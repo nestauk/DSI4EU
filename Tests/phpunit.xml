@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpunit bootstrap="bootstrap.php" colors="true">
+    <testsuites>
+        <testsuite name="WholeApplication">
+            <directory>.</directory>
+        </testsuite>
+        <testsuite name="WorkingOnFile">
+			<file>C:\xampp\htdocs\DSI4EU\Tests\use.cases\</file>
+        </testsuite>
+    </testsuites>
+	<filter>
+		<whitelist>
+			<directory suffix=".php">C:\xampp\htdocs\DSI4EU\src\DSI</directory>
+            <exclude>
+                <directory suffix=".php">C:\xampp\htdocs\DSI4EU\src\DSI\Controller</directory>
+            </exclude>
+		</whitelist>
+	</filter>
+</phpunit>

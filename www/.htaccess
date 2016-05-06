@@ -1,0 +1,6 @@
+RewriteEngine on
+
+#RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule (.*)\.(gif|jpe?g|png|svg|js|css|map)$ $0 [QSA,L]
+RewriteRule . index.php [QSA,L]

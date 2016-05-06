@@ -1,0 +1,72 @@
+.skill .delete {
+    display: none;
+}
+
+.skill:hover .delete {
+    display: block;
+}
+
+.skill.add-entry {
+    cursor: pointer;
+}
+
+.add-skill-btn {
+    float: none;
+    width: auto;
+    margin-top: 0;
+    line-height: 13px;
+}
+
+form.add-skill-section, form.add-language-section {
+    margin-top: 15px;
+    width: auto;
+}
+
+#Add-skill, #Add-language, #Add-link {
+    float: left;
+}
+
+#Add-link{
+    height:31px;
+}
+
+.social-contact-li .delete{
+    top:auto;
+    right:auto;
+    left:46px;
+}
+
+.social-contact-li:hover .delete{
+    display:block;
+}
+
+.profile-info-left {
+    padding-left: 0;
+}
+
+.profile-info-left li{
+    padding-left:20px;
+}
+
+.modal-createProject {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    z-index: 20;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, .45);
+}
+
+.modal-createProject.bg-blur {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    display: none;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, .4);
+}
