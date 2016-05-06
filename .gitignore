@@ -2,3 +2,5 @@ src/config.php
 vendor/
 composer.lock
 .idea/
+www/images/users/background/
+www/images/users/profile/
