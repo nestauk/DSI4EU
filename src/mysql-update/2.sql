@@ -1,0 +1,1 @@
+ALTER TABLE `projects` ADD `url` VARCHAR(1024) NOT NULL AFTER `description`;
