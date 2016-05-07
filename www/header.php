@@ -203,6 +203,7 @@
         </div>
     </div>
 <?php } else { ?>
+    <script type="text/javascript" src="<?php echo SITE_RELATIVE_PATH?>/js/controllers/CreateProjectOrganisationController.js"></script>
     <div class="modal-signup bg-blur">
         <div data-ix="downbeforeup" class="signup-form">
             <div class="modal-header"></div>
@@ -217,26 +218,26 @@
                         <div>Organisation</div>
                     </a>
                 </div>
-                <div class="w-tab-content tabs-content">
-                    <div data-w-tab="Tab 1" class="w-tab-pane w--tab-active" ng-controller="LoginController">
+                <div class="w-tab-content tabs-content" ng-controller="CreateProjectOrganisationController">
+                    <div data-w-tab="Tab 1" class="w-tab-pane w--tab-active">
                         <div class="w-form login-form">
                             <form ng-submit="createProject()">
                                 <input type="text" placeholder="Enter project name" name="project"
-                                       required="required" autofocus="autofocus"
+                                       autofocus="autofocus"
                                        class="w-input login-field"
-                                       ng-model="project.value"
-                                       ng-class="{error: errors.project}">
-                                <div style="color:red" ng-show="errors.project" ng-bind="errors.project"></div>
+                                       ng-model="project.name"
+                                       ng-class="{error: project.errors.name}">
+                                <div style="color:red" ng-show="project.errors.name" ng-bind="project.errors.name"></div>
 
-                                <input ng-hide="loading" type="submit" value="Create Project"
+                                <input ng-hide="project.loading" type="submit" value="Create Project"
                                        class="w-button login-button">
-                                <button ng-show="loading" type="button" class="w-button login-button register">
+                                <button ng-show="project.loading" type="button" class="w-button login-button register">
                                     Loading...
                                 </button>
                             </form>
                         </div>
                     </div>
-                    <div data-w-tab="Tab 2" class="w-tab-pane" ng-controller="RegisterController">
+                    <div data-w-tab="Tab 2" class="w-tab-pane">
                         <div class="w-form login-form">
                             <form ng-submit="createOrganisation()">
                                 <input type="text" placeholder="Enter organisation name" name="organisation"

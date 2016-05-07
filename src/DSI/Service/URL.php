@@ -30,4 +30,9 @@ class URL
     {
         return SITE_RELATIVE_PATH . '/';
     }
+
+    public static function project($projectID)
+    {
+        return SITE_RELATIVE_PATH . '/project/' . $projectID;
+    }
 }

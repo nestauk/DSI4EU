@@ -49,6 +49,14 @@ class ProjectTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($projectDesc, $this->project->getDescription());
     }
 
+    /** @test setUrl, getUrl */
+    public function settingUrl_returnsUrl()
+    {
+        $projectUrl = 'http://example.org';
+        $this->project->setUrl($projectUrl);
+        $this->assertEquals($projectUrl, $this->project->getUrl());
+    }
+
     /** @test setOwner, getOwner */
     public function settingOwner_returnsOwner()
     {

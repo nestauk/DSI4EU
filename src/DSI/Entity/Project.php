@@ -12,7 +12,8 @@ class Project
 
     /** @var string */
     private $name,
-        $description;
+        $description,
+        $url;
 
     /**
      * @return int
@@ -79,5 +80,21 @@ class Project
     public function setOwner(User $owner)
     {
         $this->owner = $owner;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl(): string
+    {
+        return (string)$this->url;
+    }
+
+    /**
+     * @param string $url
+     */
+    public function setUrl(string $url)
+    {
+        $this->url = $url;
     }
 }

@@ -58,6 +58,9 @@ class Router
         } elseif ($this->pageURL === '/my-profile.json') {
             $this->myProfilePage('json');
 
+        } elseif ($this->pageURL === '/createProject.json') {
+            $this->createProjectPage();
+
         } elseif ($this->pageURL === '/uploadProfilePicture') {
             $this->uploadProfilePicturePage();
 
@@ -70,11 +73,17 @@ class Router
         } elseif ($this->pageURL === '/languages.json') {
             $this->languagesListJsonPage();
 
-        } elseif (preg_match('<^/profile/([a-zA-Z0-9\.]*)/details\.json$>', $this->pageURL, $matches)) {
+        } elseif (preg_match('<^/profile/([a-zA-Z0-9\.]+)/details\.json$>', $this->pageURL, $matches)) {
             $this->userProfilePage($matches, 'json');
 
-        } elseif (preg_match('<^/profile/([a-zA-Z0-9\.]*)$>', $this->pageURL, $matches)) {
+        } elseif (preg_match('<^/profile/([a-zA-Z0-9\.]+)$>', $this->pageURL, $matches)) {
             $this->userProfilePage($matches);
+
+        } elseif (preg_match('<^/project/([0-9]+)\.json?$>', $this->pageURL, $matches)) {
+            $this->projectJsonPage($matches);
+
+        } elseif (preg_match('<^/project/([0-9]+)(\/.*)?$>', $this->pageURL, $matches)) {
+            $this->projectPage($matches);
 
         } elseif (preg_match('<^/.*\.(gif|jpe?g|png|svg|js|css|map)$>', $this->pageURL)) {
             pr('not found');
@@ -209,6 +218,27 @@ class Router
     private function uploadProfilePicturePage()
     {
         $command = new \DSI\Controller\PersonalDetailsController();
+        $command->exec();
+    }
+
+    private function createProjectPage()
+    {
+        $command = new \DSI\Controller\CreateProjectController();
+        $command->exec();
+    }
+
+    private function projectPage($matches)
+    {
+        $command = new \DSI\Controller\ProjectController();
+        $command->data()->projectID = $matches[1];
+        $command->exec();
+    }
+
+    private function projectJsonPage($matches)
+    {
+        $command = new \DSI\Controller\ProjectController();
+        $command->data()->projectID = $matches[1];
+        $command->data()->format = 'json';
         $command->exec();
     }
 }

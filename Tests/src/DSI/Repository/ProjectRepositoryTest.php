@@ -100,11 +100,13 @@ class ProjectRepositoryTest extends PHPUnit_Framework_TestCase
         $project->setOwner($this->user1);
         $project->setName('Name');
         $project->setDescription('Desc');
+        $project->setUrl('http://example.org');
         $this->projectRepository->saveAsNew($project);
 
         $sameProject = $this->projectRepository->getById( $project->getId() );
         $this->assertEquals($project->getOwner()->getId(), $sameProject->getOwner()->getId());
         $this->assertEquals($project->getName(), $sameProject->getName());
         $this->assertEquals($project->getDescription(), $sameProject->getDescription());
+        $this->assertEquals($project->getUrl(), $sameProject->getUrl());
     }
 }

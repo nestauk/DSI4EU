@@ -15,6 +15,7 @@ class ProjectRepository
         $insert[] = "`ownerID` = '" . addslashes($project->getOwner()->getId()) . "'";
         $insert[] = "`name` = '" . addslashes($project->getName()) . "'";
         $insert[] = "`description` = '" . addslashes($project->getDescription()) . "'";
+        $insert[] = "`url` = '" . addslashes($project->getUrl()) . "'";
 
         $query = new SQL("INSERT INTO `projects` SET " . implode(', ', $insert) . "");
         $query->query();
@@ -33,6 +34,7 @@ class ProjectRepository
         $insert[] = "`ownerID` = '" . addslashes($project->getOwner()->getId()) . "'";
         $insert[] = "`name` = '" . addslashes($project->getName()) . "'";
         $insert[] = "`description` = '" . addslashes($project->getDescription()) . "'";
+        $insert[] = "`url` = '" . addslashes($project->getUrl()) . "'";
 
         $query = new SQL("UPDATE `projects` SET " . implode(', ', $insert) . " WHERE `id` = '{$project->getId()}'");
         $query->query();
@@ -55,6 +57,7 @@ class ProjectRepository
         );
         $projectObj->setName($project['name']);
         $projectObj->setDescription($project['description']);
+        $projectObj->setUrl($project['url']);
         return $projectObj;
     }
 
@@ -63,7 +66,7 @@ class ProjectRepository
         $where = ["1"];
         $projects = [];
         $query = new SQL("SELECT 
-            id, ownerID, name, description
+            id, ownerID, name, description, url
           FROM `projects` WHERE " . implode(' AND ', $where) . "");
         foreach ($query->fetch_all() AS $dbProject) {
             $projects[] = $this->buildProjectFromData($dbProject);
@@ -80,7 +83,7 @@ class ProjectRepository
     private function getProjectWhere($where)
     {
         $query = new SQL("SELECT 
-              id, ownerID, name, description
+              id, ownerID, name, description, url
             FROM `projects` WHERE " . implode(' AND ', $where) . " LIMIT 1");
         $dbProject = $query->fetch();
         if (!$dbProject) {
