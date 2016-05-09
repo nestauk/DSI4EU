@@ -28,6 +28,10 @@ class UpdateProjectTest extends PHPUnit_Framework_TestCase
         $userRepo = new \DSI\Repository\UserRepository();
         $userRepo->saveAsNew($this->user1);
 
+        $this->user2 = new \DSI\Entity\User();
+        $userRepo = new \DSI\Repository\UserRepository();
+        $userRepo->saveAsNew($this->user2);
+
         $createProject = new \DSI\UseCase\CreateProject();
         $createProject->data()->name = 'Project Name';
         $createProject->data()->owner = $this->user1;
@@ -54,7 +58,7 @@ class UpdateProjectTest extends PHPUnit_Framework_TestCase
             $this->updateProject->data()->url = $url;
 
             $this->updateProject->data()->project = $this->project;
-            $this->updateProject->data()->user = $this->user2;
+            $this->updateProject->data()->user = $this->user1;
 
             $this->updateProject->exec();
         } catch (ErrorHandler $e) {
@@ -65,36 +69,6 @@ class UpdateProjectTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($name, $project->getName());
         $this->assertEquals($description, $project->getDescription());
         $this->assertEquals($url, $project->getUrl());
-        $this->assertEquals($this->user2->getId(), $project->getOwner()->getId());
-    }
-
-    /** @test */
-    public function cannotSendAnEmptyFirstName()
-    {
-        $e = null;
-        try {
-            $this->updateProject->data()->userID = $this->project->getId();
-            $this->updateProject->data()->firstName = '';
-            $this->updateProject->exec();
-        } catch (ErrorHandler $e) {
-        }
-
-        $this->assertNotNull($e);
-        $this->assertNotEmpty($e->getTaggedError('firstName'));
-    }
-
-    /** @test */
-    public function cannotSendAnEmptyLastName()
-    {
-        $e = null;
-        try {
-            $this->updateProject->data()->userID = $this->project->getId();
-            $this->updateProject->data()->lastName = '';
-            $this->updateProject->exec();
-        } catch (ErrorHandler $e) {
-        }
-
-        $this->assertNotNull($e);
-        $this->assertNotEmpty($e->getTaggedError('lastName'));
+        $this->assertEquals($this->user1->getId(), $project->getOwner()->getId());
     }
 }

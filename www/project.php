@@ -5,9 +5,9 @@ require __DIR__ . '/header.php';
 ?>
     <script src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/ProjectController.js"></script>
 
-    <form name="projectForm"
-          ng-controller="ProjectController"
-          data-projectid="<?php echo $project->getId() ?>">
+    <div
+        ng-controller="ProjectController"
+        data-projectid="<?php echo $project->getId() ?>">
 
         <div class="w-section project-section">
             <div class="w-container body-container">
@@ -159,15 +159,27 @@ require __DIR__ . '/header.php';
                         <div class="info-card">
                             <h3 class="info-h card-h">This project is tagged under:</h3>
                             <div class="w-clearfix tags-block">
-                                <div class="skill">Here is a very long tag</div>
-                                <div class="skill">Short</div>
-                                <div class="skill">This tag is going to span several lines and is in fact longer</div>
-                                <div class="skill">Hardware</div>
-                                <div class="skill">Software</div>
-                                <div class="skill">Innovation</div>
-                                <div class="skill">Skills</div>
-                                <div class="add-item-block">
+                                <div class="skill" ng-repeat="tag in project.tags">
+                                    <div class="delete" ng-click="removeTag(tag)">-</div>
+                                    <div ng-bind="tag"></div>
+                                </div>
+                                <div class="add-item-block" ng-click="addingTag = !addingTag">
                                     <div class="add-item">+</div>
+                                </div>
+
+                                <div class="w-form" style="float:left"
+                                     ng-show="addingTag">
+                                    <form class="w-clearfix add-skill-section"
+                                          ng-submit="addTag()">
+                                        <select data-tags="true"
+                                                data-placeholder="Type your skill"
+                                                id="Add-tag"
+                                                class="w-input add-language"
+                                                style="width:200px;display:inline">
+                                            <option></option>
+                                        </select>
+                                        <input type="submit" value="Add" class="w-button add-skill-btn">
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -176,29 +188,78 @@ require __DIR__ . '/header.php';
                             <div class="impact-block">
                                 <h4 class="impact-h4">Areas of society impacted</h4>
                                 <div class="w-clearfix tags-block impact">
-                                    <div class="skill">Culture and Arts</div>
-                                    <div class="skill">Education and Skills</div>
-                                    <div class="skill">Work and Employment</div>
-                                    <div class="add-item-block">
+                                    <div class="skill" ng-repeat="tag in project.impactTagsA">
+                                        <div class="delete" ng-click="removeImpactTagA(tag)">-</div>
+                                        <div ng-bind="tag"></div>
+                                    </div>
+                                    <div class="add-item-block" ng-click="addingImpactTagA = !addingImpactTagA">
                                         <div class="add-item">+</div>
+                                    </div>
+                                    <div class="w-form" style="float:left"
+                                         ng-show="addingImpactTagA">
+                                        <form class="w-clearfix add-skill-section"
+                                              ng-submit="addImpactTagA()">
+                                            <select data-tags="true"
+                                                    data-placeholder="Type your skill"
+                                                    id="Add-impact-tag-a"
+                                                    class="w-input add-language"
+                                                    style="width:200px;display:inline">
+                                                <option></option>
+                                            </select>
+                                            <input type="submit" value="Add" class="w-button add-skill-btn">
+                                        </form>
                                     </div>
                                 </div>
                             </div>
                             <div class="impact-block">
                                 <h4 class="impact-h4">Technology focus</h4>
                                 <div class="w-clearfix tags-block impact">
-                                    <div class="skill">Open Hardware</div>
-                                    <div class="add-item-block">
+                                    <div class="skill" ng-repeat="tag in project.impactTagsB">
+                                        <div class="delete" ng-click="removeImpactTagB(tag)">-</div>
+                                        <div ng-bind="tag"></div>
+                                    </div>
+                                    <div class="add-item-block" ng-click="addingImpactTagB = !addingImpactTagB">
                                         <div class="add-item">+</div>
+                                    </div>
+                                    <div class="w-form" style="float:left"
+                                         ng-show="addingImpactTagB">
+                                        <form class="w-clearfix add-skill-section"
+                                              ng-submit="addImpactTagB()">
+                                            <select data-tags="true"
+                                                    data-placeholder="Type your skill"
+                                                    id="Add-impact-tag-b"
+                                                    class="w-input add-language"
+                                                    style="width:200px;display:inline">
+                                                <option></option>
+                                            </select>
+                                            <input type="submit" value="Add" class="w-button add-skill-btn">
+                                        </form>
                                     </div>
                                 </div>
                             </div>
                             <div class="impact-block last">
                                 <h4 class="impact-h4">Technology method</h4>
                                 <div class="w-clearfix tags-block impact">
-                                    <div class="skill">Open Hardware</div>
-                                    <div class="add-item-block">
+                                    <div class="skill" ng-repeat="tag in project.impactTagsC">
+                                        <div class="delete" ng-click="removeImpactTagC(tag)">-</div>
+                                        <div ng-bind="tag"></div>
+                                    </div>
+                                    <div class="add-item-block" ng-click="addingImpactTagC = !addingImpactTagC">
                                         <div class="add-item">+</div>
+                                    </div>
+                                    <div class="w-form" style="float:left"
+                                         ng-show="addingImpactTagC">
+                                        <form class="w-clearfix add-skill-section"
+                                              ng-submit="addImpactTagC()">
+                                            <select data-tags="true"
+                                                    data-placeholder="Type your skill"
+                                                    id="Add-impact-tag-c"
+                                                    class="w-input add-language"
+                                                    style="width:200px;display:inline">
+                                                <option></option>
+                                            </select>
+                                            <input type="submit" value="Add" class="w-button add-skill-btn">
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -299,5 +360,5 @@ require __DIR__ . '/header.php';
             </div>
         </div>
 
-    </form>
+    </div>
 <?php require __DIR__ . '/footer.php' ?>

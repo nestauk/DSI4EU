@@ -70,6 +70,12 @@ class Router
         } elseif ($this->pageURL === '/skills.json') {
             $this->skillsListJsonPage();
 
+        } elseif ($this->pageURL === '/tags-for-projects.json') {
+            $this->tagsForProjectsListJsonPage();
+
+        } elseif ($this->pageURL === '/impact-tags.json') {
+            $this->impactTagsListJsonPage();
+
         } elseif ($this->pageURL === '/languages.json') {
             $this->languagesListJsonPage();
 
@@ -239,6 +245,18 @@ class Router
         $command = new \DSI\Controller\ProjectController();
         $command->data()->projectID = $matches[1];
         $command->data()->format = 'json';
+        $command->exec();
+    }
+
+    private function tagsForProjectsListJsonPage()
+    {
+        $command = new \DSI\Controller\ListTagsForProjectsController();
+        $command->exec();
+    }
+
+    private function impactTagsListJsonPage()
+    {
+        $command = new \DSI\Controller\ListImpactTagsController();
         $command->exec();
     }
 }

@@ -11,7 +11,7 @@ use DSI\Service\ErrorHandler;
 use DSI\Service\URL;
 use DSI\UseCase\AddLanguageToUser;
 use DSI\UseCase\AddLinkToUser;
-use DSI\UseCase\AddSkillToUser;
+use DSI\UseCase\AddTagToProject;
 use DSI\UseCase\RemoveLanguageFromUser;
 use DSI\UseCase\RemoveLinkFromUser;
 use DSI\UseCase\RemoveSkillFromUser;
@@ -41,9 +41,9 @@ class ProfileController
 
             if (isset($_POST['addSkill'])) {
                 try {
-                    $addSkillToUser = new AddSkillToUser();
-                    $addSkillToUser->data()->userID = $user->getId();
-                    $addSkillToUser->data()->skill = $_POST['addSkill'];
+                    $addSkillToUser = new AddTagToProject();
+                    $addSkillToUser->data()->projectID = $user->getId();
+                    $addSkillToUser->data()->tag = $_POST['addSkill'];
                     $addSkillToUser->exec();
                 } catch (ErrorHandler $e) {
                 }
@@ -97,7 +97,7 @@ class ProfileController
                 }
             } else {
                 echo json_encode([
-                    'skills' => $userSkillRepo->getSkillsNameByUserID($user->getId()),
+                    'tags' => $userSkillRepo->getSkillsNameByUserID($user->getId()),
                     'languages' => $userLangRepo->getLanguagesNameByUserID($user->getId()),
                     'links' => $userLinkRepo->getLinksByUserID($user->getId()),
                     'user' => [

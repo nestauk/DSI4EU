@@ -1,10 +1,14 @@
 var app = angular.module('DSIApp');
 
 app.controller('UserController', function ($scope, $http) {
+    $scope.tags = [];
+    $scope.languages = [];
+    $scope.links = [];
+
     $http.get(SITE_RELATIVE_PATH + '/profile/' + profileUserID + '/details.json')
         .then(function (result) {
             // console.log(result.data);
-            $scope.skills = result.data.skills || [];
+            $scope.tags = result.data.tags || [];
             $scope.languages = result.data.languages || [];
             $scope.links = result.data.links.sort(sortUrls) || [];
             $scope.user = result.data.user || {};
@@ -20,7 +24,6 @@ app.controller('UserController', function ($scope, $http) {
     };
 
     var addSkillSelect = $('#Add-skill');
-    $scope.skills = [];
     $scope.addSkills = function () {
         var newSkill = addSkillSelect.select2().val();
         addSkillSelect.select2().val('').trigger("change");
@@ -28,10 +31,10 @@ app.controller('UserController', function ($scope, $http) {
         if (newSkill == '')
             return;
 
-        var index = $scope.skills.indexOf(newSkill);
+        var index = $scope.tags.indexOf(newSkill);
         if (index == -1) {
-            $scope.skills.push(newSkill);
-            $scope.skills.sort();
+            $scope.tags.push(newSkill);
+            $scope.tags.sort();
 
             $http.post(SITE_RELATIVE_PATH + '/profile/' + profileUserID + '/details.json', {
                 addSkill: newSkill
@@ -41,9 +44,9 @@ app.controller('UserController', function ($scope, $http) {
         }
     };
     $scope.removeSkill = function (skill) {
-        var index = $scope.skills.indexOf(skill);
+        var index = $scope.tags.indexOf(skill);
         if (index > -1) {
-            $scope.skills.splice(index, 1);
+            $scope.tags.splice(index, 1);
 
             $http.post(SITE_RELATIVE_PATH + '/profile/' + profileUserID + '/details.json', {
                 removeSkill: skill
@@ -61,7 +64,6 @@ app.controller('UserController', function ($scope, $http) {
         });
 
     var addLanguageSelect = $('#Add-language');
-    $scope.languages = [];
     $scope.addLanguages = function () {
         var newLanguage = addLanguageSelect.select2().val();
         addLanguageSelect.select2().val('').trigger("change");
@@ -102,7 +104,6 @@ app.controller('UserController', function ($scope, $http) {
         });
 
     var addLink = $('#Add-link');
-    $scope.links = [];
     $scope.newLink = '';
     $scope.addLink = function () {
         if ($scope.newLink == '')
