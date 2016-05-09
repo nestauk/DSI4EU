@@ -70,3 +70,7 @@ form.add-skill-section, form.add-language-section {
     height: 100vh;
     background-color: rgba(0, 0, 0, .4);
 }
+
+input.ng-invalid{
+    border:1px solid red;
+}

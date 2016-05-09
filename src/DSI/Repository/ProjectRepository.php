@@ -16,6 +16,9 @@ class ProjectRepository
         $insert[] = "`name` = '" . addslashes($project->getName()) . "'";
         $insert[] = "`description` = '" . addslashes($project->getDescription()) . "'";
         $insert[] = "`url` = '" . addslashes($project->getUrl()) . "'";
+        $insert[] = "`status` = '" . addslashes($project->getStatus()) . "'";
+        $insert[] = "`startDate` = '" . addslashes($project->getStartDate()) . "'";
+        $insert[] = "`endDate` = '" . addslashes($project->getEndDate()) . "'";
 
         $query = new SQL("INSERT INTO `projects` SET " . implode(', ', $insert) . "");
         $query->query();
@@ -35,6 +38,9 @@ class ProjectRepository
         $insert[] = "`name` = '" . addslashes($project->getName()) . "'";
         $insert[] = "`description` = '" . addslashes($project->getDescription()) . "'";
         $insert[] = "`url` = '" . addslashes($project->getUrl()) . "'";
+        $insert[] = "`status` = '" . addslashes($project->getStatus()) . "'";
+        $insert[] = "`startDate` = '" . addslashes($project->getStartDate()) . "'";
+        $insert[] = "`endDate` = '" . addslashes($project->getEndDate()) . "'";
 
         $query = new SQL("UPDATE `projects` SET " . implode(', ', $insert) . " WHERE `id` = '{$project->getId()}'");
         $query->query();
@@ -58,6 +64,9 @@ class ProjectRepository
         $projectObj->setName($project['name']);
         $projectObj->setDescription($project['description']);
         $projectObj->setUrl($project['url']);
+        $projectObj->setStatus($project['status']);
+        $projectObj->setStartDate($project['startDate'] != '0000-00-00' ? $project['startDate'] : NULL);
+        $projectObj->setEndDate($project['endDate'] != '0000-00-00' ? $project['endDate'] : NULL);
         return $projectObj;
     }
 
@@ -66,7 +75,8 @@ class ProjectRepository
         $where = ["1"];
         $projects = [];
         $query = new SQL("SELECT 
-            id, ownerID, name, description, url
+            id, ownerID, name, description, url, status
+          , startDate, endDate
           FROM `projects` WHERE " . implode(' AND ', $where) . "");
         foreach ($query->fetch_all() AS $dbProject) {
             $projects[] = $this->buildProjectFromData($dbProject);
@@ -83,7 +93,8 @@ class ProjectRepository
     private function getProjectWhere($where)
     {
         $query = new SQL("SELECT 
-              id, ownerID, name, description, url
+              id, ownerID, name, description, url, status
+            , startDate, endDate
             FROM `projects` WHERE " . implode(' AND ', $where) . " LIMIT 1");
         $dbProject = $query->fetch();
         if (!$dbProject) {

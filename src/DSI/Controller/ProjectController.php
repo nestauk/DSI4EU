@@ -42,6 +42,13 @@ class ProjectController
                 $updateProject->data()->name = $_POST['name'];
             if (isset($_POST['url']))
                 $updateProject->data()->url = $_POST['url'];
+            if (isset($_POST['status']))
+                $updateProject->data()->status = $_POST['status'];
+            if (isset($_POST['description']))
+                $updateProject->data()->description = $_POST['description'];
+
+            $updateProject->data()->startDate = $_POST['startDate'] ?? NULL;
+            $updateProject->data()->endDate = $_POST['endDate'] ?? NULL;
 
             try {
                 $updateProject->exec();
@@ -61,6 +68,10 @@ class ProjectController
             echo json_encode([
                 'name' => $project->getName(),
                 'url' => $project->getUrl(),
+                'status' => $project->getStatus(),
+                'description' => $project->getDescription(),
+                'startDate' => $project->getStartDate(),
+                'endDate' => $project->getEndDate(),
             ]);
             die();
         } else {

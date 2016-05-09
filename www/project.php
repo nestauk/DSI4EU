@@ -5,9 +5,10 @@ require __DIR__ . '/header.php';
 ?>
     <script src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/ProjectController.js"></script>
 
-    <div
-        ng-controller="ProjectController"
-        data-projectid="<?php echo $project->getId() ?>">
+    <form name="projectForm"
+          ng-controller="ProjectController"
+          data-projectid="<?php echo $project->getId() ?>">
+
         <div class="w-section project-section">
             <div class="w-container body-container">
                 <div class="project-detail">
@@ -22,10 +23,15 @@ require __DIR__ . '/header.php';
                                ng-blur="updateBasic()"
                                placeholder="Project Page"
                                value="<?php echo $project->getUrl() ?>"
-                               style="background:transparent;color:white;width:500px"/>
+                               style="background:transparent;color:white;width:500px;border:0"/>
 
-                        <div class="project-status"><span class="status-text">Project status:</span> <strong
-                                class="status-indicator">Live</strong>
+                        <div class="project-status"><span class="status-text">Project status:</span>
+                            <select ng-model="project.status" ng-change="updateBasic()"
+                                    style="background: transparent;border:0">
+                                <option value="live">Live</option>
+                                <option value="closed">Closed</option>
+                            </select>
+                            <?php /* <strong class="status-indicator">Live</strong> */ ?>
                         </div>
                     </div>
                     <h1 class="project-h1">
@@ -33,7 +39,7 @@ require __DIR__ . '/header.php';
                                ng-model="project.name"
                                ng-blur="updateBasic()"
                                value="<?php echo $project->getName() ?>"
-                               style="background:transparent;color:white"/>
+                               style="background:transparent;color:white;width:500px;border:0"/>
                     </h1>
                 </div>
                 <div class="w-row project-info">
@@ -41,16 +47,42 @@ require __DIR__ . '/header.php';
                         <div class="info-card">
                             <h3 class="info-h card-h">About this project</h3>
                             <p class="project-summary">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros
-                                elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut
-                                commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem
-                                imperdiet. Nunc ut sem vitae risus tristique posuere.
-                                <?php echo $project->getDescription() ?>
+                                <textarea ng-model="project.description" ng-blur="updateBasic()"
+                                          style="min-height:150px;border:0;width:100%">
+                                    <?php echo $project->getDescription() ?>
+                                </textarea>
                             </p>
                             <h3 class="card-sub-h">Duration</h3>
-                            <div class="duration-p">This project runs from&nbsp;<strong>June 2014</strong> to <strong>May
-                                    2017</strong>
+                            <div class="duration-p">
+                                <div ng-show="projectForm.$valid">
+                                    <div ng-show="project.startDate && project.endDate">
+                                        This project runs from
+                                        <strong>{{getDateFrom(project.startDate)}}</strong> to
+                                        <strong>{{getDateFrom(project.endDate)}}</strong>
+                                    </div>
+                                    <div ng-show="project.startDate && !project.endDate">
+                                        This project runs from
+                                        <strong>{{getDateFrom(project.startDate)}}</strong>
+                                    </div>
+                                    <div ng-show="!project.startDate && project.endDate">
+                                        This project runs until
+                                        <strong>{{getDateFrom(project.endDate)}}</strong>
+                                    </div>
+                                </div>
                             </div>
+                            <br/>
+                            <div style="float:left;width:40%;margin-left:10%">
+                                Start Date
+                                <input type="text" placeholder="yyyy-mm-dd" ng-model="project.startDate"
+                                       ng-blur="updateBasic()" style="width:130px" ng-pattern="datePattern"/>
+                            </div>
+                            <div style="float:left;width:40%">
+                                End Date
+                                <input type="text" placeholder="yyyy-mm-dd" ng-model="project.endDate"
+                                       ng-blur="updateBasic()" style="width:130px" ng-pattern="datePattern"/>
+                            </div>
+
+                            <div style="clear:both"></div>
                         </div>
                         <div class="info-card">
                             <h3 class="info-h card-h">Organisations involved</h3>
@@ -267,5 +299,5 @@ require __DIR__ . '/header.php';
             </div>
         </div>
 
-    </div>
+    </form>
 <?php require __DIR__ . '/footer.php' ?>

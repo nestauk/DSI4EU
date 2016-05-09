@@ -50,6 +50,11 @@ class UpdateProject
             $this->data()->project->setDescription($this->data()->description);
         if (isset($this->data()->url))
             $this->data()->project->setUrl($this->data()->url);
+        if (isset($this->data()->status))
+            $this->data()->project->setStatus($this->data()->status);
+
+        $this->data()->project->setStartDate($this->data()->startDate);
+        $this->data()->project->setEndDate($this->data()->endDate);
 
         $this->projectRepo->save($this->data()->project);
     }
@@ -86,7 +91,10 @@ class UpdateProject_Data
     /** @var string */
     public $name,
         $description,
-        $url;
+        $url,
+        $status,
+        $startDate,
+        $endDate;
 
     /** @var Project */
     public $project;

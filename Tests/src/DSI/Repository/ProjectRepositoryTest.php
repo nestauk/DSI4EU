@@ -101,12 +101,32 @@ class ProjectRepositoryTest extends PHPUnit_Framework_TestCase
         $project->setName('Name');
         $project->setDescription('Desc');
         $project->setUrl('http://example.org');
+        $project->setStatus('closed');
+        $project->setStartDate('2016-05-21');
+        $project->setEndDate('2016-05-22');
         $this->projectRepository->saveAsNew($project);
 
-        $sameProject = $this->projectRepository->getById( $project->getId() );
+        $sameProject = $this->projectRepository->getById($project->getId());
         $this->assertEquals($project->getOwner()->getId(), $sameProject->getOwner()->getId());
         $this->assertEquals($project->getName(), $sameProject->getName());
         $this->assertEquals($project->getDescription(), $sameProject->getDescription());
         $this->assertEquals($project->getUrl(), $sameProject->getUrl());
+        $this->assertEquals($project->getStatus(), $sameProject->getStatus());
+        $this->assertEquals($project->getStartDate(), $sameProject->getStartDate());
+        $this->assertEquals($project->getEndDate(), $sameProject->getEndDate());
+    }
+
+    /** @test */
+    public function setNullStartDateAndEndDate()
+    {
+        $project = new Project();
+        $project->setOwner($this->user1);
+        $project->setStartDate(NULL);
+        $project->setEndDate(NULL);
+        $this->projectRepository->saveAsNew($project);
+
+        $sameProject = $this->projectRepository->getById($project->getId());
+        $this->assertNull($sameProject->getStartDate());
+        $this->assertNull($sameProject->getEndDate());
     }
 }

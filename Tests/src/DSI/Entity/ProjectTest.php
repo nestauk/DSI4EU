@@ -57,6 +57,46 @@ class ProjectTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($projectUrl, $this->project->getUrl());
     }
 
+    /** @test setStatus, getStatus */
+    public function settingStatus_returnsStatus()
+    {
+        $status = 'closed';
+        $this->project->setStatus($status);
+        $this->assertEquals($status, $this->project->getStatus());
+    }
+
+    /** @test setStartDate, getStartDate */
+    public function settingStartDate_returnsStartDate()
+    {
+        $startDate = '2016-05-21';
+        $this->project->setStartDate($startDate);
+        $this->assertEquals($startDate, $this->project->getStartDate());
+    }
+
+    /** @test setStartDate, getStartDate */
+    public function settingNullStartDate_returnsStartDate()
+    {
+        $startDate = null;
+        $this->project->setStartDate($startDate);
+        $this->assertEquals($startDate, $this->project->getStartDate());
+    }
+
+    /** @test setEndDate, getEndDate */
+    public function settingEndDate_returnsEndDate()
+    {
+        $EndDate = '2016-05-21';
+        $this->project->setEndDate($EndDate);
+        $this->assertEquals($EndDate, $this->project->getEndDate());
+    }
+
+    /** @test setEndDate, getEndDate */
+    public function settingNullEndDate_returnsEndDate()
+    {
+        $EndDate = null;
+        $this->project->setEndDate($EndDate);
+        $this->assertEquals($EndDate, $this->project->getEndDate());
+    }
+
     /** @test setOwner, getOwner */
     public function settingOwner_returnsOwner()
     {

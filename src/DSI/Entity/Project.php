@@ -13,7 +13,10 @@ class Project
     /** @var string */
     private $name,
         $description,
-        $url;
+        $url,
+        $status,
+        $startDate,
+        $endDate;
 
     /**
      * @return int
@@ -96,5 +99,53 @@ class Project
     public function setUrl(string $url)
     {
         $this->url = $url;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatus(): string
+    {
+        return (string)$this->status;
+    }
+
+    /**
+     * @param string $status
+     */
+    public function setStatus(string $status)
+    {
+        $this->status = $status;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStartDate()
+    {
+        return $this->startDate;
+    }
+
+    /**
+     * @param string $startDate
+     */
+    public function setStartDate($startDate)
+    {
+        $this->startDate = $startDate;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEndDate()
+    {
+        return $this->endDate;
+    }
+
+    /**
+     * @param string $endDate
+     */
+    public function setEndDate($endDate)
+    {
+        $this->endDate = $endDate;
     }
 }
