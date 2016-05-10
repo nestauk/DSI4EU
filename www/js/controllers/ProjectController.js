@@ -1,6 +1,12 @@
 var app = angular.module('DSIApp');
 
-app.controller('ProjectController', function ($scope, $http, $attrs) {
+app.controller('ProjectController', function ($scope, $http, $attrs, $timeout) {
+    var addTagSelect = $('#Add-tag');
+    var addImpactTagASelect = $('#Add-impact-tag-a');
+    var addImpactTagBSelect = $('#Add-impact-tag-b');
+    var addImpactTagCSelect = $('#Add-impact-tag-c');
+    var addMemberSelect = $('#Add-member');
+
     $scope.datePattern = '[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])';
     $scope.getDateFrom = function (date) {
         var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -11,13 +17,6 @@ app.controller('ProjectController', function ($scope, $http, $attrs) {
         return monthNames[jsDate.getMonth()] + ' ' + jsDate.getFullYear();
     };
 
-    // Get Project Details
-    (function () {
-        $http.get(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json')
-            .then(function (response) {
-                $scope.project = response.data || {};
-            });
-    }());
     $scope.updateBasic = function () {
         var data = {
             updateBasic: true,
@@ -31,30 +30,21 @@ app.controller('ProjectController', function ($scope, $http, $attrs) {
 
         $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', data)
             .then(function (response) {
-                if (response.data.result == 'error')
-                    alert(response.data);
+                if (response.data.result == 'error') {
+                    alert('error');
+                    console.log(response.data);
+                }
             });
     };
 
-    var addTagSelect = $('#Add-tag');
     $scope.addTag = function () {
         var newTag = addTagSelect.select2().val();
-        addTagSelect.select2().val('').trigger("change");
-
-        if (newTag == '')
-            return;
-
-        var index = $scope.project.tags.indexOf(newTag);
-        if (index == -1) {
-            $scope.project.tags.push(newTag);
-            $scope.project.tags.sort();
-
-            $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', {
-                addTag: newTag
-            }).then(function (result) {
-                console.log(result.data);
-            });
-        }
+        addTag({
+            tag: newTag,
+            selectBox: addTagSelect,
+            currentTags: $scope.project.tags,
+            postFields: {addTag: newTag}
+        });
     };
     $scope.removeTag = function (tag) {
         removeTag({
@@ -64,25 +54,14 @@ app.controller('ProjectController', function ($scope, $http, $attrs) {
         });
     };
 
-    var addImpactTagASelect = $('#Add-impact-tag-a');
     $scope.addImpactTagA = function () {
         var newTag = addImpactTagASelect.select2().val();
-        addImpactTagASelect.select2().val('').trigger("change");
-
-        if (newTag == '')
-            return;
-
-        var index = $scope.project.impactTagsA.indexOf(newTag);
-        if (index == -1) {
-            $scope.project.impactTagsA.push(newTag);
-            $scope.project.impactTagsA.sort();
-
-            $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', {
-                addImpactTagA: newTag
-            }).then(function (result) {
-                console.log(result.data);
-            });
-        }
+        addTag({
+            tag: newTag,
+            selectBox: addImpactTagASelect,
+            currentTags: $scope.project.impactTagsA,
+            postFields: {addImpactTagA: newTag}
+        });
     };
     $scope.removeImpactTagA = function (tag) {
         removeTag({
@@ -92,25 +71,14 @@ app.controller('ProjectController', function ($scope, $http, $attrs) {
         });
     };
 
-    var addImpactTagBSelect = $('#Add-impact-tag-b');
     $scope.addImpactTagB = function () {
         var newTag = addImpactTagBSelect.select2().val();
-        addImpactTagBSelect.select2().val('').trigger("change");
-
-        if (newTag == '')
-            return;
-
-        var index = $scope.project.impactTagsB.indexOf(newTag);
-        if (index == -1) {
-            $scope.project.impactTagsB.push(newTag);
-            $scope.project.impactTagsB.sort();
-
-            $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', {
-                addImpactTagB: newTag
-            }).then(function (result) {
-                console.log(result.data);
-            });
-        }
+        addTag({
+            tag: newTag,
+            selectBox: addImpactTagBSelect,
+            currentTags: $scope.project.impactTagsB,
+            postFields: {addImpactTagB: newTag}
+        });
     };
     $scope.removeImpactTagB = function (tag) {
         removeTag({
@@ -120,25 +88,14 @@ app.controller('ProjectController', function ($scope, $http, $attrs) {
         });
     };
 
-    var addImpactTagCSelect = $('#Add-impact-tag-c');
     $scope.addImpactTagC = function () {
         var newTag = addImpactTagCSelect.select2().val();
-        addImpactTagCSelect.select2().val('').trigger("change");
-
-        if (newTag == '')
-            return;
-
-        var index = $scope.project.impactTagsC.indexOf(newTag);
-        if (index == -1) {
-            $scope.project.impactTagsC.push(newTag);
-            $scope.project.impactTagsC.sort();
-
-            $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', {
-                addImpactTagC: newTag
-            }).then(function (result) {
-                console.log(result.data);
-            });
-        }
+        addTag({
+            tag: newTag,
+            selectBox: addImpactTagCSelect,
+            currentTags: $scope.project.impactTagsC,
+            postFields: {addImpactTagC: newTag}
+        });
     };
     $scope.removeImpactTagC = function (tag) {
         removeTag({
@@ -148,7 +105,46 @@ app.controller('ProjectController', function ($scope, $http, $attrs) {
         });
     };
 
+    $scope.addMember = function () {
+        var newMemberID = addMemberSelect.select2().val();
+        addMemberSelect.select2().val('').trigger("change");
 
+        if (newMemberID == '') return;
+
+        var newMember = null;
+        for (var i in $scope.users) {
+            if (newMemberID == $scope.users[i].id)
+                newMember = $scope.users[i];
+        }
+        if (!newMember) return;
+
+        $scope.project.members.push(newMember);
+        $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', {
+            addMember: newMemberID
+        }).then(function (result) {
+            console.log(result.data);
+        });
+    };
+    $scope.removeMember = function (member) {
+        var index = getItemIndexById($scope.project.members, member.id);
+        if (index > -1) {
+            $scope.project.members.splice(index, 1);
+
+            $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', {
+                removeMember: member.id
+            }).then(function (result) {
+                console.log(result.data);
+            });
+        }
+    };
+
+    // Get Project Details
+    (function () {
+        $http.get(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json')
+            .then(function (response) {
+                $scope.project = response.data || {};
+            });
+    }());
     // Get Tags List
     (function () {
         $http.get(SITE_RELATIVE_PATH + '/tags-for-projects.json')
@@ -167,7 +163,32 @@ app.controller('ProjectController', function ($scope, $http, $attrs) {
                 addImpactTagCSelect.select2({data: result.data});
             });
     }());
+    // Get Users List
+    (function () {
+        $http.get(SITE_RELATIVE_PATH + '/users.json')
+            .then(function (result) {
+                $scope.users = result.data;
+                addMemberSelect.select2({data: result.data});
+            });
+    }());
 
+    var addTag = function (data) {
+        data.selectBox.select2().val('').trigger("change");
+
+        if (data.tag == '')
+            return;
+
+        var index = data.currentTags.indexOf(data.tag);
+        if (index == -1) {
+            data.currentTags.push(data.tag);
+            data.currentTags.sort();
+
+            $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', data.postFields)
+                .then(function (result) {
+                    console.log(result.data);
+                });
+        }
+    };
     var removeTag = function (data) {
         var index = data.currentTags.indexOf(data.tag);
         if (index > -1) {
@@ -178,5 +199,54 @@ app.controller('ProjectController', function ($scope, $http, $attrs) {
                     console.log(result.data);
                 });
         }
+    };
+
+
+    $scope.requestToJoin = {};
+    $scope.sendRequestToJoin = function () {
+        $scope.requestToJoin.loading = true;
+        $timeout(function () {
+            $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', {
+                requestToJoin: true
+            }).then(function (result) {
+                $scope.requestToJoin.loading = false;
+                $scope.requestToJoin.requestSent = true;
+                console.log(result.data);
+            });
+        }, 1000);
+    };
+    $scope.approveRequestToJoin = function (member) {
+        var index = getItemIndexById($scope.project.memberRequests, member.id);
+        if (index > -1) {
+            $scope.project.memberRequests.splice(index, 1);
+            $scope.project.members.push(member);
+
+            $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', {
+                approveRequestToJoin: member.id
+            }).then(function (result) {
+                console.log(result.data);
+            });
+        }
+    };
+    $scope.rejectRequestToJoin = function (member) {
+        var index = getItemIndexById($scope.project.memberRequests, member.id);
+        if (index > -1) {
+            $scope.project.memberRequests.splice(index, 1);
+
+            $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', {
+                rejectRequestToJoin: member.id
+            }).then(function (result) {
+                console.log(result.data);
+            });
+        }
+    };
+
+
+    var getItemIndexById = function (pool, id) {
+        for (var i in pool) {
+            if (pool[i].id == id)
+                return i;
+        }
+        return -1;
     }
 });

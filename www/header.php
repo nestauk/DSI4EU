@@ -107,13 +107,13 @@
                         <div class="w-form login-form">
                             <form id="email-form" name="email-form" data-name="Email Form" ng-submit="onSubmit()">
                                 <input id="email-4" type="email" placeholder="Enter your email address" name="email-4"
-                                       data-name="Email 4" required="required" autofocus="autofocus"
+                                       data-name="Email 4" autofocus="autofocus"
                                        class="w-input login-field"
                                        ng-model="email.value"
                                        ng-class="{error: errors.email}">
                                 <div style="color:red" ng-show="errors.email" ng-bind="errors.email"></div>
                                 <input id="Password-4" type="password" placeholder="Password" name="Password-4"
-                                       data-name="Password 4" required="required" class="w-input login-field"
+                                       data-name="Password 4" class="w-input login-field"
                                        ng-model="password.value"
                                        ng-class="{error: errors.password}">
                                 <div style="color:red" ng-show="errors.password" ng-bind="errors.password"></div>
@@ -168,13 +168,13 @@
                         <div class="w-form login-form">
                             <form id="email-form" name="email-form" data-name="Email Form" ng-submit="onSubmit()">
                                 <input id="email-5" type="email" placeholder="Enter your email address" name="email-5"
-                                       data-name="Email 5" required="required" autofocus="autofocus"
+                                       data-name="Email 5" autofocus="autofocus"
                                        class="w-input login-field"
                                        ng-model="email.value"
                                        ng-class="{error: errors.email}">
                                 <div style="color:red" ng-show="errors.email" ng-bind="errors.email"></div>
                                 <input id="Password-5" type="password" placeholder="Password" name="Password-5"
-                                       data-name="Password 5" required="required" class="w-input login-field"
+                                       data-name="Password 5" class="w-input login-field"
                                        ng-model="password.value"
                                        ng-class="{error: errors.password}">
                                 <div style="color:red" ng-show="errors.password" ng-bind="errors.password"></div>
@@ -241,7 +241,7 @@
                         <div class="w-form login-form">
                             <form ng-submit="createOrganisation()">
                                 <input type="text" placeholder="Enter organisation name" name="organisation"
-                                       required="required" autofocus="autofocus"
+                                       autofocus="autofocus"
                                        class="w-input login-field"
                                        ng-model="organisation.value"
                                        ng-class="{error: errors.organisation}">

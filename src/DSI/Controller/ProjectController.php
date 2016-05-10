@@ -2,9 +2,13 @@
 
 namespace DSI\Controller;
 
+use DSI\Entity\Project;
+use DSI\Entity\User;
 use DSI\Repository\ProjectImpactTagARepository;
 use DSI\Repository\ProjectImpactTagBRepository;
 use DSI\Repository\ProjectImpactTagCRepository;
+use DSI\Repository\ProjectMemberRepository;
+use DSI\Repository\ProjectMemberRequestRepository;
 use DSI\Repository\ProjectRepository;
 use DSI\Repository\ProjectTagRepository;
 use DSI\Repository\UserRepository;
@@ -14,10 +18,15 @@ use DSI\Service\URL;
 use DSI\UseCase\AddImpactTagAToProject;
 use DSI\UseCase\AddImpactTagBToProject;
 use DSI\UseCase\AddImpactTagCToProject;
+use DSI\UseCase\AddMemberRequestToProject;
+use DSI\UseCase\AddMemberToProject;
 use DSI\UseCase\AddTagToProject;
+use DSI\UseCase\ApproveMemberRequestToProject;
+use DSI\UseCase\RejectMemberRequestToProject;
 use DSI\UseCase\RemoveImpactTagAFromProject;
 use DSI\UseCase\RemoveImpactTagBFromProject;
 use DSI\UseCase\RemoveImpactTagCFromProject;
+use DSI\UseCase\RemoveMemberFromProject;
 use DSI\UseCase\RemoveTagFromProject;
 use DSI\UseCase\UpdateProject;
 
@@ -136,12 +145,68 @@ class ProjectController
                 die();
             }
 
+            if (isset($_POST['addMember'])) {
+                $addMemberToProject = new AddMemberToProject();
+                $addMemberToProject->data()->projectID = $project->getId();
+                $addMemberToProject->data()->userID = $_POST['addMember'];
+                $addMemberToProject->exec();
+                echo json_encode(['result' => 'ok']);
+                die();
+            }
+            if (isset($_POST['removeMember'])) {
+                $removeMemberFromProject = new RemoveMemberFromProject();
+                $removeMemberFromProject->data()->projectID = $project->getId();
+                $removeMemberFromProject->data()->userID = $_POST['removeMember'];
+                $removeMemberFromProject->exec();
+                echo json_encode(['result' => 'ok']);
+                die();
+            }
+
+            if (isset($_POST['requestToJoin'])) {
+                $addMemberRequestToJoinProject = new AddMemberRequestToProject();
+                $addMemberRequestToJoinProject->data()->projectID = $project->getId();
+                $addMemberRequestToJoinProject->data()->userID = $loggedInUser->getId();
+                $addMemberRequestToJoinProject->exec();
+                echo json_encode(['result' => 'ok']);
+                die();
+            }
+            if (isset($_POST['approveRequestToJoin'])) {
+                $approveMemberRequestToJoinProject = new ApproveMemberRequestToProject();
+                $approveMemberRequestToJoinProject->data()->projectID = $project->getId();
+                $approveMemberRequestToJoinProject->data()->userID = $_POST['approveRequestToJoin'];
+                $approveMemberRequestToJoinProject->exec();
+                echo json_encode(['result' => 'ok']);
+                die();
+            }
+            if (isset($_POST['rejectRequestToJoin'])) {
+                $rejectMemberRequestToJoinProject = new RejectMemberRequestToProject();
+                $rejectMemberRequestToJoinProject->data()->projectID = $project->getId();
+                $rejectMemberRequestToJoinProject->data()->userID = $_POST['rejectRequestToJoin'];
+                $rejectMemberRequestToJoinProject->exec();
+                echo json_encode(['result' => 'ok']);
+                die();
+            }
+
+
         } catch (ErrorHandler $e) {
             echo json_encode([
                 'result' => 'error',
                 'errors' => $e->getErrors()
             ]);
             die();
+        }
+
+        $memberRequests = [];
+        $isOwner = false;
+        $canUserRequestMembership = false;
+        $projectMembers = (new ProjectMemberRepository())->getMembersForProject($project->getId());
+        if ($loggedInUser) {
+            $canUserRequestMembership = $this->canUserRequestMembership($project, $loggedInUser);
+            if ($project->getOwner()->getId() == $loggedInUser->getId())
+                $isOwner = true;
+
+            if (isset($isOwner) AND $isOwner === true)
+                $memberRequests = (new ProjectMemberRequestRepository())->getMembersForProject($project->getId());
         }
 
         if ($this->data()->format == 'json') {
@@ -156,9 +221,32 @@ class ProjectController
                 'impactTagsA' => (new ProjectImpactTagARepository())->getTagsNameByProjectID($project->getId()),
                 'impactTagsB' => (new ProjectImpactTagBRepository())->getTagsNameByProjectID($project->getId()),
                 'impactTagsC' => (new ProjectImpactTagCRepository())->getTagsNameByProjectID($project->getId()),
+                'members' => array_map(function (User $user) {
+                    return [
+                        'id' => $user->getId(),
+                        'text' => $user->getFirstName() . ' ' . $user->getLastName(),
+                        'firstName' => $user->getFirstName(),
+                        'lastName' => $user->getLastName(),
+                        'profilePic' => $user->getProfilePicOrDefault()
+                    ];
+                }, $projectMembers),
+                'memberRequests' => array_map(function (User $user) {
+                    return [
+                        'id' => $user->getId(),
+                        'text' => $user->getFirstName() . ' ' . $user->getLastName(),
+                        'firstName' => $user->getFirstName(),
+                        'lastName' => $user->getLastName(),
+                        'profilePic' => $user->getProfilePicOrDefault()
+                    ];
+                }, $memberRequests)
             ]);
             die();
         } else {
+            $data = [
+                'project' => $project,
+                'canUserRequestMembership' => $canUserRequestMembership ?? false,
+                'isOwner' => $isOwner ?? false,
+            ];
             require __DIR__ . '/../../../www/project.php';
         }
     }
@@ -169,6 +257,23 @@ class ProjectController
     public function data()
     {
         return $this->data;
+    }
+
+    /**
+     * @param Project $project
+     * @param User $loggedInUser
+     * @return bool
+     */
+    private function canUserRequestMembership(Project $project, User $loggedInUser)
+    {
+        if ($project->getOwner()->getId() == $loggedInUser->getId())
+            return false;
+        if ((new ProjectMemberRepository())->projectHasMember($project->getId(), $loggedInUser->getId()))
+            return false;
+        if ((new ProjectMemberRequestRepository())->projectHasRequestFromMember($project->getId(), $loggedInUser->getId()))
+            return false;
+
+        return true;
     }
 }
 
