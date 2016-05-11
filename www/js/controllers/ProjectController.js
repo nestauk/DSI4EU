@@ -6,6 +6,8 @@ app.controller('ProjectController', function ($scope, $http, $attrs, $timeout) {
     var addImpactTagBSelect = $('#Add-impact-tag-b');
     var addImpactTagCSelect = $('#Add-impact-tag-c');
     var addMemberSelect = $('#Add-member');
+    var editCountry = $('#Edit-country');
+    var editCountryRegion = $('#Edit-countryRegion');
 
     $scope.datePattern = '[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])';
     $scope.getDateFrom = function (date) {
@@ -139,38 +141,32 @@ app.controller('ProjectController', function ($scope, $http, $attrs, $timeout) {
     };
 
     // Get Project Details
-    (function () {
-        $http.get(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json')
-            .then(function (response) {
-                $scope.project = response.data || {};
+    $http.get(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json')
+        .then(function (response) {
+            $scope.project = response.data || {};
+            listCountries();
+        });
+
+    // List Tags
+    $http.get(SITE_RELATIVE_PATH + '/tags-for-projects.json')
+        .then(function (result) {
+            addTagSelect.select2({
+                data: result.data
             });
-    }());
-    // Get Tags List
-    (function () {
-        $http.get(SITE_RELATIVE_PATH + '/tags-for-projects.json')
-            .then(function (result) {
-                addTagSelect.select2({
-                    data: result.data
-                });
-            });
-    }());
-    // Get Impact Tags List
-    (function () {
-        $http.get(SITE_RELATIVE_PATH + '/impact-tags.json')
-            .then(function (result) {
-                addImpactTagASelect.select2({data: result.data});
-                addImpactTagBSelect.select2({data: result.data});
-                addImpactTagCSelect.select2({data: result.data});
-            });
-    }());
-    // Get Users List
-    (function () {
-        $http.get(SITE_RELATIVE_PATH + '/users.json')
-            .then(function (result) {
-                $scope.users = result.data;
-                addMemberSelect.select2({data: result.data});
-            });
-    }());
+        });
+    // List ImpactTags
+    $http.get(SITE_RELATIVE_PATH + '/impact-tags.json')
+        .then(function (result) {
+            addImpactTagASelect.select2({data: result.data});
+            addImpactTagBSelect.select2({data: result.data});
+            addImpactTagCSelect.select2({data: result.data});
+        });
+    // List Users
+    $http.get(SITE_RELATIVE_PATH + '/users.json')
+        .then(function (result) {
+            $scope.users = result.data;
+            addMemberSelect.select2({data: result.data});
+        });
 
     var addTag = function (data) {
         data.selectBox.select2().val('').trigger("change");
@@ -201,8 +197,36 @@ app.controller('ProjectController', function ($scope, $http, $attrs, $timeout) {
         }
     };
 
+    var listCountries = function () {
+        $http.get(SITE_RELATIVE_PATH + '/countries.json')
+            .then(function (result) {
+                editCountry.select2({data: result.data});
+                editCountry.on("change", function () {
+                    listCountryRegions(editCountry.val());
+                });
+                editCountry.val($scope.project.countryID).trigger("change");
+            });
+    };
+    var listCountryRegions = function (countryID) {
+        countryID = parseInt(countryID) || 0;
+        if (countryID > 0) {
+            $scope.loadingCountryRegions = true;
+            $http.get(SITE_RELATIVE_PATH + '/countryRegions/' + countryID + '.json')
+                .then(function (result) {
+                    $timeout(function () {
+                        editCountryRegion
+                            .html("")
+                            .select2({data: result.data})
+                            .val($scope.project.countryRegion)
+                            .trigger("change");
+                        $scope.loadingCountryRegions = false;
+                    }, 500);
+                });
+        }
+    };
 
     $scope.requestToJoin = {};
+    $scope.savingCountryRegion = {};
     $scope.sendRequestToJoin = function () {
         $scope.requestToJoin.loading = true;
         $timeout(function () {
@@ -213,7 +237,7 @@ app.controller('ProjectController', function ($scope, $http, $attrs, $timeout) {
                 $scope.requestToJoin.requestSent = true;
                 console.log(result.data);
             });
-        }, 1000);
+        }, 500);
     };
     $scope.approveRequestToJoin = function (member) {
         var index = getItemIndexById($scope.project.memberRequests, member.id);
@@ -240,7 +264,21 @@ app.controller('ProjectController', function ($scope, $http, $attrs, $timeout) {
             });
         }
     };
-
+    $scope.saveCountryRegion = function () {
+        $scope.savingCountryRegion.loading = true;
+        $scope.savingCountryRegion.saved = false;
+        $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', {
+            updateCountryRegion: true,
+            countryID: editCountry.val(),
+            region: editCountryRegion.val()
+        }).then(function (result) {
+            $timeout(function () {
+                $scope.savingCountryRegion.loading = false;
+                $scope.savingCountryRegion.saved = true;
+                console.log(result.data);
+            }, 500);
+        });
+    };
 
     var getItemIndexById = function (pool, id) {
         for (var i in pool) {
@@ -248,5 +286,28 @@ app.controller('ProjectController', function ($scope, $http, $attrs, $timeout) {
                 return i;
         }
         return -1;
-    }
+    };
+
+    /*
+     $scope.saveGMapPosition = function () {
+     $http.get('http://maps.googleapis.com/maps/api/geocode/json?' +
+     'latlng=' + selectedLocation.getPosition().lat() + ',' +
+     selectedLocation.getPosition().lng() +
+     '&sensor=false')
+     .then(function (result) {
+     if (result.data.status == 'OK') {
+     $scope.possibleLocationsNotFound = false;
+     console.log(result.data.status);
+     var country = result.data.results.pop().formatted_address;
+     console.log({
+     country: country
+     });
+     $scope.possibleLocations = result.data.results
+     } else {
+     $scope.possibleLocationsNotFound = true;
+     $scope.possibleLocations = [];
+     }
+     });
+     }
+     */
 });

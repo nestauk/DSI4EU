@@ -2,7 +2,7 @@
 
 namespace DSI\Entity;
 
-class Project
+class Organisation
 {
     /** @var integer */
     private $id;
@@ -12,11 +12,7 @@ class Project
 
     /** @var string */
     private $name,
-        $description,
-        $url,
-        $status,
-        $startDate,
-        $endDate;
+        $description;
 
     /** @var CountryRegion */
     private $countryRegion;
@@ -86,70 +82,6 @@ class Project
     public function setOwner(User $owner)
     {
         $this->owner = $owner;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUrl(): string
-    {
-        return (string)$this->url;
-    }
-
-    /**
-     * @param string $url
-     */
-    public function setUrl(string $url)
-    {
-        $this->url = $url;
-    }
-
-    /**
-     * @return string
-     */
-    public function getStatus(): string
-    {
-        return (string)$this->status;
-    }
-
-    /**
-     * @param string $status
-     */
-    public function setStatus(string $status)
-    {
-        $this->status = $status;
-    }
-
-    /**
-     * @return string
-     */
-    public function getStartDate()
-    {
-        return $this->startDate;
-    }
-
-    /**
-     * @param string $startDate
-     */
-    public function setStartDate($startDate)
-    {
-        $this->startDate = $startDate;
-    }
-
-    /**
-     * @return string
-     */
-    public function getEndDate()
-    {
-        return $this->endDate;
-    }
-
-    /**
-     * @param string $endDate
-     */
-    public function setEndDate($endDate)
-    {
-        $this->endDate = $endDate;
     }
 
     /**

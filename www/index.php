@@ -61,6 +61,9 @@ class Router
         } elseif ($this->pageURL === '/createProject.json') {
             $this->createProjectPage();
 
+        } elseif ($this->pageURL === '/createOrganisation.json') {
+            $this->createOrganisationPage();
+
         } elseif ($this->pageURL === '/uploadProfilePicture') {
             $this->uploadProfilePicturePage();
 
@@ -82,6 +85,12 @@ class Router
         } elseif ($this->pageURL === '/languages.json') {
             $this->languagesListJsonPage();
 
+        } elseif ($this->pageURL === '/countries.json') {
+            $this->countriesListJsonPage();
+
+        } elseif (preg_match('<^/countryRegions/([0-9]+)\.json$>', $this->pageURL, $matches)) {
+            $this->countryRegionsListJsonPage($matches);
+
         } elseif (preg_match('<^/profile/([a-zA-Z0-9\.]+)/details\.json$>', $this->pageURL, $matches)) {
             $this->userProfilePage($matches, 'json');
 
@@ -93,6 +102,12 @@ class Router
 
         } elseif (preg_match('<^/project/([0-9]+)(\/.*)?$>', $this->pageURL, $matches)) {
             $this->projectPage($matches);
+
+        } elseif (preg_match('<^/org/([0-9]+)\.json?$>', $this->pageURL, $matches)) {
+            $this->organisationJsonPage($matches);
+
+        } elseif (preg_match('<^/org/([0-9]+)(\/.*)?$>', $this->pageURL, $matches)) {
+            $this->organisationPage($matches);
 
         } elseif (preg_match('<^/.*\.(gif|jpe?g|png|svg|js|css|map)$>', $this->pageURL)) {
             pr('not found');
@@ -236,6 +251,12 @@ class Router
         $command->exec();
     }
 
+    private function createOrganisationPage()
+    {
+        $command = new \DSI\Controller\CreateOrganisationController();
+        $command->exec();
+    }
+
     private function projectPage($matches)
     {
         $command = new \DSI\Controller\ProjectController();
@@ -243,10 +264,25 @@ class Router
         $command->exec();
     }
 
+    private function organisationPage($matches)
+    {
+        $command = new \DSI\Controller\OrganisationController();
+        $command->data()->organisationID = $matches[1];
+        $command->exec();
+    }
+
     private function projectJsonPage($matches)
     {
         $command = new \DSI\Controller\ProjectController();
         $command->data()->projectID = $matches[1];
+        $command->data()->format = 'json';
+        $command->exec();
+    }
+
+    private function organisationJsonPage($matches)
+    {
+        $command = new \DSI\Controller\OrganisationController();
+        $command->data()->organisationID = $matches[1];
         $command->data()->format = 'json';
         $command->exec();
     }
@@ -266,6 +302,19 @@ class Router
     private function usersListJsonPage()
     {
         $command = new \DSI\Controller\ListUsersController();
+        $command->exec();
+    }
+
+    private function countriesListJsonPage()
+    {
+        $command = new \DSI\Controller\ListCountriesController();
+        $command->exec();
+    }
+
+    private function countryRegionsListJsonPage($matches)
+    {
+        $command = new \DSI\Controller\ListCountryRegionsController();
+        $command->data()->countryID = $matches[1];
         $command->exec();
     }
 }

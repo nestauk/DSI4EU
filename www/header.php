@@ -11,12 +11,12 @@
     <meta property="og:title" content="Home">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Webflow">
-    <link rel="stylesheet" type="text/css" href="<?php echo SITE_RELATIVE_PATH?>/css/normalize.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo SITE_RELATIVE_PATH?>/css/webflow.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo SITE_RELATIVE_PATH?>/css/dsi4eu.webflow.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo SITE_RELATIVE_PATH?>/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo SITE_RELATIVE_PATH ?>/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo SITE_RELATIVE_PATH ?>/css/webflow.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo SITE_RELATIVE_PATH ?>/css/dsi4eu.webflow.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo SITE_RELATIVE_PATH ?>/css/custom.css">
 
-    <script type="text/javascript" src="<?php echo SITE_RELATIVE_PATH?>/js/script.js"></script>
+    <script type="text/javascript" src="<?php echo SITE_RELATIVE_PATH ?>/js/script.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
     <script>
@@ -26,7 +26,7 @@
             }
         });
     </script>
-    <script type="text/javascript" src="<?php echo SITE_RELATIVE_PATH?>/js/modernizr.js"></script>
+    <script type="text/javascript" src="<?php echo SITE_RELATIVE_PATH ?>/js/modernizr.js"></script>
     <link rel="shortcut icon" type="image/x-icon" href="https://daks2k3a4ib2z.cloudfront.net/img/favicon.ico">
     <link rel="apple-touch-icon" href="https://daks2k3a4ib2z.cloudfront.net/img/webclip.png">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.2.2/isotope.pkgd.min.js"></script>
@@ -77,14 +77,14 @@
         }
     </style>
 
-    <script type="text/javascript" src="<?php echo SITE_RELATIVE_PATH?>/js/angular.min.js"></script>
+    <script type="text/javascript" src="<?php echo SITE_RELATIVE_PATH ?>/js/angular.min.js"></script>
 
     <?php /** ngFileUpload */ ?>
-    <script src="<?php echo SITE_RELATIVE_PATH?>/js/lib/ng-file-upload-bower/ng-file-upload-shim.min.js"></script>
+    <script src="<?php echo SITE_RELATIVE_PATH ?>/js/lib/ng-file-upload-bower/ng-file-upload-shim.min.js"></script>
     <!-- for no html5 browsers support -->
-    <script src="<?php echo SITE_RELATIVE_PATH?>/js/lib/ng-file-upload-bower/ng-file-upload.min.js"></script>
+    <script src="<?php echo SITE_RELATIVE_PATH ?>/js/lib/ng-file-upload-bower/ng-file-upload.min.js"></script>
 
-    <script type="text/javascript" src="<?php echo SITE_RELATIVE_PATH?>/js/DSIApp.js"></script>
+    <script type="text/javascript" src="<?php echo SITE_RELATIVE_PATH ?>/js/DSIApp.js"></script>
 </head>
 <body ng-app="DSIApp">
 <?php if (!isset($_SESSION['user'])) { ?>
@@ -92,7 +92,8 @@
         <div data-ix="downbeforeup" class="signup-form">
             <div class="modal-header"></div>
             <div data-ix="destroysignup" class="close modal-close">+</div>
-            <img src="<?php echo SITE_RELATIVE_PATH?>/images/dsi-8c1449cf94fe315a853fd9a5d99eaf45.png" class="modal-brand">
+            <img src="<?php echo SITE_RELATIVE_PATH ?>/images/dsi-8c1449cf94fe315a853fd9a5d99eaf45.png"
+                 class="modal-brand">
             <div data-duration-in="300" data-duration-out="100" data-easing="ease-in-out" class="w-tabs">
                 <div class="w-tab-menu tabs-menu">
                     <a data-w-tab="Tab 1" class="w-tab-link w--current w-inline-block tab">
@@ -133,27 +134,34 @@
 
                                 <div class="w-row social-badges">
                                     <div class="w-col w-col-3">
-                                        <a href="<?php echo SITE_RELATIVE_PATH?>/github-login" class="w-inline-block social-login">
-                                            <img width="100%" height="100%" src="<?php echo SITE_RELATIVE_PATH?>/images/social-1_square-github.svg"
-                                                 class="social-badge">
-                                        </a>
-                                    </div>
-                                    <div class="w-col w-col-3">
-                                        <a href="<?php echo SITE_RELATIVE_PATH?>/facebook-login" class="w-inline-block social-login">
-                                            <img width="100%" height="100%" src="<?php echo SITE_RELATIVE_PATH?>/images/social-1_square-facebook.svg"
-                                                 class="social-badge">
-                                        </a>
-                                    </div>
-                                    <div class="w-col w-col-3">
-                                        <a href="<?php echo SITE_RELATIVE_PATH?>/google-login" class="w-inline-block social-login">
+                                        <a href="<?php echo SITE_RELATIVE_PATH ?>/github-login"
+                                           class="w-inline-block social-login">
                                             <img width="100%" height="100%"
-                                                 src="<?php echo SITE_RELATIVE_PATH?>/images/social-1_square-google-plus.svg"
+                                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/social-1_square-github.svg"
                                                  class="social-badge">
                                         </a>
                                     </div>
                                     <div class="w-col w-col-3">
-                                        <a href="<?php echo SITE_RELATIVE_PATH?>/twitter-login" class="w-inline-block social-login">
-                                            <img width="100%" height="100%" src="<?php echo SITE_RELATIVE_PATH?>/images/social-1_square-twitter.svg"
+                                        <a href="<?php echo SITE_RELATIVE_PATH ?>/facebook-login"
+                                           class="w-inline-block social-login">
+                                            <img width="100%" height="100%"
+                                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/social-1_square-facebook.svg"
+                                                 class="social-badge">
+                                        </a>
+                                    </div>
+                                    <div class="w-col w-col-3">
+                                        <a href="<?php echo SITE_RELATIVE_PATH ?>/google-login"
+                                           class="w-inline-block social-login">
+                                            <img width="100%" height="100%"
+                                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/social-1_square-google-plus.svg"
+                                                 class="social-badge">
+                                        </a>
+                                    </div>
+                                    <div class="w-col w-col-3">
+                                        <a href="<?php echo SITE_RELATIVE_PATH ?>/twitter-login"
+                                           class="w-inline-block social-login">
+                                            <img width="100%" height="100%"
+                                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/social-1_square-twitter.svg"
                                                  class="social-badge">
                                         </a>
                                     </div>
@@ -203,12 +211,14 @@
         </div>
     </div>
 <?php } else { ?>
-    <script type="text/javascript" src="<?php echo SITE_RELATIVE_PATH?>/js/controllers/CreateProjectOrganisationController.js"></script>
+    <script type="text/javascript"
+            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/CreateProjectOrganisationController.js"></script>
     <div class="modal-signup bg-blur">
         <div data-ix="downbeforeup" class="signup-form">
             <div class="modal-header"></div>
             <div data-ix="destroysignup" class="close modal-close">+</div>
-            <img src="<?php echo SITE_RELATIVE_PATH?>/images/dsi-8c1449cf94fe315a853fd9a5d99eaf45.png" class="modal-brand">
+            <img src="<?php echo SITE_RELATIVE_PATH ?>/images/dsi-8c1449cf94fe315a853fd9a5d99eaf45.png"
+                 class="modal-brand">
             <div data-duration-in="300" data-duration-out="100" data-easing="ease-in-out" class="w-tabs">
                 <div class="w-tab-menu tabs-menu">
                     <a data-w-tab="Tab 1" class="w-tab-link w--current w-inline-block tab">
@@ -227,8 +237,8 @@
                                        class="w-input login-field"
                                        ng-model="project.name"
                                        ng-class="{error: project.errors.name}">
-                                <div style="color:red" ng-show="project.errors.name" ng-bind="project.errors.name"></div>
-
+                                <div style="color:red" ng-show="project.errors.name"
+                                     ng-bind="project.errors.name"></div>
                                 <input ng-hide="project.loading" type="submit" value="Create Project"
                                        class="w-button login-button">
                                 <button ng-show="project.loading" type="button" class="w-button login-button register">
@@ -243,13 +253,13 @@
                                 <input type="text" placeholder="Enter organisation name" name="organisation"
                                        autofocus="autofocus"
                                        class="w-input login-field"
-                                       ng-model="organisation.value"
-                                       ng-class="{error: errors.organisation}">
-                                <div style="color:red" ng-show="errors.organisation"
-                                     ng-bind="errors.organisation"></div>
-                                <input ng-hide="loading" type="submit" value="Create Organisation"
+                                       ng-model="organisation.name"
+                                       ng-class="{error: organisation.errors.name}">
+                                <div style="color:red" ng-show="organisation.errors.name"
+                                     ng-bind="organisation.errors.name"></div>
+                                <input ng-hide="organisation.loading" type="submit" value="Create Organisation"
                                        class="w-button login-button register">
-                                <button ng-show="loading" type="button" class="w-button login-button register">
+                                <button ng-show="organisation.loading" type="button" class="w-button login-button register">
                                     Loading...
                                 </button>
                             </form>
@@ -262,14 +272,14 @@
 <?php } ?>
 <div data-collapse="medium" data-animation="default" data-duration="400" data-contain="1" class="w-nav nav-main">
     <div class="w-container">
-        <a href="<?php echo SITE_RELATIVE_PATH?>/" class="w-nav-brand">
-            <img src="<?php echo SITE_RELATIVE_PATH?>/images/dsi-8c1449cf94fe315a853fd9a5d99eaf45.png" class="brand">
+        <a href="<?php echo SITE_RELATIVE_PATH ?>/" class="w-nav-brand">
+            <img src="<?php echo SITE_RELATIVE_PATH ?>/images/dsi-8c1449cf94fe315a853fd9a5d99eaf45.png" class="brand">
         </a>
         <nav role="navigation" class="w-nav-menu">
-            <a href="<?php echo SITE_RELATIVE_PATH?>/stories" class="w-nav-link nav">Stories</a>
-            <a href="<?php echo SITE_RELATIVE_PATH?>/projects" class="w-nav-link nav">Projects</a>
-            <a href="<?php echo SITE_RELATIVE_PATH?>/organisations" class="w-nav-link nav">Organisations</a>
-            <a href="<?php echo SITE_RELATIVE_PATH?>/my-profile" class="w-nav-link nav">Profile</a>
+            <a href="<?php echo SITE_RELATIVE_PATH ?>/stories" class="w-nav-link nav">Stories</a>
+            <a href="<?php echo SITE_RELATIVE_PATH ?>/projects" class="w-nav-link nav">Projects</a>
+            <a href="<?php echo SITE_RELATIVE_PATH ?>/organisations" class="w-nav-link nav">Organisations</a>
+            <a href="<?php echo SITE_RELATIVE_PATH ?>/my-profile" class="w-nav-link nav">Profile</a>
             <?php if (!isset($_SESSION['user'])) { ?>
                 <a href="#" data-ix="showsignup" class="w-nav-link nav signup">Signup</a>
             <?php } else { ?>
@@ -287,14 +297,19 @@
             <div class="w-col w-col-6 w-clearfix">
                 <?php if (isset($loggedInUser)) { ?>
                     <div class="profile-popover bg-blur">
-                        <a href="<?php echo SITE_RELATIVE_PATH?>/my-profile" data-ix="popoverfadeout" class="popover-link">View profile</a>
-                        <a href="<?php echo SITE_RELATIVE_PATH?>/personal-details" data-ix="popoverfadeout" class="popover-link">Edit Profile</a>
-                        <a href="<?php echo SITE_RELATIVE_PATH?>/logout" data-ix="popoverfadeout" class="popover-link">Sign out</a>
+                        <a href="<?php echo SITE_RELATIVE_PATH ?>/my-profile" data-ix="popoverfadeout"
+                           class="popover-link">View profile</a>
+                        <a href="<?php echo SITE_RELATIVE_PATH ?>/personal-details" data-ix="popoverfadeout"
+                           class="popover-link">Edit Profile</a>
+                        <a href="<?php echo SITE_RELATIVE_PATH ?>/logout" data-ix="popoverfadeout" class="popover-link">Sign
+                            out</a>
                     </div>
-                    <img width="15" src="<?php echo SITE_RELATIVE_PATH?>/images/vertical-nav.png" data-ix="showpopover" class="vert-nav">
-                    <a href="<?php echo SITE_RELATIVE_PATH?>/my-profile" class="w-inline-block w-clearfix link-to-profile">
+                    <img width="15" src="<?php echo SITE_RELATIVE_PATH ?>/images/vertical-nav.png" data-ix="showpopover"
+                         class="vert-nav">
+                    <a href="<?php echo SITE_RELATIVE_PATH ?>/my-profile"
+                       class="w-inline-block w-clearfix link-to-profile">
                         <div class="profile-img"
-                             style="background-image: url('<?php echo SITE_RELATIVE_PATH?>/images/users/profile/<?php echo $loggedInUser->getProfilePicOrDefault() ?>');"></div>
+                             style="background-image: url('<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/<?php echo $loggedInUser->getProfilePicOrDefault() ?>');"></div>
                         <h3 class="profile-name"><?php echo $loggedInUser->getFirstName() ?></h3>
                         <h3 class="profile-name profile-organisation"><?php echo $loggedInUser->getLastName() ?></h3>
                         <?php /* <h3 class="profile-name profile-organisation">Nesta</h3> */ ?>

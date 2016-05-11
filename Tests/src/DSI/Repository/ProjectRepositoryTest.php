@@ -4,8 +4,12 @@ require_once __DIR__ . '/../../../config.php';
 
 use \DSI\Repository\UserRepository;
 use \DSI\Repository\ProjectRepository;
+use \DSI\Repository\CountryRegionRepository;
+use \DSI\Repository\CountryRepository;
 use \DSI\Entity\Project;
 use \DSI\Entity\User;
+use \DSI\Entity\CountryRegion;
+use \DSI\Entity\Country;
 
 class ProjectRepositoryTest extends PHPUnit_Framework_TestCase
 {
@@ -15,6 +19,18 @@ class ProjectRepositoryTest extends PHPUnit_Framework_TestCase
     /** @var UserRepository */
     private $userRepo;
 
+    /** @var CountryRegionRepository */
+    private $countryRegionRepo;
+
+    /** @var CountryRepository */
+    private $countryRepo;
+
+    /** @var Country */
+    private $country;
+
+    /** @var CountryRegion */
+    private $countryRegion;
+
     /** @var User */
     private $user1, $user2;
 
@@ -22,17 +38,30 @@ class ProjectRepositoryTest extends PHPUnit_Framework_TestCase
     {
         $this->projectRepository = new ProjectRepository();
         $this->userRepo = new UserRepository();
+        $this->countryRegionRepo = new CountryRegionRepository();
+        $this->countryRepo = new CountryRepository();
 
         $this->user1 = new User();
-        $this->userRepo->saveAsNew($this->user1);
         $this->user2 = new User();
+        $this->userRepo->saveAsNew($this->user1);
         $this->userRepo->saveAsNew($this->user2);
+
+        $this->country = new Country();
+        $this->country->setName('test1');
+        $this->countryRepo->saveAsNew($this->country);
+
+        $this->countryRegion = new CountryRegion();
+        $this->countryRegion->setName('test1');
+        $this->countryRegion->setCountry($this->country);
+        $this->countryRegionRepo->saveAsNew($this->countryRegion);
     }
 
     public function tearDown()
     {
         $this->projectRepository->clearAll();
         $this->userRepo->clearAll();
+        $this->countryRegionRepo->clearAll();
+        $this->countryRepo->clearAll();
     }
 
     /** @test saveAsNew */
@@ -104,6 +133,7 @@ class ProjectRepositoryTest extends PHPUnit_Framework_TestCase
         $project->setStatus('closed');
         $project->setStartDate('2016-05-21');
         $project->setEndDate('2016-05-22');
+        $project->setCountryRegion($this->countryRegion);
         $this->projectRepository->saveAsNew($project);
 
         $sameProject = $this->projectRepository->getById($project->getId());
@@ -114,6 +144,8 @@ class ProjectRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($project->getStatus(), $sameProject->getStatus());
         $this->assertEquals($project->getStartDate(), $sameProject->getStartDate());
         $this->assertEquals($project->getEndDate(), $sameProject->getEndDate());
+        $this->assertEquals($project->getCountryRegion()->getId(), $sameProject->getCountryRegion()->getId());
+        $this->assertEquals($project->getCountry()->getId(), $sameProject->getCountry()->getId());
     }
 
     /** @test */

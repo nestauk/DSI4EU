@@ -15,7 +15,44 @@ require __DIR__ . '/header.php';
                 <div class="project-detail">
                     <div class="project-header">
                         <img src="<?php echo SITE_RELATIVE_PATH ?>/images/pin.png" class="card-pin">
-                        <div class="card-city">City, Country</div>
+                        <?php if ($isOwner) { ?>
+                            <div class="card-city" style="text-shadow: 0 0 0 #000;">
+                                <form ng-submit="saveCountryRegion()">
+                                    <select id="Edit-country"
+                                            data-placeholder="Select country"
+                                            style="width:150px;background:transparent">
+                                        <option></option>
+                                    </select>
+                                <span ng-hide="loadingCountryRegions">
+                                    <select
+                                        data-tags="true"
+                                        id="Edit-countryRegion"
+                                        data-placeholder="Type the city"
+                                        style="width:150px;background:transparent">
+                                    </select>
+                                </span>
+                                <span ng-show="loadingCountryRegions">
+                                    Loading...
+                                </span>
+                                <span ng-hide="loadingCountryRegions">
+                                    <input ng-hide="savingCountryRegion.loading || savingCountryRegion.saved"
+                                           type="submit" value="Save" class="w-button add-skill-btn">
+                                    <button ng-show="savingCountryRegion.loading && !savingCountryRegion.saved"
+                                            type="button" class="w-button add-skill-btn">Saving...
+                                    </button>
+                                    <input ng-show="!savingCountryRegion.loading && savingCountryRegion.saved"
+                                           type="submit" value="Saved" class="w-button add-skill-btn">
+                                </span>
+                                </form>
+                            </div>
+                        <?php } else { ?>
+                            <div class="card-city">
+                                <?php if ($project->getCountryRegion()) { ?>
+                                    <?php echo $project->getCountryRegion()->getName() ?>,
+                                    <?php echo $project->getCountry()->getName() ?>
+                                <?php } ?>
+                            </div>
+                        <?php } ?>
                         <img src="<?php echo SITE_RELATIVE_PATH ?>/images/share-symbol.svg" class="share">
 
                         <?php if ($isOwner) { ?>
@@ -58,6 +95,173 @@ require __DIR__ . '/header.php';
                         <?php } ?>
                     </h1>
                 </div>
+
+                <?php /*
+            <div id="googleMap">
+                <style>
+                    #map {
+                        height: 600px;
+                    }
+
+                    .controls {
+                        margin-top: 10px;
+                        border: 1px solid transparent;
+                        border-radius: 2px 0 0 2px;
+                        box-sizing: border-box;
+                        -moz-box-sizing: border-box;
+                        height: 32px;
+                        outline: none;
+                        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+                    }
+
+                    #pac-input {
+                        background-color: #fff;
+                        font-family: Roboto;
+                        font-size: 15px;
+                        font-weight: 300;
+                        margin-left: 12px;
+                        padding: 0 11px 0 13px;
+                        text-overflow: ellipsis;
+                        width: 300px;
+                    }
+
+                    #pac-input:focus {
+                        border-color: #4d90fe;
+                    }
+
+                    .pac-container {
+                        font-family: Roboto;
+                    }
+
+                    #type-selector {
+                        color: #fff;
+                        background-color: #4d90fe;
+                        padding: 5px 11px 0px 11px;
+                    }
+
+                    #type-selector label {
+                        font-family: Roboto;
+                        font-size: 13px;
+                        font-weight: 300;
+                    }
+
+                    #target {
+                        width: 345px;
+                    }
+                </style>
+                <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+                <div id="map"></div>
+                <script>
+                    // This example adds a search box to a map, using the Google Place Autocomplete
+                    // feature. People can enter geographical searches. The search box will return a
+                    // pick list containing a mix of places and predicted search terms.
+
+                    // This example requires the Places library. Include the libraries=places
+                    // parameter when you first load the API. For example:
+                    // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+                    var selectedLocation = null;
+
+                    function initAutocomplete() {
+                        var map = new google.maps.Map(document.getElementById('map'), {
+                            center: {lat: 53, lng: 15},
+                            zoom: 4,
+                            mapTypeId: google.maps.MapTypeId.ROADMAP
+                        });
+
+                        // Create the search box and link it to the UI element.
+                        var input = document.getElementById('pac-input');
+                        var searchBox = new google.maps.places.SearchBox(input);
+                        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+                        // Bias the SearchBox results towards current map's viewport.
+                        map.addListener('bounds_changed', function () {
+                            searchBox.setBounds(map.getBounds());
+                        });
+                        map.addListener('click', function (e) {
+                            placeMarkerAndPanTo(e.latLng, map);
+                        });
+
+                        var markers = [];
+                        // Listen for the event fired when the user selects a prediction and retrieve
+                        // more details for that place.
+                        searchBox.addListener('places_changed', function () {
+                            var places = searchBox.getPlaces();
+
+                            if (places.length == 0) {
+                                return;
+                            }
+
+                            // Clear out the old markers.
+                            markers.forEach(function (marker) {
+                                marker.setMap(null);
+                            });
+                            markers = [];
+
+                            // For each place, get the icon, name and location.
+                            var bounds = new google.maps.LatLngBounds();
+                            places.forEach(function (place) {
+                                var icon = {
+                                    url: place.icon,
+                                    size: new google.maps.Size(71, 71),
+                                    origin: new google.maps.Point(0, 0),
+                                    anchor: new google.maps.Point(17, 34),
+                                    scaledSize: new google.maps.Size(25, 25)
+                                };
+
+                                // Create a marker for each place.
+                                markers.push(new google.maps.Marker({
+                                    map: map,
+                                    icon: icon,
+                                    title: place.name,
+                                    position: place.geometry.location
+                                }));
+
+                                if (place.geometry.viewport) {
+                                    // Only geocodes have viewport.
+                                    bounds.union(place.geometry.viewport);
+                                } else {
+                                    bounds.extend(place.geometry.location);
+                                }
+                            });
+                            map.fitBounds(bounds);
+                        });
+
+                        function placeMarkerAndPanTo(latLng, map) {
+                            for (var i = 0; i < markers.length; i++)
+                                markers[i].setMap(null);
+                            markers = [];
+
+                            var marker = new google.maps.Marker({
+                                position: latLng,
+                                map: map
+                            });
+                            markers.push(marker);
+                            selectedLocation = marker;
+                        }
+                    }
+
+                </script>
+                <script
+                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdjn0XlX4VebRi0Vm5BjfC7tv2T93Qi58&libraries=places&callback=initAutocomplete"
+                    async defer></script>
+
+                <div style="text-align:center;padding:10px;">
+                    <input type="button" ng-click="saveGMapPosition()" value="Save Location" class="w-button add-skill-btn">
+                </div>
+
+                <div ng-show="possibleLocations.length > 0">
+                    Please select the correct location:
+                    <ul>
+                        <li ng-repeat="location in possibleLocations">{{location.formatted_address}}</li>
+                    </ul>
+                </div>
+                <div ng-show="possibleLocationsNotFound">
+                    Address could not be found. Please insert your address manually.
+                </div>
+            </div>
+                */ ?>
+
                 <div class="w-row project-info">
                     <div class="w-col w-col-6">
                         <div class="info-card">
@@ -66,8 +270,8 @@ require __DIR__ . '/header.php';
                                 <?php if ($isOwner) { ?>
                                     <textarea ng-model="project.description" ng-blur="updateBasic()"
                                               style="min-height:150px;border:0;width:100%">
-                                    <?php echo show_input($project->getDescription()) ?>
-                                </textarea>
+                                        <?php echo show_input($project->getDescription()) ?>
+                                    </textarea>
                                 <?php } else { ?>
                                     <?php echo show_input($project->getDescription()) ?>
                                 <?php } ?>
@@ -366,9 +570,9 @@ require __DIR__ . '/header.php';
                                     <div class="w-form add-post-form-wrapper">
                                         <form id="email-form" name="email-form" data-name="Email Form"
                                               class="w-clearfix">
-                                        <textarea id="new-post" placeholder="What's been happening?" name="new-post"
-                                                  data-name="new post" data-ix="addpost"
-                                                  class="w-input add-post-form"></textarea>
+                                    <textarea id="new-post" placeholder="What's been happening?" name="new-post"
+                                              data-name="new post" data-ix="addpost"
+                                              class="w-input add-post-form"></textarea>
                                         </form>
                                         <div class="w-form-done">
                                             <p>Thank you! Your submission has been received!</p>

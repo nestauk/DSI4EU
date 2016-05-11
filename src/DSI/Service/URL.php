@@ -35,4 +35,9 @@ class URL
     {
         return SITE_RELATIVE_PATH . '/project/' . $projectID;
     }
+
+    public static function organisation($orgID)
+    {
+        return SITE_RELATIVE_PATH . '/org/' . $orgID;
+    }
 }

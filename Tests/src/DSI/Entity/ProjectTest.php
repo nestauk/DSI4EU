@@ -12,6 +12,12 @@ class ProjectTest extends \PHPUnit_Framework_TestCase
     /** @var \DSI\Entity\User */
     private $owner;
 
+    /** @var \DSI\Entity\CountryRegion */
+    private $countryRegion;
+
+    /** @var \DSI\Entity\Country */
+    private $country;
+
     public function setUp()
     {
         $this->project = new Project();
@@ -102,5 +108,19 @@ class ProjectTest extends \PHPUnit_Framework_TestCase
     {
         $this->project->setOwner($this->owner);
         $this->assertEquals($this->owner->getId(), $this->project->getOwner()->getId());
+    }
+
+    /** @test setCountryRegion, getCountryRegion */
+    public function settingCountryRegion_returnsCountryRegion()
+    {
+        $this->country = new \DSI\Entity\Country();
+        $this->country->setId(1);
+        $this->countryRegion = new \DSI\Entity\CountryRegion();
+        $this->countryRegion->setId(2);
+        $this->countryRegion->setCountry($this->country);
+
+        $this->project->setCountryRegion($this->countryRegion);
+        $this->assertEquals($this->countryRegion->getId(), $this->project->getCountryRegion()->getId());
+        $this->assertEquals($this->country->getId(), $this->project->getCountry()->getId());
     }
 }
