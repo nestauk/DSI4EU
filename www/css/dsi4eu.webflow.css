@@ -488,6 +488,8 @@ strong {
   min-height: 400px;
   border-top: 1px solid #e2e2e2;
   background-color: #fff;
+  background-image: -webkit-linear-gradient(45deg, #18233f, #384155);
+  background-image: linear-gradient(45deg, #18233f, #384155);
 }
 
 .footer-columns {
@@ -2074,7 +2076,7 @@ strong {
 }
 
 .org-tab {
-  width: 50%;
+  width: 49.5%;
   border-bottom: 3px solid #e6e6e6;
   background-color: #f7f7f7;
   color: #575757;
@@ -2143,6 +2145,379 @@ strong {
 .overlay-address {
   padding: 20px;
   color: #fff;
+}
+
+.homepage-hero {
+  height: 660px;
+  background-image: -webkit-linear-gradient(45deg, #18233f, #384155);
+  background-image: linear-gradient(45deg, #18233f, #384155);
+  background-position: 0px 0px;
+  background-size: auto;
+  background-repeat: repeat;
+  font-size: 20px;
+  line-height: 30px;
+}
+
+.homepage-nav {
+  padding-top: 20px;
+  background-color: transparent;
+}
+
+.hp-nav {
+  -webkit-transition: all 200ms ease;
+  transition: all 200ms ease;
+  color: #6c7e8a;
+  font-size: 14px;
+}
+
+.hp-nav:hover {
+  color: #fff;
+}
+
+.hero-h1 {
+  margin-top: 130px;
+  margin-bottom: 25px;
+  font-family: 'Open Sans', sans-serif;
+  color: #fff;
+  font-size: 36px;
+  line-height: 40px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.hero-container {
+  padding-top: 120px;
+}
+
+.hero-sub-heading {
+  font-family: 'Open Sans', sans-serif;
+  color: #a2afd1;
+  text-align: center;
+}
+
+.invite-form {
+  display: block;
+  width: 940px;
+  margin-top: 57px;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+}
+
+.invite-form-field {
+  width: 32%;
+  height: 48px;
+  margin-right: 1%;
+  float: left;
+  border-style: none;
+  border-radius: 3px;
+  background-color: #344c75;
+  color: #fc6868;
+  text-align: center;
+}
+
+.invite-form-field.submit {
+  background-color: #dd3ea4;
+  -webkit-transition: all 200ms ease;
+  transition: all 200ms ease;
+  color: #fff;
+  font-size: 18px;
+}
+
+.invite-form-field.submit:hover {
+  background-color: #bb2485;
+}
+
+.section-grey {
+  padding-top: 80px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e4e4e4;
+  background-color: #f3f3f3;
+}
+
+.image-placeholder {
+  height: 325px;
+  margin-bottom: 50px;
+  margin-left: 72px;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 7px 7px 100px -4px rgba(0, 0, 0, .03);
+}
+
+.home-h2 {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 28px;
+  line-height: 37px;
+  font-weight: 600;
+}
+
+.home-h2.centre {
+  text-align: center;
+}
+
+.p-big {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 19px;
+  line-height: 29px;
+  font-weight: 400;
+}
+
+.p-big.centre {
+  display: block;
+  width: 630px;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+}
+
+.section-white {
+  min-width: auto;
+  padding-top: 80px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e7e7e7;
+  background-color: #fff;
+}
+
+.showcase {
+  margin-top: 40px;
+  margin-bottom: 30px;
+}
+
+.showcase-card {
+  position: relative;
+  height: 335px;
+  border-radius: 3px;
+  background-color: #fff;
+  background-image: none;
+  background-position: 0px 0px;
+  background-size: auto;
+  background-repeat: repeat;
+  box-shadow: 0 0 50px -4px rgba(0, 0, 0, .2);
+}
+
+.showcase-card.proj {
+  background-color: #d732a2;
+}
+
+.showcase-card.org {
+  background-color: #d78e32;
+}
+
+.card-h3 {
+  margin-top: 0px;
+  padding-top: 30px;
+  padding-right: 20px;
+  padding-left: 20px;
+  font-family: 'Open Sans', sans-serif;
+  color: #384155;
+  font-size: 14px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.show-card-p {
+  padding-right: 96px;
+  padding-left: 20px;
+  font-family: 'Open Sans', sans-serif;
+  color: #18233f;
+  font-size: 19px;
+  line-height: 29px;
+  font-weight: 600;
+}
+
+.card-btn {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+  padding: 14px 25px;
+  border-radius: 3px;
+  background-color: #384155;
+  -webkit-transition: all 200ms ease;
+  transition: all 200ms ease;
+  color: #fff;
+}
+
+.card-btn:hover {
+  background-color: #060d20;
+  box-shadow: 0 0 50px -5px rgba(0, 0, 0, .4);
+}
+
+.partner-logos {
+  margin-top: 82px;
+}
+
+.partner {
+  display: inline-block;
+  width: 12.5%;
+  padding-right: 20px;
+  float: left;
+  opacity: 0.38;
+  -webkit-transition: opacity 200ms ease;
+  transition: opacity 200ms ease;
+}
+
+.partner:hover {
+  opacity: 1;
+}
+
+.container-wide {
+  display: block;
+  max-width: 1170px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-bottom: 70px;
+}
+
+.button {
+  min-width: 175px;
+  padding: 10px 30px;
+  border: 0px none #000;
+  border-radius: 3px;
+  -webkit-transition: all 200ms ease;
+  transition: all 200ms ease;
+  font-size: 18px;
+  line-height: 30px;
+  text-align: center;
+}
+
+.button:hover {
+  background-image: -webkit-linear-gradient(270deg, rgba(0, 0, 0, .16), rgba(0, 0, 0, .16));
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, .16), rgba(0, 0, 0, .16));
+  box-shadow: 0 0 50px -9px rgba(0, 0, 0, .56);
+}
+
+.button.btn-centre {
+  display: block;
+  width: 175px;
+  min-width: auto;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: #dd3ea4;
+}
+
+.footer-brand {
+  width: 140px;
+}
+
+.footer-h3 {
+  margin-top: 0px;
+  margin-bottom: 4px;
+  padding-bottom: 13px;
+  border-bottom: 0px none hsla(0, 0%, 100%, .06);
+  font-family: 'Open Sans', sans-serif;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.footer-link {
+  margin-bottom: 5px;
+  -webkit-transition: opacity 200ms ease, all 200ms ease;
+  transition: opacity 200ms ease, all 200ms ease;
+  color: hsla(0, 0%, 100%, .57);
+  text-decoration: none;
+}
+
+.footer-link:hover {
+  color: #fff;
+}
+
+.hp-post {
+  height: 200px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  background-color: #fff;
+}
+
+.hp-post-link {
+  position: relative;
+  width: 100%;
+  box-shadow: 0 0 50px -15px rgba(0, 0, 0, .43);
+  -webkit-transition: all 200ms ease;
+  transition: all 200ms ease;
+}
+
+.hp-post-link:hover {
+  box-shadow: 0 0 50px -8px #000;
+}
+
+.hp-post-img {
+  width: 100%;
+  height: 180px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  background-image: url('../images/brussels-locations.jpg');
+  background-position: 50% 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.hp-post-img.post-2 {
+  background-image: url('../images/great_design_from_that_media_group_graphic_studio_logo_design.jpg');
+  background-position: 50% -31px;
+}
+
+.hp-post-img.post-3 {
+  background-image: url('../images/Dr. Patrick Meier, QCRI Director of Social Innovaiton, Crisis Mapper.jpg');
+  background-size: cover;
+}
+
+.hp-post-row {
+  margin-top: 40px;
+}
+
+.hp-post-meta {
+  width: 50%;
+  padding: 15px;
+  float: left;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.hp-post-meta.category {
+  width: 35%;
+  padding-bottom: 10px;
+  font-family: 'Open Sans', sans-serif;
+  color: #6c7e8a;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.hp-post-meta.category.inspiration {
+  color: #dd3ea4;
+}
+
+.hp-post-meta.category.discovery {
+  color: #136dce;
+}
+
+.hp-post-meta.hp-date {
+  width: 60%;
+  padding-bottom: 10px;
+  font-family: 'Open Sans', sans-serif;
+  color: #b4b4b4;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.hp-post-h3 {
+  margin-top: 0px;
+  margin-bottom: 12px;
+  padding-right: 15px;
+  padding-left: 15px;
+  font-family: 'Open Sans', sans-serif;
+  color: #18233f;
+  font-size: 19px;
+  line-height: 24.8px;
+  font-weight: 600;
+}
+
+.hp-post-p {
+  padding-right: 40px;
+  padding-left: 15px;
+  font-family: 'Open Sans', sans-serif;
+  line-height: 21px;
+  font-weight: 400;
 }
 
 html.w-mod-js *[data-ix="downbeforeup"] {
