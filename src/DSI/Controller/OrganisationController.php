@@ -7,6 +7,7 @@ use DSI\Entity\Project;
 use DSI\Entity\User;
 use DSI\Repository\OrganisationRepository;
 use DSI\Repository\OrganisationSizeRepository;
+use DSI\Repository\OrganisationTagRepository;
 use DSI\Repository\OrganisationTypeRepository;
 use DSI\Repository\ProjectMemberRepository;
 use DSI\Repository\ProjectMemberRequestRepository;
@@ -15,6 +16,8 @@ use DSI\Repository\UserRepository;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\URL;
+use DSI\UseCase\AddTagToOrganisation;
+use DSI\UseCase\RemoveTagFromOrganisation;
 use DSI\UseCase\UpdateOrganisation;
 use DSI\UseCase\UpdateProject;
 
@@ -55,6 +58,7 @@ class OrganisationController
                     $updateOrganisation->data()->name = $_POST['name'];
                 if (isset($_POST['description']))
                     $updateOrganisation->data()->description = $_POST['description'];
+                $updateOrganisation->data()->address = $_POST['address'];
                 if (isset($_POST['organisationTypeId']) AND $_POST['organisationTypeId'])
                     $updateOrganisation->data()->organisationTypeId = $_POST['organisationTypeId'];
                 if (isset($_POST['organisationSizeId']) AND $_POST['organisationSizeId'])
@@ -65,74 +69,24 @@ class OrganisationController
                 die();
             }
 
-            /*
             if (isset($_POST['addTag'])) {
-                $addTagToProject = new AddTagToProject();
-                $addTagToProject->data()->projectID = $organisation->getId();
+                $addTagToProject = new AddTagToOrganisation();
+                $addTagToProject->data()->organisationID = $organisation->getId();
                 $addTagToProject->data()->tag = $_POST['addTag'];
                 $addTagToProject->exec();
                 echo json_encode(['result' => 'ok']);
                 die();
             }
             if (isset($_POST['removeTag'])) {
-                $removeTagFromProject = new RemoveTagFromProject();
-                $removeTagFromProject->data()->projectID = $organisation->getId();
+                $removeTagFromProject = new RemoveTagFromOrganisation();
+                $removeTagFromProject->data()->organisationID = $organisation->getId();
                 $removeTagFromProject->data()->tag = $_POST['removeTag'];
                 $removeTagFromProject->exec();
                 echo json_encode(['result' => 'ok']);
                 die();
             }
 
-            if (isset($_POST['addImpactTagA'])) {
-                $addTagToProject = new AddImpactTagAToProject();
-                $addTagToProject->data()->projectID = $organisation->getId();
-                $addTagToProject->data()->tag = $_POST['addImpactTagA'];
-                $addTagToProject->exec();
-                echo json_encode(['result' => 'ok']);
-                die();
-            }
-            if (isset($_POST['removeImpactTagA'])) {
-                $removeTagFromProject = new RemoveImpactTagAFromProject();
-                $removeTagFromProject->data()->projectID = $organisation->getId();
-                $removeTagFromProject->data()->tag = $_POST['removeImpactTagA'];
-                $removeTagFromProject->exec();
-                echo json_encode(['result' => 'ok']);
-                die();
-            }
-
-            if (isset($_POST['addImpactTagB'])) {
-                $addTagToProject = new AddImpactTagBToProject();
-                $addTagToProject->data()->projectID = $organisation->getId();
-                $addTagToProject->data()->tag = $_POST['addImpactTagB'];
-                $addTagToProject->exec();
-                echo json_encode(['result' => 'ok']);
-                die();
-            }
-            if (isset($_POST['removeImpactTagB'])) {
-                $removeTagFromProject = new RemoveImpactTagBFromProject();
-                $removeTagFromProject->data()->projectID = $organisation->getId();
-                $removeTagFromProject->data()->tag = $_POST['removeImpactTagB'];
-                $removeTagFromProject->exec();
-                echo json_encode(['result' => 'ok']);
-                die();
-            }
-
-            if (isset($_POST['addImpactTagC'])) {
-                $addTagToProject = new AddImpactTagCToProject();
-                $addTagToProject->data()->projectID = $organisation->getId();
-                $addTagToProject->data()->tag = $_POST['addImpactTagC'];
-                $addTagToProject->exec();
-                echo json_encode(['result' => 'ok']);
-                die();
-            }
-            if (isset($_POST['removeImpactTagC'])) {
-                $removeTagFromProject = new RemoveImpactTagCFromProject();
-                $removeTagFromProject->data()->projectID = $organisation->getId();
-                $removeTagFromProject->data()->tag = $_POST['removeImpactTagC'];
-                $removeTagFromProject->exec();
-                echo json_encode(['result' => 'ok']);
-                die();
-            }
+            /*
 
             if (isset($_POST['addMember'])) {
                 $addMemberToProject = new AddMemberToProject();
@@ -214,10 +168,11 @@ class OrganisationController
             echo json_encode([
                 'name' => $organisation->getName(),
                 'description' => $organisation->getDescription(),
+                'address' => $organisation->getAddress(),
                 'organisationTypeId' => (string)$organisation->getOrganisationTypeId(),
                 'organisationSizeId' => (string)$organisation->getOrganisationSizeId(),
 
-                'tags' => (new ProjectTagRepository())->getTagsNameByProjectID($organisation->getId()),
+                'tags' => (new OrganisationTagRepository())->getTagsNameByOrganisationID($organisation->getId()),
                 'members' => array_map(function (User $user) {
                     return [
                         'id' => $user->getId(),

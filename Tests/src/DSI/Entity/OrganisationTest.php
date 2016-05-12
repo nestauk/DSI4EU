@@ -100,4 +100,11 @@ class OrganisationTest extends \PHPUnit_Framework_TestCase
         $this->organisation->setOrganisationSize($this->organisationSize);
         $this->assertEquals($this->organisationSize->getId(), $this->organisation->getOrganisationSize()->getId());
     }
+
+    /** @test setAddress, getAddress*/
+    public function settingAddress_returnsAddress()
+    {
+        $this->organisation->setAddress('test');
+        $this->assertEquals('test', $this->organisation->getAddress());
+    }
 }

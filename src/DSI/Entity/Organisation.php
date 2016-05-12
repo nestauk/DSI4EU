@@ -12,7 +12,8 @@ class Organisation
 
     /** @var string */
     private $name,
-        $description;
+        $description,
+        $address;
 
     /** @var CountryRegion */
     private $countryRegion;
@@ -176,5 +177,21 @@ class Organisation
     public function setOrganisationSize(OrganisationSize $organisationSize)
     {
         $this->organisationSize = $organisationSize;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * @param string $address
+     */
+    public function setAddress(string $address)
+    {
+        $this->address = $address;
     }
 }

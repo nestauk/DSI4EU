@@ -37,13 +37,15 @@ require __DIR__ . '/header.php';
                         <p class="project-summary">
                             <?php if ($isOwner) { ?>
                                 <textarea
+                                    class="readjustTextarea"
+                                    placeholder="Please type a description"
                                     ng-model="organisation.description"
                                     ng-blur="updateBasic()"
                                     style="min-height:150px;border:0;width:100%">
                                         <?php echo show_input($organisation->getDescription()) ?>
                                     </textarea>
                             <?php } else { ?>
-                                <?php echo show_input($organisation->getDescription()) ?>
+                                <?php echo nl2br(show_input($organisation->getDescription())) ?>
                             <?php } ?>
                         </p>
                         <h3 class="org-detail-h3">Type of organisation</h3>
@@ -92,31 +94,62 @@ require __DIR__ . '/header.php';
                         </div>
                     </div>
                     <div class="info-card map">
-                        <h3 class="info-h card-h map">Nesta's location</h3>
-                        <div class="map-overlay-address">
-                            <div class="overlay-address">Nesta,
-                                <br>1 Plough Place,
-                                <br>London,
-                                <br>EC4A 1DE
+                        <h3 class="info-h card-h map">
+                            <span ng-bind="organisation.name"><?php echo $organisation->getName() ?></span>'s location
+                        </h3>
+                        <div class="map-overlay-address" style="position:static">
+                            <div class="overlay-address">
+                                <?php /*
+                                Nesta,<br>
+                                1 Plough Place,<br>
+                                London,<br>
+                                EC4A 1DE
+                                */ ?>
+
+                                <?php if ($isOwner) { ?>
+                                    <textarea
+                                        class="readjustTextarea"
+                                        placeholder="Please type the address"
+                                        ng-model="organisation.address"
+                                        ng-blur="updateBasic()"
+                                        style="min-height:80px;border:0;width:100%;background: transparent">
+                                        <?php echo show_input($organisation->getAddress()) ?>
+                                    </textarea>
+                                <?php } else { ?>
+                                    <?php echo nl2br(show_input($organisation->getAddress())) ?>
+                                <?php } ?>
                             </div>
                         </div>
-                        <div data-widget-latlng="51.511214,-0.119824" data-widget-style="roadmap"
-                             data-widget-zoom="12"
-                             class="w-widget w-widget-map map"></div>
                     </div>
                     <div class="info-card">
                         <h3 class="info-h card-h">This organisation is tagged under:</h3>
                         <div class="w-clearfix tags-block">
-                            <div class="skill">Here is a very long tag</div>
-                            <div class="skill">Short</div>
-                            <div class="skill">This tag is going to span several lines and is in fact longer</div>
-                            <div class="skill">Hardware</div>
-                            <div class="skill">Software</div>
-                            <div class="skill">Innovation</div>
-                            <div class="skill">Skills</div>
-                            <div class="add-item-block">
-                                <div class="add-item">+</div>
+                            <div class="skill" ng-repeat="tag in organisation.tags">
+                                <?php if ($isOwner) { ?>
+                                    <div class="delete" ng-click="removeTag(tag)">-</div>
+                                <?php } ?>
+                                <div ng-bind="tag"></div>
                             </div>
+                            <?php if ($isOwner) { ?>
+                                <div class="add-item-block" ng-click="addingTag = !addingTag">
+                                    <div class="add-item">+</div>
+                                </div>
+
+                                <div class="w-form" style="float:left"
+                                     ng-show="addingTag">
+                                    <form class="w-clearfix add-skill-section"
+                                          ng-submit="addTag()">
+                                        <select data-tags="true"
+                                                data-placeholder="Type your skill"
+                                                id="Add-tag"
+                                                class="w-input add-language"
+                                                style="width:200px;display:inline">
+                                            <option></option>
+                                        </select>
+                                        <input type="submit" value="Add" class="w-button add-skill-btn">
+                                    </form>
+                                </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>

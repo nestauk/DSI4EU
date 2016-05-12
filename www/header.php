@@ -16,8 +16,6 @@
     <link rel="stylesheet" type="text/css" href="<?php echo SITE_RELATIVE_PATH ?>/css/dsi4eu.webflow.css">
     <link rel="stylesheet" type="text/css" href="<?php echo SITE_RELATIVE_PATH ?>/css/custom.css">
 
-    <script type="text/javascript" src="<?php echo SITE_RELATIVE_PATH ?>/js/script.js"></script>
-
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
     <script>
         WebFont.load({

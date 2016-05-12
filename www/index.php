@@ -79,6 +79,9 @@ class Router
         } elseif ($this->pageURL === '/tags-for-projects.json') {
             $this->tagsForProjectsListJsonPage();
 
+        } elseif ($this->pageURL === '/tags-for-organisations.json') {
+            $this->tagsForOrganisationsListJsonPage();
+
         } elseif ($this->pageURL === '/impact-tags.json') {
             $this->impactTagsListJsonPage();
 
@@ -290,6 +293,12 @@ class Router
     private function tagsForProjectsListJsonPage()
     {
         $command = new \DSI\Controller\ListTagsForProjectsController();
+        $command->exec();
+    }
+
+    private function tagsForOrganisationsListJsonPage()
+    {
+        $command = new \DSI\Controller\ListTagsForOrganisationsController();
         $command->exec();
     }
 

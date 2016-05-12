@@ -18,6 +18,7 @@ class OrganisationRepository
             $insert[] = "`countryID` = '" . addslashes($organisation->getCountry()->getId()) . "'";
         if ($organisation->getCountryRegion())
             $insert[] = "`countryRegionID` = '" . addslashes($organisation->getCountryRegion()->getId()) . "'";
+        $insert[] = "`address` = '" . addslashes($organisation->getAddress()) . "'";
         if ($organisation->getOrganisationType())
             $insert[] = "`organisationTypeID` = '" . addslashes($organisation->getOrganisationTypeId()) . "'";
         if ($organisation->getOrganisationSize())
@@ -46,6 +47,7 @@ class OrganisationRepository
             $insert[] = "`countryRegionID` = '" . addslashes($organisation->getCountryRegion()->getId()) . "'";
         if ($organisation->getOrganisationType())
             $insert[] = "`organisationTypeID` = '" . addslashes($organisation->getOrganisationTypeId()) . "'";
+        $insert[] = "`address` = '" . addslashes($organisation->getAddress()) . "'";
         if ($organisation->getOrganisationSize())
             $insert[] = "`organisationSizeID` = '" . addslashes($organisation->getOrganisationSizeId()) . "'";
 
@@ -75,6 +77,7 @@ class OrganisationRepository
                 (new CountryRegionRepository())->getById($organisation['countryRegionID'])
             );
         }
+        $organisationObj->setAddress($organisation['address']);
         if ($organisation['organisationTypeID']) {
             $organisationObj->setOrganisationType(
                 (new OrganisationTypeRepository())->getById($organisation['organisationTypeID'])
@@ -95,7 +98,8 @@ class OrganisationRepository
         $organisations = [];
         $query = new SQL("SELECT 
             id, ownerID, name, description
-          , countryRegionID, organisationTypeID, organisationSizeID
+          , countryRegionID, address
+          , organisationTypeID, organisationSizeID
           FROM `organisations` WHERE " . implode(' AND ', $where) . "");
         foreach ($query->fetch_all() AS $dbOrganisation) {
             $organisations[] = $this->buildObjectFromData($dbOrganisation);
@@ -113,7 +117,8 @@ class OrganisationRepository
     {
         $query = new SQL("SELECT 
               id, ownerID, name, description
-            , countryRegionID, organisationTypeID, organisationSizeID
+          , countryRegionID, address
+          , organisationTypeID, organisationSizeID
             FROM `organisations` WHERE " . implode(' AND ', $where) . " LIMIT 1");
         $dbOrganisation = $query->fetch();
         if (!$dbOrganisation) {

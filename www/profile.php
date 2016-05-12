@@ -363,7 +363,8 @@ require __DIR__ . '/header.php';
                                             <div class="update">update</div>
                                             <div class="w-form">
                                                 <form id="email-form-2" name="email-form-2" data-name="Email Form 2">
-                                                <textarea id="Bio" placeholder="Add a short biography" name="Bio"
+                                                <textarea id="Bio" class="readjustTextarea"
+                                                          placeholder="Add a short biography" name="Bio"
                                                           data-name="Bio"
                                                           class="w-input profile-text"
                                                           ng-model="user.bio"
@@ -432,13 +433,5 @@ require __DIR__ . '/header.php';
                 </div>
             </div>
         </div>
-
-        <script type="text/javascript">
-            var bioTextarea = $('#Bio');
-            textAreaAdjust(bioTextarea[0]);
-            bioTextarea.on('keydown', function () {
-                textAreaAdjust($(this)[0]);
-            });
-        </script>
     </div>
 <?php require __DIR__ . '/footer.php' ?>

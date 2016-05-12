@@ -49,8 +49,8 @@ class UpdateOrganisation
     private function saveOrganisationDetails()
     {
         $this->data()->organisation->setName($this->data()->name);
-        if (isset($this->data()->description))
-            $this->data()->organisation->setDescription($this->data()->description);
+        $this->data()->organisation->setDescription($this->data()->description);
+        $this->data()->organisation->setAddress($this->data()->address);
         if ($this->data()->organisationTypeId)
             $this->data()->organisation->setOrganisationType(
                 (new OrganisationTypeRepository())->getById(
@@ -102,7 +102,8 @@ class UpdateOrganisation_Data
 
     /** @var string */
     public $name,
-        $description;
+        $description,
+        $address;
 
     /** @var Organisation */
     public $organisation;

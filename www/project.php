@@ -268,8 +268,11 @@ require __DIR__ . '/header.php';
                             <h3 class="info-h card-h">About this project</h3>
                             <p class="project-summary">
                                 <?php if ($isOwner) { ?>
-                                    <textarea ng-model="project.description" ng-blur="updateBasic()"
-                                              style="min-height:150px;border:0;width:100%">
+                                    <textarea
+                                        class="readjustTextarea"
+                                        ng-model="project.description"
+                                        ng-blur="updateBasic()"
+                                        style="min-height:150px;border:0;width:100%">
                                         <?php echo show_input($project->getDescription()) ?>
                                     </textarea>
                                 <?php } else { ?>
