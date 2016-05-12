@@ -14,10 +14,14 @@ class OrganisationRepository
         $insert[] = "`ownerID` = '" . addslashes($organisation->getOwner()->getId()) . "'";
         $insert[] = "`name` = '" . addslashes($organisation->getName()) . "'";
         $insert[] = "`description` = '" . addslashes($organisation->getDescription()) . "'";
-        if($organisation->getCountry())
+        if ($organisation->getCountry())
             $insert[] = "`countryID` = '" . addslashes($organisation->getCountry()->getId()) . "'";
-        if($organisation->getCountryRegion())
+        if ($organisation->getCountryRegion())
             $insert[] = "`countryRegionID` = '" . addslashes($organisation->getCountryRegion()->getId()) . "'";
+        if ($organisation->getOrganisationType())
+            $insert[] = "`organisationTypeID` = '" . addslashes($organisation->getOrganisationTypeId()) . "'";
+        if ($organisation->getOrganisationSize())
+            $insert[] = "`organisationSizeID` = '" . addslashes($organisation->getOrganisationSizeId()) . "'";
 
         $query = new SQL("INSERT INTO `organisations` SET " . implode(', ', $insert) . "");
         $query->query();
@@ -36,10 +40,14 @@ class OrganisationRepository
         $insert[] = "`ownerID` = '" . addslashes($organisation->getOwner()->getId()) . "'";
         $insert[] = "`name` = '" . addslashes($organisation->getName()) . "'";
         $insert[] = "`description` = '" . addslashes($organisation->getDescription()) . "'";
-        if($organisation->getCountry())
+        if ($organisation->getCountry())
             $insert[] = "`countryID` = '" . addslashes($organisation->getCountry()->getId()) . "'";
-        if($organisation->getCountryRegion())
+        if ($organisation->getCountryRegion())
             $insert[] = "`countryRegionID` = '" . addslashes($organisation->getCountryRegion()->getId()) . "'";
+        if ($organisation->getOrganisationType())
+            $insert[] = "`organisationTypeID` = '" . addslashes($organisation->getOrganisationTypeId()) . "'";
+        if ($organisation->getOrganisationSize())
+            $insert[] = "`organisationSizeID` = '" . addslashes($organisation->getOrganisationSizeId()) . "'";
 
         $query = new SQL("UPDATE `organisations` SET " . implode(', ', $insert) . " WHERE `id` = '{$organisation->getId()}'");
         $query->query();
@@ -62,9 +70,19 @@ class OrganisationRepository
         );
         $organisationObj->setName($organisation['name']);
         $organisationObj->setDescription($organisation['description']);
-        if($organisation['countryRegionID']){
+        if ($organisation['countryRegionID']) {
             $organisationObj->setCountryRegion(
                 (new CountryRegionRepository())->getById($organisation['countryRegionID'])
+            );
+        }
+        if ($organisation['organisationTypeID']) {
+            $organisationObj->setOrganisationType(
+                (new OrganisationTypeRepository())->getById($organisation['organisationTypeID'])
+            );
+        }
+        if ($organisation['organisationSizeID']) {
+            $organisationObj->setOrganisationSize(
+                (new OrganisationSizeRepository())->getById($organisation['organisationSizeID'])
             );
         }
 
@@ -77,7 +95,7 @@ class OrganisationRepository
         $organisations = [];
         $query = new SQL("SELECT 
             id, ownerID, name, description
-          , countryRegionID
+          , countryRegionID, organisationTypeID, organisationSizeID
           FROM `organisations` WHERE " . implode(' AND ', $where) . "");
         foreach ($query->fetch_all() AS $dbOrganisation) {
             $organisations[] = $this->buildObjectFromData($dbOrganisation);
@@ -95,7 +113,7 @@ class OrganisationRepository
     {
         $query = new SQL("SELECT 
               id, ownerID, name, description
-            , countryRegionID
+            , countryRegionID, organisationTypeID, organisationSizeID
             FROM `organisations` WHERE " . implode(' AND ', $where) . " LIMIT 1");
         $dbOrganisation = $query->fetch();
         if (!$dbOrganisation) {

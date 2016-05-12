@@ -3,9 +3,12 @@
 namespace DSI\UseCase;
 
 use DSI\Entity\Organisation;
+use DSI\Entity\OrganisationType;
 use DSI\Entity\User;
 use DSI\NotEnoughData;
 use DSI\Repository\OrganisationRepository;
+use DSI\Repository\OrganisationSizeRepository;
+use DSI\Repository\OrganisationTypeRepository;
 use DSI\Service\ErrorHandler;
 
 class UpdateOrganisation
@@ -48,6 +51,18 @@ class UpdateOrganisation
         $this->data()->organisation->setName($this->data()->name);
         if (isset($this->data()->description))
             $this->data()->organisation->setDescription($this->data()->description);
+        if ($this->data()->organisationTypeId)
+            $this->data()->organisation->setOrganisationType(
+                (new OrganisationTypeRepository())->getById(
+                    $this->data()->organisationTypeId
+                )
+            );
+        if ($this->data()->organisationSizeId)
+            $this->data()->organisation->setOrganisationSize(
+                (new OrganisationSizeRepository())->getById(
+                    $this->data()->organisationSizeId
+                )
+            );
 
         $this->organisationRepo->save($this->data()->organisation);
     }
@@ -81,6 +96,10 @@ class UpdateOrganisation
 
 class UpdateOrganisation_Data
 {
+    /** @var int */
+    public $organisationTypeId,
+        $organisationSizeId;
+
     /** @var string */
     public $name,
         $description;

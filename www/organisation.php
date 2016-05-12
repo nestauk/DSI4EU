@@ -3,6 +3,8 @@ require __DIR__ . '/header.php';
 /** @var $organisation \DSI\Entity\Organisation */
 /** @var $canUserRequestMembership bool */
 /** @var $isOwner bool */
+/** @var $organisationTypes \DSI\Entity\OrganisationType[] */
+/** @var $organisationSizes \DSI\Entity\OrganisationSize[] */
 ?>
     <script src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/OrganisationController.js"></script>
 
@@ -45,9 +47,49 @@ require __DIR__ . '/header.php';
                             <?php } ?>
                         </p>
                         <h3 class="org-detail-h3">Type of organisation</h3>
-                        <div class="org-detail-p">Social enterprise or foundation</div>
+                        <div class="org-detail-p">
+                            <?php if ($isOwner) { ?>
+                                <select style="border:0" ng-change="updateBasic()"
+                                        ng-model="organisation.organisationTypeId">
+                                    <option value="0">
+                                        - Please select -
+                                    </option>
+                                    <?php foreach ($organisationTypes AS $organisationType) { ?>
+                                        <option
+                                            <?php if ($organisationType->getId() == $organisation->getOrganisationTypeId()) echo 'selected' ?>
+                                            value="<?php echo $organisationType->getId() ?>">
+                                            <?php echo $organisationType->getName() ?>
+                                        </option>
+                                    <?php } ?>
+                                </select>
+                            <?php } else { ?>
+                                <?php if ($organisation->getOrganisationType()) { ?>
+                                    <?php echo $organisation->getOrganisationType()->getName() ?>
+                                <?php } ?>
+                            <?php } ?>
+                        </div>
                         <h3 class="org-detail-h3">Size</h3>
-                        <div class="org-detail-p">Between 100-500 staff members</div>
+                        <div class="org-detail-p">
+                            <?php if ($isOwner) { ?>
+                                <select style="border:0" ng-change="updateBasic()"
+                                        ng-model="organisation.organisationSizeId">
+                                    <option value="0">
+                                        - Please select -
+                                    </option>
+                                    <?php foreach ($organisationSizes AS $organisationSize) { ?>
+                                        <option
+                                            <?php if ($organisationSize->getId() == $organisation->getOrganisationSizeId()) echo 'selected' ?>
+                                            value="<?php echo $organisationSize->getId() ?>">
+                                            <?php echo $organisationSize->getName() ?>
+                                        </option>
+                                    <?php } ?>
+                                </select>
+                            <?php } else { ?>
+                                <?php if ($organisation->getOrganisationSize()) { ?>
+                                    <?php echo $organisation->getOrganisationSize()->getName() ?>
+                                <?php } ?>
+                            <?php } ?>
+                        </div>
                     </div>
                     <div class="info-card map">
                         <h3 class="info-h card-h map">Nesta's location</h3>
@@ -58,7 +100,8 @@ require __DIR__ . '/header.php';
                                 <br>EC4A 1DE
                             </div>
                         </div>
-                        <div data-widget-latlng="51.511214,-0.119824" data-widget-style="roadmap" data-widget-zoom="12"
+                        <div data-widget-latlng="51.511214,-0.119824" data-widget-style="roadmap"
+                             data-widget-zoom="12"
                              class="w-widget w-widget-map map"></div>
                     </div>
                     <div class="info-card">
@@ -109,7 +152,8 @@ require __DIR__ . '/header.php';
                                                 <div class="no-of-projects">6 Organisations</div>
                                             </div>
                                             <div class="w-clearfix list-item">
-                                                <div class="partner-title">Investment and support for social technology
+                                                <div class="partner-title">Investment and support for social
+                                                    technology
                                                     start-ups
                                                 </div>
                                                 <div class="no-of-projects">5 Organisations</div>
@@ -145,7 +189,8 @@ require __DIR__ . '/header.php';
                                                 <div class="no-of-projects">1 Project</div>
                                             </div>
                                             <div class="w-clearfix list-item">
-                                                <div class="partner-title">Attendal - Creative Business Innovation</div>
+                                                <div class="partner-title">Attendal - Creative Business Innovation
+                                                </div>
                                                 <div class="no-of-projects">1 Project</div>
                                             </div>
                                             <div class="w-clearfix list-item">
@@ -153,7 +198,8 @@ require __DIR__ . '/header.php';
                                                 <div class="no-of-projects">1 Project</div>
                                             </div>
                                             <div class="w-clearfix list-item">
-                                                <div class="partner-title">Manchester Digital Development Agency</div>
+                                                <div class="partner-title">Manchester Digital Development Agency
+                                                </div>
                                                 <div class="no-of-projects">1 Project</div>
                                             </div>
                                             <div class="w-clearfix list-item">
@@ -165,7 +211,8 @@ require __DIR__ . '/header.php';
                                                 <div class="no-of-projects">1 Project</div>
                                             </div>
                                             <div class="w-clearfix list-item">
-                                                <div class="partner-title">IMMI (International Modern Media Institute)
+                                                <div class="partner-title">IMMI (International Modern Media
+                                                    Institute)
                                                 </div>
                                                 <div class="no-of-projects">1 Project</div>
                                             </div>

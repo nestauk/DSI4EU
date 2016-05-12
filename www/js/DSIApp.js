@@ -14,16 +14,15 @@ app.controller('LoginController', function ($scope, $http, $timeout) {
         };
 
         $http.post(SITE_RELATIVE_PATH + '/login.json', data).then(
-            function (response) {
-                console.log(data);
+            function (result) {
                 $scope.loading = false;
-                if (response.data.response == 'error') {
-                    $scope.errors = response.data.errors;
-                } else if (response.data.response == 'ok') {
+                if (result.data.response == 'error') {
+                    $scope.errors = result.data.errors;
+                } else if (result.data.response == 'ok') {
                     $scope.loggedin = true;
                     $timeout(function () {
                         window.location.href = SITE_RELATIVE_PATH + "/";
-                    }, 1000);
+                    }, 500);
                 }
             },
             function (response) {

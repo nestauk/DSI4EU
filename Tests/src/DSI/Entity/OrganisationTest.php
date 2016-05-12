@@ -1,6 +1,7 @@
 <?php
 
 use DSI\Entity\Organisation;
+use DSI\Entity\OrganisationType;
 
 require_once __DIR__ . '/../../../config.php';
 
@@ -8,6 +9,12 @@ class OrganisationTest extends \PHPUnit_Framework_TestCase
 {
     /** @var Organisation */
     private $organisation;
+
+    /** @var OrganisationType */
+    private $organisationType;
+
+    /** @var \DSI\Entity\OrganisationSize */
+    private $organisationSize;
 
     /** @var \DSI\Entity\User */
     private $owner;
@@ -21,6 +28,10 @@ class OrganisationTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->organisation = new Organisation();
+        $this->organisationType = new OrganisationType();
+        $this->organisationType->setId(1);
+        $this->organisationSize = new \DSI\Entity\OrganisationSize();
+        $this->organisationSize->setId(1);
         $this->owner = new \DSI\Entity\User();
         $this->owner->setId(1);
     }
@@ -74,5 +85,19 @@ class OrganisationTest extends \PHPUnit_Framework_TestCase
         $this->organisation->setCountryRegion($this->countryRegion);
         $this->assertEquals($this->countryRegion->getId(), $this->organisation->getCountryRegion()->getId());
         $this->assertEquals($this->country->getId(), $this->organisation->getCountry()->getId());
+    }
+
+    /** @test setOrganisationType, getOrganisationType */
+    public function settingOrgType_returnsOrgType()
+    {
+        $this->organisation->setOrganisationType($this->organisationType);
+        $this->assertEquals($this->organisationType->getId(), $this->organisation->getOrganisationType()->getId());
+    }
+
+    /** @test setOrganisationSize, getOrganisationSize */
+    public function settingOrgSize_returnsOrgSize()
+    {
+        $this->organisation->setOrganisationSize($this->organisationSize);
+        $this->assertEquals($this->organisationSize->getId(), $this->organisation->getOrganisationSize()->getId());
     }
 }

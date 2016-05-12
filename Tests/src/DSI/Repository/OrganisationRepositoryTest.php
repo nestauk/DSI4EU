@@ -16,6 +16,12 @@ class OrganisationRepositoryTest extends PHPUnit_Framework_TestCase
     /** @var OrganisationRepository */
     private $organisationRepo;
 
+    /** @var \DSI\Repository\OrganisationTypeRepository */
+    private $organisationTypeRepo;
+
+    /** @var \DSI\Repository\OrganisationSizeRepository */
+    private $organisationSizeRepo;
+
     /** @var UserRepository */
     private $userRepo;
 
@@ -37,6 +43,8 @@ class OrganisationRepositoryTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->organisationRepo = new OrganisationRepository();
+        $this->organisationTypeRepo = new \DSI\Repository\OrganisationTypeRepository();
+        $this->organisationSizeRepo = new \DSI\Repository\OrganisationSizeRepository();
         $this->userRepo = new UserRepository();
         $this->countryRegionRepo = new CountryRegionRepository();
         $this->countryRepo = new CountryRepository();
@@ -59,6 +67,8 @@ class OrganisationRepositoryTest extends PHPUnit_Framework_TestCase
     public function tearDown()
     {
         $this->organisationRepo->clearAll();
+        $this->organisationTypeRepo->clearAll();
+        $this->organisationSizeRepo->clearAll();
         $this->userRepo->clearAll();
         $this->countryRegionRepo->clearAll();
         $this->countryRepo->clearAll();
@@ -125,11 +135,19 @@ class OrganisationRepositoryTest extends PHPUnit_Framework_TestCase
     /** @test saveAsNew getById */
     public function setAllOrganisationDetails()
     {
+        $organisationType = new \DSI\Entity\OrganisationType();
+        $this->organisationTypeRepo->saveAsNew($organisationType);
+
+        $organisationSize = new \DSI\Entity\OrganisationSize();
+        $this->organisationSizeRepo->saveAsNew($organisationSize);
+
         $organisation = new Organisation();
         $organisation->setOwner($this->user1);
         $organisation->setName('Name');
         $organisation->setDescription('Desc');
         $organisation->setCountryRegion($this->countryRegion);
+        $organisation->setOrganisationType($organisationType);
+        $organisation->setOrganisationSize($organisationSize);
         $this->organisationRepo->saveAsNew($organisation);
 
         $sameOrganisation = $this->organisationRepo->getById($organisation->getId());
@@ -138,5 +156,7 @@ class OrganisationRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($organisation->getDescription(), $sameOrganisation->getDescription());
         $this->assertEquals($organisation->getCountryRegion()->getId(), $sameOrganisation->getCountryRegion()->getId());
         $this->assertEquals($organisation->getCountry()->getId(), $sameOrganisation->getCountry()->getId());
+        $this->assertEquals($organisation->getOrganisationType()->getId(), $sameOrganisation->getOrganisationType()->getId());
+        $this->assertEquals($organisation->getOrganisationSize()->getId(), $sameOrganisation->getOrganisationSize()->getId());
     }
 }

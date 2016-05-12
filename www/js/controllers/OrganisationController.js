@@ -8,7 +8,9 @@ app.controller('OrganisationController', function ($scope, $http, $attrs, $timeo
         var data = {
             updateBasic: true,
             name: $scope.organisation.name,
-            description: $scope.organisation.description
+            description: $scope.organisation.description,
+            organisationTypeId: $scope.organisation.organisationTypeId,
+            organisationSizeId: $scope.organisation.organisationSizeId
         };
 
         $http.post(SITE_RELATIVE_PATH + '/org/' + $attrs.organisationid + '.json', data)

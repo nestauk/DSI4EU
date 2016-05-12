@@ -17,6 +17,12 @@ class Organisation
     /** @var CountryRegion */
     private $countryRegion;
 
+    /** @var OrganisationType */
+    private $organisationType;
+
+    /** @var OrganisationSize */
+    private $organisationSize;
+
     /**
      * @return int
      */
@@ -122,5 +128,53 @@ class Organisation
     public function setCountryRegion(CountryRegion $countryRegion)
     {
         $this->countryRegion = $countryRegion;
+    }
+
+    /**
+     * @return OrganisationType
+     */
+    public function getOrganisationType()
+    {
+        return $this->organisationType;
+    }
+
+    /**
+     * @return int
+     */
+    public function getOrganisationTypeId()
+    {
+        return $this->organisationType ? $this->organisationType->getId() : 0;
+    }
+
+    /**
+     * @param OrganisationType $organisationType
+     */
+    public function setOrganisationType(OrganisationType $organisationType)
+    {
+        $this->organisationType = $organisationType;
+    }
+
+    /**
+     * @return OrganisationSize
+     */
+    public function getOrganisationSize()
+    {
+        return $this->organisationSize;
+    }
+
+    /**
+     * @return int
+     */
+    public function getOrganisationSizeId()
+    {
+        return $this->organisationSize ? $this->organisationSize->getId() : 0;
+    }
+
+    /**
+     * @param OrganisationSize $organisationSize
+     */
+    public function setOrganisationSize(OrganisationSize $organisationSize)
+    {
+        $this->organisationSize = $organisationSize;
     }
 }

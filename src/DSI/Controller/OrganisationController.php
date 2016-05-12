@@ -6,6 +6,8 @@ use DSI\Entity\Organisation;
 use DSI\Entity\Project;
 use DSI\Entity\User;
 use DSI\Repository\OrganisationRepository;
+use DSI\Repository\OrganisationSizeRepository;
+use DSI\Repository\OrganisationTypeRepository;
 use DSI\Repository\ProjectMemberRepository;
 use DSI\Repository\ProjectMemberRequestRepository;
 use DSI\Repository\ProjectTagRepository;
@@ -39,6 +41,9 @@ class OrganisationController
         $organisationRepo = new OrganisationRepository();
         $organisation = $organisationRepo->getById($this->data()->organisationID);
 
+        $organisationTypes = (new OrganisationTypeRepository())->getAll();
+        $organisationSizes = (new OrganisationSizeRepository())->getAll();
+
         try {
             if (isset($_POST['updateBasic'])) {
                 $authUser->ifNotLoggedInRedirectTo(URL::login());
@@ -50,6 +55,10 @@ class OrganisationController
                     $updateOrganisation->data()->name = $_POST['name'];
                 if (isset($_POST['description']))
                     $updateOrganisation->data()->description = $_POST['description'];
+                if (isset($_POST['organisationTypeId']) AND $_POST['organisationTypeId'])
+                    $updateOrganisation->data()->organisationTypeId = $_POST['organisationTypeId'];
+                if (isset($_POST['organisationSizeId']) AND $_POST['organisationSizeId'])
+                    $updateOrganisation->data()->organisationSizeId = $_POST['organisationSizeId'];
 
                 $updateOrganisation->exec();
                 echo json_encode(['result' => 'ok']);
@@ -205,6 +214,9 @@ class OrganisationController
             echo json_encode([
                 'name' => $organisation->getName(),
                 'description' => $organisation->getDescription(),
+                'organisationTypeId' => (string)$organisation->getOrganisationTypeId(),
+                'organisationSizeId' => (string)$organisation->getOrganisationSizeId(),
+
                 'tags' => (new ProjectTagRepository())->getTagsNameByProjectID($organisation->getId()),
                 'members' => array_map(function (User $user) {
                     return [
@@ -234,6 +246,8 @@ class OrganisationController
                 'organisation' => $organisation,
                 'canUserRequestMembership' => $canUserRequestMembership ?? false,
                 'isOwner' => $isOwner ?? false,
+                'organisationTypes' => $organisationTypes,
+                'organisationSizes' => $organisationSizes,
             ];
             require __DIR__ . '/../../../www/organisation.php';
         }
