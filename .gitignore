@@ -1,6 +1,7 @@
 src/config.php
 vendor/
 composer.lock
+composer.phar
 .idea/
 www/images/users/background/
 www/images/users/profile/
