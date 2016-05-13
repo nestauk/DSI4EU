@@ -23,26 +23,26 @@ require __DIR__ . '/header.php';
                                             style="width:150px;background:transparent">
                                         <option></option>
                                     </select>
-                                <span ng-hide="loadingCountryRegions">
-                                    <select
-                                        data-tags="true"
-                                        id="Edit-countryRegion"
-                                        data-placeholder="Type the city"
-                                        style="width:150px;background:transparent">
-                                    </select>
-                                </span>
-                                <span ng-show="loadingCountryRegions">
-                                    Loading...
-                                </span>
-                                <span ng-hide="loadingCountryRegions">
-                                    <input ng-hide="savingCountryRegion.loading || savingCountryRegion.saved"
-                                           type="submit" value="Save" class="w-button add-skill-btn">
-                                    <button ng-show="savingCountryRegion.loading && !savingCountryRegion.saved"
-                                            type="button" class="w-button add-skill-btn">Saving...
-                                    </button>
-                                    <input ng-show="!savingCountryRegion.loading && savingCountryRegion.saved"
-                                           type="submit" value="Saved" class="w-button add-skill-btn">
-                                </span>
+                                    <span ng-show="regionsLoaded">
+                                        <select
+                                            data-tags="true"
+                                            id="Edit-countryRegion"
+                                            data-placeholder="Type the city"
+                                            style="width:150px;background:transparent">
+                                        </select>
+                                    </span>
+                                    <span ng-show="regionsLoading">
+                                        Loading...
+                                    </span>
+                                    <span ng-show="regionsLoaded">
+                                        <input ng-hide="savingCountryRegion.loading || savingCountryRegion.saved"
+                                               type="submit" value="Save" class="w-button add-skill-btn">
+                                        <button ng-show="savingCountryRegion.loading && !savingCountryRegion.saved"
+                                                type="button" class="w-button add-skill-btn">Saving...
+                                        </button>
+                                        <input ng-show="!savingCountryRegion.loading && savingCountryRegion.saved"
+                                               type="submit" value="Saved" class="w-button add-skill-btn">
+                                    </span>
                                 </form>
                             </div>
                         <?php } else { ?>
@@ -353,6 +353,7 @@ require __DIR__ . '/header.php';
                                 <label>
                                     Select new member:
                                     <select data-tags="true"
+                                            data-placeholder="Select new member"
                                             id="Add-member"
                                             style="width:150px">
                                         <option></option>

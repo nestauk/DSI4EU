@@ -7,6 +7,13 @@ require __DIR__ . '/header.php';
 /** @var $organisationSizes \DSI\Entity\OrganisationSize[] */
 ?>
     <script src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/OrganisationController.js"></script>
+<style>
+    .card-city{
+        position: static;float:left;
+        margin-left:0;
+        padding-left:0;
+    }
+</style>
 
     <div
         ng-controller="OrganisationController"
@@ -93,19 +100,168 @@ require __DIR__ . '/header.php';
                             <?php } ?>
                         </div>
                     </div>
+
+                    <div class="info-card">
+                        <h3 class="info-h card-h">
+                            <div style="float:left">
+                                Members
+                            </div>
+                            <?php if ($isOwner) { ?>
+                                <div class="add-item-block" ng-click="addingMember = !addingMember"
+                                     style="float:right;margin-right:20px">
+                                    <div class="add-item">+</div>
+                                </div>
+                            <?php } ?>
+                            <div style="clear:both"></div>
+                        </h3>
+
+                        <form ng-show="addingMember" ng-submit="addMember()">
+                            <label>
+                                Select new member:
+                                <select data-tags="true"
+                                        data-placeholder="Select new member"
+                                        id="Add-member"
+                                        style="width:150px">
+                                    <option></option>
+                                </select>
+                                <input type="submit" value="Add" class="w-button add-skill-btn">
+                            </label>
+                        </form>
+
+                        <div style="clear:both"></div>
+
+                        <div class="project-owner">
+                            <a href="<?php echo SITE_RELATIVE_PATH ?>/profile/<?php echo $organisation->getOwner()->getId() ?>"
+                               class="w-inline-block owner-link">
+                                <img width="50" height="50"
+                                     src="<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/<?php echo $organisation->getOwner()->getProfilePicOrDefault() ?>"
+                                     class="project-creator-img">
+                                <div class="creator-name"><?php echo $organisation->getOwner()->getFirstName() ?></div>
+                                <div class="project-creator-text">
+                                    <?php echo $organisation->getOwner()->getLastName() ?>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="w-row contributors">
+                            <div class="w-col w-col-6 contributor-col" ng-repeat="member in organisation.members">
+                                <a href="<?php echo SITE_RELATIVE_PATH ?>/profile/{{member.id}}"
+                                   class="w-inline-block contributor">
+                                    <img width="40" height="40"
+                                         ng-src="<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/{{member.profilePic}}"
+                                         class="contributor-small-img">
+                                    <div class="contributor-name" ng-bind="member.firstName"></div>
+                                    <div class="contributor-position" ng-bind="member.lastName"></div>
+                                </a>
+                                <?php if ($isOwner) { ?>
+                                    <div class="delete" style="display:block" ng-click="removeMember(member)">-
+                                    </div>
+                                <?php } ?>
+                            </div>
+                        </div>
+
+                        <?php if ($canUserRequestMembership) { ?>
+                            <div class="join-organisation">
+                                <div ng-hide="requestToJoin.requestSent">
+                                    <a href="#" ng-hide="requestToJoin.loading" class="w-button btn btn-join"
+                                       style="position: static;"
+                                       ng-click="sendRequestToJoin()">
+                                        Request to join
+                                    </a>
+                                    <button ng-show="requestToJoin.loading" class="w-button btn btn-join"
+                                            style="background-color: #ec388e;position: static;">
+                                        Sending Request...
+                                    </button>
+                                </div>
+                                <button ng-show="requestToJoin.requestSent" class="w-button btn btn-join"
+                                        style="position: static;">
+                                    Request Sent
+                                </button>
+                            </div>
+                        <?php } ?>
+                    </div>
+
+                    <?php if ($isOwner) { ?>
+                        <div class="info-card" style="min-height: 0;" ng-show="organisation.memberRequests.length > 0">
+                            <h3 class="info-h card-h">
+                                Member Requests
+                            </h3>
+
+                            <div class="w-row contributors">
+                                <div class="w-col w-col-6 contributor-col"
+                                     ng-repeat="member in organisation.memberRequests">
+                                    <a href="<?php echo SITE_RELATIVE_PATH ?>/profile/{{member.id}}"
+                                       class="w-inline-block contributor">
+                                        <img width="40" height="40"
+                                             ng-src="<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/{{member.profilePic}}"
+                                             class="contributor-small-img">
+                                        <div class="contributor-name" ng-bind="member.firstName"></div>
+                                        <div class="contributor-position" ng-bind="member.lastName"></div>
+                                    </a>
+                                    <div style="margin-left:30px">
+                                        <a href="#" title="Approve Member Request" class="add-item"
+                                           ng-click="approveRequestToJoin(member)"
+                                           style="background-color: green">+</a>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <a href="#" title="Reject Member Request" class="add-item"
+                                           ng-click="rejectRequestToJoin(member)"
+                                           style="background-color: red">-</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php } ?>
+
                     <div class="info-card map">
                         <h3 class="info-h card-h map">
                             <span ng-bind="organisation.name"><?php echo $organisation->getName() ?></span>'s location
                         </h3>
-                        <div class="map-overlay-address" style="position:static">
-                            <div class="overlay-address">
-                                <?php /*
-                                Nesta,<br>
-                                1 Plough Place,<br>
-                                London,<br>
-                                EC4A 1DE
-                                */ ?>
 
+                        <div class="map-overlay-address" style="position:static">
+                            <div style="margin:10px 10px 0 10px;padding:0">
+                                <img src="<?php echo SITE_RELATIVE_PATH ?>/images/pin.png" class="card-pin"
+                                     style="position:static;float:left;margin-top:7px;margin-right:10px">
+                                <?php if ($isOwner) { ?>
+                                    <div class="card-city" style="text-shadow: 0 0 0 #000">
+                                        <form ng-submit="saveCountryRegion()">
+                                            <select id="Edit-country"
+                                                    data-placeholder="Select country"
+                                                    style="width:150px;background:transparent">
+                                                <option></option>
+                                            </select>
+                                            <span ng-show="regionsLoaded">
+                                                <select
+                                                    data-tags="true"
+                                                    id="Edit-countryRegion"
+                                                    data-placeholder="Type the city"
+                                                    style="width:150px;background:transparent">
+                                                </select>
+                                            </span>
+                                            <span ng-show="regionsLoading">
+                                                Loading...
+                                            </span>
+                                            <span ng-show="regionsLoaded">
+                                                <input ng-hide="savingCountryRegion.loading || savingCountryRegion.saved"
+                                                       type="submit" value="Save" class="w-button add-skill-btn">
+                                                <button ng-show="savingCountryRegion.loading && !savingCountryRegion.saved"
+                                                        type="button" class="w-button add-skill-btn">Saving...
+                                                </button>
+                                                <input ng-show="!savingCountryRegion.loading && savingCountryRegion.saved"
+                                                       type="submit" value="Saved" class="w-button add-skill-btn">
+                                            </span>
+                                        </form>
+                                    </div>
+                                <?php } else { ?>
+                                    <div class="card-city">
+                                        <?php if ($organisation->getCountryRegion()) { ?>
+                                            <?php echo $organisation->getCountryRegion()->getName() ?>,
+                                            <?php echo $organisation->getCountry()->getName() ?>
+                                        <?php } ?>
+                                    </div>
+                                <?php } ?>
+                                <div style="clear:both"></div>
+                            </div>
+
+                            <div class="overlay-address">
                                 <?php if ($isOwner) { ?>
                                     <textarea
                                         class="readjustTextarea"
@@ -121,7 +277,7 @@ require __DIR__ . '/header.php';
                             </div>
                         </div>
                     </div>
-                    <div class="info-card">
+                    <div class="info-card" style="min-height:0">
                         <h3 class="info-h card-h">This organisation is tagged under:</h3>
                         <div class="w-clearfix tags-block">
                             <div class="skill" ng-repeat="tag in organisation.tags">

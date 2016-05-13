@@ -3,23 +3,26 @@
 namespace DSI\Controller;
 
 use DSI\Entity\Organisation;
-use DSI\Entity\Project;
 use DSI\Entity\User;
+use DSI\Repository\OrganisationMemberRepository;
+use DSI\Repository\OrganisationMemberRequestRepository;
 use DSI\Repository\OrganisationRepository;
 use DSI\Repository\OrganisationSizeRepository;
 use DSI\Repository\OrganisationTagRepository;
 use DSI\Repository\OrganisationTypeRepository;
-use DSI\Repository\ProjectMemberRepository;
-use DSI\Repository\ProjectMemberRequestRepository;
-use DSI\Repository\ProjectTagRepository;
 use DSI\Repository\UserRepository;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\URL;
+use DSI\UseCase\AddMemberRequestToOrganisation;
+use DSI\UseCase\AddMemberToOrganisation;
 use DSI\UseCase\AddTagToOrganisation;
+use DSI\UseCase\ApproveMemberRequestToOrganisation;
+use DSI\UseCase\RejectMemberRequestToOrganisation;
+use DSI\UseCase\RemoveMemberFromOrganisation;
 use DSI\UseCase\RemoveTagFromOrganisation;
 use DSI\UseCase\UpdateOrganisation;
-use DSI\UseCase\UpdateProject;
+use DSI\UseCase\UpdateOrganisationCountryRegion;
 
 class OrganisationController
 {
@@ -70,76 +73,73 @@ class OrganisationController
             }
 
             if (isset($_POST['addTag'])) {
-                $addTagToProject = new AddTagToOrganisation();
-                $addTagToProject->data()->organisationID = $organisation->getId();
-                $addTagToProject->data()->tag = $_POST['addTag'];
-                $addTagToProject->exec();
+                $addTagCmd = new AddTagToOrganisation();
+                $addTagCmd->data()->organisationID = $organisation->getId();
+                $addTagCmd->data()->tag = $_POST['addTag'];
+                $addTagCmd->exec();
                 echo json_encode(['result' => 'ok']);
                 die();
             }
             if (isset($_POST['removeTag'])) {
-                $removeTagFromProject = new RemoveTagFromOrganisation();
-                $removeTagFromProject->data()->organisationID = $organisation->getId();
-                $removeTagFromProject->data()->tag = $_POST['removeTag'];
-                $removeTagFromProject->exec();
+                $removeTagCmd = new RemoveTagFromOrganisation();
+                $removeTagCmd->data()->organisationID = $organisation->getId();
+                $removeTagCmd->data()->tag = $_POST['removeTag'];
+                $removeTagCmd->exec();
                 echo json_encode(['result' => 'ok']);
                 die();
             }
 
-            /*
-
             if (isset($_POST['addMember'])) {
-                $addMemberToProject = new AddMemberToProject();
-                $addMemberToProject->data()->projectID = $organisation->getId();
-                $addMemberToProject->data()->userID = $_POST['addMember'];
-                $addMemberToProject->exec();
+                $addMemberToOrgCmd = new AddMemberToOrganisation();
+                $addMemberToOrgCmd->data()->organisationID = $organisation->getId();
+                $addMemberToOrgCmd->data()->userID = $_POST['addMember'];
+                $addMemberToOrgCmd->exec();
                 echo json_encode(['result' => 'ok']);
                 die();
             }
             if (isset($_POST['removeMember'])) {
-                $removeMemberFromProject = new RemoveMemberFromProject();
-                $removeMemberFromProject->data()->projectID = $organisation->getId();
-                $removeMemberFromProject->data()->userID = $_POST['removeMember'];
-                $removeMemberFromProject->exec();
+                $removeMemberFromOrgCmd = new RemoveMemberFromOrganisation();
+                $removeMemberFromOrgCmd->data()->organisationID = $organisation->getId();
+                $removeMemberFromOrgCmd->data()->userID = $_POST['removeMember'];
+                $removeMemberFromOrgCmd->exec();
                 echo json_encode(['result' => 'ok']);
                 die();
             }
 
             if (isset($_POST['requestToJoin'])) {
-                $addMemberRequestToJoinProject = new AddMemberRequestToProject();
-                $addMemberRequestToJoinProject->data()->projectID = $organisation->getId();
-                $addMemberRequestToJoinProject->data()->userID = $loggedInUser->getId();
-                $addMemberRequestToJoinProject->exec();
+                $addMemberRequestToJoinOrganisation = new AddMemberRequestToOrganisation();
+                $addMemberRequestToJoinOrganisation->data()->organisationID = $organisation->getId();
+                $addMemberRequestToJoinOrganisation->data()->userID = $loggedInUser->getId();
+                $addMemberRequestToJoinOrganisation->exec();
                 echo json_encode(['result' => 'ok']);
                 die();
             }
             if (isset($_POST['approveRequestToJoin'])) {
-                $approveMemberRequestToJoinProject = new ApproveMemberRequestToProject();
-                $approveMemberRequestToJoinProject->data()->projectID = $organisation->getId();
-                $approveMemberRequestToJoinProject->data()->userID = $_POST['approveRequestToJoin'];
-                $approveMemberRequestToJoinProject->exec();
+                $approveMemberRequestToJoinOrganisation = new ApproveMemberRequestToOrganisation();
+                $approveMemberRequestToJoinOrganisation->data()->organisationID = $organisation->getId();
+                $approveMemberRequestToJoinOrganisation->data()->userID = $_POST['approveRequestToJoin'];
+                $approveMemberRequestToJoinOrganisation->exec();
                 echo json_encode(['result' => 'ok']);
                 die();
             }
             if (isset($_POST['rejectRequestToJoin'])) {
-                $rejectMemberRequestToJoinProject = new RejectMemberRequestToProject();
-                $rejectMemberRequestToJoinProject->data()->projectID = $organisation->getId();
-                $rejectMemberRequestToJoinProject->data()->userID = $_POST['rejectRequestToJoin'];
-                $rejectMemberRequestToJoinProject->exec();
+                $rejectMemberRequestToJoinOrganisation = new RejectMemberRequestToOrganisation();
+                $rejectMemberRequestToJoinOrganisation->data()->organisationID = $organisation->getId();
+                $rejectMemberRequestToJoinOrganisation->data()->userID = $_POST['rejectRequestToJoin'];
+                $rejectMemberRequestToJoinOrganisation->exec();
                 echo json_encode(['result' => 'ok']);
                 die();
             }
 
             if (isset($_POST['updateCountryRegion'])) {
-                $updateProjectCountryRegionCmd = new UpdateProjectCountryRegion();
-                $updateProjectCountryRegionCmd->data()->projectID = $organisation->getId();
-                $updateProjectCountryRegionCmd->data()->countryID = $_POST['countryID'];
-                $updateProjectCountryRegionCmd->data()->region = $_POST['region'];
-                $updateProjectCountryRegionCmd->exec();
+                $updateOrganisationCountryRegionCmd = new UpdateOrganisationCountryRegion();
+                $updateOrganisationCountryRegionCmd->data()->organisationID = $organisation->getId();
+                $updateOrganisationCountryRegionCmd->data()->countryID = $_POST['countryID'];
+                $updateOrganisationCountryRegionCmd->data()->region = $_POST['region'];
+                $updateOrganisationCountryRegionCmd->exec();
                 echo json_encode(['result' => 'ok']);
                 die();
             }
-            */
 
         } catch (ErrorHandler $e) {
             echo json_encode([
@@ -149,19 +149,18 @@ class OrganisationController
             die();
         }
 
-        $projectMembers = [];
         $memberRequests = [];
         $isOwner = false;
         $canUserRequestMembership = false;
 
-        // $projectMembers = (new ProjectMemberRepository())->getMembersForProject($organisation->getId());
+        $organisationMembers = (new OrganisationMemberRepository())->getMembersForOrganisation($organisation->getId());
         if ($loggedInUser) {
-            // $canUserRequestMembership = $this->canUserRequestMembership($organisation, $loggedInUser);
+            $canUserRequestMembership = $this->canUserRequestMembership($organisation, $loggedInUser);
             if ($organisation->getOwner()->getId() == $loggedInUser->getId())
                 $isOwner = true;
 
-            //if (isset($isOwner) AND $isOwner === true)
-            //  $memberRequests = (new ProjectMemberRequestRepository())->getMembersForProject($organisation->getId());
+            if (isset($isOwner) AND $isOwner === true)
+                $memberRequests = (new OrganisationMemberRequestRepository())->getMembersForOrganisation($organisation->getId());
         }
 
         if ($this->data()->format == 'json') {
@@ -181,7 +180,7 @@ class OrganisationController
                         'lastName' => $user->getLastName(),
                         'profilePic' => $user->getProfilePicOrDefault()
                     ];
-                }, $projectMembers),
+                }, $organisationMembers),
                 'memberRequests' => array_map(function (User $user) {
                     return [
                         'id' => $user->getId(),
@@ -216,18 +215,13 @@ class OrganisationController
         return $this->data;
     }
 
-    /**
-     * @param Project $organisation
-     * @param User $loggedInUser
-     * @return bool
-     */
     private function canUserRequestMembership(Organisation $organisation, User $loggedInUser)
     {
         if ($organisation->getOwner()->getId() == $loggedInUser->getId())
             return false;
-        if ((new ProjectMemberRepository())->projectHasMember($organisation->getId(), $loggedInUser->getId()))
+        if ((new OrganisationMemberRepository())->organisationHasMember($organisation->getId(), $loggedInUser->getId()))
             return false;
-        if ((new ProjectMemberRequestRepository())->projectHasRequestFromMember($organisation->getId(), $loggedInUser->getId()))
+        if ((new OrganisationMemberRequestRepository())->organisationHasRequestFromMember($organisation->getId(), $loggedInUser->getId()))
             return false;
 
         return true;

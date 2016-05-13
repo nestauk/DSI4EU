@@ -210,7 +210,8 @@ app.controller('ProjectController', function ($scope, $http, $attrs, $timeout) {
     var listCountryRegions = function (countryID) {
         countryID = parseInt(countryID) || 0;
         if (countryID > 0) {
-            $scope.loadingCountryRegions = true;
+            $scope.regionsLoaded = false;
+            $scope.regionsLoading = true;
             $http.get(SITE_RELATIVE_PATH + '/countryRegions/' + countryID + '.json')
                 .then(function (result) {
                     $timeout(function () {
@@ -219,7 +220,8 @@ app.controller('ProjectController', function ($scope, $http, $attrs, $timeout) {
                             .select2({data: result.data})
                             .val($scope.project.countryRegion)
                             .trigger("change");
-                        $scope.loadingCountryRegions = false;
+                        $scope.regionsLoaded = true;
+                        $scope.regionsLoading = false;
                     }, 500);
                 });
         }
