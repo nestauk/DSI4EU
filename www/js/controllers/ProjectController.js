@@ -6,6 +6,7 @@ app.controller('ProjectController', function ($scope, $http, $attrs, $timeout) {
     var addImpactTagBSelect = $('#Add-impact-tag-b');
     var addImpactTagCSelect = $('#Add-impact-tag-c');
     var addMemberSelect = $('#Add-member');
+    var addOrganisationSelect = $('#Add-organisation');
     var editCountry = $('#Edit-country');
     var editCountryRegion = $('#Edit-countryRegion');
 
@@ -167,6 +168,12 @@ app.controller('ProjectController', function ($scope, $http, $attrs, $timeout) {
             $scope.users = result.data;
             addMemberSelect.select2({data: result.data});
         });
+    // List Organisations
+    $http.get(SITE_RELATIVE_PATH + '/organisations.json')
+        .then(function (result) {
+            $scope.organisations = result.data;
+            addOrganisationSelect.select2({data: result.data});
+        });
 
     var addTag = function (data) {
         data.selectBox.select2().val('').trigger("change");
@@ -280,6 +287,32 @@ app.controller('ProjectController', function ($scope, $http, $attrs, $timeout) {
                 console.log(result.data);
             }, 500);
         });
+    };
+
+    $scope.addOrganisation = function () {
+        var organisation = addOrganisationSelect.select2().val();
+
+        if (organisation == '')
+            return;
+
+        var existingIndex = getItemIndexById($scope.project.organisationProjects, organisation);
+        if (existingIndex > -1)
+            return;
+
+        var index = getItemIndexById($scope.organisations, organisation);
+        if (index > -1) {
+            $scope.project.organisationProjects.push({
+                'id': $scope.organisations[index].id,
+                'name': $scope.organisations[index].text,
+                'url': $scope.organisations[index].url
+            });
+
+            $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', {
+                newOrganisationID: organisation
+            }).then(function (result) {
+                console.log(result.data);
+            });
+        }
     };
 
     var getItemIndexById = function (pool, id) {

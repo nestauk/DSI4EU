@@ -91,6 +91,9 @@ class Router
         } elseif ($this->pageURL === '/countries.json') {
             $this->countriesListJsonPage();
 
+        } elseif ($this->pageURL === '/organisations.json') {
+            $this->organisationsListJsonPage();
+
         } elseif (preg_match('<^/countryRegions/([0-9]+)\.json$>', $this->pageURL, $matches)) {
             $this->countryRegionsListJsonPage($matches);
 
@@ -317,6 +320,12 @@ class Router
     private function countriesListJsonPage()
     {
         $command = new \DSI\Controller\ListCountriesController();
+        $command->exec();
+    }
+
+    private function organisationsListJsonPage()
+    {
+        $command = new \DSI\Controller\ListOrganisationsController();
         $command->exec();
     }
 

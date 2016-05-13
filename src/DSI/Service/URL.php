@@ -31,13 +31,19 @@ class URL
         return SITE_RELATIVE_PATH . '/';
     }
 
-    public static function project($projectID)
+    public static function project($projectID, $projectName = null)
     {
-        return SITE_RELATIVE_PATH . '/project/' . $projectID;
+        if ($projectName)
+            return SITE_RELATIVE_PATH . '/project/' . $projectID . '/' . strtolower(preg_replace('([^a-zA-Z0-9\-])', '-', $projectName));
+        else
+            return SITE_RELATIVE_PATH . '/project/' . $projectID;
     }
 
-    public static function organisation($orgID)
+    public static function organisation($orgID, $organisationName = null)
     {
-        return SITE_RELATIVE_PATH . '/org/' . $orgID;
+        if ($organisationName)
+            return SITE_RELATIVE_PATH . '/org/' . $orgID . '/' . strtolower(preg_replace('([^a-zA-Z0-9\-])', '-', $organisationName));
+        else
+            return SITE_RELATIVE_PATH . '/org/' . $orgID;
     }
 }

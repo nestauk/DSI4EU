@@ -110,6 +110,13 @@ class ProjectTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->owner->getId(), $this->project->getOwner()->getId());
     }
 
+    /** @test setOrganisationsCount, getOrganisationsCount */
+    public function settingOrganisationsCount_returnsOrganisationsCount()
+    {
+        $this->project->setOrganisationsCount(10);
+        $this->assertEquals(10, $this->project->getOrganisationsCount());
+    }
+
     /** @test setCountryRegion, getCountryRegion */
     public function settingCountryRegion_returnsCountryRegion()
     {

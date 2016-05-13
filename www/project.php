@@ -272,6 +272,7 @@ require __DIR__ . '/header.php';
                                         class="readjustTextarea"
                                         ng-model="project.description"
                                         ng-blur="updateBasic()"
+                                        placeholder="Type a description"
                                         style="min-height:150px;border:0;width:100%">
                                         <?php echo show_input($project->getDescription()) ?>
                                     </textarea>
@@ -311,26 +312,41 @@ require __DIR__ . '/header.php';
 
                             <div style="clear:both"></div>
                         </div>
+
                         <div class="info-card">
-                            <h3 class="info-h card-h">Organisations involved</h3>
-                            <div class="w-row organisation-links">
-                                <div class="w-col w-col-4 w-col-stack w-col-small-4">
-                                    <a href="#" class="w-inline-block organisation-small"><img width="118"
-                                                                                               src="<?php echo SITE_RELATIVE_PATH ?>/images/nesta-6a9b5fe999e8323b379ccc0d8e70290f.png"
-                                                                                               class="org-img">
-                                    </a>
+                            <h3 class="info-h card-h">
+                                <div style="float:left">
+                                    Organisations involved
                                 </div>
-                                <div class="w-col w-col-4 w-col-stack w-col-small-4">
-                                    <a href="#" class="w-inline-block organisation-small"><img width="118"
-                                                                                               src="<?php echo SITE_RELATIVE_PATH ?>/images/waag-f1d052f43133268eaf2e13090a0b4bf1.png"
-                                                                                               class="org-img">
-                                    </a>
-                                </div>
-                                <div class="w-col w-col-4 w-col-stack w-col-small-4">
-                                    <a href="#" class="w-inline-block organisation-small"><img width="118"
-                                                                                               src="<?php echo SITE_RELATIVE_PATH ?>/images/future-everything-2f261cf2d078264179fd82b21e5927b7.png"
-                                                                                               class="org-img">
-                                    </a>
+                                <?php if ($isOwner) { ?>
+                                    <div class="add-item-block" ng-click="addingOrganisation = !addingOrganisation"
+                                         style="float:right;margin-right:20px">
+                                        <div class="add-item">+</div>
+                                    </div>
+                                <?php } ?>
+                                <div style="clear:both"></div>
+                            </h3>
+
+                            <form ng-show="addingOrganisation" ng-submit="addOrganisation()">
+                                <label>
+                                    Select organisation:
+                                    <select data-placeholder="Select organisation"
+                                            id="Add-organisation"
+                                            style="width:150px">
+                                        <option></option>
+                                    </select>
+                                    <input type="submit" value="Add" class="w-button add-skill-btn">
+                                </label>
+                            </form>
+
+                            <div class="list-items">
+                                <div class="w-inline-block partner-link">
+                                    <div class="list-item"
+                                         ng-repeat="organisation in project.organisationProjects">
+                                        <div class="partner-title">
+                                            <a ng-href="{{organisation.url}}" ng-bind="organisation.name"></a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

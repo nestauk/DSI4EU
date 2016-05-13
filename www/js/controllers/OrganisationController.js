@@ -157,8 +157,24 @@ app.controller('OrganisationController', function ($scope, $http, $attrs, $timeo
         }
     };
 
-    $scope.requestToJoin = {};
     $scope.savingCountryRegion = {};
+    $scope.saveCountryRegion = function () {
+        $scope.savingCountryRegion.loading = true;
+        $scope.savingCountryRegion.saved = false;
+        $http.post(SITE_RELATIVE_PATH + '/org/' + $attrs.organisationid + '.json', {
+            updateCountryRegion: true,
+            countryID: editCountry.val(),
+            region: editCountryRegion.val()
+        }).then(function (result) {
+            $timeout(function () {
+                $scope.savingCountryRegion.loading = false;
+                $scope.savingCountryRegion.saved = true;
+                console.log(result.data);
+            }, 500);
+        });
+    };
+
+    $scope.requestToJoin = {};
     $scope.sendRequestToJoin = function () {
         $scope.requestToJoin.loading = true;
         $timeout(function () {
@@ -196,20 +212,23 @@ app.controller('OrganisationController', function ($scope, $http, $attrs, $timeo
             });
         }
     };
-    $scope.saveCountryRegion = function () {
-        $scope.savingCountryRegion.loading = true;
-        $scope.savingCountryRegion.saved = false;
-        $http.post(SITE_RELATIVE_PATH + '/org/' + $attrs.organisationid + '.json', {
-            updateCountryRegion: true,
-            countryID: editCountry.val(),
-            region: editCountryRegion.val()
-        }).then(function (result) {
+
+    $scope.newProjectName = '';
+    $scope.addNewProject = {};
+    $scope.addProject = function () {
+        if ($scope.newProjectName != '') {
+            $scope.addNewProject.loading = true;
             $timeout(function () {
-                $scope.savingCountryRegion.loading = false;
-                $scope.savingCountryRegion.saved = true;
-                console.log(result.data);
+                $http.post(SITE_RELATIVE_PATH + '/org/' + $attrs.organisationid + '.json', {
+                    createProject: $scope.newProjectName
+                }).then(function (response) {
+                    if (response.data.result == 'ok')
+                        window.location.href = response.data.url;
+                    else
+                        console.log(response.data);
+                });
             }, 500);
-        });
+        }
     };
 
     var getItemIndexById = function (pool, id) {

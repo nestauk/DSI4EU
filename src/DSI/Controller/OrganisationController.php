@@ -3,9 +3,11 @@
 namespace DSI\Controller;
 
 use DSI\Entity\Organisation;
+use DSI\Entity\OrganisationProject;
 use DSI\Entity\User;
 use DSI\Repository\OrganisationMemberRepository;
 use DSI\Repository\OrganisationMemberRequestRepository;
+use DSI\Repository\OrganisationProjectRepository;
 use DSI\Repository\OrganisationRepository;
 use DSI\Repository\OrganisationSizeRepository;
 use DSI\Repository\OrganisationTagRepository;
@@ -16,8 +18,10 @@ use DSI\Service\ErrorHandler;
 use DSI\Service\URL;
 use DSI\UseCase\AddMemberRequestToOrganisation;
 use DSI\UseCase\AddMemberToOrganisation;
+use DSI\UseCase\AddProjectToOrganisation;
 use DSI\UseCase\AddTagToOrganisation;
 use DSI\UseCase\ApproveMemberRequestToOrganisation;
+use DSI\UseCase\CreateProject;
 use DSI\UseCase\RejectMemberRequestToOrganisation;
 use DSI\UseCase\RemoveMemberFromOrganisation;
 use DSI\UseCase\RemoveTagFromOrganisation;
@@ -132,12 +136,31 @@ class OrganisationController
             }
 
             if (isset($_POST['updateCountryRegion'])) {
-                $updateOrganisationCountryRegionCmd = new UpdateOrganisationCountryRegion();
-                $updateOrganisationCountryRegionCmd->data()->organisationID = $organisation->getId();
-                $updateOrganisationCountryRegionCmd->data()->countryID = $_POST['countryID'];
-                $updateOrganisationCountryRegionCmd->data()->region = $_POST['region'];
-                $updateOrganisationCountryRegionCmd->exec();
+                $createProjectCmd = new UpdateOrganisationCountryRegion();
+                $createProjectCmd->data()->organisationID = $organisation->getId();
+                $createProjectCmd->data()->countryID = $_POST['countryID'];
+                $createProjectCmd->data()->region = $_POST['region'];
+                $createProjectCmd->exec();
                 echo json_encode(['result' => 'ok']);
+                die();
+            }
+
+            if (isset($_POST['createProject'])) {
+                $createProjectCmd = new CreateProject();
+                $createProjectCmd->data()->name = $_POST['createProject'];
+                $createProjectCmd->data()->owner = $loggedInUser;
+                $createProjectCmd->exec();
+                $project = $createProjectCmd->getProject();
+
+                $addOrganisationProjectCmd = new AddProjectToOrganisation();
+                $addOrganisationProjectCmd->data()->projectID = $project->getId();
+                $addOrganisationProjectCmd->data()->organisationID = $organisation->getId();
+                $addOrganisationProjectCmd->exec();
+
+                echo json_encode([
+                    'result' => 'ok',
+                    'url' => URL::project($project->getId()),
+                ]);
                 die();
             }
 
@@ -154,6 +177,8 @@ class OrganisationController
         $canUserRequestMembership = false;
 
         $organisationMembers = (new OrganisationMemberRepository())->getMembersForOrganisation($organisation->getId());
+        $organisationProjects = (new OrganisationProjectRepository())->getByOrganisationID($organisation->getId());
+
         if ($loggedInUser) {
             $canUserRequestMembership = $this->canUserRequestMembership($organisation, $loggedInUser);
             if ($organisation->getOwner()->getId() == $loggedInUser->getId())
@@ -190,6 +215,15 @@ class OrganisationController
                         'profilePic' => $user->getProfilePicOrDefault()
                     ];
                 }, $memberRequests),
+                'organisationProjects' => array_map(function (OrganisationProject $organisationProject) {
+                    $project = $organisationProject->getProject();
+                    return [
+                        'id' => $project->getId(),
+                        'name' => $project->getName(),
+                        'organisationsCount' => $project->getOrganisationsCount(),
+                        'url' => URL::project($project->getId(), $project->getName()),
+                    ];
+                }, $organisationProjects),
                 'countryID' => $organisation->getCountryID(),
                 'countryRegionID' => $organisation->getCountryRegionID(),
                 'countryRegion' => $organisation->getCountryRegion() ? $organisation->getCountryRegion()->getName() : '',

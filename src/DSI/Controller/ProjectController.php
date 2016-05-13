@@ -2,8 +2,10 @@
 
 namespace DSI\Controller;
 
+use DSI\Entity\OrganisationProject;
 use DSI\Entity\Project;
 use DSI\Entity\User;
+use DSI\Repository\OrganisationProjectRepository;
 use DSI\Repository\ProjectImpactTagARepository;
 use DSI\Repository\ProjectImpactTagBRepository;
 use DSI\Repository\ProjectImpactTagCRepository;
@@ -20,6 +22,7 @@ use DSI\UseCase\AddImpactTagBToProject;
 use DSI\UseCase\AddImpactTagCToProject;
 use DSI\UseCase\AddMemberRequestToProject;
 use DSI\UseCase\AddMemberToProject;
+use DSI\UseCase\AddProjectToOrganisation;
 use DSI\UseCase\AddTagToProject;
 use DSI\UseCase\ApproveMemberRequestToProject;
 use DSI\UseCase\RejectMemberRequestToProject;
@@ -198,6 +201,15 @@ class ProjectController
                 die();
             }
 
+            if (isset($_POST['newOrganisationID'])) {
+                $addOrganisationProjectCmd = new AddProjectToOrganisation();
+                $addOrganisationProjectCmd->data()->projectID = $project->getId();
+                $addOrganisationProjectCmd->data()->organisationID = $_POST['newOrganisationID'];
+                $addOrganisationProjectCmd->exec();
+                echo json_encode(['result' => 'ok']);
+                die();
+            }
+
 
         } catch (ErrorHandler $e) {
             echo json_encode([
@@ -211,6 +223,19 @@ class ProjectController
         $isOwner = false;
         $canUserRequestMembership = false;
         $projectMembers = (new ProjectMemberRepository())->getMembersForProject($project->getId());
+        $organisationProjects = (new OrganisationProjectRepository())->getByProjectID($project->getId());
+        $organisationProjects = array_map(function (OrganisationProject $organisationProject) {
+            $organisation = $organisationProject->getOrganisation();
+            return [
+                'id' => $organisation->getId(),
+                'name' => $organisation->getName(),
+                'url' => URL::organisation($organisation->getId(), $organisation->getName()),
+            ];
+        }, $organisationProjects);
+        usort($organisationProjects, function ($a, $b) {
+            return ($a['name'] <= $b['name']) ? -1 : 1;
+        });
+
         if ($loggedInUser) {
             $canUserRequestMembership = $this->canUserRequestMembership($project, $loggedInUser);
             if ($project->getOwner()->getId() == $loggedInUser->getId())
@@ -250,6 +275,7 @@ class ProjectController
                         'profilePic' => $user->getProfilePicOrDefault()
                     ];
                 }, $memberRequests),
+                'organisationProjects' => $organisationProjects,
                 'countryID' => $project->getCountryID(),
                 'countryRegionID' => $project->getCountryRegionID(),
                 'countryRegion' => $project->getCountryRegion() ? $project->getCountryRegion()->getName() : '',

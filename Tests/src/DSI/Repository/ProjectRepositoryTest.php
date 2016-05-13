@@ -134,18 +134,20 @@ class ProjectRepositoryTest extends PHPUnit_Framework_TestCase
         $project->setStartDate('2016-05-21');
         $project->setEndDate('2016-05-22');
         $project->setCountryRegion($this->countryRegion);
+        $project->setOrganisationsCount(10);
         $this->projectRepository->saveAsNew($project);
 
-        $sameProject = $this->projectRepository->getById($project->getId());
-        $this->assertEquals($project->getOwner()->getId(), $sameProject->getOwner()->getId());
-        $this->assertEquals($project->getName(), $sameProject->getName());
-        $this->assertEquals($project->getDescription(), $sameProject->getDescription());
-        $this->assertEquals($project->getUrl(), $sameProject->getUrl());
-        $this->assertEquals($project->getStatus(), $sameProject->getStatus());
-        $this->assertEquals($project->getStartDate(), $sameProject->getStartDate());
-        $this->assertEquals($project->getEndDate(), $sameProject->getEndDate());
-        $this->assertEquals($project->getCountryRegion()->getId(), $sameProject->getCountryRegion()->getId());
-        $this->assertEquals($project->getCountry()->getId(), $sameProject->getCountry()->getId());
+        $project = $this->projectRepository->getById($project->getId());
+        $this->assertEquals($this->user1->getId(), $project->getOwner()->getId());
+        $this->assertEquals('Name', $project->getName());
+        $this->assertEquals('Desc', $project->getDescription());
+        $this->assertEquals('http://example.org', $project->getUrl());
+        $this->assertEquals('closed', $project->getStatus());
+        $this->assertEquals('2016-05-21', $project->getStartDate());
+        $this->assertEquals('2016-05-22', $project->getEndDate());
+        $this->assertEquals($this->countryRegion->getId(), $project->getCountryRegion()->getId());
+        $this->assertEquals($this->countryRegion->getCountry()->getId(), $project->getCountry()->getId());
+        $this->assertEquals(10, $project->getOrganisationsCount());
     }
 
     /** @test */

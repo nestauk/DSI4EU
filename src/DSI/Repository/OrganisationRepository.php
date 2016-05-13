@@ -92,6 +92,9 @@ class OrganisationRepository
         return $organisationObj;
     }
 
+    /**
+     * @return Organisation[]
+     */
     public function getAll()
     {
         $where = ["1"];

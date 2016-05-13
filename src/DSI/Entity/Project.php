@@ -5,7 +5,8 @@ namespace DSI\Entity;
 class Project
 {
     /** @var integer */
-    private $id;
+    private $id,
+        $organisationsCount;
 
     /** @var User */
     private $owner;
@@ -190,5 +191,21 @@ class Project
     public function setCountryRegion(CountryRegion $countryRegion)
     {
         $this->countryRegion = $countryRegion;
+    }
+
+    /**
+     * @return int
+     */
+    public function getOrganisationsCount()
+    {
+        return (int)$this->organisationsCount;
+    }
+
+    /**
+     * @param int $organisationsCount
+     */
+    public function setOrganisationsCount($organisationsCount)
+    {
+        $this->organisationsCount = (int)$organisationsCount;
     }
 }

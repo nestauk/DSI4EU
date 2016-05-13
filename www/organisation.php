@@ -7,13 +7,14 @@ require __DIR__ . '/header.php';
 /** @var $organisationSizes \DSI\Entity\OrganisationSize[] */
 ?>
     <script src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/OrganisationController.js"></script>
-<style>
-    .card-city{
-        position: static;float:left;
-        margin-left:0;
-        padding-left:0;
-    }
-</style>
+    <style>
+        .card-city {
+            position: static;
+            float: left;
+            margin-left: 0;
+            padding-left: 0;
+        }
+    </style>
 
     <div
         ng-controller="OrganisationController"
@@ -240,13 +241,16 @@ require __DIR__ . '/header.php';
                                                 Loading...
                                             </span>
                                             <span ng-show="regionsLoaded">
-                                                <input ng-hide="savingCountryRegion.loading || savingCountryRegion.saved"
-                                                       type="submit" value="Save" class="w-button add-skill-btn">
-                                                <button ng-show="savingCountryRegion.loading && !savingCountryRegion.saved"
-                                                        type="button" class="w-button add-skill-btn">Saving...
+                                                <input
+                                                    ng-hide="savingCountryRegion.loading || savingCountryRegion.saved"
+                                                    type="submit" value="Save" class="w-button add-skill-btn">
+                                                <button
+                                                    ng-show="savingCountryRegion.loading && !savingCountryRegion.saved"
+                                                    type="button" class="w-button add-skill-btn">Saving...
                                                 </button>
-                                                <input ng-show="!savingCountryRegion.loading && savingCountryRegion.saved"
-                                                       type="submit" value="Saved" class="w-button add-skill-btn">
+                                                <input
+                                                    ng-show="!savingCountryRegion.loading && savingCountryRegion.saved"
+                                                    type="submit" value="Saved" class="w-button add-skill-btn">
                                             </span>
                                         </form>
                                     </div>
@@ -323,44 +327,36 @@ require __DIR__ . '/header.php';
                             <div class="w-tab-content">
                                 <div data-w-tab="Tab 1" class="w-tab-pane w--tab-active">
                                     <div class="list-items">
-                                        <a href="#" class="w-inline-block partner-link">
-                                            <div class="list-item">
-                                                <div class="partner-title">Make things do stuff</div>
-                                                <div class="no-of-projects">3 Organisations</div>
-                                            </div>
-                                            <div class="w-clearfix list-item">
-                                                <div class="partner-title">Digital Social Innovation</div>
-                                                <div class="no-of-projects">14 Organisations</div>
-                                            </div>
-                                            <div class="w-clearfix list-item">
-                                                <div class="partner-title">D-CENT</div>
-                                                <div class="no-of-projects">7 Organisations</div>
-                                            </div>
-                                            <div class="w-clearfix list-item">
-                                                <div class="partner-title">Civic Exchange</div>
-                                                <div class="no-of-projects">6 Organisations</div>
-                                            </div>
-                                            <div class="w-clearfix list-item">
-                                                <div class="partner-title">Investment and support for social
-                                                    technology
-                                                    start-ups
+                                        <div class="w-inline-block partner-link">
+                                            <?php if ($isOwner) { ?>
+                                                <form method="post" class="list-item" ng-submit="addProject()">
+                                                    <div class="partner-title" style="width:100%">
+                                                        <input type="text" style="line-height:25px;"
+                                                               ng-model="newProjectName" placeholder="Project Name"/>
+                                                        <input ng-hide="addNewProject.loading" type="submit"
+                                                               value="Create Project" class="w-button add-skill-btn">
+                                                        <input ng-show="addNewProject.loading" type="button"
+                                                               value="Loading..." class="w-button add-skill-btn">
+                                                    </div>
+                                                </form>
+                                            <?php } ?>
+                                            <div class="list-item"
+                                                 ng-repeat="project in organisation.organisationProjects">
+                                                <div class="partner-title">
+                                                    <a ng-href="{{project.url}}" ng-bind="project.name"></a>
                                                 </div>
-                                                <div class="no-of-projects">5 Organisations</div>
+                                                <div class="no-of-projects">
+                                                    <span ng-bind="project.organisationsCount"></span>
+                                                    Organisation<span
+                                                        ng-bind="project.organisationsCount > 1 ? 's' : ''"></span>
+                                                </div>
                                             </div>
-                                            <div class="w-clearfix list-item">
-                                                <div class="partner-title">The Civic Crowd</div>
-                                                <div class="no-of-projects">1 Organisations</div>
-                                            </div>
-                                            <div class="w-clearfix list-item">
-                                                <div class="partner-title">Commons4EU</div>
-                                                <div class="no-of-projects">6 Organisations</div>
-                                            </div>
-                                        </a>
+                                        </div>
                                     </div>
                                 </div>
                                 <div data-w-tab="Tab 2" class="w-tab-pane">
                                     <div class="list-items">
-                                        <a href="#" class="w-inline-block partner-link">
+                                        <div class="w-inline-block partner-link">
                                             <div class="w-clearfix list-item">
                                                 <div class="partner-title">Waag Society</div>
                                                 <div class="no-of-projects">3 Projects</div>
@@ -409,7 +405,7 @@ require __DIR__ . '/header.php';
                                                 <div class="partner-title">Dyne.org</div>
                                                 <div class="no-of-projects">1 Project</div>
                                             </div>
-                                        </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
