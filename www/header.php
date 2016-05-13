@@ -313,24 +313,29 @@
     <div class="container-wide search-container">
         <div class="w-row top-row-personal">
             <div class="w-col w-col-5 w-col-small-5 w-clearfix">
-                <div class="profile-popover bg-blur">
-                    <a href="<?php echo SITE_RELATIVE_PATH ?>/my-profile" data-ix="popoverfadeout" class="popover-link">View
-                        profile</a>
-                    <a href="<?php echo SITE_RELATIVE_PATH ?>/personal-details" data-ix="popoverfadeout"
-                       class="popover-link">Edit Profile</a>
-                    <a href="<?php echo SITE_RELATIVE_PATH ?>/personal-details" class="popover-link inactive">Sign
-                        out</a>
-                </div>
-                <img width="15" src="<?php echo SITE_RELATIVE_PATH ?>/images/white-settings.png" data-ix="showpopover"
-                     class="vert-nav">
-                <a href="<?php echo SITE_RELATIVE_PATH ?>/my-profile" class="w-inline-block w-clearfix link-to-profile">
-                    <div class="profile-img"
-                         style="background-image: url('<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/<?php echo $loggedInUser->getProfilePicOrDefault() ?>');">
-
+                <?php if (isset($loggedInUser)) { ?>
+                    <div class="profile-popover bg-blur">
+                        <a href="<?php echo SITE_RELATIVE_PATH ?>/my-profile" data-ix="popoverfadeout"
+                           class="popover-link">View
+                            profile</a>
+                        <a href="<?php echo SITE_RELATIVE_PATH ?>/personal-details" data-ix="popoverfadeout"
+                           class="popover-link">Edit Profile</a>
+                        <a href="<?php echo SITE_RELATIVE_PATH ?>/logout" class="popover-link">Sign
+                            out</a>
                     </div>
-                    <h3 class="profile-name"><?php echo $loggedInUser->getFirstName() ?></h3>
-                    <h3 class="profile-name profile-organisation"><?php echo $loggedInUser->getLastName() ?></h3>
-                </a>
+                    <img width="15" src="<?php echo SITE_RELATIVE_PATH ?>/images/white-settings.png"
+                         data-ix="showpopover"
+                         class="vert-nav">
+                    <a href="<?php echo SITE_RELATIVE_PATH ?>/my-profile"
+                       class="w-inline-block w-clearfix link-to-profile">
+                        <div class="profile-img"
+                             style="background-image: url('<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/<?php echo $loggedInUser->getProfilePicOrDefault() ?>');">
+
+                        </div>
+                        <h3 class="profile-name"><?php echo $loggedInUser->getFirstName() ?></h3>
+                        <h3 class="profile-name profile-organisation"><?php echo $loggedInUser->getLastName() ?></h3>
+                    </a>
+                <?php } ?>
             </div>
             <div class="w-col w-col-7 w-col-small-7">
                 <div class="w-form">
