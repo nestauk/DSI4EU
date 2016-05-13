@@ -2343,7 +2343,7 @@ strong {
 }
 
 .partner-logos {
-  margin-top: 82px;
+  margin-top: 180px;
 }
 
 .partner {
@@ -2493,11 +2493,13 @@ strong {
 
 .hp-post-meta.hp-date {
   width: 60%;
+  padding-right: 0px;
   padding-bottom: 10px;
   font-family: 'Open Sans', sans-serif;
   color: #b4b4b4;
   font-size: 12px;
   font-weight: 600;
+  text-align: right;
 }
 
 .hp-post-h3 {
@@ -2594,6 +2596,61 @@ html.w-mod-js *[data-ix="postblockclosed"] {
   .add-post-form {
     width: 268px;
   }
+  .invite-form {
+    width: 100%;
+    padding-left: 12px;
+  }
+  .section-grey {
+    padding-top: 36px;
+  }
+  .image-placeholder {
+    margin-left: 0px;
+  }
+  .home-h2 {
+    text-align: center;
+  }
+  .p-big {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .showcase-card {
+    height: 215px;
+    margin-bottom: 20px;
+  }
+  .partner-logos {
+    margin-top: 147px;
+    padding-left: 0px;
+  }
+  .partner {
+    width: 25%;
+    margin-top: 5px;
+    margin-bottom: 16px;
+    padding-right: 0px;
+    float: none;
+  }
+  .partner-hp-link {
+    display: block;
+    width: 116px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  .container-wide {
+    padding-bottom: 0px;
+  }
+  .hp-post {
+    height: 146px;
+  }
+  .hp-post-link {
+    height: 326px;
+    margin-bottom: 20px;
+  }
+  .hp-post-h3 {
+    margin-top: 51px;
+    text-align: left;
+  }
+  .m-menu-btn {
+    color: #fff;
+  }
 }
 
 @media (max-width: 767px) {
@@ -2661,6 +2718,32 @@ html.w-mod-js *[data-ix="postblockclosed"] {
   }
   .contributor-position {
     top: -7px;
+  }
+  .partner-logos {
+    display: block;
+    width: 518px;
+    margin-top: 126px;
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 0px;
+  }
+  .partner {
+    width: 25%;
+    margin-top: 11px;
+    padding-right: 0px;
+    float: none;
+  }
+  .partner-hp-link {
+    display: block;
+    width: 83px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  .hp-post {
+    height: 176px;
+  }
+  .hp-post-link {
+    height: 356px;
   }
 }
 
@@ -2783,6 +2866,39 @@ html.w-mod-js *[data-ix="postblockclosed"] {
   }
   .add-post-form {
     width: 218px;
+  }
+  .homepage-hero {
+    height: 710px;
+  }
+  .hero-h1 {
+    margin-top: 100px;
+  }
+  .invite-form {
+    padding-left: 0px;
+  }
+  .invite-form-field {
+    width: 100%;
+    margin-right: 0%;
+    float: none;
+    border-radius: 0px;
+  }
+  .invite-form-field.submit {
+    border-radius: 0px;
+  }
+  .p-big.centre {
+    width: 100%;
+  }
+  .showcase-card {
+    height: 305px;
+  }
+  .partner-logos {
+    display: none;
+  }
+  .hp-post {
+    height: 226px;
+  }
+  .hp-post-link {
+    height: 406px;
   }
 }
 
