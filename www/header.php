@@ -2,7 +2,6 @@
 /** @var $loggedInUser \DSI\Entity\User */
 ?>
 <!DOCTYPE html>
-<!-- This site was created in Webflow. http://www.webflow.com-->
 <!-- Last Published: Tue Apr 26 2016 15:33:26 GMT+0000 (UTC) -->
 <html data-wf-site="56e2e31a1b1f8f784728a08c" data-wf-page="56fbef6ecf591b312d56f8be">
 <head>
@@ -12,8 +11,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Webflow">
     <link rel="stylesheet" type="text/css" href="<?php echo SITE_RELATIVE_PATH ?>/css/normalize.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo SITE_RELATIVE_PATH ?>/css/webflow.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo SITE_RELATIVE_PATH ?>/css/dsi4eu.webflow.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo SITE_RELATIVE_PATH ?>/css/components.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo SITE_RELATIVE_PATH ?>/css/dsi4eu.css">
     <link rel="stylesheet" type="text/css" href="<?php echo SITE_RELATIVE_PATH ?>/css/custom.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
@@ -72,6 +71,22 @@
             border-color: #000 #000 #FF3030;
             background-color: #fff;
             text-align: center;
+        }
+
+        .w-input::-webkit-input-placeholder { /* WebKit browsers */
+            color: #4CADDE;
+        }
+
+        .w-input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+            color: #4CADDE;
+        }
+
+        .w-input::-moz-placeholder { /* Mozilla Firefox 19+ */
+            color: #4CADDE;
+        }
+
+        .w-input:-ms-input-placeholder { /* Internet Explorer 10+ */
+            color: #4CADDE;
         }
     </style>
 
@@ -257,7 +272,8 @@
                                      ng-bind="organisation.errors.name"></div>
                                 <input ng-hide="organisation.loading" type="submit" value="Create Organisation"
                                        class="w-button login-button register">
-                                <button ng-show="organisation.loading" type="button" class="w-button login-button register">
+                                <button ng-show="organisation.loading" type="button"
+                                        class="w-button login-button register">
                                     Loading...
                                 </button>
                             </form>
@@ -268,10 +284,12 @@
         </div>
     </div>
 <?php } ?>
+
+
 <div data-collapse="medium" data-animation="default" data-duration="400" data-contain="1" class="w-nav nav-main">
-    <div class="w-container">
+    <div class="w-clearfix container-wide nav-container">
         <a href="<?php echo SITE_RELATIVE_PATH ?>/" class="w-nav-brand">
-            <img src="<?php echo SITE_RELATIVE_PATH ?>/images/dsi-8c1449cf94fe315a853fd9a5d99eaf45.png" class="brand">
+            <img width="160" src="<?php echo SITE_RELATIVE_PATH ?>/images/logo-white.svg" class="brand">
         </a>
         <nav role="navigation" class="w-nav-menu">
             <a href="<?php echo SITE_RELATIVE_PATH ?>/stories" class="w-nav-link nav">Stories</a>
@@ -279,42 +297,42 @@
             <a href="<?php echo SITE_RELATIVE_PATH ?>/organisations" class="w-nav-link nav">Organisations</a>
             <a href="<?php echo SITE_RELATIVE_PATH ?>/my-profile" class="w-nav-link nav">Profile</a>
             <?php if (!isset($_SESSION['user'])) { ?>
-                <a href="#" data-ix="showsignup" class="w-nav-link nav signup">Signup</a>
+                <a href="#" data-ix="showsignup" class="w-nav-link nav log-in">Log In</a>
             <?php } else { ?>
-                <a href="#" data-ix="showsignup" class="w-nav-link nav signup">Create Project / Organisation</a>
+                <a href="#" data-ix="showsignup" class="w-nav-link nav log-in">Create Project / Organisation</a>
             <?php } ?>
         </nav>
         <div class="w-nav-button">
-            <div class="w-icon-nav-menu"></div>
+            <div class="w-icon-nav-menu m-menu-btn"></div>
         </div>
     </div>
 </div>
+
 <div class="search bg-blur">
-    <div class="w-container">
-        <div class="w-row">
-            <div class="w-col w-col-6 w-clearfix">
-                <?php if (isset($loggedInUser)) { ?>
-                    <div class="profile-popover bg-blur">
-                        <a href="<?php echo SITE_RELATIVE_PATH ?>/my-profile" data-ix="popoverfadeout"
-                           class="popover-link">View profile</a>
-                        <a href="<?php echo SITE_RELATIVE_PATH ?>/personal-details" data-ix="popoverfadeout"
-                           class="popover-link">Edit Profile</a>
-                        <a href="<?php echo SITE_RELATIVE_PATH ?>/logout" data-ix="popoverfadeout" class="popover-link">Sign
-                            out</a>
+    <div class="dark-bg-overlay"></div>
+    <div class="container-wide search-container">
+        <div class="w-row top-row-personal">
+            <div class="w-col w-col-5 w-col-small-5 w-clearfix">
+                <div class="profile-popover bg-blur">
+                    <a href="<?php echo SITE_RELATIVE_PATH ?>/my-profile" data-ix="popoverfadeout" class="popover-link">View
+                        profile</a>
+                    <a href="<?php echo SITE_RELATIVE_PATH ?>/personal-details" data-ix="popoverfadeout"
+                       class="popover-link">Edit Profile</a>
+                    <a href="<?php echo SITE_RELATIVE_PATH ?>/personal-details" class="popover-link inactive">Sign
+                        out</a>
+                </div>
+                <img width="15" src="<?php echo SITE_RELATIVE_PATH ?>/images/white-settings.png" data-ix="showpopover"
+                     class="vert-nav">
+                <a href="<?php echo SITE_RELATIVE_PATH ?>/my-profile" class="w-inline-block w-clearfix link-to-profile">
+                    <div class="profile-img"
+                         style="background-image: url('<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/<?php echo $loggedInUser->getProfilePicOrDefault() ?>');">
+
                     </div>
-                    <img width="15" src="<?php echo SITE_RELATIVE_PATH ?>/images/vertical-nav.png" data-ix="showpopover"
-                         class="vert-nav">
-                    <a href="<?php echo SITE_RELATIVE_PATH ?>/my-profile"
-                       class="w-inline-block w-clearfix link-to-profile">
-                        <div class="profile-img"
-                             style="background-image: url('<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/<?php echo $loggedInUser->getProfilePicOrDefault() ?>');"></div>
-                        <h3 class="profile-name"><?php echo $loggedInUser->getFirstName() ?></h3>
-                        <h3 class="profile-name profile-organisation"><?php echo $loggedInUser->getLastName() ?></h3>
-                        <?php /* <h3 class="profile-name profile-organisation">Nesta</h3> */ ?>
-                    </a>
-                <?php } ?>
+                    <h3 class="profile-name"><?php echo $loggedInUser->getFirstName() ?></h3>
+                    <h3 class="profile-name profile-organisation"><?php echo $loggedInUser->getLastName() ?></h3>
+                </a>
             </div>
-            <div class="w-col w-col-6">
+            <div class="w-col w-col-7 w-col-small-7">
                 <div class="w-form">
                     <form id="email-form" name="email-form" data-name="Email Form" class="w-clearfix">
                         <input id="Search" type="text" placeholder="Search DSI4EU" name="Search" data-name="Search"
@@ -331,4 +349,5 @@
         </div>
     </div>
 </div>
+
 <div class="w-section body">
