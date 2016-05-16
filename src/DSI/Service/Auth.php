@@ -21,9 +21,15 @@ class Auth
         );
     }
 
+    /**
+     * @return int
+     */
     public function getUserId()
     {
-        return (int) $_SESSION['user']['userID'];
+        if (isset($_SESSION['user']) AND isset($_SESSION['user']['userID']))
+            return (int)$_SESSION['user']['userID'];
+        else
+            return 0;
     }
 
     public function saveUserInSession(User $user)

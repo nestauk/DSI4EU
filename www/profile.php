@@ -363,7 +363,7 @@ require __DIR__ . '/header.php';
                                             <div class="update">update</div>
                                             <div class="w-form">
                                                 <form id="email-form-2" name="email-form-2" data-name="Email Form 2">
-                                                <textarea id="Bio" class="readjustTextarea"
+                                                <textarea id="Bio" class="readjustTextarea" style="width:100%"
                                                           placeholder="Add a short biography" name="Bio"
                                                           data-name="Bio"
                                                           class="w-input profile-text"
