@@ -3,8 +3,10 @@
 namespace DSI\UseCase;
 
 use DSI\Entity\Organisation;
+use DSI\Entity\OrganisationMember;
 use DSI\Entity\User;
 use DSI\NotEnoughData;
+use DSI\Repository\OrganisationMemberRepository;
 use DSI\Repository\OrganisationRepository;
 use DSI\Service\ErrorHandler;
 
@@ -52,6 +54,12 @@ class CreateOrganisation
         $organisation->setDescription((string)$this->data()->description);
         $organisation->setOwner($this->data()->owner);
         $this->organisationRepo->saveAsNew($organisation);
+
+        $organisationMemberRepository = new OrganisationMemberRepository();
+        $organisationMember = new OrganisationMember();
+        $organisationMember->setMember($this->data()->owner);
+        $organisationMember->setOrganisation($organisation);
+        $organisationMemberRepository->add($organisationMember);
 
         $this->organisation = $organisation;
     }

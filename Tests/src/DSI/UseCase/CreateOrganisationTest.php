@@ -7,6 +7,9 @@ class CreateOrganisationTest extends PHPUnit_Framework_TestCase
     /** @var \DSI\UseCase\CreateOrganisation */
     private $createOrganisationCommand;
 
+    /** @var \DSI\Repository\OrganisationMemberRepository */
+    private $organisationMemberRepo;
+
     /** @var \DSI\Repository\OrganisationRepository */
     private $organisationRepo;
 
@@ -19,6 +22,7 @@ class CreateOrganisationTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->createOrganisationCommand = new \DSI\UseCase\CreateOrganisation();
+        $this->organisationMemberRepo = new \DSI\Repository\OrganisationMemberRepository();
         $this->organisationRepo = new \DSI\Repository\OrganisationRepository();
         $this->userRepo = new \DSI\Repository\UserRepository();
 
@@ -28,8 +32,9 @@ class CreateOrganisationTest extends PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
-        (new \DSI\Repository\OrganisationRepository())->clearAll();
-        (new \DSI\Repository\UserRepository())->clearAll();
+        $this->organisationMemberRepo->clearAll();
+        $this->organisationRepo->clearAll();
+        $this->userRepo->clearAll();
     }
 
     /** @test */
@@ -51,6 +56,20 @@ class CreateOrganisationTest extends PHPUnit_Framework_TestCase
     }
 
     /** @test */
+    public function ownerIsAlsoMemberOfTheOrganisation()
+    {
+        $this->createOrganisationCommand->data()->name = 'test';
+        $this->createOrganisationCommand->data()->description = 'test';
+        $this->createOrganisationCommand->data()->owner = $this->user;
+        $this->createOrganisationCommand->exec();
+        $organisation = $this->createOrganisationCommand->getOrganisation();
+
+        $this->assertTrue(
+            $this->organisationMemberRepo->organisationHasMember($organisation->getId(), $this->user->getId())
+        );
+    }
+
+    /** @test */
     public function cannotAddWithAnEmptyName()
     {
         $e = null;
@@ -59,7 +78,7 @@ class CreateOrganisationTest extends PHPUnit_Framework_TestCase
         $this->createOrganisationCommand->data()->owner = $this->user;
         try {
             $this->createOrganisationCommand->exec();
-        } catch(\DSI\Service\ErrorHandler $e){
+        } catch (\DSI\Service\ErrorHandler $e) {
         }
 
         $this->assertNotNull($e);

@@ -2,6 +2,10 @@
 
 namespace DSI\Controller;
 
+use DSI\Entity\OrganisationMember;
+use DSI\Entity\ProjectMember;
+use DSI\Repository\OrganisationMemberRepository;
+use DSI\Repository\ProjectMemberRepository;
 use DSI\Repository\UserLanguageRepository;
 use DSI\Repository\UserLinkRepository;
 use DSI\Repository\UserRepository;
@@ -38,6 +42,8 @@ class ProfileController
             $userSkillRepo = new UserSkillRepository();
             $userLangRepo = new UserLanguageRepository();
             $userLinkRepo = new UserLinkRepository();
+            $projectMemberRepo = new ProjectMemberRepository();
+            $organisationMemberRepo = new OrganisationMemberRepository();
 
             if (isset($_POST['addSkill'])) {
                 try {
@@ -101,7 +107,43 @@ class ProfileController
                     'languages' => $userLangRepo->getLanguagesNameByUserID($user->getId()),
                     'links' => $userLinkRepo->getLinksByUserID($user->getId()),
                     'user' => [
-                        'bio' => $user->getBio()
+                        'bio' => $user->getBio(),
+                        'projects' => array_map(function (ProjectMember $projectMember) use ($projectMemberRepo) {
+                            $project = $projectMember->getProject();
+                            return [
+                                'id' => $project->getId(),
+                                'name' => $project->getName(),
+                                'description' => $project->getDescription(),
+                                'url' => URL::project($project->getId(), $project->getName()),
+                                'members' => array_map(function (ProjectMember $projectMember) {
+                                    $user = $projectMember->getMember();
+                                    return [
+                                        'id' => $user->getId(),
+                                        'name' => $user->getFirstName() . ' ' . $user->getLastName(),
+                                        'profilePic' => $user->getProfilePicOrDefault(),
+                                        'url' => URL::profile($user->getId()),
+                                    ];
+                                }, $projectMemberRepo->getByProjectID($project->getId())),
+                            ];
+                        }, $projectMemberRepo->getByMemberID($user->getId())),
+                        'organisations' => array_map(function (OrganisationMember $organisationMember) use ($organisationMemberRepo) {
+                            $organisation = $organisationMember->getOrganisation();
+                            return [
+                                'id' => $organisation->getId(),
+                                'name' => $organisation->getName(),
+                                'description' => $organisation->getDescription(),
+                                'url' => URL::organisation($organisation->getId(), $organisation->getName()),
+                                'members' => array_map(function (OrganisationMember $projectMember) {
+                                    $user = $projectMember->getMember();
+                                    return [
+                                        'id' => $user->getId(),
+                                        'name' => $user->getFirstName() . ' ' . $user->getLastName(),
+                                        'profilePic' => $user->getProfilePicOrDefault(),
+                                        'url' => URL::profile($user->getId()),
+                                    ];
+                                }, $organisationMemberRepo->getByOrganisationID($organisation->getId())),
+                            ];
+                        }, $organisationMemberRepo->getByMemberID($user->getId())),
                     ],
                 ]);
             }

@@ -43,6 +43,7 @@ class UpdateProjectTest extends PHPUnit_Framework_TestCase
     public function tearDown()
     {
         $this->projectRepo->clearAll();
+        (new \DSI\Repository\ProjectMemberRepository())->clearAll();
     }
 
     /** @test */

@@ -43,6 +43,7 @@ class UpdateOrganisationTest extends PHPUnit_Framework_TestCase
     public function tearDown()
     {
         $this->organisationRepo->clearAll();
+        (new \DSI\Repository\OrganisationMemberRepository())->clearAll();
     }
 
     /** @test */

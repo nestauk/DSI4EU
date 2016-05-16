@@ -246,6 +246,7 @@ class ProjectController
         }
 
         if ($this->data()->format == 'json') {
+            $owner = $project->getOwner();
             echo json_encode([
                 'name' => $project->getName(),
                 'url' => $project->getUrl(),
@@ -257,15 +258,18 @@ class ProjectController
                 'impactTagsA' => (new ProjectImpactTagARepository())->getTagsNameByProjectID($project->getId()),
                 'impactTagsB' => (new ProjectImpactTagBRepository())->getTagsNameByProjectID($project->getId()),
                 'impactTagsC' => (new ProjectImpactTagCRepository())->getTagsNameByProjectID($project->getId()),
-                'members' => array_map(function (User $user) {
-                    return [
+                'members' => array_filter(array_map(function (User $user) use ($owner) {
+                    if ($owner->getId() == $user->getId())
+                        return null;
+                    else
+                        return [
                         'id' => $user->getId(),
                         'text' => $user->getFirstName() . ' ' . $user->getLastName(),
                         'firstName' => $user->getFirstName(),
                         'lastName' => $user->getLastName(),
                         'profilePic' => $user->getProfilePicOrDefault()
                     ];
-                }, $projectMembers),
+                }, $projectMembers)),
                 'memberRequests' => array_map(function (User $user) {
                     return [
                         'id' => $user->getId(),

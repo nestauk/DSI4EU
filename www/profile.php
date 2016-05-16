@@ -6,7 +6,7 @@ require __DIR__ . '/header.php';
     <script type="text/javascript">
         profileUserID = '<?php echo $userID?>';
     </script>
-    <script type="text/javascript" src="<?php echo SITE_RELATIVE_PATH?>/js/controllers/UserController.js"></script>
+    <script type="text/javascript" src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/UserController.js"></script>
     <div ng-controller="UserController as ctrl">
 
         <div class="w-container body-container">
@@ -22,12 +22,14 @@ require __DIR__ . '/header.php';
                     </div>
                     <?php /* <div class="public-profile-position">DSI Digital Product Manager</div> */ ?>
                     <?php if ($user->getLocation()) { ?>
-                        <div class="w-clearfix location"><img width="60" src="<?php echo SITE_RELATIVE_PATH?>/images/pin.png" class="location-pin">
+                        <div class="w-clearfix location"><img width="60"
+                                                              src="<?php echo SITE_RELATIVE_PATH ?>/images/pin.png"
+                                                              class="location-pin">
                             <div class="location-info"><?php echo $user->getLocation() ?></div>
                         </div>
                     <?php } ?>
                     <div class="profile-img-main"
-                         style="background-image: url('<?php echo SITE_RELATIVE_PATH?>/images/users/profile/<?php echo $user->getProfilePicOrDefault() ?>');"></div>
+                         style="background-image: url('<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/<?php echo $user->getProfilePicOrDefault() ?>');"></div>
                     <div class="profile-blur el-blur"></div>
                     <div class="profile-overlay"></div>
                 </div>
@@ -46,102 +48,42 @@ require __DIR__ . '/header.php';
                         </div>
                         <div class="w-tab-content public-profile-tabs-content">
                             <div data-w-tab="Tab 1" class="w-tab-pane">
-                                <div class="project-list-card">
-                                    <div class="w-row profile-project-list">
-                                        <div class="w-col w-col-3">
-                                            <div class="joined-on">
-                                                <div class="joined">Joined organisation on:</div>
-                                                <div><strong>30th March 2016</strong>
+                                <div ng-show="user.organisations.length > 0">
+                                    <div class="project-list-card" ng-repeat="organisation in user.organisations">
+                                        <div class="w-row profile-project-list">
+                                            <div class="w-col w-col-3">
+                                                <div class="joined-on">
+                                                    <div class="joined">Joined organisation on:</div>
+                                                    <div><strong>30th March 2016</strong>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="w-col w-col-9 w-clearfix profile-project-detail"><img
-                                                src="<?php echo SITE_RELATIVE_PATH?>/images/nesta-6a9b5fe999e8323b379ccc0d8e70290f.png">
-                                            <p class="profile-project-descr org">Lorem ipsum dolor sit amet, consectetur
-                                                adipiscing elit. Suspendisse varius enim in eros elementum
-                                                tristique...</p>
-                                            <div class="w-clearfix profile-project-team-members"><img width="40"
-                                                                                                      height="40"
-                                                                                                      src="<?php echo SITE_RELATIVE_PATH?>/images/Screen Shot 2016-03-29 at 15.15.30.png"
-                                                                                                      class="team-member-small"><img
-                                                    width="40" height="40" src="<?php echo SITE_RELATIVE_PATH?>/images/meghan-benton-wv-250x250.jpg"
-                                                    class="team-member-small"><img width="40" height="40"
-                                                                                   src="<?php echo SITE_RELATIVE_PATH?>/images/Screen Shot 2016-03-29 at 14.50.51.png"
-                                                                                   class="team-member-small"><img
-                                                    width="40"
-                                                    height="40"
-                                                    src="<?php echo SITE_RELATIVE_PATH?>/images/images.jpg"
-                                                    class="team-member-small">
+                                            <div class="w-col w-col-9 w-clearfix profile-project-detail">
+                                                <h3 class="project-summary-h3" ng-bind="organisation.name"></h3>
+                                                <p class="profile-project-descr org"
+                                                   ng-bind="organisation.description"></p>
+                                                <div class="w-clearfix profile-project-team-members">
+                                                    <a href="#" ng-href="{{member.url}}"
+                                                       ng-repeat="member in organisation.members"
+                                                       title="{{member.name}}">
+                                                        <img width="40" height="40" class="team-member-small"
+                                                             ng-src="<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/{{member.profilePic}}">
+                                                    </a>
+                                                </div>
+                                                <a href="#" ng-href="{{organisation.url}}" class="view-project">View
+                                                    organisation</a>
                                             </div>
-                                            <a href="#" class="view-project">View organisation</a>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="project-list-card">
-                                    <div class="w-row profile-project-list">
-                                        <div class="w-col w-col-3">
-                                            <div class="joined-on">
-                                                <div class="joined">Joined project on:</div>
-                                                <div><strong>30th March 2016</strong>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="w-col w-col-9 w-clearfix profile-project-detail"><img
-                                                src="<?php echo SITE_RELATIVE_PATH?>/images/waag-f1d052f43133268eaf2e13090a0b4bf1.png">
-                                            <p class="profile-project-descr org">Lorem ipsum dolor sit amet, consectetur
-                                                adipiscing elit. Suspendisse varius enim in eros &nbsp;tristique...em
-                                                ipsum
-                                                dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in
-                                                eros
-                                                &nbsp;tristique...em ipsum dolor sit amet, consectetur adipiscing elit.
-                                                Suspendisse varius enim in eros &nbsp;tristique...em ipsum dolor sit
-                                                amet,
-                                                consectetur adipiscing elit. Suspendisse varius enim in eros &nbsp;tristique...em
-                                                ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius
-                                                enim
-                                                in eros &nbsp;tristique...em ipsum dolor sit amet, consectetur
-                                                adipiscing
-                                                elit. Suspendisse varius enim in eros &nbsp;tristique...</p>
-                                            <div class="w-clearfix profile-project-team-members"><img width="40"
-                                                                                                      height="40"
-                                                                                                      src="<?php echo SITE_RELATIVE_PATH?>/images/Screen Shot 2016-03-29 at 14.50.51.png"
-                                                                                                      class="team-member-small"><img
-                                                    width="40" height="40" src="<?php echo SITE_RELATIVE_PATH?>/images/images.jpg"
-                                                    class="team-member-small">
-                                            </div>
-                                            <a href="#" class="view-project">View organisation</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="project-list-card">
-                                    <div class="w-row profile-project-list">
-                                        <div class="w-col w-col-3">
-                                            <div class="joined-on">
-                                                <div class="joined">Joined project on:</div>
-                                                <div><strong>30th March 2016</strong>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="w-col w-col-9 w-clearfix profile-project-detail"><img
-                                                src="<?php echo SITE_RELATIVE_PATH?>/images/future-everything-2f261cf2d078264179fd82b21e5927b7.png">
-                                            <p class="profile-project-descr org">Lorem ipsum dolor sit amet, consectetur
-                                                adipiscing elit. Suspendisse varius enim in eros elementum
-                                                tristique...</p>
-                                            <div class="w-clearfix profile-project-team-members"><img width="40"
-                                                                                                      height="40"
-                                                                                                      src="<?php echo SITE_RELATIVE_PATH?>/images/Screen Shot 2016-03-29 at 15.15.30.png"
-                                                                                                      class="team-member-small"><img
-                                                    width="40" height="40" src="<?php echo SITE_RELATIVE_PATH?>/images/meghan-benton-wv-250x250.jpg"
-                                                    class="team-member-small"><img width="40" height="40"
-                                                                                   src="<?php echo SITE_RELATIVE_PATH?>/images/Screen Shot 2016-03-29 at 14.50.51.png"
-                                                                                   class="team-member-small">
-                                            </div>
-                                            <a href="#" class="view-project">View organisation</a>
-                                        </div>
+                                <div ng-show="user.organisations.length == 0">
+                                    <div class="no-listing-available">
+                                        This person is not a member of any project
                                     </div>
                                 </div>
                             </div>
                             <div data-w-tab="Tab 2" class="w-tab-pane">
+                                <?php /*
                                 <div class="add-project-block">
                                     <div class="w-row join">
                                         <div class="w-col w-col-9">
@@ -167,146 +109,36 @@ require __DIR__ . '/header.php';
                                         </div>
                                     </div>
                                 </div>
-                                <div class="project-list-card">
-                                    <div class="w-row profile-project-list">
-                                        <div class="w-col w-col-3">
-                                            <div class="joined-on">
-                                                <div class="joined">Joined project on:</div>
-                                                <div><strong>30th March 2016</strong>
+                                */ ?>
+                                <div ng-show="user.projects.length > 0">
+                                    <div class="project-list-card" ng-repeat="project in user.projects">
+                                        <div class="w-row profile-project-list">
+                                            <div class="w-col w-col-3">
+                                                <div class="joined-on">
+                                                    <div class="joined">Joined project on:</div>
+                                                    <div><strong>30th March 2016</strong>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="w-col w-col-9 w-clearfix profile-project-detail">
-                                            <h3 class="project-summary-h3">DSI4EU</h3>
-                                            <p class="profile-project-descr">Lorem ipsum dolor sit amet, consectetur
-                                                adipiscing elit. Suspendisse varius enim in eros elementum
-                                                tristique...</p>
-                                            <div class="w-clearfix profile-project-team-members"><img width="40"
-                                                                                                      height="40"
-                                                                                                      src="<?php echo SITE_RELATIVE_PATH?>/images/Screen Shot 2016-03-29 at 15.15.30.png"
-                                                                                                      class="team-member-small"><img
-                                                    width="40" height="40" src="<?php echo SITE_RELATIVE_PATH?>/images/meghan-benton-wv-250x250.jpg"
-                                                    class="team-member-small"><img width="40" height="40"
-                                                                                   src="<?php echo SITE_RELATIVE_PATH?>/images/Screen Shot 2016-03-29 at 14.50.51.png"
-                                                                                   class="team-member-small"><img
-                                                    width="40"
-                                                    height="40"
-                                                    src="<?php echo SITE_RELATIVE_PATH?>/images/images.jpg"
-                                                    class="team-member-small">
+                                            <div class="w-col w-col-9 w-clearfix profile-project-detail">
+                                                <h3 class="project-summary-h3" ng-bind="project.name"></h3>
+                                                <p class="profile-project-descr" ng-bind="project.description"></p>
+                                                <div class="w-clearfix profile-project-team-members">
+                                                    <a href="#" ng-href="{{member.url}}"
+                                                       ng-repeat="member in project.members" title="{{member.name}}">
+                                                        <img width="40" height="40" class="team-member-small"
+                                                             ng-src="<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/{{member.profilePic}}">
+                                                    </a>
+                                                </div>
+                                                <a href="#" ng-href="{{project.url}}" class="view-project">View
+                                                    project</a>
                                             </div>
-                                            <a href="#" class="view-project">View project</a>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="project-list-card">
-                                    <div class="w-row profile-project-list">
-                                        <div class="w-col w-col-3">
-                                            <div class="joined-on">
-                                                <div class="joined">Joined project on:</div>
-                                                <div><strong>30th March 2016</strong>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="w-col w-col-9 w-clearfix profile-project-detail">
-                                            <h3 class="project-summary-h3">Open Data Challenge Series</h3>
-                                            <p class="profile-project-descr">Lorem ipsum dolor sit amet, consectetur
-                                                adipiscing elit. Suspendisse varius enim in eros elementum
-                                                tristique...</p>
-                                            <div class="w-clearfix profile-project-team-members"><img width="40"
-                                                                                                      height="40"
-                                                                                                      src="<?php echo SITE_RELATIVE_PATH?>/images/Screen Shot 2016-03-29 at 14.50.51.png"
-                                                                                                      class="team-member-small"><img
-                                                    width="40" height="40" src="<?php echo SITE_RELATIVE_PATH?>/images/images.jpg"
-                                                    class="team-member-small">
-                                            </div>
-                                            <a href="#" class="view-project">View project</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="project-list-card">
-                                    <div class="w-row profile-project-list">
-                                        <div class="w-col w-col-3">
-                                            <div class="joined-on">
-                                                <div class="joined">Joined project on:</div>
-                                                <div><strong>30th March 2016</strong>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="w-col w-col-9 w-clearfix profile-project-detail">
-                                            <h3 class="project-summary-h3">RaspberryPi</h3>
-                                            <p class="profile-project-descr">Lorem ipsum dolor sit amet, consectetur
-                                                adipiscing elit. Suspendisse varius enim in eros elementum
-                                                tristique...</p>
-                                            <div class="w-clearfix profile-project-team-members"><img width="40"
-                                                                                                      height="40"
-                                                                                                      src="<?php echo SITE_RELATIVE_PATH?>/images/Screen Shot 2016-03-29 at 15.15.30.png"
-                                                                                                      class="team-member-small"><img
-                                                    width="40" height="40" src="<?php echo SITE_RELATIVE_PATH?>/images/meghan-benton-wv-250x250.jpg"
-                                                    class="team-member-small"><img width="40" height="40"
-                                                                                   src="<?php echo SITE_RELATIVE_PATH?>/images/Screen Shot 2016-03-29 at 14.50.51.png"
-                                                                                   class="team-member-small">
-                                            </div>
-                                            <a href="#" class="view-project">View project</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="project-list-card">
-                                    <div class="w-row profile-project-list">
-                                        <div class="w-col w-col-3">
-                                            <div class="joined-on">
-                                                <div class="joined">Joined project on:</div>
-                                                <div><strong>30th March 2016</strong>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="w-col w-col-9 w-clearfix profile-project-detail">
-                                            <h3 class="project-summary-h3">Nesta project</h3>
-                                            <p class="profile-project-descr">Lorem ipsum dolor sit amet, consectetur
-                                                adipiscing elit. Suspendisse varius enim in eros elementum
-                                                tristique...</p>
-                                            <div class="w-clearfix profile-project-team-members"><img width="40"
-                                                                                                      height="40"
-                                                                                                      src="<?php echo SITE_RELATIVE_PATH?>/images/Screen Shot 2016-03-29 at 15.15.30.png"
-                                                                                                      class="team-member-small"><img
-                                                    width="40" height="40"
-                                                    src="<?php echo SITE_RELATIVE_PATH?>/images/Screen Shot 2016-03-29 at 14.50.51.png"
-                                                    class="team-member-small"><img width="40" height="40"
-                                                                                   src="<?php echo SITE_RELATIVE_PATH?>/images/images.jpg"
-                                                                                   class="team-member-small">
-                                            </div>
-                                            <a href="#" class="view-project">View project</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="project-list-card">
-                                    <div class="w-row profile-project-list">
-                                        <div class="w-col w-col-3">
-                                            <div class="joined-on">
-                                                <div class="joined">Joined project on:</div>
-                                                <div><strong>30th March 2016</strong>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="w-col w-col-9 w-clearfix profile-project-detail">
-                                            <h3 class="project-summary-h3">Another random project</h3>
-                                            <p class="profile-project-descr">Lorem ipsum dolor sit amet, consectetur
-                                                adipiscing elit. Suspendisse varius enim in eros elementum
-                                                tristique...</p>
-                                            <div class="w-clearfix profile-project-team-members"><img width="40"
-                                                                                                      height="40"
-                                                                                                      src="<?php echo SITE_RELATIVE_PATH?>/images/Screen Shot 2016-03-29 at 15.15.30.png"
-                                                                                                      class="team-member-small"><img
-                                                    width="40" height="40" src="<?php echo SITE_RELATIVE_PATH?>/images/meghan-benton-wv-250x250.jpg"
-                                                    class="team-member-small"><img width="40" height="40"
-                                                                                   src="<?php echo SITE_RELATIVE_PATH?>/images/Screen Shot 2016-03-29 at 14.50.51.png"
-                                                                                   class="team-member-small"><img
-                                                    width="40"
-                                                    height="40"
-                                                    src="<?php echo SITE_RELATIVE_PATH?>/images/images.jpg"
-                                                    class="team-member-small">
-                                            </div>
-                                            <a href="#" class="view-project">View project</a>
-                                        </div>
+                                <div ng-show="user.projects.length == 0">
+                                    <div class="no-listing-available">
+                                        This person is not a member of any project
                                     </div>
                                 </div>
                             </div>
@@ -324,7 +156,7 @@ require __DIR__ . '/header.php';
                                                                target="_blank"
                                                                class="w-inline-block w-clearfix">
                                                                 <img
-                                                                    ng-src="<?php echo SITE_RELATIVE_PATH?>/images/{{getUrlIcon(link)}}"
+                                                                    ng-src="<?php echo SITE_RELATIVE_PATH ?>/images/{{getUrlIcon(link)}}"
                                                                     class="social-small"
                                                                     title="{{link}}">
                                                                 <div class="social-label" title="{{link}}">

@@ -3,8 +3,10 @@
 namespace DSI\UseCase;
 
 use DSI\Entity\Project;
+use DSI\Entity\ProjectMember;
 use DSI\Entity\User;
 use DSI\NotEnoughData;
+use DSI\Repository\ProjectMemberRepository;
 use DSI\Repository\ProjectRepository;
 use DSI\Service\ErrorHandler;
 
@@ -52,6 +54,12 @@ class CreateProject
         $project->setDescription((string)$this->data()->description);
         $project->setOwner($this->data()->owner);
         $this->projectRepo->saveAsNew($project);
+
+        $projectMemberRepository = new ProjectMemberRepository();
+        $projectMember = new ProjectMember();
+        $projectMember->setMember($this->data()->owner);
+        $projectMember->setProject($project);
+        $projectMemberRepository->add($projectMember);
 
         $this->project = $project;
     }
