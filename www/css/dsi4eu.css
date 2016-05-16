@@ -601,7 +601,13 @@ strong {
 .close.modal-close {
   top: 20px;
   right: 20px;
-  color: #7e7e7e;
+  -webkit-transition: all 200ms ease;
+  transition: all 200ms ease;
+  color: hsla(0, 0%, 100%, .75);
+}
+
+.close.modal-close:hover {
+  color: #fff;
 }
 
 .add {
@@ -641,11 +647,11 @@ strong {
   width: 500px;
   height: auto;
   min-height: 550px;
-  margin-top: 15%;
+  margin-top: 5%;
   margin-right: auto;
   margin-left: auto;
   padding: 40px 0px;
-  border: 1px solid #e2e2e2;
+  border: 1px none #e2e2e2;
   border-radius: 3px;
   background-color: #fff;
   box-shadow: 0 0 50px -9px #000;
@@ -677,6 +683,7 @@ strong {
   position: absolute;
   left: 20px;
   top: 20px;
+  margin-top: 4px;
 }
 
 .body {
@@ -975,6 +982,7 @@ strong {
   padding-left: 15px;
   float: none;
   background-color: transparent;
+  color: hsla(0, 0%, 100%, .62);
   font-size: 16px;
   text-align: center;
 }
@@ -984,7 +992,7 @@ strong {
   float: none;
   border-bottom: 3px solid #50a4ff;
   background-color: transparent;
-  color: #3f7ce7;
+  color: #fff;
 }
 
 .tab.left.w--current {
@@ -1058,6 +1066,8 @@ strong {
   height: 100px;
   border-bottom: 1px solid #d8d8d8;
   background-color: #e6e6e6;
+  background-image: -webkit-linear-gradient(45deg, #18233f, #384155);
+  background-image: linear-gradient(45deg, #18233f, #384155);
 }
 
 .fb-login {
@@ -1074,11 +1084,12 @@ strong {
 }
 
 .social-badge {
+  max-width: 60%;
   border-radius: 50px;
 }
 
 .social-badges {
-  margin-top: 20px;
+  margin-top: 43px;
 }
 
 .profile-main {
