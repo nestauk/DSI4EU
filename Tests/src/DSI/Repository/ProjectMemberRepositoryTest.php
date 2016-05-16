@@ -171,14 +171,14 @@ class ProjectMemberRepositoryTest extends PHPUnit_Framework_TestCase
     {
         $project = new \DSI\Entity\Project();
         $project->setOwner($user);
-        $this->projectsRepo->saveAsNew($project);
+        $this->projectsRepo->insert($project);
         return $project;
     }
 
     private function createUser()
     {
         $user = new \DSI\Entity\User();
-        $this->usersRepo->saveAsNew($user);
+        $this->usersRepo->insert($user);
         return $user;
     }
 }

@@ -8,7 +8,7 @@ use DSI\Service\SQL;
 
 class UserRepository
 {
-    public function saveAsNew(User $user)
+    public function insert(User $user)
     {
         $insert = array();
         $insert[] = "`email` = '" . addslashes($user->getEmail()) . "'";

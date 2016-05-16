@@ -35,11 +35,11 @@ class RemoveImpactTagCFromProjectTest extends PHPUnit_Framework_TestCase
         $this->userRepo = new \DSI\Repository\UserRepository();
 
         $user = new \DSI\Entity\User();
-        $this->userRepo->saveAsNew($user);
+        $this->userRepo->insert($user);
 
         $this->project = new \DSI\Entity\Project();
         $this->project->setOwner($user);
-        $this->projectRepo->saveAsNew($this->project);
+        $this->projectRepo->insert($this->project);
     }
 
     public function tearDown()

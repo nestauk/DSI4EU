@@ -193,7 +193,7 @@ class OrganisationTagsRepositoryTest extends PHPUnit_Framework_TestCase
     private function createOrganisation(int $organisationID)
     {
         $user = new \DSI\Entity\User();
-        $this->usersRepo->saveAsNew($user);
+        $this->usersRepo->insert($user);
 
         $organisation = new \DSI\Entity\Organisation();
         $organisation->setId($organisationID);

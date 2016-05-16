@@ -3,6 +3,7 @@ require __DIR__ . '/header.php';
 /** @var $project \DSI\Entity\Project */
 /** @var $canUserRequestMembership bool */
 /** @var $isOwner bool */
+/** @var $loggedInUser \DSI\Entity\User */
 ?>
     <script src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/ProjectController.js"></script>
 
@@ -583,27 +584,23 @@ require __DIR__ . '/header.php';
                     </div>
                     <div class="w-col w-col-6">
                         <div class="info-card">
-                            <div data-ix="postblockclosed" class="add-post">
-                                <div class="w-clearfix post-author new-post"><img width="40" height="40"
-                                                                                  src="<?php echo SITE_RELATIVE_PATH ?>/images/XG1hqhM1_400x400.jpg"
-                                                                                  class="post-author-img post">
-                                    <div class="w-form add-post-form-wrapper">
-                                        <form id="email-form" name="email-form" data-name="Email Form"
-                                              class="w-clearfix">
-                                    <textarea id="new-post" placeholder="What's been happening?" name="new-post"
-                                              data-name="new post" data-ix="addpost"
-                                              class="w-input add-post-form"></textarea>
-                                        </form>
-                                        <div class="w-form-done">
-                                            <p>Thank you! Your submission has been received!</p>
+                            <?php if ($loggedInUser AND $isOwner) { ?>
+                                <div data-ix="postblockclosed" class="add-post">
+                                    <form id="email-form" name="email-form" data-name="Email Form"
+                                          class="w-clearfix" ng-submit="addPost()">
+                                        <div class="w-clearfix post-author new-post">
+                                            <img width="40" height="40" class="post-author-img post"
+                                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/<?php echo $loggedInUser->getProfilePicOrDefault() ?>">
+                                            <div class="w-form add-post-form-wrapper">
+                                            <textarea id="new-post" placeholder="What's been happening?" name="new-post"
+                                                      data-name="new post" data-ix="addpost"
+                                                      class="w-input add-post-form" ng-model="newPost"></textarea>
+                                            </div>
                                         </div>
-                                        <div class="w-form-fail">
-                                            <p>Oops! Something went wrong while submitting the form</p>
-                                        </div>
-                                    </div>
+                                        <input type="submit" class="w-button btn-new-post btn" value="Add post"/>
+                                    </form>
                                 </div>
-                                <a href="#" class="w-button btn-new-post btn">Add post</a>
-                            </div>
+                            <?php } ?>
                             <div class="w-clearfix current-status">
                                 <h3 class="status-h3">Latest post</h3>
                                 <div class="post-author latest"><img width="40" height="40"

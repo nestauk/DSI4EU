@@ -25,6 +25,7 @@ use DSI\UseCase\AddMemberToProject;
 use DSI\UseCase\AddProjectToOrganisation;
 use DSI\UseCase\AddTagToProject;
 use DSI\UseCase\ApproveMemberRequestToProject;
+use DSI\UseCase\CreateProjectPost;
 use DSI\UseCase\RejectMemberRequestToProject;
 use DSI\UseCase\RemoveImpactTagAFromProject;
 use DSI\UseCase\RemoveImpactTagBFromProject;
@@ -57,168 +58,6 @@ class ProjectController
         $projectRepo = new ProjectRepository();
         $project = $projectRepo->getById($this->data()->projectID);
 
-        try {
-            if (isset($_POST['updateBasic'])) {
-                $authUser->ifNotLoggedInRedirectTo(URL::login());
-
-                $updateProject = new UpdateProject();
-                $updateProject->data()->project = $project;
-                $updateProject->data()->user = $loggedInUser;
-                if (isset($_POST['name']))
-                    $updateProject->data()->name = $_POST['name'];
-                if (isset($_POST['url']))
-                    $updateProject->data()->url = $_POST['url'];
-                if (isset($_POST['status']))
-                    $updateProject->data()->status = $_POST['status'];
-                if (isset($_POST['description']))
-                    $updateProject->data()->description = $_POST['description'];
-
-                $updateProject->data()->startDate = $_POST['startDate'] ?? NULL;
-                $updateProject->data()->endDate = $_POST['endDate'] ?? NULL;
-
-                $updateProject->exec();
-                echo json_encode(['result' => 'ok']);
-                die();
-            }
-
-            if (isset($_POST['addTag'])) {
-                $addTagToProject = new AddTagToProject();
-                $addTagToProject->data()->projectID = $project->getId();
-                $addTagToProject->data()->tag = $_POST['addTag'];
-                $addTagToProject->exec();
-                echo json_encode(['result' => 'ok']);
-                die();
-            }
-            if (isset($_POST['removeTag'])) {
-                $removeTagFromProject = new RemoveTagFromProject();
-                $removeTagFromProject->data()->projectID = $project->getId();
-                $removeTagFromProject->data()->tag = $_POST['removeTag'];
-                $removeTagFromProject->exec();
-                echo json_encode(['result' => 'ok']);
-                die();
-            }
-
-            if (isset($_POST['addImpactTagA'])) {
-                $addTagToProject = new AddImpactTagAToProject();
-                $addTagToProject->data()->projectID = $project->getId();
-                $addTagToProject->data()->tag = $_POST['addImpactTagA'];
-                $addTagToProject->exec();
-                echo json_encode(['result' => 'ok']);
-                die();
-            }
-            if (isset($_POST['removeImpactTagA'])) {
-                $removeTagFromProject = new RemoveImpactTagAFromProject();
-                $removeTagFromProject->data()->projectID = $project->getId();
-                $removeTagFromProject->data()->tag = $_POST['removeImpactTagA'];
-                $removeTagFromProject->exec();
-                echo json_encode(['result' => 'ok']);
-                die();
-            }
-
-            if (isset($_POST['addImpactTagB'])) {
-                $addTagToProject = new AddImpactTagBToProject();
-                $addTagToProject->data()->projectID = $project->getId();
-                $addTagToProject->data()->tag = $_POST['addImpactTagB'];
-                $addTagToProject->exec();
-                echo json_encode(['result' => 'ok']);
-                die();
-            }
-            if (isset($_POST['removeImpactTagB'])) {
-                $removeTagFromProject = new RemoveImpactTagBFromProject();
-                $removeTagFromProject->data()->projectID = $project->getId();
-                $removeTagFromProject->data()->tag = $_POST['removeImpactTagB'];
-                $removeTagFromProject->exec();
-                echo json_encode(['result' => 'ok']);
-                die();
-            }
-
-            if (isset($_POST['addImpactTagC'])) {
-                $addTagToProject = new AddImpactTagCToProject();
-                $addTagToProject->data()->projectID = $project->getId();
-                $addTagToProject->data()->tag = $_POST['addImpactTagC'];
-                $addTagToProject->exec();
-                echo json_encode(['result' => 'ok']);
-                die();
-            }
-            if (isset($_POST['removeImpactTagC'])) {
-                $removeTagFromProject = new RemoveImpactTagCFromProject();
-                $removeTagFromProject->data()->projectID = $project->getId();
-                $removeTagFromProject->data()->tag = $_POST['removeImpactTagC'];
-                $removeTagFromProject->exec();
-                echo json_encode(['result' => 'ok']);
-                die();
-            }
-
-            if (isset($_POST['addMember'])) {
-                $addMemberToProject = new AddMemberToProject();
-                $addMemberToProject->data()->projectID = $project->getId();
-                $addMemberToProject->data()->userID = $_POST['addMember'];
-                $addMemberToProject->exec();
-                echo json_encode(['result' => 'ok']);
-                die();
-            }
-            if (isset($_POST['removeMember'])) {
-                $removeMemberFromProject = new RemoveMemberFromProject();
-                $removeMemberFromProject->data()->projectID = $project->getId();
-                $removeMemberFromProject->data()->userID = $_POST['removeMember'];
-                $removeMemberFromProject->exec();
-                echo json_encode(['result' => 'ok']);
-                die();
-            }
-
-            if (isset($_POST['requestToJoin'])) {
-                $addMemberRequestToJoinProject = new AddMemberRequestToProject();
-                $addMemberRequestToJoinProject->data()->projectID = $project->getId();
-                $addMemberRequestToJoinProject->data()->userID = $loggedInUser->getId();
-                $addMemberRequestToJoinProject->exec();
-                echo json_encode(['result' => 'ok']);
-                die();
-            }
-            if (isset($_POST['approveRequestToJoin'])) {
-                $approveMemberRequestToJoinProject = new ApproveMemberRequestToProject();
-                $approveMemberRequestToJoinProject->data()->projectID = $project->getId();
-                $approveMemberRequestToJoinProject->data()->userID = $_POST['approveRequestToJoin'];
-                $approveMemberRequestToJoinProject->exec();
-                echo json_encode(['result' => 'ok']);
-                die();
-            }
-            if (isset($_POST['rejectRequestToJoin'])) {
-                $rejectMemberRequestToJoinProject = new RejectMemberRequestToProject();
-                $rejectMemberRequestToJoinProject->data()->projectID = $project->getId();
-                $rejectMemberRequestToJoinProject->data()->userID = $_POST['rejectRequestToJoin'];
-                $rejectMemberRequestToJoinProject->exec();
-                echo json_encode(['result' => 'ok']);
-                die();
-            }
-
-            if (isset($_POST['updateCountryRegion'])) {
-                $updateProjectCountryRegionCmd = new UpdateProjectCountryRegion();
-                $updateProjectCountryRegionCmd->data()->projectID = $project->getId();
-                $updateProjectCountryRegionCmd->data()->countryID = $_POST['countryID'];
-                $updateProjectCountryRegionCmd->data()->region = $_POST['region'];
-                $updateProjectCountryRegionCmd->exec();
-                echo json_encode(['result' => 'ok']);
-                die();
-            }
-
-            if (isset($_POST['newOrganisationID'])) {
-                $addOrganisationProjectCmd = new AddProjectToOrganisation();
-                $addOrganisationProjectCmd->data()->projectID = $project->getId();
-                $addOrganisationProjectCmd->data()->organisationID = $_POST['newOrganisationID'];
-                $addOrganisationProjectCmd->exec();
-                echo json_encode(['result' => 'ok']);
-                die();
-            }
-
-
-        } catch (ErrorHandler $e) {
-            echo json_encode([
-                'result' => 'error',
-                'errors' => $e->getErrors()
-            ]);
-            die();
-        }
-
         $memberRequests = [];
         $isOwner = false;
         $canUserRequestMembership = false;
@@ -245,6 +84,182 @@ class ProjectController
                 $memberRequests = (new ProjectMemberRequestRepository())->getMembersForProject($project->getId());
         }
 
+        if ($isOwner) {
+            try {
+                if (isset($_POST['updateBasic'])) {
+                    $authUser->ifNotLoggedInRedirectTo(URL::login());
+
+                    $updateProject = new UpdateProject();
+                    $updateProject->data()->project = $project;
+                    $updateProject->data()->user = $loggedInUser;
+                    if (isset($_POST['name']))
+                        $updateProject->data()->name = $_POST['name'];
+                    if (isset($_POST['url']))
+                        $updateProject->data()->url = $_POST['url'];
+                    if (isset($_POST['status']))
+                        $updateProject->data()->status = $_POST['status'];
+                    if (isset($_POST['description']))
+                        $updateProject->data()->description = $_POST['description'];
+
+                    $updateProject->data()->startDate = $_POST['startDate'] ?? NULL;
+                    $updateProject->data()->endDate = $_POST['endDate'] ?? NULL;
+
+                    $updateProject->exec();
+                    echo json_encode(['result' => 'ok']);
+                    die();
+                }
+
+                if (isset($_POST['addTag'])) {
+                    $addTagToProject = new AddTagToProject();
+                    $addTagToProject->data()->projectID = $project->getId();
+                    $addTagToProject->data()->tag = $_POST['addTag'];
+                    $addTagToProject->exec();
+                    echo json_encode(['result' => 'ok']);
+                    die();
+                }
+                if (isset($_POST['removeTag'])) {
+                    $removeTagFromProject = new RemoveTagFromProject();
+                    $removeTagFromProject->data()->projectID = $project->getId();
+                    $removeTagFromProject->data()->tag = $_POST['removeTag'];
+                    $removeTagFromProject->exec();
+                    echo json_encode(['result' => 'ok']);
+                    die();
+                }
+
+                if (isset($_POST['addImpactTagA'])) {
+                    $addTagToProject = new AddImpactTagAToProject();
+                    $addTagToProject->data()->projectID = $project->getId();
+                    $addTagToProject->data()->tag = $_POST['addImpactTagA'];
+                    $addTagToProject->exec();
+                    echo json_encode(['result' => 'ok']);
+                    die();
+                }
+                if (isset($_POST['removeImpactTagA'])) {
+                    $removeTagFromProject = new RemoveImpactTagAFromProject();
+                    $removeTagFromProject->data()->projectID = $project->getId();
+                    $removeTagFromProject->data()->tag = $_POST['removeImpactTagA'];
+                    $removeTagFromProject->exec();
+                    echo json_encode(['result' => 'ok']);
+                    die();
+                }
+
+                if (isset($_POST['addImpactTagB'])) {
+                    $addTagToProject = new AddImpactTagBToProject();
+                    $addTagToProject->data()->projectID = $project->getId();
+                    $addTagToProject->data()->tag = $_POST['addImpactTagB'];
+                    $addTagToProject->exec();
+                    echo json_encode(['result' => 'ok']);
+                    die();
+                }
+                if (isset($_POST['removeImpactTagB'])) {
+                    $removeTagFromProject = new RemoveImpactTagBFromProject();
+                    $removeTagFromProject->data()->projectID = $project->getId();
+                    $removeTagFromProject->data()->tag = $_POST['removeImpactTagB'];
+                    $removeTagFromProject->exec();
+                    echo json_encode(['result' => 'ok']);
+                    die();
+                }
+
+                if (isset($_POST['addImpactTagC'])) {
+                    $addTagToProject = new AddImpactTagCToProject();
+                    $addTagToProject->data()->projectID = $project->getId();
+                    $addTagToProject->data()->tag = $_POST['addImpactTagC'];
+                    $addTagToProject->exec();
+                    echo json_encode(['result' => 'ok']);
+                    die();
+                }
+                if (isset($_POST['removeImpactTagC'])) {
+                    $removeTagFromProject = new RemoveImpactTagCFromProject();
+                    $removeTagFromProject->data()->projectID = $project->getId();
+                    $removeTagFromProject->data()->tag = $_POST['removeImpactTagC'];
+                    $removeTagFromProject->exec();
+                    echo json_encode(['result' => 'ok']);
+                    die();
+                }
+
+                if (isset($_POST['addMember'])) {
+                    $addMemberToProject = new AddMemberToProject();
+                    $addMemberToProject->data()->projectID = $project->getId();
+                    $addMemberToProject->data()->userID = $_POST['addMember'];
+                    $addMemberToProject->exec();
+                    echo json_encode(['result' => 'ok']);
+                    die();
+                }
+                if (isset($_POST['removeMember'])) {
+                    $removeMemberFromProject = new RemoveMemberFromProject();
+                    $removeMemberFromProject->data()->projectID = $project->getId();
+                    $removeMemberFromProject->data()->userID = $_POST['removeMember'];
+                    $removeMemberFromProject->exec();
+                    echo json_encode(['result' => 'ok']);
+                    die();
+                }
+
+                if (isset($_POST['requestToJoin'])) {
+                    $addMemberRequestToJoinProject = new AddMemberRequestToProject();
+                    $addMemberRequestToJoinProject->data()->projectID = $project->getId();
+                    $addMemberRequestToJoinProject->data()->userID = $loggedInUser->getId();
+                    $addMemberRequestToJoinProject->exec();
+                    echo json_encode(['result' => 'ok']);
+                    die();
+                }
+                if (isset($_POST['approveRequestToJoin'])) {
+                    $approveMemberRequestToJoinProject = new ApproveMemberRequestToProject();
+                    $approveMemberRequestToJoinProject->data()->projectID = $project->getId();
+                    $approveMemberRequestToJoinProject->data()->userID = $_POST['approveRequestToJoin'];
+                    $approveMemberRequestToJoinProject->exec();
+                    echo json_encode(['result' => 'ok']);
+                    die();
+                }
+                if (isset($_POST['rejectRequestToJoin'])) {
+                    $rejectMemberRequestToJoinProject = new RejectMemberRequestToProject();
+                    $rejectMemberRequestToJoinProject->data()->projectID = $project->getId();
+                    $rejectMemberRequestToJoinProject->data()->userID = $_POST['rejectRequestToJoin'];
+                    $rejectMemberRequestToJoinProject->exec();
+                    echo json_encode(['result' => 'ok']);
+                    die();
+                }
+
+                if (isset($_POST['updateCountryRegion'])) {
+                    $updateProjectCountryRegionCmd = new UpdateProjectCountryRegion();
+                    $updateProjectCountryRegionCmd->data()->projectID = $project->getId();
+                    $updateProjectCountryRegionCmd->data()->countryID = $_POST['countryID'];
+                    $updateProjectCountryRegionCmd->data()->region = $_POST['region'];
+                    $updateProjectCountryRegionCmd->exec();
+                    echo json_encode(['result' => 'ok']);
+                    die();
+                }
+
+                if (isset($_POST['newOrganisationID'])) {
+                    $addOrganisationProjectCmd = new AddProjectToOrganisation();
+                    $addOrganisationProjectCmd->data()->projectID = $project->getId();
+                    $addOrganisationProjectCmd->data()->organisationID = $_POST['newOrganisationID'];
+                    $addOrganisationProjectCmd->exec();
+                    echo json_encode(['result' => 'ok']);
+                    die();
+                }
+
+                if (isset($_POST['addPost'])) {
+                    $addPostCmd = new CreateProjectPost();
+                    $addPostCmd->data()->project = $project;
+                    $addPostCmd->data()->user = $loggedInUser;
+                    $addPostCmd->data()->text = $_POST['addPost'];
+                    $addPostCmd->exec();
+                    echo json_encode([
+                        'result' => 'ok'
+                    ]);
+                    die();
+                }
+
+
+            } catch (ErrorHandler $e) {
+                echo json_encode([
+                    'result' => 'error',
+                    'errors' => $e->getErrors()
+                ]);
+                die();
+            }
+        }
+
         if ($this->data()->format == 'json') {
             $owner = $project->getOwner();
             echo json_encode([
@@ -263,12 +278,12 @@ class ProjectController
                         return null;
                     else
                         return [
-                        'id' => $user->getId(),
-                        'text' => $user->getFirstName() . ' ' . $user->getLastName(),
-                        'firstName' => $user->getFirstName(),
-                        'lastName' => $user->getLastName(),
-                        'profilePic' => $user->getProfilePicOrDefault()
-                    ];
+                            'id' => $user->getId(),
+                            'text' => $user->getFirstName() . ' ' . $user->getLastName(),
+                            'firstName' => $user->getFirstName(),
+                            'lastName' => $user->getLastName(),
+                            'profilePic' => $user->getProfilePicOrDefault()
+                        ];
                 }, $projectMembers)),
                 'memberRequests' => array_map(function (User $user) {
                     return [

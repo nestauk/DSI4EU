@@ -27,7 +27,7 @@ class CreateProjectTest extends PHPUnit_Framework_TestCase
         $this->userRepo = new \DSI\Repository\UserRepository();
 
         $this->user = new \DSI\Entity\User();
-        $this->userRepo->saveAsNew($this->user);
+        $this->userRepo->insert($this->user);
     }
 
     public function tearDown()

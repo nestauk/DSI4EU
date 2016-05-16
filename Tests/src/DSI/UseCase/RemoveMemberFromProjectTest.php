@@ -34,11 +34,11 @@ class RemoveMemberFromProjectTest extends PHPUnit_Framework_TestCase
         $this->userRepo = new \DSI\Repository\UserRepository();
 
         $this->user = new \DSI\Entity\User();
-        $this->userRepo->saveAsNew($this->user);
+        $this->userRepo->insert($this->user);
 
         $this->project = new \DSI\Entity\Project();
         $this->project->setOwner($this->user);
-        $this->projectRepo->saveAsNew($this->project);
+        $this->projectRepo->insert($this->project);
     }
 
     public function tearDown()

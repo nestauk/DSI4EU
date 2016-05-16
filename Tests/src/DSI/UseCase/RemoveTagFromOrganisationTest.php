@@ -35,7 +35,7 @@ class RemoveTagFromOrganisationTest extends PHPUnit_Framework_TestCase
         $this->userRepo = new \DSI\Repository\UserRepository();
 
         $user = new \DSI\Entity\User();
-        $this->userRepo->saveAsNew($user);
+        $this->userRepo->insert($user);
 
         $this->organisation = new \DSI\Entity\Organisation();
         $this->organisation->setOwner($user);

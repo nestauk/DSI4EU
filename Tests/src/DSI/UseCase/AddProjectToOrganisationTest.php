@@ -35,14 +35,14 @@ class AddProjectToOrganisationTest extends PHPUnit_Framework_TestCase
         $this->addProjectToOrganisation = new \DSI\UseCase\AddProjectToOrganisation();
 
         $user = new \DSI\Entity\User();
-        $this->userRepo->saveAsNew($user);
+        $this->userRepo->insert($user);
 
         $this->project_1 = new \DSI\Entity\Project();
         $this->project_1->setOwner($user);
-        $this->projectRepo->saveAsNew($this->project_1);
+        $this->projectRepo->insert($this->project_1);
         $this->project_2 = new \DSI\Entity\Project();
         $this->project_2->setOwner($user);
-        $this->projectRepo->saveAsNew($this->project_2);
+        $this->projectRepo->insert($this->project_2);
 
         $this->organisation = new \DSI\Entity\Organisation();
         $this->organisation->setOwner($user);

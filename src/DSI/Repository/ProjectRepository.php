@@ -8,7 +8,7 @@ use DSI\Service\SQL;
 
 class ProjectRepository
 {
-    public function saveAsNew(Project $project)
+    public function insert(Project $project)
     {
         $insert = array();
         $insert[] = "`ownerID` = '" . addslashes($project->getOwner()->getId()) . "'";

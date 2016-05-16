@@ -23,9 +23,9 @@ class UpdateUserEmailAddressTest extends PHPUnit_Framework_TestCase
         $this->userRepo = new UserRepository();
 
         $this->user = new \DSI\Entity\User();
-        $this->userRepo->saveAsNew($this->user);
+        $this->userRepo->insert($this->user);
         $this->user2 = new \DSI\Entity\User();
-        $this->userRepo->saveAsNew($this->user2);
+        $this->userRepo->insert($this->user2);
     }
 
     public function tearDown()

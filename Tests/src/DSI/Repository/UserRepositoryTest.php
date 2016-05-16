@@ -26,7 +26,7 @@ class UserRepositoryTest extends PHPUnit_Framework_TestCase
         $user = new User();
         $user->setEmail('test@example.com');
 
-        $this->userRepo->saveAsNew($user);
+        $this->userRepo->insert($user);
 
         $this->assertEquals(1, $user->getId());
     }
@@ -37,7 +37,7 @@ class UserRepositoryTest extends PHPUnit_Framework_TestCase
         $user = new User();
         $user->setEmail('test@example.com');
 
-        $this->userRepo->saveAsNew($user);
+        $this->userRepo->insert($user);
 
         $user->setEmail('test2@example.com');
         $this->userRepo->save($user);
@@ -71,7 +71,7 @@ class UserRepositoryTest extends PHPUnit_Framework_TestCase
         $email = 'test@example.com';
         $user = new User();
         $user->setEmail($email);
-        $this->userRepo->saveAsNew($user);
+        $this->userRepo->insert($user);
 
         $sameUser = $this->userRepo->getByEmail($email);
         $this->assertEquals($user->getId(), $sameUser->getId());
@@ -111,7 +111,7 @@ class UserRepositoryTest extends PHPUnit_Framework_TestCase
         $facebookID = '10655gregbregh543';
         $user = new User();
         $user->setFacebookUID($facebookID);
-        $this->userRepo->saveAsNew($user);
+        $this->userRepo->insert($user);
 
         $sameUser = $this->userRepo->getByFacebookUId($facebookID);
         $this->assertEquals($user->getId(), $sameUser->getId());
@@ -138,7 +138,7 @@ class UserRepositoryTest extends PHPUnit_Framework_TestCase
         $googleUID = '10576';
         $user = new User();
         $user->setGoogleUID($googleUID);
-        $this->userRepo->saveAsNew($user);
+        $this->userRepo->insert($user);
 
         $sameUser = $this->userRepo->getByGoogleUId($googleUID);
         $this->assertEquals($user->getId(), $sameUser->getId());
@@ -165,7 +165,7 @@ class UserRepositoryTest extends PHPUnit_Framework_TestCase
         $gitHubUID = '10576';
         $user = new User();
         $user->setGitHubUID($gitHubUID);
-        $this->userRepo->saveAsNew($user);
+        $this->userRepo->insert($user);
 
         $sameUser = $this->userRepo->getByGitHubUId($gitHubUID);
         $this->assertEquals($user->getId(), $sameUser->getId());
@@ -192,7 +192,7 @@ class UserRepositoryTest extends PHPUnit_Framework_TestCase
         $twitterUID = '10576';
         $user = new User();
         $user->setTwitterUID($twitterUID);
-        $this->userRepo->saveAsNew($user);
+        $this->userRepo->insert($user);
 
         $sameUser = $this->userRepo->getByTwitterUId($twitterUID);
         $this->assertEquals($user->getId(), $sameUser->getId());
@@ -219,7 +219,7 @@ class UserRepositoryTest extends PHPUnit_Framework_TestCase
         $profileURL = 'alecs.pandele';
         $user = new User();
         $user->setProfileURL($profileURL);
-        $this->userRepo->saveAsNew($user);
+        $this->userRepo->insert($user);
 
         $sameUser = $this->userRepo->getByProfileURL($profileURL);
         $this->assertEquals($user->getId(), $sameUser->getId());
@@ -231,12 +231,12 @@ class UserRepositoryTest extends PHPUnit_Framework_TestCase
     public function getAllUsers()
     {
         $user = new User();
-        $this->userRepo->saveAsNew($user);
+        $this->userRepo->insert($user);
 
         $this->assertCount(1, $this->userRepo->getAll());
 
         $user = new User();
-        $this->userRepo->saveAsNew($user);
+        $this->userRepo->insert($user);
 
         $this->assertCount(2, $this->userRepo->getAll());
     }
@@ -257,7 +257,7 @@ class UserRepositoryTest extends PHPUnit_Framework_TestCase
         $user->setTwitterUID('twitterUID');
         $user->setProfileURL('profileURL');
         $user->setProfilePic('profilePic');
-        $this->userRepo->saveAsNew($user);
+        $this->userRepo->insert($user);
 
         $sameUser = $this->userRepo->getById( $user->getId() );
         $this->assertEquals($user->getEmail(), $sameUser->getEmail());

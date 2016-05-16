@@ -189,7 +189,7 @@ class UserSkillRepositoryTest extends PHPUnit_Framework_TestCase
     {
         $user = new \DSI\Entity\User();
         $user->setId($userID);
-        $this->userRepo->saveAsNew($user);
+        $this->userRepo->insert($user);
         return $user;
     }
 

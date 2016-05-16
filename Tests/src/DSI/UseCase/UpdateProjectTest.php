@@ -26,11 +26,11 @@ class UpdateProjectTest extends PHPUnit_Framework_TestCase
 
         $this->user1 = new \DSI\Entity\User();
         $userRepo = new \DSI\Repository\UserRepository();
-        $userRepo->saveAsNew($this->user1);
+        $userRepo->insert($this->user1);
 
         $this->user2 = new \DSI\Entity\User();
         $userRepo = new \DSI\Repository\UserRepository();
-        $userRepo->saveAsNew($this->user2);
+        $userRepo->insert($this->user2);
 
         $createProject = new \DSI\UseCase\CreateProject();
         $createProject->data()->name = 'Project Name';

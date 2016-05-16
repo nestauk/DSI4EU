@@ -26,9 +26,9 @@ class AddMemberToOrganisationTest extends PHPUnit_Framework_TestCase
         $this->userRepo = new \DSI\Repository\UserRepository();
 
         $this->user_1 = new \DSI\Entity\User();
-        $this->userRepo->saveAsNew($this->user_1);
+        $this->userRepo->insert($this->user_1);
         $this->user_2 = new \DSI\Entity\User();
-        $this->userRepo->saveAsNew($this->user_2);
+        $this->userRepo->insert($this->user_2);
 
         $this->organisation = new \DSI\Entity\Organisation();
         $this->organisation->setOwner($this->user_1);

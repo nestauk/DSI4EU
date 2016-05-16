@@ -45,7 +45,7 @@ class TwitterRegister
             $user->setLastName($this->data()->lastName);
         if ($this->data()->email)
             $user->setEmail($this->data()->email);
-        $this->userRepo->saveAsNew($user);
+        $this->userRepo->insert($user);
 
         $this->user = $user;
     }

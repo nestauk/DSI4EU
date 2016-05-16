@@ -43,7 +43,7 @@ class Register
         $user = new User();
         $user->setEmail($this->data()->email);
         $user->setPassword($this->data()->password);
-        $this->userRepo->saveAsNew($user);
+        $this->userRepo->insert($user);
 
         $this->user = $user;
     }

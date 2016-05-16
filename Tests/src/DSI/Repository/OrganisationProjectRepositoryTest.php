@@ -164,7 +164,7 @@ class OrganisationProjectsRepositoryTest extends PHPUnit_Framework_TestCase
     private function createOrganisation(int $organisationID)
     {
         $user = new \DSI\Entity\User();
-        $this->usersRepo->saveAsNew($user);
+        $this->usersRepo->insert($user);
 
         $organisation = new \DSI\Entity\Organisation();
         $organisation->setId($organisationID);
@@ -176,12 +176,12 @@ class OrganisationProjectsRepositoryTest extends PHPUnit_Framework_TestCase
     private function createProject(int $projectID)
     {
         $user = new \DSI\Entity\User();
-        $this->usersRepo->saveAsNew($user);
+        $this->usersRepo->insert($user);
 
         $project = new \DSI\Entity\Project();
         $project->setId($projectID);
         $project->setOwner($user);
-        $this->projectsRepo->saveAsNew($project);
+        $this->projectsRepo->insert($project);
         return $project;
     }
 }

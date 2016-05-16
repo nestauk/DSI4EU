@@ -53,7 +53,7 @@ class CreateProject
         $project->setName((string)$this->data()->name);
         $project->setDescription((string)$this->data()->description);
         $project->setOwner($this->data()->owner);
-        $this->projectRepo->saveAsNew($project);
+        $this->projectRepo->insert($project);
 
         $projectMemberRepository = new ProjectMemberRepository();
         $projectMember = new ProjectMember();

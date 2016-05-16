@@ -43,8 +43,8 @@ class ProjectRepositoryTest extends PHPUnit_Framework_TestCase
 
         $this->user1 = new User();
         $this->user2 = new User();
-        $this->userRepo->saveAsNew($this->user1);
-        $this->userRepo->saveAsNew($this->user2);
+        $this->userRepo->insert($this->user1);
+        $this->userRepo->insert($this->user2);
 
         $this->country = new Country();
         $this->country->setName('test1');
@@ -69,7 +69,7 @@ class ProjectRepositoryTest extends PHPUnit_Framework_TestCase
     {
         $project = new Project();
         $project->setOwner($this->user1);
-        $this->projectRepository->saveAsNew($project);
+        $this->projectRepository->insert($project);
 
         $this->assertEquals(1, $project->getId());
     }
@@ -79,7 +79,7 @@ class ProjectRepositoryTest extends PHPUnit_Framework_TestCase
     {
         $project = new Project();
         $project->setOwner($this->user1);
-        $this->projectRepository->saveAsNew($project);
+        $this->projectRepository->insert($project);
 
         $project->setOwner($this->user2);
         $this->projectRepository->save($project);
@@ -111,13 +111,13 @@ class ProjectRepositoryTest extends PHPUnit_Framework_TestCase
     {
         $project = new Project();
         $project->setOwner($this->user1);
-        $this->projectRepository->saveAsNew($project);
+        $this->projectRepository->insert($project);
 
         $this->assertCount(1, $this->projectRepository->getAll());
 
         $project = new Project();
         $project->setOwner($this->user1);
-        $this->projectRepository->saveAsNew($project);
+        $this->projectRepository->insert($project);
 
         $this->assertCount(2, $this->projectRepository->getAll());
     }
@@ -135,7 +135,7 @@ class ProjectRepositoryTest extends PHPUnit_Framework_TestCase
         $project->setEndDate('2016-05-22');
         $project->setCountryRegion($this->countryRegion);
         $project->setOrganisationsCount(10);
-        $this->projectRepository->saveAsNew($project);
+        $this->projectRepository->insert($project);
 
         $project = $this->projectRepository->getById($project->getId());
         $this->assertEquals($this->user1->getId(), $project->getOwner()->getId());
@@ -157,7 +157,7 @@ class ProjectRepositoryTest extends PHPUnit_Framework_TestCase
         $project->setOwner($this->user1);
         $project->setStartDate(NULL);
         $project->setEndDate(NULL);
-        $this->projectRepository->saveAsNew($project);
+        $this->projectRepository->insert($project);
 
         $sameProject = $this->projectRepository->getById($project->getId());
         $this->assertNull($sameProject->getStartDate());

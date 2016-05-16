@@ -42,7 +42,7 @@ class FacebookRegister
         $user->setFirstName($this->data()->firstName);
         $user->setLastName($this->data()->lastName);
         $user->setEmail($this->data()->email);
-        $this->userRepo->saveAsNew($user);
+        $this->userRepo->insert($user);
 
         $this->user = $user;
     }

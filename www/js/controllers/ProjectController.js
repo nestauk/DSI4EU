@@ -314,6 +314,16 @@ app.controller('ProjectController', function ($scope, $http, $attrs, $timeout) {
             });
         }
     };
+    $scope.addPost = function () {
+        $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', {
+            addPost: $scope.newPost
+        }).then(function (result) {
+            if (result.data.response == 'ok')
+                $scope.posts = result.data.posts;
+            else
+                console.log(result.data);
+        });
+    };
 
     var getItemIndexById = function (pool, id) {
         for (var i in pool) {

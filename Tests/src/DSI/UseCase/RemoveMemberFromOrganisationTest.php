@@ -34,7 +34,7 @@ class RemoveMemberFromOrganisationTest extends PHPUnit_Framework_TestCase
         $this->userRepo = new \DSI\Repository\UserRepository();
 
         $this->user = new \DSI\Entity\User();
-        $this->userRepo->saveAsNew($this->user);
+        $this->userRepo->insert($this->user);
 
         $this->organisation = new \DSI\Entity\Organisation();
         $this->organisation->setOwner($this->user);

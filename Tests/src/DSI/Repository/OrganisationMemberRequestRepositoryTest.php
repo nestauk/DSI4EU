@@ -178,7 +178,7 @@ class OrganisationMemberRequestRepositoryTest extends PHPUnit_Framework_TestCase
     private function createUser()
     {
         $user = new \DSI\Entity\User();
-        $this->usersRepo->saveAsNew($user);
+        $this->usersRepo->insert($user);
         return $user;
     }
 }

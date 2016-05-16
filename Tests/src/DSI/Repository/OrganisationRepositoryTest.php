@@ -51,8 +51,8 @@ class OrganisationRepositoryTest extends PHPUnit_Framework_TestCase
 
         $this->user1 = new User();
         $this->user2 = new User();
-        $this->userRepo->saveAsNew($this->user1);
-        $this->userRepo->saveAsNew($this->user2);
+        $this->userRepo->insert($this->user1);
+        $this->userRepo->insert($this->user2);
 
         $this->country = new Country();
         $this->country->setName('test1');

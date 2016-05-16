@@ -1,14 +1,13 @@
 var app = angular.module('DSIApp');
 
 app.controller('UserController', function ($scope, $http) {
-    $scope.tags = [];
+    $scope.skills = [];
     $scope.languages = [];
     $scope.links = [];
 
     $http.get(SITE_RELATIVE_PATH + '/profile/' + profileUserID + '/details.json')
         .then(function (result) {
-            // console.log(result.data);
-            $scope.tags = result.data.tags || [];
+            $scope.skills = result.data.tags || [];
             $scope.languages = result.data.languages || [];
             $scope.links = result.data.links.sort(sortUrls) || [];
             $scope.user = result.data.user || {};
@@ -31,10 +30,11 @@ app.controller('UserController', function ($scope, $http) {
         if (newSkill == '')
             return;
 
-        var index = $scope.tags.indexOf(newSkill);
+        var index = $scope.skills.indexOf(newSkill);
+        console.log(index);
         if (index == -1) {
-            $scope.tags.push(newSkill);
-            $scope.tags.sort();
+            $scope.skills.push(newSkill);
+            $scope.skills.sort();
 
             $http.post(SITE_RELATIVE_PATH + '/profile/' + profileUserID + '/details.json', {
                 addSkill: newSkill
@@ -44,9 +44,9 @@ app.controller('UserController', function ($scope, $http) {
         }
     };
     $scope.removeSkill = function (skill) {
-        var index = $scope.tags.indexOf(skill);
+        var index = $scope.skills.indexOf(skill);
         if (index > -1) {
-            $scope.tags.splice(index, 1);
+            $scope.skills.splice(index, 1);
 
             $http.post(SITE_RELATIVE_PATH + '/profile/' + profileUserID + '/details.json', {
                 removeSkill: skill

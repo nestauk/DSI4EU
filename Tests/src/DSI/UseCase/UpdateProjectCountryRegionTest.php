@@ -46,12 +46,12 @@ class UpdateProjectCountryRegionTest extends PHPUnit_Framework_TestCase
         $this->countryRegionRepository->saveAsNew($this->countryRegion);
 
         $this->user = new \DSI\Entity\User();
-        $this->userRepo->saveAsNew($this->user);
+        $this->userRepo->insert($this->user);
 
         $this->projectRepo = new \DSI\Repository\ProjectRepository();
         $this->project = new \DSI\Entity\Project();
         $this->project->setOwner($this->user);
-        $this->projectRepo->saveAsNew($this->project);
+        $this->projectRepo->insert($this->project);
     }
 
     public function tearDown()
