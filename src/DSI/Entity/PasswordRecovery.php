@@ -15,7 +15,8 @@ class PasswordRecovery
         $expires;
 
     /** @var bool */
-    private $isUsed;
+    private $isUsed,
+        $isExpired;
 
     /**
      * @return int
@@ -32,7 +33,7 @@ class PasswordRecovery
     {
         if ($id <= 0)
             throw new \InvalidArgumentException('id: ' . $id);
-        
+
         $this->id = $id;
     }
 
@@ -98,5 +99,21 @@ class PasswordRecovery
     public function setIsUsed(bool $isUsed)
     {
         $this->isUsed = $isUsed;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isExpired()
+    {
+        return (bool)$this->isExpired;
+    }
+
+    /**
+     * @param boolean $isExpired
+     */
+    public function setIsExpired(bool $isExpired)
+    {
+        $this->isExpired = $isExpired;
     }
 }

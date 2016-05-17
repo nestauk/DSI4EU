@@ -4,12 +4,7 @@ require_once __DIR__ . '/../../../config.php';
 
 use \DSI\Repository\UserRepository;
 use \DSI\Repository\PasswordRecoveryRepository;
-use \DSI\Repository\CountryRegionRepository;
-use \DSI\Repository\CountryRepository;
-use \DSI\Entity\Project;
 use \DSI\Entity\User;
-use \DSI\Entity\CountryRegion;
-use \DSI\Entity\Country;
 
 class PasswordRecoveryRepositoryTest extends PHPUnit_Framework_TestCase
 {

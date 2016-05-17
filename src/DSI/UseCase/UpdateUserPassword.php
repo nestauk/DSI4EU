@@ -58,7 +58,7 @@ class UpdateUserPassword
     /**
      * @param $userRepo
      */
-    private function updateUserPassword($userRepo)
+    private function updateUserPassword(UserRepository $userRepo)
     {
         $user = $userRepo->getById($this->data()->userID);
         $user->setPassword($this->data()->password);

@@ -19,7 +19,11 @@ class PasswordRecoveryRepository
         $query = new SQL("INSERT INTO `password-recovery` SET " . implode(', ', $insert) . "");
         $query->query();
 
-        $passwordRecovery->setId($query->insert_id());
+        $samePasswordRecovery = (new PasswordRecoveryRepository())->getById($query->insert_id());
+
+        $passwordRecovery->setId($samePasswordRecovery->getId());
+        $passwordRecovery->setExpires($samePasswordRecovery->getExpires());
+        $passwordRecovery->setIsExpired($samePasswordRecovery->isExpired());
     }
 
     public function save(PasswordRecovery $passwordRecovery)
@@ -45,6 +49,14 @@ class PasswordRecoveryRepository
         ]);
     }
 
+    public function getByUserAndCode(int $userID, string $code): PasswordRecovery
+    {
+        return $this->getPasswordRecoveryWhere([
+            "`userID` = {$userID}",
+            "`code` = '".addslashes($code)."'",
+        ]);
+    }
+
     private function buildPasswordRecoveryFromData($dbPasswordRecovery)
     {
         $passwordRecovery = new PasswordRecovery();
@@ -54,6 +66,7 @@ class PasswordRecoveryRepository
         );
         $passwordRecovery->setCode($dbPasswordRecovery['code']);
         $passwordRecovery->setExpires($dbPasswordRecovery['expires']);
+        $passwordRecovery->setIsExpired($dbPasswordRecovery['isExpired']);
         $passwordRecovery->setIsUsed($dbPasswordRecovery['isUsed']);
 
         return $passwordRecovery;
@@ -65,7 +78,8 @@ class PasswordRecoveryRepository
         $projects = [];
         $query = new SQL("SELECT 
             id, userID, code, expires, isUsed
-          FROM `password-recovery` WHERE " . implode(' AND ', $where) . "");
+          , IF(expires < NOW(), 1, 0) AS isExpired
+        FROM `password-recovery` WHERE " . implode(' AND ', $where) . "");
         foreach ($query->fetch_all() AS $dbProject) {
             $projects[] = $this->buildPasswordRecoveryFromData($dbProject);
         }
@@ -82,6 +96,7 @@ class PasswordRecoveryRepository
     {
         $query = new SQL("SELECT 
               id, userID, code, expires, isUsed
+            , IF(expires < NOW(), 1, 0) AS isExpired
             FROM `password-recovery` WHERE " . implode(' AND ', $where) . " LIMIT 1");
         $dbPasswordRecovery = $query->fetch();
         if (!$dbPasswordRecovery) {
