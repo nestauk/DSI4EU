@@ -198,7 +198,7 @@ class OrganisationController
                 'organisationSizeId' => (string)$organisation->getOrganisationSizeId(),
 
                 'tags' => (new OrganisationTagRepository())->getTagsNameByOrganisationID($organisation->getId()),
-                'members' => array_filter(array_map(function (User $user) use ($owner) {
+                'members' => array_values(array_filter(array_map(function (User $user) use ($owner) {
                     if ($owner->getId() == $user->getId())
                         return null;
                     else
@@ -209,7 +209,7 @@ class OrganisationController
                             'lastName' => $user->getLastName(),
                             'profilePic' => $user->getProfilePicOrDefault()
                         ];
-                }, $organisationMembers)),
+                }, $organisationMembers))),
                 'memberRequests' => array_map(function (User $user) {
                     return [
                         'id' => $user->getId(),

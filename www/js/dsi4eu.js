@@ -467,6 +467,9 @@
 	var queueIndex = -1;
 
 	function cleanUpNextTick() {
+	    if (!draining || !currentQueue) {
+	        return;
+	    }
 	    draining = false;
 	    if (currentQueue.length) {
 	        queue = currentQueue.concat(queue);
@@ -4573,5 +4576,7 @@ Webflow.require('ix').init([
   {"slug":"update","name":"update","value":{"style":{},"triggers":[{"type":"click","selector":".update","siblings":true,"stepsA":[{"display":"block","opacity":1,"wait":0,"transition":"opacity 500ms ease 0ms"}],"stepsB":[{"opacity":0,"wait":0,"transition":"opacity 500ms ease 0ms"}]}]}},
   {"slug":"showpasswordchange","name":"showPassWordChange","value":{"style":{},"triggers":[{"type":"click","selector":".change-password-block","stepsA":[{"display":"block","opacity":1,"wait":300,"transition":"opacity 300ms ease 0ms"}],"stepsB":[]},{"type":"click","selector":".password-signupform","stepsA":[{"opacity":1,"transition":"transform 300ms ease 0ms, opacity 300ms ease 0ms","x":"0px","y":"-5px","z":"0px"},{"transition":"transform 300ms ease 0ms","x":"0px","y":"0px","z":"0px"}],"stepsB":[]}]}},
   {"slug":"addpost","name":"addPost","value":{"style":{"height":"38px"},"triggers":[{"type":"click","stepsA":[{"height":"83px","wait":300,"transition":"height 300ms ease-in 0ms"},{"height":"80px","transition":"height 200ms ease-in-out 0ms"}],"stepsB":[{"height":"38px","wait":200,"transition":"height 200ms ease-in-out 0ms"}]},{"type":"click","selector":".add-post","stepsA":[{"height":"178px","wait":300,"transition":"height 300ms ease-in 0ms"},{"height":"175px","transition":"height 200ms ease-in 0ms"}],"stepsB":[{"height":"55px","wait":200,"transition":"height 200ms ease-in-out 0ms"}]},{"type":"click","selector":".btn-new-post","stepsA":[{"wait":300},{"display":"block","opacity":1,"transition":"opacity 200ms ease-in 0ms"}],"stepsB":[{"opacity":0,"transition":"opacity 200ms ease-out 0ms"}]}]}},
-  {"slug":"postblockclosed","name":"postBlockClosed","value":{"style":{"height":"55px"},"triggers":[]}}
+  {"slug":"postblockclosed","name":"postBlockClosed","value":{"style":{"height":"55px"},"triggers":[]}},
+  {"slug":"new-post-show","name":"new post show","value":{"style":{},"triggers":[{"type":"click","selector":".new-post-bg","stepsA":[{"display":"block"}],"stepsB":[]}]}},
+  {"slug":"hide-new-post","name":"hide new post","value":{"style":{},"triggers":[{"type":"click","selector":".new-post-bg","stepsA":[{"display":"none"}],"stepsB":[]}]}}
 ]);

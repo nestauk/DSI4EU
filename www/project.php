@@ -12,7 +12,7 @@ require __DIR__ . '/header.php';
         data-projectid="<?php echo $project->getId() ?>">
 
         <div class="w-section project-section">
-            <div class="w-container body-container">
+            <div class="container-wide">
                 <div class="project-detail">
                     <div class="project-header">
                         <img src="<?php echo SITE_RELATIVE_PATH ?>/images/pin.png" class="card-pin">
@@ -342,10 +342,14 @@ require __DIR__ . '/header.php';
 
                             <div class="list-items">
                                 <div class="w-inline-block partner-link">
-                                    <div class="list-item"
+                                    <div class="w-clearfix list-item"
                                          ng-repeat="organisation in project.organisationProjects">
                                         <div class="partner-title">
                                             <a ng-href="{{organisation.url}}" ng-bind="organisation.name"></a>
+                                        </div>
+                                        <div class="no-of-projects">
+                                            <span ng-bind="organisation.projectsCount"></span>
+                                            Project<span ng-bind="organisation.projectsCount == 1 ? '' : 's'"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -404,7 +408,8 @@ require __DIR__ . '/header.php';
                                         <div class="contributor-position" ng-bind="member.lastName"></div>
                                     </a>
                                     <?php if ($isOwner) { ?>
-                                        <div class="delete" style="display:block" ng-click="removeMember(member)">-
+                                        <div class="delete" ng-click="removeMember(member)">
+                                            -
                                         </div>
                                     <?php } ?>
                                 </div>
@@ -585,20 +590,15 @@ require __DIR__ . '/header.php';
                     <div class="w-col w-col-6">
                         <div class="info-card">
                             <?php if ($loggedInUser AND $isOwner) { ?>
-                                <div data-ix="postblockclosed" class="add-post">
-                                    <form id="email-form" name="email-form" data-name="Email Form"
-                                          class="w-clearfix" ng-submit="addPost()">
-                                        <div class="w-clearfix post-author new-post">
-                                            <img width="40" height="40" class="post-author-img post"
-                                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/<?php echo $loggedInUser->getProfilePicOrDefault() ?>">
-                                            <div class="w-form add-post-form-wrapper">
-                                            <textarea id="new-post" placeholder="What's been happening?" name="new-post"
-                                                      data-name="new post" data-ix="addpost"
-                                                      class="w-input add-post-form" ng-model="newPost"></textarea>
-                                            </div>
-                                        </div>
-                                        <input type="submit" class="w-button btn-new-post btn" value="Add post"/>
-                                    </form>
+                                <div class="add-post">
+                                    <div class="w-clearfix post-author new-post">
+                                        <img
+                                            src="<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/<?php echo $loggedInUser->getProfilePicOrDefault() ?>"
+                                            width="40" height="40" class="post-author-img post">
+                                        <div class="profile-label">Do you have something to share?</div>
+                                        <a href="#" data-ix="new-post-show" class="create-new-post">Add new post <span
+                                                class="add-post-plus">+</span></a>
+                                    </div>
                                 </div>
                             <?php } ?>
                             <div class="w-clearfix current-status">
@@ -670,6 +670,12 @@ require __DIR__ . '/header.php';
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="new-post-bg bg-blur">
+            <div class="add-post-modal">
+                <a href="#" data-ix="hide-new-post" class="modal-save cancel">Cancel</a>
+                <a href="#" data-ix="hide-new-post" class="modal-save">Publish post</a>
             </div>
         </div>
 

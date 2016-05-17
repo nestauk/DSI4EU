@@ -4,6 +4,7 @@ namespace DSI\Controller;
 
 use DSI\Entity\OrganisationProject;
 use DSI\Entity\Project;
+use DSI\Entity\ProjectMember;
 use DSI\Entity\User;
 use DSI\Repository\OrganisationProjectRepository;
 use DSI\Repository\ProjectImpactTagARepository;
@@ -69,6 +70,7 @@ class ProjectController
                 'id' => $organisation->getId(),
                 'name' => $organisation->getName(),
                 'url' => URL::organisation($organisation->getId(), $organisation->getName()),
+                'projectsCount' => count((new OrganisationProjectRepository())->getByOrganisationID($organisation->getId())),
             ];
         }, $organisationProjects);
         usort($organisationProjects, function ($a, $b) {
@@ -273,18 +275,7 @@ class ProjectController
                 'impactTagsA' => (new ProjectImpactTagARepository())->getTagsNameByProjectID($project->getId()),
                 'impactTagsB' => (new ProjectImpactTagBRepository())->getTagsNameByProjectID($project->getId()),
                 'impactTagsC' => (new ProjectImpactTagCRepository())->getTagsNameByProjectID($project->getId()),
-                'members' => array_filter(array_map(function (User $user) use ($owner) {
-                    if ($owner->getId() == $user->getId())
-                        return null;
-                    else
-                        return [
-                            'id' => $user->getId(),
-                            'text' => $user->getFirstName() . ' ' . $user->getLastName(),
-                            'firstName' => $user->getFirstName(),
-                            'lastName' => $user->getLastName(),
-                            'profilePic' => $user->getProfilePicOrDefault()
-                        ];
-                }, $projectMembers)),
+                'members' => $this->getMembers($owner, $projectMembers),
                 'memberRequests' => array_map(function (User $user) {
                     return [
                         'id' => $user->getId(),
@@ -333,6 +324,30 @@ class ProjectController
             return false;
 
         return true;
+    }
+
+    /**
+     * @param User $owner
+     * @param ProjectMember[] $projectMembers
+     * @return array
+     */
+    private function getMembers(User $owner, $projectMembers)
+    {
+        return array_values(
+            array_filter(
+                array_map(
+                    function (User $user) use ($owner) {
+                        if ($owner->getId() == $user->getId())
+                            return null;
+                        else
+                            return [
+                                'id' => $user->getId(),
+                                'text' => $user->getFirstName() . ' ' . $user->getLastName(),
+                                'firstName' => $user->getFirstName(),
+                                'lastName' => $user->getLastName(),
+                                'profilePic' => $user->getProfilePicOrDefault(),
+                            ];
+                    }, $projectMembers)));
     }
 }
 

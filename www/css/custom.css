@@ -26,26 +26,26 @@ form.add-skill-section, form.add-language-section {
     float: left;
 }
 
-#Add-link{
-    height:31px;
+#Add-link {
+    height: 31px;
 }
 
-.social-contact-li .delete{
-    top:auto;
-    right:auto;
-    left:46px;
+.social-contact-li .delete {
+    top: auto;
+    right: auto;
+    left: 46px;
 }
 
-.social-contact-li:hover .delete{
-    display:block;
+.social-contact-li:hover .delete {
+    display: block;
 }
 
 .profile-info-left {
     padding-left: 0;
 }
 
-.profile-info-left li{
-    padding-left:20px;
+.profile-info-left li {
+    padding-left: 20px;
 }
 
 .modal-createProject {
@@ -71,6 +71,19 @@ form.add-skill-section, form.add-language-section {
     background-color: rgba(0, 0, 0, .4);
 }
 
-input.ng-invalid{
-    border:1px solid red;
+input.ng-invalid {
+    border: 1px solid red;
+}
+
+.contributor-col:hover .delete {
+    display: block;
+}
+
+.contributor-name {
+    min-width: 100px;
+}
+
+.delete {
+    top: 0;
+    right: 0;
 }
