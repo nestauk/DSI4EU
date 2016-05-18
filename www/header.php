@@ -120,19 +120,18 @@
                         <div class="w-form login-form">
                             <div ng-hide="forgotPassword.show">
                                 <form id="email-form" name="email-form" data-name="Email Form" ng-submit="onSubmit()">
-                                    <input id="email-4" type="email" placeholder="Enter your email address"
-                                           name="email-4"
+                                    <input type="email" placeholder="Enter your email address"
+                                           name="email"
                                            data-name="Email 4" autofocus="autofocus"
                                            class="w-input login-field"
                                            ng-model="email.value"
                                            ng-class="{error: errors.email}">
                                     <div style="color:red" ng-show="errors.email" ng-bind="errors.email"></div>
-                                    <input id="Password-4" type="password" placeholder="Password" name="Password-4"
-                                           data-name="Password 4" class="w-input login-field"
+                                    <input type="password" placeholder="Password"
+                                           name="Password" class="w-input login-field"
                                            ng-model="password.value"
                                            ng-class="{error: errors.password}">
                                     <div style="color:red" ng-show="errors.password" ng-bind="errors.password"></div>
-
 
                                     <div ng-hide="loggedin">
                                         <input ng-hide="loading" type="submit" value="Login" data-wait="Please wait..."
@@ -188,14 +187,18 @@
                                       data-name="Email Form"
                                       ng-submit="forgotPasswordSubmit()">
                                     <input type="email" placeholder="Enter your email address"
+                                           name="email"
                                            class="w-input login-field"
                                            ng-model="email.value"
                                            ng-class="{error: forgotPassword.errors.email}">
                                     <div style="color:red" ng-show="forgotPassword.errors.email"
                                          ng-bind="forgotPassword.errors.email"></div>
                                     <div ng-show="forgotPassword.codeSent">
+                                        <i ng-hide="forgotPassword.codeVerified">The security code has been emailed to you.</i>
                                         <input type="text" placeholder="Security code"
+                                               name="code"
                                                class="w-input login-field"
+                                               ng-disabled="forgotPassword.codeVerified"
                                                ng-model="forgotPassword.code"
                                                ng-class="{error: forgotPassword.errors.code}">
                                         <div style="color:red" ng-show="forgotPassword.errors.code"
@@ -203,6 +206,7 @@
 
                                         <div ng-show="forgotPassword.codeVerified">
                                             <input type="password" placeholder="New Password"
+                                                   name="password"
                                                    class="w-input login-field"
                                                    ng-model="forgotPassword.password"
                                                    ng-class="{error: forgotPassword.errors.password}">
@@ -210,6 +214,7 @@
                                                  ng-bind="forgotPassword.errors.password"></div>
 
                                             <input type="password" placeholder="Retype Password"
+                                                   name="retypePassword"
                                                    class="w-input login-field"
                                                    ng-model="forgotPassword.retypePassword"
                                                    ng-class="{error: forgotPassword.errors.retypePassword}">
