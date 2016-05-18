@@ -601,69 +601,33 @@ require __DIR__ . '/header.php';
                                     </div>
                                 </div>
                             <?php } ?>
-                            <div class="w-clearfix current-status">
+                            <div class="w-clearfix current-status" ng-show="project.posts.length > 0">
                                 <h3 class="status-h3">Latest post</h3>
-                                <div class="post-author latest"><img width="40" height="40"
-                                                                     src="<?php echo SITE_RELATIVE_PATH ?>/images/XG1hqhM1_400x400.jpg"
-                                                                     class="post-author-img">
-                                    <div class="post-author-detail latest">DanielMPettifer</div>
-                                    <div class="posted-on latest">Posted today at 11:12 gmt</div>
+                                <div class="post-author latest">
+                                    <img width="40" height="40" class="post-author-img"
+                                         ng-src="<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/{{project.posts[0].user.profilePic}}">
+                                    <div class="post-author-detail latest" ng-bind="project.posts[0].user.name"></div>
+                                    <div class="posted-on latest" ng-bind="project.posts[0].time"></div>
                                 </div>
-                                <div class="news-content">Our new app has just been published on the apple app store:
-                                    <br><a class="status-link"
-                                           href="https://geo.itunes.apple.com/us/app/netflix/id363590051?mt=8">https://geo.itunes.apple.com/us/app/netflix/id363590051?mt=8</a>
-                                    <br> android version to be released very soon! Follow us to stay up to date!
-                                </div>
+                                <div class="news-content" ng-bind-html="renderHtml(project.posts[0].text)"></div>
                             </div>
-                            <h3 class="info-h card-h">Previous posts</h3>
-                            <div class="w-clearfix project-post">
-                                <div class="post-author"><img width="40" height="40"
-                                                              src="<?php echo SITE_RELATIVE_PATH ?>/images/XG1hqhM1_400x400.jpg"
-                                                              class="post-author-img">
-                                    <div class="post-author-detail">DanielMPettifer</div>
-                                    <div class="posted-on">Posted yesterday at 08:22 gmt</div>
-                                </div>
-                                <div class="project-post-detail"><img
-                                        src="<?php echo SITE_RELATIVE_PATH ?>/images/wearable-circuit-board-tattoo-644x424.jpg"
-                                        class="project-post-image">
-                                    <div class="w-richtext project-post-rich-text">
-                                        <h4>First human test of implants</h4>
-                                        <p>A rich text element can be used with static or dynamic content. For static
-                                            content, just drop it into any page and begin editing. For dynamic content,
-                                            add
-                                            a rich text field to any collection and then connect a rich text element to
-                                            that
-                                            field in the settings panel. Voila!</p>
+
+                            <div ng-show="project.posts.length > 1">
+                                <h3 class="info-h card-h">Previous posts</h3>
+
+                                <div class="w-clearfix project-post" ng-repeat="post in project.posts" ng-if="$index > 0">
+                                    <div class="post-author">
+                                        <img width="40" height="40" class="post-author-img"
+                                             ng-src="<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/{{post.user.profilePic}}">
+                                        <div class="post-author-detail" ng-bind="post.user.name"></div>
+                                        <div class="posted-on" ng-bind="post.time"></div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="w-clearfix project-post">
-                                <div class="post-author"><img width="40" height="40"
-                                                              src="<?php echo SITE_RELATIVE_PATH ?>/images/XG1hqhM1_400x400.jpg"
-                                                              class="post-author-img">
-                                    <div class="post-author-detail">DanielMPettifer</div>
-                                    <div class="posted-on">Posted yesterday at 08:22 gmt</div>
-                                </div>
-                                <div class="project-post-detail">
-                                    <div style="padding-top: 56.17021276595745%;" class="w-embed w-video">
-                                        <iframe class="embedly-embed"
-                                                src="https://cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2FWs6AAhTw7RA%3Ffeature%3Doembed&amp;url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DWs6AAhTw7RA%26feature%3Dyoutu.be&amp;image=https%3A%2F%2Fi.ytimg.com%2Fvi%2FWs6AAhTw7RA%2Fhqdefault.jpg&amp;key=c4e54deccf4d4ec997a64902e9a30300&amp;type=text%2Fhtml&amp;schema=youtube"
-                                                scrolling="no" frameborder="0" allowfullscreen=""></iframe>
-                                    </div>
-                                    <div class="w-richtext project-post-rich-text">
-                                        <h4>Quantum levitation now included in our base model</h4>
-                                        <p>A rich text element can be used with static or dynamic content. For static
-                                            content, just drop it into any page and begin editing. For dynamic content,
-                                            add
-                                            a rich text field to any collection and then connect a rich text element to
-                                            that
-                                            field in the settings panel. Voila!</p>
-                                        <h4>How to customize formatting for each rich text</h4>
-                                        <p>Headings, paragraphs, blockquotes, figures, images, and figure captions can
-                                            all
-                                            be styled after a class is added to the rich text element using the "When
-                                            inside
-                                            of" nested selector system.</p>
+                                    <div class="project-post-detail">
+                                        <?php /*
+                                        <img class="project-post-image"
+                                             src="<?php echo SITE_RELATIVE_PATH ?>/images/wearable-circuit-board-tattoo-644x424.jpg">
+                                        */ ?>
+                                        <div class="news-content" ng-bind-html="renderHtml(post.text)"></div>
                                     </div>
                                 </div>
                             </div>
@@ -673,9 +637,28 @@ require __DIR__ . '/header.php';
             </div>
         </div>
         <div class="new-post-bg bg-blur">
+            <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+            <script>
+                tinymce.init({
+                    selector: '#newPost',
+                    height: 500,
+                    plugins: "autoresize autolink lists link preview paste textcolor colorpicker image imagetools media",
+                    autoresize_bottom_margin: 0,
+                    autoresize_max_height: 500,
+                    menubar: false,
+                    toolbar1: 'styleselect | forecolor backcolor | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media | preview',
+                    image_advtab: true,
+                    paste_data_images: false
+                });
+            </script>
+
             <div class="add-post-modal">
-                <a href="#" data-ix="hide-new-post" class="modal-save cancel">Cancel</a>
-                <a href="#" data-ix="hide-new-post" class="modal-save">Publish post</a>
+                <form ng-submit="addPost()">
+                    <textarea id="newPost" style="height:100%">Please type your update here...</textarea>
+                    <a href="#" data-ix="hide-new-post" class="modal-save cancel">Cancel</a>
+                    <input type="submit" class="modal-save" value="Publish post"
+                           style="border-width:0;line-height:20px;"/>
+                </form>
             </div>
         </div>
 

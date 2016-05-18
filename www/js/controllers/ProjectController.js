@@ -1,6 +1,6 @@
 var app = angular.module('DSIApp');
 
-app.controller('ProjectController', function ($scope, $http, $attrs, $timeout) {
+app.controller('ProjectController', function ($scope, $http, $attrs, $timeout, $sce) {
     var addTagSelect = $('#Add-tag');
     var addImpactTagASelect = $('#Add-impact-tag-a');
     var addImpactTagBSelect = $('#Add-impact-tag-b');
@@ -145,6 +145,7 @@ app.controller('ProjectController', function ($scope, $http, $attrs, $timeout) {
     $http.get(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json')
         .then(function (response) {
             $scope.project = response.data || {};
+            console.log($scope.project.posts);
             listCountries();
         });
 
@@ -316,13 +317,16 @@ app.controller('ProjectController', function ($scope, $http, $attrs, $timeout) {
     };
     $scope.addPost = function () {
         $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', {
-            addPost: $scope.newPost
-        }).then(function (result) {
-            if (result.data.response == 'ok')
-                $scope.posts = result.data.posts;
-            else
-                console.log(result.data);
-        });
+            addPost: tinymce.activeEditor.getContent()
+        }).then(function (response) {
+                if (response.data.result == 'ok') {
+                    $('.new-post-bg.bg-blur').hide();
+                    $scope.project.posts = response.data.posts;
+                } else {
+                    console.log(response.data);
+                }
+            }
+        );
     };
 
     var getItemIndexById = function (pool, id) {
@@ -331,6 +335,10 @@ app.controller('ProjectController', function ($scope, $http, $attrs, $timeout) {
                 return i;
         }
         return -1;
+    };
+
+    $scope.renderHtml = function (html_code) {
+        return $sce.trustAsHtml(html_code);
     };
 
     /*
