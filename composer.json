@@ -5,6 +5,7 @@
     "league/oauth2-github": "^0.2.1",
     "league/oauth1-client": "^1.6",
     "abeautifulsite/simpleimage": "^2.6",
-    "paragonie/random_compat": "^2.0"
+    "paragonie/random_compat": "^2.0",
+    "phpmailer/phpmailer": "~5.2"
   }
 }

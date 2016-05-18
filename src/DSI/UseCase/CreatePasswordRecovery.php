@@ -8,6 +8,7 @@ use DSI\NotEnoughData;
 use DSI\Repository\PasswordRecoveryRepository;
 use DSI\Repository\UserRepository;
 use DSI\Service\ErrorHandler;
+use DSI\Service\Mailer;
 
 class CreatePasswordRecovery
 {
@@ -51,6 +52,19 @@ class CreatePasswordRecovery
         $this->passwordRecoveryRepo->insert($passwordRecovery);
 
         $this->passwordRecovery = $passwordRecovery;
+
+        if ($this->data()->sendEmail) {
+            $message = "Email: " . $passwordRecovery->getUser()->getEmail() . PHP_EOL;
+            $message .= "Security Code: " . $passwordRecovery->getCode();
+            $email = new Mailer();
+            $email->From = 'noreply@digitalsocial.eu';
+            $email->FromName = 'No Reply';
+            $email->addAddress($passwordRecovery->getUser()->getEmail());
+            $email->Subject = 'Digital Social Innovation :: Password Recovery';
+            $email->Body = $message;
+            $email->AltBody = $message;
+            $email->send();
+        }
     }
 
     /**
@@ -88,4 +102,7 @@ class CreatePasswordRecovery_Data
 {
     /** @var String */
     public $email;
+
+    /** @var bool */
+    public $sendEmail = false;
 }

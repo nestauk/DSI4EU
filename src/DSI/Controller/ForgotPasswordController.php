@@ -22,6 +22,7 @@ class ForgotPasswordController
             if (isset($_POST['sendCode'])) {
                 $passwordRecovery = new CreatePasswordRecovery();
                 $passwordRecovery->data()->email = $_POST['email'] ?? '';
+                $passwordRecovery->data()->sendEmail = true;
                 $passwordRecovery->exec();
             } elseif (isset($_POST['verifyCode'])) {
                 $verifyPasswordRecovery = new VerifyPasswordRecovery();
