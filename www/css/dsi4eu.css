@@ -89,8 +89,9 @@ strong {
   margin-top: 22px;
   -webkit-transition: opacity 200ms ease;
   transition: opacity 200ms ease;
+  font-family: 'Open Sans', sans-serif;
   color: hsla(0, 0%, 100%, .6);
-  font-weight: 700;
+  font-weight: 400;
 }
 
 .nav:hover {
@@ -179,6 +180,7 @@ strong {
   background-color: #fff;
   -webkit-transition: all 200ms ease;
   transition: all 200ms ease;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .search-field.quicksearch:hover {
@@ -300,10 +302,11 @@ strong {
   bottom: 0px;
   z-index: 1;
   padding-bottom: 20px;
-  padding-left: 40px;
+  padding-left: 30px;
   opacity: 1;
+  font-family: 'Open Sans', sans-serif;
   color: #fff;
-  text-shadow: 0 1px 4px #000;
+  text-shadow: none;
 }
 
 .card-pin {
@@ -313,7 +316,7 @@ strong {
   z-index: 1;
   width: 15px;
   margin-bottom: 24px;
-  margin-left: 20px;
+  margin-left: 12px;
 }
 
 .card-project-summary {
@@ -405,6 +408,7 @@ strong {
   top: 0px;
   z-index: 1;
   margin-top: 0px;
+  margin-bottom: 10px;
   margin-left: 0px;
   padding-top: 10px;
   padding-right: 20px;
@@ -412,7 +416,7 @@ strong {
   font-family: 'Open Sans', sans-serif;
   color: #fff;
   font-size: 36px;
-  font-weight: 600;
+  font-weight: 400;
   text-shadow: 0 1px 4px #000;
 }
 
@@ -432,6 +436,7 @@ strong {
 }
 
 .info-card {
+  position: relative;
   overflow: visible;
   min-height: 190px;
   margin-bottom: 20px;
@@ -1807,6 +1812,7 @@ strong {
   left: 20px;
   top: -10px;
   display: inline-block;
+  font-family: 'Open Sans', sans-serif;
   color: #575757;
   font-weight: 700;
 }
@@ -1817,6 +1823,7 @@ strong {
   top: -29px;
   display: block;
   width: 338px;
+  font-family: 'Open Sans', sans-serif;
   color: #8f8f8f;
 }
 
@@ -1857,6 +1864,7 @@ strong {
   left: 11px;
   top: -6px;
   display: inline-block;
+  font-family: 'Open Sans', sans-serif;
   color: #575757;
   font-weight: 700;
 }
@@ -1867,6 +1875,7 @@ strong {
   top: -21px;
   display: inline-block;
   width: 140px;
+  font-family: 'Open Sans', sans-serif;
   color: #8f8f8f;
   font-size: 12px;
   line-height: 15px;
@@ -2282,7 +2291,7 @@ strong {
 
 .partner-link {
   width: 100%;
-  padding-top: 10px;
+  padding-top: 0px;
 }
 
 .no-of-projects {
@@ -2385,6 +2394,7 @@ strong {
   border-style: none;
   border-radius: 3px;
   background-color: #344c75;
+  font-family: 'Open Sans', sans-serif;
   color: #fc6868;
   text-align: center;
 }
@@ -2393,6 +2403,7 @@ strong {
   background-color: #dd3ea4;
   -webkit-transition: all 200ms ease;
   transition: all 200ms ease;
+  font-family: 'Open Sans', sans-serif;
   color: #fff;
   font-size: 18px;
 }
@@ -3011,6 +3022,167 @@ strong {
   box-shadow: 0 3px 10px 0 rgba(0, 0, 0, .45);
 }
 
+.profile-header-card {
+  position: relative;
+  overflow: hidden;
+  height: 200px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  background-image: -webkit-linear-gradient(270deg, #000, #fff);
+  background-image: linear-gradient(180deg, #000, #fff);
+}
+
+.profile-essential-info {
+  position: relative;
+  height: 160px;
+  margin-bottom: 20px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  background-color: #fff;
+}
+
+.profile-bg-img {
+  position: relative;
+  right: 37px;
+  bottom: 23px;
+  width: 635px;
+  height: 350px;
+  background-image: url('../images/Screen Shot 2016-05-18 at 11.07.48.png');
+  background-position: 50% 50%;
+  background-size: cover;
+}
+
+.profile-bg-img.el-blur {
+  right: 67px;
+  bottom: 26px;
+  width: 700px;
+  height: 400px;
+  background-image: -webkit-linear-gradient(270deg, rgba(222, 86, 108, .88), #b34659), url('../images/Screen Shot 2016-05-18 at 11.07.48.png');
+  background-image: linear-gradient(180deg, rgba(222, 86, 108, .88), #b34659), url('../images/Screen Shot 2016-05-18 at 11.07.48.png');
+  background-position: 0px 0px, 50% 0px;
+  background-size: auto, cover;
+}
+
+.profile-image-large {
+  position: relative;
+  left: auto;
+  top: -99px;
+  right: auto;
+  bottom: 0px;
+  display: block;
+  width: 200px;
+  height: 200px;
+  margin-right: auto;
+  margin-left: auto;
+  border: 2px solid #fff;
+  border-radius: 100px;
+  background-image: url('../images/Screen Shot 2016-05-18 at 11.07.48.png');
+  background-position: 50% 50%;
+  background-size: cover;
+  -webkit-transition: all 200ms ease;
+  transition: all 200ms ease;
+}
+
+.profile-image-large:hover {
+  box-shadow: 0 0 50px -13px #000;
+  -webkit-transform: scale(1.03);
+  -ms-transform: scale(1.03);
+  transform: scale(1.03);
+}
+
+.header-card-overlay {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  background-image: -webkit-linear-gradient(270deg, rgba(0, 0, 0, .3), rgba(0, 0, 0, .3));
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, .3), rgba(0, 0, 0, .3));
+}
+
+.profile-card-h1 {
+  position: relative;
+  left: 0px;
+  top: 0px;
+  margin-top: 10px;
+  margin-bottom: -3px;
+  margin-left: 20px;
+  font-family: 'Open Sans', sans-serif;
+  color: #fff;
+  font-size: 28px;
+  font-weight: 400;
+}
+
+.profile-card-job-title {
+  margin-left: 20px;
+  font-family: 'Open Sans', sans-serif;
+  color: hsla(0, 0%, 100%, .72);
+  font-weight: 400;
+}
+
+.edit-image {
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  width: 190px;
+  height: 190px;
+  border-radius: 95px;
+  background-image: -webkit-linear-gradient(270deg, rgba(24, 35, 63, .85), rgba(24, 35, 63, .85));
+  background-image: linear-gradient(180deg, rgba(24, 35, 63, .85), rgba(24, 35, 63, .85));
+}
+
+.edit-image-text {
+  position: relative;
+  left: 0px;
+  top: 77px;
+  right: 0px;
+  display: block;
+  width: 130px;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 5px 15px;
+  border-radius: 3px;
+  background-color: hsla(0, 0%, 100%, .28);
+  -webkit-transition: all 200ms ease;
+  transition: all 200ms ease;
+  font-family: 'Open Sans', sans-serif;
+  color: #fff;
+  text-align: center;
+  cursor: pointer;
+}
+
+.edit-image-text:hover {
+  background-color: hsla(0, 0%, 100%, .38);
+  box-shadow: 0 0 50px -9px #000;
+  -webkit-transform: scale(1.03);
+  -ms-transform: scale(1.03);
+  transform: scale(1.03);
+}
+
+.edit-white {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 9999;
+  cursor: pointer;
+}
+
+.edit-dark {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.profile-card-email {
+  position: absolute;
+  left: 20px;
+  bottom: 10px;
+  font-family: 'Open Sans', sans-serif;
+  color: #384155;
+  text-decoration: none;
+}
+
 html.w-mod-js *[data-ix="downbeforeup"] {
   opacity: 0;
   -webkit-transform: translate(0px, 50px);
@@ -3024,6 +3196,13 @@ html.w-mod-js *[data-ix="addpost"] {
 
 html.w-mod-js *[data-ix="postblockclosed"] {
   height: 55px;
+}
+
+html.w-mod-js *[data-ix="update-image-closed"] {
+  opacity: 0;
+  -webkit-transform: scale(0.8, 0.8);
+  -ms-transform: scale(0.8, 0.8);
+  transform: scale(0.8, 0.8);
 }
 
 @media (max-width: 991px) {
@@ -3173,6 +3352,17 @@ html.w-mod-js *[data-ix="postblockclosed"] {
     width: 95%;
     height: 90vh;
   }
+  .profile-bg-img.el-blur {
+    width: 850px;
+  }
+  .profile-image-large {
+    position: relative;
+    left: auto;
+    right: auto;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+  }
 }
 
 @media (max-width: 767px) {
@@ -3317,6 +3507,18 @@ html.w-mod-js *[data-ix="postblockclosed"] {
 
 @media (max-width: 479px) {
   .search-field.quicksearch {
+    display: none;
+  }
+  .card-city {
+    bottom: 107px;
+    display: block;
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 0px;
+    text-align: center;
+  }
+  .card-pin {
     display: none;
   }
   .modal-signup.bg-blur {
@@ -3476,6 +3678,42 @@ html.w-mod-js *[data-ix="postblockclosed"] {
   }
   .create-new-post {
     right: 6px;
+  }
+  .profile-header-card {
+    height: 250px;
+  }
+  .profile-card-h1 {
+    display: block;
+    width: 280px;
+    margin-top: 33px;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+  }
+  .profile-card-job-title {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+  }
+  .edit-image-text {
+    left: 0px;
+    top: 77px;
+    right: 0px;
+    display: block;
+    width: 125px;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+  }
+  .profile-card-email {
+    left: auto;
+    bottom: 20px;
+    display: block;
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
   }
 }
 
