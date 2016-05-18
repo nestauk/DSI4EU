@@ -72,15 +72,16 @@ class ProjectPostRepository
 
     public function getAll()
     {
-        $where = ["1"];
-        $posts = [];
-        $query = new SQL("SELECT 
-            id, projectID, userID, `time`, title, text
-          FROM `project-posts` WHERE " . implode(' AND ', $where) . "");
-        foreach ($query->fetch_all() AS $dbPost) {
-            $posts[] = $this->buildPostFromData($dbPost);
-        }
-        return $posts;
+        return $this->getPostsWhere([
+            "1"
+        ]);
+    }
+
+    public function getByProjectID(int $projectID)
+    {
+        return $this->getPostsWhere([
+            "`projectID` = '{$projectID}'"
+        ]);
     }
 
     public function clearAll()
@@ -105,5 +106,22 @@ class ProjectPostRepository
         }
 
         return $this->buildPostFromData($dbPost);
+    }
+
+    /**
+     * @param array $where
+     * @return ProjectPost[]
+     */
+    private function getPostsWhere($where)
+    {
+        $posts = [];
+        $query = new SQL("SELECT 
+            id, projectID, userID, `time`, title, text
+            FROM `project-posts` WHERE " . implode(' AND ', $where) . "
+            ORDER BY `id` DESC");
+        foreach ($query->fetch_all() AS $dbPost) {
+            $posts[] = $this->buildPostFromData($dbPost);
+        }
+        return $posts;
     }
 }

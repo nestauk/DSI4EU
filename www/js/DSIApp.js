@@ -1,6 +1,7 @@
 var app = angular.module('DSIApp', ['ngFileUpload']);
 
 app.controller('LoginController', function ($scope, $http, $timeout) {
+    $scope.forgotPassword = {};
     $scope.email = {value: ''};
     $scope.password = {value: ''};
     $scope.onSubmit = function () {
@@ -14,11 +15,11 @@ app.controller('LoginController', function ($scope, $http, $timeout) {
         };
 
         $http.post(SITE_RELATIVE_PATH + '/login.json', data).then(
-            function (result) {
+            function (response) {
                 $scope.loading = false;
-                if (result.data.response == 'error') {
-                    $scope.errors = result.data.errors;
-                } else if (result.data.response == 'ok') {
+                if (response.data.response == 'error') {
+                    $scope.errors = response.data.errors;
+                } else if (response.data.response == 'ok') {
                     $scope.loggedin = true;
                     $timeout(function () {
                         window.location.href = SITE_RELATIVE_PATH + "/";
@@ -30,6 +31,75 @@ app.controller('LoginController', function ($scope, $http, $timeout) {
                 alert(response);
             }
         )
+    };
+
+    $scope.forgotPasswordSubmit = function () {
+        $scope.forgotPassword.loading = true;
+        $scope.forgotPassword.errors = {};
+
+        $timeout(function () {
+            if (!$scope.forgotPassword.codeSent) {
+                sendSecurityCode_useCase();
+                return;
+            }
+            if (!$scope.forgotPassword.codeVerified) {
+                verifySecurityCode_useCase();
+                return;
+            }
+            completePasswordRecovery_useCase();
+        }, 500);
+    };
+
+    function sendSecurityCode_useCase() {
+        $http.post(SITE_RELATIVE_PATH + '/forgotPassword.json', {
+            sendCode: true,
+            email: $scope.email.value
+        }).then(
+            function (response) {
+                $scope.forgotPassword.loading = false;
+                if (response.data.result == 'error') {
+                    $scope.forgotPassword.errors = response.data.errors;
+                } else if (response.data.result == 'ok') {
+                    $scope.forgotPassword.codeSent = true;
+                }
+            }
+        );
+    }
+
+    function verifySecurityCode_useCase() {
+        $http.post(SITE_RELATIVE_PATH + '/forgotPassword.json', {
+            verifyCode: true,
+            email: $scope.email.value,
+            code: $scope.forgotPassword.code
+        }).then(
+            function (response) {
+                $scope.forgotPassword.loading = false;
+                if (response.data.result == 'error') {
+                    $scope.forgotPassword.errors = response.data.errors;
+                } else if (response.data.result == 'ok') {
+                    $scope.forgotPassword.codeVerified = true;
+                }
+            }
+        );
+    }
+
+    function completePasswordRecovery_useCase() {
+        $http.post(SITE_RELATIVE_PATH + '/forgotPassword.json', {
+            completeForgotPassword: true,
+            email: $scope.email.value,
+            code: $scope.forgotPassword.code,
+            password: $scope.forgotPassword.password,
+            retypePassword: $scope.forgotPassword.retypePassword
+        }).then(
+            function (response) {
+                $scope.forgotPassword.loading = false;
+                if (response.data.result == 'error') {
+                    $scope.forgotPassword.errors = response.data.errors;
+                } else if (response.data.result == 'ok') {
+                    $scope.forgotPassword.complete = true;
+                }
+            }
+        );
     }
 });
 

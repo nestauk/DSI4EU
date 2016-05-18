@@ -105,7 +105,7 @@
         <div data-ix="downbeforeup" class="signup-form">
             <div class="modal-header"></div>
             <div data-ix="destroysignup" class="close modal-close">+</div>
-			<img width="160" src="<?php echo SITE_RELATIVE_PATH ?>/images/logo-white.svg" class="modal-brand">
+            <img width="160" src="<?php echo SITE_RELATIVE_PATH ?>/images/logo-white.svg" class="modal-brand">
             <div data-duration-in="300" data-duration-out="100" data-easing="ease-in-out" class="w-tabs">
                 <div class="w-tab-menu tabs-menu">
                     <a data-w-tab="Tab 1" class="w-tab-link w--current w-inline-block tab">
@@ -118,69 +118,125 @@
                 <div class="w-tab-content tabs-content">
                     <div data-w-tab="Tab 1" class="w-tab-pane w--tab-active" ng-controller="LoginController">
                         <div class="w-form login-form">
-                            <form id="email-form" name="email-form" data-name="Email Form" ng-submit="onSubmit()">
-                                <input id="email-4" type="email" placeholder="Enter your email address" name="email-4"
-                                       data-name="Email 4" autofocus="autofocus"
-                                       class="w-input login-field"
-                                       ng-model="email.value"
-                                       ng-class="{error: errors.email}">
-                                <div style="color:red" ng-show="errors.email" ng-bind="errors.email"></div>
-                                <input id="Password-4" type="password" placeholder="Password" name="Password-4"
-                                       data-name="Password 4" class="w-input login-field"
-                                       ng-model="password.value"
-                                       ng-class="{error: errors.password}">
-                                <div style="color:red" ng-show="errors.password" ng-bind="errors.password"></div>
+                            <div ng-hide="forgotPassword.show">
+                                <form id="email-form" name="email-form" data-name="Email Form" ng-submit="onSubmit()">
+                                    <input id="email-4" type="email" placeholder="Enter your email address"
+                                           name="email-4"
+                                           data-name="Email 4" autofocus="autofocus"
+                                           class="w-input login-field"
+                                           ng-model="email.value"
+                                           ng-class="{error: errors.email}">
+                                    <div style="color:red" ng-show="errors.email" ng-bind="errors.email"></div>
+                                    <input id="Password-4" type="password" placeholder="Password" name="Password-4"
+                                           data-name="Password 4" class="w-input login-field"
+                                           ng-model="password.value"
+                                           ng-class="{error: errors.password}">
+                                    <div style="color:red" ng-show="errors.password" ng-bind="errors.password"></div>
 
 
-                                <div ng-hide="loggedin">
-                                    <input ng-hide="loading" type="submit" value="Login" data-wait="Please wait..."
-                                           class="w-button login-button">
-                                    <button ng-show="loading" type="button" class="w-button login-button register">
-                                        Loading...
+                                    <div ng-hide="loggedin">
+                                        <input ng-hide="loading" type="submit" value="Login" data-wait="Please wait..."
+                                               class="w-button login-button">
+                                        <button ng-show="loading" type="button" class="w-button login-button register">
+                                            Loading...
+                                        </button>
+                                        <a href="#" class="forgotten-password" ng-click="forgotPassword.show = true">Forgotten
+                                            password?</a>
+                                    </div>
+                                    <button ng-show="loggedin" type="button" class="w-button login-button register">
+                                        Welcome back to Digital Social!
                                     </button>
-                                    <a href="#" class="forgotten-password">Forgotten password?</a>
-                                </div>
-                                <button ng-show="loggedin" type="button" class="w-button login-button register">
-                                    Welcome back to Digital Social!
-                                </button>
 
-                                <div class="w-row social-badges">
-                                    <div class="w-col w-col-3">
-                                        <a href="<?php echo SITE_RELATIVE_PATH ?>/github-login"
-                                           class="w-inline-block social-login">
-                                            <img width="100%" height="100%"
-                                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/social-1_square-github.svg"
-                                                 class="social-badge">
-                                        </a>
+                                    <div class="w-row social-badges">
+                                        <div class="w-col w-col-3">
+                                            <a href="<?php echo SITE_RELATIVE_PATH ?>/github-login"
+                                               class="w-inline-block social-login">
+                                                <img width="100%" height="100%"
+                                                     src="<?php echo SITE_RELATIVE_PATH ?>/images/social-1_square-github.svg"
+                                                     class="social-badge">
+                                            </a>
+                                        </div>
+                                        <div class="w-col w-col-3">
+                                            <a href="<?php echo SITE_RELATIVE_PATH ?>/facebook-login"
+                                               class="w-inline-block social-login">
+                                                <img width="100%" height="100%"
+                                                     src="<?php echo SITE_RELATIVE_PATH ?>/images/social-1_square-facebook.svg"
+                                                     class="social-badge">
+                                            </a>
+                                        </div>
+                                        <div class="w-col w-col-3">
+                                            <a href="<?php echo SITE_RELATIVE_PATH ?>/google-login"
+                                               class="w-inline-block social-login">
+                                                <img width="100%" height="100%"
+                                                     src="<?php echo SITE_RELATIVE_PATH ?>/images/social-1_square-google-plus.svg"
+                                                     class="social-badge">
+                                            </a>
+                                        </div>
+                                        <div class="w-col w-col-3">
+                                            <a href="<?php echo SITE_RELATIVE_PATH ?>/twitter-login"
+                                               class="w-inline-block social-login">
+                                                <img width="100%" height="100%"
+                                                     src="<?php echo SITE_RELATIVE_PATH ?>/images/social-1_square-twitter.svg"
+                                                     class="social-badge">
+                                            </a>
+                                        </div>
                                     </div>
-                                    <div class="w-col w-col-3">
-                                        <a href="<?php echo SITE_RELATIVE_PATH ?>/facebook-login"
-                                           class="w-inline-block social-login">
-                                            <img width="100%" height="100%"
-                                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/social-1_square-facebook.svg"
-                                                 class="social-badge">
-                                        </a>
+                                </form>
+                            </div>
+                            <div ng-show="forgotPassword.show">
+                                <form ng-hide="forgotPassword.complete" id="email-form" name="email-form"
+                                      data-name="Email Form"
+                                      ng-submit="forgotPasswordSubmit()">
+                                    <input type="email" placeholder="Enter your email address"
+                                           class="w-input login-field"
+                                           ng-model="email.value"
+                                           ng-class="{error: forgotPassword.errors.email}">
+                                    <div style="color:red" ng-show="forgotPassword.errors.email"
+                                         ng-bind="forgotPassword.errors.email"></div>
+                                    <div ng-show="forgotPassword.codeSent">
+                                        <input type="text" placeholder="Security code"
+                                               class="w-input login-field"
+                                               ng-model="forgotPassword.code"
+                                               ng-class="{error: forgotPassword.errors.code}">
+                                        <div style="color:red" ng-show="forgotPassword.errors.code"
+                                             ng-bind="forgotPassword.errors.code"></div>
+
+                                        <div ng-show="forgotPassword.codeVerified">
+                                            <input type="password" placeholder="New Password"
+                                                   class="w-input login-field"
+                                                   ng-model="forgotPassword.password"
+                                                   ng-class="{error: forgotPassword.errors.password}">
+                                            <div style="color:red" ng-show="forgotPassword.errors.password"
+                                                 ng-bind="forgotPassword.errors.password"></div>
+
+                                            <input type="password" placeholder="Retype Password"
+                                                   class="w-input login-field"
+                                                   ng-model="forgotPassword.retypePassword"
+                                                   ng-class="{error: forgotPassword.errors.retypePassword}">
+                                            <div style="color:red" ng-show="forgotPassword.errors.retypePassword"
+                                                 ng-bind="forgotPassword.errors.retypePassword"></div>
+                                        </div>
+
                                     </div>
-                                    <div class="w-col w-col-3">
-                                        <a href="<?php echo SITE_RELATIVE_PATH ?>/google-login"
-                                           class="w-inline-block social-login">
-                                            <img width="100%" height="100%"
-                                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/social-1_square-google-plus.svg"
-                                                 class="social-badge">
-                                        </a>
-                                    </div>
-                                    <div class="w-col w-col-3">
-                                        <a href="<?php echo SITE_RELATIVE_PATH ?>/twitter-login"
-                                           class="w-inline-block social-login">
-                                            <img width="100%" height="100%"
-                                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/social-1_square-twitter.svg"
-                                                 class="social-badge">
-                                        </a>
-                                    </div>
+
+                                    <input type="submit" class="w-button login-button"
+                                           ng-disabled="forgotPassword.loading"
+                                           ng-value="forgotPassword.loading ? 'Loading...' : 'Reset my password'">
+
+                                    <a href="#" class="forgotten-password"
+                                       ng-click="forgotPassword = {}">
+                                        Back to login
+                                    </a>
+                                </form>
+                                <div ng-show="forgotPassword.complete"
+                                     style="font-size:20px;line-height:50px;padding-top:70px">
+                                    Your password has changed.<br/>
+                                    <a href="#"
+                                       ng-click="forgotPassword = {}">
+                                        Click here
+                                    </a>
+                                    to login using your new password.
                                 </div>
-                            </form>
-                            <div class="w-form-done">
-                                <p>Thank you! Your submission has been received!</p>
                             </div>
                         </div>
                     </div>
@@ -206,16 +262,9 @@
                                     </button>
                                 </div>
                                 <button ng-show="registered" type="button" class="w-button login-button register">
-                                    Welcome to
-                                    Digital Social!
+                                    Welcome to Digital Social!
                                 </button>
                             </form>
-                            <div class="w-form-done">
-                                <p>Thank you! Your submission has been received!</p>
-                            </div>
-                            <div class="w-form-fail">
-                                <p>Oops! Something went wrong while submitting the form</p>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -229,7 +278,7 @@
         <div data-ix="downbeforeup" class="signup-form">
             <div class="modal-header"></div>
             <div data-ix="destroysignup" class="close modal-close">+</div>
-			<img width="160" src="<?php echo SITE_RELATIVE_PATH ?>/images/logo-white.svg" class="modal-brand">
+            <img width="160" src="<?php echo SITE_RELATIVE_PATH ?>/images/logo-white.svg" class="modal-brand">
             <div data-duration-in="300" data-duration-out="100" data-easing="ease-in-out" class="w-tabs">
                 <div class="w-tab-menu tabs-menu">
                     <a data-w-tab="Tab 1" class="w-tab-link w--current w-inline-block tab">

@@ -62,10 +62,10 @@ form.add-skill-section, form.add-language-section {
 
 .modal-createProject.bg-blur {
     position: fixed;
-    left: 0px;
-    top: 0px;
-    right: 0px;
-    bottom: 0px;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
     display: none;
     height: 100vh;
     background-color: rgba(0, 0, 0, .4);
@@ -86,4 +86,16 @@ input.ng-invalid {
 .delete {
     top: 0;
     right: 0;
+}
+
+.add-post-modal {
+    background-color: #F0F0F0;
+}
+
+.current-status p{
+    color:inherit;
+}
+
+.add-post-modal{
+    width:585px;
 }

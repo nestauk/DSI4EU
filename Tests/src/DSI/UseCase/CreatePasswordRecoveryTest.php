@@ -7,7 +7,7 @@ class CreatePasswordRecoveryTest extends PHPUnit_Framework_TestCase
     /** @var \DSI\UseCase\CreatePasswordRecovery */
     private $createPasswordRecoveryCmd;
 
-    /** @var \DSI\Repository\PasswordRecoveryRepository*/
+    /** @var \DSI\Repository\PasswordRecoveryRepository */
     private $passwordRecoveryRepo;
 
     /** @var \DSI\Repository\UserRepository */
@@ -23,6 +23,7 @@ class CreatePasswordRecoveryTest extends PHPUnit_Framework_TestCase
         $this->userRepo = new \DSI\Repository\UserRepository();
 
         $this->user = new \DSI\Entity\User();
+        $this->user->setEmail('test@example.org');
         $this->userRepo->insert($this->user);
     }
 
@@ -35,12 +36,12 @@ class CreatePasswordRecoveryTest extends PHPUnit_Framework_TestCase
     /** @test */
     public function successfulCreation()
     {
-        $this->createPasswordRecoveryCmd->data()->user = $this->user;
+        $this->createPasswordRecoveryCmd->data()->email = $this->user->getEmail();
         $this->createPasswordRecoveryCmd->exec();
 
         $this->assertCount(1, $this->passwordRecoveryRepo->getAll());
 
-        $this->createPasswordRecoveryCmd->data()->user = $this->user;
+        $this->createPasswordRecoveryCmd->data()->email = $this->user->getEmail();
         $this->createPasswordRecoveryCmd->exec();
 
         $this->assertCount(2, $this->passwordRecoveryRepo->getAll());
@@ -49,11 +50,25 @@ class CreatePasswordRecoveryTest extends PHPUnit_Framework_TestCase
     /** @test */
     public function successfulCreation_createdData()
     {
-        $this->createPasswordRecoveryCmd->data()->user = $this->user;
+        $this->createPasswordRecoveryCmd->data()->email = $this->user->getEmail();
         $this->createPasswordRecoveryCmd->exec();
         $passwordRecovery = $this->createPasswordRecoveryCmd->getPasswordRecovery();
 
         $this->assertRegExp('[^\d{4}\-\d{2}\-\d{2} \d{2}:\d{2}:\d{2}$]', $passwordRecovery->getExpires());
         $this->assertNotEquals('', $passwordRecovery->getCode());
+    }
+
+    /** @test */
+    public function cannotRecoverPasswordForNonexistentEmail()
+    {
+        $e = null;
+        $this->createPasswordRecoveryCmd->data()->email = $this->user->getEmail() . '.uk';
+        try {
+            $this->createPasswordRecoveryCmd->exec();
+        } catch (\DSI\Service\ErrorHandler $e) {
+        }
+
+        $this->assertNotNull($e);
+        $this->assertNotEmpty($e->getTaggedError('email'));
     }
 }

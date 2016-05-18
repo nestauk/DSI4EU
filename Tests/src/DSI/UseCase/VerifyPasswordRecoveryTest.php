@@ -27,6 +27,7 @@ class VerifyPasswordRecoveryTest extends PHPUnit_Framework_TestCase
         $this->userRepo = new \DSI\Repository\UserRepository();
 
         $this->user = new \DSI\Entity\User();
+        $this->user->setEmail('test@example.org');
         $this->userRepo->insert($this->user);
     }
 
@@ -39,27 +40,27 @@ class VerifyPasswordRecoveryTest extends PHPUnit_Framework_TestCase
     /** @test */
     public function canVerifyGenuineRequest()
     {
-        $this->createPasswordRecoveryCmd->data()->user = $this->user;
+        $this->createPasswordRecoveryCmd->data()->email = $this->user->getEmail();
         $this->createPasswordRecoveryCmd->exec();
         $passwordRecovery = $this->createPasswordRecoveryCmd->getPasswordRecovery();
 
-        $this->verifyPasswordRecoveryCmd->data()->user = $this->user;
+        $this->verifyPasswordRecoveryCmd->data()->email = $this->user->getEmail();
         $this->verifyPasswordRecoveryCmd->data()->code = $passwordRecovery->getCode();
         $this->verifyPasswordRecoveryCmd->exec();
 
         $samePasswordRecovery = $this->passwordRecoveryRepo->getById($passwordRecovery->getId());
-        $this->assertTrue($samePasswordRecovery->isUsed());
+        $this->assertFalse($samePasswordRecovery->isUsed());
     }
 
     /** @test */
     public function doesNotAcceptInvalidCode()
     {
         $e = null;
-        $this->createPasswordRecoveryCmd->data()->user = $this->user;
+        $this->createPasswordRecoveryCmd->data()->email = $this->user->getEmail();
         $this->createPasswordRecoveryCmd->exec();
         $passwordRecovery = $this->createPasswordRecoveryCmd->getPasswordRecovery();
 
-        $this->verifyPasswordRecoveryCmd->data()->user = $this->user;
+        $this->verifyPasswordRecoveryCmd->data()->email = $this->user->getEmail();
         $this->verifyPasswordRecoveryCmd->data()->code = $passwordRecovery->getCode() . '1';
         try {
             $this->verifyPasswordRecoveryCmd->exec();

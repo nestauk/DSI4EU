@@ -6,6 +6,7 @@ use DSI\Entity\PasswordRecovery;
 use DSI\Entity\User;
 use DSI\NotEnoughData;
 use DSI\Repository\PasswordRecoveryRepository;
+use DSI\Repository\UserRepository;
 use DSI\Service\ErrorHandler;
 
 class CreatePasswordRecovery
@@ -32,17 +33,21 @@ class CreatePasswordRecovery
         $this->errorHandler = new ErrorHandler();
         $this->passwordRecoveryRepo = new PasswordRecoveryRepository();
 
-        if (!isset($this->data()->user))
-            throw new NotEnoughData('user');
+        if (!isset($this->data()->email))
+            throw new NotEnoughData('email');
 
-        if ($this->data()->user->getId() <= 0) {
-            $this->errorHandler->addTaggedError('user', 'Invalid user ID');
+        $userRepository = new UserRepository();
+
+        if (!$userRepository->emailAddressExists($this->data()->email)) {
+            $this->errorHandler->addTaggedError('email', 'This email address is not registered');
             throw $this->errorHandler;
         }
 
+        $user = $userRepository->getByEmail($this->data()->email);
+
         $passwordRecovery = new PasswordRecovery();
         $passwordRecovery->setCode($this->generateRandomCode());
-        $passwordRecovery->setUser($this->data()->user);
+        $passwordRecovery->setUser($user);
         $this->passwordRecoveryRepo->insert($passwordRecovery);
 
         $this->passwordRecovery = $passwordRecovery;
@@ -81,6 +86,6 @@ class CreatePasswordRecovery
 
 class CreatePasswordRecovery_Data
 {
-    /** @var User */
-    public $user;
+    /** @var String */
+    public $email;
 }

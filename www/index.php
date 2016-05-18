@@ -22,6 +22,9 @@ class Router
         } elseif ($this->pageURL === '/login.json') {
             $this->loginJsonPage();
 
+        } elseif ($this->pageURL === '/forgotPassword.json') {
+            $this->forgotPasswordJsonPage();
+
         } elseif ($this->pageURL === '/facebook-login') {
             $this->facebookLoginPage();
 
@@ -136,6 +139,13 @@ class Router
     private function loginJsonPage()
     {
         $command = new \DSI\Controller\LoginController();
+        $command->responseFormat = 'json';
+        $command->exec();
+    }
+
+    private function forgotPasswordJsonPage()
+    {
+        $command = new \DSI\Controller\ForgotPasswordController();
         $command->responseFormat = 'json';
         $command->exec();
     }

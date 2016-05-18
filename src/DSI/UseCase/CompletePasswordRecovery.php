@@ -10,7 +10,7 @@ use DSI\Repository\PasswordRecoveryRepository;
 use DSI\Repository\UserRepository;
 use DSI\Service\ErrorHandler;
 
-class VerifyPasswordRecovery
+class CompletePasswordRecovery
 {
     /** @var ErrorHandler */
     private $errorHandler;
@@ -21,12 +21,12 @@ class VerifyPasswordRecovery
     /** @var PasswordRecovery */
     private $passwordRecovery;
 
-    /** @var VerifyPasswordRecovery_Data */
+    /** @var CompletePasswordRecovery_Data */
     private $data;
 
     public function __construct()
     {
-        $this->data = new VerifyPasswordRecovery_Data();
+        $this->data = new CompletePasswordRecovery_Data();
     }
 
     public function exec()
@@ -38,18 +38,25 @@ class VerifyPasswordRecovery
         $this->checkValidData();
         $this->checkIfEmailIsRegistered();
 
-        $user = (new UserRepository())->getByEmail($this->data()->email);
+        $verifyPasswordRecovery = new VerifyPasswordRecovery();
+        $verifyPasswordRecovery->data()->email = $this->data()->email;
+        $verifyPasswordRecovery->data()->code = $this->data()->code;
+        $verifyPasswordRecovery->exec();
 
-        $this->passwordRecovery = $this->checkIfCodeIsValid($user);
-        $this->checkIfCodeHasExpired($this->passwordRecovery);
-        $this->checkIfCodeHasBeenUsed($this->passwordRecovery);
+        $passwordRecovery = $verifyPasswordRecovery->getPasswordRecovery();
 
-        // $passwordRecovery->setIsUsed(true);
-        // $this->passwordRecoveryRepo->save($passwordRecovery);
+        $updateUserPassword = new UpdateUserPassword();
+        $updateUserPassword->data()->userID = $passwordRecovery->getUser()->getId();
+        $updateUserPassword->data()->password = $this->data()->password;
+        $updateUserPassword->data()->retypePassword = $this->data()->retypePassword;
+        $updateUserPassword->exec();
+
+        $passwordRecovery->setIsUsed(true);
+        $this->passwordRecoveryRepo->save($passwordRecovery);
     }
 
     /**
-     * @return VerifyPasswordRecovery_Data
+     * @return CompletePasswordRecovery_Data
      */
     public function data()
     {
@@ -62,6 +69,10 @@ class VerifyPasswordRecovery
             throw new NotEnoughData('email');
         if (!isset($this->data()->code))
             throw new NotEnoughData('code');
+        if (!isset($this->data()->password))
+            throw new NotEnoughData('password');
+        if (!isset($this->data()->retypePassword))
+            throw new NotEnoughData('retypePassword');
     }
 
     private function checkValidData()
@@ -71,6 +82,12 @@ class VerifyPasswordRecovery
 
         if (strlen($this->data()->code) == 0)
             $this->errorHandler->addTaggedError('code', 'Please type the security code');
+
+        if (strlen($this->data()->password) < 8)
+            $this->errorHandler->addTaggedError('password', 'Password must have at least 8 characters');
+
+        if ($this->data()->password != $this->data()->retypePassword)
+            $this->errorHandler->addTaggedError('retypePassword', 'Passwords do not match');
 
         $this->errorHandler->throwIfNotEmpty();
     }
@@ -88,7 +105,7 @@ class VerifyPasswordRecovery
      * @param string $code
      * @return PasswordRecovery|null
      */
-    private function retrievePasswordRecovery(User $user, $code)
+    private function getPasswordRecovery(User $user, $code)
     {
         try {
             return $this->passwordRecoveryRepo->getByUserAndCode($user->getId(), $code);
@@ -99,7 +116,7 @@ class VerifyPasswordRecovery
 
     private function checkIfCodeIsValid(User $user)
     {
-        $passwordRecovery = $this->retrievePasswordRecovery($user, $this->data()->code);
+        $passwordRecovery = $this->getPasswordRecovery($user, $this->data()->code);
 
         if (!$passwordRecovery) {
             $this->errorHandler->addTaggedError('code', 'The code is not valid');
@@ -132,19 +149,13 @@ class VerifyPasswordRecovery
             $this->errorHandler->throwIfNotEmpty();
         }
     }
-
-    /**
-     * @return PasswordRecovery
-     */
-    public function getPasswordRecovery()
-    {
-        return $this->passwordRecovery;
-    }
 }
 
-class VerifyPasswordRecovery_Data
+class CompletePasswordRecovery_Data
 {
     /** @var string */
     public $email,
-        $code;
+        $code,
+        $password,
+        $retypePassword;
 }

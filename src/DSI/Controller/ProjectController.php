@@ -5,6 +5,7 @@ namespace DSI\Controller;
 use DSI\Entity\OrganisationProject;
 use DSI\Entity\Project;
 use DSI\Entity\ProjectMember;
+use DSI\Entity\ProjectPost;
 use DSI\Entity\User;
 use DSI\Repository\OrganisationProjectRepository;
 use DSI\Repository\ProjectImpactTagARepository;
@@ -12,6 +13,7 @@ use DSI\Repository\ProjectImpactTagBRepository;
 use DSI\Repository\ProjectImpactTagCRepository;
 use DSI\Repository\ProjectMemberRepository;
 use DSI\Repository\ProjectMemberRequestRepository;
+use DSI\Repository\ProjectPostRepository;
 use DSI\Repository\ProjectRepository;
 use DSI\Repository\ProjectTagRepository;
 use DSI\Repository\UserRepository;
@@ -247,7 +249,8 @@ class ProjectController
                     $addPostCmd->data()->text = $_POST['addPost'];
                     $addPostCmd->exec();
                     echo json_encode([
-                        'result' => 'ok'
+                        'result' => 'ok',
+                        'posts' => $this->getPostsForProject($project),
                     ]);
                     die();
                 }
@@ -289,6 +292,7 @@ class ProjectController
                 'countryID' => $project->getCountryID(),
                 'countryRegionID' => $project->getCountryRegionID(),
                 'countryRegion' => $project->getCountryRegion() ? $project->getCountryRegion()->getName() : '',
+                'posts' => $this->getPostsForProject($project),
             ]);
             die();
         } else {
@@ -348,6 +352,27 @@ class ProjectController
                                 'profilePic' => $user->getProfilePicOrDefault(),
                             ];
                     }, $projectMembers)));
+    }
+
+    /**
+     * @param $project
+     * @return mixed
+     */
+    private function getPostsForProject($project)
+    {
+        return array_map(function (ProjectPost $post) {
+            $user = $post->getUser();
+            return [
+                'id' => $post->getId(),
+                'time' => $post->getTime(),
+                'text' => $post->getText(),
+                'user' => [
+                    'id' => $user->getId(),
+                    'name' => $user->getFirstName() . ' ' . $user->getLastName(),
+                    'profilePic' => $user->getProfilePicOrDefault(),
+                ],
+            ];
+        }, (new ProjectPostRepository())->getByProjectID($project->getId()));
     }
 }
 
