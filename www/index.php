@@ -103,6 +103,12 @@ class Router
         } elseif ($this->pageURL === '/organisations.json') {
             $this->organisationsListJsonPage();
 
+        } elseif ($this->pageURL === '/feedback') {
+            $this->feedbackPage();
+
+        } elseif ($this->pageURL === '/feedback.json') {
+            $this->feedbackJsonPage();
+
         } elseif (preg_match('<^/countryRegions/([0-9]+)\.json$>', $this->pageURL, $matches)) {
             $this->countryRegionsListJsonPage($matches);
 
@@ -363,6 +369,19 @@ class Router
     {
         $command = new \DSI\Controller\ListCountryRegionsController();
         $command->data()->countryID = $matches[1];
+        $command->exec();
+    }
+
+    private function feedbackPage()
+    {
+        $command = new \DSI\Controller\FeedbackController();
+        $command->exec();
+    }
+
+    private function feedbackJsonPage()
+    {
+        $command = new \DSI\Controller\FeedbackController();
+        $command->format = 'json';
         $command->exec();
     }
 }
