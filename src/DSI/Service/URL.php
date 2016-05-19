@@ -46,4 +46,9 @@ class URL
         else
             return SITE_RELATIVE_PATH . '/org/' . $orgID;
     }
+
+    public static function feedback()
+    {
+        return SITE_RELATIVE_PATH . '/feedback';
+    }
 }

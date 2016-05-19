@@ -2,8 +2,8 @@
 <div class="w-section footer">
     <div class="container-wide">
         <div class="w-row footer-columns">
-            <div class="w-col w-col-6">
-                <img src="<?php echo SITE_RELATIVE_PATH ?>/images/logo-white.svg" class="footer-brand">
+            <div class="w-col w-col-4">
+                <img src="<?php echo SITE_RELATIVE_PATH?>/images/logo-white.svg" class="footer-brand">
             </div>
             <div class="w-col w-col-2">
                 <h3 class="footer-h3">People</h3>
@@ -55,6 +55,10 @@
                         <a href="#" class="footer-link">View partner organisations</a>
                     </li>
                 </ul>
+            </div>
+            <div class="w-col w-col-2">
+                <h3 class="footer-h3">Development</h3>
+                <a href="<?php echo \DSI\Service\URL::feedback()?>" class="footer-link">Feedback</a>
             </div>
         </div>
     </div>
