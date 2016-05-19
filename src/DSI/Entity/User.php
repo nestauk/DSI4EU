@@ -14,6 +14,7 @@ class User
         $hashPassword,
         $bio,
         $location,
+        $jobTitle,
         $facebookUID,
         $googleUID,
         $gitHubUID,
@@ -124,6 +125,11 @@ class User
     public function setLastName(string $lastName)
     {
         $this->lastName = $lastName;
+    }
+
+    public function getFullName()
+    {
+        return $this->getFirstName() . ' ' . $this->getLastName();
     }
 
     /**
@@ -245,7 +251,7 @@ class User
      */
     public function getProfilePicOrDefault(): string
     {
-        return (string) ($this->profilePic ?? '0.svg');
+        return (string)($this->profilePic ?? '0.svg');
     }
 
     /**
@@ -254,5 +260,21 @@ class User
     public function setProfilePic(string $profilePic)
     {
         $this->profilePic = $profilePic;
+    }
+
+    /**
+     * @return string
+     */
+    public function getJobTitle()
+    {
+        return $this->jobTitle;
+    }
+
+    /**
+     * @param string $jobTitle
+     */
+    public function setJobTitle($jobTitle)
+    {
+        $this->jobTitle = $jobTitle;
     }
 }

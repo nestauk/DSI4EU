@@ -1,0 +1,1 @@
+ALTER TABLE `users` ADD `jobTitle` CHAR(255) NOT NULL AFTER `location`;

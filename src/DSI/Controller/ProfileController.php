@@ -19,6 +19,7 @@ use DSI\UseCase\AddSkillToUser;
 use DSI\UseCase\RemoveLanguageFromUser;
 use DSI\UseCase\RemoveLinkFromUser;
 use DSI\UseCase\RemoveSkillFromUser;
+use DSI\UseCase\UpdateUserBasicDetails;
 use DSI\UseCase\UpdateUserBio;
 
 class ProfileController
@@ -47,69 +48,67 @@ class ProfileController
             $organisationMemberRepo = new OrganisationMemberRepository();
 
             if ($isOwner) {
-                if (isset($_POST['addSkill'])) {
-                    try {
+                try {
+                    if (isset($_POST['addSkill'])) {
                         $addSkillToUser = new AddSkillToUser();
                         $addSkillToUser->data()->userID = $user->getId();
                         $addSkillToUser->data()->skill = $_POST['addSkill'];
                         $addSkillToUser->exec();
-                    } catch (ErrorHandler $e) {
-                    }
-                    die();
-                } elseif (isset($_POST['removeSkill'])) {
-                    try {
+                        return;
+                    } elseif (isset($_POST['removeSkill'])) {
                         $removeSkillFromUser = new RemoveSkillFromUser();
                         $removeSkillFromUser->data()->userID = $user->getId();
                         $removeSkillFromUser->data()->skill = $_POST['removeSkill'];
                         $removeSkillFromUser->exec();
-                    } catch (ErrorHandler $e) {
-                    }
-                    die();
-                } elseif (isset($_POST['addLanguage'])) {
-                    try {
+                        return;
+                    } elseif (isset($_POST['addLanguage'])) {
                         $addSkillToUser = new AddLanguageToUser();
                         $addSkillToUser->data()->userID = $user->getId();
                         $addSkillToUser->data()->language = $_POST['addLanguage'];
                         $addSkillToUser->exec();
-                    } catch (ErrorHandler $e) {
-                    }
-                    die();
-                } elseif (isset($_POST['removeLanguage'])) {
-                    try {
+                        return;
+                    } elseif (isset($_POST['removeLanguage'])) {
                         $removeLanguageFromUser = new RemoveLanguageFromUser();
                         $removeLanguageFromUser->data()->userID = $user->getId();
                         $removeLanguageFromUser->data()->language = $_POST['removeLanguage'];
                         $removeLanguageFromUser->exec();
-                    } catch (ErrorHandler $e) {
-                    }
-                    die();
-                } elseif (isset($_POST['updateBio'])) {
-                    try {
+                        return;
+                    } elseif (isset($_POST['updateBio'])) {
                         $updateUserBio = new UpdateUserBio();
                         $updateUserBio->data()->userID = $user->getId();
-                        $updateUserBio->data()->bio = $_POST['bio'];
+                        $updateUserBio->data()->bio = $_POST['bio'] ?? '';
                         $updateUserBio->exec();
-                    } catch (ErrorHandler $e) {
-                    }
-                    die();
-                } elseif (isset($_POST['addLink'])) {
-                    try {
+                        echo json_encode(['code' => 'ok']);
+                        return;
+                    } elseif (isset($_POST['addLink'])) {
                         $addLinkToUser = new AddLinkToUser();
                         $addLinkToUser->data()->userID = $user->getId();
                         $addLinkToUser->data()->link = $_POST['addLink'];
                         $addLinkToUser->exec();
-                    } catch (ErrorHandler $e) {
-                    }
-                    die();
-                } elseif (isset($_POST['removeLink'])) {
-                    try {
+                        return;
+                    } elseif (isset($_POST['removeLink'])) {
                         $removeLinkFromUser = new RemoveLinkFromUser();
                         $removeLinkFromUser->data()->userID = $user->getId();
                         $removeLinkFromUser->data()->link = $_POST['removeLink'];
                         $removeLinkFromUser->exec();
-                    } catch (ErrorHandler $e) {
+                        return;
+                    } elseif (isset($_POST['updateBasicDetails'])) {
+                        $updateUserBasicDetails = new UpdateUserBasicDetails();
+                        $updateUserBasicDetails->data()->userID = $user->getId();
+                        $updateUserBasicDetails->data()->firstName = $_POST['firstName'] ?? '';
+                        $updateUserBasicDetails->data()->lastName = $_POST['lastName'] ?? '';
+                        $updateUserBasicDetails->data()->location = $_POST['location'] ?? '';
+                        $updateUserBasicDetails->data()->jobTitle = $_POST['jobTitle'] ?? '';
+                        $updateUserBasicDetails->exec();
+                        echo json_encode(['code' => 'ok']);
+                        return;
                     }
-                    die();
+                } catch (ErrorHandler $e) {
+                    echo json_encode([
+                        'code' => 'error',
+                        'errors' => $e->getErrors()
+                    ]);
+                    return;
                 }
             }
 
@@ -118,14 +117,21 @@ class ProfileController
                 'languages' => $userLangRepo->getLanguagesNameByUserID($user->getId()),
                 'links' => $userLinkRepo->getLinksByUserID($user->getId()),
                 'user' => [
+                    'firstName' => $user->getFirstName(),
+                    'lastName' => $user->getLastName(),
+                    'jobTitle' => $user->getJobTitle(),
+                    'location' => $user->getLocation(),
                     'bio' => $user->getBio(),
+                    'profilePic' => $user->getProfilePicOrDefault(),
                     'projects' => array_map(function (ProjectMember $projectMember) use ($projectMemberRepo) {
                         $project = $projectMember->getProject();
                         return [
-                            'id' => $project->getId(),
+                            //'id' => $project->getId(),
                             'name' => $project->getName(),
-                            'description' => $project->getDescription(),
+                            //'description' => $project->getDescription(),
                             'url' => URL::project($project->getId(), $project->getName()),
+                            'membersCount' => count($projectMemberRepo->getByProjectID($project->getId())),
+                            /*
                             'members' => array_map(function (ProjectMember $projectMember) {
                                 $user = $projectMember->getMember();
                                 return [
@@ -135,15 +141,18 @@ class ProfileController
                                     'url' => URL::profile($user->getId()),
                                 ];
                             }, $projectMemberRepo->getByProjectID($project->getId())),
+                            */
                         ];
                     }, $projectMemberRepo->getByMemberID($user->getId())),
                     'organisations' => array_map(function (OrganisationMember $organisationMember) use ($organisationMemberRepo) {
                         $organisation = $organisationMember->getOrganisation();
                         return [
-                            'id' => $organisation->getId(),
+                            // 'id' => $organisation->getId(),
                             'name' => $organisation->getName(),
-                            'description' => $organisation->getDescription(),
+                            // 'description' => $organisation->getDescription(),
                             'url' => URL::organisation($organisation->getId(), $organisation->getName()),
+                            'membersCount' => count($organisationMemberRepo->getByOrganisationID($organisation->getId())),
+                            /*
                             'members' => array_map(function (OrganisationMember $projectMember) {
                                 $user = $projectMember->getMember();
                                 return [
@@ -153,6 +162,7 @@ class ProfileController
                                     'url' => URL::profile($user->getId()),
                                 ];
                             }, $organisationMemberRepo->getByOrganisationID($organisation->getId())),
+                            */
                         ];
                     }, $organisationMemberRepo->getByMemberID($user->getId())),
                 ],
@@ -164,7 +174,8 @@ class ProfileController
         }
     }
 
-    public function data()
+    public
+    function data()
     {
         return $this->data;
     }
@@ -172,7 +183,8 @@ class ProfileController
     /**
      * @return \DSI\Entity\User
      */
-    protected function getUserFromURL()
+    protected
+    function getUserFromURL()
     {
         $userRepo = new UserRepository();
         if (ctype_digit($this->data()->userURL)) {

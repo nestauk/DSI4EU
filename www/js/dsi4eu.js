@@ -467,9 +467,6 @@
 	var queueIndex = -1;
 
 	function cleanUpNextTick() {
-	    if (!draining || !currentQueue) {
-	        return;
-	    }
 	    draining = false;
 	    if (currentQueue.length) {
 	        queue = currentQueue.concat(queue);
@@ -4578,5 +4575,11 @@ Webflow.require('ix').init([
   {"slug":"addpost","name":"addPost","value":{"style":{"height":"38px"},"triggers":[{"type":"click","stepsA":[{"height":"83px","wait":300,"transition":"height 300ms ease-in 0ms"},{"height":"80px","transition":"height 200ms ease-in-out 0ms"}],"stepsB":[{"height":"38px","wait":200,"transition":"height 200ms ease-in-out 0ms"}]},{"type":"click","selector":".add-post","stepsA":[{"height":"178px","wait":300,"transition":"height 300ms ease-in 0ms"},{"height":"175px","transition":"height 200ms ease-in 0ms"}],"stepsB":[{"height":"55px","wait":200,"transition":"height 200ms ease-in-out 0ms"}]},{"type":"click","selector":".btn-new-post","stepsA":[{"wait":300},{"display":"block","opacity":1,"transition":"opacity 200ms ease-in 0ms"}],"stepsB":[{"opacity":0,"transition":"opacity 200ms ease-out 0ms"}]}]}},
   {"slug":"postblockclosed","name":"postBlockClosed","value":{"style":{"height":"55px"},"triggers":[]}},
   {"slug":"new-post-show","name":"new post show","value":{"style":{},"triggers":[{"type":"click","selector":".new-post-bg","stepsA":[{"display":"block"}],"stepsB":[]}]}},
-  {"slug":"hide-new-post","name":"hide new post","value":{"style":{},"triggers":[{"type":"click","selector":".new-post-bg","stepsA":[{"display":"none"}],"stepsB":[]}]}}
+  {"slug":"hide-new-post","name":"hide new post","value":{"style":{},"triggers":[{"type":"click","selector":".new-post-bg","stepsA":[{"display":"none"}],"stepsB":[]}]}},
+  {"slug":"update-image-closed","name":"update image closed","value":{"style":{"opacity":0,"scaleX":0.8,"scaleY":0.8,"scaleZ":1},"triggers":[]}},
+  {"slug":"edit-image","name":"edit image","value":{"style":{},"triggers":[{"type":"hover","selector":".edit-image","stepsA":[{"opacity":1,"wait":200,"transition":"transform 200ms ease 0ms, opacity 200ms ease 0ms","scaleX":1,"scaleY":1,"scaleZ":1}],"stepsB":[{"opacity":0,"transition":"transform 200ms ease 0ms, opacity 200ms ease 0ms","scaleX":0.9,"scaleY":0.9,"scaleZ":1}]}]}},
+  {"slug":"hide-cancel-or-save","name":"hide cancel or save","value":{"style":{"display":"none","opacity":0,"x":"0px","y":"5px","z":"0px"},"triggers":[]}},
+  {"slug":"show-cancel-or-save","name":"show cancel or save","value":{"style":{},"triggers":[{"type":"click","selector":".cancel-save","siblings":true,"stepsA":[{"display":"block","opacity":1,"transition":"transform 200ms ease 0ms, opacity 200ms ease 0ms","x":"0px","y":"-3px","z":"0px"},{"transition":"transform 200ms ease 0ms","x":"0px","y":"0px","z":"0px"}],"stepsB":[{"display":"block","opacity":0,"transition":"transform 200ms ease 0ms, opacity 200ms ease 0ms","x":"0px","y":"5px","z":"0px"}]}]}},
+  {"slug":"show-profile-update","name":"show profile update","value":{"style":{},"triggers":[{"type":"click","selector":".profile-update","stepsA":[{"display":"block"}],"stepsB":[]}]}},
+  {"slug":"close-profile-update","name":"Close profile update","value":{"style":{},"triggers":[{"type":"click","selector":".profile-update","stepsA":[{"display":"none"}],"stepsB":[]}]}}
 ]);

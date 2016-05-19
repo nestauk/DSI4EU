@@ -16,6 +16,7 @@ class UserRepository
         $insert[] = "`lname` = '" . addslashes($user->getLastName()) . "'";
         $insert[] = "`bio` = '" . addslashes($user->getBio()) . "'";
         $insert[] = "`location` = '" . addslashes($user->getLocation()) . "'";
+        $insert[] = "`jobTitle` = '" . addslashes($user->getJobTitle()) . "'";
         $insert[] = "`password` = '" . addslashes($user->getHashPassword()) . "'";
         $insert[] = "`facebookUID` = '" . addslashes($user->getFacebookUID()) . "'";
         $insert[] = "`googleUID` = '" . addslashes($user->getGoogleUID()) . "'";
@@ -44,6 +45,7 @@ class UserRepository
         $insert[] = "`lname` = '" . addslashes($user->getLastName()) . "'";
         $insert[] = "`bio` = '" . addslashes($user->getBio()) . "'";
         $insert[] = "`location` = '" . addslashes($user->getLocation()) . "'";
+        $insert[] = "`jobTitle` = '" . addslashes($user->getJobTitle()) . "'";
         $insert[] = "`password` = '" . addslashes($user->getHashPassword()) . "'";
         $insert[] = "`facebookUID` = '" . addslashes($user->getFacebookUID()) . "'";
         $insert[] = "`googleUID` = '" . addslashes($user->getGoogleUID()) . "'";
@@ -178,6 +180,7 @@ class UserRepository
             $userObj->setBio($user['bio']);
         if ($user['location'])
             $userObj->setLocation($user['location']);
+        $userObj->setJobTitle($user['jobTitle']);
         if ($user['facebookUID'])
             $userObj->setFacebookUID($user['facebookUID']);
         if ($user['googleUID'])
@@ -199,7 +202,7 @@ class UserRepository
         $where = ["1"];
         $users = [];
         $query = new SQL("SELECT 
-            id, password, email, fname, lname, bio, location
+            id, password, email, fname, lname, bio, location, jobTitle
           , facebookUID, googleUID, gitHubUID, twitterUID
           , profileURL, profilePic
           FROM `users` WHERE " . implode(' AND ', $where) . "");
@@ -223,7 +226,7 @@ class UserRepository
     private function getUserWhere($where)
     {
         $query = new SQL("SELECT 
-              id, password, email, fname, lname, bio, location
+              id, password, email, fname, lname, bio, location, jobTitle
             , facebookUID, googleUID, gitHubUID, twitterUID
             , profileURL, profilePic
             FROM `users` WHERE " . implode(' AND ', $where) . " LIMIT 1");

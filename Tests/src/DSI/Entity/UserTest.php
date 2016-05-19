@@ -158,4 +158,12 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $this->user->setProfilePic($profilePic);
         $this->assertEquals($profilePic, $this->user->getProfilePic());
     }
+
+    /** @test setJobTitle, getJobTitle*/
+    public function settingJobTitle_getsJobTitle()
+    {
+        $jobTitle = 'WebDev at Inoveb';
+        $this->user->setJobTitle($jobTitle);
+        $this->assertEquals($jobTitle, $this->user->getJobTitle());
+    }
 }

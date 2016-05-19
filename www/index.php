@@ -52,8 +52,14 @@ class Router
         } elseif ($this->pageURL === '/projects') {
             $this->projectsPage();
 
+        } elseif ($this->pageURL === '/projects.json') {
+            $this->projectsJsonPage();
+
         } elseif ($this->pageURL === '/organisations') {
             $this->organisationsPage();
+
+        } elseif ($this->pageURL === '/organisations.json') {
+            $this->organisationsJsonPage();
 
         } elseif ($this->pageURL === '/my-profile') {
             $this->myProfilePage();
@@ -199,9 +205,23 @@ class Router
         $command->exec();
     }
 
+    private function projectsJsonPage()
+    {
+        $command = new \DSI\Controller\ProjectsController();
+        $command->responseFormat = 'json';
+        $command->exec();
+    }
+
     private function organisationsPage()
     {
         $command = new \DSI\Controller\OrganisationsController();
+        $command->exec();
+    }
+
+    private function organisationsJsonPage()
+    {
+        $command = new \DSI\Controller\OrganisationsController();
+        $command->responseFormat = 'json';
         $command->exec();
     }
 
