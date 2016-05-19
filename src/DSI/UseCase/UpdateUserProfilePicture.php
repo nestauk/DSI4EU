@@ -44,7 +44,7 @@ class UpdateUserProfilePicture
 
         $this->checkImageDimensions($img);
 
-        $img->thumbnail(100, 100)->save($this->data()->filePath, null, $fileInfo->getExtension());
+        $img->thumbnail(200, 200)->save($this->data()->filePath, null, $fileInfo->getExtension());
 
         $this->profilePic = $this->data()->userID . '-' . $this->data()->fileName;
         rename($this->data()->filePath, __DIR__ . '/../../../www/images/users/profile/' . $this->profilePic);

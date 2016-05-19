@@ -194,21 +194,24 @@
                                     <div style="color:red" ng-show="forgotPassword.errors.email"
                                          ng-bind="forgotPassword.errors.email"></div>
                                     <div ng-show="forgotPassword.codeSent">
-                                        <i ng-hide="forgotPassword.codeVerified">The security code has been emailed to you.</i>
-                                        <input type="text" placeholder="Security code"
-                                               name="code"
-                                               class="w-input login-field"
-                                               ng-disabled="forgotPassword.codeVerified"
-                                               ng-model="forgotPassword.code"
-                                               ng-class="{error: forgotPassword.errors.code}">
-                                        <div style="color:red" ng-show="forgotPassword.errors.code"
-                                             ng-bind="forgotPassword.errors.code"></div>
-
+                                        <div ng-hide="forgotPassword.codeVerified">
+                                            <i ng-hide="forgotPassword.codeVerified">The security code has been emailed
+                                                to you.</i>
+                                            <input type="text" placeholder="Security code"
+                                                   name="code"
+                                                   class="w-input login-field"
+                                                   ng-disabled="forgotPassword.codeVerified"
+                                                   ng-model="forgotPassword.code"
+                                                   ng-class="{error: forgotPassword.errors.code}">
+                                            <div style="color:red" ng-show="forgotPassword.errors.code"
+                                                 ng-bind="forgotPassword.errors.code"></div>
+                                        </div>
                                         <div ng-show="forgotPassword.codeVerified">
                                             <input type="password" placeholder="New Password"
                                                    name="password"
                                                    class="w-input login-field"
                                                    ng-model="forgotPassword.password"
+                                                   autocomplete="off"
                                                    ng-class="{error: forgotPassword.errors.password}">
                                             <div style="color:red" ng-show="forgotPassword.errors.password"
                                                  ng-bind="forgotPassword.errors.password"></div>
@@ -217,6 +220,7 @@
                                                    name="retypePassword"
                                                    class="w-input login-field"
                                                    ng-model="forgotPassword.retypePassword"
+                                                   autocomplete="off"
                                                    ng-class="{error: forgotPassword.errors.retypePassword}">
                                             <div style="color:red" ng-show="forgotPassword.errors.retypePassword"
                                                  ng-bind="forgotPassword.errors.retypePassword"></div>

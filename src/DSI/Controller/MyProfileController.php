@@ -80,8 +80,9 @@ class MyProfileController
             echo json_encode([
                 'firstName' => $user->getFirstName(),
                 'lastName' => $user->getLastName(),
-                'email' => $user->getEmail(),
                 'location' => $user->getLocation(),
+                'bio' => $user->getBio(),
+                'jobTitle' => $user->getJobTitle(),
                 'profilePic' => $user->getProfilePicOrDefault(),
             ]);
             die();
@@ -90,8 +91,7 @@ class MyProfileController
         }
     }
 
-    public
-    function data()
+    public function data()
     {
         return $this->data;
     }

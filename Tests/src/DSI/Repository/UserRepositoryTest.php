@@ -206,7 +206,7 @@ class UserRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($this->userRepo->profileURLExists('randomUserUID'));
     }
 
-    /** @test getByProfileURL*/
+    /** @test getByProfileURL */
     public function gettingAnNonExistentUserByProfileURL_throwsException()
     {
         $this->setExpectedException(\DSI\NotFound::class);
@@ -245,32 +245,34 @@ class UserRepositoryTest extends PHPUnit_Framework_TestCase
     public function setAllUsersDetails()
     {
         $user = new User();
-        $user->setEmail('test@example.com');
-        $user->setFirstName('firstName');
-        $user->setLastName('lastName');
-        $user->setBio('My Own Personal Bio');
-        $user->setLocation('London, UK');
-        $user->setPassword('password');
-        $user->setFacebookUID('facebookUID');
-        $user->setGoogleUID('googleUID');
-        $user->setGitHubUID('gitHubUID');
-        $user->setTwitterUID('twitterUID');
-        $user->setProfileURL('profileURL');
-        $user->setProfilePic('profilePic');
+        $user->setEmail($email = 'test@example.com');
+        $user->setFirstName($firstName = 'firstName');
+        $user->setLastName($lastName = 'lastName');
+        $user->setBio($bio = 'My Own Personal Bio');
+        $user->setLocation($location = 'London, UK');
+        $user->setJobTitle($jobTitle = 'WebDev at Inoveb');
+        $user->setPassword($password = 'password');
+        $user->setFacebookUID($facebookUID = 'facebookUID');
+        $user->setGoogleUID($googleUID = 'googleUID');
+        $user->setGitHubUID($gitHubUID = 'gitHubUID');
+        $user->setTwitterUID($twitterUID = 'twitterUID');
+        $user->setProfileURL($profileUrl = 'profileURL');
+        $user->setProfilePic($profilePic = 'profilePic.jpg');
         $this->userRepo->insert($user);
 
-        $sameUser = $this->userRepo->getById( $user->getId() );
-        $this->assertEquals($user->getEmail(), $sameUser->getEmail());
-        $this->assertEquals($user->getFirstName(), $sameUser->getFirstName());
-        $this->assertEquals($user->getLastName(), $sameUser->getLastName());
-        $this->assertEquals($user->getBio(), $sameUser->getBio());
-        $this->assertEquals($user->getLocation(), $sameUser->getLocation());
-        $this->assertEquals($user->getHashPassword(), $sameUser->getHashPassword());
-        $this->assertEquals($user->getFacebookUID(), $sameUser->getFacebookUID());
-        $this->assertEquals($user->getGoogleUID(), $sameUser->getGoogleUID());
-        $this->assertEquals($user->getGitHubUID(), $sameUser->getGitHubUID());
-        $this->assertEquals($user->getTwitterUID(), $sameUser->getTwitterUID());
-        $this->assertEquals($user->getProfileURL(), $sameUser->getProfileURL());
-        $this->assertEquals($user->getProfilePic(), $sameUser->getProfilePic());
+        $sameUser = $this->userRepo->getById($user->getId());
+        $this->assertEquals($email, $sameUser->getEmail());
+        $this->assertEquals($firstName, $sameUser->getFirstName());
+        $this->assertEquals($lastName, $sameUser->getLastName());
+        $this->assertEquals($bio, $sameUser->getBio());
+        $this->assertEquals($location, $sameUser->getLocation());
+        $this->assertEquals($jobTitle, $sameUser->getJobTitle());
+        $this->assertTrue($sameUser->checkPassword($password));
+        $this->assertEquals($facebookUID, $sameUser->getFacebookUID());
+        $this->assertEquals($googleUID, $sameUser->getGoogleUID());
+        $this->assertEquals($gitHubUID, $sameUser->getGitHubUID());
+        $this->assertEquals($twitterUID, $sameUser->getTwitterUID());
+        $this->assertEquals($profileUrl, $sameUser->getProfileURL());
+        $this->assertEquals($profilePic, $sameUser->getProfilePic());
     }
 }

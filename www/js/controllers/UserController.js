@@ -1,9 +1,10 @@
 var app = angular.module('DSIApp');
 
-app.controller('UserController', function ($scope, $http) {
+app.controller('UserController', function ($scope, $http, $timeout, Upload) {
     $scope.skills = [];
     $scope.languages = [];
     $scope.links = [];
+    $scope.editPanel = 'basicDetails';
 
     $http.get(SITE_RELATIVE_PATH + '/profile/' + profileUserID + '/details.json')
         .then(function (result) {
@@ -11,7 +12,55 @@ app.controller('UserController', function ($scope, $http) {
             $scope.languages = result.data.languages || [];
             $scope.links = result.data.links.sort(sortUrls) || [];
             $scope.user = result.data.user || {};
+            $scope.userEdit = copyAllFieldsFrom($scope.user);
         });
+
+    $scope.saveBasicDetails = function () {
+        $scope.userEdit.loading = true;
+        $scope.userEdit.errors = {};
+        $timeout(function () {
+            $http.post(SITE_RELATIVE_PATH + '/profile/' + profileUserID + '/details.json', {
+                updateBasicDetails: true,
+                firstName: $scope.userEdit.firstName,
+                lastName: $scope.userEdit.lastName,
+                jobTitle: $scope.userEdit.jobTitle,
+                location: $scope.userEdit.location
+            }).then(function (response) {
+                console.log(response.data);
+                $scope.userEdit.loading = false;
+                if (response.data.code == 'ok') {
+                    $scope.user.firstName = $scope.userEdit.firstName;
+                    $scope.user.lastName = $scope.userEdit.lastName;
+                    $scope.user.jobTitle = $scope.userEdit.jobTitle;
+                    $scope.user.location = $scope.userEdit.location;
+                } else {
+                    $scope.userEdit.errors = response.data.errors;
+                    console.log(response.data.errors);
+                }
+            });
+        }, 500);
+    };
+
+    $scope.saveBio = function () {
+        $scope.userEdit.loading = true;
+        $scope.userEdit.errors = {};
+        console.log('save bio');
+        $timeout(function () {
+            $http.post(SITE_RELATIVE_PATH + '/profile/' + profileUserID + '/details.json', {
+                updateBio: true,
+                bio: $scope.userEdit.bio
+            }).then(function (response) {
+                console.log(response.data);
+                $scope.userEdit.loading = false;
+                if (response.data.code == 'ok') {
+                    $scope.user.bio = $scope.userEdit.bio;
+                } else {
+                    $scope.userEdit.errors = response.data.errors;
+                    console.log(response.data.errors);
+                }
+            });
+        }, 500);
+    };
 
     $scope.updateUserBio = function () {
         $http.post(SITE_RELATIVE_PATH + '/profile/' + profileUserID + '/details.json', {
@@ -55,6 +104,7 @@ app.controller('UserController', function ($scope, $http) {
             });
         }
     };
+
     // List Skills
     $http.get(SITE_RELATIVE_PATH + '/skills.json')
         .then(function (result) {
@@ -152,6 +202,31 @@ app.controller('UserController', function ($scope, $http) {
                 return 'www.png';
         }
     };
+    $scope.uploadFiles = function (file, errFiles) {
+        $scope.f = file;
+        $scope.errFile = errFiles && errFiles[0];
+        if (file) {
+            file.upload = Upload.upload({
+                url: SITE_RELATIVE_PATH + '/uploadProfilePicture',
+                data: {file: file}
+            });
+
+            file.upload.then(function (response) {
+                file.result = response.data;
+                if (response.data.result == 'ok')
+                    $scope.user.profilePic = response.data.imgPath;
+                else if (response.data.result == 'error') {
+                    $scope.errorMsg = response.data.errors;
+                }
+            }, function (response) {
+                if (response.status > 0)
+                    $scope.errorMsg = response.status + ': ' + response.data;
+            }, function (evt) {
+                file.progress = Math.min(100, parseInt(100.0 *
+                    evt.loaded / evt.total));
+            });
+        }
+    };
 
     var sortUrls = function (x, y) {
         var levels = {
@@ -170,7 +245,6 @@ app.controller('UserController', function ($scope, $http) {
         else
             return xLevel > yLevel;
     };
-
     var getUrlType = function (url) {
         if (/^(https?:\/\/)?((w{3}\.)?)twitter\.com\//i.test(url))
             return 'twitter';
@@ -182,5 +256,10 @@ app.controller('UserController', function ($scope, $http) {
             return 'facebook';
 
         return 'www';
+    };
+    var copyAllFieldsFrom = function (currentObject) {
+        var newObject = {};
+        for (var k in currentObject) newObject[k] = currentObject[k];
+        return newObject;
     }
 });

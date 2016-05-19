@@ -54,14 +54,16 @@ class CreatePasswordRecovery
         $this->passwordRecovery = $passwordRecovery;
 
         if ($this->data()->sendEmail) {
-            $message = "Email: " . $passwordRecovery->getUser()->getEmail() . '<br />';
+            $message = "<div>";
+            $message .= "Email: " . $passwordRecovery->getUser()->getEmail() . '<br />' . PHP_EOL;
             $message .= "Security Code: " . $passwordRecovery->getCode();
+            $message .= "</div>";
             $email = new Mailer();
             $email->From = 'noreply@digitalsocial.eu';
             $email->FromName = 'No Reply';
             $email->addAddress($passwordRecovery->getUser()->getEmail());
             $email->Subject = 'Digital Social Innovation :: Password Recovery';
-            $email->Body = $message;
+            $email->msgHTML($message);
             $email->isHTML(true);
             $email->send();
         }

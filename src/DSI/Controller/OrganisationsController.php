@@ -1,23 +1,40 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: apandele
- * Date: 25/04/2016
- * Time: 15:45
- */
 
 namespace DSI\Controller;
 
+use DSI\Entity\Organisation;
+use DSI\Repository\OrganisationRepository;
+use DSI\Repository\UserRepository;
 use DSI\Service\Auth;
-use DSI\Service\URL;
 
 class OrganisationsController
 {
+    public $responseFormat = 'html';
+
     public function exec()
     {
-        //$authUser = new Auth();
-        //$authUser->ifLoggedInRedirectTo(URL::myProfile());
+        if ($this->responseFormat == 'json') {
+            $organisationRepo = new OrganisationRepository();
+            echo json_encode(array_map(function (Organisation $organisation) {
+                $region = $organisation->getCountryRegion();
+                return [
+                    'id' => $organisation->getId(),
+                    'name' => $organisation->getName(),
+                    'region' => ($region ? $region->getName() : ''),
+                    'country' => ($region ? $region->getCountry()->getName() : ''),
+                ];
+            }, $organisationRepo->getAll()));
+        } else {
+            $authUser = new Auth();
+            if ($authUser->getUserId())
+                $loggedInUser = (new UserRepository())->getById($authUser->getUserId());
+            else
+                $loggedInUser = null;
 
-        require __DIR__ . '/../../../www/organisations.php';
+            $data = [
+                'loggedInUser' => $loggedInUser
+            ];
+            require __DIR__ . '/../../../www/organisations.php';
+        }
     }
 }

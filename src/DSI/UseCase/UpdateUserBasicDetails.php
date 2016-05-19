@@ -26,13 +26,13 @@ class UpdateUserBasicDetails
         $this->errorHandler = new ErrorHandler();
         $this->userRepo = new UserRepository();
 
-        if(isset($this->data()->firstName)){
-            if($this->data()->firstName == ''){
+        if (isset($this->data()->firstName)) {
+            if ($this->data()->firstName == '') {
                 $this->errorHandler->addTaggedError('firstName', 'Please type the first name');
             }
         }
-        if(isset($this->data()->lastName)){
-            if($this->data()->lastName == ''){
+        if (isset($this->data()->lastName)) {
+            if ($this->data()->lastName == '') {
                 $this->errorHandler->addTaggedError('lastName', 'Please type the last name');
             }
         }
@@ -53,12 +53,10 @@ class UpdateUserBasicDetails
     private function saveUserDetails()
     {
         $user = $this->userRepo->getById($this->data()->userID);
-        if ($this->data()->firstName)
-            $user->setFirstName($this->data()->firstName);
-        if ($this->data()->lastName)
-            $user->setLastName($this->data()->lastName);
-        if ($this->data()->location)
-            $user->setLocation($this->data()->location);
+        $user->setFirstName($this->data()->firstName);
+        $user->setLastName($this->data()->lastName);
+        $user->setLocation($this->data()->location);
+        $user->setJobTitle($this->data()->jobTitle);
         $this->userRepo->save($user);
     }
 }
@@ -68,7 +66,8 @@ class UpdateUserBasicDetails_Data
     /** @var string */
     public $firstName,
         $lastName,
-        $location;
+        $location,
+        $jobTitle;
 
     /** @var int */
     public $userID;
