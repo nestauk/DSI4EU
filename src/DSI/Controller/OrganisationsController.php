@@ -3,9 +3,11 @@
 namespace DSI\Controller;
 
 use DSI\Entity\Organisation;
+use DSI\Repository\OrganisationProjectRepository;
 use DSI\Repository\OrganisationRepository;
 use DSI\Repository\UserRepository;
 use DSI\Service\Auth;
+use DSI\Service\URL;
 
 class OrganisationsController
 {
@@ -22,6 +24,9 @@ class OrganisationsController
                     'name' => $organisation->getName(),
                     'region' => ($region ? $region->getName() : ''),
                     'country' => ($region ? $region->getCountry()->getName() : ''),
+                    'url' => URL::organisation($organisation->getId(), $organisation->getName()),
+                    'projectsCount' => count((new OrganisationProjectRepository())->getByOrganisationID($organisation->getId())),
+                    'partnersCount' => count((new OrganisationProjectRepository())->getByOrganisationID($organisation->getId())),
                 ];
             }, $organisationRepo->getAll()));
         } else {

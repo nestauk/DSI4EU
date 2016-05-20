@@ -92,10 +92,15 @@ input.ng-invalid {
     background-color: #F0F0F0;
 }
 
-.current-status p{
-    color:inherit;
+.current-status p {
+    color: inherit;
 }
 
-.add-post-modal{
-    width:585px;
+.add-post-modal {
+    width: 585px;
+}
+
+.alphabet-link.selected {
+    background: #252F48;
+    color: #F3F3F3;
 }
