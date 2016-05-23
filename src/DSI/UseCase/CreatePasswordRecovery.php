@@ -63,7 +63,10 @@ class CreatePasswordRecovery
             $email->FromName = 'No Reply';
             $email->addAddress($passwordRecovery->getUser()->getEmail());
             $email->Subject = 'Digital Social Innovation :: Password Recovery';
-            $email->msgHTML($message);
+            $email->wrapMessageInTemplate([
+                'header' => 'Password Recovery',
+                'body' => $message
+            ]);
             $email->isHTML(true);
             $email->send();
         }

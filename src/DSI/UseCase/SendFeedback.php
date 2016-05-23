@@ -69,7 +69,10 @@ class SendFeedback
             $email->addAddress('alexandru.pandele@nesta.org.uk');
             $email->addAddress('daniel.pettifer@nesta.org.uk');
             $email->Subject = 'Digital Social Innovation :: Feedback Form';
-            $email->msgHTML($message);
+            $email->wrapMessageInTemplate([
+                'header' => 'Feedback Form',
+                'body' => $message,
+            ]);
             $email->isHTML(true);
             $email->send();
         }

@@ -1,5 +1,6 @@
 <?php
 /** @var $mailBody string */
+/** @var $mailHeader string */
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -356,7 +357,7 @@
                 <table bgcolor="#18233F">
                     <tr>
                         <td style="width:150px"><img src="http://dsi4eu-dev.ddns.net/images/logo-white.svg"/></td>
-                        <td align="right"><h6 class="collapse">DSI4EU User Registration</h6></td>
+                        <td align="right"><h6 class="collapse">DSI4EU <?php echo $mailHeader?></h6></td>
                     </tr>
                 </table>
             </div>
