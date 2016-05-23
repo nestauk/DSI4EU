@@ -3837,6 +3837,15 @@ html.w-mod-js *[data-ix="hide-cancel-or-save"] {
   .alphabet-link {
     margin-bottom: 4px;
   }
+  .dashboard-widget {
+    margin-bottom: 20px;
+  }
+  .notification-detail.post-latest-card {
+    display: block;
+    width: 420px;
+    margin-left: 70px;
+    float: none;
+  }
 }
 
 @media (max-width: 767px) {
@@ -4202,6 +4211,25 @@ html.w-mod-js *[data-ix="hide-cancel-or-save"] {
   }
   .card-slim-location {
     text-align: center;
+  }
+  .intro-title {
+    height: 125px;
+  }
+  .card-notification.card-project {
+    height: 95px;
+  }
+  .card-notification.latest-post {
+    height: 221px;
+  }
+  .notification-detail {
+    width: 210px;
+  }
+  .notification-detail.post-latest-card {
+    width: auto;
+  }
+  .dashboard-stats {
+    position: static;
+    margin-top: -27px;
   }
 }
 
