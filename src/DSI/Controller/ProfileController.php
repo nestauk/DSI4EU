@@ -6,6 +6,7 @@ use DSI\Entity\OrganisationMember;
 use DSI\Entity\ProjectMember;
 use DSI\Repository\OrganisationMemberRepository;
 use DSI\Repository\ProjectMemberRepository;
+use DSI\Repository\ProjectRepository;
 use DSI\Repository\UserLanguageRepository;
 use DSI\Repository\UserLinkRepository;
 use DSI\Repository\UserRepository;
@@ -38,7 +39,9 @@ class ProfileController
         $authUser->ifNotLoggedInRedirectTo(URL::login());
 
         $user = $this->getUserFromURL();
+        $userID = $user->getId();
         $isOwner = ($user->getId() == $authUser->getUserId());
+        $loggedInUser = (new UserRepository())->getById($authUser->getUserId());
 
         if ($this->data()->format == 'json') {
             $userSkillRepo = new UserSkillRepository();
@@ -100,6 +103,13 @@ class ProfileController
                         $updateUserBasicDetails->data()->location = $_POST['location'] ?? '';
                         $updateUserBasicDetails->data()->jobTitle = $_POST['jobTitle'] ?? '';
                         $updateUserBasicDetails->exec();
+                        echo json_encode(['code' => 'ok']);
+                        return;
+                    } elseif (isset($_POST['joinProject'])) {
+                        $joinProject = new \DSI\UseCase\AddMemberRequestToProject();
+                        $joinProject->data()->projectID = $_POST['project'];
+                        $joinProject->data()->userID = $loggedInUser->getId();
+                        $joinProject->exec();
                         echo json_encode(['code' => 'ok']);
                         return;
                     }
@@ -168,14 +178,12 @@ class ProfileController
                 ],
             ]);
         } else {
-            $userID = $user->getId();
-            $loggedInUser = (new UserRepository())->getById($authUser->getUserId());
+            $projects = (new ProjectRepository())->getAll();
             require __DIR__ . '/../../../www/profile.php';
         }
     }
 
-    public
-    function data()
+    public function data()
     {
         return $this->data;
     }
@@ -183,8 +191,7 @@ class ProfileController
     /**
      * @return \DSI\Entity\User
      */
-    protected
-    function getUserFromURL()
+    protected function getUserFromURL()
     {
         $userRepo = new UserRepository();
         if (ctype_digit($this->data()->userURL)) {

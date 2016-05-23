@@ -3,6 +3,7 @@ require __DIR__ . '/header.php';
 /** @var $userID int */
 /** @var $isOwner bool */
 /** @var $user \DSI\Entity\User */
+/** @var $projects \DSI\Entity\Project[] */
 ?>
     <script type="text/javascript">
         profileUserID = '<?php echo $userID?>';
@@ -36,7 +37,7 @@ require __DIR__ . '/header.php';
         }
     </style>
 
-    <div ng-controller="UserController as ctrl">
+    <div ng-controller="UserController as ctrl" id="UserController">
 
         <div class="w-section project-section">
             <div class="container-wide">
@@ -182,9 +183,15 @@ require __DIR__ . '/header.php';
                                         </div>
                                     </a>
                                 </div>
-                                <div class="join-project">
-                                    <a href="#" class="w-button btn btn-join">Add new project +</a>
-                                </div>
+                                <?php if ($isOwner) { ?>
+                                    <div class="join-project">
+                                        <a href="#" class="w-button btn btn-join"
+                                           ng-click="editPanel = 'joinProject'"
+                                           data-ix="show-profile-update">
+                                            Join project +
+                                        </a>
+                                    </div>
+                                <?php } ?>
                             </div>
                         </div>
                         <div class="info-card">
@@ -201,9 +208,11 @@ require __DIR__ . '/header.php';
                                     </div>
                                 </a>
                             </div>
-                            <div class="join-project">
-                                <a href="#" class="w-button btn btn-join">Join organisation +</a>
-                            </div>
+                            <?php if ($isOwner) { ?>
+                                <div class="join-project">
+                                    <a href="#" class="w-button btn btn-join">Join organisation +</a>
+                                </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
@@ -288,11 +297,63 @@ require __DIR__ . '/header.php';
                             </div>
                         </div>
 
+                        <div ng-show="editPanel == 'joinProject'">
+                            <h2 class="modal-h2">Join project</h2>
+                            <div class="w-form login-form" style="margin-top:0">
+                                <form ng-submit="joinProject.submit()" id="joinProjectForm">
+                                    <select style="width:100%" data-placeholder="Select a project"
+                                            ng-model="joinProject.data.project">
+                                        <option value=""></option>
+                                        <?php foreach ($projects AS $project) { ?>
+                                            <option value="<?php echo $project->getId() ?>">
+                                                <?php echo show_input($project->getName()) ?>
+                                            </option>
+                                        <?php } ?>
+                                    </select>
+
+                                    <br /><br />
+
+                                    <div style="color:red" ng-show="joinProject.errors.project"
+                                         ng-bind="joinProject.errors.project"></div>
+                                    <div style="color:red" ng-show="joinProject.errors.member"
+                                         ng-bind="joinProject.errors.member"></div>
+
+                                    <div style="color:green;" ng-show="joinProject.success">
+                                        Your request to join the project has been successfully send.
+                                    </div>
+
+                                    <div class="cancel-save">
+                                        <div class="w-row">
+                                            <div class="w-col w-col-6">
+                                                <a href="#" data-ix="close-profile-update"
+                                                   class="w-button dsi-button cors cancel">Close</a>
+                                            </div>
+                                            <div class="w-col w-col-6">
+                                                <input type="submit" class="w-button dsi-button cors"
+                                                       ng-value="joinProject.loading ? 'Saving...' : 'Join'"
+                                                       ng-disabled="joinProject.loading"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
                         <br/><br/><br/>
                     </div>
                 </div>
             </div>
         <?php } ?>
 
+        <script type="text/javascript">
+            var joinProjectForm = $('#joinProjectForm');
+            $('select', joinProjectForm).select2();
+            $('.select2-selection', joinProjectForm).on('keyup', function (e) {
+                if (e.keyCode === 13) {
+                    angular.element('#UserController').scope().joinProject.submit();
+                    angular.element('#UserController').scope().$apply();
+                }
+            });
+        </script>
     </div>
 <?php require __DIR__ . '/footer.php' ?>

@@ -3,6 +3,7 @@
 namespace DSI\UseCase;
 
 use DSI\Entity\ProjectMemberRequest;
+use DSI\Repository\ProjectMemberRepository;
 use DSI\Repository\ProjectMemberRequestRepository;
 use DSI\Repository\ProjectRepository;
 use DSI\Repository\UserRepository;
@@ -36,6 +37,11 @@ class AddMemberRequestToProject
         $this->projectMemberRequestRepo = new ProjectMemberRequestRepository();
         $this->projectRepository = new ProjectRepository();
         $this->userRepository = new UserRepository();
+
+        if ((new ProjectMemberRepository())->projectHasMember($this->data()->projectID, $this->data()->userID)) {
+            $this->errorHandler->addTaggedError('member', 'This user is already a member of the project');
+            $this->errorHandler->throwIfNotEmpty();
+        }
 
         if ($this->projectMemberRequestRepo->projectHasRequestFromMember($this->data()->projectID, $this->data()->userID)) {
             $this->errorHandler->addTaggedError('member', 'This user has already made a request to join the project');

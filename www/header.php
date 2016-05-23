@@ -342,7 +342,7 @@
 <?php } ?>
 
 
-<div data-collapse="medium" data-animation="default" data-duration="400" data-contain="1" class="w-nav nav-main">
+<div data-collapse="medium" data-animation="default" data-duration="400" class="w-nav nav-main">
     <div class="w-clearfix container-wide nav-container">
         <a href="<?php echo SITE_RELATIVE_PATH ?>/" class="w-nav-brand">
             <img width="160" src="<?php echo SITE_RELATIVE_PATH ?>/images/logo-white.svg" class="brand">

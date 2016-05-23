@@ -71,6 +71,30 @@ app.controller('UserController', function ($scope, $http, $timeout, Upload) {
         });
     };
 
+    $scope.joinProject = {};
+    $scope.joinProject.submit = function () {
+        $scope.joinProject.success = false;
+        $scope.joinProject.loading = true;
+        $scope.joinProject.errors = {};
+
+        $timeout(function () {
+            $http.post(SITE_RELATIVE_PATH + '/profile/' + profileUserID + '/details.json', {
+                joinProject: true,
+                project: $scope.joinProject.data.project
+            }).then(function (response) {
+                $scope.joinProject.loading = false;
+                if (response.data.code == 'ok') {
+                    $scope.joinProject.success = true;
+                } else if (response.data.code == 'error') {
+                    $scope.joinProject.errors = response.data.errors;
+                } else {
+                    alert('unexpected error');
+                    console.log(response);
+                }
+            });
+        }, 500);
+    };
+
     var addSkillSelect = $('#Add-skill');
     $scope.addSkills = function () {
         var newSkill = addSkillSelect.select2().val();
