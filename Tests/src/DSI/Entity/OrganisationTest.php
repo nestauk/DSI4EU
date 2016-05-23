@@ -101,10 +101,18 @@ class OrganisationTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->organisationSize->getId(), $this->organisation->getOrganisationSize()->getId());
     }
 
-    /** @test setAddress, getAddress*/
+    /** @test setAddress, getAddress */
     public function settingAddress_returnsAddress()
     {
         $this->organisation->setAddress('test');
         $this->assertEquals('test', $this->organisation->getAddress());
+    }
+
+    /** @test */
+    public function settingPartnersCount_returnsPartnersCount()
+    {
+        $partnersCount = 10;
+        $this->organisation->setPartnersCount($partnersCount);
+        $this->assertEquals($partnersCount, $this->organisation->getPartnersCount());
     }
 }

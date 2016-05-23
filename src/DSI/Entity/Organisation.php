@@ -5,7 +5,8 @@ namespace DSI\Entity;
 class Organisation
 {
     /** @var integer */
-    private $id;
+    private $id,
+        $partnersCount;
 
     /** @var User */
     private $owner;
@@ -193,5 +194,21 @@ class Organisation
     public function setAddress(string $address)
     {
         $this->address = $address;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPartnersCount()
+    {
+        return (int)$this->partnersCount;
+    }
+
+    /**
+     * @param int $partnersCount
+     */
+    public function setPartnersCount($partnersCount)
+    {
+        $this->partnersCount = (int)$partnersCount;
     }
 }

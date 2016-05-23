@@ -169,7 +169,7 @@ class OrganisationProjectsRepositoryTest extends PHPUnit_Framework_TestCase
         $organisation = new \DSI\Entity\Organisation();
         $organisation->setId($organisationID);
         $organisation->setOwner($user);
-        $this->organisationsRepo->saveAsNew($organisation);
+        $this->organisationsRepo->insert($organisation);
         return $organisation;
     }
 

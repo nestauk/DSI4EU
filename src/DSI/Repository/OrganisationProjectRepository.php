@@ -107,6 +107,25 @@ class OrganisationProjectRepository
     }
 
     /**
+     * @param int[] $projectIDs
+     * @return \DSI\Entity\OrganisationProject[]
+     */
+    public function getByProjectIDs($projectIDs)
+    {
+        $projectIDs = array_map(function ($projectID) {
+            return (int)$projectID;
+        }, $projectIDs);
+
+        if ($projectIDs) {
+            return $this->getOrganisationProjectsWhere([
+                "`projectID` IN (" . implode(',', $projectIDs) . ")"
+            ]);
+        } else {
+            return [];
+        }
+    }
+
+    /**
      * @param int $projectID
      * @return \int[]
      */

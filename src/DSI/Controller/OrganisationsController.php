@@ -26,7 +26,7 @@ class OrganisationsController
                     'country' => ($region ? $region->getCountry()->getName() : ''),
                     'url' => URL::organisation($organisation->getId(), $organisation->getName()),
                     'projectsCount' => count((new OrganisationProjectRepository())->getByOrganisationID($organisation->getId())),
-                    'partnersCount' => count((new OrganisationProjectRepository())->getByOrganisationID($organisation->getId())),
+                    'partnersCount' => $organisation->getPartnersCount(),
                 ];
             }, $organisationRepo->getAll()));
         } else {

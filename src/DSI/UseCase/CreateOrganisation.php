@@ -53,7 +53,7 @@ class CreateOrganisation
         $organisation->setName((string)$this->data()->name);
         $organisation->setDescription((string)$this->data()->description);
         $organisation->setOwner($this->data()->owner);
-        $this->organisationRepo->saveAsNew($organisation);
+        $this->organisationRepo->insert($organisation);
 
         $organisationMemberRepository = new OrganisationMemberRepository();
         $organisationMember = new OrganisationMember();

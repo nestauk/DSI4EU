@@ -32,7 +32,7 @@ class AddMemberToOrganisationTest extends PHPUnit_Framework_TestCase
 
         $this->organisation = new \DSI\Entity\Organisation();
         $this->organisation->setOwner($this->user_1);
-        $this->organisationRepo->saveAsNew($this->organisation);
+        $this->organisationRepo->insert($this->organisation);
     }
 
     public function tearDown()

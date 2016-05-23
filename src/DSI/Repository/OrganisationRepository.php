@@ -8,7 +8,7 @@ use DSI\Service\SQL;
 
 class OrganisationRepository
 {
-    public function saveAsNew(Organisation $organisation)
+    public function insert(Organisation $organisation)
     {
         $insert = array();
         $insert[] = "`ownerID` = '" . addslashes($organisation->getOwner()->getId()) . "'";
@@ -23,6 +23,7 @@ class OrganisationRepository
             $insert[] = "`organisationTypeID` = '" . addslashes($organisation->getOrganisationTypeId()) . "'";
         if ($organisation->getOrganisationSize())
             $insert[] = "`organisationSizeID` = '" . addslashes($organisation->getOrganisationSizeId()) . "'";
+        $insert[] = "`partnersCount` = '" . addslashes($organisation->getPartnersCount()) . "'";
 
         $query = new SQL("INSERT INTO `organisations` SET " . implode(', ', $insert) . "");
         $query->query();
@@ -50,6 +51,7 @@ class OrganisationRepository
         $insert[] = "`address` = '" . addslashes($organisation->getAddress()) . "'";
         if ($organisation->getOrganisationSize())
             $insert[] = "`organisationSizeID` = '" . addslashes($organisation->getOrganisationSizeId()) . "'";
+        $insert[] = "`partnersCount` = '" . addslashes($organisation->getPartnersCount()) . "'";
 
         $query = new SQL("UPDATE `organisations` SET " . implode(', ', $insert) . " WHERE `id` = '{$organisation->getId()}'");
         $query->query();
@@ -88,6 +90,7 @@ class OrganisationRepository
                 (new OrganisationSizeRepository())->getById($organisation['organisationSizeID'])
             );
         }
+        $organisationObj->setPartnersCount($organisation['partnersCount']);
 
         return $organisationObj;
     }
@@ -103,6 +106,7 @@ class OrganisationRepository
             id, ownerID, name, description
           , countryRegionID, address
           , organisationTypeID, organisationSizeID
+          , partnersCount
           FROM `organisations` WHERE " . implode(' AND ', $where) . "");
         foreach ($query->fetch_all() AS $dbOrganisation) {
             $organisations[] = $this->buildObjectFromData($dbOrganisation);
@@ -122,6 +126,7 @@ class OrganisationRepository
               id, ownerID, name, description
           , countryRegionID, address
           , organisationTypeID, organisationSizeID
+          , partnersCount
             FROM `organisations` WHERE " . implode(' AND ', $where) . " LIMIT 1");
         $dbOrganisation = $query->fetch();
         if (!$dbOrganisation) {

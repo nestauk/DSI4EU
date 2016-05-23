@@ -37,21 +37,13 @@ class AddProjectToOrganisation
         $this->organisationRepository = new OrganisationRepository();
         $this->projectRepository = new ProjectRepository();
 
-        if ($this->organisationProjectRepo->organisationHasProject($this->data()->organisationID, $this->data()->projectID)) {
-            $this->errorHandler->addTaggedError('project', 'The organisation already has this project');
-            $this->errorHandler->throwIfNotEmpty();
-        }
+        $this->checkIfTheOrganisationAlreadyHasTheProject();
 
         $project = $this->projectRepository->getById($this->data()->projectID);
 
-        $organisationProject = new OrganisationProject();
-        $organisationProject->setProject($project);
-        $organisationProject->setOrganisation($this->organisationRepository->getById($this->data()->organisationID));
-        $this->organisationProjectRepo->add($organisationProject);
-
-        $organisationsCount = count($this->organisationProjectRepo->getByProjectID($project->getId()));
-        $project->setOrganisationsCount($organisationsCount);
-        $this->projectRepository->save($project);
+        $this->addProjectToOrganisation($project);
+        $this->setProjectOrganisationsCount($project);
+        $this->setOrganisationPartnersCount();
     }
 
     /**
@@ -60,6 +52,44 @@ class AddProjectToOrganisation
     public function data()
     {
         return $this->data;
+    }
+
+    private function setOrganisationPartnersCount()
+    {
+        $calculateOrganisationPartnersCountCmd = new CalculateOrganisationPartnersCount();
+        $calculateOrganisationPartnersCountCmd->data()->organisationID = $this->data()->organisationID;
+        $calculateOrganisationPartnersCountCmd->exec();
+    }
+
+    /**
+     * @param $project
+     * @throws \DSI\NotFound
+     */
+    private function setProjectOrganisationsCount($project)
+    {
+        $organisationsCount = count($this->organisationProjectRepo->getByProjectID($project->getId()));
+        $project->setOrganisationsCount($organisationsCount);
+        $this->projectRepository->save($project);
+    }
+
+    /**
+     * @param $project
+     * @throws \DSI\DuplicateEntry
+     */
+    private function addProjectToOrganisation($project)
+    {
+        $organisationProject = new OrganisationProject();
+        $organisationProject->setProject($project);
+        $organisationProject->setOrganisation($this->organisationRepository->getById($this->data()->organisationID));
+        $this->organisationProjectRepo->add($organisationProject);
+    }
+
+    private function checkIfTheOrganisationAlreadyHasTheProject()
+    {
+        if ($this->organisationProjectRepo->organisationHasProject($this->data()->organisationID, $this->data()->projectID)) {
+            $this->errorHandler->addTaggedError('project', 'The organisation already has this project');
+            $this->errorHandler->throwIfNotEmpty();
+        }
     }
 }
 

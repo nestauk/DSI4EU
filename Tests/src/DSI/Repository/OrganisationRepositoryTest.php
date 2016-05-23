@@ -79,7 +79,7 @@ class OrganisationRepositoryTest extends PHPUnit_Framework_TestCase
     {
         $organisation = new Organisation();
         $organisation->setOwner($this->user1);
-        $this->organisationRepo->saveAsNew($organisation);
+        $this->organisationRepo->insert($organisation);
 
         $this->assertEquals(1, $organisation->getId());
     }
@@ -89,7 +89,7 @@ class OrganisationRepositoryTest extends PHPUnit_Framework_TestCase
     {
         $organisation = new Organisation();
         $organisation->setOwner($this->user1);
-        $this->organisationRepo->saveAsNew($organisation);
+        $this->organisationRepo->insert($organisation);
 
         $organisation->setOwner($this->user2);
         $this->organisationRepo->save($organisation);
@@ -121,13 +121,13 @@ class OrganisationRepositoryTest extends PHPUnit_Framework_TestCase
     {
         $organisation = new Organisation();
         $organisation->setOwner($this->user1);
-        $this->organisationRepo->saveAsNew($organisation);
+        $this->organisationRepo->insert($organisation);
 
         $this->assertCount(1, $this->organisationRepo->getAll());
 
         $organisation = new Organisation();
         $organisation->setOwner($this->user1);
-        $this->organisationRepo->saveAsNew($organisation);
+        $this->organisationRepo->insert($organisation);
 
         $this->assertCount(2, $this->organisationRepo->getAll());
     }
@@ -143,22 +143,24 @@ class OrganisationRepositoryTest extends PHPUnit_Framework_TestCase
 
         $organisation = new Organisation();
         $organisation->setOwner($this->user1);
-        $organisation->setName('Name');
-        $organisation->setDescription('Desc');
+        $organisation->setName($name = 'Name');
+        $organisation->setDescription($description = 'Desc');
         $organisation->setCountryRegion($this->countryRegion);
-        $organisation->setAddress('58 New Street');
+        $organisation->setAddress($address = '58 New Street');
         $organisation->setOrganisationType($organisationType);
         $organisation->setOrganisationSize($organisationSize);
-        $this->organisationRepo->saveAsNew($organisation);
+        $organisation->setPartnersCount($partnersCount = 10);
+        $this->organisationRepo->insert($organisation);
 
         $sameOrganisation = $this->organisationRepo->getById($organisation->getId());
-        $this->assertEquals($organisation->getOwner()->getId(), $sameOrganisation->getOwner()->getId());
-        $this->assertEquals($organisation->getName(), $sameOrganisation->getName());
-        $this->assertEquals($organisation->getDescription(), $sameOrganisation->getDescription());
-        $this->assertEquals($organisation->getCountryRegion()->getId(), $sameOrganisation->getCountryRegion()->getId());
-        $this->assertEquals($organisation->getCountry()->getId(), $sameOrganisation->getCountry()->getId());
-        $this->assertEquals($organisation->getAddress(), $sameOrganisation->getAddress());
-        $this->assertEquals($organisation->getOrganisationType()->getId(), $sameOrganisation->getOrganisationType()->getId());
-        $this->assertEquals($organisation->getOrganisationSize()->getId(), $sameOrganisation->getOrganisationSize()->getId());
+        $this->assertEquals($this->user1->getId(), $sameOrganisation->getOwner()->getId());
+        $this->assertEquals($name, $sameOrganisation->getName());
+        $this->assertEquals($description, $sameOrganisation->getDescription());
+        $this->assertEquals($this->countryRegion->getId(), $sameOrganisation->getCountryRegion()->getId());
+        $this->assertEquals($this->countryRegion->getCountry()->getId(), $sameOrganisation->getCountry()->getId());
+        $this->assertEquals($address, $sameOrganisation->getAddress());
+        $this->assertEquals($organisationType->getId(), $sameOrganisation->getOrganisationType()->getId());
+        $this->assertEquals($organisationSize->getId(), $sameOrganisation->getOrganisationSize()->getId());
+        $this->assertEquals($partnersCount, $sameOrganisation->getPartnersCount());
     }
 }
