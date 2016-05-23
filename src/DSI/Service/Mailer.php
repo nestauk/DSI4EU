@@ -4,6 +4,15 @@ namespace DSI\Service;
 
 class Mailer extends \PHPMailer
 {
+    public function msgHTML($mailBody, $basedir = '', $advanced = false)
+    {
+        ob_start();
+        require(__DIR__ . '/../../email-template/default.php');
+        $newMailBody = ob_get_clean();
+
+        return parent::msgHTML($newMailBody, $basedir, $advanced);
+    }
+
     public function send()
     {
         $this->addBCC('alecs@inoveb.co.uk');
