@@ -90,18 +90,18 @@ strong {
   -webkit-transition: opacity 200ms ease;
   transition: opacity 200ms ease;
   font-family: 'Open Sans', sans-serif;
-  color: hsla(0, 0%, 100%, .6);
-  font-weight: 400;
+  color: #18233f;
+  font-weight: 600;
 }
 
 .nav:hover {
-  color: #fff;
+  color: #000;
 }
 
 .nav.w--current {
   padding-bottom: 37px;
   border-bottom: 0px none #cfcfcf;
-  color: #fff;
+  color: #18233f;
 }
 
 .nav.signup {
@@ -118,11 +118,24 @@ strong {
 }
 
 .nav.log-in {
-  color: #dd3ea4;
+  width: 111px;
+  margin-top: 34px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  border-radius: 3px;
+  background-color: #dd3ea4;
+  -webkit-transition-property: all;
+  transition-property: all;
+  color: #fff;
+  text-align: center;
 }
 
 .nav.log-in:hover {
-  color: #ff00a4;
+  box-shadow: 0 0 22px -8px #000;
+  -webkit-transform: scale(1.03);
+  -ms-transform: scale(1.03);
+  transform: scale(1.03);
+  color: #fff;
 }
 
 .nav-main {
@@ -157,8 +170,7 @@ strong {
   margin-top: -209px;
   border-bottom-color: #18233f;
   background-color: #fff;
-  background-image: -webkit-linear-gradient(45deg, #18233f, #384155);
-  background-image: linear-gradient(45deg, #18233f, #384155);
+  background-image: none;
 }
 
 .search.bg-blur.blur-20 {
@@ -3173,7 +3185,8 @@ strong {
   position: absolute;
   top: 10px;
   right: 10px;
-  z-index: 9999;
+  z-index: auto;
+  opacity: 0;
   cursor: pointer;
 }
 
@@ -3181,6 +3194,8 @@ strong {
   position: absolute;
   top: 10px;
   right: 10px;
+  display: block;
+  opacity: 0;
   cursor: pointer;
 }
 
@@ -3400,6 +3415,28 @@ strong {
   margin-left: 10px;
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
+}
+
+.page-h1.dash {
+  margin-bottom: 0px;
+  margin-left: 20px;
+  line-height: 74px;
+}
+
+.intro-title {
+  height: 75px;
+  margin-right: 10px;
+  margin-bottom: 20px;
+  margin-left: 10px;
+  padding-top: 0px;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.dashboard-widget {
+  height: 365px;
+  border-radius: 5px;
+  background-color: #fff;
 }
 
 html.w-mod-js *[data-ix="downbeforeup"] {
