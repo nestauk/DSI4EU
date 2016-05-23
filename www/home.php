@@ -1,4 +1,7 @@
-<?php require __DIR__ . '/header.php' ?>
+<?php
+$isHomePage = true;
+require __DIR__ . '/header.php';
+?>
 
     <div class="w-section homepage-hero">
         <div class="container-wide">

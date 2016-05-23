@@ -1,5 +1,6 @@
 <?php
 /** @var $loggedInUser \DSI\Entity\User */
+/** @var $isHomePage bool */
 ?>
 <!DOCTYPE html>
 <!-- Last Published: Tue Apr 26 2016 15:33:26 GMT+0000 (UTC) -->
@@ -345,9 +346,13 @@
 <div data-collapse="medium" data-animation="default" data-duration="400" class="w-nav nav-main">
     <div class="w-clearfix container-wide nav-container">
         <a href="<?php echo SITE_RELATIVE_PATH ?>/" class="w-nav-brand">
-            <img width="160" src="<?php echo SITE_RELATIVE_PATH ?>/images/logo-white.svg" class="brand">
+            <?php if (isset($isHomePage)) { ?>
+                <img width="160" src="<?php echo SITE_RELATIVE_PATH ?>/images/logo-white.svg" class="brand">
+            <?php } else { ?>
+                <img width="160" src="<?php echo SITE_RELATIVE_PATH ?>/images/logo-white-black-text.svg" class="brand">
+            <?php } ?>
         </a>
-        <nav role="navigation" class="w-nav-menu">
+        <nav role="navigation" class="w-nav-menu m-nav-open">
             <a href="<?php echo SITE_RELATIVE_PATH ?>/stories" class="w-nav-link nav">Stories</a>
             <a href="<?php echo SITE_RELATIVE_PATH ?>/projects" class="w-nav-link nav">Projects</a>
             <a href="<?php echo SITE_RELATIVE_PATH ?>/organisations" class="w-nav-link nav">Organisations</a>
@@ -355,7 +360,7 @@
             <?php if (!isset($_SESSION['user'])) { ?>
                 <a href="#" data-ix="showsignup" class="w-nav-link nav log-in">Log In</a>
             <?php } else { ?>
-                <a href="#" data-ix="showsignup" class="w-nav-link nav log-in">Create Project / Organisation</a>
+                <a href="#" data-ix="showsignup" class="w-nav-link nav log-in">Create +</a>
             <?php } ?>
         </nav>
         <div class="w-nav-button">
