@@ -4,6 +4,7 @@ require __DIR__ . '/header.php';
 /** @var $isOwner bool */
 /** @var $user \DSI\Entity\User */
 /** @var $projects \DSI\Entity\Project[] */
+/** @var $organisations \DSI\Entity\Organisation[] */
 ?>
     <script type="text/javascript">
         profileUserID = '<?php echo $userID?>';
@@ -119,6 +120,7 @@ require __DIR__ . '/header.php';
                                                         data-placeholder="Type your skill"
                                                         id="Add-skill" name="Add-skill"
                                                         class="w-input add-skill"
+                                                        multiple
                                                         style="width:200px">
                                                     <option></option>
                                                 </select>
@@ -210,7 +212,11 @@ require __DIR__ . '/header.php';
                             </div>
                             <?php if ($isOwner) { ?>
                                 <div class="join-project">
-                                    <a href="#" class="w-button btn btn-join">Join organisation +</a>
+                                    <a href="#" class="w-button btn btn-join"
+                                       ng-click="editPanel = 'joinOrganisation'"
+                                       data-ix="show-profile-update">
+                                        Join organisation +
+                                    </a>
                                 </div>
                             <?php } ?>
                         </div>
@@ -226,7 +232,7 @@ require __DIR__ . '/header.php';
                     <div data-ix="close-profile-update" class="close modal-close">+</div>
                     <img width="160" src="<?php echo SITE_RELATIVE_PATH ?>/images/logo-white.svg" class="modal-brand">
 
-                    <div style="padding-top:90px">
+                    <div style="padding:90px 0">
                         <div ng-show="editPanel == 'basicDetails'">
                             <h2 class="modal-h2">Update personal info</h2>
 
@@ -268,7 +274,6 @@ require __DIR__ . '/header.php';
                                 </form>
                             </div>
                         </div>
-
                         <div ng-show="editPanel == 'bio'">
                             <h2 class="modal-h2">Update biography</h2>
                             <div class="w-form login-form" style="margin-top:0">
@@ -296,7 +301,6 @@ require __DIR__ . '/header.php';
                                 </form>
                             </div>
                         </div>
-
                         <div ng-show="editPanel == 'joinProject'">
                             <h2 class="modal-h2">Join project</h2>
                             <div class="w-form login-form" style="margin-top:0">
@@ -311,7 +315,7 @@ require __DIR__ . '/header.php';
                                         <?php } ?>
                                     </select>
 
-                                    <br /><br />
+                                    <br/><br/>
 
                                     <div style="color:red" ng-show="joinProject.errors.project"
                                          ng-bind="joinProject.errors.project"></div>
@@ -338,22 +342,74 @@ require __DIR__ . '/header.php';
                                 </form>
                             </div>
                         </div>
+                        <div ng-show="editPanel == 'joinOrganisation'">
+                            <h2 class="modal-h2">Join Organisation</h2>
+                            <div class="w-form login-form" style="margin-top:0">
+                                <form ng-submit="joinOrganisation.submit()" id="joinOrganisationForm">
+                                    <select style="width:100%" data-placeholder="Select an organisation"
+                                            ng-model="joinOrganisation.data.organisation">
+                                        <option value=""></option>
+                                        <?php foreach ($organisations AS $organisation) { ?>
+                                            <option value="<?php echo $organisation->getId() ?>">
+                                                <?php echo show_input($organisation->getName()) ?>
+                                            </option>
+                                        <?php } ?>
+                                    </select>
 
-                        <br/><br/><br/>
+                                    <br/><br/>
+
+                                    <div style="color:red" ng-show="joinOrganisation.errors.organisation"
+                                         ng-bind="joinOrganisation.errors.organisation"></div>
+                                    <div style="color:red" ng-show="joinOrganisation.errors.member"
+                                         ng-bind="joinOrganisation.errors.member"></div>
+
+                                    <div style="color:green;" ng-show="joinOrganisation.success">
+                                        Your request to join the organisation has been successfully send.
+                                    </div>
+
+                                    <div class="cancel-save">
+                                        <div class="w-row">
+                                            <div class="w-col w-col-6">
+                                                <a href="#" data-ix="close-profile-update"
+                                                   class="w-button dsi-button cors cancel">Close</a>
+                                            </div>
+                                            <div class="w-col w-col-6">
+                                                <input type="submit" class="w-button dsi-button cors"
+                                                       ng-value="joinOrganisation.loading ? 'Saving...' : 'Join'"
+                                                       ng-disabled="joinOrganisation.loading"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         <?php } ?>
 
         <script type="text/javascript">
-            var joinProjectForm = $('#joinProjectForm');
-            $('select', joinProjectForm).select2();
-            $('.select2-selection', joinProjectForm).on('keyup', function (e) {
-                if (e.keyCode === 13) {
-                    angular.element('#UserController').scope().joinProject.submit();
-                    angular.element('#UserController').scope().$apply();
-                }
-            });
+            (function () {
+                var joinProjectForm = $('#joinProjectForm');
+                $('select', joinProjectForm).select2();
+                $('.select2-selection', joinProjectForm).on('keyup', function (e) {
+                    if (e.keyCode === 13) {
+                        angular.element('#UserController').scope().joinProject.submit();
+                        angular.element('#UserController').scope().$apply();
+                    }
+                });
+            }());
+
+            (function () {
+                var joinOrganisationForm = $('#joinOrganisationForm');
+                $('select', joinOrganisationForm).select2();
+                $('.select2-selection', joinOrganisationForm).on('keyup', function (e) {
+                    if (e.keyCode === 13) {
+                        angular.element('#UserController').scope().joinOrganisation.submit();
+                        angular.element('#UserController').scope().$apply();
+                    }
+                });
+            }());
         </script>
     </div>
 <?php require __DIR__ . '/footer.php' ?>
