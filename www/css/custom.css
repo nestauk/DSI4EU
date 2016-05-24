@@ -104,3 +104,14 @@ input.ng-invalid {
     background: #252F48;
     color: #F3F3F3;
 }
+
+.w-tab-pane.w--tab-active, .w-form.login-form, .forgotPasswordPanel, .forgotPasswordPanel form{
+    height:100%;
+}
+.forgotPasswordPanel form{
+    position:relative;
+}
+.modal-footer{
+    position: absolute;width:100%;
+    bottom:100px;
+}

@@ -148,7 +148,7 @@
                                     </button>
 
                                     <div class="w-row social-badges">
-                                        <div class="w-col w-col-3">
+                                        <div class="w-col w-col-3 w-col-small-3 w-col-tiny-3">
                                             <a href="<?php echo SITE_RELATIVE_PATH ?>/github-login"
                                                class="w-inline-block social-login">
                                                 <img width="100%" height="100%"
@@ -156,7 +156,7 @@
                                                      class="social-badge">
                                             </a>
                                         </div>
-                                        <div class="w-col w-col-3">
+                                        <div class="w-col w-col-3 w-col-small-3 w-col-tiny-3">
                                             <a href="<?php echo SITE_RELATIVE_PATH ?>/facebook-login"
                                                class="w-inline-block social-login">
                                                 <img width="100%" height="100%"
@@ -164,7 +164,7 @@
                                                      class="social-badge">
                                             </a>
                                         </div>
-                                        <div class="w-col w-col-3">
+                                        <div class="w-col w-col-3 w-col-small-3 w-col-tiny-3">
                                             <a href="<?php echo SITE_RELATIVE_PATH ?>/google-login"
                                                class="w-inline-block social-login">
                                                 <img width="100%" height="100%"
@@ -172,7 +172,7 @@
                                                      class="social-badge">
                                             </a>
                                         </div>
-                                        <div class="w-col w-col-3">
+                                        <div class="w-col w-col-3 w-col-small-3 w-col-tiny-3">
                                             <a href="<?php echo SITE_RELATIVE_PATH ?>/twitter-login"
                                                class="w-inline-block social-login">
                                                 <img width="100%" height="100%"
@@ -183,10 +183,10 @@
                                     </div>
                                 </form>
                             </div>
-                            <div ng-show="forgotPassword.show">
-                                <form ng-hide="forgotPassword.complete" id="email-form" name="email-form"
-                                      data-name="Email Form"
-                                      ng-submit="forgotPasswordSubmit()">
+                            <div ng-show="forgotPassword.show" class="forgotPasswordPanel">
+                                <form ng-hide="forgotPassword.complete"
+                                      ng-submit="forgotPasswordSubmit()"
+                                      autocomplete="off">
                                     <input type="email" placeholder="Enter your email address"
                                            name="email"
                                            class="w-input login-field"
@@ -229,17 +229,20 @@
 
                                     </div>
 
-                                    <input type="submit" class="w-button login-button"
-                                           ng-disabled="forgotPassword.loading"
-                                           ng-value="forgotPassword.loading ? 'Loading...' : 'Reset my password'">
+                                    <div class="modal-footer">
+                                        <input type="submit" class="w-button login-button"
+                                               ng-disabled="forgotPassword.loading"
+                                               ng-value="forgotPassword.loading ? 'Loading...' : 'Reset my password'">
 
-                                    <a href="#" class="forgotten-password"
-                                       ng-click="forgotPassword = {}">
-                                        Back to login
-                                    </a>
+                                        <a href="#" class="forgotten-password"
+                                           ng-click="forgotPassword = {}">
+                                            Back to login
+                                        </a>
+                                    </div>
+
                                 </form>
                                 <div ng-show="forgotPassword.complete"
-                                     style="font-size:20px;line-height:50px;padding-top:70px">
+                                     style="font-size:18px;line-height:24px;padding-top:70px">
                                     Your password has changed.<br/>
                                     <a href="#"
                                        ng-click="forgotPassword = {}">
