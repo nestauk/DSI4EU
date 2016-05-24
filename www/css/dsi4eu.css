@@ -3320,6 +3320,10 @@ strong {
   color: #fff;
 }
 
+.dsi-button.top-filter {
+  background-color: #fff;
+}
+
 .cancel-save {
   position: absolute;
   right: 10px;
