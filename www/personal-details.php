@@ -3,7 +3,7 @@ require __DIR__ . '/header.php';
 /** @var $user \DSI\Entity\User */
 ?>
     <script type="text/javascript" src="<?php echo SITE_RELATIVE_PATH?>/js/controllers/PersonalDetailsController.js"></script>
-    <script type="text/javascript" src="<?php echo SITE_RELATIVE_PATH?>/js/controllers/UploadImageController.js"></script>
+    <?php /* <script type="text/javascript" src="<?php echo SITE_RELATIVE_PATH?>/js/controllers/UploadImageController.js"></script> */?>
     <script type="text/javascript" src="<?php echo SITE_RELATIVE_PATH?>/js/controllers/UpdatePasswordController.js"></script>
     <div>
 
@@ -41,7 +41,7 @@ require __DIR__ . '/header.php';
 
         <div class="w-container body-container">
             <div class="body-content">
-                <div ng-controller="UploadImageController">
+                <div>
                     <style>
                         .thumb {
                             width: 24px;
@@ -67,15 +67,15 @@ require __DIR__ . '/header.php';
                             width: 0;
                         }
                     </style>
+
+
                     <h2 class="login-h2">Personal details</h2>
                     <img
-                        src="<?php echo SITE_RELATIVE_PATH?>/images/users/profile/<?php echo $user->getProfilePic() ?? '0.svg' ?>"
-                        ng-src="<?php echo SITE_RELATIVE_PATH?>/images/users/profile/{{user.profilePic || '0.svg'}}"
+                        src="<?php echo SITE_RELATIVE_PATH?>/images/users/profile/<?php echo $user->getProfilePicOrDefault() ?>"
+                        ng-src="<?php echo SITE_RELATIVE_PATH?>/images/users/profile/{{user.profilePic}}"
                         class="profile-image-upload">
-                    <div ngf-select="uploadFiles($file, $invalidFiles)" accept="image/*"
-                         class="update-profile-image">Update profile image
-                    </div>
 
+                    <?php /*
                     <div class="update-profile-image">
                         <div style="font:smaller">
                             <span ng-bind="{{errFile.name}}"></span>
@@ -88,6 +88,7 @@ require __DIR__ . '/header.php';
                         </div>
                         <div style="color:red" ng-bind="{{errorMsg.file}}"></div>
                     </div>
+                    */?>
                 </div>
 
                 <div ng-controller="PersonalDetailsController">

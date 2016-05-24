@@ -40,7 +40,7 @@ require __DIR__ . '/header.php';
             <div class="partner-logos">
                 <div class="partner">
                     <a href="#" class="w-inline-block partner-hp-link">
-                        <img src="<?php echo SITE_RELATIVE_PATH ?>/images/nesta-6a9b5fe999e8323b379ccc0d8e70290f_1.png">
+                        <img src="<?php echo SITE_RELATIVE_PATH ?>/images/nesta-6a9b5fe999e8323b379ccc0d8e70290f.png">
                     </a>
                 </div>
                 <div class="partner">
@@ -78,7 +78,7 @@ require __DIR__ . '/header.php';
                 <div class="partner">
                     <a href="#" class="w-inline-block partner-hp-link">
                         <img
-                            src="<?php echo SITE_RELATIVE_PATH ?>/images/future-everything-2f261cf2d078264179fd82b21e5927b7_1.png">
+                            src="<?php echo SITE_RELATIVE_PATH ?>/images/future-everything-2f261cf2d078264179fd82b21e5927b7.png">
                     </a>
                 </div>
             </div>
