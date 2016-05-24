@@ -22,7 +22,7 @@ app.controller('LoginController', function ($scope, $http, $timeout) {
                 } else if (response.data.response == 'ok') {
                     $scope.loggedin = true;
                     $timeout(function () {
-                        window.location.href = SITE_RELATIVE_PATH + "/";
+                        window.location.href = SITE_RELATIVE_PATH + "/my-profile";
                     }, 500);
                 }
             },
@@ -126,7 +126,7 @@ app.controller('RegisterController', function ($scope, $http, $timeout) {
                     } else if (response.data.response == 'ok') {
                         $scope.registered = true;
                         $timeout(function () {
-                            window.location.href = SITE_RELATIVE_PATH + "/";
+                            window.location.href = SITE_RELATIVE_PATH + "/my-profile";
                         }, 1000);
                     }
                 },

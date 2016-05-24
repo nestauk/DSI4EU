@@ -362,10 +362,10 @@
             <a href="<?php echo SITE_RELATIVE_PATH ?>/stories" class="w-nav-link nav">Stories</a>
             <a href="<?php echo SITE_RELATIVE_PATH ?>/projects" class="w-nav-link nav">Projects</a>
             <a href="<?php echo SITE_RELATIVE_PATH ?>/organisations" class="w-nav-link nav">Organisations</a>
-            <a href="<?php echo SITE_RELATIVE_PATH ?>/my-profile" class="w-nav-link nav">Profile</a>
             <?php if (!isset($_SESSION['user'])) { ?>
                 <a href="#" data-ix="showsignup" class="w-nav-link nav log-in">Log In</a>
             <?php } else { ?>
+                <a href="<?php echo SITE_RELATIVE_PATH ?>/my-profile" class="w-nav-link nav">Profile</a>
                 <a href="#" data-ix="showsignup" class="w-nav-link nav log-in">Create +</a>
             <?php } ?>
         </nav>
@@ -384,12 +384,16 @@
                     <?php if (isset($loggedInUser)) { ?>
                         <div class="profile-popover bg-blur">
                             <a href="<?php echo SITE_RELATIVE_PATH ?>/my-profile" data-ix="popoverfadeout"
-                               class="popover-link">View
-                                profile</a>
+                               class="popover-link">
+                                View profile
+                            </a>
                             <a href="<?php echo SITE_RELATIVE_PATH ?>/personal-details" data-ix="popoverfadeout"
-                               class="popover-link">Edit Profile</a>
-                            <a href="<?php echo SITE_RELATIVE_PATH ?>/logout" class="popover-link">Sign
-                                out</a>
+                               class="popover-link">
+                                Edit Profile
+                            </a>
+                            <a href="<?php echo SITE_RELATIVE_PATH ?>/logout" class="popover-link">
+                                Sign out
+                            </a>
                         </div>
                         <img width="15" src="<?php echo SITE_RELATIVE_PATH ?>/images/white-settings.png"
                              data-ix="showpopover"
