@@ -13,7 +13,7 @@ class URL
 {
     public static function myProfile()
     {
-        return SITE_RELATIVE_PATH . '/my_profile';
+        return SITE_RELATIVE_PATH . '/my-profile';
     }
 
     public static function login()
