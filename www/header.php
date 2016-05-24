@@ -107,7 +107,8 @@
             <div class="modal-header"></div>
             <div data-ix="destroysignup" class="close modal-close">+</div>
             <img width="160" src="<?php echo SITE_RELATIVE_PATH ?>/images/logo-white.svg" class="modal-brand">
-            <div data-duration-in="300" data-duration-out="100" data-easing="ease-in-out" class="w-tabs">
+            <div data-duration-in="300" data-duration-out="100" data-easing="ease-in-out"
+                 class="w-tabs modal-push-buttons">
                 <div class="w-tab-menu tabs-menu">
                     <a data-w-tab="Tab 1" class="w-tab-link w--current w-inline-block tab">
                         <div>Login</div>

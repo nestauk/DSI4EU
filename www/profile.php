@@ -50,8 +50,8 @@ require __DIR__ . '/header.php';
                                     <img src="<?php echo SITE_RELATIVE_PATH ?>/images/pin.png" class="card-pin">
                                     <div class="card-city"
                                          ng-bind="user.location"><?php echo $user->getLocation() ?></div>
-                                    <div class="profile-bg-img el-blur"></div>
-                                    <div class="header-card-overlay">
+                                    <div class="profile-bg-img el-blur" style="background:#666"></div>
+                                    <div data-ix="show-edit-light" class="header-card-overlay">
                                         <h1 class="profile-card-h1">
                                             <span ng-bind="user.firstName"><?php echo $user->getFirstName() ?></span>
                                             <span ng-bind="user.lastName"><?php echo $user->getLastName() ?></span>
@@ -95,7 +95,7 @@ require __DIR__ . '/header.php';
                                     </div>
                                 </div>
                             </div>
-                            <div class="info-card">
+                            <div data-ix="show-edit-dark" class="info-card">
                                 <h3 class="info-h card-h">About me</h3>
                                 <p class="project-summary" ng-bind="user.bio" style="white-space: pre-line">
                                     <?php echo nl2br(show_input($user->getBio())) ?>
@@ -109,13 +109,13 @@ require __DIR__ . '/header.php';
                                         <div ng-bind="skill"></div>
                                     </div>
                                     <?php if ($isOwner) { ?>
-                                        <div class="add-item-block" ng-click="addSkill = !addSkill">
+                                        <div class="add-item-block" ng-click="showAddSkill = !showAddSkill">
                                             <div class="add-item">+</div>
                                         </div>
                                         <div class="w-form" style="float:left;margin-top:-17px"
-                                             ng-show="addSkill">
+                                             ng-show="showAddSkill">
                                             <form id="email-form" name="email-form" data-name="Email Form"
-                                                  class="w-clearfix add-skill-section" ng-submit="addSkills()">
+                                                  class="w-clearfix add-skill-section">
                                                 <select data-tags="true"
                                                         data-placeholder="Type your skill"
                                                         id="Add-skill" name="Add-skill"
@@ -124,8 +124,10 @@ require __DIR__ . '/header.php';
                                                         style="width:200px">
                                                     <option></option>
                                                 </select>
+                                                <?php /*
                                                 <input type="submit" value="Add" data-wait="Please wait..."
                                                        class="w-button add-skill-btn">
+                                                */ ?>
                                             </form>
                                         </div>
                                     <?php } ?>
@@ -139,23 +141,26 @@ require __DIR__ . '/header.php';
                                         <div ng-bind="lang"></div>
                                     </div>
                                     <?php if ($isOwner) { ?>
-                                        <div class="add-item-block" ng-click="addLanguage = !addLanguage">
+                                        <div class="add-item-block" ng-click="showAddLanguage = !showAddLanguage">
                                             <div class="add-item">+</div>
                                         </div>
 
                                         <div class="w-form" style="float:left;margin-top:-17px"
-                                             ng-show="addLanguage">
+                                             ng-show="showAddLanguage">
                                             <form id="email-form" name="email-form" data-name="Email Form"
                                                   class="w-clearfix add-skill-section"
-                                                  ng-submit="addLanguages()">
-                                                <select data-placeholder="Select your language"
-                                                        id="Add-language" name="Add-language"
-                                                        class="w-input add-language"
-                                                        style="width:200px">
-                                                    <option></option>
-                                                </select>
+                                            ">
+                                            <select data-placeholder="Select your language"
+                                                    id="Add-language" name="Add-language"
+                                                    class="w-input add-language"
+                                                    multiple
+                                                    style="width:200px">
+                                                <option></option>
+                                            </select>
+                                            <?php /*
                                                 <input type="submit" value="Add"
                                                        class="w-button add-skill-btn">
+                                                */ ?>
                                             </form>
                                         </div>
                                     <?php } ?>

@@ -105,13 +105,16 @@ input.ng-invalid {
     color: #F3F3F3;
 }
 
-.w-tab-content .w-tab-pane, .w-form.login-form, .w-tab-screen, .w-form.login-form form{
+.modal-push-buttons .w-tab-content .w-tab-pane,
+.modal-push-buttons .w-form.login-form,
+.modal-push-buttons .w-tab-screen,
+.modal-push-buttons .w-form.login-form form{
     height:100%;
 }
-.w-form.login-form form{
+.modal-push-buttons .w-form.login-form form{
     position:relative;
 }
-.modal-footer{
+.modal-push-buttons .modal-footer{
     position: absolute;width:100%;
     bottom:100px;
 }
