@@ -954,6 +954,7 @@ strong {
 
 .card-p.notification-stat {
   margin-bottom: 20px;
+  font-weight: 600;
 }
 
 .date {
@@ -3314,6 +3315,11 @@ strong {
   right: 115px;
 }
 
+.dsi-button.create {
+  background-color: #dd3ea4;
+  color: #fff;
+}
+
 .cancel-save {
   position: absolute;
   right: 10px;
@@ -3514,6 +3520,7 @@ strong {
   overflow: visible;
   height: auto;
   min-height: 365px;
+  margin-bottom: 20px;
   padding-bottom: 20px;
   border-radius: 5px;
   background-color: #fff;
@@ -3641,6 +3648,10 @@ strong {
   font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
+}
+
+.create-or-join {
+  margin-bottom: 20px;
 }
 
 html.w-mod-js *[data-ix="downbeforeup"] {
