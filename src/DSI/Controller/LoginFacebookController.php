@@ -41,7 +41,7 @@ class LoginFacebookController
                     $facebookLogin->data()->facebookUID = $user->getId();
                     $facebookLogin->exec();
                     $authUser->saveUserInSession($facebookLogin->getUser());
-                    go_to(URL::home());
+                    go_to(URL::myProfile());
                 } else {
                     $facebookLogin = new FacebookRegister();
                     $facebookLogin->data()->facebookUID = $user->getId();
@@ -50,7 +50,7 @@ class LoginFacebookController
                     $facebookLogin->data()->email = $user->getEmail();
                     $facebookLogin->exec();
                     $authUser->saveUserInSession($facebookLogin->getUser());
-                    go_to(URL::home());
+                    go_to(URL::myProfile());
                 }
             } catch (\Exception $e) {
                 pr($e);
