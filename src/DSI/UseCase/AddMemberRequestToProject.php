@@ -38,20 +38,9 @@ class AddMemberRequestToProject
         $this->projectRepository = new ProjectRepository();
         $this->userRepository = new UserRepository();
 
-        if ((new ProjectMemberRepository())->projectHasMember($this->data()->projectID, $this->data()->userID)) {
-            $this->errorHandler->addTaggedError('member', 'This user is already a member of the project');
-            $this->errorHandler->throwIfNotEmpty();
-        }
-
-        if ($this->projectMemberRequestRepo->projectHasRequestFromMember($this->data()->projectID, $this->data()->userID)) {
-            $this->errorHandler->addTaggedError('member', 'This user has already made a request to join the project');
-            $this->errorHandler->throwIfNotEmpty();
-        }
-
-        $projectMemberRequest = new ProjectMemberRequest();
-        $projectMemberRequest->setMember($this->userRepository->getById($this->data()->userID));
-        $projectMemberRequest->setProject($this->projectRepository->getById($this->data()->projectID));
-        $this->projectMemberRequestRepo->add($projectMemberRequest);
+        $this->checkIfProjectAlreadyHasTheMember();
+        $this->checkIfThereIsAlreadyARequestFromTheUser();
+        $this->addMemberRequest();
     }
 
     /**
@@ -60,6 +49,30 @@ class AddMemberRequestToProject
     public function data()
     {
         return $this->data;
+    }
+
+    private function checkIfProjectAlreadyHasTheMember()
+    {
+        if ((new ProjectMemberRepository())->projectHasMember($this->data()->projectID, $this->data()->userID)) {
+            $this->errorHandler->addTaggedError('member', 'This user is already a member of the project');
+            $this->errorHandler->throwIfNotEmpty();
+        }
+    }
+
+    private function checkIfThereIsAlreadyARequestFromTheUser()
+    {
+        if ($this->projectMemberRequestRepo->projectHasRequestFromMember($this->data()->projectID, $this->data()->userID)) {
+            $this->errorHandler->addTaggedError('member', 'This user has already made a request to join the project');
+            $this->errorHandler->throwIfNotEmpty();
+        }
+    }
+
+    private function addMemberRequest()
+    {
+        $projectMemberRequest = new ProjectMemberRequest();
+        $projectMemberRequest->setMember($this->userRepository->getById($this->data()->userID));
+        $projectMemberRequest->setProject($this->projectRepository->getById($this->data()->projectID));
+        $this->projectMemberRequestRepo->add($projectMemberRequest);
     }
 }
 

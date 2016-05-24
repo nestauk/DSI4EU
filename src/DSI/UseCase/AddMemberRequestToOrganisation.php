@@ -3,6 +3,7 @@
 namespace DSI\UseCase;
 
 use DSI\Entity\OrganisationMemberRequest;
+use DSI\Repository\OrganisationMemberRepository;
 use DSI\Repository\OrganisationMemberRequestRepository;
 use DSI\Repository\OrganisationRepository;
 use DSI\Repository\UserRepository;
@@ -37,15 +38,9 @@ class AddMemberRequestToOrganisation
         $this->organisationRepository = new OrganisationRepository();
         $this->userRepository = new UserRepository();
 
-        if ($this->organisationMemberRequestRepo->organisationHasRequestFromMember($this->data()->organisationID, $this->data()->userID)) {
-            $this->errorHandler->addTaggedError('member', 'This user has already made a request to join the organisation');
-            $this->errorHandler->throwIfNotEmpty();
-        }
-
-        $organisationMemberRequest = new OrganisationMemberRequest();
-        $organisationMemberRequest->setMember($this->userRepository->getById($this->data()->userID));
-        $organisationMemberRequest->setOrganisation($this->organisationRepository->getById($this->data()->organisationID));
-        $this->organisationMemberRequestRepo->add($organisationMemberRequest);
+        $this->checkIfOrganisationAlreadyHasTheMember();
+        $this->checkIfThereIsAlreadyARequestFromTheUser();
+        $this->addMemberRequest();
     }
 
     /**
@@ -54,6 +49,30 @@ class AddMemberRequestToOrganisation
     public function data()
     {
         return $this->data;
+    }
+
+    private function checkIfOrganisationAlreadyHasTheMember()
+    {
+        if ((new OrganisationMemberRepository())->organisationHasMember($this->data()->organisationID, $this->data()->userID)) {
+            $this->errorHandler->addTaggedError('member', 'This user is already a member of the organisation');
+            $this->errorHandler->throwIfNotEmpty();
+        }
+    }
+
+    private function checkIfThereIsAlreadyARequestFromTheUser()
+    {
+        if ($this->organisationMemberRequestRepo->organisationHasRequestFromMember($this->data()->organisationID, $this->data()->userID)) {
+            $this->errorHandler->addTaggedError('member', 'This user has already made a request to join the organisation');
+            $this->errorHandler->throwIfNotEmpty();
+        }
+    }
+
+    private function addMemberRequest()
+    {
+        $organisationMemberRequest = new OrganisationMemberRequest();
+        $organisationMemberRequest->setMember($this->userRepository->getById($this->data()->userID));
+        $organisationMemberRequest->setOrganisation($this->organisationRepository->getById($this->data()->organisationID));
+        $this->organisationMemberRequestRepo->add($organisationMemberRequest);
     }
 }
 

@@ -5,6 +5,7 @@ namespace DSI\Controller;
 use DSI\Entity\OrganisationMember;
 use DSI\Entity\ProjectMember;
 use DSI\Repository\OrganisationMemberRepository;
+use DSI\Repository\OrganisationRepository;
 use DSI\Repository\ProjectMemberRepository;
 use DSI\Repository\ProjectRepository;
 use DSI\Repository\UserLanguageRepository;
@@ -16,6 +17,8 @@ use DSI\Service\ErrorHandler;
 use DSI\Service\URL;
 use DSI\UseCase\AddLanguageToUser;
 use DSI\UseCase\AddLinkToUser;
+use DSI\UseCase\AddMemberRequestToOrganisation;
+use DSI\UseCase\AddMemberRequestToProject;
 use DSI\UseCase\AddSkillToUser;
 use DSI\UseCase\RemoveLanguageFromUser;
 use DSI\UseCase\RemoveLinkFromUser;
@@ -106,10 +109,17 @@ class ProfileController
                         echo json_encode(['code' => 'ok']);
                         return;
                     } elseif (isset($_POST['joinProject'])) {
-                        $joinProject = new \DSI\UseCase\AddMemberRequestToProject();
+                        $joinProject = new AddMemberRequestToProject();
                         $joinProject->data()->projectID = $_POST['project'];
                         $joinProject->data()->userID = $loggedInUser->getId();
                         $joinProject->exec();
+                        echo json_encode(['code' => 'ok']);
+                        return;
+                    } elseif (isset($_POST['joinOrganisation'])) {
+                        $joinOrganisation = new AddMemberRequestToOrganisation();
+                        $joinOrganisation->data()->organisationID = $_POST['organisation'];
+                        $joinOrganisation->data()->userID = $loggedInUser->getId();
+                        $joinOrganisation->exec();
                         echo json_encode(['code' => 'ok']);
                         return;
                     }
@@ -136,49 +146,24 @@ class ProfileController
                     'projects' => array_map(function (ProjectMember $projectMember) use ($projectMemberRepo) {
                         $project = $projectMember->getProject();
                         return [
-                            //'id' => $project->getId(),
                             'name' => $project->getName(),
-                            //'description' => $project->getDescription(),
                             'url' => URL::project($project->getId(), $project->getName()),
                             'membersCount' => count($projectMemberRepo->getByProjectID($project->getId())),
-                            /*
-                            'members' => array_map(function (ProjectMember $projectMember) {
-                                $user = $projectMember->getMember();
-                                return [
-                                    'id' => $user->getId(),
-                                    'name' => $user->getFirstName() . ' ' . $user->getLastName(),
-                                    'profilePic' => $user->getProfilePicOrDefault(),
-                                    'url' => URL::profile($user->getId()),
-                                ];
-                            }, $projectMemberRepo->getByProjectID($project->getId())),
-                            */
                         ];
                     }, $projectMemberRepo->getByMemberID($user->getId())),
                     'organisations' => array_map(function (OrganisationMember $organisationMember) use ($organisationMemberRepo) {
                         $organisation = $organisationMember->getOrganisation();
                         return [
-                            // 'id' => $organisation->getId(),
                             'name' => $organisation->getName(),
-                            // 'description' => $organisation->getDescription(),
                             'url' => URL::organisation($organisation->getId(), $organisation->getName()),
                             'membersCount' => count($organisationMemberRepo->getByOrganisationID($organisation->getId())),
-                            /*
-                            'members' => array_map(function (OrganisationMember $projectMember) {
-                                $user = $projectMember->getMember();
-                                return [
-                                    'id' => $user->getId(),
-                                    'name' => $user->getFirstName() . ' ' . $user->getLastName(),
-                                    'profilePic' => $user->getProfilePicOrDefault(),
-                                    'url' => URL::profile($user->getId()),
-                                ];
-                            }, $organisationMemberRepo->getByOrganisationID($organisation->getId())),
-                            */
                         ];
                     }, $organisationMemberRepo->getByMemberID($user->getId())),
                 ],
             ]);
         } else {
             $projects = (new ProjectRepository())->getAll();
+            $organisations = (new OrganisationRepository())->getAll();
             require __DIR__ . '/../../../www/profile.php';
         }
     }

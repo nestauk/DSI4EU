@@ -370,16 +370,18 @@ require __DIR__ . '/header.php';
                                 <div style="clear:both"></div>
                             </h3>
 
-                            <form ng-show="addingMember" ng-submit="addMember()">
+                            <form ng-show="addingMember" style="padding-left:20px">
                                 <label>
                                     Select new member:
+
                                     <select data-tags="true"
-                                            data-placeholder="Select new member"
-                                            id="Add-member"
-                                            style="width:150px">
+                                            data-placeholder="Add a new member"
+                                            id="Add-member" name="Add-member"
+                                            class="w-input add-skill"
+                                            multiple="multiple"
+                                            style="width:200px">
                                         <option></option>
                                     </select>
-                                    <input type="submit" value="Add" class="w-button add-skill-btn">
                                 </label>
                             </form>
 
@@ -615,7 +617,8 @@ require __DIR__ . '/header.php';
                             <div ng-show="project.posts.length > 1">
                                 <h3 class="info-h card-h">Previous posts</h3>
 
-                                <div class="w-clearfix project-post" ng-repeat="post in project.posts" ng-if="$index > 0">
+                                <div class="w-clearfix project-post" ng-repeat="post in project.posts"
+                                     ng-if="$index > 0">
                                     <div class="post-author">
                                         <img width="40" height="40" class="post-author-img"
                                              ng-src="<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/{{post.user.profilePic}}">
