@@ -3320,6 +3320,15 @@ strong {
   color: #fff;
 }
 
+.dsi-button.top-filter {
+  background-color: #fff;
+}
+
+.dsi-button.top-filter:hover {
+  position: relative;
+  z-index: 8;
+}
+
 .cancel-save {
   position: absolute;
   right: 10px;
@@ -4212,6 +4221,9 @@ html.w-mod-js *[data-ix="hide-cancel-or-save"] {
     margin-right: auto;
     margin-left: auto;
     text-align: center;
+  }
+  .dsi-button.top-filter {
+    margin-bottom: 10px;
   }
   .card-thin {
     height: 190px;
