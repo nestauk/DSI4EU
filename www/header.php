@@ -119,7 +119,7 @@
                 <div class="w-tab-content tabs-content">
                     <div data-w-tab="Tab 1" class="w-tab-pane w--tab-active" ng-controller="LoginController">
                         <div class="w-form login-form">
-                            <div ng-hide="forgotPassword.show">
+                            <div ng-hide="forgotPassword.show" class="w-tab-screen">
                                 <form id="email-form" name="email-form" data-name="Email Form" ng-submit="onSubmit()">
                                     <input type="email" placeholder="Enter your email address"
                                            name="email"
@@ -183,7 +183,7 @@
                                     </div>
                                 </form>
                             </div>
-                            <div ng-show="forgotPassword.show" class="forgotPasswordPanel">
+                            <div ng-show="forgotPassword.show" class="w-tab-screen">
                                 <form ng-hide="forgotPassword.complete"
                                       ng-submit="forgotPasswordSubmit()"
                                       autocomplete="off">
@@ -267,16 +267,18 @@
                                        ng-model="password.value"
                                        ng-class="{error: errors.password}">
                                 <div style="color:red" ng-show="errors.password" ng-bind="errors.password"></div>
-                                <div ng-hide="registered">
-                                    <input ng-hide="loading" type="submit" value="Register"
-                                           class="w-button login-button register">
-                                    <button ng-show="loading" type="button" class="w-button login-button register">
-                                        Loading...
+
+                                <div class="modal-footer">
+                                    <div ng-hide="registered">
+                                        <input type="submit"
+                                               ng-disabled="loading"
+                                               ng-value="loading ? 'Loading...' : 'Register'"
+                                               class="w-button login-button register">
+                                    </div>
+                                    <button ng-show="registered" type="button" class="w-button login-button register">
+                                        Welcome to Digital Social!
                                     </button>
                                 </div>
-                                <button ng-show="registered" type="button" class="w-button login-button register">
-                                    Welcome to Digital Social!
-                                </button>
                             </form>
                         </div>
                     </div>

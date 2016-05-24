@@ -110,29 +110,31 @@ app.controller('RegisterController', function ($scope, $http, $timeout) {
         $scope.loading = true;
         $scope.errors = {};
 
-        var data = {
-            email: $scope.email.value,
-            password: $scope.password.value,
-            register: true
-        };
+        $timeout(function () {
+            var data = {
+                email: $scope.email.value,
+                password: $scope.password.value,
+                register: true
+            };
 
-        $http.post(SITE_RELATIVE_PATH + '/register.json', data).then(
-            function (response) {
-                console.log(data);
-                $scope.loading = false;
-                if (response.data.response == 'error') {
-                    $scope.errors = response.data.errors;
-                } else if (response.data.response == 'ok') {
-                    $scope.registered = true;
-                    $timeout(function () {
-                        window.location.href = SITE_RELATIVE_PATH + "/";
-                    }, 1000);
+            $http.post(SITE_RELATIVE_PATH + '/register.json', data).then(
+                function (response) {
+                    console.log(data);
+                    $scope.loading = false;
+                    if (response.data.response == 'error') {
+                        $scope.errors = response.data.errors;
+                    } else if (response.data.response == 'ok') {
+                        $scope.registered = true;
+                        $timeout(function () {
+                            window.location.href = SITE_RELATIVE_PATH + "/";
+                        }, 1000);
+                    }
+                },
+                function (response) {
+                    $scope.loading = false;
+                    alert(response);
                 }
-            },
-            function (response) {
-                $scope.loading = false;
-                alert(response);
-            }
-        )
+            )
+        }, 500);
     }
 });

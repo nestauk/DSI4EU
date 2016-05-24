@@ -105,10 +105,10 @@ input.ng-invalid {
     color: #F3F3F3;
 }
 
-.w-tab-pane.w--tab-active, .w-form.login-form, .forgotPasswordPanel, .forgotPasswordPanel form{
+.w-tab-content .w-tab-pane, .w-form.login-form, .w-tab-screen, .w-form.login-form form{
     height:100%;
 }
-.forgotPasswordPanel form{
+.w-form.login-form form{
     position:relative;
 }
 .modal-footer{
