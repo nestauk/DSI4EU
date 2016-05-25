@@ -448,9 +448,9 @@ strong {
 }
 
 .info-card {
-  position: relative;
+  position: static;
   overflow: visible;
-  min-height: 190px;
+  min-height: auto;
   margin-bottom: 20px;
   padding-top: 10px;
   padding-bottom: 20px;
@@ -1849,6 +1849,7 @@ strong {
   position: relative;
   width: 100%;
   height: 60px;
+  margin-bottom: 10px;
   padding: 10px;
   border-radius: 5px;
   -webkit-transition: all 200ms ease;
@@ -2177,6 +2178,7 @@ strong {
 }
 
 .project-post {
+  position: static;
   min-height: auto;
   margin-bottom: 20px;
 }
@@ -3703,7 +3705,7 @@ strong {
   position: absolute;
   left: -53px;
   top: -17px;
-  z-index: auto;
+  z-index: 1;
   width: 150px;
   padding-top: 5px;
   padding-bottom: 5px;
@@ -3713,6 +3715,98 @@ strong {
   opacity: 0;
   font-family: 'Open Sans', sans-serif;
   text-align: center;
+}
+
+.post-comments {
+  position: static;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  height: auto;
+  padding-top: 20px;
+  padding-right: 10px;
+  padding-bottom: 20px;
+  background-color: #f7f7f7;
+}
+
+.comment {
+  position: static;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+.commentor-img {
+  width: 40px;
+  float: left;
+  border-radius: 20px;
+}
+
+.commentor-img.commentor-reply-img {
+  width: 30px;
+  margin-left: 5px;
+}
+
+.commentor-name {
+  margin-left: 12px;
+  float: left;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.commentor-name.commentor-reply {
+  margin-left: 5px;
+  font-size: 9px;
+}
+
+.reply {
+  margin-left: 10px;
+  float: left;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12px;
+}
+
+.post-comment {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.post-comment.reply-comment {
+  padding-left: 10px;
+}
+
+.post-comment.comment-original-post {
+  font-weight: 600;
+}
+
+.add-comment {
+  margin-right: 10px;
+  margin-left: 7px;
+  border-style: none;
+  border-radius: 3px;
+  background-color: #e2e2e2;
+}
+
+.reply-cols {
+  margin-bottom: 20px;
+  padding-left: 50px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.comment-original {
+  margin-bottom: 20px;
+}
+
+.reply-col-1 {
+  height: auto;
+  padding-left: 0px;
+  border-left: 2px solid #e7e7e7;
+}
+
+.reply-input {
+  display: none;
+  padding-left: 52px;
 }
 
 html.w-mod-js *[data-ix="downbeforeup"] {
