@@ -3316,6 +3316,7 @@ strong {
 }
 
 .dsi-button.create {
+  width: 80%;
   background-color: #dd3ea4;
   color: #fff;
 }
@@ -3327,6 +3328,10 @@ strong {
 .dsi-button.top-filter:hover {
   position: relative;
   z-index: 8;
+}
+
+.dsi-button.dash-join {
+  width: 80%;
 }
 
 .cancel-save {
