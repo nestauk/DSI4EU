@@ -3,7 +3,6 @@
 namespace DSI\UseCase;
 
 use DSI\Entity\PasswordRecovery;
-use DSI\Entity\User;
 use DSI\NotEnoughData;
 use DSI\Repository\PasswordRecoveryRepository;
 use DSI\Repository\UserRepository;

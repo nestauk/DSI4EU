@@ -20,6 +20,7 @@ use DSI\Repository\UserRepository;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\URL;
+use DSI\UseCase\AddEmailToProject;
 use DSI\UseCase\AddImpactTagAToProject;
 use DSI\UseCase\AddImpactTagBToProject;
 use DSI\UseCase\AddImpactTagCToProject;
@@ -181,13 +182,39 @@ class ProjectController
                     die();
                 }
 
+                if (isset($_POST['addEmail'])) {
+                    $addEmailToProject = new AddEmailToProject();
+                    $addEmailToProject->data()->projectID = $project->getId();
+                    $addEmailToProject->data()->email = $_POST['addEmail'];
+                    $addEmailToProject->data()->byUserID = $loggedInUser->getId();
+                    $addEmailToProject->exec();
+                    $user = $addEmailToProject->getUser();
+
+                    $response = [];
+                    $response['result'] = 'ok';
+                    $response['successMessage'] = $user ?
+                        'Member has been successfully added' :
+                        'An invitation email has been sent to the person';
+                    if ($user) {
+                        $response['user'] = [
+                            'id' => $user->getId(),
+                            'text' => $user->getFirstName() . ' ' . $user->getLastName(),
+                            'profilePic' => $user->getProfilePicOrDefault(),
+                            'firstName' => $user->getFirstName(),
+                            'lastName' => $user->getLastName(),
+                        ];
+                    }
+
+                    echo json_encode($response);
+                    return;
+                }
                 if (isset($_POST['addMember'])) {
                     $addMemberToProject = new AddMemberToProject();
                     $addMemberToProject->data()->projectID = $project->getId();
                     $addMemberToProject->data()->userID = $_POST['addMember'];
                     $addMemberToProject->exec();
                     echo json_encode(['result' => 'ok']);
-                    die();
+                    return;
                 }
                 if (isset($_POST['removeMember'])) {
                     $removeMemberFromProject = new RemoveMemberFromProject();
@@ -358,7 +385,7 @@ class ProjectController
      * @param $project
      * @return mixed
      */
-    private function getPostsForProject($project)
+    private function getPostsForProject(Project $project)
     {
         return array_map(function (ProjectPost $post) {
             $user = $post->getUser();

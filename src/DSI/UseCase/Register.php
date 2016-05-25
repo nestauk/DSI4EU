@@ -2,7 +2,10 @@
 
 namespace DSI\UseCase;
 
+use DSI\Entity\ProjectMember;
 use DSI\Entity\User;
+use DSI\Repository\ProjectEmailInvitationRepository;
+use DSI\Repository\ProjectMemberRepository;
 use DSI\Repository\UserRepository;
 use DSI\Service\ErrorHandler;
 
@@ -33,12 +36,9 @@ class Register
 
         $this->verifyEmail();
         $this->verifyPassword();
-
         $this->errorHandler->throwIfNotEmpty();
 
         $this->verifyIfEmailExists();
-
-        $this->errorHandler->throwIfNotEmpty();
 
         $user = new User();
         $user->setEmail($this->data()->email);
@@ -46,6 +46,8 @@ class Register
         $this->userRepo->insert($user);
 
         $this->user = $user;
+
+        $this->checkProjectInvitations();
     }
 
     /**
@@ -88,6 +90,25 @@ class Register
     {
         if ($this->userRepo->emailExists($this->data()->email))
             $this->errorHandler->addTaggedError('email', 'This email address is already registered');
+
+        $this->errorHandler->throwIfNotEmpty();
+    }
+
+    private function checkProjectInvitations()
+    {
+        $projectEmailInvitationRepo = new ProjectEmailInvitationRepository();
+        $projectInvitations = $projectEmailInvitationRepo->getByEmail(
+            $this->data()->email
+        );
+
+        foreach ($projectInvitations AS $projectInvitation) {
+            $projectMember = new ProjectMember();
+            $projectMember->setMember($this->user);
+            $projectMember->setProject($projectInvitation->getProject());
+            (new ProjectMemberRepository())->add($projectMember);
+
+            $projectEmailInvitationRepo->remove($projectInvitation);
+        }
     }
 }
 

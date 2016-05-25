@@ -1,307 +1,297 @@
 var app = angular.module('DSIApp');
 
 app.controller('ProjectController', function ($scope, $http, $attrs, $timeout, $sce) {
-    /*
-     var addTagSelect = $('#Add-tag');
-     var addImpactTagASelect = $('#Add-impact-tag-a');
-     var addImpactTagBSelect = $('#Add-impact-tag-b');
-     var addImpactTagCSelect = $('#Add-impact-tag-c');
-     var addOrganisationSelect = $('#Add-organisation');
-     var editCountry = $('#Edit-country');
-     var editCountryRegion = $('#Edit-countryRegion');
+    var addTagSelect = $('#Add-tag');
+    var addImpactTagASelect = $('#Add-impact-tag-a');
+    var addImpactTagBSelect = $('#Add-impact-tag-b');
+    var addImpactTagCSelect = $('#Add-impact-tag-c');
+    var addOrganisationSelect = $('#Add-organisation');
+    var editCountry = $('#Edit-country');
+    var editCountryRegion = $('#Edit-countryRegion');
 
-     $scope.datePattern = '[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])';
-     $scope.getDateFrom = function (date) {
-     var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-     ];
+    $scope.datePattern = '[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])';
+    $scope.getDateFrom = function (date) {
+        var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+        ];
 
-     var jsDate = new Date(date);
-     return monthNames[jsDate.getMonth()] + ' ' + jsDate.getFullYear();
-     };
+        var jsDate = new Date(date);
+        return monthNames[jsDate.getMonth()] + ' ' + jsDate.getFullYear();
+    };
 
-     $scope.updateBasic = function () {
-     var data = {
-     updateBasic: true,
-     url: $scope.project.url,
-     name: $scope.project.name,
-     status: $scope.project.status,
-     description: $scope.project.description,
-     startDate: $scope.project.startDate,
-     endDate: $scope.project.endDate
-     };
+    $scope.updateBasic = function () {
+        var data = {
+            updateBasic: true,
+            url: $scope.project.url,
+            name: $scope.project.name,
+            status: $scope.project.status,
+            description: $scope.project.description,
+            startDate: $scope.project.startDate,
+            endDate: $scope.project.endDate
+        };
 
-     $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', data)
-     .then(function (response) {
-     if (response.data.result == 'error') {
-     alert('error');
-     console.log(response.data);
-     }
-     });
-     };
+        $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', data)
+            .then(function (response) {
+                if (response.data.result == 'error') {
+                    alert('error');
+                    console.log(response.data);
+                }
+            });
+    };
 
-     $scope.addTag = function () {
-     var newTag = addTagSelect.select2().val();
-     addTag({
-     tag: newTag,
-     selectBox: addTagSelect,
-     currentTags: $scope.project.tags,
-     postFields: {addTag: newTag}
-     });
-     };
-     $scope.removeTag = function (tag) {
-     removeTag({
-     tag: tag,
-     currentTags: $scope.project.tags,
-     postFields: {removeTag: tag}
-     });
-     };
+    $scope.addTag = function () {
+        var newTag = addTagSelect.select2().val();
+        addTag({
+            tag: newTag,
+            selectBox: addTagSelect,
+            currentTags: $scope.project.tags,
+            postFields: {addTag: newTag}
+        });
+    };
+    $scope.removeTag = function (tag) {
+        removeTag({
+            tag: tag,
+            currentTags: $scope.project.tags,
+            postFields: {removeTag: tag}
+        });
+    };
 
-     $scope.addImpactTagA = function () {
-     var newTag = addImpactTagASelect.select2().val();
-     addTag({
-     tag: newTag,
-     selectBox: addImpactTagASelect,
-     currentTags: $scope.project.impactTagsA,
-     postFields: {addImpactTagA: newTag}
-     });
-     };
-     $scope.removeImpactTagA = function (tag) {
-     removeTag({
-     tag: tag,
-     currentTags: $scope.project.impactTagsA,
-     postFields: {removeImpactTagA: tag}
-     });
-     };
+    $scope.addImpactTagA = function () {
+        var newTag = addImpactTagASelect.select2().val();
+        addTag({
+            tag: newTag,
+            selectBox: addImpactTagASelect,
+            currentTags: $scope.project.impactTagsA,
+            postFields: {addImpactTagA: newTag}
+        });
+    };
+    $scope.removeImpactTagA = function (tag) {
+        removeTag({
+            tag: tag,
+            currentTags: $scope.project.impactTagsA,
+            postFields: {removeImpactTagA: tag}
+        });
+    };
 
-     $scope.addImpactTagB = function () {
-     var newTag = addImpactTagBSelect.select2().val();
-     addTag({
-     tag: newTag,
-     selectBox: addImpactTagBSelect,
-     currentTags: $scope.project.impactTagsB,
-     postFields: {addImpactTagB: newTag}
-     });
-     };
-     $scope.removeImpactTagB = function (tag) {
-     removeTag({
-     tag: tag,
-     currentTags: $scope.project.impactTagsB,
-     postFields: {removeImpactTagB: tag}
-     });
-     };
+    $scope.addImpactTagB = function () {
+        var newTag = addImpactTagBSelect.select2().val();
+        addTag({
+            tag: newTag,
+            selectBox: addImpactTagBSelect,
+            currentTags: $scope.project.impactTagsB,
+            postFields: {addImpactTagB: newTag}
+        });
+    };
+    $scope.removeImpactTagB = function (tag) {
+        removeTag({
+            tag: tag,
+            currentTags: $scope.project.impactTagsB,
+            postFields: {removeImpactTagB: tag}
+        });
+    };
 
-     $scope.addImpactTagC = function () {
-     var newTag = addImpactTagCSelect.select2().val();
-     addTag({
-     tag: newTag,
-     selectBox: addImpactTagCSelect,
-     currentTags: $scope.project.impactTagsC,
-     postFields: {addImpactTagC: newTag}
-     });
-     };
-     $scope.removeImpactTagC = function (tag) {
-     removeTag({
-     tag: tag,
-     currentTags: $scope.project.impactTagsC,
-     postFields: {removeImpactTagC: tag}
-     });
-     };
+    $scope.addImpactTagC = function () {
+        var newTag = addImpactTagCSelect.select2().val();
+        addTag({
+            tag: newTag,
+            selectBox: addImpactTagCSelect,
+            currentTags: $scope.project.impactTagsC,
+            postFields: {addImpactTagC: newTag}
+        });
+    };
+    $scope.removeImpactTagC = function (tag) {
+        removeTag({
+            tag: tag,
+            currentTags: $scope.project.impactTagsC,
+            postFields: {removeImpactTagC: tag}
+        });
+    };
 
-     // Get Project Details
-     $http.get(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json')
-     .then(function (response) {
-     $scope.project = response.data || {};
-     console.log($scope.project.posts);
-     listCountries();
-     });
+    // Get Project Details
+    $http.get(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json')
+        .then(function (response) {
+            $scope.project = response.data || {};
+            console.log($scope.project.posts);
+            listCountries();
+        });
 
-     // List Tags
-     $http.get(SITE_RELATIVE_PATH + '/tags-for-projects.json')
-     .then(function (result) {
-     addTagSelect.select2({
-     data: result.data
-     });
-     });
-     // List ImpactTags
-     $http.get(SITE_RELATIVE_PATH + '/impact-tags.json')
-     .then(function (result) {
-     addImpactTagASelect.select2({data: result.data});
-     addImpactTagBSelect.select2({data: result.data});
-     addImpactTagCSelect.select2({data: result.data});
-     });
-     // List Organisations
-     $http.get(SITE_RELATIVE_PATH + '/organisations.json')
-     .then(function (result) {
-     $scope.organisations = result.data;
-     addOrganisationSelect.select2({data: result.data});
-     });
+    // List Tags
+    $http.get(SITE_RELATIVE_PATH + '/tags-for-projects.json')
+        .then(function (result) {
+            addTagSelect.select2({
+                data: result.data
+            });
+        });
+    // List ImpactTags
+    $http.get(SITE_RELATIVE_PATH + '/impact-tags.json')
+        .then(function (result) {
+            addImpactTagASelect.select2({data: result.data});
+            addImpactTagBSelect.select2({data: result.data});
+            addImpactTagCSelect.select2({data: result.data});
+        });
+    // List Organisations
+    $http.get(SITE_RELATIVE_PATH + '/organisations.json')
+        .then(function (result) {
+            $scope.organisations = result.data;
+            addOrganisationSelect.select2({data: result.data});
+        });
 
-     var addTag = function (data) {
-     data.selectBox.select2().val('').trigger("change");
+    var addTag = function (data) {
+        data.selectBox.select2().val('').trigger("change");
 
-     if (data.tag == '')
-     return;
+        if (data.tag == '')
+            return;
 
-     var index = data.currentTags.indexOf(data.tag);
-     if (index == -1) {
-     data.currentTags.push(data.tag);
-     data.currentTags.sort();
+        var index = data.currentTags.indexOf(data.tag);
+        if (index == -1) {
+            data.currentTags.push(data.tag);
+            data.currentTags.sort();
 
-     $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', data.postFields)
-     .then(function (result) {
-     console.log(result.data);
-     });
-     }
-     };
-     var removeTag = function (data) {
-     var index = data.currentTags.indexOf(data.tag);
-     if (index > -1) {
-     data.currentTags.splice(index, 1);
+            $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', data.postFields)
+                .then(function (result) {
+                    console.log(result.data);
+                });
+        }
+    };
+    var removeTag = function (data) {
+        var index = data.currentTags.indexOf(data.tag);
+        if (index > -1) {
+            data.currentTags.splice(index, 1);
 
-     $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', data.postFields)
-     .then(function (result) {
-     console.log(result.data);
-     });
-     }
-     };
+            $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', data.postFields)
+                .then(function (result) {
+                    console.log(result.data);
+                });
+        }
+    };
 
-     var listCountries = function () {
-     $http.get(SITE_RELATIVE_PATH + '/countries.json')
-     .then(function (result) {
-     editCountry.select2({data: result.data});
-     editCountry.on("change", function () {
-     listCountryRegions(editCountry.val());
-     });
-     editCountry.val($scope.project.countryID).trigger("change");
-     });
-     };
-     var listCountryRegions = function (countryID) {
-     countryID = parseInt(countryID) || 0;
-     if (countryID > 0) {
-     $scope.regionsLoaded = false;
-     $scope.regionsLoading = true;
-     $http.get(SITE_RELATIVE_PATH + '/countryRegions/' + countryID + '.json')
-     .then(function (result) {
-     $timeout(function () {
-     editCountryRegion
-     .html("")
-     .select2({data: result.data})
-     .val($scope.project.countryRegion)
-     .trigger("change");
-     $scope.regionsLoaded = true;
-     $scope.regionsLoading = false;
-     }, 500);
-     });
-     }
-     };
+    var listCountries = function () {
+        $http.get(SITE_RELATIVE_PATH + '/countries.json')
+            .then(function (result) {
+                editCountry.select2({data: result.data});
+                editCountry.on("change", function () {
+                    listCountryRegions(editCountry.val());
+                });
+                editCountry.val($scope.project.countryID).trigger("change");
+            });
+    };
+    var listCountryRegions = function (countryID) {
+        countryID = parseInt(countryID) || 0;
+        if (countryID > 0) {
+            $scope.regionsLoaded = false;
+            $scope.regionsLoading = true;
+            $http.get(SITE_RELATIVE_PATH + '/countryRegions/' + countryID + '.json')
+                .then(function (result) {
+                    $timeout(function () {
+                        editCountryRegion
+                            .html("")
+                            .select2({data: result.data})
+                            .val($scope.project.countryRegion)
+                            .trigger("change");
+                        $scope.regionsLoaded = true;
+                        $scope.regionsLoading = false;
+                    }, 500);
+                });
+        }
+    };
 
-     $scope.requestToJoin = {};
-     $scope.savingCountryRegion = {};
-     $scope.sendRequestToJoin = function () {
-     $scope.requestToJoin.loading = true;
-     $timeout(function () {
-     $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', {
-     requestToJoin: true
-     }).then(function (result) {
-     $scope.requestToJoin.loading = false;
-     $scope.requestToJoin.requestSent = true;
-     console.log(result.data);
-     });
-     }, 500);
-     };
-     $scope.approveRequestToJoin = function (member) {
-     var index = getItemIndexById($scope.project.memberRequests, member.id);
-     if (index > -1) {
-     $scope.project.memberRequests.splice(index, 1);
-     $scope.project.members.push(member);
+    $scope.requestToJoin = {};
+    $scope.savingCountryRegion = {};
+    $scope.sendRequestToJoin = function () {
+        $scope.requestToJoin.loading = true;
+        $timeout(function () {
+            $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', {
+                requestToJoin: true
+            }).then(function (result) {
+                $scope.requestToJoin.loading = false;
+                $scope.requestToJoin.requestSent = true;
+                console.log(result.data);
+            });
+        }, 500);
+    };
+    $scope.approveRequestToJoin = function (member) {
+        var index = Helpers.getItemIndexById($scope.project.memberRequests, member.id);
+        if (index > -1) {
+            $scope.project.memberRequests.splice(index, 1);
+            $scope.project.members.push(member);
 
-     $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', {
-     approveRequestToJoin: member.id
-     }).then(function (result) {
-     console.log(result.data);
-     });
-     }
-     };
-     $scope.rejectRequestToJoin = function (member) {
-     var index = getItemIndexById($scope.project.memberRequests, member.id);
-     if (index > -1) {
-     $scope.project.memberRequests.splice(index, 1);
+            $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', {
+                approveRequestToJoin: member.id
+            }).then(function (result) {
+                console.log(result.data);
+            });
+        }
+    };
+    $scope.rejectRequestToJoin = function (member) {
+        var index = Helpers.getItemIndexById($scope.project.memberRequests, member.id);
+        if (index > -1) {
+            $scope.project.memberRequests.splice(index, 1);
 
-     $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', {
-     rejectRequestToJoin: member.id
-     }).then(function (result) {
-     console.log(result.data);
-     });
-     }
-     };
-     $scope.saveCountryRegion = function () {
-     $scope.savingCountryRegion.loading = true;
-     $scope.savingCountryRegion.saved = false;
-     $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', {
-     updateCountryRegion: true,
-     countryID: editCountry.val(),
-     region: editCountryRegion.val()
-     }).then(function (result) {
-     $timeout(function () {
-     $scope.savingCountryRegion.loading = false;
-     $scope.savingCountryRegion.saved = true;
-     console.log(result.data);
-     }, 500);
-     });
-     };
+            $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', {
+                rejectRequestToJoin: member.id
+            }).then(function (result) {
+                console.log(result.data);
+            });
+        }
+    };
+    $scope.saveCountryRegion = function () {
+        $scope.savingCountryRegion.loading = true;
+        $scope.savingCountryRegion.saved = false;
+        $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', {
+            updateCountryRegion: true,
+            countryID: editCountry.val(),
+            region: editCountryRegion.val()
+        }).then(function (result) {
+            $timeout(function () {
+                $scope.savingCountryRegion.loading = false;
+                $scope.savingCountryRegion.saved = true;
+                console.log(result.data);
+            }, 500);
+        });
+    };
 
-     $scope.addOrganisation = function () {
-     var organisation = addOrganisationSelect.select2().val();
+    $scope.addOrganisation = function () {
+        var organisation = addOrganisationSelect.select2().val();
 
-     if (organisation == '')
-     return;
+        if (organisation == '')
+            return;
 
-     var existingIndex = getItemIndexById($scope.project.organisationProjects, organisation);
-     if (existingIndex > -1)
-     return;
+        var existingIndex = Helpers.getItemIndexById($scope.project.organisationProjects, organisation);
+        if (existingIndex > -1)
+            return;
 
-     var index = getItemIndexById($scope.organisations, organisation);
-     if (index > -1) {
-     $scope.project.organisationProjects.push({
-     'id': $scope.organisations[index].id,
-     'name': $scope.organisations[index].text,
-     'url': $scope.organisations[index].url
-     });
+        var index = Helpers.getItemIndexById($scope.organisations, organisation);
+        if (index > -1) {
+            $scope.project.organisationProjects.push({
+                'id': $scope.organisations[index].id,
+                'name': $scope.organisations[index].text,
+                'url': $scope.organisations[index].url
+            });
 
-     $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', {
-     newOrganisationID: organisation
-     }).then(function (result) {
-     console.log(result.data);
-     });
-     }
-     };
-     $scope.addPost = function () {
-     $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', {
-     addPost: tinymce.activeEditor.getContent()
-     }).then(function (response) {
-     if (response.data.result == 'ok') {
-     $('.new-post-bg.bg-blur').hide();
-     $scope.project.posts = response.data.posts;
-     } else {
-     console.log(response.data);
-     }
-     }
-     );
-     };
+            $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', {
+                newOrganisationID: organisation
+            }).then(function (result) {
+                console.log(result.data);
+            });
+        }
+    };
+    $scope.addPost = function () {
+        $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', {
+            addPost: tinymce.activeEditor.getContent()
+        }).then(function (response) {
+                if (response.data.result == 'ok') {
+                    $('.new-post-bg.bg-blur').hide();
+                    $scope.project.posts = response.data.posts;
+                } else {
+                    console.log(response.data);
+                }
+            }
+        );
+    };
 
-     var getItemIndexById = function (pool, id) {
-     for (var i in pool) {
-     if (pool[i].id == id)
-     return i;
-     }
-     return -1;
-     };
-
-     $scope.renderHtml = function (html_code) {
-     return $sce.trustAsHtml(html_code);
-     };
-     */
+    $scope.renderHtml = function (html_code) {
+        return $sce.trustAsHtml(html_code);
+    };
 
     /*
      $scope.saveGMapPosition = function () {
@@ -328,49 +318,93 @@ app.controller('ProjectController', function ($scope, $http, $attrs, $timeout, $
 
     // Members
     (function () {
+        $scope.addProjectMember = {};
         var addMemberSelect = $('#Add-member');
         addMemberSelect.on("change", function (evt) {
-            console.log(addMemberSelect.val());
-            $scope.addMember(
+            // console.log('addMemberSelect:onChange:val:' + addMemberSelect.val());
+            addMember(
                 Helpers.getFirstNonEmptyValue(
                     addMemberSelect.val()
                 )
             );
-            addMemberSelect.val(null).trigger("change.select2");
+            resetSelectField();
         });
 
-        $scope.addMember = function (member) {
-            if (member == '') return;
-
-            var newMember = null;
-            for (var i in $scope.users) {
-                if (member == $scope.users[i].id)
-                    newMember = $scope.users[i];
-            }
-            if (newMember)
-                return $scope.addExistingMember(newMember);
-            else {
-                /////
-            }
+        var resetSelectField = function () {
+            addMemberSelect.val(null).trigger("change.select2");
         };
-        $scope.addExistingMember = function (newMember) {
-            $scope.project.members.push(newMember);
+
+        var addMember = function (memberIdOrEmail) {
+            if (memberIdOrEmail == '') return;
+
+            $scope.addProjectMember.errors = {};
+            $scope.addProjectMember.loading = true;
+            $scope.addProjectMember.success = false;
+            $scope.$apply();
+
+            $timeout(function () {
+                var existingMemberId = Helpers.getItemIndexById($scope.users, memberIdOrEmail);
+
+                if (existingMemberId != -1)
+                    return addExistingMember($scope.users[existingMemberId]);
+                else
+                    return addNewMemberFromEmailAddress(memberIdOrEmail);
+
+            }, 500);
+        };
+
+        var addExistingMember = function (newMember) {
             $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', {
-                addMember: member
-            }).then(function (result) {
-                console.log(result.data);
+                addMember: newMember.id
+            }).then(function (response) {
+                $scope.addProjectMember.loading = false;
+                console.log(response.data);
+
+                if (response.data.result == 'ok') {
+                    $scope.project.members.push(newMember);
+                } else if (response.data.result == 'error') {
+                    $scope.addProjectMember.errors = response.data.errors;
+                } else {
+                    alert('unexpected error');
+                    console.log(response.data);
+                }
+            });
+        };
+
+        var addNewMemberFromEmailAddress = function (emailAddress) {
+            console.log('add email: ' + emailAddress);
+
+            $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', {
+                addEmail: emailAddress
+            }).then(function (response) {
+                $scope.addProjectMember.loading = false;
+                console.log(response.data);
+
+                if (response.data.result == 'ok') {
+                    $scope.addProjectMember.success = response.data.successMessage;
+                    if (response.data.user)
+                        $scope.project.members.push(response.data.user);
+                } else if (response.data.result == 'error') {
+                    $scope.addProjectMember.errors = response.data.errors;
+                } else {
+                    alert('unexpected error');
+                    console.log(response.data);
+                }
             });
         };
 
         $scope.removeMember = function (member) {
-            var index = getItemIndexById($scope.project.members, member.id);
+            var index = Helpers.getItemIndexById($scope.project.members, member.id);
             if (index > -1) {
                 $scope.project.members.splice(index, 1);
 
                 $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', {
                     removeMember: member.id
-                }).then(function (result) {
-                    console.log(result.data);
+                }).then(function (response) {
+                    if (response.data.result != 'ok') {
+                        alert('unexpected error');
+                        console.log(response);
+                    }
                 });
             }
         };
@@ -389,6 +423,13 @@ app.controller('ProjectController', function ($scope, $http, $attrs, $timeout, $
                     return values[i];
             }
             return null;
+        },
+        getItemIndexById: function (pool, id) {
+            for (var i in pool) {
+                if (pool[i].id == id)
+                    return i;
+            }
+            return -1;
         }
     }
 });

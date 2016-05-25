@@ -370,20 +370,36 @@ require __DIR__ . '/header.php';
                                 <div style="clear:both"></div>
                             </h3>
 
-                            <form ng-show="addingMember" style="padding-left:20px">
-                                <label>
+                            <div ng-show="addingMember" style="margin-left:20px">
+                                <form id="add-member-form" name="add-member-form" data-name="Add Member Form"
+                                      class="w-clearfix">
                                     Select new member:
-
                                     <select data-tags="true"
-                                            data-placeholder="Add a new member"
+                                            data-placeholder=""
                                             id="Add-member" name="Add-member"
-                                            class="w-input add-skill"
-                                            multiple="multiple"
+                                            class="w-input"
+                                            multiple
                                             style="width:200px">
                                         <option></option>
                                     </select>
-                                </label>
-                            </form>
+                                </form>
+
+                                <div style="color:red;padding:12px 0 10px 100px;">
+                                    <div style="color:orange">
+                                        <div ng-show="addProjectMember.loading">Loading...</div>
+                                    </div>
+                                    <div style="color:green">
+                                        <div ng-show="addProjectMember.success"
+                                             ng-bind="addProjectMember.success"></div>
+                                    </div>
+                                    <div
+                                        ng-show="addProjectMember.errors.email"
+                                        ng-bind="addProjectMember.errors.email"></div>
+                                    <div
+                                        ng-show="addProjectMember.errors.member"
+                                        ng-bind="addProjectMember.errors.member"></div>
+                                </div>
+                            </div>
 
                             <div style="clear:both"></div>
 
