@@ -3668,6 +3668,53 @@ strong {
   margin-bottom: 20px;
 }
 
+.star-full {
+  position: absolute;
+  top: 19px;
+  right: 10px;
+  z-index: 1;
+  display: block;
+  width: 20px;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.star-empty {
+  position: absolute;
+  top: 19px;
+  right: 10px;
+  z-index: 5;
+  width: 20px;
+  cursor: pointer;
+}
+
+.star-holder {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: 1000;
+  width: 40px;
+  height: 100%;
+  cursor: default;
+}
+
+.admin-added {
+  position: absolute;
+  left: -53px;
+  top: -17px;
+  z-index: auto;
+  width: 150px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 3px;
+  background-color: #fff;
+  box-shadow: 0 0 27px -7px rgba(0, 0, 0, .57);
+  opacity: 0;
+  font-family: 'Open Sans', sans-serif;
+  text-align: center;
+}
+
 html.w-mod-js *[data-ix="downbeforeup"] {
   opacity: 0;
   -webkit-transform: translate(0px, 50px);
