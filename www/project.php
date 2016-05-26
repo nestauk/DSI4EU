@@ -419,20 +419,26 @@ require __DIR__ . '/header.php';
                                 <div class="w-col w-col-6 contributor-col" ng-repeat="member in project.members">
                                     <div class="contributor">
                                         <div class="star-holder">
-                                            <img ng-show="member.isAdmin"
-                                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-star-orange.png"
-                                                 ng-click="member.isAdmin = !member.isAdmin; updateAdminStatus(member)"
-                                                 class="star-full" style="opacity:1">
-                                            <img ng-show="!member.isAdmin"
-                                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-star-outline-orange.png"
-                                                 ng-click="member.isAdmin = !member.isAdmin; updateAdminStatus(member)"
-                                                 class="star-empty">
-                                            <input type="checkbox"
-                                                   ng-checked="member.isAdmin"
-                                                   ng-model="member.isAdmin"
-                                                   ng-change="updateAdminStatus(member)"
-                                                   style="display:none"
-                                            />
+                                            <?php if ($isOwner) { ?>
+                                                <img ng-show="member.isAdmin"
+                                                     src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-star-orange.png"
+                                                     ng-click="member.isAdmin = !member.isAdmin; updateAdminStatus(member)"
+                                                     class="star-full" style="opacity:1">
+                                                <img ng-show="!member.isAdmin"
+                                                     src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-star-outline-orange.png"
+                                                     ng-click="member.isAdmin = !member.isAdmin; updateAdminStatus(member)"
+                                                     class="star-empty">
+                                                <input type="checkbox"
+                                                       ng-checked="member.isAdmin"
+                                                       ng-model="member.isAdmin"
+                                                       ng-change="updateAdminStatus(member)"
+                                                       style="display:none"
+                                                />
+                                            <?php } else { ?>
+                                                <img ng-show="member.isAdmin"
+                                                     src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-star-orange.png"
+                                                     class="star-full" style="opacity:1">
+                                            <?php } ?>
                                         </div>
                                         <a href="<?php echo SITE_RELATIVE_PATH ?>/profile/{{member.id}}"
                                            class="w-inline-block">
