@@ -408,6 +408,22 @@ app.controller('ProjectController', function ($scope, $http, $attrs, $timeout, $
                 });
             }
         };
+
+        $scope.updateAdminStatus = function (member) {
+            console.log(member);
+            $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', {
+                setAdmin: true,
+                member: member.id,
+                isAdmin: member.isAdmin
+            }).then(function (response) {
+                if (response.data.result != 'ok') {
+                    alert('unexpected error');
+                    console.log(response);
+                }
+            });
+        };
+
+
         // List Users
         $http.get(SITE_RELATIVE_PATH + '/users.json')
             .then(function (result) {

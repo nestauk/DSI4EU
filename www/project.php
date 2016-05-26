@@ -417,19 +417,34 @@ require __DIR__ . '/header.php';
                             </div>
                             <div class="w-row contributors">
                                 <div class="w-col w-col-6 contributor-col" ng-repeat="member in project.members">
-                                    <a href="<?php echo SITE_RELATIVE_PATH ?>/profile/{{member.id}}"
-                                       class="w-inline-block contributor">
-                                        <img width="40" height="40"
-                                             ng-src="<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/{{member.profilePic}}"
-                                             class="contributor-small-img">
-                                        <div class="contributor-name" ng-bind="member.firstName"></div>
-                                        <div class="contributor-position" ng-bind="member.lastName"></div>
-                                    </a>
-                                    <?php if ($isOwner) { ?>
-                                        <div class="delete" ng-click="removeMember(member)">
-                                            -
+                                    <div class="contributor">
+                                        <div class="star-holder">
+                                            <img ng-show="member.isAdmin"
+                                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-star-orange.png"
+                                                 ng-click="member.isAdmin = !member.isAdmin; updateAdminStatus(member)"
+                                                 class="star-full" style="opacity:1">
+                                            <img ng-show="!member.isAdmin"
+                                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-star-outline-orange.png"
+                                                 ng-click="member.isAdmin = !member.isAdmin; updateAdminStatus(member)"
+                                                 class="star-empty">
+                                            <input type="checkbox"
+                                                   ng-checked="member.isAdmin"
+                                                   ng-model="member.isAdmin"
+                                                   ng-change="updateAdminStatus(member)"
+                                                   style="display:none"
+                                            />
                                         </div>
-                                    <?php } ?>
+                                        <a href="<?php echo SITE_RELATIVE_PATH ?>/profile/{{member.id}}"
+                                           class="w-inline-block">
+                                            <img width="40" height="40" class="contributor-small-img"
+                                                 ng-src="<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/{{member.profilePic}}">
+                                            <div class="contributor-name" ng-bind="member.firstName"></div>
+                                            <div class="contributor-position" ng-bind="member.lastName"></div>
+                                        </a>
+                                        <?php if ($isOwner) { ?>
+                                            <div class="delete" ng-click="removeMember(member)">-</div>
+                                        <?php } ?>
+                                    </div>
                                 </div>
                             </div>
                             <?php if ($canUserRequestMembership) { ?>

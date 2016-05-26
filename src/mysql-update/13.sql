@@ -1,0 +1,1 @@
+ALTER TABLE `project-members` ADD `isAdmin` TINYINT(1) NOT NULL AFTER `userID`;

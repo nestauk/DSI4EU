@@ -10,6 +10,9 @@ class ProjectMember
     /** @var User */
     private $member;
 
+    /** @var  bool */
+    private $isAdmin;
+
     /**
      * @return Project
      */
@@ -50,5 +53,21 @@ class ProjectMember
     public function setMember(User $member)
     {
         $this->member = $member;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAdmin()
+    {
+        return (bool)$this->isAdmin;
+    }
+
+    /**
+     * @param bool $isAdmin
+     */
+    public function setIsAdmin($isAdmin)
+    {
+        $this->isAdmin = (bool)$isAdmin;
     }
 }

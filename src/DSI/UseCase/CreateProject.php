@@ -59,7 +59,7 @@ class CreateProject
         $projectMember = new ProjectMember();
         $projectMember->setMember($this->data()->owner);
         $projectMember->setProject($project);
-        $projectMemberRepository->add($projectMember);
+        $projectMemberRepository->insert($projectMember);
 
         $this->project = $project;
     }

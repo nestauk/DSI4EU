@@ -21,7 +21,7 @@ class ProjectMemberRepository
         $this->userRepo = new UserRepository();
     }
 
-    public function add(ProjectMember $projectMember)
+    public function insert(ProjectMember $projectMember)
     {
         $query = new SQL("SELECT projectID 
             FROM `project-members`
@@ -35,8 +35,31 @@ class ProjectMemberRepository
         $insert = array();
         $insert[] = "`projectID` = '" . (int)($projectMember->getProjectID()) . "'";
         $insert[] = "`userID` = '" . (int)($projectMember->getMemberID()) . "'";
+        $insert[] = "`isAdmin` = '" . (bool)($projectMember->isAdmin()) . "'";
 
         $query = new SQL("INSERT INTO `project-members` SET " . implode(', ', $insert) . "");
+        // $query->pr();
+        $query->query();
+    }
+
+    public function save(ProjectMember $projectMember)
+    {
+        $query = new SQL("SELECT projectID 
+            FROM `project-members`
+            WHERE `projectID` = '{$projectMember->getProjectID()}'
+            AND `userID` = '{$projectMember->getMemberID()}'
+            LIMIT 1
+        ");
+        if (!$query->fetch('projectID'))
+            throw new NotFound("projectID: {$projectMember->getProjectID()} / userID: {$projectMember->getMemberID()}");
+
+        $insert = [];
+        $insert[] = "`isAdmin` = '" . (bool)($projectMember->isAdmin()) . "'";
+        $where = [];
+        $where[] = "`projectID` = '" . (int)($projectMember->getProjectID()) . "'";
+        $where[] = "`userID` = '" . (int)($projectMember->getMemberID()) . "'";
+
+        $query = new SQL("UPDATE `project-members` SET " . implode(', ', $insert) . " WHERE " . implode(' AND ', $where) . "");
         // $query->pr();
         $query->query();
     }
@@ -55,6 +78,7 @@ class ProjectMemberRepository
         $insert = array();
         $insert[] = "`projectID` = '" . (int)($projectMember->getProjectID()) . "'";
         $insert[] = "`userID` = '" . (int)($projectMember->getMemberID()) . "'";
+        $insert[] = "`isAdmin` = '" . (bool)($projectMember->isAdmin()) . "'";
 
         $query = new SQL("DELETE FROM `project-members` WHERE " . implode(' AND ', $insert) . "");
         $query->query();
@@ -69,6 +93,19 @@ class ProjectMemberRepository
         return $this->getProjectMembersWhere([
             "`projectID` = '{$projectID}'"
         ]);
+    }
+
+    /**
+     * @param int $projectID
+     * @param int $memberID
+     * @return ProjectMember
+     */
+    public function getByProjectIDAndMemberID(int $projectID, int $memberID)
+    {
+        return $this->getProjectMembersWhere([
+            "`projectID` = '{$projectID}'",
+            "`userID` = '{$memberID}'",
+        ])[0];
     }
 
     /**
@@ -155,7 +192,7 @@ class ProjectMemberRepository
     {
         /** @var ProjectMember[] $projectMembers */
         $projectMembers = [];
-        $query = new SQL("SELECT projectID, userID 
+        $query = new SQL("SELECT projectID, userID, isAdmin
             FROM `project-members`
             WHERE " . implode(' AND ', $where) . "
         ");
@@ -163,6 +200,7 @@ class ProjectMemberRepository
             $projectMember = new ProjectMember();
             $projectMember->setProject($this->projectRepo->getById($dbProjectMember['projectID']));
             $projectMember->setMember($this->userRepo->getById($dbProjectMember['userID']));
+            $projectMember->setIsAdmin($dbProjectMember['isAdmin']);
             $projectMembers[] = $projectMember;
         }
 

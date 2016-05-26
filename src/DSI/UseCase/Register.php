@@ -105,7 +105,7 @@ class Register
             $projectMember = new ProjectMember();
             $projectMember->setMember($this->user);
             $projectMember->setProject($projectInvitation->getProject());
-            (new ProjectMemberRepository())->add($projectMember);
+            (new ProjectMemberRepository())->insert($projectMember);
 
             $projectEmailInvitationRepo->remove($projectInvitation);
         }

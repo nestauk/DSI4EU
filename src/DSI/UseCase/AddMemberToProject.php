@@ -45,7 +45,7 @@ class AddMemberToProject
         $projectMember = new ProjectMember();
         $projectMember->setMember($this->userRepository->getById($this->data()->userID));
         $projectMember->setProject($this->projectRepository->getById($this->data()->projectID));
-        $this->projectMemberRepo->add($projectMember);
+        $this->projectMemberRepo->insert($projectMember);
     }
 
     /**

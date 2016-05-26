@@ -36,6 +36,7 @@ use DSI\UseCase\RemoveImpactTagBFromProject;
 use DSI\UseCase\RemoveImpactTagCFromProject;
 use DSI\UseCase\RemoveMemberFromProject;
 use DSI\UseCase\RemoveTagFromProject;
+use DSI\UseCase\SetAdminStatusToProjectMember;
 use DSI\UseCase\UpdateProject;
 use DSI\UseCase\UpdateProjectCountryRegion;
 
@@ -65,7 +66,7 @@ class ProjectController
         $memberRequests = [];
         $isOwner = false;
         $canUserRequestMembership = false;
-        $projectMembers = (new ProjectMemberRepository())->getMembersForProject($project->getId());
+        $projectMembers = (new ProjectMemberRepository())->getByProjectID($project->getId());
         $organisationProjects = (new OrganisationProjectRepository())->getByProjectID($project->getId());
         $organisationProjects = array_map(function (OrganisationProject $organisationProject) {
             $organisation = $organisationProject->getOrganisation();
@@ -282,6 +283,20 @@ class ProjectController
                     die();
                 }
 
+                if (isset($_POST['setAdmin'])) {
+                    $setStatusCmd = new SetAdminStatusToProjectMember();
+                    $setStatusCmd->data()->executor = $loggedInUser;
+                    $setStatusCmd->data()->member = (new UserRepository())->getById($_POST['member']);
+                    $setStatusCmd->data()->project = $project;
+                    $setStatusCmd->data()->isAdmin = (bool)$_POST['isAdmin'];
+                    $setStatusCmd->exec();
+
+                    echo json_encode([
+                        'result' => 'ok'
+                    ]);
+                    return;
+                }
+
 
             } catch (ErrorHandler $e) {
                 echo json_encode([
@@ -367,7 +382,8 @@ class ProjectController
         return array_values(
             array_filter(
                 array_map(
-                    function (User $user) use ($owner) {
+                    function (ProjectMember $projectMember) use ($owner) {
+                        $user = $projectMember->getMember();
                         if ($owner->getId() == $user->getId())
                             return null;
                         else
@@ -377,6 +393,7 @@ class ProjectController
                                 'firstName' => $user->getFirstName(),
                                 'lastName' => $user->getLastName(),
                                 'profilePic' => $user->getProfilePicOrDefault(),
+                                'isAdmin' => $projectMember->isAdmin(),
                             ];
                     }, $projectMembers)));
     }

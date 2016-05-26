@@ -47,22 +47,22 @@ class ProjectMemberRepositoryTest extends PHPUnit_Framework_TestCase
         $projectMember = new \DSI\Entity\ProjectMember();
         $projectMember->setProject($this->project_1);
         $projectMember->setMember($this->user_1);
-        $this->projectMemberRepo->add($projectMember);
+        $this->projectMemberRepo->insert($projectMember);
 
         $projectMember = new \DSI\Entity\ProjectMember();
         $projectMember->setProject($this->project_1);
         $projectMember->setMember($this->user_2);
-        $this->projectMemberRepo->add($projectMember);
+        $this->projectMemberRepo->insert($projectMember);
 
         $projectMember = new \DSI\Entity\ProjectMember();
         $projectMember->setProject($this->project_2);
         $projectMember->setMember($this->user_1);
-        $this->projectMemberRepo->add($projectMember);
+        $this->projectMemberRepo->insert($projectMember);
 
         $projectMember = new \DSI\Entity\ProjectMember();
         $projectMember->setProject($this->project_3);
         $projectMember->setMember($this->user_1);
-        $this->projectMemberRepo->add($projectMember);
+        $this->projectMemberRepo->insert($projectMember);
 
         $this->assertCount(2, $this->projectMemberRepo->getByProjectID(
             $this->project_1->getId()
@@ -75,13 +75,13 @@ class ProjectMemberRepositoryTest extends PHPUnit_Framework_TestCase
         $projectMember = new \DSI\Entity\ProjectMember();
         $projectMember->setProject($this->project_1);
         $projectMember->setMember($this->user_1);
-        $this->projectMemberRepo->add($projectMember);
+        $this->projectMemberRepo->insert($projectMember);
 
         $projectMember = new \DSI\Entity\ProjectMember();
         $projectMember->setProject($this->project_1);
         $projectMember->setMember($this->user_1);
         $this->setExpectedException(\DSI\DuplicateEntry::class);
-        $this->projectMemberRepo->add($projectMember);
+        $this->projectMemberRepo->insert($projectMember);
     }
 
     /** @test saveAsNew */
@@ -90,12 +90,12 @@ class ProjectMemberRepositoryTest extends PHPUnit_Framework_TestCase
         $projectMember = new \DSI\Entity\ProjectMember();
         $projectMember->setProject($this->project_1);
         $projectMember->setMember($this->user_1);
-        $this->projectMemberRepo->add($projectMember);
+        $this->projectMemberRepo->insert($projectMember);
 
         $projectMember = new \DSI\Entity\ProjectMember();
         $projectMember->setProject($this->project_1);
         $projectMember->setMember($this->user_2);
-        $this->projectMemberRepo->add($projectMember);
+        $this->projectMemberRepo->insert($projectMember);
 
         $this->assertEquals(
             [$this->user_1->getId(), $this->user_2->getId()],
@@ -110,16 +110,31 @@ class ProjectMemberRepositoryTest extends PHPUnit_Framework_TestCase
         $projectMember = new \DSI\Entity\ProjectMember();
         $projectMember->setProject($this->project_1);
         $projectMember->setMember($this->user_1);
-        $this->projectMemberRepo->add($projectMember);
+        $this->projectMemberRepo->insert($projectMember);
 
         $projectMember = new \DSI\Entity\ProjectMember();
         $projectMember->setProject($this->project_2);
         $projectMember->setMember($this->user_1);
-        $this->projectMemberRepo->add($projectMember);
+        $this->projectMemberRepo->insert($projectMember);
 
         $this->assertCount(2, $this->projectMemberRepo->getByMemberID(
             $this->user_1->getId()
         ));
+    }
+
+    /** @test */
+    public function retainThatAMemberIsAdmin()
+    {
+        $projectMember = new \DSI\Entity\ProjectMember();
+        $projectMember->setProject($this->project_1);
+        $projectMember->setMember($this->user_1);
+        $projectMember->setIsAdmin(true);
+        $this->projectMemberRepo->insert($projectMember);
+
+        $projectMember = $this->projectMemberRepo->getByMemberID(
+            $this->user_1->getId()
+        )[0];
+        $this->assertTrue($projectMember->isAdmin());
     }
 
     /** @test saveAsNew */
@@ -128,12 +143,12 @@ class ProjectMemberRepositoryTest extends PHPUnit_Framework_TestCase
         $projectMember = new \DSI\Entity\ProjectMember();
         $projectMember->setProject($this->project_1);
         $projectMember->setMember($this->user_1);
-        $this->projectMemberRepo->add($projectMember);
+        $this->projectMemberRepo->insert($projectMember);
 
         $projectMember = new \DSI\Entity\ProjectMember();
         $projectMember->setProject($this->project_2);
         $projectMember->setMember($this->user_1);
-        $this->projectMemberRepo->add($projectMember);
+        $this->projectMemberRepo->insert($projectMember);
 
         $this->assertEquals([1, 2], $this->projectMemberRepo->getProjectIDsForMember(
             $this->user_1->getId()
@@ -146,12 +161,12 @@ class ProjectMemberRepositoryTest extends PHPUnit_Framework_TestCase
         $projectMember = new \DSI\Entity\ProjectMember();
         $projectMember->setProject($this->project_1);
         $projectMember->setMember($this->user_1);
-        $this->projectMemberRepo->add($projectMember);
+        $this->projectMemberRepo->insert($projectMember);
 
         $projectMember = new \DSI\Entity\ProjectMember();
         $projectMember->setProject($this->project_2);
         $projectMember->setMember($this->user_2);
-        $this->projectMemberRepo->add($projectMember);
+        $this->projectMemberRepo->insert($projectMember);
 
         $this->assertTrue($this->projectMemberRepo->projectHasMember(
             $this->project_1->getId(), $this->user_1->getId())

@@ -23,10 +23,12 @@ class ProjectMemberTest extends \PHPUnit_Framework_TestCase
         $this->projectMember = new \DSI\Entity\ProjectMember();
         $this->projectMember->setProject($project);
         $this->projectMember->setMember($member);
+        $this->projectMember->setIsAdmin(true);
 
         $this->assertEquals($project->getId(), $this->projectMember->getProjectID());
         $this->assertEquals($project->getId(), $this->projectMember->getProject()->getId());
         $this->assertEquals($member->getId(), $this->projectMember->getMemberID());
         $this->assertEquals($member->getId(), $this->projectMember->getMember()->getId());
+        $this->assertTrue($this->projectMember->isAdmin());
     }
 }

@@ -59,7 +59,7 @@ class ApproveMemberRequestToProject
         $projectMember = new ProjectMember();
         $projectMember->setMember($member);
         $projectMember->setProject($project);
-        $this->projectMemberRepo->add($projectMember);
+        $this->projectMemberRepo->insert($projectMember);
     }
 
     /**
