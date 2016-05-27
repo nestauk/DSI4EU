@@ -9,7 +9,7 @@ CREATE TABLE `project-post-comments` (
 
 ALTER TABLE `project-post-comments`
   ADD PRIMARY KEY (`id`),
-  ADD INDEX KEY `postID` (`postID`);
+  ADD INDEX `postID` (`postID`);
 
 ALTER TABLE `project-post-comments`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
