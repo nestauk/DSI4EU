@@ -20,6 +20,7 @@ use DSI\Repository\UserRepository;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\URL;
+use DSI\UseCase\AddCommentToProjectPost;
 use DSI\UseCase\AddEmailToProject;
 use DSI\UseCase\AddImpactTagAToProject;
 use DSI\UseCase\AddImpactTagBToProject;
@@ -290,6 +291,19 @@ class ProjectController
                     $setStatusCmd->data()->project = $project;
                     $setStatusCmd->data()->isAdmin = (bool)$_POST['isAdmin'];
                     $setStatusCmd->exec();
+
+                    echo json_encode([
+                        'result' => 'ok'
+                    ]);
+                    return;
+                }
+
+                if (isset($_POST['addPostComment'])) {
+                    $addCommentCmd = new AddCommentToProjectPost();
+                    $addCommentCmd->data()->comment = $_POST['comment'];
+                    $addCommentCmd->data()->projectPost = (new ProjectPostRepository())->getById($_POST['post']);
+                    $addCommentCmd->data()->user = $loggedInUser;
+                    $addCommentCmd->exec();
 
                     echo json_encode([
                         'result' => 'ok'

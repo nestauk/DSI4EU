@@ -3,7 +3,6 @@
 namespace DSI\Repository;
 
 use DSI;
-use DSI\Entity\Project;
 use DSI\Entity\ProjectPost;
 use DSI\Service\SQL;
 
@@ -97,15 +96,11 @@ class ProjectPostRepository
      */
     private function getPostWhere($where)
     {
-        $query = new SQL("SELECT 
-            id, projectID, userID, `time`, title, text
-            FROM `project-posts` WHERE " . implode(' AND ', $where) . " LIMIT 1");
-        $dbPost = $query->fetch();
-        if (!$dbPost) {
+        $dbPost = $this->getPostsWhere($where);
+        if (count($dbPost) < 1)
             throw new DSI\NotFound();
-        }
 
-        return $this->buildPostFromData($dbPost);
+        return $dbPost[0];
     }
 
     /**

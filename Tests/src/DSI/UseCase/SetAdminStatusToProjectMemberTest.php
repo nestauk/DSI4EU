@@ -92,7 +92,6 @@ class SetAdminStatusToProjectMemberTest extends PHPUnit_Framework_TestCase
         try {
             $this->setStatusCmd->exec();
         } catch (\DSI\Service\ErrorHandler $e) {
-            var_dump($e->getErrors());
         }
 
         $this->assertNotNull($e);

@@ -111,7 +111,6 @@ app.controller('ProjectController', function ($scope, $http, $attrs, $timeout, $
     $http.get(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json')
         .then(function (response) {
             $scope.project = response.data || {};
-            console.log($scope.project.posts);
             listCountries();
         });
 
@@ -430,6 +429,22 @@ app.controller('ProjectController', function ($scope, $http, $attrs, $timeout, $
                 $scope.users = result.data;
                 addMemberSelect.select2({data: result.data});
             });
+    }());
+
+    // Comments
+    (function () {
+        $scope.submitComment = function (post) {
+            $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', {
+                addPostComment: true,
+                post: post.id,
+                comment: post.newComment
+            }).then(function (response) {
+                post.newComment = '';
+                $timeout(function () {
+                    console.log(response.data);
+                }, 500);
+            });
+        }
     }());
 
     var Helpers = {

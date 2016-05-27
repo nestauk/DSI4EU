@@ -4,17 +4,15 @@ namespace DSI\Controller;
 
 use DSI\Repository\UserRepository;
 use DSI\Service\Auth;
-use DSI\Service\URL;
 
 class ListUsersController
 {
     public function exec()
     {
         $authUser = new Auth();
+        $users = [];
         if ($authUser->isLoggedIn()) {
-
             $userRepo = new UserRepository();
-            $users = [];
             foreach ($userRepo->getAll() AS $user) {
                 $users[] = [
                     'id' => $user->getId(),
@@ -24,12 +22,9 @@ class ListUsersController
                     'lastName' => $user->getLastName(),
                 ];
             }
-
-            echo json_encode($users);
-            return;
-        } else {
-            echo json_encode([]);
-            return;
         }
+
+        echo json_encode($users);
+        return;
     }
 }
