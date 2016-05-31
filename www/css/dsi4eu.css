@@ -2599,6 +2599,13 @@ strong {
   margin-bottom: 20px;
 }
 
+.container-wide.post-hero {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+}
+
 .button {
   min-width: 175px;
   padding: 10px 30px;
@@ -3896,6 +3903,154 @@ strong {
   margin-left: 10px;
 }
 
+.single-post-hero {
+  position: relative;
+  height: 400px;
+  margin-top: 105px;
+  background-image: -webkit-linear-gradient(270deg, rgba(24, 35, 63, .27), rgba(24, 35, 63, .76)), url('../images/brussels-locations.jpg');
+  background-image: linear-gradient(180deg, rgba(24, 35, 63, .27), rgba(24, 35, 63, .76)), url('../images/brussels-locations.jpg');
+  background-position: 0px 0px, 0px -216px;
+  background-size: auto, cover;
+  background-repeat: repeat, no-repeat;
+}
+
+.post-hero-title {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  bottom: 10px;
+  width: 75%;
+  padding-left: 10px;
+  font-family: 'Open Sans', sans-serif;
+  color: #fff;
+  font-weight: 300;
+}
+
+.post-single-date {
+  position: absolute;
+  right: 0px;
+  bottom: 10px;
+  padding-right: 10px;
+  font-family: 'Open Sans', sans-serif;
+  color: #fff;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.single-post-author {
+  display: inline-block;
+  padding-top: 20px;
+}
+
+.single-post-author-img {
+  width: 50px;
+  height: 50px;
+  float: left;
+  border-radius: 25px;
+  background-image: url('../images/images.jpg');
+  background-position: 50% 50%;
+  background-size: cover;
+}
+
+.single-post-author-name {
+  display: inline-block;
+  margin-top: 15px;
+  margin-left: 15px;
+  float: left;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+}
+
+.author-details {
+  margin-bottom: 20px;
+}
+
+.single-post-category {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  display: block;
+  width: auto;
+  min-width: auto;
+  padding: 10px 20px;
+  background-color: #384155;
+  font-family: 'Open Sans', sans-serif;
+  color: #fff;
+  font-weight: 600;
+  text-align: right;
+  text-transform: uppercase;
+}
+
+.single-post-content-card {
+  padding: 20px;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.sidebar-content-card {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.sidebar-h2 {
+  margin-top: 0px;
+  padding-right: 10px;
+  padding-left: 10px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 28px;
+  font-weight: 300;
+}
+
+.latest-post-li {
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #f3f3f3;
+  background-color: #fff;
+  -webkit-transition: all 200ms ease;
+  transition: all 200ms ease;
+  color: #707070;
+}
+
+.latest-post-li:hover {
+  border-radius: 5px;
+  box-shadow: 0 0 25px -7px rgba(0, 0, 0, .67);
+  -webkit-transform: scale(1.03);
+  -ms-transform: scale(1.03);
+  transform: scale(1.03);
+}
+
+.latest-post-date {
+  margin-bottom: 5px;
+  padding-left: 10px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12px;
+  line-height: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.latest-post-year {
+  padding-left: 10px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 20px;
+}
+
+.latest-post-title {
+  padding-right: 10px;
+  font-family: 'Open Sans', sans-serif;
+  line-height: 19px;
+  font-weight: 600;
+}
+
+.content-h2 {
+  margin-top: 0px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+}
+
 html.w-mod-js *[data-ix="downbeforeup"] {
   opacity: 0;
   -webkit-transform: translate(0px, 50px);
@@ -4099,6 +4254,14 @@ html.w-mod-js *[data-ix="hide-cancel-or-save"] {
     margin-left: 70px;
     float: none;
   }
+  .single-post-hero {
+    background-size: auto, auto;
+    background-repeat: repeat, no-repeat;
+  }
+  .latest-post-title {
+    margin-top: 10px;
+    padding-left: 10px;
+  }
 }
 
 @media (max-width: 767px) {
@@ -4242,6 +4405,9 @@ html.w-mod-js *[data-ix="hide-cancel-or-save"] {
   .card-logo-small {
     width: 50px;
     max-width: auto;
+  }
+  .single-post-category {
+    top: -52px;
   }
 }
 
@@ -4486,6 +4652,9 @@ html.w-mod-js *[data-ix="hide-cancel-or-save"] {
   .dashboard-stats {
     position: static;
     margin-top: -27px;
+  }
+  .single-post-category {
+    top: -81px;
   }
 }
 
