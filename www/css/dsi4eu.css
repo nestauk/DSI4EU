@@ -386,6 +386,7 @@ strong {
 
 .project-section {
   margin-top: 130px;
+  opacity: 1;
 }
 
 .project-detail {
@@ -3507,6 +3508,7 @@ strong {
 }
 
 .page-h1 {
+  margin-top: 0px;
   margin-bottom: 30px;
   margin-left: 10px;
   font-family: 'Open Sans', sans-serif;
@@ -3522,11 +3524,12 @@ strong {
 }
 
 .intro-title {
-  height: 75px;
+  height: auto;
   margin-right: 10px;
   margin-bottom: 20px;
   margin-left: 10px;
-  padding-top: 0px;
+  padding-top: 10px;
+  padding-left: 20px;
   border-radius: 5px;
   background-color: #fff;
 }
@@ -3681,6 +3684,10 @@ strong {
   cursor: pointer;
 }
 
+.star-full.star-full-activated {
+  opacity: 1;
+}
+
 .star-empty {
   position: absolute;
   top: 19px;
@@ -3688,6 +3695,11 @@ strong {
   z-index: 5;
   width: 20px;
   cursor: pointer;
+}
+
+.star-empty.activated {
+  z-index: 1;
+  display: block;
 }
 
 .star-holder {
@@ -3807,6 +3819,81 @@ strong {
 .reply-input {
   display: none;
   padding-left: 52px;
+}
+
+.admin-removed.admin-added {
+  display: block;
+  opacity: 0;
+}
+
+.intro-col {
+  padding-bottom: 20px;
+  padding-left: 10px;
+}
+
+.data-tab {
+  width: 32%;
+  height: 70px;
+  margin-bottom: 21px;
+  margin-left: 2%;
+  border-radius: 5px;
+  background-color: #fff;
+  -webkit-transition: all 200ms ease;
+  transition: all 200ms ease;
+  font-size: 16px;
+  line-height: 49px;
+}
+
+.data-tab:hover {
+  height: 70px;
+  box-shadow: 0 0 28px -8px #000;
+  -webkit-transform: scale(1.03);
+  -ms-transform: scale(1.03);
+  transform: scale(1.03);
+  font-size: 16px;
+  line-height: 49px;
+}
+
+.data-tab.left-data-tab {
+  height: 70px;
+  margin-right: 2%;
+  margin-left: 0%;
+  -webkit-transition: all 200ms ease;
+  transition: all 200ms ease;
+  font-size: 16px;
+  line-height: 49px;
+}
+
+.data-tab.left-data-tab:hover {
+  box-shadow: 0 0 32px -15px #000;
+  -webkit-transform: scale(1.03);
+  -ms-transform: scale(1.03);
+  transform: scale(1.03);
+}
+
+.data-tab.mid-data-tab {
+  height: 70px;
+  margin-left: 0%;
+  font-size: 16px;
+  line-height: 49px;
+}
+
+.data-tab.mid-data-tab.w--current {
+  margin-left: 0px;
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+}
+
+.data-tab.data-tab-right {
+  height: 70px;
+  font-size: 16px;
+  line-height: 49px;
+}
+
+.explore-tabs {
+  margin-right: 10px;
+  margin-left: 10px;
 }
 
 html.w-mod-js *[data-ix="downbeforeup"] {
