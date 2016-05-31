@@ -9,6 +9,7 @@ app.controller('ProjectController', function ($scope, $http, $attrs, $timeout, $
     var editCountry = $('#Edit-country');
     var editCountryRegion = $('#Edit-countryRegion');
 
+    $scope.projectid = $attrs.projectid;
     $scope.datePattern = '[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])';
     $scope.getDateFrom = function (date) {
         var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -30,7 +31,7 @@ app.controller('ProjectController', function ($scope, $http, $attrs, $timeout, $
             endDate: $scope.project.endDate
         };
 
-        $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', data)
+        $http.post(SITE_RELATIVE_PATH + '/project/' + $scope.projectid + '.json', data)
             .then(function (response) {
                 if (response.data.result == 'error') {
                     alert('error');
@@ -108,9 +109,10 @@ app.controller('ProjectController', function ($scope, $http, $attrs, $timeout, $
     };
 
     // Get Project Details
-    $http.get(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json')
+    $http.get(SITE_RELATIVE_PATH + '/project/' + $scope.projectid + '.json')
         .then(function (response) {
             $scope.project = response.data || {};
+            console.log(response.data);
             listCountries();
         });
 
@@ -146,7 +148,7 @@ app.controller('ProjectController', function ($scope, $http, $attrs, $timeout, $
             data.currentTags.push(data.tag);
             data.currentTags.sort();
 
-            $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', data.postFields)
+            $http.post(SITE_RELATIVE_PATH + '/project/' + $scope.projectid + '.json', data.postFields)
                 .then(function (result) {
                     console.log(result.data);
                 });
@@ -157,7 +159,7 @@ app.controller('ProjectController', function ($scope, $http, $attrs, $timeout, $
         if (index > -1) {
             data.currentTags.splice(index, 1);
 
-            $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', data.postFields)
+            $http.post(SITE_RELATIVE_PATH + '/project/' + $scope.projectid + '.json', data.postFields)
                 .then(function (result) {
                     console.log(result.data);
                 });
@@ -199,7 +201,7 @@ app.controller('ProjectController', function ($scope, $http, $attrs, $timeout, $
     $scope.sendRequestToJoin = function () {
         $scope.requestToJoin.loading = true;
         $timeout(function () {
-            $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', {
+            $http.post(SITE_RELATIVE_PATH + '/project/' + $scope.projectid + '.json', {
                 requestToJoin: true
             }).then(function (result) {
                 $scope.requestToJoin.loading = false;
@@ -214,7 +216,7 @@ app.controller('ProjectController', function ($scope, $http, $attrs, $timeout, $
             $scope.project.memberRequests.splice(index, 1);
             $scope.project.members.push(member);
 
-            $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', {
+            $http.post(SITE_RELATIVE_PATH + '/project/' + $scope.projectid + '.json', {
                 approveRequestToJoin: member.id
             }).then(function (result) {
                 console.log(result.data);
@@ -226,7 +228,7 @@ app.controller('ProjectController', function ($scope, $http, $attrs, $timeout, $
         if (index > -1) {
             $scope.project.memberRequests.splice(index, 1);
 
-            $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', {
+            $http.post(SITE_RELATIVE_PATH + '/project/' + $scope.projectid + '.json', {
                 rejectRequestToJoin: member.id
             }).then(function (result) {
                 console.log(result.data);
@@ -236,7 +238,7 @@ app.controller('ProjectController', function ($scope, $http, $attrs, $timeout, $
     $scope.saveCountryRegion = function () {
         $scope.savingCountryRegion.loading = true;
         $scope.savingCountryRegion.saved = false;
-        $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', {
+        $http.post(SITE_RELATIVE_PATH + '/project/' + $scope.projectid + '.json', {
             updateCountryRegion: true,
             countryID: editCountry.val(),
             region: editCountryRegion.val()
@@ -267,7 +269,7 @@ app.controller('ProjectController', function ($scope, $http, $attrs, $timeout, $
                 'url': $scope.organisations[index].url
             });
 
-            $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', {
+            $http.post(SITE_RELATIVE_PATH + '/project/' + $scope.projectid + '.json', {
                 newOrganisationID: organisation
             }).then(function (result) {
                 console.log(result.data);
@@ -275,7 +277,7 @@ app.controller('ProjectController', function ($scope, $http, $attrs, $timeout, $
         }
     };
     $scope.addPost = function () {
-        $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', {
+        $http.post(SITE_RELATIVE_PATH + '/project/' + $scope.projectid + '.json', {
             addPost: tinymce.activeEditor.getContent()
         }).then(function (response) {
                 if (response.data.result == 'ok') {
@@ -353,7 +355,7 @@ app.controller('ProjectController', function ($scope, $http, $attrs, $timeout, $
         };
 
         var addExistingMember = function (newMember) {
-            $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', {
+            $http.post(SITE_RELATIVE_PATH + '/project/' + $scope.projectid + '.json', {
                 addMember: newMember.id
             }).then(function (response) {
                 $scope.addProjectMember.loading = false;
@@ -373,7 +375,7 @@ app.controller('ProjectController', function ($scope, $http, $attrs, $timeout, $
         var addNewMemberFromEmailAddress = function (emailAddress) {
             console.log('add email: ' + emailAddress);
 
-            $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', {
+            $http.post(SITE_RELATIVE_PATH + '/project/' + $scope.projectid + '.json', {
                 addEmail: emailAddress
             }).then(function (response) {
                 $scope.addProjectMember.loading = false;
@@ -397,7 +399,7 @@ app.controller('ProjectController', function ($scope, $http, $attrs, $timeout, $
             if (index > -1) {
                 $scope.project.members.splice(index, 1);
 
-                $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', {
+                $http.post(SITE_RELATIVE_PATH + '/project/' + $scope.projectid + '.json', {
                     removeMember: member.id
                 }).then(function (response) {
                     if (response.data.result != 'ok') {
@@ -410,7 +412,7 @@ app.controller('ProjectController', function ($scope, $http, $attrs, $timeout, $
 
         $scope.updateAdminStatus = function (member) {
             console.log(member);
-            $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', {
+            $http.post(SITE_RELATIVE_PATH + '/project/' + $scope.projectid + '.json', {
                 setAdmin: true,
                 member: member.id,
                 isAdmin: member.isAdmin
@@ -431,22 +433,6 @@ app.controller('ProjectController', function ($scope, $http, $attrs, $timeout, $
             });
     }());
 
-    // Comments
-    (function () {
-        $scope.submitComment = function (post) {
-            $http.post(SITE_RELATIVE_PATH + '/project/' + $attrs.projectid + '.json', {
-                addPostComment: true,
-                post: post.id,
-                comment: post.newComment
-            }).then(function (response) {
-                post.newComment = '';
-                $timeout(function () {
-                    console.log(response.data);
-                }, 500);
-            });
-        }
-    }());
-
     var Helpers = {
         getFirstNonEmptyValue: function (values) {
             for (var i in values) {
@@ -462,5 +448,23 @@ app.controller('ProjectController', function ($scope, $http, $attrs, $timeout, $
             }
             return -1;
         }
+    }
+});
+
+app.controller('ProjectPostController', function ($scope, $http, $timeout, $sce) {
+    if ($scope.post) {
+        $scope.submitComment = function () {
+            $http.post(SITE_RELATIVE_PATH + '/projectPost/' + $scope.post.id + '.json', {
+                addPostComment: true,
+                post: $scope.post.id,
+                comment: $scope.post.newComment
+            }).then(function (response) {
+                $scope.post.newComment = '';
+                $timeout(function () {
+                    $scope.post.comments.unshift(response.data.comment);
+                    console.log(response.data);
+                }, 500);
+            });
+        };
     }
 });

@@ -4,6 +4,7 @@ namespace DSI\Controller;
 
 use DSI\Entity\Project;
 use DSI\Repository\OrganisationProjectRepository;
+use DSI\Repository\ProjectPostCommentRepository;
 use DSI\Repository\ProjectRepository;
 use DSI\Repository\UserRepository;
 use DSI\Service\Auth;

@@ -48,7 +48,7 @@ class AddCommentToProjectPost
     }
 
     /**
-     * @return Project
+     * @return ProjectPostComment
      */
     public function getProjectPostComment()
     {
@@ -63,7 +63,7 @@ class AddCommentToProjectPost
         $postComment->setComment($this->data()->comment);
         $this->projectPostCommentRepo->insert($postComment);
 
-        $this->projectPostComment = $postComment;
+        $this->projectPostComment = $this->projectPostCommentRepo->getById($postComment->getId());
     }
 
     private function checkForInvalidData()

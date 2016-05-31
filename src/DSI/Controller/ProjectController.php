@@ -6,6 +6,7 @@ use DSI\Entity\OrganisationProject;
 use DSI\Entity\Project;
 use DSI\Entity\ProjectMember;
 use DSI\Entity\ProjectPost;
+use DSI\Entity\ProjectPostComment;
 use DSI\Entity\User;
 use DSI\Repository\OrganisationProjectRepository;
 use DSI\Repository\ProjectImpactTagARepository;
@@ -13,6 +14,7 @@ use DSI\Repository\ProjectImpactTagBRepository;
 use DSI\Repository\ProjectImpactTagCRepository;
 use DSI\Repository\ProjectMemberRepository;
 use DSI\Repository\ProjectMemberRequestRepository;
+use DSI\Repository\ProjectPostCommentRepository;
 use DSI\Repository\ProjectPostRepository;
 use DSI\Repository\ProjectRepository;
 use DSI\Repository\ProjectTagRepository;
@@ -298,20 +300,6 @@ class ProjectController
                     return;
                 }
 
-                if (isset($_POST['addPostComment'])) {
-                    $addCommentCmd = new AddCommentToProjectPost();
-                    $addCommentCmd->data()->comment = $_POST['comment'];
-                    $addCommentCmd->data()->projectPost = (new ProjectPostRepository())->getById($_POST['post']);
-                    $addCommentCmd->data()->user = $loggedInUser;
-                    $addCommentCmd->exec();
-
-                    echo json_encode([
-                        'result' => 'ok'
-                    ]);
-                    return;
-                }
-
-
             } catch (ErrorHandler $e) {
                 echo json_encode([
                     'result' => 'error',
@@ -420,6 +408,8 @@ class ProjectController
     {
         return array_map(function (ProjectPost $post) {
             $user = $post->getUser();
+            $comments = (new ProjectPostCommentRepository())->getByPostID($post->getId());
+
             return [
                 'id' => $post->getId(),
                 'time' => $post->getTime(),
@@ -429,6 +419,18 @@ class ProjectController
                     'name' => $user->getFirstName() . ' ' . $user->getLastName(),
                     'profilePic' => $user->getProfilePicOrDefault(),
                 ],
+                'comments' => array_map(function (ProjectPostComment $comment) {
+                    $user = $comment->getUser();
+                    return [
+                        'id' => $comment->getId(),
+                        'comment' => $comment->getComment(),
+                        'time' => $comment->getJsTime(),
+                        'user' => [
+                            'name' => $user->getFullName(),
+                            'profilePic' => $user->getProfilePicOrDefault(),
+                        ],
+                    ];
+                }, $comments),
             ];
         }, (new ProjectPostRepository())->getByProjectID($project->getId()));
     }

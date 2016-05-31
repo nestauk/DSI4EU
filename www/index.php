@@ -121,6 +121,9 @@ class Router
         } elseif (preg_match('<^/project/([0-9]+)\.json?$>', $this->pageURL, $matches)) {
             $this->projectJsonPage($matches);
 
+        } elseif (preg_match('<^/projectPost/([0-9]+)\.json?$>', $this->pageURL, $matches)) {
+            $this->projectPostJsonPage($matches);
+
         } elseif (preg_match('<^/project/([0-9]+)(\/.*)?$>', $this->pageURL, $matches)) {
             $this->projectPage($matches);
 
@@ -317,6 +320,14 @@ class Router
     {
         $command = new \DSI\Controller\ProjectController();
         $command->data()->projectID = $matches[1];
+        $command->data()->format = 'json';
+        $command->exec();
+    }
+
+    private function projectPostJsonPage($matches)
+    {
+        $command = new \DSI\Controller\ProjectPostController();
+        $command->data()->postID = $matches[1];
         $command->data()->format = 'json';
         $command->exec();
     }

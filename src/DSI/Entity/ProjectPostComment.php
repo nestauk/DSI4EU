@@ -107,6 +107,14 @@ class ProjectPostComment
     }
 
     /**
+     * @return string
+     */
+    public function getJsTime()
+    {
+        return (string)strtotime($this->time);
+    }
+
+    /**
      * @param string $time
      */
     public function setTime($time)
