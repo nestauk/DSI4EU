@@ -3985,6 +3985,7 @@ strong {
   padding: 20px;
   border-radius: 5px;
   background-color: #fff;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .sidebar-content-card {
@@ -4049,6 +4050,13 @@ strong {
   margin-top: 0px;
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
+}
+
+.post-p {
+  margin-top: 30px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  line-height: 22px;
 }
 
 html.w-mod-js *[data-ix="downbeforeup"] {
