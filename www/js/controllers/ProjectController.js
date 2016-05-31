@@ -454,17 +454,40 @@ app.controller('ProjectController', function ($scope, $http, $attrs, $timeout, $
 app.controller('ProjectPostController', function ($scope, $http, $timeout, $sce) {
     if ($scope.post) {
         $scope.submitComment = function () {
-            $http.post(SITE_RELATIVE_PATH + '/projectPost/' + $scope.post.id + '.json', {
+            var data = {
                 addPostComment: true,
                 post: $scope.post.id,
                 comment: $scope.post.newComment
-            }).then(function (response) {
-                $scope.post.newComment = '';
-                $timeout(function () {
-                    $scope.post.comments.unshift(response.data.comment);
-                    console.log(response.data);
-                }, 500);
-            });
+            };
+            $scope.post.newComment = '';
+            $http.post(SITE_RELATIVE_PATH + '/projectPost/' + $scope.post.id + '.json', data)
+                .then(function (response) {
+                    $timeout(function () {
+                        $scope.post.comments.unshift(response.data.comment);
+                        console.log(response.data);
+                    }, 500);
+                });
+        };
+    }
+});
+
+app.controller('ProjectPostCommentController', function ($scope, $http, $timeout, $sce) {
+    if ($scope.comment) {
+        $scope.submitComment = function () {
+            var data = {
+                addReply: true,
+                reply: $scope.comment.newReply
+            };
+            $scope.comment.newReply = '';
+            $http.post(SITE_RELATIVE_PATH + '/projectPostComment/' + $scope.comment.id + '.json', data)
+                .then(function (response) {
+                    $timeout(function () {
+                        if(!$scope.comment.replies)
+                            $scope.comment.replies = [];
+
+                        $scope.comment.replies.push(response.data.reply);
+                    }, 500);
+                });
         };
     }
 });

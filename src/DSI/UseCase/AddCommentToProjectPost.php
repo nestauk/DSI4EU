@@ -2,7 +2,6 @@
 
 namespace DSI\UseCase;
 
-use DSI\Entity\Project;
 use DSI\Entity\ProjectPost;
 use DSI\Entity\ProjectPostComment;
 use DSI\Entity\User;
@@ -18,7 +17,7 @@ class AddCommentToProjectPost
     /** @var ProjectPostCommentRepository */
     private $projectPostCommentRepo;
 
-    /** @var ProjectPost */
+    /** @var ProjectPostComment */
     private $projectPostComment;
 
     /** @var AddCommentToProjectPost_Data */

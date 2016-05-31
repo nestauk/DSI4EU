@@ -640,207 +640,98 @@ require __DIR__ . '/header.php';
                                     </div>
                                 </div>
                             <?php } ?>
-                            <div ng-show="project.posts.length > 0">
-                                <div ng-controller="ProjectPostController" ng-repeat="post in [project.posts[0]]">
-                                    <div class="w-clearfix current-status">
-                                        <h3 class="status-h3">Latest post</h3>
-                                        <div class="post-author latest">
-                                            <img width="40" height="40" class="post-author-img"
-                                                 ng-src="<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/{{project.posts[0].user.profilePic}}">
-                                            <div class="post-author-detail latest"
-                                                 ng-bind="post.user.name"></div>
-                                            <div class="posted-on latest" ng-bind="post.time"></div>
-                                        </div>
-                                        <div class="news-content"
-                                             ng-bind-html="renderHtml(post.text)"></div>
+                            <div ng-controller="ProjectPostController" ng-repeat="post in project.posts">
+                                <div class="w-clearfix" ng-class="{'current-status' : $index == 0}">
+
+                                    <h3 ng-show="$index == 0" class="status-h3">Latest post</h3>
+                                    <h3 ng-show="$index == 1" class="info-h card-h">Previous posts</h3>
+
+                                    <div class="post-author" ng-class="{'latest' : $index == 0}">
+                                        <img width="40" height="40" class="post-author-img"
+                                             ng-src="<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/{{post.user.profilePic}}">
+                                        <div class="post-author-detail" ng-class="{'latest' : $index == 0}"
+                                             ng-bind="post.user.name"></div>
+                                        <div class="posted-on" ng-class="{'latest' : $index == 0}"
+                                             ng-bind="post.time"></div>
                                     </div>
-                                    <div class="post-comments">
-                                        <div class="comment">
-                                            <?php if ($loggedInUser) { ?>
-                                                <div class="w-row">
-                                                    <div class="w-col w-col-1 w-clearfix">
-                                                        <img class="commentor-img"
-                                                             src="<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/<?php echo $loggedInUser->getProfilePicOrDefault() ?>">
-                                                    </div>
-                                                    <div class="w-col w-col-11">
-                                                        <div class="post-comment">
-                                                            <div class="w-form">
-                                                                <form ng-submit="submitComment()">
-                                                                    <input type="text" placeholder="Write your comment"
-                                                                           class="w-input add-comment"
-                                                                           ng-model="post.newComment">
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                    <div class="news-content"
+                                         ng-bind-html="renderHtml(post.text)"></div>
+                                </div>
+                                <div class="post-comments">
+                                    <div class="comment">
+                                        <?php if ($loggedInUser) { ?>
+                                            <div class="w-row">
+                                                <div class="w-col w-col-1 w-clearfix">
+                                                    <img class="commentor-img"
+                                                         src="<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/<?php echo $loggedInUser->getProfilePicOrDefault() ?>">
                                                 </div>
-                                            <?php } ?>
-                                            <div ng-repeat="comment in post.comments">
-                                                <div class="w-row comment-original">
-                                                    <div class="w-col w-col-4 w-clearfix">
-                                                        <img class="commentor-img"
-                                                             ng-src="<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/{{comment.user.profilePic}}">
-                                                        <div class="commentor-name">{{comment.user.name}}</div>
-                                                        <a href="#" data-ix="reply-to-post" class="reply">Reply</a>
-                                                    </div>
-                                                    <div class="w-col w-col-8">
-                                                        <div class="post-comment comment-original-post">
-                                                            {{comment.comment}}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <div class="w-row reply-cols">
-                                                        <div class="w-col w-col-3 w-clearfix reply-col-1">
-                                                            <img
-                                                                src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg"
-                                                                class="commentor-img commentor-reply-img">
-                                                            <div class="commentor-name commentor-reply">Jacob M Simon
-                                                            </div>
-                                                        </div>
-                                                        <div class="w-col w-col-9">
-                                                            <div class="post-comment reply-comment">Yes, I too would
-                                                                like to
-                                                                know the cost of this. I would also like to ask why you
-                                                                thought
-                                                                of using quantum levitation as opposed to maglev for
-                                                                this
-                                                                project. Surely it's a problem keeping the temperature
-                                                                consistent?
-                                                            </div>
-                                                            <a href="#" data-ix="reply-to-post" class="reply">Reply</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="w-row reply-input">
-                                                        <div class="w-col w-col-1 w-clearfix">
-                                                            <img
-                                                                src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg"
-                                                                class="commentor-img commentor-reply-img">
-                                                        </div>
-                                                        <div class="w-col w-col-11">
-                                                            <div class="w-form">
-                                                                <form id="email-form" name="email-form"
-                                                                      data-name="Email Form">
-                                                                    <input id="Comment-5" type="text"
-                                                                           placeholder="Add your reply" name="Comment-5"
-                                                                           data-name="Comment 5"
-                                                                           class="w-input add-comment">
-                                                                </form>
-                                                                <div class="w-form-done">
-                                                                    <p>Thank you! Your submission has been received!</p>
-                                                                </div>
-                                                                <div class="w-form-fail">
-                                                                    <p>Oops! Something went wrong while submitting the
-                                                                        form</p>
-                                                                </div>
-                                                            </div>
+                                                <div class="w-col w-col-11">
+                                                    <div class="post-comment">
+                                                        <div class="w-form">
+                                                            <form ng-submit="submitComment()">
+                                                                <input type="text" placeholder="Write your comment"
+                                                                       class="w-input add-comment"
+                                                                       ng-model="post.newComment">
+                                                            </form>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="comment">
+                                        <?php } ?>
+                                        <div ng-controller="ProjectPostCommentController"
+                                             ng-repeat="comment in post.comments">
                                             <div class="w-row comment-original">
                                                 <div class="w-col w-col-4 w-clearfix">
-                                                    <img
-                                                        src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg"
-                                                        class="commentor-img">
-                                                    <div class="commentor-name">Jacob M Simon</div>
-                                                    <a href="#" data-ix="reply-to-post" class="reply">Reply</a>
+                                                    <img class="commentor-img"
+                                                         ng-src="<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/{{comment.user.profilePic}}">
+                                                    <div class="commentor-name">{{comment.user.name}}</div>
+                                                    <br/>
+                                                    <a href="#" ng-click="replyToComment = !replyToComment"
+                                                       class="reply">Reply</a>
                                                 </div>
                                                 <div class="w-col w-col-8">
-                                                    <div class="post-comment comment-original-post">Please could you
-                                                        explain
-                                                        more about how you managed to include quantum levitation in your
-                                                        base model. What were the costs involved?
+                                                    <div class="post-comment comment-original-post">
+                                                        {{comment.comment}}
                                                     </div>
                                                 </div>
                                             </div>
                                             <div>
-                                                <div class="w-row reply-cols">
+                                                <div class="w-row reply-cols" ng-repeat="reply in comment.replies">
                                                     <div class="w-col w-col-3 w-clearfix reply-col-1">
-                                                        <img
-                                                            src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg"
-                                                            class="commentor-img commentor-reply-img">
-                                                        <div class="commentor-name commentor-reply">Jacob M Simon</div>
+                                                        <img class="commentor-img commentor-reply-img"
+                                                             ng-src="<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/{{reply.user.profilePic}}">
+                                                        <div class="commentor-name commentor-reply">
+                                                            {{reply.user.name}}
+                                                        </div>
                                                     </div>
                                                     <div class="w-col w-col-9">
-                                                        <div class="post-comment reply-comment">Yes, I too would like to
-                                                            know the cost of this. I would also like to ask why you
-                                                            thought
-                                                            of using quantum levitation as opposed to maglev for this
-                                                            project. Surely it's a problem keeping the temperature
-                                                            consistent?
+                                                        <div class="post-comment reply-comment">{{reply.comment}}
                                                         </div>
-                                                        <a href="#" data-ix="reply-to-post" class="reply">Reply</a>
+                                                        <a href="#"
+                                                           ng-click="$parent.replyToComment = !$parent.replyToComment"
+                                                           class="reply">Reply</a>
                                                     </div>
                                                 </div>
-                                                <div class="w-row reply-cols">
-                                                    <div class="w-col w-col-3 w-clearfix reply-col-1">
-                                                        <img
-                                                            src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg"
-                                                            class="commentor-img commentor-reply-img">
-                                                        <div class="commentor-name commentor-reply">Jacob M Simon</div>
-                                                    </div>
-                                                    <div class="w-col w-col-9">
-                                                        <div class="post-comment reply-comment">Yes, I too would like to
-                                                            know the cost of this. I would also like to ask why you
-                                                            thought
-                                                            of using quantum levitation as opposed to maglev for this
-                                                            project. Surely it's a problem keeping the temperature
-                                                            consistent?
+                                                <?php if ($loggedInUser) { ?>
+                                                    <div class="w-row reply-input" ng-show="replyToComment">
+                                                        <div class="w-col w-col-1 w-clearfix">
+                                                            <img class="commentor-img commentor-reply-img"
+                                                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/<?php echo $loggedInUser->getProfilePicOrDefault() ?>">
                                                         </div>
-                                                        <a href="#" data-ix="reply-to-post" class="reply">Reply</a>
-                                                    </div>
-                                                </div>
-                                                <div class="w-row reply-input">
-                                                    <div class="w-col w-col-1 w-clearfix">
-                                                        <img
-                                                            src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg"
-                                                            class="commentor-img commentor-reply-img">
-                                                    </div>
-                                                    <div class="w-col w-col-11">
-                                                        <div class="w-form">
-                                                            <form id="email-form" name="email-form"
-                                                                  data-name="Email Form">
-                                                                <input id="Comment-5" type="text"
-                                                                       placeholder="Add your reply" name="Comment-5"
-                                                                       data-name="Comment 5"
-                                                                       class="w-input add-comment">
-                                                            </form>
-                                                            <div class="w-form-done">
-                                                                <p>Thank you! Your submission has been received!</p>
-                                                            </div>
-                                                            <div class="w-form-fail">
-                                                                <p>Oops! Something went wrong while submitting the
-                                                                    form</p>
+                                                        <div class="w-col w-col-11">
+                                                            <div class="w-form">
+                                                                <form ng-submit="submitComment()">
+                                                                    <input type="text"
+                                                                           placeholder="Add your reply"
+                                                                           class="w-input add-comment"
+                                                                           ng-model="comment.newReply">
+                                                                </form>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                <?php } ?>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div ng-show="project.posts.length > 1">
-                                <h3 class="info-h card-h">Previous posts</h3>
-
-                                <div class="w-clearfix project-post" ng-repeat="post in project.posts"
-                                     ng-if="$index > 0">
-                                    <div class="post-author">
-                                        <img width="40" height="40" class="post-author-img"
-                                             ng-src="<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/{{post.user.profilePic}}">
-                                        <div class="post-author-detail" ng-bind="post.user.name"></div>
-                                        <div class="posted-on" ng-bind="post.time"></div>
-                                    </div>
-                                    <div class="project-post-detail">
-                                        <?php /*
-                                        <img class="project-post-image"
-                                             src="<?php echo SITE_RELATIVE_PATH ?>/images/wearable-circuit-board-tattoo-644x424.jpg">
-                                        */ ?>
-                                        <div class="news-content" ng-bind-html="renderHtml(post.text)"></div>
                                     </div>
                                 </div>
                             </div>

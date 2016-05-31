@@ -5,18 +5,17 @@ namespace DSI\Repository;
 use DSI\Entity\ProjectPostComment;
 use DSI\NotFound;
 use DSI\Service\SQL;
-use Guzzle\Common\Exception\InvalidArgumentException;
 
 class ProjectPostCommentRepository
 {
     public function insert(ProjectPostComment $projectPostComment)
     {
         if (!$projectPostComment->getProjectPost() OR !$projectPostComment->getProjectPostId())
-            throw new InvalidArgumentException();
+            throw new \InvalidArgumentException();
         if (!$projectPostComment->getUserId() OR !$projectPostComment->getUserId())
-            throw new InvalidArgumentException();
+            throw new \InvalidArgumentException();
         if ($projectPostComment->getComment() == '')
-            throw new InvalidArgumentException();
+            throw new \InvalidArgumentException();
 
         $insert = array();
         $insert[] = "`postID` = '" . (int)($projectPostComment->getProjectPostId()) . "'";
@@ -34,11 +33,11 @@ class ProjectPostCommentRepository
     public function save(ProjectPostComment $projectPostComment)
     {
         if (!$projectPostComment->getProjectPost() OR !$projectPostComment->getProjectPostId())
-            throw new InvalidArgumentException();
+            throw new \InvalidArgumentException();
         if (!$projectPostComment->getUserId() OR !$projectPostComment->getUserId())
-            throw new InvalidArgumentException();
+            throw new \InvalidArgumentException();
         if ($projectPostComment->getComment() == '')
-            throw new InvalidArgumentException();
+            throw new \InvalidArgumentException();
 
         $query = new SQL("SELECT id FROM `project-post-comments` WHERE id = '{$projectPostComment->getId()}' LIMIT 1");
         $existingPost = $query->fetch();

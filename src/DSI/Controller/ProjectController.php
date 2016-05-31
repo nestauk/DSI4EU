@@ -7,6 +7,7 @@ use DSI\Entity\Project;
 use DSI\Entity\ProjectMember;
 use DSI\Entity\ProjectPost;
 use DSI\Entity\ProjectPostComment;
+use DSI\Entity\ProjectPostCommentReply;
 use DSI\Entity\User;
 use DSI\Repository\OrganisationProjectRepository;
 use DSI\Repository\ProjectImpactTagARepository;
@@ -14,6 +15,7 @@ use DSI\Repository\ProjectImpactTagBRepository;
 use DSI\Repository\ProjectImpactTagCRepository;
 use DSI\Repository\ProjectMemberRepository;
 use DSI\Repository\ProjectMemberRequestRepository;
+use DSI\Repository\ProjectPostCommentReplyRepository;
 use DSI\Repository\ProjectPostCommentRepository;
 use DSI\Repository\ProjectPostRepository;
 use DSI\Repository\ProjectRepository;
@@ -421,6 +423,7 @@ class ProjectController
                 ],
                 'comments' => array_map(function (ProjectPostComment $comment) {
                     $user = $comment->getUser();
+                    $replies = (new ProjectPostCommentReplyRepository())->getByCommentID($comment->getId());
                     return [
                         'id' => $comment->getId(),
                         'comment' => $comment->getComment(),
@@ -429,6 +432,19 @@ class ProjectController
                             'name' => $user->getFullName(),
                             'profilePic' => $user->getProfilePicOrDefault(),
                         ],
+                        'repliesCount' => $comment->getRepliesCount(),
+                        'replies' => array_map(function (ProjectPostCommentReply $reply) {
+                            $user = $reply->getUser();
+                            return [
+                                'id' => $reply->getId(),
+                                'comment' => $reply->getComment(),
+                                'time' => $reply->getTime(),
+                                'user' => [
+                                    'name' => $user->getFullName(),
+                                    'profilePic' => $user->getProfilePicOrDefault(),
+                                ],
+                            ];
+                        }, $replies)
                     ];
                 }, $comments),
             ];

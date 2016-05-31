@@ -119,3 +119,8 @@ input.ng-invalid {
     position: absolute;width:100%;
     bottom:100px;
 }
+
+
+.reply-input {
+    display: block;
+}
