@@ -124,6 +124,7 @@ class ProjectPostRepositoryTest extends PHPUnit_Framework_TestCase
         $post->setUser($this->user1);
         $post->setTitle($title = 'Post Title');
         $post->setText($text = 'Post Text');
+        $post->setCommentsCount($commentsCount = 10);
         $this->projectPostRepo->insert($post);
 
         $post = $this->projectPostRepo->getById($post->getId());
@@ -131,6 +132,7 @@ class ProjectPostRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($this->user1->getId(), $post->getUser()->getId());
         $this->assertEquals($title, $post->getTitle());
         $this->assertEquals($text, $post->getText());
+        $this->assertEquals($commentsCount, $post->getCommentsCount());
         $this->assertRegExp('[^\d{4}\-\d{2}\-\d{2} \d{2}:\d{2}:\d{2}$]', $post->getTime());
     }
 }

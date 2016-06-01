@@ -18,6 +18,9 @@ class ProjectPost
         $title,
         $text;
 
+    /** @var int */
+    private $commentsCount;
+
     /**
      * @return int
      */
@@ -112,5 +115,21 @@ class ProjectPost
     public function setText($text)
     {
         $this->text = $text;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCommentsCount()
+    {
+        return (int)$this->commentsCount;
+    }
+
+    /**
+     * @param int $commentsCount
+     */
+    public function setCommentsCount($commentsCount)
+    {
+        $this->commentsCount = (int)$commentsCount;
     }
 }

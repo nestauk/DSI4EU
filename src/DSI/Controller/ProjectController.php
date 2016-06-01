@@ -421,6 +421,8 @@ class ProjectController
                     'name' => $user->getFirstName() . ' ' . $user->getLastName(),
                     'profilePic' => $user->getProfilePicOrDefault(),
                 ],
+                'commentsCount' => $post->getCommentsCount(),
+                /*
                 'comments' => array_map(function (ProjectPostComment $comment) {
                     $user = $comment->getUser();
                     $replies = (new ProjectPostCommentReplyRepository())->getByCommentID($comment->getId());
@@ -447,6 +449,7 @@ class ProjectController
                         }, $replies)
                     ];
                 }, $comments),
+                */
             ];
         }, (new ProjectPostRepository())->getByProjectID($project->getId()));
     }

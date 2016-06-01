@@ -11,11 +11,12 @@ class ProjectPostRepository
     public function insert(ProjectPost $projectPost)
     {
         $insert = array();
-        $insert[] = "`projectID` = '" . addslashes($projectPost->getProject()->getId()) . "'";
-        $insert[] = "`userID` = '" . addslashes($projectPost->getUser()->getId()) . "'";
+        $insert[] = "`projectID` = '" . (int)($projectPost->getProject()->getId()) . "'";
+        $insert[] = "`userID` = '" . (int)($projectPost->getUser()->getId()) . "'";
         $insert[] = "`time` = NOW()";
         $insert[] = "`title` = '" . addslashes($projectPost->getTitle()) . "'";
         $insert[] = "`text` = '" . addslashes($projectPost->getText()) . "'";
+        $insert[] = "`commentsCount` = '" . (int)($projectPost->getCommentsCount()) . "'";
 
         $query = new SQL("INSERT INTO `project-posts` SET " . implode(', ', $insert) . "");
         $query->query();
@@ -31,10 +32,11 @@ class ProjectPostRepository
             throw new DSI\NotFound('postID: ' . $projectPost->getId());
 
         $insert = array();
-        $insert[] = "`projectID` = '" . addslashes($projectPost->getProject()->getId()) . "'";
-        $insert[] = "`userID` = '" . addslashes($projectPost->getUser()->getId()) . "'";
+        $insert[] = "`projectID` = '" . (int)($projectPost->getProject()->getId()) . "'";
+        $insert[] = "`userID` = '" . (int)($projectPost->getUser()->getId()) . "'";
         $insert[] = "`title` = '" . addslashes($projectPost->getTitle()) . "'";
         $insert[] = "`text` = '" . addslashes($projectPost->getText()) . "'";
+        $insert[] = "`commentsCount` = '" . (int)($projectPost->getCommentsCount()) . "'";
 
         $query = new SQL("UPDATE `project-posts` SET " . implode(', ', $insert) . " WHERE `id` = '{$projectPost->getId()}'");
         $query->query();
@@ -65,6 +67,7 @@ class ProjectPostRepository
         $post->setTime($dbPost['time']);
         $post->setTitle($dbPost['title']);
         $post->setText($dbPost['text']);
+        $post->setCommentsCount($dbPost['commentsCount']);
 
         return $post;
     }
@@ -111,7 +114,7 @@ class ProjectPostRepository
     {
         $posts = [];
         $query = new SQL("SELECT 
-            id, projectID, userID, `time`, title, text
+            id, projectID, userID, `time`, title, text, commentsCount
             FROM `project-posts` WHERE " . implode(' AND ', $where) . "
             ORDER BY `id` DESC");
         foreach ($query->fetch_all() AS $dbPost) {

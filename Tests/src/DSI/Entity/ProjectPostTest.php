@@ -20,7 +20,7 @@ class ProjectPostTest extends \PHPUnit_Framework_TestCase
     public function settingDetails_returnsTheDetails()
     {
         $post = new \DSI\Entity\ProjectPost();
-        $post->setId(1);
+        $post->setId($id = 1);
 
         $project = new \DSI\Entity\Project();
         $project->setId(11);
@@ -33,12 +33,13 @@ class ProjectPostTest extends \PHPUnit_Framework_TestCase
         $post->setTitle($title = 'Post Title');
         $post->setText($text = 'Post Text');
         $post->setTime($time = '2016-05-16 14:36:36');
+        $post->setCommentsCount($commentsCount = '52');
 
-        $this->assertEquals(1, $post->getId());
+        $this->assertEquals($id, $post->getId());
         $this->assertEquals($project->getId(), $post->getProject()->getId());
         $this->assertEquals($user->getId(), $post->getUser()->getId());
         $this->assertEquals($title, $post->getTitle());
         $this->assertEquals($text, $post->getText());
-        $this->assertEquals($time, $post->getTime());
+        $this->assertEquals($commentsCount, $post->getCommentsCount());
     }
 }
