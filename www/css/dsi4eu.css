@@ -4059,6 +4059,37 @@ strong {
   line-height: 22px;
 }
 
+.comment-toggle {
+  display: block;
+  width: 100%;
+  margin-top: 0px;
+  float: left;
+  border-top: 1px solid #f3f3f3;
+  -webkit-transition: all 200ms ease;
+  transition: all 200ms ease;
+  font-family: 'Open Sans', sans-serif;
+  color: #18233f;
+}
+
+.comment-toggle:hover {
+  background-color: #fafafa;
+}
+
+.comment-bubble {
+  width: 55px;
+  margin-left: 13px;
+  padding: 10px;
+  float: left;
+  opacity: 0.16;
+}
+
+.comment-indicator {
+  margin-top: 18px;
+  margin-left: 70px;
+  padding-right: 10px;
+  font-weight: 600;
+}
+
 html.w-mod-js *[data-ix="downbeforeup"] {
   opacity: 0;
   -webkit-transform: translate(0px, 50px);
