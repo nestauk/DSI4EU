@@ -463,11 +463,23 @@ app.controller('ProjectPostController', function ($scope, $http, $timeout, $sce)
             $http.post(SITE_RELATIVE_PATH + '/projectPost/' + $scope.post.id + '.json', data)
                 .then(function (response) {
                     $timeout(function () {
+                        if (!$scope.post.comments)
+                            $scope.post.comments = [];
+
                         $scope.post.comments.unshift(response.data.comment);
+                        $scope.post.commentsCount++;
                         console.log(response.data);
                     }, 500);
                 });
         };
+
+        $scope.loadComments = function () {
+            $http.get(SITE_RELATIVE_PATH + '/projectPost/' + $scope.post.id + '.json')
+                .then(function (response) {
+                    $scope.post.comments = response.data.comments;
+                    $scope.showComments = true;
+                });
+        }
     }
 });
 
@@ -482,7 +494,7 @@ app.controller('ProjectPostCommentController', function ($scope, $http, $timeout
             $http.post(SITE_RELATIVE_PATH + '/projectPostComment/' + $scope.comment.id + '.json', data)
                 .then(function (response) {
                     $timeout(function () {
-                        if(!$scope.comment.replies)
+                        if (!$scope.comment.replies)
                             $scope.comment.replies = [];
 
                         $scope.comment.replies.push(response.data.reply);

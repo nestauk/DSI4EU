@@ -2,6 +2,10 @@
 
 namespace DSI\Controller;
 
+use DSI\Entity\ProjectPostComment;
+use DSI\Entity\ProjectPostCommentReply;
+use DSI\Repository\ProjectPostCommentReplyRepository;
+use DSI\Repository\ProjectPostCommentRepository;
 use DSI\Repository\ProjectPostRepository;
 use DSI\Repository\UserRepository;
 use DSI\Service\Auth;
@@ -69,6 +73,36 @@ class ProjectPostController
             ]);
             die();
         }
+
+        $comments = (new ProjectPostCommentRepository())->getByPostID($post->getId());
+        echo json_encode([
+            'comments' => array_map(function (ProjectPostComment $comment) {
+                $user = $comment->getUser();
+                $replies = (new ProjectPostCommentReplyRepository())->getByCommentID($comment->getId());
+                return [
+                    'id' => $comment->getId(),
+                    'comment' => $comment->getComment(),
+                    'time' => $comment->getJsTime(),
+                    'user' => [
+                        'name' => $user->getFullName(),
+                        'profilePic' => $user->getProfilePicOrDefault(),
+                    ],
+                    'repliesCount' => $comment->getRepliesCount(),
+                    'replies' => array_map(function (ProjectPostCommentReply $reply) {
+                        $user = $reply->getUser();
+                        return [
+                            'id' => $reply->getId(),
+                            'comment' => $reply->getComment(),
+                            'time' => $reply->getTime(),
+                            'user' => [
+                                'name' => $user->getFullName(),
+                                'profilePic' => $user->getProfilePicOrDefault(),
+                            ],
+                        ];
+                    }, $replies)
+                ];
+            }, $comments),
+        ]);
     }
 
     /**

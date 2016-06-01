@@ -410,7 +410,6 @@ class ProjectController
     {
         return array_map(function (ProjectPost $post) {
             $user = $post->getUser();
-            $comments = (new ProjectPostCommentRepository())->getByPostID($post->getId());
 
             return [
                 'id' => $post->getId(),
