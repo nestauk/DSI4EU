@@ -4109,8 +4109,8 @@ strong {
   margin-right: auto;
   margin-left: auto;
   border-radius: 30px;
-  background-color: #fff;
-  background-image: url('../images/social-1_square-facebook.svg');
+  background-color: transparent;
+  background-image: url('../images/social-icon-fb-white.png');
   background-position: 50% 50%;
   background-size: cover;
   background-repeat: no-repeat;
@@ -4130,16 +4130,16 @@ strong {
   display: block;
   margin-right: auto;
   margin-left: auto;
-  background-color: #fff;
-  background-image: url('../images/social-1_square-twitter.svg');
+  background-color: transparent;
+  background-image: url('../images/social-icon-tw-white.png');
 }
 
 .hero-s-login.github-s {
-  background-image: url('../images/social-1_square-github.svg');
+  background-image: url('../images/social-icon-gh-white.png');
 }
 
 .hero-s-login.google-p-s {
-  background-image: url('../images/social-1_square-google-plus.svg');
+  background-image: url('../images/social-icon-gp-white.png');
 }
 
 html.w-mod-js *[data-ix="downbeforeup"] {
