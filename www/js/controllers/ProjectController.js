@@ -474,10 +474,17 @@ app.controller('ProjectPostController', function ($scope, $http, $timeout, $sce)
         };
 
         $scope.loadComments = function () {
+            if ($scope.showComments)
+                return;
+
+            $scope.loadingComments = true;
             $http.get(SITE_RELATIVE_PATH + '/projectPost/' + $scope.post.id + '.json')
                 .then(function (response) {
-                    $scope.post.comments = response.data.comments;
-                    $scope.showComments = true;
+                    $timeout(function () {
+                        $scope.loadingComments = false;
+                        $scope.post.comments = response.data.comments;
+                        $scope.showComments = true;
+                    }, 100);
                 });
         }
     }

@@ -18,35 +18,61 @@ require __DIR__ . '/header.php';
                         <div id="text">
                             <div class="project-detail">
                                 <div class="project-header">
+                                    <h1 class="project-h1">
+                                        <?php if ($isOwner) { ?>
+                                            <input type="text" value="<?php echo $project->getName() ?>"
+                                                   ng-model="project.name" ng-blur="updateBasic()"
+                                                   style="background:transparent;color:white;width:500px;border:0"/>
+                                        <?php } else { ?>
+                                            <?php echo $project->getName() ?>
+                                        <?php } ?>
+                                    </h1>
                                     <img src="<?php echo SITE_RELATIVE_PATH ?>/images/pin.png" class="card-pin">
+
                                     <?php if ($isOwner) { ?>
                                         <div class="card-city" style="text-shadow: 0 0 0 #000;">
-                                            <form ng-submit="saveCountryRegion()">
-                                                <select id="Edit-country"
-                                                        data-placeholder="Select country"
+                                            <div ng-hide="changeRegion" ng-click="changeRegion = true"
+                                                 style="cursor:pointer">
+                                                <?php if ($project->getCountryRegion()) { ?>
+                                                    <?php echo $project->getCountryRegion()->getName() ?>,
+                                                    <?php echo $project->getCountry()->getName() ?>
+                                                <?php } ?>
+                                            </div>
+
+                                            <form ng-submit="saveCountryRegion()" ng-show="changeRegion" ng-cloak>
+                                                <select id="Edit-country" data-placeholder="Select country"
                                                         style="width:150px;background:transparent">
                                                     <option></option>
                                                 </select>
-                                    <span ng-show="regionsLoaded">
-                                        <select
-                                            data-tags="true"
-                                            id="Edit-countryRegion"
-                                            data-placeholder="Type the city"
-                                            style="width:150px;background:transparent">
-                                        </select>
-                                    </span>
-                                    <span ng-show="regionsLoading">
-                                        Loading...
-                                    </span>
-                                    <span ng-show="regionsLoaded">
-                                        <input ng-hide="savingCountryRegion.loading || savingCountryRegion.saved"
-                                               type="submit" value="Save" class="w-button add-skill-btn">
-                                        <button ng-show="savingCountryRegion.loading && !savingCountryRegion.saved"
-                                                type="button" class="w-button add-skill-btn">Saving...
-                                        </button>
-                                        <input ng-show="!savingCountryRegion.loading && savingCountryRegion.saved"
-                                               type="submit" value="Saved" class="w-button add-skill-btn">
-                                    </span>
+                                                <span ng-show="regionsLoaded">
+                                                    <select
+                                                        data-tags="true" id="Edit-countryRegion"
+                                                        data-placeholder="Type the city"
+                                                        style="width:150px;background:transparent">
+                                                    </select>
+                                                </span>
+                                                <span ng-show="regionsLoading">
+                                                    Loading...
+                                                </span>
+                                                <span ng-show="regionsLoaded">
+                                                    <input
+                                                        ng-hide="savingCountryRegion.loading || savingCountryRegion.saved"
+                                                        type="submit" value="Save" class="w-button add-skill-btn">
+                                                    <button
+                                                        ng-show="savingCountryRegion.loading && !savingCountryRegion.saved"
+                                                        type="button" class="w-button add-skill-btn">Saving...
+                                                    </button>
+
+                                                    <input
+                                                        ng-show="!savingCountryRegion.loading && savingCountryRegion.saved"
+                                                        type="submit" value="Saved" class="w-button add-skill-btn">
+
+                                                    <button class="w-button add-skill-btn"
+                                                            ng-show="!savingCountryRegion.loading"
+                                                            ng-click="changeRegion = false">
+                                                        Close
+                                                    </button>
+                                                </span>
                                             </form>
                                         </div>
                                     <?php } else { ?>
@@ -57,26 +83,23 @@ require __DIR__ . '/header.php';
                                             <?php } ?>
                                         </div>
                                     <?php } ?>
-                                    <img src="<?php echo SITE_RELATIVE_PATH ?>/images/share-symbol.svg" class="share">
 
                                     <?php if ($isOwner) { ?>
-                                        <input type="text"
-                                               class="project-url"
-                                               ng-model="project.url"
-                                               ng-blur="updateBasic()"
-                                               placeholder="Project Page"
-                                               value="<?php echo $project->getUrl() ?>"
+                                        <input type="text" class="project-url"
+                                               ng-model="project.url" ng-blur="updateBasic()"
+                                               placeholder="Project Page" value="<?php echo $project->getUrl() ?>"
                                                style="background:transparent;color:white;width:500px;border:0"/>
                                     <?php } else { ?>
                                         <?php if ($project->getUrl()) { ?>
-                                            <a href="<?php echo $project->getUrl() ?>" target="_blank"
-                                               class="project-url">
+                                            <a href="<?php echo $project->getUrl() ?>"
+                                               target="_blank" class="project-url">
                                                 <?php echo $project->getUrl() ?>
                                             </a>
                                         <?php } ?>
                                     <?php } ?>
 
-                                    <div class="project-status"><span class="status-text">Project status:</span>
+                                    <div class="project-status" ng-hide="changeRegion">
+                                        <span class="status-text">Project status:</span>
                                         <?php if ($isOwner) { ?>
                                             <select ng-model="project.status" ng-change="updateBasic()"
                                                     style="background: transparent;border:0">
@@ -88,18 +111,11 @@ require __DIR__ . '/header.php';
                                                 class="status-indicator"><?php echo ucfirst($project->getStatus()) ?></strong>
                                         <?php } ?>
                                     </div>
+
+                                    <img class="edit-white"
+                                         src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-compose-outline-white.png"
+                                         width="25">
                                 </div>
-                                <h1 class="project-h1">
-                                    <?php if ($isOwner) { ?>
-                                        <input type="text"
-                                               ng-model="project.name"
-                                               ng-blur="updateBasic()"
-                                               value="<?php echo $project->getName() ?>"
-                                               style="background:transparent;color:white;width:500px;border:0"/>
-                                    <?php } else { ?>
-                                        <h1 class="project-h1"><?php echo $project->getName() ?></h1>
-                                    <?php } ?>
-                                </h1>
                             </div>
 
                             <?php /*
@@ -285,7 +301,7 @@ require __DIR__ . '/header.php';
                                     <?php } ?>
                                 </p>
                                 <h3 class="card-sub-h">Duration</h3>
-                                <div class="duration-p">
+                                <div class="duration-p" ng-cloak>
                                     <div ng-show="project.startDate && project.endDate">
                                         This project runs from
                                         <strong>{{getDateFrom(project.startDate)}}</strong> to
@@ -301,18 +317,19 @@ require __DIR__ . '/header.php';
                                     </div>
                                 </div>
                                 <?php if ($isOwner) { ?>
-                                    <br/>
-                                    <div style="float:left;width:40%;margin-left:10%">
-                                        Start Date
-                                        <input type="text" placeholder="yyyy-mm-dd" ng-model="project.startDate"
-                                               ng-blur="updateBasic()" style="width:130px"
-                                               ng-pattern="datePattern"/>
-                                    </div>
-                                    <div style="float:left;width:40%">
-                                        End Date
-                                        <input type="text" placeholder="yyyy-mm-dd" ng-model="project.endDate"
-                                               ng-blur="updateBasic()" style="width:130px"
-                                               ng-pattern="datePattern"/>
+                                    <div ng-cloak>
+                                        <div style="float:left;width:40%;margin-left:10%">
+                                            Start Date
+                                            <input type="text" placeholder="yyyy-mm-dd" ng-model="project.startDate"
+                                                   ng-blur="updateBasic()" style="width:130px"
+                                                   ng-pattern="datePattern"/>
+                                        </div>
+                                        <div style="float:left;width:40%">
+                                            End Date
+                                            <input type="text" placeholder="yyyy-mm-dd" ng-model="project.endDate"
+                                                   ng-blur="updateBasic()" style="width:130px"
+                                                   ng-pattern="datePattern"/>
+                                        </div>
                                     </div>
                                 <?php } ?>
 
@@ -486,7 +503,7 @@ require __DIR__ . '/header.php';
                             </div>
 
                             <?php if ($isOwner) { ?>
-                                <div class="info-card" style="min-height: 0;"
+                                <div class="info-card" style="min-height: 0;" ng-cloak
                                      ng-show="project.memberRequests.length > 0">
                                     <h3 class="info-h card-h">
                                         Member Requests
@@ -683,7 +700,7 @@ require __DIR__ . '/header.php';
                                         <div class="news-content"
                                              ng-bind-html="renderHtml(post.text)"></div>
                                     </div>
-                                    <div class="w-clearfix comment-count">
+                                    <div class="w-clearfix comment-count" ng-cloak>
                                         <a href="#" class="w-inline-block w-clearfix comment-toggle">
                                             <img width="256" class="comment-bubble"
                                                  src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-chatbubble.png">
@@ -691,10 +708,11 @@ require __DIR__ . '/header.php';
                                                 <span ng-show="post.commentsCount == 0">There are no comments, be the first to say something</span>
                                                 <span ng-show="post.commentsCount == 1">There is {{post.commentsCount}} comment</span>
                                                 <span ng-show="post.commentsCount > 1">There are {{post.commentsCount}} comments</span>
+                                                <span ng-show="loadingComments">| Loading comments...</span>
                                             </div>
                                         </a>
                                     </div>
-                                    <div class="post-comments" ng-show="showComments">
+                                    <div class="post-comments" ng-show="showComments" ng-cloak="">
                                         <div class="comment">
                                             <?php if ($loggedInUser) { ?>
                                                 <div class="w-row">
