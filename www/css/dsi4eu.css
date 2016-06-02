@@ -2349,11 +2349,10 @@ strong {
 }
 
 .homepage-hero {
-  height: 660px;
+  height: 700px;
   margin-top: 0px;
   padding-top: 105px;
-  background-image: -webkit-linear-gradient(270deg, rgba(24, 35, 63, .78), rgba(24, 35, 63, .78));
-  background-image: linear-gradient(180deg, rgba(24, 35, 63, .78), rgba(24, 35, 63, .78));
+  background-image: none;
   background-position: 0px 0px;
   background-size: auto;
   background-repeat: repeat;
@@ -2378,7 +2377,7 @@ strong {
 }
 
 .hero-h1 {
-  margin-top: 130px;
+  margin-top: 100px;
   margin-bottom: 25px;
   font-family: 'Open Sans', sans-serif;
   color: #fff;
@@ -2398,12 +2397,16 @@ strong {
   text-align: center;
 }
 
+.hero-sub-heading.social {
+  margin-top: 26px;
+  margin-bottom: 13px;
+}
+
 .invite-form {
   display: block;
   width: 940px;
-  margin-top: 57px;
-  margin-right: auto;
-  margin-left: auto;
+  height: 48px;
+  margin: 40px auto 0px;
   text-align: center;
 }
 
@@ -2554,7 +2557,7 @@ strong {
 }
 
 .partner-logos {
-  margin-top: 180px;
+  margin-top: 47px;
 }
 
 .partner {
@@ -3395,6 +3398,7 @@ strong {
   left: 0px;
   top: 0px;
   right: 0px;
+  display: none;
   width: 100%;
   height: 660px;
 }
@@ -3405,9 +3409,9 @@ strong {
   top: 0px;
   right: 0px;
   width: 100%;
-  height: 660px;
-  background-image: -webkit-linear-gradient(45deg, rgba(24, 35, 63, .8), rgba(56, 65, 85, .78));
-  background-image: linear-gradient(45deg, rgba(24, 35, 63, .8), rgba(56, 65, 85, .78));
+  height: 700px;
+  background-image: -webkit-linear-gradient(45deg, #18233f, #384155);
+  background-image: linear-gradient(45deg, #18233f, #384155);
 }
 
 .card-row {
@@ -4090,6 +4094,54 @@ strong {
   font-weight: 600;
 }
 
+.social-login-hero {
+  display: block;
+  width: 400px;
+  margin-top: 10px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.hero-s-login {
+  display: block;
+  width: 60px;
+  height: 60px;
+  margin-right: auto;
+  margin-left: auto;
+  border-radius: 30px;
+  background-color: #fff;
+  background-image: url('../images/social-1_square-facebook.svg');
+  background-position: 50% 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 1;
+  -webkit-transition: all 200ms ease;
+  transition: all 200ms ease;
+}
+
+.hero-s-login:hover {
+  box-shadow: 0 0 32px -7px #000;
+  -webkit-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  transform: scale(1.05);
+}
+
+.hero-s-login.twitter {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: #fff;
+  background-image: url('../images/social-1_square-twitter.svg');
+}
+
+.hero-s-login.github-s {
+  background-image: url('../images/social-1_square-github.svg');
+}
+
+.hero-s-login.google-p-s {
+  background-image: url('../images/social-1_square-google-plus.svg');
+}
+
 html.w-mod-js *[data-ix="downbeforeup"] {
   opacity: 0;
   -webkit-transform: translate(0px, 50px);
@@ -4191,6 +4243,9 @@ html.w-mod-js *[data-ix="hide-cancel-or-save"] {
   .add-post-form {
     width: 268px;
   }
+  .homepage-hero {
+    height: 780px;
+  }
   .invite-form {
     width: 100%;
     padding-left: 12px;
@@ -4213,7 +4268,7 @@ html.w-mod-js *[data-ix="hide-cancel-or-save"] {
     margin-bottom: 20px;
   }
   .partner-logos {
-    margin-top: 147px;
+    margin-top: 58px;
     padding-left: 0px;
   }
   .partner {
@@ -4277,6 +4332,9 @@ html.w-mod-js *[data-ix="hide-cancel-or-save"] {
     display: block;
     margin-right: auto;
     margin-left: auto;
+  }
+  .overlay {
+    height: 780px;
   }
   .card-row {
     margin-bottom: 0px;
@@ -4381,7 +4439,7 @@ html.w-mod-js *[data-ix="hide-cancel-or-save"] {
     min-width: auto;
   }
   .homepage-hero {
-    height: 690px;
+    height: 780px;
   }
   .hero-h1 {
     margin-top: 57px;
@@ -4399,7 +4457,7 @@ html.w-mod-js *[data-ix="hide-cancel-or-save"] {
   .partner-logos {
     display: block;
     width: 518px;
-    margin-top: 147px;
+    margin-top: 39px;
     margin-right: auto;
     margin-left: auto;
     padding-left: 0px;
@@ -4589,10 +4647,13 @@ html.w-mod-js *[data-ix="hide-cancel-or-save"] {
     width: 218px;
   }
   .homepage-hero {
-    height: 658px;
+    height: 821px;
   }
   .hero-h1 {
     margin-top: 25px;
+  }
+  .hero-sub-heading.social {
+    margin-top: 144px;
   }
   .invite-form {
     padding-left: 0px;
@@ -4663,6 +4724,9 @@ html.w-mod-js *[data-ix="hide-cancel-or-save"] {
   .dsi-button.top-filter {
     margin-bottom: 10px;
   }
+  .overlay {
+    height: 830px;
+  }
   .card-thin {
     height: 190px;
     text-align: center;
@@ -4694,6 +4758,9 @@ html.w-mod-js *[data-ix="hide-cancel-or-save"] {
   }
   .single-post-category {
     top: -81px;
+  }
+  .social-login-hero {
+    width: 320px;
   }
 }
 
