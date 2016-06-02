@@ -51,4 +51,24 @@ class URL
     {
         return SITE_RELATIVE_PATH . '/feedback';
     }
+
+    public static function loginWithGitHub()
+    {
+        return SITE_RELATIVE_PATH . '/github-login';
+    }
+
+    public static function loginWithFacebook()
+    {
+        return SITE_RELATIVE_PATH . '/facebook-login';
+    }
+
+    public static function loginWithGoogle()
+    {
+        return SITE_RELATIVE_PATH . '/google-login';
+    }
+
+    public static function loginWithTwitter()
+    {
+        return SITE_RELATIVE_PATH . '/twitter-login';
+    }
 }

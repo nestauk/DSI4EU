@@ -1,6 +1,7 @@
 <?php
 /** @var $loggedInUser \DSI\Entity\User */
 /** @var $isHomePage bool */
+use \DSI\Service\URL;
 ?>
 <!DOCTYPE html>
 <!-- Last Published: Tue Apr 26 2016 15:33:26 GMT+0000 (UTC) -->
@@ -150,7 +151,7 @@
 
                                     <div class="w-row social-badges">
                                         <div class="w-col w-col-3 w-col-small-3 w-col-tiny-3">
-                                            <a href="<?php echo SITE_RELATIVE_PATH ?>/github-login"
+                                            <a href="<?php echo URL::loginWithGitHub() ?>"
                                                class="w-inline-block social-login">
                                                 <img width="100%" height="100%"
                                                      src="<?php echo SITE_RELATIVE_PATH ?>/images/social-1_square-github.svg"
@@ -158,7 +159,7 @@
                                             </a>
                                         </div>
                                         <div class="w-col w-col-3 w-col-small-3 w-col-tiny-3">
-                                            <a href="<?php echo SITE_RELATIVE_PATH ?>/facebook-login"
+                                            <a href="<?php echo URL::loginWithFacebook() ?>"
                                                class="w-inline-block social-login">
                                                 <img width="100%" height="100%"
                                                      src="<?php echo SITE_RELATIVE_PATH ?>/images/social-1_square-facebook.svg"
@@ -166,7 +167,7 @@
                                             </a>
                                         </div>
                                         <div class="w-col w-col-3 w-col-small-3 w-col-tiny-3">
-                                            <a href="<?php echo SITE_RELATIVE_PATH ?>/google-login"
+                                            <a href="<?php echo URL::loginWithGoogle() ?>"
                                                class="w-inline-block social-login">
                                                 <img width="100%" height="100%"
                                                      src="<?php echo SITE_RELATIVE_PATH ?>/images/social-1_square-google-plus.svg"
@@ -174,7 +175,7 @@
                                             </a>
                                         </div>
                                         <div class="w-col w-col-3 w-col-small-3 w-col-tiny-3">
-                                            <a href="<?php echo SITE_RELATIVE_PATH ?>/twitter-login"
+                                            <a href="<?php echo URL::loginWithTwitter()?>"
                                                class="w-inline-block social-login">
                                                 <img width="100%" height="100%"
                                                      src="<?php echo SITE_RELATIVE_PATH ?>/images/social-1_square-twitter.svg"
