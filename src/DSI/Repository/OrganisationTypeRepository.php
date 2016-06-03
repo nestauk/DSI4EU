@@ -8,7 +8,10 @@ use DSI\Service\SQL;
 
 class OrganisationTypeRepository
 {
-    public function saveAsNew(OrganisationType $organisationType)
+    /** @var self */
+    private static $objects = [];
+
+    public function insert(OrganisationType $organisationType)
     {
         $insert = array();
         $insert[] = "`name` = '" . addslashes($organisationType->getName()) . "'";
@@ -16,6 +19,8 @@ class OrganisationTypeRepository
         $query->query();
 
         $organisationType->setId($query->insert_id());
+
+        self::$objects[$organisationType->getId()] = $organisationType;
     }
 
     public function save(OrganisationType $organisationType)
@@ -30,12 +35,24 @@ class OrganisationTypeRepository
 
         $query = new SQL("UPDATE `organisation-types` SET " . implode(', ', $insert) . " WHERE `id` = '{$organisationType->getId()}'");
         $query->query();
+
+        self::$objects[$organisationType->getId()] = $organisationType;
     }
 
     public function getById(int $id): OrganisationType
     {
+        if (isset(self::$objects[$id]))
+            return self::$objects[$id];
+
         return $this->getElementWhere([
             "`id` = {$id}"
+        ]);
+    }
+
+    public function getByName(string $name): OrganisationType
+    {
+        return $this->getElementWhere([
+            "`name` = '" . addslashes($name) . "'"
         ]);
     }
 
@@ -44,6 +61,9 @@ class OrganisationTypeRepository
         $organisationTypeObj = new OrganisationType();
         $organisationTypeObj->setId($organisationType['id']);
         $organisationTypeObj->setName($organisationType['name']);
+
+        self::$objects[$organisationTypeObj->getId()] = $organisationTypeObj;
+
         return $organisationTypeObj;
     }
 
@@ -64,6 +84,7 @@ class OrganisationTypeRepository
     {
         $query = new SQL("TRUNCATE TABLE `organisation-types`");
         $query->query();
+        self::$objects = [];
     }
 
     private function getElementWhere($where)

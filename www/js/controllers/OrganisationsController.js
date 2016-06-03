@@ -1,11 +1,20 @@
 var app = angular.module('DSIApp');
 
-app.controller('OrganisationsController', function ($scope, $http) {
+app.controller('OrganisationsController', function ($scope, $http, $interval) {
     $scope.letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-    $scope.startLetter = 'A';
+    $scope.startLetter = '';
+    $scope.organisations = [];
+    /*
+    var preloadOrganisations = $interval(function () {
+        $scope.organisations.push({});
+    }, 100);
+    */
 
     $http.get(SITE_RELATIVE_PATH + '/organisations.json')
         .then(function (result) {
+            // $interval.cancel(preloadOrganisations);
+            $scope.startLetter = 'A';
+            $scope.loaded = true;
             $scope.organisations = result.data;
         });
 

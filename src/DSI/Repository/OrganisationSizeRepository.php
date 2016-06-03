@@ -8,7 +8,10 @@ use DSI\Service\SQL;
 
 class OrganisationSizeRepository
 {
-    public function saveAsNew(OrganisationSize $organisationSize)
+    /** @var self */
+    private static $objects = [];
+
+    public function insert(OrganisationSize $organisationSize)
     {
         $insert = array();
         $insert[] = "`name` = '" . addslashes($organisationSize->getName()) . "'";
@@ -16,6 +19,8 @@ class OrganisationSizeRepository
         $query->query();
 
         $organisationSize->setId($query->insert_id());
+
+        self::$objects[$organisationSize->getId()] = $organisationSize;
     }
 
     public function save(OrganisationSize $organisationSize)
@@ -30,12 +35,24 @@ class OrganisationSizeRepository
 
         $query = new SQL("UPDATE `organisation-sizes` SET " . implode(', ', $insert) . " WHERE `id` = '{$organisationSize->getId()}'");
         $query->query();
+
+        self::$objects[$organisationSize->getId()] = $organisationSize;
     }
 
     public function getById(int $id): OrganisationSize
     {
+        if (isset(self::$objects[$id]))
+            return self::$objects[$id];
+
         return $this->getElementWhere([
             "`id` = {$id}"
+        ]);
+    }
+
+    public function getByName(string $name): OrganisationSize
+    {
+        return $this->getElementWhere([
+            "`name` = '" . addslashes($name) . "'"
         ]);
     }
 
@@ -44,6 +61,9 @@ class OrganisationSizeRepository
         $organisationSizeObj = new OrganisationSize();
         $organisationSizeObj->setId($organisationSize['id']);
         $organisationSizeObj->setName($organisationSize['name']);
+
+        self::$objects[$organisationSizeObj->getId()] = $organisationSizeObj;
+
         return $organisationSizeObj;
     }
 
@@ -64,6 +84,7 @@ class OrganisationSizeRepository
     {
         $query = new SQL("TRUNCATE TABLE `organisation-sizes`");
         $query->query();
+        self::$objects = [];
     }
 
     private function getElementWhere($where)

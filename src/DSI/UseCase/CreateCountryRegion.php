@@ -43,7 +43,7 @@ class CreateCountryRegion
         $countryRegion = new CountryRegion();
         $countryRegion->setName((string)$this->data()->name);
         $countryRegion->setCountry($this->countryRepo->getById($this->data()->countryID));
-        $this->countryRegionRepo->saveAsNew($countryRegion);
+        $this->countryRegionRepo->insert($countryRegion);
 
         $this->countryRegion = $countryRegion;
     }

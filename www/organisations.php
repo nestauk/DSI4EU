@@ -16,6 +16,9 @@
                     </a>
                 </div>
                 <div class="w-row card-row">
+
+                    <div ng-hide="loaded" style="padding: 0 10px 10px 20px;font-weight: bold;">Loading...</div>
+
                     <div class="w-col w-col-4 w-col-stack"
                          ng-repeat="organisation in organisations | filter:startsWithLetter">
                         <a ng-href="{{organisation.url}}" class="w-inline-block card-thin">

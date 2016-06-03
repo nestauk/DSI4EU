@@ -23,6 +23,7 @@ class ProjectRepository
         if ($project->getCountryRegion())
             $insert[] = "`countryRegionID` = '" . addslashes($project->getCountryRegion()->getId()) . "'";
         $insert[] = "`organisationsCount` = '" . (int)($project->getOrganisationsCount()) . "'";
+        $insert[] = "`importID` = '" . addslashes($project->getImportID()) . "'";
 
         $query = new SQL("INSERT INTO `projects` SET " . implode(', ', $insert) . "");
         $query->query();
@@ -50,6 +51,7 @@ class ProjectRepository
         if ($project->getCountryRegion())
             $insert[] = "`countryRegionID` = '" . addslashes($project->getCountryRegion()->getId()) . "'";
         $insert[] = "`organisationsCount` = '" . (int)($project->getOrganisationsCount()) . "'";
+        $insert[] = "`importID` = '" . addslashes($project->getImportID()) . "'";
 
         $query = new SQL("UPDATE `projects` SET " . implode(', ', $insert) . " WHERE `id` = '{$project->getId()}'");
         $query->query();
@@ -57,8 +59,15 @@ class ProjectRepository
 
     public function getById(int $id): Project
     {
-        return $this->getProjectWhere([
+        return $this->getObjectWhere([
             "`id` = {$id}"
+        ]);
+    }
+
+    public function getByImportID(string $importID): Project
+    {
+        return $this->getObjectWhere([
+            "`importID` = '".addslashes($importID)."'"
         ]);
     }
 
@@ -82,23 +91,14 @@ class ProjectRepository
             );
         }
         $projectObj->setOrganisationsCount($project['organisationsCount']);
+        $projectObj->setImportID($project['importID']);
 
         return $projectObj;
     }
 
     public function getAll()
     {
-        $where = ["1"];
-        $projects = [];
-        $query = new SQL("SELECT 
-            id, ownerID, name, description, url, status
-          , startDate, endDate
-          , countryRegionID, organisationsCount
-          FROM `projects` WHERE " . implode(' AND ', $where) . "");
-        foreach ($query->fetch_all() AS $dbProject) {
-            $projects[] = $this->buildProjectFromData($dbProject);
-        }
-        return $projects;
+        return $this->getObjectsWhere(["1"]);
     }
 
     public function clearAll()
@@ -107,18 +107,34 @@ class ProjectRepository
         $query->query();
     }
 
-    private function getProjectWhere($where)
+    private function getObjectWhere($where)
     {
-        $query = new SQL("SELECT 
-              id, ownerID, name, description, url, status
-            , startDate, endDate
-            , countryRegionID, organisationsCount
-            FROM `projects` WHERE " . implode(' AND ', $where) . " LIMIT 1");
-        $dbProject = $query->fetch();
-        if (!$dbProject) {
+        $objects = $this->getObjectsWhere($where);
+        if(count($objects) < 1)
             throw new DSI\NotFound();
-        }
 
-        return $this->buildProjectFromData($dbProject);
+        return $objects[0];
+    }
+
+    /**
+     * @param $where
+     * @return array
+     */
+    private function getObjectsWhere($where)
+    {
+        $projects = [];
+        $query = new SQL("SELECT 
+            id, ownerID, name, description, url, status
+          , startDate, endDate
+          , countryRegionID, organisationsCount
+          , importID
+          FROM `projects`
+          WHERE " . implode(' AND ', $where) . "
+          ORDER BY `name`
+        ");
+        foreach ($query->fetch_all() AS $dbProject) {
+            $projects[] = $this->buildProjectFromData($dbProject);
+        }
+        return $projects;
     }
 }

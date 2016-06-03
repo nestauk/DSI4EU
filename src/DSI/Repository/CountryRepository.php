@@ -8,6 +8,9 @@ use DSI\Entity\Country;
 
 class CountryRepository
 {
+    /** @var self */
+    private static $objects = [];
+
     public function saveAsNew(Country $country)
     {
         if (!$country->getName())
@@ -22,6 +25,8 @@ class CountryRepository
         $query->query();
 
         $country->setId($query->insert_id());
+
+        self::$objects[$country->getId()] = $country;
     }
 
     public function save(Country $country)
@@ -42,10 +47,15 @@ class CountryRepository
 
         $query = new SQL("UPDATE `countries` SET " . implode(', ', $insert) . " WHERE `id` = '{$country->getId()}'");
         $query->query();
+
+        self::$objects[$country->getId()] = $country;
     }
 
     public function getById(int $id): Country
     {
+        if (isset(self::$objects[$id]))
+            return self::$objects[$id];
+
         return $this->getCountryWhere([
             "`id` = {$id}"
         ]);
@@ -83,6 +93,7 @@ class CountryRepository
     {
         $query = new SQL("TRUNCATE TABLE `countries`");
         $query->query();
+        self::$objects = [];
     }
 
 
@@ -95,6 +106,9 @@ class CountryRepository
         $countryObj = new Country();
         $countryObj->setId($country['id']);
         $countryObj->setName($country['name']);
+
+        self::$objects[$countryObj->getId()] = $countryObj;
+
         return $countryObj;
     }
 

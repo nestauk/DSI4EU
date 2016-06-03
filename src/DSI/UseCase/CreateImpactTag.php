@@ -37,7 +37,7 @@ class CreateImpactTag
 
         $tag = new ImpactTag();
         $tag->setName((string)$this->data()->name);
-        $this->tagRepo->saveAsNew($tag);
+        $this->tagRepo->insert($tag);
 
         $this->tag = $tag;
     }

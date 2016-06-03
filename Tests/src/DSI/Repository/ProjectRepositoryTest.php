@@ -53,7 +53,7 @@ class ProjectRepositoryTest extends PHPUnit_Framework_TestCase
         $this->countryRegion = new CountryRegion();
         $this->countryRegion->setName('test1');
         $this->countryRegion->setCountry($this->country);
-        $this->countryRegionRepo->saveAsNew($this->countryRegion);
+        $this->countryRegionRepo->insert($this->countryRegion);
     }
 
     public function tearDown()

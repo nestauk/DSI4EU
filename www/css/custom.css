@@ -109,18 +109,27 @@ input.ng-invalid {
 .modal-push-buttons .w-tab-content .w-tab-pane,
 .modal-push-buttons .w-form.login-form,
 .modal-push-buttons .w-tab-screen,
-.modal-push-buttons .w-form.login-form form{
-    height:100%;
-}
-.modal-push-buttons .w-form.login-form form{
-    position:relative;
-}
-.modal-push-buttons .modal-footer{
-    position: absolute;width:100%;
-    bottom:100px;
+.modal-push-buttons .w-form.login-form form {
+    height: 100%;
 }
 
+.modal-push-buttons .w-form.login-form form {
+    position: relative;
+}
+
+.modal-push-buttons .modal-footer {
+    position: absolute;
+    width: 100%;
+    bottom: 100px;
+}
 
 .reply-input {
     display: block;
+}
+
+.card-slim-h2 {
+    font-size: 16px;
+    line-height: 21px;
+    max-height: 40px;
+    overflow: hidden;
 }

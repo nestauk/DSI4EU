@@ -24,7 +24,7 @@ class OrganisationTypeRepositoryTest extends PHPUnit_Framework_TestCase
     public function organisationTypeCanBeSaved()
     {
         $organisationType = new OrganisationType();
-        $this->organisationTypeRepo->saveAsNew($organisationType);
+        $this->organisationTypeRepo->insert($organisationType);
         $this->assertGreaterThan(0, $organisationType->getId());
     }
 
@@ -32,7 +32,7 @@ class OrganisationTypeRepositoryTest extends PHPUnit_Framework_TestCase
     public function organisationTypeCanBeUpdated()
     {
         $organisationType = new OrganisationType();
-        $this->organisationTypeRepo->saveAsNew($organisationType);
+        $this->organisationTypeRepo->insert($organisationType);
 
         $organisationType->setName('test');
         $this->organisationTypeRepo->save($organisationType);
@@ -61,12 +61,12 @@ class OrganisationTypeRepositoryTest extends PHPUnit_Framework_TestCase
     public function getAllOrganisationTypes()
     {
         $organisationType = new OrganisationType();
-        $this->organisationTypeRepo->saveAsNew($organisationType);
+        $this->organisationTypeRepo->insert($organisationType);
 
         $this->assertCount(1, $this->organisationTypeRepo->getAll());
 
         $organisationType = new OrganisationType();
-        $this->organisationTypeRepo->saveAsNew($organisationType);
+        $this->organisationTypeRepo->insert($organisationType);
 
         $this->assertCount(2, $this->organisationTypeRepo->getAll());
     }
@@ -76,7 +76,7 @@ class OrganisationTypeRepositoryTest extends PHPUnit_Framework_TestCase
     {
         $organisationType = new OrganisationType();
         $organisationType->setName('Name');
-        $this->organisationTypeRepo->saveAsNew($organisationType);
+        $this->organisationTypeRepo->insert($organisationType);
 
         $sameOrganisation = $this->organisationTypeRepo->getById($organisationType->getId());
         $this->assertEquals($organisationType->getName(), $sameOrganisation->getName());

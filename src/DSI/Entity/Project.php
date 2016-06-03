@@ -22,6 +22,9 @@ class Project
     /** @var CountryRegion */
     private $countryRegion;
 
+    /** @var string */
+    private $importID;
+
     /**
      * @return int
      */
@@ -207,5 +210,21 @@ class Project
     public function setOrganisationsCount($organisationsCount)
     {
         $this->organisationsCount = (int)$organisationsCount;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImportID()
+    {
+        return $this->importID;
+    }
+
+    /**
+     * @param string $importID
+     */
+    public function setImportID($importID)
+    {
+        $this->importID = $importID;
     }
 }

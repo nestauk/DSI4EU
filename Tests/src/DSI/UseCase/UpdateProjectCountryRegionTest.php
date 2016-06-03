@@ -43,7 +43,7 @@ class UpdateProjectCountryRegionTest extends PHPUnit_Framework_TestCase
         $this->countryRegion = new \DSI\Entity\CountryRegion();
         $this->countryRegion->setName('test');
         $this->countryRegion->setCountry($this->country);
-        $this->countryRegionRepository->saveAsNew($this->countryRegion);
+        $this->countryRegionRepository->insert($this->countryRegion);
 
         $this->user = new \DSI\Entity\User();
         $this->userRepo->insert($this->user);

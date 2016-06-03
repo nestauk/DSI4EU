@@ -207,7 +207,7 @@ class ProjectImpactTagsARepositoryTest extends PHPUnit_Framework_TestCase
         $tag = new \DSI\Entity\ImpactTag();
         $tag->setId($tagID);
         $tag->setName('tag-' . $tagID);
-        $this->tagsRepo->saveAsNew($tag);
+        $this->tagsRepo->insert($tag);
         return $tag;
     }
 }

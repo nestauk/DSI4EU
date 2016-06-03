@@ -44,7 +44,7 @@ class CountryRegionRepositoryTest extends PHPUnit_Framework_TestCase
         $countryRegion->setName('test');
         $countryRegion->setCountry($this->country_1);
 
-        $this->countryRegionRepo->saveAsNew($countryRegion);
+        $this->countryRegionRepo->insert($countryRegion);
 
         $this->assertEquals(1, $countryRegion->getId());
     }
@@ -56,7 +56,7 @@ class CountryRegionRepositoryTest extends PHPUnit_Framework_TestCase
         $countryRegion->setName('test');
         $countryRegion->setCountry($this->country_1);
 
-        $this->countryRegionRepo->saveAsNew($countryRegion);
+        $this->countryRegionRepo->insert($countryRegion);
 
         $countryRegion->setName('test2');
         $countryRegion->setCountry($this->country_2);
@@ -99,7 +99,7 @@ class CountryRegionRepositoryTest extends PHPUnit_Framework_TestCase
         $countryRegion = new \DSI\Entity\CountryRegion();
         $countryRegion->setCountry($this->country_1);
         $this->setExpectedException(\DSI\NotEnoughData::class);
-        $this->countryRegionRepo->saveAsNew($countryRegion);
+        $this->countryRegionRepo->insert($countryRegion);
     }
 
     /** @test saveAsNew */
@@ -108,7 +108,7 @@ class CountryRegionRepositoryTest extends PHPUnit_Framework_TestCase
         $countryRegion = new \DSI\Entity\CountryRegion();
         $countryRegion->setName('test');
         $this->setExpectedException(\DSI\NotEnoughData::class);
-        $this->countryRegionRepo->saveAsNew($countryRegion);
+        $this->countryRegionRepo->insert($countryRegion);
     }
 
     /** @test save */
@@ -117,7 +117,7 @@ class CountryRegionRepositoryTest extends PHPUnit_Framework_TestCase
         $countryRegion = new \DSI\Entity\CountryRegion();
         $countryRegion->setCountry($this->country_1);
         $countryRegion->setName('test');
-        $this->countryRegionRepo->saveAsNew($countryRegion);
+        $this->countryRegionRepo->insert($countryRegion);
 
         $countryRegion->setName('');
         $this->setExpectedException(\DSI\NotEnoughData::class);
@@ -130,13 +130,13 @@ class CountryRegionRepositoryTest extends PHPUnit_Framework_TestCase
         $countryRegion = new \DSI\Entity\CountryRegion();
         $countryRegion->setCountry($this->country_1);
         $countryRegion->setName('test');
-        $this->countryRegionRepo->saveAsNew($countryRegion);
+        $this->countryRegionRepo->insert($countryRegion);
 
         $countryRegion = new \DSI\Entity\CountryRegion();
         $countryRegion->setCountry($this->country_1);
         $countryRegion->setName('test');
         $this->setExpectedException(\DSI\DuplicateEntry::class);
-        $this->countryRegionRepo->saveAsNew($countryRegion);
+        $this->countryRegionRepo->insert($countryRegion);
     }
 
     /** @test save */
@@ -145,12 +145,12 @@ class CountryRegionRepositoryTest extends PHPUnit_Framework_TestCase
         $countryRegion_1 = new \DSI\Entity\CountryRegion();
         $countryRegion_1->setCountry($this->country_1);
         $countryRegion_1->setName('test');
-        $this->countryRegionRepo->saveAsNew($countryRegion_1);
+        $this->countryRegionRepo->insert($countryRegion_1);
 
         $countryRegion_2 = new \DSI\Entity\CountryRegion();
         $countryRegion_2->setCountry($this->country_1);
         $countryRegion_2->setName('test2');
-        $this->countryRegionRepo->saveAsNew($countryRegion_2);
+        $this->countryRegionRepo->insert($countryRegion_2);
 
         $countryRegion_2->setName('test');
         $this->setExpectedException(\DSI\DuplicateEntry::class);
@@ -163,14 +163,14 @@ class CountryRegionRepositoryTest extends PHPUnit_Framework_TestCase
         $countryRegion = new \DSI\Entity\CountryRegion();
         $countryRegion->setCountry($this->country_1);
         $countryRegion->setName('test');
-        $this->countryRegionRepo->saveAsNew($countryRegion);
+        $this->countryRegionRepo->insert($countryRegion);
 
         $this->assertCount(1, $this->countryRegionRepo->getAll());
 
         $countryRegion = new \DSI\Entity\CountryRegion();
         $countryRegion->setCountry($this->country_1);
         $countryRegion->setName('test2');
-        $this->countryRegionRepo->saveAsNew($countryRegion);
+        $this->countryRegionRepo->insert($countryRegion);
 
         $this->assertCount(2, $this->countryRegionRepo->getAll());
     }
@@ -181,7 +181,7 @@ class CountryRegionRepositoryTest extends PHPUnit_Framework_TestCase
         $countryRegion = new \DSI\Entity\CountryRegion();
         $countryRegion->setCountry($this->country_1);
         $countryRegion->setName('test');
-        $this->countryRegionRepo->saveAsNew($countryRegion);
+        $this->countryRegionRepo->insert($countryRegion);
 
         $sameCountryRegion = $this->countryRegionRepo->getById($countryRegion->getId());
         $this->assertEquals($countryRegion->getName(), $sameCountryRegion->getName());

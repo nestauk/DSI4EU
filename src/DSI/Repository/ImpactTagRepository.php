@@ -8,7 +8,7 @@ use DSI\Entity\ImpactTag;
 
 class ImpactTagRepository
 {
-    public function saveAsNew(ImpactTag $tag)
+    public function insert(ImpactTag $tag)
     {
         if (!$tag->getName())
             throw new DSI\NotEnoughData('name');

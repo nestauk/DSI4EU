@@ -19,6 +19,9 @@ class Router
         if ($this->pageURL === '/') {
             $this->homePage();
 
+        } elseif ($this->pageURL === '/import') {
+            $this->importPage();
+
         } elseif ($this->pageURL === '/login.json') {
             $this->loginJsonPage();
 
@@ -404,6 +407,12 @@ class Router
     {
         $command = new \DSI\Controller\FeedbackController();
         $command->format = 'json';
+        $command->exec();
+    }
+
+    private function importPage()
+    {
+        $command = new \DSI\Controller\ImportController();
         $command->exec();
     }
 }

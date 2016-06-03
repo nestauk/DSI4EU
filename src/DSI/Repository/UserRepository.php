@@ -8,6 +8,9 @@ use DSI\Service\SQL;
 
 class UserRepository
 {
+    /** @var self */
+    private static $objects = [];
+
     public function insert(User $user)
     {
         $insert = array();
@@ -30,6 +33,8 @@ class UserRepository
         $query->query();
 
         $user->setId($query->insert_id());
+
+        self::$objects[$user->getId()] = $user;
     }
 
     public function save(User $user)
@@ -57,10 +62,15 @@ class UserRepository
 
         $query = new SQL("UPDATE `users` SET " . implode(', ', $insert) . " WHERE `id` = '{$user->getId()}'");
         $query->query();
+
+        self::$objects[$user->getId()] = $user;
     }
 
     public function getById(int $id): User
     {
+        if (isset(self::$objects[$id]))
+            return self::$objects[$id];
+
         return $this->getUserWhere([
             "`id` = {$id}"
         ]);
@@ -193,6 +203,9 @@ class UserRepository
             $userObj->setProfileURL($user['profileURL']);
         if ($user['profilePic'])
             $userObj->setProfilePic($user['profilePic']);
+
+        self::$objects[$userObj->getId()] = $userObj;
+
         return $userObj;
     }
 
@@ -216,6 +229,7 @@ class UserRepository
     {
         $query = new SQL("TRUNCATE TABLE `users`");
         $query->query();
+        self::$objects = [];
     }
 
     /**

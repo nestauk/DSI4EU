@@ -26,7 +26,7 @@ class ImpactTagRepositoryTest extends PHPUnit_Framework_TestCase
         $tag = new ImpactTag();
         $tag->setName('test');
 
-        $this->tagsRepo->saveAsNew($tag);
+        $this->tagsRepo->insert($tag);
 
         $this->assertEquals(1, $tag->getId());
     }
@@ -37,7 +37,7 @@ class ImpactTagRepositoryTest extends PHPUnit_Framework_TestCase
         $tag = new ImpactTag();
         $tag->setName('test');
 
-        $this->tagsRepo->saveAsNew($tag);
+        $this->tagsRepo->insert($tag);
 
         $tag->setName('test2');
         $this->tagsRepo->save($tag);
@@ -71,7 +71,7 @@ class ImpactTagRepositoryTest extends PHPUnit_Framework_TestCase
         $name = 'test';
         $tag = new ImpactTag();
         $tag->setName($name);
-        $this->tagsRepo->saveAsNew($tag);
+        $this->tagsRepo->insert($tag);
 
         $sameTag = $this->tagsRepo->getByName($name);
         $this->assertEquals($tag->getId(), $sameTag->getId());
@@ -95,7 +95,7 @@ class ImpactTagRepositoryTest extends PHPUnit_Framework_TestCase
     {
         $tag = new ImpactTag();
         $this->setExpectedException(\DSI\NotEnoughData::class);
-        $this->tagsRepo->saveAsNew($tag);
+        $this->tagsRepo->insert($tag);
     }
 
     /** @test save */
@@ -103,7 +103,7 @@ class ImpactTagRepositoryTest extends PHPUnit_Framework_TestCase
     {
         $tag = new ImpactTag();
         $tag->setName('test');
-        $this->tagsRepo->saveAsNew($tag);
+        $this->tagsRepo->insert($tag);
 
         $tag->setName('');
         $this->setExpectedException(\DSI\NotEnoughData::class);
@@ -115,12 +115,12 @@ class ImpactTagRepositoryTest extends PHPUnit_Framework_TestCase
     {
         $tag = new ImpactTag();
         $tag->setName('test');
-        $this->tagsRepo->saveAsNew($tag);
+        $this->tagsRepo->insert($tag);
 
         $tag = new ImpactTag();
         $tag->setName('test');
         $this->setExpectedException(\DSI\DuplicateEntry::class);
-        $this->tagsRepo->saveAsNew($tag);
+        $this->tagsRepo->insert($tag);
     }
 
     /** @test save */
@@ -128,11 +128,11 @@ class ImpactTagRepositoryTest extends PHPUnit_Framework_TestCase
     {
         $tag_1 = new ImpactTag();
         $tag_1->setName('test');
-        $this->tagsRepo->saveAsNew($tag_1);
+        $this->tagsRepo->insert($tag_1);
 
         $tag_2 = new ImpactTag();
         $tag_2->setName('test2');
-        $this->tagsRepo->saveAsNew($tag_2);
+        $this->tagsRepo->insert($tag_2);
 
         $tag_2->setName('test');
         $this->setExpectedException(\DSI\DuplicateEntry::class);
@@ -144,13 +144,13 @@ class ImpactTagRepositoryTest extends PHPUnit_Framework_TestCase
     {
         $tags = new ImpactTag();
         $tags->setName('test');
-        $this->tagsRepo->saveAsNew($tags);
+        $this->tagsRepo->insert($tags);
 
         $this->assertCount(1, $this->tagsRepo->getAll());
 
         $tags = new ImpactTag();
         $tags->setName('test2');
-        $this->tagsRepo->saveAsNew($tags);
+        $this->tagsRepo->insert($tags);
 
         $this->assertCount(2, $this->tagsRepo->getAll());
     }
@@ -160,7 +160,7 @@ class ImpactTagRepositoryTest extends PHPUnit_Framework_TestCase
     {
         $tag = new ImpactTag();
         $tag->setName('test');
-        $this->tagsRepo->saveAsNew($tag);
+        $this->tagsRepo->insert($tag);
 
         $sameTag = $this->tagsRepo->getById($tag->getId());
         $this->assertEquals($tag->getName(), $sameTag->getName());

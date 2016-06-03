@@ -24,7 +24,7 @@ class OrganisationSizeRepositoryTest extends PHPUnit_Framework_TestCase
     public function organisationSizeCanBeSaved()
     {
         $organisationSize = new OrganisationSize();
-        $this->organisationSizeRepo->saveAsNew($organisationSize);
+        $this->organisationSizeRepo->insert($organisationSize);
         $this->assertGreaterThan(0, $organisationSize->getId());
     }
 
@@ -32,7 +32,7 @@ class OrganisationSizeRepositoryTest extends PHPUnit_Framework_TestCase
     public function organisationSizeCanBeUpdated()
     {
         $organisationSize = new OrganisationSize();
-        $this->organisationSizeRepo->saveAsNew($organisationSize);
+        $this->organisationSizeRepo->insert($organisationSize);
 
         $organisationSize->setName('test');
         $this->organisationSizeRepo->save($organisationSize);
@@ -61,12 +61,12 @@ class OrganisationSizeRepositoryTest extends PHPUnit_Framework_TestCase
     public function getAllOrganisationSizes()
     {
         $organisationSize = new OrganisationSize();
-        $this->organisationSizeRepo->saveAsNew($organisationSize);
+        $this->organisationSizeRepo->insert($organisationSize);
 
         $this->assertCount(1, $this->organisationSizeRepo->getAll());
 
         $organisationSize = new OrganisationSize();
-        $this->organisationSizeRepo->saveAsNew($organisationSize);
+        $this->organisationSizeRepo->insert($organisationSize);
 
         $this->assertCount(2, $this->organisationSizeRepo->getAll());
     }
@@ -76,7 +76,7 @@ class OrganisationSizeRepositoryTest extends PHPUnit_Framework_TestCase
     {
         $organisationSize = new OrganisationSize();
         $organisationSize->setName('Name');
-        $this->organisationSizeRepo->saveAsNew($organisationSize);
+        $this->organisationSizeRepo->insert($organisationSize);
 
         $sameOrganisation = $this->organisationSizeRepo->getById($organisationSize->getId());
         $this->assertEquals($organisationSize->getName(), $sameOrganisation->getName());

@@ -4,12 +4,14 @@ namespace DSI\Repository;
 
 use DSI;
 use DSI\Service\SQL;
-use DSI\Entity\Country;
 use DSI\Entity\CountryRegion;
 
 class CountryRegionRepository
 {
-    public function saveAsNew(CountryRegion $countryRegion)
+    /** @var self */
+    private static $objects = [];
+
+    public function insert(CountryRegion $countryRegion)
     {
         if (!$countryRegion->getName())
             throw new DSI\NotEnoughData('name');
@@ -26,6 +28,8 @@ class CountryRegionRepository
         $query->query();
 
         $countryRegion->setId($query->insert_id());
+
+        self::$objects[$countryRegion->getId()] = $countryRegion;
     }
 
     public function save(CountryRegion $countryRegion)
@@ -49,10 +53,15 @@ class CountryRegionRepository
 
         $query = new SQL("UPDATE `country-regions` SET " . implode(', ', $insert) . " WHERE `id` = '{$countryRegion->getId()}'");
         $query->query();
+
+        self::$objects[$countryRegion->getId()] = $countryRegion;
     }
 
     public function getById(int $id): CountryRegion
     {
+        if (isset(self::$objects[$id]))
+            return self::$objects[$id];
+
         return $this->getCountryRegionWhere([
             "`id` = {$id}"
         ]);
@@ -111,6 +120,7 @@ class CountryRegionRepository
     {
         $query = new SQL("TRUNCATE TABLE `country-regions`");
         $query->query();
+        self::$objects = [];
     }
 
 
@@ -126,6 +136,9 @@ class CountryRegionRepository
             (new CountryRepository())->getById($countryRegion['countryID'])
         );
         $countryObj->setName($countryRegion['name']);
+
+        self::$objects[$countryObj->getId()] = $countryObj;
+
         return $countryObj;
     }
 

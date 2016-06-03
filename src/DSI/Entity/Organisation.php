@@ -25,6 +25,9 @@ class Organisation
     /** @var OrganisationSize */
     private $organisationSize;
 
+    /** @var string */
+    private $importID;
+
     /**
      * @return int
      */
@@ -210,5 +213,21 @@ class Organisation
     public function setPartnersCount($partnersCount)
     {
         $this->partnersCount = (int)$partnersCount;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImportID()
+    {
+        return $this->importID;
+    }
+
+    /**
+     * @param string $importID
+     */
+    public function setImportID($importID)
+    {
+        $this->importID = $importID;
     }
 }

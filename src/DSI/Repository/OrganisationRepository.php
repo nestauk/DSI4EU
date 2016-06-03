@@ -24,6 +24,7 @@ class OrganisationRepository
         if ($organisation->getOrganisationSize())
             $insert[] = "`organisationSizeID` = '" . addslashes($organisation->getOrganisationSizeId()) . "'";
         $insert[] = "`partnersCount` = '" . addslashes($organisation->getPartnersCount()) . "'";
+        $insert[] = "`importID` = '" . addslashes($organisation->getImportID()) . "'";
 
         $query = new SQL("INSERT INTO `organisations` SET " . implode(', ', $insert) . "");
         $query->query();
@@ -52,6 +53,7 @@ class OrganisationRepository
         if ($organisation->getOrganisationSize())
             $insert[] = "`organisationSizeID` = '" . addslashes($organisation->getOrganisationSizeId()) . "'";
         $insert[] = "`partnersCount` = '" . addslashes($organisation->getPartnersCount()) . "'";
+        $insert[] = "`importID` = '" . addslashes($organisation->getImportID()) . "'";
 
         $query = new SQL("UPDATE `organisations` SET " . implode(', ', $insert) . " WHERE `id` = '{$organisation->getId()}'");
         $query->query();
@@ -59,8 +61,15 @@ class OrganisationRepository
 
     public function getById(int $id): Organisation
     {
-        return $this->getElementWhere([
+        return $this->getObjectWhere([
             "`id` = {$id}"
+        ]);
+    }
+
+    public function getByImportID(string $importID): Organisation
+    {
+        return $this->getObjectWhere([
+            "`importID` = '".addslashes($importID)."'"
         ]);
     }
 
@@ -91,6 +100,7 @@ class OrganisationRepository
             );
         }
         $organisationObj->setPartnersCount($organisation['partnersCount']);
+        $organisationObj->setImportID($organisation['importID']);
 
         return $organisationObj;
     }
@@ -100,18 +110,7 @@ class OrganisationRepository
      */
     public function getAll()
     {
-        $where = ["1"];
-        $organisations = [];
-        $query = new SQL("SELECT 
-            id, ownerID, name, description
-          , countryRegionID, address
-          , organisationTypeID, organisationSizeID
-          , partnersCount
-          FROM `organisations` WHERE " . implode(' AND ', $where) . "");
-        foreach ($query->fetch_all() AS $dbOrganisation) {
-            $organisations[] = $this->buildObjectFromData($dbOrganisation);
-        }
-        return $organisations;
+        return $this->getObjectsWhere(["1"]);
     }
 
     public function clearAll()
@@ -120,19 +119,35 @@ class OrganisationRepository
         $query->query();
     }
 
-    private function getElementWhere($where)
+    private function getObjectWhere($where)
     {
+        $objects = $this->getObjectsWhere($where);
+
+        if (count($objects) < 1)
+            throw new DSI\NotFound();
+
+        return $objects[0];
+    }
+
+    /**
+     * @param $where
+     * @return array
+     */
+    private function getObjectsWhere($where)
+    {
+        $organisations = [];
         $query = new SQL("SELECT 
-              id, ownerID, name, description
+            id, ownerID, name, description
           , countryRegionID, address
           , organisationTypeID, organisationSizeID
-          , partnersCount
-            FROM `organisations` WHERE " . implode(' AND ', $where) . " LIMIT 1");
-        $dbOrganisation = $query->fetch();
-        if (!$dbOrganisation) {
-            throw new DSI\NotFound();
+          , partnersCount, importID
+          FROM `organisations` 
+          WHERE " . implode(' AND ', $where) . "
+          ORDER BY `name`
+        ");
+        foreach ($query->fetch_all() AS $dbOrganisation) {
+            $organisations[] = $this->buildObjectFromData($dbOrganisation);
         }
-
-        return $this->buildObjectFromData($dbOrganisation);
+        return $organisations;
     }
 }

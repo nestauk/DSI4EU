@@ -61,7 +61,7 @@ class OrganisationRepositoryTest extends PHPUnit_Framework_TestCase
         $this->countryRegion = new CountryRegion();
         $this->countryRegion->setName('test1');
         $this->countryRegion->setCountry($this->country);
-        $this->countryRegionRepo->saveAsNew($this->countryRegion);
+        $this->countryRegionRepo->insert($this->countryRegion);
     }
 
     public function tearDown()
@@ -136,10 +136,10 @@ class OrganisationRepositoryTest extends PHPUnit_Framework_TestCase
     public function setAllOrganisationDetails()
     {
         $organisationType = new \DSI\Entity\OrganisationType();
-        $this->organisationTypeRepo->saveAsNew($organisationType);
+        $this->organisationTypeRepo->insert($organisationType);
 
         $organisationSize = new \DSI\Entity\OrganisationSize();
-        $this->organisationSizeRepo->saveAsNew($organisationSize);
+        $this->organisationSizeRepo->insert($organisationSize);
 
         $organisation = new Organisation();
         $organisation->setOwner($this->user1);
