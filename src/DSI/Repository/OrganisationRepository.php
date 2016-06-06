@@ -23,7 +23,8 @@ class OrganisationRepository
             $insert[] = "`organisationTypeID` = '" . addslashes($organisation->getOrganisationTypeId()) . "'";
         if ($organisation->getOrganisationSize())
             $insert[] = "`organisationSizeID` = '" . addslashes($organisation->getOrganisationSizeId()) . "'";
-        $insert[] = "`partnersCount` = '" . addslashes($organisation->getPartnersCount()) . "'";
+        $insert[] = "`projectsCount` = '" . (int)($organisation->getProjectsCount()) . "'";
+        $insert[] = "`partnersCount` = '" . (int)($organisation->getPartnersCount()) . "'";
         $insert[] = "`importID` = '" . addslashes($organisation->getImportID()) . "'";
 
         $query = new SQL("INSERT INTO `organisations` SET " . implode(', ', $insert) . "");
@@ -52,7 +53,8 @@ class OrganisationRepository
         $insert[] = "`address` = '" . addslashes($organisation->getAddress()) . "'";
         if ($organisation->getOrganisationSize())
             $insert[] = "`organisationSizeID` = '" . addslashes($organisation->getOrganisationSizeId()) . "'";
-        $insert[] = "`partnersCount` = '" . addslashes($organisation->getPartnersCount()) . "'";
+        $insert[] = "`projectsCount` = '" . (int)($organisation->getProjectsCount()) . "'";
+        $insert[] = "`partnersCount` = '" . (int)($organisation->getPartnersCount()) . "'";
         $insert[] = "`importID` = '" . addslashes($organisation->getImportID()) . "'";
 
         $query = new SQL("UPDATE `organisations` SET " . implode(', ', $insert) . " WHERE `id` = '{$organisation->getId()}'");
@@ -69,7 +71,7 @@ class OrganisationRepository
     public function getByImportID(string $importID): Organisation
     {
         return $this->getObjectWhere([
-            "`importID` = '".addslashes($importID)."'"
+            "`importID` = '" . addslashes($importID) . "'"
         ]);
     }
 
@@ -99,6 +101,7 @@ class OrganisationRepository
                 (new OrganisationSizeRepository())->getById($organisation['organisationSizeID'])
             );
         }
+        $organisationObj->setProjectsCount($organisation['projectsCount']);
         $organisationObj->setPartnersCount($organisation['partnersCount']);
         $organisationObj->setImportID($organisation['importID']);
 
@@ -140,7 +143,8 @@ class OrganisationRepository
             id, ownerID, name, description
           , countryRegionID, address
           , organisationTypeID, organisationSizeID
-          , partnersCount, importID
+          , projectsCount, partnersCount
+          , importID
           FROM `organisations` 
           WHERE " . implode(' AND ', $where) . "
           ORDER BY `name`

@@ -5,8 +5,7 @@ namespace DSI\Entity;
 class Organisation
 {
     /** @var integer */
-    private $id,
-        $partnersCount;
+    private $id;
 
     /** @var User */
     private $owner;
@@ -27,6 +26,10 @@ class Organisation
 
     /** @var string */
     private $importID;
+
+    /** @var int */
+    private $partnersCount,
+        $projectsCount;
 
     /**
      * @return int
@@ -229,5 +232,21 @@ class Organisation
     public function setImportID($importID)
     {
         $this->importID = $importID;
+    }
+
+    /**
+     * @return int
+     */
+    public function getProjectsCount()
+    {
+        return (int)$this->projectsCount;
+    }
+
+    /**
+     * @param int $projectsCount
+     */
+    public function setProjectsCount($projectsCount)
+    {
+        $this->projectsCount = (int)$projectsCount;
     }
 }

@@ -149,6 +149,7 @@ class OrganisationRepositoryTest extends PHPUnit_Framework_TestCase
         $organisation->setAddress($address = '58 New Street');
         $organisation->setOrganisationType($organisationType);
         $organisation->setOrganisationSize($organisationSize);
+        $organisation->setProjectsCount($projectsCount = 10);
         $organisation->setPartnersCount($partnersCount = 10);
         $this->organisationRepo->insert($organisation);
 
@@ -161,6 +162,7 @@ class OrganisationRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($address, $sameOrganisation->getAddress());
         $this->assertEquals($organisationType->getId(), $sameOrganisation->getOrganisationType()->getId());
         $this->assertEquals($organisationSize->getId(), $sameOrganisation->getOrganisationSize()->getId());
+        $this->assertEquals($projectsCount, $sameOrganisation->getProjectsCount());
         $this->assertEquals($partnersCount, $sameOrganisation->getPartnersCount());
     }
 }

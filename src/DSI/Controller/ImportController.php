@@ -4,6 +4,7 @@ namespace DSI\Controller;
 
 set_time_limit(0);
 
+use DSI\DuplicateEntry;
 use DSI\Entity\Country;
 use DSI\Entity\CountryRegion;
 use DSI\Entity\ImpactTag;
@@ -28,6 +29,8 @@ use DSI\Repository\ProjectImpactTagARepository;
 use DSI\Repository\ProjectImpactTagBRepository;
 use DSI\Repository\ProjectImpactTagCRepository;
 use DSI\Repository\ProjectRepository;
+use DSI\Service\ErrorHandler;
+use DSI\UseCase\AddProjectToOrganisation;
 
 class ImportController
 {
@@ -334,19 +337,27 @@ class ImportController
         try {
             $organisation = (new OrganisationRepository())->getByImportID($data[1]);
         } catch (NotFound $e) {
-            var_dump(['org' => $data[1]]);
+            var_dump(['invalid org' => $data[1]]);
         }
         try {
             $project = (new ProjectRepository())->getByImportID($data[2]);
         } catch (NotFound $e) {
-            var_dump(['proj' => $data[2]]);
+            var_dump(['invalid proj' => $data[2]]);
         }
 
         if (isset($organisation) AND isset($project)) {
-            $organisationProject = new OrganisationProject();
-            $organisationProject->setOrganisation($organisation);
-            $organisationProject->setProject($project);
-            (new OrganisationProjectRepository())->add($organisationProject);
+            $addProjectToOrgCmd = new AddProjectToOrganisation();
+            $addProjectToOrgCmd->data()->organisationID = $organisation->getId();
+            $addProjectToOrgCmd->data()->projectID = $project->getId();
+            try {
+                $addProjectToOrgCmd->exec();
+            } catch (ErrorHandler $e) {
+                var_dump([
+                    'error' => $e->getErrors(),
+                    'org' => $data[1],
+                    'proj' => $data[2],
+                ]);
+            }
 
             // var_dump($data);
         }

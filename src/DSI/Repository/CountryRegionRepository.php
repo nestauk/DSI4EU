@@ -123,7 +123,6 @@ class CountryRegionRepository
         self::$objects = [];
     }
 
-
     /**
      * @param $countryRegion
      * @return CountryRegion

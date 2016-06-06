@@ -115,4 +115,12 @@ class OrganisationTest extends \PHPUnit_Framework_TestCase
         $this->organisation->setPartnersCount($partnersCount);
         $this->assertEquals($partnersCount, $this->organisation->getPartnersCount());
     }
+
+    /** @test */
+    public function settingProjectsCount_returnsProjectsCount()
+    {
+        $projectsCount = 10;
+        $this->organisation->setProjectsCount($projectsCount);
+        $this->assertEquals($projectsCount, $this->organisation->getProjectsCount());
+    }
 }

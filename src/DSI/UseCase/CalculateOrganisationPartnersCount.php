@@ -2,7 +2,6 @@
 
 namespace DSI\UseCase;
 
-use DSI\Entity\CountryRegion;
 use DSI\Entity\Organisation;
 use DSI\Entity\OrganisationProject;
 use DSI\Repository\OrganisationProjectRepository;

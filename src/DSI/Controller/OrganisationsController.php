@@ -2,9 +2,14 @@
 
 namespace DSI\Controller;
 
+use DSI\Entity\Country;
+use DSI\Entity\CountryRegion;
 use DSI\Entity\Organisation;
-use DSI\Repository\OrganisationProjectRepository;
+use DSI\Repository\CountryRegionRepository;
+use DSI\Repository\CountryRepository;
 use DSI\Repository\OrganisationRepository;
+use DSI\Repository\OrganisationSizeRepository;
+use DSI\Repository\OrganisationTypeRepository;
 use DSI\Repository\UserRepository;
 use DSI\Service\Auth;
 use DSI\Service\URL;
@@ -16,6 +21,11 @@ class OrganisationsController
     public function exec()
     {
         if ($this->responseFormat == 'json') {
+            // (new CountryRepository())->getAll();
+            (new CountryRegionRepository())->getAll();
+            // (new OrganisationTypeRepository())->getAll();
+            // (new OrganisationSizeRepository())->getAll();
+
             $organisationRepo = new OrganisationRepository();
             echo json_encode(array_map(function (Organisation $organisation) {
                 $region = $organisation->getCountryRegion();
@@ -25,7 +35,7 @@ class OrganisationsController
                     'region' => ($region ? $region->getName() : ''),
                     'country' => ($region ? $region->getCountry()->getName() : ''),
                     'url' => URL::organisation($organisation->getId(), $organisation->getName()),
-                    'projectsCount' => count((new OrganisationProjectRepository())->getByOrganisationID($organisation->getId())),
+                    'projectsCount' => $organisation->getProjectsCount(),
                     'partnersCount' => $organisation->getPartnersCount(),
                 ];
             }, $organisationRepo->getAll()));

@@ -3,6 +3,7 @@
 namespace DSI\UseCase;
 
 use DSI\Entity\OrganisationProject;
+use DSI\Entity\Project;
 use DSI\Repository\OrganisationProjectRepository;
 use DSI\Repository\OrganisationRepository;
 use DSI\Repository\ProjectRepository;
@@ -44,6 +45,7 @@ class AddProjectToOrganisation
         $this->addProjectToOrganisation($project);
         $this->setProjectOrganisationsCount($project);
         $this->setOrganisationPartnersCount();
+        $this->setOrganisationProjectsCount();
     }
 
     /**
@@ -61,11 +63,18 @@ class AddProjectToOrganisation
         $calculateOrganisationPartnersCountCmd->exec();
     }
 
+    private function setOrganisationProjectsCount()
+    {
+        $calculateOrganisationProjectsCountCmd = new CalculateOrganisationProjectsCount();
+        $calculateOrganisationProjectsCountCmd->data()->organisationID = $this->data()->organisationID;
+        $calculateOrganisationProjectsCountCmd->exec();
+    }
+
     /**
      * @param $project
      * @throws \DSI\NotFound
      */
-    private function setProjectOrganisationsCount($project)
+    private function setProjectOrganisationsCount(Project $project)
     {
         $organisationsCount = count($this->organisationProjectRepo->getByProjectID($project->getId()));
         $project->setOrganisationsCount($organisationsCount);
