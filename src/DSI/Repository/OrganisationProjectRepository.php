@@ -3,6 +3,7 @@
 namespace DSI\Repository;
 
 use DSI\DuplicateEntry;
+use DSI\Entity\Organisation;
 use DSI\Entity\OrganisationProject;
 use DSI\NotFound;
 use DSI\Service\SQL;
@@ -93,6 +94,28 @@ class OrganisationProjectRepository
         }
 
         return $projectIDs;
+    }
+
+    /**
+     * @param Organisation $organisation
+     * @return Organisation[]
+     */
+    public function getPartnerOrganisationsFor(Organisation $organisation)
+    {
+        $projectIDs = $this->getProjectIDsForOrganisation($organisation->getId());
+        $partnerOrganisations = array_map(
+            function (OrganisationProject $organisationProject) use ($organisation, $projectIDs) {
+                $partnerOrganisation = $organisationProject->getOrganisation();
+                if ($organisation->getId() == $partnerOrganisation->getId())
+                    return null;
+
+                $partnerProjectIDs = $this->getProjectIDsForOrganisation($partnerOrganisation->getId());
+                $partnerOrganisation->data['common-projects'] = count(array_intersect($projectIDs, $partnerProjectIDs));
+                return $partnerOrganisation;
+            },
+            $this->getByProjectIDs($projectIDs)
+        );
+        return array_filter($partnerOrganisations);
     }
 
     /**

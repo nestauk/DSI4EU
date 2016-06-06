@@ -4,6 +4,8 @@ namespace DSI\Entity;
 
 class Organisation
 {
+    public $data;
+
     /** @var integer */
     private $id;
 

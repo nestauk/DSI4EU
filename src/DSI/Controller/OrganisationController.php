@@ -178,6 +178,7 @@ class OrganisationController
 
         $organisationMembers = (new OrganisationMemberRepository())->getMembersForOrganisation($organisation->getId());
         $organisationProjects = (new OrganisationProjectRepository())->getByOrganisationID($organisation->getId());
+        $partnerOrganisations = (new OrganisationProjectRepository())->getPartnerOrganisationsFor($organisation);
 
         if ($loggedInUser) {
             $canUserRequestMembership = $this->canUserRequestMembership($organisation, $loggedInUser);
@@ -228,6 +229,14 @@ class OrganisationController
                         'url' => URL::project($project->getId(), $project->getName()),
                     ];
                 }, $organisationProjects),
+                'partnerOrganisations' => array_map(function(Organisation $organisation){
+                    return [
+                        'id' => $organisation->getId(),
+                        'name' => $organisation->getName(),
+                        'commonProjects' => $organisation->data['common-projects'],
+                        'url' => URL::organisation($organisation->getId(), $organisation->getName()),
+                    ];
+                }, $partnerOrganisations),
                 'countryID' => $organisation->getCountryID(),
                 'countryRegionID' => $organisation->getCountryRegionID(),
                 'countryRegion' => $organisation->getCountryRegion() ? $organisation->getCountryRegion()->getName() : '',

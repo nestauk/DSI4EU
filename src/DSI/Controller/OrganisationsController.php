@@ -2,8 +2,6 @@
 
 namespace DSI\Controller;
 
-use DSI\Entity\Country;
-use DSI\Entity\CountryRegion;
 use DSI\Entity\Organisation;
 use DSI\Repository\CountryRegionRepository;
 use DSI\Repository\CountryRepository;

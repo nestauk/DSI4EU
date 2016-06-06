@@ -357,53 +357,15 @@ require __DIR__ . '/header.php';
                                 <div data-w-tab="Tab 2" class="w-tab-pane">
                                     <div class="list-items">
                                         <div class="w-inline-block partner-link">
-                                            <div class="w-clearfix list-item">
-                                                <div class="partner-title">Waag Society</div>
-                                                <div class="no-of-projects">3 Projects</div>
-                                            </div>
-                                            <div class="w-clearfix list-item">
-                                                <div class="partner-title">Esade</div>
-                                                <div class="no-of-projects">3 Projects</div>
-                                            </div>
-                                            <div class="w-clearfix list-item">
-                                                <div class="partner-title">Forum Virium Helsinki</div>
-                                                <div class="no-of-projects">3 Projects</div>
-                                            </div>
-                                            <div class="w-clearfix list-item">
-                                                <div class="partner-title">Arduino</div>
-                                                <div class="no-of-projects">1 Project</div>
-                                            </div>
-                                            <div class="w-clearfix list-item">
-                                                <div class="partner-title">Attendal - Creative Business Innovation
+                                            <div class="w-clearfix list-item"
+                                                 ng-repeat="partnerOrganisation in organisation.partnerOrganisations">
+                                                <a href="{{partnerOrganisation.url}}" class="partner-title"
+                                                   ng-bind="partnerOrganisation.name"></a>
+                                                <div class="no-of-projects">
+                                                    <span ng-bind="partnerOrganisation.commonProjects"></span>
+                                                    Project<span
+                                                        ng-bind="partnerOrganisation.commonProjects == 1 ? '' : 's'"></span>
                                                 </div>
-                                                <div class="no-of-projects">1 Project</div>
-                                            </div>
-                                            <div class="w-clearfix list-item">
-                                                <div class="partner-title">Bethnal Green Ventures</div>
-                                                <div class="no-of-projects">1 Project</div>
-                                            </div>
-                                            <div class="w-clearfix list-item">
-                                                <div class="partner-title">Manchester Digital Development Agency
-                                                </div>
-                                                <div class="no-of-projects">1 Project</div>
-                                            </div>
-                                            <div class="w-clearfix list-item">
-                                                <div class="partner-title">City of Amsterdam</div>
-                                                <div class="no-of-projects">1 Project</div>
-                                            </div>
-                                            <div class="w-clearfix list-item">
-                                                <div class="partner-title">Barcelona &nbsp;Media</div>
-                                                <div class="no-of-projects">1 Project</div>
-                                            </div>
-                                            <div class="w-clearfix list-item">
-                                                <div class="partner-title">IMMI (International Modern Media
-                                                    Institute)
-                                                </div>
-                                                <div class="no-of-projects">1 Project</div>
-                                            </div>
-                                            <div class="w-clearfix list-item">
-                                                <div class="partner-title">Dyne.org</div>
-                                                <div class="no-of-projects">1 Project</div>
                                             </div>
                                         </div>
                                     </div>
