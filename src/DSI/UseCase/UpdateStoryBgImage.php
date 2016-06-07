@@ -5,32 +5,32 @@ namespace DSI\UseCase;
 use abeautifulsite\SimpleImage;
 use DSI\NotEnoughData;
 use DSI\NotFound;
-use DSI\Repository\UserRepository;
+use DSI\Repository\StoryRepository;
 use DSI\Service\ErrorHandler;
 
-class UpdateUserProfilePicture
+class UpdateStoryBgImage
 {
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var UpdateUserProfilePicture_Data */
+    /** @var UpdateStoryBgImage_Data */
     private $data;
 
-    /** @var UserRepository */
-    private $userRepo;
+    /** @var StoryRepository */
+    private $storyRepo;
 
     /** @var string */
-    private $profilePic;
+    private $bgImage;
 
     public function __construct()
     {
-        $this->data = new UpdateUserProfilePicture_Data();
+        $this->data = new UpdateStoryBgImage_Data();
     }
 
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->userRepo = new UserRepository();
+        $this->storyRepo = new StoryRepository();
 
         $this->checkIfAllTheInfoHaveBeenSent();
         $this->checkIfFileExistsOnServer();
@@ -46,14 +46,14 @@ class UpdateUserProfilePicture
 
         $img->thumbnail(200, 200)->save($this->data()->filePath, null, $fileInfo->getExtension());
 
-        $this->profilePic = $this->data()->userID . '-' . $this->data()->fileName;
-        rename($this->data()->filePath, __DIR__ . '/../../../www/images/users/profile/' . $this->profilePic);
+        $this->bgImage = $this->data()->storyID . '-' . $this->data()->fileName;
+        rename($this->data()->filePath, __DIR__ . '/../../../www/images/stories/' . $this->bgImage);
 
-        $this->updateUserDetails();
+        $this->updateStoryDetails();
     }
 
     /**
-     * @return UpdateUserProfilePicture_Data
+     * @return UpdateStoryBgImage_Data
      */
     public function data()
     {
@@ -63,9 +63,9 @@ class UpdateUserProfilePicture
     /**
      * @return string
      */
-    public function getProfilePic()
+    public function getBgImage()
     {
-        return $this->profilePic;
+        return $this->bgImage;
     }
 
     private function checkFileExtension(\SplFileInfo $fileInfo)
@@ -99,7 +99,7 @@ class UpdateUserProfilePicture
             throw new NotEnoughData('filePath');
         if (!isset($this->data()->fileName))
             throw new NotEnoughData('fileName');
-        if (!isset($this->data()->userID))
+        if (!isset($this->data()->storyID))
             throw new NotEnoughData('userID');
     }
 
@@ -115,20 +115,20 @@ class UpdateUserProfilePicture
         }
     }
 
-    private function updateUserDetails()
+    private function updateStoryDetails()
     {
-        $user = $this->userRepo->getById($this->data()->userID);
-        $user->setProfilePic($this->profilePic);
-        $this->userRepo->save($user);
+        $story = $this->storyRepo->getById($this->data()->storyID);
+        $story->setBgImage($this->bgImage);
+        $this->storyRepo->save($story);
     }
 }
 
-class UpdateUserProfilePicture_Data
+class UpdateStoryBgImage_Data
 {
     /** @var string */
     public $filePath,
         $fileName;
 
     /** @var int */
-    public $userID;
+    public $storyID;
 }

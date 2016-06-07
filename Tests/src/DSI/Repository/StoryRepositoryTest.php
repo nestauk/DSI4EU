@@ -1,0 +1,124 @@
+<?php
+
+require_once __DIR__ . '/../../../config.php';
+
+use \DSI\Repository\UserRepository;
+use \DSI\Repository\StoryRepository;
+use \DSI\Repository\StoryCategoryRepository;
+use \DSI\Entity\Story;
+use \DSI\Entity\User;
+
+class StoryRepositoryTest extends PHPUnit_Framework_TestCase
+{
+    /** @var StoryCategoryRepository */
+    private $storyCategoryRepository;
+
+    /** @var StoryRepository */
+    private $storyRepository;
+
+    /** @var UserRepository */
+    private $userRepo;
+
+    /** @var User */
+    private $user1, $user2;
+
+    public function setUp()
+    {
+        $this->storyCategoryRepository = new StoryCategoryRepository();
+        $this->storyRepository = new StoryRepository();
+        $this->userRepo = new UserRepository();
+
+        $this->user1 = new User();
+        $this->user2 = new User();
+        $this->userRepo->insert($this->user1);
+        $this->userRepo->insert($this->user2);
+    }
+
+    public function tearDown()
+    {
+        $this->storyCategoryRepository->clearAll();
+        $this->storyRepository->clearAll();
+        $this->userRepo->clearAll();
+    }
+
+    /** @test saveAsNew */
+    public function storyCanBeSaved()
+    {
+        $story = new Story();
+        $story->setWriter($this->user1);
+        $this->storyRepository->insert($story);
+
+        $this->assertEquals(1, $story->getId());
+    }
+
+    /** @test save, getByID */
+    public function canBeUpdated()
+    {
+        $story = new Story();
+        $story->setWriter($this->user1);
+        $this->storyRepository->insert($story);
+
+        $story->setWriter($this->user2);
+        $this->storyRepository->save($story);
+
+        $sameStory = $this->storyRepository->getById($story->getId());
+        $this->assertEquals($this->user2->getId(), $sameStory->getWriter()->getId());
+    }
+
+    /** @test getByID */
+    public function gettingAnNonExistentStoryById_throwsException()
+    {
+        $this->setExpectedException(\DSI\NotFound::class);
+        $this->storyRepository->getById(1);
+    }
+
+    /** @test save */
+    public function NonexistentStoryCannotBeSaved()
+    {
+        $story = new Story();
+        $story->setId(1);
+        $story->setWriter($this->user1);
+
+        $this->setExpectedException(\DSI\NotFound::class);
+        $this->storyRepository->save($story);
+    }
+
+    /** @test getAll */
+    public function getAllStories()
+    {
+        $story = new Story();
+        $story->setWriter($this->user1);
+        $this->storyRepository->insert($story);
+
+        $this->assertCount(1, $this->storyRepository->getAll());
+
+        $story = new Story();
+        $story->setWriter($this->user1);
+        $this->storyRepository->insert($story);
+
+        $this->assertCount(2, $this->storyRepository->getAll());
+    }
+
+    /** @test */
+    public function setAllStoryDetails()
+    {
+        $category = new \DSI\Entity\StoryCategory();
+        $this->storyCategoryRepository->insert($category);
+
+        $story = new Story();
+        $story->setStoryCategory($category);
+        $story->setWriter($this->user1);
+        $story->setTitle($title = 'Name');
+        $story->setContent($content = 'Desc');
+        $story->setBgImage($bgImage = 'DSC.jpg');
+        $this->storyRepository->insert($story);
+
+        $story = $this->storyRepository->getById($story->getId());
+        $this->assertEquals($category->getId(), $story->getStoryCategoryId());
+        $this->assertEquals($this->user1->getId(), $story->getWriter()->getId());
+        $this->assertEquals($title, $story->getTitle());
+        $this->assertEquals($content, $story->getContent());
+        $this->assertEquals($bgImage, $story->getBgImage());
+        $this->assertRegExp('<^\d{4}\-\d{2}\-\d{2} \d{2}\:\d{2}\:\d{2}$>', $story->getTime());
+    }
+}
