@@ -3354,6 +3354,14 @@ strong {
   color: #fff;
 }
 
+.dsi-button.top-filter.published-stories {
+  background-color: #dffffa;
+}
+
+.dsi-button.top-filter.unpublished {
+  background-color: #b3bcd5;
+}
+
 .dsi-button.dash-join {
   width: 80%;
 }
