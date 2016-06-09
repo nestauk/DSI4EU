@@ -3556,7 +3556,7 @@ strong {
 }
 
 .page-h1 {
-  position: absolute;
+  position: static;
   width: auto;
   margin-top: 0px;
   margin-bottom: 30px;
