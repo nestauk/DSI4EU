@@ -52,6 +52,9 @@ class Router
         } elseif ($this->pageURL === '/stories') {
             $this->storiesPage();
 
+        } elseif ($this->pageURL === '/story/add') {
+            $this->addStoryPage();
+
         } elseif ($this->pageURL === '/projects') {
             $this->projectsPage();
 
@@ -108,6 +111,9 @@ class Router
 
         } elseif ($this->pageURL === '/feedback') {
             $this->feedbackPage();
+
+        } elseif ($this->pageURL === '/temp-gallery.json') {
+            $this->tempGalleryJsonPage();
 
         } elseif ($this->pageURL === '/feedback.json') {
             $this->feedbackJsonPage();
@@ -211,6 +217,12 @@ class Router
     private function storiesPage()
     {
         $command = new \DSI\Controller\StoriesController();
+        $command->exec();
+    }
+
+    private function addStoryPage()
+    {
+        $command = new \DSI\Controller\CreateStoryController();
         $command->exec();
     }
 
@@ -406,6 +418,13 @@ class Router
     private function feedbackJsonPage()
     {
         $command = new \DSI\Controller\FeedbackController();
+        $command->format = 'json';
+        $command->exec();
+    }
+
+    private function tempGalleryJsonPage()
+    {
+        $command = new \DSI\Controller\TempGalleryController();
         $command->format = 'json';
         $command->exec();
     }

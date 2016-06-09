@@ -6,3 +6,4 @@ composer.phar
 www/images/users/background/
 www/images/users/profile/
 logs/
+www/images/tmp/

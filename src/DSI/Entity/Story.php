@@ -14,10 +14,17 @@ class Story
     private $title,
         $content,
         $time,
+        $featuredImage,
         $bgImage;
 
     /** @var StoryCategory */
     private $storyCategory;
+
+    /** @var bool */
+    private $isPublished;
+
+    /** @var string */
+    private $datePublished;
 
     /**
      * @return int
@@ -140,5 +147,53 @@ class Story
     public function setBgImage($bgImage)
     {
         $this->bgImage = (string)$bgImage;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFeaturedImage()
+    {
+        return (string)$this->featuredImage;
+    }
+
+    /**
+     * @param string $featuredImage
+     */
+    public function setFeaturedImage($featuredImage)
+    {
+        $this->featuredImage = (string)$featuredImage;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isPublished()
+    {
+        return (bool)$this->isPublished;
+    }
+
+    /**
+     * @param boolean $isPublished
+     */
+    public function setIsPublished($isPublished)
+    {
+        $this->isPublished = (bool)$isPublished;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDatePublished()
+    {
+        return (string)$this->datePublished;
+    }
+
+    /**
+     * @param string $datePublished
+     */
+    public function setDatePublished($datePublished)
+    {
+        $this->datePublished = (string)$datePublished;
     }
 }

@@ -2,6 +2,7 @@
 /** @var $loggedInUser \DSI\Entity\User */
 /** @var $isHomePage bool */
 use \DSI\Service\URL;
+
 ?>
 <!DOCTYPE html>
 <!-- Last Published: Tue Apr 26 2016 15:33:26 GMT+0000 (UTC) -->
@@ -12,6 +13,7 @@ use \DSI\Service\URL;
     <meta property="og:title" content="Home">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Webflow">
+    <link rel="stylesheet" type="text/css" href="<?php echo SITE_RELATIVE_PATH ?>/lib/ionicons/css/ionicons.min.css">
     <link rel="stylesheet" type="text/css" href="<?php echo SITE_RELATIVE_PATH ?>/css/normalize.css">
     <link rel="stylesheet" type="text/css" href="<?php echo SITE_RELATIVE_PATH ?>/css/components.css">
     <link rel="stylesheet" type="text/css" href="<?php echo SITE_RELATIVE_PATH ?>/css/dsi4eu.css">
@@ -175,7 +177,7 @@ use \DSI\Service\URL;
                                             </a>
                                         </div>
                                         <div class="w-col w-col-3 w-col-small-3 w-col-tiny-3">
-                                            <a href="<?php echo URL::loginWithTwitter()?>"
+                                            <a href="<?php echo URL::loginWithTwitter() ?>"
                                                class="w-inline-block social-login">
                                                 <img width="100%" height="100%"
                                                      src="<?php echo SITE_RELATIVE_PATH ?>/images/social-1_square-twitter.svg"

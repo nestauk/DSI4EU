@@ -217,8 +217,8 @@ class ImportController
         $project->setImportID($data[0]);
         $project->setName($data[1]);
         $project->setDescription($data[6]);
-        // TODO project type $data[2]
-        // TODO project links $data[3]
+        // TODO project type $data[2] - use as tag
+        // TODO project links $data[3] - link
         (new ProjectRepository())->insert($project);
         $this->setAreasOfSociety($data[4], $project);
         // TODO DSI Areas?

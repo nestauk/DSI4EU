@@ -8,15 +8,16 @@
 
 namespace DSI\Controller;
 
+use DSI\Repository\UserRepository;
 use DSI\Service\Auth;
-use DSI\Service\URL;
 
 class StoriesController
 {
     public function exec()
     {
-        //$authUser = new Auth();
-        //$authUser->ifLoggedInRedirectTo(URL::myProfile());
+        $authUser = new Auth();
+        if ($authUser->isLoggedIn())
+            $loggedInUser = (new UserRepository())->getById($authUser->getUserId());
 
         require __DIR__ . '/../../../www/stories.php';
     }

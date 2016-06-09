@@ -8,23 +8,23 @@ use DSI\NotFound;
 use DSI\Repository\StoryRepository;
 use DSI\Service\ErrorHandler;
 
-class UpdateStoryBgImage
+class UpdateStoryFeaturedImage
 {
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var UpdateStoryBgImage_Data */
+    /** @var UpdateStoryFeaturedImage_Data */
     private $data;
 
     /** @var StoryRepository */
     private $storyRepo;
 
     /** @var string */
-    private $bgImage;
+    private $featuredImage;
 
     public function __construct()
     {
-        $this->data = new UpdateStoryBgImage_Data();
+        $this->data = new UpdateStoryFeaturedImage_Data();
     }
 
     public function exec()
@@ -46,14 +46,14 @@ class UpdateStoryBgImage
 
         $img->thumbnail(200, 200)->save($this->data()->filePath, null, $fileInfo->getExtension());
 
-        $this->bgImage = $this->data()->storyID . '-' . $this->data()->fileName;
-        rename($this->data()->filePath, __DIR__ . '/../../../www/images/stories/bg/' . $this->bgImage);
+        $this->featuredImage = $this->data()->storyID . '-' . $this->data()->fileName;
+        rename($this->data()->filePath, __DIR__ . '/../../../www/images/stories/featured/' . $this->featuredImage);
 
         $this->updateStoryDetails();
     }
 
     /**
-     * @return UpdateStoryBgImage_Data
+     * @return UpdateStoryFeaturedImage_Data
      */
     public function data()
     {
@@ -63,9 +63,9 @@ class UpdateStoryBgImage
     /**
      * @return string
      */
-    public function getBgImage()
+    public function getFeaturedImage()
     {
-        return $this->bgImage;
+        return $this->featuredImage;
     }
 
     private function checkFileExtension(\SplFileInfo $fileInfo)
@@ -118,12 +118,12 @@ class UpdateStoryBgImage
     private function updateStoryDetails()
     {
         $story = $this->storyRepo->getById($this->data()->storyID);
-        $story->setBgImage($this->bgImage);
+        $story->setFeaturedImage($this->featuredImage);
         $this->storyRepo->save($story);
     }
 }
 
-class UpdateStoryBgImage_Data
+class UpdateStoryFeaturedImage_Data
 {
     /** @var string */
     public $filePath,

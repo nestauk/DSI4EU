@@ -44,7 +44,7 @@ class StoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($storyTitle, $this->story->getTitle());
     }
 
-    /** @test  */
+    /** @test */
     public function settingContent_returnsContent()
     {
         $storyContent = 'Brand New Project Desc';
@@ -52,7 +52,7 @@ class StoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($storyContent, $this->story->getContent());
     }
 
-    /** @test  */
+    /** @test */
     public function settingTime_returnsTime()
     {
         $storyTime = '2016-10-10 10:10:10';
@@ -60,7 +60,15 @@ class StoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($storyTime, $this->story->getTime());
     }
 
-    /** @test  */
+    /** @test */
+    public function settingDatePublished_returnsDatePublished()
+    {
+        $datePublished = '2016-10-10 10:10:10';
+        $this->story->setDatePublished($datePublished);
+        $this->assertEquals($datePublished, $this->story->getDatePublished());
+    }
+
+    /** @test */
     public function settingBgImage_returnsBgImage()
     {
         $bgImage = 'DSC.jpg';
@@ -68,7 +76,25 @@ class StoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($bgImage, $this->story->getBgImage());
     }
 
-    /** @test  */
+    /** @test */
+    public function settingFeaturedImage_returnsFeaturedImage()
+    {
+        $featuredImage = 'DSC.jpg';
+        $this->story->setFeaturedImage($featuredImage);
+        $this->assertEquals($featuredImage, $this->story->getFeaturedImage());
+    }
+
+    /** @test */
+    public function settingIsPublished_returnsIsPublished()
+    {
+        $this->story->setIsPublished(true);
+        $this->assertTrue($this->story->isPublished());
+
+        $this->story->setIsPublished(func_num_args());
+        $this->assertFalse($this->story->isPublished());
+    }
+
+    /** @test */
     public function settingCategory_returnsCategory()
     {
         $this->storyCategory = new \DSI\Entity\StoryCategory();

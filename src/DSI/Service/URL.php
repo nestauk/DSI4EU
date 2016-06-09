@@ -71,4 +71,14 @@ class URL
     {
         return SITE_RELATIVE_PATH . '/twitter-login';
     }
+
+    public static function addStory()
+    {
+        return SITE_RELATIVE_PATH . '/story/add';
+    }
+
+    public static function story($id, $title)
+    {
+        return SITE_RELATIVE_PATH . '/story/' . $id . '/' . strtolower(preg_replace('([^a-zA-Z0-9\-])', '-', $title));
+    }
 }

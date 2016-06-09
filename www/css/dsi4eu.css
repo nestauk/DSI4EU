@@ -1047,6 +1047,10 @@ strong {
   background-color: #fff;
 }
 
+.body-content.add-story {
+  margin-top: 120px;
+}
+
 .h1-login {
   text-align: center;
 }
@@ -3343,8 +3347,41 @@ strong {
   z-index: 8;
 }
 
+.dsi-button.top-filter.add-new-story {
+  width: 140px;
+  float: right;
+  background-color: #dd3ea4;
+  color: #fff;
+}
+
+.dsi-button.top-filter.published-stories {
+  background-color: #dffffa;
+}
+
+.dsi-button.top-filter.unpublished {
+  background-color: #b3bcd5;
+}
+
 .dsi-button.dash-join {
   width: 80%;
+}
+
+.dsi-button.post-story {
+  margin-left: 10px;
+  float: right;
+}
+
+.dsi-button.story-image-upload {
+  margin-top: 10px;
+  margin-bottom: 60px;
+  margin-left: 0px;
+  float: none;
+  clear: none;
+}
+
+.dsi-button.button-bar-button {
+  margin-left: 10px;
+  float: right;
 }
 
 .cancel-save {
@@ -3519,6 +3556,8 @@ strong {
 }
 
 .page-h1 {
+  position: relative;
+  width: auto;
   margin-top: 0px;
   margin-bottom: 30px;
   margin-left: 10px;
@@ -4140,6 +4179,44 @@ strong {
 
 .hero-s-login.google-p-s {
   background-image: url('../images/social-icon-gp-white.png');
+}
+
+.story-form {
+  max-width: 560px;
+  margin-bottom: 60px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-style: none;
+  border-radius: 3px;
+  background-color: #f3f3f3;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.story-label {
+  margin-bottom: 10px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.story-image-upload {
+  display: block;
+}
+
+.story-image-upload.story-image-upload-large {
+  width: 350px;
+  height: auto;
+}
+
+.story-admin-buttons {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  z-index: 3;
+  display: none;
+  height: 49px;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, .69);
+  color: #fff;
 }
 
 html.w-mod-js *[data-ix="downbeforeup"] {

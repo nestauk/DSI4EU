@@ -5,32 +5,32 @@ namespace DSI\UseCase;
 use abeautifulsite\SimpleImage;
 use DSI\NotEnoughData;
 use DSI\NotFound;
-use DSI\Repository\StoryRepository;
+use DSI\Repository\UserRepository;
 use DSI\Service\ErrorHandler;
 
-class UpdateStoryBgImage
+class UploadTempImage
 {
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var UpdateStoryBgImage_Data */
+    /** @var UploadTempImage_Data */
     private $data;
 
-    /** @var StoryRepository */
-    private $storyRepo;
+    /** @var UserRepository */
+    private $userRepo;
 
     /** @var string */
-    private $bgImage;
+    private $imagePath;
 
     public function __construct()
     {
-        $this->data = new UpdateStoryBgImage_Data();
+        $this->data = new UploadTempImage_Data();
     }
 
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->storyRepo = new StoryRepository();
+        $this->userRepo = new UserRepository();
 
         $this->checkIfAllTheInfoHaveBeenSent();
         $this->checkIfFileExistsOnServer();
@@ -41,19 +41,14 @@ class UpdateStoryBgImage
         $this->checkFileExtension($fileInfo);
 
         $img = new SimpleImage($this->data()->filePath);
+        $img->save($this->data()->filePath, null, $fileInfo->getExtension());
 
-        $this->checkImageDimensions($img);
-
-        $img->thumbnail(200, 200)->save($this->data()->filePath, null, $fileInfo->getExtension());
-
-        $this->bgImage = $this->data()->storyID . '-' . $this->data()->fileName;
-        rename($this->data()->filePath, __DIR__ . '/../../../www/images/stories/bg/' . $this->bgImage);
-
-        $this->updateStoryDetails();
+        $this->imagePath = md5($this->data()->fileName . uniqid('', true)) . '.' . strtolower($fileInfo->getExtension());
+        rename($this->data()->filePath, __DIR__ . '/../../../www/images/tmp/' . $this->imagePath);
     }
 
     /**
-     * @return UpdateStoryBgImage_Data
+     * @return UploadTempImage_Data
      */
     public function data()
     {
@@ -63,9 +58,9 @@ class UpdateStoryBgImage
     /**
      * @return string
      */
-    public function getBgImage()
+    public function getImagePath()
     {
-        return $this->bgImage;
+        return $this->imagePath;
     }
 
     private function checkFileExtension(\SplFileInfo $fileInfo)
@@ -99,36 +94,12 @@ class UpdateStoryBgImage
             throw new NotEnoughData('filePath');
         if (!isset($this->data()->fileName))
             throw new NotEnoughData('fileName');
-        if (!isset($this->data()->storyID))
-            throw new NotEnoughData('userID');
-    }
-
-    /**
-     * @param $img
-     * @throws ErrorHandler
-     */
-    private function checkImageDimensions(SimpleImage $img)
-    {
-        if ($img->get_height() < 100 OR $img->get_width() < 100) {
-            $this->errorHandler->addTaggedError('file', 'Image must be at least 100x100');
-            $this->errorHandler->throwIfNotEmpty();
-        }
-    }
-
-    private function updateStoryDetails()
-    {
-        $story = $this->storyRepo->getById($this->data()->storyID);
-        $story->setBgImage($this->bgImage);
-        $this->storyRepo->save($story);
     }
 }
 
-class UpdateStoryBgImage_Data
+class UploadTempImage_Data
 {
     /** @var string */
     public $filePath,
         $fileName;
-
-    /** @var int */
-    public $storyID;
 }

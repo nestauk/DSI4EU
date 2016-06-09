@@ -2,5 +2,5 @@ RewriteEngine on
 
 #RewriteCond %{REQUEST_FILENAME} !-d
 #RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule (.*)\.(gif|jpe?g|png|svg|js|css|map)$ $0 [L,QSA]
+RewriteRule (.*)\.(gif|jpe?g|png|svg|js|css|map|ttf)$ $0 [L,QSA]
 RewriteRule . index.php [QSA,L]

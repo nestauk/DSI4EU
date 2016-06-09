@@ -42,7 +42,7 @@ class StoryRepositoryTest extends PHPUnit_Framework_TestCase
     }
 
     /** @test saveAsNew */
-    public function storyCanBeSaved()
+    public function canBeAdded()
     {
         $story = new Story();
         $story->setWriter($this->user1);
@@ -110,7 +110,10 @@ class StoryRepositoryTest extends PHPUnit_Framework_TestCase
         $story->setWriter($this->user1);
         $story->setTitle($title = 'Name');
         $story->setContent($content = 'Desc');
+        $story->setFeaturedImage($featuredImage = 'DSC.jpg');
         $story->setBgImage($bgImage = 'DSC.jpg');
+        $story->setIsPublished(true);
+        $story->setDatePublished($datePublished = '2016-03-03');
         $this->storyRepository->insert($story);
 
         $story = $this->storyRepository->getById($story->getId());
@@ -118,7 +121,10 @@ class StoryRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($this->user1->getId(), $story->getWriter()->getId());
         $this->assertEquals($title, $story->getTitle());
         $this->assertEquals($content, $story->getContent());
+        $this->assertEquals($featuredImage, $story->getFeaturedImage());
         $this->assertEquals($bgImage, $story->getBgImage());
+        $this->assertTrue($story->isPublished());
+        $this->assertEquals($datePublished, $story->getDatePublished());
         $this->assertRegExp('<^\d{4}\-\d{2}\-\d{2} \d{2}\:\d{2}\:\d{2}$>', $story->getTime());
     }
 }

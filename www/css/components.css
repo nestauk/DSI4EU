@@ -1530,7 +1530,6 @@ textarea.w-select {
 .w-tab-content {
   position: relative;
   display: block;
-  overflow: hidden;
 }
 .w-tab-pane {
   position: relative;

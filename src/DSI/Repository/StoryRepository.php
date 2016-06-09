@@ -15,7 +15,10 @@ class StoryRepository
         $insert[] = "`writerID` = '" . (int)($story->getWriter()->getId()) . "'";
         $insert[] = "`title` = '" . addslashes($story->getTitle()) . "'";
         $insert[] = "`content` = '" . addslashes($story->getContent()) . "'";
+        $insert[] = "`featuredImage` = '" . addslashes($story->getFeaturedImage()) . "'";
         $insert[] = "`bgImage` = '" . addslashes($story->getBgImage()) . "'";
+        $insert[] = "`isPublished` = '" . (bool)($story->isPublished()) . "'";
+        $insert[] = "`datePublished` = '" . addslashes($story->getDatePublished()) . "'";
 
         $query = new SQL("INSERT INTO `stories` SET " . implode(', ', $insert) . "");
         $query->query();
@@ -32,10 +35,13 @@ class StoryRepository
 
         $insert = array();
         $insert[] = "`categoryID` = '" . (int)($story->getStoryCategoryId()) . "'";
-        $insert[] = "`writerID` = '" . addslashes($story->getWriter()->getId()) . "'";
+        $insert[] = "`writerID` = '" . (int)($story->getWriter()->getId()) . "'";
         $insert[] = "`title` = '" . addslashes($story->getTitle()) . "'";
         $insert[] = "`content` = '" . addslashes($story->getContent()) . "'";
+        $insert[] = "`featuredImage` = '" . addslashes($story->getFeaturedImage()) . "'";
         $insert[] = "`bgImage` = '" . addslashes($story->getBgImage()) . "'";
+        $insert[] = "`isPublished` = '" . (bool)($story->isPublished()) . "'";
+        $insert[] = "`datePublished` = '" . addslashes($story->getDatePublished()) . "'";
 
         $query = new SQL("UPDATE `stories` SET " . implode(', ', $insert) . " WHERE `id` = '{$story->getId()}'");
         $query->query();
@@ -63,7 +69,10 @@ class StoryRepository
         $storyObj->setTitle($story['title']);
         $storyObj->setContent($story['content']);
         $storyObj->setTime($story['time']);
+        $storyObj->setFeaturedImage($story['featuredImage']);
         $storyObj->setBgImage($story['bgImage']);
+        $storyObj->setIsPublished($story['isPublished']);
+        $storyObj->setDatePublished($story['datePublished']);
 
         return $storyObj;
     }
@@ -97,8 +106,9 @@ class StoryRepository
         $stories = [];
         $query = new SQL("SELECT 
             `id`, `categoryID`
-          , `writerID`, `title`, `content`, `bgImage`
-          , `time`
+          , `writerID`, `title`, `content`
+          , `featuredImage`, `bgImage`
+          , `time`, `isPublished`, `datePublished`
           FROM `stories`
           WHERE " . implode(' AND ', $where) . "
           ORDER BY `title`

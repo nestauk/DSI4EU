@@ -66,15 +66,13 @@ require __DIR__ . '/header.php';
                                     </div>
                                 </div>
                                 <div class="profile-essential-info">
-                                    <div data-ix="edit-image" class="profile-image-large"
+                                    <div data-ix="edit-image" class="profile-image-large profile-image-upload"
                                          style="background-image: url('<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/<?php echo $user->getProfilePicOrDefault() ?>')"
-                                         ng-style="{'background-image':'url(<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/' + user.profilePic + ')'}"
-                                         class="profile-image-upload">
+                                         ng-style="{'background-image':'url(<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/' + user.profilePic + ')'}">
                                         <?php if ($isOwner) { ?>
                                             <div data-ix="update-image-closed" class="edit-image">
-                                                <div class="edit-image-text"
-                                                     ngf-select="uploadFiles($file, $invalidFiles)" accept="image/*"
-                                                     class="update-profile-image">
+                                                <div class="edit-image-text update-profile-image"
+                                                     ngf-select="uploadFiles($file, $invalidFiles)" accept="image/*">
                                                     Update image
                                                 </div>
                                             </div>
