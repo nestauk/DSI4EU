@@ -3384,6 +3384,11 @@ strong {
   float: right;
 }
 
+.dsi-button.button-bar-button.delete-button {
+  background-color: #c03636;
+  color: #fff;
+}
+
 .cancel-save {
   position: absolute;
   right: 10px;
@@ -4246,6 +4251,10 @@ strong {
 .notification-link {
   color: #000;
   text-decoration: underline;
+}
+
+.story-grid-card {
+  position: relative;
 }
 
 html.w-mod-js *[data-ix="downbeforeup"] {

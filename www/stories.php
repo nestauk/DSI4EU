@@ -37,21 +37,24 @@ require __DIR__ . '/header.php';
         <div class="w-row hp-post-row">
             <?php foreach ($stories AS $story) { ?>
                 <div class="w-col w-col-4 w-col-stack">
-                    <a class="w-inline-block hp-post-link" data-ix="admin-edit"
-                       href="<?php echo \DSI\Service\URL::story($story->getId(), $story->getTitle()) ?>">
-                        <div class="hp-post-img"
-                             style="background-image: url('<?php echo SITE_RELATIVE_PATH . '/images/stories/feat/' . $story->getFeaturedImage() ?>');"></div>
-                        <div class="w-clearfix hp-post">
-                            <div class="hp-post-meta category">News</div>
-                            <div class="hp-post-meta hp-date"><?php echo $story->getDatePublished('jS F Y') ?></div>
-                            <h3 class="hp-post-h3"><?php echo show_input($story->getTitle()) ?></h3>
-                            <p class="hp-post-p"><?php echo substr(strip_tags($story->getContent()), 0, 150) ?></p>
-                        </div>
+                    <div class="story-grid-card" data-ix="admin-edit">
+                        <a class="w-inline-block hp-post-link"
+                           href="<?php echo \DSI\Service\URL::story($story->getId(), $story->getTitle()) ?>">
+                            <div class="hp-post-img"
+                                 style="background-image: url('<?php echo SITE_RELATIVE_PATH . '/images/stories/feat/' . $story->getFeaturedImage() ?>');"></div>
+                            <div class="w-clearfix hp-post">
+                                <div class="hp-post-meta category">News</div>
+                                <div class="hp-post-meta hp-date"><?php echo $story->getDatePublished('jS F Y') ?></div>
+                                <h3 class="hp-post-h3"><?php echo show_input($story->getTitle()) ?></h3>
+                                <p class="hp-post-p"><?php echo substr(strip_tags($story->getContent()), 0, 150) ?></p>
+                            </div>
+                        </a>
                         <div class="w-clearfix story-admin-buttons">
-                            <div class="dsi-button button-bar-button">Edit story</div>
-                            <div class="dsi-button button-bar-button">Delete story</div>
+                            <a class="w-button dsi-button button-bar-button"
+                               href="<?php echo \DSI\Service\URL::storyEdit($story->getId()) ?>">Edit Story</a>
+                            <a class="w-button dsi-button button-bar-button delete-button" href="#">Delete story</a>
                         </div>
-                    </a>
+                    </div>
                 </div>
             <?php } ?>
         </div>
