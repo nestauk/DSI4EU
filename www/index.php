@@ -139,6 +139,15 @@ class Router
         } elseif (preg_match('<^/project/([0-9]+)(\/.*)?$>', $this->pageURL, $matches)) {
             $this->projectPage($matches);
 
+        } elseif (preg_match('<^/story/([0-9]+)(\/.*)?$>', $this->pageURL, $matches)) {
+            $this->storyPage($matches);
+
+        } elseif (preg_match('<^/story/edit/([0-9]+)\.json$>', $this->pageURL, $matches)) {
+            $this->editStoryPage($matches, 'json');
+
+        } elseif (preg_match('<^/story/edit/([0-9]+)$>', $this->pageURL, $matches)) {
+            $this->editStoryPage($matches);
+
         } elseif (preg_match('<^/org/([0-9]+)\.json?$>', $this->pageURL, $matches)) {
             $this->organisationJsonPage($matches);
 
@@ -222,7 +231,7 @@ class Router
 
     private function addStoryPage()
     {
-        $command = new \DSI\Controller\CreateStoryController();
+        $command = new \DSI\Controller\StoryAddController();
         $command->exec();
     }
 
@@ -324,6 +333,21 @@ class Router
     {
         $command = new \DSI\Controller\ProjectController();
         $command->data()->projectID = $matches[1];
+        $command->exec();
+    }
+
+    private function storyPage($matches)
+    {
+        $command = new \DSI\Controller\StoryController();
+        $command->data()->storyID = $matches[1];
+        $command->exec();
+    }
+
+    private function editStoryPage($matches, $format = 'html')
+    {
+        $command = new \DSI\Controller\StoryEditController();
+        $command->storyID = $matches[1];
+        $command->format = $format;
         $command->exec();
     }
 

@@ -118,7 +118,7 @@ class UpdateStoryBgImage
     private function updateStoryDetails()
     {
         $story = $this->storyRepo->getById($this->data()->storyID);
-        $story->setBgImage($this->bgImage);
+        $story->setMainImage($this->bgImage);
         $this->storyRepo->save($story);
     }
 }

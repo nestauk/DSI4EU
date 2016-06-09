@@ -45,7 +45,7 @@ class StoryRepositoryTest extends PHPUnit_Framework_TestCase
     public function canBeAdded()
     {
         $story = new Story();
-        $story->setWriter($this->user1);
+        $story->setAuthor($this->user1);
         $this->storyRepository->insert($story);
 
         $this->assertEquals(1, $story->getId());
@@ -55,14 +55,14 @@ class StoryRepositoryTest extends PHPUnit_Framework_TestCase
     public function canBeUpdated()
     {
         $story = new Story();
-        $story->setWriter($this->user1);
+        $story->setAuthor($this->user1);
         $this->storyRepository->insert($story);
 
-        $story->setWriter($this->user2);
+        $story->setAuthor($this->user2);
         $this->storyRepository->save($story);
 
         $sameStory = $this->storyRepository->getById($story->getId());
-        $this->assertEquals($this->user2->getId(), $sameStory->getWriter()->getId());
+        $this->assertEquals($this->user2->getId(), $sameStory->getAuthor()->getId());
     }
 
     /** @test getByID */
@@ -77,7 +77,7 @@ class StoryRepositoryTest extends PHPUnit_Framework_TestCase
     {
         $story = new Story();
         $story->setId(1);
-        $story->setWriter($this->user1);
+        $story->setAuthor($this->user1);
 
         $this->setExpectedException(\DSI\NotFound::class);
         $this->storyRepository->save($story);
@@ -87,13 +87,13 @@ class StoryRepositoryTest extends PHPUnit_Framework_TestCase
     public function getAllStories()
     {
         $story = new Story();
-        $story->setWriter($this->user1);
+        $story->setAuthor($this->user1);
         $this->storyRepository->insert($story);
 
         $this->assertCount(1, $this->storyRepository->getAll());
 
         $story = new Story();
-        $story->setWriter($this->user1);
+        $story->setAuthor($this->user1);
         $this->storyRepository->insert($story);
 
         $this->assertCount(2, $this->storyRepository->getAll());
@@ -107,22 +107,22 @@ class StoryRepositoryTest extends PHPUnit_Framework_TestCase
 
         $story = new Story();
         $story->setStoryCategory($category);
-        $story->setWriter($this->user1);
+        $story->setAuthor($this->user1);
         $story->setTitle($title = 'Name');
         $story->setContent($content = 'Desc');
         $story->setFeaturedImage($featuredImage = 'DSC.jpg');
-        $story->setBgImage($bgImage = 'DSC.jpg');
+        $story->setMainImage($bgImage = 'DSC.jpg');
         $story->setIsPublished(true);
         $story->setDatePublished($datePublished = '2016-03-03');
         $this->storyRepository->insert($story);
 
         $story = $this->storyRepository->getById($story->getId());
         $this->assertEquals($category->getId(), $story->getStoryCategoryId());
-        $this->assertEquals($this->user1->getId(), $story->getWriter()->getId());
+        $this->assertEquals($this->user1->getId(), $story->getAuthor()->getId());
         $this->assertEquals($title, $story->getTitle());
         $this->assertEquals($content, $story->getContent());
         $this->assertEquals($featuredImage, $story->getFeaturedImage());
-        $this->assertEquals($bgImage, $story->getBgImage());
+        $this->assertEquals($bgImage, $story->getMainImage());
         $this->assertTrue($story->isPublished());
         $this->assertEquals($datePublished, $story->getDatePublished());
         $this->assertRegExp('<^\d{4}\-\d{2}\-\d{2} \d{2}\:\d{2}\:\d{2}$>', $story->getTime());

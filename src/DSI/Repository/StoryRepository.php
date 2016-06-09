@@ -12,11 +12,11 @@ class StoryRepository
     {
         $insert = array();
         $insert[] = "`categoryID` = '" . (int)($story->getStoryCategoryId()) . "'";
-        $insert[] = "`writerID` = '" . (int)($story->getWriter()->getId()) . "'";
+        $insert[] = "`writerID` = '" . (int)($story->getAuthor()->getId()) . "'";
         $insert[] = "`title` = '" . addslashes($story->getTitle()) . "'";
         $insert[] = "`content` = '" . addslashes($story->getContent()) . "'";
         $insert[] = "`featuredImage` = '" . addslashes($story->getFeaturedImage()) . "'";
-        $insert[] = "`bgImage` = '" . addslashes($story->getBgImage()) . "'";
+        $insert[] = "`bgImage` = '" . addslashes($story->getMainImage()) . "'";
         $insert[] = "`isPublished` = '" . (bool)($story->isPublished()) . "'";
         $insert[] = "`datePublished` = '" . addslashes($story->getDatePublished()) . "'";
 
@@ -35,11 +35,11 @@ class StoryRepository
 
         $insert = array();
         $insert[] = "`categoryID` = '" . (int)($story->getStoryCategoryId()) . "'";
-        $insert[] = "`writerID` = '" . (int)($story->getWriter()->getId()) . "'";
+        $insert[] = "`writerID` = '" . (int)($story->getAuthor()->getId()) . "'";
         $insert[] = "`title` = '" . addslashes($story->getTitle()) . "'";
         $insert[] = "`content` = '" . addslashes($story->getContent()) . "'";
         $insert[] = "`featuredImage` = '" . addslashes($story->getFeaturedImage()) . "'";
-        $insert[] = "`bgImage` = '" . addslashes($story->getBgImage()) . "'";
+        $insert[] = "`bgImage` = '" . addslashes($story->getMainImage()) . "'";
         $insert[] = "`isPublished` = '" . (bool)($story->isPublished()) . "'";
         $insert[] = "`datePublished` = '" . addslashes($story->getDatePublished()) . "'";
 
@@ -63,14 +63,14 @@ class StoryRepository
             $storyObj->setStoryCategory(
                 (new StoryCategoryRepository())->getById($story['categoryID'])
             );
-        $storyObj->setWriter(
+        $storyObj->setAuthor(
             (new UserRepository())->getById($story['writerID'])
         );
         $storyObj->setTitle($story['title']);
         $storyObj->setContent($story['content']);
         $storyObj->setTime($story['time']);
         $storyObj->setFeaturedImage($story['featuredImage']);
-        $storyObj->setBgImage($story['bgImage']);
+        $storyObj->setMainImage($story['bgImage']);
         $storyObj->setIsPublished($story['isPublished']);
         $storyObj->setDatePublished($story['datePublished']);
 

@@ -8,14 +8,14 @@ class Story
     private $id;
 
     /** @var User */
-    private $writer;
+    private $author;
 
     /** @var string */
     private $title,
         $content,
         $time,
         $featuredImage,
-        $bgImage;
+        $mainImage;
 
     /** @var StoryCategory */
     private $storyCategory;
@@ -48,17 +48,17 @@ class Story
     /**
      * @return User
      */
-    public function getWriter()
+    public function getAuthor()
     {
-        return $this->writer;
+        return $this->author;
     }
 
     /**
-     * @param User $writer
+     * @param User $author
      */
-    public function setWriter(User $writer)
+    public function setAuthor(User $author)
     {
-        $this->writer = $writer;
+        $this->author = $author;
     }
 
     /**
@@ -136,17 +136,17 @@ class Story
     /**
      * @return string
      */
-    public function getBgImage()
+    public function getMainImage()
     {
-        return (string)$this->bgImage;
+        return (string)$this->mainImage;
     }
 
     /**
-     * @param string $bgImage
+     * @param string $mainImage
      */
-    public function setBgImage($bgImage)
+    public function setMainImage($mainImage)
     {
-        $this->bgImage = (string)$bgImage;
+        $this->mainImage = (string)$mainImage;
     }
 
     /**
@@ -184,9 +184,13 @@ class Story
     /**
      * @return string
      */
-    public function getDatePublished()
+    public function getDatePublished($format = NULL)
     {
-        return (string)$this->datePublished;
+        if ($format) {
+            $date = strtotime($this->datePublished);
+            return date($format, $date);
+        } else
+            return (string)$this->datePublished;
     }
 
     /**

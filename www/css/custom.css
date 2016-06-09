@@ -133,3 +133,7 @@ input.ng-invalid {
     max-height: 40px;
     overflow: hidden;
 }
+
+.hp-post-link {
+    margin-bottom: 20px;
+}

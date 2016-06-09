@@ -34,7 +34,7 @@ class URL
     public static function project($projectID, $projectName = null)
     {
         if ($projectName)
-            return SITE_RELATIVE_PATH . '/project/' . $projectID . '/' . strtolower(preg_replace('([^a-zA-Z0-9\-])', '-', $projectName));
+            return SITE_RELATIVE_PATH . '/project/' . $projectID . '/' . self::linkify($projectName);
         else
             return SITE_RELATIVE_PATH . '/project/' . $projectID;
     }
@@ -42,7 +42,7 @@ class URL
     public static function organisation($orgID, $organisationName = null)
     {
         if ($organisationName)
-            return SITE_RELATIVE_PATH . '/org/' . $orgID . '/' . strtolower(preg_replace('([^a-zA-Z0-9\-])', '-', $organisationName));
+            return SITE_RELATIVE_PATH . '/org/' . $orgID . '/' . self::linkify($organisationName);
         else
             return SITE_RELATIVE_PATH . '/org/' . $orgID;
     }
@@ -77,8 +77,30 @@ class URL
         return SITE_RELATIVE_PATH . '/story/add';
     }
 
+    public static function stories()
+    {
+        return SITE_RELATIVE_PATH . '/stories';
+    }
+
     public static function story($id, $title)
     {
-        return SITE_RELATIVE_PATH . '/story/' . $id . '/' . strtolower(preg_replace('([^a-zA-Z0-9\-])', '-', $title));
+        return SITE_RELATIVE_PATH . '/story/' . $id . '/' . self::linkify($title);
+    }
+
+    public static function storyEdit($id)
+    {
+        return SITE_RELATIVE_PATH . '/story/edit/' . $id;
+    }
+
+    /**
+     * @param $title
+     * @return string
+     */
+    public static function linkify($title)
+    {
+        $title = preg_replace('([^a-zA-Z0-9\-])', '-', $title);
+        $title = trim($title, '-');
+        $title = preg_replace('(\-{2,})', '-', $title);
+        return strtolower($title);
     }
 }

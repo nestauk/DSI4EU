@@ -1,10 +1,14 @@
-<?php require __DIR__ . '/header.php' ?>
+<?php
+require __DIR__ . '/header.php';
+/** @var $story \DSI\Entity\Story */
+/** @var $categories \DSI\Entity\StoryCategory[] */
+?>
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
     <script type="text/javascript"
-            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/StoryAddController.js"></script>
+            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/StoryEditController.js"></script>
 
     <style>
         .progress {
@@ -20,19 +24,19 @@
         }
     </style>
 
-    <div ng-controller="AddStoryController">
+    <div ng-controller="StoryEditController" storyid="<?php echo $story->getId() ?>">
 
         <div class="container-wide">
             <div class="body-content add-story">
-                <h1 class="page-h1">Add a new story</h1>
+                <h1 class="page-h1">Edit story</h1>
                 <div class="w-form">
-                    <form class="w-clearfix" ng-submit="addStory()">
+                    <form class="w-clearfix" ng-submit="saveStory()">
                         <div class="w-row">
                             <div class="w-col w-col-6">
                                 <label class="story-label" for="Title">Title</label>
                                 <div style="color:red" ng-cloak ng-show="errors.title" ng-bind="errors.title"></div>
-                                <input class="w-input story-form" maxlength="256" ng-model="title"
-                                       placeholder="Add the title of your story" type="text">
+                                <input class="w-input story-form" maxlength="256" ng-model="story.title"
+                                       placeholder="Add the title of your story" type="text" value="">
 
                                 <label class="story-label" for="published-on">Published on</label>
                                 <div onclick="$('#datePublished').datepicker('show');">
@@ -40,13 +44,13 @@
                                     <input id="datePublishedReadable" style="border:0;font-size:18px;margin-left:10px"/>
                                 </div>
                                 <input type="text" style="display:none" id="datePublished" maxlength="256"
-                                       ng-model="datePublished">
+                                       ng-model="story.datePublished">
                                 <br/><br/>
 
                                 <label class="story-label" for="Title">Card grid image</label>
 
-                                <img ng-show="featuredImage" class="story-image-upload"
-                                     ng-src="<?php echo SITE_RELATIVE_PATH ?>/images/tmp/{{featuredImage}}">
+                                <img ng-show="story.featuredImage" class="story-image-upload"
+                                     ng-src="<?php echo SITE_RELATIVE_PATH ?>/images/tmp/{{story.featuredImage}}">
                                 <a ngf-select="uploadFeaturedImage($file, $invalidFiles)" accept="image/*"
                                    class="w-button dsi-button story-image-upload" href="#">Upload image</a>
 
@@ -66,8 +70,8 @@
 
                                 <label class="story-label" for="Title">Main story image</label>
 
-                                <img ng-show="mainImage" class="story-image-upload"
-                                     ng-src="<?php echo SITE_RELATIVE_PATH ?>/images/tmp/{{mainImage}}">
+                                <img ng-show="story.mainImage" class="story-image-upload"
+                                     ng-src="<?php echo SITE_RELATIVE_PATH ?>/images/tmp/{{story.mainImage}}">
                                 <a ngf-select="uploadMainImage($file, $invalidFiles)" accept="image/*"
                                    class="w-button dsi-button story-image-upload" href="#">Upload image</a>
 
@@ -85,7 +89,7 @@
                                     <div style="color:red" ng-bind="{{mainImageUpload.errorMsg.file}}"></div>
                                 </div>
 
-                                <label class="story-label" for="Story-wysiwyg">Category</label>
+                                <label class="story-label" for="Story-wysiwyg">Categories</label>
                                 <?php foreach ($categories AS $category) { ?>
                                     <div class="w-checkbox">
                                         <label class="w-form-label">
@@ -98,7 +102,8 @@
                             </div>
                             <div class="w-col w-col-6">
                                 <label class="story-label">Your story</label>
-                                <textarea id="newStory" class="w-input story-form"></textarea>
+                                <textarea id="newStory"
+                                          class="w-input story-form"><?php echo show_input($story->getContent()) ?></textarea>
 
                                 <br/><br/>
 
@@ -106,14 +111,14 @@
                                 <div class="w-checkbox">
                                     <label>
                                         <input class="w-checkbox-input" value="1"
-                                               name="published" ng-model="isPublished" type="radio">
+                                               name="published" ng-model="story.isPublished" type="radio">
                                         Published
                                     </label>
                                 </div>
                                 <div class="w-checkbox">
                                     <label>
                                         <input class="w-checkbox-input" value="0"
-                                               name="published" ng-model="isPublished" type="radio">
+                                               name="published" ng-model="story.isPublished" type="radio">
                                         Unpublished
                                     </label>
                                 </div>
@@ -124,6 +129,10 @@
                                ng-disabled="loading">
                         <a href="<?php echo \DSI\Service\URL::stories() ?>"
                            class="w-button dsi-button post-story cancel">Cancel</a>
+                        <div style="clear: both;text-align:right;color:green;padding-top:10px;font-weight:bold;"
+                             ng-show="saved" ng-cloak>
+                            Changes have been successfully saved.
+                        </div>
                     </form>
                 </div>
             </div>

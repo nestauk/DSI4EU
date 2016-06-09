@@ -4,7 +4,7 @@ require_once __DIR__ . '/../../../config.php';
 
 class CreateStoryTest extends PHPUnit_Framework_TestCase
 {
-    /** @var \DSI\UseCase\CreateStory */
+    /** @var \DSI\UseCase\StoryAdd */
     private $createStoryCmd;
 
     /** @var \DSI\Repository\StoryCategoryRepository */
@@ -21,7 +21,7 @@ class CreateStoryTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->createStoryCmd = new \DSI\UseCase\CreateStory();
+        $this->createStoryCmd = new \DSI\UseCase\StoryAdd();
 
         $this->storyCategoryRepo = new \DSI\Repository\StoryCategoryRepository();
         $this->storyRepo = new \DSI\Repository\StoryRepository();
@@ -47,14 +47,14 @@ class CreateStoryTest extends PHPUnit_Framework_TestCase
         $this->createStoryCmd->data()->categoryID = $category->getId();
         $this->createStoryCmd->data()->title = 'test';
         $this->createStoryCmd->data()->content = 'test';
-        $this->createStoryCmd->data()->writerID = $this->user->getId();
+        $this->createStoryCmd->data()->authorID = $this->user->getId();
         $this->createStoryCmd->exec();
         $this->assertCount(1, $this->storyRepo->getAll());
 
         $this->createStoryCmd->data()->categoryID = $category->getId();
         $this->createStoryCmd->data()->title = 'test';
         $this->createStoryCmd->data()->content = 'test';
-        $this->createStoryCmd->data()->writerID = $this->user->getId();
+        $this->createStoryCmd->data()->authorID = $this->user->getId();
         $this->createStoryCmd->exec();
         $this->assertCount(2, $this->storyRepo->getAll());
     }
@@ -65,7 +65,7 @@ class CreateStoryTest extends PHPUnit_Framework_TestCase
         $e = null;
         $this->createStoryCmd->data()->title = '';
         $this->createStoryCmd->data()->content = 'test';
-        $this->createStoryCmd->data()->writerID = $this->user->getId();
+        $this->createStoryCmd->data()->authorID = $this->user->getId();
         try {
             $this->createStoryCmd->exec();
         } catch (\DSI\Service\ErrorHandler $e) {

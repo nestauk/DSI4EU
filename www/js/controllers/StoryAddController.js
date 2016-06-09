@@ -2,7 +2,7 @@ var app = angular.module('DSIApp');
 
 app.controller('AddStoryController', function ($scope, $http, $timeout, Upload) {
     // featuredImage
-    (function(){
+    (function () {
         $scope.featuredImageUpload = {};
         $scope.uploadFeaturedImage = function (file, errFiles) {
             $scope.featuredImageUpload.f = file;
@@ -35,7 +35,7 @@ app.controller('AddStoryController', function ($scope, $http, $timeout, Upload) 
     }());
 
     // mainImage
-    (function(){
+    (function () {
         $scope.mainImageUpload = {};
         $scope.uploadMainImage = function (file, errFiles) {
             $scope.mainImageUpload.f = file;
@@ -67,18 +67,34 @@ app.controller('AddStoryController', function ($scope, $http, $timeout, Upload) 
     }());
 
     // addStory
-    (function(){
-        $scope.addStory = function(){
+    (function () {
+        $scope.addStory = function () {
+            $scope.loading = true;
             var data = {
                 add: true,
                 title: $scope.title,
+                categoryID: $scope.story.categoryID,
                 datePublished: $scope.datePublished,
                 featuredImage: $scope.featuredImage,
                 mainImage: $scope.mainImage,
-                content: $('#newStory').val(),
+                content: tinyMCE.get('newStory').getContent(),
                 isPublished: $scope.isPublished
             };
             console.log(data);
+            $timeout(function () {
+                $http.post(SITE_RELATIVE_PATH + '/story/add', data)
+                    .then(function (response) {
+                        $scope.loading = false;
+                        if (response.data.code == 'ok') {
+                            window.location.href = response.data.url;
+                        } else if (response.data.code == 'error') {
+                            $scope.errors = response.data.errors;
+                            console.log(response.data.errors);
+                        } else {
+                            alert(['unexpected error', response.data]);
+                        }
+                    });
+            }, 500);
         }
     }())
 });

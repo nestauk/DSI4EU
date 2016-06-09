@@ -72,8 +72,8 @@ class StoryTest extends \PHPUnit_Framework_TestCase
     public function settingBgImage_returnsBgImage()
     {
         $bgImage = 'DSC.jpg';
-        $this->story->setBgImage($bgImage);
-        $this->assertEquals($bgImage, $this->story->getBgImage());
+        $this->story->setMainImage($bgImage);
+        $this->assertEquals($bgImage, $this->story->getMainImage());
     }
 
     /** @test */
