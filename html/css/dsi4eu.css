@@ -4223,7 +4223,7 @@ strong {
   top: 0px;
   right: 0px;
   z-index: 3;
-  display: block;
+  display: none;
   height: 49px;
   padding: 10px;
   background-color: rgba(0, 0, 0, .69);
