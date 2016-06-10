@@ -52,6 +52,9 @@ class Router
         } elseif ($this->pageURL === '/stories') {
             $this->storiesPage();
 
+        } elseif ($this->pageURL === '/stories.json') {
+            $this->storiesJsonPage();
+
         } elseif ($this->pageURL === '/story/add') {
             $this->addStoryPage();
 
@@ -226,6 +229,13 @@ class Router
     private function storiesPage()
     {
         $command = new \DSI\Controller\StoriesController();
+        $command->exec();
+    }
+
+    private function storiesJsonPage()
+    {
+        $command = new \DSI\Controller\StoriesController();
+        $command->format = 'json';
         $command->exec();
     }
 

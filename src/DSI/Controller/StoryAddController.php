@@ -58,6 +58,7 @@ class StoryAddController
 
         $categories = (new StoryCategoryRepository())->getAll();
 
+        $angularModules['fileUpload'] = true;
         require(__DIR__ . '/../../../www/story-add.php');
     }
 }

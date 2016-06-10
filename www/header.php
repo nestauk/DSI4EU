@@ -1,11 +1,11 @@
 <?php
 /** @var $loggedInUser \DSI\Entity\User */
 /** @var $isHomePage bool */
+/** @var $angularModules string[] */
 use \DSI\Service\URL;
 
 ?>
 <!DOCTYPE html>
-<!-- Last Published: Tue Apr 26 2016 15:33:26 GMT+0000 (UTC) -->
 <html data-wf-site="56e2e31a1b1f8f784728a08c" data-wf-page="56fbef6ecf591b312d56f8be">
 <head>
     <meta charset="utf-8">
@@ -41,6 +41,8 @@ use \DSI\Service\URL;
 
     <script>
         var SITE_RELATIVE_PATH = '<?php echo SITE_RELATIVE_PATH?>';
+        var angularDependencies = [];
+        var angularAppName = 'DSIApp';
     </script>
 
     <style>
@@ -96,15 +98,33 @@ use \DSI\Service\URL;
 
     <script type="text/javascript" src="<?php echo SITE_RELATIVE_PATH ?>/js/angular.min.js"></script>
 
-    <?php /** ngFileUpload */ ?>
-    <script src="<?php echo SITE_RELATIVE_PATH ?>/js/lib/ng-file-upload-bower/ng-file-upload-shim.min.js"></script>
-    <!-- for no html5 browsers support -->
-    <script src="<?php echo SITE_RELATIVE_PATH ?>/js/lib/ng-file-upload-bower/ng-file-upload.min.js"></script>
+    <?php if (isset($angularModules['fileUpload'])) { ?>
+        <?php /** ngFileUpload */ ?>
+        <script src="<?php echo SITE_RELATIVE_PATH ?>/js/lib/ng-file-upload-bower/ng-file-upload-shim.min.js"></script>
+        <!-- for no html5 browsers support -->
+        <script src="<?php echo SITE_RELATIVE_PATH ?>/js/lib/ng-file-upload-bower/ng-file-upload.min.js"></script>
+        <script>angularDependencies.push('ngFileUpload');</script>
+    <?php } ?>
+
+    <?php if (isset($angularModules['animate'])) { ?>
+        <script type="text/javascript"
+                src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.js"></script>
+        <script>angularDependencies.push('ngAnimate');</script>
+    <?php } ?>
+
+    <?php if (isset($angularModules['pagination'])) { ?>
+        <link rel="stylesheet" type="text/css"
+              href="<?php echo SITE_RELATIVE_PATH ?>/lib/bootstrap-pagination/bootstrap-pagination.css">
+        <script type="text/javascript"
+                src="<?php echo SITE_RELATIVE_PATH ?>/lib/bootstrap-pagination/ui-bootstrap-tpls-0.2.0.js"></script>
+        <script>angularDependencies.push('ui.bootstrap');</script>
+    <?php } ?>
 
     <script type="text/javascript" src="<?php echo SITE_RELATIVE_PATH ?>/js/DSIApp.js"></script>
 </head>
 <body ng-app="DSIApp">
 <?php if (!isset($_SESSION['user'])) { ?>
+    <script type="text/javascript" src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/LoginController.js"></script>
     <div class="modal-signup bg-blur">
         <div data-ix="downbeforeup" class="signup-form">
             <div class="modal-header"></div>
