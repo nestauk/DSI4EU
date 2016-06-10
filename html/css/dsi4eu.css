@@ -3947,6 +3947,7 @@ strong {
 }
 
 .data-tab.data-tab-right {
+  width: 31%;
   height: 70px;
   font-size: 16px;
   line-height: 49px;
