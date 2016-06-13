@@ -27,8 +27,9 @@ class TempGalleryController
         $loggedInUser = (new UserRepository())->getById($authUser->getUserId());
 
         if ($this->format == 'json') {
-            if (isset($_FILES['file'])) {
-                try {
+            try {
+                if (isset($_FILES['file'])) {
+
                     $uploadTempImage = new UploadTempImage();
                     $uploadTempImage->data()->filePath = $_FILES['file']['tmp_name'];
                     $uploadTempImage->data()->fileName = $_FILES['file']['name'];
@@ -38,15 +39,15 @@ class TempGalleryController
                         'code' => 'ok',
                         'imgPath' => $uploadTempImage->getImagePath(),
                     ]);
-                } catch (ErrorHandler $e) {
-                    echo json_encode([
-                        'code' => 'error',
-                        'errors' => $e->getErrors(),
-                    ]);
                 }
+            } catch (ErrorHandler $e) {
+                echo json_encode([
+                    'code' => 'error',
+                    'errors' => $e->getErrors(),
+                ]);
             }
 
-            die();
+            return;
         }
     }
 }

@@ -3,6 +3,7 @@
 namespace DSI\Controller;
 
 use DSI\Entity\Project;
+use DSI\Repository\CountryRegionRepository;
 use DSI\Repository\OrganisationProjectRepository;
 use DSI\Repository\ProjectPostCommentRepository;
 use DSI\Repository\ProjectRepository;
@@ -17,6 +18,7 @@ class ProjectsController
     public function exec()
     {
         if ($this->responseFormat == 'json') {
+            // (new CountryRegionRepository())->getAll();
             $projectRepo = new ProjectRepository();
             echo json_encode(array_map(function (Project $project) {
                 $region = $project->getCountryRegion();
@@ -26,7 +28,7 @@ class ProjectsController
                     'region' => ($region ? $region->getName() : ''),
                     'country' => ($region ? $region->getCountry()->getName() : ''),
                     'url' => URL::project($project->getId(), $project->getName()),
-                    'organisationsCount' => count((new OrganisationProjectRepository())->getByProjectID($project->getId())),
+                    'organisationsCount' => $project->getOrganisationsCount(),
                 ];
             }, $projectRepo->getAll()));
         } else {
