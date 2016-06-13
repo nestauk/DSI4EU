@@ -2,6 +2,8 @@
 
 namespace DSI\Controller;
 
+use DSI\Repository\ProjectRepository;
+use DSI\Repository\StoryRepository;
 use DSI\Repository\UserRepository;
 use DSI\Service\Auth;
 use DSI\Service\URL;
@@ -17,12 +19,14 @@ class HomeController
         else
             $loggedInUser = null;
 
-        $hideSearch = true;
+        if ($authUser->getUserId()) {
+            $totalProjects = (new ProjectRepository())->countProjects();
+            $latestStories = (new StoryRepository())->getLast(3);
 
-        $data = [
-            'loggedInUser' => $loggedInUser,
-            'hideSearch' => $hideSearch,
-        ];
-        require __DIR__ . '/../../../www/home.php';
+            require __DIR__ . '/../../../www/home-dashboard.php';
+        } else {
+            $hideSearch = true;
+            require __DIR__ . '/../../../www/home.php';
+        }
     }
 }

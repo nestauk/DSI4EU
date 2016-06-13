@@ -67,7 +67,7 @@ class ProjectRepository
     public function getByImportID(string $importID): Project
     {
         return $this->getObjectWhere([
-            "`importID` = '".addslashes($importID)."'"
+            "`importID` = '" . addslashes($importID) . "'"
         ]);
     }
 
@@ -110,7 +110,7 @@ class ProjectRepository
     private function getObjectWhere($where)
     {
         $objects = $this->getObjectsWhere($where);
-        if(count($objects) < 1)
+        if (count($objects) < 1)
             throw new DSI\NotFound();
 
         return $objects[0];
@@ -136,5 +136,23 @@ class ProjectRepository
             $projects[] = $this->buildProjectFromData($dbProject);
         }
         return $projects;
+    }
+
+    public function countProjects()
+    {
+        return $this->countObjectsWhere(['1']);
+    }
+
+    /**
+     * @param $where
+     * @return array
+     */
+    private function countObjectsWhere($where)
+    {
+        $query = new SQL("SELECT count(id) AS `total`
+          FROM `projects`
+          WHERE " . implode(' AND ', $where) . "
+        ");
+        return $query->fetch('total');
     }
 }

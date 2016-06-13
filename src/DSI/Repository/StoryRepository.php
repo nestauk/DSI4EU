@@ -82,6 +82,16 @@ class StoryRepository
         return $this->getObjectsWhere(["1"]);
     }
 
+    public function getLast($limit)
+    {
+        $options = [
+            'limit' => $limit,
+            'orderBy' => 'time',
+            'direction' => 'DESC'
+        ];
+        return $this->getObjectsWhere(["1"], $options);
+    }
+
     public function clearAll()
     {
         $query = new SQL("TRUNCATE TABLE `stories`");
@@ -101,7 +111,7 @@ class StoryRepository
      * @param $where
      * @return array
      */
-    private function getObjectsWhere($where)
+    private function getObjectsWhere($where, $options = [])
     {
         $stories = [];
         $query = new SQL("SELECT 
@@ -111,8 +121,11 @@ class StoryRepository
           , `time`, `isPublished`, `datePublished`
           FROM `stories`
           WHERE " . implode(' AND ', $where) . "
-          ORDER BY `title`
+          ORDER BY " . (isset($options['orderBy']) ? $options['orderBy'] : '`title`') . "
+          " . (isset($options['direction']) ? $options['direction'] : 'ASC') . "
+          " . (isset($options['limit']) ? "LIMIT {$options['limit']}" : '') . "
         ");
+        // $query->pr();
         foreach ($query->fetch_all() AS $dbStory)
             $stories[] = $this->buildProjectFromData($dbStory);
 
