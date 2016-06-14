@@ -31,12 +31,22 @@ class URL
         return SITE_RELATIVE_PATH . '/';
     }
 
+    public static function projects()
+    {
+        return SITE_RELATIVE_PATH . '/projects';
+    }
+
     public static function project($projectID, $projectName = null)
     {
         if ($projectName)
             return SITE_RELATIVE_PATH . '/project/' . $projectID . '/' . self::linkify($projectName);
         else
             return SITE_RELATIVE_PATH . '/project/' . $projectID;
+    }
+
+    public static function organisations()
+    {
+        return SITE_RELATIVE_PATH . '/organisations';
     }
 
     public static function organisation($orgID, $organisationName = null)
