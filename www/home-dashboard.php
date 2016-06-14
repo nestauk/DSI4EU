@@ -31,16 +31,18 @@ require __DIR__ . '/header.php';
                         <div class="card-p notification-stat">You currently have <strong>3 </strong>requests pending
                         </div>
                         <ul class="w-list-unstyled notification-list">
-                            <li class="notification-li">
-                                <div class="w-clearfix card-notification" data-ix="notification-interaction">
+                            <li class="notification-li" ng-repeat="invitation in projectInvitations">
+                                <div class="w-clearfix card-notification notification-interaction-actions">
                                     <div class="notification-profile-image"></div>
-                                    <div class="notification-detail"><strong>Jason Smith</strong> has added you to the
-                                        <strong>RaspberryPi</strong> project
+                                    <div class="notification-detail">
+                                        You have been added to the <strong ng-bind="invitation.name"></strong> project
                                     </div>
                                     <div class="notification-interaction">
-                                        <a class="w-button dsi-button notification-accept" href="#">Accept</a>
+                                        <a class="w-button dsi-button notification-accept" href="#"
+                                           ng-click="approveProjectInvitation(invitation)">Accept</a>
                                         <a class="w-button dsi-button notification-decline" href="#">Decline</a>
-                                        <a class="w-button dsi-button notification-view" href="#">View</a>
+                                        <a class="w-button dsi-button notification-view"
+                                           href="{{invitation.url}}">View</a>
                                     </div>
                                 </div>
                             </li>
@@ -126,10 +128,11 @@ require __DIR__ . '/header.php';
                             </div>
                             <div class="w-row create-or-join">
                                 <div class="w-col w-col-6">
-                                    <a class="w-button dsi-button create" href="#" data-ix="showsignup" data-w-tab="Tab 2">Create +</a>
+                                    <a class="w-button dsi-button create" href="#" data-ix="showsignup"
+                                       data-w-tab="Tab 2">Create +</a>
                                 </div>
                                 <div class="w-col w-col-6">
-                                    <a class="w-button dsi-button dash-join" href="<?php echo URL::organisations()?>">Join</a>
+                                    <a class="w-button dsi-button dash-join" href="<?php echo URL::organisations() ?>">Join</a>
                                 </div>
                             </div>
                         <?php } else { ?>
@@ -202,5 +205,15 @@ require __DIR__ . '/header.php';
         </div>
 
     </div>
+
+    <script type="text/javascript">
+        jQuery(function ($) {
+            $('.notification-list').on('mouseenter', '.notification-interaction-actions', function () {
+                $('.notification-interaction', $(this)).css('opacity', 1);
+            }).on('mouseleave', '.notification-interaction-actions', function () {
+                $('.notification-interaction', $(this)).css('opacity', 0);
+            })
+        })
+    </script>
 
 <?php require __DIR__ . '/footer.php' ?>

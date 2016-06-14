@@ -332,6 +332,8 @@ angular
             };
 
             var addExistingMember = function (newMember) {
+                $scope.addProjectMember.success = false;
+
                 $http.post(SITE_RELATIVE_PATH + '/project/' + $scope.projectid + '.json', {
                     addMember: newMember.id
                 }).then(function (response) {
@@ -339,7 +341,7 @@ angular
                     console.log(response.data);
 
                     if (response.data.result == 'ok') {
-                        $scope.project.members.push(newMember);
+                        $scope.addProjectMember.success = newMember.firstName + ' ' + newMember.lastName + ' has been successfully invited';
                     } else if (response.data.result == 'error') {
                         $scope.addProjectMember.errors = response.data.errors;
                     } else {
@@ -360,8 +362,8 @@ angular
 
                     if (response.data.result == 'ok') {
                         $scope.addProjectMember.success = response.data.successMessage;
-                        if (response.data.user)
-                            $scope.project.members.push(response.data.user);
+                        /* if (response.data.user)
+                         $scope.project.members.push(response.data.user); */
                     } else if (response.data.result == 'error') {
                         $scope.addProjectMember.errors = response.data.errors;
                     } else {

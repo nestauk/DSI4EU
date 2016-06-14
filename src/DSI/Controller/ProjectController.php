@@ -6,8 +6,6 @@ use DSI\Entity\OrganisationProject;
 use DSI\Entity\Project;
 use DSI\Entity\ProjectMember;
 use DSI\Entity\ProjectPost;
-use DSI\Entity\ProjectPostComment;
-use DSI\Entity\ProjectPostCommentReply;
 use DSI\Entity\User;
 use DSI\Repository\OrganisationProjectRepository;
 use DSI\Repository\ProjectImpactTagARepository;
@@ -15,8 +13,6 @@ use DSI\Repository\ProjectImpactTagBRepository;
 use DSI\Repository\ProjectImpactTagCRepository;
 use DSI\Repository\ProjectMemberRepository;
 use DSI\Repository\ProjectMemberRequestRepository;
-use DSI\Repository\ProjectPostCommentReplyRepository;
-use DSI\Repository\ProjectPostCommentRepository;
 use DSI\Repository\ProjectPostRepository;
 use DSI\Repository\ProjectRepository;
 use DSI\Repository\ProjectTagRepository;
@@ -24,13 +20,12 @@ use DSI\Repository\UserRepository;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\URL;
-use DSI\UseCase\AddCommentToProjectPost;
 use DSI\UseCase\AddEmailToProject;
 use DSI\UseCase\AddImpactTagAToProject;
 use DSI\UseCase\AddImpactTagBToProject;
 use DSI\UseCase\AddImpactTagCToProject;
+use DSI\UseCase\AddMemberInvitationToProject;
 use DSI\UseCase\AddMemberRequestToProject;
-use DSI\UseCase\AddMemberToProject;
 use DSI\UseCase\AddProjectToOrganisation;
 use DSI\UseCase\AddTagToProject;
 use DSI\UseCase\ApproveMemberRequestToProject;
@@ -199,8 +194,9 @@ class ProjectController
                     $response = [];
                     $response['result'] = 'ok';
                     $response['successMessage'] = $user ?
-                        'Member has been successfully added' :
+                        'Member has been successfully invited' :
                         'An invitation email has been sent to the person';
+                    /*
                     if ($user) {
                         $response['user'] = [
                             'id' => $user->getId(),
@@ -210,12 +206,13 @@ class ProjectController
                             'lastName' => $user->getLastName(),
                         ];
                     }
+                    */
 
                     echo json_encode($response);
                     return;
                 }
                 if (isset($_POST['addMember'])) {
-                    $addMemberToProject = new AddMemberToProject();
+                    $addMemberToProject = new AddMemberInvitationToProject();
                     $addMemberToProject->data()->projectID = $project->getId();
                     $addMemberToProject->data()->userID = $_POST['addMember'];
                     $addMemberToProject->exec();
