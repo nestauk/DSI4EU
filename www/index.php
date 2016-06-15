@@ -124,6 +124,11 @@ class Router
         } elseif ($this->pageURL === '/feedback.json') {
             $this->feedbackJsonPage();
 
+// Static pages
+        } elseif ($this->pageURL === '/explore-dsi') {
+            $this->exploreDsiPage();
+
+
         } elseif (preg_match('<^/countryRegions/([0-9]+)\.json$>', $this->pageURL, $matches)) {
             $this->countryRegionsListJsonPage($matches);
 
@@ -457,6 +462,13 @@ class Router
     {
         $command = new \DSI\Controller\FeedbackController();
         $command->format = 'json';
+        $command->exec();
+    }
+
+    private function exploreDsiPage()
+    {
+        $command = new \DSI\Controller\StaticHtmlController();
+        $command->view = 'explore-dsi.php';
         $command->exec();
     }
 

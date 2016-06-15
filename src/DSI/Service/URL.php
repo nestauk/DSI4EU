@@ -102,6 +102,11 @@ class URL
         return SITE_RELATIVE_PATH . '/story/edit/' . $id;
     }
 
+    public static function exploreDSI()
+    {
+        return SITE_RELATIVE_PATH . '/explore-dsi';
+    }
+
     /**
      * @param $title
      * @return string
