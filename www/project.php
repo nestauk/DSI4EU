@@ -1,6 +1,7 @@
 <?php
 require __DIR__ . '/header.php';
 /** @var $project \DSI\Entity\Project */
+/** @var $userHasInvitation bool */
 /** @var $canUserRequestMembership bool */
 /** @var $isOwner bool */
 /** @var $loggedInUser \DSI\Entity\User */
@@ -395,7 +396,7 @@ require __DIR__ . '/header.php';
                                     <div style="clear:both"></div>
                                 </h3>
 
-                                <div ng-show="addingMember" style="margin-left:20px">
+                                <div ng-show="addingMember" style="margin-left:20px" ng-cloak>
                                     <form id="add-member-form" name="add-member-form"
                                           data-name="Add Member Form"
                                           class="w-clearfix">
@@ -442,7 +443,7 @@ require __DIR__ . '/header.php';
                                         </div>
                                     </a>
                                 </div>
-                                <div class="w-row contributors">
+                                <div class="w-row contributors" ng-cloak>
                                     <div class="w-col w-col-6 contributor-col"
                                          ng-repeat="member in project.members">
                                         <div class="contributor">
@@ -483,7 +484,7 @@ require __DIR__ . '/header.php';
                                     </div>
                                 </div>
                                 <?php if ($canUserRequestMembership) { ?>
-                                    <div class="join-project">
+                                    <div class="join-project" ng-cloak>
                                         <div ng-hide="requestToJoin.requestSent">
                                             <a href="#" ng-hide="requestToJoin.loading"
                                                class="w-button btn btn-join"
@@ -497,6 +498,17 @@ require __DIR__ . '/header.php';
                                         <button ng-show="requestToJoin.requestSent"
                                                 class="w-button btn btn-join">
                                             Request Sent
+                                        </button>
+                                    </div>
+                                <?php } ?>
+                                <?php if ($userHasInvitation) { ?>
+                                    <div class="join-project" ng-hide="invitationActioned" ng-cloak>
+                                        You have been invited to be part of this project
+                                        <button class="w-button" ng-click="approveInvitationToJoin()">
+                                            Accept
+                                        </button>
+                                        <button class="w-button" ng-click="rejectInvitationToJoin()">
+                                            Decline
                                         </button>
                                     </div>
                                 <?php } ?>

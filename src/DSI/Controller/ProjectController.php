@@ -11,6 +11,7 @@ use DSI\Repository\OrganisationProjectRepository;
 use DSI\Repository\ProjectImpactTagARepository;
 use DSI\Repository\ProjectImpactTagBRepository;
 use DSI\Repository\ProjectImpactTagCRepository;
+use DSI\Repository\ProjectMemberInvitationRepository;
 use DSI\Repository\ProjectMemberRepository;
 use DSI\Repository\ProjectMemberRequestRepository;
 use DSI\Repository\ProjectPostRepository;
@@ -82,7 +83,12 @@ class ProjectController
         });
 
         if ($loggedInUser) {
-            $canUserRequestMembership = $this->canUserRequestMembership($project, $loggedInUser);
+            $userHasInvitation = (new ProjectMemberInvitationRepository())->memberHasInvitationToProject(
+                $loggedInUser->getId(),
+                $project->getId()
+            );
+
+            $canUserRequestMembership = $this->canUserRequestMembership($project, $loggedInUser, $userHasInvitation);
             if ($project->getOwner()->getId() == $loggedInUser->getId())
                 $isOwner = true;
 
@@ -341,6 +347,7 @@ class ProjectController
             $data = [
                 'project' => $project,
                 'canUserRequestMembership' => $canUserRequestMembership ?? false,
+                'userHasInvitation' => $userHasInvitation ?? false,
                 'isOwner' => $isOwner ?? false,
             ];
             require __DIR__ . '/../../../www/project.php';
@@ -355,13 +362,10 @@ class ProjectController
         return $this->data;
     }
 
-    /**
-     * @param Project $project
-     * @param User $loggedInUser
-     * @return bool
-     */
-    private function canUserRequestMembership(Project $project, User $loggedInUser)
+    private function canUserRequestMembership(Project $project, User $loggedInUser, $userHasInvitation)
     {
+        if ($userHasInvitation)
+            return false;
         if ($project->getOwner()->getId() == $loggedInUser->getId())
             return false;
         if ((new ProjectMemberRepository())->projectHasMember($project->getId(), $loggedInUser->getId()))

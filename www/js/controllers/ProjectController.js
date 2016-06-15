@@ -235,6 +235,44 @@ angular
                 });
             }
         };
+
+        $scope.approveInvitationToJoin = function () {
+            $http.post(SITE_RELATIVE_PATH + '/dashboard.json', {
+                approveProjectInvitation: true,
+                projectID: $scope.projectid
+            }).then(function (response) {
+                if (response.data.code == 'ok') {
+                    swal(response.data.message.title, response.data.message.text, "success");
+                    $scope.invitationActioned = true;
+                } else if (response.data.code == 'error') {
+
+                }
+            });
+        };
+        $scope.rejectInvitationToJoin = function () {
+            swal({
+                title: "Are you sure?",
+                text: "You will not be able to join this project at this time",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, continue!",
+                closeOnConfirm: false
+            }, function () {
+                $http.post(SITE_RELATIVE_PATH + '/dashboard.json', {
+                    rejectProjectInvitation: true,
+                    projectID: $scope.projectid
+                }).then(function (response) {
+                    if (response.data.code == 'ok') {
+                        swal(response.data.message.title, response.data.message.text, "warning");
+                        $scope.invitationActioned = true;
+                    } else if (response.data.code == 'error') {
+
+                    }
+                });
+            });
+        };
+
         $scope.saveCountryRegion = function () {
             $scope.savingCountryRegion.loading = true;
             $scope.savingCountryRegion.saved = false;

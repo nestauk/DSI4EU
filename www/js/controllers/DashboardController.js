@@ -21,19 +21,17 @@ angular
 
         $scope.approveProjectInvitation = function (invitation) {
             console.log(invitation);
-            var data = {
+            $http.post(SITE_RELATIVE_PATH + '/dashboard.json', {
                 approveProjectInvitation: true,
                 projectID: invitation.id
-            };
-            $http.post(SITE_RELATIVE_PATH + '/dashboard.json', data)
-                .then(function (response) {
-                    if (response.data.code == 'ok') {
-                        swal(response.data.message.title, response.data.message.text, "success");
-                        $scope.projectInvitations = extractElm($scope.projectInvitations, invitation);
-                    } else if (response.data.code == 'error') {
+            }).then(function (response) {
+                if (response.data.code == 'ok') {
+                    swal(response.data.message.title, response.data.message.text, "success");
+                    $scope.projectInvitations = extractElm($scope.projectInvitations, invitation);
+                } else if (response.data.code == 'error') {
 
-                    }
-                });
+                }
+            });
         };
 
         $scope.declineProjectInvitation = function (invitation) {
@@ -47,38 +45,34 @@ angular
                 closeOnConfirm: false
             }, function () {
                 console.log(invitation);
-                var data = {
+                $http.post(SITE_RELATIVE_PATH + '/dashboard.json', {
                     rejectProjectInvitation: true,
                     projectID: invitation.id
-                };
-                $http.post(SITE_RELATIVE_PATH + '/dashboard.json', data)
-                    .then(function (response) {
-                        console.log(response.data);
-                        if (response.data.code == 'ok') {
-                            swal(response.data.message.title, response.data.message.text, "warning");
-                            $scope.projectInvitations = extractElm($scope.projectInvitations, invitation);
-                        } else if (response.data.code == 'error') {
+                }).then(function (response) {
+                    console.log(response.data);
+                    if (response.data.code == 'ok') {
+                        swal(response.data.message.title, response.data.message.text, "warning");
+                        $scope.projectInvitations = extractElm($scope.projectInvitations, invitation);
+                    } else if (response.data.code == 'error') {
 
-                        }
-                    });
+                    }
+                });
             });
         };
 
         $scope.approveOrganisationInvitation = function (invitation) {
             console.log(invitation);
-            var data = {
+            $http.post(SITE_RELATIVE_PATH + '/dashboard.json', {
                 approveOrganisationInvitation: true,
                 organisationID: invitation.id
-            };
-            $http.post(SITE_RELATIVE_PATH + '/dashboard.json', data)
-                .then(function (response) {
-                    if (response.data.code == 'ok') {
-                        swal(response.data.message.title, response.data.message.text, "success");
-                        $scope.organisationInvitations = extractElm($scope.organisationInvitations, invitation);
-                    } else if (response.data.code == 'error') {
+            }).then(function (response) {
+                if (response.data.code == 'ok') {
+                    swal(response.data.message.title, response.data.message.text, "success");
+                    $scope.organisationInvitations = extractElm($scope.organisationInvitations, invitation);
+                } else if (response.data.code == 'error') {
 
-                    }
-                });
+                }
+            });
         };
 
         $scope.declineOrganisationInvitation = function (invitation) {
@@ -92,20 +86,18 @@ angular
                 closeOnConfirm: false
             }, function () {
                 console.log(invitation);
-                var data = {
+                $http.post(SITE_RELATIVE_PATH + '/dashboard.json', {
                     rejectOrganisationInvitation: true,
                     organisationID: invitation.id
-                };
-                $http.post(SITE_RELATIVE_PATH + '/dashboard.json', data)
-                    .then(function (response) {
-                        console.log(response.data);
-                        if (response.data.code == 'ok') {
-                            swal(response.data.message.title, response.data.message.text, "warning");
-                            $scope.organisationInvitations = extractElm($scope.organisationInvitations, invitation);
-                        } else if (response.data.code == 'error') {
+                }).then(function (response) {
+                    console.log(response.data);
+                    if (response.data.code == 'ok') {
+                        swal(response.data.message.title, response.data.message.text, "warning");
+                        $scope.organisationInvitations = extractElm($scope.organisationInvitations, invitation);
+                    } else if (response.data.code == 'error') {
 
-                        }
-                    });
+                    }
+                });
             });
         };
 
