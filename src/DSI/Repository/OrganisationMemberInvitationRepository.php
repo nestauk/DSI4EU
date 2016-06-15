@@ -3,11 +3,11 @@
 namespace DSI\Repository;
 
 use DSI\DuplicateEntry;
-use DSI\Entity\OrganisationMember;
+use DSI\Entity\OrganisationMemberInvitation;
 use DSI\NotFound;
 use DSI\Service\SQL;
 
-class OrganisationMemberRepository
+class OrganisationMemberInvitationRepository
 {
     /** @var OrganisationRepository */
     private $organisationRepo;
@@ -21,52 +21,52 @@ class OrganisationMemberRepository
         $this->userRepo = new UserRepository();
     }
 
-    public function insert(OrganisationMember $organisationMember)
+    public function add(OrganisationMemberInvitation $organisationMemberInvitation)
     {
         $query = new SQL("SELECT organisationID 
-            FROM `organisation-members`
-            WHERE `organisationID` = '{$organisationMember->getOrganisationID()}'
-            AND `userID` = '{$organisationMember->getMemberID()}'
+            FROM `organisation-member-invitations`
+            WHERE `organisationID` = '{$organisationMemberInvitation->getOrganisationID()}'
+            AND `userID` = '{$organisationMemberInvitation->getMemberID()}'
             LIMIT 1
         ");
         if ($query->fetch('organisationID') > 0)
-            throw new DuplicateEntry("organisationID: {$organisationMember->getOrganisationID()} / userID: {$organisationMember->getMemberID()}");
+            throw new DuplicateEntry("organisationID: {$organisationMemberInvitation->getOrganisationID()} / userID: {$organisationMemberInvitation->getMemberID()}");
 
         $insert = array();
-        $insert[] = "`organisationID` = '" . (int)($organisationMember->getOrganisationID()) . "'";
-        $insert[] = "`userID` = '" . (int)($organisationMember->getMemberID()) . "'";
+        $insert[] = "`organisationID` = '" . (int)($organisationMemberInvitation->getOrganisationID()) . "'";
+        $insert[] = "`userID` = '" . (int)($organisationMemberInvitation->getMemberID()) . "'";
 
-        $query = new SQL("INSERT INTO `organisation-members` SET " . implode(', ', $insert) . "");
+        $query = new SQL("INSERT INTO `organisation-member-invitations` SET " . implode(', ', $insert) . "");
         // $query->pr();
         $query->query();
     }
 
-    public function remove(OrganisationMember $organisationMember)
+    public function remove(OrganisationMemberInvitation $organisationMemberInvitation)
     {
         $query = new SQL("SELECT organisationID 
-            FROM `organisation-members`
-            WHERE `organisationID` = '{$organisationMember->getOrganisationID()}'
-            AND `userID` = '{$organisationMember->getMemberID()}'
+            FROM `organisation-member-invitations`
+            WHERE `organisationID` = '{$organisationMemberInvitation->getOrganisationID()}'
+            AND `userID` = '{$organisationMemberInvitation->getMemberID()}'
             LIMIT 1
         ");
         if (!$query->fetch('organisationID'))
-            throw new NotFound("organisationID: {$organisationMember->getOrganisationID()} / userID: {$organisationMember->getMemberID()}");
+            throw new NotFound("organisationID: {$organisationMemberInvitation->getOrganisationID()} / userID: {$organisationMemberInvitation->getMemberID()}");
 
         $insert = array();
-        $insert[] = "`organisationID` = '" . (int)($organisationMember->getOrganisationID()) . "'";
-        $insert[] = "`userID` = '" . (int)($organisationMember->getMemberID()) . "'";
+        $insert[] = "`organisationID` = '" . (int)($organisationMemberInvitation->getOrganisationID()) . "'";
+        $insert[] = "`userID` = '" . (int)($organisationMemberInvitation->getMemberID()) . "'";
 
-        $query = new SQL("DELETE FROM `organisation-members` WHERE " . implode(' AND ', $insert) . "");
+        $query = new SQL("DELETE FROM `organisation-member-invitations` WHERE " . implode(' AND ', $insert) . "");
         $query->query();
     }
 
     /**
      * @param int $organisationID
-     * @return \DSI\Entity\OrganisationMember[]
+     * @return \DSI\Entity\OrganisationMemberInvitation[]
      */
     public function getByOrganisationID(int $organisationID)
     {
-        return $this->getOrganisationMembersWhere([
+        return $this->getObjectsWhere([
             "`organisationID` = '{$organisationID}'"
         ]);
     }
@@ -84,7 +84,7 @@ class OrganisationMemberRepository
         /** @var int[] $memberIDs */
         $memberIDs = [];
         $query = new SQL("SELECT userID 
-            FROM `organisation-members`
+            FROM `organisation-member-invitations`
             WHERE " . implode(' AND ', $where) . "
             ORDER BY userID
         ");
@@ -108,11 +108,11 @@ class OrganisationMemberRepository
 
     /**
      * @param int $userID
-     * @return \DSI\Entity\OrganisationMember[]
+     * @return \DSI\Entity\OrganisationMemberInvitation[]
      */
     public function getByMemberID(int $userID)
     {
-        return $this->getOrganisationMembersWhere([
+        return $this->getObjectsWhere([
             "`userID` = '{$userID}'"
         ]);
     }
@@ -130,7 +130,7 @@ class OrganisationMemberRepository
         /** @var int[] $organisationIDs */
         $organisationIDs = [];
         $query = new SQL("SELECT organisationID 
-            FROM `organisation-members`
+            FROM `organisation-member-invitations`
             WHERE " . implode(' AND ', $where) . "
             ORDER BY organisationID
         ");
@@ -143,33 +143,11 @@ class OrganisationMemberRepository
 
     public function clearAll()
     {
-        $query = new SQL("TRUNCATE TABLE `organisation-members`");
+        $query = new SQL("TRUNCATE TABLE `organisation-member-invitations`");
         $query->query();
     }
 
-    /**
-     * @param $where
-     * @return \DSI\Entity\OrganisationMember[]
-     */
-    private function getOrganisationMembersWhere($where)
-    {
-        /** @var OrganisationMember[] $organisationMembers */
-        $organisationMembers = [];
-        $query = new SQL("SELECT organisationID, userID 
-            FROM `organisation-members`
-            WHERE " . implode(' AND ', $where) . "
-        ");
-        foreach ($query->fetch_all() AS $dbOrganisationMember) {
-            $organisationMember = new OrganisationMember();
-            $organisationMember->setOrganisation($this->organisationRepo->getById($dbOrganisationMember['organisationID']));
-            $organisationMember->setMember($this->userRepo->getById($dbOrganisationMember['userID']));
-            $organisationMembers[] = $organisationMember;
-        }
-
-        return $organisationMembers;
-    }
-
-    public function organisationHasMember(int $organisationID, int $userID)
+    public function memberHasInvitationToOrganisation(int $userID, int $organisationID)
     {
         $organisationMembers = $this->getByOrganisationID($organisationID);
         foreach ($organisationMembers AS $organisationMember) {
@@ -179,5 +157,27 @@ class OrganisationMemberRepository
         }
 
         return false;
+    }
+
+    /**
+     * @param $where
+     * @return \DSI\Entity\OrganisationMemberInvitation[]
+     */
+    private function getObjectsWhere($where)
+    {
+        /** @var OrganisationMemberInvitation[] $organisationMemberInvitations */
+        $organisationMemberInvitations = [];
+        $query = new SQL("SELECT organisationID, userID 
+            FROM `organisation-member-invitations`
+            WHERE " . implode(' AND ', $where) . "
+        ");
+        foreach ($query->fetch_all() AS $dbOrganisationMember) {
+            $organisationMember = new OrganisationMemberInvitation();
+            $organisationMember->setOrganisation($this->organisationRepo->getById($dbOrganisationMember['organisationID']));
+            $organisationMember->setMember($this->userRepo->getById($dbOrganisationMember['userID']));
+            $organisationMemberInvitations[] = $organisationMember;
+        }
+
+        return $organisationMemberInvitations;
     }
 }

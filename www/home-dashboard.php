@@ -18,8 +18,9 @@ require __DIR__ . '/header.php';
                 <h1 class="page-h1 dash">Dashboard</h1>
                 <div class="dashboard-stats">
                     <div>
-                        <strong><?php echo number_format($totalProjects) ?></strong> Projects have been added by
-                        <strong><?php echo number_format($totalOrganisations)?></strong> organisations
+                        <strong><?php echo number_format($totalOrganisations) ?></strong> Organisations
+                        have collaborated on
+                        <strong><?php echo number_format($totalProjects) ?></strong> projects
                     </div>
                 </div>
             </div>

@@ -59,7 +59,7 @@ class ApproveMemberRequestToOrganisation
         $organisationMember = new OrganisationMember();
         $organisationMember->setMember($member);
         $organisationMember->setOrganisation($organisation);
-        $this->organisationMemberRepo->add($organisationMember);
+        $this->organisationMemberRepo->insert($organisationMember);
     }
 
     /**

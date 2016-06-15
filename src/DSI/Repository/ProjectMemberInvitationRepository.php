@@ -3,7 +3,6 @@
 namespace DSI\Repository;
 
 use DSI\DuplicateEntry;
-use DSI\Entity\ProjectMember;
 use DSI\Entity\ProjectMemberInvitation;
 use DSI\NotFound;
 use DSI\Service\SQL;

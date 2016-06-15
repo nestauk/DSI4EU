@@ -45,7 +45,7 @@ class AddMemberToOrganisation
         $organisationMember = new OrganisationMember();
         $organisationMember->setMember($this->userRepository->getById($this->data()->userID));
         $organisationMember->setOrganisation($this->organisationRepository->getById($this->data()->organisationID));
-        $this->organisationMemberRepo->add($organisationMember);
+        $this->organisationMemberRepo->insert($organisationMember);
     }
 
     /**

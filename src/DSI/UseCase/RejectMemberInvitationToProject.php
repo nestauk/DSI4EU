@@ -2,7 +2,6 @@
 
 namespace DSI\UseCase;
 
-use DSI\Entity\ProjectMember;
 use DSI\Entity\ProjectMemberInvitation;
 use DSI\Entity\User;
 use DSI\Repository\ProjectMemberRepository;

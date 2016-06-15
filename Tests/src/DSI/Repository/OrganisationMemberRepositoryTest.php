@@ -47,22 +47,22 @@ class OrganisationMemberRepositoryTest extends PHPUnit_Framework_TestCase
         $organisationMember = new \DSI\Entity\OrganisationMember();
         $organisationMember->setOrganisation($this->organisation_1);
         $organisationMember->setMember($this->user_1);
-        $this->organisationMemberRepo->add($organisationMember);
+        $this->organisationMemberRepo->insert($organisationMember);
 
         $organisationMember = new \DSI\Entity\OrganisationMember();
         $organisationMember->setOrganisation($this->organisation_1);
         $organisationMember->setMember($this->user_2);
-        $this->organisationMemberRepo->add($organisationMember);
+        $this->organisationMemberRepo->insert($organisationMember);
 
         $organisationMember = new \DSI\Entity\OrganisationMember();
         $organisationMember->setOrganisation($this->organisation_2);
         $organisationMember->setMember($this->user_1);
-        $this->organisationMemberRepo->add($organisationMember);
+        $this->organisationMemberRepo->insert($organisationMember);
 
         $organisationMember = new \DSI\Entity\OrganisationMember();
         $organisationMember->setOrganisation($this->organisation_3);
         $organisationMember->setMember($this->user_1);
-        $this->organisationMemberRepo->add($organisationMember);
+        $this->organisationMemberRepo->insert($organisationMember);
 
         $this->assertCount(2, $this->organisationMemberRepo->getByOrganisationID(
             $this->organisation_1->getId()
@@ -75,13 +75,13 @@ class OrganisationMemberRepositoryTest extends PHPUnit_Framework_TestCase
         $organisationMember = new \DSI\Entity\OrganisationMember();
         $organisationMember->setOrganisation($this->organisation_1);
         $organisationMember->setMember($this->user_1);
-        $this->organisationMemberRepo->add($organisationMember);
+        $this->organisationMemberRepo->insert($organisationMember);
 
         $organisationMember = new \DSI\Entity\OrganisationMember();
         $organisationMember->setOrganisation($this->organisation_1);
         $organisationMember->setMember($this->user_1);
         $this->setExpectedException(\DSI\DuplicateEntry::class);
-        $this->organisationMemberRepo->add($organisationMember);
+        $this->organisationMemberRepo->insert($organisationMember);
     }
 
     /** @test saveAsNew */
@@ -90,12 +90,12 @@ class OrganisationMemberRepositoryTest extends PHPUnit_Framework_TestCase
         $organisationMember = new \DSI\Entity\OrganisationMember();
         $organisationMember->setOrganisation($this->organisation_1);
         $organisationMember->setMember($this->user_1);
-        $this->organisationMemberRepo->add($organisationMember);
+        $this->organisationMemberRepo->insert($organisationMember);
 
         $organisationMember = new \DSI\Entity\OrganisationMember();
         $organisationMember->setOrganisation($this->organisation_1);
         $organisationMember->setMember($this->user_2);
-        $this->organisationMemberRepo->add($organisationMember);
+        $this->organisationMemberRepo->insert($organisationMember);
 
         $this->assertEquals(
             [$this->user_1->getId(), $this->user_2->getId()],
@@ -110,12 +110,12 @@ class OrganisationMemberRepositoryTest extends PHPUnit_Framework_TestCase
         $organisationMember = new \DSI\Entity\OrganisationMember();
         $organisationMember->setOrganisation($this->organisation_1);
         $organisationMember->setMember($this->user_1);
-        $this->organisationMemberRepo->add($organisationMember);
+        $this->organisationMemberRepo->insert($organisationMember);
 
         $organisationMember = new \DSI\Entity\OrganisationMember();
         $organisationMember->setOrganisation($this->organisation_2);
         $organisationMember->setMember($this->user_1);
-        $this->organisationMemberRepo->add($organisationMember);
+        $this->organisationMemberRepo->insert($organisationMember);
 
         $this->assertCount(2, $this->organisationMemberRepo->getByMemberID(
             $this->user_1->getId()
@@ -128,12 +128,12 @@ class OrganisationMemberRepositoryTest extends PHPUnit_Framework_TestCase
         $organisationMember = new \DSI\Entity\OrganisationMember();
         $organisationMember->setOrganisation($this->organisation_1);
         $organisationMember->setMember($this->user_1);
-        $this->organisationMemberRepo->add($organisationMember);
+        $this->organisationMemberRepo->insert($organisationMember);
 
         $organisationMember = new \DSI\Entity\OrganisationMember();
         $organisationMember->setOrganisation($this->organisation_2);
         $organisationMember->setMember($this->user_1);
-        $this->organisationMemberRepo->add($organisationMember);
+        $this->organisationMemberRepo->insert($organisationMember);
 
         $this->assertEquals([1, 2], $this->organisationMemberRepo->getOrganisationIDsForMember(
             $this->user_1->getId()
@@ -146,12 +146,12 @@ class OrganisationMemberRepositoryTest extends PHPUnit_Framework_TestCase
         $organisationMember = new \DSI\Entity\OrganisationMember();
         $organisationMember->setOrganisation($this->organisation_1);
         $organisationMember->setMember($this->user_1);
-        $this->organisationMemberRepo->add($organisationMember);
+        $this->organisationMemberRepo->insert($organisationMember);
 
         $organisationMember = new \DSI\Entity\OrganisationMember();
         $organisationMember->setOrganisation($this->organisation_2);
         $organisationMember->setMember($this->user_2);
-        $this->organisationMemberRepo->add($organisationMember);
+        $this->organisationMemberRepo->insert($organisationMember);
 
         $this->assertTrue($this->organisationMemberRepo->organisationHasMember(
             $this->organisation_1->getId(), $this->user_1->getId())
