@@ -14,3 +14,8 @@
     margin: 26px 5px 0 5px;
     cursor: pointer;
 }
+
+.showSweetAlert[data-animation=pop] {
+    -webkit-animation: showSweetAlert 0s;
+    animation: showSweetAlert 0s;
+}
