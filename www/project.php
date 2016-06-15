@@ -286,58 +286,6 @@ require __DIR__ . '/header.php';
                 */ ?>
 
                             <div class="info-card">
-                                <h3 class="info-h card-h">About this project</h3>
-                                <p class="project-summary">
-                                    <?php if ($isOwner) { ?>
-                                        <textarea
-                                            class="readjustTextarea"
-                                            ng-model="project.description"
-                                            ng-blur="updateBasic()"
-                                            placeholder="Type a description"
-                                            style="min-height:150px;border:0;width:100%">
-                                        <?php echo show_input($project->getDescription()) ?>
-                                    </textarea>
-                                    <?php } else { ?>
-                                        <?php echo show_input($project->getDescription()) ?>
-                                    <?php } ?>
-                                </p>
-                                <h3 class="card-sub-h">Duration</h3>
-                                <div class="duration-p" ng-cloak>
-                                    <div ng-show="project.startDate && project.endDate">
-                                        This project runs from
-                                        <strong>{{getDateFrom(project.startDate)}}</strong> to
-                                        <strong>{{getDateFrom(project.endDate)}}</strong>
-                                    </div>
-                                    <div ng-show="project.startDate && !project.endDate">
-                                        This project runs from
-                                        <strong>{{getDateFrom(project.startDate)}}</strong>
-                                    </div>
-                                    <div ng-show="!project.startDate && project.endDate">
-                                        This project runs until
-                                        <strong>{{getDateFrom(project.endDate)}}</strong>
-                                    </div>
-                                </div>
-                                <?php if ($isOwner) { ?>
-                                    <div ng-cloak>
-                                        <div style="float:left;width:40%;margin-left:10%">
-                                            Start Date
-                                            <input type="text" placeholder="yyyy-mm-dd" ng-model="project.startDate"
-                                                   ng-blur="updateBasic()" style="width:130px"
-                                                   ng-pattern="datePattern"/>
-                                        </div>
-                                        <div style="float:left;width:40%">
-                                            End Date
-                                            <input type="text" placeholder="yyyy-mm-dd" ng-model="project.endDate"
-                                                   ng-blur="updateBasic()" style="width:130px"
-                                                   ng-pattern="datePattern"/>
-                                        </div>
-                                    </div>
-                                <?php } ?>
-
-                                <div style="clear:both"></div>
-                            </div>
-
-                            <div class="info-card">
                                 <h3 class="info-h card-h">
                                     <div style="float:left">
                                         Organisations involved
@@ -352,7 +300,7 @@ require __DIR__ . '/header.php';
                                     <div style="clear:both"></div>
                                 </h3>
 
-                                <form ng-show="addingOrganisation" ng-submit="addOrganisation()">
+                                <form ng-show="addingOrganisation" ng-submit="addOrganisation()" ng-cloak>
                                     <label>
                                         Select organisation:
                                         <select data-placeholder="Select organisation"
@@ -364,7 +312,7 @@ require __DIR__ . '/header.php';
                                     </label>
                                 </form>
 
-                                <div class="list-items">
+                                <div class="list-items" ng-cloak>
                                     <div class="w-inline-block partner-link">
                                         <div class="w-clearfix list-item"
                                              ng-repeat="organisation in project.organisationProjects">
@@ -679,7 +627,60 @@ require __DIR__ . '/header.php';
                             </div>
                         </div>
                     </div>
+
                     <div id="postsScroll" class="w-col w-col-6 w-col-stack">
+                        <div class="info-card">
+                            <h3 class="info-h card-h">About this project</h3>
+                            <p class="project-summary">
+                                <?php if ($isOwner) { ?>
+                                    <textarea
+                                        class="readjustTextarea"
+                                        ng-model="project.description"
+                                        ng-blur="updateBasic()"
+                                        placeholder="Type a description"
+                                        style="min-height:150px;border:0;width:100%">
+                                        <?php echo show_input($project->getDescription()) ?>
+                                    </textarea>
+                                <?php } else { ?>
+                                    <?php echo show_input($project->getDescription()) ?>
+                                <?php } ?>
+                            </p>
+                            <h3 class="card-sub-h">Duration</h3>
+                            <div class="duration-p" ng-cloak>
+                                <div ng-show="project.startDate && project.endDate">
+                                    This project runs from
+                                    <strong>{{getDateFrom(project.startDate)}}</strong> to
+                                    <strong>{{getDateFrom(project.endDate)}}</strong>
+                                </div>
+                                <div ng-show="project.startDate && !project.endDate">
+                                    This project runs from
+                                    <strong>{{getDateFrom(project.startDate)}}</strong>
+                                </div>
+                                <div ng-show="!project.startDate && project.endDate">
+                                    This project runs until
+                                    <strong>{{getDateFrom(project.endDate)}}</strong>
+                                </div>
+                            </div>
+                            <?php if ($isOwner) { ?>
+                                <div ng-cloak>
+                                    <div style="float:left;width:40%;margin-left:10%">
+                                        Start Date
+                                        <input type="text" placeholder="yyyy-mm-dd" ng-model="project.startDate"
+                                               ng-blur="updateBasic()" style="width:130px"
+                                               ng-pattern="datePattern"/>
+                                    </div>
+                                    <div style="float:left;width:40%">
+                                        End Date
+                                        <input type="text" placeholder="yyyy-mm-dd" ng-model="project.endDate"
+                                               ng-blur="updateBasic()" style="width:130px"
+                                               ng-pattern="datePattern"/>
+                                    </div>
+                                </div>
+                            <?php } ?>
+
+                            <div style="clear:both"></div>
+                        </div>
+
                         <div id="posts">
                             <div class="info-card">
                                 <?php if ($loggedInUser AND $isOwner) { ?>
@@ -695,7 +696,7 @@ require __DIR__ . '/header.php';
                                         </div>
                                     </div>
                                 <?php } ?>
-                                <div ng-controller="ProjectPostController" ng-repeat="post in project.posts">
+                                <div ng-controller="ProjectPostController" ng-repeat="post in project.posts" ng-cloak>
                                     <div class="w-clearfix" ng-class="{'current-status' : $index == 0}">
 
                                         <h3 ng-show="$index == 0" class="status-h3">Latest post</h3>

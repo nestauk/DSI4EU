@@ -141,3 +141,10 @@ input.ng-invalid {
 .dashboard-stats {
     width: 400px;
 }
+
+.homePageColours a{
+    color:white;
+}
+.homePageColours a:hover{
+    color:#fff1fa;
+}
