@@ -86,6 +86,11 @@ require __DIR__ . '/header.php';
                             </li>
                             */ ?>
                         </ul>
+
+                        <div style="text-align:center">
+                            <button ng-click="tempAlertBox()">Alert Box</button>
+                            <button ng-click="tempConfirmBox()">Confirm Box</button>
+                        </div>
                     </div>
                 </div>
                 <div class="w-col w-col-4 w-col-stack">

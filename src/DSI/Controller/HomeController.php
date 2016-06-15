@@ -40,7 +40,13 @@ class HomeController
                         $approveInvitation->data()->projectID = isset($_POST['projectID']) ? $_POST['projectID'] : 0;
                         $approveInvitation->exec();
 
-                        echo json_encode(['code' => 'ok']);
+                        echo json_encode([
+                            'code' => 'ok',
+                            'message' => [
+                                'title' => 'Success!',
+                                'text' => 'You have accepted the invitation to be part of the project!',
+                            ]
+                        ]);
                         return;
                     }
                     if (isset($_POST['rejectProjectInvitation'])) {
@@ -50,7 +56,13 @@ class HomeController
                         $rejectInvitation->data()->projectID = isset($_POST['projectID']) ? $_POST['projectID'] : 0;
                         $rejectInvitation->exec();
 
-                        echo json_encode(['code' => 'ok']);
+                        echo json_encode([
+                            'code' => 'ok',
+                            'message' => [
+                                'title' => 'OK',
+                                'text' => 'You have declined the invitation to be part of the project!',
+                            ]
+                        ]);
                         return;
                     }
                     if (isset($_POST['approveOrganisationInvitation'])) {
@@ -60,7 +72,13 @@ class HomeController
                         $approveInvitation->data()->organisationID = isset($_POST['organisationID']) ? $_POST['organisationID'] : 0;
                         $approveInvitation->exec();
 
-                        echo json_encode(['code' => 'ok']);
+                        echo json_encode([
+                            'code' => 'ok',
+                            'message' => [
+                                'title' => 'Success!',
+                                'text' => 'You have accepted the invitation to be part of the organisation!',
+                            ]
+                        ]);
                         return;
                     }
                     if (isset($_POST['rejectOrganisationInvitation'])) {
@@ -70,7 +88,13 @@ class HomeController
                         $rejectInvitation->data()->organisationID = isset($_POST['organisationID']) ? $_POST['organisationID'] : 0;
                         $rejectInvitation->exec();
 
-                        echo json_encode(['code' => 'ok']);
+                        echo json_encode([
+                            'code' => 'ok',
+                            'message' => [
+                                'title' => 'OK',
+                                'text' => 'You have declined the invitation to be part of the organisation!',
+                            ]
+                        ]);
                         return;
                     }
 
