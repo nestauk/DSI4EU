@@ -3371,6 +3371,10 @@ strong {
   float: right;
 }
 
+.dsi-button.post-story.cancel {
+  color: #c73232;
+}
+
 .dsi-button.story-image-upload {
   margin-top: 10px;
   margin-bottom: 60px;
@@ -4193,7 +4197,7 @@ strong {
 }
 
 .story-form {
-  max-width: 560px;
+  max-width: 350px;
   margin-bottom: 60px;
   padding-top: 20px;
   padding-bottom: 20px;
@@ -4203,9 +4207,18 @@ strong {
   font-family: 'Open Sans', sans-serif;
 }
 
+.story-form.personal {
+  max-width: 350px;
+  margin-bottom: 15px;
+}
+
 .story-label {
   margin-bottom: 10px;
   font-family: 'Open Sans', sans-serif;
+}
+
+.story-label.profile-image {
+  margin-top: 32px;
 }
 
 .story-image-upload {
@@ -4255,6 +4268,14 @@ strong {
 
 .story-grid-card {
   position: relative;
+}
+
+.edit-h2 {
+  margin-bottom: 30px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 22px;
+  font-weight: 300;
+  text-transform: uppercase;
 }
 
 html.w-mod-js *[data-ix="downbeforeup"] {
