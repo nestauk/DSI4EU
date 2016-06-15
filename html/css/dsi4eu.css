@@ -3920,6 +3920,7 @@ strong {
 }
 
 .data-tab.left-data-tab {
+  width: 30%;
   height: 70px;
   margin-right: 2%;
   margin-left: 0%;
@@ -3944,6 +3945,7 @@ strong {
 }
 
 .data-tab.mid-data-tab.w--current {
+  width: 30%;
   margin-left: 0px;
   -webkit-transform: scale(1);
   -ms-transform: scale(1);
@@ -3951,6 +3953,7 @@ strong {
 }
 
 .data-tab.data-tab-right {
+  width: 30%;
   height: 70px;
   font-size: 16px;
   line-height: 49px;
