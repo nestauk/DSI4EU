@@ -37,7 +37,8 @@ use \DSI\Service\URL;
 
     <?php /** SweetAlert */ ?>
     <script src="<?php echo SITE_RELATIVE_PATH ?>/lib/sweetalert-master/dist/sweetalert.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="<?php echo SITE_RELATIVE_PATH ?>/lib/sweetalert-master/dist/sweetalert.css">
+    <link rel="stylesheet" type="text/css"
+          href="<?php echo SITE_RELATIVE_PATH ?>/lib/sweetalert-master/dist/sweetalert.css">
     <link rel="stylesheet" type="text/css" href="<?php echo SITE_RELATIVE_PATH ?>/css/sweet.css">
 
     <?php /** Select2 */ ?>
@@ -386,14 +387,14 @@ use \DSI\Service\URL;
                 <img width="160" src="<?php echo SITE_RELATIVE_PATH ?>/images/logo-white-black-text.svg" class="brand">
             <?php } ?>
         </a>
-        <nav role="navigation" class="w-nav-menu m-nav-open">
-            <a href="<?php echo SITE_RELATIVE_PATH ?>/stories" class="w-nav-link nav">Stories</a>
-            <a href="<?php echo SITE_RELATIVE_PATH ?>/projects" class="w-nav-link nav">Projects</a>
-            <a href="<?php echo SITE_RELATIVE_PATH ?>/organisations" class="w-nav-link nav">Organisations</a>
+        <nav role="navigation" class="w-nav-menu m-nav-open <?php echo isset($isHomePage) ? 'homePageColours' : ''?>">
+            <a href="<?php echo URL::exploreDSI() ?>" class="w-nav-link nav">Explore DSI</a>
+            <a href="<?php echo URL::stories() ?>" class="w-nav-link nav">Stories</a>
+            <a href="<?php echo URL::projects() ?>" class="w-nav-link nav">Projects</a>
+            <a href="<?php echo URL::organisations() ?>" class="w-nav-link nav">Organisations</a>
             <?php if (!isset($_SESSION['user'])) { ?>
                 <a href="#" data-ix="showsignup" class="w-nav-link nav log-in">Log In</a>
             <?php } else { ?>
-                <a href="<?php echo SITE_RELATIVE_PATH ?>/my-profile" class="w-nav-link nav">Profile</a>
                 <a href="#" data-ix="showsignup" class="w-nav-link nav log-in">Create +</a>
             <?php } ?>
         </nav>
