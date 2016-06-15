@@ -137,3 +137,7 @@ input.ng-invalid {
 .hp-post-link {
     margin-bottom: 20px;
 }
+
+.dashboard-stats {
+    width: 400px;
+}

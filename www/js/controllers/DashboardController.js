@@ -7,6 +7,15 @@ angular
                 $scope.projectInvitations = response.data.projectInvitations;
             });
 
+        function extractElm(pool, elm) {
+            var newPool = [];
+            for (var i in pool) {
+                if (pool[i].id != elm.id)
+                    newPool.push(pool[i]);
+            }
+            return newPool;
+        }
+
         $scope.approveProjectInvitation = function (invitation) {
             console.log(invitation);
             var data = {
@@ -15,17 +24,28 @@ angular
             };
             $http.post(SITE_RELATIVE_PATH + '/dashboard.json', data)
                 .then(function (response) {
-                    console.log(response.data);
                     if (response.data.code == 'ok') {
-                        var newProjectInvitations = [];
-                        for (i in $scope.projectInvitations) {
-                            if ($scope.projectInvitations[i].id != invitation.id)
-                                newProjectInvitations.push($scope.projectInvitations[i]);
-                        }
-                        $scope.projectInvitations = newProjectInvitations;
+                        $scope.projectInvitations = extractElm($scope.projectInvitations, invitation);
                     } else if (response.data.code == 'error') {
 
                     }
                 });
-        }
+        };
+
+        $scope.declineProjectInvitation = function (invitation) {
+            console.log(invitation);
+            var data = {
+                rejectProjectInvitation: true,
+                projectID: invitation.id
+            };
+            $http.post(SITE_RELATIVE_PATH + '/dashboard.json', data)
+                .then(function (response) {
+                    console.log(response.data);
+                    if (response.data.code == 'ok') {
+                        $scope.projectInvitations = extractElm($scope.projectInvitations, invitation);
+                    } else if (response.data.code == 'error') {
+
+                    }
+                });
+        };
     });

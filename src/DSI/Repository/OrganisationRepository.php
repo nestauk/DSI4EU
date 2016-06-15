@@ -154,4 +154,22 @@ class OrganisationRepository
         }
         return $organisations;
     }
+
+    public function countOrganisations()
+    {
+        return $this->countObjectsWhere(['1']);
+    }
+
+    /**
+     * @param $where
+     * @return array
+     */
+    private function countObjectsWhere($where)
+    {
+        $query = new SQL("SELECT count(id) AS `total`
+          FROM `organisations`
+          WHERE " . implode(' AND ', $where) . "
+        ");
+        return $query->fetch('total');
+    }
 }

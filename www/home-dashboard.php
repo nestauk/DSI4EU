@@ -1,5 +1,6 @@
 <?php
 /** @var $totalProjects int */
+/** @var $totalOrganisations int */
 /** @var $latestStories \DSI\Entity\Story[] */
 /** @var $projectsMember \DSI\Entity\ProjectMember[] */
 /** @var $organisationsMember \DSI\Entity\OrganisationMember[] */
@@ -16,7 +17,9 @@ require __DIR__ . '/header.php';
             <div class="intro-title">
                 <h1 class="page-h1 dash">Dashboard</h1>
                 <div class="dashboard-stats">
-                    <div><strong><?php echo number_format($totalProjects) ?></strong> Projects have been created so far
+                    <div>
+                        <strong><?php echo number_format($totalProjects) ?></strong> Projects have been added by
+                        <strong><?php echo number_format($totalOrganisations)?></strong> organisations
                     </div>
                 </div>
             </div>
@@ -40,7 +43,8 @@ require __DIR__ . '/header.php';
                                     <div class="notification-interaction">
                                         <a class="w-button dsi-button notification-accept" href="#"
                                            ng-click="approveProjectInvitation(invitation)">Accept</a>
-                                        <a class="w-button dsi-button notification-decline" href="#">Decline</a>
+                                        <a class="w-button dsi-button notification-decline" href="#"
+                                           ng-click="declineProjectInvitation(invitation)">Decline</a>
                                         <a class="w-button dsi-button notification-view"
                                            href="{{invitation.url}}">View</a>
                                     </div>

@@ -90,8 +90,8 @@ class ProjectController
                 $memberRequests = (new ProjectMemberRequestRepository())->getMembersForProject($project->getId());
         }
 
-        if ($isOwner) {
-            try {
+        try {
+            if ($isOwner) {
                 if (isset($_POST['updateBasic'])) {
                     $authUser->ifNotLoggedInRedirectTo(URL::login());
 
@@ -227,15 +227,6 @@ class ProjectController
                     echo json_encode(['result' => 'ok']);
                     die();
                 }
-
-                if (isset($_POST['requestToJoin'])) {
-                    $addMemberRequestToJoinProject = new AddMemberRequestToProject();
-                    $addMemberRequestToJoinProject->data()->projectID = $project->getId();
-                    $addMemberRequestToJoinProject->data()->userID = $loggedInUser->getId();
-                    $addMemberRequestToJoinProject->exec();
-                    echo json_encode(['result' => 'ok']);
-                    die();
-                }
                 if (isset($_POST['approveRequestToJoin'])) {
                     $approveMemberRequestToJoinProject = new ApproveMemberRequestToProject();
                     $approveMemberRequestToJoinProject->data()->projectID = $project->getId();
@@ -298,14 +289,22 @@ class ProjectController
                     ]);
                     return;
                 }
-
-            } catch (ErrorHandler $e) {
-                echo json_encode([
-                    'result' => 'error',
-                    'errors' => $e->getErrors()
-                ]);
-                die();
+            } else {
+                if (isset($_POST['requestToJoin'])) {
+                    $addMemberRequestToJoinProject = new AddMemberRequestToProject();
+                    $addMemberRequestToJoinProject->data()->projectID = $project->getId();
+                    $addMemberRequestToJoinProject->data()->userID = $loggedInUser->getId();
+                    $addMemberRequestToJoinProject->exec();
+                    echo json_encode(['result' => 'ok']);
+                    die();
+                }
             }
+        } catch (ErrorHandler $e) {
+            echo json_encode([
+                'result' => 'error',
+                'errors' => $e->getErrors()
+            ]);
+            die();
         }
 
         if ($this->data()->format == 'json') {
@@ -418,34 +417,6 @@ class ProjectController
                     'profilePic' => $user->getProfilePicOrDefault(),
                 ],
                 'commentsCount' => $post->getCommentsCount(),
-                /*
-                'comments' => array_map(function (ProjectPostComment $comment) {
-                    $user = $comment->getUser();
-                    $replies = (new ProjectPostCommentReplyRepository())->getByCommentID($comment->getId());
-                    return [
-                        'id' => $comment->getId(),
-                        'comment' => $comment->getComment(),
-                        'time' => $comment->getJsTime(),
-                        'user' => [
-                            'name' => $user->getFullName(),
-                            'profilePic' => $user->getProfilePicOrDefault(),
-                        ],
-                        'repliesCount' => $comment->getRepliesCount(),
-                        'replies' => array_map(function (ProjectPostCommentReply $reply) {
-                            $user = $reply->getUser();
-                            return [
-                                'id' => $reply->getId(),
-                                'comment' => $reply->getComment(),
-                                'time' => $reply->getTime(),
-                                'user' => [
-                                    'name' => $user->getFullName(),
-                                    'profilePic' => $user->getProfilePicOrDefault(),
-                                ],
-                            ];
-                        }, $replies)
-                    ];
-                }, $comments),
-                */
             ];
         }, (new ProjectPostRepository())->getByProjectID($project->getId()));
     }

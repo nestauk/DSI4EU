@@ -488,7 +488,7 @@ require __DIR__ . '/header.php';
                                             <a href="#" ng-hide="requestToJoin.loading"
                                                class="w-button btn btn-join"
                                                ng-click="sendRequestToJoin()">Request to join</a>
-                                            <button ng-show="requestToJoin.loading"
+                                            <button ng-show="requestToJoin.loading" ng-cloak
                                                     class="w-button btn btn-join"
                                                     style="background-color: #ec388e">
                                                 Sending Request...

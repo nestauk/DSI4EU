@@ -4,6 +4,7 @@ namespace DSI\Controller;
 
 use DSI\Entity\ProjectMemberInvitation;
 use DSI\Repository\OrganisationMemberRepository;
+use DSI\Repository\OrganisationRepository;
 use DSI\Repository\ProjectMemberInvitationRepository;
 use DSI\Repository\ProjectMemberRepository;
 use DSI\Repository\ProjectRepository;
@@ -13,6 +14,7 @@ use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\URL;
 use DSI\UseCase\ApproveMemberInvitationToProject;
+use DSI\UseCase\RejectMemberInvitationToProject;
 
 class HomeController
 {
@@ -37,6 +39,16 @@ class HomeController
                         echo json_encode(['code' => 'ok']);
                         return;
                     }
+                    if (isset($_POST['rejectProjectInvitation'])) {
+                        $rejectInvitation = new RejectMemberInvitationToProject();
+                        $rejectInvitation->data()->executor = $loggedInUser;
+                        $rejectInvitation->data()->userID = $loggedInUser->getId();
+                        $rejectInvitation->data()->projectID = isset($_POST['projectID']) ? $_POST['projectID'] : 0;
+                        $rejectInvitation->exec();
+
+                        echo json_encode(['code' => 'ok']);
+                        return;
+                    }
 
                     $projectInvitations = (new ProjectMemberInvitationRepository())->getByMemberID($loggedInUser->getId());
                     echo json_encode([
@@ -49,7 +61,7 @@ class HomeController
                             ];
                         }, $projectInvitations),
                     ]);
-                } catch(ErrorHandler $e){
+                } catch (ErrorHandler $e) {
                     echo json_encode([
                         'code' => 'error',
                         'errors' => $e->getErrors()
@@ -57,6 +69,7 @@ class HomeController
                 }
             } else {
                 $totalProjects = (new ProjectRepository())->countProjects();
+                $totalOrganisations = (new OrganisationRepository())->countOrganisations();
                 $latestStories = (new StoryRepository())->getLast(3);
                 $projectsMember = (new ProjectMemberRepository())->getByMemberID($loggedInUser->getId());
                 $organisationsMember = (new OrganisationMemberRepository())->getByMemberID($loggedInUser->getId());
