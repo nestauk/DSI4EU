@@ -2,7 +2,9 @@
 
 namespace DSI\Controller;
 
+use DSI\Entity\OrganisationMemberInvitation;
 use DSI\Entity\ProjectMemberInvitation;
+use DSI\Repository\OrganisationMemberInvitationRepository;
 use DSI\Repository\OrganisationMemberRepository;
 use DSI\Repository\OrganisationRepository;
 use DSI\Repository\ProjectMemberInvitationRepository;
@@ -13,7 +15,9 @@ use DSI\Repository\UserRepository;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\URL;
+use DSI\UseCase\ApproveMemberInvitationToOrganisation;
 use DSI\UseCase\ApproveMemberInvitationToProject;
+use DSI\UseCase\RejectMemberInvitationToOrganisation;
 use DSI\UseCase\RejectMemberInvitationToProject;
 
 class HomeController
@@ -49,8 +53,29 @@ class HomeController
                         echo json_encode(['code' => 'ok']);
                         return;
                     }
+                    if (isset($_POST['approveOrganisationInvitation'])) {
+                        $approveInvitation = new ApproveMemberInvitationToOrganisation();
+                        $approveInvitation->data()->executor = $loggedInUser;
+                        $approveInvitation->data()->userID = $loggedInUser->getId();
+                        $approveInvitation->data()->organisationID = isset($_POST['organisationID']) ? $_POST['organisationID'] : 0;
+                        $approveInvitation->exec();
+
+                        echo json_encode(['code' => 'ok']);
+                        return;
+                    }
+                    if (isset($_POST['rejectOrganisationInvitation'])) {
+                        $rejectInvitation = new RejectMemberInvitationToOrganisation();
+                        $rejectInvitation->data()->executor = $loggedInUser;
+                        $rejectInvitation->data()->userID = $loggedInUser->getId();
+                        $rejectInvitation->data()->organisationID = isset($_POST['organisationID']) ? $_POST['organisationID'] : 0;
+                        $rejectInvitation->exec();
+
+                        echo json_encode(['code' => 'ok']);
+                        return;
+                    }
 
                     $projectInvitations = (new ProjectMemberInvitationRepository())->getByMemberID($loggedInUser->getId());
+                    $organisationInvitations = (new OrganisationMemberInvitationRepository())->getByMemberID($loggedInUser->getId());
                     echo json_encode([
                         'projectInvitations' => array_map(function (ProjectMemberInvitation $projectMember) {
                             $project = $projectMember->getProject();
@@ -60,6 +85,14 @@ class HomeController
                                 'url' => URL::project($project->getId(), $project->getName()),
                             ];
                         }, $projectInvitations),
+                        'organisationInvitations' => array_map(function (OrganisationMemberInvitation $organisationMember) {
+                            $organisation = $organisationMember->getOrganisation();
+                            return [
+                                'id' => $organisation->getId(),
+                                'name' => $organisation->getName(),
+                                'url' => URL::organisation($organisation->getId(), $organisation->getName()),
+                            ];
+                        }, $organisationInvitations),
                     ]);
                 } catch (ErrorHandler $e) {
                     echo json_encode([

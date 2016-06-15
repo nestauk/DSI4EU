@@ -300,7 +300,7 @@ angular
             var addMemberSelect = $('#Add-member');
             addMemberSelect.on("change", function (evt) {
                 // console.log('addMemberSelect:onChange:val:' + addMemberSelect.val());
-                addMember(
+                addNewMember(
                     Helpers.getFirstNonEmptyValue(
                         addMemberSelect.val()
                     )
@@ -312,7 +312,7 @@ angular
                 addMemberSelect.val(null).trigger("change.select2");
             };
 
-            var addMember = function (memberIdOrEmail) {
+            var addNewMember = function (memberIdOrEmail) {
                 if (memberIdOrEmail == '') return;
 
                 $scope.addProjectMember.errors = {};

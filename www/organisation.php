@@ -127,6 +127,22 @@ require __DIR__ . '/header.php';
                                 </select>
                                 <input type="submit" value="Add" class="w-button add-skill-btn">
                             </label>
+
+                            <div style="color:red;padding:12px 0 10px 100px;">
+                                <div style="color:orange">
+                                    <div ng-show="addOrganisationMember.loading">Loading...</div>
+                                </div>
+                                <div style="color:green">
+                                    <div ng-show="addOrganisationMember.success"
+                                         ng-bind="addOrganisationMember.success"></div>
+                                </div>
+                                <div
+                                    ng-show="addOrganisationMember.errors.email"
+                                    ng-bind="addOrganisationMember.errors.email"></div>
+                                <div
+                                    ng-show="addOrganisationMember.errors.member"
+                                    ng-bind="addOrganisationMember.errors.member"></div>
+                            </div>
                         </form>
 
                         <div style="clear:both"></div>

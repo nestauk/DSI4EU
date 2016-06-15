@@ -16,6 +16,7 @@ use DSI\Repository\UserRepository;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\URL;
+use DSI\UseCase\AddMemberInvitationToOrganisation;
 use DSI\UseCase\AddMemberRequestToOrganisation;
 use DSI\UseCase\AddMemberToOrganisation;
 use DSI\UseCase\AddProjectToOrganisation;
@@ -94,7 +95,7 @@ class OrganisationController
             }
 
             if (isset($_POST['addMember'])) {
-                $addMemberToOrgCmd = new AddMemberToOrganisation();
+                $addMemberToOrgCmd = new AddMemberInvitationToOrganisation();
                 $addMemberToOrgCmd->data()->organisationID = $organisation->getId();
                 $addMemberToOrgCmd->data()->userID = $_POST['addMember'];
                 $addMemberToOrgCmd->exec();
@@ -229,7 +230,7 @@ class OrganisationController
                         'url' => URL::project($project->getId(), $project->getName()),
                     ];
                 }, $organisationProjects),
-                'partnerOrganisations' => array_map(function(Organisation $organisation){
+                'partnerOrganisations' => array_map(function (Organisation $organisation) {
                     return [
                         'id' => $organisation->getId(),
                         'name' => $organisation->getName(),

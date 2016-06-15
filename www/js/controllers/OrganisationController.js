@@ -6,6 +6,8 @@ angular
         var editCountryRegion = $('#Edit-countryRegion');
         var addMemberSelect = $('#Add-member');
 
+        $scope.organisationid = $attrs.organisationid;
+
         $scope.updateBasic = function () {
             var data = {
                 updateBasic: true,
@@ -49,22 +51,72 @@ angular
 
             if (newMemberID == '') return;
 
-            var newMember = null;
-            for (var i in $scope.users) {
-                if (newMemberID == $scope.users[i].id)
-                    newMember = $scope.users[i];
-            }
-            if (!newMember) return;
+            addNewMember(newMemberID);
+        };
 
-            $scope.organisation.members.push(newMember);
-            $http.post(SITE_RELATIVE_PATH + '/org/' + $attrs.organisationid + '.json', {
-                addMember: newMemberID
-            }).then(function (result) {
-                console.log(result.data);
+        $scope.addOrganisationMember = {};
+        var addNewMember = function (memberIdOrEmail) {
+            if (memberIdOrEmail == '') return;
+
+            $scope.addOrganisationMember.errors = {};
+            $scope.addOrganisationMember.loading = true;
+            $scope.addOrganisationMember.success = false;
+
+            $timeout(function () {
+                var existingMemberId = Helpers.getItemIndexById($scope.users, memberIdOrEmail);
+
+                if (existingMemberId != -1)
+                    return addExistingMember($scope.users[existingMemberId]);
+                else
+                    return addNewMemberFromEmailAddress(memberIdOrEmail);
+
+            }, 500);
+        };
+
+        var addExistingMember = function (newMember) {
+            $scope.addOrganisationMember.success = false;
+
+            $http.post(SITE_RELATIVE_PATH + '/org/' + $scope.organisationid + '.json', {
+                addMember: newMember.id
+            }).then(function (response) {
+                $scope.addOrganisationMember.loading = false;
+                console.log(response.data);
+
+                if (response.data.result == 'ok') {
+                    $scope.addOrganisationMember.success = newMember.firstName + ' ' + newMember.lastName + ' has been successfully invited';
+                } else if (response.data.result == 'error') {
+                    $scope.addOrganisationMember.errors = response.data.errors;
+                } else {
+                    alert('unexpected error');
+                    console.log(response.data);
+                }
             });
         };
+
+        var addNewMemberFromEmailAddress = function (emailAddress) {
+            console.log('add email: ' + emailAddress);
+
+            $http.post(SITE_RELATIVE_PATH + '/org/' + $scope.organisationid + '.json', {
+                addEmail: emailAddress
+            }).then(function (response) {
+                $scope.addOrganisationMember.loading = false;
+                console.log(response.data);
+
+                if (response.data.result == 'ok') {
+                    $scope.addOrganisationMember.success = response.data.successMessage;
+                    /* if (response.data.user)
+                     $scope.project.members.push(response.data.user); */
+                } else if (response.data.result == 'error') {
+                    $scope.addOrganisationMember.errors = response.data.errors;
+                } else {
+                    alert('unexpected error');
+                    console.log(response.data);
+                }
+            });
+        };
+
         $scope.removeMember = function (member) {
-            var index = getItemIndexById($scope.organisation.members, member.id);
+            var index = Helpers.getItemIndexById($scope.organisation.members, member.id);
             if (index > -1) {
                 $scope.organisation.members.splice(index, 1);
 
@@ -188,7 +240,7 @@ angular
             }, 500);
         };
         $scope.approveRequestToJoin = function (member) {
-            var index = getItemIndexById($scope.organisation.memberRequests, member.id);
+            var index = Helpers.getItemIndexById($scope.organisation.memberRequests, member.id);
             if (index > -1) {
                 $scope.organisation.memberRequests.splice(index, 1);
                 $scope.organisation.members.push(member);
@@ -201,7 +253,7 @@ angular
             }
         };
         $scope.rejectRequestToJoin = function (member) {
-            var index = getItemIndexById($scope.organisation.memberRequests, member.id);
+            var index = Helpers.getItemIndexById($scope.organisation.memberRequests, member.id);
             if (index > -1) {
                 $scope.organisation.memberRequests.splice(index, 1);
 
@@ -231,11 +283,20 @@ angular
             }
         };
 
-        var getItemIndexById = function (pool, id) {
-            for (var i in pool) {
-                if (pool[i].id == id)
-                    return i;
+        var Helpers = {
+            getFirstNonEmptyValue: function (values) {
+                for (var i in values) {
+                    if (values[i] != '')
+                        return values[i];
+                }
+                return null;
+            },
+            getItemIndexById: function (pool, id) {
+                for (var i in pool) {
+                    if (pool[i].id == id)
+                        return i;
+                }
+                return -1;
             }
-            return -1;
-        };
+        }
     });

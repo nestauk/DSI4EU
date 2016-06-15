@@ -28,13 +28,17 @@ require __DIR__ . '/header.php';
                 <div class="w-col w-col-4 w-col-stack notification-col">
                     <div class="dashboard-widget">
                         <h3 class="card-h3">Notifications</h3>
-                        <div class="card-p notification-stat">You don't have any activity at the moment</div>
-                    </div>
-                    <div class="dashboard-widget">
-                        <h3 class="card-h3">Notifications</h3>
-                        <div class="card-p notification-stat">You currently have <strong>3 </strong>requests pending
+                        <div class="card-p notification-stat" ng-cloak
+                             ng-hide="projectInvitations.length + organisationInvitations.length">
+                            You don't have any notifications at the moment
                         </div>
-                        <ul class="w-list-unstyled notification-list">
+                        <div class="card-p notification-stat" ng-cloak
+                             ng-show="projectInvitations.length + organisationInvitations.length">
+                            You currently have
+                            <strong ng-bind="projectInvitations.length + organisationInvitations.length"></strong>
+                            notification(s)
+                        </div>
+                        <ul class="w-list-unstyled notification-list" ng-cloak>
                             <li class="notification-li" ng-repeat="invitation in projectInvitations">
                                 <div class="w-clearfix card-notification notification-interaction-actions">
                                     <div class="notification-profile-image"></div>
@@ -51,19 +55,23 @@ require __DIR__ . '/header.php';
                                     </div>
                                 </div>
                             </li>
-                            <li>
-                                <div class="w-clearfix card-notification" data-ix="notification-interaction">
+                            <li class="notification-li" ng-repeat="invitation in organisationInvitations">
+                                <div class="w-clearfix card-notification notification-interaction-actions">
                                     <div class="notification-profile-image"></div>
-                                    <div class="notification-detail"><strong>Kat Sperry</strong>&nbsp;has invited you to
-                                        join <strong>Nesta</strong>
+                                    <div class="notification-detail">
+                                        You have been invited to join <strong ng-bind="invitation.name"></strong>
                                     </div>
                                     <div class="notification-interaction">
-                                        <a class="w-button dsi-button notification-accept" href="#">Accept</a>
-                                        <a class="w-button dsi-button notification-decline" href="#">Decline</a>
-                                        <a class="w-button dsi-button notification-view" href="#">View</a>
+                                        <a class="w-button dsi-button notification-accept" href="#"
+                                           ng-click="approveOrganisationInvitation(invitation)">Accept</a>
+                                        <a class="w-button dsi-button notification-decline" href="#"
+                                           ng-click="declineOrganisationInvitation(invitation)">Decline</a>
+                                        <a class="w-button dsi-button notification-view"
+                                           href="{{invitation.url}}">View</a>
                                     </div>
                                 </div>
                             </li>
+                            <?php /*
                             <li>
                                 <div class="w-clearfix card-notification" data-ix="notification-interaction">
                                     <div class="notification-profile-image"></div>
@@ -76,6 +84,7 @@ require __DIR__ . '/header.php';
                                     </div>
                                 </div>
                             </li>
+                            */ ?>
                         </ul>
                     </div>
                 </div>
