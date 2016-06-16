@@ -143,12 +143,20 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($bio, $this->user->getBio());
     }
 
-    /** @test setLocation, getLocation */
-    public function settingLocation_getsLocation()
+    /** @test */
+    public function settingCityName_getsCityName()
     {
-        $location = 'MyHomeTown';
-        $this->user->setLocation($location);
-        $this->assertEquals($location, $this->user->getLocation());
+        $cityName = 'MyHomeTown';
+        $this->user->setCityName($cityName);
+        $this->assertEquals($cityName, $this->user->getCityName());
+    }
+
+    /** @test */
+    public function settingCountryName_getsCountryName()
+    {
+        $countryName = 'Romania';
+        $this->user->setCountryName($countryName);
+        $this->assertEquals($countryName, $this->user->getCountryName());
     }
 
     /** @test setProfilePic, getProfilePic */
@@ -165,5 +173,22 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $jobTitle = 'WebDev at Inoveb';
         $this->user->setJobTitle($jobTitle);
         $this->assertEquals($jobTitle, $this->user->getJobTitle());
+    }
+
+    /** @test setCompany, getCompany*/
+    public function settingCompany_getsCompany()
+    {
+        $company = 'Inoveb';
+        $this->user->setCompany($company);
+        $this->assertEquals($company, $this->user->getCompany());
+    }
+
+    /** @test setShowEmail, getShowEmail*/
+    public function settingShowEmail_getsShowEmail()
+    {
+        $this->user->setShowEmail(true);
+        $this->assertTrue($this->user->canShowEmail());
+        $this->user->setShowEmail(false);
+        $this->assertFalse($this->user->canShowEmail());
     }
 }

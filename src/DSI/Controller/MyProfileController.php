@@ -2,6 +2,7 @@
 
 namespace DSI\Controller;
 
+use DSI\Entity\Image;
 use DSI\Repository\UserRepository;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
@@ -9,6 +10,7 @@ use DSI\Service\URL;
 use DSI\UseCase\UpdateUserBasicDetails;
 use DSI\UseCase\UpdateUserEmailAddress;
 use DSI\UseCase\UpdateUserPassword;
+use DSI\UseCase\UpdateUserProfilePicture;
 
 class MyProfileController
 {
@@ -25,41 +27,48 @@ class MyProfileController
         $authUser = new Auth();
         $authUser->ifNotLoggedInRedirectTo(URL::login());
 
-        $userRepo = new UserRepository();
-        $user = $userRepo->getById(
-            $authUser->getUserId()
-        );
+        $loggedInUser = (new UserRepository())->getById($authUser->getUserId());
+        $user = $loggedInUser;
 
         if ($this->data->format == 'json') {
 
-            if (isset($_POST['saveDetails'])) {
-                try {
+            try {
+                if (isset($_POST['saveDetails'])) {
                     $updateUserBasicDetails = new UpdateUserBasicDetails();
                     $updateUserBasicDetails->data()->userID = $user->getId();
-                    $updateUserBasicDetails->data()->firstName = $_POST['details']['firstName'];
-                    $updateUserBasicDetails->data()->lastName = $_POST['details']['lastName'];
-                    $updateUserBasicDetails->data()->location = $_POST['details']['location'];
+                    $updateUserBasicDetails->data()->firstName = $_POST['firstName'] ?? '';
+                    $updateUserBasicDetails->data()->lastName = $_POST['lastName'] ?? '';
+                    $updateUserBasicDetails->data()->showEmail = $_POST['showEmail'] ?? false;
+                    $updateUserBasicDetails->data()->cityName = $_POST['cityName'] ?? '';
+                    $updateUserBasicDetails->data()->countryName = $_POST['countryName'] ?? '';
+                    $updateUserBasicDetails->data()->jobTitle = $_POST['jobTitle'] ?? '';
+                    $updateUserBasicDetails->data()->company = $_POST['company'] ?? '';
+                    $updateUserBasicDetails->data()->bio = $_POST['bio'] ?? '';
                     $updateUserBasicDetails->exec();
 
                     $updateUserEmail = new UpdateUserEmailAddress();
                     $updateUserEmail->data()->userID = $user->getId();
-                    $updateUserEmail->data()->email = $_POST['details']['email'];
+                    $updateUserEmail->data()->email = $_POST['email'];
                     $updateUserEmail->exec();
 
-                    echo json_encode([
-                        'response' => 'ok'
-                    ]);
-                } catch (ErrorHandler $e) {
-                    echo json_encode([
-                        'response' => 'error',
-                        'errors' => $e->getErrors()
-                    ]);
-                }
-                die();
-            }
+                    if ($_POST['profilePic'] != Image::PROFILE_PIC_URL . $user->getProfilePicOrDefault()) {
+                        $updateUserEmail = new UpdateUserProfilePicture();
+                        $updateUserEmail->data()->userID = $user->getId();
+                        $updateUserEmail->data()->fileName = basename($_POST['profilePic']);
+                        $updateUserEmail->exec();
+                    }
 
-            if (isset($_POST['changePassword'])) {
-                try {
+                    echo json_encode([
+                        'response' => 'ok',
+                        'message' => [
+                            'title' => 'Success!',
+                            'text' => 'Your details have been successfully saved',
+                        ],
+                    ]);
+                    return;
+                }
+
+                if (isset($_POST['changePassword'])) {
                     $updateUserPassword = new UpdateUserPassword();
                     $updateUserPassword->data()->userID = $user->getId();
                     $updateUserPassword->data()->password = (string)($_POST['password'] ?? '');
@@ -68,24 +77,32 @@ class MyProfileController
                     echo json_encode([
                         'result' => 'ok'
                     ]);
-                } catch (ErrorHandler $e) {
-                    echo json_encode([
-                        'result' => 'error',
-                        'errors' => $e->getErrors(),
-                    ]);
+                    return;
                 }
-                die();
+            } catch (ErrorHandler $e) {
+                echo json_encode([
+                    'response' => 'error',
+                    'errors' => $e->getErrors()
+                ]);
             }
 
             echo json_encode([
                 'firstName' => $user->getFirstName(),
                 'lastName' => $user->getLastName(),
-                'location' => $user->getLocation(),
-                'bio' => $user->getBio(),
+                'email' => $user->getEmail(),
+                'showEmail' => $user->canShowEmail(),
+
                 'jobTitle' => $user->getJobTitle(),
-                'profilePic' => $user->getProfilePicOrDefault(),
+                'company' => $user->getCompany(),
+
+                'cityName' => $user->getCityName(),
+                'countryName' => $user->getCountryName(),
+
+                'bio' => $user->getBio(),
+                'profilePic' => Image::PROFILE_PIC_URL . $user->getProfilePicOrDefault(),
             ]);
-            die();
+
+            return;
         } else {
             go_to(URL::profile($user->getProfileURL() ?? $user->getId()));
         }

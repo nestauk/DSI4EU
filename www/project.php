@@ -305,7 +305,7 @@ require __DIR__ . '/header.php';
                                         Select organisation:
                                         <select data-placeholder="Select organisation"
                                                 id="Add-organisation"
-                                                style="width:150px">
+                                                style="width:300px">
                                             <option></option>
                                         </select>
                                         <input type="submit" value="Add" class="w-button add-skill-btn">

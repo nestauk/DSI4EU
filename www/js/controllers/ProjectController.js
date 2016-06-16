@@ -134,7 +134,14 @@ angular
         $http.get(SITE_RELATIVE_PATH + '/organisations.json')
             .then(function (result) {
                 $scope.organisations = result.data;
-                addOrganisationSelect.select2({data: result.data});
+                addOrganisationSelect.select2({
+                    data: result.data.map(function (elm) {
+                        return {
+                            id: elm.id,
+                            text: elm.name
+                        };
+                    })
+                });
             });
 
         var addTag = function (data) {
@@ -237,17 +244,19 @@ angular
         };
 
         $scope.approveInvitationToJoin = function () {
-            $http.post(SITE_RELATIVE_PATH + '/dashboard.json', {
+            var data = {
                 approveProjectInvitation: true,
                 projectID: $scope.projectid
-            }).then(function (response) {
-                if (response.data.code == 'ok') {
-                    swal(response.data.message.title, response.data.message.text, "success");
-                    $scope.invitationActioned = true;
-                } else if (response.data.code == 'error') {
+            };
+            $http.post(SITE_RELATIVE_PATH + '/dashboard.json', data)
+                .then(function (response) {
+                    if (response.data.code == 'ok') {
+                        swal(response.data.message.title, response.data.message.text, "success");
+                        $scope.invitationActioned = true;
+                    } else if (response.data.code == 'error') {
 
-                }
-            });
+                    }
+                });
         };
         $scope.rejectInvitationToJoin = function () {
             swal({
@@ -262,14 +271,15 @@ angular
                 $http.post(SITE_RELATIVE_PATH + '/dashboard.json', {
                     rejectProjectInvitation: true,
                     projectID: $scope.projectid
-                }).then(function (response) {
-                    if (response.data.code == 'ok') {
-                        swal(response.data.message.title, response.data.message.text, "warning");
-                        $scope.invitationActioned = true;
-                    } else if (response.data.code == 'error') {
+                })
+                    .then(function (response) {
+                        if (response.data.code == 'ok') {
+                            swal(response.data.message.title, response.data.message.text, "warning");
+                            $scope.invitationActioned = true;
+                        } else if (response.data.code == 'error') {
 
-                    }
-                });
+                        }
+                    });
             });
         };
 

@@ -148,3 +148,7 @@ input.ng-invalid {
 .homePageColours a:hover{
     color:#fff1fa;
 }
+
+.dsi-button.story-image-upload {
+    margin-bottom: 20px;
+}

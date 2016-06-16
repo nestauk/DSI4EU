@@ -42,7 +42,7 @@ class UpdateUserBasicDetailsTest extends PHPUnit_Framework_TestCase
             $this->updateUserBasicDetails->data()->userID = $this->user->getId();
             $this->updateUserBasicDetails->data()->firstName = $firstName;
             $this->updateUserBasicDetails->data()->lastName = $lastName;
-            $this->updateUserBasicDetails->data()->location = $location;
+            $this->updateUserBasicDetails->data()->cityName = $location;
             $this->updateUserBasicDetails->exec();
         } catch (ErrorHandler $e) {
             $this->assertNull($e);
@@ -51,7 +51,7 @@ class UpdateUserBasicDetailsTest extends PHPUnit_Framework_TestCase
         $user = $this->userRepo->getById($this->user->getId());
         $this->assertEquals($firstName, $user->getFirstName());
         $this->assertEquals($lastName, $user->getLastName());
-        $this->assertEquals($location, $user->getLocation());
+        $this->assertEquals($location, $user->getCityName());
     }
 
     /** @test */

@@ -202,17 +202,6 @@ class ProjectController
                     $response['successMessage'] = $user ?
                         'Member has been successfully invited' :
                         'An invitation email has been sent to the person';
-                    /*
-                    if ($user) {
-                        $response['user'] = [
-                            'id' => $user->getId(),
-                            'text' => $user->getFirstName() . ' ' . $user->getLastName(),
-                            'profilePic' => $user->getProfilePicOrDefault(),
-                            'firstName' => $user->getFirstName(),
-                            'lastName' => $user->getLastName(),
-                        ];
-                    }
-                    */
 
                     echo json_encode($response);
                     return;

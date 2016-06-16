@@ -55,8 +55,12 @@ class UpdateUserBasicDetails
         $user = $this->userRepo->getById($this->data()->userID);
         $user->setFirstName($this->data()->firstName);
         $user->setLastName($this->data()->lastName);
-        $user->setLocation($this->data()->location);
+        $user->setShowEmail($this->data()->showEmail);
+        $user->setCityName($this->data()->cityName);
+        $user->setCountryName($this->data()->countryName);
         $user->setJobTitle($this->data()->jobTitle);
+        $user->setCompany($this->data()->company);
+        $user->setBio($this->data()->bio);
         $this->userRepo->save($user);
     }
 }
@@ -66,8 +70,12 @@ class UpdateUserBasicDetails_Data
     /** @var string */
     public $firstName,
         $lastName,
-        $location,
-        $jobTitle;
+        $showEmail,
+        $cityName,
+        $countryName,
+        $jobTitle,
+        $company,
+        $bio;
 
     /** @var int */
     public $userID;

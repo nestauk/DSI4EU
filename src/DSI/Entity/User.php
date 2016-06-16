@@ -13,8 +13,10 @@ class User
         $email,
         $hashPassword,
         $bio,
-        $location,
+        $cityName,
+        $countryName,
         $jobTitle,
+        $company,
         $facebookUID,
         $googleUID,
         $gitHubUID,
@@ -22,10 +24,13 @@ class User
         $profileURL,
         $profilePic;
 
+    /** @var bool */
+    private $showEmail;
+
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return (int)$this->id;
     }
@@ -33,18 +38,18 @@ class User
     /**
      * @param int $id
      */
-    public function setId(int $id)
+    public function setId($id)
     {
         if ($id <= 0)
             throw new \InvalidArgumentException('id: ' . $id);
 
-        $this->id = $id;
+        $this->id = (int)$id;
     }
 
     /**
      * @return string
      */
-    public function getEmail(): string
+    public function getEmail()
     {
         return (string)$this->email;
     }
@@ -52,18 +57,18 @@ class User
     /**
      * @param string $email
      */
-    public function setEmail(string $email)
+    public function setEmail($email)
     {
         if (!filter_var($email, FILTER_VALIDATE_EMAIL))
             throw new \InvalidArgumentException('email: ' . $email);
 
-        $this->email = $email;
+        $this->email = (string)$email;
     }
 
     /**
      * @param string $password
      */
-    public function setPassword(string $password)
+    public function setPassword($password)
     {
         $this->setHashPassword(
             password_hash($password, PASSWORD_BCRYPT)
@@ -73,7 +78,7 @@ class User
     /**
      * @param string $hashPassword
      */
-    public function setHashPassword(string $hashPassword)
+    public function setHashPassword($hashPassword)
     {
         $this->hashPassword = $hashPassword;
     }
@@ -81,7 +86,7 @@ class User
     /**
      * @return string
      */
-    public function getHashPassword(): string
+    public function getHashPassword()
     {
         return (string)$this->hashPassword;
     }
@@ -90,7 +95,7 @@ class User
      * @param string $password
      * @return bool
      */
-    public function checkPassword(string $password): bool
+    public function checkPassword($password)
     {
         return (bool)password_verify($password, $this->hashPassword);
     }
@@ -98,7 +103,7 @@ class User
     /**
      * @return string
      */
-    public function getFirstName(): string
+    public function getFirstName()
     {
         return (string)$this->firstName;
     }
@@ -106,7 +111,7 @@ class User
     /**
      * @param string $firstName
      */
-    public function setFirstName(string $firstName)
+    public function setFirstName($firstName)
     {
         $this->firstName = $firstName;
     }
@@ -114,7 +119,7 @@ class User
     /**
      * @return string
      */
-    public function getLastName(): string
+    public function getLastName()
     {
         return (string)$this->lastName;
     }
@@ -122,7 +127,7 @@ class User
     /**
      * @param string $lastName
      */
-    public function setLastName(string $lastName)
+    public function setLastName($lastName)
     {
         $this->lastName = $lastName;
     }
@@ -151,7 +156,7 @@ class User
     /**
      * @return int
      */
-    public function getFacebookUID(): string
+    public function getFacebookUID()
     {
         return (string)$this->facebookUID;
     }
@@ -159,7 +164,7 @@ class User
     /**
      * @param int $facebookUID
      */
-    public function setFacebookUID(string $facebookUID)
+    public function setFacebookUID($facebookUID)
     {
         if (trim($facebookUID) == '')
             throw new \InvalidArgumentException('facebookUId: ' . $facebookUID);
@@ -167,12 +172,12 @@ class User
         $this->facebookUID = $facebookUID;
     }
 
-    public function getGoogleUID(): string
+    public function getGoogleUID()
     {
         return (string)$this->googleUID;
     }
 
-    public function setGoogleUID(string $googleUID)
+    public function setGoogleUID($googleUID)
     {
         if (trim($googleUID) == '')
             throw new \InvalidArgumentException('googleUId: ' . $googleUID);
@@ -180,12 +185,12 @@ class User
         $this->googleUID = $googleUID;
     }
 
-    public function getGitHubUID(): string
+    public function getGitHubUID()
     {
         return (string)$this->gitHubUID;
     }
 
-    public function setGitHubUID(string $gitHubUID)
+    public function setGitHubUID($gitHubUID)
     {
         if (trim($gitHubUID) == '')
             throw new \InvalidArgumentException('githubUId: ' . $gitHubUID);
@@ -193,12 +198,12 @@ class User
         $this->gitHubUID = $gitHubUID;
     }
 
-    public function getTwitterUID(): string
+    public function getTwitterUID()
     {
         return (string)$this->twitterUID;
     }
 
-    public function setTwitterUID(string $twitterUID)
+    public function setTwitterUID($twitterUID)
     {
         if (trim($twitterUID) == '')
             throw new \InvalidArgumentException('twitterUId: ' . $twitterUID);
@@ -209,7 +214,7 @@ class User
     /**
      * @return string
      */
-    public function getBio(): string
+    public function getBio()
     {
         return (string)$this->bio;
     }
@@ -217,31 +222,47 @@ class User
     /**
      * @param string $bio
      */
-    public function setBio(string $bio)
+    public function setBio($bio)
     {
-        $this->bio = $bio;
+        $this->bio = (string)$bio;
     }
 
     /**
      * @return string
      */
-    public function getLocation(): string
+    public function getCityName()
     {
-        return (string)$this->location;
+        return (string)$this->cityName;
     }
 
     /**
-     * @param string $location
+     * @param string $cityName
      */
-    public function setLocation(string $location)
+    public function setCityName($cityName)
     {
-        $this->location = $location;
+        $this->cityName = $cityName;
     }
 
     /**
      * @return string
      */
-    public function getProfilePic(): string
+    public function getCountryName()
+    {
+        return (string)$this->countryName;
+    }
+
+    /**
+     * @param string $countryName
+     */
+    public function setCountryName($countryName)
+    {
+        $this->countryName = (string)$countryName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getProfilePic()
     {
         return (string)$this->profilePic;
     }
@@ -249,7 +270,7 @@ class User
     /**
      * @return string
      */
-    public function getProfilePicOrDefault(): string
+    public function getProfilePicOrDefault()
     {
         return (string)($this->profilePic ?? '0.svg');
     }
@@ -257,7 +278,7 @@ class User
     /**
      * @param string $profilePic
      */
-    public function setProfilePic(string $profilePic)
+    public function setProfilePic($profilePic)
     {
         $this->profilePic = $profilePic;
     }
@@ -267,7 +288,7 @@ class User
      */
     public function getJobTitle()
     {
-        return $this->jobTitle;
+        return (string)$this->jobTitle;
     }
 
     /**
@@ -275,6 +296,38 @@ class User
      */
     public function setJobTitle($jobTitle)
     {
-        $this->jobTitle = $jobTitle;
+        $this->jobTitle = (string)$jobTitle;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCompany()
+    {
+        return (string)$this->company;
+    }
+
+    /**
+     * @param string $company
+     */
+    public function setCompany($company)
+    {
+        $this->company = (string)$company;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function canShowEmail()
+    {
+        return (bool)$this->showEmail;
+    }
+
+    /**
+     * @param boolean $showEmail
+     */
+    public function setShowEmail($showEmail)
+    {
+        $this->showEmail = (bool)$showEmail;
     }
 }

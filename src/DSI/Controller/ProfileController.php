@@ -103,7 +103,7 @@ class ProfileController
                         $updateUserBasicDetails->data()->userID = $user->getId();
                         $updateUserBasicDetails->data()->firstName = $_POST['firstName'] ?? '';
                         $updateUserBasicDetails->data()->lastName = $_POST['lastName'] ?? '';
-                        $updateUserBasicDetails->data()->location = $_POST['location'] ?? '';
+                        $updateUserBasicDetails->data()->cityName = $_POST['location'] ?? '';
                         $updateUserBasicDetails->data()->jobTitle = $_POST['jobTitle'] ?? '';
                         $updateUserBasicDetails->exec();
                         echo json_encode(['code' => 'ok']);
@@ -140,7 +140,7 @@ class ProfileController
                     'firstName' => $user->getFirstName(),
                     'lastName' => $user->getLastName(),
                     'jobTitle' => $user->getJobTitle(),
-                    'location' => $user->getLocation(),
+                    'location' => $user->getCityName(),
                     'bio' => $user->getBio(),
                     'profilePic' => $user->getProfilePicOrDefault(),
                     'projects' => array_map(function (ProjectMember $projectMember) use ($projectMemberRepo) {

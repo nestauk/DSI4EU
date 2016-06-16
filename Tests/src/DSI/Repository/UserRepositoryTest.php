@@ -7,6 +7,22 @@ use \DSI\Entity\User;
 
 class UserRepositoryTest extends PHPUnit_Framework_TestCase
 {
+    const EMAIL = 'test@example.com';
+    const FIRST_NAME = 'firstName';
+    const LAST_NAME = 'lastName';
+    const BIO = 'My Own Personal Bio';
+    const CITY_NAME = 'London';
+    const COUNTRY_NAME = 'UK';
+    const JOB_TITLE = 'WebDev at Inoveb';
+    const PASSWORD = 'password';
+    const FACEBOOK_UID = 'facebookUID';
+    const GOOGLE_UID = 'googleUID';
+    const GIT_HUB_UID = 'gitHubUID';
+    const TWITTER_UID = 'twitterUID';
+    const PROFILE_URL = 'profileURL';
+    const PROFILE_PIC = 'profilePic.jpg';
+    const COMPANY = 'company';
+    const SHOW_EMAIL = true;
     /** @var UserRepository */
     protected $userRepo;
 
@@ -24,7 +40,7 @@ class UserRepositoryTest extends PHPUnit_Framework_TestCase
     public function userCanBeSaved()
     {
         $user = new User();
-        $user->setEmail('test@example.com');
+        $user->setEmail(self::EMAIL);
 
         $this->userRepo->insert($user);
 
@@ -35,7 +51,7 @@ class UserRepositoryTest extends PHPUnit_Framework_TestCase
     public function userCanBeUpdated()
     {
         $user = new User();
-        $user->setEmail('test@example.com');
+        $user->setEmail(self::EMAIL);
 
         $this->userRepo->insert($user);
 
@@ -56,7 +72,7 @@ class UserRepositoryTest extends PHPUnit_Framework_TestCase
     /** @test save */
     public function NonexistentUserCannotBeSaved()
     {
-        $email = 'test@example.com';
+        $email = self::EMAIL;
         $user = new User();
         $user->setId(1);
         $user->setEmail($email);
@@ -68,7 +84,7 @@ class UserRepositoryTest extends PHPUnit_Framework_TestCase
     /** @test getByEmail */
     public function userCanBeRetrievedByEmail()
     {
-        $email = 'test@example.com';
+        $email = self::EMAIL;
         $user = new User();
         $user->setEmail($email);
         $this->userRepo->insert($user);
@@ -81,14 +97,14 @@ class UserRepositoryTest extends PHPUnit_Framework_TestCase
     public function gettingAnNonExistentUserByEmail_throwsException()
     {
         $this->setExpectedException(\DSI\NotFound::class);
-        $this->userRepo->getByEmail('test@example.com');
+        $this->userRepo->getByEmail(self::EMAIL);
     }
 
 
     /** @test emailExists */
     public function NonexistentUserCannotBeFoundByEmail()
     {
-        $this->assertFalse($this->userRepo->emailExists('test@example.com'));
+        $this->assertFalse($this->userRepo->emailExists(self::EMAIL));
     }
 
 
@@ -242,37 +258,86 @@ class UserRepositoryTest extends PHPUnit_Framework_TestCase
     }
 
     /** @test saveAsNew getById */
-    public function setAllUsersDetails()
+    public function checkUserDetailsOnInsert()
     {
         $user = new User();
-        $user->setEmail($email = 'test@example.com');
-        $user->setFirstName($firstName = 'firstName');
-        $user->setLastName($lastName = 'lastName');
-        $user->setBio($bio = 'My Own Personal Bio');
-        $user->setLocation($location = 'London, UK');
-        $user->setJobTitle($jobTitle = 'WebDev at Inoveb');
-        $user->setPassword($password = 'password');
-        $user->setFacebookUID($facebookUID = 'facebookUID');
-        $user->setGoogleUID($googleUID = 'googleUID');
-        $user->setGitHubUID($gitHubUID = 'gitHubUID');
-        $user->setTwitterUID($twitterUID = 'twitterUID');
-        $user->setProfileURL($profileUrl = 'profileURL');
-        $user->setProfilePic($profilePic = 'profilePic.jpg');
+        $user->setEmail(self::EMAIL);
+        $user->setShowEmail(self::SHOW_EMAIL);
+        $user->setFirstName(self::FIRST_NAME);
+        $user->setLastName(self::LAST_NAME);
+        $user->setBio(self::BIO);
+        $user->setCityName(self::CITY_NAME);
+        $user->setCountryName(self::COUNTRY_NAME);
+        $user->setJobTitle(self::JOB_TITLE);
+        $user->setCompany(self::COMPANY);
+        $user->setPassword(self::PASSWORD);
+        $user->setFacebookUID(self::FACEBOOK_UID);
+        $user->setGoogleUID(self::GOOGLE_UID);
+        $user->setGitHubUID(self::GIT_HUB_UID);
+        $user->setTwitterUID(self::TWITTER_UID);
+        $user->setProfileURL(self::PROFILE_URL);
+        $user->setProfilePic(self::PROFILE_PIC);
         $this->userRepo->insert($user);
 
         $sameUser = $this->userRepo->getById($user->getId());
-        $this->assertEquals($email, $sameUser->getEmail());
-        $this->assertEquals($firstName, $sameUser->getFirstName());
-        $this->assertEquals($lastName, $sameUser->getLastName());
-        $this->assertEquals($bio, $sameUser->getBio());
-        $this->assertEquals($location, $sameUser->getLocation());
-        $this->assertEquals($jobTitle, $sameUser->getJobTitle());
-        $this->assertTrue($sameUser->checkPassword($password));
-        $this->assertEquals($facebookUID, $sameUser->getFacebookUID());
-        $this->assertEquals($googleUID, $sameUser->getGoogleUID());
-        $this->assertEquals($gitHubUID, $sameUser->getGitHubUID());
-        $this->assertEquals($twitterUID, $sameUser->getTwitterUID());
-        $this->assertEquals($profileUrl, $sameUser->getProfileURL());
-        $this->assertEquals($profilePic, $sameUser->getProfilePic());
+        $this->assertEquals(self::EMAIL, $sameUser->getEmail());
+        $this->assertEquals(self::SHOW_EMAIL, $sameUser->canShowEmail());
+        $this->assertEquals(self::FIRST_NAME, $sameUser->getFirstName());
+        $this->assertEquals(self::LAST_NAME, $sameUser->getLastName());
+        $this->assertEquals(self::BIO, $sameUser->getBio());
+        $this->assertEquals(self::CITY_NAME, $sameUser->getCityName());
+        $this->assertEquals(self::COUNTRY_NAME, $sameUser->getCountryName());
+        $this->assertEquals(self::JOB_TITLE, $sameUser->getJobTitle());
+        $this->assertEquals(self::COMPANY, $sameUser->getCompany());
+        $this->assertTrue($sameUser->checkPassword(self::PASSWORD));
+        $this->assertEquals(self::FACEBOOK_UID, $sameUser->getFacebookUID());
+        $this->assertEquals(self::GOOGLE_UID, $sameUser->getGoogleUID());
+        $this->assertEquals(self::GIT_HUB_UID, $sameUser->getGitHubUID());
+        $this->assertEquals(self::TWITTER_UID, $sameUser->getTwitterUID());
+        $this->assertEquals(self::PROFILE_URL, $sameUser->getProfileURL());
+        $this->assertEquals(self::PROFILE_PIC, $sameUser->getProfilePic());
+    }
+
+    /** @test saveAsNew getById */
+    public function checkUserDetailsOnUpdate()
+    {
+        $user = new User();
+        $this->userRepo->insert($user);
+
+        $user->setEmail(self::EMAIL);
+        $user->setShowEmail(self::SHOW_EMAIL);
+        $user->setFirstName(self::FIRST_NAME);
+        $user->setLastName(self::LAST_NAME);
+        $user->setBio(self::BIO);
+        $user->setCityName(self::CITY_NAME);
+        $user->setCountryName(self::COUNTRY_NAME);
+        $user->setJobTitle(self::JOB_TITLE);
+        $user->setCompany(self::COMPANY);
+        $user->setPassword(self::PASSWORD);
+        $user->setFacebookUID(self::FACEBOOK_UID);
+        $user->setGoogleUID(self::GOOGLE_UID);
+        $user->setGitHubUID(self::GIT_HUB_UID);
+        $user->setTwitterUID(self::TWITTER_UID);
+        $user->setProfileURL(self::PROFILE_URL);
+        $user->setProfilePic(self::PROFILE_PIC);
+        $this->userRepo->save($user);
+
+        $sameUser = $this->userRepo->getById($user->getId());
+        $this->assertEquals(self::EMAIL, $sameUser->getEmail());
+        $this->assertEquals(self::SHOW_EMAIL, $sameUser->canShowEmail());
+        $this->assertEquals(self::FIRST_NAME, $sameUser->getFirstName());
+        $this->assertEquals(self::LAST_NAME, $sameUser->getLastName());
+        $this->assertEquals(self::BIO, $sameUser->getBio());
+        $this->assertEquals(self::CITY_NAME, $sameUser->getCityName());
+        $this->assertEquals(self::COUNTRY_NAME, $sameUser->getCountryName());
+        $this->assertEquals(self::JOB_TITLE, $sameUser->getJobTitle());
+        $this->assertEquals(self::COMPANY, $sameUser->getCompany());
+        $this->assertTrue($sameUser->checkPassword(self::PASSWORD));
+        $this->assertEquals(self::FACEBOOK_UID, $sameUser->getFacebookUID());
+        $this->assertEquals(self::GOOGLE_UID, $sameUser->getGoogleUID());
+        $this->assertEquals(self::GIT_HUB_UID, $sameUser->getGitHubUID());
+        $this->assertEquals(self::TWITTER_UID, $sameUser->getTwitterUID());
+        $this->assertEquals(self::PROFILE_URL, $sameUser->getProfileURL());
+        $this->assertEquals(self::PROFILE_PIC, $sameUser->getProfilePic());
     }
 }

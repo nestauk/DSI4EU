@@ -416,7 +416,7 @@ use \DSI\Service\URL;
                                class="popover-link">
                                 View profile
                             </a>
-                            <a href="<?php echo SITE_RELATIVE_PATH ?>/personal-details" data-ix="popoverfadeout"
+                            <a href="<?php echo URL::editProfile()?>" data-ix="popoverfadeout"
                                class="popover-link">
                                 Edit Profile
                             </a>

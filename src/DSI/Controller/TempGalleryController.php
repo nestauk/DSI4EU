@@ -8,11 +8,11 @@
 
 namespace DSI\Controller;
 
+use DSI\Entity\Image;
 use DSI\Repository\UserRepository;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\URL;
-use DSI\UseCase\UpdateUserProfilePicture;
 use DSI\UseCase\UploadTempImage;
 
 class TempGalleryController
@@ -31,13 +31,14 @@ class TempGalleryController
                 if (isset($_FILES['file'])) {
 
                     $uploadTempImage = new UploadTempImage();
+                    $uploadTempImage->data()->format = $_POST['format'] ?? '';
                     $uploadTempImage->data()->filePath = $_FILES['file']['tmp_name'];
                     $uploadTempImage->data()->fileName = $_FILES['file']['name'];
                     $uploadTempImage->exec();
 
                     echo json_encode([
                         'code' => 'ok',
-                        'imgPath' => $uploadTempImage->getImagePath(),
+                        'imgPath' => Image::TEMP_FOLDER_URL . $uploadTempImage->getImagePath(),
                     ]);
                 }
             } catch (ErrorHandler $e) {

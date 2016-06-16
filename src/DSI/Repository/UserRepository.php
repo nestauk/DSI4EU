@@ -15,11 +15,14 @@ class UserRepository
     {
         $insert = array();
         $insert[] = "`email` = '" . addslashes($user->getEmail()) . "'";
+        $insert[] = "`showEmail` = '" . (bool)($user->canShowEmail()) . "'";
         $insert[] = "`fname` = '" . addslashes($user->getFirstName()) . "'";
         $insert[] = "`lname` = '" . addslashes($user->getLastName()) . "'";
         $insert[] = "`bio` = '" . addslashes($user->getBio()) . "'";
-        $insert[] = "`location` = '" . addslashes($user->getLocation()) . "'";
+        $insert[] = "`cityName` = '" . addslashes($user->getCityName()) . "'";
+        $insert[] = "`countryName` = '" . addslashes($user->getCountryName()) . "'";
         $insert[] = "`jobTitle` = '" . addslashes($user->getJobTitle()) . "'";
+        $insert[] = "`company` = '" . addslashes($user->getCompany()) . "'";
         $insert[] = "`password` = '" . addslashes($user->getHashPassword()) . "'";
         $insert[] = "`facebookUID` = '" . addslashes($user->getFacebookUID()) . "'";
         $insert[] = "`googleUID` = '" . addslashes($user->getGoogleUID()) . "'";
@@ -46,11 +49,14 @@ class UserRepository
 
         $insert = array();
         $insert[] = "`email` = '" . addslashes($user->getEmail()) . "'";
+        $insert[] = "`showEmail` = '" . (bool)($user->canShowEmail()) . "'";
         $insert[] = "`fname` = '" . addslashes($user->getFirstName()) . "'";
         $insert[] = "`lname` = '" . addslashes($user->getLastName()) . "'";
         $insert[] = "`bio` = '" . addslashes($user->getBio()) . "'";
-        $insert[] = "`location` = '" . addslashes($user->getLocation()) . "'";
+        $insert[] = "`cityName` = '" . addslashes($user->getCityName()) . "'";
+        $insert[] = "`countryName` = '" . addslashes($user->getCountryName()) . "'";
         $insert[] = "`jobTitle` = '" . addslashes($user->getJobTitle()) . "'";
+        $insert[] = "`company` = '" . addslashes($user->getCompany()) . "'";
         $insert[] = "`password` = '" . addslashes($user->getHashPassword()) . "'";
         $insert[] = "`facebookUID` = '" . addslashes($user->getFacebookUID()) . "'";
         $insert[] = "`googleUID` = '" . addslashes($user->getGoogleUID()) . "'";
@@ -182,15 +188,18 @@ class UserRepository
             $userObj->setHashPassword($user['password']);
         if ($user['email'])
             $userObj->setEmail($user['email']);
+        if ($user['showEmail'])
+            $userObj->setShowEmail($user['showEmail']);
         if ($user['fname'])
             $userObj->setFirstName($user['fname']);
         if ($user['lname'])
             $userObj->setLastName($user['lname']);
         if ($user['bio'])
             $userObj->setBio($user['bio']);
-        if ($user['location'])
-            $userObj->setLocation($user['location']);
+        $userObj->setCityName($user['cityName']);
+        $userObj->setCountryName($user['countryName']);
         $userObj->setJobTitle($user['jobTitle']);
+        $userObj->setCompany($user['company']);
         if ($user['facebookUID'])
             $userObj->setFacebookUID($user['facebookUID']);
         if ($user['googleUID'])
@@ -212,17 +221,7 @@ class UserRepository
     /** @return User[] */
     public function getAll()
     {
-        $where = ["1"];
-        $users = [];
-        $query = new SQL("SELECT 
-            id, password, email, fname, lname, bio, location, jobTitle
-          , facebookUID, googleUID, gitHubUID, twitterUID
-          , profileURL, profilePic
-          FROM `users` WHERE " . implode(' AND ', $where) . "");
-        foreach ($query->fetch_all() AS $dbUser) {
-            $users[] = $this->buildUserFromData($dbUser);
-        }
-        return $users;
+        return $this->getObjectsWhere(["1"]);
     }
 
     public function clearAll()
@@ -239,17 +238,11 @@ class UserRepository
      */
     private function getUserWhere($where)
     {
-        $query = new SQL("SELECT 
-              id, password, email, fname, lname, bio, location, jobTitle
-            , facebookUID, googleUID, gitHubUID, twitterUID
-            , profileURL, profilePic
-            FROM `users` WHERE " . implode(' AND ', $where) . " LIMIT 1");
-        $dbUser = $query->fetch();
-        if (!$dbUser) {
+        $objects = $this->getObjectsWhere($where);
+        if (count($objects) < 1)
             throw new DSI\NotFound();
-        }
 
-        return $this->buildUserFromData($dbUser);
+        return $objects[0];
     }
 
     /**
@@ -260,5 +253,25 @@ class UserRepository
     {
         $query = new SQL("SELECT id FROM `users` WHERE " . implode(' AND ', $where) . " LIMIT 1");
         return ($query->fetch() ? true : false);
+    }
+
+    /**
+     * @param $where
+     * @return array
+     */
+    private function getObjectsWhere($where)
+    {
+        $users = [];
+        $query = new SQL("SELECT 
+            id, password, email, showEmail, fname, lname, bio
+          , cityName, countryName
+          , jobTitle, company
+          , facebookUID, googleUID, gitHubUID, twitterUID
+          , profileURL, profilePic
+          FROM `users` WHERE " . implode(' AND ', $where) . "");
+        foreach ($query->fetch_all() AS $dbUser) {
+            $users[] = $this->buildUserFromData($dbUser);
+        }
+        return $users;
     }
 }

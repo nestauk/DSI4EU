@@ -41,6 +41,8 @@ class AddEmailToProject
         $this->projectRepository = new ProjectRepository();
         $this->userRepository = new UserRepository();
 
+        $this->assertValidEmailAddress();
+
         if ($this->userRepository->emailExists($this->data()->email)) {
             $this->user = $this->userRepository->getByEmail($this->data()->email);
             $addMemberToProject = new AddMemberInvitationToProject();
@@ -71,6 +73,14 @@ class AddEmailToProject
     public function getUser()
     {
         return $this->user;
+    }
+
+    private function assertValidEmailAddress()
+    {
+        if (!isValidEmail($this->data()->email)) {
+            $this->errorHandler->addTaggedError('email', 'Please type a valid email address');
+            throw $this->errorHandler;
+        }
     }
 }
 

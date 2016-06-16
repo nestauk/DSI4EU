@@ -83,7 +83,7 @@ class OrganisationRepository
         $organisationObj->setOwner(
             (new UserRepository())->getById($organisation['ownerID'])
         );
-        $organisationObj->setName($organisation['name']);
+        $organisationObj->setName($organisation['name'] != '' ? $organisation['name'] : '-');
         $organisationObj->setDescription($organisation['description']);
         if ($organisation['countryRegionID']) {
             $organisationObj->setCountryRegion(

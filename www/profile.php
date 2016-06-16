@@ -12,32 +12,6 @@ require __DIR__ . '/header.php';
     <script type="text/javascript"
             src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/UserController.js"></script>
 
-    <style>
-        .thumb {
-            width: 24px;
-            height: 24px;
-            float: none;
-            position: relative;
-            top: 7px;
-        }
-
-        form .progress {
-            line-height: 15px;
-        }
-
-        .progress {
-            display: inline-block;
-            width: 100px;
-            border: 3px groove #CCC;
-        }
-
-        .progress div {
-            font-size: smaller;
-            background: orange;
-            width: 0;
-        }
-    </style>
-
     <div ng-controller="UserController as ctrl" id="UserController">
 
         <div class="w-section project-section">
@@ -48,20 +22,22 @@ require __DIR__ . '/header.php';
                             <div class="project-detail">
                                 <div class="profile-header-card">
                                     <img src="<?php echo SITE_RELATIVE_PATH ?>/images/pin.png" class="card-pin">
-                                    <div class="card-city"
-                                         ng-bind="user.location"><?php echo $user->getLocation() ?></div>
+                                    <div class="card-city">
+                                        <?php echo $user->getCityName() ?>,
+                                        <?php echo $user->getCountryName() ?>
+                                    </div>
                                     <div class="profile-bg-img el-blur" style="background:#666"></div>
                                     <div data-ix="show-edit-light" class="header-card-overlay">
                                         <h1 class="profile-card-h1">
-                                            <span ng-bind="user.firstName"><?php echo $user->getFirstName() ?></span>
-                                            <span ng-bind="user.lastName"><?php echo $user->getLastName() ?></span>
+                                            <span><?php echo $user->getFirstName() ?></span>
+                                            <span><?php echo $user->getLastName() ?></span>
                                         </h1>
-                                        <div class="profile-card-job-title"
-                                             ng-bind="user.jobTitle"><?php echo $user->getJobTitle() ?></div>
+                                        <div class="profile-card-job-title"><?php echo $user->getJobTitle() ?></div>
                                         <?php if ($isOwner) { ?>
-                                            <img width="25" ng-click="editPanel = 'basicDetails'"
-                                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-compose-outline-white.png"
-                                                 data-ix="show-profile-update" class="edit-white">
+                                            <a href="<?php echo \DSI\Service\URL::editProfile() ?>" class="edit-white">
+                                                <img width="25"
+                                                     src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-compose-outline-white.png"/>
+                                            </a>
                                         <?php } ?>
                                     </div>
                                 </div>
@@ -69,27 +45,6 @@ require __DIR__ . '/header.php';
                                     <div data-ix="edit-image" class="profile-image-large profile-image-upload"
                                          style="background-image: url('<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/<?php echo $user->getProfilePicOrDefault() ?>')"
                                          ng-style="{'background-image':'url(<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/' + user.profilePic + ')'}">
-                                        <?php if ($isOwner) { ?>
-                                            <div data-ix="update-image-closed" class="edit-image">
-                                                <div class="edit-image-text update-profile-image"
-                                                     ngf-select="uploadFiles($file, $invalidFiles)" accept="image/*">
-                                                    Update image
-                                                </div>
-                                            </div>
-                                            <div ng-show="f.progress > 0 && f.progress < 100"
-                                                 class="update-profile-image">
-                                                <div style="font-size:smaller">
-                                                    <span ng-bind="{{errFile.name}}"></span>
-                                                    <span ng-bind="{{errFile.$error}}"></span>
-                                                    <span ng-bind="{{errFile.$errorParam}}"></span>
-
-                                                <span class="progress" ng-show="f.progress >= 0">
-                                                    <div style="width:{{f.progress}}%" ng-bind="f.progress + '%'"></div>
-                                                </span>
-                                                </div>
-                                                <div style="color:red" ng-bind="{{errorMsg.file}}"></div>
-                                            </div>
-                                        <?php } ?>
                                     </div>
                                 </div>
                             </div>
@@ -146,16 +101,15 @@ require __DIR__ . '/header.php';
                                         <div class="w-form" style="float:left;margin-top:-17px"
                                              ng-show="showAddLanguage">
                                             <form id="email-form" name="email-form" data-name="Email Form"
-                                                  class="w-clearfix add-skill-section"
-                                            ">
-                                            <select data-placeholder="Select your language"
-                                                    id="Add-language" name="Add-language"
-                                                    class="w-input add-language"
-                                                    multiple
-                                                    style="width:200px">
-                                                <option></option>
-                                            </select>
-                                            <?php /*
+                                                  class="w-clearfix add-skill-section">
+                                                <select data-placeholder="Select your language"
+                                                        id="Add-language" name="Add-language"
+                                                        class="w-input add-language"
+                                                        multiple
+                                                        style="width:200px">
+                                                    <option></option>
+                                                </select>
+                                                <?php /*
                                                 <input type="submit" value="Add"
                                                        class="w-button add-skill-btn">
                                                 */ ?>
@@ -163,11 +117,6 @@ require __DIR__ . '/header.php';
                                         </div>
                                     <?php } ?>
                                 </div>
-                                <?php if ($isOwner) { ?>
-                                    <img width="25" ng-click="editPanel = 'bio'"
-                                         src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-compose-outline.png"
-                                         data-ix="show-profile-update" class="edit-dark">
-                                <?php } ?>
                             </div>
                         </div>
                     </div>

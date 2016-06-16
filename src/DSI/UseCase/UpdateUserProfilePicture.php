@@ -3,6 +3,7 @@
 namespace DSI\UseCase;
 
 use abeautifulsite\SimpleImage;
+use DSI\Entity\Image;
 use DSI\NotEnoughData;
 use DSI\NotFound;
 use DSI\Repository\UserRepository;
@@ -32,22 +33,24 @@ class UpdateUserProfilePicture
         $this->errorHandler = new ErrorHandler();
         $this->userRepo = new UserRepository();
 
-        $this->checkIfAllTheInfoHaveBeenSent();
-        $this->checkIfFileExistsOnServer();
-        $this->checkFilename();
+        $this->assertAllInfoHaveBeenSent();
 
-        $fileInfo = new \SplFileInfo($this->data()->fileName);
+        $orgFileName = basename($this->data()->fileName);
+        $orgFilePath = Image::TEMP_FOLDER . $orgFileName;
+        $newFileName = $this->data()->userID . '-' . $orgFileName;
+        $newFilePath = Image::PROFILE_PIC . $newFileName;
 
+        $this->assertFileExistsOnServer($orgFilePath);
+
+        $fileInfo = new \SplFileInfo($orgFilePath);
         $this->checkFileExtension($fileInfo);
 
-        $img = new SimpleImage($this->data()->filePath);
-
+        $img = new SimpleImage($orgFilePath);
         $this->checkImageDimensions($img);
+        $img->thumbnail(200, 200)->save($newFilePath, null, $fileInfo->getExtension());
 
-        $img->thumbnail(200, 200)->save($this->data()->filePath, null, $fileInfo->getExtension());
-
-        $this->profilePic = $this->data()->userID . '-' . $this->data()->fileName;
-        rename($this->data()->filePath, __DIR__ . '/../../../www/images/users/profile/' . $this->profilePic);
+        $this->profilePic = $newFileName;
+        rename($orgFilePath, $newFilePath);
 
         $this->updateUserDetails();
     }
@@ -79,26 +82,16 @@ class UpdateUserProfilePicture
         }
     }
 
-    private function checkFilename()
+    private function assertFileExistsOnServer($orgFilePath)
     {
-        if (basename($this->data()->fileName) != $this->data()->fileName) {
-            $this->errorHandler->addTaggedError('file', 'Invalid file name. Try renaming the file');
-            $this->errorHandler->throwIfNotEmpty();
-        }
-    }
-
-    private function checkIfFileExistsOnServer()
-    {
-        if (!file_exists($this->data()->filePath))
+        if (!file_exists($orgFilePath))
             throw new NotFound('filePath');
     }
 
-    private function checkIfAllTheInfoHaveBeenSent()
+    private function assertAllInfoHaveBeenSent()
     {
-        if (!isset($this->data()->filePath))
-            throw new NotEnoughData('filePath');
         if (!isset($this->data()->fileName))
-            throw new NotEnoughData('fileName');
+            throw new NotEnoughData('filePath');
         if (!isset($this->data()->userID))
             throw new NotEnoughData('userID');
     }
@@ -126,8 +119,7 @@ class UpdateUserProfilePicture
 class UpdateUserProfilePicture_Data
 {
     /** @var string */
-    public $filePath,
-        $fileName;
+    public $fileName;
 
     /** @var int */
     public $userID;

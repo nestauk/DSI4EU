@@ -95,7 +95,7 @@ angular
                         swal(response.data.message.title, response.data.message.text, "warning");
                         $scope.organisationInvitations = extractElm($scope.organisationInvitations, invitation);
                     } else if (response.data.code == 'error') {
-
+                        
                     }
                 });
             });

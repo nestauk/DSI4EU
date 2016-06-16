@@ -107,6 +107,11 @@ class URL
         return SITE_RELATIVE_PATH . '/explore-dsi';
     }
 
+    public static function editProfile()
+    {
+        return SITE_RELATIVE_PATH . '/personal-details';
+    }
+
     /**
      * @param $title
      * @return string

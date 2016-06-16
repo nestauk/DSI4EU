@@ -3,6 +3,7 @@
 namespace DSI\UseCase;
 
 use abeautifulsite\SimpleImage;
+use DSI\Entity\Image;
 use DSI\NotEnoughData;
 use DSI\NotFound;
 use DSI\Repository\UserRepository;
@@ -40,11 +41,14 @@ class UploadTempImage
 
         $this->checkFileExtension($fileInfo);
 
-        $img = new SimpleImage($this->data()->filePath);
-        $img->save($this->data()->filePath, null, $fileInfo->getExtension());
+        if ($this->data()->format == 'profilePic') {
+            $img = new SimpleImage($this->data()->filePath);
+            $img->thumbnail(200, 200)
+                ->save($this->data()->filePath, null, $fileInfo->getExtension());
+        }
 
         $this->imagePath = md5($this->data()->fileName . uniqid('', true)) . '.' . strtolower($fileInfo->getExtension());
-        rename($this->data()->filePath, __DIR__ . '/../../../www/images/tmp/' . $this->imagePath);
+        rename($this->data()->filePath, Image::TEMP_FOLDER . $this->imagePath);
     }
 
     /**
@@ -101,5 +105,6 @@ class UploadTempImage_Data
 {
     /** @var string */
     public $filePath,
-        $fileName;
+        $fileName,
+        $format;
 }
