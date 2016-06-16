@@ -3385,6 +3385,16 @@ strong {
   color: #fff;
 }
 
+.dsi-button.notification-button {
+  display: inline-block;
+  width: 100px;
+  margin-left: 15px;
+}
+
+.dsi-button.notification-button.decline {
+  color: #db4343;
+}
+
 .cancel-save {
   position: absolute;
   right: 10px;
@@ -4285,6 +4295,24 @@ strong {
   border-right: 1px solid #f3f3f3;
 }
 
+.you-have-invites {
+  position: relative;
+  height: 75px;
+  margin-top: 10px;
+  margin-right: 10px;
+  margin-left: 10px;
+  border-radius: 3px;
+  background-color: #c9ffb8;
+}
+
+.notification-block-p {
+  display: inline-block;
+  margin-left: 20px;
+  font-family: 'Open Sans', sans-serif;
+  line-height: 75px;
+  font-weight: 600;
+}
+
 html.w-mod-js *[data-ix="downbeforeup"] {
   opacity: 0;
   -webkit-transform: translate(0px, 50px);
@@ -4482,6 +4510,15 @@ html.w-mod-js *[data-ix="under-dev"] {
     margin-right: auto;
     margin-left: auto;
   }
+  .dsi-button.notification-button.decline {
+    margin-top: 22px;
+    float: right;
+  }
+  .dsi-button.notification-button.accept {
+    margin-top: 22px;
+    margin-right: 25px;
+    float: right;
+  }
   .overlay {
     height: 780px;
   }
@@ -4650,6 +4687,13 @@ html.w-mod-js *[data-ix="under-dev"] {
   }
   .feedback-list {
     width: 100%;
+  }
+  .dsi-button.notification-button.decline {
+    float: none;
+  }
+  .dsi-button.notification-button.accept {
+    margin-right: -5px;
+    float: none;
   }
   .card-logo-small {
     width: 50px;
@@ -4876,6 +4920,10 @@ html.w-mod-js *[data-ix="under-dev"] {
   .dsi-button.top-filter {
     margin-bottom: 10px;
   }
+  .dsi-button.notification-button.accept {
+    width: 130px;
+    margin-bottom: 16px;
+  }
   .overlay {
     height: 830px;
   }
@@ -4921,6 +4969,14 @@ html.w-mod-js *[data-ix="under-dev"] {
     left: 12px;
     margin-top: 51px;
     padding-right: 8px;
+  }
+  .you-have-invites {
+    height: auto;
+  }
+  .notification-block-p {
+    margin-top: 13px;
+    margin-bottom: 10px;
+    line-height: 15px;
   }
 }
 
