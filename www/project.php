@@ -450,14 +450,13 @@ require __DIR__ . '/header.php';
                                     </div>
                                 <?php } ?>
                                 <?php if ($userHasInvitation) { ?>
-                                    <div class="join-project" ng-hide="invitationActioned" ng-cloak>
-                                        You have been invited to be part of this project
-                                        <button class="w-button" ng-click="approveInvitationToJoin()">
-                                            Accept
-                                        </button>
-                                        <button class="w-button" ng-click="rejectInvitationToJoin()">
-                                            Decline
-                                        </button>
+                                    <div class="you-have-invites" ng-hide="invitationActioned" ng-cloak>
+                                        <div class="notification-block-p">You have been invited to join this project
+                                        </div>
+                                        <a class="w-button dsi-button notification-button accept" href="#"
+                                           ng-click="approveInvitationToJoin()">Accept</a>
+                                        <a class="w-button dsi-button notification-button decline" href="#"
+                                           ng-click="rejectInvitationToJoin()">Decline</a>
                                     </div>
                                 <?php } ?>
                             </div>

@@ -21,11 +21,13 @@ require __DIR__ . '/header.php';
                         <div id="text">
                             <div class="project-detail">
                                 <div class="profile-header-card">
-                                    <img src="<?php echo SITE_RELATIVE_PATH ?>/images/pin.png" class="card-pin">
-                                    <div class="card-city">
-                                        <?php echo $user->getCityName() ?>,
-                                        <?php echo $user->getCountryName() ?>
-                                    </div>
+                                    <?php if ($user->getCityName() OR $user->getCountryName()) { ?>
+                                        <img src="<?php echo SITE_RELATIVE_PATH ?>/images/pin.png" class="card-pin">
+                                        <div class="card-city">
+                                            <?php echo $user->getCityName() ?>,
+                                            <?php echo $user->getCountryName() ?>
+                                        </div>
+                                    <?php } ?>
                                     <div class="profile-bg-img el-blur" style="background:#666"></div>
                                     <div data-ix="show-edit-light" class="header-card-overlay">
                                         <h1 class="profile-card-h1">

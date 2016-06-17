@@ -31,29 +31,27 @@ class UpdateProjectCountryRegion
         $this->projectRepo = new ProjectRepository();
         $this->countryRegionRepo = new CountryRegionRepository();
 
-        if ($this->data()->countryID == 0)
-            $this->errorHandler->addTaggedError('country', 'Please select a country');
-
         if ($this->data()->projectID == 0)
             $this->errorHandler->addTaggedError('project', 'Please select a project');
 
-        if ($this->data()->region == '')
-            $this->errorHandler->addTaggedError('region', 'Please specify a region');
-
         $this->errorHandler->throwIfNotEmpty();
 
-        if ($this->countryRegionRepo->nameExists($this->data()->countryID, $this->data()->region)) {
-            $countryRegion = $this->countryRegionRepo->getByName($this->data()->countryID, $this->data()->region);
+        $project = $this->projectRepo->getById($this->data()->projectID);
+        if ($this->data()->countryID != 0) {
+            if ($this->countryRegionRepo->nameExists($this->data()->countryID, $this->data()->region)) {
+                $countryRegion = $this->countryRegionRepo->getByName($this->data()->countryID, $this->data()->region);
+            } else {
+                $createCountryRegionCmd = new CreateCountryRegion();
+                $createCountryRegionCmd->data()->countryID = $this->data()->countryID;
+                $createCountryRegionCmd->data()->name = $this->data()->region;
+                $createCountryRegionCmd->exec();
+                $countryRegion = $createCountryRegionCmd->getCountryRegion();
+            }
+            $project->setCountryRegion($countryRegion);
         } else {
-            $createCountryRegionCmd = new CreateCountryRegion();
-            $createCountryRegionCmd->data()->countryID = $this->data()->countryID;
-            $createCountryRegionCmd->data()->name = $this->data()->region;
-            $createCountryRegionCmd->exec();
-            $countryRegion = $createCountryRegionCmd->getCountryRegion();
+            $project->unsetCountryRegion();
         }
 
-        $project = $this->projectRepo->getById($this->data()->projectID);
-        $project->setCountryRegion($countryRegion);
         $this->projectRepo->save($project);
     }
 

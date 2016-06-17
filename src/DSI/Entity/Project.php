@@ -196,6 +196,11 @@ class Project
         $this->countryRegion = $countryRegion;
     }
 
+    public function unsetCountryRegion()
+    {
+        $this->countryRegion = null;
+    }
+
     /**
      * @return int
      */

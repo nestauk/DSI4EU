@@ -241,6 +241,8 @@ strong {
 }
 
 .vert-nav {
+  position: relative;
+  z-index: 2;
   width: 10px;
   margin-top: 12px;
   margin-right: 13px;
@@ -395,20 +397,16 @@ strong {
   transition: all 200ms ease;
 }
 
-.project-detail:hover {
-  box-shadow: 0 0 50px -22px #000;
-}
-
 .project-header {
   position: relative;
   height: 400px;
   margin-right: 0px;
   margin-bottom: 0px;
-  margin-left: 0px;
+  margin-left: -10px;
   border-style: none;
   border-width: 1px 1px 3px;
   border-color: transparent;
-  border-radius: 5px 5px 0px 0px;
+  border-radius: 5px 0px 0px;
   background-image: -webkit-linear-gradient(270deg, rgba(0, 0, 0, .77), rgba(0, 0, 0, .26)), url('../images/Screen Shot 2016-03-24 at 11.19.25.png');
   background-image: linear-gradient(180deg, rgba(0, 0, 0, .77), rgba(0, 0, 0, .26)), url('../images/Screen Shot 2016-03-24 at 11.19.25.png');
   background-position: 0px 0px, 50% 50%;
@@ -462,10 +460,6 @@ strong {
   background-color: #fff;
   -webkit-transition: all 200ms ease;
   transition: all 200ms ease;
-}
-
-.info-card:hover {
-  box-shadow: 0 0 50px -25px #000;
 }
 
 .info-card.notifications {
@@ -3021,7 +3015,7 @@ strong {
 
 .sharing-text {
   margin-top: 27px;
-  margin-left: 20px;
+  margin-left: 10px;
   font-family: 'Open Sans', sans-serif;
   font-weight: 600;
 }
@@ -3391,6 +3385,16 @@ strong {
 .dsi-button.button-bar-button.delete-button {
   background-color: #c03636;
   color: #fff;
+}
+
+.dsi-button.notification-button {
+  display: inline-block;
+  width: 100px;
+  margin-left: 15px;
+}
+
+.dsi-button.notification-button.decline {
+  color: #db4343;
 }
 
 .cancel-save {
@@ -4281,6 +4285,36 @@ strong {
   text-transform: uppercase;
 }
 
+.single-header {
+  margin-right: 10px;
+  margin-left: 10px;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.project-intro {
+  padding-right: 0px;
+  border-right: 1px solid #f3f3f3;
+}
+
+.you-have-invites {
+  position: relative;
+  height: 75px;
+  margin-top: 10px;
+  margin-right: 10px;
+  margin-left: 10px;
+  border-radius: 3px;
+  background-color: #c9ffb8;
+}
+
+.notification-block-p {
+  display: inline-block;
+  margin-left: 20px;
+  font-family: 'Open Sans', sans-serif;
+  line-height: 75px;
+  font-weight: 600;
+}
+
 html.w-mod-js *[data-ix="downbeforeup"] {
   opacity: 0;
   -webkit-transform: translate(0px, 50px);
@@ -4478,6 +4512,15 @@ html.w-mod-js *[data-ix="under-dev"] {
     margin-right: auto;
     margin-left: auto;
   }
+  .dsi-button.notification-button.decline {
+    margin-top: 22px;
+    float: right;
+  }
+  .dsi-button.notification-button.accept {
+    margin-top: 22px;
+    margin-right: 25px;
+    float: right;
+  }
   .overlay {
     height: 780px;
   }
@@ -4646,6 +4689,13 @@ html.w-mod-js *[data-ix="under-dev"] {
   }
   .feedback-list {
     width: 100%;
+  }
+  .dsi-button.notification-button.decline {
+    float: none;
+  }
+  .dsi-button.notification-button.accept {
+    margin-right: -5px;
+    float: none;
   }
   .card-logo-small {
     width: 50px;
@@ -4872,6 +4922,10 @@ html.w-mod-js *[data-ix="under-dev"] {
   .dsi-button.top-filter {
     margin-bottom: 10px;
   }
+  .dsi-button.notification-button.accept {
+    width: 130px;
+    margin-bottom: 16px;
+  }
   .overlay {
     height: 830px;
   }
@@ -4917,6 +4971,14 @@ html.w-mod-js *[data-ix="under-dev"] {
     left: 12px;
     margin-top: 51px;
     padding-right: 8px;
+  }
+  .you-have-invites {
+    height: auto;
+  }
+  .notification-block-p {
+    margin-top: 13px;
+    margin-bottom: 10px;
+    line-height: 15px;
   }
 }
 

@@ -138,6 +138,15 @@ class Router
         } elseif (preg_match('<^/profile/([a-zA-Z0-9\.]+)$>', $this->pageURL, $matches)) {
             $this->userProfilePage($matches);
 
+        } elseif (preg_match('<^/project/([0-9]+)\.json$>', $this->pageURL, $matches)) {
+            $this->projectJsonPage($matches);
+
+        } elseif (preg_match('<^/project/edit/([0-9]+)\.json$>', $this->pageURL, $matches)) {
+            $this->editProjectPage($matches, 'json');
+
+        } elseif (preg_match('<^/project/edit/([0-9]+)$>', $this->pageURL, $matches)) {
+            $this->editProjectPage($matches);
+
         } elseif (preg_match('<^/project/([0-9]+)\.json?$>', $this->pageURL, $matches)) {
             $this->projectJsonPage($matches);
 
@@ -382,6 +391,14 @@ class Router
         $command = new \DSI\Controller\ProjectController();
         $command->data()->projectID = $matches[1];
         $command->data()->format = 'json';
+        $command->exec();
+    }
+
+    private function editProjectPage($matches, $format = 'html')
+    {
+        $command = new \DSI\Controller\ProjectEditController();
+        $command->projectID = $matches[1];
+        $command->format = $format;
         $command->exec();
     }
 
