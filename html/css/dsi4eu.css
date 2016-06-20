@@ -512,7 +512,7 @@ strong {
   padding-left: 20px;
   border-style: none;
   font-family: 'Open Sans', sans-serif;
-  color: #6c7e8a;
+  color: #18233f;
   font-size: 18px;
   font-weight: 300;
   text-transform: uppercase;
@@ -1668,11 +1668,13 @@ strong {
   border-style: none;
   border-width: 0px;
   border-color: #318ef3 #318ef3 #136dce;
+  background-color: rgba(29, 201, 160, .94);
   -webkit-transition: all 200ms ease;
   transition: all 200ms ease;
   font-family: 'Open Sans', sans-serif;
+  color: #18233f;
   line-height: 20px;
-  font-weight: 300;
+  font-weight: 600;
 }
 
 .btn.btn-join:hover {
@@ -2317,7 +2319,8 @@ strong {
   display: inline-block;
   width: 237px;
   margin-bottom: 50px;
-  color: #575757;
+  font-family: 'Open Sans', sans-serif;
+  color: #18233f;
   font-weight: 700;
 }
 
@@ -2333,6 +2336,7 @@ strong {
   display: inline-block;
   padding-right: 0px;
   float: right;
+  font-family: 'Open Sans', sans-serif;
   color: #6c7e8a;
   text-align: right;
 }
@@ -3451,6 +3455,24 @@ strong {
   background-color: #fff;
 }
 
+.dsi-button.profile-edit {
+  position: absolute;
+  right: 0px;
+  bottom: 30px;
+  background-color: hsla(0, 0%, 95%, .15);
+  color: #fff;
+}
+
+.dsi-button.add-new-item {
+  position: relative;
+  right: 20px;
+  width: auto;
+  float: right;
+  background-color: rgba(29, 201, 160, .94);
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+}
+
 .cancel-save {
   position: absolute;
   right: 10px;
@@ -3659,7 +3681,9 @@ strong {
 
 .page-h1.light {
   margin-top: 20px;
+  margin-bottom: 0px;
   color: #fff;
+  font-size: 28px;
   text-align: center;
   text-transform: uppercase;
 }
@@ -4500,8 +4524,8 @@ strong {
   height: auto;
   padding-top: 40px;
   padding-bottom: 0px;
-  background-image: -webkit-linear-gradient(0deg, rgba(197, 72, 236, .96), #4bb1f5 49%, rgba(87, 255, 242, .96)), url('../images/bg2.png'), -webkit-linear-gradient(45deg, #18233f, #384155);
-  background-image: linear-gradient(90deg, rgba(197, 72, 236, .96), #4bb1f5 49%, rgba(87, 255, 242, .96)), url('../images/bg2.png'), linear-gradient(45deg, #18233f, #384155);
+  background-image: -webkit-linear-gradient(0deg, rgba(115, 23, 214, .96), #3e8de4 49%, rgba(29, 201, 160, .94)), url('../images/bg2.png'), -webkit-linear-gradient(45deg, #18233f, #384155);
+  background-image: linear-gradient(90deg, rgba(115, 23, 214, .96), #3e8de4 49%, rgba(29, 201, 160, .94)), url('../images/bg2.png'), linear-gradient(45deg, #18233f, #384155);
   background-position: 0px 0px, 0px 0px, 0px 0px;
   background-size: auto, 960px, auto;
 }
@@ -4522,6 +4546,53 @@ strong {
 
 .page-header.stories-header {
   height: 360px;
+}
+
+.large-profile-img {
+  display: block;
+  width: 100px;
+  margin-right: auto;
+  margin-left: auto;
+  border-radius: 50px;
+}
+
+.position {
+  position: relative;
+  margin-top: 0px;
+  margin-bottom: 11px;
+  font-family: 'Open Sans', sans-serif;
+  color: hsla(0, 0%, 100%, .6);
+  text-align: center;
+}
+
+.add-new {
+  position: relative;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #f3f3f3;
+}
+
+.add-new-input {
+  padding: 20px;
+  border-bottom: 1px solid #f3f3f3;
+}
+
+.add-item-input {
+  width: 75%;
+  float: left;
+  border-style: none;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  background-color: #f3f3f3;
+}
+
+.add-new-input-button {
+  width: 25%;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  background-color: rgba(29, 201, 160, .94);
+  font-family: 'Open Sans', sans-serif;
+  color: #18233f;
+  font-weight: 600;
 }
 
 html.w-mod-js *[data-ix="downbeforeup"] {
@@ -5134,6 +5205,11 @@ html.w-mod-js *[data-ix="under-dev"] {
   .dsi-button.notification-button.accept {
     width: 130px;
     margin-bottom: 16px;
+  }
+  .dsi-button.profile-edit {
+    right: 9px;
+    width: 100px;
+    font-size: 12px;
   }
   .overlay {
     height: 830px;
