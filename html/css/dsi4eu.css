@@ -2618,7 +2618,7 @@ strong {
 }
 
 .container-wide.archive {
-  margin-top: 130px;
+  margin-top: 60px;
   margin-bottom: 20px;
 }
 
@@ -3382,9 +3382,9 @@ strong {
 }
 
 .dsi-button.top-filter.add-new-story {
-  width: 140px;
+  width: auto;
   float: right;
-  border: 1px solid #fff;
+  border: 0px none #fff;
   background-color: hsla(0, 0%, 100%, .15);
   color: #fff;
 }
@@ -3587,8 +3587,12 @@ strong {
 }
 
 .alphabet-selectors {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
   margin-right: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
   margin-left: 10px;
 }
 
@@ -3598,11 +3602,11 @@ strong {
   margin-right: 5px;
   float: left;
   border-radius: 3px;
-  background-color: #fff;
+  background-color: hsla(0, 0%, 100%, .15);
   -webkit-transition: all 200ms ease;
   transition: all 200ms ease;
   font-family: 'Open Sans', sans-serif;
-  color: #18233f;
+  color: #fff;
   line-height: 30px;
   font-weight: 600;
   text-align: center;
