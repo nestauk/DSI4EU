@@ -1680,7 +1680,7 @@ strong {
 .btn.btn-join:hover {
   border-style: none;
   border-top-color: #18426f;
-  background-color: #2777bd;
+  background-color: rgba(29, 201, 160, .94);
   box-shadow: 0 0 50px -13px #000;
   -webkit-transform: scale(1.03);
   -ms-transform: scale(1.03);
@@ -4453,14 +4453,15 @@ strong {
 }
 
 .search-results-popover {
-  position: static;
+  position: absolute;
   left: 0px;
-  top: 0px;
+  top: -200px;
   right: 0px;
   z-index: 1;
+  display: none;
   height: 335px;
   border-radius: 5px;
-  background-color: #fff;
+  background-color: hsla(0, 0%, 100%, .95);
   box-shadow: 0 0 30px -16px #000;
 }
 
@@ -4561,7 +4562,7 @@ strong {
   margin-top: 0px;
   margin-bottom: 11px;
   font-family: 'Open Sans', sans-serif;
-  color: hsla(0, 0%, 100%, .6);
+  color: hsla(0, 0%, 100%, .75);
   text-align: center;
 }
 
@@ -4593,6 +4594,12 @@ strong {
   font-family: 'Open Sans', sans-serif;
   color: #18233f;
   font-weight: 600;
+}
+
+.dsi4eu-stats {
+  font-family: 'Open Sans', sans-serif;
+  color: hsla(0, 0%, 100%, .75);
+  text-align: center;
 }
 
 html.w-mod-js *[data-ix="downbeforeup"] {
