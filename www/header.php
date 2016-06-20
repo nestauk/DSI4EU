@@ -70,12 +70,6 @@ use \DSI\Service\URL;
             filter: blur(25px);
         }
 
-        input[type=text] {
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-        }
-
         .login-field.error {
             height: 50px;
             border-style: none none solid;
@@ -387,13 +381,13 @@ use \DSI\Service\URL;
                 <img width="160" src="<?php echo SITE_RELATIVE_PATH ?>/images/logo-white-black-text.svg" class="brand">
             <?php } ?>
         </a>
-        <nav role="navigation" class="w-nav-menu m-nav-open <?php echo isset($isHomePage) ? 'homePageColours' : ''?>">
+        <nav role="navigation" class="w-nav-menu m-nav-open <?php echo isset($isHomePage) ? 'homePageColours' : '' ?>">
             <a href="<?php echo URL::exploreDSI() ?>" class="w-nav-link nav">Explore DSI</a>
             <a href="<?php echo URL::stories() ?>" class="w-nav-link nav">Stories</a>
             <a href="<?php echo URL::projects() ?>" class="w-nav-link nav">Projects</a>
             <a href="<?php echo URL::organisations() ?>" class="w-nav-link nav">Organisations</a>
             <?php if (!isset($_SESSION['user'])) { ?>
-                <a href="#" data-ix="showsignup" class="w-nav-link nav log-in">Log In</a>
+                <a href="#" data-ix="showsignup" class="w-nav-link nav log-in">Login</a>
             <?php } else { ?>
                 <a href="#" data-ix="showsignup" class="w-nav-link nav log-in">Create +</a>
             <?php } ?>
@@ -416,7 +410,7 @@ use \DSI\Service\URL;
                                class="popover-link">
                                 View profile
                             </a>
-                            <a href="<?php echo URL::editProfile()?>" data-ix="popoverfadeout"
+                            <a href="<?php echo URL::editProfile() ?>" data-ix="popoverfadeout"
                                class="popover-link">
                                 Edit Profile
                             </a>

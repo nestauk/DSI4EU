@@ -5,6 +5,7 @@ composer.phar
 .idea/
 www/images/users/background/
 www/images/users/profile/
+www/images/projects/logo/
 logs/
 www/images/tmp/
 www/images/stories/feat/
