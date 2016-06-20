@@ -36,6 +36,56 @@ require __DIR__ . '/header.php';
             src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/StoriesController.js"></script>
 
     <div ng-controller="StoriesController">
+
+
+        <div class="w-section page-header stories-header">
+            <div class="container-wide header">
+                <h1 class="page-h1 light">Stories</h1>
+                <div class="filter-block">
+                    <div class="w-row">
+                        <div class="w-col w-col-9 w-col-stack">
+                            <div class="w-row">
+                                <div class="w-col w-col-2">
+                                    <a class="w-button dsi-button top-filter" ng-click="searchCriteria = {}" href="#">
+                                        All stories</a>
+                                </div>
+                                <div class="w-col w-col-2">
+                                    <a class="w-button dsi-button top-filter" ng-click="searchCriteria.catg = 3"
+                                       href="#">
+                                        News</a>
+                                </div>
+                                <div class="w-col w-col-2">
+                                    <a class="w-button dsi-button top-filter" ng-click="searchCriteria.catg = 2"
+                                       href="#">
+                                        Events</a>
+                                </div>
+                                <div class="w-col w-col-2">
+                                    <a class="w-button dsi-button top-filter" ng-click="searchCriteria.catg = 1"
+                                       href="#">
+                                        Case studies</a>
+                                </div>
+                                <div class="w-col w-col-2">
+                                    <a class="w-button dsi-button top-filter published-stories"
+                                       ng-click="searchCriteria.published = true"
+                                       href="#">Published</a>
+                                </div>
+                                <div class="w-col w-col-2">
+                                    <a class="w-button dsi-button top-filter unpublished"
+                                       ng-click="searchCriteria.published = false"
+                                       href="#">Unpublished</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-col w-col-3 w-col-stack w-clearfix">
+                            <a class="w-button dsi-button top-filter add-new-story"
+                               href="<?php echo \DSI\Service\URL::addStory() ?>">
+                                Add new story +</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="container-wide stories">
             <div class="filter-block">
                 <div class="w-row">

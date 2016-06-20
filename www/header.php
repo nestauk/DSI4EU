@@ -70,6 +70,12 @@ use \DSI\Service\URL;
             filter: blur(25px);
         }
 
+        input[type=text] {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
         .login-field.error {
             height: 50px;
             border-style: none none solid;
@@ -371,15 +377,10 @@ use \DSI\Service\URL;
     </div>
 <?php } ?>
 
-
 <div data-collapse="medium" data-animation="default" data-duration="400" class="w-nav nav-main">
     <div class="w-clearfix container-wide nav-container">
         <a href="<?php echo SITE_RELATIVE_PATH ?>/" class="w-nav-brand">
-            <?php if (isset($isHomePage)) { ?>
-                <img width="160" src="<?php echo SITE_RELATIVE_PATH ?>/images/logo-white.svg" class="brand">
-            <?php } else { ?>
-                <img width="160" src="<?php echo SITE_RELATIVE_PATH ?>/images/logo-white-black-text.svg" class="brand">
-            <?php } ?>
+            <img width="160" src="<?php echo SITE_RELATIVE_PATH ?>/images/logo-white.svg" class="brand">
         </a>
         <nav role="navigation" class="w-nav-menu m-nav-open <?php echo isset($isHomePage) ? 'homePageColours' : '' ?>">
             <a href="<?php echo URL::exploreDSI() ?>" class="w-nav-link nav">Explore DSI</a>
@@ -387,7 +388,7 @@ use \DSI\Service\URL;
             <a href="<?php echo URL::projects() ?>" class="w-nav-link nav">Projects</a>
             <a href="<?php echo URL::organisations() ?>" class="w-nav-link nav">Organisations</a>
             <?php if (!isset($_SESSION['user'])) { ?>
-                <a href="#" data-ix="showsignup" class="w-nav-link nav log-in">Login</a>
+                <a href="#" data-ix="showsignup" class="w-nav-link nav log-in">Log In</a>
             <?php } else { ?>
                 <a href="#" data-ix="showsignup" class="w-nav-link nav log-in">Create +</a>
             <?php } ?>
@@ -418,7 +419,7 @@ use \DSI\Service\URL;
                                 Sign out
                             </a>
                         </div>
-                        <img width="15" src="<?php echo SITE_RELATIVE_PATH ?>/images/vertical-nav.png"
+                        <img width="15" src="<?php echo SITE_RELATIVE_PATH ?>/images/white-settings.png"
                              data-ix="showpopover"
                              class="vert-nav">
                         <a href="<?php echo SITE_RELATIVE_PATH ?>/my-profile"
@@ -427,23 +428,20 @@ use \DSI\Service\URL;
                                  style="background-image: url('<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/<?php echo $loggedInUser->getProfilePicOrDefault() ?>');">
 
                             </div>
-                            <h3 class="profile-name"><?php echo $loggedInUser->getFirstName() ?></h3>
-                            <h3 class="profile-name profile-organisation"><?php echo $loggedInUser->getLastName() ?></h3>
+                            <h3 class="profile-name">
+                                <?php echo $loggedInUser->getFirstName() ?>
+                                <?php echo $loggedInUser->getLastName() ?>
+                            </h3>
+                            <h3 class="profile-name profile-organisation"><?php echo $loggedInUser->getJobTitle() ?></h3>
                         </a>
                     <?php } ?>
                 </div>
                 <div class="w-col w-col-7 w-col-small-7">
                     <div class="w-form">
-                        <form id="email-form" name="email-form" data-name="Email Form" class="w-clearfix">
-                            <input id="Search" type="text" placeholder="Search DSI4EU" name="Search" data-name="Search"
-                                   class="w-input search-field quicksearch">
+                        <form class="w-clearfix" id="email-form">
+                            <input class="w-input search-field quicksearch" data-name="Search" id="Search"
+                                   maxlength="256" name="Search" placeholder="Search DSI4EU" type="text">
                         </form>
-                        <div class="w-form-done">
-                            <p>Thank you! Your submission has been received!</p>
-                        </div>
-                        <div class="w-form-fail">
-                            <p>Oops! Something went wrong while submitting the form</p>
-                        </div>
                     </div>
                 </div>
             </div>

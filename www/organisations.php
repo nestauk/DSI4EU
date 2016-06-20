@@ -4,9 +4,9 @@
 
     <div ng-controller="OrganisationsController">
 
-        <div class="w-section project-archive">
-            <div class="container-wide archive">
-                <h1 class="page-h1">Organisations</h1>
+        <div class="w-section page-header stories-header">
+            <div class="container-wide header">
+                <h1 class="page-h1 light">Organisations</h1>
                 <div class="w-clearfix alphabet-selectors">
                     <a href="#" class="w-inline-block alphabet-link"
                        ng-class="{selected: startLetter == letter}"
@@ -14,11 +14,16 @@
                        ng-click="setStartLetter(letter)">
                         <div ng-bind="letter"></div>
                     </a>
+                    <a class="w-button dsi-button top-filter add-new-story" href="#">Add organisation +</a>
                 </div>
+            </div>
+        </div>
+
+        <div class="w-section project-archive">
+            <div class="container-wide archive">
+                <h1 class="page-h1">Organisations</h1>
                 <div class="w-row card-row">
-
                     <div ng-hide="loaded" style="padding: 0 10px 10px 20px;font-weight: bold;">Loading...</div>
-
                     <div class="w-col w-col-4 w-col-stack"
                          ng-repeat="organisation in organisations | filter:startsWithLetter">
                         <a ng-href="{{organisation.url}}" class="w-inline-block card-thin">

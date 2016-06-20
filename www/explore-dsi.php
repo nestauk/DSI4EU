@@ -1,16 +1,28 @@
 <?php require __DIR__ . '/header.php'; ?>
 
+    <div class="w-section page-header">
+        <div class="w-clearfix container-wide header">
+            <h1 class="page-h1 light">Explore DSI</h1>
+        </div>
+    </div>
+
     <div class="container-wide archive">
         <div class="intro-title">
             <h1 class="page-h1">Explore DSI</h1>
             <div class="w-row">
                 <div class="w-col w-col-6 intro-col">
                     <h2 class="home-h2">Heading</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros
+                        elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo
+                        diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut
+                        sem vitae risus tristique posuere.</p>
                 </div>
                 <div class="w-col w-col-6 intro-col">
                     <h2 class="home-h2">Heading</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros
+                        elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo
+                        diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut
+                        sem vitae risus tristique posuere.</p>
                 </div>
             </div>
         </div>
