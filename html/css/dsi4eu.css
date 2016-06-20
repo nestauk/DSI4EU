@@ -3599,6 +3599,10 @@ strong {
   line-height: 75px;
 }
 
+.page-h1.dash.full-page {
+  margin-left: 0px;
+}
+
 .page-h1.notice {
   margin-top: 17px;
   color: #000;
@@ -4361,7 +4365,7 @@ strong {
 }
 
 .search-results-popover {
-  position: absolute;
+  position: static;
   left: 0px;
   top: 0px;
   right: 0px;
@@ -4402,6 +4406,11 @@ strong {
 .search-result-link {
   display: block;
   color: #318ef3;
+}
+
+.search-result-link.full-page-result {
+  margin-bottom: 10px;
+  padding-left: 20px;
 }
 
 .view-all-search-results {
