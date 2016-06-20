@@ -13,17 +13,19 @@ require __DIR__ . '/header.php';
             src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/DashboardController.js"></script>
     <div ng-controller="DashboardController">
 
-        <div class="container-wide archive">
-            <div class="intro-title">
-                <h1 class="page-h1 dash">Dashboard</h1>
-                <div class="dashboard-stats">
-                    <div>
-                        <strong><?php echo number_format($totalOrganisations) ?></strong> Organisations
-                        have collaborated on
-                        <strong><?php echo number_format($totalProjects) ?></strong> projects
-                    </div>
+        <div class="w-section page-header">
+            <div class="container-wide header">
+                <h1 class="page-h1 light">Your dashboard</h1>
+                <div class="dsi4eu-stats">
+                    So far
+                    <?php echo number_format($totalOrganisations) ?> Organisations
+                    have collaborated on
+                    <?php echo number_format($totalProjects) ?> projects
                 </div>
             </div>
+        </div>
+
+        <div class="container-wide archive">
             <div class="w-row dashboard-widgets">
                 <div class="w-col w-col-4 w-col-stack notification-col">
                     <div class="dashboard-widget">
