@@ -2,6 +2,7 @@
 
 namespace DSI\Controller;
 
+use DSI\Entity\Image;
 use DSI\Entity\OrganisationProject;
 use DSI\Entity\Project;
 use DSI\Entity\ProjectMember;
@@ -40,6 +41,7 @@ use DSI\UseCase\RemoveTagFromProject;
 use DSI\UseCase\SetAdminStatusToProjectMember;
 use DSI\UseCase\UpdateProject;
 use DSI\UseCase\UpdateProjectCountryRegion;
+use DSI\UseCase\UpdateProjectLogo;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 
 class ProjectEditController
@@ -88,6 +90,13 @@ class ProjectEditController
                     $updateProjectCountryRegionCmd->data()->region = $_POST['region'] ?? '';
                     $updateProjectCountryRegionCmd->exec();
 
+                    if ($_POST['logo'] != Image::PROJECT_LOGO_URL . $project->getLogoOrDefault()) {
+                        $updateProjectLogo = new UpdateProjectLogo();
+                        $updateProjectLogo->data()->projectID = $project->getId();
+                        $updateProjectLogo->data()->fileName = basename($_POST['logo']);
+                        $updateProjectLogo->exec();
+                    }
+
                     echo json_encode([
                         'result' => 'ok',
                         'message' => [
@@ -112,10 +121,13 @@ class ProjectEditController
                 'status' => $project->getStatus(),
                 'description' => $project->getDescription(),
                 'startDate' => $project->getStartDate(),
+                'startDateHumanReadable' => $project->getUnixStartDate() ? date('l, j F, Y', $project->getUnixStartDate()) : '',
                 'endDate' => $project->getEndDate(),
+                'endDateHumanReadable' => $project->getUnixEndDate() ? date('l, j F, Y', $project->getUnixEndDate()) : '',
                 'countryID' => $project->getCountryID(),
                 'countryRegionID' => $project->getCountryRegionID(),
                 'countryRegion' => $project->getCountryRegion() ? $project->getCountryRegion()->getName() : '',
+                'logo' => Image::PROJECT_LOGO_URL . $project->getLogoOrDefault(),
             ]);
             return;
 

@@ -65,13 +65,34 @@ class ProjectRepositoryTest extends PHPUnit_Framework_TestCase
     }
 
     /** @test saveAsNew */
-    public function projectCanBeSaved()
+    public function projectCanBeCreated()
     {
         $project = new Project();
         $project->setOwner($this->user1);
+        $project->setName($name = 'Name');
+        $project->setDescription($desc = 'Desc');
+        $project->setUrl($url = 'http://example.org');
+        $project->setStatus($status = 'closed');
+        $project->setStartDate($startDate = '2016-05-21');
+        $project->setEndDate($endDate = '2016-05-22');
+        $project->setCountryRegion($this->countryRegion);
+        $project->setOrganisationsCount($organisations = 10);
+        $project->setLogo($logo = 'DSC100.JPG');
         $this->projectRepository->insert($project);
 
         $this->assertEquals(1, $project->getId());
+        $project = $this->projectRepository->getById($project->getId());
+        $this->assertEquals($this->user1->getId(), $project->getOwner()->getId());
+        $this->assertEquals($name, $project->getName());
+        $this->assertEquals($desc, $project->getDescription());
+        $this->assertEquals($url, $project->getUrl());
+        $this->assertEquals($status, $project->getStatus());
+        $this->assertEquals($startDate, $project->getStartDate());
+        $this->assertEquals($endDate, $project->getEndDate());
+        $this->assertEquals($this->countryRegion->getId(), $project->getCountryRegion()->getId());
+        $this->assertEquals($this->countryRegion->getCountry()->getId(), $project->getCountry()->getId());
+        $this->assertEquals($organisations, $project->getOrganisationsCount());
+        $this->assertEquals($logo, $project->getLogo());
     }
 
     /** @test save, getByID */

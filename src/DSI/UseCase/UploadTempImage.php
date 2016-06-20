@@ -46,6 +46,11 @@ class UploadTempImage
             $img->thumbnail(200, 200)
                 ->save($this->data()->filePath, null, $fileInfo->getExtension());
         }
+        if ($this->data()->format == 'projectLogo') {
+            $img = new SimpleImage($this->data()->filePath);
+            $img->thumbnail(200, 200)
+                ->save($this->data()->filePath, null, $fileInfo->getExtension());
+        }
 
         $this->imagePath = md5($this->data()->fileName . uniqid('', true)) . '.' . strtolower($fileInfo->getExtension());
         rename($this->data()->filePath, Image::TEMP_FOLDER . $this->imagePath);

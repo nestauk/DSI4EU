@@ -24,6 +24,7 @@ class ProjectRepository
             $insert[] = "`countryRegionID` = '" . addslashes($project->getCountryRegion()->getId()) . "'";
         $insert[] = "`organisationsCount` = '" . (int)($project->getOrganisationsCount()) . "'";
         $insert[] = "`importID` = '" . addslashes($project->getImportID()) . "'";
+        $insert[] = "`logo` = '" . addslashes($project->getLogo()) . "'";
 
         $query = new SQL("INSERT INTO `projects` SET " . implode(', ', $insert) . "");
         $query->query();
@@ -52,6 +53,7 @@ class ProjectRepository
             $insert[] = "`countryRegionID` = '" . addslashes($project->getCountryRegion()->getId()) . "'";
         $insert[] = "`organisationsCount` = '" . (int)($project->getOrganisationsCount()) . "'";
         $insert[] = "`importID` = '" . addslashes($project->getImportID()) . "'";
+        $insert[] = "`logo` = '" . addslashes($project->getLogo()) . "'";
 
         $query = new SQL("UPDATE `projects` SET " . implode(', ', $insert) . " WHERE `id` = '{$project->getId()}'");
         $query->query();
@@ -92,6 +94,7 @@ class ProjectRepository
         }
         $projectObj->setOrganisationsCount($project['organisationsCount']);
         $projectObj->setImportID($project['importID']);
+        $projectObj->setLogo($project['logo']);
 
         return $projectObj;
     }
@@ -127,7 +130,7 @@ class ProjectRepository
             id, ownerID, name, description, url, status
           , startDate, endDate
           , countryRegionID, organisationsCount
-          , importID
+          , importID, logo
           FROM `projects`
           WHERE " . implode(' AND ', $where) . "
           ORDER BY `name`

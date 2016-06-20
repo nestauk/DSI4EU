@@ -23,7 +23,8 @@ class Project
     private $countryRegion;
 
     /** @var string */
-    private $importID;
+    private $importID,
+        $logo;
 
     /**
      * @return int
@@ -133,6 +134,14 @@ class Project
     }
 
     /**
+     * @return string
+     */
+    public function getUnixStartDate()
+    {
+        return strtotime($this->startDate);
+    }
+
+    /**
      * @param string $startDate
      */
     public function setStartDate($startDate)
@@ -146,6 +155,14 @@ class Project
     public function getEndDate()
     {
         return $this->endDate;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUnixEndDate()
+    {
+        return strtotime($this->endDate);
     }
 
     /**
@@ -231,5 +248,26 @@ class Project
     public function setImportID($importID)
     {
         $this->importID = $importID;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLogo()
+    {
+        return (string)$this->logo;
+    }
+
+    public function getLogoOrDefault()
+    {
+        return ($this->logo != '' ? $this->logo : '0.svg');
+    }
+
+    /**
+     * @param string $logo
+     */
+    public function setLogo($logo)
+    {
+        $this->logo = (string)$logo;
     }
 }

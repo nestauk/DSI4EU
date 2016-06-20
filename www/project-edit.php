@@ -69,38 +69,65 @@ require __DIR__ . '/header.php';
                                 </div>
                                 <label class="story-label profile-image" for="Title">Your project logo</label>
                                 <img class="story-image-upload"
-                                     src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg">
-                                <a class="w-button dsi-button story-image-upload" href="#">Upload image</a>
+                                     src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg"
+                                     ng-src="{{project.logo}}">
+                                <a class="w-button dsi-button story-image-upload" href="#"
+                                   ngf-select="logo.upload($file, $invalidFiles)" ng-bind="logo.loading ? 'Loading...' : 'Upload image'">
+                                    Upload image
+                                </a>
+                                <?php /*
                                 <label class="story-label" for="Title">Header background image</label>
                                 <img class="story-image-upload story-image-upload-large"
                                      src="images/brussels-locations.jpg">
                                 <a class="w-button dsi-button story-image-upload" href="#">Upload image</a>
+                                */ ?>
                             </div>
                             <div class="w-col w-col-6">
                                 <h2 class="edit-h2">Duration of project</h2>
                                 <label class="story-label" for="start-date">Project start date</label>
+                                <input id="start-date-hidden" type="text" style="display:none"
+                                       ng-model="project.startDate">
                                 <input class="w-input story-form personal" id="start-date"
                                        maxlength="256" placeholder="What date did the project start?"
-                                       type="text">
+                                       type="text" ng-model="project.startDateHumanReadable"
+                                       onclick="$('#start-date-hidden').datepicker('show')">
                                 <label class="story-label" for="End-date">Project end date (leave this blank for ongoing
                                     projects)</label>
-                                <input class="w-input story-form personal" data-name="End date" id="End-date"
-                                       maxlength="256" name="End-date" placeholder="When did/will the project end?"
-                                       type="text">
+                                <input id="end-date-hidden" type="text" style="display:none" ng-model="project.endDate">
+                                <input class="w-input story-form personal" id="end-date"
+                                       maxlength="256" placeholder="When did/will the project end?"
+                                       type="text" ng-model="project.endDateHumanReadable"
+                                       onclick="$('#end-date-hidden').datepicker('show')">
                                 <h2 class="edit-h2">Where is your project based?</h2>
-                                <label class="story-label" for="city">Which city are you based in?</label>
-                                <input class="w-input story-form personal" data-name="city" id="city" maxlength="256"
-                                       name="city" placeholder="Your city" type="text">
-                                <label class="story-label" for="country">In which country?</label>
-                                <input class="w-input story-form personal" data-name="country" id="country"
-                                       maxlength="256" name="country" placeholder="Your country" type="text">
+
+                                <div ng-cloak>
+                                    <div>
+                                        <label class="story-label" for="country">Which country are you based in?</label>
+                                        <select id="edit-country" data-placeholder="Select country"
+                                                style="width:400px;background:transparent">
+                                            <option></option>
+                                        </select>
+                                    </div>
+                                    <div ng-show="regionsLoaded">
+                                        <br/>
+                                        <label class="story-label" for="city">In which city?</label>
+                                        <select
+                                            data-tags="true" id="edit-countryRegion"
+                                            data-placeholder="Type the city"
+                                            style="width:400px;background:transparent">
+                                        </select>
+                                    </div>
+                                    <div ng-show="regionsLoading">
+                                        Loading...
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <input class="w-button dsi-button post-story" type="submit" value="Update project"
                                ng-value="loading ? 'Loading...' : 'Update project'"
                                ng-disabled="loading">
                         <a href="<?php echo \DSI\Service\URL::project($project->getId(), $project->getName()) ?>"
-                           class="w-button dsi-button post-story cancel">Cancel</a>
+                           class="w-button dsi-button post-story cancel">Back to project</a>
                     </form>
                 </div>
             </div>
@@ -108,10 +135,15 @@ require __DIR__ . '/header.php';
 
     </div>
     <script>
-        $(function() {
-            $( "#start-date" ).datepicker({
-                dateFormat: "DD, d MM, yy",
-                altField: "#alternate-start-date",
+        $(function () {
+            $("#start-date-hidden").datepicker({
+                dateFormat: "yy-mm-dd",
+                altField: "#start-date",
+                altFormat: "DD, d MM, yy"
+            });
+            $('#end-date-hidden').datepicker({
+                dateFormat: "yy-mm-dd",
+                altField: "#end-date",
                 altFormat: "DD, d MM, yy"
             });
         });

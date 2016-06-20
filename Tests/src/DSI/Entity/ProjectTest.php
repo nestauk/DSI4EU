@@ -130,4 +130,12 @@ class ProjectTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->countryRegion->getId(), $this->project->getCountryRegion()->getId());
         $this->assertEquals($this->country->getId(), $this->project->getCountry()->getId());
     }
+
+    /** @test */
+    public function settingLogo_returnsLogo()
+    {
+        $logo = 'DCS100.JPG';
+        $this->project->setLogo($logo);
+        $this->assertEquals($logo, $this->project->getLogo());
+    }
 }

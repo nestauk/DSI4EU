@@ -1,0 +1,1 @@
+ALTER TABLE `projects` ADD `logo` CHAR(50) NOT NULL AFTER `importID`;
