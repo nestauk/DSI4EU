@@ -2472,9 +2472,10 @@ strong {
 
 .home-h2 {
   font-family: 'Open Sans', sans-serif;
+  color: #18233f;
   font-size: 28px;
   line-height: 37px;
-  font-weight: 600;
+  font-weight: 400;
 }
 
 .home-h2.centre {
@@ -2510,6 +2511,10 @@ strong {
   padding-bottom: 20px;
   border-bottom: 1px solid #e7e7e7;
   background-color: #fff;
+}
+
+.section-white.stats {
+  padding-top: 0px;
 }
 
 .showcase {
@@ -3538,9 +3543,10 @@ strong {
   height: 800px;
   background-image: -webkit-linear-gradient(0deg, rgba(115, 23, 214, .96), #3e8de4 48%, rgba(29, 201, 160, .94)), url('../images/bg2.png'), -webkit-linear-gradient(45deg, #18233f, #384155);
   background-image: linear-gradient(90deg, rgba(115, 23, 214, .96), #3e8de4 48%, rgba(29, 201, 160, .94)), url('../images/bg2.png'), linear-gradient(45deg, #18233f, #384155);
-  background-position: 0px 0px, 50% 53%, 0px 0px;
+  background-position: 0px 0px, 50% 50%, 0px 0px;
   background-size: auto, cover, auto;
   background-repeat: repeat, no-repeat, repeat;
+  background-attachment: scroll, scroll, scroll;
 }
 
 .card-row {
@@ -4059,6 +4065,13 @@ strong {
   line-height: 49px;
 }
 
+.tabs-menu-explore {
+  position: static;
+  display: block;
+  width: 570px;
+  margin: -57px auto 50px;
+}
+
 .explore-tabs {
   margin-right: 10px;
   margin-left: 10px;
@@ -4066,8 +4079,8 @@ strong {
 
 .single-post-hero {
   position: relative;
-  height: 400px;
-  margin-top: 105px;
+  height: 350px;
+  margin-top: 0px;
   background-image: -webkit-linear-gradient(270deg, rgba(24, 35, 63, .27), rgba(24, 35, 63, .76)), url('../images/brussels-locations.jpg');
   background-image: linear-gradient(180deg, rgba(24, 35, 63, .27), rgba(24, 35, 63, .76)), url('../images/brussels-locations.jpg');
   background-position: 0px 0px, 0px -216px;
@@ -4527,8 +4540,10 @@ strong {
   padding-bottom: 0px;
   background-image: -webkit-linear-gradient(0deg, rgba(115, 23, 214, .96), #3e8de4 49%, rgba(29, 201, 160, .94)), url('../images/bg2.png'), -webkit-linear-gradient(45deg, #18233f, #384155);
   background-image: linear-gradient(90deg, rgba(115, 23, 214, .96), #3e8de4 49%, rgba(29, 201, 160, .94)), url('../images/bg2.png'), linear-gradient(45deg, #18233f, #384155);
-  background-position: 0px 0px, 0px 0px, 0px 0px;
-  background-size: auto, 960px, auto;
+  background-position: 0px 0px, 50% 50%, 0px 0px;
+  background-size: auto, cover, auto;
+  background-repeat: repeat, no-repeat, repeat;
+  background-attachment: scroll, scroll, scroll;
 }
 
 .cta-column-left {
@@ -4600,6 +4615,38 @@ strong {
   font-family: 'Open Sans', sans-serif;
   color: hsla(0, 0%, 100%, .75);
   text-align: center;
+}
+
+.tab-buttons-container {
+  height: 75px;
+  background-image: -webkit-linear-gradient(0deg, rgba(115, 23, 214, .96), #3e8de4 52%, rgba(29, 201, 160, .94)), url('../images/bg2.png'), -webkit-linear-gradient(45deg, #18233f, #384155);
+  background-image: linear-gradient(90deg, rgba(115, 23, 214, .96), #3e8de4 52%, rgba(29, 201, 160, .94)), url('../images/bg2.png'), linear-gradient(45deg, #18233f, #384155);
+  background-position: 0px 0px, 50% 50%, 0px 0px;
+  background-size: auto, cover, auto;
+  background-repeat: repeat, no-repeat, repeat;
+}
+
+.tab-button {
+  width: 174px;
+  margin-right: 5px;
+  margin-left: 5px;
+  border-radius: 3px;
+  background-color: hsla(0, 0%, 100%, .15);
+  -webkit-transition: all 200ms ease;
+  transition: all 200ms ease;
+  color: #fff;
+  text-align: center;
+}
+
+.tab-button:hover {
+  background-color: hsla(0, 0%, 100%, .25);
+  -webkit-transform: scale(1.03);
+  -ms-transform: scale(1.03);
+  transform: scale(1.03);
+}
+
+.tab-button.w--current {
+  background-color: hsla(0, 0%, 100%, .35);
 }
 
 html.w-mod-js *[data-ix="downbeforeup"] {
@@ -5250,6 +5297,10 @@ html.w-mod-js *[data-ix="under-dev"] {
     position: static;
     margin-top: -27px;
   }
+  .tabs-menu-explore {
+    width: 100%;
+    margin-top: -161px;
+  }
   .single-post-category {
     top: -81px;
   }
@@ -5271,6 +5322,15 @@ html.w-mod-js *[data-ix="under-dev"] {
     margin-top: 13px;
     margin-bottom: 10px;
     line-height: 15px;
+  }
+  .tab-buttons-container {
+    height: 185px;
+  }
+  .tab-button {
+    width: 100%;
+    margin-right: 0px;
+    margin-bottom: 10px;
+    margin-left: 0px;
   }
 }
 

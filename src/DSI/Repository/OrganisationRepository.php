@@ -155,6 +155,9 @@ class OrganisationRepository
         return $organisations;
     }
 
+    /**
+     * @return int
+     */
     public function countOrganisations()
     {
         return $this->countObjectsWhere(['1']);
@@ -162,7 +165,7 @@ class OrganisationRepository
 
     /**
      * @param $where
-     * @return array
+     * @return int
      */
     private function countObjectsWhere($where)
     {

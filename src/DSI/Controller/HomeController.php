@@ -125,8 +125,6 @@ class HomeController
                     ]);
                 }
             } else {
-                $totalProjects = (new ProjectRepository())->countProjects();
-                $totalOrganisations = (new OrganisationRepository())->countOrganisations();
                 $latestStories = (new StoryRepository())->getLast(3);
                 $projectsMember = (new ProjectMemberRepository())->getByMemberID($loggedInUser->getId());
                 $organisationsMember = (new OrganisationMemberRepository())->getByMemberID($loggedInUser->getId());

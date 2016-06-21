@@ -141,6 +141,9 @@ class ProjectRepository
         return $projects;
     }
 
+    /**
+     * @return int
+     */
     public function countProjects()
     {
         return $this->countObjectsWhere(['1']);
@@ -148,7 +151,7 @@ class ProjectRepository
 
     /**
      * @param $where
-     * @return array
+     * @return int
      */
     private function countObjectsWhere($where)
     {

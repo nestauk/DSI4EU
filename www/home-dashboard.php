@@ -1,6 +1,4 @@
 <?php
-/** @var $totalProjects int */
-/** @var $totalOrganisations int */
 /** @var $latestStories \DSI\Entity\Story[] */
 /** @var $projectsMember \DSI\Entity\ProjectMember[] */
 /** @var $organisationsMember \DSI\Entity\OrganisationMember[] */
@@ -16,12 +14,6 @@ require __DIR__ . '/header.php';
         <div class="w-section page-header">
             <div class="container-wide header">
                 <h1 class="page-h1 light">Your dashboard</h1>
-                <div class="dsi4eu-stats">
-                    So far
-                    <?php echo number_format($totalOrganisations) ?> Organisations
-                    have collaborated on
-                    <?php echo number_format($totalProjects) ?> projects
-                </div>
             </div>
         </div>
 
