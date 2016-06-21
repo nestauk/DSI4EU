@@ -2,6 +2,7 @@
 
 namespace DSI\Controller;
 
+use DSI\Entity\Image;
 use DSI\Repository\StoryCategoryRepository;
 use DSI\Repository\StoryRepository;
 use DSI\Repository\UserRepository;
@@ -67,8 +68,8 @@ class StoryEditController
             echo json_encode([
                 'title' => $story->getTitle(),
                 'datePublished' => $story->getDatePublished(),
-                'featuredImage' => $story->getFeaturedImage(),
-                'mainImage' => $story->getMainImage(),
+                'featuredImage' => Image::STORY_FEATURED_IMAGE_URL . $story->getFeaturedImage(),
+                'mainImage' => Image::STORY_MAIN_IMAGE_URL . $story->getMainImage(),
                 'isPublished' => $story->isPublished(),
                 'categoryID' => $story->getStoryCategoryId(),
             ]);

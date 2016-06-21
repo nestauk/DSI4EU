@@ -51,7 +51,7 @@
                                 <label class="story-label" for="Title">Card grid image</label>
 
                                 <img ng-show="featuredImage" class="story-image-upload"
-                                     ng-src="<?php echo SITE_RELATIVE_PATH ?>/images/tmp/{{featuredImage}}">
+                                     ng-src="{{featuredImage}}">
                                 <a ngf-select="uploadFeaturedImage($file, $invalidFiles)" accept="image/*"
                                    class="w-button dsi-button story-image-upload" href="#">Upload image</a>
 
@@ -72,7 +72,7 @@
                                 <label class="story-label" for="Title">Main story image</label>
 
                                 <img ng-show="mainImage" class="story-image-upload"
-                                     ng-src="<?php echo SITE_RELATIVE_PATH ?>/images/tmp/{{mainImage}}">
+                                     ng-src="{{mainImage}}">
                                 <a ngf-select="uploadMainImage($file, $invalidFiles)" accept="image/*"
                                    class="w-button dsi-button story-image-upload" href="#">Upload image</a>
 
@@ -95,7 +95,7 @@
                                     <div class="w-checkbox">
                                         <label class="w-form-label">
                                             <input class="w-checkbox-input" name="categoryID" type="radio"
-                                                   ng-model="story.categoryID" value="<?php echo $category->getId()?>">
+                                                   ng-model="categoryID" value="<?php echo $category->getId() ?>">
                                             <?php echo $category->getName() ?>
                                         </label>
                                     </div>

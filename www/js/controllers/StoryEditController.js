@@ -93,7 +93,7 @@ angular
                                 $scope.errors = response.data.errors;
                                 console.log(response.data.errors);
                             } else {
-                                alert(['unexpected error', response.data]);
+                                alert('unexpected error');
                                 console.log(response.data);
                             }
                         });

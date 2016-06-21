@@ -73,7 +73,7 @@ angular
                 var data = {
                     add: true,
                     title: $scope.title,
-                    categoryID: $scope.story.categoryID,
+                    categoryID: $scope.categoryID,
                     datePublished: $scope.datePublished,
                     featuredImage: $scope.featuredImage,
                     mainImage: $scope.mainImage,
@@ -91,7 +91,8 @@ angular
                                 $scope.errors = response.data.errors;
                                 console.log(response.data.errors);
                             } else {
-                                alert(['unexpected error', response.data]);
+                                alert('unexpected error');
+                                console.log(response.data);
                             }
                         });
                 }, 500);

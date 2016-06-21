@@ -2,6 +2,7 @@
 
 namespace DSI\UseCase;
 
+use DSI\Entity\Image;
 use DSI\Entity\Story;
 use DSI\NotEnoughData;
 use DSI\Repository\StoryCategoryRepository;
@@ -71,7 +72,7 @@ class StoryEdit
         if (!isset($this->data()->title))
             throw new NotEnoughData('title');
         //if (!isset($this->data()->authorID))
-          //  throw new NotEnoughData('author');
+        //  throw new NotEnoughData('author');
     }
 
     private function assertSentDataIsValid()
@@ -110,12 +111,14 @@ class StoryEdit
      */
     private function setMainImage(Story $story)
     {
-        if ($this->data()->mainImage) {
-            copy(
-                __DIR__ . '/../../../www/images/tmp/' . $this->data()->mainImage,
-                __DIR__ . '/../../../www/images/stories/main/' . $this->data()->mainImage
-            );
-            $story->setMainImage($this->data()->mainImage);
+        if (
+            $this->data()->mainImage AND
+            $this->data()->mainImage != Image::STORY_MAIN_IMAGE_URL . $story->getMainImage()
+        ) {
+            $updateMainImage = new UpdateStoryMainImage();
+            $updateMainImage->data()->story = $story;
+            $updateMainImage->data()->fileName = $this->data()->mainImage;
+            $updateMainImage->exec();
         }
     }
 
@@ -124,12 +127,14 @@ class StoryEdit
      */
     private function setFeaturedImage(Story $story)
     {
-        if ($this->data()->featuredImage) {
-            copy(
-                __DIR__ . '/../../../www/images/tmp/' . $this->data()->featuredImage,
-                __DIR__ . '/../../../www/images/stories/feat/' . $this->data()->featuredImage
-            );
-            $story->setFeaturedImage($this->data()->featuredImage);
+        if (
+            $this->data()->featuredImage AND
+            $this->data()->featuredImage != Image::STORY_FEATURED_IMAGE_URL . $story->getFeaturedImage()
+        ) {
+            $updateFeatImage = new UpdateStoryFeatImage();
+            $updateFeatImage->data()->story = $story;
+            $updateFeatImage->data()->fileName = $this->data()->featuredImage;
+            $updateFeatImage->exec();
         }
     }
 

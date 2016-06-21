@@ -2,6 +2,7 @@
 
 namespace DSI\UseCase;
 
+use DSI\Entity\Image;
 use DSI\Entity\Story;
 use DSI\NotEnoughData;
 use DSI\Repository\StoryCategoryRepository;
@@ -41,13 +42,13 @@ class StoryAdd
         $story->setContent((string)$this->data()->content);
         $this->setCategory($story);
         $this->setAuthor($story);
-        $this->setFeaturedImage($story);
-        $this->setMainImage($story);
         $this->setDatePublished($story);
         $story->setIsPublished($this->data()->isPublished);
-
         $this->storyRepo->insert($story);
         $this->story = $this->storyRepo->getById($story->getId());
+
+        $this->setFeaturedImage($this->story);
+        $this->setMainImage($this->story);
     }
 
     /**
@@ -109,11 +110,10 @@ class StoryAdd
     private function setMainImage(Story $story)
     {
         if ($this->data()->mainImage) {
-            copy(
-                __DIR__ . '/../../../www/images/tmp/' . $this->data()->mainImage,
-                __DIR__ . '/../../../www/images/stories/main/' . $this->data()->mainImage
-            );
-            $story->setMainImage($this->data()->mainImage);
+            $updateMainImage = new UpdateStoryMainImage();
+            $updateMainImage->data()->story = $story;
+            $updateMainImage->data()->fileName = $this->data()->mainImage;
+            $updateMainImage->exec();
         }
     }
 
@@ -123,11 +123,10 @@ class StoryAdd
     private function setFeaturedImage(Story $story)
     {
         if ($this->data()->featuredImage) {
-            copy(
-                __DIR__ . '/../../../www/images/tmp/' . $this->data()->featuredImage,
-                __DIR__ . '/../../../www/images/stories/feat/' . $this->data()->featuredImage
-            );
-            $story->setFeaturedImage($this->data()->featuredImage);
+            $updateFeatImage = new UpdateStoryFeatImage();
+            $updateFeatImage->data()->story = $story;
+            $updateFeatImage->data()->fileName = $this->data()->featuredImage;
+            $updateFeatImage->exec();
         }
     }
 

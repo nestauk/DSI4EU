@@ -54,7 +54,7 @@ require __DIR__ . '/header.php';
                                 <label class="story-label" for="Title">Card grid image</label>
 
                                 <img ng-show="story.featuredImage" class="story-image-upload"
-                                     ng-src="<?php echo SITE_RELATIVE_PATH ?>/images/tmp/{{story.featuredImage}}">
+                                     ng-src="{{story.featuredImage}}">
                                 <a ngf-select="uploadFeaturedImage($file, $invalidFiles)" accept="image/*"
                                    class="w-button dsi-button story-image-upload" href="#">Upload image</a>
 
@@ -75,7 +75,7 @@ require __DIR__ . '/header.php';
                                 <label class="story-label" for="Title">Main story image</label>
 
                                 <img ng-show="story.mainImage" class="story-image-upload"
-                                     ng-src="<?php echo SITE_RELATIVE_PATH ?>/images/tmp/{{story.mainImage}}">
+                                     ng-src="{{story.mainImage}}">
                                 <a ngf-select="uploadMainImage($file, $invalidFiles)" accept="image/*"
                                    class="w-button dsi-button story-image-upload" href="#">Upload image</a>
 

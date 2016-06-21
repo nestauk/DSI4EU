@@ -37,7 +37,6 @@ require __DIR__ . '/header.php';
             <div class="w-row">
                 <div class="w-col w-col-7">
                     <div class="single-post-content-card">
-                        <h2 class="content-h2"><?php echo show_input($story->getTitle()) ?></h2>
                         <p class="post-p"><?php echo $story->getContent() ?></p>
                     </div>
                 </div>
