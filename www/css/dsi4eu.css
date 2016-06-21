@@ -1055,7 +1055,9 @@ strong {
 }
 
 .body-content.add-story {
-  margin-top: 120px;
+  margin-top: 35px;
+  border-style: none;
+  background-color: transparent;
 }
 
 .h1-login {
@@ -2398,7 +2400,7 @@ strong {
   color: #fff;
   font-size: 36px;
   line-height: 40px;
-  font-weight: 600;
+  font-weight: 400;
   text-align: center;
 }
 
@@ -3413,9 +3415,11 @@ strong {
 .dsi-button.post-story {
   margin-left: 10px;
   float: right;
+  background-color: #fff;
 }
 
 .dsi-button.post-story.cancel {
+  background-color: #fff;
   color: #c73232;
 }
 
@@ -4079,13 +4083,14 @@ strong {
 
 .single-post-hero {
   position: relative;
-  height: 350px;
-  margin-top: 0px;
-  background-image: -webkit-linear-gradient(270deg, rgba(24, 35, 63, .27), rgba(24, 35, 63, .76)), url('../images/brussels-locations.jpg');
-  background-image: linear-gradient(180deg, rgba(24, 35, 63, .27), rgba(24, 35, 63, .76)), url('../images/brussels-locations.jpg');
-  background-position: 0px 0px, 0px -216px;
-  background-size: auto, cover;
+  height: 400px;
+  margin-top: -46px;
+  background-image: -webkit-linear-gradient(270deg, rgba(62, 69, 83, .7), rgba(37, 34, 46, .91)), url('../images/brussels-locations.jpg');
+  background-image: linear-gradient(180deg, rgba(62, 69, 83, .7), rgba(37, 34, 46, .91)), url('../images/brussels-locations.jpg');
+  background-position: 0px 0px, 50% 50%;
+  background-size: auto, auto;
   background-repeat: repeat, no-repeat;
+  background-attachment: scroll, scroll;
 }
 
 .post-hero-title {
@@ -4156,7 +4161,7 @@ strong {
 }
 
 .single-post-content-card {
-  padding: 20px;
+  padding: 40px;
   border-radius: 5px;
   background-color: #fff;
   font-family: 'Open Sans', sans-serif;
@@ -4172,7 +4177,7 @@ strong {
 .sidebar-h2 {
   margin-top: 0px;
   padding-right: 10px;
-  padding-left: 10px;
+  padding-left: 20px;
   font-family: 'Open Sans', sans-serif;
   font-size: 28px;
   font-weight: 300;
@@ -4182,6 +4187,7 @@ strong {
   width: 100%;
   padding-top: 10px;
   padding-bottom: 10px;
+  padding-left: 10px;
   border-bottom: 1px solid #f3f3f3;
   background-color: #fff;
   -webkit-transition: all 200ms ease;
@@ -4319,13 +4325,14 @@ strong {
   padding-bottom: 20px;
   border-style: none;
   border-radius: 3px;
-  background-color: #f3f3f3;
+  background-color: #fff;
   font-family: 'Open Sans', sans-serif;
 }
 
 .story-form.personal {
   max-width: 350px;
   margin-bottom: 15px;
+  background-color: #fff;
 }
 
 .story-label {

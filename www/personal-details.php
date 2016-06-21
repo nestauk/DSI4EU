@@ -68,9 +68,15 @@ require __DIR__ . '/header.php';
     </div>
 
     <div ng-controller="PersonalDetailsController">
+
+        <div class="w-section page-header">
+            <div class="container-wide header">
+                <h1 class="page-h1 light">Edit your profile</h1>
+            </div>
+        </div>
+
         <div class="container-wide">
             <div class="body-content add-story">
-                <h1 class="page-h1">Edit your profile</h1>
                 <div data-ix="showpasswordchange" class="change-password top-right">Change password</div>
 
                 <div class="w-form">

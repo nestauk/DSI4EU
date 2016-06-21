@@ -22,9 +22,14 @@
 
     <div ng-controller="AddStoryController">
 
+        <div class="w-section page-header">
+            <div class="container-wide header">
+                <h1 class="page-h1 light">Add a new story</h1>
+            </div>
+        </div>
+
         <div class="container-wide">
             <div class="body-content add-story">
-                <h1 class="page-h1">Add a new story</h1>
                 <div class="w-form">
                     <form class="w-clearfix" ng-submit="addStory()">
                         <div class="w-row">

@@ -25,10 +25,14 @@ require __DIR__ . '/header.php';
     </style>
 
     <div ng-controller="StoryEditController" storyid="<?php echo $story->getId() ?>">
+        <div class="w-section page-header">
+            <div class="container-wide header">
+                <h1 class="page-h1 light">Edit story</h1>
+            </div>
+        </div>
 
         <div class="container-wide">
             <div class="body-content add-story">
-                <h1 class="page-h1">Edit story</h1>
                 <div class="w-form">
                     <form class="w-clearfix" ng-submit="saveStory()">
                         <div class="w-row">
