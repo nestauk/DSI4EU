@@ -14,142 +14,138 @@ require __DIR__ . '/header.php';
 
     <div ng-controller="UserController as ctrl" id="UserController">
 
+        <div class="w-section page-header">
+            <div class="container-wide header">
+                <h1 class="page-h1 light">
+                    <?php echo show_input($user->getFirstName()) ?>
+                    <?php echo show_input($user->getLastName()) ?>
+                </h1>
+                <div class="position">
+                    <?php echo show_input($user->getJobTitle()) ?> at
+                    <?php echo show_input($user->getCompany()) ?>
+                </div>
+                <img class="large-profile-img"
+                     src="<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/<?php echo $user->getProfilePicOrDefault() ?>">
+                <?php if ($isOwner) { ?>
+                    <a class="w-button dsi-button profile-edit" href="<?php echo \DSI\Service\URL::editProfile() ?>">
+                        Edit profile</a>
+                <?php } ?>
+            </div>
+        </div>
+
         <div class="w-section project-section">
             <div class="container-wide">
-                <div class="w-row project-info">
-                    <div id="textScroll" class="w-col w-col-6 w-col-stack">
-                        <div id="text">
-                            <div class="project-detail">
-                                <div class="profile-header-card">
-                                    <?php if ($user->getCityName() OR $user->getCountryName()) { ?>
-                                        <img src="<?php echo SITE_RELATIVE_PATH ?>/images/pin.png" class="card-pin">
-                                        <div class="card-city">
-                                            <?php echo $user->getCityName() ?>,
-                                            <?php echo $user->getCountryName() ?>
-                                        </div>
-                                    <?php } ?>
-                                    <div class="profile-bg-img el-blur" style="background:#666"></div>
-                                    <div data-ix="show-edit-light" class="header-card-overlay">
-                                        <h1 class="profile-card-h1">
-                                            <span><?php echo $user->getFirstName() ?></span>
-                                            <span><?php echo $user->getLastName() ?></span>
-                                        </h1>
-                                        <div class="profile-card-job-title"><?php echo $user->getJobTitle() ?></div>
-                                        <?php if ($isOwner) { ?>
-                                            <a href="<?php echo \DSI\Service\URL::editProfile() ?>" class="edit-white">
-                                                <img width="25"
-                                                     src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-compose-outline-white.png"/>
-                                            </a>
-                                        <?php } ?>
-                                    </div>
-                                </div>
-                                <div class="profile-essential-info">
-                                    <div data-ix="edit-image" class="profile-image-large profile-image-upload"
-                                         style="background-image: url('<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/<?php echo $user->getProfilePicOrDefault() ?>')"
-                                         ng-style="{'background-image':'url(<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/' + user.profilePic + ')'}">
-                                    </div>
-                                </div>
-                            </div>
-                            <div data-ix="show-edit-dark" class="info-card">
-                                <h3 class="info-h card-h">About me</h3>
-                                <p class="project-summary" ng-bind="user.bio" style="white-space: pre-line">
-                                    <?php echo nl2br(show_input($user->getBio())) ?>
+                <div class="w-row profile-info">
+                    <div class="w-col w-col-4 w-col-stack">
+                        <div class="info-card">
+                            <h3 class="info-h card-h">About me</h3>
+                            <p class="project-summary" ng-bind="user.bio" style="white-space: pre-line">
+                                <?php echo nl2br(show_input($user->getBio())) ?>
+                            </p>
+                            <?php if ($user->getCityName() OR $user->getCountryName()) { ?>
+                                <h3 class="info-h card-h">Location</h3>
+                                <p class="project-summary">
+                                    <?php echo $user->getCityName() ?>,
+                                    <?php echo $user->getCountryName() ?>
                                 </p>
-                                <h3 class="info-h card-h">My skills:</h3>
-                                <div class="w-clearfix tags-block">
-                                    <div class="skill" ng-repeat="skill in skills">
-                                        <?php if ($isOwner) { ?>
-                                            <div class="delete" ng-click="removeSkill(skill)">-</div>
-                                        <?php } ?>
-                                        <div ng-bind="skill"></div>
-                                    </div>
-                                    <?php if ($isOwner) { ?>
-                                        <div class="add-item-block" ng-click="showAddSkill = !showAddSkill">
-                                            <div class="add-item">+</div>
-                                        </div>
-                                        <div class="w-form" style="float:left;margin-top:-17px"
-                                             ng-show="showAddSkill">
-                                            <form id="email-form" name="email-form" data-name="Email Form"
-                                                  class="w-clearfix add-skill-section">
-                                                <select data-tags="true"
-                                                        data-placeholder="Type your skill"
-                                                        id="Add-skill" name="Add-skill"
-                                                        class="w-input add-skill"
-                                                        multiple
-                                                        style="width:200px">
-                                                    <option></option>
-                                                </select>
-                                                <?php /*
-                                                <input type="submit" value="Add" data-wait="Please wait..."
-                                                       class="w-button add-skill-btn">
-                                                */ ?>
-                                            </form>
-                                        </div>
-                                    <?php } ?>
-                                </div>
-                                <h3 class="info-h card-h">My Languages:</h3>
-                                <div class="w-clearfix tags-block">
-                                    <div class="skill" ng-repeat="lang in languages">
-                                        <?php if ($isOwner) { ?>
-                                            <div class="delete" ng-click="removeLanguage(lang)">-</div>
-                                        <?php } ?>
-                                        <div ng-bind="lang"></div>
-                                    </div>
-                                    <?php if ($isOwner) { ?>
-                                        <div class="add-item-block" ng-click="showAddLanguage = !showAddLanguage">
-                                            <div class="add-item">+</div>
-                                        </div>
+                            <?php } ?>
 
-                                        <div class="w-form" style="float:left;margin-top:-17px"
-                                             ng-show="showAddLanguage">
-                                            <form id="email-form" name="email-form" data-name="Email Form"
-                                                  class="w-clearfix add-skill-section">
-                                                <select data-placeholder="Select your language"
-                                                        id="Add-language" name="Add-language"
-                                                        class="w-input add-language"
-                                                        multiple
-                                                        style="width:200px">
-                                                    <option></option>
-                                                </select>
-                                                <?php /*
-                                                <input type="submit" value="Add"
-                                                       class="w-button add-skill-btn">
-                                                */ ?>
-                                            </form>
-                                        </div>
+                            <h3 class="info-h card-h">My skills:</h3>
+                            <div class="w-clearfix tags-block">
+                                <div class="skill" ng-repeat="skill in skills">
+                                    <?php if ($isOwner) { ?>
+                                        <div class="delete" ng-click="removeSkill(skill)">-</div>
                                     <?php } ?>
+                                    <div ng-bind="skill"></div>
                                 </div>
                             </div>
+                            <?php if ($isOwner) { ?>
+                                <div class="w-clearfix add-new">
+                                    <a class="w-button dsi-button add-new-item" href="#"
+                                       ng-click="showAddSkill = !showAddSkill"
+                                       ng-bind="showAddSkill ? 'Close' : 'Add new skill +'">Add new skill +</a>
+                                </div>
+
+                                <div class="add-new-input" ng-show="showAddSkill">
+                                    <div class="w-form">
+                                        <form class="w-clearfix" data-name="Email Form 2" id="email-form-2"
+                                              name="email-form-2">
+                                            <select data-tags="true"
+                                                    data-placeholder="Add your skill"
+                                                    id="Add-skill" name="Add-skill"
+                                                    class="w-input add-skill"
+                                                    multiple
+                                                    style="width:200px">
+                                                <option></option>
+                                            </select>
+                                            <input class="w-button add-new-input-button" data-wait="Please wait..."
+                                                   type="submit" value="Add +">
+                                        </form>
+                                    </div>
+                                </div>
+                            <?php } ?>
+
+                            <h3 class="info-h card-h">My Languages:</h3>
+                            <div class="w-clearfix tags-block">
+                                <div class="skill" ng-repeat="lang in languages">
+                                    <?php if ($isOwner) { ?>
+                                        <div class="delete" ng-click="removeLanguage(lang)">-</div>
+                                    <?php } ?>
+                                    <div ng-bind="lang"></div>
+                                </div>
+                            </div>
+                            <?php if ($isOwner) { ?>
+                                <div class="w-clearfix add-new" ng-click="showAddLanguage = !showAddLanguage">
+                                    <a class="w-button dsi-button add-new-item" href="#"
+                                       ng-bind="showAddLanguage ? 'Close' : 'Add new language +'">Add new language +</a>
+                                </div>
+
+                                <div class="add-new-input" ng-show="showAddLanguage">
+                                    <div class="w-form">
+                                        <form class="w-clearfix" data-name="Email Form 2" id="email-form-2"
+                                              name="email-form-2">
+                                            <select data-placeholder="Select your language"
+                                                    id="Add-language" name="Add-language"
+                                                    class="w-input add-language"
+                                                    multiple
+                                                    style="width:200px">
+                                                <option></option>
+                                            </select>
+                                            <input class="w-button add-new-input-button" data-wait="Please wait..."
+                                                   type="submit" value="Add +">
+                                        </form>
+                                    </div>
+                                </div>
+                            <?php } ?>
                         </div>
                     </div>
-                    <div id="postsScroll" class="w-col w-col-6 w-col-stack">
-                        <div id="posts">
-                            <div class="info-card">
-                                <h3 class="info-h card-h">Projects i'm involved with</h3>
-                                <div class="list-items">
-                                    <a href="#" class="w-inline-block partner-link"
-                                       ng-href="{{project.url}}"
-                                       ng-repeat="project in user.projects">
-                                        <div class="w-clearfix list-item">
-                                            <div class="partner-title" ng-bind="project.name"></div>
-                                            <div class="no-of-projects">
-                                                <span ng-bind="project.membersCount"></span>
-                                                Contributor<span ng-bind="project.membersCount == 1 ? '' : 's'"></span>
-                                            </div>
+                    <div class="w-col w-col-4 w-col-stack">
+                        <div class="info-card">
+                            <h3 class="info-h card-h">Projects i'm involved with</h3>
+                            <div class="list-items">
+                                <a class="w-inline-block partner-link" href="#"
+                                   ng-href="{{project.url}}"
+                                   ng-repeat="project in user.projects">
+                                    <div class="w-clearfix list-item">
+                                        <div class="partner-title" ng-bind="project.name"></div>
+                                        <div class="no-of-projects">
+                                            <span ng-bind="project.membersCount"></span>
+                                            <span
+                                                ng-bind="project.membersCount == 1 ? 'Contributor' : 'Contributors'"></span>
                                         </div>
-                                    </a>
-                                </div>
-                                <?php if ($isOwner) { ?>
-                                    <div class="join-project">
-                                        <a href="#" class="w-button btn btn-join"
-                                           ng-click="editPanel = 'joinProject'"
-                                           data-ix="show-profile-update">
-                                            Join project +
-                                        </a>
                                     </div>
-                                <?php } ?>
+                                </a>
                             </div>
+                            <?php if ($isOwner) { ?>
+                                <div class="join-project">
+                                    <a class="w-button btn btn-join" href="#"
+                                       ng-click="editPanel = 'joinProject'"
+                                       data-ix="show-profile-update">Add new project +</a>
+                                </div>
+                            <?php } ?>
                         </div>
+                    </div>
+                    <div class="w-col w-col-4 w-col-stack">
                         <div class="info-card">
                             <h3 class="info-h card-h">Organisations i'm involved with</h3>
                             <div class="list-items">
@@ -159,7 +155,7 @@ require __DIR__ . '/header.php';
                                         <div class="partner-title" ng-bind="organisation.name"></div>
                                         <div class="no-of-projects">
                                             <span ng-bind="organisation.membersCount"></span>
-                                            Project<span ng-bind="organisation.membersCount == 1 ? '' : 's'"></span>
+                                            <span ng-bind="organisation.membersCount == 1 ? 'Project' : 'Projects'"></span>
                                         </div>
                                     </div>
                                 </a>
@@ -178,6 +174,7 @@ require __DIR__ . '/header.php';
                 </div>
             </div>
         </div>
+
 
         <?php if ($isOwner) { ?>
             <div class="profile-update bg-blur">
