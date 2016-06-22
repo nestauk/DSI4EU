@@ -12,93 +12,65 @@ require __DIR__ . '/header.php';
         ng-controller="ProjectController"
         data-projectid="<?php echo $project->getId() ?>">
 
+        <div class="w-section page-header">
+            <div class="container-wide header">
+                <h1 class="page-h1 light"><?php echo show_input($project->getName()) ?></h1>
+                <div class="dsi4eu-stats">
+                    <a href="<?php echo $project->getUrl() ?>"><?php echo $project->getUrl() ?></a>
+                </div>
+                <img class="large-profile-img"
+                     src="<?php echo \DSI\Entity\Image::PROJECT_LOGO_URL . $project->getLogoOrDefault() ?>">
+                <a class="w-button dsi-button profile-edit" href="#">Edit&nbsp;project</a>
+            </div>
+        </div>
+
         <div class="w-section project-section">
             <div class="container-wide">
                 <div class="w-row project-info">
-                    <div id="textScroll" class="w-col w-col-6 w-col-stack">
+                    <div class="w-col w-col-6 w-col-stack" id="textScroll">
                         <div id="text">
+                            <div class="info-card">
+                                <h3 class="info-h card-h">About this project</h3>
+                                <p class="project-summary">
+                                    <?php echo show_input($project->getDescription()) ?>
+                                </p>
+                                <?php if ($project->getCountryRegion()) { ?>
+                                    <p class="project-summary">
+                                        <strong><?php echo show_input($project->getName()) ?></strong>
+                                        is based in
+                                        <strong><?php echo $project->getCountryRegion()->getName() ?></strong>,
+                                        <strong><?php echo $project->getCountry()->getName() ?></strong>
+                                    </p>
+                                <?php } ?>
+                                <h3 class="card-sub-h">Duration</h3>
+                                <div class="duration-p">This project runs from
+                                    <strong><?php echo date('M Y', $project->getUnixStartDate()) ?></strong> to
+                                    <strong><?php echo date('M Y', $project->getUnixEndDate()) ?></strong>
+                                </div>
+                                <br/>
+                                <h3 class="card-sub-h">Status</h3>
+                                <div class="duration-p">
+                                    <strong><?php echo ucfirst($project->getStatus()) ?></strong>
+                                </div>
+                                <h3 class="info-h card-h">This project is tagged under:</h3>
+                                <div class="w-clearfix tags-block">
+                                    <div class="skill">Here is a very long tag</div>
+                                    <div class="skill">Short</div>
+                                    <div class="skill">This tag is going to span several lines and is in fact longer
+                                    </div>
+                                    <div class="skill">Hardware</div>
+                                    <div class="skill">Software</div>
+                                    <div class="skill">Innovation</div>
+                                    <div class="skill">Skills</div>
+                                    <div class="add-item-block">
+                                        <div class="add-item">+</div>
+                                    </div>
+                                </div>
+                                <img class="edit-dark" src="images/ios7-compose-outline.png" width="25">
+                            </div>
+
                             <div class="project-detail">
                                 <div class="project-header">
-                                    <h1 class="project-h1">
-                                        <?php if ($isOwner) { ?>
-                                            <input type="text" value="<?php echo $project->getName() ?>"
-                                                   ng-model="project.name" ng-blur="updateBasic()"
-                                                   style="background:transparent;color:white;width:500px;border:0"/>
-                                        <?php } else { ?>
-                                            <?php echo $project->getName() ?>
-                                        <?php } ?>
-                                    </h1>
-                                    <img src="<?php echo SITE_RELATIVE_PATH ?>/images/pin.png" class="card-pin">
-
-                                    <?php if ($isOwner) { ?>
-                                        <div class="card-city" style="text-shadow: 0 0 0 #000;">
-                                            <div ng-hide="changeRegion" ng-click="changeRegion = true"
-                                                 style="cursor:pointer">
-                                                <?php if ($project->getCountryRegion()) { ?>
-                                                    <?php echo $project->getCountryRegion()->getName() ?>,
-                                                    <?php echo $project->getCountry()->getName() ?>
-                                                <?php } ?>
-                                            </div>
-
-                                            <form ng-submit="saveCountryRegion()" ng-show="changeRegion" ng-cloak>
-                                                <select id="Edit-country" data-placeholder="Select country"
-                                                        style="width:150px;background:transparent">
-                                                    <option></option>
-                                                </select>
-                                                <span ng-show="regionsLoaded">
-                                                    <select
-                                                        data-tags="true" id="Edit-countryRegion"
-                                                        data-placeholder="Type the city"
-                                                        style="width:150px;background:transparent">
-                                                    </select>
-                                                </span>
-                                                <span ng-show="regionsLoading">
-                                                    Loading...
-                                                </span>
-                                                <span ng-show="regionsLoaded">
-                                                    <input
-                                                        ng-hide="savingCountryRegion.loading || savingCountryRegion.saved"
-                                                        type="submit" value="Save" class="w-button add-skill-btn">
-                                                    <button
-                                                        ng-show="savingCountryRegion.loading && !savingCountryRegion.saved"
-                                                        type="button" class="w-button add-skill-btn">Saving...
-                                                    </button>
-
-                                                    <input
-                                                        ng-show="!savingCountryRegion.loading && savingCountryRegion.saved"
-                                                        type="submit" value="Saved" class="w-button add-skill-btn">
-
-                                                    <button class="w-button add-skill-btn"
-                                                            ng-show="!savingCountryRegion.loading"
-                                                            ng-click="changeRegion = false">
-                                                        Close
-                                                    </button>
-                                                </span>
-                                            </form>
-                                        </div>
-                                    <?php } else { ?>
-                                        <div class="card-city">
-                                            <?php if ($project->getCountryRegion()) { ?>
-                                                <?php echo $project->getCountryRegion()->getName() ?>,
-                                                <?php echo $project->getCountry()->getName() ?>
-                                            <?php } ?>
-                                        </div>
-                                    <?php } ?>
-
-                                    <?php if ($isOwner) { ?>
-                                        <input type="text" class="project-url"
-                                               ng-model="project.url" ng-blur="updateBasic()"
-                                               placeholder="Project Page" value="<?php echo $project->getUrl() ?>"
-                                               style="background:transparent;color:white;width:500px;border:0"/>
-                                    <?php } else { ?>
-                                        <?php if ($project->getUrl()) { ?>
-                                            <a href="<?php echo $project->getUrl() ?>"
-                                               target="_blank" class="project-url">
-                                                <?php echo $project->getUrl() ?>
-                                            </a>
-                                        <?php } ?>
-                                    <?php } ?>
-
                                     <div class="project-status" ng-hide="changeRegion">
                                         <span class="status-text">Project status:</span>
                                         <?php if ($isOwner) { ?>

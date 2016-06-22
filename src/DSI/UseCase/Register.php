@@ -84,6 +84,8 @@ class Register
     {
         if (trim($this->data()->password) == '')
             $this->errorHandler->addTaggedError('password', 'Please type a password');
+        if (strlen($this->data()->password) < 6)
+            $this->errorHandler->addTaggedError('password', 'Please type a longer password');
     }
 
     public function verifyIfEmailExists()

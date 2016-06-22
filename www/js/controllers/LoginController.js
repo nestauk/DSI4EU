@@ -109,16 +109,19 @@ angular
             $scope.loading = true;
             $scope.errors = {};
 
-            $timeout(function () {
-                var data = {
-                    email: $scope.email.value,
-                    password: $scope.password.value,
-                    register: true
-                };
+            var data = {
+                email: $scope.email.value,
+                password: $scope.password.value,
+                register: true
+            };
 
+            console.log(data);
+            console.log(SITE_RELATIVE_PATH + '/register.json');
+
+            $timeout(function () {
                 $http.post(SITE_RELATIVE_PATH + '/register.json', data).then(
                     function (response) {
-                        console.log(data);
+                        console.log(response.data);
                         $scope.loading = false;
                         if (response.data.response == 'error') {
                             $scope.errors = response.data.errors;

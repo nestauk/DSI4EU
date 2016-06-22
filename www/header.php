@@ -382,7 +382,7 @@ use \DSI\Service\URL;
 <div data-collapse="medium" data-animation="default" data-duration="400" class="w-nav nav-main">
     <div class="w-clearfix container-wide nav-container">
         <a href="<?php echo SITE_RELATIVE_PATH ?>/" class="w-nav-brand">
-            <img width="160" src="<?php echo SITE_RELATIVE_PATH ?>/images/logo-white.svg" class="brand">
+            <img width="160" src="<?php echo SITE_RELATIVE_PATH ?>/images/all white.svg" class="brand">
         </a>
         <nav role="navigation" class="w-nav-menu m-nav-open <?php echo isset($isHomePage) ? 'homePageColours' : '' ?>">
             <a href="<?php echo URL::exploreDSI() ?>" class="w-nav-link nav">Explore DSI</a>

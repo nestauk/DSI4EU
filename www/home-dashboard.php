@@ -18,8 +18,8 @@ require __DIR__ . '/header.php';
         </div>
 
         <div class="container-wide archive">
-            <div class="search-results-popover" ng-show="(search.focused && search.entry.length >= 3) || search.entry.length >= 3"
-                 style="display:block">
+            <div class="search-results-popover" ng-cloak
+                 ng-show="search.entry.length >= 3">
                 <h3 class="search-results">Search results for: {{search.entry}}</h3>
                 <div class="w-row">
                     <div class="w-col w-col-4 search-result">
