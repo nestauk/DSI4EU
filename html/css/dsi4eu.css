@@ -2710,7 +2710,7 @@ strong {
 }
 
 .hp-post {
-  height: 200px;
+  height: 270px;
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
   background-color: #fff;
@@ -3442,8 +3442,11 @@ strong {
 }
 
 .dsi-button.post-story.cancel {
+  position: static;
+  height: 30px;
   background-color: #fff;
   color: #c73232;
+  line-height: 20px;
 }
 
 .dsi-button.story-image-upload {
@@ -4127,10 +4130,10 @@ strong {
   position: relative;
   height: 400px;
   margin-top: -46px;
-  background-image: -webkit-linear-gradient(270deg, rgba(62, 69, 83, .7), rgba(37, 34, 46, .91)), url('../images/brussels-locations.jpg');
-  background-image: linear-gradient(180deg, rgba(62, 69, 83, .7), rgba(37, 34, 46, .91)), url('../images/brussels-locations.jpg');
+  background-image: -webkit-linear-gradient(270deg, rgba(27, 32, 42, .78), rgba(37, 34, 46, .91)), url('../images/brussels-locations.jpg');
+  background-image: linear-gradient(180deg, rgba(27, 32, 42, .78), rgba(37, 34, 46, .91)), url('../images/brussels-locations.jpg');
   background-position: 0px 0px, 50% 50%;
-  background-size: auto, auto;
+  background-size: auto, cover;
   background-repeat: repeat, no-repeat;
   background-attachment: scroll, scroll;
 }
@@ -4522,7 +4525,9 @@ strong {
   right: 0px;
   z-index: 1;
   display: block;
-  height: 335px;
+  height: auto;
+  min-height: 335px;
+  padding-bottom: 40px;
   border-radius: 5px;
   background-color: hsla(0, 0%, 100%, .95);
   box-shadow: 0 0 30px -16px #000;
@@ -4764,9 +4769,13 @@ strong {
 }
 
 .create-drop-down.w--open {
-  margin-top: 14px;
+  right: -48px;
+  margin-top: 25px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   border-radius: 3px;
   background-color: #fff;
+  box-shadow: 0 1px 30px -11px #000;
   font-family: 'Open Sans', sans-serif;
   color: #18233f;
   text-transform: uppercase;
@@ -4854,12 +4863,28 @@ strong {
   width: 34px;
   height: 38px;
   padding-left: 10px;
-  background-color: #fff;
+  background-color: transparent;
   font-family: 'Open Sans', sans-serif;
   color: #18233f;
   font-size: 11px;
   line-height: 38px;
   cursor: pointer;
+}
+
+.arror-up {
+  position: absolute;
+  left: 0px;
+  top: -26px;
+  right: 0px;
+  display: block;
+  width: 0px;
+  height: 0px;
+  margin-right: auto;
+  margin-left: auto;
+  border-style: solid;
+  border-width: 15px 20px;
+  border-color: transparent transparent #fff;
+  background-color: transparent;
 }
 
 html.w-mod-js *[data-ix="downbeforeup"] {
