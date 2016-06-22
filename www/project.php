@@ -45,12 +45,20 @@ require __DIR__ . '/header.php';
                                         <strong><?php echo $project->getCountry()->getName() ?></strong>
                                     </p>
                                 <?php } ?>
-                                <h3 class="card-sub-h">Duration</h3>
-                                <div class="duration-p">This project runs from
-                                    <strong><?php echo date('M Y', $project->getUnixStartDate()) ?></strong> to
-                                    <strong><?php echo date('M Y', $project->getUnixEndDate()) ?></strong>
-                                </div>
-                                <br/>
+                                <?php if ($project->getUnixStartDate() OR $project->getUnixEndDate()) { ?>
+                                    <h3 class="card-sub-h">Duration</h3>
+                                    <div class="duration-p">This project runs
+                                        <?php if ($project->getUnixStartDate()) { ?>
+                                            from
+                                            <strong><?php echo date('M Y', $project->getUnixStartDate()) ?></strong>
+                                        <?php } ?>
+                                        <?php if ($project->getUnixEndDate()) { ?>
+                                            to
+                                            <strong><?php echo date('M Y', $project->getUnixEndDate()) ?></strong>
+                                        <?php } ?>
+                                    </div>
+                                    <br/>
+                                <?php } ?>
                                 <h3 class="card-sub-h">Status</h3>
                                 <div class="duration-p">
                                     <strong><?php echo ucfirst($project->getStatus()) ?></strong>

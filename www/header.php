@@ -469,7 +469,9 @@ use \DSI\Service\URL;
                                    maxlength="256" name="Search" placeholder="Search DSI4EU" type="text"
                                    ng-model="search.entry" ng-focus="search.focused = true"
                                    ng-blur="search.focused = false">
-                            <div ng-show="search.entry.length > 0" class="search-clear" ng-click="search.entry = ''">clear</div>
+                            <div ng-cloak ng-show="search.entry.length > 0" class="search-clear"
+                                 ng-click="search.entry = ''">clear
+                            </div>
                         </form>
                     </div>
                 </div>
