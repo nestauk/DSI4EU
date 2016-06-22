@@ -464,11 +464,12 @@ use \DSI\Service\URL;
                 </div>
                 <div class="w-col w-col-7 w-col-small-7">
                     <div class="w-form">
-                        <form class="w-clearfix" id="email-form">
+                        <form class="w-clearfix search-input" id="email-form">
                             <input class="w-input search-field quicksearch" data-name="Search" id="Search"
                                    maxlength="256" name="Search" placeholder="Search DSI4EU" type="text"
                                    ng-model="search.entry" ng-focus="search.focused = true"
                                    ng-blur="search.focused = false">
+                            <div ng-show="search.entry.length > 0" class="search-clear" ng-click="search.entry = ''">clear</div>
                         </form>
                     </div>
                 </div>
