@@ -44,6 +44,11 @@ class URL
             return SITE_RELATIVE_PATH . '/project/' . $projectID;
     }
 
+    public static function editProject($projectID)
+    {
+        return SITE_RELATIVE_PATH . '/project/edit/' . $projectID;
+    }
+
     public static function organisations()
     {
         return SITE_RELATIVE_PATH . '/organisations';

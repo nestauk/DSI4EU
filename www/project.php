@@ -20,7 +20,10 @@ require __DIR__ . '/header.php';
                 </div>
                 <img class="large-profile-img"
                      src="<?php echo \DSI\Entity\Image::PROJECT_LOGO_URL . $project->getLogoOrDefault() ?>">
-                <a class="w-button dsi-button profile-edit" href="#">Edit&nbsp;project</a>
+                <?php if ($isOwner) { ?>
+                    <a class="w-button dsi-button profile-edit"
+                       href="<?php echo \DSI\Service\URL::editProject($project->getId()) ?>">Edit project</a>
+                <?php } ?>
             </div>
         </div>
 
@@ -54,41 +57,34 @@ require __DIR__ . '/header.php';
                                 </div>
                                 <h3 class="info-h card-h">This project is tagged under:</h3>
                                 <div class="w-clearfix tags-block">
-                                    <div class="skill">Here is a very long tag</div>
-                                    <div class="skill">Short</div>
-                                    <div class="skill">This tag is going to span several lines and is in fact longer
+                                    <div class="skill" ng-repeat="tag in project.tags">
+                                        <?php if ($isOwner) { ?>
+                                            <div class="delete" ng-click="removeTag(tag)">-</div>
+                                        <?php } ?>
+                                        <div ng-bind="tag"></div>
                                     </div>
-                                    <div class="skill">Hardware</div>
-                                    <div class="skill">Software</div>
-                                    <div class="skill">Innovation</div>
-                                    <div class="skill">Skills</div>
-                                    <div class="add-item-block">
-                                        <div class="add-item">+</div>
-                                    </div>
+                                    <?php if ($isOwner) { ?>
+                                        <div class="add-item-block" ng-click="addingTag = !addingTag">
+                                            <div class="add-item">+</div>
+                                        </div>
+
+                                        <div class="w-form" style="float:left"
+                                             ng-show="addingTag">
+                                            <form class="w-clearfix add-skill-section"
+                                                  ng-submit="addTag()">
+                                                <select data-tags="true"
+                                                        data-placeholder="Type your skill"
+                                                        id="Add-tag"
+                                                        class="w-input add-language"
+                                                        style="width:200px;display:inline">
+                                                    <option></option>
+                                                </select>
+                                                <input type="submit" value="Add" class="w-button add-skill-btn">
+                                            </form>
+                                        </div>
+                                    <?php } ?>
                                 </div>
                                 <img class="edit-dark" src="images/ios7-compose-outline.png" width="25">
-                            </div>
-
-                            <div class="project-detail">
-                                <div class="project-header">
-                                    <div class="project-status" ng-hide="changeRegion">
-                                        <span class="status-text">Project status:</span>
-                                        <?php if ($isOwner) { ?>
-                                            <select ng-model="project.status" ng-change="updateBasic()"
-                                                    style="background: transparent;border:0">
-                                                <option value="live">Live</option>
-                                                <option value="closed">Closed</option>
-                                            </select>
-                                        <?php } else { ?>
-                                            <strong
-                                                class="status-indicator"><?php echo ucfirst($project->getStatus()) ?></strong>
-                                        <?php } ?>
-                                    </div>
-
-                                    <img class="edit-white"
-                                         src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-compose-outline-white.png"
-                                         width="25">
-                                </div>
                             </div>
 
                             <?php /*
@@ -421,7 +417,7 @@ require __DIR__ . '/header.php';
                                         </button>
                                     </div>
                                 <?php } ?>
-                                <?php if ($userHasInvitation) { ?>
+                                <?php if (isset($userHasInvitation) AND $userHasInvitation) { ?>
                                     <div class="you-have-invites" ng-hide="invitationActioned" ng-cloak>
                                         <div class="notification-block-p">You have been invited to join this project
                                         </div>
@@ -466,37 +462,6 @@ require __DIR__ . '/header.php';
                                 </div>
                             <?php } ?>
 
-                            <div class="info-card">
-                                <h3 class="info-h card-h">This project is tagged under:</h3>
-                                <div class="w-clearfix tags-block">
-                                    <div class="skill" ng-repeat="tag in project.tags">
-                                        <?php if ($isOwner) { ?>
-                                            <div class="delete" ng-click="removeTag(tag)">-</div>
-                                        <?php } ?>
-                                        <div ng-bind="tag"></div>
-                                    </div>
-                                    <?php if ($isOwner) { ?>
-                                        <div class="add-item-block" ng-click="addingTag = !addingTag">
-                                            <div class="add-item">+</div>
-                                        </div>
-
-                                        <div class="w-form" style="float:left"
-                                             ng-show="addingTag">
-                                            <form class="w-clearfix add-skill-section"
-                                                  ng-submit="addTag()">
-                                                <select data-tags="true"
-                                                        data-placeholder="Type your skill"
-                                                        id="Add-tag"
-                                                        class="w-input add-language"
-                                                        style="width:200px;display:inline">
-                                                    <option></option>
-                                                </select>
-                                                <input type="submit" value="Add" class="w-button add-skill-btn">
-                                            </form>
-                                        </div>
-                                    <?php } ?>
-                                </div>
-                            </div>
                             <div class="info-card">
                                 <h3 class="info-h card-h">Social impact</h3>
                                 <div class="impact-block">
@@ -600,58 +565,6 @@ require __DIR__ . '/header.php';
                     </div>
 
                     <div id="postsScroll" class="w-col w-col-6 w-col-stack">
-                        <div class="info-card">
-                            <h3 class="info-h card-h">About this project</h3>
-                            <p class="project-summary">
-                                <?php if ($isOwner) { ?>
-                                    <textarea
-                                        class="readjustTextarea"
-                                        ng-model="project.description"
-                                        ng-blur="updateBasic()"
-                                        placeholder="Type a description"
-                                        style="min-height:150px;border:0;width:100%">
-                                        <?php echo show_input($project->getDescription()) ?>
-                                    </textarea>
-                                <?php } else { ?>
-                                    <?php echo show_input($project->getDescription()) ?>
-                                <?php } ?>
-                            </p>
-                            <h3 class="card-sub-h">Duration</h3>
-                            <div class="duration-p" ng-cloak>
-                                <div ng-show="project.startDate && project.endDate">
-                                    This project runs from
-                                    <strong>{{getDateFrom(project.startDate)}}</strong> to
-                                    <strong>{{getDateFrom(project.endDate)}}</strong>
-                                </div>
-                                <div ng-show="project.startDate && !project.endDate">
-                                    This project runs from
-                                    <strong>{{getDateFrom(project.startDate)}}</strong>
-                                </div>
-                                <div ng-show="!project.startDate && project.endDate">
-                                    This project runs until
-                                    <strong>{{getDateFrom(project.endDate)}}</strong>
-                                </div>
-                            </div>
-                            <?php if ($isOwner) { ?>
-                                <div ng-cloak>
-                                    <div style="float:left;width:40%;margin-left:10%">
-                                        Start Date
-                                        <input type="text" placeholder="yyyy-mm-dd" ng-model="project.startDate"
-                                               ng-blur="updateBasic()" style="width:130px"
-                                               ng-pattern="datePattern"/>
-                                    </div>
-                                    <div style="float:left;width:40%">
-                                        End Date
-                                        <input type="text" placeholder="yyyy-mm-dd" ng-model="project.endDate"
-                                               ng-blur="updateBasic()" style="width:130px"
-                                               ng-pattern="datePattern"/>
-                                    </div>
-                                </div>
-                            <?php } ?>
-
-                            <div style="clear:both"></div>
-                        </div>
-
                         <div id="posts">
                             <div class="info-card">
                                 <?php if ($loggedInUser AND $isOwner) { ?>
