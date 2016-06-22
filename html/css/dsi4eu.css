@@ -2432,7 +2432,7 @@ strong {
 }
 
 .invite-form-field {
-  width: 32%;
+  width: 100%;
   height: 48px;
   margin-right: 1%;
   float: left;
@@ -4789,6 +4789,43 @@ strong {
 
 .login-modal.modal {
   display: none;
+}
+
+.signup-input {
+  position: relative;
+  display: inline-block;
+  width: 300px;
+  margin-right: 5px;
+  margin-left: 5px;
+  float: left;
+}
+
+.error-message {
+  position: absolute;
+  bottom: 80px;
+  display: block;
+  width: 300px;
+  padding: 10px;
+  border-radius: 3px;
+  background-color: #fff;
+  font-family: 'Open Sans', sans-serif;
+  color: #db4343;
+  font-size: 14px;
+  line-height: 21px;
+}
+
+.arrow-down {
+  position: absolute;
+  left: 129px;
+  bottom: -30px;
+  display: block;
+  width: 40px;
+  height: 40px;
+  margin-right: auto;
+  margin-left: auto;
+  border-style: solid;
+  border-width: 20px;
+  border-color: #fff transparent transparent;
 }
 
 html.w-mod-js *[data-ix="downbeforeup"] {
