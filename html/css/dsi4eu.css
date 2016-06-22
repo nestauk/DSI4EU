@@ -4842,6 +4842,26 @@ strong {
   border-color: #fff transparent transparent;
 }
 
+.search-input {
+  position: relative;
+}
+
+.search-clear {
+  position: absolute;
+  top: 7px;
+  right: 18px;
+  bottom: 0px;
+  width: 34px;
+  height: 38px;
+  padding-left: 10px;
+  background-color: #fff;
+  font-family: 'Open Sans', sans-serif;
+  color: #18233f;
+  font-size: 11px;
+  line-height: 38px;
+  cursor: pointer;
+}
+
 html.w-mod-js *[data-ix="downbeforeup"] {
   opacity: 0;
   -webkit-transform: translate(0px, 50px);
