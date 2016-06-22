@@ -19,7 +19,7 @@ angular
 
                     $scope.currentPage = 1; //current page
                     $scope.maxSize = 10; //pagination max size
-                    $scope.entryLimit = 1; //max rows for data table
+                    $scope.entryLimit = 12; //max rows for data table
 
                     /* init pagination with $scope.list */
                     $scope.noOfPages = Math.ceil($scope.stories.length / $scope.entryLimit);
