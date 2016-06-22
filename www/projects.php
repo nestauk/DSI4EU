@@ -21,7 +21,6 @@
 
         <div class="w-section project-archive">
             <div class="container-wide archive">
-                <h1 class="page-h1">Projects</h1>
                 <div class="w-row card-row">
                     <div class="w-col w-col-4 w-col-stack"
                          ng-repeat="project in projects | filter:startsWithLetter">
