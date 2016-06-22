@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Last Published: Tue Jun 21 2016 13:08:04 GMT+0000 (UTC) -->
+<!-- Last Published: Wed Jun 22 2016 10:33:09 GMT+0000 (UTC) -->
 <html data-wf-site="56e2e31a1b1f8f784728a08c" data-wf-page="573add50dc12b47e497523d3">
 <head>
   <meta charset="utf-8">
@@ -57,74 +57,81 @@
     .w-input:-ms-input-placeholder { /* Internet Explorer 10+ */
         color:    #4CADDE;
     }
+    /* keep modals centered */
+    .modal-container {display: table; height: 100%; position:absolute; overflow: hidden;width:100%;}
+    .modal-helper {#position: absolute; #top: 50%;display: table-cell; vertical-align: middle;}
+    .modal-content {#position: relative; #top: -50%;margin:0 auto;width:600px;}
   </style>
 </head>
 <body>
   <div class="modal-signup bg-blur">
-    <div class="signup-form" data-ix="downbeforeup">
-      <div class="modal-header"></div>
-      <div class="close modal-close" data-ix="destroysignup">+</div>
-      <img class="modal-brand" src="images/logo-white.svg" width="160">
-      <div class="w-tabs" data-duration-in="300" data-duration-out="100" data-easing="ease-in-out">
-        <div class="w-tab-menu tabs-menu">
-          <a class="w-tab-link w--current w-inline-block tab" data-w-tab="Tab 1">
-            <div>Login</div>
-          </a>
-          <a class="w-tab-link w-inline-block tab" data-w-tab="Tab 2">
-            <div>Register</div>
-          </a>
-        </div>
-        <div class="w-tab-content tabs-content">
-          <div class="w-tab-pane w--tab-active" data-w-tab="Tab 1">
-            <div class="w-form login-form">
-              <form data-name="Email Form" id="email-form" name="email-form">
-                <input autofocus="autofocus" class="w-input login-field" data-name="Email 4" id="email-4" maxlength="256" name="email-4" placeholder="Enter your email address" required="required" type="email">
-                <input class="w-input login-field" data-name="Password 4" id="Password-4" maxlength="256" name="Password-4" placeholder="Password" required="required" type="password">
-                <input class="w-button login-button" data-wait="Please wait..." type="submit" value="Login">
-                <a class="forgotten-password" href="#">Forgotten password?</a>
-                <div class="w-row social-badges">
-                  <div class="w-col w-col-3 w-col-small-3 w-col-tiny-3">
-                    <a class="w-inline-block social-login" href="#">
-                      <img class="social-badge" height="100%" src="images/social-1_square-github.svg" width="100%">
-                    </a>
+    <div class="modal-container">
+      <div class="modal-helper">
+        <div class="signup-form modal-content" data-ix="downbeforeup">
+          <div class="modal-header"></div>
+          <div class="close modal-close" data-ix="destroysignup">+</div>
+          <div class="w-tabs" data-duration-in="300" data-duration-out="100" data-easing="ease-in-out">
+            <div class="w-tab-menu tabs-menu">
+              <a class="w-tab-link w--current w-inline-block tab" data-w-tab="Tab 1">
+                <div>Login</div>
+              </a>
+              <a class="w-tab-link w-inline-block tab" data-w-tab="Tab 2">
+                <div>Register</div>
+              </a>
+            </div>
+            <div class="w-tab-content tabs-content">
+              <div class="w-tab-pane w--tab-active" data-w-tab="Tab 1">
+                <div class="w-form login-form">
+                  <form data-name="Email Form" id="email-form" name="email-form">
+                    <input autofocus="autofocus" class="w-input login-field" data-name="Email 4" id="email-4" maxlength="256" name="email-4" placeholder="Enter your email address" required="required" type="email">
+                    <input class="w-input login-field" data-name="Password 4" id="Password-4" maxlength="256" name="Password-4" placeholder="Password" required="required" type="password">
+                    <input class="w-button login-button" data-wait="Please wait..." type="submit" value="Login">
+                    <a class="forgotten-password" href="#">Forgotten password?</a>
+                    <div class="w-row social-badges">
+                      <div class="w-col w-col-3 w-col-small-3 w-col-tiny-3">
+                        <a class="w-inline-block social-login" href="#">
+                          <img class="social-badge" height="100%" src="images/social-1_square-github.svg" width="100%">
+                        </a>
+                      </div>
+                      <div class="w-col w-col-3 w-col-small-3 w-col-tiny-3">
+                        <a class="w-inline-block social-login" href="#">
+                          <img class="social-badge" height="100%" src="images/social-1_square-facebook.svg" width="100%">
+                        </a>
+                      </div>
+                      <div class="w-col w-col-3 w-col-small-3 w-col-tiny-3">
+                        <a class="w-inline-block social-login" href="#">
+                          <img class="social-badge" height="100%" src="images/social-1_square-google-plus.svg" width="100%">
+                        </a>
+                      </div>
+                      <div class="w-col w-col-3 w-col-small-3 w-col-tiny-3">
+                        <a class="w-inline-block social-login" href="#">
+                          <img class="social-badge" height="100%" src="images/social-1_square-twitter.svg" width="100%">
+                        </a>
+                      </div>
+                    </div>
+                  </form>
+                  <div class="w-form-done">
+                    <p>Thank you! Your submission has been received!</p>
                   </div>
-                  <div class="w-col w-col-3 w-col-small-3 w-col-tiny-3">
-                    <a class="w-inline-block social-login" href="#">
-                      <img class="social-badge" height="100%" src="images/social-1_square-facebook.svg" width="100%">
-                    </a>
-                  </div>
-                  <div class="w-col w-col-3 w-col-small-3 w-col-tiny-3">
-                    <a class="w-inline-block social-login" href="#">
-                      <img class="social-badge" height="100%" src="images/social-1_square-google-plus.svg" width="100%">
-                    </a>
-                  </div>
-                  <div class="w-col w-col-3 w-col-small-3 w-col-tiny-3">
-                    <a class="w-inline-block social-login" href="#">
-                      <img class="social-badge" height="100%" src="images/social-1_square-twitter.svg" width="100%">
-                    </a>
+                  <div class="w-form-fail">
+                    <p>Oops! Something went wrong while submitting the form</p>
                   </div>
                 </div>
-              </form>
-              <div class="w-form-done">
-                <p>Thank you! Your submission has been received!</p>
               </div>
-              <div class="w-form-fail">
-                <p>Oops! Something went wrong while submitting the form</p>
-              </div>
-            </div>
-          </div>
-          <div class="w-tab-pane" data-w-tab="Tab 2">
-            <div class="w-form login-form">
-              <form data-name="Email Form" id="email-form" name="email-form">
-                <input autofocus="autofocus" class="w-input login-field" data-name="Email 5" id="email-5" maxlength="256" name="email-5" placeholder="Enter your email address" required="required" type="email">
-                <input class="w-input login-field" data-name="Password 5" id="Password-5" maxlength="256" name="Password-5" placeholder="Password" required="required" type="password">
-                <input class="w-button login-button register" data-wait="Please wait..." type="submit" value="Register">
-              </form>
-              <div class="w-form-done">
-                <p>Thank you! Your submission has been received!</p>
-              </div>
-              <div class="w-form-fail">
-                <p>Oops! Something went wrong while submitting the form</p>
+              <div class="w-tab-pane" data-w-tab="Tab 2">
+                <div class="w-form login-form">
+                  <form data-name="Email Form" id="email-form" name="email-form">
+                    <input autofocus="autofocus" class="w-input login-field" data-name="Email 5" id="email-5" maxlength="256" name="email-5" placeholder="Enter your email address" required="required" type="email">
+                    <input class="w-input login-field" data-name="Password 5" id="Password-5" maxlength="256" name="Password-5" placeholder="Password" required="required" type="password">
+                    <input class="w-button login-button register" data-wait="Please wait..." type="submit" value="Register">
+                  </form>
+                  <div class="w-form-done">
+                    <p>Thank you! Your submission has been received!</p>
+                  </div>
+                  <div class="w-form-fail">
+                    <p>Oops! Something went wrong while submitting the form</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -142,7 +149,15 @@
         <a class="w-nav-link nav" href="stories.html">Stories</a>
         <a class="w-nav-link nav" href="projects.html">Projects</a>
         <a class="w-nav-link nav" href="organisations.html">Organisations</a>
-        <a class="w-nav-link nav log-in" data-ix="showsignup" href="#">Login</a>
+        <div class="w-dropdown" data-delay="0">
+          <div class="w-dropdown-toggle nav log-in">
+            <div>Create +</div>
+          </div>
+          <nav class="w-dropdown-list create-drop-down">
+            <a class="w-dropdown-link drop-down-link" data-ix="create-project-modal" href="#">Create a new project</a>
+            <a class="w-dropdown-link drop-down-link" data-ix="create-organisation-modal" href="#">Create an organisation</a>
+          </nav>
+        </div>
       </nav>
       <div class="w-nav-button menu-open">
         <div class="w-icon-nav-menu m-menu-btn"></div>

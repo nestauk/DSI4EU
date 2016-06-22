@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Last Published: Tue Jun 21 2016 13:08:04 GMT+0000 (UTC) -->
+<!-- Last Published: Wed Jun 22 2016 10:33:09 GMT+0000 (UTC) -->
 <html data-wf-site="56e2e31a1b1f8f784728a08c" data-wf-page="573add50dc12b47e497523d6">
 <head>
   <meta charset="utf-8">
@@ -57,6 +57,10 @@
     .w-input:-ms-input-placeholder { /* Internet Explorer 10+ */
         color:    #4CADDE;
     }
+    /* keep modals centered */
+    .modal-container {display: table; height: 100%; position:absolute; overflow: hidden;width:100%;}
+    .modal-helper {#position: absolute; #top: 50%;display: table-cell; vertical-align: middle;}
+    .modal-content {#position: relative; #top: -50%;margin:0 auto;width:600px;}
   </style>
 </head>
 <body>
