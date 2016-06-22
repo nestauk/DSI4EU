@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Last Published: Wed Jun 22 2016 11:01:06 GMT+0000 (UTC) -->
+<!-- Last Published: Wed Jun 22 2016 11:34:27 GMT+0000 (UTC) -->
 <html data-wf-site="56e2e31a1b1f8f784728a08c" data-wf-page="573add50dc12b47e497523d8">
 <head>
   <meta charset="utf-8">
@@ -205,44 +205,19 @@
     <div class="container-wide header">
       <h1 class="page-h1 light">{{project.name}}</h1>
       <div class="dsi4eu-stats">www.link-to-the-project-site</div>
-      <img class="large-profile-img" src="images/stickers_logo_text.png">
+      <img class="large-profile-img" src="images/CZ2ne8yK_400x400.jpg">
       <a class="w-button dsi-button profile-edit" href="#">Edit&nbsp;project</a>
     </div>
   </div>
   <div class="w-section project-section">
     <div class="container-wide">
-      <div class="single-header">
-        <div class="w-row">
-          <div class="w-col w-col-6 project-intro">
-            <div class="project-detail">
-              <div class="project-header">
-                <h1 class="project-h1">Name of the project</h1>
-                <img class="card-pin" src="images/pin.png">
-                <div class="card-city">City, Country</div>
-                <a class="project-url" href="#" target="_blank">www.linktotheprojectwebsite.com</a>
-                <div class="project-status"><span class="status-text">Project status:</span> <strong class="status-indicator">Live</strong>
-                </div>
-                <img class="edit-white" src="images/ios7-compose-outline-white.png" width="25">
-              </div>
-              <div class="social-sharing">
-                <div class="w-row">
-                  <div class="w-col w-col-5">
-                    <div class="sharing-text">Like this project? Show others..&nbsp;</div>
-                  </div>
-                  <div class="w-col w-col-7 w-clearfix">
-                    <div class="sharing-icon github"></div>
-                    <div class="sharing-icon tw"></div>
-                    <div class="sharing-icon gplus"></div>
-                    <div class="sharing-icon fb"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="w-col w-col-6">
+      <div class="w-row project-info">
+        <div class="w-col w-col-6 w-col-stack" id="textScroll">
+          <div id="text">
             <div class="info-card">
               <h3 class="info-h card-h">About this project</h3>
               <p class="project-summary">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p>
+              <p class="project-summary">{{<strong>Project.name</strong>}} is based in {{<strong>project.city</strong>}}, {{<strong>project.country</strong>}}</p>
               <h3 class="card-sub-h">Duration</h3>
               <div class="duration-p">This project runs from&nbsp;<strong>June 2014</strong> to <strong>May 2017</strong>
               </div>
@@ -261,12 +236,6 @@
               </div>
               <img class="edit-dark" src="images/ios7-compose-outline.png" width="25">
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="w-row project-info">
-        <div class="w-col w-col-6 w-col-stack" id="textScroll">
-          <div id="text">
             <div class="info-card">
               <h3 class="info-h card-h">Organisations involved</h3>
               <div class="list-items">
