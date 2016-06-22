@@ -100,6 +100,22 @@ class StoryRepositoryTest extends PHPUnit_Framework_TestCase
     }
 
     /** @test */
+    public function searchByTitle()
+    {
+        $this->addStory('title 1');
+        $this->addStory('title 2');
+        $this->addStory('title 3');
+        $this->addStory('different 1');
+
+        $this->assertCount(0, $this->storyRepository->searchByTitle('4'));
+        $this->assertCount(1, $this->storyRepository->searchByTitle('2'));
+        $this->assertCount(2, $this->storyRepository->searchByTitle('1'));
+        $this->assertCount(3, $this->storyRepository->searchByTitle('title'));
+        $this->assertCount(3, $this->storyRepository->searchByTitle(' ', 3));
+        $this->assertCount(4, $this->storyRepository->searchByTitle(' '));
+    }
+
+    /** @test */
     public function setAllStoryDetails()
     {
         $category = new \DSI\Entity\StoryCategory();
@@ -126,5 +142,15 @@ class StoryRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($story->isPublished());
         $this->assertEquals($datePublished, $story->getDatePublished());
         $this->assertRegExp('<^\d{4}\-\d{2}\-\d{2} \d{2}\:\d{2}\:\d{2}$>', $story->getTime());
+    }
+
+
+    private function addStory($title)
+    {
+        $story = new Story();
+        $story->setTitle($title);
+        $story->setAuthor($this->user1);
+        $this->storyRepository->insert($story);
+        return $story;
     }
 }

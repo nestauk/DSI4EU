@@ -134,9 +134,10 @@ class OrganisationRepository
 
     /**
      * @param $where
-     * @return array
+     * @param array $options
+     * @return Organisation[]
      */
-    private function getObjectsWhere($where)
+    private function getObjectsWhere($where, $options = [])
     {
         $organisations = [];
         $query = new SQL("SELECT 
@@ -148,6 +149,7 @@ class OrganisationRepository
           FROM `organisations` 
           WHERE " . implode(' AND ', $where) . "
           ORDER BY `name`
+          " . ((isset($options['limit']) AND $options['limit'] > 0) ? "LIMIT {$options['limit']}" : '') . "
         ");
         foreach ($query->fetch_all() AS $dbOrganisation) {
             $organisations[] = $this->buildObjectFromData($dbOrganisation);
@@ -174,5 +176,14 @@ class OrganisationRepository
           WHERE " . implode(' AND ', $where) . "
         ");
         return $query->fetch('total');
+    }
+
+    public function searchByTitle(string $name, int $limit = 0)
+    {
+        return $this->getObjectsWhere([
+            "`name` LIKE '%" . addslashes($name) . "%'"
+        ], [
+            "limit" => $limit
+        ]);
     }
 }

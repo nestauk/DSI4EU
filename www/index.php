@@ -97,6 +97,9 @@ class Router
         } elseif ($this->pageURL === '/users.json') {
             $this->usersListJsonPage();
 
+        } elseif ($this->pageURL === '/search.json') {
+            $this->searchPage('json');
+
         } elseif ($this->pageURL === '/tags-for-projects.json') {
             $this->tagsForProjectsListJsonPage();
 
@@ -398,6 +401,13 @@ class Router
     {
         $command = new \DSI\Controller\ProjectEditController();
         $command->projectID = $matches[1];
+        $command->format = $format;
+        $command->exec();
+    }
+
+    private function searchPage($format = 'html')
+    {
+        $command = new \DSI\Controller\SearchController();
         $command->format = $format;
         $command->exec();
     }

@@ -128,7 +128,9 @@ use \DSI\Service\URL;
 
     <script type="text/javascript" src="<?php echo SITE_RELATIVE_PATH ?>/js/DSIApp.js"></script>
 </head>
-<body ng-app="DSIApp">
+<script type="text/javascript"
+        src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/SearchController.js"></script>
+<body ng-app="DSIApp" ng-controller="SearchController">
 <?php if (!isset($_SESSION['user'])) { ?>
     <script type="text/javascript" src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/LoginController.js"></script>
     <div class="modal-signup bg-blur">
@@ -440,7 +442,9 @@ use \DSI\Service\URL;
                     <div class="w-form">
                         <form class="w-clearfix" id="email-form">
                             <input class="w-input search-field quicksearch" data-name="Search" id="Search"
-                                   maxlength="256" name="Search" placeholder="Search DSI4EU" type="text">
+                                   maxlength="256" name="Search" placeholder="Search DSI4EU" type="text"
+                                   ng-model="search.entry" ng-focus="search.focused = true"
+                                   ng-blur="search.focused = false">
                         </form>
                     </div>
                 </div>

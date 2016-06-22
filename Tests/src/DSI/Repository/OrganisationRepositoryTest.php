@@ -165,4 +165,31 @@ class OrganisationRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($projectsCount, $sameOrganisation->getProjectsCount());
         $this->assertEquals($partnersCount, $sameOrganisation->getPartnersCount());
     }
+
+    /** @test */
+    public function searchByTitle()
+    {
+        $this->createOrganisation('Organisation 1');
+        $this->createOrganisation('Organisation 2');
+        $this->createOrganisation('Organisation X');
+        $this->createOrganisation('Category 1');
+
+        $this->assertCount(0, $this->organisationRepo->searchByTitle('3'));
+        $this->assertCount(1, $this->organisationRepo->searchByTitle('2'));
+        $this->assertCount(2, $this->organisationRepo->searchByTitle(' 1'));
+        $this->assertCount(3, $this->organisationRepo->searchByTitle('Organisation'));
+        $this->assertCount(3, $this->organisationRepo->searchByTitle(' ', 3));
+        $this->assertCount(4, $this->organisationRepo->searchByTitle(' '));
+    }
+
+    /**
+     * @param $name
+     */
+    private function createOrganisation($name)
+    {
+        $organisation = new Organisation();
+        $organisation->setOwner($this->user1);
+        $organisation->setName($name);
+        $this->organisationRepo->insert($organisation);
+    }
 }

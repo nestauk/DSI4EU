@@ -184,4 +184,31 @@ class ProjectRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertNull($sameProject->getStartDate());
         $this->assertNull($sameProject->getEndDate());
     }
+
+    /** @test */
+    public function searchByTitle()
+    {
+        $this->createProject('Project 1');
+        $this->createProject('Project 2');
+        $this->createProject('Project X');
+        $this->createProject('Category 1');
+
+        $this->assertCount(0, $this->projectRepository->searchByTitle('3'));
+        $this->assertCount(1, $this->projectRepository->searchByTitle('2'));
+        $this->assertCount(2, $this->projectRepository->searchByTitle(' 1'));
+        $this->assertCount(3, $this->projectRepository->searchByTitle('Project'));
+        $this->assertCount(3, $this->projectRepository->searchByTitle(' ', 3));
+        $this->assertCount(4, $this->projectRepository->searchByTitle(' '));
+    }
+
+    /**
+     * @param $name
+     */
+    private function createProject($name)
+    {
+        $project = new Project();
+        $project->setOwner($this->user1);
+        $project->setName($name);
+        $this->projectRepository->insert($project);
+    }
 }

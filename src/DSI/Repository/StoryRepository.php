@@ -54,6 +54,15 @@ class StoryRepository
         ]);
     }
 
+    public function searchByTitle(string $name, int $limit = 0)
+    {
+        return $this->getObjectsWhere([
+            "title LIKE '%" . addslashes($name) . "%'"
+        ], [
+            "limit" => $limit
+        ]);
+    }
+
     private function buildProjectFromData($story)
     {
         $storyObj = new Story();
@@ -123,7 +132,7 @@ class StoryRepository
           WHERE " . implode(' AND ', $where) . "
           ORDER BY " . (isset($options['orderBy']) ? $options['orderBy'] : '`title`') . "
           " . (isset($options['direction']) ? $options['direction'] : 'ASC') . "
-          " . (isset($options['limit']) ? "LIMIT {$options['limit']}" : '') . "
+          " . ((isset($options['limit']) AND $options['limit'] > 0) ? "LIMIT {$options['limit']}" : '') . "
         ");
         // $query->pr();
         foreach ($query->fetch_all() AS $dbStory)
