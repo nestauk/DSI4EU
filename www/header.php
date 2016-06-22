@@ -70,12 +70,6 @@ use \DSI\Service\URL;
             filter: blur(25px);
         }
 
-        input[type=text] {
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-        }
-
         .login-field.error {
             height: 50px;
             border-style: none none solid;
@@ -99,6 +93,29 @@ use \DSI\Service\URL;
 
         .w-input:-ms-input-placeholder { /* Internet Explorer 10+ */
             color: #4CADDE;
+        }
+
+        /* keep modals centered */
+        .modal-container {
+            display: table;
+            height: 100%;
+            position: absolute;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .modal-helper {
+            #position: absolute;
+            #top: 50%;
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        .modal-content {
+            #position: relative;
+            #top: -50%;
+            margin: 0 auto;
+            width: 600px;
         }
     </style>
 
@@ -152,7 +169,7 @@ use \DSI\Service\URL;
                     <div data-w-tab="Tab 1" class="w-tab-pane w--tab-active" ng-controller="LoginController">
                         <div class="w-form login-form">
                             <div ng-hide="forgotPassword.show" class="w-tab-screen">
-                                <form id="email-form" name="email-form" data-name="Email Form" ng-submit="onSubmit()">
+                                <form id="email-form" name="email-form" ng-submit="onSubmit()">
                                     <input type="email" placeholder="Enter your email address"
                                            name="email"
                                            data-name="Email 4" autofocus="autofocus"
@@ -287,7 +304,7 @@ use \DSI\Service\URL;
                     </div>
                     <div data-w-tab="Tab 2" class="w-tab-pane" ng-controller="RegisterController">
                         <div class="w-form login-form">
-                            <form id="email-form" name="email-form" data-name="Email Form" ng-submit="onSubmit()">
+                            <form id="email-form" name="email-form" ng-submit="onSubmit()">
                                 <input id="email-5" type="email" placeholder="Enter your email address" name="email-5"
                                        data-name="Email 5" autofocus="autofocus"
                                        class="w-input login-field"
@@ -321,57 +338,51 @@ use \DSI\Service\URL;
 <?php } else { ?>
     <script type="text/javascript"
             src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/CreateProjectOrganisationController.js"></script>
-    <div class="modal-signup bg-blur">
-        <div data-ix="downbeforeup" class="signup-form">
-            <div class="modal-header"></div>
-            <div data-ix="destroysignup" class="close modal-close">+</div>
-            <img width="160" src="<?php echo SITE_RELATIVE_PATH ?>/images/logo-white.svg" class="modal-brand">
-            <div data-duration-in="300" data-duration-out="100" data-easing="ease-in-out" class="w-tabs">
-                <div class="w-tab-menu tabs-menu">
-                    <a data-w-tab="Tab 1" class="w-tab-link w--current w-inline-block tab">
-                        <div>Project</div>
-                    </a>
-                    <a data-w-tab="Tab 2" class="w-tab-link w-inline-block tab">
-                        <div>Organisation</div>
-                    </a>
-                </div>
-                <div class="w-tab-content tabs-content" ng-controller="CreateProjectOrganisationController">
-                    <div data-w-tab="Tab 1" class="w-tab-pane w--tab-active">
-                        <div class="w-form login-form">
-                            <form ng-submit="createProject()">
-                                <input type="text" placeholder="Enter project name" name="project"
-                                       autofocus="autofocus"
-                                       class="w-input login-field"
-                                       ng-model="project.name"
-                                       ng-class="{error: project.errors.name}">
-                                <div style="color:red" ng-show="project.errors.name"
+
+    <div ng-controller="CreateProjectOrganisationController">
+        <div class="create-project-modal modal">
+            <div class="modal-container">
+                <div class="modal-helper">
+                    <div class="modal-content">
+                        <h2 class="centered modal-h2">Create project</h2>
+                        <div class="w-form">
+                            <form id="email-form-3" name="email-form-3" ng-submit="createProject()">
+                                <div style="color:red;text-align:center" ng-show="project.errors.name"
                                      ng-bind="project.errors.name"></div>
-                                <input ng-hide="project.loading" type="submit" value="Create Project"
-                                       class="w-button login-button">
-                                <button ng-show="project.loading" type="button" class="w-button login-button register">
-                                    Loading...
-                                </button>
+                                <input class="w-input modal-input" data-name="Name 3" id="name-3" maxlength="256"
+                                       name="name" placeholder="Enter the name of your project" type="text"
+                                       ng-model="project.name" ng-class="{error: project.errors.name}">
+                                <input class="w-button dsi-button creat-button" type="submit"
+                                       value="Create +"
+                                       ng-value="project.loading ? 'Loading...' : 'Create +'"
+                                       ng-disabled="project.loading">
                             </form>
                         </div>
+                        <div class="cancel" data-ix="close-nu-modal">Cancel</div>
                     </div>
-                    <div data-w-tab="Tab 2" class="w-tab-pane">
-                        <div class="w-form login-form">
-                            <form ng-submit="createOrganisation()">
-                                <input type="text" placeholder="Enter organisation name" name="organisation"
-                                       autofocus="autofocus"
-                                       class="w-input login-field"
+                </div>
+            </div>
+        </div>
+        <div class="create-organisation-modal modal">
+            <div class="modal-container">
+                <div class="modal-helper">
+                    <div class="modal-content">
+                        <h2 class="centered modal-h2">Create organisation</h2>
+                        <div class="w-form">
+                            <form id="email-form-3" name="email-form-3" ng-submit="createOrganisation()">
+                                <div style="color:red;text-align:center" ng-show="organisation.errors.name"
+                                     ng-bind="organisation.errors.name"></div>
+                                <input class="w-input modal-input" data-name="Name 3" id="name-3" maxlength="256"
+                                       name="name" placeholder="Enter the name of your organisation" type="text"
                                        ng-model="organisation.name"
                                        ng-class="{error: organisation.errors.name}">
-                                <div style="color:red" ng-show="organisation.errors.name"
-                                     ng-bind="organisation.errors.name"></div>
-                                <input ng-hide="organisation.loading" type="submit" value="Create Organisation"
-                                       class="w-button login-button register">
-                                <button ng-show="organisation.loading" type="button"
-                                        class="w-button login-button register">
-                                    Loading...
-                                </button>
+                                <input class="w-button dsi-button creat-button" data-wait="Please wait..." type="submit"
+                                       value="Create +"
+                                       ng-value="organisation.loading ? 'Loading...' : 'Create +'"
+                                       ng-disabled="organisation.loading">
                             </form>
                         </div>
+                        <div class="cancel" data-ix="close-nu-modal">Cancel</div>
                     </div>
                 </div>
             </div>
@@ -392,7 +403,18 @@ use \DSI\Service\URL;
             <?php if (!isset($_SESSION['user'])) { ?>
                 <a href="#" data-ix="showsignup" class="w-nav-link nav log-in">Log In</a>
             <?php } else { ?>
-                <a href="#" data-ix="showsignup" class="w-nav-link nav log-in">Create +</a>
+                <div class="w-dropdown" data-delay="0">
+                    <div class="w-dropdown-toggle nav log-in">
+                        <div>Create +</div>
+                    </div>
+                    <nav class="w-dropdown-list create-drop-down">
+                        <a class="w-dropdown-link drop-down-link" data-ix="create-project-modal" href="#">Create a new
+                            project</a>
+                        <a class="w-dropdown-link drop-down-link" data-ix="create-organisation-modal" href="#">Create an
+                            organisation</a>
+                        <div class="arror-up"></div>
+                    </nav>
+                </div>
             <?php } ?>
         </nav>
         <div class="w-nav-button">

@@ -3,7 +3,7 @@
     <div class="container-wide">
         <div class="w-row footer-columns">
             <div class="w-col w-col-4">
-                <img src="<?php echo SITE_RELATIVE_PATH?>/images/logo-white.svg" class="footer-brand">
+                <img src="<?php echo SITE_RELATIVE_PATH ?>/images/logo-white.svg" class="footer-brand">
             </div>
             <div class="w-col w-col-2">
                 <h3 class="footer-h3">People</h3>
@@ -58,7 +58,7 @@
             </div>
             <div class="w-col w-col-2">
                 <h3 class="footer-h3">Development</h3>
-                <a href="<?php echo \DSI\Service\URL::feedback()?>" class="footer-link">Feedback</a>
+                <a href="<?php echo \DSI\Service\URL::feedback() ?>" class="footer-link">Feedback</a>
             </div>
         </div>
     </div>
@@ -66,7 +66,10 @@
 
 <div class="under-development" data-ix="under-dev">
     <h1 class="page-h1 notice">Under development</h1>
-    <div class="notification-p">This page is under development and may not behave as expected. Please visit the <a class="notification-link" href="<?php echo \DSI\Service\URL::feedback()?>">feedback</a> page to view pages &amp; tasks currently being tested.</div>
+    <div class="notification-p">This page is under development and may not behave as expected. Please visit the <a
+            class="notification-link" href="<?php echo \DSI\Service\URL::feedback() ?>">feedback</a> page to view pages
+        &amp; tasks currently being tested.
+    </div>
 </div>
 
 <script type="text/javascript" src="<?php echo SITE_RELATIVE_PATH ?>/js/dsi4eu.js"></script>
@@ -105,6 +108,16 @@
             timeout = setTimeout(delayed, threshold || 100);
         }
     }
+</script>
+
+<script>
+    // Create Project / Organisation Dropdown
+    (function () {
+        var nav = $('nav.w-dropdown-list.create-drop-down');
+        $('a', nav).on('click', function () {
+            nav.removeClass('w--open');
+        });
+    }());
 </script>
 
 <script type="text/javascript" src="<?php echo SITE_RELATIVE_PATH ?>/js/script.js"></script>
