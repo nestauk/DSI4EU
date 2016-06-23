@@ -524,6 +524,10 @@ strong {
   margin-bottom: 0px;
 }
 
+.info-h.card-h.alt {
+  padding-left: 0px;
+}
+
 .project-summary {
   margin-top: 0px;
   margin-bottom: 0px;
@@ -531,6 +535,11 @@ strong {
   padding-bottom: 20px;
   padding-left: 20px;
   color: #888;
+}
+
+.project-summary.alt {
+  padding-left: 0px;
+  color: #18233f;
 }
 
 .project-archive {
@@ -1133,9 +1142,12 @@ strong {
 }
 
 .forgotten-password {
-  margin-top: 0px;
+  display: block;
+  width: 160px;
+  margin: 0px auto 22px;
   color: #d34c4c;
   font-size: 12px;
+  text-align: center;
   text-decoration: none;
 }
 
@@ -1984,7 +1996,7 @@ strong {
 
 .posted-on {
   position: absolute;
-  left: 71px;
+  left: 74px;
   top: 20px;
   display: block;
   margin-top: 0px;
@@ -2093,6 +2105,13 @@ strong {
 
 .impact-block.last {
   border-bottom-style: none;
+}
+
+.impact-block.alt {
+  min-height: 200px;
+  padding: 19px;
+  border-radius: 3px;
+  background-color: #fff;
 }
 
 .impact-h4 {
@@ -2646,6 +2665,8 @@ strong {
   left: 0px;
   right: 0px;
   bottom: 0px;
+  height: 248px;
+  padding-bottom: 0px;
 }
 
 .container-wide.header {
@@ -2653,6 +2674,11 @@ strong {
   height: 245px;
   padding-top: 90px;
   padding-bottom: 0px;
+}
+
+.container-wide.padding-20 {
+  padding-right: 20px;
+  padding-left: 20px;
 }
 
 .button {
@@ -2719,16 +2745,21 @@ strong {
 .hp-post-link {
   position: relative;
   width: 100%;
+  border: 1px solid #f3f3f3;
+  border-radius: 3px;
   box-shadow: 0 0 21px -6px rgba(0, 0, 0, .23);
-  -webkit-transition: all 200ms ease;
-  transition: all 200ms ease;
+  -webkit-transition: all 100ms ease;
+  transition: all 100ms ease;
 }
 
 .hp-post-link:hover {
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgba(122, 95, 151, .96);
   box-shadow: 0 0 50px -17px #000;
-  -webkit-transform: scale(1.02);
-  -ms-transform: scale(1.02);
-  transform: scale(1.02);
+  -webkit-transform: none;
+  -ms-transform: none;
+  transform: none;
 }
 
 .hp-post-img {
@@ -2990,13 +3021,14 @@ strong {
 }
 
 .centered.modal-h2 {
-  margin-top: 128px;
+  margin-top: 80px;
   margin-bottom: 75px;
-  font-size: 22px;
+  font-size: 32px;
+  font-weight: 300;
 }
 
 .centered.modal-h2.log-in {
-  margin-top: 104px;
+  margin-top: 67px;
   margin-bottom: 49px;
 }
 
@@ -3504,6 +3536,7 @@ strong {
   right: 0px;
   bottom: 30px;
   background-color: hsla(0, 0%, 95%, .15);
+  font-family: 'Open Sans', sans-serif;
   color: #fff;
 }
 
@@ -3522,6 +3555,7 @@ strong {
 }
 
 .dsi-button.creat-button {
+  margin-top: 43px;
   background-color: rgba(29, 201, 160, .94);
   font-family: 'Open Sans', sans-serif;
   font-weight: 600;
@@ -4130,8 +4164,8 @@ strong {
   position: relative;
   height: 400px;
   margin-top: -46px;
-  background-image: -webkit-linear-gradient(270deg, rgba(27, 32, 42, .78), rgba(37, 34, 46, .91)), url('../images/brussels-locations.jpg');
-  background-image: linear-gradient(180deg, rgba(27, 32, 42, .78), rgba(37, 34, 46, .91)), url('../images/brussels-locations.jpg');
+  background-image: -webkit-linear-gradient(270deg, rgba(14, 23, 41, .83) 26%, rgba(58, 47, 70, .7)), url('../images/brussels-locations.jpg');
+  background-image: linear-gradient(180deg, rgba(14, 23, 41, .83) 26%, rgba(58, 47, 70, .7)), url('../images/brussels-locations.jpg');
   background-position: 0px 0px, 50% 50%;
   background-size: auto, cover;
   background-repeat: repeat, no-repeat;
@@ -4141,8 +4175,8 @@ strong {
 .post-hero-title {
   position: absolute;
   left: 0px;
+  top: 0px;
   right: 0px;
-  bottom: 10px;
   width: 75%;
   padding-left: 10px;
   font-family: 'Open Sans', sans-serif;
@@ -4712,7 +4746,7 @@ strong {
   position: relative;
   display: block;
   width: 600px;
-  height: 600px;
+  height: 540px;
   margin-right: auto;
   margin-left: auto;
   padding: 26px;
@@ -4794,7 +4828,7 @@ strong {
   width: 438px;
   height: 50px;
   margin-right: auto;
-  margin-bottom: 50px;
+  margin-bottom: 14px;
   margin-left: auto;
   border-style: none;
   background-color: #f3f3f3;
@@ -4885,6 +4919,113 @@ strong {
   border-width: 15px 20px;
   border-color: transparent transparent #fff;
   background-color: transparent;
+}
+
+.bread-crumbs {
+  position: absolute;
+  left: 0px;
+  bottom: 30px;
+  width: auto;
+  height: 30px;
+}
+
+.breadcrumb-root {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 30px;
+  margin-right: 20px;
+  padding: 5px 0px 5px 20px;
+  float: left;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  background-color: hsla(0, 0%, 100%, .15);
+  opacity: 0.75;
+  -webkit-transition: opacity 200ms ease;
+  transition: opacity 200ms ease;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.breadcrumb-root:hover {
+  opacity: 1;
+}
+
+.breadcrumb-root.path {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-right: 0px;
+  margin-left: 0px;
+  float: none;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
+.breadcrumb-link {
+  padding: 0px;
+  font-family: 'Open Sans', sans-serif;
+  color: #fff;
+  text-decoration: none;
+}
+
+.arrow-right {
+  position: relative;
+  top: -5px;
+  right: -15px;
+  bottom: 0px;
+  display: inline-block;
+  height: 30px;
+  border-style: solid;
+  border-width: 15px 0px 15px 15px;
+  border-color: transparent transparent transparent hsla(0, 0%, 100%, .15);
+}
+
+.arrow-top-left {
+  position: absolute;
+  left: -15px;
+  top: 0px;
+  bottom: 0px;
+  width: 0px;
+  height: 0px;
+  border-color: hsla(0, 0%, 100%, .15) #000 transparent transparent;
+  border-top-style: solid;
+  border-top-width: 15px;
+  border-right-style: solid;
+  border-right-width: 0px;
+  border-left-style: solid;
+  border-left-width: 15px;
+}
+
+.arrow-bottom-left {
+  position: absolute;
+  left: -15px;
+  bottom: 0px;
+  width: 0px;
+  height: 0px;
+  border-top: 15px solid transparent;
+  border-right: 15px solid hsla(0, 0%, 100%, .15);
+  border-bottom: 0px solid transparent;
+}
+
+.project-description {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-family: 'Open Sans', sans-serif;
+  color: #18233f;
+  font-size: 24px;
+  line-height: 36px;
 }
 
 html.w-mod-js *[data-ix="downbeforeup"] {

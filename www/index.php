@@ -97,9 +97,6 @@ class Router
         } elseif ($this->pageURL === '/users.json') {
             $this->usersListJsonPage();
 
-        } elseif ($this->pageURL === '/search.json') {
-            $this->searchPage('json');
-
         } elseif ($this->pageURL === '/tags-for-projects.json') {
             $this->tagsForProjectsListJsonPage();
 
@@ -126,6 +123,13 @@ class Router
 
         } elseif ($this->pageURL === '/feedback.json') {
             $this->feedbackJsonPage();
+
+// Search
+        } elseif ($this->pageURL === '/search.json') {
+            $this->searchPage(null, 'json');
+
+        } elseif (preg_match('<^/search/(.*)$>', $this->pageURL, $matches)) {
+            $this->searchPage($matches);
 
 // Static pages
         } elseif ($this->pageURL === '/explore-dsi') {
@@ -405,9 +409,10 @@ class Router
         $command->exec();
     }
 
-    private function searchPage($format = 'html')
+    private function searchPage($matches, $format = 'html')
     {
         $command = new \DSI\Controller\SearchController();
+        $command->term = $matches[1];
         $command->format = $format;
         $command->exec();
     }

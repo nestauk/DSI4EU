@@ -14,7 +14,9 @@ use DSI\Service\URL;
 
 class SearchController
 {
-    public $format = 'html';
+    /** @var string */
+    public $term,
+        $format = 'html';
 
     public function exec()
     {
@@ -49,6 +51,10 @@ class SearchController
                 ]);
             }
         } else {
+            $term = $this->term;
+            $organisations = (new OrganisationRepository())->searchByTitle($this->term);
+            $projects = (new ProjectRepository())->searchByTitle($this->term);
+            $stories = (new StoryRepository())->searchByTitle($this->term);
             require __DIR__ . '/../../../www/search.php';
         }
     }

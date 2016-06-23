@@ -41,7 +41,7 @@ require __DIR__ . '/header.php';
                         <div ng-show="search.organisations.length == 0">No organisations found</div>
                     </div>
                 </div>
-                <a class="view-all-search-results" href="#">View all results</a>
+                <a class="view-all-search-results" href="<?php echo URL::search()?>{{search.entry}}">View all results</a>
             </div>
 
             <div class="w-row dashboard-widgets">
