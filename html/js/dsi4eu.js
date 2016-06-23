@@ -4606,5 +4606,6 @@ Webflow.require('ix').init([
   {"slug":"hideprofilepopover","name":"hideProfilePopOver","value":{"style":{},"triggers":[{"type":"click","selector":".profile-popover","stepsA":[],"stepsB":[{"opacity":0,"transition":"opacity 100ms ease 0ms"}]}]}},
   {"slug":"create-project-modal","name":"create project modal","value":{"style":{},"triggers":[{"type":"click","selector":".create-project-modal","stepsA":[{"display":"block"}],"stepsB":[]}]}},
   {"slug":"close-nu-modal","name":"close nu modal","value":{"style":{},"triggers":[{"type":"click","selector":".modal","stepsA":[{"display":"none"}],"stepsB":[]}]}},
-  {"slug":"create-organisation-modal","name":"create organisation modal","value":{"style":{},"triggers":[{"type":"click","selector":".create-organisation-modal","stepsA":[{"display":"block"}],"stepsB":[]}]}}
+  {"slug":"create-organisation-modal","name":"create organisation modal","value":{"style":{},"triggers":[{"type":"click","selector":".create-organisation-modal","stepsA":[{"display":"block"}],"stepsB":[]}]}},
+  {"slug":"open-login-modal","name":"open login modal","value":{"style":{},"triggers":[{"type":"click","selector":".login-modal","stepsA":[{"display":"block"}],"stepsB":[]}]}}
 ]);
