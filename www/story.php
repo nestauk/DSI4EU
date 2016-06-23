@@ -9,6 +9,21 @@ require __DIR__ . '/header.php';
         <div class="container-wide post-hero">
             <h1 class="post-hero-title"><?php echo show_input($story->getTitle()) ?></h1>
             <div class="post-single-date"><?php echo $story->getDatePublished('jS F Y') ?></div>
+            <div class="w-clearfix bread-crumbs">
+                <a class="w-inline-block breadcrumb-root" href="<?php echo \DSI\Service\URL::stories()?>">
+                    <div class="breadcrumb-link">Stories</div>
+                    <div class="arrow-right"></div>
+                </a>
+                <a class="w-inline-block breadcrumb-root path" href="#">
+                    <div class="arrow-bottom-left"></div>
+                    <div class="arrow-top-left"></div>
+                    <div class="breadcrumb-link">
+                        <?php echo substr(show_input($story->getTitle()), 0, 35)?>
+                        <?php echo strlen($story->getTitle()) > 35 ? '...' : ''?>
+                    </div>
+                    <div class="arrow-right"></div>
+                </a>
+            </div>
         </div>
     </div>
     <div class="w-section single-post-detail">

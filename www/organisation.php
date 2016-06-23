@@ -16,19 +16,43 @@ require __DIR__ . '/header.php';
         }
     </style>
 
+
+    <div class="w-section page-header">
+        <div class="container-wide header">
+            <h1 class="page-h1 light"><?php echo show_input($organisation->getName()) ?></h1>
+            <div class="dsi4eu-stats">
+                <a href="<?php echo \DSI\Service\URL::organisation($organisation->getId(), $organisation->getName()) ?>">
+                    <?php echo \DSI\Service\URL::organisation($organisation->getId(), $organisation->getName()) ?>
+                </a>
+            </div>
+            <div class="w-clearfix bread-crumbs">
+                <a class="w-inline-block breadcrumb-root" href="<?php echo \DSI\Service\URL::projects()?>">
+                    <div class="breadcrumb-link">Projects</div>
+                    <div class="arrow-right"></div>
+                </a>
+                <a class="w-inline-block breadcrumb-root path" href="#">
+                    <div class="arrow-bottom-left"></div>
+                    <div class="arrow-top-left"></div>
+                    <div class="breadcrumb-link">
+                        <?php echo substr(show_input($organisation->getName()), 0, 35)?>
+                        <?php echo strlen($organisation->getName()) > 35 ? '...' : ''?>
+                    </div>
+                    <div class="arrow-right"></div>
+                </a>
+            </div>
+        </div>
+    </div>
+
     <div
         ng-controller="OrganisationController"
         data-organisationid="<?php echo $organisation->getId() ?>"
         class="w-section project-section">
 
+
         <div class="w-container body-container project">
             <div class="w-row project-info">
                 <div class="w-col w-col-6">
                     <div class="info-card">
-                        <?php /*
-                        <div class="org-brand"><img src="<?php echo SITE_RELATIVE_PATH?>/images/nesta-logo.jpg">
-                        </div>
-                        */ ?>
                         <?php if ($isOwner) { ?>
                             <h3 class="info-h card-h">
                                 <input

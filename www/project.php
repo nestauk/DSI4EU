@@ -16,8 +16,26 @@ require __DIR__ . '/header.php';
             <div class="container-wide header">
                 <h1 class="page-h1 light"><?php echo show_input($project->getName()) ?></h1>
                 <div class="dsi4eu-stats">
-                    <a href="<?php echo $project->getUrl() ?>"><?php echo $project->getUrl() ?></a>
+                    <a href="<?php echo \DSI\Service\URL::project($project->getId(), $project->getName()) ?>">
+                        <?php echo \DSI\Service\URL::project($project->getId(), $project->getName()) ?>
+                    </a>
                 </div>
+                <div class="w-clearfix bread-crumbs">
+                    <a class="w-inline-block breadcrumb-root" href="<?php echo \DSI\Service\URL::projects()?>">
+                        <div class="breadcrumb-link">Projects</div>
+                        <div class="arrow-right"></div>
+                    </a>
+                    <a class="w-inline-block breadcrumb-root path" href="#">
+                        <div class="arrow-bottom-left"></div>
+                        <div class="arrow-top-left"></div>
+                        <div class="breadcrumb-link">
+                            <?php echo substr(show_input($project->getName()), 0, 35)?>
+                            <?php echo strlen($project->getName()) > 35 ? '...' : ''?>
+                        </div>
+                        <div class="arrow-right"></div>
+                    </a>
+                </div>
+
                 <img class="large-profile-img"
                      src="<?php echo \DSI\Entity\Image::PROJECT_LOGO_URL . $project->getLogoOrDefault() ?>">
                 <?php if ($isOwner) { ?>
