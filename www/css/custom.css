@@ -162,3 +162,13 @@ form.add-skill-section, form.add-language-section {
     text-align: center;
     cursor: pointer;
 }
+
+a.login-modal-back {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+}
+
+.modal-content {
+    height: 580px;
+}

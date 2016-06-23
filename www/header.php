@@ -152,21 +152,123 @@ use \DSI\Service\URL;
 <body ng-app="DSIApp" ng-controller="SearchController">
 <?php if (!isset($_SESSION['user'])) { ?>
     <script type="text/javascript" src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/LoginController.js"></script>
+
+    <div class="login-modal modal" ng-controller="LoginController">
+        <div class="modal-container">
+            <div class="modal-helper">
+                <div class="modal-content">
+                    <h2 class="centered modal-h2 log-in" ng-bind="forgotPassword.show ? 'Reset password' : 'Log in'">Log
+                        in</h2>
+                    <div class="w-form">
+                        <a href="#" class="login-modal-back" ng-show="forgotPassword.show"
+                           ng-click="forgotPassword = {}">Back to login</a>
+
+                        <div ng-hide="forgotPassword.show">
+                            <form id="email-form-3" name="email-form-3" ng-submit="onSubmit()">
+                                <input class="w-input modal-input log-in" data-name="Enter your email address"
+                                       id="Enter-your-email-address" maxlength="256" name="Enter-your-email-address"
+                                       placeholder="Enter your email address" type="email"
+                                       ng-model="email.value"
+                                       ng-class="{error: errors.email}">
+                                <div style="color:red;text-align:center" ng-show="errors.email"
+                                     ng-bind="errors.email"></div>
+                                <input class="w-input modal-input" data-name="password" id="password-6" maxlength="256"
+                                       name="password" placeholder="Password" type="password"
+                                       ng-model="password.value"
+                                       ng-class="{error: errors.password}">
+                                <div style="color:red;text-align:center" ng-show="errors.password"
+                                     ng-bind="errors.password"></div>
+                                <br/>
+                                <a class="forgotten-password" href="#" ng-click="forgotPassword.show = true">Forgotten
+                                    password?</a>
+
+                                <div ng-hide="loggedin">
+                                    <input class="w-button dsi-button creat-button" data-wait="Please wait..."
+                                           type="submit"
+                                           value="Log in"
+                                           ng-value="loading ? 'Loading...' : 'Log in'"
+                                           ng-disabled="loading">
+                                </div>
+                                <button ng-show="loggedin" type="button" class="w-button login-button register">
+                                    Welcome back to Digital Social!
+                                </button>
+                            </form>
+                        </div>
+                        <div ng-show="forgotPassword.show" class="w-tab-screen" style="text-align:center">
+                            <form ng-hide="forgotPassword.complete"
+                                  ng-submit="forgotPasswordSubmit()"
+                                  autocomplete="off">
+                                <input type="email" placeholder="Enter your email address"
+                                       name="email"
+                                       class="w-input modal-input"
+                                       ng-model="email.value"
+                                       ng-class="{error: forgotPassword.errors.email}">
+                                <div style="color:red;text-align:center" ng-show="forgotPassword.errors.email"
+                                     ng-bind="forgotPassword.errors.email"></div>
+                                <div ng-show="forgotPassword.codeSent">
+                                    <div ng-hide="forgotPassword.codeVerified">
+                                        <i ng-hide="forgotPassword.codeVerified">
+                                            The security code has been emailed to you.
+                                        </i>
+                                        <input type="text" placeholder="Security code"
+                                               name="code"
+                                               class="w-input modal-input"
+                                               ng-disabled="forgotPassword.codeVerified"
+                                               ng-model="forgotPassword.code"
+                                               ng-class="{error: forgotPassword.errors.code}">
+                                        <div style="color:red;text-align:center" ng-show="forgotPassword.errors.code"
+                                             ng-bind="forgotPassword.errors.code"></div>
+                                    </div>
+                                    <div ng-show="forgotPassword.codeVerified">
+                                        <input type="password" placeholder="New Password"
+                                               name="password"
+                                               class="w-input modal-input"
+                                               ng-model="forgotPassword.password"
+                                               autocomplete="off"
+                                               ng-class="{error: forgotPassword.errors.password}">
+                                        <div style="color:red" ng-show="forgotPassword.errors.password"
+                                             ng-bind="forgotPassword.errors.password"></div>
+
+                                        <input type="password" placeholder="Retype Password"
+                                               name="retypePassword"
+                                               class="w-input modal-input"
+                                               ng-model="forgotPassword.retypePassword"
+                                               autocomplete="off"
+                                               ng-class="{error: forgotPassword.errors.retypePassword}">
+                                        <div style="color:red" ng-show="forgotPassword.errors.retypePassword"
+                                             ng-bind="forgotPassword.errors.retypePassword"></div>
+                                    </div>
+
+                                </div>
+
+                                <div class="modal-footer">
+                                    <input type="submit" class="w-button dsi-button creat-button" style="width:auto"
+                                           ng-disabled="forgotPassword.loading"
+                                           ng-value="forgotPassword.loading ? 'Loading...' : 'Reset my password'">
+                                </div>
+
+                            </form>
+                            <div ng-show="forgotPassword.complete"
+                                 style="font-size:18px;line-height:24px;padding-top:70px">
+                                Your password has changed.<br/>
+                                <a href="#" ng-click="forgotPassword = {}">
+                                    Click here
+                                </a> to login using your new password.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cancel" ng-hide="loggedin">
+                        <a href="#" data-ix="close-nu-modal">Cancel</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="modal-signup bg-blur">
         <div data-ix="downbeforeup" class="signup-form">
-            <div class="modal-header"></div>
-            <div data-ix="destroysignup" class="close modal-close">+</div>
-            <img width="160" src="<?php echo SITE_RELATIVE_PATH ?>/images/logo-white.svg" class="modal-brand">
             <div data-duration-in="300" data-duration-out="100" data-easing="ease-in-out"
                  class="w-tabs modal-push-buttons">
-                <div class="w-tab-menu tabs-menu">
-                    <a data-w-tab="Tab 1" class="w-tab-link w--current w-inline-block tab">
-                        <div>Login</div>
-                    </a>
-                    <a data-w-tab="Tab 2" class="w-tab-link w-inline-block tab">
-                        <div>Register</div>
-                    </a>
-                </div>
                 <div class="w-tab-content tabs-content">
                     <div data-w-tab="Tab 1" class="w-tab-pane w--tab-active" ng-controller="LoginController">
                         <div class="w-form login-form">
@@ -304,35 +406,6 @@ use \DSI\Service\URL;
                             </div>
                         </div>
                     </div>
-                    <div data-w-tab="Tab 2" class="w-tab-pane" ng-controller="RegisterController">
-                        <div class="w-form login-form">
-                            <form id="email-form" name="email-form" ng-submit="onSubmit()">
-                                <input id="email-5" type="email" placeholder="Enter your email address" name="email-5"
-                                       data-name="Email 5" autofocus="autofocus"
-                                       class="w-input login-field"
-                                       ng-model="email.value"
-                                       ng-class="{error: errors.email}">
-                                <div style="color:red" ng-show="errors.email" ng-bind="errors.email"></div>
-                                <input id="Password-5" type="password" placeholder="Password" name="Password-5"
-                                       data-name="Password 5" class="w-input login-field"
-                                       ng-model="password.value"
-                                       ng-class="{error: errors.password}">
-                                <div style="color:red" ng-show="errors.password" ng-bind="errors.password"></div>
-
-                                <div class="modal-footer">
-                                    <div ng-hide="registered">
-                                        <input type="submit"
-                                               ng-disabled="loading"
-                                               ng-value="loading ? 'Loading...' : 'Register'"
-                                               class="w-button login-button register">
-                                    </div>
-                                    <button ng-show="registered" type="button" class="w-button login-button register">
-                                        Welcome to Digital Social!
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -403,7 +476,7 @@ use \DSI\Service\URL;
             <a href="<?php echo URL::projects() ?>" class="w-nav-link nav">Projects</a>
             <a href="<?php echo URL::organisations() ?>" class="w-nav-link nav">Organisations</a>
             <?php if (!isset($_SESSION['user'])) { ?>
-                <a href="#" data-ix="showsignup" class="w-nav-link nav log-in">Log In</a>
+                <a href="#" data-ix="open-login-modal" class="w-nav-link nav log-in">Log In</a>
             <?php } else { ?>
                 <div class="w-dropdown" data-delay="0">
                     <div class="w-dropdown-toggle nav log-in">
