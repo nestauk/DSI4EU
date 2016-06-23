@@ -26,8 +26,8 @@ require __DIR__ . '/header.php';
                 </a>
             </div>
             <div class="w-clearfix bread-crumbs">
-                <a class="w-inline-block breadcrumb-root" href="<?php echo \DSI\Service\URL::projects()?>">
-                    <div class="breadcrumb-link">Projects</div>
+                <a class="w-inline-block breadcrumb-root" href="<?php echo \DSI\Service\URL::organisations()?>">
+                    <div class="breadcrumb-link">Organisations</div>
                     <div class="arrow-right"></div>
                 </a>
                 <a class="w-inline-block breadcrumb-root path" href="#">
