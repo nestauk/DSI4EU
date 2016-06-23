@@ -524,6 +524,10 @@ strong {
   margin-bottom: 0px;
 }
 
+.info-h.card-h.alt {
+  padding-left: 0px;
+}
+
 .project-summary {
   margin-top: 0px;
   margin-bottom: 0px;
@@ -531,6 +535,11 @@ strong {
   padding-bottom: 20px;
   padding-left: 20px;
   color: #888;
+}
+
+.project-summary.alt {
+  padding-left: 0px;
+  color: #18233f;
 }
 
 .project-archive {
@@ -1133,9 +1142,12 @@ strong {
 }
 
 .forgotten-password {
-  margin-top: 0px;
+  display: block;
+  width: 160px;
+  margin: 0px auto 22px;
   color: #d34c4c;
   font-size: 12px;
+  text-align: center;
   text-decoration: none;
 }
 
@@ -2095,6 +2107,13 @@ strong {
   border-bottom-style: none;
 }
 
+.impact-block.alt {
+  min-height: 200px;
+  padding: 19px;
+  border-radius: 3px;
+  background-color: #fff;
+}
+
 .impact-h4 {
   padding-left: 30px;
   color: #575757;
@@ -2657,6 +2676,11 @@ strong {
   padding-bottom: 0px;
 }
 
+.container-wide.padding-20 {
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
 .button {
   min-width: 175px;
   padding: 10px 30px;
@@ -3004,7 +3028,7 @@ strong {
 }
 
 .centered.modal-h2.log-in {
-  margin-top: 104px;
+  margin-top: 67px;
   margin-bottom: 49px;
 }
 
@@ -3531,6 +3555,7 @@ strong {
 }
 
 .dsi-button.creat-button {
+  margin-top: 43px;
   background-color: rgba(29, 201, 160, .94);
   font-family: 'Open Sans', sans-serif;
   font-weight: 600;
@@ -4803,7 +4828,7 @@ strong {
   width: 438px;
   height: 50px;
   margin-right: auto;
-  margin-bottom: 30px;
+  margin-bottom: 14px;
   margin-left: auto;
   border-style: none;
   background-color: #f3f3f3;
@@ -4992,6 +5017,15 @@ strong {
   border-top: 15px solid transparent;
   border-right: 15px solid hsla(0, 0%, 100%, .15);
   border-bottom: 0px solid transparent;
+}
+
+.project-description {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-family: 'Open Sans', sans-serif;
+  color: #18233f;
+  font-size: 24px;
+  line-height: 36px;
 }
 
 html.w-mod-js *[data-ix="downbeforeup"] {
