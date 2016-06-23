@@ -15,11 +15,6 @@ require __DIR__ . '/header.php';
         <div class="w-section page-header">
             <div class="container-wide header">
                 <h1 class="page-h1 light"><?php echo show_input($project->getName()) ?></h1>
-                <div class="dsi4eu-stats">
-                    <a href="<?php echo \DSI\Service\URL::project($project->getId(), $project->getName()) ?>">
-                        <?php echo \DSI\Service\URL::project($project->getId(), $project->getName()) ?>
-                    </a>
-                </div>
                 <div class="w-clearfix bread-crumbs">
                     <a class="w-inline-block breadcrumb-root" href="<?php echo \DSI\Service\URL::projects()?>">
                         <div class="breadcrumb-link">Projects</div>
