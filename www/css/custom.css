@@ -152,3 +152,17 @@ input.ng-invalid {
 .dsi-button.story-image-upload {
     margin-bottom: 20px;
 }
+
+.sweet-alert button.cancel {
+    
+    position: relative;
+    left: 0px;
+    right: 0px;
+    bottom: 0;
+    width: 140px;
+    height: 30px;
+    font-family: 'Open Sans', sans-serif;
+    line-height: 20px;
+    text-align: center;
+    cursor: pointer;
+}
