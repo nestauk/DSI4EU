@@ -40,7 +40,10 @@ require __DIR__ . '/header.php';
                 <div class="modal-content">
                     <h2 class="centered modal-h2 log-in">Change password</h2>
                     <div class="w-form" style="text-align:center">
-                        <div data-ix="destroypasswordchange" style="color:red" class="close modal-close">+</div>
+                        <div data-ix="destroypasswordchange"
+                             style="color: silver;font-family: open sans-serif;font-weight: 300"
+                             class="close modal-close">+
+                        </div>
                         <form id="email-form" name="email-form" data-name="Email Form"
                               ng-submit="savePassword()">
                             <input id="new-password" type="password" placeholder="Enter your new password"
@@ -105,7 +108,8 @@ require __DIR__ . '/header.php';
                                 </label>
                                 <img class="story-image-upload" ng-src="{{user.profilePic}}">
                                 <a class="w-button dsi-button story-image-upload" href="#"
-                                   ngf-select="profilePic.upload($file, $invalidFiles)" ng-bind="profilePic.loading ? 'Loading...' : 'Upload image'">
+                                   ngf-select="profilePic.upload($file, $invalidFiles)"
+                                   ng-bind="profilePic.loading ? 'Loading...' : 'Upload image'">
                                     Upload image
                                 </a>
                                 <div ng-show="profilePic.f.progress > 0 && profilePic.f.progress < 100"
@@ -115,7 +119,8 @@ require __DIR__ . '/header.php';
                                         <span ng-bind="{{profilePic.$error}}"></span>
                                         <span ng-bind="{{profilePic.$errorParam}}"></span>
                                                 <span class="progress" ng-show="profilePic.f.progress >= 0">
-                                                    <div style="width:{{profilePic.f.progress}}%" ng-bind="profilePic.f.progress + '%'"></div>
+                                                    <div style="width:{{profilePic.f.progress}}%"
+                                                         ng-bind="profilePic.f.progress + '%'"></div>
                                                 </span>
                                     </div>
                                     <div style="color:red" ng-bind="{{profilePic.errorMsg.file}}"></div>
