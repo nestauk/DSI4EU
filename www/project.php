@@ -49,29 +49,31 @@ require __DIR__ . '/header.php';
                 <div class="project-description light">
                     <?php echo show_input($project->getDescription()) ?>
                 </div>
-                <p class="project-summary alt light">
-                    <strong class="light strong-light"><?php echo show_input($project->getName()) ?></strong>
-                    <?php if ($region = $project->getCountryRegion()) { ?>
-                        is based in
-                        <strong class="light strong-light">
-                            <?php echo show_input($region->getName()) ?>,
-                            <?php echo show_input($region->getCountry()->getName()) ?>
-                        </strong>
-                        <?php if ($project->getStartDate()) { ?>
-                            and
-                        <?php } ?>
-                    <?php } ?>
-                    <?php if ($project->getStartDate()) { ?>
-                        ran from <strong class="light strong-light">
-                            <?php echo date('M, Y', $project->getUnixStartDate()) ?>
-                        </strong>
-                        <?php if ($project->getEndDate()) { ?>
-                            to <strong class="light strong-light">
-                                <?php echo date('M, Y', $project->getUnixEndDate()) ?>
+                <?php if ($project->getCountryRegion() OR $project->getStartDate() OR $project->getEndDate()) { ?>
+                    <p class="project-summary alt light">
+                        <strong class="light strong-light"><?php echo show_input($project->getName()) ?></strong>
+                        <?php if ($region = $project->getCountryRegion()) { ?>
+                            is based in
+                            <strong class="light strong-light">
+                                <?php echo show_input($region->getName()) ?>,
+                                <?php echo show_input($region->getCountry()->getName()) ?>
                             </strong>
+                            <?php if ($project->getStartDate()) { ?>
+                                and
+                            <?php } ?>
                         <?php } ?>
-                    <?php } ?>
-                </p>
+                        <?php if ($project->getStartDate()) { ?>
+                            ran from <strong class="light strong-light">
+                                <?php echo date('M, Y', $project->getUnixStartDate()) ?>
+                            </strong>
+                            <?php if ($project->getEndDate()) { ?>
+                                to <strong class="light strong-light">
+                                    <?php echo date('M, Y', $project->getUnixEndDate()) ?>
+                                </strong>
+                            <?php } ?>
+                        <?php } ?>
+                    </p>
+                <?php } ?>
                 <a class="w-button project-nav" href="#tags">Tags</a>
                 <a class="w-button project-nav" href="#who">Who's involved</a>
                 <a class="w-button project-nav" href="#social">Social impact</a>
