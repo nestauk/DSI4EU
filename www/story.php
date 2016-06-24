@@ -3,14 +3,13 @@ require __DIR__ . '/header.php';
 /** @var $story \DSI\Entity\Story */
 /** @var $author \DSI\Entity\User */
 ?>
-
     <div class="w-section single-post-hero"
          style="background-image: linear-gradient(180deg, rgba(14, 23, 41, .83) 26%, rgba(58, 47, 70, .7)), url('<?php echo SITE_RELATIVE_PATH ?>/images/stories/main/<?php echo $story->getMainImage() ?>');">
         <div class="container-wide post-hero">
             <h1 class="post-hero-title"><?php echo show_input($story->getTitle()) ?></h1>
             <div class="post-single-date"><?php echo $story->getDatePublished('jS F Y') ?></div>
             <div class="w-clearfix bread-crumbs">
-                <a class="w-inline-block breadcrumb-root" href="<?php echo \DSI\Service\URL::stories()?>">
+                <a class="w-inline-block breadcrumb-root" href="<?php echo \DSI\Service\URL::stories() ?>">
                     <div class="breadcrumb-link">Stories</div>
                     <div class="arrow-right"></div>
                 </a>
@@ -18,8 +17,8 @@ require __DIR__ . '/header.php';
                     <div class="arrow-bottom-left"></div>
                     <div class="arrow-top-left"></div>
                     <div class="breadcrumb-link">
-                        <?php echo substr(show_input($story->getTitle()), 0, 35)?>
-                        <?php echo strlen($story->getTitle()) > 35 ? '...' : ''?>
+                        <?php echo substr(show_input($story->getTitle()), 0, 35) ?>
+                        <?php echo strlen($story->getTitle()) > 35 ? '...' : '' ?>
                     </div>
                     <div class="arrow-right"></div>
                 </a>

@@ -172,3 +172,7 @@ a.login-modal-back {
 .modal-content {
     height: 580px;
 }
+
+.remove-from-list{
+    display:none;
+}

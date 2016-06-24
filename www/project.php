@@ -12,11 +12,10 @@ require __DIR__ . '/header.php';
         ng-controller="ProjectController"
         data-projectid="<?php echo $project->getId() ?>">
 
-        <div class="w-section page-header">
-            <div class="container-wide header">
-                <h1 class="page-h1 light"><?php echo show_input($project->getName()) ?></h1>
+        <div class="w-section page-header project-header-exp">
+            <div class="container-wide header project-header-exp">
                 <div class="w-clearfix bread-crumbs">
-                    <a class="w-inline-block breadcrumb-root" href="<?php echo \DSI\Service\URL::projects()?>">
+                    <a class="w-inline-block breadcrumb-root" href="<?php echo \DSI\Service\URL::projects() ?>">
                         <div class="breadcrumb-link">Projects</div>
                         <div class="arrow-right"></div>
                     </a>
@@ -24,271 +23,262 @@ require __DIR__ . '/header.php';
                         <div class="arrow-bottom-left"></div>
                         <div class="arrow-top-left"></div>
                         <div class="breadcrumb-link">
-                            <?php echo substr(show_input($project->getName()), 0, 35)?>
-                            <?php echo strlen($project->getName()) > 35 ? '...' : ''?>
+                            <?php echo substr(show_input($project->getName()), 0, 35) ?>
+                            <?php echo strlen($project->getName()) > 35 ? '...' : '' ?>
                         </div>
                         <div class="arrow-right"></div>
                     </a>
                 </div>
-
-                <img class="large-profile-img"
+                <h1 class="page-h1 light"><?php echo show_input($project->getName()) ?></h1>
+                <div class="dsi4eu-stats project-header-exp">
+                    <a class="project-url-link" href="<?php echo $project->getUrl() ?>"
+                       target="_blank"><?php echo $project->getUrl() ?></a>
+                </div>
+                <img class="large-profile-img project-header-exp"
                      src="<?php echo \DSI\Entity\Image::PROJECT_LOGO_URL . $project->getLogoOrDefault() ?>">
                 <?php if ($isOwner) { ?>
-                    <a class="w-button dsi-button profile-edit"
-                       href="<?php echo \DSI\Service\URL::editProject($project->getId()) ?>">Edit project</a>
+                    <a class="w-button dsi-button profile-edit project-header-exp"
+                       href="<?php echo \DSI\Service\URL::editProject($project->getId()) ?>">
+                        Edit project</a>
                 <?php } ?>
             </div>
         </div>
 
-        <div class="w-section project-section">
+        <div class="w-section section-grey dark">
+            <div class="container-wide padding-20">
+                <div class="project-description light">
+                    <?php echo show_input($project->getDescription()) ?>
+                </div>
+                <p class="project-summary alt light">
+                    <strong class="light strong-light"><?php echo show_input($project->getName()) ?></strong>
+                    <?php if ($region = $project->getCountryRegion()) { ?>
+                        is based in
+                        <strong class="light strong-light">
+                            <?php echo show_input($region->getName()) ?>,
+                            <?php echo show_input($region->getCountry()->getName()) ?>
+                        </strong>
+                        <?php if ($project->getStartDate()) { ?>
+                            and
+                        <?php } ?>
+                    <?php } ?>
+                    <?php if ($project->getStartDate()) { ?>
+                        ran from <strong class="light strong-light">
+                            <?php echo date('M, Y', $project->getUnixStartDate()) ?>
+                        </strong>
+                        <?php if ($project->getEndDate()) { ?>
+                            to <strong class="light strong-light">
+                                <?php echo date('M, Y', $project->getUnixEndDate()) ?>
+                            </strong>
+                        <?php } ?>
+                    <?php } ?>
+                </p>
+                <a class="w-button project-nav" href="#tags">Tags</a>
+                <a class="w-button project-nav" href="#who">Who's involved</a>
+                <a class="w-button project-nav" href="#social">Social impact</a>
+                <a class="w-button project-nav" href="#updates">News &amp; updates</a>
+            </div>
+        </div>
+
+        <div class="w-section section-white tag-section" id="tags">
             <div class="container-wide">
+                <h3 class="info-h card-h alt">This project is tagged under:</h3>
+                <div class="w-clearfix tags-block" ng-cloak>
+                    <div class="skill" ng-repeat="tag in project.tags">
+                        <div ng-bind="tag"></div>
+                        <div class="tag-label"></div>
+                        <div class="tag-hole"></div>
+                        <?php if ($isOwner) { ?>
+                            <div class="delete" ng-click="removeTag(tag)">-</div>
+                        <?php } ?>
+                    </div>
+                    <?php if ($isOwner) { ?>
+                        <div class="add-item-block" ng-click="addingTag = !addingTag">
+                            <div class="add-item">+</div>
+                        </div>
+
+                        <div class="w-form" style="float:left"
+                             ng-show="addingTag">
+                            <form class="w-clearfix add-skill-section"
+                                  ng-submit="addTag()">
+                                <select data-tags="true"
+                                        data-placeholder="Add a tag"
+                                        id="Add-tag"
+                                        class="w-input add-language"
+                                        style="width:200px;display:inline">
+                                    <option></option>
+                                </select>
+                                <input type="submit" value="Add" class="w-button add-skill-btn">
+                            </form>
+                        </div>
+                    <?php } ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-section section-grey" id="who">
+            <div class="container-wide">
+                <h3 class="section-header">Who's involved</h3>
                 <div class="w-row project-info">
                     <div class="w-col w-col-6 w-col-stack" id="textScroll">
                         <div id="text">
-                            <div class="info-card">
-                                <h3 class="info-h card-h">About this project</h3>
-                                <p class="project-summary">
-                                    <?php echo show_input($project->getDescription()) ?>
-                                </p>
-                                <?php if ($project->getCountryRegion()) { ?>
-                                    <p class="project-summary">
-                                        <strong><?php echo show_input($project->getName()) ?></strong>
-                                        is based in
-                                        <strong><?php echo $project->getCountryRegion()->getName() ?></strong>,
-                                        <strong><?php echo $project->getCountry()->getName() ?></strong>
-                                    </p>
-                                <?php } ?>
-                                <?php if ($project->getUnixStartDate() OR $project->getUnixEndDate()) { ?>
-                                    <h3 class="card-sub-h">Duration</h3>
-                                    <div class="duration-p">This project runs
-                                        <?php if ($project->getUnixStartDate()) { ?>
-                                            from
-                                            <strong><?php echo date('M Y', $project->getUnixStartDate()) ?></strong>
-                                        <?php } ?>
-                                        <?php if ($project->getUnixEndDate()) { ?>
-                                            to
-                                            <strong><?php echo date('M Y', $project->getUnixEndDate()) ?></strong>
-                                        <?php } ?>
+                            <div class="info-card alt">
+                                <h3 class="info-h card-h">Contributors</h3>
+                                <div class="project-owner">
+                                    <div class="owner-link">
+                                        <a class="w-inline-block inner-link"
+                                           href="<?php echo SITE_RELATIVE_PATH ?>/profile/<?php echo $project->getOwner()->getId() ?>">
+                                            <img class="project-creator-img" height="50"
+                                                 ng-src="<?php echo \DSI\Entity\Image::PROFILE_PIC_URL . $project->getOwner()->getProfilePicOrDefault() ?>"
+                                                 width="50">
+                                            <div class="creator-name">
+                                                <?php echo show_input($project->getOwner()->getFirstName()) ?>
+                                                <?php echo show_input($project->getOwner()->getLastName()) ?>
+                                            </div>
+                                            <div class="project-creator-text">
+                                                <?php echo show_input($project->getOwner()->getJobTitle()) ?>
+                                            </div>
+                                        </a>
+                                        <div class="star-holder">
+                                            <img class="star-full" style="opacity:1"
+                                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-star-orange.png">
+                                        </div>
                                     </div>
-                                    <br/>
-                                <?php } ?>
-                                <h3 class="card-sub-h">Status</h3>
-                                <div class="duration-p">
-                                    <strong><?php echo ucfirst($project->getStatus()) ?></strong>
+
+                                    <div class="project-members">
+                                        <div class="owner-link project-member" ng-repeat="member in project.members"
+                                             ng-cloak>
+                                            <a class="w-inline-block inner-link"
+                                               href="<?php echo SITE_RELATIVE_PATH ?>/profile/{{member.id}}">
+                                                <img class="project-creator-img" height="50"
+                                                     ng-src="<?php echo \DSI\Entity\Image::PROFILE_PIC_URL ?>{{member.profilePic}}"
+                                                     width="50">
+                                                <div class="creator-name">{{member.firstName}} {{member.lastName}}</div>
+                                                <div class="project-creator-text">{{member.jobTitle}}</div>
+                                            </a>
+                                            <div class="star-holder">
+                                                <?php if ($isOwner) { ?>
+                                                    <img class="star-full" data-ix="add-star-admin" style="opacity:1"
+                                                         src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-star-orange.png"
+                                                         ng-click="member.isAdmin = !member.isAdmin; updateAdminStatus(member)"
+                                                         ng-show="member.isAdmin">
+                                                    <img class="star-empty" data-ix="add-star-admin" style="opacity:1"
+                                                         src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-star-outline-orange.png"
+                                                         ng-click="member.isAdmin = !member.isAdmin; updateAdminStatus(member)"
+                                                         ng-hide="member.isAdmin">
+                                                    <div class="admin-added"
+                                                         ng-bind="member.isAdmin ? 'Admin activated' : 'Admin removed'"></div>
+                                                <?php } else { ?>
+                                                    <img class="star-full" style="opacity:1"
+                                                         src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-star-orange.png"
+                                                         ng-show="member.isAdmin">
+                                                    <img class="star-empty" style="opacity:1"
+                                                         src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-star-outline-orange.png"
+                                                         ng-hide="member.isAdmin">
+                                                <?php } ?>
+                                            </div>
+                                            <?php if ($isOwner) { ?>
+                                                <div class="remove-from-list" ng-click="removeMember(member)">-</div>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
                                 </div>
-                                <h3 class="info-h card-h">This project is tagged under:</h3>
-                                <div class="w-clearfix tags-block">
-                                    <div class="skill" ng-repeat="tag in project.tags">
-                                        <?php if ($isOwner) { ?>
-                                            <div class="delete" ng-click="removeTag(tag)">-</div>
-                                        <?php } ?>
-                                        <div ng-bind="tag"></div>
-                                    </div>
-                                    <?php if ($isOwner) { ?>
-                                        <div class="add-item-block" ng-click="addingTag = !addingTag">
-                                            <div class="add-item">+</div>
+                                <?php if ($isOwner) { ?>
+                                    <div class="join-project">
+                                        <div class="add-item-block" style="float:right;margin-right:20px">
+                                            <div class="add-item" onclick="$('#addNewMember').toggle()">+</div>
                                         </div>
 
-                                        <div class="w-form" style="float:left"
-                                             ng-show="addingTag">
-                                            <form class="w-clearfix add-skill-section"
-                                                  ng-submit="addTag()">
+                                        <div id="addNewMember" style="margin-left:20px;display:none">
+                                            <form id="add-member-form" name="add-member-form"
+                                                  data-name="Add Member Form"
+                                                  class="w-clearfix">
+                                                Select new member:
                                                 <select data-tags="true"
-                                                        data-placeholder="Type your skill"
-                                                        id="Add-tag"
-                                                        class="w-input add-language"
-                                                        style="width:200px;display:inline">
+                                                        data-placeholder=""
+                                                        id="Add-member" name="Add-member"
+                                                        class="w-input"
+                                                        multiple
+                                                        style="width:200px">
                                                     <option></option>
                                                 </select>
-                                                <input type="submit" value="Add" class="w-button add-skill-btn">
                                             </form>
+
+                                            <div style="color:red;padding:12px 0 10px 100px;">
+                                                <div style="color:orange">
+                                                    <div ng-show="addProjectMember.loading">Loading...</div>
+                                                </div>
+                                                <div style="color:green">
+                                                    <div ng-show="addProjectMember.success"
+                                                         ng-bind="addProjectMember.success"></div>
+                                                </div>
+                                                <div
+                                                    ng-show="addProjectMember.errors.email"
+                                                    ng-bind="addProjectMember.errors.email"></div>
+                                                <div
+                                                    ng-show="addProjectMember.errors.member"
+                                                    ng-bind="addProjectMember.errors.member"></div>
+                                            </div>
                                         </div>
-                                    <?php } ?>
-                                </div>
-                                <img class="edit-dark" src="images/ios7-compose-outline.png" width="25">
+                                    </div>
+                                <?php } ?>
                             </div>
 
-                            <?php /*
-            <div id="googleMap">
-                <style>
-                    #map {
-                        height: 600px;
-                    }
+                            <div class="info-card alt" ng-show="project.memberRequests.length > 0" ng-cloak>
+                                <h3 class="info-h card-h">Member Requests</h3>
+                                <div class="project-owner">
+                                    <div class="info-card" style="min-height: 0;">
+                                        <div class="w-row contributors">
+                                            <div class="w-col w-col-12 contributor-col"
+                                                 ng-repeat="member in project.memberRequests">
+                                                <a class="w-inline-block"
+                                                   href="<?php echo SITE_RELATIVE_PATH ?>/profile/{{member.id}}">
+                                                    <img class="project-creator-img" height="50"
+                                                         ng-src="<?php echo \DSI\Entity\Image::PROFILE_PIC_URL ?>{{member.profilePic}}"
+                                                         width="50">
+                                                    <div class="creator-name">{{member.firstName}} {{member.lastName}}
+                                                    </div>
+                                                    <div class="project-creator-text">{{member.jobTitle}}</div>
+                                                </a>
 
-                    .controls {
-                        margin-top: 10px;
-                        border: 1px solid transparent;
-                        border-radius: 2px 0 0 2px;
-                        box-sizing: border-box;
-                        -moz-box-sizing: border-box;
-                        height: 32px;
-                        outline: none;
-                        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-                    }
-
-                    #pac-input {
-                        background-color: #fff;
-                        font-family: Roboto;
-                        font-size: 15px;
-                        font-weight: 300;
-                        margin-left: 12px;
-                        padding: 0 11px 0 13px;
-                        text-overflow: ellipsis;
-                        width: 300px;
-                    }
-
-                    #pac-input:focus {
-                        border-color: #4d90fe;
-                    }
-
-                    .pac-container {
-                        font-family: Roboto;
-                    }
-
-                    #type-selector {
-                        color: #fff;
-                        background-color: #4d90fe;
-                        padding: 5px 11px 0px 11px;
-                    }
-
-                    #type-selector label {
-                        font-family: Roboto;
-                        font-size: 13px;
-                        font-weight: 300;
-                    }
-
-                    #target {
-                        width: 345px;
-                    }
-                </style>
-                <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-                <div id="map"></div>
-                <script>
-                    // This example adds a search box to a map, using the Google Place Autocomplete
-                    // feature. People can enter geographical searches. The search box will return a
-                    // pick list containing a mix of places and predicted search terms.
-
-                    // This example requires the Places library. Include the libraries=places
-                    // parameter when you first load the API. For example:
-                    // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-
-                    var selectedLocation = null;
-
-                    function initAutocomplete() {
-                        var map = new google.maps.Map(document.getElementById('map'), {
-                            center: {lat: 53, lng: 15},
-                            zoom: 4,
-                            mapTypeId: google.maps.MapTypeId.ROADMAP
-                        });
-
-                        // Create the search box and link it to the UI element.
-                        var input = document.getElementById('pac-input');
-                        var searchBox = new google.maps.places.SearchBox(input);
-                        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-
-                        // Bias the SearchBox results towards current map's viewport.
-                        map.addListener('bounds_changed', function () {
-                            searchBox.setBounds(map.getBounds());
-                        });
-                        map.addListener('click', function (e) {
-                            placeMarkerAndPanTo(e.latLng, map);
-                        });
-
-                        var markers = [];
-                        // Listen for the event fired when the user selects a prediction and retrieve
-                        // more details for that place.
-                        searchBox.addListener('places_changed', function () {
-                            var places = searchBox.getPlaces();
-
-                            if (places.length == 0) {
-                                return;
-                            }
-
-                            // Clear out the old markers.
-                            markers.forEach(function (marker) {
-                                marker.setMap(null);
-                            });
-                            markers = [];
-
-                            // For each place, get the icon, name and location.
-                            var bounds = new google.maps.LatLngBounds();
-                            places.forEach(function (place) {
-                                var icon = {
-                                    url: place.icon,
-                                    size: new google.maps.Size(71, 71),
-                                    origin: new google.maps.Point(0, 0),
-                                    anchor: new google.maps.Point(17, 34),
-                                    scaledSize: new google.maps.Size(25, 25)
-                                };
-
-                                // Create a marker for each place.
-                                markers.push(new google.maps.Marker({
-                                    map: map,
-                                    icon: icon,
-                                    title: place.name,
-                                    position: place.geometry.location
-                                }));
-
-                                if (place.geometry.viewport) {
-                                    // Only geocodes have viewport.
-                                    bounds.union(place.geometry.viewport);
-                                } else {
-                                    bounds.extend(place.geometry.location);
-                                }
-                            });
-                            map.fitBounds(bounds);
-                        });
-
-                        function placeMarkerAndPanTo(latLng, map) {
-                            for (var i = 0; i < markers.length; i++)
-                                markers[i].setMap(null);
-                            markers = [];
-
-                            var marker = new google.maps.Marker({
-                                position: latLng,
-                                map: map
-                            });
-                            markers.push(marker);
-                            selectedLocation = marker;
-                        }
-                    }
-
-                </script>
-                <script
-                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdjn0XlX4VebRi0Vm5BjfC7tv2T93Qi58&libraries=places&callback=initAutocomplete"
-                    async defer></script>
-
-                <div style="text-align:center;padding:10px;">
-                    <input type="button" ng-click="saveGMapPosition()" value="Save Location" class="w-button add-skill-btn">
-                </div>
-
-                <div ng-show="possibleLocations.length > 0">
-                    Please select the correct location:
-                    <ul>
-                        <li ng-repeat="location in possibleLocations">{{location.formatted_address}}</li>
-                    </ul>
-                </div>
-                <div ng-show="possibleLocationsNotFound">
-                    Address could not be found. Please insert your address manually.
-                </div>
-            </div>
-                */ ?>
-
-                            <div class="info-card">
-                                <h3 class="info-h card-h">
-                                    <div style="float:left">
-                                        Organisations involved
-                                    </div>
-                                    <?php if ($isOwner) { ?>
-                                        <div class="add-item-block"
-                                             ng-click="addingOrganisation = !addingOrganisation"
-                                             style="float:right;margin-right:20px">
-                                            <div class="add-item">+</div>
+                                                <div style="float:right;margin-top:15px;margin-right:10px">
+                                                    <a href="#" title="Approve Member Request" class="add-item"
+                                                       ng-click="approveRequestToJoin(member)"
+                                                       style="background-color: green">+</a>
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <a href="#" title="Reject Member Request" class="add-item"
+                                                       ng-click="rejectRequestToJoin(member)"
+                                                       style="background-color: red">-</a>
+                                                </div>
+                                            </div>
                                         </div>
-                                    <?php } ?>
-                                    <div style="clear:both"></div>
-                                </h3>
-
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-col w-col-6 w-col-stack" id="postsScroll">
+                        <div class="info-card alt">
+                            <h3 class="info-h card-h">Organisations involved</h3>
+                            <div class="list-items">
+                                <a class="w-inline-block partner-link"
+                                   ng-repeat="organisation in project.organisationProjects"
+                                   href="{{organisation.url}}">
+                                    <div class="w-clearfix list-item">
+                                        <div class="partner-title" ng-bind="organisation.name"></div>
+                                        <div class="no-of-projects">
+                                            <span ng-bind="organisation.projectsCount"></span>
+                                            <span
+                                                ng-bind="organisation.projectsCount == 1 ? 'Project' : 'Projects'"></span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <?php if ($isOwner) { ?>
+                                <div class="add-item-block"
+                                     ng-click="addingOrganisation = !addingOrganisation"
+                                     style="float:right;margin-right:20px">
+                                    <div class="add-item">+</div>
+                                </div>
                                 <form ng-show="addingOrganisation" ng-submit="addOrganisation()" ng-cloak>
                                     <label>
                                         Select organisation:
@@ -300,292 +290,165 @@ require __DIR__ . '/header.php';
                                         <input type="submit" value="Add" class="w-button add-skill-btn">
                                     </label>
                                 </form>
-
-                                <div class="list-items" ng-cloak>
-                                    <div class="w-inline-block partner-link">
-                                        <div class="w-clearfix list-item"
-                                             ng-repeat="organisation in project.organisationProjects">
-                                            <div class="partner-title">
-                                                <a ng-href="{{organisation.url}}"
-                                                   ng-bind="organisation.name"></a>
-                                            </div>
-                                            <div class="no-of-projects">
-                                                <span ng-bind="organisation.projectsCount"></span>
-                                                Project<span
-                                                    ng-bind="organisation.projectsCount == 1 ? '' : 's'"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="info-card">
-                                <h3 class="info-h card-h">
-                                    <div style="float:left">
-                                        Contributors
-                                    </div>
-                                    <?php if ($isOwner) { ?>
-                                        <div class="add-item-block" ng-click="addingMember = !addingMember"
-                                             style="float:right;margin-right:20px">
-                                            <div class="add-item">+</div>
-                                        </div>
-                                    <?php } ?>
-                                    <div style="clear:both"></div>
-                                </h3>
-
-                                <div ng-show="addingMember" style="margin-left:20px" ng-cloak>
-                                    <form id="add-member-form" name="add-member-form"
-                                          data-name="Add Member Form"
-                                          class="w-clearfix">
-                                        Select new member:
-                                        <select data-tags="true"
-                                                data-placeholder=""
-                                                id="Add-member" name="Add-member"
-                                                class="w-input"
-                                                multiple
-                                                style="width:200px">
-                                            <option></option>
-                                        </select>
-                                    </form>
-
-                                    <div style="color:red;padding:12px 0 10px 100px;">
-                                        <div style="color:orange">
-                                            <div ng-show="addProjectMember.loading">Loading...</div>
-                                        </div>
-                                        <div style="color:green">
-                                            <div ng-show="addProjectMember.success"
-                                                 ng-bind="addProjectMember.success"></div>
-                                        </div>
-                                        <div
-                                            ng-show="addProjectMember.errors.email"
-                                            ng-bind="addProjectMember.errors.email"></div>
-                                        <div
-                                            ng-show="addProjectMember.errors.member"
-                                            ng-bind="addProjectMember.errors.member"></div>
-                                    </div>
-                                </div>
-
-                                <div style="clear:both"></div>
-
-                                <div class="project-owner">
-                                    <a href="<?php echo SITE_RELATIVE_PATH ?>/profile/<?php echo $project->getOwner()->getId() ?>"
-                                       class="w-inline-block owner-link">
-                                        <img width="50" height="50"
-                                             src="<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/<?php echo $project->getOwner()->getProfilePicOrDefault() ?>"
-                                             class="project-creator-img">
-                                        <div
-                                            class="creator-name"><?php echo $project->getOwner()->getFirstName() ?></div>
-                                        <div class="project-creator-text">
-                                            <?php echo $project->getOwner()->getLastName() ?>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="w-row contributors" ng-cloak>
-                                    <div class="w-col w-col-6 contributor-col"
-                                         ng-repeat="member in project.members">
-                                        <div class="contributor">
-                                            <div class="star-holder">
-                                                <?php if ($isOwner) { ?>
-                                                    <img ng-show="member.isAdmin"
-                                                         src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-star-orange.png"
-                                                         ng-click="member.isAdmin = !member.isAdmin; updateAdminStatus(member)"
-                                                         class="star-full" style="opacity:1">
-                                                    <img ng-show="!member.isAdmin"
-                                                         src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-star-outline-orange.png"
-                                                         ng-click="member.isAdmin = !member.isAdmin; updateAdminStatus(member)"
-                                                         class="star-empty">
-                                                    <input type="checkbox"
-                                                           ng-checked="member.isAdmin"
-                                                           ng-model="member.isAdmin"
-                                                           ng-change="updateAdminStatus(member)"
-                                                           style="display:none"
-                                                    />
-                                                <?php } else { ?>
-                                                    <img ng-show="member.isAdmin"
-                                                         src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-star-orange.png"
-                                                         class="star-full" style="opacity:1">
-                                                <?php } ?>
-                                            </div>
-                                            <a href="<?php echo SITE_RELATIVE_PATH ?>/profile/{{member.id}}"
-                                               class="w-inline-block">
-                                                <img width="40" height="40" class="contributor-small-img"
-                                                     ng-src="<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/{{member.profilePic}}">
-                                                <div class="contributor-name" ng-bind="member.firstName"></div>
-                                                <div class="contributor-position"
-                                                     ng-bind="member.lastName"></div>
-                                            </a>
-                                            <?php if ($isOwner) { ?>
-                                                <div class="delete" ng-click="removeMember(member)">-</div>
-                                            <?php } ?>
-                                        </div>
-                                    </div>
-                                </div>
-                                <?php if ($canUserRequestMembership) { ?>
-                                    <div class="join-project" ng-cloak>
-                                        <div ng-hide="requestToJoin.requestSent">
-                                            <a href="#" ng-hide="requestToJoin.loading"
-                                               class="w-button btn btn-join"
-                                               ng-click="sendRequestToJoin()">Request to join</a>
-                                            <button ng-show="requestToJoin.loading" ng-cloak
-                                                    class="w-button btn btn-join"
-                                                    style="background-color: #ec388e">
-                                                Sending Request...
-                                            </button>
-                                        </div>
-                                        <button ng-show="requestToJoin.requestSent"
-                                                class="w-button btn btn-join">
-                                            Request Sent
-                                        </button>
-                                    </div>
-                                <?php } ?>
-                                <?php if (isset($userHasInvitation) AND $userHasInvitation) { ?>
-                                    <div class="you-have-invites" ng-hide="invitationActioned" ng-cloak>
-                                        <div class="notification-block-p">You have been invited to join this project
-                                        </div>
-                                        <a class="w-button dsi-button notification-button accept" href="#"
-                                           ng-click="approveInvitationToJoin()">Accept</a>
-                                        <a class="w-button dsi-button notification-button decline" href="#"
-                                           ng-click="rejectInvitationToJoin()">Decline</a>
-                                    </div>
-                                <?php } ?>
-                            </div>
-
-                            <?php if ($isOwner) { ?>
-                                <div class="info-card" style="min-height: 0;" ng-cloak
-                                     ng-show="project.memberRequests.length > 0">
-                                    <h3 class="info-h card-h">
-                                        Member Requests
-                                    </h3>
-
-                                    <div class="w-row contributors">
-                                        <div class="w-col w-col-6 contributor-col"
-                                             ng-repeat="member in project.memberRequests">
-                                            <a href="<?php echo SITE_RELATIVE_PATH ?>/profile/{{member.id}}"
-                                               class="w-inline-block contributor">
-                                                <img width="40" height="40"
-                                                     ng-src="<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/{{member.profilePic}}"
-                                                     class="contributor-small-img">
-                                                <div class="contributor-name" ng-bind="member.firstName"></div>
-                                                <div class="contributor-position"
-                                                     ng-bind="member.lastName"></div>
-                                            </a>
-                                            <div style="margin-left:30px">
-                                                <a href="#" title="Approve Member Request" class="add-item"
-                                                   ng-click="approveRequestToJoin(member)"
-                                                   style="background-color: green">+</a>
-                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                <a href="#" title="Reject Member Request" class="add-item"
-                                                   ng-click="rejectRequestToJoin(member)"
-                                                   style="background-color: red">-</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             <?php } ?>
+                        </div>
+                    </div>
+                </div>
 
-                            <div class="info-card">
-                                <h3 class="info-h card-h">Social impact</h3>
-                                <div class="impact-block">
-                                    <h4 class="impact-h4">Areas of society impacted</h4>
-                                    <div class="w-clearfix tags-block impact">
-                                        <div class="skill" ng-repeat="tag in project.impactTagsA">
-                                            <?php if ($isOwner) { ?>
-                                                <div class="delete" ng-click="removeImpactTagA(tag)">-</div>
-                                            <?php } ?>
-                                            <div ng-bind="tag"></div>
-                                        </div>
-                                        <?php if ($isOwner) { ?>
-                                            <div class="add-item-block"
-                                                 ng-click="addingImpactTagA = !addingImpactTagA">
-                                                <div class="add-item">+</div>
-                                            </div>
-                                            <div class="w-form" style="float:left"
-                                                 ng-show="addingImpactTagA">
-                                                <form class="w-clearfix add-skill-section"
-                                                      ng-submit="addImpactTagA()">
-                                                    <select data-tags="true"
-                                                            data-placeholder="Type your skill"
-                                                            id="Add-impact-tag-a"
-                                                            class="w-input add-language"
-                                                            style="width:200px;display:inline">
-                                                        <option></option>
-                                                    </select>
-                                                    <input type="submit" value="Add"
-                                                           class="w-button add-skill-btn">
-                                                </form>
-                                            </div>
-                                        <?php } ?>
-                                    </div>
-                                </div>
-                                <div class="impact-block">
-                                    <h4 class="impact-h4">Technology focus</h4>
-                                    <div class="w-clearfix tags-block impact">
-                                        <div class="skill" ng-repeat="tag in project.impactTagsB">
-                                            <?php if ($isOwner) { ?>
-                                                <div class="delete" ng-click="removeImpactTagB(tag)">-</div>
-                                            <?php } ?>
-                                            <div ng-bind="tag"></div>
-                                        </div>
-                                        <?php if ($isOwner) { ?>
-                                            <div class="add-item-block"
-                                                 ng-click="addingImpactTagB = !addingImpactTagB">
-                                                <div class="add-item">+</div>
-                                            </div>
-                                            <div class="w-form" style="float:left"
-                                                 ng-show="addingImpactTagB">
-                                                <form class="w-clearfix add-skill-section"
-                                                      ng-submit="addImpactTagB()">
-                                                    <select data-tags="true"
-                                                            data-placeholder="Type your skill"
-                                                            id="Add-impact-tag-b"
-                                                            class="w-input add-language"
-                                                            style="width:200px;display:inline">
-                                                        <option></option>
-                                                    </select>
-                                                    <input type="submit" value="Add"
-                                                           class="w-button add-skill-btn">
-                                                </form>
-                                            </div>
-                                        <?php } ?>
-                                    </div>
-                                </div>
-                                <div class="impact-block last">
-                                    <h4 class="impact-h4">Technology method</h4>
-                                    <div class="w-clearfix tags-block impact">
-                                        <div class="skill" ng-repeat="tag in project.impactTagsC">
-                                            <?php if ($isOwner) { ?>
-                                                <div class="delete" ng-click="removeImpactTagC(tag)">-</div>
-                                            <?php } ?>
-                                            <div ng-bind="tag"></div>
-                                        </div>
-                                        <?php if ($isOwner) { ?>
-                                            <div class="add-item-block"
-                                                 ng-click="addingImpactTagC = !addingImpactTagC">
-                                                <div class="add-item">+</div>
-                                            </div>
-                                            <div class="w-form" style="float:left"
-                                                 ng-show="addingImpactTagC">
-                                                <form class="w-clearfix add-skill-section"
-                                                      ng-submit="addImpactTagC()">
-                                                    <select data-tags="true"
-                                                            data-placeholder="Type your skill"
-                                                            id="Add-impact-tag-c"
-                                                            class="w-input add-language"
-                                                            style="width:200px;display:inline">
-                                                        <option></option>
-                                                    </select>
-                                                    <input type="submit" value="Add"
-                                                           class="w-button add-skill-btn">
-                                                </form>
-                                            </div>
-                                        <?php } ?>
-                                    </div>
-                                </div>
+                <?php if (isset($userHasInvitation) AND $userHasInvitation) { ?>
+                    <div class="you-have-invites" ng-hide="invitationActioned" ng-cloak>
+                        <div class="notification-block-p">You have been invited to join this project
+                        </div>
+                        <a class="w-button dsi-button notification-button accept" href="#"
+                           ng-click="approveInvitationToJoin()">Accept</a>
+                        <a class="w-button dsi-button notification-button decline" href="#"
+                           ng-click="rejectInvitationToJoin()">Decline</a>
+                    </div>
+                <?php } ?>
+            </div>
+
+            <?php if ($canUserRequestMembership) { ?>
+                <div class="section-cta" ng-cloak>
+                    <div class="container-wide section-cta">
+                        <div class="w-row">
+                            <div class="w-col w-col-6">
+                                <h3>Are you involved with this project?</h3>
+                                <div>If you are involved you can request to join this project</div>
+                            </div>
+                            <div class="w-col w-col-6">
+                                <a class="w-button btn btn-join section-cta" href="#"
+                                   ng-click="sendRequestToJoin()"
+                                   ng-hide="requestToJoin.requestSent"
+                                   ng-bind="requestToJoin.loading ? 'Sending Request...' : 'Request to join +'"></a>
+                                <button ng-show="requestToJoin.requestSent"
+                                        class="w-button btn btn-join">
+                                    Request Sent
+                                </button>
                             </div>
                         </div>
                     </div>
+                </div>
+            <?php } ?>
+        </div>
 
-                    <div id="postsScroll" class="w-col w-col-6 w-col-stack">
+        <div class="w-section section-white" id="social">
+            <div class="container-wide">
+                <h3 class="info-h card-h section-header">Social impact</h3>
+                <div class="w-row">
+                    <div class="w-col w-col-4">
+                        <div class="impact-block">
+                            <h4 class="impact-h4">Areas of society impacted</h4>
+                            <div class="w-clearfix tags-block impact">
+                                <div class="skill" ng-repeat="tag in project.impactTagsA">
+                                    <?php if ($isOwner) { ?>
+                                        <div class="delete" ng-click="removeImpactTagA(tag)">-</div>
+                                    <?php } ?>
+                                    <div ng-bind="tag"></div>
+                                </div>
+                                <?php if ($isOwner) { ?>
+                                    <div class="add-item-block"
+                                         ng-click="addingImpactTagA = !addingImpactTagA">
+                                        <div class="add-item">+</div>
+                                    </div>
+                                    <div class="w-form" style="float:left"
+                                         ng-show="addingImpactTagA">
+                                        <form class="w-clearfix add-skill-section"
+                                              ng-submit="addImpactTagA()">
+                                            <select data-tags="true"
+                                                    data-placeholder="Type your skill"
+                                                    id="Add-impact-tag-a"
+                                                    class="w-input add-language"
+                                                    style="width:200px;display:inline">
+                                                <option></option>
+                                            </select>
+                                            <input type="submit" value="Add"
+                                                   class="w-button add-skill-btn">
+                                        </form>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-col w-col-4">
+                        <div class="impact-block">
+                            <h4 class="impact-h4">Technology focus</h4>
+                            <div class="w-clearfix tags-block impact">
+                                <div class="skill" ng-repeat="tag in project.impactTagsB">
+                                    <?php if ($isOwner) { ?>
+                                        <div class="delete" ng-click="removeImpactTagB(tag)">-</div>
+                                    <?php } ?>
+                                    <div ng-bind="tag"></div>
+                                </div>
+                                <?php if ($isOwner) { ?>
+                                    <div class="add-item-block"
+                                         ng-click="addingImpactTagB = !addingImpactTagB">
+                                        <div class="add-item">+</div>
+                                    </div>
+                                    <div class="w-form" style="float:left"
+                                         ng-show="addingImpactTagB">
+                                        <form class="w-clearfix add-skill-section"
+                                              ng-submit="addImpactTagB()">
+                                            <select data-tags="true"
+                                                    data-placeholder="Type your skill"
+                                                    id="Add-impact-tag-b"
+                                                    class="w-input add-language"
+                                                    style="width:200px;display:inline">
+                                                <option></option>
+                                            </select>
+                                            <input type="submit" value="Add"
+                                                   class="w-button add-skill-btn">
+                                        </form>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-col w-col-4">
+                        <div class="impact-block last">
+                            <h4 class="impact-h4">Technology method</h4>
+                            <div class="w-clearfix tags-block impact">
+                                <div class="skill" ng-repeat="tag in project.impactTagsC">
+                                    <?php if ($isOwner) { ?>
+                                        <div class="delete" ng-click="removeImpactTagC(tag)">-</div>
+                                    <?php } ?>
+                                    <div ng-bind="tag"></div>
+                                </div>
+                                <?php if ($isOwner) { ?>
+                                    <div class="add-item-block"
+                                         ng-click="addingImpactTagC = !addingImpactTagC">
+                                        <div class="add-item">+</div>
+                                    </div>
+                                    <div class="w-form" style="float:left"
+                                         ng-show="addingImpactTagC">
+                                        <form class="w-clearfix add-skill-section"
+                                              ng-submit="addImpactTagC()">
+                                            <select data-tags="true"
+                                                    data-placeholder="Type your skill"
+                                                    id="Add-impact-tag-c"
+                                                    class="w-input add-language"
+                                                    style="width:200px;display:inline">
+                                                <option></option>
+                                            </select>
+                                            <input type="submit" value="Add"
+                                                   class="w-button add-skill-btn">
+                                        </form>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="w-section section-grey dark" id="updates">
+            <div class="container-wide">
+                <div class="w-row project-info">
+                    <div class="w-col w-col-3" id="textScroll">
+                        <div id="text"></div>
+                    </div>
+                    <div class="w-col w-col-6" id="postsScroll">
                         <div id="posts">
                             <div class="info-card">
                                 <?php if ($loggedInUser AND $isOwner) { ?>
@@ -737,11 +600,23 @@ require __DIR__ . '/header.php';
             <div class="add-post-modal">
                 <form ng-submit="addPost()">
                     <textarea id="newPost" style="height:100%">Please type your update here...</textarea>
-                    <a href="#" data-ix="hide-new-post" class="modal-save cancel">Cancel</a>
+                    <a href="#" data-ix="hide-new-post" class="modal-save" style="right:140px">Cancel</a>
                     <input type="submit" class="modal-save" value="Publish post"
-                           style="border-width:0;line-height:20px;"/>
+                           style="border-width:0;line-height:20px;font-weight:bold;"/>
                 </form>
             </div>
         </div>
     </div>
+
+    <script>
+        $(function () {
+            $('.project-members')
+                .on('mouseenter', '.project-member', function () {
+                    $('.remove-from-list', $(this)).show();
+                })
+                .on('mouseleave', '.project-member', function () {
+                    $('.remove-from-list', $(this)).hide();
+                })
+        });
+    </script>
 <?php require __DIR__ . '/footer.php' ?>
