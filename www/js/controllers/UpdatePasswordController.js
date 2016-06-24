@@ -13,16 +13,17 @@ angular
             $http.post(SITE_RELATIVE_PATH + '/my-profile.json', data)
                 .then(function (response) {
                     $timeout(function () {
+                        console.log(response.data);
                         $scope.loading = false;
                         $scope.saved = false;
-                        if (response.data.result == 'ok') {
+                        if (response.data.response == 'ok') {
                             $scope.saved = true;
                             $scope.password = '';
                             $scope.retypePassword = '';
-                        } else if (response.data.result == 'error') {
+                        } else if (response.data.response == 'error') {
                             $scope.errors = response.data.errors;
                         }
-                    }, 1000);
+                    }, 200);
                 });
         }
     });

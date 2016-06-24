@@ -75,7 +75,7 @@ class MyProfileController
                     $updateUserPassword->data()->retypePassword = (string)($_POST['retypePassword'] ?? '');
                     $updateUserPassword->exec();
                     echo json_encode([
-                        'result' => 'ok'
+                        'response' => 'ok'
                     ]);
                     return;
                 }
@@ -84,6 +84,7 @@ class MyProfileController
                     'response' => 'error',
                     'errors' => $e->getErrors()
                 ]);
+                return;
             }
 
             echo json_encode([

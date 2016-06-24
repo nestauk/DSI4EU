@@ -34,35 +34,36 @@ require __DIR__ . '/header.php';
         }
     </style>
 
-    <div class="change-password-block bg-blur modal-signup" ng-controller="UpdatePasswordController">
-        <div data-ix="downbeforeup" class="password-signupform signup-form">
-            <div class="modal-header"></div>
-            <div data-ix="destroysignup" class="close modal-close">+</div>
-            <img src="<?php echo SITE_RELATIVE_PATH ?>/images/dsi-8c1449cf94fe315a853fd9a5d99eaf45.png"
-                 class="modal-brand">
-            <h3 class="change-password-h">Change password</h3>
-            <div class="w-form login-form">
-                <form id="email-form" name="email-form" data-name="Email Form"
-                      ng-submit="savePassword()">
-                    <input id="new-password" type="password" placeholder="Enter your new password"
-                           name="new-password" data-name="new password"
-                           class="w-input login-field"
-                           ng-class="{error: errors.password}"
-                           ng-model="password">
-                    <div style="color:red" ng-bind="errors.password"></div>
-                    <input id="confirm-password" type="password" placeholder="Confirm password"
-                           name="confirm-password" data-name="confirm password"
-                           class="w-input login-field"
-                           ng-class="{error: errors.retypePassword}"
-                           ng-model="retypePassword">
-                    <div style="color:red" ng-bind="errors.retypePassword"></div>
-                    <input ng-hide="loading" type="submit"
-                           value="{{saved ? 'Your password has been saved' : 'Update password'}}"
-                           class="w-button login-button">
-                    <button ng-show="loading" class="w-button login-button" style="background-color:#EC9A38">
-                        Please wait...
-                    </button>
-                </form>
+    <div class="change-password-block login-modal modal" ng-controller="UpdatePasswordController">
+        <div class="modal-container">
+            <div class="modal-helper">
+                <div class="modal-content">
+                    <h2 class="centered modal-h2 log-in">Change password</h2>
+                    <div class="w-form" style="text-align:center">
+                        <div data-ix="destroypasswordchange" style="color:red" class="close modal-close">+</div>
+                        <form id="email-form" name="email-form" data-name="Email Form"
+                              ng-submit="savePassword()">
+                            <input id="new-password" type="password" placeholder="Enter your new password"
+                                   name="new-password" data-name="new password"
+                                   class="w-input login-field"
+                                   ng-class="{error: errors.password}"
+                                   ng-model="password">
+                            <div style="color:red" ng-bind="errors.password"></div>
+                            <input id="confirm-password" type="password" placeholder="Confirm password"
+                                   name="confirm-password" data-name="confirm password"
+                                   class="w-input login-field"
+                                   ng-class="{error: errors.retypePassword}"
+                                   ng-model="retypePassword">
+                            <div style="color:red" ng-bind="errors.retypePassword"></div>
+                            <input ng-hide="saved" type="submit"
+                                   value="Update password"
+                                   ng-value="loading ? 'Loading...' : 'Update password'"
+                                   ng-disabled="loading"
+                                   class="w-button login-button">
+                            <div ng-show="saved" class="success-message">Your password has been saved</div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -77,8 +78,6 @@ require __DIR__ . '/header.php';
 
         <div class="container-wide">
             <div class="body-content add-story">
-                <div data-ix="showpasswordchange" class="change-password top-right">Change password</div>
-
                 <div class="w-form">
                     <form class="w-clearfix" ng-submit="savePersonalDetails()" ng-disabled="loading">
                         <div class="w-row">
@@ -157,6 +156,7 @@ require __DIR__ . '/header.php';
                            class="w-button dsi-button post-story cancel">Cancel</a>
                     </form>
                 </div>
+                <div data-ix="showpasswordchange" class="change-password top-right">Change password</div>
             </div>
         </div>
 
