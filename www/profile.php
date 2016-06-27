@@ -68,7 +68,7 @@ require __DIR__ . '/header.php';
 
                                 <div class="add-new-input" ng-show="showAddSkill">
                                     <div class="w-form">
-                                        <form class="w-clearfix" data-name="Email Form 2" id="email-form-2"
+                                        <form class="w-clearfix" id="email-form-2"
                                               name="email-form-2">
                                             <select data-tags="true"
                                                     data-placeholder="Add your skill"
@@ -102,7 +102,7 @@ require __DIR__ . '/header.php';
 
                                 <div class="add-new-input" ng-show="showAddLanguage">
                                     <div class="w-form">
-                                        <form class="w-clearfix" data-name="Email Form 2" id="email-form-2"
+                                        <form class="w-clearfix" id="email-form-2"
                                               name="email-form-2">
                                             <select data-placeholder="Select your language"
                                                     id="Add-language" name="Add-language"
