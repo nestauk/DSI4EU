@@ -149,7 +149,7 @@ use \DSI\Service\URL;
 </head>
 <script type="text/javascript"
         src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/SearchController.js"></script>
-<body ng-app="DSIApp" ng-controller="SearchController">
+<body ng-app="DSIApp" ng-controller="SearchController" id="top">
 <?php if (!isset($_SESSION['user'])) { ?>
     <script type="text/javascript" src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/LoginController.js"></script>
 
@@ -165,7 +165,7 @@ use \DSI\Service\URL;
 
                         <div ng-hide="forgotPassword.show">
                             <form id="email-form-3" name="email-form-3" ng-submit="onSubmit()">
-                                <input class="w-input modal-input log-in" data-name="Enter your email address"
+                                <input class="w-input modal-input log-in"
                                        id="Enter-your-email-address" maxlength="256" name="Enter-your-email-address"
                                        placeholder="Enter your email address" type="email"
                                        ng-model="email.value"
@@ -182,16 +182,15 @@ use \DSI\Service\URL;
                                 <a class="forgotten-password" href="#" ng-click="forgotPassword.show = true">Forgotten
                                     password?</a>
 
-                                <div ng-hide="loggedin">
-                                    <input class="w-button dsi-button creat-button" data-wait="Please wait..."
-                                           type="submit"
+                                    <input class="w-button dsi-button creat-button"
+                                           type="submit" ng-hide="loggedin"
                                            value="Log in"
                                            ng-value="loading ? 'Loading...' : 'Log in'"
                                            ng-disabled="loading">
-                                </div>
-                                <button ng-show="loggedin" type="button" class="w-button login-button register">
-                                    Welcome back to Digital Social!
-                                </button>
+                                    <input class="w-button dsi-button creat-button"
+                                           ng-show="loggedin" type="button"
+                                           style="width:auto"
+                                           value="Welcome back to Digital Social!">
                             </form>
                         </div>
                         <div ng-show="forgotPassword.show" class="w-tab-screen" style="text-align:center">
@@ -424,7 +423,7 @@ use \DSI\Service\URL;
                             <form id="email-form-3" name="email-form-3" ng-submit="createProject()">
                                 <div style="color:red;text-align:center" ng-show="project.errors.name"
                                      ng-bind="project.errors.name"></div>
-                                <input class="w-input modal-input" data-name="Name 3" id="name-3" maxlength="256"
+                                <input class="w-input modal-input" id="name-3" maxlength="256"
                                        name="name" placeholder="Enter the name of your project" type="text"
                                        ng-model="project.name" ng-class="{error: project.errors.name}">
                                 <input class="w-button dsi-button creat-button" type="submit"
@@ -447,7 +446,7 @@ use \DSI\Service\URL;
                             <form id="email-form-3" name="email-form-3" ng-submit="createOrganisation()">
                                 <div style="color:red;text-align:center" ng-show="organisation.errors.name"
                                      ng-bind="organisation.errors.name"></div>
-                                <input class="w-input modal-input" data-name="Name 3" id="name-3" maxlength="256"
+                                <input class="w-input modal-input" id="name-3" maxlength="256"
                                        name="name" placeholder="Enter the name of your organisation" type="text"
                                        ng-model="organisation.name"
                                        ng-class="{error: organisation.errors.name}">
@@ -538,8 +537,8 @@ use \DSI\Service\URL;
                 <div class="w-col w-col-7 w-col-small-7">
                     <div class="w-form">
                         <form class="w-clearfix search-input" id="email-form">
-                            <input class="w-input search-field quicksearch" data-name="Search" id="Search"
-                                   maxlength="256" name="Search" placeholder="Search DSI4EU" type="text"
+                            <input class="w-input search-field quicksearch" id="Search"
+                                   maxlength="256" name="Search" placeholder="Search digitalsocial.eu" type="text"
                                    ng-model="search.entry" ng-focus="search.focused = true"
                                    ng-blur="search.focused = false">
                             <div ng-cloak ng-show="search.entry.length > 0" class="search-clear"
