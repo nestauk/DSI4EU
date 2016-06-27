@@ -134,6 +134,7 @@ class HomeController
         } else {
             $loggedInUser = null;
             $hideSearch = true;
+            $stories = (new StoryRepository())->getPublishedLast(3);
 
             require __DIR__ . '/../../../www/home.php';
         }

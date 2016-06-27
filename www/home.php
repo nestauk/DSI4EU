@@ -4,8 +4,8 @@ $isHomePage = true;
 use \DSI\Service\URL;
 
 require __DIR__ . '/header.php';
+/** @var $stories \DSI\Entity\Story[] */
 ?>
-
     <div class="w-section homepage-hero">
         <div class="overlay"></div>
         <div class="w-background-video video-bg" data-autoplay="data-autoplay" data-loop="data-loop"
@@ -138,14 +138,14 @@ require __DIR__ . '/header.php';
                         <h3 class="card-h3">People</h3>
                         <p class="show-card-p">People use DSI4EU as a way to get involved with projects and share their
                             skills</p>
-                        <a href="#" class="w-button card-btn">Join DSI4EU</a>
+                        <a href="#top" class="w-button card-btn">Join DSI4EU</a>
                     </div>
                 </div>
                 <div class="w-col w-col-4 w-col-stack">
                     <div class="showcase-card">
                         <h3 class="card-h3">Projects</h3>
                         <p class="show-card-p">Existing DSI projects are showcased as well as new DSI projects</p>
-                        <a href="#" class="w-button card-btn">View existing projects</a>
+                        <a href="<?php echo URL::projects() ?>" class="w-button card-btn">View existing projects</a>
                     </div>
                 </div>
                 <div class="w-col w-col-4 w-col-stack">
@@ -153,7 +153,8 @@ require __DIR__ . '/header.php';
                         <h3 class="card-h3">Organisations</h3>
                         <p class="show-card-p">Organisations offer funding and support to both projects &amp;
                             individuals</p>
-                        <a href="#" class="w-button card-btn">Check out our partner organisations</a>
+                        <a href="<?php echo URL::organisations() ?>" class="w-button card-btn">Check out our partner
+                            organisations</a>
                     </div>
                 </div>
             </div>
@@ -169,7 +170,7 @@ require __DIR__ . '/header.php';
                         varius enim in eros elementum tristique...</p>
                 </div>
                 <div class="w-col w-col-6 cta-column-right">
-                    <a class="w-button dsi-button cta" href="#">Add project +</a>
+                    <a class="w-button dsi-button cta" href="#top">Add project +</a>
                 </div>
             </div>
         </div>
@@ -181,43 +182,34 @@ require __DIR__ . '/header.php';
             <p class="p-big centre">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in
                 eros elementum tristique...</p>
             <div class="w-row hp-post-row">
-                <div class="w-col w-col-4 w-col-stack">
-                    <a class="w-inline-block hp-post-link" href="#">
-                        <div class="hp-post-img"></div>
-                        <div class="w-clearfix hp-post">
-                            <div class="hp-post-meta category">News</div>
-                            <div class="hp-post-meta hp-date">25th april 2016</div>
-                            <h3 class="hp-post-h3">Policy Workshop: Shaping the Future of Digital Social Innovation in
-                                Europe</h3>
-                            <p class="hp-post-p">Join us in Brussels the 29th of June at DG Connect for a Policy
-                                Workshop on Digital Social Innovation...</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="w-col w-col-4 w-col-stack">
-                    <a class="w-inline-block hp-post-link" href="#">
-                        <div class="hp-post-img post-2"></div>
-                        <div class="w-clearfix hp-post">
-                            <div class="hp-post-meta category inspiration">Events</div>
-                            <div class="hp-post-meta hp-date">14th July 2015</div>
-                            <h3 class="hp-post-h3">In a rapidly changing world, we are all designers.</h3>
-                            <p class="hp-post-p">Ezio Manzini is a world-leading expert on sustainable design. He is
-                                founder of the&nbsp;DESIS...</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="w-col w-col-4 w-col-stack">
-                    <a class="w-inline-block hp-post-link" href="#">
-                        <div class="hp-post-img post-3"></div>
-                        <div class="w-clearfix hp-post">
-                            <div class="hp-post-meta category discovery">Case Studies</div>
-                            <div class="hp-post-meta hp-date">16th June 2015</div>
-                            <h3 class="hp-post-h3">Digital Social Innovation, a relatively new concept</h3>
-                            <p class="hp-post-p">Digital Social Innovation (DSI) is an emerging field, with little
-                                existing knowledge on who the digital social innovators are...</p>
-                        </div>
-                    </a>
-                </div>
+                <?php foreach ($stories AS $story) { ?>
+                    <div class="w-col w-col-4 w-col-stack">
+                        <a class="w-inline-block hp-post-link"
+                           href="<?php echo URL::story($story->getId(), $story->getTitle()) ?>">
+                            <div class="hp-post-img"
+                                 style="background-image: url('<?php echo \DSI\Entity\Image::STORY_FEATURED_IMAGE_URL . $story->getFeaturedImage() ?>')"></div>
+                            <div class="w-clearfix hp-post">
+                                <div
+                                    class="hp-post-meta category">
+                                    <?php if ($story->getStoryCategoryId()) { ?>
+                                        <?php echo $story->getStoryCategory()->getName() ?>
+                                    <?php } ?>
+                                </div>
+                                <div class="hp-post-meta hp-date">
+                                    <?php echo $story->getDatePublished('jS F Y') ?>
+                                </div>
+                                <h3 class="hp-post-h3"><?php echo show_input($story->getTitle()) ?></h3>
+                                <p class="hp-post-p">
+                                    <?php echo show_input(
+                                        substr(
+                                            strip_tags($story->getContent()), 0, 200
+                                        )
+                                    ) ?>...
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                <?php } ?>
             </div>
         </div>
     </div>
