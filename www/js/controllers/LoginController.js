@@ -129,7 +129,7 @@ angular
                             $scope.registered = true;
                             $timeout(function () {
                                 window.location.href = SITE_RELATIVE_PATH + "/my-profile";
-                            }, 1000);
+                            }, 500);
                         }
                     },
                     function (response) {
@@ -137,6 +137,6 @@ angular
                         alert(response);
                     }
                 )
-            }, 500);
+            }, 200);
         }
     });
