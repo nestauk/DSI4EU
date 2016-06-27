@@ -2560,6 +2560,10 @@ strong {
 }
 
 .home-h2.centre {
+  display: block;
+  max-width: 800px;
+  margin-right: auto;
+  margin-left: auto;
   text-align: center;
 }
 
@@ -5220,6 +5224,21 @@ strong {
   line-height: 18px;
   text-align: center;
   cursor: pointer;
+}
+
+.eu-footer {
+  height: 75px;
+  background-color: #1d212a;
+}
+
+.ec-logo {
+  margin-top: 10px;
+}
+
+.ec-footer-p {
+  margin-top: 19px;
+  font-family: 'Open Sans', sans-serif;
+  color: #757575;
 }
 
 html.w-mod-js *[data-ix="downbeforeup"] {
