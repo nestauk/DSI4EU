@@ -103,6 +103,7 @@ require __DIR__ . '/header.php';
                                         </label>
                                     </div>
                                 <?php } ?>
+                                <div style="color:red" ng-bind="errors.category"></div>
                             </div>
                             <div class="w-col w-col-6">
                                 <label class="story-label">Your story</label>
