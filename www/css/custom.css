@@ -176,3 +176,7 @@ a.login-modal-back {
 .remove-from-list{
     display:none;
 }
+
+.search-results-popover {
+    top: 160px;
+}

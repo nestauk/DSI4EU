@@ -4,7 +4,6 @@ require __DIR__ . '/header.php';
 ?>
     <script type="text/javascript"
             src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/PersonalDetailsController.js"></script>
-<?php /* <script type="text/javascript" src="<?php echo SITE_RELATIVE_PATH?>/js/controllers/UploadImageController.js"></script> */ ?>
     <script type="text/javascript"
             src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/UpdatePasswordController.js"></script>
 
@@ -70,6 +69,8 @@ require __DIR__ . '/header.php';
             </div>
         </div>
     </div>
+
+    <?php require(__DIR__ . '/partialViews/search-results.php'); ?>
 
     <div ng-controller="PersonalDetailsController">
 

@@ -72,7 +72,7 @@
     </div>
 </div>
 
-<script type="text/javascript" src="<?php echo SITE_RELATIVE_PATH ?>/js/dsi4eu.js"></script>
+<script type="text/javascript" src="<?php echo SITE_RELATIVE_PATH ?>/js/dsi4eu.js?v=<?php echo Sysctl::$version ?>"></script>
 <!--[if lte IE 9]>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
 <script>
@@ -120,7 +120,7 @@
     }());
 </script>
 
-<script type="text/javascript" src="<?php echo SITE_RELATIVE_PATH ?>/js/script.js"></script>
+<script type="text/javascript" src="<?php echo SITE_RELATIVE_PATH ?>/js/script.js?v=<?php echo \DSI\Service\Sysctl::$version ?>"></script>
 
 </body>
 </html>

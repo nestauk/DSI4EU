@@ -43,11 +43,12 @@ require __DIR__ . '/header.php';
         </div>
     </div>
 
+    <?php require(__DIR__ . '/partialViews/search-results.php'); ?>
+
     <div
         ng-controller="OrganisationController"
         data-organisationid="<?php echo $organisation->getId() ?>"
         class="w-section project-section">
-
 
         <div class="w-container body-container project">
             <div class="w-row project-info">

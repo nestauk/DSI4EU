@@ -37,8 +37,6 @@ require __DIR__ . '/header.php';
             src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/StoriesController.js"></script>
 
     <div ng-controller="StoriesController">
-
-
         <div class="w-section page-header stories-header">
             <div class="container-wide header">
                 <h1 class="page-h1 light">Stories</h1>
@@ -91,9 +89,11 @@ require __DIR__ . '/header.php';
             </div>
         </div>
 
+        <?php require(__DIR__ . '/partialViews/search-results.php'); ?>
+
         <div class="container-wide stories">
             <div class="w-row hp-post-row" id="lisStories">
-                <div class="w-col w-col-4 w-col-stack <?php /*animate */?>"
+                <div class="w-col w-col-4 w-col-stack <?php /*animate */ ?>"
                      ng-repeat="story in filtered = (stories | filter:criteriaMatch(criteria) ) | filter: recalculatePagination() | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
                     <div class="story-grid-card admin-edit">
                         <a class="w-inline-block hp-post-link"

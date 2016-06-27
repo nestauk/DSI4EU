@@ -3,6 +3,7 @@
 /** @var $isHomePage bool */
 /** @var $angularModules string[] */
 use \DSI\Service\URL;
+use \DSI\Service\Sysctl;
 
 ?>
 <!DOCTYPE html>
@@ -13,11 +14,11 @@ use \DSI\Service\URL;
     <meta property="og:title" content="Home">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Webflow">
-    <link rel="stylesheet" type="text/css" href="<?php echo SITE_RELATIVE_PATH ?>/lib/ionicons/css/ionicons.min.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo SITE_RELATIVE_PATH ?>/css/normalize.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo SITE_RELATIVE_PATH ?>/css/components.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo SITE_RELATIVE_PATH ?>/css/dsi4eu.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo SITE_RELATIVE_PATH ?>/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo SITE_RELATIVE_PATH ?>/lib/ionicons/css/ionicons.min.css?v=<?php echo Sysctl::$version ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo SITE_RELATIVE_PATH ?>/css/normalize.css?v=<?php echo Sysctl::$version ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo SITE_RELATIVE_PATH ?>/css/components.css?v=<?php echo Sysctl::$version ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo SITE_RELATIVE_PATH ?>/css/dsi4eu.css?v=<?php echo Sysctl::$version ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo SITE_RELATIVE_PATH ?>/css/custom.css?v=<?php echo Sysctl::$version ?>">
 
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
     <script>
@@ -27,7 +28,7 @@ use \DSI\Service\URL;
             }
         });
     </script>
-    <script type="text/javascript" src="<?php echo SITE_RELATIVE_PATH ?>/js/modernizr.js"></script>
+    <script type="text/javascript" src="<?php echo SITE_RELATIVE_PATH ?>/js/modernizr.js?v=<?php echo Sysctl::$version ?>"></script>
 
     <link rel="shortcut icon" type="image/x-icon" href="<?php echo SITE_RELATIVE_PATH ?>/images/ico-small.png">
     <link rel="apple-touch-icon" href="<?php echo SITE_RELATIVE_PATH ?>/images/ico-large.png">
@@ -38,10 +39,10 @@ use \DSI\Service\URL;
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 
     <?php /** SweetAlert */ ?>
-    <script src="<?php echo SITE_RELATIVE_PATH ?>/lib/sweetalert-master/dist/sweetalert.min.js"></script>
+    <script src="<?php echo SITE_RELATIVE_PATH ?>/lib/sweetalert-master/dist/sweetalert.min.js?v=<?php echo Sysctl::$version ?>"></script>
     <link rel="stylesheet" type="text/css"
-          href="<?php echo SITE_RELATIVE_PATH ?>/lib/sweetalert-master/dist/sweetalert.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo SITE_RELATIVE_PATH ?>/css/sweet.css">
+          href="<?php echo SITE_RELATIVE_PATH ?>/lib/sweetalert-master/dist/sweetalert.css?v=<?php echo Sysctl::$version ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo SITE_RELATIVE_PATH ?>/css/sweet.css?v=<?php echo Sysctl::$version ?>">
 
     <?php /** Select2 */ ?>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/css/select2.min.css" rel="stylesheet"/>
@@ -121,13 +122,13 @@ use \DSI\Service\URL;
         }
     </style>
 
-    <script type="text/javascript" src="<?php echo SITE_RELATIVE_PATH ?>/js/angular.min.js"></script>
+    <script type="text/javascript" src="<?php echo SITE_RELATIVE_PATH ?>/js/angular.min.js?v=<?php echo Sysctl::$version ?>"></script>
 
     <?php if (isset($angularModules['fileUpload'])) { ?>
         <?php /** ngFileUpload */ ?>
-        <script src="<?php echo SITE_RELATIVE_PATH ?>/js/lib/ng-file-upload-bower/ng-file-upload-shim.min.js"></script>
+        <script src="<?php echo SITE_RELATIVE_PATH ?>/js/lib/ng-file-upload-bower/ng-file-upload-shim.min.js?v=<?php echo Sysctl::$version ?>"></script>
         <!-- for no html5 browsers support -->
-        <script src="<?php echo SITE_RELATIVE_PATH ?>/js/lib/ng-file-upload-bower/ng-file-upload.min.js"></script>
+        <script src="<?php echo SITE_RELATIVE_PATH ?>/js/lib/ng-file-upload-bower/ng-file-upload.min.js?v=<?php echo Sysctl::$version ?>"></script>
         <script>angularDependencies.push('ngFileUpload');</script>
     <?php } ?>
 
@@ -139,19 +140,19 @@ use \DSI\Service\URL;
 
     <?php if (isset($angularModules['pagination'])) { ?>
         <link rel="stylesheet" type="text/css"
-              href="<?php echo SITE_RELATIVE_PATH ?>/lib/bootstrap-pagination/bootstrap-pagination.css">
+              href="<?php echo SITE_RELATIVE_PATH ?>/lib/bootstrap-pagination/bootstrap-pagination.css?v=<?php echo Sysctl::$version ?>">
         <script type="text/javascript"
-                src="<?php echo SITE_RELATIVE_PATH ?>/lib/bootstrap-pagination/ui-bootstrap-tpls-0.2.0.js"></script>
+                src="<?php echo SITE_RELATIVE_PATH ?>/lib/bootstrap-pagination/ui-bootstrap-tpls-0.2.0.js?v=<?php echo Sysctl::$version ?>"></script>
         <script>angularDependencies.push('ui.bootstrap');</script>
     <?php } ?>
 
-    <script type="text/javascript" src="<?php echo SITE_RELATIVE_PATH ?>/js/DSIApp.js"></script>
+    <script type="text/javascript" src="<?php echo SITE_RELATIVE_PATH ?>/js/DSIApp.js?v=<?php echo Sysctl::$version ?>"></script>
 </head>
 <script type="text/javascript"
-        src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/SearchController.js"></script>
+        src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/SearchController.js?v=<?php echo Sysctl::$version ?>"></script>
 <body ng-app="DSIApp" ng-controller="SearchController" id="top">
 <?php if (!isset($_SESSION['user'])) { ?>
-    <script type="text/javascript" src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/LoginController.js"></script>
+    <script type="text/javascript" src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/LoginController.js?v=<?php echo Sysctl::$version ?>"></script>
 
     <div class="login-modal modal" ng-controller="LoginController">
         <div class="modal-container">
@@ -411,7 +412,7 @@ use \DSI\Service\URL;
     </div>
 <?php } else { ?>
     <script type="text/javascript"
-            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/CreateProjectOrganisationController.js"></script>
+            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/CreateProjectOrganisationController.js?v=<?php echo Sysctl::$version ?>"></script>
 
     <div ng-controller="CreateProjectOrganisationController">
         <div class="create-project-modal modal">

@@ -33,6 +33,8 @@ require __DIR__ . '/header.php';
             </div>
         </div>
 
+        <?php require(__DIR__ . '/partialViews/search-results.php'); ?>
+
         <div class="w-section project-section">
             <div class="container-wide">
                 <div class="w-row profile-info">
