@@ -18,6 +18,12 @@ class OrganisationsController
 
     public function exec()
     {
+        $authUser = new Auth();
+        if ($authUser->isLoggedIn())
+            $loggedInUser = (new UserRepository())->getById($authUser->getUserId());
+        else
+            $loggedInUser = null;
+
         if ($this->responseFormat == 'json') {
             // (new CountryRepository())->getAll();
             (new CountryRegionRepository())->getAll();
@@ -38,11 +44,6 @@ class OrganisationsController
                 ];
             }, $organisationRepo->getAll()));
         } else {
-            $authUser = new Auth();
-            if ($authUser->getUserId())
-                $loggedInUser = (new UserRepository())->getById($authUser->getUserId());
-            else
-                $loggedInUser = null;
 
             $data = [
                 'loggedInUser' => $loggedInUser

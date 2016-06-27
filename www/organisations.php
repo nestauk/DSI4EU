@@ -1,4 +1,7 @@
-<?php require __DIR__ . '/header.php' ?>
+<?php
+require __DIR__ . '/header.php'
+/** @var $loggedInUser \DSI\Entity\User */
+?>
     <script type="text/javascript"
             src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/OrganisationsController.js"></script>
 
@@ -14,7 +17,9 @@
                        ng-click="setStartLetter(letter)">
                         <div ng-bind="letter"></div>
                     </a>
-                    <a class="w-button dsi-button top-filter add-new-story" href="#">Add organisation +</a>
+                    <?php if ($loggedInUser) { ?>
+                        <a class="w-button dsi-button top-filter add-new-story" href="#">Add organisation +</a>
+                    <?php } ?>
                 </div>
             </div>
         </div>
