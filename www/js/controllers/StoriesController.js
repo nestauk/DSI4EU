@@ -15,6 +15,7 @@ angular
             $scope.stories = [];
             $http.get(SITE_RELATIVE_PATH + '/stories.json')
                 .then(function (response) {
+                    $scope.searchCriteria.published = true;
                     $scope.stories = response.data;
 
                     $scope.currentPage = 1; //current page

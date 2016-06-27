@@ -1,5 +1,6 @@
 <?php
 require __DIR__ . '/header.php';
+/** @var $loggedInUser \DSI\Entity\User */
 ?>
 
     <style>
@@ -64,22 +65,26 @@ require __DIR__ . '/header.php';
                                        href="#">
                                         Case studies</a>
                                 </div>
-                                <div class="w-col w-col-2">
-                                    <a class="w-button dsi-button top-filter published-stories"
-                                       ng-click="searchCriteria.published = true"
-                                       href="#">Published</a>
-                                </div>
-                                <div class="w-col w-col-2">
-                                    <a class="w-button dsi-button top-filter unpublished"
-                                       ng-click="searchCriteria.published = false"
-                                       href="#">Unpublished</a>
-                                </div>
+                                <?php if ($loggedInUser) { ?>
+                                    <div class="w-col w-col-2">
+                                        <a class="w-button dsi-button top-filter published-stories"
+                                           ng-click="searchCriteria.published = true"
+                                           href="#">Published</a>
+                                    </div>
+                                    <div class="w-col w-col-2">
+                                        <a class="w-button dsi-button top-filter unpublished"
+                                           ng-click="searchCriteria.published = false"
+                                           href="#">Unpublished</a>
+                                    </div>
+                                <?php } ?>
                             </div>
                         </div>
                         <div class="w-col w-col-3 w-col-stack w-clearfix">
-                            <a class="w-button dsi-button top-filter add-new-story"
-                               href="<?php echo \DSI\Service\URL::addStory() ?>">
-                                Add new story +</a>
+                            <?php if ($loggedInUser) { ?>
+                                <a class="w-button dsi-button top-filter add-new-story"
+                                   href="<?php echo \DSI\Service\URL::addStory() ?>">
+                                    Add new story +</a>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
@@ -88,7 +93,7 @@ require __DIR__ . '/header.php';
 
         <div class="container-wide stories">
             <div class="w-row hp-post-row" id="lisStories">
-                <div class="w-col w-col-4 w-col-stack animate"
+                <div class="w-col w-col-4 w-col-stack <?php /*animate */?>"
                      ng-repeat="story in filtered = (stories | filter:criteriaMatch(criteria) ) | filter: recalculatePagination() | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
                     <div class="story-grid-card admin-edit">
                         <a class="w-inline-block hp-post-link"
@@ -103,11 +108,13 @@ require __DIR__ . '/header.php';
                                 <p class="hp-post-p" ng-bind="story.content"></p>
                             </div>
                         </a>
-                        <div class="w-clearfix story-admin-buttons">
-                            <a class="w-button dsi-button button-bar-button"
-                               href="{{story.editUrl}}">Edit Story</a>
-                            <?php /* <a class="w-button dsi-button button-bar-button delete-button" href="#">Delete story</a> */ ?>
-                        </div>
+                        <?php if ($loggedInUser) { ?>
+                            <div class="w-clearfix story-admin-buttons">
+                                <a class="w-button dsi-button button-bar-button"
+                                   href="{{story.editUrl}}">Edit Story</a>
+                                <?php /* <a class="w-button dsi-button button-bar-button delete-button" href="#">Delete story</a> */ ?>
+                            </div>
+                        <?php } ?>
                     </div>
                 </div>
             </div>

@@ -91,6 +91,13 @@ class StoryRepository
         return $this->getObjectsWhere(["1"]);
     }
 
+    public function getAllPublished()
+    {
+        return $this->getObjectsWhere([
+            "`isPublished` = 1"
+        ]);
+    }
+
     public function getLast($limit)
     {
         $options = [
@@ -99,6 +106,19 @@ class StoryRepository
             'direction' => 'DESC'
         ];
         return $this->getObjectsWhere(["1"], $options);
+    }
+
+    public function getPublishedLast($limit)
+    {
+        $options = [
+            'limit' => $limit,
+            'orderBy' => 'time',
+            'direction' => 'DESC'
+        ];
+        $where = [
+            "`isPublished` = 1"
+        ];
+        return $this->getObjectsWhere($where, $options);
     }
 
     public function clearAll()
@@ -122,6 +142,13 @@ class StoryRepository
      */
     private function getObjectsWhere($where, $options = [])
     {
+        $orderBy = 'time';
+        $orderDirection = 'DESC';
+        if (isset($options['orderBy']))
+            $orderBy = $options['orderBy'];
+        if (isset($options['direction']))
+            $orderDirection = $options['direction'];
+
         $stories = [];
         $query = new SQL("SELECT 
             `id`, `categoryID`
@@ -130,8 +157,8 @@ class StoryRepository
           , `time`, `isPublished`, `datePublished`
           FROM `stories`
           WHERE " . implode(' AND ', $where) . "
-          ORDER BY " . (isset($options['orderBy']) ? $options['orderBy'] : '`title`') . "
-          " . (isset($options['direction']) ? $options['direction'] : 'ASC') . "
+          ORDER BY " . addslashes($orderBy) . "
+          " . addslashes($orderDirection) . "
           " . ((isset($options['limit']) AND $options['limit'] > 0) ? "LIMIT {$options['limit']}" : '') . "
         ");
         // $query->pr();

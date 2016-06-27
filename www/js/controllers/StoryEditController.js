@@ -70,8 +70,10 @@ angular
         // saveStory
         (function () {
             $scope.saveStory = function () {
+                $scope.errors = {};
                 $scope.loading = true;
                 $scope.saved = false;
+
                 var data = {
                     save: true,
                     title: $scope.story.title,
@@ -91,7 +93,7 @@ angular
                                 $scope.saved = true;
                             } else if (response.data.code == 'error') {
                                 $scope.errors = response.data.errors;
-                                console.log(response.data.errors);
+                                console.log({errors: response.data.errors});
                             } else {
                                 alert('unexpected error');
                                 console.log(response.data);

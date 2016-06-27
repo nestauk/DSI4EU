@@ -17,9 +17,15 @@ class StoriesController
         $authUser = new Auth();
         if ($authUser->isLoggedIn())
             $loggedInUser = (new UserRepository())->getById($authUser->getUserId());
+        else
+            $loggedInUser = null;
 
         if ($this->format == 'json') {
-            $stories = (new StoryRepository())->getAll();
+            if ($loggedInUser)
+                $stories = (new StoryRepository())->getAll();
+            else
+                $stories = (new StoryRepository())->getAllPublished();
+            
             echo json_encode(array_map(function (Story $story) {
                 $data = [
                     'id' => $story->getId(),
