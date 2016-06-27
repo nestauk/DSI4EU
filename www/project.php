@@ -325,7 +325,7 @@ require __DIR__ . '/header.php';
                                    ng-hide="requestToJoin.requestSent"
                                    ng-bind="requestToJoin.loading ? 'Sending Request...' : 'Request to join +'"></a>
                                 <button ng-show="requestToJoin.requestSent"
-                                        class="w-button btn btn-join">
+                                        class="w-button btn btn-join section-cta">
                                     Request Sent
                                 </button>
                             </div>
