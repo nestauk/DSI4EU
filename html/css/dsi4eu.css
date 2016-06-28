@@ -2450,6 +2450,10 @@ strong {
   line-height: 30px;
 }
 
+.homepage-hero.minus-100 {
+  height: 700px;
+}
+
 .homepage-nav {
   padding-top: 20px;
   background-color: transparent;
@@ -2543,7 +2547,7 @@ strong {
 }
 
 .image-placeholder {
-  height: 325px;
+  height: auto;
   margin-bottom: 50px;
   margin-left: 72px;
   border-radius: 10px;
@@ -2743,6 +2747,10 @@ strong {
 
 .container-wide.section-cta {
   padding-top: 29px;
+}
+
+.container-wide.footer-container {
+  padding-bottom: 0px;
 }
 
 .button {
