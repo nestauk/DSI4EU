@@ -294,7 +294,7 @@ require __DIR__ . '/header.php';
                                         <div class="w-row">
                                             <div class="w-col w-col-6">
                                                 <a href="#" data-ix="close-profile-update"
-                                                   class="w-button dsi-button cors cancel">Close</a>
+                                                   class="w-button dsi-button post-story cancel custom-cancel">Close</a>
                                             </div>
                                             <div class="w-col w-col-6">
                                                 <input type="submit" class="w-button dsi-button cors"
@@ -335,7 +335,7 @@ require __DIR__ . '/header.php';
                                         <div class="w-row">
                                             <div class="w-col w-col-6">
                                                 <a href="#" data-ix="close-profile-update"
-                                                   class="w-button dsi-button cors cancel">Close</a>
+                                                   class="w-button dsi-button post-story cancel custom-cancel">Close</a>
                                             </div>
                                             <div class="w-col w-col-6">
                                                 <input type="submit" class="w-button dsi-button cors"

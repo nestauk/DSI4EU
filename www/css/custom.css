@@ -186,6 +186,13 @@ a.login-modal-back {
     margin-top: 30px
 }
 
-.custom-project-header-exp{
-    background:none;
+.custom-project-header-exp {
+    background: none;
+}
+
+.custom-cancel {
+    background: #eee !important;
+    width: auto;
+    padding-left: 30px;
+    padding-right: 30px
 }
