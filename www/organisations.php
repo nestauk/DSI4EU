@@ -18,7 +18,8 @@ require __DIR__ . '/header.php'
                         <div ng-bind="letter"></div>
                     </a>
                     <?php if ($loggedInUser) { ?>
-                        <a class="w-button dsi-button top-filter add-new-story" href="#">Add organisation +</a>
+                        <a class="w-button dsi-button top-filter add-new-story" href="#"
+                           data-ix="create-organisation-modal">Add organisation +</a>
                     <?php } ?>
                 </div>
             </div>
