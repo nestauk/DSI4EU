@@ -5631,6 +5631,10 @@ html.w-mod-js *[data-ix="under-dev"] {
     margin-right: -5px;
     float: none;
   }
+  .card-thin {
+    height: auto;
+    text-align: center;
+  }
   .card-logo-small {
     width: 50px;
     max-width: auto;
@@ -5816,6 +5820,9 @@ html.w-mod-js *[data-ix="under-dev"] {
   .partner-logos {
     display: none;
   }
+  .container-wide.header {
+    height: 265px;
+  }
   .hp-post {
     height: 226px;
   }
@@ -5886,6 +5893,9 @@ html.w-mod-js *[data-ix="under-dev"] {
   .card-slim-location {
     text-align: center;
   }
+  .page-h1.light {
+    margin-top: 0px;
+  }
   .intro-title {
     height: 125px;
   }
@@ -5939,6 +5949,9 @@ html.w-mod-js *[data-ix="under-dev"] {
     margin-right: 0px;
     margin-bottom: 10px;
     margin-left: 0px;
+  }
+  .search-clear {
+    display: none;
   }
 }
 
