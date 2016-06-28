@@ -21,8 +21,13 @@ require __DIR__ . '/header.php';
                     <?php echo show_input($user->getLastName()) ?>
                 </h1>
                 <div class="position">
-                    <?php echo show_input($user->getJobTitle()) ?> at
-                    <?php echo show_input($user->getCompany()) ?>
+                    <?php if ($user->getJobTitle() OR $user->getCompany()) { ?>
+                        <?php echo show_input($user->getJobTitle()) ?>
+                        <?php if ($user->getJobTitle() AND $user->getCompany()) echo ' at ' ?>
+                        <?php echo show_input($user->getCompany()) ?>
+                    <?php } else { ?>
+                        &nbsp;
+                    <?php } ?>
                 </div>
                 <img class="large-profile-img"
                      src="<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/<?php echo $user->getProfilePicOrDefault() ?>">
@@ -62,27 +67,29 @@ require __DIR__ . '/header.php';
                                 </div>
                             </div>
                             <?php if ($isOwner) { ?>
-                                <div class="w-clearfix add-new">
-                                    <a class="w-button dsi-button add-new-item" href="#"
-                                       ng-click="showAddSkill = !showAddSkill"
-                                       ng-bind="showAddSkill ? 'Close' : 'Add new skill +'">Add new skill +</a>
-                                </div>
+                                <div ng-cloak>
+                                    <div class="w-clearfix add-new">
+                                        <a class="w-button dsi-button add-new-item" href="#"
+                                           ng-click="showAddSkill = !showAddSkill"
+                                           ng-bind="showAddSkill ? 'Close' : 'Add new skill +'">Add new skill +</a>
+                                    </div>
 
-                                <div class="add-new-input" ng-show="showAddSkill">
-                                    <div class="w-form">
-                                        <form class="w-clearfix" id="email-form-2"
-                                              name="email-form-2">
-                                            <select data-tags="true"
-                                                    data-placeholder="Add your skill"
-                                                    id="Add-skill" name="Add-skill"
-                                                    class="w-input add-skill"
-                                                    multiple
-                                                    style="width:200px">
-                                                <option></option>
-                                            </select>
-                                            <input class="w-button add-new-input-button" data-wait="Please wait..."
-                                                   type="submit" value="Add +">
-                                        </form>
+                                    <div class="add-new-input" ng-show="showAddSkill">
+                                        <div class="w-form">
+                                            <form class="w-clearfix" id="email-form-2"
+                                                  name="email-form-2">
+                                                <select data-tags="true"
+                                                        data-placeholder="Add your skill"
+                                                        id="Add-skill" name="Add-skill"
+                                                        class="w-input add-skill"
+                                                        multiple
+                                                        style="width:200px">
+                                                    <option></option>
+                                                </select>
+                                                <input class="w-button add-new-input-button" data-wait="Please wait..."
+                                                       type="submit" value="Add +">
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             <?php } ?>
@@ -97,25 +104,28 @@ require __DIR__ . '/header.php';
                                 </div>
                             </div>
                             <?php if ($isOwner) { ?>
-                                <div class="w-clearfix add-new" ng-click="showAddLanguage = !showAddLanguage">
-                                    <a class="w-button dsi-button add-new-item" href="#"
-                                       ng-bind="showAddLanguage ? 'Close' : 'Add new language +'">Add new language +</a>
-                                </div>
+                                <div ng-cloak>
+                                    <div class="w-clearfix add-new" ng-click="showAddLanguage = !showAddLanguage">
+                                        <a class="w-button dsi-button add-new-item" href="#"
+                                           ng-bind="showAddLanguage ? 'Close' : 'Add new language +'">Add new language
+                                            +</a>
+                                    </div>
 
-                                <div class="add-new-input" ng-show="showAddLanguage">
-                                    <div class="w-form">
-                                        <form class="w-clearfix" id="email-form-2"
-                                              name="email-form-2">
-                                            <select data-placeholder="Select your language"
-                                                    id="Add-language" name="Add-language"
-                                                    class="w-input add-language"
-                                                    multiple
-                                                    style="width:200px">
-                                                <option></option>
-                                            </select>
-                                            <input class="w-button add-new-input-button" data-wait="Please wait..."
-                                                   type="submit" value="Add +">
-                                        </form>
+                                    <div class="add-new-input" ng-show="showAddLanguage">
+                                        <div class="w-form">
+                                            <form class="w-clearfix" id="email-form-2"
+                                                  name="email-form-2">
+                                                <select data-placeholder="Select your language"
+                                                        id="Add-language" name="Add-language"
+                                                        class="w-input add-language"
+                                                        multiple
+                                                        style="width:200px">
+                                                    <option></option>
+                                                </select>
+                                                <input class="w-button add-new-input-button" data-wait="Please wait..."
+                                                       type="submit" value="Add +">
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             <?php } ?>
@@ -157,7 +167,8 @@ require __DIR__ . '/header.php';
                                         <div class="partner-title" ng-bind="organisation.name"></div>
                                         <div class="no-of-projects">
                                             <span ng-bind="organisation.membersCount"></span>
-                                            <span ng-bind="organisation.membersCount == 1 ? 'Project' : 'Projects'"></span>
+                                            <span
+                                                ng-bind="organisation.membersCount == 1 ? 'Project' : 'Projects'"></span>
                                         </div>
                                     </div>
                                 </a>
