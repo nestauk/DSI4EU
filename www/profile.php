@@ -54,7 +54,7 @@ require __DIR__ . '/header.php';
 
                             <h3 class="info-h card-h">My skills:</h3>
                             <div class="w-clearfix tags-block">
-                                <div class="skill" ng-repeat="skill in skills">
+                                <div class="skill" ng-repeat="skill in skills" ng-cloak>
                                     <?php if ($isOwner) { ?>
                                         <div class="delete" ng-click="removeSkill(skill)">-</div>
                                     <?php } ?>
@@ -89,7 +89,7 @@ require __DIR__ . '/header.php';
 
                             <h3 class="info-h card-h">My Languages:</h3>
                             <div class="w-clearfix tags-block">
-                                <div class="skill" ng-repeat="lang in languages">
+                                <div class="skill" ng-repeat="lang in languages" ng-cloak>
                                     <?php if ($isOwner) { ?>
                                         <div class="delete" ng-click="removeLanguage(lang)">-</div>
                                     <?php } ?>
@@ -127,7 +127,7 @@ require __DIR__ . '/header.php';
                             <div class="list-items">
                                 <a class="w-inline-block partner-link" href="#"
                                    ng-href="{{project.url}}"
-                                   ng-repeat="project in user.projects">
+                                   ng-repeat="project in user.projects" ng-cloak>
                                     <div class="w-clearfix list-item">
                                         <div class="partner-title" ng-bind="project.name"></div>
                                         <div class="no-of-projects">
@@ -152,7 +152,7 @@ require __DIR__ . '/header.php';
                             <h3 class="info-h card-h">Organisations i'm involved with</h3>
                             <div class="list-items">
                                 <a ng-href="{{organisation.url}}" href="#" class="w-inline-block partner-link"
-                                   ng-repeat="organisation in user.organisations">
+                                   ng-repeat="organisation in user.organisations" ng-cloak>
                                     <div class="w-clearfix list-item">
                                         <div class="partner-title" ng-bind="organisation.name"></div>
                                         <div class="no-of-projects">
