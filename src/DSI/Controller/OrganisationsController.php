@@ -38,7 +38,7 @@ class OrganisationsController
                     'name' => $organisation->getName(),
                     'region' => ($region ? $region->getName() : ''),
                     'country' => ($region ? $region->getCountry()->getName() : ''),
-                    'url' => URL::organisation($organisation->getId(), $organisation->getName()),
+                    'url' => URL::organisation($organisation),
                     'projectsCount' => $organisation->getProjectsCount(),
                     'partnersCount' => $organisation->getPartnersCount(),
                 ];

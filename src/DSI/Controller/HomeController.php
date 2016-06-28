@@ -114,7 +114,7 @@ class HomeController
                             return [
                                 'id' => $organisation->getId(),
                                 'name' => $organisation->getName(),
-                                'url' => URL::organisation($organisation->getId(), $organisation->getName()),
+                                'url' => URL::organisation($organisation),
                             ];
                         }, $organisationInvitations),
                     ]);

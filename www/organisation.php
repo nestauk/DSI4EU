@@ -16,17 +16,10 @@ require __DIR__ . '/header.php';
         }
     </style>
 
-
-    <div class="w-section page-header">
-        <div class="container-wide header">
-            <h1 class="page-h1 light"><?php echo show_input($organisation->getName()) ?></h1>
-            <div class="dsi4eu-stats">
-                <a href="<?php echo \DSI\Service\URL::organisation($organisation->getId(), $organisation->getName()) ?>">
-                    <?php echo \DSI\Service\URL::organisation($organisation->getId(), $organisation->getName()) ?>
-                </a>
-            </div>
+    <div class="w-section page-header project-header-exp">
+        <div class="container-wide header project-header-exp">
             <div class="w-clearfix bread-crumbs">
-                <a class="w-inline-block breadcrumb-root" href="<?php echo \DSI\Service\URL::organisations()?>">
+                <a class="w-inline-block breadcrumb-root" href="<?php echo \DSI\Service\URL::organisations() ?>">
                     <div class="breadcrumb-link">Organisations</div>
                     <div class="arrow-right"></div>
                 </a>
@@ -34,21 +27,49 @@ require __DIR__ . '/header.php';
                     <div class="arrow-bottom-left"></div>
                     <div class="arrow-top-left"></div>
                     <div class="breadcrumb-link">
-                        <?php echo substr(show_input($organisation->getName()), 0, 35)?>
-                        <?php echo strlen($organisation->getName()) > 35 ? '...' : ''?>
+                        <?php echo substr(show_input($organisation->getName()), 0, 35) ?>
+                        <?php echo strlen($organisation->getName()) > 35 ? '...' : '' ?>
                     </div>
                     <div class="arrow-right"></div>
                 </a>
             </div>
+            <h1 class="page-h1 light"><?php echo show_input($organisation->getName()) ?></h1>
+            <div class="dsi4eu-stats project-header-exp">
+                <a class="dsi4eu-stats" href="<?php echo \DSI\Service\URL::organisation($organisation) ?>">
+                    <?php echo \DSI\Service\URL::organisation($organisation) ?>
+                </a>
+            </div>
+            <div class="large-profile-img project-header-exp custom-project-header-exp"></div>
+            <?php /*
+            <img class="large-profile-img project-header-exp"
+                 src="<?php echo \DSI\Entity\Image::PROJECT_LOGO_URL?>">
+            */ ?>
+            <?php if ($isOwner) { ?>
+                <a class="w-button dsi-button profile-edit project-header-exp"
+                   href="<?php echo \DSI\Service\URL::organisation($organisation) ?>">
+                    Edit organisation</a>
+            <?php } ?>
         </div>
     </div>
 
-    <?php require(__DIR__ . '/partialViews/search-results.php'); ?>
+<?php /*
+    <div class="w-section page-header project-header-exp">
+        <div class="container-wide header project-header-exp">
+            <div class="dsi4eu-stats project-header-exp">
+                <a href="<?php echo \DSI\Service\URL::organisation($organisation->getId(), $organisation->getName()) ?>">
+                    <?php echo \DSI\Service\URL::organisation($organisation->getId(), $organisation->getName()) ?>
+                </a>
+            </div>
+        </div>
+    </div>
+*/ ?>
+
+<?php require(__DIR__ . '/partialViews/search-results.php'); ?>
 
     <div
         ng-controller="OrganisationController"
         data-organisationid="<?php echo $organisation->getId() ?>"
-        class="w-section project-section">
+        class="w-section project-section custom-project-section">
 
         <div class="w-container body-container project">
             <div class="w-row project-info">

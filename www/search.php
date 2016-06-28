@@ -51,7 +51,7 @@ require __DIR__ . '/header.php';
                     <?php if ($organisations) { ?>
                         <?php foreach ($organisations AS $organisation) { ?>
                             <a class="search-result-link full-page-result"
-                               href="<?php echo \DSI\Service\URL::organisation($organisation->getId(), $organisation->getName()) ?>">
+                               href="<?php echo \DSI\Service\URL::organisation($organisation) ?>">
                                 <?php echo show_input($organisation->getName()) ?>
                             </a>
                         <?php } ?>

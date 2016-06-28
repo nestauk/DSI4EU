@@ -9,6 +9,8 @@
 namespace DSI\Service;
 
 
+use DSI\Entity\Organisation;
+
 class URL
 {
     public static function myProfile()
@@ -54,12 +56,14 @@ class URL
         return SITE_RELATIVE_PATH . '/organisations';
     }
 
-    public static function organisation($orgID, $organisationName = null)
+    public static function organisation(Organisation $org)
     {
-        if ($organisationName)
-            return SITE_RELATIVE_PATH . '/org/' . $orgID . '/' . self::linkify($organisationName);
-        else
-            return SITE_RELATIVE_PATH . '/org/' . $orgID;
+        return SITE_RELATIVE_PATH . '/org/' . $org->getId() . '/' . self::linkify($org->getName());
+    }
+
+    public static function editOrganisation(Organisation $org)
+    {
+        return SITE_RELATIVE_PATH . '/org/' . $org->getId();
     }
 
     public static function feedback()

@@ -33,7 +33,7 @@ class SearchController
                     'organisations' => array_map(function (Organisation $organisation) {
                         return [
                             'name' => $organisation->getName(),
-                            'url' => URL::organisation($organisation->getId(), $organisation->getName()),
+                            'url' => URL::organisation($organisation),
                         ];
                     }, $organisations),
                     'projects' => array_map(function (Project $project) {

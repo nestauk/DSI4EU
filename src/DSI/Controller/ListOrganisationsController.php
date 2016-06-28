@@ -19,7 +19,7 @@ class ListOrganisationsController
             $organisations[] = [
                 'id' => $organisation->getId(),
                 'text' => $organisation->getName(),
-                'url' => URL::organisation($organisation->getId(), $organisation->getName()),
+                'url' => URL::organisation($organisation),
             ];
         }
 

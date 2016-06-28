@@ -74,7 +74,7 @@ class ProjectController
             return [
                 'id' => $organisation->getId(),
                 'name' => $organisation->getName(),
-                'url' => URL::organisation($organisation->getId(), $organisation->getName()),
+                'url' => URL::organisation($organisation),
                 'projectsCount' => count((new OrganisationProjectRepository())->getByOrganisationID($organisation->getId())),
             ];
         }, $organisationProjects);

@@ -163,7 +163,7 @@ require __DIR__ . '/header.php';
                                             <div class="notification-interaction">
                                                 <?php /* <a class="w-button dsi-button notification-decline" href="#">Delete</a> */ ?>
                                                 <a class="w-button dsi-button notification-view notification-project"
-                                                   href="<?php echo URL::organisation($organisation->getId(), $organisation->getName()) ?>">
+                                                   href="<?php echo URL::organisation($organisation) ?>">
                                                     View
                                                 </a>
                                             </div>

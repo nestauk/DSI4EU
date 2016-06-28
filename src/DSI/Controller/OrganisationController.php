@@ -235,7 +235,7 @@ class OrganisationController
                         'id' => $organisation->getId(),
                         'name' => $organisation->getName(),
                         'commonProjects' => $organisation->data['common-projects'],
-                        'url' => URL::organisation($organisation->getId(), $organisation->getName()),
+                        'url' => URL::organisation($organisation),
                     ];
                 }, $partnerOrganisations),
                 'countryID' => $organisation->getCountryID(),
