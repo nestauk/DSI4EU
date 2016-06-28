@@ -19,3 +19,7 @@ class NotEnoughData extends \Exception
 class DuplicateEntry extends \Exception
 {
 }
+
+class AccessDenied extends \Exception
+{
+}

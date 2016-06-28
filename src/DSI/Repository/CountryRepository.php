@@ -11,7 +11,7 @@ class CountryRepository
     /** @var self */
     private static $objects = [];
 
-    public function saveAsNew(Country $country)
+    public function insert(Country $country)
     {
         if (!$country->getName())
             throw new DSI\NotEnoughData('name');

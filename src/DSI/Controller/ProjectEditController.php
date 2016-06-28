@@ -2,47 +2,19 @@
 
 namespace DSI\Controller;
 
+use DSI\AccessDenied;
 use DSI\Entity\Image;
-use DSI\Entity\OrganisationProject;
 use DSI\Entity\Project;
-use DSI\Entity\ProjectMember;
-use DSI\Entity\ProjectPost;
 use DSI\Entity\User;
-use DSI\Repository\OrganisationProjectRepository;
-use DSI\Repository\ProjectImpactTagARepository;
-use DSI\Repository\ProjectImpactTagBRepository;
-use DSI\Repository\ProjectImpactTagCRepository;
-use DSI\Repository\ProjectMemberInvitationRepository;
 use DSI\Repository\ProjectMemberRepository;
-use DSI\Repository\ProjectMemberRequestRepository;
-use DSI\Repository\ProjectPostRepository;
 use DSI\Repository\ProjectRepository;
-use DSI\Repository\ProjectTagRepository;
 use DSI\Repository\UserRepository;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\URL;
-use DSI\UseCase\AddEmailToProject;
-use DSI\UseCase\AddImpactTagAToProject;
-use DSI\UseCase\AddImpactTagBToProject;
-use DSI\UseCase\AddImpactTagCToProject;
-use DSI\UseCase\AddMemberInvitationToProject;
-use DSI\UseCase\AddMemberRequestToProject;
-use DSI\UseCase\AddProjectToOrganisation;
-use DSI\UseCase\AddTagToProject;
-use DSI\UseCase\ApproveMemberRequestToProject;
-use DSI\UseCase\CreateProjectPost;
-use DSI\UseCase\RejectMemberRequestToProject;
-use DSI\UseCase\RemoveImpactTagAFromProject;
-use DSI\UseCase\RemoveImpactTagBFromProject;
-use DSI\UseCase\RemoveImpactTagCFromProject;
-use DSI\UseCase\RemoveMemberFromProject;
-use DSI\UseCase\RemoveTagFromProject;
-use DSI\UseCase\SetAdminStatusToProjectMember;
 use DSI\UseCase\UpdateProject;
 use DSI\UseCase\UpdateProjectCountryRegion;
 use DSI\UseCase\UpdateProjectLogo;
-use Symfony\Component\Finder\Exception\AccessDeniedException;
 
 class ProjectEditController
 {
@@ -62,8 +34,8 @@ class ProjectEditController
         $projectRepo = new ProjectRepository();
         $project = $projectRepo->getById($this->projectID);
 
-        if ($project->getOwner()->getId() != $loggedInUser->getId())
-            throw new AccessDeniedException('You cannot access this page');
+        if (!$this->userCanModifyProject($project, $loggedInUser))
+            throw new AccessDenied('You cannot access this page');
 
         if ($this->format == 'json') {
             try {
@@ -136,5 +108,16 @@ class ProjectEditController
             $angularModules['fileUpload'] = true;
             require __DIR__ . '/../../../www/project-edit.php';
         }
+    }
+
+    private function userCanModifyProject(Project $project, User $user)
+    {
+        if ($project->getOwner()->getId() == $user->getId())
+            return true;
+
+        if ((new ProjectMemberRepository())->projectHasMember($project->getId(), $user->getId()))
+            return true;
+
+        return false;
     }
 }

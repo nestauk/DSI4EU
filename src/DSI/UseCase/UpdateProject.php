@@ -5,6 +5,7 @@ namespace DSI\UseCase;
 use DSI\Entity\Project;
 use DSI\Entity\User;
 use DSI\NotEnoughData;
+use DSI\Repository\ProjectMemberRepository;
 use DSI\Repository\ProjectRepository;
 use DSI\Service\ErrorHandler;
 
@@ -71,10 +72,16 @@ class UpdateProject
 
     private function checkIfUserCanEditTheProject()
     {
-        if ($this->data()->user->getId() != $this->data()->project->getOwner()->getId()) {
-            $this->errorHandler->addTaggedError('user', 'Only the owner can make changes to the project');
-            throw $this->errorHandler;
-        }
+        if ($this->data()->user->getId() == $this->data()->project->getOwner()->getId())
+            return true;
+        if ((new ProjectMemberRepository())->projectHasMember(
+            $this->data()->project->getId(),
+            $this->data()->user->getId())
+        )
+            return true;
+
+        $this->errorHandler->addTaggedError('user', 'Only the owner can make changes to the project');
+        throw $this->errorHandler;
     }
 
     private function checkIfNameIsNotEmpty()

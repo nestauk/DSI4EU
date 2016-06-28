@@ -31,10 +31,8 @@ class UpdateProjectCountryRegion
         $this->projectRepo = new ProjectRepository();
         $this->countryRegionRepo = new CountryRegionRepository();
 
-        if ($this->data()->projectID == 0)
-            $this->errorHandler->addTaggedError('project', 'Please select a project');
-
-        $this->errorHandler->throwIfNotEmpty();
+        $this->assertProjectHasBeenSent();
+        $this->assertNameHasBeenSent();
 
         $project = $this->projectRepo->getById($this->data()->projectID);
         if ($this->data()->countryID != 0) {
@@ -61,6 +59,22 @@ class UpdateProjectCountryRegion
     public function data()
     {
         return $this->data;
+    }
+
+    private function assertNameHasBeenSent()
+    {
+        if ($this->data()->region == '') {
+            $this->errorHandler->addTaggedError('region', 'Please type a region name');
+            throw $this->errorHandler;
+        }
+    }
+
+    private function assertProjectHasBeenSent()
+    {
+        if ($this->data()->projectID == 0) {
+            $this->errorHandler->addTaggedError('project', 'Please select a project');
+            $this->errorHandler->throwIfNotEmpty();
+        }
     }
 }
 

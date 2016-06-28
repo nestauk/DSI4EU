@@ -165,7 +165,7 @@ class ImportController
         } catch (NotFound $e) {
             $country = new Country();
             $country->setName($countryName);
-            $countryRepository->saveAsNew($country);
+            $countryRepository->insert($country);
         }
 
         $countryRegionRepo = new CountryRegionRepository();

@@ -48,7 +48,7 @@ class ProjectRepositoryTest extends PHPUnit_Framework_TestCase
 
         $this->country = new Country();
         $this->country->setName('test1');
-        $this->countryRepo->saveAsNew($this->country);
+        $this->countryRepo->insert($this->country);
 
         $this->countryRegion = new CountryRegion();
         $this->countryRegion->setName('test1');

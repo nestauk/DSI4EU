@@ -26,7 +26,7 @@ class CountryRepositoryTest extends PHPUnit_Framework_TestCase
         $country = new Country();
         $country->setName('test');
 
-        $this->countryRepo->saveAsNew($country);
+        $this->countryRepo->insert($country);
 
         $this->assertEquals(1, $country->getId());
     }
@@ -37,7 +37,7 @@ class CountryRepositoryTest extends PHPUnit_Framework_TestCase
         $country = new Country();
         $country->setName('test');
 
-        $this->countryRepo->saveAsNew($country);
+        $this->countryRepo->insert($country);
 
         $country->setName('test2');
         $this->countryRepo->save($country);
@@ -71,7 +71,7 @@ class CountryRepositoryTest extends PHPUnit_Framework_TestCase
         $name = 'test';
         $country = new Country();
         $country->setName($name);
-        $this->countryRepo->saveAsNew($country);
+        $this->countryRepo->insert($country);
 
         $sameTag = $this->countryRepo->getByName($name);
         $this->assertEquals($country->getId(), $sameTag->getId());
@@ -95,7 +95,7 @@ class CountryRepositoryTest extends PHPUnit_Framework_TestCase
     {
         $country = new Country();
         $this->setExpectedException(\DSI\NotEnoughData::class);
-        $this->countryRepo->saveAsNew($country);
+        $this->countryRepo->insert($country);
     }
 
     /** @test save */
@@ -103,7 +103,7 @@ class CountryRepositoryTest extends PHPUnit_Framework_TestCase
     {
         $country = new Country();
         $country->setName('test');
-        $this->countryRepo->saveAsNew($country);
+        $this->countryRepo->insert($country);
 
         $country->setName('');
         $this->setExpectedException(\DSI\NotEnoughData::class);
@@ -115,12 +115,12 @@ class CountryRepositoryTest extends PHPUnit_Framework_TestCase
     {
         $country = new Country();
         $country->setName('test');
-        $this->countryRepo->saveAsNew($country);
+        $this->countryRepo->insert($country);
 
         $country = new Country();
         $country->setName('test');
         $this->setExpectedException(\DSI\DuplicateEntry::class);
-        $this->countryRepo->saveAsNew($country);
+        $this->countryRepo->insert($country);
     }
 
     /** @test save */
@@ -128,11 +128,11 @@ class CountryRepositoryTest extends PHPUnit_Framework_TestCase
     {
         $country_1 = new Country();
         $country_1->setName('test');
-        $this->countryRepo->saveAsNew($country_1);
+        $this->countryRepo->insert($country_1);
 
         $country_2 = new Country();
         $country_2->setName('test2');
-        $this->countryRepo->saveAsNew($country_2);
+        $this->countryRepo->insert($country_2);
 
         $country_2->setName('test');
         $this->setExpectedException(\DSI\DuplicateEntry::class);
@@ -144,13 +144,13 @@ class CountryRepositoryTest extends PHPUnit_Framework_TestCase
     {
         $countries = new Country();
         $countries->setName('test');
-        $this->countryRepo->saveAsNew($countries);
+        $this->countryRepo->insert($countries);
 
         $this->assertCount(1, $this->countryRepo->getAll());
 
         $countries = new Country();
         $countries->setName('test2');
-        $this->countryRepo->saveAsNew($countries);
+        $this->countryRepo->insert($countries);
 
         $this->assertCount(2, $this->countryRepo->getAll());
     }
@@ -160,7 +160,7 @@ class CountryRepositoryTest extends PHPUnit_Framework_TestCase
     {
         $country = new Country();
         $country->setName('test');
-        $this->countryRepo->saveAsNew($country);
+        $this->countryRepo->insert($country);
 
         $sameTag = $this->countryRepo->getById($country->getId());
         $this->assertEquals($country->getName(), $sameTag->getName());

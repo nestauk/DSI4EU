@@ -31,27 +31,31 @@ class UpdateProjectCountryRegionTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->updateProjectCountryRegionCmd = new \DSI\UseCase\UpdateProjectCountryRegion();
-        $this->userRepo = new \DSI\Repository\UserRepository();
-        $this->countryRepository = new \DSI\Repository\CountryRepository();
-        $this->countryRegionRepository = new \DSI\Repository\CountryRegionRepository();
+        try {
+            $this->updateProjectCountryRegionCmd = new \DSI\UseCase\UpdateProjectCountryRegion();
+            $this->userRepo = new \DSI\Repository\UserRepository();
+            $this->countryRepository = new \DSI\Repository\CountryRepository();
+            $this->countryRegionRepository = new \DSI\Repository\CountryRegionRepository();
 
-        $this->country = new \DSI\Entity\Country();
-        $this->country->setName('test');
-        $this->countryRepository->saveAsNew($this->country);
+            $this->country = new \DSI\Entity\Country();
+            $this->country->setName('test');
+            $this->countryRepository->insert($this->country);
 
-        $this->countryRegion = new \DSI\Entity\CountryRegion();
-        $this->countryRegion->setName('test');
-        $this->countryRegion->setCountry($this->country);
-        $this->countryRegionRepository->insert($this->countryRegion);
+            $this->countryRegion = new \DSI\Entity\CountryRegion();
+            $this->countryRegion->setName('test');
+            $this->countryRegion->setCountry($this->country);
+            $this->countryRegionRepository->insert($this->countryRegion);
 
-        $this->user = new \DSI\Entity\User();
-        $this->userRepo->insert($this->user);
+            $this->user = new \DSI\Entity\User();
+            $this->userRepo->insert($this->user);
 
-        $this->projectRepo = new \DSI\Repository\ProjectRepository();
-        $this->project = new \DSI\Entity\Project();
-        $this->project->setOwner($this->user);
-        $this->projectRepo->insert($this->project);
+            $this->projectRepo = new \DSI\Repository\ProjectRepository();
+            $this->project = new \DSI\Entity\Project();
+            $this->project->setOwner($this->user);
+            $this->projectRepo->insert($this->project);
+        } catch (Exception $e) {
+            var_dump($e);
+        }
     }
 
     public function tearDown()
@@ -130,7 +134,7 @@ class UpdateProjectCountryRegionTest extends PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function cannotExecWithoutACountry()
+    public function countryCanBeUnset()
     {
         $e = null;
         try {
@@ -140,7 +144,6 @@ class UpdateProjectCountryRegionTest extends PHPUnit_Framework_TestCase
         } catch (ErrorHandler $e) {
         }
 
-        $this->assertNotNull($e);
-        $this->assertNotEmpty($e->getTaggedError('country'));
+        $this->assertNull($e);
     }
 }

@@ -38,7 +38,7 @@ class UpdateOrganisationCountryRegionTest extends PHPUnit_Framework_TestCase
 
         $this->country = new \DSI\Entity\Country();
         $this->country->setName('test');
-        $this->countryRepository->saveAsNew($this->country);
+        $this->countryRepository->insert($this->country);
 
         $this->countryRegion = new \DSI\Entity\CountryRegion();
         $this->countryRegion->setName('test');

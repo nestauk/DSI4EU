@@ -65,7 +65,7 @@ class ProjectController
         $project = $projectRepo->getById($this->data()->projectID);
 
         $memberRequests = [];
-        $isOwner = false;
+        $isAdmin = false;
         $canUserRequestMembership = false;
         $projectMembers = (new ProjectMemberRepository())->getByProjectID($project->getId());
         $organisationProjects = (new OrganisationProjectRepository())->getByProjectID($project->getId());
@@ -89,15 +89,21 @@ class ProjectController
             );
 
             $canUserRequestMembership = $this->canUserRequestMembership($project, $loggedInUser, $userHasInvitation);
-            if ($project->getOwner()->getId() == $loggedInUser->getId())
+            if ($project->getOwner()->getId() == $loggedInUser->getId()){
                 $isOwner = true;
+                $isAdmin = true;
+            }
 
-            if (isset($isOwner) AND $isOwner === true)
+            if((new ProjectMemberRepository())->projectHasMember($project->getId(), $loggedInUser->getId())){
+                $isAdmin = true;
+            }
+
+            if (isset($isAdmin) AND $isAdmin === true)
                 $memberRequests = (new ProjectMemberRequestRepository())->getMembersForProject($project->getId());
         }
 
         try {
-            if ($isOwner) {
+            if ($isAdmin) {
                 if (isset($_POST['updateBasic'])) {
                     $authUser->ifNotLoggedInRedirectTo(URL::login());
 
@@ -337,6 +343,7 @@ class ProjectController
                 'project' => $project,
                 'canUserRequestMembership' => $canUserRequestMembership ?? false,
                 'userHasInvitation' => $userHasInvitation ?? false,
+                'isAdmin' => $isAdmin ?? false,
                 'isOwner' => $isOwner ?? false,
             ];
             require __DIR__ . '/../../../www/project.php';

@@ -24,7 +24,7 @@ class CreateCountryRegionTest extends PHPUnit_Framework_TestCase
 
         $this->country = new \DSI\Entity\Country();
         $this->country->setName('test');
-        $this->countryRepo->saveAsNew($this->country);
+        $this->countryRepo->insert($this->country);
     }
 
     public function tearDown()

@@ -3,6 +3,7 @@ require __DIR__ . '/header.php';
 /** @var $project \DSI\Entity\Project */
 /** @var $userHasInvitation bool */
 /** @var $canUserRequestMembership bool */
+/** @var $isAdmin bool */
 /** @var $isOwner bool */
 /** @var $loggedInUser \DSI\Entity\User */
 ?>
@@ -36,7 +37,7 @@ require __DIR__ . '/header.php';
                 </div>
                 <img class="large-profile-img project-header-exp"
                      src="<?php echo \DSI\Entity\Image::PROJECT_LOGO_URL . $project->getLogoOrDefault() ?>">
-                <?php if ($isOwner) { ?>
+                <?php if ($isAdmin) { ?>
                     <a class="w-button dsi-button profile-edit project-header-exp"
                        href="<?php echo \DSI\Service\URL::editProject($project->getId()) ?>">
                         Edit project</a>
@@ -91,11 +92,11 @@ require __DIR__ . '/header.php';
                         <div ng-bind="tag"></div>
                         <div class="tag-label"></div>
                         <div class="tag-hole"></div>
-                        <?php if ($isOwner) { ?>
+                        <?php if ($isAdmin) { ?>
                             <div class="delete" ng-click="removeTag(tag)">-</div>
                         <?php } ?>
                     </div>
-                    <?php if ($isOwner) { ?>
+                    <?php if ($isAdmin) { ?>
                         <div class="add-item-block" ng-click="addingTag = !addingTag">
                             <div class="add-item">+</div>
                         </div>
@@ -160,7 +161,7 @@ require __DIR__ . '/header.php';
                                                 <div class="project-creator-text">{{member.jobTitle}}</div>
                                             </a>
                                             <div class="star-holder">
-                                                <?php if ($isOwner) { ?>
+                                                <?php if ($isAdmin) { ?>
                                                     <img class="star-full" data-ix="add-star-admin" style="opacity:1"
                                                          src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-star-orange.png"
                                                          ng-click="member.isAdmin = !member.isAdmin; updateAdminStatus(member)"
@@ -180,13 +181,13 @@ require __DIR__ . '/header.php';
                                                          ng-hide="member.isAdmin">
                                                 <?php } ?>
                                             </div>
-                                            <?php if ($isOwner) { ?>
+                                            <?php if ($isAdmin) { ?>
                                                 <div class="remove-from-list" ng-click="removeMember(member)">-</div>
                                             <?php } ?>
                                         </div>
                                     </div>
                                 </div>
-                                <?php if ($isOwner) { ?>
+                                <?php if ($isAdmin) { ?>
                                     <div class="join-project">
                                         <div class="add-item-block" style="float:right;margin-right:20px">
                                             <div class="add-item" onclick="$('#addNewMember').toggle()">+</div>
@@ -277,7 +278,7 @@ require __DIR__ . '/header.php';
                                     </div>
                                 </a>
                             </div>
-                            <?php if ($isOwner) { ?>
+                            <?php if ($isAdmin) { ?>
                                 <div class="add-item-block"
                                      ng-click="addingOrganisation = !addingOrganisation"
                                      style="float:right;margin-right:20px">
@@ -344,12 +345,12 @@ require __DIR__ . '/header.php';
                             <h4 class="impact-h4">Areas of society impacted</h4>
                             <div class="w-clearfix tags-block impact">
                                 <div class="skill" ng-repeat="tag in project.impactTagsA">
-                                    <?php if ($isOwner) { ?>
+                                    <?php if ($isAdmin) { ?>
                                         <div class="delete" ng-click="removeImpactTagA(tag)">-</div>
                                     <?php } ?>
                                     <div ng-bind="tag"></div>
                                 </div>
-                                <?php if ($isOwner) { ?>
+                                <?php if ($isAdmin) { ?>
                                     <div class="add-item-block"
                                          ng-click="addingImpactTagA = !addingImpactTagA">
                                         <div class="add-item">+</div>
@@ -378,12 +379,12 @@ require __DIR__ . '/header.php';
                             <h4 class="impact-h4">Technology focus</h4>
                             <div class="w-clearfix tags-block impact">
                                 <div class="skill" ng-repeat="tag in project.impactTagsB">
-                                    <?php if ($isOwner) { ?>
+                                    <?php if ($isAdmin) { ?>
                                         <div class="delete" ng-click="removeImpactTagB(tag)">-</div>
                                     <?php } ?>
                                     <div ng-bind="tag"></div>
                                 </div>
-                                <?php if ($isOwner) { ?>
+                                <?php if ($isAdmin) { ?>
                                     <div class="add-item-block"
                                          ng-click="addingImpactTagB = !addingImpactTagB">
                                         <div class="add-item">+</div>
@@ -412,12 +413,12 @@ require __DIR__ . '/header.php';
                             <h4 class="impact-h4">Technology method</h4>
                             <div class="w-clearfix tags-block impact">
                                 <div class="skill" ng-repeat="tag in project.impactTagsC">
-                                    <?php if ($isOwner) { ?>
+                                    <?php if ($isAdmin) { ?>
                                         <div class="delete" ng-click="removeImpactTagC(tag)">-</div>
                                     <?php } ?>
                                     <div ng-bind="tag"></div>
                                 </div>
-                                <?php if ($isOwner) { ?>
+                                <?php if ($isAdmin) { ?>
                                     <div class="add-item-block"
                                          ng-click="addingImpactTagC = !addingImpactTagC">
                                         <div class="add-item">+</div>
@@ -455,7 +456,7 @@ require __DIR__ . '/header.php';
                     <div class="w-col w-col-6" id="postsScroll">
                         <div id="posts">
                             <div class="info-card">
-                                <?php if ($loggedInUser AND $isOwner) { ?>
+                                <?php if ($loggedInUser AND $isAdmin) { ?>
                                     <div class="add-post">
                                         <div class="w-clearfix post-author new-post">
                                             <img

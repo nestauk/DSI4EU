@@ -24,11 +24,11 @@ class CountryRegionRepositoryTest extends PHPUnit_Framework_TestCase
 
         $this->country_1 = new Country();
         $this->country_1->setName('Romania');
-        $this->countryRepo->saveAsNew($this->country_1);
+        $this->countryRepo->insert($this->country_1);
 
         $this->country_2 = new Country();
         $this->country_2->setName('UK');
-        $this->countryRepo->saveAsNew($this->country_2);
+        $this->countryRepo->insert($this->country_2);
     }
 
     public function tearDown()

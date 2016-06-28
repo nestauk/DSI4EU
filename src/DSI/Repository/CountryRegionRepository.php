@@ -67,7 +67,7 @@ class CountryRegionRepository
         ]);
     }
 
-    public function nameExists(int $countryID, string $name): bool
+    public function nameExists(int $countryID, $name): bool
     {
         return $this->checkExistingCountryRegionWhere([
             "`countryID` = '" . addslashes($countryID) . "'",
