@@ -6,7 +6,7 @@ use \DSI\Service\URL;
 require __DIR__ . '/header.php';
 /** @var $stories \DSI\Entity\Story[] */
 ?>
-    <div class="w-section homepage-hero">
+    <div class="homepage-hero minus-100 w-section">
         <div class="overlay"></div>
         <div class="w-background-video video-bg" data-autoplay="data-autoplay" data-loop="data-loop"
              data-poster-url="https://daks2k3a4ib2z.cloudfront.net/56e2e31a1b1f8f784728a08c/573d767d3a2f809c6a1a3e0b_dsi bg-poster-00001.jpg"
@@ -89,17 +89,23 @@ require __DIR__ . '/header.php';
         </div>
     </div>
 
-    <div class="w-section section-grey">
+    <div class="section-grey w-section">
         <div class="w-container">
             <div class="w-row">
                 <div class="w-col w-col-4 w-col-stack">
                     <h2 class="home-h2">What is Digital Social Innovation?</h2>
-                    <p class="p-big">Digital Social Innovation (DSI) uses technology to solve social challenges, from
-                        crowdsourcing campaigns to helping create transparency in government spending through open
-                        data</p>
+                    <p class="p-big">Digital Social Innovation (DSI) is a type of collaborative innovation in which
+                        innovators, users and communities collaborate using digital technologies to co-create knowledge
+                        and solutions for a wide range of social needs.</p>
                 </div>
                 <div class="w-col w-col-8 w-col-stack">
-                    <div class="image-placeholder"></div>
+                    <div class="image-placeholder">
+                        <div class="w-embed w-video" style="padding-top: 56.17021276595745%;">
+                            <iframe class="embedly-embed"
+                                    src="https://cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fplayer.vimeo.com%2Fvideo%2F113705156&amp;url=https%3A%2F%2Fvimeo.com%2F113705156&amp;image=http%3A%2F%2Fi.vimeocdn.com%2Fvideo%2F499122568_640.jpg&amp;key=c4e54deccf4d4ec997a64902e9a30300&amp;type=text%2Fhtml&amp;schema=vimeo"
+                                    scrolling="no" frameborder="0" allowfullscreen=""></iframe>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -107,67 +113,60 @@ require __DIR__ . '/header.php';
 
     <div class="section-white">
         <div class="container-wide">
-            <h2 class="home-h2 centre">DSI4EU is a partnership between 4 leaders in the field</h2>
-            <p class="p-big centre">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in
-                eros elementum tristique...</p>
-            <div class="w-row partner-logos">
-                <div class="w-col w-col-3">
-                    <img class="partner-logo" src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg">
+            <h2 class="centre home-h2">This site is part of the DSI4EU project which is a support action in the H2020 Collective Awareness Platforms program.</h2>
+            <p class="centre p-big">DSI4EU will support, grow and scale the current Digital Social Innovation network of projects, organisations, and individuals. The project is a partnership between three organisations</p>
+            <div class="partner-logos w-row">
+                <div class="w-col w-col-4">
+                    <img class="partner-logo" src="<?php echo SITE_RELATIVE_PATH?>/images/nesta.png">
                 </div>
-                <div class="w-col w-col-3">
-                    <img class="partner-logo" src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg">
+                <div class="w-col w-col-4">
+                    <img class="partner-logo" src="<?php echo SITE_RELATIVE_PATH?>/images/waag.png">
                 </div>
-                <div class="w-col w-col-3">
-                    <img class="partner-logo" src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg">
-                </div>
-                <div class="w-col w-col-3">
-                    <img class="partner-logo" src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg">
+                <div class="w-col w-col-4">
+                    <img class="partner-logo" src="<?php echo SITE_RELATIVE_PATH?>/images/supsi.png">
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="w-section section-grey">
-        <div class="container-wide">
-            <h2 class="home-h2 centre">Who does Digital Social Innovation?</h2>
-            <p class="p-big centre">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in
-                eros elementum tristique...</p>
-            <div class="w-row showcase">
-                <div class="w-col w-col-4 w-col-stack">
-                    <div class="showcase-card">
-                        <h3 class="card-h3">People</h3>
-                        <p class="show-card-p">People use DSI4EU as a way to get involved with projects and share their
-                            skills</p>
-                        <a href="#top" class="w-button card-btn">Join DSI4EU</a>
-                    </div>
+    <div class="container-wide">
+        <h2 class="centre home-h2">Who does Digital Social Innovation?</h2>
+        <p class="centre p-big">Find DSI organisations &amp; projects. Join the community and add your own DSI
+            project</p>
+        <div class="showcase w-row">
+            <div class="w-col w-col-4 w-col-stack">
+                <div class="showcase-card">
+                    <h3 class="card-h3">People</h3>
+                    <p class="show-card-p">People use DSI4EU as a way to get involved with projects and share their
+                        skills</p>
+                    <a class="card-btn w-button" href="#">Join DSI4EU</a>
                 </div>
-                <div class="w-col w-col-4 w-col-stack">
-                    <div class="showcase-card">
-                        <h3 class="card-h3">Projects</h3>
-                        <p class="show-card-p">Existing DSI projects are showcased as well as new DSI projects</p>
-                        <a href="<?php echo URL::projects() ?>" class="w-button card-btn">View existing projects</a>
-                    </div>
+            </div>
+            <div class="w-col w-col-4 w-col-stack">
+                <div class="showcase-card">
+                    <h3 class="card-h3">Projects</h3>
+                    <p class="show-card-p">Existing DSI projects are showcased as well as new DSI projects</p>
+                    <a class="card-btn w-button" href="#">Projects</a>
                 </div>
-                <div class="w-col w-col-4 w-col-stack">
-                    <div class="showcase-card">
-                        <h3 class="card-h3">Organisations</h3>
-                        <p class="show-card-p">Organisations offer funding and support to both projects &amp;
-                            individuals</p>
-                        <a href="<?php echo URL::organisations() ?>" class="w-button card-btn">Check out our partner
-                            organisations</a>
-                    </div>
+            </div>
+            <div class="w-col w-col-4 w-col-stack">
+                <div class="showcase-card">
+                    <h3 class="card-h3">Organisations</h3>
+                    <p class="show-card-p">Organisations offer funding and support to both projects &amp;
+                        individuals</p>
+                    <a class="card-btn w-button" href="#">Organisations</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="w-section cta-block">
+    <div class="cta-block w-section">
         <div class="container-wide">
             <div class="w-row">
-                <div class="w-col w-col-6 cta-column-left">
-                    <h2 class="home-h2 cta-text-light">Have you got a project to add?</h2>
-                    <p class="p-big cta-text-light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                        varius enim in eros elementum tristique...</p>
+                <div class="cta-column-left w-col w-col-6">
+                    <h2 class="cta-text-light home-h2">Have you got a project to add?</h2>
+                    <p class="cta-text-light p-big">Are you working on an innovative digital project that supports a
+                        social need?</p>
                 </div>
                 <div class="w-col w-col-6 cta-column-right">
                     <a class="w-button dsi-button cta" href="#top">Add project +</a>
@@ -178,9 +177,9 @@ require __DIR__ . '/header.php';
 
     <div class="w-section section-grey">
         <div class="container-wide">
-            <h2 class="home-h2 centre">What's happening in Digital Social Innovation?</h2>
-            <p class="p-big centre">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in
-                eros elementum tristique...</p>
+            <h2 class="centre home-h2">What's happening in Digital Social Innovation?</h2>
+            <p class="centre p-big">Digital Social Innovation news, blogs and events created and curated by the DSI
+                community</p>
             <div class="w-row hp-post-row">
                 <?php foreach ($stories AS $story) { ?>
                     <div class="w-col w-col-4 w-col-stack">

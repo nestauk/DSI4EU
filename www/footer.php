@@ -64,15 +64,24 @@
     </div>
 </div>
 
-<div class="under-development" data-ix="under-dev">
-    <h1 class="page-h1 notice">Under development</h1>
-    <div class="notification-p">This page is under development and may not behave as expected. Please visit the <a
-            class="notification-link" href="<?php echo \DSI\Service\URL::feedback() ?>">feedback</a> page to view pages
-        &amp; tasks currently being tested.
+<div class="eu-footer w-section">
+    <div class="container-wide footer-container">
+        <div class="w-row">
+            <div class="w-col w-col-1">
+                <img class="ec-logo" src="images/EC-LOGO.png">
+            </div>
+            <div class="w-col w-col-11">
+                <div class="ec-footer-p">The DSI4EU project is funded by the European Commission Directorate General
+                    for Communications Networks, Content &amp; Technology, Net Futures, Administration and Finance,
+                    under Grant Agreement No. 688192
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-<script type="text/javascript" src="<?php echo SITE_RELATIVE_PATH ?>/js/dsi4eu.js?v=<?php echo \DSI\Service\Sysctl::$version ?>"></script>
+<script type="text/javascript"
+        src="<?php echo SITE_RELATIVE_PATH ?>/js/dsi4eu.js?v=<?php echo \DSI\Service\Sysctl::$version ?>"></script>
 <!--[if lte IE 9]>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
 <script>
@@ -120,7 +129,8 @@
     }());
 </script>
 
-<script type="text/javascript" src="<?php echo SITE_RELATIVE_PATH ?>/js/script.js?v=<?php echo \DSI\Service\Sysctl::$version ?>"></script>
+<script type="text/javascript"
+        src="<?php echo SITE_RELATIVE_PATH ?>/js/script.js?v=<?php echo \DSI\Service\Sysctl::$version ?>"></script>
 
 </body>
 </html>
