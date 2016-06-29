@@ -83,7 +83,7 @@
 <script type="text/javascript"
         src="<?php echo SITE_RELATIVE_PATH ?>/js/dsi4eu.js?v=<?php echo \DSI\Service\Sysctl::$version ?>"></script>
 <!--[if lte IE 9]>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
+<script src="<?php echo SITE_RELATIVE_PATH ?>/js/lib/placeholders/placeholders.min.js"></script><![endif]-->
 <script>
     $(function () {
         // quick search regex

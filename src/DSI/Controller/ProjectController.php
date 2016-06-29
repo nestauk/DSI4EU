@@ -124,7 +124,7 @@ class ProjectController
 
                     $updateProject->exec();
                     echo json_encode(['result' => 'ok']);
-                    die();
+                    return;
                 }
 
                 if (isset($_POST['addTag'])) {
@@ -133,7 +133,7 @@ class ProjectController
                     $addTagToProject->data()->tag = $_POST['addTag'];
                     $addTagToProject->exec();
                     echo json_encode(['result' => 'ok']);
-                    die();
+                    return;
                 }
                 if (isset($_POST['removeTag'])) {
                     $removeTagFromProject = new RemoveTagFromProject();
@@ -141,7 +141,7 @@ class ProjectController
                     $removeTagFromProject->data()->tag = $_POST['removeTag'];
                     $removeTagFromProject->exec();
                     echo json_encode(['result' => 'ok']);
-                    die();
+                    return;
                 }
 
                 if (isset($_POST['addImpactTagA'])) {
@@ -150,7 +150,7 @@ class ProjectController
                     $addTagToProject->data()->tag = $_POST['addImpactTagA'];
                     $addTagToProject->exec();
                     echo json_encode(['result' => 'ok']);
-                    die();
+                    return;
                 }
                 if (isset($_POST['removeImpactTagA'])) {
                     $removeTagFromProject = new RemoveImpactTagAFromProject();
@@ -158,7 +158,7 @@ class ProjectController
                     $removeTagFromProject->data()->tag = $_POST['removeImpactTagA'];
                     $removeTagFromProject->exec();
                     echo json_encode(['result' => 'ok']);
-                    die();
+                    return;
                 }
 
                 if (isset($_POST['addImpactTagB'])) {
@@ -167,7 +167,7 @@ class ProjectController
                     $addTagToProject->data()->tag = $_POST['addImpactTagB'];
                     $addTagToProject->exec();
                     echo json_encode(['result' => 'ok']);
-                    die();
+                    return;
                 }
                 if (isset($_POST['removeImpactTagB'])) {
                     $removeTagFromProject = new RemoveImpactTagBFromProject();
@@ -175,7 +175,7 @@ class ProjectController
                     $removeTagFromProject->data()->tag = $_POST['removeImpactTagB'];
                     $removeTagFromProject->exec();
                     echo json_encode(['result' => 'ok']);
-                    die();
+                    return;
                 }
 
                 if (isset($_POST['addImpactTagC'])) {
@@ -184,7 +184,7 @@ class ProjectController
                     $addTagToProject->data()->tag = $_POST['addImpactTagC'];
                     $addTagToProject->exec();
                     echo json_encode(['result' => 'ok']);
-                    die();
+                    return;
                 }
                 if (isset($_POST['removeImpactTagC'])) {
                     $removeTagFromProject = new RemoveImpactTagCFromProject();
@@ -192,7 +192,7 @@ class ProjectController
                     $removeTagFromProject->data()->tag = $_POST['removeImpactTagC'];
                     $removeTagFromProject->exec();
                     echo json_encode(['result' => 'ok']);
-                    die();
+                    return;
                 }
 
                 if (isset($_POST['addEmail'])) {
@@ -226,7 +226,7 @@ class ProjectController
                     $removeMemberFromProject->data()->userID = $_POST['removeMember'];
                     $removeMemberFromProject->exec();
                     echo json_encode(['result' => 'ok']);
-                    die();
+                    return;
                 }
                 if (isset($_POST['approveRequestToJoin'])) {
                     $approveMemberRequestToJoinProject = new ApproveMemberRequestToProject();
@@ -234,7 +234,7 @@ class ProjectController
                     $approveMemberRequestToJoinProject->data()->userID = $_POST['approveRequestToJoin'];
                     $approveMemberRequestToJoinProject->exec();
                     echo json_encode(['result' => 'ok']);
-                    die();
+                    return;
                 }
                 if (isset($_POST['rejectRequestToJoin'])) {
                     $rejectMemberRequestToJoinProject = new RejectMemberRequestToProject();
@@ -242,7 +242,7 @@ class ProjectController
                     $rejectMemberRequestToJoinProject->data()->userID = $_POST['rejectRequestToJoin'];
                     $rejectMemberRequestToJoinProject->exec();
                     echo json_encode(['result' => 'ok']);
-                    die();
+                    return;
                 }
 
                 if (isset($_POST['updateCountryRegion'])) {
@@ -252,7 +252,7 @@ class ProjectController
                     $updateProjectCountryRegionCmd->data()->region = $_POST['region'];
                     $updateProjectCountryRegionCmd->exec();
                     echo json_encode(['result' => 'ok']);
-                    die();
+                    return;
                 }
 
                 if (isset($_POST['newOrganisationID'])) {
@@ -261,7 +261,7 @@ class ProjectController
                     $addOrganisationProjectCmd->data()->organisationID = $_POST['newOrganisationID'];
                     $addOrganisationProjectCmd->exec();
                     echo json_encode(['result' => 'ok']);
-                    die();
+                    return;
                 }
 
                 if (isset($_POST['addPost'])) {
@@ -274,7 +274,7 @@ class ProjectController
                         'result' => 'ok',
                         'posts' => $this->getPostsForProject($project),
                     ]);
-                    die();
+                    return;
                 }
 
                 if (isset($_POST['setAdmin'])) {
@@ -297,7 +297,7 @@ class ProjectController
                     $addMemberRequestToJoinProject->data()->userID = $loggedInUser->getId();
                     $addMemberRequestToJoinProject->exec();
                     echo json_encode(['result' => 'ok']);
-                    die();
+                    return;
                 }
             }
         } catch (ErrorHandler $e) {
@@ -305,7 +305,7 @@ class ProjectController
                 'result' => 'error',
                 'errors' => $e->getErrors()
             ]);
-            die();
+            return;
         }
 
         if ($this->data()->format == 'json') {
@@ -337,15 +337,9 @@ class ProjectController
                 'countryRegion' => $project->getCountryRegion() ? $project->getCountryRegion()->getName() : '',
                 'posts' => $this->getPostsForProject($project),
             ]);
-            die();
+            return;
         } else {
-            $data = [
-                'project' => $project,
-                'canUserRequestMembership' => $canUserRequestMembership ?? false,
-                'userHasInvitation' => $userHasInvitation ?? false,
-                'isAdmin' => $isAdmin ?? false,
-                'isOwner' => $isOwner ?? false,
-            ];
+            $pageTitle = $project->getName();
             require __DIR__ . '/../../../www/project.php';
         }
     }

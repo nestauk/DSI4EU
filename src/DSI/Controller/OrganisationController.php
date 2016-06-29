@@ -74,7 +74,7 @@ class OrganisationController
 
                 $updateOrganisation->exec();
                 echo json_encode(['result' => 'ok']);
-                die();
+                return;
             }
 
             if (isset($_POST['addTag'])) {
@@ -83,7 +83,7 @@ class OrganisationController
                 $addTagCmd->data()->tag = $_POST['addTag'];
                 $addTagCmd->exec();
                 echo json_encode(['result' => 'ok']);
-                die();
+                return;
             }
             if (isset($_POST['removeTag'])) {
                 $removeTagCmd = new RemoveTagFromOrganisation();
@@ -91,7 +91,7 @@ class OrganisationController
                 $removeTagCmd->data()->tag = $_POST['removeTag'];
                 $removeTagCmd->exec();
                 echo json_encode(['result' => 'ok']);
-                die();
+                return;
             }
 
             if (isset($_POST['addMember'])) {
@@ -100,7 +100,7 @@ class OrganisationController
                 $addMemberToOrgCmd->data()->userID = $_POST['addMember'];
                 $addMemberToOrgCmd->exec();
                 echo json_encode(['result' => 'ok']);
-                die();
+                return;
             }
             if (isset($_POST['removeMember'])) {
                 $removeMemberFromOrgCmd = new RemoveMemberFromOrganisation();
@@ -108,7 +108,7 @@ class OrganisationController
                 $removeMemberFromOrgCmd->data()->userID = $_POST['removeMember'];
                 $removeMemberFromOrgCmd->exec();
                 echo json_encode(['result' => 'ok']);
-                die();
+                return;
             }
 
             if (isset($_POST['requestToJoin'])) {
@@ -117,7 +117,7 @@ class OrganisationController
                 $addMemberRequestToJoinOrganisation->data()->userID = $loggedInUser->getId();
                 $addMemberRequestToJoinOrganisation->exec();
                 echo json_encode(['result' => 'ok']);
-                die();
+                return;
             }
             if (isset($_POST['approveRequestToJoin'])) {
                 $approveMemberRequestToJoinOrganisation = new ApproveMemberRequestToOrganisation();
@@ -125,7 +125,7 @@ class OrganisationController
                 $approveMemberRequestToJoinOrganisation->data()->userID = $_POST['approveRequestToJoin'];
                 $approveMemberRequestToJoinOrganisation->exec();
                 echo json_encode(['result' => 'ok']);
-                die();
+                return;
             }
             if (isset($_POST['rejectRequestToJoin'])) {
                 $rejectMemberRequestToJoinOrganisation = new RejectMemberRequestToOrganisation();
@@ -133,7 +133,7 @@ class OrganisationController
                 $rejectMemberRequestToJoinOrganisation->data()->userID = $_POST['rejectRequestToJoin'];
                 $rejectMemberRequestToJoinOrganisation->exec();
                 echo json_encode(['result' => 'ok']);
-                die();
+                return;
             }
 
             if (isset($_POST['updateCountryRegion'])) {
@@ -143,7 +143,7 @@ class OrganisationController
                 $createProjectCmd->data()->region = $_POST['region'];
                 $createProjectCmd->exec();
                 echo json_encode(['result' => 'ok']);
-                die();
+                return;
             }
 
             if (isset($_POST['createProject'])) {
@@ -162,7 +162,7 @@ class OrganisationController
                     'result' => 'ok',
                     'url' => URL::project($project->getId()),
                 ]);
-                die();
+                return;
             }
 
         } catch (ErrorHandler $e) {
@@ -170,7 +170,7 @@ class OrganisationController
                 'result' => 'error',
                 'errors' => $e->getErrors()
             ]);
-            die();
+            return;
         }
 
         $memberRequests = [];
@@ -242,15 +242,9 @@ class OrganisationController
                 'countryRegionID' => $organisation->getCountryRegionID(),
                 'countryRegion' => $organisation->getCountryRegion() ? $organisation->getCountryRegion()->getName() : '',
             ]);
-            die();
+            return;
         } else {
-            $data = [
-                'organisation' => $organisation,
-                'canUserRequestMembership' => $canUserRequestMembership ?? false,
-                'isOwner' => $isOwner ?? false,
-                'organisationTypes' => $organisationTypes,
-                'organisationSizes' => $organisationSizes,
-            ];
+            $pageTitle = $organisation->getName();
             require __DIR__ . '/../../../www/organisation.php';
         }
     }

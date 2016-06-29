@@ -1,5 +1,7 @@
 <?php
+$pageTitle = 'Explore DSI';
 require __DIR__ . '/header.php';
+
 $totalProjects = (new \DSI\Repository\ProjectRepository())->countProjects();
 $totalOrganisations = (new \DSI\Repository\OrganisationRepository())->countOrganisations();
 ?>

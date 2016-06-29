@@ -38,9 +38,7 @@ class ProjectsController
             else
                 $loggedInUser = null;
 
-            $data = [
-                'loggedInUser' => $loggedInUser
-            ];
+            $pageTitle = 'Projects';
             require __DIR__ . '/../../../www/projects.php';
         }
     }
