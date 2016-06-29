@@ -362,7 +362,7 @@ require __DIR__ . '/header.php';
                                     <form class="w-clearfix add-skill-section"
                                           ng-submit="addTag()">
                                         <select data-tags="true"
-                                                data-placeholder="Type your skill"
+                                                data-placeholder="Add a tag"
                                                 id="Add-tag"
                                                 class="w-input add-language"
                                                 style="width:200px;display:inline">
