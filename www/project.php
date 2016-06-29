@@ -61,20 +61,45 @@ require __DIR__ . '/header.php';
                                 <?php echo show_input($region->getName()) ?>,
                                 <?php echo show_input($region->getCountry()->getName()) ?>
                             </strong>
-                            <?php if ($project->getStartDate()) { ?>
+                            <?php if ($project->getStartDate() OR $project->getEndDate()) { ?>
                                 and
                             <?php } ?>
                         <?php } ?>
-                        <?php if ($project->getStartDate()) { ?>
-                            ran from <strong class="light strong-light">
-                                <?php echo date('M, Y', $project->getUnixStartDate()) ?>
-                            </strong>
-                            <?php if ($project->getEndDate()) { ?>
-                                to <strong class="light strong-light">
-                                    <?php echo date('M, Y', $project->getUnixEndDate()) ?>
-                                </strong>
-                            <?php } ?>
-                        <?php } ?>
+
+                        <?php
+                        if ($project->getStartDate() AND !$project->getEndDate()) {
+                            if ($project->startDateIsPassed()) {
+                                echo 'is running since ', date('M, Y', $project->getUnixStartDate());
+                            } else {
+                                echo 'will run from ', date('M, Y', $project->getUnixStartDate());
+                            }
+                        } elseif (!$project->getStartDate() AND $project->getEndDate()) {
+                            if ($project->endDateIsPassed()) {
+                                echo 'ran until ', date('M, Y', $project->getUnixEndDate());
+                            } else {
+                                echo 'is running until ', date('M, Y', $project->getUnixEndDate());
+                            }
+                        } elseif ($project->getStartDate() AND $project->getEndDate()) {
+                            if (date('M, Y', $project->getUnixStartDate()) == date('M, Y', $project->getUnixEndDate())) {
+                                if ($project->startDateIsPassed()) {
+                                    echo 'ran in ', date('M, Y', $project->getUnixStartDate());
+                                } elseif ($project->startDateIsInFuture()) {
+                                    echo 'will run in ', date('M, Y', $project->getUnixStartDate());
+                                }
+                            } else {
+                                if ($project->endDateIsPassed()) {
+                                    echo 'ran from ', date('M, Y', $project->getUnixEndDate()),
+                                    ' to ', date('M, Y', $project->getUnixEndDate());
+                                } elseif ($project->startDateIsInFuture()) {
+                                    echo 'will run from ', date('M, Y', $project->getUnixEndDate()),
+                                    ' to ', date('M, Y', $project->getUnixEndDate());
+                                } else {
+                                    echo 'is running from ', date('M, Y', $project->getUnixEndDate()),
+                                    ' to ', date('M, Y', $project->getUnixEndDate());
+                                }
+                            }
+                        }
+                        ?>
                     </p>
                 <?php } ?>
                 <a class="w-button project-nav" href="#tags">Tags</a>

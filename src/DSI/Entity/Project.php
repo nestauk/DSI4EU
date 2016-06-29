@@ -141,6 +141,16 @@ class Project
         return strtotime($this->startDate);
     }
 
+    public function startDateIsPassed()
+    {
+        return strtotime($this->startDate) < time();
+    }
+
+    public function startDateIsInFuture()
+    {
+        return strtotime($this->startDate) > time();
+    }
+
     /**
      * @param string $startDate
      */
@@ -163,6 +173,11 @@ class Project
     public function getUnixEndDate()
     {
         return strtotime($this->endDate);
+    }
+
+    public function endDateIsPassed()
+    {
+        return strtotime($this->endDate) < time();
     }
 
     /**
