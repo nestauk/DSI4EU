@@ -3,6 +3,69 @@ require __DIR__ . '/header.php';
 /** @var $story \DSI\Entity\Story */
 /** @var $author \DSI\Entity\User */
 ?>
+
+    <div class="single-post-hero w-section"
+         style="    background-image: linear-gradient(180deg, rgba(14, 23, 41, .83) 26%, rgba(58, 47, 70, .7)), url('<?php echo \DSI\Entity\Image::STORY_MAIN_IMAGE_URL . $story->getMainImage()?>');">
+        <div class="container-wide post-hero">
+            <h1 class="post-hero-title"><?php echo show_input($story->getTitle()) ?></h1>
+            <div class="post-single-date"><?php echo $story->getDatePublished('jS F Y') ?></div>
+            <div class="breadcrumb-container">
+                <div class="bread-crumbs w-clearfix">
+                    <a class="breadcrumb-root w-inline-block" href="<?php echo \DSI\Service\URL::stories() ?>">
+                        <div class="breadcrumb-link">Stories</div>
+                        <div class="arrow-right"></div>
+                    </a>
+                    <a class="breadcrumb-root path w-inline-block" href="#">
+                        <div class="arrow-bottom-left"></div>
+                        <div class="arrow-top-left"></div>
+                        <div class="breadcrumb-link">
+                            <?php
+                            echo show_input(substr($story->getTitle(), 0, 35));
+                            if (strlen($story->getTitle()) > 35) echo '...';
+                            ?>
+                        </div>
+                        <div class="arrow-right"></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<?php /*
+    <div class="w-section page-header project-header-exp">
+        <div class="container-wide header project-header-exp">
+            <div class="w-clearfix bread-crumbs">
+                <a class="w-inline-block breadcrumb-root" href="<?php echo \DSI\Service\URL::organisations() ?>">
+                    <div class="breadcrumb-link">Organisations</div>
+                    <div class="arrow-right"></div>
+                </a>
+                <a class="w-inline-block breadcrumb-root path" href="#">
+                    <div class="arrow-bottom-left"></div>
+                    <div class="arrow-top-left"></div>
+                    <div class="breadcrumb-link">
+                        <?php echo substr(show_input($story->getTitle()), 0, 35) ?>
+                        <?php echo strlen($story->getTitle()) > 35 ? '...' : '' ?>
+                    </div>
+                    <div class="arrow-right"></div>
+                </a>
+            </div>
+            <h1 class="page-h1 light"><?php echo show_input($story->getTitle()) ?></h1>
+            <div class="dsi4eu-stats project-header-exp"></div>
+            <div class="large-profile-img project-header-exp custom-project-header-exp"></div>
+            <?php /*
+            <img class="large-profile-img project-header-exp"
+                 src="<?php echo \DSI\Entity\Image::PROJECT_LOGO_URL?>">
+            * / ?>
+            <?php /* if ($isOwner) { ?>
+                <a class="w-button dsi-button profile-edit project-header-exp"
+                   href="<?php echo \DSI\Service\URL::organisation($organisation) ?>">
+                    Edit organisation</a>
+            <?php } * / ?>
+        </div>
+    </div>
+ */ ?>
+
+<?php /*
     <div class="w-section single-post-hero"
          style="background-image: linear-gradient(180deg, rgba(14, 23, 41, .83) 26%, rgba(58, 47, 70, .7)), url('<?php echo SITE_RELATIVE_PATH ?>/images/stories/main/<?php echo $story->getMainImage() ?>');">
         <div class="container-wide post-hero">
@@ -25,8 +88,9 @@ require __DIR__ . '/header.php';
             </div>
         </div>
     </div>
+ */ ?>
 
-    <?php require(__DIR__ . '/partialViews/search-results.php'); ?>
+<?php require(__DIR__ . '/partialViews/search-results.php'); ?>
 
     <div class="w-section single-post-detail">
         <div class="container-wide single-post-content">
