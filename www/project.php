@@ -128,7 +128,7 @@ require __DIR__ . '/header.php';
 
                         <div class="w-form" style="float:left"
                              ng-show="addingTag">
-                            <form class="w-clearfix add-skill-section"
+                            <form class="w-clearfix add-skill-section" style="margin-top:0"
                                   ng-submit="addTag()">
                                 <select data-tags="true"
                                         data-placeholder="Add a tag"
@@ -380,8 +380,8 @@ require __DIR__ . '/header.php';
                                          ng-click="addingImpactTagA = !addingImpactTagA">
                                         <div class="add-item">+</div>
                                     </div>
-                                    <div class="w-form" style="float:left"
-                                         ng-show="addingImpactTagA">
+                                    <div style="clear:both"></div>
+                                    <div class="w-form" ng-show="addingImpactTagA">
                                         <form class="w-clearfix add-skill-section"
                                               ng-submit="addImpactTagA()">
                                             <select data-tags="true"
@@ -414,8 +414,8 @@ require __DIR__ . '/header.php';
                                          ng-click="addingImpactTagB = !addingImpactTagB">
                                         <div class="add-item">+</div>
                                     </div>
-                                    <div class="w-form" style="float:left"
-                                         ng-show="addingImpactTagB">
+                                    <div style="clear:both"></div>
+                                    <div class="w-form" ng-show="addingImpactTagB">
                                         <form class="w-clearfix add-skill-section"
                                               ng-submit="addImpactTagB()">
                                             <select data-tags="true"
@@ -448,8 +448,8 @@ require __DIR__ . '/header.php';
                                          ng-click="addingImpactTagC = !addingImpactTagC">
                                         <div class="add-item">+</div>
                                     </div>
-                                    <div class="w-form" style="float:left"
-                                         ng-show="addingImpactTagC">
+                                    <div style="clear:both"></div>
+                                    <div class="w-form" ng-show="addingImpactTagC">
                                         <form class="w-clearfix add-skill-section"
                                               ng-submit="addImpactTagC()">
                                             <select data-tags="true"
