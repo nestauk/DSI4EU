@@ -15,6 +15,7 @@ class OrganisationSizeRepository
     {
         $insert = array();
         $insert[] = "`name` = '" . addslashes($organisationSize->getName()) . "'";
+        $insert[] = "`order` = '" . addslashes($organisationSize->getOrder()) . "'";
         $query = new SQL("INSERT INTO `organisation-sizes` SET " . implode(', ', $insert) . "");
         $query->query();
 
@@ -32,6 +33,7 @@ class OrganisationSizeRepository
 
         $insert = array();
         $insert[] = "`name` = '" . addslashes($organisationSize->getName()) . "'";
+        $insert[] = "`order` = '" . addslashes($organisationSize->getOrder()) . "'";
 
         $query = new SQL("UPDATE `organisation-sizes` SET " . implode(', ', $insert) . " WHERE `id` = '{$organisationSize->getId()}'");
         $query->query();
@@ -61,6 +63,7 @@ class OrganisationSizeRepository
         $organisationSizeObj = new OrganisationSize();
         $organisationSizeObj->setId($organisationSize['id']);
         $organisationSizeObj->setName($organisationSize['name']);
+        $organisationSizeObj->setOrder($organisationSize['order']);
 
         self::$objects[$organisationSizeObj->getId()] = $organisationSizeObj;
 
@@ -69,15 +72,7 @@ class OrganisationSizeRepository
 
     public function getAll()
     {
-        $where = ["1"];
-        $organisationSizes = [];
-        $query = new SQL("SELECT 
-            id, name
-          FROM `organisation-sizes` WHERE " . implode(' AND ', $where) . "");
-        foreach ($query->fetch_all() AS $dbOrganisationSize) {
-            $organisationSizes[] = $this->buildObjectFromData($dbOrganisationSize);
-        }
-        return $organisationSizes;
+        return $this->getObjectsWhere(["1"]);
     }
 
     public function clearAll()
@@ -89,14 +84,28 @@ class OrganisationSizeRepository
 
     private function getElementWhere($where)
     {
-        $query = new SQL("SELECT 
-              id, name
-            FROM `organisation-sizes` WHERE " . implode(' AND ', $where) . " LIMIT 1");
-        $dbOrganisationSize = $query->fetch();
-        if (!$dbOrganisationSize) {
+        $objects = $this->getObjectsWhere($where);
+        if(count($objects) < 1)
             throw new DSI\NotFound();
-        }
 
-        return $this->buildObjectFromData($dbOrganisationSize);
+        return $objects[0];
+    }
+
+    /**
+     * @param $where
+     * @return array
+     */
+    private function getObjectsWhere($where)
+    {
+        $organisationSizes = [];
+        $query = new SQL("SELECT 
+            id, name, `order`
+          FROM `organisation-sizes`
+          WHERE " . implode(' AND ', $where) . "
+          ORDER BY `order`");
+        foreach ($query->fetch_all() AS $dbOrganisationSize) {
+            $organisationSizes[] = $this->buildObjectFromData($dbOrganisationSize);
+        }
+        return $organisationSizes;
     }
 }

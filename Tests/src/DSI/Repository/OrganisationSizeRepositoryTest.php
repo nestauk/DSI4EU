@@ -24,8 +24,14 @@ class OrganisationSizeRepositoryTest extends PHPUnit_Framework_TestCase
     public function organisationSizeCanBeSaved()
     {
         $organisationSize = new OrganisationSize();
+        $organisationSize->setName($name = 'name');
+        $organisationSize->setOrder($order = 9);
         $this->organisationSizeRepo->insert($organisationSize);
+
         $this->assertGreaterThan(0, $organisationSize->getId());
+        $organisationSize = $this->organisationSizeRepo->getById($organisationSize->getId());
+        $this->assertEquals($name, $organisationSize->getName());
+        $this->assertEquals($order, $organisationSize->getOrder());
     }
 
     /** @test save, getByID */

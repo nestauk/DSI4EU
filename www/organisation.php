@@ -14,6 +14,10 @@ require __DIR__ . '/header.php';
             margin-left: 0;
             padding-left: 0;
         }
+
+        .org-tab {
+            width: 49%;
+        }
     </style>
 
     <div class="w-section page-header project-header-exp">
@@ -35,9 +39,9 @@ require __DIR__ . '/header.php';
             </div>
             <h1 class="page-h1 light"><?php echo show_input($organisation->getName()) ?></h1>
             <div class="dsi4eu-stats project-header-exp">
-                <a class="dsi4eu-stats" href="<?php echo \DSI\Service\URL::organisation($organisation) ?>">
+                <?php /* <a class="dsi4eu-stats" href="<?php echo \DSI\Service\URL::organisation($organisation) ?>">
                     <?php echo \DSI\Service\URL::organisation($organisation) ?>
-                </a>
+                </a> */ ?>
             </div>
             <div class="large-profile-img project-header-exp custom-project-header-exp"></div>
             <?php /*
@@ -225,15 +229,13 @@ require __DIR__ . '/header.php';
                         <?php if ($canUserRequestMembership) { ?>
                             <div class="join-organisation">
                                 <div ng-hide="requestToJoin.requestSent">
-                                    <a href="#" ng-hide="requestToJoin.loading" class="w-button btn btn-join"
-                                       style="position: static;"
-                                       ng-click="sendRequestToJoin()">
+                                    <a href="#" class="w-button btn btn-join"
+                                       style="position: static;width:170px"
+                                       ng-click="sendRequestToJoin()"
+                                       ng-bind="requestToJoin.loading ? 'Sending Request...' : 'Request to join'"
+                                       ng-disabled="requestToJoin.loading">
                                         Request to join
                                     </a>
-                                    <button ng-show="requestToJoin.loading" class="w-button btn btn-join"
-                                            style="background-color: #ec388e;position: static;">
-                                        Sending Request...
-                                    </button>
                                 </div>
                                 <button ng-show="requestToJoin.requestSent" class="w-button btn btn-join"
                                         style="position: static;">
@@ -351,6 +353,9 @@ require __DIR__ . '/header.php';
                                     <div class="delete" ng-click="removeTag(tag)">-</div>
                                 <?php } ?>
                                 <div ng-bind="tag"></div>
+                            </div>
+                            <div ng-show="organisation.tags.length == 0">
+                                No tags selected
                             </div>
                             <?php if ($isOwner) { ?>
                                 <div class="add-item-block" ng-click="addingTag = !addingTag">

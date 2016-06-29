@@ -10,6 +10,8 @@ class OrganisationSize
     /** @var string */
     private $name;
 
+    private $order;
+
     /**
      * @return int
      */
@@ -43,5 +45,21 @@ class OrganisationSize
     public function setName(string $name)
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOrder()
+    {
+        return (int)$this->order;
+    }
+
+    /**
+     * @param mixed $order
+     */
+    public function setOrder($order)
+    {
+        $this->order = (int)$order;
     }
 }

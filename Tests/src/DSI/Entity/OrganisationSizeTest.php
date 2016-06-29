@@ -35,4 +35,12 @@ class OrganisationSizeTest extends \PHPUnit_Framework_TestCase
         $this->organisationSize->setName($name);
         $this->assertEquals($name, $this->organisationSize->getName());
     }
+
+    /** @test */
+    public function settingOrder_returnsOrder()
+    {
+        $order = 9;
+        $this->organisationSize->setOrder($order);
+        $this->assertEquals($order, $this->organisationSize->getOrder());
+    }
 }
