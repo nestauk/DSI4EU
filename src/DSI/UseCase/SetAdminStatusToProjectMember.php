@@ -43,9 +43,9 @@ class SetAdminStatusToProjectMember
         if (!$this->data()->executor)
             throw new \InvalidArgumentException('No executor');
 
-        if($this->data()->project->getOwner()->getId() != $this->data()->executor->getId()){
-            $this->errorHandler->addTaggedError('member', 'Only the owner can change member status');
-            $this->errorHandler->throwIfNotEmpty();
+        if (!$this->userCanChangeStatus()) {
+            $this->errorHandler->addTaggedError('member', 'You cannot change member status');
+            throw $this->errorHandler;
         }
 
         if (!$this->projectMemberRepo->projectHasMember($this->data()->project->getId(), $this->data()->member->getId())) {
@@ -66,6 +66,21 @@ class SetAdminStatusToProjectMember
     public function data()
     {
         return $this->data;
+    }
+
+    private function userCanChangeStatus()
+    {
+        if ($this->data()->project->getOwner()->getId() == $this->data()->executor->getId())
+            return true;
+
+        $member = (new ProjectMemberRepository())->getByProjectIDAndMemberID(
+            $this->data()->project->getId(),
+            $this->data()->executor->getId()
+        );
+        if ($member->isAdmin())
+            return true;
+
+        return false;
     }
 }
 
