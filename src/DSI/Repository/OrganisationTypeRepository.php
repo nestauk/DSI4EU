@@ -15,6 +15,7 @@ class OrganisationTypeRepository
     {
         $insert = array();
         $insert[] = "`name` = '" . addslashes($organisationType->getName()) . "'";
+        $insert[] = "`order` = '" . addslashes($organisationType->getOrder()) . "'";
         $query = new SQL("INSERT INTO `organisation-types` SET " . implode(', ', $insert) . "");
         $query->query();
 
@@ -32,6 +33,7 @@ class OrganisationTypeRepository
 
         $insert = array();
         $insert[] = "`name` = '" . addslashes($organisationType->getName()) . "'";
+        $insert[] = "`order` = '" . addslashes($organisationType->getOrder()) . "'";
 
         $query = new SQL("UPDATE `organisation-types` SET " . implode(', ', $insert) . " WHERE `id` = '{$organisationType->getId()}'");
         $query->query();
@@ -44,14 +46,14 @@ class OrganisationTypeRepository
         if (isset(self::$objects[$id]))
             return self::$objects[$id];
 
-        return $this->getElementWhere([
+        return $this->getObjectWhere([
             "`id` = {$id}"
         ]);
     }
 
     public function getByName(string $name): OrganisationType
     {
-        return $this->getElementWhere([
+        return $this->getObjectWhere([
             "`name` = '" . addslashes($name) . "'"
         ]);
     }
@@ -61,6 +63,7 @@ class OrganisationTypeRepository
         $organisationTypeObj = new OrganisationType();
         $organisationTypeObj->setId($organisationType['id']);
         $organisationTypeObj->setName($organisationType['name']);
+        $organisationTypeObj->setOrder($organisationType['order']);
 
         self::$objects[$organisationTypeObj->getId()] = $organisationTypeObj;
 
@@ -69,15 +72,7 @@ class OrganisationTypeRepository
 
     public function getAll()
     {
-        $where = ["1"];
-        $organisationTypes = [];
-        $query = new SQL("SELECT 
-            id, name
-          FROM `organisation-types` WHERE " . implode(' AND ', $where) . "");
-        foreach ($query->fetch_all() AS $dbOrganisationType) {
-            $organisationTypes[] = $this->buildObjectFromData($dbOrganisationType);
-        }
-        return $organisationTypes;
+        return $this->getObjectsWhere(["1"]);
     }
 
     public function clearAll()
@@ -87,16 +82,30 @@ class OrganisationTypeRepository
         self::$objects = [];
     }
 
-    private function getElementWhere($where)
+    private function getObjectWhere($where)
     {
-        $query = new SQL("SELECT 
-              id, name
-            FROM `organisation-types` WHERE " . implode(' AND ', $where) . " LIMIT 1");
-        $dbOrganisationType = $query->fetch();
-        if (!$dbOrganisationType) {
+        $objects = $this->getObjectsWhere($where);
+        if (count($objects) < 1)
             throw new DSI\NotFound();
-        }
 
-        return $this->buildObjectFromData($dbOrganisationType);
+        return $objects[0];
+    }
+
+    /**
+     * @param $where
+     * @return array
+     */
+    private function getObjectsWhere($where)
+    {
+        $organisationTypes = [];
+        $query = new SQL("SELECT 
+            id, `name`, `order`
+          FROM `organisation-types`
+          WHERE " . implode(' AND ', $where) . "
+          ORDER BY `order`");
+        foreach ($query->fetch_all() AS $dbOrganisationType) {
+            $organisationTypes[] = $this->buildObjectFromData($dbOrganisationType);
+        }
+        return $organisationTypes;
     }
 }

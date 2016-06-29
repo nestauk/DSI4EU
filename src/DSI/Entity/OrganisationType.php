@@ -10,6 +10,9 @@ class OrganisationType
     /** @var string */
     private $name;
 
+    /** @var int */
+    private $order;
+    
     /**
      * @return int
      */
@@ -43,5 +46,21 @@ class OrganisationType
     public function setName(string $name)
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return int
+     */
+    public function getOrder()
+    {
+        return (int)$this->order;
+    }
+
+    /**
+     * @param int $order
+     */
+    public function setOrder($order)
+    {
+        $this->order = (int) $order;
     }
 }
