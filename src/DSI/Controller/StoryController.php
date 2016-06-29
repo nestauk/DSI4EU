@@ -26,6 +26,7 @@ class StoryController
         $story = $storyRepo->getById($this->data()->storyID);
         $author = $story->getAuthor();
 
+        $pageTitle = $story->getTitle();
         require __DIR__ . '/../../../www/story.php';
     }
 

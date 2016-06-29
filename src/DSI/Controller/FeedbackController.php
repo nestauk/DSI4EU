@@ -45,6 +45,7 @@ class FeedbackController
         $data = [
             'loggedInUser' => $loggedInUser,
         ];
+        $pageTitle = 'Feedback';
         require __DIR__ . '/../../../www/feedback.php';
     }
 }

@@ -2,6 +2,7 @@
 /** @var $loggedInUser \DSI\Entity\User */
 /** @var $isHomePage bool */
 /** @var $angularModules string[] */
+/** @var $pageTitle string[] */
 use \DSI\Service\URL;
 use \DSI\Service\Sysctl;
 
@@ -10,15 +11,20 @@ use \DSI\Service\Sysctl;
 <html data-wf-site="56e2e31a1b1f8f784728a08c" data-wf-page="56fbef6ecf591b312d56f8be">
 <head>
     <meta charset="utf-8">
-    <title>Home</title>
-    <meta property="og:title" content="Home">
+    <title><?php echo isset($pageTitle) ? show_input($pageTitle) : 'Digitalsocial.eu' ?></title>
+    <meta property="og:title" content="<?php echo isset($pageTitle) ? show_input($pageTitle) : 'Digitalsocial.eu' ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Webflow">
-    <link rel="stylesheet" type="text/css" href="<?php echo SITE_RELATIVE_PATH ?>/lib/ionicons/css/ionicons.min.css?v=<?php echo Sysctl::$version ?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo SITE_RELATIVE_PATH ?>/css/normalize.css?v=<?php echo Sysctl::$version ?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo SITE_RELATIVE_PATH ?>/css/components.css?v=<?php echo Sysctl::$version ?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo SITE_RELATIVE_PATH ?>/css/dsi4eu.css?v=<?php echo Sysctl::$version ?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo SITE_RELATIVE_PATH ?>/css/custom.css?v=<?php echo Sysctl::$version ?>">
+    <link rel="stylesheet" type="text/css"
+          href="<?php echo SITE_RELATIVE_PATH ?>/lib/ionicons/css/ionicons.min.css?v=<?php echo Sysctl::$version ?>">
+    <link rel="stylesheet" type="text/css"
+          href="<?php echo SITE_RELATIVE_PATH ?>/css/normalize.css?v=<?php echo Sysctl::$version ?>">
+    <link rel="stylesheet" type="text/css"
+          href="<?php echo SITE_RELATIVE_PATH ?>/css/components.css?v=<?php echo Sysctl::$version ?>">
+    <link rel="stylesheet" type="text/css"
+          href="<?php echo SITE_RELATIVE_PATH ?>/css/dsi4eu.css?v=<?php echo Sysctl::$version ?>">
+    <link rel="stylesheet" type="text/css"
+          href="<?php echo SITE_RELATIVE_PATH ?>/css/custom.css?v=<?php echo Sysctl::$version ?>">
 
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
     <script>
@@ -28,25 +34,28 @@ use \DSI\Service\Sysctl;
             }
         });
     </script>
-    <script type="text/javascript" src="<?php echo SITE_RELATIVE_PATH ?>/js/modernizr.js?v=<?php echo Sysctl::$version ?>"></script>
+    <script type="text/javascript"
+            src="<?php echo SITE_RELATIVE_PATH ?>/js/modernizr.js?v=<?php echo Sysctl::$version ?>"></script>
 
     <link rel="shortcut icon" type="image/x-icon" href="<?php echo SITE_RELATIVE_PATH ?>/images/ico-small.png">
     <link rel="apple-touch-icon" href="<?php echo SITE_RELATIVE_PATH ?>/images/ico-large.png">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.2.2/isotope.pkgd.min.js"></script>
+    <script src="<?php echo SITE_RELATIVE_PATH ?>/js/lib/isotope/isotope.pkgd.min.js"></script>
 
     <?php /** jQuery */ ?>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script type="text/javascript" src="<?php echo SITE_RELATIVE_PATH ?>/js/lib/jquery/jquery.min.js"></script>
 
     <?php /** SweetAlert */ ?>
-    <script src="<?php echo SITE_RELATIVE_PATH ?>/lib/sweetalert-master/dist/sweetalert.min.js?v=<?php echo Sysctl::$version ?>"></script>
+    <script
+        src="<?php echo SITE_RELATIVE_PATH ?>/lib/sweetalert-master/dist/sweetalert.min.js?v=<?php echo Sysctl::$version ?>"></script>
     <link rel="stylesheet" type="text/css"
           href="<?php echo SITE_RELATIVE_PATH ?>/lib/sweetalert-master/dist/sweetalert.css?v=<?php echo Sysctl::$version ?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo SITE_RELATIVE_PATH ?>/css/sweet.css?v=<?php echo Sysctl::$version ?>">
+    <link rel="stylesheet" type="text/css"
+          href="<?php echo SITE_RELATIVE_PATH ?>/css/sweet.css?v=<?php echo Sysctl::$version ?>">
 
     <?php /** Select2 */ ?>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/css/select2.min.css" rel="stylesheet"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/js/select2.full.min.js"></script>
+    <link href="<?php echo SITE_RELATIVE_PATH ?>/lib/select2/select2.min.css" rel="stylesheet"/>
+    <script src="<?php echo SITE_RELATIVE_PATH ?>/lib/select2/select2.full.min.js"></script>
 
     <script>
         var SITE_RELATIVE_PATH = '<?php echo SITE_RELATIVE_PATH?>';
@@ -122,13 +131,16 @@ use \DSI\Service\Sysctl;
         }
     </style>
 
-    <script type="text/javascript" src="<?php echo SITE_RELATIVE_PATH ?>/js/angular.min.js?v=<?php echo Sysctl::$version ?>"></script>
+    <script type="text/javascript"
+            src="<?php echo SITE_RELATIVE_PATH ?>/js/angular.min.js?v=<?php echo Sysctl::$version ?>"></script>
 
     <?php if (isset($angularModules['fileUpload'])) { ?>
         <?php /** ngFileUpload */ ?>
-        <script src="<?php echo SITE_RELATIVE_PATH ?>/js/lib/ng-file-upload-bower/ng-file-upload-shim.min.js?v=<?php echo Sysctl::$version ?>"></script>
+        <script
+            src="<?php echo SITE_RELATIVE_PATH ?>/js/lib/ng-file-upload-bower/ng-file-upload-shim.min.js?v=<?php echo Sysctl::$version ?>"></script>
         <!-- for no html5 browsers support -->
-        <script src="<?php echo SITE_RELATIVE_PATH ?>/js/lib/ng-file-upload-bower/ng-file-upload.min.js?v=<?php echo Sysctl::$version ?>"></script>
+        <script
+            src="<?php echo SITE_RELATIVE_PATH ?>/js/lib/ng-file-upload-bower/ng-file-upload.min.js?v=<?php echo Sysctl::$version ?>"></script>
         <script>angularDependencies.push('ngFileUpload');</script>
     <?php } ?>
 
@@ -146,13 +158,15 @@ use \DSI\Service\Sysctl;
         <script>angularDependencies.push('ui.bootstrap');</script>
     <?php } ?>
 
-    <script type="text/javascript" src="<?php echo SITE_RELATIVE_PATH ?>/js/DSIApp.js?v=<?php echo Sysctl::$version ?>"></script>
+    <script type="text/javascript"
+            src="<?php echo SITE_RELATIVE_PATH ?>/js/DSIApp.js?v=<?php echo Sysctl::$version ?>"></script>
 </head>
 <script type="text/javascript"
         src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/SearchController.js?v=<?php echo Sysctl::$version ?>"></script>
 <body ng-app="DSIApp" ng-controller="SearchController" id="top">
 <?php if (!isset($_SESSION['user'])) { ?>
-    <script type="text/javascript" src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/LoginController.js?v=<?php echo Sysctl::$version ?>"></script>
+    <script type="text/javascript"
+            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/LoginController.js?v=<?php echo Sysctl::$version ?>"></script>
 
     <div class="login-modal modal" ng-controller="LoginController">
         <div class="modal-container">
@@ -183,15 +197,15 @@ use \DSI\Service\Sysctl;
                                 <a class="forgotten-password" href="#" ng-click="forgotPassword.show = true">Forgotten
                                     password?</a>
 
-                                    <input class="w-button dsi-button creat-button"
-                                           type="submit" ng-hide="loggedin"
-                                           value="Log in"
-                                           ng-value="loading ? 'Loading...' : 'Log in'"
-                                           ng-disabled="loading">
-                                    <input class="w-button dsi-button creat-button"
-                                           ng-show="loggedin" type="button"
-                                           style="width:auto"
-                                           value="Welcome back to Digital Social!">
+                                <input class="w-button dsi-button creat-button"
+                                       type="submit" ng-hide="loggedin"
+                                       value="Log in"
+                                       ng-value="loading ? 'Loading...' : 'Log in'"
+                                       ng-disabled="loading">
+                                <input class="w-button dsi-button creat-button"
+                                       ng-show="loggedin" type="button"
+                                       style="width:auto"
+                                       value="Welcome back to Digital Social!">
                             </form>
                         </div>
                         <div ng-show="forgotPassword.show" class="w-tab-screen" style="text-align:center">

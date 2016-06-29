@@ -144,7 +144,7 @@ strong {
 
 .nav.log-in:hover {
   background-color: hsla(0, 0%, 100%, .3);
-  box-shadow: 0 0 22px -8px #000;
+  box-shadow: 0 0 22px -8px rgba(0, 0, 0, .3);
   -webkit-transform: scale(1.03);
   -ms-transform: scale(1.03);
   transform: scale(1.03);
@@ -3813,6 +3813,12 @@ strong {
   transform: scale(1.2);
 }
 
+.alphabet-link:active {
+  -webkit-transform: scale(0.9);
+  -ms-transform: scale(0.9);
+  transform: scale(0.9);
+}
+
 .card-slim-stats {
   position: absolute;
   left: 0px;
@@ -5019,9 +5025,14 @@ strong {
 .bread-crumbs {
   position: absolute;
   left: 0px;
-  bottom: 115px;
+  bottom: 30px;
   width: auto;
   height: 30px;
+}
+
+.bread-crumbs.alt {
+  top: 103px;
+  bottom: 0px;
 }
 
 .breadcrumb-root {
@@ -5249,6 +5260,18 @@ strong {
   color: #757575;
 }
 
+.breadcrumb-container {
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  width: 400px;
+  height: 30px;
+}
+
+.breadcrumb-container.breadcrumb-container-alt {
+  bottom: 85px;
+}
+
 html.w-mod-js *[data-ix="downbeforeup"] {
   opacity: 0;
   -webkit-transform: translate(0px, 50px);
@@ -5321,6 +5344,11 @@ html.w-mod-js *[data-ix="under-dev"] {
     right: 0px;
     bottom: 0px;
     width: 91%;
+  }
+  .btn.btn-join.section-cta {
+    width: 309px;
+    margin-top: 11px;
+    margin-right: 39px;
   }
   .profile-info-left {
     display: block;
@@ -5400,6 +5428,10 @@ html.w-mod-js *[data-ix="under-dev"] {
   .container-wide {
     padding-bottom: 0px;
   }
+  .container-wide.section-cta {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
   .hp-post {
     height: 146px;
   }
@@ -5446,6 +5478,9 @@ html.w-mod-js *[data-ix="under-dev"] {
     margin-right: auto;
     margin-left: auto;
   }
+  .dsi-button.top-filter {
+    width: 115px;
+  }
   .dsi-button.notification-button.decline {
     margin-top: 22px;
     float: right;
@@ -5487,6 +5522,9 @@ html.w-mod-js *[data-ix="under-dev"] {
 }
 
 @media (max-width: 767px) {
+  .search.bg-blur {
+    height: auto;
+  }
   .search-field {
     display: block;
     margin-top: 12px;
@@ -5501,6 +5539,9 @@ html.w-mod-js *[data-ix="under-dev"] {
   .project-header {
     margin-top: 30px;
     border-radius: 0px;
+  }
+  .info-h.card-h.alt {
+    margin-left: 20px;
   }
   .body-container {
     margin-top: -52px;
@@ -5542,8 +5583,18 @@ html.w-mod-js *[data-ix="under-dev"] {
     bottom: 0px;
     width: 90%;
   }
+  .btn.btn-join.section-cta {
+    position: relative;
+    display: block;
+    width: 300px;
+    margin-right: auto;
+    margin-left: auto;
+  }
   .btn-col {
     padding-left: 0px;
+  }
+  .tags-block {
+    margin-left: 20px;
   }
   .contributor {
     border-top: 0px none #e2e2e2;
@@ -5599,6 +5650,13 @@ html.w-mod-js *[data-ix="under-dev"] {
     margin-right: auto;
     margin-left: auto;
   }
+  .container-wide.header {
+    max-width: auto;
+    padding-top: 60px;
+  }
+  .container-wide.section-cta {
+    height: 251px;
+  }
   .hp-post {
     height: 176px;
   }
@@ -5624,6 +5682,12 @@ html.w-mod-js *[data-ix="under-dev"] {
   .feedback-list {
     width: 100%;
   }
+  .filter-block {
+    top: 170px;
+  }
+  .dsi-button.top-filter {
+    margin-top: 15px;
+  }
   .dsi-button.notification-button.decline {
     float: none;
   }
@@ -5639,8 +5703,15 @@ html.w-mod-js *[data-ix="under-dev"] {
     width: 50px;
     max-width: auto;
   }
+  .page-h1.light {
+    margin-top: 44px;
+    margin-left: 0px;
+  }
   .single-post-category {
     top: -52px;
+  }
+  .page-header.stories-header {
+    height: 360px;
   }
   .modal-content {
     width: 100%;
@@ -5649,6 +5720,23 @@ html.w-mod-js *[data-ix="under-dev"] {
   }
   .modal-input {
     width: 100%;
+  }
+  .bread-crumbs {
+    display: none;
+  }
+  .project-description.light {
+    margin-top: 40px;
+    font-size: 20px;
+    line-height: 30px;
+  }
+  .search-column {
+    height: 50px;
+  }
+  .cta-h3 {
+    text-align: center;
+  }
+  .cta-p {
+    text-align: center;
   }
 }
 
@@ -5823,6 +5911,9 @@ html.w-mod-js *[data-ix="under-dev"] {
   .container-wide.header {
     height: 265px;
   }
+  .container-wide.padding-20 {
+    padding-bottom: 30px;
+  }
   .hp-post {
     height: 226px;
   }
@@ -5893,8 +5984,14 @@ html.w-mod-js *[data-ix="under-dev"] {
   .card-slim-location {
     text-align: center;
   }
+  .alphabet-selectors {
+    top: 158px;
+  }
   .page-h1.light {
-    margin-top: 0px;
+    margin-top: 45px;
+    margin-left: 0px;
+    font-size: 18px;
+    text-align: center;
   }
   .intro-title {
     height: 125px;
@@ -5941,6 +6038,9 @@ html.w-mod-js *[data-ix="under-dev"] {
     margin-bottom: 10px;
     line-height: 15px;
   }
+  .page-header.stories-header {
+    height: 410px;
+  }
   .tab-buttons-container {
     height: 185px;
   }
@@ -5952,6 +6052,9 @@ html.w-mod-js *[data-ix="under-dev"] {
   }
   .search-clear {
     display: none;
+  }
+  .project-nav {
+    margin-bottom: 10px;
   }
 }
 

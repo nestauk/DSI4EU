@@ -44,10 +44,7 @@ class OrganisationsController
                 ];
             }, $organisationRepo->getAll()));
         } else {
-
-            $data = [
-                'loggedInUser' => $loggedInUser
-            ];
+            $pageTitle = 'Organisations';
             require __DIR__ . '/../../../www/organisations.php';
         }
     }
