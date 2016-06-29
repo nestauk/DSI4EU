@@ -144,7 +144,7 @@ strong {
 
 .nav.log-in:hover {
   background-color: hsla(0, 0%, 100%, .3);
-  box-shadow: 0 0 22px -8px #000;
+  box-shadow: 0 0 22px -8px rgba(0, 0, 0, .3);
   -webkit-transform: scale(1.03);
   -ms-transform: scale(1.03);
   transform: scale(1.03);
@@ -3813,6 +3813,12 @@ strong {
   transform: scale(1.2);
 }
 
+.alphabet-link:active {
+  -webkit-transform: scale(0.9);
+  -ms-transform: scale(0.9);
+  transform: scale(0.9);
+}
+
 .card-slim-stats {
   position: absolute;
   left: 0px;
@@ -5019,9 +5025,14 @@ strong {
 .bread-crumbs {
   position: absolute;
   left: 0px;
-  bottom: 115px;
+  bottom: 30px;
   width: auto;
   height: 30px;
+}
+
+.bread-crumbs.alt {
+  top: 103px;
+  bottom: 0px;
 }
 
 .breadcrumb-root {
@@ -5247,6 +5258,18 @@ strong {
   margin-top: 19px;
   font-family: 'Open Sans', sans-serif;
   color: #757575;
+}
+
+.breadcrumb-container {
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  width: 400px;
+  height: 30px;
+}
+
+.breadcrumb-container.breadcrumb-container-alt {
+  bottom: 85px;
 }
 
 html.w-mod-js *[data-ix="downbeforeup"] {

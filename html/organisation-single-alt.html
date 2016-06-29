@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <!-- Last Published: Wed Jun 29 2016 11:54:52 GMT+0000 (UTC) -->
-<html data-wf-site="56e2e31a1b1f8f784728a08c" data-wf-page="577149898479866150f499d8">
+<html data-wf-site="56e2e31a1b1f8f784728a08c" data-wf-page="57739f062de39fb074c7536c">
 <head>
   <meta charset="utf-8">
-  <title>Components</title>
-  <meta property="og:title" content="Components">
+  <title>Organisation single alt</title>
+  <meta property="og:title" content="Organisation single alt">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="css/normalize.css">
   <link rel="stylesheet" type="text/css" href="css/components.css">
@@ -63,75 +63,7 @@
     .modal-content {#position: relative; #top: -50%;margin:0 auto;width:600px;}
   </style>
 </head>
-<body data-ix="hideprofilepopover">
-  <div class="create-project-modal modal">
-    <div class="modal-container">
-      <div class="modal-helper">
-        <div class="modal-content">
-          <h2 class="centered modal-h2">Create project</h2>
-          <div class="w-form">
-            <form data-name="Email Form 3" id="email-form-3" name="email-form-3">
-              <input class="modal-input w-input" data-name="Name 3" id="name-3" maxlength="256" name="name" placeholder="Enter the name of your project" type="text">
-              <input class="creat-button dsi-button w-button" data-wait="Please wait..." type="submit" value="Create +">
-            </form>
-            <div class="w-form-done">
-              <div>Thank you! Your submission has been received!</div>
-            </div>
-            <div class="w-form-fail">
-              <div>Oops! Something went wrong while submitting the form</div>
-            </div>
-          </div>
-          <div class="cancel" data-ix="close-nu-modal">Cancel</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="create-organisation-modal modal">
-    <div class="modal-container">
-      <div class="modal-helper">
-        <div class="modal-content">
-          <h2 class="centered modal-h2">Create organisation</h2>
-          <div class="w-form">
-            <form data-name="Email Form 3" id="email-form-3" name="email-form-3">
-              <input class="modal-input w-input" data-name="Name 3" id="name-3" maxlength="256" name="name" placeholder="Enter the name of your organisation" type="text">
-              <input class="creat-button dsi-button w-button" data-wait="Please wait..." type="submit" value="Create +">
-            </form>
-            <div class="w-form-done">
-              <div>Thank you! Your submission has been received!</div>
-            </div>
-            <div class="w-form-fail">
-              <div>Oops! Something went wrong while submitting the form</div>
-            </div>
-          </div>
-          <div class="cancel" data-ix="close-nu-modal">Cancel</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="login-modal modal">
-    <div class="modal-container">
-      <div class="modal-helper">
-        <div class="modal-content">
-          <h2 class="centered log-in modal-h2">Log in</h2>
-          <div class="w-form">
-            <form data-name="Email Form 3" id="email-form-3" name="email-form-3">
-              <input class="log-in modal-input w-input" data-name="Enter your email address" id="Enter-your-email-address" maxlength="256" name="Enter-your-email-address" placeholder="Enter your email address" type="email">
-              <input class="modal-input w-input" data-name="password" id="password-6" maxlength="256" name="password" placeholder="Password" type="password">
-              <a class="forgotten-password" href="#">Forgotten password?</a>
-              <input class="creat-button dsi-button w-button" data-wait="Please wait..." type="submit" value="Log in">
-            </form>
-            <div class="w-form-done">
-              <div>Thank you! Your submission has been received!</div>
-            </div>
-            <div class="w-form-fail">
-              <div>Oops! Something went wrong while submitting the form</div>
-            </div>
-          </div>
-          <div class="cancel" data-ix="close-nu-modal">Cancel</div>
-        </div>
-      </div>
-    </div>
-  </div>
+<body>
   <div class="nav-main w-nav" data-animation="default" data-collapse="medium" data-duration="400">
     <div class="container-wide nav-container w-clearfix">
       <a class="w-nav-brand" href="index.html">
@@ -274,135 +206,170 @@
   </div>
   <div class="page-header w-section">
     <div class="container-wide header">
-      <h1 class="light page-h1">Components Page</h1>
-      <div class="position">Digital Product Manager at DSI4EU</div>
-      <img class="large-profile-img" src="images/XG1hqhM1_400x400.jpg">
-      <a class="dsi-button profile-edit w-button" href="#">Edit profile</a>
+      <h1 class="light page-h1">{{organisation.name}}</h1>
+      <div class="dsi4eu-stats">www.link-to-the-organisation-site</div>
+      <img class="large-profile-img" src="images/CZ2ne8yK_400x400.jpg">
+      <a class="dsi-button profile-edit w-button" href="#">Edit&nbsp;project</a>
+      <div class="breadcrumb-container">
+        <div class="bread-crumbs w-clearfix">
+          <a class="breadcrumb-root w-inline-block" href="#">
+            <div class="breadcrumb-link">Organisations</div>
+            <div class="arrow-right"></div>
+          </a>
+          <a class="breadcrumb-root path w-inline-block" href="#">
+            <div class="arrow-bottom-left"></div>
+            <div class="arrow-top-left"></div>
+            <div class="breadcrumb-link">{{organisation.name}}</div>
+            <div class="arrow-right"></div>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
   <div class="project-section w-section">
     <div class="container-wide">
-      <div class="profile-info w-row">
-        <div class="w-col w-col-4 w-col-stack">
+      <div class="project-info w-row">
+        <div class="w-col w-col-6">
           <div class="info-card">
-            <h3 class="card-h info-h">About me</h3>
+            <div class="org-brand">
+              <img src="images/nesta-logo.jpg">
+            </div>
+            <h3 class="card-h info-h">About Nesta</h3>
             <p class="project-summary">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p>
-            <h3 class="card-h info-h">Location</h3>
-            <p class="project-summary">London, United Kingdom</p>
-            <h3 class="card-h info-h">My skills:</h3>
+            <h3 class="org-detail-h3">Type of organisation</h3>
+            <div class="org-detail-p">Social enterprise or foundation</div>
+            <h3 class="org-detail-h3">Size</h3>
+            <div class="org-detail-p">Between 100-500 staff members</div>
+          </div>
+          <div class="info-card map">
+            <h3 class="card-h info-h map">Nesta's location</h3>
+            <div class="map-overlay-address">
+              <div class="overlay-address">Nesta,
+                <br>1 Plough Place,
+                <br>London,
+                <br>EC4A 1DE</div>
+            </div>
+            <div class="map w-widget w-widget-map" data-widget-latlng="51.511214,-0.119824" data-widget-style="roadmap" data-widget-zoom="12"></div>
+          </div>
+          <div class="info-card">
+            <h3 class="card-h info-h">This organisation is tagged under:</h3>
             <div class="tags-block w-clearfix">
-              <div class="skill">HTML5</div>
-              <div class="skill">CSS3</div>
-              <div class="skill">JS</div>
-              <div class="skill">AngularJS</div>
-              <div class="skill">Ionic</div>
-              <div class="skill">iOS development</div>
-              <div class="skill">Android development</div>
-              <div class="skill">UI</div>
-              <div class="skill">UX</div>
-              <div class="skill">UXD</div>
-              <div class="add-item-block"></div>
-            </div>
-            <div class="add-new w-clearfix">
-              <a class="add-new-item dsi-button w-button" href="#">Add new skill +</a>
-            </div>
-            <div class="add-new-input">
-              <div class="w-form">
-                <form class="w-clearfix" data-name="Email Form 2" id="email-form-2" name="email-form-2">
-                  <input class="add-item-input w-input" data-name="Name" id="name" maxlength="256" name="name" placeholder="Add your skill" type="text">
-                  <input class="add-new-input-button w-button" data-wait="Please wait..." type="submit" value="Add +">
-                </form>
-                <div class="w-form-done">
-                  <div>Thank you! Your submission has been received!</div>
-                </div>
-                <div class="w-form-fail">
-                  <div>Oops! Something went wrong while submitting the form</div>
-                </div>
-              </div>
-            </div>
-            <h3 class="card-h info-h">My Languages:</h3>
-            <div class="tags-block w-clearfix">
-              <div class="skill">English</div>
-              <div class="skill">Turkish</div>
-              <div class="add-item-block"></div>
-            </div>
-            <div class="add-new w-clearfix">
-              <a class="add-new-item dsi-button w-button" href="#">Add new language +</a>
-            </div>
-            <div class="add-new-input">
-              <div class="w-form">
-                <form class="w-clearfix" data-name="Email Form 2" id="email-form-2" name="email-form-2">
-                  <input class="add-item-input w-input" data-name="Name 2" id="name-2" maxlength="256" name="name-2" placeholder="Add your language" type="text">
-                  <input class="add-new-input-button w-button" data-wait="Please wait..." type="submit" value="Add +">
-                </form>
-                <div class="w-form-done">
-                  <div>Thank you! Your submission has been received!</div>
-                </div>
-                <div class="w-form-fail">
-                  <div>Oops! Something went wrong while submitting the form</div>
-                </div>
+              <div class="skill">Here is a very long tag</div>
+              <div class="skill">Short</div>
+              <div class="skill">This tag is going to span several lines and is in fact longer</div>
+              <div class="skill">Hardware</div>
+              <div class="skill">Software</div>
+              <div class="skill">Innovation</div>
+              <div class="skill">Skills</div>
+              <div class="add-item-block">
+                <div class="add-item">+</div>
               </div>
             </div>
           </div>
         </div>
-        <div class="w-col w-col-4 w-col-stack">
+        <div class="w-col w-col-6">
           <div class="info-card">
-            <h3 class="card-h info-h">Projects i'm involved with</h3>
-            <div class="list-items">
-              <a class="partner-link w-inline-block" href="project-single.html">
-                <div class="list-item w-clearfix">
-                  <div class="partner-title">DSI</div>
-                  <div class="no-of-projects">7 Contributors</div>
+            <div class="w-tabs" data-duration-in="300" data-duration-out="100">
+              <div class="w-tab-menu">
+                <a class="org-tab w-inline-block w-tab-link" data-w-tab="Tab 1">
+                  <div>Projects</div>
+                </a>
+                <a class="org-tab w--current w-inline-block w-tab-link" data-w-tab="Tab 2">
+                  <div>Partner organisations</div>
+                </a>
+              </div>
+              <div class="tabs-content-list w-tab-content">
+                <div class="proj-tabs w-tab-pane" data-w-tab="Tab 1">
+                  <div class="list-items">
+                    <a class="partner-link w-inline-block" href="#">
+                      <div class="list-item">
+                        <div class="partner-title">Make things do stuff</div>
+                        <div class="no-of-projects">3 Organisations</div>
+                      </div>
+                      <div class="list-item w-clearfix">
+                        <div class="partner-title">Digital Social Innovation</div>
+                        <div class="no-of-projects">14 Organisations</div>
+                      </div>
+                      <div class="list-item w-clearfix">
+                        <div class="partner-title">D-CENT</div>
+                        <div class="no-of-projects">7 Organisations</div>
+                      </div>
+                      <div class="list-item w-clearfix">
+                        <div class="partner-title">Civic Exchange</div>
+                        <div class="no-of-projects">6 Organisations</div>
+                      </div>
+                      <div class="list-item w-clearfix">
+                        <div class="partner-title">Investment and support for social technology start-ups</div>
+                        <div class="no-of-projects">5 Organisations</div>
+                      </div>
+                      <div class="list-item w-clearfix">
+                        <div class="partner-title">The Civic Crowd</div>
+                        <div class="no-of-projects">1 Organisations</div>
+                      </div>
+                      <div class="list-item w-clearfix">
+                        <div class="partner-title">Commons4EU</div>
+                        <div class="no-of-projects">6 Organisations</div>
+                      </div>
+                    </a>
+                  </div>
                 </div>
-              </a>
-              <a class="partner-link w-inline-block" href="project-single.html">
-                <div class="list-item w-clearfix">
-                  <div class="partner-title">Nesta</div>
-                  <div class="no-of-projects">12 Contributors</div>
+                <div class="w--tab-active w-tab-pane" data-w-tab="Tab 2">
+                  <div class="list-items">
+                    <a class="partner-link w-inline-block" href="#">
+                      <div class="list-item w-clearfix">
+                        <div class="partner-title">Waag Society</div>
+                        <div class="no-of-projects">3 Projects</div>
+                      </div>
+                      <div class="list-item w-clearfix">
+                        <div class="partner-title">Esade</div>
+                        <div class="no-of-projects">3 Projects</div>
+                      </div>
+                      <div class="list-item w-clearfix">
+                        <div class="partner-title">Forum Virium Helsinki</div>
+                        <div class="no-of-projects">3 Projects</div>
+                      </div>
+                      <div class="list-item w-clearfix">
+                        <div class="partner-title">Arduino</div>
+                        <div class="no-of-projects">1 Project</div>
+                      </div>
+                      <div class="list-item w-clearfix">
+                        <div class="partner-title">Attendal - Creative Business Innovation</div>
+                        <div class="no-of-projects">1 Project</div>
+                      </div>
+                      <div class="list-item w-clearfix">
+                        <div class="partner-title">Bethnal Green Ventures</div>
+                        <div class="no-of-projects">1 Project</div>
+                      </div>
+                      <div class="list-item w-clearfix">
+                        <div class="partner-title">Manchester Digital Development Agency</div>
+                        <div class="no-of-projects">1 Project</div>
+                      </div>
+                      <div class="list-item w-clearfix">
+                        <div class="partner-title">City of Amsterdam</div>
+                        <div class="no-of-projects">1 Project</div>
+                      </div>
+                      <div class="list-item w-clearfix">
+                        <div class="partner-title">Barcelona &nbsp;Media</div>
+                        <div class="no-of-projects">1 Project</div>
+                      </div>
+                      <div class="list-item w-clearfix">
+                        <div class="partner-title">IMMI (International Modern Media Institute)</div>
+                        <div class="no-of-projects">1 Project</div>
+                      </div>
+                      <div class="list-item w-clearfix">
+                        <div class="partner-title">Dyne.org</div>
+                        <div class="no-of-projects">1 Project</div>
+                      </div>
+                    </a>
+                  </div>
                 </div>
-              </a>
-              <a class="partner-link w-inline-block" href="project-single.html">
-                <div class="list-item w-clearfix">
-                  <div class="partner-title">RaspberryPi</div>
-                  <div class="no-of-projects">4 Contributors</div>
-                </div>
-              </a>
-            </div>
-            <div class="join-project">
-              <a class="btn btn-join w-button" href="#">Add new project +</a>
-            </div>
-          </div>
-        </div>
-        <div class="w-col w-col-4 w-col-stack">
-          <div class="info-card">
-            <h3 class="card-h info-h">Organisations i'm involved with</h3>
-            <div class="list-items">
-              <a class="partner-link w-inline-block" href="#">
-                <div class="list-item w-clearfix">
-                  <div class="partner-title">Waag Society</div>
-                  <div class="no-of-projects">3 Projects</div>
-                </div>
-                <div class="list-item w-clearfix">
-                  <div class="partner-title">Esade</div>
-                  <div class="no-of-projects">3 Projects</div>
-                </div>
-                <div class="list-item w-clearfix">
-                  <div class="partner-title">Forum Virium Helsinki</div>
-                  <div class="no-of-projects">3 Projects</div>
-                </div>
-                <div class="list-item w-clearfix">
-                  <div class="partner-title">Arduino</div>
-                  <div class="no-of-projects">1 Project</div>
-                </div>
-              </a>
-            </div>
-            <div class="join-project">
-              <a class="btn btn-join w-button" href="#">Join organisation +</a>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <div class="body-container project w-container"></div>
   </div>
   <div class="footer w-section">
     <div class="container-wide">
@@ -467,27 +434,6 @@
         <div class="w-col w-col-2">
           <h3 class="footer-h3">Development</h3>
           <a class="footer-link" href="feedback.html">Feedback</a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="bg-blur new-post-bg">
-    <div class="add-post-modal">
-      <a class="cancel modal-save" data-ix="hide-new-post" href="#">Cancel</a>
-      <a class="modal-save" data-ix="hide-new-post" href="#">Publish post</a>
-    </div>
-  </div>
-  <div class="bg-blur profile-update">
-    <div class="update-modal">
-      <h2 class="modal-h2">Update personal info</h2>
-      <div class="cancel-save">
-        <div class="w-row">
-          <div class="w-col w-col-6">
-            <a class="cancel cors dsi-button w-button" data-ix="close-profile-update" href="#">cancel</a>
-          </div>
-          <div class="w-col w-col-6">
-            <a class="cors dsi-button w-button" data-ix="close-profile-update" href="#">save</a>
-          </div>
         </div>
       </div>
     </div>
