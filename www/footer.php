@@ -68,7 +68,7 @@
     <div class="container-wide footer-container">
         <div class="w-row">
             <div class="w-col w-col-1">
-                <img class="ec-logo" src="images/EC-LOGO.png">
+                <img class="ec-logo" src="<?php echo SITE_RELATIVE_PATH?>/images/EC-LOGO.png">
             </div>
             <div class="w-col w-col-11">
                 <div class="ec-footer-p">The DSI4EU project is funded by the European Commission Directorate General
