@@ -69,9 +69,9 @@ require __DIR__ . '/header.php';
                         <?php
                         if ($project->getStartDate() AND !$project->getEndDate()) {
                             if ($project->startDateIsPassed()) {
-                                echo 'is running since ', date('M, Y', $project->getUnixStartDate());
+                                echo 'started in ', date('M, Y', $project->getUnixStartDate());
                             } else {
-                                echo 'will run from ', date('M, Y', $project->getUnixStartDate());
+                                echo 'will start in ', date('M, Y', $project->getUnixStartDate());
                             }
                         } elseif (!$project->getStartDate() AND $project->getEndDate()) {
                             if ($project->endDateIsPassed()) {
