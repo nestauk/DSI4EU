@@ -15,21 +15,6 @@ require __DIR__ . '/header.php';
 
         <div class="w-section page-header project-header-exp">
             <div class="container-wide header project-header-exp">
-                <div class="w-clearfix bread-crumbs">
-                    <a class="w-inline-block breadcrumb-root" href="<?php echo \DSI\Service\URL::projects() ?>">
-                        <div class="breadcrumb-link">Projects</div>
-                        <div class="arrow-right"></div>
-                    </a>
-                    <a class="w-inline-block breadcrumb-root path" href="#">
-                        <div class="arrow-bottom-left"></div>
-                        <div class="arrow-top-left"></div>
-                        <div class="breadcrumb-link">
-                            <?php echo substr(show_input($project->getName()), 0, 35) ?>
-                            <?php echo strlen($project->getName()) > 35 ? '...' : '' ?>
-                        </div>
-                        <div class="arrow-right"></div>
-                    </a>
-                </div>
                 <h1 class="page-h1 light"><?php echo show_input($project->getName()) ?></h1>
                 <div class="dsi4eu-stats project-header-exp">
                     <a class="project-url-link" href="<?php echo $project->getUrl() ?>"
@@ -42,6 +27,24 @@ require __DIR__ . '/header.php';
                        href="<?php echo \DSI\Service\URL::editProject($project->getId()) ?>">
                         Edit project</a>
                 <?php } ?>
+
+                <div class="breadcrumb-container breadcrumb-container-alt">
+                    <div class="w-clearfix bread-crumbs">
+                        <a class="w-inline-block breadcrumb-root" href="<?php echo \DSI\Service\URL::projects() ?>">
+                            <div class="breadcrumb-link">Projects</div>
+                            <div class="arrow-right"></div>
+                        </a>
+                        <a class="w-inline-block breadcrumb-root path" href="#">
+                            <div class="arrow-bottom-left"></div>
+                            <div class="arrow-top-left"></div>
+                            <div class="breadcrumb-link">
+                                <?php echo substr(show_input($project->getName()), 0, 35) ?>
+                                <?php echo strlen($project->getName()) > 35 ? '...' : '' ?>
+                            </div>
+                            <div class="arrow-right"></div>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
 
