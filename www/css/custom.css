@@ -180,6 +180,7 @@ a.login-modal-back {
 
 .search-results-popover {
     top: 160px;
+    position:fixed;
 }
 
 .custom-project-section {
