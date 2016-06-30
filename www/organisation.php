@@ -22,20 +22,22 @@ require __DIR__ . '/header.php';
 
     <div class="w-section page-header project-header-exp">
         <div class="container-wide header project-header-exp">
-            <div class="w-clearfix bread-crumbs">
-                <a class="w-inline-block breadcrumb-root" href="<?php echo \DSI\Service\URL::organisations() ?>">
-                    <div class="breadcrumb-link">Organisations</div>
-                    <div class="arrow-right"></div>
-                </a>
-                <a class="w-inline-block breadcrumb-root path" href="#">
-                    <div class="arrow-bottom-left"></div>
-                    <div class="arrow-top-left"></div>
-                    <div class="breadcrumb-link">
-                        <?php echo substr(show_input($organisation->getName()), 0, 35) ?>
-                        <?php echo strlen($organisation->getName()) > 35 ? '...' : '' ?>
-                    </div>
-                    <div class="arrow-right"></div>
-                </a>
+            <div class="breadcrumb-container breadcrumb-container-alt">
+                <div class="w-clearfix bread-crumbs">
+                    <a class="w-inline-block breadcrumb-root" href="<?php echo \DSI\Service\URL::organisations() ?>">
+                        <div class="breadcrumb-link">Organisations</div>
+                        <div class="arrow-right"></div>
+                    </a>
+                    <a class="w-inline-block breadcrumb-root path" href="#">
+                        <div class="arrow-bottom-left"></div>
+                        <div class="arrow-top-left"></div>
+                        <div class="breadcrumb-link">
+                            <?php echo substr(show_input($organisation->getName()), 0, 35) ?>
+                            <?php echo strlen($organisation->getName()) > 35 ? '...' : '' ?>
+                        </div>
+                        <div class="arrow-right"></div>
+                    </a>
+                </div>
             </div>
             <h1 class="page-h1 light"><?php echo show_input($organisation->getName()) ?></h1>
             <div class="dsi4eu-stats project-header-exp">
