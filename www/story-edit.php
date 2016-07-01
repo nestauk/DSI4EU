@@ -100,7 +100,7 @@ require __DIR__ . '/header.php';
                                     <div class="w-checkbox">
                                         <label class="w-form-label">
                                             <input class="w-checkbox-input" name="categoryID" type="radio"
-                                                   ng-model="story.categoryID" value="<?php echo $category->getId()?>">
+                                                   ng-model="story.categoryID" value="<?php echo $category->getId() ?>">
                                             <?php echo $category->getName() ?>
                                         </label>
                                     </div>
@@ -136,10 +136,6 @@ require __DIR__ . '/header.php';
                                ng-disabled="loading">
                         <a href="<?php echo \DSI\Service\URL::stories() ?>"
                            class="w-button dsi-button post-story cancel">Cancel</a>
-                        <div style="clear: both;text-align:right;color:green;padding-top:10px;font-weight:bold;"
-                             ng-show="saved" ng-cloak>
-                            Changes have been successfully saved.
-                        </div>
                     </form>
                 </div>
             </div>

@@ -72,7 +72,6 @@ angular
             $scope.saveStory = function () {
                 $scope.errors = {};
                 $scope.loading = true;
-                $scope.saved = false;
 
                 var data = {
                     save: true,
@@ -90,7 +89,7 @@ angular
                         .then(function (response) {
                             $scope.loading = false;
                             if (response.data.code == 'ok') {
-                                $scope.saved = true;
+                                swal('Success', 'Changes have been successfully saved', "success");
                             } else if (response.data.code == 'error') {
                                 $scope.errors = response.data.errors;
                                 console.log({errors: response.data.errors});
