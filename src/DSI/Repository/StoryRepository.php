@@ -142,7 +142,7 @@ class StoryRepository
      */
     private function getObjectsWhere($where, $options = [])
     {
-        $orderBy = 'time';
+        $orderBy = 'datePublished';
         $orderDirection = 'DESC';
         if (isset($options['orderBy']))
             $orderBy = $options['orderBy'];
