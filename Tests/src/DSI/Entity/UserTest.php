@@ -167,7 +167,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($profilePic, $this->user->getProfilePic());
     }
 
-    /** @test setJobTitle, getJobTitle*/
+    /** @test setJobTitle, getJobTitle */
     public function settingJobTitle_getsJobTitle()
     {
         $jobTitle = 'WebDev at Inoveb';
@@ -175,7 +175,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($jobTitle, $this->user->getJobTitle());
     }
 
-    /** @test setCompany, getCompany*/
+    /** @test setCompany, getCompany */
     public function settingCompany_getsCompany()
     {
         $company = 'Inoveb';
@@ -183,12 +183,30 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($company, $this->user->getCompany());
     }
 
-    /** @test setShowEmail, getShowEmail*/
+    /** @test setShowEmail, getShowEmail */
     public function settingShowEmail_getsShowEmail()
     {
         $this->user->setShowEmail(true);
         $this->assertTrue($this->user->canShowEmail());
         $this->user->setShowEmail(false);
         $this->assertFalse($this->user->canShowEmail());
+    }
+
+    /** @test */
+    public function settingIsAdmin_getsIsAdmin()
+    {
+        $this->user->setIsAdmin(true);
+        $this->assertTrue($this->user->isAdmin());
+        $this->user->setIsAdmin(false);
+        $this->assertFalse($this->user->isAdmin());
+    }
+
+    /** @test */
+    public function settingIsSuperAdmin_getsIsSuperAdmin()
+    {
+        $this->user->setIsSuperAdmin(true);
+        $this->assertTrue($this->user->isSuperAdmin());
+        $this->user->setIsSuperAdmin(false);
+        $this->assertFalse($this->user->isSuperAdmin());
     }
 }

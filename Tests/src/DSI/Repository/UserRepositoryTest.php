@@ -22,7 +22,9 @@ class UserRepositoryTest extends PHPUnit_Framework_TestCase
     const PROFILE_URL = 'profileURL';
     const PROFILE_PIC = 'profilePic.jpg';
     const COMPANY = 'company';
-    const SHOW_EMAIL = true;
+    const SHOW_EMAIL = self::IS_ADMIN;
+    const IS_ADMIN = self::IS_SUPER_ADMIN;
+    const IS_SUPER_ADMIN = true;
     /** @var UserRepository */
     protected $userRepo;
 
@@ -277,6 +279,8 @@ class UserRepositoryTest extends PHPUnit_Framework_TestCase
         $user->setTwitterUID(self::TWITTER_UID);
         $user->setProfileURL(self::PROFILE_URL);
         $user->setProfilePic(self::PROFILE_PIC);
+        $user->setIsAdmin(self::IS_ADMIN);
+        $user->setIsSuperAdmin(self::IS_SUPER_ADMIN);
         $this->userRepo->insert($user);
 
         $sameUser = $this->userRepo->getById($user->getId());
@@ -296,6 +300,8 @@ class UserRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(self::TWITTER_UID, $sameUser->getTwitterUID());
         $this->assertEquals(self::PROFILE_URL, $sameUser->getProfileURL());
         $this->assertEquals(self::PROFILE_PIC, $sameUser->getProfilePic());
+        $this->assertEquals(self::IS_ADMIN, $sameUser->isAdmin());
+        $this->assertEquals(self::IS_SUPER_ADMIN, $sameUser->isSuperAdmin());
     }
 
     /** @test saveAsNew getById */
@@ -320,6 +326,8 @@ class UserRepositoryTest extends PHPUnit_Framework_TestCase
         $user->setTwitterUID(self::TWITTER_UID);
         $user->setProfileURL(self::PROFILE_URL);
         $user->setProfilePic(self::PROFILE_PIC);
+        $user->setIsAdmin(self::IS_ADMIN);
+        $user->setIsSuperAdmin(self::IS_SUPER_ADMIN);
         $this->userRepo->save($user);
 
         $sameUser = $this->userRepo->getById($user->getId());
@@ -339,5 +347,7 @@ class UserRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(self::TWITTER_UID, $sameUser->getTwitterUID());
         $this->assertEquals(self::PROFILE_URL, $sameUser->getProfileURL());
         $this->assertEquals(self::PROFILE_PIC, $sameUser->getProfilePic());
+        $this->assertEquals(self::IS_ADMIN, $sameUser->isAdmin());
+        $this->assertEquals(self::IS_SUPER_ADMIN, $sameUser->isSuperAdmin());
     }
 }

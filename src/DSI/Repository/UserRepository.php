@@ -32,6 +32,9 @@ class UserRepository
         $insert[] = "`profileURL` = '" . addslashes($user->getProfileURL()) . "'";
         $insert[] = "`profilePic` = '" . addslashes($user->getProfilePic()) . "'";
 
+        $insert[] = "`isAdmin` = '" . (bool)($user->isAdmin()) . "'";
+        $insert[] = "`isSuperAdmin` = '" . (bool)($user->isSuperAdmin()) . "'";
+
         $query = new SQL("INSERT INTO `users` SET " . implode(', ', $insert) . "");
         $query->query();
 
@@ -65,6 +68,9 @@ class UserRepository
 
         $insert[] = "`profileURL` = '" . addslashes($user->getProfileURL()) . "'";
         $insert[] = "`profilePic` = '" . addslashes($user->getProfilePic()) . "'";
+
+        $insert[] = "`isAdmin` = '" . (bool)($user->isAdmin()) . "'";
+        $insert[] = "`isSuperAdmin` = '" . (bool)($user->isSuperAdmin()) . "'";
 
         $query = new SQL("UPDATE `users` SET " . implode(', ', $insert) . " WHERE `id` = '{$user->getId()}'");
         $query->query();
@@ -213,6 +219,9 @@ class UserRepository
         if ($user['profilePic'])
             $userObj->setProfilePic($user['profilePic']);
 
+        $userObj->setIsAdmin($user['isAdmin']);
+        $userObj->setIsSuperAdmin($user['isSuperAdmin']);
+
         self::$objects[$userObj->getId()] = $userObj;
 
         return $userObj;
@@ -268,6 +277,7 @@ class UserRepository
           , jobTitle, company
           , facebookUID, googleUID, gitHubUID, twitterUID
           , profileURL, profilePic
+          , isAdmin, isSuperAdmin
           FROM `users` WHERE " . implode(' AND ', $where) . "");
         foreach ($query->fetch_all() AS $dbUser) {
             $users[] = $this->buildUserFromData($dbUser);

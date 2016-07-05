@@ -1,0 +1,1 @@
+ALTER TABLE `users` ADD `isAdmin` TINYINT(1) NOT NULL AFTER `profilePic`, ADD `isSuperAdmin` TINYINT(1) NOT NULL AFTER `isAdmin`;
