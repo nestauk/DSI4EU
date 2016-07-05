@@ -61,6 +61,12 @@ class UpdateUserBasicDetails
         $user->setJobTitle($this->data()->jobTitle);
         $user->setCompany($this->data()->company);
         $user->setBio($this->data()->bio);
+
+        if (isset($this->data()->isAdmin))
+            $user->setIsAdmin($this->data()->isAdmin);
+        if (isset($this->data()->isSuperAdmin))
+            $user->setIsSuperAdmin($this->data()->isSuperAdmin);
+
         $this->userRepo->save($user);
     }
 }
@@ -76,6 +82,10 @@ class UpdateUserBasicDetails_Data
         $jobTitle,
         $company,
         $bio;
+
+    /** @var bool */
+    public $isAdmin,
+        $isSuperAdmin;
 
     /** @var int */
     public $userID;
