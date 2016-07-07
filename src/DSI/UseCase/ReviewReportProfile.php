@@ -9,7 +9,7 @@ use DSI\Repository\ReportProfileRepository;
 use DSI\Repository\UserRepository;
 use DSI\Service\ErrorHandler;
 
-class CreateReportProfile
+class ReviewReportProfile
 {
     /** @var ErrorHandler */
     private $errorHandler;
@@ -20,12 +20,12 @@ class CreateReportProfile
     /** @var ReportProfileRepository */
     private $reportProfileRepo;
 
-    /** @var CreateReportProfile_Data */
+    /** @var ReviewReportProfile_Data */
     private $data;
 
     public function __construct()
     {
-        $this->data = new CreateReportProfile_Data();
+        $this->data = new ReviewReportProfile_Data();
     }
 
     public function exec()
@@ -35,45 +35,45 @@ class CreateReportProfile
 
         if(!$this->data()->executor)
             throw new \InvalidArgumentException('Invalid executor');
-        if(!$this->data()->byUserId)
-            throw new \InvalidArgumentException('Invalid reporter user');
-        if(!$this->data()->reportedUserId)
-            throw new \InvalidArgumentException('Invalid reported user');
+        if(!$this->data()->reviewedByUserId)
+            throw new \InvalidArgumentException('Invalid reviewer');
+        if(!$this->data()->report)
+            throw new \InvalidArgumentException('Invalid report');
 
-        $this->report = new ReportProfile();
-        $this->report->setByUser((new UserRepository())->getById($this->data()->byUserId));
-        $this->report->setReportedUser((new UserRepository())->getById($this->data()->reportedUserId));
-        $this->report->setComment($this->data()->comment);
+        $this->data()->report->setReviewedByUser((new UserRepository())->getById($this->data()->reviewedByUserId));
+        $this->data()->report->setReviewedTime(date('Y-m-d H:i:s'));
+        $this->data()->report->setReview($this->data()->review);
 
-        $this->reportProfileRepo->insert($this->report);
+        $this->reportProfileRepo->save($this->data()->report);
+
+        $this->report = $this->reportProfileRepo->getById($this->data()->report->getId());
     }
 
     /**
-     * @return CreateReportProfile_Data
+     * @return ReviewReportProfile_Data
      */
     public function data()
     {
         return $this->data;
     }
 
-    /**
-     * @return ReportProfile
-     */
     public function getReport()
     {
         return $this->report;
     }
 }
 
-class CreateReportProfile_Data
+class ReviewReportProfile_Data
 {
     /** @var User */
     public $executor;
 
+    /** @var ReportProfile */
+    public $report;
+
     /** @var int */
-    public $byUserId,
-        $reportedUserId;
+    public $reviewedByUserId;
 
     /** @var string */
-    public $comment;
+    public $review;
 }
