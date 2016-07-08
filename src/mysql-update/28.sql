@@ -1,0 +1,1 @@
+ALTER TABLE `users` ADD `isDisabled` TINYINT(1) NOT NULL AFTER `isSuperAdmin`;

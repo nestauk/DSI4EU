@@ -209,4 +209,13 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $this->user->setIsSuperAdmin(false);
         $this->assertFalse($this->user->isSuperAdmin());
     }
+
+    /** @test */
+    public function settingIsDisabled_getsIsDisabled()
+    {
+        $this->user->setIsDisabled(true);
+        $this->assertTrue($this->user->isDisabled());
+        $this->user->setIsDisabled(false);
+        $this->assertFalse($this->user->isDisabled());
+    }
 }

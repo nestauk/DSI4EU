@@ -23,8 +23,10 @@ class UserRepositoryTest extends PHPUnit_Framework_TestCase
     const PROFILE_PIC = 'profilePic.jpg';
     const COMPANY = 'company';
     const SHOW_EMAIL = self::IS_ADMIN;
-    const IS_ADMIN = self::IS_SUPER_ADMIN;
+    const IS_ADMIN = true;
     const IS_SUPER_ADMIN = true;
+    const IS_DISABLED = true;
+
     /** @var UserRepository */
     protected $userRepo;
 
@@ -281,6 +283,7 @@ class UserRepositoryTest extends PHPUnit_Framework_TestCase
         $user->setProfilePic(self::PROFILE_PIC);
         $user->setIsAdmin(self::IS_ADMIN);
         $user->setIsSuperAdmin(self::IS_SUPER_ADMIN);
+        $user->setIsDisabled(self::IS_DISABLED);
         $this->userRepo->insert($user);
 
         $sameUser = $this->userRepo->getById($user->getId());
@@ -302,6 +305,7 @@ class UserRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(self::PROFILE_PIC, $sameUser->getProfilePic());
         $this->assertEquals(self::IS_ADMIN, $sameUser->isAdmin());
         $this->assertEquals(self::IS_SUPER_ADMIN, $sameUser->isSuperAdmin());
+        $this->assertEquals(self::IS_DISABLED, $sameUser->isDisabled());
     }
 
     /** @test saveAsNew getById */
@@ -328,6 +332,7 @@ class UserRepositoryTest extends PHPUnit_Framework_TestCase
         $user->setProfilePic(self::PROFILE_PIC);
         $user->setIsAdmin(self::IS_ADMIN);
         $user->setIsSuperAdmin(self::IS_SUPER_ADMIN);
+        $user->setIsDisabled(self::IS_DISABLED);
         $this->userRepo->save($user);
 
         $sameUser = $this->userRepo->getById($user->getId());
@@ -349,5 +354,6 @@ class UserRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(self::PROFILE_PIC, $sameUser->getProfilePic());
         $this->assertEquals(self::IS_ADMIN, $sameUser->isAdmin());
         $this->assertEquals(self::IS_SUPER_ADMIN, $sameUser->isSuperAdmin());
+        $this->assertEquals(self::IS_DISABLED, $sameUser->isDisabled());
     }
 }

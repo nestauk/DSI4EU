@@ -30,6 +30,9 @@ class User
     /** @var bool */
     private $isAdmin, $isSuperAdmin;
 
+    /** @var bool */
+    private $isDisabled;
+
     /**
      * @return int
      */
@@ -364,5 +367,21 @@ class User
     public function setIsSuperAdmin($isSuperAdmin)
     {
         $this->isSuperAdmin = (bool)$isSuperAdmin;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isDisabled()
+    {
+        return (bool)$this->isDisabled;
+    }
+
+    /**
+     * @param boolean $isDisabled
+     */
+    public function setIsDisabled($isDisabled)
+    {
+        $this->isDisabled = (bool)$isDisabled;
     }
 }

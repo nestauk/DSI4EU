@@ -34,8 +34,9 @@ class UserRepository
 
         $insert[] = "`isAdmin` = '" . (bool)($user->isAdmin()) . "'";
         $insert[] = "`isSuperAdmin` = '" . (bool)($user->isSuperAdmin()) . "'";
+        $insert[] = "`isDisabled` = '" . (bool)($user->isDisabled()) . "'";
 
-        $query = new SQL("INSERT INTO `users` SET " . implode(', ', $insert) . "");
+        $query = new SQL("INSERT INTO `users` SET " . implode(', ', $insert));
         $query->query();
 
         $user->setId($query->insert_id());
@@ -71,6 +72,7 @@ class UserRepository
 
         $insert[] = "`isAdmin` = '" . (bool)($user->isAdmin()) . "'";
         $insert[] = "`isSuperAdmin` = '" . (bool)($user->isSuperAdmin()) . "'";
+        $insert[] = "`isDisabled` = '" . (bool)($user->isDisabled()) . "'";
 
         $query = new SQL("UPDATE `users` SET " . implode(', ', $insert) . " WHERE `id` = '{$user->getId()}'");
         $query->query();
@@ -221,6 +223,7 @@ class UserRepository
 
         $userObj->setIsAdmin($user['isAdmin']);
         $userObj->setIsSuperAdmin($user['isSuperAdmin']);
+        $userObj->setIsDisabled($user['isDisabled']);
 
         self::$objects[$userObj->getId()] = $userObj;
 
@@ -277,7 +280,7 @@ class UserRepository
           , jobTitle, company
           , facebookUID, googleUID, gitHubUID, twitterUID
           , profileURL, profilePic
-          , isAdmin, isSuperAdmin
+          , isAdmin, isSuperAdmin, isDisabled
           FROM `users` WHERE " . implode(' AND ', $where) . "");
         foreach ($query->fetch_all() AS $dbUser) {
             $users[] = $this->buildUserFromData($dbUser);
