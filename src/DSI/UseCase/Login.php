@@ -31,20 +31,15 @@ class Login
     public function __construct()
     {
         $this->data = new Login_Data();
+        $this->errorHandler = new ErrorHandler();
+        $this->userRepo = new UserRepository();
     }
 
     public function exec()
     {
-        $this->errorHandler = new ErrorHandler();
-        if (!$this->userRepo)
-            $this->userRepo = new UserRepository();
-
-        $this->verifyEmail();
-        $this->verifyPassword();
-        $this->errorHandler->throwIfNotEmpty();
-
-        $this->verifyIfEmailAndPasswordMatch();
-        $this->errorHandler->throwIfNotEmpty();
+        $this->assertValidEmailAndPassword();
+        $this->assertEmailAndPasswordMatch();
+        $this->assertUserIsEnabled();
     }
 
     /**
@@ -70,7 +65,7 @@ class Login
             $this->errorHandler->addTaggedError('password', 'Please type a password');
     }
 
-    public function verifyIfEmailAndPasswordMatch()
+    public function assertEmailAndPasswordMatch()
     {
         try {
             $user = $this->userRepo->getByEmail($this->data()->email);
@@ -82,6 +77,8 @@ class Login
         } catch (NotFound $e) {
             $this->errorHandler->addTaggedError('email', 'This email address is not registered');
         }
+
+        $this->errorHandler->throwIfNotEmpty();
     }
 
     /**
@@ -90,6 +87,21 @@ class Login
     public function getUser()
     {
         return $this->user;
+    }
+
+    private function assertUserIsEnabled()
+    {
+        if ($this->user->isDisabled()) {
+            $this->errorHandler->addTaggedError('email', 'This user has been disabled. Please contact the website admin.');
+            throw $this->errorHandler;
+        }
+    }
+
+    private function assertValidEmailAndPassword()
+    {
+        $this->verifyEmail();
+        $this->verifyPassword();
+        $this->errorHandler->throwIfNotEmpty();
     }
 }
 

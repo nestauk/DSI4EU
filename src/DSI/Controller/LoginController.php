@@ -22,8 +22,6 @@ class LoginController
         $authUser = new Auth();
         $authUser->ifLoggedInRedirectTo(URL::myProfile());
 
-        // file_put_contents( "php://stderr", var_export($_POST, true) );
-
         if (isset($_POST['login'])) {
             try {
                 $login = new Login();

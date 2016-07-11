@@ -22,7 +22,7 @@ class UserRepositoryTest extends PHPUnit_Framework_TestCase
     const PROFILE_URL = 'profileURL';
     const PROFILE_PIC = 'profilePic.jpg';
     const COMPANY = 'company';
-    const SHOW_EMAIL = self::IS_ADMIN;
+    const SHOW_EMAIL = true;
     const IS_ADMIN = true;
     const IS_SUPER_ADMIN = true;
     const IS_DISABLED = true;
