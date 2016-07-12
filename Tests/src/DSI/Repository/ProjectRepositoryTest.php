@@ -70,6 +70,7 @@ class ProjectRepositoryTest extends PHPUnit_Framework_TestCase
         $project = new Project();
         $project->setOwner($this->user1);
         $project->setName($name = 'Name');
+        $project->setShortDescription($shortDesc = 'Short Desc');
         $project->setDescription($desc = 'Desc');
         $project->setUrl($url = 'http://example.org');
         $project->setStatus($status = 'closed');
@@ -84,6 +85,7 @@ class ProjectRepositoryTest extends PHPUnit_Framework_TestCase
         $project = $this->projectRepository->getById($project->getId());
         $this->assertEquals($this->user1->getId(), $project->getOwner()->getId());
         $this->assertEquals($name, $project->getName());
+        $this->assertEquals($shortDesc, $project->getShortDescription());
         $this->assertEquals($desc, $project->getDescription());
         $this->assertEquals($url, $project->getUrl());
         $this->assertEquals($status, $project->getStatus());
@@ -93,20 +95,6 @@ class ProjectRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($this->countryRegion->getCountry()->getId(), $project->getCountry()->getId());
         $this->assertEquals($organisations, $project->getOrganisationsCount());
         $this->assertEquals($logo, $project->getLogo());
-    }
-
-    /** @test save, getByID */
-    public function projectCanBeUpdated()
-    {
-        $project = new Project();
-        $project->setOwner($this->user1);
-        $this->projectRepository->insert($project);
-
-        $project->setOwner($this->user2);
-        $this->projectRepository->save($project);
-
-        $sameProject = $this->projectRepository->getById($project->getId());
-        $this->assertEquals($this->user2->getId(), $sameProject->getOwner()->getId());
     }
 
     /** @test getByID */
@@ -143,25 +131,30 @@ class ProjectRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertCount(2, $this->projectRepository->getAll());
     }
 
-    /** @test saveAsNew getById */
-    public function setAllProjectsDetails()
+    /** @test */
+    public function projectCanBeUpdated()
     {
         $project = new Project();
         $project->setOwner($this->user1);
-        $project->setName('Name');
-        $project->setDescription('Desc');
+        $this->projectRepository->insert($project);
+
+        $project->setOwner($this->user1);
+        $project->setName($name = 'Name');
+        $project->setShortDescription($shortDesc = 'Short Desc');
+        $project->setDescription($desc = 'Desc');
         $project->setUrl('http://example.org');
         $project->setStatus('closed');
         $project->setStartDate('2016-05-21');
         $project->setEndDate('2016-05-22');
         $project->setCountryRegion($this->countryRegion);
         $project->setOrganisationsCount(10);
-        $this->projectRepository->insert($project);
+        $this->projectRepository->save($project);
 
         $project = $this->projectRepository->getById($project->getId());
         $this->assertEquals($this->user1->getId(), $project->getOwner()->getId());
-        $this->assertEquals('Name', $project->getName());
-        $this->assertEquals('Desc', $project->getDescription());
+        $this->assertEquals($name, $project->getName());
+        $this->assertEquals($shortDesc, $project->getShortDescription());
+        $this->assertEquals($desc, $project->getDescription());
         $this->assertEquals('http://example.org', $project->getUrl());
         $this->assertEquals('closed', $project->getStatus());
         $this->assertEquals('2016-05-21', $project->getStartDate());

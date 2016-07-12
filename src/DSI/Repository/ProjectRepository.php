@@ -13,6 +13,7 @@ class ProjectRepository
         $insert = array();
         $insert[] = "`ownerID` = '" . addslashes($project->getOwner()->getId()) . "'";
         $insert[] = "`name` = '" . addslashes($project->getName()) . "'";
+        $insert[] = "`shortDescription` = '" . addslashes($project->getShortDescription()) . "'";
         $insert[] = "`description` = '" . addslashes($project->getDescription()) . "'";
         $insert[] = "`url` = '" . addslashes($project->getUrl()) . "'";
         $insert[] = "`status` = '" . addslashes($project->getStatus()) . "'";
@@ -42,6 +43,7 @@ class ProjectRepository
         $insert = array();
         $insert[] = "`ownerID` = '" . addslashes($project->getOwner()->getId()) . "'";
         $insert[] = "`name` = '" . addslashes($project->getName()) . "'";
+        $insert[] = "`shortDescription` = '" . addslashes($project->getShortDescription()) . "'";
         $insert[] = "`description` = '" . addslashes($project->getDescription()) . "'";
         $insert[] = "`url` = '" . addslashes($project->getUrl()) . "'";
         $insert[] = "`status` = '" . addslashes($project->getStatus()) . "'";
@@ -86,6 +88,7 @@ class ProjectRepository
             (new UserRepository())->getById($project['ownerID'])
         );
         $projectObj->setName($project['name']);
+        $projectObj->setShortDescription($project['shortDescription']);
         $projectObj->setDescription($project['description']);
         $projectObj->setUrl($project['url']);
         $projectObj->setStatus($project['status']);
@@ -132,7 +135,8 @@ class ProjectRepository
     {
         $projects = [];
         $query = new SQL("SELECT 
-            id, ownerID, name, description, url, status
+            id, ownerID, name
+          , shortDescription, description, url, status
           , startDate, endDate
           , countryRegionID, organisationsCount
           , importID, logo

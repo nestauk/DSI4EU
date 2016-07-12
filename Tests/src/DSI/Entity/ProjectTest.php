@@ -47,6 +47,14 @@ class ProjectTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($projectName, $this->project->getName());
     }
 
+    /** @test setShortDescription, getShortDescription */
+    public function settingShortDescription_returnsShortDescription()
+    {
+        $shortDesc = 'Brand New Project Desc';
+        $this->project->setShortDescription($shortDesc);
+        $this->assertEquals($shortDesc, $this->project->getShortDescription());
+    }
+
     /** @test setDescription, getDescription */
     public function settingDescription_returnsDescription()
     {

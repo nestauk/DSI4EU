@@ -13,6 +13,7 @@ class Project
 
     /** @var string */
     private $name,
+        $shortDescription,
         $description,
         $url,
         $status,
@@ -59,6 +60,22 @@ class Project
     public function setName(string $name)
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getShortDescription()
+    {
+        return (string)$this->shortDescription;
+    }
+
+    /**
+     * @param string $shortDescription
+     */
+    public function setShortDescription($shortDescription)
+    {
+        $this->shortDescription = (string)$shortDescription;
     }
 
     /**
