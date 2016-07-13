@@ -132,9 +132,11 @@ class Router
             $this->searchPage($matches);
 
 // Static pages
+        } elseif ($this->pageURL === '/robots.txt') {
+            $this->robotsTxtPage();
+
         } elseif ($this->pageURL === '/explore-dsi') {
             $this->exploreDsiPage();
-
 
         } elseif (preg_match('<^/countryRegions/([0-9]+)\.json$>', $this->pageURL, $matches)) {
             $this->countryRegionsListJsonPage($matches);
@@ -187,7 +189,6 @@ class Router
 
         } else {
             $this->notFound404Page();
-
         }
 
         return true;
@@ -494,6 +495,14 @@ class Router
     {
         $command = new \DSI\Controller\FeedbackController();
         $command->format = 'json';
+        $command->exec();
+    }
+
+    private function robotsTxtPage()
+    {
+        $command = new \DSI\Controller\StaticHtmlController();
+        $command->format = 'txt';
+        $command->view = 'robots.txt.php';
         $command->exec();
     }
 
