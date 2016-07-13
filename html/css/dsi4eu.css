@@ -217,6 +217,10 @@ strong {
   color: #2c2d33;
 }
 
+.nav.alt.w--current {
+  border-color: #f3f3f3;
+}
+
 .nav-main {
   position: relative;
   left: 0px;
@@ -2860,6 +2864,10 @@ strong {
   height: 66px;
 }
 
+.container-wide.case-study-grid {
+  margin-top: 170px;
+}
+
 .button {
   min-width: 175px;
   padding: 10px 30px;
@@ -5493,12 +5501,12 @@ strong {
 .massive-hero-h1 {
   width: auto;
   max-width: 500px;
-  margin-top: 209px;
+  margin-top: 175px;
   margin-bottom: 20px;
   font-family: 'Open Sans', sans-serif;
   color: #fff;
-  font-size: 62px;
-  line-height: 1.02em;
+  font-size: 52px;
+  line-height: 1.3em;
   font-weight: 800;
   text-align: left;
 }
@@ -5879,8 +5887,8 @@ strong {
 
 .big-h2 {
   color: #2c2d33;
-  font-size: 62px;
-  line-height: 86px;
+  font-size: 52px;
+  line-height: 1.3em;
   font-weight: 800;
 }
 
@@ -5942,6 +5950,11 @@ strong {
 .case-studies-row {
   margin-top: -359px;
   margin-bottom: 100px;
+}
+
+.case-studies-row.case-studies-row-grid {
+  margin-top: 0px;
+  margin-bottom: 40px;
 }
 
 .icon-right {
@@ -6599,6 +6612,12 @@ html.w-mod-js *[data-ix="menuhide"] {
   .ec-logo {
     width: 40px;
   }
+  .case-study-card-label {
+    left: auto;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+  }
 }
 
 @media (max-width: 767px) {
@@ -7180,6 +7199,13 @@ html.w-mod-js *[data-ix="menuhide"] {
   }
   .ec-logo {
     width: 40px;
+  }
+  .case-study-card-label {
+    left: auto;
+    display: block;
+    width: 90%;
+    margin-right: auto;
+    margin-left: auto;
   }
 }
 
