@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Last Published: Thu Jun 30 2016 08:02:48 GMT+0000 (UTC) -->
+<!-- Last Published: Wed Jul 13 2016 14:23:57 GMT+0000 (UTC) -->
 <html data-wf-site="56e2e31a1b1f8f784728a08c" data-wf-page="577149898479866150f499ca">
 <head>
   <meta charset="utf-8">
@@ -45,16 +45,16 @@
         background-color: #fff;
         text-align: center;
     }
-      .w-input::-webkit-input-placeholder { /* WebKit browsers */
+    /*  .w-input::-webkit-input-placeholder { /* WebKit browsers 
         color:    #4CADDE;
     }
-    .w-input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    .w-input:-moz-placeholder { /* Mozilla Firefox 4 to 18 
         color:    #4CADDE;
     }
-    .w-input::-moz-placeholder { /* Mozilla Firefox 19+ */
+    .w-input::-moz-placeholder { /* Mozilla Firefox 19+ 
         color:    #4CADDE;
     }
-    .w-input:-ms-input-placeholder { /* Internet Explorer 10+ */
+    .w-input:-ms-input-placeholder { /* Internet Explorer 10+ 
         color:    #4CADDE;
     }
     /* keep modals centered */
@@ -64,30 +64,22 @@
   </style>
 </head>
 <body>
-  <div class="nav-main w-nav" data-animation="default" data-collapse="medium" data-duration="400">
-    <div class="container-wide nav-container w-clearfix">
-      <a class="w-nav-brand" href="index.html">
-        <img class="brand" src="images/all white.svg" width="160">
+  <div class="alt nav-main w-nav white-menu" data-animation="default" data-collapse="medium" data-duration="400">
+    <div class="container-wide menu w-clearfix">
+      <a class="w-nav-brand" href="#">
+        <img class="logo-dark" src="images/dark.svg">
       </a>
-      <nav class="m-nav-open w-nav-menu" role="navigation">
-        <a class="nav w-nav-link" href="explore-dsi.html">Explore DSI</a>
-        <a class="nav w-nav-link" href="stories.html">Stories</a>
-        <a class="nav w-nav-link" href="projects.html">Projects</a>
-        <a class="nav w-nav-link" href="organisations.html">Organisations</a>
-        <a class="nav w-nav-link" data-ix="open-login-modal">login</a>
-        <div class="w-dropdown" data-delay="0">
-          <div class="log-in nav w-dropdown-toggle">
-            <div>Create +</div>
-          </div>
-          <nav class="create-drop-down w-dropdown-list">
-            <a class="drop-down-link w-dropdown-link" data-ix="create-project-modal" href="#">Create a new project</a>
-            <a class="drop-down-link w-dropdown-link" data-ix="create-organisation-modal" href="#">Create an organisation</a>
-            <div class="arror-up"></div>
-          </nav>
-        </div>
+      <nav class="w-nav-menu" role="navigation">
+        <a class="alt nav w-nav-link" href="#">Explore DSI</a>
+        <a class="alt nav w-nav-link" href="#">Case Studies</a>
+        <a class="alt nav w-nav-link" href="#">Blog</a>
+        <a class="alt nav w-nav-link" href="#">Projects</a>
+        <a class="alt nav w-nav-link" href="#">Organisations</a>
+        <a class="alt log-in nav w-nav-link white-alt" href="#">Login</a>
+        <a class="alt log-in log-in-alt nav w-nav-link" href="#">Signup</a>
       </nav>
-      <div class="menu-open w-nav-button">
-        <div class="m-menu-btn w-icon-nav-menu"></div>
+      <div class="w-nav-button">
+        <div class="w-icon-nav-menu"></div>
       </div>
     </div>
   </div>
@@ -105,7 +97,7 @@
             <a class="inactive popover-link" href="#">Sign out</a>
             <a class="popover-link" data-ix="popoverfadeout" href="personal-profile-page.html">Password reset</a>
           </div>
-          <img class="vert-nav" src="images/white-settings.png" width="15">
+          <img class="vert-nav" src="images/vertical-nav.png" width="15">
           <a class="link-to-profile w-clearfix w-inline-block" href="personal-profile-page.html">
             <div class="profile-img"></div>
             <h3 class="profile-name">DanielMPettifer</h3>
@@ -129,61 +121,176 @@
       </div>
     </div>
   </div>
-  <div class="page-header w-section">
+  <div class="creator page-header w-section">
     <div class="container-wide header">
-      <h1 class="light page-h1">Edit project</h1>
+      <h1 class="light page-h1">{{Create}}{{Edit}} project</h1>
     </div>
   </div>
-  <div class="container-wide">
-    <div class="add-story body-content">
-      <div class="w-form">
-        <form class="w-clearfix" data-name="Email Form 2" id="email-form-2" name="email-form-2">
-          <div class="w-row">
-            <div class="w-col w-col-6">
-              <h2 class="edit-h2">Project info</h2>
-              <label class="story-label" for="project-name">Project name</label>
-              <input class="personal story-form w-input" data-name="project name" id="project-name" maxlength="256" name="project-name" placeholder="Add your project&#39;s name" type="text">
-              <label class="story-label" for="project-url">URL</label>
-              <input class="personal story-form w-input" data-name="project url" id="project-url" maxlength="256" name="project-url" placeholder="Add your projects URL" type="text">
-              <label class="story-label" for="project-bio">Project bio</label>
-              <textarea class="story-form w-input" data-name="project bio" id="project-bio" maxlength="5000" name="project-bio" placeholder="Briefly describe your project (no more than 500 characters)"></textarea>
-              <label class="story-label" for="Story-wysiwyg">Current status</label>
-              <div class="w-checkbox">
-                <input class="w-checkbox-input" data-name="Checkbox 7" id="checkbox-7" name="checkbox-7" type="checkbox">
-                <label class="w-form-label" for="checkbox-7">Live</label>
+  <div class="creator section-white w-section">
+    <div class="container-wide">
+      <div class="add-story body-content">
+        <div class="w-tabs" data-easing="linear">
+          <div class="creator-tab-menu w-tab-menu">
+            <a class="step-tab tab-link-1 w--current w-inline-block w-tab-link" data-w-tab="Tab 1">
+              <div>1 - Project details</div>
+            </a>
+            <a class="step-tab tab-link-2 w-inline-block w-tab-link" data-w-tab="Tab 2">
+              <div>2 - Duration &amp; Location</div>
+            </a>
+            <a class="step-tab tab-link-3 w-inline-block w-tab-link" data-w-tab="Tab 3">
+              <div>3 - project Description</div>
+            </a>
+            <a class="step-tab tab-link-4 w-inline-block w-tab-link" data-w-tab="Tab 4" id="tab-four">
+              <div>{{Publish}}{{unpublish}} your project</div>
+            </a>
+          </div>
+          <div class="w-tab-content">
+            <div class="step-window w--tab-active w-tab-pane" data-w-tab="Tab 1">
+              <div class="tabbed-nav-buttons w-clearfix">
+                <a class="tab-button-2 tab-button-next w-button">Save and continue</a>
               </div>
-              <div class="w-checkbox">
-                <input class="w-checkbox-input" data-name="Checkbox 6" id="checkbox-6" name="checkbox-6" type="checkbox">
-                <label class="w-form-label" for="checkbox-6">Closed</label>
+              <div class="w-row">
+                <div class="creator-col w-col w-col-6">
+                  <h2>1 - Project Details</h2>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p>
+                </div>
+                <div class="creator-col creator-col-right w-col w-col-6">
+                  <div class="w-form">
+                    <form data-name="Email Form 3" id="email-form-3" name="email-form-3">
+                      <label for="name">Project name</label>
+                      <div class="required">*Required</div>
+                      <input class="creator-data-entry w-input" data-name="Name" id="name" maxlength="256" name="name" placeholder="{{project name}}" type="text">
+                      <label for="email">Project URL</label>
+                      <input class="creator-data-entry w-input" data-name="Email" id="email" maxlength="256" name="email" placeholder="Add your project&#39;s URL" required="required" type="text">
+                      <label for="email-2">Social media links</label>
+                      <input class="creator-data-entry w-input" data-name="Email 2" id="email-2" maxlength="256" name="email-2" placeholder="Facebook" required="required" type="text">
+                      <input class="creator-data-entry w-input" data-name="Email 3" id="email-3" maxlength="256" name="email-3" placeholder="Twitter" required="required" type="text">
+                      <input class="creator-data-entry w-input" data-name="Email 4" id="email-4" maxlength="256" name="email-4" placeholder="Google plus" required="required" type="text">
+                      <input class="creator-data-entry w-input" data-name="Email 5" id="email-5" maxlength="256" name="email-5" placeholder="Github" required="required" type="text">
+                    </form>
+                    <div class="w-form-done">
+                      <div>Thank you! Your submission has been received!</div>
+                    </div>
+                    <div class="w-form-fail">
+                      <div>Oops! Something went wrong while submitting the form</div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <label class="profile-image story-label" for="Title">Your project logo</label>
-              <img class="story-image-upload" src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg">
-              <a class="dsi-button story-image-upload w-button" href="#">Upload image</a>
-              <label class="story-label" for="Title">Header background image</label>
-              <img class="story-image-upload story-image-upload-large" src="images/brussels-locations.jpg">
-              <a class="dsi-button story-image-upload w-button" href="#">Upload image</a>
             </div>
-            <div class="w-col w-col-6">
-              <h2 class="edit-h2">Duration of project</h2>
-              <label class="story-label" for="start-date">Project start date</label>
-              <input class="personal story-form w-input" data-name="start date" id="start-date" maxlength="256" name="start-date" placeholder="What date did the project start?" type="text">
-              <label class="story-label" for="End-date">Project end date (leave this blank for ongoing projects)</label>
-              <input class="personal story-form w-input" data-name="End date" id="End-date" maxlength="256" name="End-date" placeholder="When did/will the project end?" type="text">
-              <h2 class="edit-h2">Where is your project based?</h2>
-              <label class="story-label" for="city">Which city are you based in?</label>
-              <input class="personal story-form w-input" data-name="city" id="city" maxlength="256" name="city" placeholder="Your city" type="text">
-              <label class="story-label" for="country">In which country?</label>
-              <input class="personal story-form w-input" data-name="country" id="country" maxlength="256" name="country" placeholder="Your country" type="text">
+            <div class="step-window w-tab-pane" data-w-tab="Tab 2">
+              <div class="tabbed-nav-buttons w-clearfix">
+                <a class="tab-button-3 tab-button-next w-button">Save and continue</a>
+                <a class="previous tab-button-1 tab-button-next w-button">Previous</a>
+              </div>
+              <div class="w-row">
+                <div class="creator-col w-col w-col-6">
+                  <h2>2 - Duration &amp; Location</h2>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p>
+                </div>
+                <div class="creator-col creator-col-right w-col w-col-6">
+                  <div class="w-form">
+                    <form data-name="Email Form 3" id="email-form-3" name="email-form-3">
+                      <h2 class="edit-h2">Duration of project</h2>
+                      <label for="name">Project start date</label>
+                      <div class="required">*Required</div>
+                      <input class="creator-data-entry w-input" data-name="Name 2" id="name-2" maxlength="256" name="name-2" placeholder="When did the project start?" type="text">
+                      <label for="email-6">Project end date (leave this blank for ongoing projects)</label>
+                      <input class="creator-data-entry w-input" data-name="Email 6" id="email-6" maxlength="256" name="email-6" placeholder="When did/will the project end?" required="required" type="text">
+                      <h2 class="edit-h2">Where is your project based?</h2>
+                      <label for="email-6">Which city are you based in?</label>
+                      <input class="creator-data-entry w-input" data-name="Email 7" id="email-7" maxlength="256" name="email-7" placeholder="Your city" required="required" type="text">
+                      <label for="email-8">In which country?</label>
+                      <input class="creator-data-entry w-input" data-name="Email 8" id="email-8" maxlength="256" name="email-8" placeholder="Your country" required="required" type="text">
+                    </form>
+                    <div class="w-form-done">
+                      <div>Thank you! Your submission has been received!</div>
+                    </div>
+                    <div class="w-form-fail">
+                      <div>Oops! Something went wrong while submitting the form</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="step-window w-tab-pane" data-w-tab="Tab 3">
+              <div class="tabbed-nav-buttons w-clearfix">
+                <a class="tab-button-4 tab-button-next w-button">Save and continue</a>
+                <a class="previous tab-button-2 tab-button-next w-button">Previous</a>
+              </div>
+              <div class="w-row">
+                <div class="creator-col w-col w-col-6">
+                  <h2>3 - Describe your project</h2>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p>
+                </div>
+                <div class="creator-col creator-col-right w-col w-col-6">
+                  <div class="w-form">
+                    <form data-name="Email Form 3" id="email-form-3" name="email-form-3">
+                      <label for="name">Short Description</label>
+                      <div class="required">*Required</div>
+                      <p>Please provide a short project description.
+                        <br>How would you describe your project in one tweet?
+                        <br>(This will appear on your project card)</p>
+                      <textarea class="creator-data-entry w-input" data-name="Project Bio 3" id="project-bio-3" maxlength="5000" name="project-bio-3" placeholder="Briefly describe your project (no more than 140 characters)"></textarea>
+                      <label class="story-label" for="project-bio">Long description</label>
+                      <p>Please provide a Longer project description.
+                        <br>How would you describe your project.......?
+                        <br>(This will appear on your project page)</p>
+                      <textarea class="creator-data-entry long-description w-input" data-name="Project Bio 4" id="project-bio-4" maxlength="5000" name="project-bio-4" placeholder="Add an in depth project description"></textarea>
+                    </form>
+                    <div class="w-form-done">
+                      <div>Thank you! Your submission has been received!</div>
+                    </div>
+                    <div class="w-form-fail">
+                      <div>Oops! Something went wrong while submitting the form</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="step-window w-tab-pane" data-w-tab="Tab 4">
+              <div class="tabbed-nav-buttons w-clearfix">
+                <a class="tab-button-next tab-button-publish w-button">Publish now</a>
+                <a class="tab-button-next update-button w-button">Save for later</a>
+                <a class="previous tab-button-3 tab-button-next w-button">Previous</a>
+              </div>
+              <div class="w-row">
+                <div class="creator-col w-col w-col-6">
+                  <h2>4 - Add images &amp; publish</h2>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p>
+                </div>
+                <div class="creator-col creator-col-right w-col w-col-6">
+                  <div class="w-form">
+                    <form data-name="Email Form 3" id="email-form-3" name="email-form-3">
+                      <label for="name">Your project logo</label>
+                      <div class="required">*Required</div>
+                      <p>Please provide a short project description.
+                        <br>How would you describe your project in one tweet?
+                        <br>(This will appear on your project card)</p>
+                      <img class="story-image-upload" src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg">
+                      <a class="dsi-button story-image-upload w-button" href="#">Upload image</a>
+                      <label class="story-label" for="Title">Header background image</label>
+                      <p>Please provide a Longer project description.
+                        <br>How would you describe your project.......?
+                        <br>(This will appear on your project page)</p>
+                      <img class="story-image-upload story-image-upload-large" src="images/brussels-locations.jpg">
+                      <a class="dsi-button story-image-upload w-button" href="#">Upload image</a>
+                    </form>
+                    <div class="w-form-done">
+                      <div>Thank you! Your submission has been received!</div>
+                    </div>
+                    <div class="w-form-fail">
+                      <div>Oops! Something went wrong while submitting the form</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          <input class="dsi-button post-story w-button" data-wait="Please wait..." type="submit" value="Update project">
-          <input class="cancel dsi-button post-story w-button" data-wait="Please wait..." type="submit" value="Cancel">
-        </form>
-        <div class="w-form-done">
-          <p>Thank you! Your submission has been received!</p>
-        </div>
-        <div class="w-form-fail">
-          <p>Oops! Something went wrong while submitting the form</p>
         </div>
       </div>
     </div>
@@ -192,7 +299,7 @@
     <div class="container-wide">
       <div class="footer-columns w-row">
         <div class="w-col w-col-4">
-          <img class="footer-brand" src="images/logo-white.svg">
+          <img class="footer-brand" src="images/all white.svg">
         </div>
         <div class="w-col w-col-2">
           <h3 class="footer-h3">People</h3>
@@ -258,5 +365,31 @@
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   <script type="text/javascript" src="js/dsi4eu.js"></script>
   <!--[if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
+  <script>
+    $('.tab-button-1').on('click', function (evt) {
+      $('.tab-link-1').triggerHandler('click');
+      evt.preventDefault();
+    });
+    $('.tab-button-2').on('click', function (evt) {
+      $('.tab-link-2').triggerHandler('click');
+      evt.preventDefault();
+    });
+    $('.tab-button-3').on('click', function (evt) {
+      $('.tab-link-3').triggerHandler('click');
+      evt.preventDefault();
+    });
+    $('.tab-button-4').on('click', function (evt) {
+      $('.tab-link-4').triggerHandler('click');
+      evt.preventDefault();
+    });
+    $('.tab-button-5').on('click', function (evt) {
+      $('.tab-link-5').triggerHandler('click');
+      evt.preventDefault();
+    });
+    $('.tab-button-6').on('click', function (evt) {
+      $('.tab-link-6').triggerHandler('click');
+      evt.preventDefault();
+    });
+  </script>
 </body>
 </html>
