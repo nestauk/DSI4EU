@@ -80,6 +80,7 @@ class ProjectRepositoryTest extends PHPUnit_Framework_TestCase
         $project->setOrganisationsCount($organisations = 10);
         $project->setLogo($logo = 'DSC100.JPG');
         $project->setSocialImpact($socialImpact = 'Social Impact');
+        $project->setIsPublished($isPublished = true);
         $this->projectRepository->insert($project);
 
         $this->assertEquals(1, $project->getId());
@@ -97,6 +98,7 @@ class ProjectRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($organisations, $project->getOrganisationsCount());
         $this->assertEquals($logo, $project->getLogo());
         $this->assertEquals($socialImpact, $project->getSocialImpact());
+        $this->assertEquals($isPublished, $project->isPublished());
     }
 
     /** @test getByID */
@@ -144,13 +146,14 @@ class ProjectRepositoryTest extends PHPUnit_Framework_TestCase
         $project->setName($name = 'Name');
         $project->setShortDescription($shortDesc = 'Short Desc');
         $project->setDescription($desc = 'Desc');
-        $project->setUrl('http://example.org');
-        $project->setStatus('closed');
-        $project->setStartDate('2016-05-21');
-        $project->setEndDate('2016-05-22');
+        $project->setUrl($url = 'http://example.org');
+        $project->setStatus($status = 'closed');
+        $project->setStartDate($startDate = '2016-05-21');
+        $project->setEndDate($endDate = '2016-05-22');
         $project->setCountryRegion($this->countryRegion);
-        $project->setOrganisationsCount(10);
+        $project->setOrganisationsCount($orgsCount = 10);
         $project->setSocialImpact($socialImpact = 'Social Impact');
+        $project->setIsPublished($isPublished = true);
         $this->projectRepository->save($project);
 
         $project = $this->projectRepository->getById($project->getId());
@@ -158,14 +161,15 @@ class ProjectRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($name, $project->getName());
         $this->assertEquals($shortDesc, $project->getShortDescription());
         $this->assertEquals($desc, $project->getDescription());
-        $this->assertEquals('http://example.org', $project->getUrl());
-        $this->assertEquals('closed', $project->getStatus());
-        $this->assertEquals('2016-05-21', $project->getStartDate());
-        $this->assertEquals('2016-05-22', $project->getEndDate());
+        $this->assertEquals($url, $project->getUrl());
+        $this->assertEquals($status, $project->getStatus());
+        $this->assertEquals($startDate, $project->getStartDate());
+        $this->assertEquals($endDate, $project->getEndDate());
         $this->assertEquals($this->countryRegion->getId(), $project->getCountryRegion()->getId());
         $this->assertEquals($this->countryRegion->getCountry()->getId(), $project->getCountry()->getId());
-        $this->assertEquals(10, $project->getOrganisationsCount());
+        $this->assertEquals($orgsCount, $project->getOrganisationsCount());
         $this->assertEquals($socialImpact, $project->getSocialImpact());
+        $this->assertEquals($isPublished, $project->isPublished());
     }
 
     /** @test */

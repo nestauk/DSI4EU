@@ -28,6 +28,9 @@ class Project
         $logo,
         $socialImpact;
 
+    /** @var bool */
+    private $isPublished;
+
     /**
      * @return int
      */
@@ -318,5 +321,21 @@ class Project
     public function setSocialImpact($socialImpact)
     {
         $this->socialImpact = (string)$socialImpact;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isPublished()
+    {
+        return (bool)$this->isPublished;
+    }
+
+    /**
+     * @param boolean $isPublished
+     */
+    public function setIsPublished($isPublished)
+    {
+        $this->isPublished = (bool)$isPublished;
     }
 }

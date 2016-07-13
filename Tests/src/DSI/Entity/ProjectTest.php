@@ -154,4 +154,16 @@ class ProjectTest extends \PHPUnit_Framework_TestCase
         $this->project->setSocialImpact($socialImpact);
         $this->assertEquals($socialImpact, $this->project->getSocialImpact());
     }
+
+    /** @test */
+    public function settingIsPublished_returnsIsPublished()
+    {
+        $this->assertEquals(false, $this->project->isPublished());
+
+        $this->project->setIsPublished(true);
+        $this->assertEquals(true, $this->project->isPublished());
+
+        $this->project->setIsPublished(false);
+        $this->assertEquals(false, $this->project->isPublished());
+    }
 }
