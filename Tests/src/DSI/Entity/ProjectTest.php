@@ -146,4 +146,12 @@ class ProjectTest extends \PHPUnit_Framework_TestCase
         $this->project->setLogo($logo);
         $this->assertEquals($logo, $this->project->getLogo());
     }
+
+    /** @test */
+    public function settingSocialImpact_returnsSocialImpact()
+    {
+        $socialImpact = 'Social Impact of the project';
+        $this->project->setSocialImpact($socialImpact);
+        $this->assertEquals($socialImpact, $this->project->getSocialImpact());
+    }
 }

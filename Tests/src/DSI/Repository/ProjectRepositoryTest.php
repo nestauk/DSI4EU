@@ -79,6 +79,7 @@ class ProjectRepositoryTest extends PHPUnit_Framework_TestCase
         $project->setCountryRegion($this->countryRegion);
         $project->setOrganisationsCount($organisations = 10);
         $project->setLogo($logo = 'DSC100.JPG');
+        $project->setSocialImpact($socialImpact = 'Social Impact');
         $this->projectRepository->insert($project);
 
         $this->assertEquals(1, $project->getId());
@@ -95,6 +96,7 @@ class ProjectRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($this->countryRegion->getCountry()->getId(), $project->getCountry()->getId());
         $this->assertEquals($organisations, $project->getOrganisationsCount());
         $this->assertEquals($logo, $project->getLogo());
+        $this->assertEquals($socialImpact, $project->getSocialImpact());
     }
 
     /** @test getByID */
@@ -148,6 +150,7 @@ class ProjectRepositoryTest extends PHPUnit_Framework_TestCase
         $project->setEndDate('2016-05-22');
         $project->setCountryRegion($this->countryRegion);
         $project->setOrganisationsCount(10);
+        $project->setSocialImpact($socialImpact = 'Social Impact');
         $this->projectRepository->save($project);
 
         $project = $this->projectRepository->getById($project->getId());
@@ -162,6 +165,7 @@ class ProjectRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($this->countryRegion->getId(), $project->getCountryRegion()->getId());
         $this->assertEquals($this->countryRegion->getCountry()->getId(), $project->getCountry()->getId());
         $this->assertEquals(10, $project->getOrganisationsCount());
+        $this->assertEquals($socialImpact, $project->getSocialImpact());
     }
 
     /** @test */

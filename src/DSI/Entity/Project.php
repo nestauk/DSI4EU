@@ -25,7 +25,8 @@ class Project
 
     /** @var string */
     private $importID,
-        $logo;
+        $logo,
+        $socialImpact;
 
     /**
      * @return int
@@ -301,5 +302,21 @@ class Project
     public function setLogo($logo)
     {
         $this->logo = (string)$logo;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSocialImpact()
+    {
+        return (string)$this->socialImpact;
+    }
+
+    /**
+     * @param string $socialImpact
+     */
+    public function setSocialImpact($socialImpact)
+    {
+        $this->socialImpact = (string)$socialImpact;
     }
 }
