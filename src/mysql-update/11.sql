@@ -1,1 +1,0 @@
-ALTER TABLE `organisations` ADD `partnersCount` INT UNSIGNED NOT NULL AFTER `organisationSizeID`;
