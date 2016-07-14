@@ -17,9 +17,9 @@ h1 {
 
 h2 {
   margin-top: 20px;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
   font-family: 'Open Sans', sans-serif;
-  color: #575757;
+  color: #1dc9a0;
   font-size: 32px;
   line-height: 36px;
   font-weight: 400;
@@ -2866,6 +2866,11 @@ strong {
 
 .container-wide.case-study-grid {
   margin-top: 170px;
+}
+
+.container-wide.container-wide-header-large {
+  padding-top: 250px;
+  padding-bottom: 0px;
 }
 
 .button {
@@ -6115,7 +6120,7 @@ strong {
 
 .step-window {
   min-height: 710px;
-  padding: 50px 50px 125px;
+  padding: 50px 0px 125px;
   background-color: #fff;
 }
 
@@ -6256,6 +6261,14 @@ strong {
   min-height: 210px;
 }
 
+.creator-data-entry.long-description.end {
+  margin-bottom: 40px;
+}
+
+.creator-data-entry.end {
+  margin-bottom: 40px;
+}
+
 .creator-tab-menu {
   margin-top: -99px;
   margin-bottom: 50px;
@@ -6270,6 +6283,135 @@ strong {
 
 .header-centre {
   color: #1dc9a0;
+  text-align: center;
+}
+
+.form-col-left {
+  padding-right: 50px;
+  border-right: 1px solid #f3f3f3;
+}
+
+.form-col-right {
+  padding-left: 50px;
+}
+
+.end {
+  margin-bottom: 40px;
+}
+
+.case-study-single {
+  background-color: #fff;
+}
+
+.header-large {
+  position: relative;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  min-height: auto;
+  background-image: -webkit-linear-gradient(270deg, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url('../images/tor00-01.jpg');
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url('../images/tor00-01.jpg');
+  background-position: 0px 0px, 50% 50%;
+  background-size: auto, cover;
+  background-repeat: repeat, no-repeat;
+  background-attachment: scroll, fixed;
+}
+
+.header-large-h1-centre {
+  color: #fff;
+  font-weight: 600;
+  text-align: center;
+}
+
+.header-large-desc {
+  display: block;
+  max-width: 750px;
+  margin-right: auto;
+  margin-bottom: 0px;
+  margin-left: auto;
+  padding-bottom: 150px;
+  color: #fff;
+  font-size: 18px;
+  line-height: 27px;
+  text-align: center;
+}
+
+.header-large-section {
+  position: static;
+  min-height: auto;
+}
+
+.case-study-logo {
+  display: block;
+  width: 150px;
+  height: 150px;
+  margin-top: -75px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-top: 19px;
+  border-radius: 75px;
+  background-color: #2c2d33;
+}
+
+.case-study-logo-over {
+  display: block;
+  width: 100px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.case-study-single-container {
+  padding-top: 50px;
+  text-align: center;
+}
+
+.case-study-rich-text {
+  text-align: center;
+}
+
+.case-study-intro-detail {
+  margin-bottom: 75px;
+  padding-bottom: 75px;
+  border-bottom: 1px solid #f3f3f3;
+}
+
+.case-study-main-text {
+  margin-bottom: 0px;
+  padding-bottom: 50px;
+  border-style: none;
+  border-bottom-width: 1px;
+  border-bottom-color: #f3f3f3;
+}
+
+.url-block {
+  margin-top: 50px;
+  margin-bottom: 0px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  border-style: solid none none;
+  border-top-width: 1px;
+  border-top-color: #f3f3f3;
+  border-bottom-width: 0px;
+  border-bottom-color: #f3f3f3;
+}
+
+.button-more {
+  margin-top: 25px;
+  padding: 12px 25px;
+  border-radius: 3px;
+  background-color: #1dc9a0;
+  font-family: 'Open Sans', sans-serif;
+  text-transform: uppercase;
+}
+
+.related-case-studies {
+  padding-top: 50px;
+  background-color: #f3f3f3;
+}
+
+.reccomendation {
+  margin-bottom: 50px;
+  color: #2c2d33;
   text-align: center;
 }
 
@@ -6775,6 +6917,9 @@ html.w-mod-js *[data-ix="menuhide"] {
   .container-wide.section-cta {
     height: 251px;
   }
+  .container-wide.container-wide-header-large {
+    padding-top: 195px;
+  }
   .hp-post {
     height: 176px;
   }
@@ -6871,9 +7016,20 @@ html.w-mod-js *[data-ix="menuhide"] {
   .cta-p {
     text-align: center;
   }
+  .header-large-desc {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+  .case-study-main-text {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
 }
 
 @media (max-width: 479px) {
+  h2 {
+    line-height: 48px;
+  }
   .search-field.quicksearch {
     display: none;
   }
@@ -7219,6 +7375,15 @@ html.w-mod-js *[data-ix="menuhide"] {
     width: 90%;
     margin-right: auto;
     margin-left: auto;
+  }
+  .case-study-card-name {
+    width: 50%;
+  }
+  .case-study-card-name.country {
+    width: 50%;
+  }
+  .reccomendation {
+    line-height: 48px;
   }
 }
 
