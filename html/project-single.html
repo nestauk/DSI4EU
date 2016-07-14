@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<!-- Last Published: Wed Jun 29 2016 11:54:52 GMT+0000 (UTC) -->
-<html data-wf-site="56e2e31a1b1f8f784728a08c" data-wf-page="577149898479866150f499d3">
+<!-- Last Published: Thu Jul 14 2016 15:03:47 GMT+0000 (UTC) -->
+<html data-wf-site="56e2e31a1b1f8f784728a08c" data-wf-page="57878ff21c0e63b1517e30e7">
 <head>
   <meta charset="utf-8">
   <title>Project single</title>
@@ -45,16 +45,16 @@
         background-color: #fff;
         text-align: center;
     }
-      .w-input::-webkit-input-placeholder { /* WebKit browsers */
+    /*  .w-input::-webkit-input-placeholder { /* WebKit browsers 
         color:    #4CADDE;
     }
-    .w-input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    .w-input:-moz-placeholder { /* Mozilla Firefox 4 to 18 
         color:    #4CADDE;
     }
-    .w-input::-moz-placeholder { /* Mozilla Firefox 19+ */
+    .w-input::-moz-placeholder { /* Mozilla Firefox 19+ 
         color:    #4CADDE;
     }
-    .w-input:-ms-input-placeholder { /* Internet Explorer 10+ */
+    .w-input:-ms-input-placeholder { /* Internet Explorer 10+ 
         color:    #4CADDE;
     }
     /* keep modals centered */
@@ -63,31 +63,23 @@
     .modal-content {#position: relative; #top: -50%;margin:0 auto;width:600px;}
   </style>
 </head>
-<body>
-  <div class="nav-main w-nav" data-animation="default" data-collapse="medium" data-duration="400">
-    <div class="container-wide nav-container w-clearfix">
-      <a class="w-nav-brand" href="index.html">
-        <img class="brand" src="images/all white.svg" width="160">
+<body class="case-study-single">
+  <div class="alt nav-main w-nav white-menu" data-animation="default" data-collapse="medium" data-duration="400">
+    <div class="container-wide menu w-clearfix">
+      <a class="w-nav-brand" href="#">
+        <img class="logo-dark" src="images/dark.svg">
       </a>
-      <nav class="m-nav-open w-nav-menu" role="navigation">
-        <a class="nav w-nav-link" href="explore-dsi.html">Explore DSI</a>
-        <a class="nav w-nav-link" href="stories.html">Stories</a>
-        <a class="nav w-nav-link" href="projects.html">Projects</a>
-        <a class="nav w-nav-link" href="organisations.html">Organisations</a>
-        <a class="nav w-nav-link" data-ix="open-login-modal">login</a>
-        <div class="w-dropdown" data-delay="0">
-          <div class="log-in nav w-dropdown-toggle">
-            <div>Create +</div>
-          </div>
-          <nav class="create-drop-down w-dropdown-list">
-            <a class="drop-down-link w-dropdown-link" data-ix="create-project-modal" href="#">Create a new project</a>
-            <a class="drop-down-link w-dropdown-link" data-ix="create-organisation-modal" href="#">Create an organisation</a>
-            <div class="arror-up"></div>
-          </nav>
-        </div>
+      <nav class="w-nav-menu" role="navigation">
+        <a class="alt nav w-nav-link" href="#">Explore DSI</a>
+        <a class="alt nav w-nav-link" href="#">Case Studies</a>
+        <a class="alt nav w-nav-link" href="#">Blog</a>
+        <a class="alt nav w-nav-link" href="#">Projects</a>
+        <a class="alt nav w-nav-link" href="#">Organisations</a>
+        <a class="alt log-in nav w-nav-link white-alt" href="#">Login</a>
+        <a class="alt log-in log-in-alt nav w-nav-link" href="#">Signup</a>
       </nav>
-      <div class="menu-open w-nav-button">
-        <div class="m-menu-btn w-icon-nav-menu"></div>
+      <div class="w-nav-button">
+        <div class="w-icon-nav-menu"></div>
       </div>
     </div>
   </div>
@@ -105,7 +97,7 @@
             <a class="inactive popover-link" href="#">Sign out</a>
             <a class="popover-link" data-ix="popoverfadeout" href="personal-profile-page.html">Password reset</a>
           </div>
-          <img class="vert-nav" src="images/white-settings.png" width="15">
+          <img class="vert-nav" src="images/vertical-nav.png" width="15">
           <a class="link-to-profile w-clearfix w-inline-block" href="personal-profile-page.html">
             <div class="profile-img"></div>
             <h3 class="profile-name">DanielMPettifer</h3>
@@ -129,73 +121,36 @@
       </div>
     </div>
   </div>
-  <div class="bg-blur modal-signup">
-    <div class="modal-container">
-      <div class="modal-helper">
-        <div class="modal-content signup-form" data-ix="downbeforeup">
-          <div class="modal-header"></div>
-          <div class="close modal-close" data-ix="destroysignup">+</div>
-          <div class="w-tabs" data-duration-in="300" data-duration-out="100" data-easing="ease-in-out">
-            <div class="tabs-menu w-tab-menu">
-              <a class="tab w--current w-inline-block w-tab-link" data-w-tab="Tab 1">
-                <div>Login</div>
-              </a>
-              <a class="tab w-inline-block w-tab-link" data-w-tab="Tab 2">
-                <div>Register</div>
-              </a>
-            </div>
-            <div class="tabs-content w-tab-content">
-              <div class="w--tab-active w-tab-pane" data-w-tab="Tab 1">
-                <div class="login-form w-form">
-                  <form data-name="Email Form" id="email-form" name="email-form">
-                    <input autofocus="autofocus" class="login-field w-input" data-name="Email 4" id="email-4" maxlength="256" name="email-4" placeholder="Enter your email address" required="required" type="email">
-                    <input class="login-field w-input" data-name="Password 4" id="Password-4" maxlength="256" name="Password-4" placeholder="Password" required="required" type="password">
-                    <input class="login-button w-button" data-wait="Please wait..." type="submit" value="Login">
-                    <a class="forgotten-password" href="#">Forgotten password?</a>
-                    <div class="social-badges w-row">
-                      <div class="w-col w-col-3 w-col-small-3 w-col-tiny-3">
-                        <a class="social-login w-inline-block" href="#">
-                          <img class="social-badge" height="100%" src="images/social-1_square-github.svg" width="100%">
-                        </a>
-                      </div>
-                      <div class="w-col w-col-3 w-col-small-3 w-col-tiny-3">
-                        <a class="social-login w-inline-block" href="#">
-                          <img class="social-badge" height="100%" src="images/social-1_square-facebook.svg" width="100%">
-                        </a>
-                      </div>
-                      <div class="w-col w-col-3 w-col-small-3 w-col-tiny-3">
-                        <a class="social-login w-inline-block" href="#">
-                          <img class="social-badge" height="100%" src="images/social-1_square-google-plus.svg" width="100%">
-                        </a>
-                      </div>
-                      <div class="w-col w-col-3 w-col-small-3 w-col-tiny-3">
-                        <a class="social-login w-inline-block" href="#">
-                          <img class="social-badge" height="100%" src="images/social-1_square-twitter.svg" width="100%">
-                        </a>
-                      </div>
-                    </div>
-                  </form>
-                  <div class="w-form-done">
-                    <p>Thank you! Your submission has been received!</p>
-                  </div>
-                  <div class="w-form-fail">
-                    <p>Oops! Something went wrong while submitting the form</p>
-                  </div>
+  <div class="header-large-section w-section">
+    <div class="header-large">
+      <div class="container-wide container-wide-header-large">
+        <h1 class="header-large-h1-centre" data-ix="fadeinuponload">The Onion Router project</h1>
+        <div class="header-large-desc">
+          <a class="ext-url" data-ix="fadeinup-2" href="#">www.torproject.org</a>
+          <div class="project-single-social" data-ix="fadeinup-3">
+            <div class="w-row">
+              <div class="w-col w-col-3 w-col-small-6 w-col-tiny-6">
+                <div class="sm-nu-bloxk w-clearfix">
+                  <img class="sm-icon" src="images/facebook-logo.png" width="40">
+                  <div class="hero-social-label">Facebook</div>
                 </div>
               </div>
-              <div class="w-tab-pane" data-w-tab="Tab 2">
-                <div class="login-form w-form">
-                  <form data-name="Email Form" id="email-form" name="email-form">
-                    <input autofocus="autofocus" class="login-field w-input" data-name="Email 5" id="email-5" maxlength="256" name="email-5" placeholder="Enter your email address" required="required" type="email">
-                    <input class="login-field w-input" data-name="Password 5" id="Password-5" maxlength="256" name="Password-5" placeholder="Password" required="required" type="password">
-                    <input class="login-button register w-button" data-wait="Please wait..." type="submit" value="Register">
-                  </form>
-                  <div class="w-form-done">
-                    <p>Thank you! Your submission has been received!</p>
-                  </div>
-                  <div class="w-form-fail">
-                    <p>Oops! Something went wrong while submitting the form</p>
-                  </div>
+              <div class="w-col w-col-3 w-col-small-6 w-col-tiny-6">
+                <div class="sm-nu-bloxk w-clearfix">
+                  <img class="sm-icon" src="images/twitter-logo-silhouette.png">
+                  <div class="hero-social-label">Twitter</div>
+                </div>
+              </div>
+              <div class="w-col w-col-3 w-col-small-6 w-col-tiny-6">
+                <div class="sm-nu-bloxk w-clearfix">
+                  <img class="sm-icon" src="images/social.png">
+                  <div class="hero-social-label">Github</div>
+                </div>
+              </div>
+              <div class="w-col w-col-3 w-col-small-6 w-col-tiny-6">
+                <div class="sm-nu-bloxk w-clearfix">
+                  <img class="sm-icon" src="images/google-plus-logo.png">
+                  <div class="hero-social-label">Google +</div>
                 </div>
               </div>
             </div>
@@ -204,402 +159,114 @@
       </div>
     </div>
   </div>
-  <div class="page-header w-section">
-    <div class="container-wide header">
-      <div class="bread-crumbs w-clearfix">
-        <a class="breadcrumb-root w-inline-block" href="#">
-          <div class="breadcrumb-link">Projects</div>
-          <div class="arrow-right"></div>
-        </a>
-        <a class="breadcrumb-root path w-inline-block" href="#">
-          <div class="arrow-bottom-left"></div>
-          <div class="arrow-top-left"></div>
-          <div class="breadcrumb-link">{{project.name}}</div>
-          <div class="arrow-right"></div>
-        </a>
-      </div>
-      <h1 class="light page-h1">{{project.name}}</h1>
-      <div class="dsi4eu-stats">www.link-to-the-project-site</div>
-      <img class="large-profile-img" src="images/CZ2ne8yK_400x400.jpg">
-      <a class="dsi-button profile-edit w-button" href="#">Edit&nbsp;project</a>
-    </div>
-  </div>
-  <div class="project-section w-section">
+  <div class="case-study-main w-section">
     <div class="container-wide">
-      <div class="project-info w-row">
-        <div class="w-col w-col-6 w-col-stack" id="textScroll">
-          <div id="text">
-            <div class="info-card">
-              <h3 class="card-h info-h">About this project</h3>
-              <p class="project-summary">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p>
-              <p class="project-summary">{{<strong>Project.name</strong>}} is based in {{<strong>project.city</strong>}}, {{<strong>project.country</strong>}}</p>
-              <h3 class="card-sub-h">Duration</h3>
-              <div class="duration-p">This project runs from&nbsp;<strong>June 2014</strong> to <strong>May 2017</strong>
-              </div>
-              <h3 class="card-h info-h">This project is tagged under:</h3>
-              <div class="tags-block w-clearfix">
-                <div class="skill">Here is a very long tag</div>
-                <div class="skill">Short</div>
-                <div class="skill">This tag is going to span several lines and is in fact longer</div>
-                <div class="skill">Hardware</div>
-                <div class="skill">Software</div>
-                <div class="skill">Innovation</div>
-                <div class="skill">Skills</div>
-                <div class="add-item-block">
-                  <div class="add-item">+</div>
-                </div>
-              </div>
-              <img class="edit-dark" src="images/ios7-compose-outline.png" width="25">
-            </div>
-            <div class="info-card">
-              <h3 class="card-h info-h">Organisations involved</h3>
-              <div class="list-items">
-                <a class="partner-link w-inline-block" href="#">
-                  <div class="list-item w-clearfix">
-                    <div class="partner-title">Waag Society</div>
-                    <div class="no-of-projects">3 Projects</div>
-                  </div>
-                  <div class="list-item w-clearfix">
-                    <div class="partner-title">Esade</div>
-                    <div class="no-of-projects">3 Projects</div>
-                  </div>
-                  <div class="list-item w-clearfix">
-                    <div class="partner-title">Forum Virium Helsinki</div>
-                    <div class="no-of-projects">3 Projects</div>
-                  </div>
-                  <div class="list-item w-clearfix">
-                    <div class="partner-title">Arduino</div>
-                    <div class="no-of-projects">1 Project</div>
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div class="info-card">
-              <h3 class="card-h info-h">Contributors</h3>
-              <div class="project-owner">
-                <a class="owner-link w-inline-block" href="personal-profile-page.html">
-                  <img class="project-creator-img" height="50" src="images/Screen Shot 2016-05-18 at 11.07.48.png" width="50">
-                  <div class="creator-name">Jasinda J Barana</div>
-                  <div class="project-creator-text">Director of operations at Deloitte</div>
-                </a>
-              </div>
-              <div class="contributors w-row">
-                <div class="contributor-col w-col w-col-6">
-                  <div class="contributor">
-                    <div class="star-holder">
-                      <img class="star-full" src="images/ios7-star-orange.png">
-                      <img class="star-empty" data-ix="add-star-admin" src="images/ios7-star-outline-orange.png">
-                      <div class="admin-added">Admin activated</div>
-                    </div>
-                    <a class="w-inline-block" href="personal-profile-page.html">
-                      <img class="contributor-small-img" height="40" src="images/Screen Shot 2016-03-29 at 14.50.51.png" width="40">
-                      <div class="contributor-name">Jacob M Simon</div>
-                      <div class="contributor-position">This is a job title</div>
-                    </a>
-                  </div>
-                </div>
-                <div class="contributor-col w-col w-col-6">
-                  <div class="contributor">
-                    <div class="star-holder">
-                      <img class="activated star-empty" src="images/ios7-star-outline-orange.png">
-                      <img class="star-full star-full-activated" data-ix="remove-star-admin" src="images/ios7-star-orange.png">
-                      <div class="admin-added admin-removed">Admin removed</div>
-                    </div>
-                    <a class="w-inline-block" href="personal-profile-page.html">
-                      <img class="contributor-small-img" height="40" src="images/Screen Shot 2016-03-29 at 14.50.51.png" width="40">
-                      <div class="contributor-name">Jacob M Simon</div>
-                      <div class="contributor-position">This is a job title</div>
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div class="contributors w-row">
-                <div class="contributor-col w-col w-col-6">
-                  <div class="contributor">
-                    <div class="star-holder">
-                      <img class="star-full" src="images/ios7-star-orange.png">
-                      <img class="star-empty" data-ix="add-star-admin" src="images/ios7-star-outline-orange.png">
-                      <div class="admin-added">Admin activated</div>
-                    </div>
-                    <a class="w-inline-block" href="personal-profile-page.html">
-                      <img class="contributor-small-img" height="40" src="images/Screen Shot 2016-03-29 at 14.50.51.png" width="40">
-                      <div class="contributor-name">Jacob M Simon</div>
-                      <div class="contributor-position">This is a job title</div>
-                    </a>
-                  </div>
-                </div>
-                <div class="contributor-col w-col w-col-6">
-                  <div class="contributor">
-                    <div class="star-holder">
-                      <img class="star-full" src="images/ios7-star-orange.png">
-                      <img class="star-empty" data-ix="add-star-admin" src="images/ios7-star-outline-orange.png">
-                      <div class="admin-added">Admin activated</div>
-                    </div>
-                    <a class="w-inline-block" href="personal-profile-page.html">
-                      <img class="contributor-small-img" height="40" src="images/Screen Shot 2016-03-29 at 14.50.51.png" width="40">
-                      <div class="contributor-name">Jacob M Simon</div>
-                      <div class="contributor-position">This is a job title</div>
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div class="join-project">
-                <a class="btn btn-join w-button" href="#">Request to join +</a>
-              </div>
-              <div class="you-have-invites">
-                <div class="notification-block-p">You have been invited to join this project</div>
-                <a class="accept dsi-button notification-button w-button" href="#">Accept</a>
-                <a class="decline dsi-button notification-button w-button" href="#">Decline</a>
-              </div>
-            </div>
-            <div class="info-card">
-              <h3 class="card-h info-h">Social impact</h3>
-              <div class="impact-block">
-                <h4 class="impact-h4">Areas of society impacted</h4>
-                <div class="impact tags-block w-clearfix">
-                  <div class="skill">Culture and Arts</div>
-                  <div class="skill">Education and Skills</div>
-                  <div class="skill">Work and Employment</div>
-                  <div class="add-item-block">
-                    <div class="add-item">+</div>
-                  </div>
-                </div>
-              </div>
-              <div class="impact-block">
-                <h4 class="impact-h4">Technology focus</h4>
-                <div class="impact tags-block w-clearfix">
-                  <div class="skill">Open Hardware</div>
-                  <div class="add-item-block">
-                    <div class="add-item">+</div>
-                  </div>
-                </div>
-              </div>
-              <div class="impact-block last">
-                <h4 class="impact-h4">Technology method</h4>
-                <div class="impact tags-block w-clearfix">
-                  <div class="skill">Open Hardware</div>
-                  <div class="add-item-block">
-                    <div class="add-item">+</div>
-                  </div>
-                </div>
-              </div>
-            </div>
+      <div class="case-study-logo" data-ix="fadeinuponload-3">
+        <img class="case-study-logo-over" src="images/tor.png">
+      </div>
+      <div class="case-study-single-container w-container">
+        <h2 class="centered" data-ix="fadeinuponload-4">About the project</h2>
+        <p class="centered" data-ix="fadeinuponload-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vit</p>
+        <h4 class="case-study-intro-detail centered" data-ix="fadeinuponload-5">The Onion Router project is based in Europe and has been running since 2005</h4>
+        <div class="centered tagged" data-ix="fadeinup-5">Tagged under: <span class="tag">Technology</span> <span class="tag">Science</span> <span class="tag">Obfuscation</span>
+        </div>
+        <div class="impact w-row">
+          <div class="w-col w-col-4">
+            <h3 class="col-h3">Areas of society impacted</h3>
+            <p class="impact-descr">Lorem ipsum dolor sit amet, consectetur adipiscing elit?</p>
+            <div class="tag">An example tag</div>
+            <div class="tag">Tag 2</div>
+            <div class="tag">This is a large tag</div>
+          </div>
+          <div class="w-col w-col-4">
+            <h3 class="col-h3">DSI Focus</h3>
+            <p class="impact-descr">Lorem ipsum dolor sit amet, consectetur adipiscing elit?</p>
+            <div class="tag">Tag 2</div>
+            <div class="tag">Tag 2</div>
+            <div class="tag">Tag 2</div>
+          </div>
+          <div class="w-col w-col-4">
+            <h3 class="col-h3">Technology type</h3>
+            <p class="impact-descr">Lorem ipsum dolor sit amet, consectetur adipiscing elit?</p>
+            <div class="tag">This is a large tag</div>
           </div>
         </div>
-        <div class="w-col w-col-6 w-col-stack" id="postsScroll">
-          <div id="posts">
-            <div class="info-card">
-              <div class="add-post">
-                <div class="new-post post-author w-clearfix">
-                  <img class="post post-author-img" height="40" src="images/XG1hqhM1_400x400.jpg" width="40">
-                  <div class="profile-label">Do you have something to share?</div>
-                  <a class="create-new-post" data-ix="new-post-show" href="#">Add new post <span class="add-post-plus">+</span></a>
-                </div>
-              </div>
-              <div class="current-status w-clearfix">
-                <h3 class="status-h3">Latest post</h3>
-                <div class="latest post-author">
-                  <img class="post-author-img" height="40" src="images/XG1hqhM1_400x400.jpg" width="40">
-                  <div class="latest post-author-detail">DanielMPettifer</div>
-                  <div class="latest posted-on">Posted today at 11:12 gmt</div>
-                </div>
-                <div class="news-content">Our new app has just been published on the apple app store:
-                  <br><a class="status-link" href="https://geo.itunes.apple.com/us/app/netflix/id363590051?mt=8">https://geo.itunes.apple.com/us/app/netflix/id363590051?mt=8</a>
-                  <br> android version to be released very soon! Follow us to stay up to date!</div>
-              </div>
-              <h3 class="card-h info-h">Previous posts</h3>
-              <div class="project-post w-clearfix">
-                <div class="post-author">
-                  <img class="post-author-img" height="40" src="images/XG1hqhM1_400x400.jpg" width="40">
-                  <div class="post-author-detail">DanielMPettifer</div>
-                  <div class="posted-on">Posted yesterday at 08:22 gmt</div>
-                  <img class="edit-dark" src="images/ios7-compose-outline.png" width="25">
-                </div>
-                <div class="project-post-detail">
-                  <img class="project-post-image" src="images/wearable-circuit-board-tattoo-644x424.jpg">
-                  <div class="project-post-rich-text w-richtext">
-                    <h4>First human test of implants</h4>
-                    <p>A rich text element can be used with static or dynamic content. For static content, just drop it into any page and begin editing. For dynamic content, add a rich text field to any collection and then connect a rich text element to that field in the settings panel. Voila!</p>
-                  </div>
-                  <div class="comment-status">
-                    <div class="comment-count w-clearfix">
-                      <a class="comment-toggle w-clearfix w-inline-block" href="#">
-                        <img class="comment-bubble" src="images/ios7-chatbubble.png" width="256">
-                        <div class="comment-indicator">There are no comments, be the first to say something</div>
-                      </a>
-                      <a class="comment-toggle w-clearfix w-inline-block" href="#">
-                        <img class="comment-bubble" src="images/ios7-chatbubble.png" width="256">
-                        <div class="comment-indicator">There are 49 comments</div>
-                      </a>
-                    </div>
-                    <div class="post-comments">
-                      <div class="comment">
-                        <div class="w-row">
-                          <div class="w-clearfix w-col w-col-1">
-                            <img class="commentor-img" src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg">
-                          </div>
-                          <div class="w-col w-col-11">
-                            <div class="post-comment">
-                              <div class="w-form">
-                                <form data-name="Email Form" id="email-form" name="email-form">
-                                  <input class="add-comment w-input" data-name="Comment 4" id="Comment-4" maxlength="256" name="Comment-4" placeholder="Write your comment" type="text">
-                                </form>
-                                <div class="w-form-done">
-                                  <p>Thank you! Your submission has been received!</p>
-                                </div>
-                                <div class="w-form-fail">
-                                  <p>Oops! Something went wrong while submitting the form</p>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="comment-original w-row">
-                          <div class="w-clearfix w-col w-col-4">
-                            <img class="commentor-img" src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg">
-                            <div class="commentor-name">Jacob M Simon</div>
-                            <a class="reply" data-ix="reply-to-post" href="#">Reply</a>
-                          </div>
-                          <div class="w-col w-col-8">
-                            <div class="comment-original-post post-comment">Please could you explain more about how you managed to include quantum levitation in your base model. What were the costs involved?</div>
-                          </div>
-                        </div>
-                        <div>
-                          <div class="reply-cols w-row">
-                            <div class="reply-col-1 w-clearfix w-col w-col-3">
-                              <img class="commentor-img commentor-reply-img" src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg">
-                              <div class="commentor-name commentor-reply">Jacob M Simon</div>
-                            </div>
-                            <div class="w-col w-col-9">
-                              <div class="post-comment reply-comment">Yes, I too would like to know the cost of this. I would also like to ask why you thought of using quantum levitation as opposed to maglev for this project. Surely it's a problem keeping the temperature consistent?</div>
-                              <a class="reply" data-ix="reply-to-post" href="#">Reply</a>
-                            </div>
-                          </div>
-                          <div class="reply-cols w-row">
-                            <div class="reply-col-1 w-clearfix w-col w-col-3">
-                              <img class="commentor-img commentor-reply-img" src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg">
-                              <div class="commentor-name commentor-reply">Jacob M Simon</div>
-                            </div>
-                            <div class="w-col w-col-9">
-                              <div class="post-comment reply-comment">Yes, I too would like to know the cost of this. I would also like to ask why you thought of using quantum levitation as opposed to maglev for this project. Surely it's a problem keeping the temperature consistent?</div>
-                              <a class="reply" data-ix="reply-to-post" href="#">Reply</a>
-                            </div>
-                          </div>
-                          <div class="reply-input w-row">
-                            <div class="w-clearfix w-col w-col-1">
-                              <img class="commentor-img commentor-reply-img" src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg">
-                            </div>
-                            <div class="w-col w-col-11">
-                              <div class="w-form">
-                                <form data-name="Email Form" id="email-form" name="email-form">
-                                  <input class="add-comment w-input" data-name="Comment 5" id="Comment-5" maxlength="256" name="Comment-5" placeholder="Add your reply" type="text">
-                                </form>
-                                <div class="w-form-done">
-                                  <p>Thank you! Your submission has been received!</p>
-                                </div>
-                                <div class="w-form-fail">
-                                  <p>Oops! Something went wrong while submitting the form</p>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="project-post w-clearfix">
-                <div class="post-author">
-                  <img class="post-author-img" height="40" src="images/XG1hqhM1_400x400.jpg" width="40">
-                  <div class="post-author-detail">DanielMPettifer</div>
-                  <div class="posted-on">Posted yesterday at 08:22 gmt</div>
-                  <img class="edit-dark" src="images/ios7-compose-outline.png" width="25">
-                </div>
-                <div class="project-post-detail">
-                  <div class="w-embed w-video" style="padding-top: 56.17021276595745%;">
-                    <iframe class="embedly-embed" src="https://cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2FWs6AAhTw7RA%3Ffeature%3Doembed&amp;url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DWs6AAhTw7RA%26feature%3Dyoutu.be&amp;image=https%3A%2F%2Fi.ytimg.com%2Fvi%2FWs6AAhTw7RA%2Fhqdefault.jpg&amp;key=c4e54deccf4d4ec997a64902e9a30300&amp;type=text%2Fhtml&amp;schema=youtube" scrolling="no" frameborder="0" allowfullscreen></iframe>
-                  </div>
-                  <div class="project-post-rich-text w-richtext">
-                    <h4>Quantum levitation now included in our base model</h4>
-                    <p>A rich text element can be used with static or dynamic content. For static content, just drop it into any page and begin editing. For dynamic content, add a rich text field to any collection and then connect a rich text element to that field in the settings panel. Voila!</p>
-                    <h4>How to customize formatting for each rich text</h4>
-                    <p>Headings, paragraphs, blockquotes, figures, images, and figure captions can all be styled after a class is added to the rich text element using the "When inside of" nested selector system.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="post-comments">
-                <div class="comment">
+        <h2 class="centered" data-ix="fadeinup">Project Overview</h2>
+        <p class="case-study-main-text" data-ix="fadeinup">The Tor network is a group of&nbsp;volunteer-operated servers that allows people to improve their privacy and security on the Internet. Tor's users employ this network by connecting through a series of virtual tunnels rather than making a direct connection, thus allowing both organizations and individuals to share information over public networks without compromising their privacy. Along the same line, Tor is an effective censorship circumvention tool, allowing its users to reach otherwise blocked destinations or content. Tor can also be used as a building block for software developers to create new communication tools with built-in privacy features.Individuals use Tor to keep websites from tracking them and their family members, or to connect to news sites, instant messaging services, or the like when these are blocked by their local Internet providers.
+          <br>
+          <br>Tor's&nbsp;hidden services&nbsp;let users publish web sites and other services without needing to reveal the location of the site. Individuals also use Tor for socially sensitive communication: chat rooms and web forums for rape and abuse survivors, or people with illnesses.Journalists use Tor to communicate more safely with whistleblowers and dissidents. Non-governmental organizations (NGOs) use Tor to allow their workers to connect to their home website while they're in a foreign country, without notifying everybody nearby that they're working with that organization.Groups such as Indymedia recommend Tor for safeguarding their members' online privacy and security. Activist groups like the Electronic Frontier Foundation (EFF) recommend Tor as a mechanism for maintaining civil liberties online.
+          <br>
+          <br>Corporations use Tor as a safe way to conduct competitive analysis, and to protect sensitive procurement patterns from eavesdroppers. They also use it to replace traditional VPNs, which reveal the exact amount and timing of communication. Which locations have employees working late? Which locations have employees consulting job-hunting websites? Which research divisions are communicating with the company's patent lawyers?A branch of the U.S. Navy uses Tor for open source intelligence gathering, and one of its teams used Tor while deployed in the Middle East recently. Law enforcement uses Tor for visiting or surveilling web sites without leaving government IP addresses in their web logs, and for security during sting operations.</p>
+        <div class="centered url-block" data-ix="fadeinup">
+          <h2 class="centered" data-ix="fadeinup">Social Impact</h2>
+          <p class="case-study-main-text" data-ix="fadeinup">The Tor network is a group of&nbsp;volunteer-operated servers that allows people to improve their privacy and security on the Internet. Tor's users employ this network by connecting through a series of virtual tunnels rather than making a direct connection, thus allowing both organizations and individuals to share information over public networks without compromising their privacy. Along the same line, Tor is an effective censorship circumvention tool, allowing its users to reach otherwise blocked destinations or content. Tor can also be used as a building block for software developers to create new communication tools with built-in privacy features.Individuals use Tor to keep websites from tracking them and their family members, or to connect to news sites, instant messaging services, or the like when these are blocked by their local Internet providers.&nbsp;</p>
+          <div class="involved">
+            <h2 class="centered" data-ix="fadeinup">Who's involved</h2>
+            <div class="w-row">
+              <div class="people-col w-col w-col-6">
+                <h4 class="involved-h4">People involved</h4>
+                <div class="involved-card">
                   <div class="w-row">
-                    <div class="w-clearfix w-col w-col-1">
-                      <img class="commentor-img" src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg">
+                    <div class="image-col w-col w-col-3 w-col-small-3 w-col-tiny-3">
+                      <img class="involved-profile-img" src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg" width="50">
                     </div>
-                    <div class="w-col w-col-11">
-                      <div class="post-comment">
-                        <div class="w-form">
-                          <form data-name="Email Form" id="email-form" name="email-form">
-                            <input class="add-comment w-input" data-name="Comment" id="Comment" maxlength="256" name="Comment" placeholder="Write your comment" type="text">
-                          </form>
-                          <div class="w-form-done">
-                            <p>Thank you! Your submission has been received!</p>
-                          </div>
-                          <div class="w-form-fail">
-                            <p>Oops! Something went wrong while submitting the form</p>
-                          </div>
-                        </div>
-                      </div>
+                    <div class="w-clearfix w-col w-col-9 w-col-small-9 w-col-tiny-9">
+                      <div class="card-name">Daniel M Pettifer</div>
+                      <div class="card-position">Digital Product Manager</div>
                     </div>
                   </div>
-                  <div class="comment-original w-row">
-                    <div class="w-clearfix w-col w-col-4">
-                      <img class="commentor-img" src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg">
-                      <div class="commentor-name">Jacob M Simon</div>
-                      <a class="reply" data-ix="reply-to-post" href="#">Reply</a>
+                  <a class="view-profile" href="#">View profile</a>
+                </div>
+                <div class="involved-card">
+                  <div class="w-row">
+                    <div class="image-col w-col w-col-3 w-col-small-3 w-col-tiny-3">
+                      <img class="involved-profile-img" src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg" width="50">
                     </div>
-                    <div class="w-col w-col-8">
-                      <div class="comment-original-post post-comment">Please could you explain more about how you managed to include quantum levitation in your base model. What were the costs involved?</div>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="reply-cols w-row">
-                      <div class="reply-col-1 w-clearfix w-col w-col-3">
-                        <img class="commentor-img commentor-reply-img" src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg">
-                        <div class="commentor-name commentor-reply">Jacob M Simon</div>
-                      </div>
-                      <div class="w-col w-col-9">
-                        <div class="post-comment reply-comment">Yes, I too would like to know the cost of this. I would also like to ask why you thought of using quantum levitation as opposed to maglev for this project. Surely it's a problem keeping the temperature consistent?</div>
-                        <a class="reply" data-ix="reply-to-post" href="#">Reply</a>
-                      </div>
-                    </div>
-                    <div class="reply-cols w-row">
-                      <div class="reply-col-1 w-clearfix w-col w-col-3">
-                        <img class="commentor-img commentor-reply-img" src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg">
-                        <div class="commentor-name commentor-reply">Jacob M Simon</div>
-                      </div>
-                      <div class="w-col w-col-9">
-                        <div class="post-comment reply-comment">Yes, I too would like to know the cost of this. I would also like to ask why you thought of using quantum levitation as opposed to maglev for this project. Surely it's a problem keeping the temperature consistent?</div>
-                        <a class="reply" data-ix="reply-to-post" href="#">Reply</a>
-                      </div>
-                    </div>
-                    <div class="reply-input w-row">
-                      <div class="w-clearfix w-col w-col-1">
-                        <img class="commentor-img commentor-reply-img" src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg">
-                      </div>
-                      <div class="w-col w-col-11">
-                        <div class="w-form">
-                          <form data-name="Email Form" id="email-form" name="email-form">
-                            <input class="add-comment w-input" data-name="Comment 3" id="Comment-3" maxlength="256" name="Comment-3" placeholder="Add your reply" type="text">
-                          </form>
-                          <div class="w-form-done">
-                            <p>Thank you! Your submission has been received!</p>
-                          </div>
-                          <div class="w-form-fail">
-                            <p>Oops! Something went wrong while submitting the form</p>
-                          </div>
-                        </div>
-                      </div>
+                    <div class="w-clearfix w-col w-col-9 w-col-small-9 w-col-tiny-9">
+                      <div class="card-name">Daniel M Pettifer</div>
+                      <div class="card-position">Digital Product Manager</div>
                     </div>
                   </div>
+                  <a class="view-profile" href="#">View profile</a>
+                </div>
+                <div class="involved-card">
+                  <div class="w-row">
+                    <div class="image-col w-col w-col-3 w-col-small-3 w-col-tiny-3">
+                      <img class="involved-profile-img" src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg" width="50">
+                    </div>
+                    <div class="w-clearfix w-col w-col-9 w-col-small-9 w-col-tiny-9">
+                      <div class="card-name">Daniel M Pettifer</div>
+                      <div class="card-position">Digital Product Manager</div>
+                    </div>
+                  </div>
+                  <a class="view-profile" href="#">View profile</a>
+                </div>
+                <div class="involved-card">
+                  <div class="w-row">
+                    <div class="image-col w-col w-col-3 w-col-small-3 w-col-tiny-3">
+                      <img class="involved-profile-img" src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg" width="50">
+                    </div>
+                    <div class="w-clearfix w-col w-col-9 w-col-small-9 w-col-tiny-9">
+                      <div class="card-name">Daniel M Pettifer</div>
+                      <div class="card-position">Digital Product Manager</div>
+                    </div>
+                  </div>
+                  <a class="view-profile" href="#">View profile</a>
+                </div>
+              </div>
+              <div class="orgs-col w-col w-col-6">
+                <h4 class="involved-h4">Organisations involved</h4>
+                <div class="involved-card">
+                  <div class="w-row">
+                    <div class="w-col w-col-5 w-col-small-5 w-col-tiny-5">
+                      <img class="involved-organisation-img" src="images/waag.png">
+                    </div>
+                    <div class="w-clearfix w-col w-col-7 w-col-small-7 w-col-tiny-7">
+                      <div class="card-name">The Waag Society</div>
+                      <div class="card-position">Holland</div>
+                    </div>
+                  </div>
+                  <a class="view-profile" href="#">View organisation</a>
                 </div>
               </div>
             </div>
@@ -612,7 +279,7 @@
     <div class="container-wide">
       <div class="footer-columns w-row">
         <div class="w-col w-col-4">
-          <img class="footer-brand" src="images/logo-white.svg">
+          <img class="footer-brand" src="images/all white.svg">
         </div>
         <div class="w-col w-col-2">
           <h3 class="footer-h3">People</h3>
@@ -673,12 +340,6 @@
           <a class="footer-link" href="feedback.html">Feedback</a>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="bg-blur new-post-bg">
-    <div class="add-post-modal">
-      <a class="cancel modal-save" data-ix="hide-new-post" href="#">Cancel</a>
-      <a class="modal-save" data-ix="hide-new-post" href="#">Publish post</a>
     </div>
   </div>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
