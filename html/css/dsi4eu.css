@@ -3209,6 +3209,7 @@ strong {
 }
 
 .centered {
+  font-weight: 300;
   text-align: center;
 }
 
@@ -3222,6 +3223,10 @@ strong {
 .centered.modal-h2.log-in {
   margin-top: 67px;
   margin-bottom: 49px;
+}
+
+.centered.news-header {
+  margin-bottom: 75px;
 }
 
 .feedback-form-input {
@@ -6351,6 +6356,7 @@ strong {
   padding-top: 19px;
   border-radius: 75px;
   background-color: #2c2d33;
+  color: #2c2d33;
 }
 
 .case-study-logo-over {
@@ -6551,6 +6557,12 @@ strong {
   max-width: 150px;
   margin-top: 12px;
   margin-left: 10px;
+}
+
+.project-news {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  background-color: #f3f3f3;
 }
 
 html.w-mod-js *[data-ix="downbeforeup"] {
@@ -6910,6 +6922,16 @@ html.w-mod-js *[data-ix="menuhide"] {
     display: block;
     margin-right: auto;
     margin-left: auto;
+  }
+  .people-col {
+    padding-right: 10px;
+  }
+  .orgs-col {
+    padding-left: 10px;
+  }
+  .involved-organisation-img {
+    max-width: 109px;
+    margin-top: 19px;
   }
 }
 
@@ -7524,10 +7546,15 @@ html.w-mod-js *[data-ix="menuhide"] {
     line-height: 48px;
   }
   .tag {
-    line-height: 33px;
+    line-height: 16px;
   }
   .people-col {
     padding-right: 10px;
+  }
+  .involved-organisation-img {
+    max-width: 99px;
+    margin-top: 22px;
+    margin-left: 0px;
   }
 }
 
