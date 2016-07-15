@@ -29,7 +29,7 @@ require __DIR__ . '/header.php';
                     <?php echo show_input($caseStudy->getIntroPageText()) ?>
                 </p>
                 <h4 class="case-study-intro-detail centered" data-ix="fadeinuponload-5">
-                    The <?php echo show_input($caseStudy->getTitle()) ?> project
+                    <?php echo show_input($caseStudy->getTitle()) ?>
                     <?php if ($caseStudy->getRegion()) { ?>
                         is based in <?php echo $caseStudy->getRegion()->getCountry()->getName() ?> and
                     <?php } ?>
