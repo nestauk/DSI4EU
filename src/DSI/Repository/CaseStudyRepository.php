@@ -101,6 +101,13 @@ class CaseStudyRepository
         return $this->getObjectsWhere(["1"]);
     }
 
+    public function getAllPublished()
+    {
+        return $this->getObjectsWhere([
+            "`isPublished` = 1"
+        ]);
+    }
+
     public function clearAll()
     {
         $query = new SQL("TRUNCATE TABLE `case-studies`");
@@ -135,7 +142,7 @@ class CaseStudyRepository
           , regionID
           FROM `case-studies`
           WHERE " . implode(' AND ', $where) . "
-          ORDER BY `id` ASC
+          ORDER BY `id` DESC
           " . ((isset($options['limit']) AND $options['limit'] > 0) ? "LIMIT {$options['limit']}" : '') . "
         ");
         foreach ($query->fetch_all() AS $dbCaseStudy) {

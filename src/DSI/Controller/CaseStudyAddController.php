@@ -43,7 +43,7 @@ class CaseStudyAddController
 
                 echo json_encode([
                     'code' => 'ok',
-                    'url' => URL::caseStudy($caseStudy->getId(), $caseStudy->getTitle()),
+                    'url' => URL::caseStudy($caseStudy),
                 ]);
             } catch (ErrorHandler $e) {
                 echo json_encode([

@@ -9,6 +9,7 @@
 namespace DSI\Service;
 
 
+use DSI\Entity\CaseStudy;
 use DSI\Entity\Organisation;
 
 class URL
@@ -106,9 +107,9 @@ class URL
         return SITE_RELATIVE_PATH . '/story/' . $id . '/' . self::linkify($title);
     }
 
-    public static function caseStudy($id, $title)
+    public static function caseStudy(CaseStudy $caseStudy)
     {
-        return SITE_RELATIVE_PATH . '/case-study/' . $id . '/' . self::linkify($title);
+        return SITE_RELATIVE_PATH . '/case-study/' . $caseStudy->getId() . '/' . self::linkify($caseStudy->getTitle());
     }
 
     public static function caseStudies()

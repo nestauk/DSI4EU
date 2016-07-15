@@ -2,6 +2,7 @@
 
 namespace DSI\Controller;
 
+use DSI\Repository\CaseStudyRepository;
 use DSI\Repository\UserRepository;
 use DSI\Service\Auth;
 
@@ -19,7 +20,7 @@ class CaseStudiesController
         if ($this->format == 'json') {
 
         } else {
-
+            $caseStudies = (new CaseStudyRepository())->getAll();
             require __DIR__ . '/../../../www/case-studies.php';
         }
     }
