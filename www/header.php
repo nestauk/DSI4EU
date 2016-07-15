@@ -18,8 +18,8 @@ use \DSI\Service\Sysctl;
 
 <div class="alt nav-main w-nav white-menu" data-animation="default" data-collapse="medium" data-duration="400">
     <div class="container-wide menu w-clearfix">
-        <a class="w-nav-brand" href="#">
-            <img class="logo-dark" src="<?php echo SITE_RELATIVE_PATH?>/images/dark.svg">
+        <a class="w-nav-brand" href="<?php echo URL::home() ?>">
+            <img class="logo-dark" src="<?php echo SITE_RELATIVE_PATH ?>/images/dark.svg">
         </a>
         <nav class="w-nav-menu" role="navigation">
             <a class="alt nav w-nav-link" href="<?php echo URL::exploreDSI() ?>">Explore DSI</a>
