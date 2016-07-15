@@ -4386,7 +4386,7 @@ strong {
 
 .single-post-hero {
   position: relative;
-  height: 400px;
+  height: 480px;
   margin-top: -46px;
   background-image: -webkit-linear-gradient(270deg, rgba(14, 23, 41, .83) 26%, rgba(58, 47, 70, .7)), url('../images/brussels-locations.jpg');
   background-image: linear-gradient(180deg, rgba(14, 23, 41, .83) 26%, rgba(58, 47, 70, .7)), url('../images/brussels-locations.jpg');
@@ -4411,12 +4411,16 @@ strong {
 .post-single-date {
   position: absolute;
   right: 0px;
-  bottom: 10px;
+  bottom: 20px;
   padding-right: 10px;
   font-family: 'Open Sans', sans-serif;
   color: #fff;
   font-weight: 600;
   text-transform: uppercase;
+}
+
+.single-post-detail {
+  height: 85px;
 }
 
 .single-post-author {
@@ -4448,14 +4452,19 @@ strong {
 }
 
 .single-post-category {
-  position: absolute;
+  position: relative;
   top: 0px;
   right: 0px;
-  display: block;
+  display: inline-block;
   width: auto;
   min-width: auto;
-  padding: 10px 20px;
-  background-color: #384155;
+  margin-top: 26px;
+  margin-right: 0px;
+  margin-left: 5px;
+  padding: 5px 20px;
+  float: right;
+  border-radius: 3px;
+  background-color: rgba(115, 23, 214, .96);
   font-family: 'Open Sans', sans-serif;
   color: #fff;
   font-weight: 600;
@@ -4463,8 +4472,12 @@ strong {
   text-transform: uppercase;
 }
 
+.single-post-category.events {
+  background-color: #3e8de4;
+}
+
 .single-post-content-card {
-  padding: 40px;
+  padding: 40px 20px 40px 0px;
   border-radius: 5px;
   background-color: #fff;
   font-family: 'Open Sans', sans-serif;
@@ -4478,7 +4491,7 @@ strong {
 }
 
 .sidebar-h2 {
-  margin-top: 0px;
+  margin-top: 22px;
   padding-right: 10px;
   padding-left: 20px;
   font-family: 'Open Sans', sans-serif;
@@ -4491,19 +4504,18 @@ strong {
   padding-top: 10px;
   padding-bottom: 10px;
   padding-left: 10px;
-  border-bottom: 1px solid #f3f3f3;
+  border-style: none none solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #f3f3f3;
   background-color: #fff;
-  -webkit-transition: all 200ms ease;
-  transition: all 200ms ease;
   color: #707070;
+  cursor: pointer;
 }
 
 .latest-post-li:hover {
-  border-radius: 5px;
-  box-shadow: 0 0 25px -7px rgba(0, 0, 0, .67);
-  -webkit-transform: scale(1.03);
-  -ms-transform: scale(1.03);
-  transform: scale(1.03);
+  border-radius: 3px;
+  background-color: #1dc9a0;
+  color: #fff;
 }
 
 .latest-post-date {
@@ -5207,26 +5219,16 @@ strong {
   margin-right: 20px;
   padding: 5px 0px 5px 20px;
   float: left;
-  border-top-left-radius: 0px;
-  border-bottom-left-radius: 0px;
-  background-color: hsla(0, 0%, 100%, .15);
-  opacity: 0.75;
-  -webkit-transition: opacity 200ms ease, all 200ms ease;
-  transition: opacity 200ms ease, all 200ms ease;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  background-color: #1dc9a0;
+  opacity: 1;
   font-family: 'Open Sans', sans-serif;
+  color: #fff;
 }
 
 .breadcrumb-root:hover {
   opacity: 1;
-  -webkit-transform: scale(1.03);
-  -ms-transform: scale(1.03);
-  transform: scale(1.03);
-}
-
-.breadcrumb-root:active {
-  -webkit-transform: scale(0.93);
-  -ms-transform: scale(0.93);
-  transform: scale(0.93);
 }
 
 .breadcrumb-root.path {
@@ -5266,7 +5268,7 @@ strong {
   height: 30px;
   border-style: solid;
   border-width: 15px 0px 15px 15px;
-  border-color: transparent transparent transparent hsla(0, 0%, 100%, .15);
+  border-color: transparent transparent transparent #1dc9a0;
 }
 
 .arrow-top-left {
@@ -5276,7 +5278,7 @@ strong {
   bottom: 0px;
   width: 0px;
   height: 0px;
-  border-color: hsla(0, 0%, 100%, .15) #000 transparent transparent;
+  border-color: #1dc9a0 #000 transparent transparent;
   border-top-style: solid;
   border-top-width: 15px;
   border-right-style: solid;
@@ -5292,7 +5294,7 @@ strong {
   width: 0px;
   height: 0px;
   border-top: 15px solid transparent;
-  border-right: 15px solid hsla(0, 0%, 100%, .15);
+  border-right: 15px solid #1dc9a0;
   border-bottom: 0px solid transparent;
 }
 
@@ -6591,6 +6593,10 @@ strong {
   font-family: 'Open Sans', sans-serif;
   font-size: 10px;
   line-height: 15px;
+}
+
+.story {
+  background-color: #fff;
 }
 
 html.w-mod-js *[data-ix="downbeforeup"] {
