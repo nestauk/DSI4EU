@@ -29,8 +29,8 @@ use \DSI\Service\Sysctl;
             <a class="alt nav w-nav-link" href="<?php echo URL::organisations() ?>">Organisations</a>
             <?php if (isset($loggedInUser) AND $loggedInUser) { ?>
                 <div class="w-dropdown" data-delay="0">
-                    <div class="log-in nav w-dropdown-toggle">
-                        <div>Create&nbsp;</div>
+                    <div class="alt log-in log-in-alt nav w-nav-link w-dropdown-toggle">
+                        <div>Create</div>
                     </div>
                     <nav class="create-drop-down w-dropdown-list">
                         <a class="drop-down-link w-dropdown-link" data-ix="create-project-modal" href="#">
