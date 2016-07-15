@@ -4,7 +4,7 @@ require __DIR__ . '/header.php';
 /** @var $author \DSI\Entity\User */
 ?>
 
-    <div class="single-post-hero w-section"
+    <div class="single-post-hero"
          style="background-image: linear-gradient(180deg, rgba(14, 23, 41, .83) 26%, rgba(58, 47, 70, .7)), url('<?php echo \DSI\Entity\Image::STORY_MAIN_IMAGE_URL . $story->getMainImage() ?>');">
         <div class="container-wide post-hero">
             <h1 class="post-hero-title"><?php echo show_input($story->getTitle()) ?></h1>
@@ -47,7 +47,7 @@ require __DIR__ . '/header.php';
                     </div>
                     <?php if ($category = $story->getStoryCategory()) { ?>
                         <div class="w-col w-col-3">
-                            <div>
+                            <div class="w-clearfix">
                                 <div class="single-post-category">
                                     <?php echo $category->getName() ?>
                                 </div>
@@ -56,6 +56,11 @@ require __DIR__ . '/header.php';
                     <?php } ?>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="story">
+        <div class="container-wide">
             <div class="w-row">
                 <div class="w-col w-col-7">
                     <div class="single-post-content-card">
