@@ -126,9 +126,11 @@
                                 </div>
                             </div>
                         </div>
-                        <input class="w-button dsi-button post-story cancel" type="submit" value="Save"
+                        <input class="dsi-button post-story w-button"
+                               type="submit" value="Save"
                                ng-value="loading ? 'Loading...' : 'Save'"
                                ng-disabled="loading">
+
                         <a href="<?php echo \DSI\Service\URL::stories() ?>"
                            class="w-button dsi-button post-story cancel">Cancel</a>
                     </form>
