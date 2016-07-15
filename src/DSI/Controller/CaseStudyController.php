@@ -24,6 +24,9 @@ class CaseStudyController
         $caseStudyRepo = new CaseStudyRepository();
         $caseStudy = $caseStudyRepo->getById($this->caseStudyID);
 
+        $caseStudies = $caseStudyRepo->getAll();
+        $caseStudies = array_splice($caseStudies, 0, 3);
+
         $pageTitle = $caseStudy->getTitle();
         require __DIR__ . '/../../../www/case-study.php';
     }
