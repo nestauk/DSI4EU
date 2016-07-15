@@ -56,6 +56,7 @@ angular
                 data.headerImage = $scope.headerImage.image;
                 data.countryID = editCountry.val();
                 data.region = editCountryRegion.val();
+                data.mainText = tinyMCE.get('mainText').getContent();
                 data.add = true;
 
                 $timeout(function () {

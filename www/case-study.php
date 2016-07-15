@@ -29,9 +29,11 @@ require __DIR__ . '/header.php';
                     <?php echo show_input($caseStudy->getIntroPageText()) ?>
                 </p>
                 <h4 class="case-study-intro-detail centered" data-ix="fadeinuponload-5">
-                    The <?php echo show_input($caseStudy->getTitle()) ?> project is based
-                    in <?php echo $caseStudy->getRegion()->getCountry()->getName() ?>
-                    and has been running since 2005
+                    The <?php echo show_input($caseStudy->getTitle()) ?> project
+                    <?php if ($caseStudy->getRegion()) { ?>
+                        is based in <?php echo $caseStudy->getRegion()->getCountry()->getName() ?> and
+                    <?php } ?>
+                    has been running since 2005
                 </h4>
                 <div class="centered tagged">Tagged under: <span class="tag">Technology</span> <span
                         class="tag">Science</span> <span class="tag">Obfuscation</span>
@@ -77,9 +79,11 @@ require __DIR__ . '/header.php';
                                         <?php echo show_input(substr($caseStudy->getTitle(), 0, 15)) ?>
                                         <?php if (strlen($caseStudy->getTitle()) > 15) echo '...' ?>
                                     </div>
-                                    <div class="case-study-card-name country">
-                                        <?php echo show_input($caseStudy->getRegion()->getCountry()->getName()) ?>
-                                    </div>
+                                    <?php if ($caseStudy->getRegion()) { ?>
+                                        <div class="case-study-card-name country">
+                                            <?php echo show_input($caseStudy->getRegion()->getCountry()->getName()) ?>
+                                        </div>
+                                    <?php } ?>
                                 </div>
                             </div>
                         </div>

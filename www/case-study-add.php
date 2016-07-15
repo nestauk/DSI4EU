@@ -6,9 +6,6 @@ require __DIR__ . '/header.php';
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
-    <script type="text/javascript"
-            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/CaseStudyAddController.js"></script>
-
     <div ng-controller="CaseStudyAddController">
         <div class="header-section-grey w-section">
             <div class="container-wide">
@@ -35,9 +32,9 @@ require __DIR__ . '/header.php';
                                 <textarea class="creator-data-entry w-input" id="field" maxlength="5000" name="field"
                                           ng-model="caseStudy.introPageText"
                                           placeholder="This text appears at the top of the case study page"></textarea>
-                                <label for="field-2">Main page text</label>
-                                <textarea class="creator-data-entry end long-description w-input" data-name="Field 2"
-                                          id="field-2" maxlength="5000" name="field-2"
+                                <label>Main page text</label>
+                                <textarea class="creator-data-entry end long-description w-input"
+                                          id="mainText"
                                           ng-model="caseStudy.mainText"
                                           placeholder="This is the main body text"></textarea>
                                 <h2 class="edit-h2">Duration of project</h2>
@@ -75,7 +72,7 @@ require __DIR__ . '/header.php';
                                         Loading...
                                     </div>
                                 </div>
-                                
+
                             </div>
                             <div class="form-col-right w-col w-col-6">
                                 <h2 class="edit-h2">Link to project or external link</h2>
@@ -174,8 +171,24 @@ require __DIR__ . '/header.php';
         </div>
     </div>
 
+    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+    <script type="text/javascript"
+            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/CaseStudyAddController.js"></script>
+
     <script>
         $(function () {
+            tinymce.init({
+                selector: '#mainText',
+                height: 500,
+                plugins: "autoresize autolink lists link preview paste textcolor colorpicker image imagetools media",
+                autoresize_bottom_margin: 0,
+                autoresize_max_height: 500,
+                menubar: false,
+                toolbar1: 'styleselect | forecolor backcolor | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media | preview',
+                image_advtab: true,
+                paste_data_images: false
+            });
+
             $("#projectStartDate").datepicker({
                 dateFormat: "yy-mm-dd"
             });

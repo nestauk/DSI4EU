@@ -41,21 +41,23 @@ use \DSI\Service\URL;
             <img class="brand" src="images/all white.svg" width="160">
         </a>
         <nav class="m-nav-open w-nav-menu" role="navigation">
-            <a class="nav w-nav-link" href="explore-dsi.html">Explore DSI</a>
-            <a class="nav w-nav-link" href="stories.html">Case Studies</a>
-            <a class="nav w-nav-link" href="stories.html">Blog</a>
-            <a class="nav w-nav-link" href="projects.html">Projects</a>
-            <a class="nav w-nav-link" href="organisations.html">Organisations</a>
+            <a class="nav w-nav-link" href="<?php echo URL::exploreDSI() ?>">Explore DSI</a>
+            <a class="nav w-nav-link" href="<?php echo URL::caseStudies() ?>">Case Studies</a>
+            <a class="nav w-nav-link" href="<?php echo URL::stories() ?>">Blog</a>
+            <a class="nav w-nav-link" href="<?php echo URL::projects() ?>">Projects</a>
+            <a class="nav w-nav-link" href="<?php echo URL::organisations() ?>">Organisations</a>
             <a class="log-in log-in-alt nav w-nav-link" data-ix="open-login-modal">login</a>
             <div class="w-dropdown" data-delay="0">
                 <div class="log-in nav w-dropdown-toggle">
                     <div>Sign up&nbsp;</div>
                 </div>
                 <nav class="create-drop-down w-dropdown-list">
-                    <a class="drop-down-link w-dropdown-link" data-ix="create-project-modal" href="#">Create a new
-                        project</a>
-                    <a class="drop-down-link w-dropdown-link" data-ix="create-organisation-modal" href="#">Create an
-                        organisation</a>
+                    <a class="drop-down-link w-dropdown-link" data-ix="create-project-modal" href="#">
+                        Create a new project
+                    </a>
+                    <a class="drop-down-link w-dropdown-link" data-ix="create-organisation-modal" href="#">
+                        Create an organisation
+                    </a>
                     <div class="arror-up"></div>
                 </nav>
             </div>
