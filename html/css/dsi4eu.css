@@ -3983,7 +3983,7 @@ strong {
 
 .page-h1.light {
   display: block;
-  width: 960px;
+  width: auto;
   margin: 50px auto 0px;
   color: #1dc9a0;
   font-size: 28px;
@@ -6257,6 +6257,7 @@ strong {
 }
 
 .creator-data-entry {
+  max-width: 320px;
   border-style: none;
   border-radius: 3px;
   background-color: #f3f3f3;
@@ -6270,8 +6271,18 @@ strong {
   margin-bottom: 40px;
 }
 
+.creator-data-entry.long-description.wide {
+  max-width: 100%;
+}
+
 .creator-data-entry.end {
+  max-width: 320px;
   margin-bottom: 40px;
+  margin-left: 1px;
+}
+
+.creator-data-entry.end.wide {
+  max-width: 100%;
 }
 
 .creator-tab-menu {
@@ -6297,6 +6308,7 @@ strong {
 }
 
 .form-col-right {
+  position: relative;
   padding-left: 50px;
 }
 
@@ -6563,6 +6575,22 @@ strong {
   padding-top: 50px;
   padding-bottom: 50px;
   background-color: #f3f3f3;
+}
+
+.padding-right-50 {
+  padding-right: 50px;
+  border-right: 1px solid #f3f3f3;
+}
+
+.padding-left-50 {
+  padding-left: 50px;
+}
+
+.small-print {
+  margin-bottom: 12px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 10px;
+  line-height: 15px;
 }
 
 html.w-mod-js *[data-ix="downbeforeup"] {
@@ -6933,6 +6961,12 @@ html.w-mod-js *[data-ix="menuhide"] {
     max-width: 109px;
     margin-top: 19px;
   }
+  .padding-right-50 {
+    border-style: none;
+  }
+  .padding-left-50 {
+    padding-left: 0px;
+  }
 }
 
 @media (max-width: 767px) {
@@ -6959,6 +6993,9 @@ html.w-mod-js *[data-ix="menuhide"] {
   }
   .body-container {
     margin-top: -52px;
+  }
+  .body-content.add-story {
+    margin-top: 157px;
   }
   .profile-main {
     position: static;
@@ -7176,6 +7213,15 @@ html.w-mod-js *[data-ix="menuhide"] {
   .cta-p {
     text-align: center;
   }
+  .tabbed-nav-buttons {
+    padding: 10px;
+  }
+  .creator-col {
+    padding-right: 0px;
+  }
+  .creator-tab-menu {
+    margin-top: -151px;
+  }
   .header-large-desc {
     padding-right: 10px;
     padding-left: 10px;
@@ -7225,6 +7271,9 @@ html.w-mod-js *[data-ix="menuhide"] {
   }
   .tabs-content {
     width: 100%;
+  }
+  .body-content.add-story {
+    margin-top: 230px;
   }
   .tab {
     display: inline-block;
@@ -7542,6 +7591,24 @@ html.w-mod-js *[data-ix="menuhide"] {
   .case-study-card-name.country {
     width: 50%;
   }
+  .tab-button-next.update-button {
+    width: 150px;
+    margin-bottom: 10px;
+  }
+  .tab-button-next.tab-button-publish {
+    width: 150px;
+    margin-bottom: 10px;
+    float: right;
+  }
+  .creator-col {
+    padding-right: 0px;
+  }
+  .creator-col.creator-col-right {
+    padding-right: 0px;
+  }
+  .creator-tab-menu {
+    margin-top: -214px;
+  }
   .reccomendation {
     line-height: 48px;
   }
@@ -7555,6 +7622,9 @@ html.w-mod-js *[data-ix="menuhide"] {
     max-width: 99px;
     margin-top: 22px;
     margin-left: 0px;
+  }
+  .padding-right-50 {
+    padding-right: 0px;
   }
 }
 
