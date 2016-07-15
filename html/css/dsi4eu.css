@@ -3667,12 +3667,16 @@ strong {
 .dsi-button.post-story {
   margin-left: 10px;
   float: right;
+  border: 1px solid #1dc9a0;
   background-color: #fff;
+  font-family: 'Open Sans', sans-serif;
+  color: #1dc9a0;
 }
 
 .dsi-button.post-story.cancel {
   position: static;
-  height: 30px;
+  height: auto;
+  border-color: #db4343;
   background-color: #fff;
   color: #c73232;
   line-height: 20px;
@@ -4883,8 +4887,8 @@ strong {
   position: relative;
   height: 330px;
   margin-top: -48px;
-  background-image: -webkit-linear-gradient(0deg, rgba(115, 23, 214, .96), #3e8de4 50%, rgba(29, 201, 160, .94)), url('../images/bg2.png'), -webkit-linear-gradient(45deg, #18233f, #384155);
-  background-image: linear-gradient(90deg, rgba(115, 23, 214, .96), #3e8de4 50%, rgba(29, 201, 160, .94)), url('../images/bg2.png'), linear-gradient(45deg, #18233f, #384155);
+  background-image: -webkit-radial-gradient(circle farthest-corner at 50% 50%, #2c2d33, rgba(44, 45, 51, .94)), url('../images/bg2.png'), -webkit-linear-gradient(45deg, #18233f, #384155);
+  background-image: radial-gradient(circle farthest-corner at 50% 50%, #2c2d33, rgba(44, 45, 51, .94)), url('../images/bg2.png'), linear-gradient(45deg, #18233f, #384155);
   background-position: 0px 0px, 0px 0px, 0px 0px;
   background-size: auto, 960px, auto;
 }
