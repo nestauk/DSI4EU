@@ -131,6 +131,16 @@ class Router
         } elseif (preg_match('<^/search/(.*)$>', $this->pageURL, $matches)) {
             $this->searchPage($matches);
 
+// Case Studies
+        } elseif ($this->pageURL === '/case-study/add') {
+            $this->addCaseStudyPage();
+
+        } elseif ($this->pageURL === '/case-studies') {
+            $this->caseStudiesPage(null, 'json');
+
+        } elseif (preg_match('<^/case-study/([0-9]+)(\/.*)?$>', $this->pageURL, $matches)) {
+            $this->caseStudyPage($matches);
+
 // Static pages
         } elseif ($this->pageURL === '/robots.txt') {
             $this->robotsTxtPage();
@@ -271,6 +281,12 @@ class Router
         $command->exec();
     }
 
+    private function addCaseStudyPage()
+    {
+        $command = new \DSI\Controller\CaseStudyAddController();
+        $command->exec();
+    }
+
     private function projectsPage()
     {
         $command = new \DSI\Controller\ProjectsController();
@@ -372,6 +388,13 @@ class Router
         $command->exec();
     }
 
+    private function caseStudyPage($matches)
+    {
+        $command = new \DSI\Controller\CaseStudyController();
+        $command->caseStudyID = $matches[1];
+        $command->exec();
+    }
+
     private function storyPage($matches)
     {
         $command = new \DSI\Controller\StoryController();
@@ -414,6 +437,13 @@ class Router
     {
         $command = new \DSI\Controller\SearchController();
         $command->term = $matches[1];
+        $command->format = $format;
+        $command->exec();
+    }
+
+    private function caseStudiesPage($format = 'html')
+    {
+        $command = new \DSI\Controller\CaseStudiesController();
         $command->format = $format;
         $command->exec();
     }

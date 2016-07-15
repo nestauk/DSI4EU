@@ -82,7 +82,8 @@ class CountryRepository
         $countries = [];
         $query = new SQL("SELECT 
             id, name
-          FROM `countries` WHERE " . implode(' AND ', $where) . "");
+          FROM `countries` WHERE " . implode(' AND ', $where) . "
+          ORDER BY name");
         foreach ($query->fetch_all() AS $dbCountry) {
             $countries[] = $this->buildCountryFromData($dbCountry);
         }

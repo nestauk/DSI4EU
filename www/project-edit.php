@@ -79,7 +79,8 @@ require __DIR__ . '/header.php';
                                      src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg"
                                      ng-src="{{project.logo}}">
                                 <a class="w-button dsi-button story-image-upload" href="#"
-                                   ngf-select="logo.upload($file, $invalidFiles)" ng-bind="logo.loading ? 'Loading...' : 'Upload image'">
+                                   ngf-select="logo.upload($file, $invalidFiles)"
+                                   ng-bind="logo.loading ? 'Loading...' : 'Upload image'">
                                     Upload image
                                 </a>
                                 <?php /*

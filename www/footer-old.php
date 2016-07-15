@@ -1,36 +1,30 @@
 </div>
-<div class="footer w-section">
+<div class="w-section footer">
     <div class="container-wide">
-
-        <?php // newsletter ?>
-
-        <div class="footer-columns w-row">
+        <div class="w-row footer-columns">
             <div class="w-col w-col-4">
-                <img class="footer-brand" src="<?php echo SITE_RELATIVE_PATH ?>/images/all white.svg">
+                <img src="<?php echo SITE_RELATIVE_PATH ?>/images/logo-white.svg" class="footer-brand">
             </div>
             <div class="w-col w-col-2">
                 <h3 class="footer-h3">People</h3>
                 <ul class="w-list-unstyled">
                     <li class="footer-link">
-                        <a class="footer-link" href="home-dashboard.html">Your dashboard</a>
+                        <a href="#" class="footer-link">Who uses DSI4EU?</a>
                     </li>
                     <li class="footer-link">
-                        <a class="footer-link" href="#">Who uses DSI4EU?</a>
+                        <a href="#" class="footer-link">Join DSI4EU</a>
                     </li>
                     <li class="footer-link">
-                        <a class="footer-link" href="#">Join DSI4EU</a>
+                        <a href="#" class="footer-link">Help centre</a>
                     </li>
                     <li class="footer-link">
-                        <a class="footer-link" href="#">Help centre</a>
+                        <a href="#" class="footer-link">Report abuse</a>
                     </li>
                     <li class="footer-link">
-                        <a class="footer-link" href="#">Report abuse</a>
+                        <a href="#" class="footer-link">Terms of service</a>
                     </li>
                     <li class="footer-link">
-                        <a class="footer-link" href="#">Terms of service</a>
-                    </li>
-                    <li class="footer-link">
-                        <a class="footer-link" href="#">Privacy policy</a>
+                        <a href="#" class="footer-link">Privacy policy</a>
                     </li>
                 </ul>
             </div>
@@ -38,13 +32,13 @@
                 <h3 class="footer-h3">Projects</h3>
                 <ul class="w-list-unstyled">
                     <li class="footer-link">
-                        <a class="footer-link" href="#">Add a project to DSI4EU</a>
+                        <a href="#" class="footer-link">Add a project to DSI4EU</a>
                     </li>
                     <li class="footer-link">
-                        <a class="footer-link" href="#">Report a&nbsp;project</a>
+                        <a href="#" class="footer-link">Report a&nbsp;project</a>
                     </li>
                     <li class="footer-link">
-                        <a class="footer-link" href="#">View project listing</a>
+                        <a href="#" class="footer-link">View project listing</a>
                     </li>
                 </ul>
             </div>
@@ -52,49 +46,35 @@
                 <h3 class="footer-h3">Organisations</h3>
                 <ul class="w-list-unstyled">
                     <li class="footer-link">
-                        <a class="footer-link" href="#">Add an organisation</a>
+                        <a href="#" class="footer-link">Add an organisation</a>
                     </li>
                     <li class="footer-link">
-                        <a class="footer-link" href="#">Report an organisation</a>
+                        <a href="#" class="footer-link">Report an organisation</a>
                     </li>
                     <li class="footer-link">
-                        <a class="footer-link" href="#">View partner organisations</a>
+                        <a href="#" class="footer-link">View partner organisations</a>
                     </li>
                 </ul>
             </div>
             <div class="w-col w-col-2">
                 <h3 class="footer-h3">Development</h3>
-                <a class="footer-link" href="feedback.html">Feedback</a>
-            </div>
-        </div>
-        <div class="footer-partner-row w-row">
-            <div class="w-col w-col-6"></div>
-            <div class="w-clearfix w-col w-col-6">
-                <a class="footer-partner-link w-inline-block" href="#">
-                    <img src="<?php echo SITE_RELATIVE_PATH ?>/images/logo_SUPSI.png" width="125">
-                </a>
-                <a class="footer-partner-link w-inline-block" href="#">
-                    <img src="<?php echo SITE_RELATIVE_PATH ?>/images/waag-f1d052f43133268eaf2e13090a0b4bf1.png"
-                         width="125">
-                </a>
-                <a class="footer-partner-link w-inline-block" href="#">
-                    <img src="<?php echo SITE_RELATIVE_PATH ?>/images/nesta-6a9b5fe999e8323b379ccc0d8e70290f.png"
-                         width="125">
-                </a>
+                <a href="<?php echo \DSI\Service\URL::feedback() ?>" class="footer-link">Feedback</a>
             </div>
         </div>
     </div>
 </div>
-<div class="cookies" id="cookies">
-    <div class="container-wide">
+
+<div class="eu-footer w-section">
+    <div class="container-wide footer-container">
         <div class="w-row">
-            <div class="w-col w-col-6">
-                <h3 class="cookie-h3">We use cookies to help us improve this site and your experience. Continue to use
-                    the site if you’re happy with this or click to find out more.</h3>
+            <div class="w-col w-col-1">
+                <img class="ec-logo" src="<?php echo SITE_RELATIVE_PATH?>/images/EC-LOGO.png">
             </div>
-            <div class="w-clearfix w-col w-col-6">
-                <a class="cookie-button w-button" href="#">Find out more</a>
-                <a class="cookie-button w-button" href="#" onclick="$('#cookies').hide()">Continue</a>
+            <div class="w-col w-col-11">
+                <div class="ec-footer-p">The DSI4EU project is funded by the European Commission Directorate General
+                    for Communications Networks, Content &amp; Technology, Net Futures, Administration and Finance,
+                    under Grant Agreement No. 688192
+                </div>
             </div>
         </div>
     </div>
@@ -103,8 +83,7 @@
 <script type="text/javascript"
         src="<?php echo SITE_RELATIVE_PATH ?>/js/dsi4eu.js?v=<?php echo \DSI\Service\Sysctl::$version ?>"></script>
 <!--[if lte IE 9]>
-<script src="<?php echo SITE_RELATIVE_PATH ?>/js/lib/placeholders/placeholders.min.js"></script>
-<![endif]-->
+<script src="<?php echo SITE_RELATIVE_PATH ?>/js/lib/placeholders/placeholders.min.js"></script><![endif]-->
 <script>
     $(function () {
         // quick search regex

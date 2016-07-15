@@ -1,0 +1,209 @@
+<?php
+require __DIR__ . '/header.php';
+/** @var $loggedInUser \DSI\Entity\User */
+?>
+
+    <div class="case-study-grid container-wide">
+        <div class="case-studies-row case-studies-row-grid w-row">
+            <div class="case-study-col-1 w-col w-col-4 w-col-stack">
+                <div class="onloadone" data-ix="fadeinuponload-3">
+                    <div class="case-study-card" data-ix="case-study-card-overlay">
+                        <div class="case-study-card-overlay"></div>
+                        <div class="case-study-card-info">
+                            <img class="case-study-card-logo" src="images/arduino.png" width="75">
+                            <div class="case-study-card-p">In 2005, Massimo Banzi, an Italian engineer and designer, started the Arduino project to enable students at the Interaction Design Institute Ivrea (IDII) to build electronic devices using an open-source hardware board.</div>
+                            <a class="case-study-card-read-more" href="#">See the case study</a>
+                        </div>
+                        <div class="case-study-card-label w-clearfix">
+                            <div class="case-study-card-name">Arduino</div>
+                            <div class="case-study-card-name country">Switzerland</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="case-study-col-2 w-col w-col-4 w-col-stack">
+                <div class="onloadtwo" data-ix="fadeinuponload">
+                    <div class="case-study-card tor" data-ix="case-study-card-overlay">
+                        <div class="case-study-card-overlay tor"></div>
+                        <div class="case-study-card-info">
+                            <img class="case-study-card-logo" src="images/tor.png" width="75">
+                            <div class="case-study-card-p">The Onion Router project (TOR) is a non-profit organisation that conducts research and development into online privacy and anonymity.&nbsp;It has developed software tools designed to stop people – including government agencies and corporations – learning web users location or tracking their browsing habits.</div>
+                            <a class="case-study-card-read-more" href="#">See the case study</a>
+                        </div>
+                        <div class="case-study-card-label w-clearfix">
+                            <div class="case-study-card-name">The Onion Router P...</div>
+                            <div class="case-study-card-name country">Germany</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="case-study-col-3 w-col w-col-4 w-col-stack">
+                <div class="onloadthree" data-ix="fadeinuponload-2">
+                    <div class="case-study-card communia" data-ix="case-study-card-overlay">
+                        <div class="case-study-card-overlay communia"></div>
+                        <div class="case-study-card-info">
+                            <img class="case-study-card-logo" src="images/communia.png" width="75">
+                            <div class="case-study-card-p">COMMUNIA – The European Thematic Network on the Digital Public Domain, is an international association based in Brussels. The COMMUNIA association is built on the eponymous COMMUNIA Project Thematic Network, funded by the European Commission from 2007 to 2011, which issued the Public Domain Manifesto and gathered over 50 members..</div>
+                            <a class="case-study-card-read-more" href="#">See the case study</a>
+                        </div>
+                        <div class="case-study-card-label w-clearfix">
+                            <div class="case-study-card-name">Communia</div>
+                            <div class="case-study-card-name country">Italy</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="case-studies-row case-studies-row-grid w-row">
+            <div class="case-study-col-1 w-col w-col-4">
+                <div class="onloadone" data-ix="fadeinuponload-5">
+                    <div class="case-study-card" data-ix="case-study-card-overlay">
+                        <div class="case-study-card-overlay"></div>
+                        <div class="case-study-card-info">
+                            <img class="case-study-card-logo" src="images/arduino.png" width="75">
+                            <div class="case-study-card-p">In 2005, Massimo Banzi, an Italian engineer and designer, started the Arduino project to enable students at the Interaction Design Institute Ivrea (IDII) to build electronic devices using an open-source hardware board.</div>
+                            <a class="case-study-card-read-more" href="#">See the case study</a>
+                        </div>
+                        <div class="case-study-card-label w-clearfix">
+                            <div class="case-study-card-name">Arduino</div>
+                            <div class="case-study-card-name country">Switzerland</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="case-study-col-2 w-col w-col-4">
+                <div class="onloadtwo" data-ix="fadeinuponload-2">
+                    <div class="case-study-card tor" data-ix="case-study-card-overlay">
+                        <div class="case-study-card-overlay tor"></div>
+                        <div class="case-study-card-info">
+                            <img class="case-study-card-logo" src="images/tor.png" width="75">
+                            <div class="case-study-card-p">The Onion Router project (TOR) is a non-profit organisation that conducts research and development into online privacy and anonymity.&nbsp;It has developed software tools designed to stop people – including government agencies and corporations – learning web users location or tracking their browsing habits.</div>
+                            <a class="case-study-card-read-more" href="#">See the case study</a>
+                        </div>
+                        <div class="case-study-card-label w-clearfix">
+                            <div class="case-study-card-name">The Onion Router P...</div>
+                            <div class="case-study-card-name country">Germany</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="case-study-col-3 w-col w-col-4">
+                <div class="onloadthree" data-ix="fadeinuponload-3">
+                    <div class="case-study-card communia" data-ix="case-study-card-overlay">
+                        <div class="case-study-card-overlay communia"></div>
+                        <div class="case-study-card-info">
+                            <img class="case-study-card-logo" src="images/communia.png" width="75">
+                            <div class="case-study-card-p">COMMUNIA – The European Thematic Network on the Digital Public Domain, is an international association based in Brussels. The COMMUNIA association is built on the eponymous COMMUNIA Project Thematic Network, funded by the European Commission from 2007 to 2011, which issued the Public Domain Manifesto and gathered over 50 members..</div>
+                            <a class="case-study-card-read-more" href="#">See the case study</a>
+                        </div>
+                        <div class="case-study-card-label w-clearfix">
+                            <div class="case-study-card-name">Communia</div>
+                            <div class="case-study-card-name country">Italy</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="case-studies-row case-studies-row-grid w-row">
+            <div class="case-study-col-1 w-col w-col-4">
+                <div class="onloadone" data-ix="fadeinuponload-3">
+                    <div class="case-study-card" data-ix="case-study-card-overlay">
+                        <div class="case-study-card-overlay"></div>
+                        <div class="case-study-card-info">
+                            <img class="case-study-card-logo" src="images/arduino.png" width="75">
+                            <div class="case-study-card-p">In 2005, Massimo Banzi, an Italian engineer and designer, started the Arduino project to enable students at the Interaction Design Institute Ivrea (IDII) to build electronic devices using an open-source hardware board.</div>
+                            <a class="case-study-card-read-more" href="#">See the case study</a>
+                        </div>
+                        <div class="case-study-card-label w-clearfix">
+                            <div class="case-study-card-name">Arduino</div>
+                            <div class="case-study-card-name country">Switzerland</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="case-study-col-2 w-col w-col-4">
+                <div class="onloadtwo" data-ix="fadeinuponload-4">
+                    <div class="case-study-card tor" data-ix="case-study-card-overlay">
+                        <div class="case-study-card-overlay tor"></div>
+                        <div class="case-study-card-info">
+                            <img class="case-study-card-logo" src="images/tor.png" width="75">
+                            <div class="case-study-card-p">The Onion Router project (TOR) is a non-profit organisation that conducts research and development into online privacy and anonymity.&nbsp;It has developed software tools designed to stop people – including government agencies and corporations – learning web users location or tracking their browsing habits.</div>
+                            <a class="case-study-card-read-more" href="#">See the case study</a>
+                        </div>
+                        <div class="case-study-card-label w-clearfix">
+                            <div class="case-study-card-name">The Onion Router P...</div>
+                            <div class="case-study-card-name country">Germany</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="case-study-col-3 w-col w-col-4">
+                <div class="onloadthree" data-ix="fadeinuponload-5">
+                    <div class="case-study-card communia" data-ix="case-study-card-overlay">
+                        <div class="case-study-card-overlay communia"></div>
+                        <div class="case-study-card-info">
+                            <img class="case-study-card-logo" src="images/communia.png" width="75">
+                            <div class="case-study-card-p">COMMUNIA – The European Thematic Network on the Digital Public Domain, is an international association based in Brussels. The COMMUNIA association is built on the eponymous COMMUNIA Project Thematic Network, funded by the European Commission from 2007 to 2011, which issued the Public Domain Manifesto and gathered over 50 members..</div>
+                            <a class="case-study-card-read-more" href="#">See the case study</a>
+                        </div>
+                        <div class="case-study-card-label w-clearfix">
+                            <div class="case-study-card-name">Communia</div>
+                            <div class="case-study-card-name country">Italy</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="case-studies-row case-studies-row-grid w-row">
+            <div class="case-study-col-1 w-col w-col-4">
+                <div class="onloadone" data-ix="fadeinuponload-3">
+                    <div class="case-study-card" data-ix="case-study-card-overlay">
+                        <div class="case-study-card-overlay"></div>
+                        <div class="case-study-card-info">
+                            <img class="case-study-card-logo" src="images/arduino.png" width="75">
+                            <div class="case-study-card-p">In 2005, Massimo Banzi, an Italian engineer and designer, started the Arduino project to enable students at the Interaction Design Institute Ivrea (IDII) to build electronic devices using an open-source hardware board.</div>
+                            <a class="case-study-card-read-more" href="#">See the case study</a>
+                        </div>
+                        <div class="case-study-card-label w-clearfix">
+                            <div class="case-study-card-name">Arduino</div>
+                            <div class="case-study-card-name country">Switzerland</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="case-study-col-2 w-col w-col-4">
+                <div class="onloadtwo" data-ix="fadeinuponload-4">
+                    <div class="case-study-card tor" data-ix="case-study-card-overlay">
+                        <div class="case-study-card-overlay tor"></div>
+                        <div class="case-study-card-info">
+                            <img class="case-study-card-logo" src="images/tor.png" width="75">
+                            <div class="case-study-card-p">The Onion Router project (TOR) is a non-profit organisation that conducts research and development into online privacy and anonymity.&nbsp;It has developed software tools designed to stop people – including government agencies and corporations – learning web users location or tracking their browsing habits.</div>
+                            <a class="case-study-card-read-more" href="#">See the case study</a>
+                        </div>
+                        <div class="case-study-card-label w-clearfix">
+                            <div class="case-study-card-name">The Onion Router P...</div>
+                            <div class="case-study-card-name country">Germany</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="case-study-col-3 w-col w-col-4">
+                <div class="onloadthree" data-ix="fadeinuponload-5">
+                    <div class="case-study-card communia" data-ix="case-study-card-overlay">
+                        <div class="case-study-card-overlay communia"></div>
+                        <div class="case-study-card-info">
+                            <img class="case-study-card-logo" src="images/communia.png" width="75">
+                            <div class="case-study-card-p">COMMUNIA – The European Thematic Network on the Digital Public Domain, is an international association based in Brussels. The COMMUNIA association is built on the eponymous COMMUNIA Project Thematic Network, funded by the European Commission from 2007 to 2011, which issued the Public Domain Manifesto and gathered over 50 members..</div>
+                            <a class="case-study-card-read-more" href="#">See the case study</a>
+                        </div>
+                        <div class="case-study-card-label w-clearfix">
+                            <div class="case-study-card-name">Communia</div>
+                            <div class="case-study-card-name country">Italy</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<?php require __DIR__ . '/footer.php' ?>
