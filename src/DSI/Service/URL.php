@@ -111,6 +111,11 @@ class URL
         return SITE_RELATIVE_PATH . '/case-study/' . $id . '/' . self::linkify($title);
     }
 
+    public static function caseStudies()
+    {
+        return SITE_RELATIVE_PATH . '/case-studies';
+    }
+
     public static function storyEdit($id)
     {
         return SITE_RELATIVE_PATH . '/story/edit/' . $id;

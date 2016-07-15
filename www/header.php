@@ -15,9 +15,30 @@ use \DSI\Service\Sysctl;
 <script type="text/javascript"
         src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/SearchController.js?v=<?php echo Sysctl::$version ?>"></script>
 <body ng-app="DSIApp" ng-controller="SearchController" id="top">
+
+<div class="alt nav-main w-nav white-menu" data-animation="default" data-collapse="medium" data-duration="400">
+    <div class="container-wide menu w-clearfix">
+        <a class="w-nav-brand" href="#">
+            <img class="logo-dark" src="<?php echo SITE_RELATIVE_PATH?>/images/dark.svg">
+        </a>
+        <nav class="w-nav-menu" role="navigation">
+            <a class="alt nav w-nav-link" href="<?php echo URL::exploreDSI() ?>">Explore DSI</a>
+            <a class="alt nav w-nav-link" href="<?php echo URL::caseStudies() ?>">Case Studies</a>
+            <a class="alt nav w-nav-link" href="<?php echo URL::stories() ?>">Blog</a>
+            <a class="alt nav w-nav-link" href="<?php echo URL::projects() ?>">Projects</a>
+            <a class="alt nav w-nav-link" href="<?php echo URL::organisations() ?>">Organisations</a>
+            <a class="alt log-in nav w-nav-link white-alt" href="#">Login</a>
+            <a class="alt log-in log-in-alt nav w-nav-link" href="#">Signup</a>
+        </nav>
+        <div class="w-nav-button">
+            <div class="w-icon-nav-menu"></div>
+        </div>
+    </div>
+</div>
+
 <?php if (!isset($_SESSION['user'])) { ?>
 
-<?php require __DIR__ . '/partialViews/loginModal.php' ?>
+    <?php require __DIR__ . '/partialViews/loginModal.php' ?>
 
     <div class="modal-signup bg-blur">
         <div data-ix="downbeforeup" class="signup-form">
@@ -219,6 +240,7 @@ use \DSI\Service\Sysctl;
     </div>
 <?php } ?>
 
+<!--
 <div data-collapse="medium" data-animation="default" data-duration="400" class="w-nav nav-main">
     <div class="w-clearfix container-wide nav-container">
         <a href="<?php echo SITE_RELATIVE_PATH ?>/" class="w-nav-brand">
@@ -251,6 +273,7 @@ use \DSI\Service\Sysctl;
         </div>
     </div>
 </div>
+-->
 
 <?php if (!isset($hideSearch) OR $hideSearch !== true) { ?>
     <div class="search bg-blur">
