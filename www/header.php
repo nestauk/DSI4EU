@@ -295,7 +295,7 @@ use \DSI\Service\Sysctl;
                                 Sign out
                             </a>
                         </div>
-                        <img width="15" src="<?php echo SITE_RELATIVE_PATH ?>/images/white-settings.png"
+                        <img width="15" src="<?php echo SITE_RELATIVE_PATH ?>/images/vertical-nav.png"
                              data-ix="showpopover"
                              class="vert-nav">
                         <a href="<?php echo SITE_RELATIVE_PATH ?>/my-profile"
