@@ -2865,7 +2865,7 @@ strong {
 }
 
 .container-wide.case-study-grid {
-  margin-top: 170px;
+  margin-top: 20px;
 }
 
 .container-wide.container-wide-header-large {
@@ -2874,15 +2874,22 @@ strong {
 }
 
 .button {
-  min-width: 175px;
-  padding: 10px 30px;
-  border: 0px none #000;
+  position: static;
+  right: 0px;
+  bottom: 30px;
+  min-width: auto;
+  padding: 7px 20px;
+  border: 1px solid #1dc9a0;
   border-radius: 3px;
+  background-color: transparent;
   -webkit-transition: all 200ms ease;
   transition: all 200ms ease;
-  font-size: 18px;
-  line-height: 30px;
+  font-family: 'Open Sans', sans-serif;
+  color: #1dc9a0;
+  font-size: 14px;
+  line-height: 20px;
   text-align: center;
+  text-transform: uppercase;
 }
 
 .button:hover {
@@ -2898,6 +2905,10 @@ strong {
   margin-right: auto;
   margin-left: auto;
   background-color: #dd3ea4;
+}
+
+.button.button-bottom-right {
+  position: absolute;
 }
 
 .footer-brand {
@@ -3988,7 +3999,7 @@ strong {
 .page-h1.light {
   display: block;
   width: auto;
-  margin: 50px auto 0px;
+  margin: 38px auto 0px;
   color: #1dc9a0;
   font-size: 28px;
   text-align: center;
