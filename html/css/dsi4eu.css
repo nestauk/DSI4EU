@@ -2911,6 +2911,10 @@ strong {
   position: absolute;
 }
 
+.button.button-bottom-right.edit-case-study {
+  bottom: 97px;
+}
+
 .footer-brand {
   width: 140px;
 }
