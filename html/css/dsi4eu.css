@@ -2459,8 +2459,8 @@ strong {
   width: 100%;
   height: 90px;
   border-bottom-style: none;
-  border-radius: 3px;
-  background-color: #fff;
+  border-radius: 0px;
+  background-color: #1dc9a0;
   box-shadow: 0 0 50px -13px rgba(0, 0, 0, .27);
   -webkit-transform: scale(1.02);
   -ms-transform: scale(1.02);
@@ -2836,6 +2836,10 @@ strong {
 
 .container-wide.header.project-header-exp {
   height: auto;
+}
+
+.container-wide.header.nu-profile-header {
+  height: 245px;
 }
 
 .container-wide.padding-20 {
@@ -3751,9 +3755,14 @@ strong {
   position: absolute;
   right: 0px;
   bottom: 30px;
-  background-color: hsla(0, 0%, 95%, .15);
+  width: auto;
+  padding-right: 20px;
+  padding-left: 20px;
+  border: 1px solid #1dc9a0;
+  background-color: transparent;
   font-family: 'Open Sans', sans-serif;
-  color: #fff;
+  color: #1dc9a0;
+  text-transform: uppercase;
 }
 
 .dsi-button.profile-edit.project-header-exp {
@@ -4929,6 +4938,10 @@ strong {
   background-position: 0px 0px, 50% 50%;
   background-size: auto, auto;
   background-attachment: scroll, fixed;
+}
+
+.page-header.personal-profile-header {
+  height: 350px;
 }
 
 .large-profile-img {
@@ -6616,6 +6629,21 @@ strong {
 
 .story {
   background-color: #fff;
+}
+
+.profile-contact-link {
+  margin-bottom: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
+  color: #1dc9a0;
+}
+
+.profile-contact-link.link:hover {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 3px;
+  background-color: #1dc9a0;
+  color: #fff;
 }
 
 html.w-mod-js *[data-ix="downbeforeup"] {
