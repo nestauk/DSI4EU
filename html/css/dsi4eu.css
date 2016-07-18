@@ -2737,6 +2737,10 @@ strong {
   text-transform: uppercase;
 }
 
+.card-h3.search-h3 {
+  padding-left: 10px;
+}
+
 .show-card-p {
   padding-right: 96px;
   padding-left: 20px;
@@ -2875,6 +2879,10 @@ strong {
 .container-wide.container-wide-header-large {
   padding-top: 250px;
   padding-bottom: 0px;
+}
+
+.container-wide.search-results-list {
+  margin-top: 140px;
 }
 
 .button {
@@ -4873,7 +4881,9 @@ strong {
 
 .search-result-link.full-page-result {
   margin-bottom: 10px;
-  padding-left: 20px;
+  padding-right: 10px;
+  padding-left: 10px;
+  color: #1dc9a0;
 }
 
 .view-all-search-results {
