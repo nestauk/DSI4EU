@@ -2,7 +2,14 @@
 
 namespace DSI\UseCase;
 
+use DSI\Repository\LanguageRepository;
+use DSI\Repository\OrganisationMemberRepository;
+use DSI\Repository\OrganisationMemberRequestRepository;
+use DSI\Repository\ProjectMemberRepository;
+use DSI\Repository\ProjectMemberRequestRepository;
+use DSI\Repository\UserLanguageRepository;
 use DSI\Repository\UserRepository;
+use DSI\Repository\UserSkillRepository;
 use DSI\Service\ErrorHandler;
 
 class UpdateUserBasicDetails
@@ -53,21 +60,122 @@ class UpdateUserBasicDetails
     private function saveUserDetails()
     {
         $user = $this->userRepo->getById($this->data()->userID);
-        $user->setFirstName($this->data()->firstName);
-        $user->setLastName($this->data()->lastName);
-        $user->setShowEmail($this->data()->showEmail);
-        $user->setCityName($this->data()->cityName);
-        $user->setCountryName($this->data()->countryName);
-        $user->setJobTitle($this->data()->jobTitle);
-        $user->setCompany($this->data()->company);
-        $user->setBio($this->data()->bio);
-
+        if (isset($this->data()->firstName))
+            $user->setFirstName($this->data()->firstName);
+        if (isset($this->data()->lastName))
+            $user->setLastName($this->data()->lastName);
+        if (isset($this->data()->showEmail))
+            $user->setShowEmail($this->data()->showEmail);
+        if (isset($this->data()->cityName))
+            $user->setCityName($this->data()->cityName);
+        if (isset($this->data()->countryName))
+            $user->setCountryName($this->data()->countryName);
+        if (isset($this->data()->jobTitle))
+            $user->setJobTitle($this->data()->jobTitle);
+        if (isset($this->data()->company))
+            $user->setCompany($this->data()->company);
+        if (isset($this->data()->bio))
+            $user->setBio($this->data()->bio);
         if (isset($this->data()->isAdmin))
             $user->setIsAdmin($this->data()->isAdmin);
         if (isset($this->data()->isSuperAdmin))
             $user->setIsSuperAdmin($this->data()->isSuperAdmin);
+        if (isset($this->data()->languages))
+            $this->setUserLanguages();
+        if (isset($this->data()->skills))
+            $this->setUserSkills();
+        if (isset($this->data()->projects))
+            $this->setUserProjects();
+        if (isset($this->data()->organisations))
+            $this->setUserOrganisations();
 
         $this->userRepo->save($user);
+    }
+
+    private function setUserLanguages()
+    {
+        $userLanguages = (new UserLanguageRepository())->getLanguageIDsForUser($this->data()->userID);
+        foreach ($this->data()->languages AS $newLang) {
+            if (!in_array($newLang, $userLanguages)) {
+                $addLang = new AddLanguageToUser();
+                $addLang->data()->userID = $this->data()->userID;
+                $addLang->data()->language = (new LanguageRepository())->getById($newLang)->getName();
+                $addLang->exec();
+            }
+        }
+        foreach ($userLanguages AS $oldLang) {
+            if (!in_array($oldLang, $this->data()->languages)) {
+                $remLang = new RemoveLanguageFromUser();
+                $remLang->data()->userID = $this->data()->userID;
+                $remLang->data()->language = (new LanguageRepository())->getById($oldLang)->getName();
+                $remLang->exec();
+            }
+        }
+    }
+
+    private function setUserSkills()
+    {
+        $userSkills = (new UserSkillRepository())->getSkillsNameByUserID($this->data()->userID);
+        foreach ($this->data()->skills AS $newSkillName) {
+            if (!in_array($newSkillName, $userSkills)) {
+                $addSkill = new AddSkillToUser();
+                $addSkill->data()->userID = $this->data()->userID;
+                $addSkill->data()->skill = $newSkillName;
+                $addSkill->exec();
+            }
+        }
+        foreach ($userSkills AS $oldSkillName) {
+            if (!in_array($oldSkillName, $this->data()->skills)) {
+                $remSkill = new RemoveSkillFromUser();
+                $remSkill->data()->userID = $this->data()->userID;
+                $remSkill->data()->skill = $oldSkillName;
+                $remSkill->exec();
+            }
+        }
+    }
+
+    private function setUserProjects()
+    {
+        $userProjects = (new ProjectMemberRepository())->getProjectIDsForMember($this->data()->userID);
+        $userProjectRequests = (new ProjectMemberRequestRepository())->getProjectIDsForMember($this->data()->userID);
+        foreach ($this->data()->projects AS $newProjectID) {
+            if (!in_array($newProjectID, $userProjects) AND !in_array($newProjectID, $userProjectRequests)) {
+                $addMemberRequest = new AddMemberRequestToProject();
+                $addMemberRequest->data()->userID = $this->data()->userID;
+                $addMemberRequest->data()->projectID = $newProjectID;
+                $addMemberRequest->exec();
+            }
+        }
+        foreach ($userProjects AS $currentProjectID) {
+            if (!in_array($currentProjectID, $this->data()->projects)) {
+                $remMember = new RemoveMemberFromProject();
+                $remMember->data()->userID = $this->data()->userID;
+                $remMember->data()->projectID = $currentProjectID;
+                $remMember->exec();
+            }
+        }
+    }
+
+    private function setUserOrganisations()
+    {
+        $userOrganisations = (new OrganisationMemberRepository())->getOrganisationIDsForMember($this->data()->userID);
+        $userOrganisationRequests = (new OrganisationMemberRequestRepository())->getOrganisationIDsForMember($this->data()->userID);
+        foreach ($this->data()->organisations AS $newOrgID) {
+            if (!in_array($newOrgID, $userOrganisations) AND !in_array($newOrgID, $userOrganisationRequests)) {
+                $addMemberRequest = new AddMemberRequestToOrganisation();
+                $addMemberRequest->data()->userID = $this->data()->userID;
+                $addMemberRequest->data()->organisationID = $newOrgID;
+                $addMemberRequest->exec();
+            }
+        }
+        foreach ($userOrganisations AS $currentOrgID) {
+            if (!in_array($currentOrgID, $this->data()->organisations)) {
+                $remMember = new RemoveMemberFromOrganisation();
+                $remMember->data()->userID = $this->data()->userID;
+                $remMember->data()->organisationID = $currentOrgID;
+                $remMember->exec();
+            }
+        }
     }
 }
 
@@ -89,4 +197,12 @@ class UpdateUserBasicDetails_Data
 
     /** @var int */
     public $userID;
+
+    /** @var int[] */
+    public $languages,
+        $projects,
+        $organisations;
+
+    /** @var string[] */
+    public $skills;
 }

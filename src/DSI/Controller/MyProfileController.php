@@ -34,36 +34,47 @@ class MyProfileController
 
             try {
                 if (isset($_POST['saveDetails'])) {
-                    $updateUserBasicDetails = new UpdateUserBasicDetails();
-                    $updateUserBasicDetails->data()->userID = $user->getId();
-                    $updateUserBasicDetails->data()->firstName = $_POST['firstName'] ?? '';
-                    $updateUserBasicDetails->data()->lastName = $_POST['lastName'] ?? '';
-                    $updateUserBasicDetails->data()->showEmail = $_POST['showEmail'] ?? false;
-                    $updateUserBasicDetails->data()->cityName = $_POST['cityName'] ?? '';
-                    $updateUserBasicDetails->data()->countryName = $_POST['countryName'] ?? '';
-                    $updateUserBasicDetails->data()->jobTitle = $_POST['jobTitle'] ?? '';
-                    $updateUserBasicDetails->data()->company = $_POST['company'] ?? '';
-                    $updateUserBasicDetails->data()->bio = $_POST['bio'] ?? '';
-                    $updateUserBasicDetails->exec();
+                    if ($_POST['step'] == 'step1') {
+                        $updateUserBasicDetails = new UpdateUserBasicDetails();
+                        $updateUserBasicDetails->data()->userID = $user->getId();
+                        $updateUserBasicDetails->data()->firstName = $_POST['firstName'] ?? '';
+                        $updateUserBasicDetails->data()->lastName = $_POST['lastName'] ?? '';
+                        $updateUserBasicDetails->data()->bio = $_POST['bio'] ?? '';
+                        $updateUserBasicDetails->exec();
 
-                    $updateUserEmail = new UpdateUserEmailAddress();
-                    $updateUserEmail->data()->userID = $user->getId();
-                    $updateUserEmail->data()->email = $_POST['email'];
-                    $updateUserEmail->exec();
-
-                    if ($_POST['profilePic'] != Image::PROFILE_PIC_URL . $user->getProfilePicOrDefault()) {
-                        $updateUserEmail = new UpdateUserProfilePicture();
+                        $updateUserEmail = new UpdateUserEmailAddress();
                         $updateUserEmail->data()->userID = $user->getId();
-                        $updateUserEmail->data()->fileName = basename($_POST['profilePic']);
+                        $updateUserEmail->data()->email = $_POST['email'];
                         $updateUserEmail->exec();
+
+                        if ($_POST['profilePic'] != Image::PROFILE_PIC_URL . $user->getProfilePicOrDefault()) {
+                            $updateUserEmail = new UpdateUserProfilePicture();
+                            $updateUserEmail->data()->userID = $user->getId();
+                            $updateUserEmail->data()->fileName = basename($_POST['profilePic']);
+                            $updateUserEmail->exec();
+                        }
+                    } elseif ($_POST['step'] == 'step2') {
+                        $updateUserBasicDetails = new UpdateUserBasicDetails();
+                        $updateUserBasicDetails->data()->userID = $user->getId();
+                        $updateUserBasicDetails->data()->countryName = $_POST['countryName'] ?? '';
+                        $updateUserBasicDetails->data()->cityName = $_POST['cityName'] ?? '';
+                        $updateUserBasicDetails->data()->jobTitle = $_POST['jobTitle'] ?? '';
+                        $updateUserBasicDetails->data()->company = $_POST['company'] ?? '';
+                        $updateUserBasicDetails->data()->languages = $_POST['languages'] ?? [];
+                        $updateUserBasicDetails->data()->skills = $_POST['skills'] ?? [];
+                        $updateUserBasicDetails->exec();
+                    } elseif ($_POST['step'] == 'step3') {
+                        $updateUserBasicDetails = new UpdateUserBasicDetails();
+                        $updateUserBasicDetails->data()->userID = $user->getId();
+                        $updateUserBasicDetails->data()->projects = $_POST['projects'] ?? [];
+                        $updateUserBasicDetails->data()->organisations = $_POST['organisations'] ?? [];
+                        $updateUserBasicDetails->exec();
                     }
 
+                    // $updateUserBasicDetails->data()->showEmail = $_POST['showEmail'] ?? false;
+
                     echo json_encode([
-                        'response' => 'ok',
-                        'message' => [
-                            'title' => 'Success!',
-                            'text' => 'Your details have been successfully saved',
-                        ],
+                        'response' => 'ok'
                     ]);
                     return;
                 }

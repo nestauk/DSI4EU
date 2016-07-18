@@ -180,7 +180,7 @@ a.login-modal-back {
 
 .search-results-popover {
     top: 160px;
-    position:fixed;
+    position: fixed;
 }
 
 .custom-project-section {
@@ -202,10 +202,32 @@ a.login-modal-back {
     background-color: rgba(255, 255, 255, 0);
 }
 
-div.error{
-    color:red;
+div.error {
+    color: red;
 }
 
-.case-study-main{
-    background:white;
+.case-study-main {
+    background: white;
+}
+
+.select2-container--default.select2-container--focus .select2-selection--multiple,
+.select2-container--default .select2-selection--multiple {
+    border: 0 !important;
+}
+
+#projectsSelectBox .select2-container--default .select2-selection--multiple .select2-selection__choice,
+#organisationsSelectBox .select2-container--default .select2-selection--multiple .select2-selection__choice {
+    float: none;
+    white-space: normal;
+    line-height: 35px;
+}
+
+#projectsSelectBox .select2-search__field,
+#organisationsSelectBox .select2-search__field {
+    width:100% !important;
+}
+
+#projectsSelectBox .select2-container .select2-search--inline,
+#organisationsSelectBox .select2-container .select2-search--inline {
+    float:none !important;
 }

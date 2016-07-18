@@ -1,10 +1,74 @@
 angular
     .module(angularAppName)
     .controller('PersonalDetailsController', function ($scope, $http, $timeout, Upload) {
+        $scope.user = {};
         $http.get(SITE_RELATIVE_PATH + '/my-profile.json')
             .then(function (result) {
                 $scope.user = result.data || {};
             });
+
+        $scope.currentTab = 'step1';
+        $scope.submitStep1 = function () {
+            $scope.saveUserDetails({
+                postField: 'step1',
+                onSuccess: function () {
+                    $scope.currentTab = 'step2';
+                }
+            })
+        };
+        $scope.submitStep2 = function () {
+            $scope.user.languages = $('#languagesSelect').val();
+            $scope.user.skills = $('#skillsSelect').val();
+            $scope.saveUserDetails({
+                postField: 'step2',
+                onSuccess: function () {
+                    $scope.currentTab = 'step3';
+                }
+            })
+        };
+        $scope.submitStep3 = function () {
+            $scope.user.projects = $('#projectsSelect').val();
+            $scope.user.organisations = $('#organisationsSelect').val();
+            $scope.saveUserDetails({
+                postField: 'step3',
+                onSuccess: function () {
+                    $scope.currentTab = 'step4';
+                }
+            })
+        };
+        $scope.submitStep4 = function (profilePage) {
+            $scope.errors = {};
+            if (!$scope.user.confirm) {
+                $scope.errors = {
+                    confirm: 'You have to agree with our terms and conditions'
+                };
+            } else {
+                $scope.loading = true;
+                window.location.href = profilePage;
+            }
+        };
+
+        $scope.saveUserDetails = function (options) {
+            $scope.loading = true;
+            $scope.errors = {};
+
+            var data = $scope.user;
+            data['saveDetails'] = true;
+            data['step'] = options.postField;
+
+            console.log(data);
+
+            $http.post(SITE_RELATIVE_PATH + '/my-profile.json', data)
+                .then(function (response) {
+                    $scope.loading = false;
+                    console.log(response.data);
+
+                    if (response.data.response == 'ok')
+                        options.onSuccess();
+                    else if (response.data.response == 'error')
+                        $scope.errors = response.data.errors;
+                });
+        };
 
         $scope.savePersonalDetails = function () {
             $scope.loading = true;
