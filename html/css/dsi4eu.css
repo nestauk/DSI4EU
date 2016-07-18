@@ -3605,14 +3605,15 @@ strong {
   right: 85px;
   bottom: 10px;
   width: 70px;
-  background-color: #f3f3f3;
-  color: #2f9940;
+  border: 1px solid #fff;
+  background-color: transparent;
+  color: #fff;
   font-size: 12px;
   line-height: 12px;
 }
 
 .dsi-button.notification-accept:hover {
-  background-color: #fff;
+  background-color: transparent;
   -webkit-transform: none;
   -ms-transform: none;
   transform: none;
@@ -3625,6 +3626,9 @@ strong {
   width: 70px;
   padding-top: 5px;
   padding-bottom: 5px;
+  border: 1px solid #fff;
+  background-color: transparent;
+  color: #fff;
   font-size: 12px;
   line-height: 12px;
 }
@@ -3645,7 +3649,7 @@ strong {
 
 .dsi-button.create {
   width: 80%;
-  background-color: #dd3ea4;
+  background-color: #1dc9a0;
   color: #fff;
 }
 
@@ -4054,18 +4058,18 @@ strong {
   height: 111px;
   border-bottom: 1px solid #f3f3f3;
   background-color: #fff;
-  -webkit-transition: all 200ms ease;
-  transition: all 200ms ease;
 }
 
 .card-notification:hover {
   z-index: 6;
   border-bottom-style: solid;
-  border-radius: 5px;
-  box-shadow: 0 0 30px -13px rgba(0, 0, 0, .76);
-  -webkit-transform: scale(1.05);
-  -ms-transform: scale(1.05);
-  transform: scale(1.05);
+  border-radius: 0px;
+  background-color: #1dc9a0;
+  box-shadow: none;
+  -webkit-transform: none;
+  -ms-transform: none;
+  transform: none;
+  color: #2c2d33;
 }
 
 .card-notification.card-project {
@@ -4822,7 +4826,7 @@ strong {
   top: -200px;
   right: 0px;
   z-index: 1;
-  display: block;
+  display: none;
   height: auto;
   min-height: 335px;
   padding-bottom: 40px;
