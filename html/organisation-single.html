@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Last Published: Mon Jul 18 2016 13:28:24 GMT+0000 (UTC) -->
+<!-- Last Published: Mon Jul 18 2016 15:08:21 GMT+0000 (UTC) -->
 <html data-wf-site="56e2e31a1b1f8f784728a08c" data-wf-page="578c91bb18f10cd163aee6e1">
 <head>
   <meta charset="utf-8">
@@ -61,6 +61,13 @@
     .modal-container {display: table; height: 100%; position:absolute; overflow: hidden;width:100%;}
     .modal-helper {#position: absolute; #top: 50%;display: table-cell; vertical-align: middle;}
     .modal-content {#position: relative; #top: -50%;margin:0 auto;width:600px;}
+    /* absolute centre divs */
+    .ab-fab {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
   </style>
 </head>
 <body class="case-study-single">
@@ -162,7 +169,9 @@
   <div class="case-study-main">
     <div class="container-wide">
       <div class="case-study-logo" data-ix="fadeinuponload-3">
-        <img class="case-study-logo-over org" src="images/nesta-6a9b5fe999e8323b379ccc0d8e70290f.png">
+        <div class="ab-fab">
+          <img class="logo-img" src="images/nesta-6a9b5fe999e8323b379ccc0d8e70290f.png">
+        </div>
       </div>
       <div class="case-study-single-container w-container">
         <h2 class="centered" data-ix="fadeinuponload-4">About {{organisation.name}}</h2>

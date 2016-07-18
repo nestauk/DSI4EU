@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Last Published: Mon Jul 18 2016 13:28:24 GMT+0000 (UTC) -->
+<!-- Last Published: Mon Jul 18 2016 15:08:21 GMT+0000 (UTC) -->
 <html data-wf-site="56e2e31a1b1f8f784728a08c" data-wf-page="577149898479866150f499cd">
 <head>
   <meta charset="utf-8">
@@ -61,9 +61,65 @@
     .modal-container {display: table; height: 100%; position:absolute; overflow: hidden;width:100%;}
     .modal-helper {#position: absolute; #top: 50%;display: table-cell; vertical-align: middle;}
     .modal-content {#position: relative; #top: -50%;margin:0 auto;width:600px;}
+    /* absolute centre divs */
+    .ab-fab {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
   </style>
 </head>
 <body>
+  <div class="search-results-popover">
+    <h3 class="search-results">Search results for: {{search.entry}}</h3>
+    <div class="w-row">
+      <div class="search-result w-col w-col-3">
+        <h4 class="results-h4">Case Studies</h4>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+      </div>
+      <div class="search-result w-col w-col-3">
+        <h4 class="results-h4">Blogs</h4>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+      </div>
+      <div class="search-result w-col w-col-3">
+        <h4 class="results-h4">Projects</h4>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+      </div>
+      <div class="search-result w-col w-col-3">
+        <h4 class="results-h4">Organisations</h4>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+      </div>
+    </div>
+    <a class="view-all-search-results" href="#">View all results</a>
+  </div>
   <div class="bg-blur search">
     <div class="dark-bg-overlay"></div>
     <div class="container-wide search-container">
@@ -127,48 +183,6 @@
     </div>
   </div>
   <div class="archive container-wide">
-    <div class="search-results-popover">
-      <h3 class="search-results">Search results for: {{search.entry}}</h3>
-      <div class="w-row">
-        <div class="search-result w-col w-col-4">
-          <h4 class="results-h4">Stories</h4>
-          <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
-          <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
-          <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
-          <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
-          <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
-        </div>
-        <div class="search-result w-col w-col-4">
-          <h4 class="results-h4">Projects</h4>
-          <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
-          <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
-          <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
-          <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
-          <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
-          <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
-          <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
-          <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
-          <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
-          <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
-          <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
-          <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
-          <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
-          <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
-          <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
-          <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
-          <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
-        </div>
-        <div class="end search-result w-col w-col-4">
-          <h4 class="results-h4">Organisations</h4>
-          <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
-          <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
-          <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
-          <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
-          <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
-        </div>
-      </div>
-      <a class="view-all-search-results" href="#">View all results</a>
-    </div>
     <div class="dashboard-widgets w-row">
       <div class="notification-col w-col w-col-4 w-col-stack">
         <div class="dashboard-widget">
