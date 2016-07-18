@@ -6368,6 +6368,15 @@ strong {
   background-attachment: scroll, fixed;
 }
 
+.header-large.nesta {
+  background-image: -webkit-linear-gradient(270deg, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url('../images/london-bridge 2.jpg');
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url('../images/london-bridge 2.jpg');
+  background-position: 0px 0px, 50% 50%;
+  background-size: auto, cover;
+  background-repeat: repeat, no-repeat;
+  background-attachment: scroll, fixed;
+}
+
 .header-large-h1-centre {
   color: #fff;
   font-weight: 600;
@@ -6412,6 +6421,10 @@ strong {
   margin-left: auto;
 }
 
+.case-study-logo-over.org {
+  margin-top: 43px;
+}
+
 .case-study-single-container {
   padding-top: 50px;
   text-align: left;
@@ -6427,6 +6440,10 @@ strong {
   border-style: none;
   border-bottom-width: 1px;
   border-bottom-color: #f3f3f3;
+}
+
+.case-study-intro-detail.centered {
+  font-weight: 600;
 }
 
 .case-study-main-text {
@@ -6447,6 +6464,12 @@ strong {
   border-top-color: #f3f3f3;
   border-bottom-width: 0px;
   border-bottom-color: #f3f3f3;
+}
+
+.url-block.centered.org {
+  margin-top: 0px;
+  padding-top: 0px;
+  border-top-style: none;
 }
 
 .button-more {
