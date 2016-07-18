@@ -3653,22 +3653,25 @@ strong {
 }
 
 .dsi-button.top-filter {
-  background-color: hsla(0, 0%, 100%, .15);
-  color: #fff;
+  border: 1px solid #1dc9a0;
+  background-color: transparent;
+  color: #1dc9a0;
 }
 
 .dsi-button.top-filter:hover {
   position: relative;
   z-index: 8;
-  background-color: hsla(0, 0%, 100%, .25);
+  background-color: transparent;
 }
 
 .dsi-button.top-filter.add-new-story {
   width: auto;
+  padding-top: 7px;
+  padding-bottom: 7px;
   float: right;
-  border: 0px none #fff;
-  background-color: hsla(0, 0%, 100%, .15);
-  color: #fff;
+  border: 1px solid #1dc9a0;
+  background-color: #1dc9a0;
+  color: #2c2d33;
 }
 
 .dsi-button.top-filter.published-stories {
