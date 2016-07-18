@@ -301,10 +301,12 @@ require __DIR__ . '/header.php';
                                                             <input class="creator-data-entry end w-input"
                                                                    data-name="Name 7" id="name-7" maxlength="256"
                                                                    name="name-7" placeholder="Your place of work"
+                                                                   ng-model="user.company"
                                                                    type="text">
                                                             <label for="name-8">What's your job title?</label>
                                                             <input class="creator-data-entry end w-input"
                                                                    data-name="Name 8" id="name-8" maxlength="256"
+                                                                   ng-model="user.jobTitle"
                                                                    name="name-8" placeholder="Your title" type="text">
                                                         </div>
                                                     </div>
