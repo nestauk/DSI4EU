@@ -2459,8 +2459,8 @@ strong {
   width: 100%;
   height: 90px;
   border-bottom-style: none;
-  border-radius: 3px;
-  background-color: #fff;
+  border-radius: 0px;
+  background-color: #1dc9a0;
   box-shadow: 0 0 50px -13px rgba(0, 0, 0, .27);
   -webkit-transform: scale(1.02);
   -ms-transform: scale(1.02);
@@ -2838,6 +2838,10 @@ strong {
   height: auto;
 }
 
+.container-wide.header.nu-profile-header {
+  height: 245px;
+}
+
 .container-wide.padding-20 {
   padding-right: 20px;
   padding-left: 20px;
@@ -2865,7 +2869,7 @@ strong {
 }
 
 .container-wide.case-study-grid {
-  margin-top: 170px;
+  margin-top: 20px;
 }
 
 .container-wide.container-wide-header-large {
@@ -2874,15 +2878,22 @@ strong {
 }
 
 .button {
-  min-width: 175px;
-  padding: 10px 30px;
-  border: 0px none #000;
+  position: static;
+  right: 0px;
+  bottom: 30px;
+  min-width: auto;
+  padding: 7px 20px;
+  border: 1px solid #1dc9a0;
   border-radius: 3px;
+  background-color: transparent;
   -webkit-transition: all 200ms ease;
   transition: all 200ms ease;
-  font-size: 18px;
-  line-height: 30px;
+  font-family: 'Open Sans', sans-serif;
+  color: #1dc9a0;
+  font-size: 14px;
+  line-height: 20px;
   text-align: center;
+  text-transform: uppercase;
 }
 
 .button:hover {
@@ -2898,6 +2909,14 @@ strong {
   margin-right: auto;
   margin-left: auto;
   background-color: #dd3ea4;
+}
+
+.button.button-bottom-right {
+  position: absolute;
+}
+
+.button.button-bottom-right.edit-case-study {
+  bottom: 97px;
 }
 
 .footer-brand {
@@ -2939,15 +2958,12 @@ strong {
   width: 100%;
   border: 1px solid #f3f3f3;
   border-radius: 3px;
-  box-shadow: 0 0 21px -6px rgba(0, 0, 0, .23);
   -webkit-transition: all 100ms ease;
   transition: all 100ms ease;
 }
 
 .hp-post-link:hover {
-  border-style: solid;
-  border-width: 1px;
-  border-color: rgba(122, 95, 151, .96);
+  border: 1px solid #1dc9a0;
   box-shadow: 0 0 50px -17px #000;
   -webkit-transform: none;
   -ms-transform: none;
@@ -3634,22 +3650,25 @@ strong {
 }
 
 .dsi-button.top-filter {
-  background-color: hsla(0, 0%, 100%, .15);
-  color: #fff;
+  border: 1px solid #1dc9a0;
+  background-color: transparent;
+  color: #1dc9a0;
 }
 
 .dsi-button.top-filter:hover {
   position: relative;
   z-index: 8;
-  background-color: hsla(0, 0%, 100%, .25);
+  background-color: transparent;
 }
 
 .dsi-button.top-filter.add-new-story {
   width: auto;
+  padding-top: 7px;
+  padding-bottom: 7px;
   float: right;
-  border: 0px none #fff;
-  background-color: hsla(0, 0%, 100%, .15);
-  color: #fff;
+  border: 1px solid #1dc9a0;
+  background-color: #1dc9a0;
+  color: #2c2d33;
 }
 
 .dsi-button.top-filter.published-stories {
@@ -3736,9 +3755,14 @@ strong {
   position: absolute;
   right: 0px;
   bottom: 30px;
-  background-color: hsla(0, 0%, 95%, .15);
+  width: auto;
+  padding-right: 20px;
+  padding-left: 20px;
+  border: 1px solid #1dc9a0;
+  background-color: transparent;
   font-family: 'Open Sans', sans-serif;
-  color: #fff;
+  color: #1dc9a0;
+  text-transform: uppercase;
 }
 
 .dsi-button.profile-edit.project-header-exp {
@@ -3988,7 +4012,7 @@ strong {
 .page-h1.light {
   display: block;
   width: auto;
-  margin: 50px auto 0px;
+  margin: 38px auto 0px;
   color: #1dc9a0;
   font-size: 28px;
   text-align: center;
@@ -4914,6 +4938,10 @@ strong {
   background-position: 0px 0px, 50% 50%;
   background-size: auto, auto;
   background-attachment: scroll, fixed;
+}
+
+.page-header.personal-profile-header {
+  height: 350px;
 }
 
 .large-profile-img {
@@ -6340,6 +6368,15 @@ strong {
   background-attachment: scroll, fixed;
 }
 
+.header-large.nesta {
+  background-image: -webkit-linear-gradient(270deg, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url('../images/london-bridge 2.jpg');
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url('../images/london-bridge 2.jpg');
+  background-position: 0px 0px, 50% 50%;
+  background-size: auto, cover;
+  background-repeat: repeat, no-repeat;
+  background-attachment: scroll, fixed;
+}
+
 .header-large-h1-centre {
   color: #fff;
   font-weight: 600;
@@ -6384,6 +6421,10 @@ strong {
   margin-left: auto;
 }
 
+.case-study-logo-over.org {
+  margin-top: 43px;
+}
+
 .case-study-single-container {
   padding-top: 50px;
   text-align: left;
@@ -6399,6 +6440,10 @@ strong {
   border-style: none;
   border-bottom-width: 1px;
   border-bottom-color: #f3f3f3;
+}
+
+.case-study-intro-detail.centered {
+  font-weight: 600;
 }
 
 .case-study-main-text {
@@ -6419,6 +6464,12 @@ strong {
   border-top-color: #f3f3f3;
   border-bottom-width: 0px;
   border-bottom-color: #f3f3f3;
+}
+
+.url-block.centered.org {
+  margin-top: 0px;
+  padding-top: 0px;
+  border-top-style: none;
 }
 
 .button-more {
@@ -6601,6 +6652,21 @@ strong {
 
 .story {
   background-color: #fff;
+}
+
+.profile-contact-link {
+  margin-bottom: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
+  color: #1dc9a0;
+}
+
+.profile-contact-link.link:hover {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 3px;
+  background-color: #1dc9a0;
+  color: #fff;
 }
 
 html.w-mod-js *[data-ix="downbeforeup"] {

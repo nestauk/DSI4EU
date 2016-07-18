@@ -136,7 +136,13 @@ class Router
             $this->addCaseStudyPage();
 
         } elseif ($this->pageURL === '/case-studies') {
-            $this->caseStudiesPage(null, 'json');
+            $this->caseStudiesPage();
+
+        } elseif (preg_match('<^/case-study/edit/([0-9]+)\.json$>', $this->pageURL, $matches)) {
+            $this->editCaseStudyPage($matches, 'json');
+
+        } elseif (preg_match('<^/case-study/edit/([0-9]+)$>', $this->pageURL, $matches)) {
+            $this->editCaseStudyPage($matches);
 
         } elseif (preg_match('<^/case-study/([0-9]+)(\/.*)?$>', $this->pageURL, $matches)) {
             $this->caseStudyPage($matches);
@@ -429,6 +435,14 @@ class Router
     {
         $command = new \DSI\Controller\ProjectEditController();
         $command->projectID = $matches[1];
+        $command->format = $format;
+        $command->exec();
+    }
+
+    private function editCaseStudyPage($matches, $format = 'html')
+    {
+        $command = new \DSI\Controller\CaseStudyEditController();
+        $command->caseStudyID = $matches[1];
         $command->format = $format;
         $command->exec();
     }
