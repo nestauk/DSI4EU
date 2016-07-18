@@ -6670,6 +6670,15 @@ strong {
   color: #fff;
 }
 
+.page-info {
+  padding-top: 149px;
+}
+
+.page-info-block {
+  padding: 50px;
+  background-color: #fff;
+}
+
 html.w-mod-js *[data-ix="downbeforeup"] {
   opacity: 0;
   -webkit-transform: translate(0px, 50px);
@@ -7717,6 +7726,9 @@ html.w-mod-js *[data-ix="menuhide"] {
   }
   .card-orgs {
     text-align: center;
+  }
+  .page-info-block {
+    padding: 10px;
   }
 }
 
