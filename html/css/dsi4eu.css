@@ -6680,6 +6680,7 @@ strong {
 }
 
 .page-info-block.update-card {
+  position: relative;
   margin-bottom: 20px;
   padding: 25px;
   border: 1px solid #e6e6e6;
@@ -6713,6 +6714,14 @@ strong {
   font-family: 'Open Sans', sans-serif;
   color: #757575;
   font-weight: 600;
+}
+
+.edit-update {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  display: none;
+  color: #c2c2c2;
 }
 
 html.w-mod-js *[data-ix="downbeforeup"] {
