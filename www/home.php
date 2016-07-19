@@ -37,7 +37,7 @@ use \DSI\Service\URL;
 </div>
 <div class="nav-main w-nav" data-animation="default" data-collapse="medium" data-duration="400">
     <div class="container-wide nav-container w-clearfix">
-        <a class="w-nav-brand" href="index.html">
+        <a class="w-nav-brand" href="<?php echo URL::home()?>">
             <img class="brand" src="images/all white.svg" width="160">
         </a>
         <nav class="m-nav-open w-nav-menu" role="navigation">
