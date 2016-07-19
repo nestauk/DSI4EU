@@ -603,9 +603,17 @@ require __DIR__ . '/header.php';
                 return $(
                     '<div class="involved-card">' +
                     '<div class="w-row">' +
-                    (logo ? '<div class="w-col w-col-3 w-col-small-3 w-col-tiny-3">' : '') +
-                    (logo ? '<img class="involved-organisation-img" src="' + logo + '">' : '') +
-                    (logo ? '</div>' : '') +
+                    (
+                        logo ?
+                            (
+                                '<div class="w-col w-col-3 w-col-small-3 w-col-tiny-3">' +
+                                '<img class="involved-organisation-img" src="' + logo + '">' +
+                                '</div>'
+                            ) :
+                            (
+                                '<div class="w-col w-col-1 w-col-small-1 w-col-tiny-1"></div>'
+                            )
+                    ) +
                     '<div class="w-clearfix w-col w-col-9 w-col-small-9 w-col-tiny-9">' +
                     '<div class="card-name">' +
                     (object.text.substring(0, 26)) +
