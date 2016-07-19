@@ -4,6 +4,15 @@ require __DIR__ . '/header.php';
 /** @var $caseStudies \DSI\Entity\CaseStudy[] */
 ?>
 
+    <div class="creator page-header">
+        <div class="container-wide header">
+            <h1 class="light page-h1">Case studies</h1>
+            <a class="button button-bottom-right w-button" href="<?php echo \DSI\Service\URL::addCaseStudy() ?>">
+                Add case study +
+            </a>
+        </div>
+    </div>
+
     <div class="case-study-grid container-wide">
         <div class="case-studies-row case-studies-row-grid w-row">
             <?php foreach ($caseStudies AS $i => $caseStudy) { ?>
