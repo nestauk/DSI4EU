@@ -38,7 +38,7 @@ require __DIR__ . '/header.php'
                                 <div class="w-col w-col-9 w-col-medium-6 w-col-small-6 card-slim-info">
                                     <h2 class="card-slim-h2" ng-bind="project.name"></h2>
                                     <div class="card-slim-location"
-                                         ng-bind="project.region + ', ' + project.country"></div>
+                                         ng-bind="project.region ? project.region + ', ' + project.country : ''"></div>
                                     <div class="card-slim-stats">
                                         <div>
                                             <strong ng-bind="project.organisationsCount"></strong>

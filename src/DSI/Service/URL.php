@@ -45,6 +45,10 @@ class URL
         return SITE_RELATIVE_PATH . '/project/' . $project->getId() . '/' . self::linkify($project->getName());
     }
 
+    /**
+     * @param int $projectID
+     * @return string
+     */
     public static function editProject($projectID)
     {
         return SITE_RELATIVE_PATH . '/project/edit/' . $projectID;

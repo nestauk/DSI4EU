@@ -13,60 +13,75 @@ require __DIR__ . '/header.php';
         ng-controller="ProjectController"
         data-projectid="<?php echo $project->getId() ?>">
 
-        <div class="w-section page-header project-header-exp">
-            <div class="container-wide header project-header-exp">
-                <h1 class="page-h1 light"><?php echo show_input($project->getName()) ?></h1>
-                <div class="dsi4eu-stats project-header-exp">
-                    <a class="project-url-link" href="<?php echo $project->getUrl() ?>"
-                       target="_blank"><?php echo $project->getUrl() ?></a>
-                </div>
-                <img class="large-profile-img project-header-exp"
-                     src="<?php echo \DSI\Entity\Image::PROJECT_LOGO_URL . $project->getLogoOrDefault() ?>">
-                <?php if ($isAdmin) { ?>
-                    <a class="w-button dsi-button profile-edit project-header-exp"
-                       href="<?php echo \DSI\Service\URL::editProject($project->getId()) ?>">
-                        Edit project</a>
-                <?php } ?>
-
-                <div class="breadcrumb-container breadcrumb-container-alt">
-                    <div class="w-clearfix bread-crumbs">
-                        <a class="w-inline-block breadcrumb-root" href="<?php echo \DSI\Service\URL::projects() ?>">
-                            <div class="breadcrumb-link">Projects</div>
-                            <div class="arrow-right"></div>
+        <div class="header-large-section">
+            <div class="header-large">
+                <div class="container-wide container-wide-header-large">
+                    <h1 class="header-large-h1-centre"
+                        data-ix="fadeinuponload"><?php echo show_input($project->getName()) ?></h1>
+                    <?php if ($isAdmin) { ?>
+                        <a class="dsi-button profile-edit w-button"
+                           href="<?php echo \DSI\Service\URL::editProject($project->getId()) ?>">Edit project</a>
+                    <?php } ?>
+                    <div class="header-large-desc">
+                        <a class="ext-url" data-ix="fadeinup-2" href="<?php echo $project->getUrl() ?>" target="_blank">
+                            <?php echo $project->getUrl() ?>
                         </a>
-                        <a class="w-inline-block breadcrumb-root path" href="#">
-                            <div class="arrow-bottom-left"></div>
-                            <div class="arrow-top-left"></div>
-                            <div class="breadcrumb-link">
-                                <?php echo substr(show_input($project->getName()), 0, 35) ?>
-                                <?php echo strlen($project->getName()) > 35 ? '...' : '' ?>
+                        <div class="project-single-social" data-ix="fadeinup-3">
+                            <div class="w-row">
+                                <div class="w-col w-col-3 w-col-small-6 w-col-tiny-6">
+                                    <div class="sm-nu-bloxk w-clearfix">
+                                        <img class="sm-icon"
+                                             src="<?php echo SITE_RELATIVE_PATH ?>/images/facebook-logo.png" width="40">
+                                        <div class="hero-social-label">Facebook</div>
+                                    </div>
+                                </div>
+                                <div class="w-col w-col-3 w-col-small-6 w-col-tiny-6">
+                                    <div class="sm-nu-bloxk w-clearfix">
+                                        <img class="sm-icon"
+                                             src="<?php echo SITE_RELATIVE_PATH ?>/images/twitter-logo-silhouette.png">
+                                        <div class="hero-social-label">Twitter</div>
+                                    </div>
+                                </div>
+                                <div class="w-col w-col-3 w-col-small-6 w-col-tiny-6">
+                                    <div class="sm-nu-bloxk w-clearfix">
+                                        <img class="sm-icon" src="<?php echo SITE_RELATIVE_PATH ?>/images/social.png">
+                                        <div class="hero-social-label">Github</div>
+                                    </div>
+                                </div>
+                                <div class="w-col w-col-3 w-col-small-6 w-col-tiny-6">
+                                    <div class="sm-nu-bloxk w-clearfix">
+                                        <img class="sm-icon"
+                                             src="<?php echo SITE_RELATIVE_PATH ?>/images/google-plus-logo.png">
+                                        <div class="hero-social-label">Google +</div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="arrow-right"></div>
-                        </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="w-section section-grey dark">
-            <div class="container-wide padding-20">
-                <div class="project-description light">
-                    <?php echo show_input($project->getDescription()) ?>
+        <div class="case-study-main">
+            <div class="container-wide">
+                <div class="case-study-logo" data-ix="fadeinuponload-3">
+                    <img class="case-study-logo-over"
+                         src="<?php echo \DSI\Entity\Image::PROJECT_LOGO_URL . $project->getLogoOrDefault() ?>">
                 </div>
-                <?php if ($project->getCountryRegion() OR $project->getStartDate() OR $project->getEndDate()) { ?>
-                    <p class="project-summary alt light">
-                        <strong class="light strong-light"><?php echo show_input($project->getName()) ?></strong>
+                <div class="case-study-single-container w-container">
+                    <h2 class="centered" data-ix="fadeinuponload-4">About the project</h2>
+                    <p class="centered"
+                       data-ix="fadeinuponload-5"><?php echo show_input($project->getShortDescription()) ?></p>
+                    <h4 class="case-study-intro-detail centered" data-ix="fadeinuponload-5">
+                        <?php echo show_input($project->getName()) ?>
                         <?php if ($region = $project->getCountryRegion()) { ?>
                             is based in
-                            <strong class="light strong-light">
-                                <?php echo show_input($region->getName()) ?>,
-                                <?php echo show_input($region->getCountry()->getName()) ?>
-                            </strong>
+                            <?php echo show_input($region->getName()) ?>,
+                            <?php echo show_input($region->getCountry()->getName()) ?>
                             <?php if ($project->getStartDate() OR $project->getEndDate()) { ?>
                                 and
                             <?php } ?>
                         <?php } ?>
-
                         <?php
                         if ($project->getStartDate() AND !$project->getEndDate()) {
                             if ($project->startDateIsPassed()) {
@@ -101,52 +116,77 @@ require __DIR__ . '/header.php';
                             }
                         }
                         ?>
-                    </p>
-                <?php } ?>
-                <a class="w-button project-nav" href="#tags">Tags</a>
-                <a class="w-button project-nav" href="#who">Who's involved</a>
-                <a class="w-button project-nav" href="#social">Social impact</a>
-                <a class="w-button project-nav" href="#updates">News &amp; updates</a>
-            </div>
-        </div>
-
-        <div class="w-section section-white tag-section" id="tags">
-            <div class="container-wide">
-                <h3 class="info-h card-h alt">This project is tagged under:</h3>
-                <div class="w-clearfix tags-block" ng-cloak>
-                    <div class="skill" ng-repeat="tag in project.tags">
-                        <div ng-bind="tag"></div>
-                        <div class="tag-label"></div>
-                        <div class="tag-hole"></div>
-                        <?php if ($isAdmin) { ?>
-                            <div class="delete" ng-click="removeTag(tag)">-</div>
-                        <?php } ?>
+                    </h4>
+                    <div class="centered tagged" data-ix="fadeinup-5">
+                        Tagged under:
+                        <span class="tag" ng-repeat="tag in project.tags" ng-bind="tag"></span>
                     </div>
-                    <?php if ($isAdmin) { ?>
-                        <div class="add-item-block" ng-click="addingTag = !addingTag">
-                            <div class="add-item">+</div>
+                    <div class="impact w-row">
+                        <div class="w-col w-col-4">
+                            <h3 class="col-h3">Areas of society impacted</h3>
+                            <p class="impact-descr">Lorem ipsum dolor sit amet, consectetur adipiscing elit?</p>
+                            <div class="tag" ng-repeat="tag in project.impactTagsA" ng-bind="tag"></div>
                         </div>
-
-                        <div class="w-form" style="float:left"
-                             ng-show="addingTag">
-                            <form class="w-clearfix add-skill-section" style="margin-top:0"
-                                  ng-submit="addTag()">
-                                <select data-tags="true"
-                                        data-placeholder="Add a tag"
-                                        id="Add-tag"
-                                        class="w-input add-language"
-                                        style="width:200px;display:inline">
-                                    <option></option>
-                                </select>
-                                <input type="submit" value="Add" class="w-button add-skill-btn">
-                            </form>
+                        <div class="w-col w-col-4">
+                            <h3 class="col-h3">DSI Focus</h3>
+                            <p class="impact-descr">Lorem ipsum dolor sit amet, consectetur adipiscing elit?</p>
+                            <div class="tag" ng-repeat="tag in project.impactTagsB" ng-bind="tag"></div>
                         </div>
-                    <?php } ?>
+                        <div class="w-col w-col-4">
+                            <h3 class="col-h3">Technology type</h3>
+                            <p class="impact-descr">Lorem ipsum dolor sit amet, consectetur adipiscing elit?</p>
+                            <div class="tag" ng-repeat="tag in project.impactTagsC" ng-bind="tag"></div>
+                        </div>
+                    </div>
+                    <h2 class="centered" data-ix="fadeinup">Project Overview</h2>
+                    <p class="case-study-main-text" data-ix="fadeinup"><?php echo $project->getDescription() ?></p>
+                    <div class="centered url-block" data-ix="fadeinup">
+                        <h2 class="centered" data-ix="fadeinup">Social Impact</h2>
+                        <p class="case-study-main-text" data-ix="fadeinup"><?php echo $project->getSocialImpact() ?></p>
+                        <div class="involved">
+                            <h2 class="centered" data-ix="fadeinup">Who's involved</h2>
+                            <div class="w-row">
+                                <div class="people-col w-col w-col-6">
+                                    <h4 class="involved-h4">People involved</h4>
+                                    <div class="involved-card">
+                                        <div class="w-row">
+                                            <div class="image-col w-col w-col-3 w-col-small-3 w-col-tiny-3">
+                                                <img class="involved-profile-img"
+                                                     src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg"
+                                                     width="50">
+                                            </div>
+                                            <div class="w-clearfix w-col w-col-9 w-col-small-9 w-col-tiny-9">
+                                                <div class="card-name">Daniel M Pettifer</div>
+                                                <div class="card-position">Digital Product Manager</div>
+                                            </div>
+                                        </div>
+                                        <a class="view-profile" href="#">View</a>
+                                    </div>
+                                </div>
+                                <div class="orgs-col w-col w-col-6">
+                                    <h4 class="involved-h4">Organisations involved</h4>
+                                    <div class="involved-card">
+                                        <div class="w-row">
+                                            <div class="w-col w-col-5 w-col-small-5 w-col-tiny-5">
+                                                <img class="involved-organisation-img" src="images/waag.png">
+                                            </div>
+                                            <div class="w-clearfix w-col w-col-7 w-col-small-7 w-col-tiny-7">
+                                                <div class="card-name">The Waag Society</div>
+                                                <div class="card-position">Holland</div>
+                                            </div>
+                                        </div>
+                                        <a class="view-profile" href="#">View</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="w-section section-grey" id="who">
+            <?php /*
             <div class="container-wide">
                 <h3 class="section-header">Who's involved</h3>
                 <div class="w-row project-info">
@@ -176,23 +216,32 @@ require __DIR__ . '/header.php';
                                     </div>
 
                                     <div class="project-members">
-                                        <div class="owner-link project-member" ng-repeat="member in project.members"
+                                        <div class="owner-link project-member"
+                                             ng-repeat="member in project.members"
                                              ng-cloak>
                                             <a class="w-inline-block inner-link"
                                                href="<?php echo SITE_RELATIVE_PATH ?>/profile/{{member.id}}">
                                                 <img class="project-creator-img" height="50"
                                                      ng-src="<?php echo \DSI\Entity\Image::PROFILE_PIC_URL ?>{{member.profilePic}}"
                                                      width="50">
-                                                <div class="creator-name">{{member.firstName}} {{member.lastName}}</div>
-                                                <div class="project-creator-text">{{member.jobTitle}}</div>
+                                                <div class="creator-name">{{member.firstName}}
+                                                    {{member.lastName}}
+                                                </div>
+                                                <div class="project-creator-text">
+                                                    {{member.jobTitle}}
+                                                </div>
                                             </a>
                                             <div class="star-holder">
                                                 <?php if ($isAdmin) { ?>
-                                                    <img class="star-full" data-ix="add-star-admin" style="opacity:1"
+                                                    <img class="star-full"
+                                                         data-ix="add-star-admin"
+                                                         style="opacity:1"
                                                          src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-star-orange.png"
                                                          ng-click="member.isAdmin = !member.isAdmin; updateAdminStatus(member)"
                                                          ng-show="member.isAdmin">
-                                                    <img class="star-empty" data-ix="add-star-admin" style="opacity:1"
+                                                    <img class="star-empty"
+                                                         data-ix="add-star-admin"
+                                                         style="opacity:1"
                                                          src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-star-outline-orange.png"
                                                          ng-click="member.isAdmin = !member.isAdmin; updateAdminStatus(member)"
                                                          ng-hide="member.isAdmin">
@@ -208,18 +257,24 @@ require __DIR__ . '/header.php';
                                                 <?php } ?>
                                             </div>
                                             <?php if ($isAdmin) { ?>
-                                                <div class="remove-from-list" ng-click="removeMember(member)">-</div>
+                                                <div class="remove-from-list"
+                                                     ng-click="removeMember(member)">-
+                                                </div>
                                             <?php } ?>
                                         </div>
                                     </div>
                                 </div>
                                 <?php if ($isAdmin) { ?>
                                     <div class="join-project">
-                                        <div class="add-item-block" style="float:right;margin-right:20px">
-                                            <div class="add-item" onclick="$('#addNewMember').toggle()">+</div>
+                                        <div class="add-item-block"
+                                             style="float:right;margin-right:20px">
+                                            <div class="add-item"
+                                                 onclick="$('#addNewMember').toggle()">+
+                                            </div>
                                         </div>
 
-                                        <div id="addNewMember" style="margin-left:20px;display:none">
+                                        <div id="addNewMember"
+                                             style="margin-left:20px;display:none">
                                             <form id="add-member-form" name="add-member-form"
                                                   data-name="Add Member Form"
                                                   class="w-clearfix">
@@ -236,7 +291,9 @@ require __DIR__ . '/header.php';
 
                                             <div style="color:red;padding:12px 0 10px 100px;">
                                                 <div style="color:orange">
-                                                    <div ng-show="addProjectMember.loading">Loading...</div>
+                                                    <div ng-show="addProjectMember.loading">
+                                                        Loading...
+                                                    </div>
                                                 </div>
                                                 <div style="color:green">
                                                     <div ng-show="addProjectMember.success"
@@ -254,7 +311,8 @@ require __DIR__ . '/header.php';
                                 <?php } ?>
                             </div>
 
-                            <div class="info-card alt" ng-show="project.memberRequests.length > 0" ng-cloak>
+                            <div class="info-card alt"
+                                 ng-show="project.memberRequests.length > 0" ng-cloak>
                                 <h3 class="info-h card-h">Member Requests</h3>
                                 <div class="project-owner">
                                     <div class="info-card" style="min-height: 0;">
@@ -266,17 +324,23 @@ require __DIR__ . '/header.php';
                                                     <img class="project-creator-img" height="50"
                                                          ng-src="<?php echo \DSI\Entity\Image::PROFILE_PIC_URL ?>{{member.profilePic}}"
                                                          width="50">
-                                                    <div class="creator-name">{{member.firstName}} {{member.lastName}}
+                                                    <div class="creator-name">
+                                                        {{member.firstName}} {{member.lastName}}
                                                     </div>
-                                                    <div class="project-creator-text">{{member.jobTitle}}</div>
+                                                    <div class="project-creator-text">
+                                                        {{member.jobTitle}}
+                                                    </div>
                                                 </a>
 
-                                                <div style="float:right;margin-top:15px;margin-right:10px">
-                                                    <a href="#" title="Approve Member Request" class="add-item"
+                                                <div
+                                                    style="float:right;margin-top:15px;margin-right:10px">
+                                                    <a href="#" title="Approve Member Request"
+                                                       class="add-item"
                                                        ng-click="approveRequestToJoin(member)"
                                                        style="background-color: green">+</a>
                                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                    <a href="#" title="Reject Member Request" class="add-item"
+                                                    <a href="#" title="Reject Member Request"
+                                                       class="add-item"
                                                        ng-click="rejectRequestToJoin(member)"
                                                        style="background-color: red">-</a>
                                                 </div>
@@ -295,7 +359,8 @@ require __DIR__ . '/header.php';
                                    ng-repeat="organisation in project.organisationProjects"
                                    href="{{organisation.url}}">
                                     <div class="w-clearfix list-item">
-                                        <div class="partner-title" ng-bind="organisation.name"></div>
+                                        <div class="partner-title"
+                                             ng-bind="organisation.name"></div>
                                         <div class="no-of-projects">
                                             <span ng-bind="organisation.projectsCount"></span>
                                             <span
@@ -310,7 +375,8 @@ require __DIR__ . '/header.php';
                                      style="float:right;margin-right:20px">
                                     <div class="add-item">+</div>
                                 </div>
-                                <form ng-show="addingOrganisation" ng-submit="addOrganisation()" ng-cloak>
+                                <form ng-show="addingOrganisation" ng-submit="addOrganisation()"
+                                      ng-cloak>
                                     <label>
                                         Select organisation:
                                         <select data-placeholder="Select organisation"
@@ -318,7 +384,8 @@ require __DIR__ . '/header.php';
                                                 style="width:300px">
                                             <option></option>
                                         </select>
-                                        <input type="submit" value="Add" class="w-button add-skill-btn">
+                                        <input type="submit" value="Add"
+                                               class="w-button add-skill-btn">
                                     </label>
                                 </form>
                             <?php } ?>
@@ -328,7 +395,8 @@ require __DIR__ . '/header.php';
 
                 <?php if (isset($userHasInvitation) AND $userHasInvitation) { ?>
                     <div class="you-have-invites" ng-hide="invitationActioned" ng-cloak>
-                        <div class="notification-block-p">You have been invited to join this project
+                        <div class="notification-block-p">You have been invited to join this
+                            project
                         </div>
                         <a class="w-button dsi-button notification-button accept" href="#"
                            ng-click="approveInvitationToJoin()">Accept</a>
@@ -337,6 +405,7 @@ require __DIR__ . '/header.php';
                     </div>
                 <?php } ?>
             </div>
+            */ ?>
 
             <?php if ($canUserRequestMembership) { ?>
                 <div class="section-cta" ng-cloak>
@@ -344,7 +413,8 @@ require __DIR__ . '/header.php';
                         <div class="w-row">
                             <div class="w-col w-col-6">
                                 <h3>Are you involved with this project?</h3>
-                                <div>If you are involved you can request to join this project</div>
+                                <div>If you are involved you can request to join this project
+                                </div>
                             </div>
                             <div class="w-col w-col-6">
                                 <a class="w-button btn btn-join section-cta" href="#"
@@ -362,117 +432,6 @@ require __DIR__ . '/header.php';
             <?php } ?>
         </div>
 
-        <div class="w-section section-white" id="social">
-            <div class="container-wide">
-                <h3 class="info-h card-h section-header">Social impact</h3>
-                <div class="w-row">
-                    <div class="w-col w-col-4">
-                        <div class="impact-block">
-                            <h4 class="impact-h4">Areas of society impacted</h4>
-                            <div class="w-clearfix tags-block impact">
-                                <div class="skill" ng-repeat="tag in project.impactTagsA">
-                                    <?php if ($isAdmin) { ?>
-                                        <div class="delete" ng-click="removeImpactTagA(tag)">-</div>
-                                    <?php } ?>
-                                    <div ng-bind="tag"></div>
-                                </div>
-                                <?php if ($isAdmin) { ?>
-                                    <div class="add-item-block"
-                                         ng-click="addingImpactTagA = !addingImpactTagA">
-                                        <div class="add-item">+</div>
-                                    </div>
-                                    <div style="clear:both"></div>
-                                    <div class="w-form" ng-show="addingImpactTagA">
-                                        <form class="w-clearfix add-skill-section"
-                                              ng-submit="addImpactTagA()">
-                                            <select data-tags="true"
-                                                    data-placeholder="Type your skill"
-                                                    id="Add-impact-tag-a"
-                                                    class="w-input add-language"
-                                                    style="width:200px;display:inline">
-                                                <option></option>
-                                            </select>
-                                            <input type="submit" value="Add"
-                                                   class="w-button add-skill-btn">
-                                        </form>
-                                    </div>
-                                <?php } ?>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="w-col w-col-4">
-                        <div class="impact-block">
-                            <h4 class="impact-h4">Technology focus</h4>
-                            <div class="w-clearfix tags-block impact">
-                                <div class="skill" ng-repeat="tag in project.impactTagsB">
-                                    <?php if ($isAdmin) { ?>
-                                        <div class="delete" ng-click="removeImpactTagB(tag)">-</div>
-                                    <?php } ?>
-                                    <div ng-bind="tag"></div>
-                                </div>
-                                <?php if ($isAdmin) { ?>
-                                    <div class="add-item-block"
-                                         ng-click="addingImpactTagB = !addingImpactTagB">
-                                        <div class="add-item">+</div>
-                                    </div>
-                                    <div style="clear:both"></div>
-                                    <div class="w-form" ng-show="addingImpactTagB">
-                                        <form class="w-clearfix add-skill-section"
-                                              ng-submit="addImpactTagB()">
-                                            <select data-tags="true"
-                                                    data-placeholder="Type your skill"
-                                                    id="Add-impact-tag-b"
-                                                    class="w-input add-language"
-                                                    style="width:200px;display:inline">
-                                                <option></option>
-                                            </select>
-                                            <input type="submit" value="Add"
-                                                   class="w-button add-skill-btn">
-                                        </form>
-                                    </div>
-                                <?php } ?>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="w-col w-col-4">
-                        <div class="impact-block last">
-                            <h4 class="impact-h4">Technology method</h4>
-                            <div class="w-clearfix tags-block impact">
-                                <div class="skill" ng-repeat="tag in project.impactTagsC">
-                                    <?php if ($isAdmin) { ?>
-                                        <div class="delete" ng-click="removeImpactTagC(tag)">-</div>
-                                    <?php } ?>
-                                    <div ng-bind="tag"></div>
-                                </div>
-                                <?php if ($isAdmin) { ?>
-                                    <div class="add-item-block"
-                                         ng-click="addingImpactTagC = !addingImpactTagC">
-                                        <div class="add-item">+</div>
-                                    </div>
-                                    <div style="clear:both"></div>
-                                    <div class="w-form" ng-show="addingImpactTagC">
-                                        <form class="w-clearfix add-skill-section"
-                                              ng-submit="addImpactTagC()">
-                                            <select data-tags="true"
-                                                    data-placeholder="Type your skill"
-                                                    id="Add-impact-tag-c"
-                                                    class="w-input add-language"
-                                                    style="width:200px;display:inline">
-                                                <option></option>
-                                            </select>
-                                            <input type="submit" value="Add"
-                                                   class="w-button add-skill-btn">
-                                        </form>
-                                    </div>
-                                <?php } ?>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
         <div class="w-section section-grey dark" id="updates">
             <div class="container-wide">
                 <div class="w-row project-info">
@@ -487,36 +446,49 @@ require __DIR__ . '/header.php';
                                         <div class="w-clearfix post-author new-post">
                                             <img
                                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/<?php echo $loggedInUser->getProfilePicOrDefault() ?>"
-                                                width="40" height="40" class="post-author-img post">
-                                            <div class="profile-label">Do you have something to share?</div>
-                                            <a href="#" data-ix="new-post-show" class="create-new-post">Add new
+                                                width="40" height="40"
+                                                class="post-author-img post">
+                                            <div class="profile-label">Do you have something to
+                                                share?
+                                            </div>
+                                            <a href="#" data-ix="new-post-show"
+                                               class="create-new-post">Add new
                                                 post <span
                                                     class="add-post-plus">+</span></a>
                                         </div>
                                     </div>
                                 <?php } ?>
-                                <div ng-controller="ProjectPostController" ng-repeat="post in project.posts" ng-cloak>
-                                    <div class="w-clearfix" ng-class="{'current-status' : $index == 0}">
+                                <div ng-controller="ProjectPostController"
+                                     ng-repeat="post in project.posts" ng-cloak>
+                                    <div class="w-clearfix"
+                                         ng-class="{'current-status' : $index == 0}">
 
-                                        <h3 ng-show="$index == 0" class="status-h3">Latest post</h3>
-                                        <h3 ng-show="$index == 1" class="info-h card-h">Previous posts</h3>
+                                        <h3 ng-show="$index == 0" class="status-h3">Latest
+                                            post</h3>
+                                        <h3 ng-show="$index == 1" class="info-h card-h">Previous
+                                            posts</h3>
 
-                                        <div class="post-author" ng-class="{'latest' : $index == 0}">
+                                        <div class="post-author"
+                                             ng-class="{'latest' : $index == 0}">
                                             <img width="40" height="40" class="post-author-img"
                                                  ng-src="<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/{{post.user.profilePic}}">
-                                            <div class="post-author-detail" ng-class="{'latest' : $index == 0}"
+                                            <div class="post-author-detail"
+                                                 ng-class="{'latest' : $index == 0}"
                                                  ng-bind="post.user.name"></div>
-                                            <div class="posted-on" ng-class="{'latest' : $index == 0}"
+                                            <div class="posted-on"
+                                                 ng-class="{'latest' : $index == 0}"
                                                  ng-bind="post.time"></div>
                                         </div>
                                         <div class="news-content"
                                              ng-bind-html="renderHtml(post.text)"></div>
                                     </div>
                                     <div class="w-clearfix comment-count" ng-cloak>
-                                        <a href="#" class="w-inline-block w-clearfix comment-toggle">
+                                        <a href="#"
+                                           class="w-inline-block w-clearfix comment-toggle">
                                             <img width="256" class="comment-bubble"
                                                  src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-chatbubble.png">
-                                            <div class="comment-indicator" ng-click="loadComments()">
+                                            <div class="comment-indicator"
+                                                 ng-click="loadComments()">
                                                 <span ng-show="post.commentsCount == 0">There are no comments, be the first to say something</span>
                                                 <span ng-show="post.commentsCount == 1">There is {{post.commentsCount}} comment</span>
                                                 <span ng-show="post.commentsCount > 1">There are {{post.commentsCount}} comments</span>
@@ -524,7 +496,8 @@ require __DIR__ . '/header.php';
                                             </div>
                                         </a>
                                     </div>
-                                    <div class="post-comments" ng-show="showComments" ng-cloak="">
+                                    <div class="post-comments" ng-show="showComments"
+                                         ng-cloak="">
                                         <div class="comment">
                                             <?php if ($loggedInUser) { ?>
                                                 <div class="w-row">
@@ -535,7 +508,8 @@ require __DIR__ . '/header.php';
                                                     <div class="w-col w-col-11">
                                                         <div class="post-comment">
                                                             <div class="w-form">
-                                                                <form ng-submit="submitComment()">
+                                                                <form
+                                                                    ng-submit="submitComment()">
                                                                     <input type="text"
                                                                            placeholder="Write your comment"
                                                                            class="w-input add-comment"
@@ -552,13 +526,17 @@ require __DIR__ . '/header.php';
                                                     <div class="w-col w-col-4 w-clearfix">
                                                         <img class="commentor-img"
                                                              ng-src="<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/{{comment.user.profilePic}}">
-                                                        <div class="commentor-name">{{comment.user.name}}</div>
+                                                        <div class="commentor-name">
+                                                            {{comment.user.name}}
+                                                        </div>
                                                         <br/>
-                                                        <a href="#" ng-click="replyToComment = !replyToComment"
+                                                        <a href="#"
+                                                           ng-click="replyToComment = !replyToComment"
                                                            class="reply">Reply</a>
                                                     </div>
                                                     <div class="w-col w-col-8">
-                                                        <div class="post-comment comment-original-post">
+                                                        <div
+                                                            class="post-comment comment-original-post">
                                                             {{comment.comment}}
                                                         </div>
                                                     </div>
@@ -566,15 +544,19 @@ require __DIR__ . '/header.php';
                                                 <div>
                                                     <div class="w-row reply-cols"
                                                          ng-repeat="reply in comment.replies">
-                                                        <div class="w-col w-col-3 w-clearfix reply-col-1">
-                                                            <img class="commentor-img commentor-reply-img"
-                                                                 ng-src="<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/{{reply.user.profilePic}}">
-                                                            <div class="commentor-name commentor-reply">
+                                                        <div
+                                                            class="w-col w-col-3 w-clearfix reply-col-1">
+                                                            <img
+                                                                class="commentor-img commentor-reply-img"
+                                                                ng-src="<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/{{reply.user.profilePic}}">
+                                                            <div
+                                                                class="commentor-name commentor-reply">
                                                                 {{reply.user.name}}
                                                             </div>
                                                         </div>
                                                         <div class="w-col w-col-9">
-                                                            <div class="post-comment reply-comment">
+                                                            <div
+                                                                class="post-comment reply-comment">
                                                                 {{reply.comment}}
                                                             </div>
                                                             <a href="#"
@@ -583,14 +565,18 @@ require __DIR__ . '/header.php';
                                                         </div>
                                                     </div>
                                                     <?php if ($loggedInUser) { ?>
-                                                        <div class="w-row reply-input" ng-show="replyToComment">
-                                                            <div class="w-col w-col-1 w-clearfix">
-                                                                <img class="commentor-img commentor-reply-img"
-                                                                     src="<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/<?php echo $loggedInUser->getProfilePicOrDefault() ?>">
+                                                        <div class="w-row reply-input"
+                                                             ng-show="replyToComment">
+                                                            <div
+                                                                class="w-col w-col-1 w-clearfix">
+                                                                <img
+                                                                    class="commentor-img commentor-reply-img"
+                                                                    src="<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/<?php echo $loggedInUser->getProfilePicOrDefault() ?>">
                                                             </div>
                                                             <div class="w-col w-col-11">
                                                                 <div class="w-form">
-                                                                    <form ng-submit="submitComment()">
+                                                                    <form
+                                                                        ng-submit="submitComment()">
                                                                         <input type="text"
                                                                                placeholder="Add your reply"
                                                                                class="w-input add-comment"
@@ -630,7 +616,8 @@ require __DIR__ . '/header.php';
 
             <div class="add-post-modal">
                 <form ng-submit="addPost()">
-                    <textarea id="newPost" style="height:100%">Please type your update here...</textarea>
+                                            <textarea id="newPost"
+                                                      style="height:100%">Please type your update here...</textarea>
                     <a href="#" data-ix="hide-new-post" class="modal-save" style="right:140px">Cancel</a>
                     <input type="submit" class="modal-save" value="Publish post"
                            style="border-width:0;line-height:20px;font-weight:bold;"/>
