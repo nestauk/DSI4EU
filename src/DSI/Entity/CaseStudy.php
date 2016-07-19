@@ -260,6 +260,14 @@ class CaseStudy
     }
 
     /**
+     * @return string
+     */
+    public function getCountryName()
+    {
+        return $this->region ? $this->getRegion()->getCountry()->getName() : '';
+    }
+
+    /**
      * @return CountryRegion
      */
     public function getRegion()

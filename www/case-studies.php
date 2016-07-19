@@ -38,7 +38,7 @@ require __DIR__ . '/header.php';
                                     <?php if (strlen($caseStudy->getTitle()) > 15) echo '...' ?>
                                 </div>
                                 <div class="case-study-card-name country">
-                                    <?php echo show_input($caseStudy->getRegion()->getCountry()->getName()) ?>
+                                    <?php echo show_input($caseStudy->getCountryName()) ?>
                                 </div>
                             </div>
                         </div>
