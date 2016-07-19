@@ -6785,6 +6785,23 @@ strong {
   cursor: pointer;
 }
 
+.password-reset {
+  width: 700px;
+  height: 700px;
+  padding: 50px;
+  background-color: #fff;
+}
+
+.password-reset.ab-fab {
+  max-height: 700px;
+  max-width: 700px;
+  background-color: transparent;
+}
+
+.password-reset-section {
+  min-height: 900px;
+}
+
 html.w-mod-js *[data-ix="downbeforeup"] {
   opacity: 0;
   -webkit-transform: translate(0px, 50px);
