@@ -8,6 +8,7 @@ use DSI\Repository\OrganisationMemberRequestRepository;
 use DSI\Repository\ProjectMemberRepository;
 use DSI\Repository\ProjectMemberRequestRepository;
 use DSI\Repository\UserLanguageRepository;
+use DSI\Repository\UserLinkRepository;
 use DSI\Repository\UserRepository;
 use DSI\Repository\UserSkillRepository;
 use DSI\Service\ErrorHandler;
@@ -84,6 +85,8 @@ class UpdateUserBasicDetails
             $this->setUserLanguages();
         if (isset($this->data()->skills))
             $this->setUserSkills();
+        if (isset($this->data()->links))
+            $this->setUserLinks();
         if (isset($this->data()->projects))
             $this->setUserProjects();
         if (isset($this->data()->organisations))
@@ -130,6 +133,27 @@ class UpdateUserBasicDetails
                 $remSkill->data()->userID = $this->data()->userID;
                 $remSkill->data()->skill = $oldSkillName;
                 $remSkill->exec();
+            }
+        }
+    }
+
+    private function setUserLinks()
+    {
+        $userLinks = (new UserLinkRepository())->getLinksByUserID($this->data()->userID);
+        foreach ($this->data()->links AS $newLink) {
+            if (!in_array($newLink, $userLinks)) {
+                $addLink = new AddLinkToUser();
+                $addLink->data()->userID = $this->data()->userID;
+                $addLink->data()->link = $newLink;
+                $addLink->exec();
+            }
+        }
+        foreach ($userLinks AS $oldLink) {
+            if (!in_array($oldLink, $this->data()->links)) {
+                $remLink = new RemoveLinkFromUser();
+                $remLink->data()->userID = $this->data()->userID;
+                $remLink->data()->link = $oldLink;
+                $remLink->exec();
             }
         }
     }
@@ -204,5 +228,6 @@ class UpdateUserBasicDetails_Data
         $organisations;
 
     /** @var string[] */
-    public $skills;
+    public $skills,
+        $links;
 }

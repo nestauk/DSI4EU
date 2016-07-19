@@ -3,6 +3,9 @@
 namespace DSI\Controller;
 
 use DSI\Entity\Image;
+use DSI\Entity\UserLink;
+use DSI\Entity\UserLink_Service;
+use DSI\Repository\UserLinkRepository;
 use DSI\Repository\UserRepository;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
@@ -40,6 +43,7 @@ class MyProfileController
                         $updateUserBasicDetails->data()->firstName = $_POST['firstName'] ?? '';
                         $updateUserBasicDetails->data()->lastName = $_POST['lastName'] ?? '';
                         $updateUserBasicDetails->data()->bio = $_POST['bio'] ?? '';
+                        $updateUserBasicDetails->data()->links = $_POST['links'] ?? [];
                         $updateUserBasicDetails->exec();
 
                         $updateUserEmail = new UpdateUserEmailAddress();
@@ -98,6 +102,19 @@ class MyProfileController
                 return;
             }
 
+            $links = [];
+            $userLinks = (new UserLinkRepository())->getByUserID($loggedInUser->getId());
+            foreach ($userLinks AS $userLink) {
+                if ($userLink->getLinkService() == UserLink_Service::Facebook)
+                    $links['facebook'] = $userLink->getLink();
+                if ($userLink->getLinkService() == UserLink_Service::Twitter)
+                    $links['twitter'] = $userLink->getLink();
+                if ($userLink->getLinkService() == UserLink_Service::GooglePlus)
+                    $links['googleplus'] = $userLink->getLink();
+                if ($userLink->getLinkService() == UserLink_Service::GitHub)
+                    $links['github'] = $userLink->getLink();
+            }
+
             echo json_encode([
                 'firstName' => $user->getFirstName(),
                 'lastName' => $user->getLastName(),
@@ -112,6 +129,8 @@ class MyProfileController
 
                 'bio' => $user->getBio(),
                 'profilePic' => Image::PROFILE_PIC_URL . $user->getProfilePicOrDefault(),
+
+                'links' => $links,
             ]);
 
             return;

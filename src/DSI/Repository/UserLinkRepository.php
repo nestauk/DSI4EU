@@ -94,6 +94,10 @@ class UserLinkRepository
         return $userLinks;
     }
 
+    /**
+     * @param int $userID
+     * @return string[]
+     */
     public function getLinksByUserID(int $userID)
     {
         $query = new SQL("SELECT link 
@@ -104,6 +108,11 @@ class UserLinkRepository
         return $query->fetch_all('link');
     }
 
+    /**
+     * @param int $userID
+     * @param string $link
+     * @return bool
+     */
     public function userHasLink($userID, $link){
         return in_array($link, $this->getLinksByUserID($userID));
     }

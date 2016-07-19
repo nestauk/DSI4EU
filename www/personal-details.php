@@ -187,18 +187,22 @@ require __DIR__ . '/header.php';
                                                             <input class="creator-data-entry w-input"
                                                                    data-name="Email 10" id="email-10" maxlength="256"
                                                                    name="email-10" placeholder="Facebook"
+                                                                   ng-model="user.links.facebook"
                                                                    type="text">
                                                             <input class="creator-data-entry w-input"
                                                                    data-name="Email 3" id="email-3" maxlength="256"
                                                                    name="email-3" placeholder="Twitter"
+                                                                   ng-model="user.links.twitter"
                                                                    type="text">
                                                             <input class="creator-data-entry w-input"
                                                                    data-name="Email 5" id="email-5" maxlength="256"
                                                                    name="email-5" placeholder="Github"
+                                                                   ng-model="user.links.github"
                                                                    type="text">
                                                             <input class="creator-data-entry w-input"
                                                                    data-name="Email 4" id="email-4" maxlength="256"
                                                                    name="email-4" placeholder="Google plus"
+                                                                   ng-model="user.links.googleplus"
                                                                    type="text">
                                                         </div>
                                                     </div>
@@ -406,7 +410,8 @@ require __DIR__ . '/header.php';
                                                             </div>
                                                             <div class="notification-card positive">
                                                                 <div class="notification-card-p">
-                                                                    Joining requests will be sent to organisation owners.
+                                                                    Joining requests will be sent to organisation
+                                                                    owners.
                                                                 </div>
                                                             </div>
                                                         </div>
