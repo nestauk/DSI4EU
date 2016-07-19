@@ -160,7 +160,7 @@ class OrganisationController
 
                 echo json_encode([
                     'result' => 'ok',
-                    'url' => URL::project($project->getId()),
+                    'url' => URL::project($project),
                 ]);
                 return;
             }
@@ -227,7 +227,7 @@ class OrganisationController
                         'id' => $project->getId(),
                         'name' => $project->getName(),
                         'organisationsCount' => $project->getOrganisationsCount(),
-                        'url' => URL::project($project->getId(), $project->getName()),
+                        'url' => URL::project($project),
                     ];
                 }, $organisationProjects),
                 'partnerOrganisations' => array_map(function (Organisation $organisation) {

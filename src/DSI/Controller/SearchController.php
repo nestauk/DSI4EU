@@ -39,7 +39,7 @@ class SearchController
                     'projects' => array_map(function (Project $project) {
                         return [
                             'name' => $project->getName(),
-                            'url' => URL::project($project->getId(), $project->getName()),
+                            'url' => URL::project($project),
                         ];
                     }, $projects),
                     'stories' => array_map(function (Story $story) {

@@ -147,7 +147,7 @@ class ProfileController
                         $project = $projectMember->getProject();
                         return [
                             'name' => $project->getName(),
-                            'url' => URL::project($project->getId(), $project->getName()),
+                            'url' => URL::project($project),
                             'membersCount' => count($projectMemberRepo->getByProjectID($project->getId())),
                         ];
                     }, $projectMemberRepo->getByMemberID($user->getId())),

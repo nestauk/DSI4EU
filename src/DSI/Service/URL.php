@@ -11,6 +11,7 @@ namespace DSI\Service;
 
 use DSI\Entity\CaseStudy;
 use DSI\Entity\Organisation;
+use DSI\Entity\Project;
 
 class URL
 {
@@ -39,12 +40,9 @@ class URL
         return SITE_RELATIVE_PATH . '/projects';
     }
 
-    public static function project($projectID, $projectName = null)
+    public static function project(Project $project)
     {
-        if ($projectName)
-            return SITE_RELATIVE_PATH . '/project/' . $projectID . '/' . self::linkify($projectName);
-        else
-            return SITE_RELATIVE_PATH . '/project/' . $projectID;
+        return SITE_RELATIVE_PATH . '/project/' . $project->getId() . '/' . self::linkify($project->getName());
     }
 
     public static function editProject($projectID)

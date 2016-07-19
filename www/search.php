@@ -36,7 +36,7 @@ require __DIR__ . '/header.php';
                     <?php if ($projects) { ?>
                         <?php foreach ($projects AS $project) { ?>
                             <a class="search-result-link full-page-result"
-                               href="<?php echo \DSI\Service\URL::project($project->getId(), $project->getName()) ?>">
+                               href="<?php echo \DSI\Service\URL::project($project) ?>">
                                 <?php echo show_input($project->getName()) ?>
                             </a>
                         <?php } ?>

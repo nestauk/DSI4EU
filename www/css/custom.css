@@ -231,3 +231,19 @@ div.error {
 #organisationsSelectBox .select2-container .select2-search--inline {
     float:none !important;
 }
+
+#projectsSelectBox .select2-container--default .select2-selection--multiple .select2-selection__choice,
+#organisationsSelectBox .select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background:none;
+    border:0;
+}
+
+.select2-logo{
+    max-height:40px;
+    max-width:40px;
+}
+
+.involved-card .involved-organisation-img{
+    max-width:50px;
+    max-height:50px;
+}

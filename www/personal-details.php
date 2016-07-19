@@ -88,8 +88,6 @@ require __DIR__ . '/header.php';
             </div>
         </div>
 
-        {{currentTab}}
-
         <div class="creator section-white">
             <div class="container-wide">
                 <div class="add-story body-content">
@@ -358,18 +356,28 @@ require __DIR__ . '/header.php';
                                                         <div class="padding-right-50">
                                                             <h2 class="edit-h2">Projects</h2>
                                                             <div id="projectsSelectBox">
-                                                                <select class="select2 creator-data-entry end w-input"
-                                                                        id="projectsSelect" style="width:100%;border:0"
-                                                                        multiple
-                                                                        data-placeholder="Click to select projects">
+                                                                <select
+                                                                    class="select2-withDesign creator-data-entry end w-input"
+                                                                    id="projectsSelect" style="width:100%;border:0"
+                                                                    multiple
+                                                                    data-placeholder="Click to select projects">
                                                                     <option></option>
                                                                     <?php foreach ($projects AS $project) { ?>
                                                                         <option value="<?php echo $project->getId() ?>"
+                                                                                data-logo="<?php echo $project->getLogoOrDefault() ?>"
+                                                                                data-url="<?php echo \DSI\Service\URL::project($project) ?>"
+                                                                                data-country="<?php echo $project->getCountryName() ?>"
+                                                                                data-type="project"
                                                                             <?php if (in_array($project->getId(), $userProjects)) echo 'selected' ?>><?php
                                                                             echo show_input($project->getName())
                                                                             ?></option>
                                                                     <?php } ?>
                                                                 </select>
+                                                            </div>
+                                                            <div class="notification-card positive">
+                                                                <div class="notification-card-p">
+                                                                    Joining requests will be sent to project owners.
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -377,20 +385,29 @@ require __DIR__ . '/header.php';
                                                         <div class="padding-left-50">
                                                             <h2 class="edit-h2">Organisations</h2>
                                                             <div id="organisationsSelectBox">
-                                                                <select class="select2 creator-data-entry end w-input"
-                                                                        id="organisationsSelect"
-                                                                        style="width:100%;border:0"
-                                                                        multiple
-                                                                        data-placeholder="Click to select organisations">
+                                                                <select
+                                                                    class="select2-withDesign creator-data-entry end w-input"
+                                                                    id="organisationsSelect"
+                                                                    style="width:100%;border:0"
+                                                                    multiple
+                                                                    data-placeholder="Click to select organisations">
                                                                     <option></option>
                                                                     <?php foreach ($organisations AS $organisation) { ?>
                                                                         <option
                                                                             value="<?php echo $organisation->getId() ?>"
+                                                                            data-url="<?php echo \DSI\Service\URL::organisation($organisation) ?>"
+                                                                            data-country="<?php echo $organisation->getCountryName() ?>"
+                                                                            data-type="organisation"
                                                                             <?php if (in_array($organisation->getId(), $userOrganisations)) echo 'selected' ?>><?php
                                                                             echo show_input($organisation->getName())
                                                                             ?></option>
                                                                     <?php } ?>
                                                                 </select>
+                                                            </div>
+                                                            <div class="notification-card positive">
+                                                                <div class="notification-card-p">
+                                                                    Joining requests will be sent to organisation owners.
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -555,7 +572,50 @@ require __DIR__ . '/header.php';
 
     <script>
         $(function () {
+            var formatResult = function (object) {
+                var element = $(object.element);
+                var logo = element.data('logo');
+                var elmType = element.data('type');
+                if (elmType == 'project')
+                    logo = '<?php echo \DSI\Entity\Image::PROJECT_LOGO_URL?>' + logo;
+
+                return $(
+                    '<span>' +
+                    (logo ? '<img src="' + logo + '" class="select2-logo" /> ' : '') +
+                    object.text +
+                    '</span>'
+                );
+            };
+            var formatSelection = function (object) {
+                var element = $(object.element);
+                var logo = element.data('logo');
+                var url = element.data('url');
+                var country = element.data('country');
+                var elmType = element.data('type');
+                if (elmType == 'project')
+                    logo = '<?php echo \DSI\Entity\Image::PROJECT_LOGO_URL?>' + logo;
+
+                return $(
+                    '<div class="involved-card">' +
+                    '<div class="w-row">' +
+                    (logo ? '<div class="w-col w-col-5 w-col-small-5 w-col-tiny-5">' : '') +
+                    (logo ? '<img class="involved-organisation-img" src="' + logo + '">' : '') +
+                    (logo ? '</div>' : '') +
+                    '<div class="w-clearfix w-col w-col-7 w-col-small-7 w-col-tiny-7">' +
+                    '<div class="card-name">' + object.text + '</div>' +
+                    '<div class="card-position">' + country + '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '<a class="view-profile" href="' + url + '" target="_blank">View</a>' +
+                    '</div>'
+                );
+            };
+
             $('select.select2').select2();
+            $('select.select2-withDesign').select2({
+                templateResult: formatResult,
+                templateSelection: formatSelection
+            });
         });
     </script>
 

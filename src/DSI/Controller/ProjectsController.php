@@ -27,7 +27,7 @@ class ProjectsController
                     'name' => $project->getName(),
                     'region' => ($region ? $region->getName() : ''),
                     'country' => ($region ? $region->getCountry()->getName() : ''),
-                    'url' => URL::project($project->getId(), $project->getName()),
+                    'url' => URL::project($project),
                     'organisationsCount' => $project->getOrganisationsCount(),
                 ];
             }, $projectRepo->getAll()));

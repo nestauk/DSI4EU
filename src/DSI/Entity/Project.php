@@ -218,6 +218,14 @@ class Project
     }
 
     /**
+     * @return string
+     */
+    public function getCountryName()
+    {
+        return $this->countryRegion ? $this->countryRegion->getCountry()->getName() : '';
+    }
+
+    /**
      * @return int
      */
     public function getCountryID()

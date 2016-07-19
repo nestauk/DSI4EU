@@ -29,7 +29,7 @@ class CreateProjectController
 
             echo json_encode([
                 'result' => 'ok',
-                'url' => URL::project($createProject->getProject()->getId()),
+                'url' => URL::project($createProject->getProject()),
             ]);
         } catch (ErrorHandler $e) {
             echo json_encode([

@@ -134,7 +134,7 @@ require __DIR__ . '/header.php';
                         <input class="w-button dsi-button post-story" type="submit" value="Update project"
                                ng-value="loading ? 'Loading...' : 'Update project'"
                                ng-disabled="loading">
-                        <a href="<?php echo \DSI\Service\URL::project($project->getId(), $project->getName()) ?>"
+                        <a href="<?php echo \DSI\Service\URL::project($project) ?>"
                            class="w-button dsi-button post-story cancel">Back to project</a>
                     </form>
                 </div>

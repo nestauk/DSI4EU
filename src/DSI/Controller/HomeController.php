@@ -106,7 +106,7 @@ class HomeController
                             return [
                                 'id' => $project->getId(),
                                 'name' => $project->getName(),
-                                'url' => URL::project($project->getId(), $project->getName()),
+                                'url' => URL::project($project),
                             ];
                         }, $projectInvitations),
                         'organisationInvitations' => array_map(function (OrganisationMemberInvitation $organisationMember) {
