@@ -66,6 +66,15 @@ class CaseStudyRepository
         ]);
     }
 
+    public function searchByTitle(string $name, int $limit = 0)
+    {
+        return $this->getObjectsWhere([
+            "title LIKE '%" . addslashes($name) . "%'"
+        ], [
+            "limit" => $limit
+        ]);
+    }
+
     /**
      * @param $caseStudyData
      * @return CaseStudy

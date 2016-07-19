@@ -18,8 +18,6 @@ require __DIR__ . '/header.php';
         </div>
 
         <div class="container-wide archive">
-            <?php require(__DIR__ . '/partialViews/search-results.php'); ?>
-
             <div class="w-row dashboard-widgets">
                 <div class="w-col w-col-4 w-col-stack notification-col">
                     <div class="dashboard-widget">

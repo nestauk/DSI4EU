@@ -1,7 +1,8 @@
 <?php
 require __DIR__ . '/header.php';
 /** @var $term string */
-/** @var $stories \DSI\Entity\Story[] */
+/** @var $caseStudies \DSI\Entity\CaseStudy[] */
+/** @var $blogPosts \DSI\Entity\Story[] */
 /** @var $projects \DSI\Entity\Project[] */
 /** @var $organisations \DSI\Entity\Organisation[] */
 ?>
@@ -11,26 +12,39 @@ require __DIR__ . '/header.php';
         </div>
     </div>
 
-    <?php require(__DIR__ . '/partialViews/search-results.php'); ?>
-
     <div class="container-wide archive">
         <div class="w-row dashboard-widgets">
-            <div class="w-col w-col-4 w-col-stack notification-col">
+            <div class="w-col w-col-3 w-col-stack">
                 <div class="dashboard-widget">
-                    <h3 class="card-h3">Stories</h3>
-                    <?php if ($stories) { ?>
-                        <?php foreach ($stories AS $story) { ?>
+                    <h3 class="card-h3">Case Studies</h3>
+                    <?php if ($caseStudies) { ?>
+                        <?php foreach ($caseStudies AS $caseStudy) { ?>
                             <a class="search-result-link full-page-result"
-                               href="<?php echo \DSI\Service\URL::story($story->getId(), $story->getTitle()) ?>">
-                                <?php echo show_input($story->getTitle()) ?>
+                               href="<?php echo \DSI\Service\URL::caseStudy($caseStudy) ?>">
+                                <?php echo show_input($caseStudy->getTitle()) ?>
                             </a>
                         <?php } ?>
                     <?php } else { ?>
-                        No stories found
+                        No case studies found
                     <?php } ?>
                 </div>
             </div>
-            <div class="w-col w-col-4 w-col-stack">
+            <div class="w-col w-col-3 w-col-stack">
+                <div class="dashboard-widget">
+                    <h3 class="card-h3">Blog posts</h3>
+                    <?php if ($blogPosts) { ?>
+                        <?php foreach ($blogPosts AS $post) { ?>
+                            <a class="search-result-link full-page-result"
+                               href="<?php echo \DSI\Service\URL::story($post->getId(), $post->getTitle()) ?>">
+                                <?php echo show_input($post->getTitle()) ?>
+                            </a>
+                        <?php } ?>
+                    <?php } else { ?>
+                        No blog posts found
+                    <?php } ?>
+                </div>
+            </div>
+            <div class="w-col w-col-3 w-col-stack">
                 <div class="dashboard-widget">
                     <h3 class="card-h3">Projects</h3>
                     <?php if ($projects) { ?>
@@ -45,7 +59,7 @@ require __DIR__ . '/header.php';
                     <?php } ?>
                 </div>
             </div>
-            <div class="w-col w-col-4 w-col-stack">
+            <div class="w-col w-col-3 w-col-stack">
                 <div class="dashboard-widget">
                     <h3 class="card-h3">Organisations</h3>
                     <?php if ($organisations) { ?>

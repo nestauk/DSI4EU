@@ -28,8 +28,6 @@
             </div>
         </div>
 
-        <?php require(__DIR__ . '/partialViews/search-results.php'); ?>
-
         <div class="container-wide">
             <div class="body-content add-story">
                 <div class="w-form">

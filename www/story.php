@@ -31,8 +31,6 @@ require __DIR__ . '/header.php';
         </div>
     </div>
 
-<?php require(__DIR__ . '/partialViews/search-results.php'); ?>
-
     <div class="w-section single-post-detail">
         <div class="container-wide single-post-content">
             <div class="author-details">

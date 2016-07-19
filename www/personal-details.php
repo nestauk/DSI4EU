@@ -78,8 +78,6 @@ require __DIR__ . '/header.php';
         </div>
     </div>
 
-<?php require(__DIR__ . '/partialViews/search-results.php'); ?>
-
     <div ng-controller="PersonalDetailsController">
 
         <div class="w-section page-header">

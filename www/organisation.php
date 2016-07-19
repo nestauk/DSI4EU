@@ -70,8 +70,6 @@ require __DIR__ . '/header.php';
     </div>
 */ ?>
 
-<?php require(__DIR__ . '/partialViews/search-results.php'); ?>
-
     <div
         ng-controller="OrganisationController"
         data-organisationid="<?php echo $organisation->getId() ?>"

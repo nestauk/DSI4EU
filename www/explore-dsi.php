@@ -18,8 +18,6 @@ $totalOrganisations = (new \DSI\Repository\OrganisationRepository())->countOrgan
         </div>
     </div>
 
-    <?php require(__DIR__ . '/partialViews/search-results.php'); ?>
-
     <div class="w-section section-grey">
         <div class="container-wide">
             <div class="w-row">

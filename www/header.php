@@ -145,3 +145,5 @@ use \DSI\Service\Sysctl;
 <?php } ?>
 
 <div class="w-section body">
+
+<?php require(__DIR__ . '/partialViews/search-results.php'); ?>
