@@ -43,7 +43,7 @@ use \DSI\Service\Sysctl;
                 </div>
             <?php } else { ?>
                 <a class="alt log-in nav w-nav-link white-alt" data-ix="open-login-modal" href="#">Login</a>
-                <a class="alt log-in log-in-alt nav w-nav-link" href="#">Signup</a>
+                <a class="alt log-in log-in-alt nav w-nav-link" data-ix="showsignup" href="#">Signup</a>
             <?php } ?>
         </nav>
         <div class="w-nav-button">
@@ -53,41 +53,6 @@ use \DSI\Service\Sysctl;
 </div>
 
 <?php require __DIR__ . '/partialViews/loginModal.php' ?>
-
-<!--
-<div data-collapse="medium" data-animation="default" data-duration="400" class="w-nav nav-main">
-    <div class="w-clearfix container-wide nav-container">
-        <a href="<?php echo SITE_RELATIVE_PATH ?>/" class="w-nav-brand">
-            <img width="160" src="<?php echo SITE_RELATIVE_PATH ?>/images/all white.svg" class="brand">
-        </a>
-        <nav role="navigation" class="w-nav-menu m-nav-open <?php echo isset($isHomePage) ? 'homePageColours' : '' ?>">
-            <a href="<?php echo URL::exploreDSI() ?>" class="w-nav-link nav">Explore DSI</a>
-            <a href="<?php echo URL::stories() ?>" class="w-nav-link nav">Stories</a>
-            <a href="<?php echo URL::projects() ?>" class="w-nav-link nav">Projects</a>
-            <a href="<?php echo URL::organisations() ?>" class="w-nav-link nav">Organisations</a>
-            <?php if (!isset($_SESSION['user'])) { ?>
-                <a href="#" data-ix="open-login-modal" class="w-nav-link nav log-in">Log In</a>
-            <?php } else { ?>
-                <div class="w-dropdown" data-delay="0">
-                    <div class="w-dropdown-toggle nav log-in">
-                        <div>Create +</div>
-                    </div>
-                    <nav class="w-dropdown-list create-drop-down">
-                        <a class="w-dropdown-link drop-down-link" data-ix="create-project-modal" href="#">Create a new
-                            project</a>
-                        <a class="w-dropdown-link drop-down-link" data-ix="create-organisation-modal" href="#">Create an
-                            organisation</a>
-                        <div class="arror-up"></div>
-                    </nav>
-                </div>
-            <?php } ?>
-        </nav>
-        <div class="w-nav-button">
-            <div class="w-icon-nav-menu m-menu-btn"></div>
-        </div>
-    </div>
-</div>
--->
 
 <?php if (!isset($hideSearch) OR $hideSearch !== true) { ?>
     <div class="search bg-blur">

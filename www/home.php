@@ -46,21 +46,29 @@ use \DSI\Service\URL;
             <a class="nav w-nav-link" href="<?php echo URL::stories() ?>">Blog</a>
             <a class="nav w-nav-link" href="<?php echo URL::projects() ?>">Projects</a>
             <a class="nav w-nav-link" href="<?php echo URL::organisations() ?>">Organisations</a>
-            <a class="log-in log-in-alt nav w-nav-link" data-ix="open-login-modal">login</a>
-            <div class="w-dropdown" data-delay="0">
-                <div class="log-in nav w-dropdown-toggle">
-                    <div>Sign up&nbsp;</div>
+            <?php if (isset($loggedInUser) AND $loggedInUser) { ?>
+                <div class="w-dropdown" data-delay="0">
+                    <div class="log-in nav w-dropdown-toggle">
+                        <div>Create</div>
+                    </div>
+                    <nav class="create-drop-down w-dropdown-list">
+                        <a class="drop-down-link w-dropdown-link" data-ix="create-project-modal" href="#">
+                            Create a new project
+                        </a>
+                        <a class="drop-down-link w-dropdown-link" data-ix="create-organisation-modal" href="#">
+                            Create an organisation
+                        </a>
+                        <div class="arror-up"></div>
+                    </nav>
                 </div>
-                <nav class="create-drop-down w-dropdown-list">
-                    <a class="drop-down-link w-dropdown-link" data-ix="create-project-modal" href="#">
-                        Create a new project
-                    </a>
-                    <a class="drop-down-link w-dropdown-link" data-ix="create-organisation-modal" href="#">
-                        Create an organisation
-                    </a>
-                    <div class="arror-up"></div>
-                </nav>
-            </div>
+            <?php } else { ?>
+                <div class="log-in nav w-dropdown-toggle">
+                    <a data-ix="open-login-modal" href="#">Login</a>
+                </div>
+                <div class="log-in nav w-dropdown-toggle">
+                    <a data-ix="showsignup" href="#">Signup</a>
+                </div>
+            <?php } ?>
         </nav>
         <div class="menu-open w-nav-button">
             <div class="m-menu-btn w-icon-nav-menu"></div>

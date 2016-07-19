@@ -1,3 +1,6 @@
+<?php
+    use DSI\Service\URL;
+?>
 <script type="text/javascript"
         src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/LoginController.js?v=<?php echo \DSI\Service\Sysctl::$version ?>"></script>
 
@@ -5,8 +8,9 @@
     <div class="modal-container">
         <div class="modal-helper">
             <div class="modal-content">
-                <h2 class="centered modal-h2 log-in" ng-bind="forgotPassword.show ? 'Reset password' : 'Log in'">Log
-                    in</h2>
+                <h2 class="centered modal-h2 log-in" ng-bind="forgotPassword.show ? 'Reset password' : 'Log in'">
+                    Log in
+                </h2>
                 <div class="w-form">
                     <a href="#" class="login-modal-back" ng-show="forgotPassword.show"
                        ng-click="forgotPassword = {}">Back to login</a>
@@ -106,6 +110,84 @@
                 </div>
                 <div class="cancel" ng-hide="loggedin">
                     <a href="#" data-ix="close-nu-modal">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-signup modal" ng-controller="RegisterController">
+    <div class="modal-container">
+        <div class="modal-helper">
+            <div class="modal-content">
+                <h2 class="centered modal-h2 log-in" ng-bind="forgotPassword.show ? 'Reset password' : 'Sign up'">
+                    Sign up
+                </h2>
+
+                <div class="w-form">
+                    <form id="email-form" name="email-form" ng-submit="onSubmit()">
+                        <input id="email-5" type="email" placeholder="Enter your email address" name="email-5"
+                               data-name="Email 5" autofocus="autofocus"
+                               class="w-input modal-input log-in"
+                               ng-model="email.value"
+                               ng-class="{error: errors.email}">
+                        <div style="color:red" ng-show="errors.email" ng-bind="errors.email"></div>
+                        <input id="Password-5" type="password" placeholder="Password" name="Password-5"
+                               data-name="Password 5" class="w-input modal-input log-in"
+                               ng-model="password.value"
+                               ng-class="{error: errors.password}">
+                        <div style="color:red" ng-show="errors.password" ng-bind="errors.password"></div>
+
+                        <div class="modal-footer">
+                            <div ng-hide="registered">
+                                <input type="submit"
+                                       ng-disabled="loading"
+                                       ng-value="loading ? 'Loading...' : 'Register'"
+                                       class="w-button dsi-button creat-button">
+                            </div>
+                            <button ng-show="registered" type="button" class="w-button login-button register">
+                                Welcome to Digital Social!
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="cancel" ng-hide="loggedin">
+                    <a href="#" data-ix="destroysignup">Cancel</a>
+                </div>
+
+                <div class="w-row social-badges">
+                    <div class="w-col w-col-3 w-col-small-3 w-col-tiny-3">
+                        <a href="<?php echo URL::loginWithGitHub() ?>"
+                           class="w-inline-block social-login">
+                            <img width="100%" height="100%"
+                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/social-1_square-github.svg"
+                                 class="social-badge">
+                        </a>
+                    </div>
+                    <div class="w-col w-col-3 w-col-small-3 w-col-tiny-3">
+                        <a href="<?php echo URL::loginWithFacebook() ?>"
+                           class="w-inline-block social-login">
+                            <img width="100%" height="100%"
+                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/social-1_square-facebook.svg"
+                                 class="social-badge">
+                        </a>
+                    </div>
+                    <div class="w-col w-col-3 w-col-small-3 w-col-tiny-3">
+                        <a href="<?php echo URL::loginWithGoogle() ?>"
+                           class="w-inline-block social-login">
+                            <img width="100%" height="100%"
+                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/social-1_square-google-plus.svg"
+                                 class="social-badge">
+                        </a>
+                    </div>
+                    <div class="w-col w-col-3 w-col-small-3 w-col-tiny-3">
+                        <a href="<?php echo URL::loginWithTwitter() ?>"
+                           class="w-inline-block social-login">
+                            <img width="100%" height="100%"
+                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/social-1_square-twitter.svg"
+                                 class="social-badge">
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
