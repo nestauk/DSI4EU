@@ -62,12 +62,10 @@ use \DSI\Service\URL;
                     </nav>
                 </div>
             <?php } else { ?>
-                <div class="log-in nav w-dropdown-toggle">
-                    <a data-ix="open-login-modal" href="#">Login</a>
-                </div>
-                <div class="log-in nav w-dropdown-toggle">
-                    <a data-ix="showsignup" href="#">Signup</a>
-                </div>
+                <a class="log-in log-in-alt nav w-nav-link" data-ix="open-login-modal"
+                   style="transition: all 0.2s ease 0s;">Login</a>
+                <a class="log-in log-in-alt nav w-nav-link" data-ix="showsignup"
+                   style="transition: all 0.2s ease 0s;">Signup</a>
             <?php } ?>
         </nav>
         <div class="menu-open w-nav-button">
