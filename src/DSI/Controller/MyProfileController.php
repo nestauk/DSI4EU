@@ -130,7 +130,7 @@ class MyProfileController
                 'bio' => $user->getBio(),
                 'profilePic' => Image::PROFILE_PIC_URL . $user->getProfilePicOrDefault(),
 
-                'links' => $links,
+                'links' => $links ? $links : '',
             ]);
 
             return;
