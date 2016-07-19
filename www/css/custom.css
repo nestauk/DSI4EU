@@ -215,69 +215,50 @@ div.error {
     border: 0 !important;
 }
 
-#projectsSelectBox .select2-container--default .select2-selection--multiple .select2-selection__choice,
-#organisationsSelectBox .select2-container--default .select2-selection--multiple .select2-selection__choice {
+.designSelectBox .select2-container--default .select2-selection--multiple .select2-selection__choice {
     float: none;
     white-space: normal;
-    line-height: 35px;
 }
 
-#projectsSelectBox .select2-search__field,
-#organisationsSelectBox .select2-search__field {
-    width:100% !important;
+.designSelectBox .select2-search__field {
+    width: 100% !important;
 }
 
-#projectsSelectBox .select2-container .select2-search--inline,
-#organisationsSelectBox .select2-container .select2-search--inline {
-    float:none !important;
+.designSelectBox .select2-container .select2-search--inline {
+    float: none !important;
 }
 
-#projectsSelectBox .select2-container--default .select2-selection--multiple .select2-selection__choice,
-#organisationsSelectBox .select2-container--default .select2-selection--multiple .select2-selection__choice {
-    background:none;
-    border:0;
+.designSelectBox .select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background: none;
+    border: 0;
+    position: relative;
+    padding: 0;
+    margin: 0;
 }
 
-.select2-logo{
-    max-height:40px;
-    max-width:40px;
+.select2-logo {
+    max-height: 40px;
+    max-width: 40px;
 }
 
-.involved-card .involved-organisation-img{
-    max-width:50px;
-    max-height:50px;
+.designSelectBox .involved-card .involved-organisation-img {
+    max-width: 50px;
+    max-height: 50px;
 }
 
 /* personal profile project and organisation card styles */
-.select2-container--default .select2-selection--multiple .select2-selection__choice {
-    background-color: #e4e4e4;
-    border: 1px solid #aaa;
-    border-radius: 4px;
-    cursor: default;
-    float: left;
-    margin-right: 0px;
-    margin-top: 5px;
-    padding: 0px 0px;
-}
 
-.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
-    color: #999;
-    cursor: pointer;
-    display: inline-block;
-    font-weight: bold;
-    margin-right: 2px;
+.designSelectBox .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
     position: absolute;
     top: 5px;
     right: 10px;
 }
 
-.view-profile {
-    position: absolute;
+.designSelectBox .involved-card .view-profile {
     right: 10px;
     bottom: 0px;
-    color: #1dc9a0;
 }
 
-.select2-container--default .select2-selection--multiple .select2-selection__rendered {
-    padding:0 !important;
+.designSelectBox .select2-container--default .select2-selection--multiple .select2-selection__rendered {
+    padding: 0 !important;
 }
