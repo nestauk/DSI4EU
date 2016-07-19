@@ -2,7 +2,6 @@ angular
     .module(angularAppName)
     .controller('CaseStudyEditController', function ($scope, $http, $timeout, $attrs, Upload) {
         var caseStudyId = $attrs.casestudyid;
-        console.log(caseStudyId);
 
         var editCountry = $('#edit-country');
         var editCountryRegion = $('#edit-countryRegion');
@@ -49,7 +48,14 @@ angular
             $scope.caseStudy = {};
             $http.get(SITE_RELATIVE_PATH + '/case-study/edit/' + caseStudyId + '.json')
                 .then(function (response) {
+                    console.log(response.data);
                     $scope.caseStudy = response.data;
+                    $scope.logo.image = $scope.caseStudy.logo;
+                    $scope.cardImage.image = $scope.caseStudy.cardImage;
+                    $scope.headerImage.image = $scope.caseStudy.headerImage;
+                    $timeout(function () {
+                        editCountry.val($scope.caseStudy.countryID).trigger("change");
+                    }, 2000);
                 });
 
             $scope.add = function () {
@@ -61,14 +67,17 @@ angular
                 data.countryID = editCountry.val();
                 data.region = editCountryRegion.val();
                 data.mainText = tinyMCE.get('mainText').getContent();
-                data.add = true;
+                data.save = true;
+
+                console.log(data);
 
                 $timeout(function () {
-                    $http.post(SITE_RELATIVE_PATH + '/case-study/add', data)
+                    $http.post(SITE_RELATIVE_PATH + '/case-study/edit/' + caseStudyId + '.json', data)
                         .then(function (response) {
                             $scope.loading = false;
                             if (response.data.code == 'ok') {
-                                window.location.href = response.data.url;
+                                // swal(response.data.message.title, response.data.message.text, "success");
+                                swal('Success', 'Case Study details have been changed', "success");
                             } else if (response.data.code == 'error') {
                                 $scope.errors = response.data.errors;
                                 console.log(response.data.errors);
@@ -98,13 +107,12 @@ angular
                 $scope.regionsLoading = true;
                 $http.get(SITE_RELATIVE_PATH + '/countryRegions/' + countryID + '.json')
                     .then(function (result) {
-                        $timeout(function () {
-                            editCountryRegion
-                                .html("")
-                                .select2({data: result.data});
-                            $scope.regionsLoaded = true;
-                            $scope.regionsLoading = false;
-                        }, 300);
+                        editCountryRegion
+                            .html("")
+                            .select2({data: result.data});
+                        $scope.regionsLoaded = true;
+                        $scope.regionsLoading = false;
+                        editCountryRegion.val($scope.caseStudy.region).trigger("change");
                     });
             }
         };

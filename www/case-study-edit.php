@@ -36,8 +36,7 @@ require __DIR__ . '/header.php';
                                 <label>Main page text</label>
                                 <textarea class="creator-data-entry end long-description w-input"
                                           id="mainText"
-                                          ng-model="caseStudy.mainText"
-                                          placeholder="This is the main body text"></textarea>
+                                          placeholder="This is the main body text"><?php echo $caseStudy->getMainText()?></textarea>
                                 <h2 class="edit-h2">Duration of project</h2>
                                 <label for="name-4">Project start date</label>
                                 <input class="creator-data-entry w-input" data-name="Name 4" id="projectStartDate"

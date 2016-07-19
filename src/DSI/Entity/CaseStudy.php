@@ -260,6 +260,14 @@ class CaseStudy
     }
 
     /**
+     * @return int
+     */
+    public function getCountryId()
+    {
+        return $this->region ? $this->getRegion()->getCountry()->getId() : 0;
+    }
+
+    /**
      * @return string
      */
     public function getCountryName()
@@ -276,6 +284,14 @@ class CaseStudy
     }
 
     /**
+     * @return string
+     */
+    public function getRegionName()
+    {
+        return $this->region ? $this->region->getName() : '';
+    }
+
+    /**
      * @return int
      */
     public function getRegionID()
@@ -289,5 +305,10 @@ class CaseStudy
     public function setRegion(CountryRegion $region)
     {
         $this->region = $region;
+    }
+
+    public function unsetRegion()
+    {
+        $this->region = null;
     }
 }
