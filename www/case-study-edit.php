@@ -7,7 +7,7 @@ require __DIR__ . '/header.php';
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
-    <div ng-controller="CaseStudyEditController" data-casestudyid="<?php echo $caseStudy->getId()?>">
+    <div ng-controller="CaseStudyEditController" data-casestudyid="<?php echo $caseStudy->getId() ?>">
         <div class="header-section-grey w-section">
             <div class="container-wide">
                 <h1 class="header-centre">Edit case study</h1>
@@ -36,7 +36,7 @@ require __DIR__ . '/header.php';
                                 <label>Main page text</label>
                                 <textarea class="creator-data-entry end long-description w-input"
                                           id="mainText"
-                                          placeholder="This is the main body text"><?php echo $caseStudy->getMainText()?></textarea>
+                                          placeholder="This is the main body text"><?php echo $caseStudy->getMainText() ?></textarea>
                                 <h2 class="edit-h2">Duration of project</h2>
                                 <label for="name-4">Project start date</label>
                                 <input class="creator-data-entry w-input" data-name="Name 4" id="projectStartDate"
@@ -173,7 +173,7 @@ require __DIR__ . '/header.php';
 
     <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
     <script type="text/javascript"
-            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/CaseStudyEditController.js"></script>
+            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/CaseStudyEditController.js?v=<?php echo Sysctl::$version ?>"></script>
 
     <script>
         $(function () {
