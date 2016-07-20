@@ -1,11 +1,12 @@
 <?php
+if (!isset($loggedInUser))
+    $loggedInUser = null;
 /** @var $loggedInUser \DSI\Entity\User */
 /** @var $isHomePage bool */
 /** @var $angularModules string[] */
 /** @var $pageTitle string[] */
 use \DSI\Service\URL;
 use \DSI\Service\Sysctl;
-
 ?>
     <!DOCTYPE html>
     <html data-wf-site="56e2e31a1b1f8f784728a08c" data-wf-page="56fbef6ecf591b312d56f8be">
@@ -22,12 +23,15 @@ use \DSI\Service\Sysctl;
                 <img class="logo-dark" src="<?php echo SITE_RELATIVE_PATH ?>/images/dark.svg">
             </a>
             <nav class="w-nav-menu" role="navigation">
-                <a class="alt nav w-nav-link" href="<?php echo URL::exploreDSI() ?>">Explore DSI</a>
+                <?php /* <a class="alt nav w-nav-link" href="<?php echo URL::exploreDSI() ?>">Explore DSI</a> */ ?>
+                <?php if ($loggedInUser) { ?>
+                    <a class="alt nav w-nav-link" href="<?php echo URL::dashboard() ?>">Dashboard</a>
+                <?php } ?>
                 <a class="alt nav w-nav-link" href="<?php echo URL::caseStudies() ?>">Case Studies</a>
                 <a class="alt nav w-nav-link" href="<?php echo URL::stories() ?>">Blog</a>
                 <a class="alt nav w-nav-link" href="<?php echo URL::projects() ?>">Projects</a>
                 <a class="alt nav w-nav-link" href="<?php echo URL::organisations() ?>">Organisations</a>
-                <?php if (isset($loggedInUser) AND $loggedInUser) { ?>
+                <?php if ($loggedInUser) { ?>
                     <div class="w-dropdown" data-delay="0">
                         <div class="alt log-in log-in-alt nav w-nav-link w-dropdown-toggle">
                             <div>Create</div>
@@ -62,9 +66,11 @@ use \DSI\Service\Sysctl;
                 <div class="w-col w-col-5 w-col-small-5 w-clearfix" id="userMenu">
                     <?php if (isset($loggedInUser)) { ?>
                         <div class="profile-popover bg-blur">
+                            <?php /*
                             <a href="<?php echo URL::dashboard() ?>" class="popover-link">
                                 My dashboard
                             </a>
+                            */ ?>
                             <a href="<?php echo URL::myProfile() ?>" class="popover-link">
                                 View profile
                             </a>
