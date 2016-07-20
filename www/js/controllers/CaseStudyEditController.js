@@ -88,12 +88,16 @@ angular
         }());
 
         // country & region
+        var currentCountry = '';
         var listCountries = function () {
             $http.get(SITE_RELATIVE_PATH + '/countries.json')
                 .then(function (result) {
                     editCountry.select2({data: result.data});
                     editCountry.on("change", function () {
-                        listCountryRegions(editCountry.val());
+                        if (currentCountry != editCountry.val()) {
+                            listCountryRegions(editCountry.val());
+                            currentCountry = editCountry.val();
+                        }
                     });
                     $scope.$watch('caseStudy.countryID', function (param) {
                         editCountry.val($scope.caseStudy.countryID).trigger("change")
