@@ -122,6 +122,14 @@ use \DSI\Service\Sysctl;
         margin: 0 auto;
         width: 600px;
     }
+
+    /* absolute centre divs */
+    .ab-fab {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
 </style>
 
 <script type="text/javascript"

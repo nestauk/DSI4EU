@@ -7,435 +7,44 @@ require __DIR__ . '/header.php';
 /** @var $organisationSizes \DSI\Entity\OrganisationSize[] */
 ?>
     <script src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/OrganisationController.js"></script>
-    <style>
-        .card-city {
-            position: static;
-            float: left;
-            margin-left: 0;
-            padding-left: 0;
-        }
 
-        .org-tab {
-            width: 49%;
-        }
-    </style>
-
-    <div class="w-section page-header project-header-exp">
-        <div class="container-wide header project-header-exp">
-            <div class="breadcrumb-container breadcrumb-container-alt">
-                <div class="w-clearfix bread-crumbs">
-                    <a class="w-inline-block breadcrumb-root" href="<?php echo \DSI\Service\URL::organisations() ?>">
-                        <div class="breadcrumb-link">Organisations</div>
-                        <div class="arrow-right"></div>
-                    </a>
-                    <a class="w-inline-block breadcrumb-root path" href="#">
-                        <div class="arrow-bottom-left"></div>
-                        <div class="arrow-top-left"></div>
-                        <div class="breadcrumb-link">
-                            <?php echo substr(show_input($organisation->getName()), 0, 35) ?>
-                            <?php echo strlen($organisation->getName()) > 35 ? '...' : '' ?>
-                        </div>
-                        <div class="arrow-right"></div>
-                    </a>
-                </div>
-            </div>
-            <h1 class="page-h1 light"><?php echo show_input($organisation->getName()) ?></h1>
-            <div class="dsi4eu-stats project-header-exp">
-                <?php /* <a class="dsi4eu-stats" href="<?php echo \DSI\Service\URL::organisation($organisation) ?>">
-                    <?php echo \DSI\Service\URL::organisation($organisation) ?>
-                </a> */ ?>
-            </div>
-            <div class="large-profile-img project-header-exp custom-project-header-exp"></div>
-            <?php /*
-            <img class="large-profile-img project-header-exp"
-                 src="<?php echo \DSI\Entity\Image::PROJECT_LOGO_URL?>">
-            */ ?>
-            <?php if ($isOwner) { ?>
-                <a class="w-button dsi-button profile-edit project-header-exp"
+    <div class="header-large-section">
+        <div class="header-large nesta">
+            <div class="container-wide container-wide-header-large">
+                <a class="w-button dsi-button profile-edit" style="bottom: auto;top: 180px;width: auto;"
                    href="<?php echo \DSI\Service\URL::editOrganisation($organisation) ?>">
                     Edit organisation</a>
-            <?php } ?>
-        </div>
-    </div>
-
-<?php /*
-    <div class="w-section page-header project-header-exp">
-        <div class="container-wide header project-header-exp">
-            <div class="dsi4eu-stats project-header-exp">
-                <a href="<?php echo \DSI\Service\URL::organisation($organisation->getId(), $organisation->getName()) ?>">
-                    <?php echo \DSI\Service\URL::organisation($organisation->getId(), $organisation->getName()) ?>
-                </a>
-            </div>
-        </div>
-    </div>
-*/ ?>
-
-    <div
-        ng-controller="OrganisationController"
-        data-organisationid="<?php echo $organisation->getId() ?>"
-        class="w-section project-section custom-project-section">
-
-        <div class="w-container body-container project">
-            <div class="w-row project-info">
-                <div class="w-col w-col-6">
-                    <div class="info-card">
-                        <?php if ($isOwner) { ?>
-                            <h3 class="info-h card-h">
-                                <input
-                                    type="text"
-                                    ng-model="organisation.name"
-                                    ng-blur="updateBasic()"
-                                    value="<?php echo show_input($organisation->getName()) ?>"
-                                    style="background:transparent;border:0"/>
-                            </h3>
-                        <?php } else { ?>
-                            <h3 class="info-h card-h"><?php echo show_input($organisation->getName()) ?></h3>
-                        <?php } ?>
-
-                        <p class="project-summary">
-                            <?php if ($isOwner) { ?>
-                                <textarea
-                                    class="readjustTextarea"
-                                    placeholder="Please type a description"
-                                    ng-model="organisation.description"
-                                    ng-blur="updateBasic()"
-                                    style="min-height:150px;border:0;width:100%">
-                                        <?php echo show_input($organisation->getDescription()) ?>
-                                    </textarea>
-                            <?php } else { ?>
-                                <?php echo nl2br(show_input($organisation->getDescription())) ?>
-                            <?php } ?>
-                        </p>
-                        <h3 class="org-detail-h3">Type of organisation</h3>
-                        <div class="org-detail-p">
-                            <?php if ($isOwner) { ?>
-                                <select style="border:0" ng-change="updateBasic()"
-                                        ng-model="organisation.organisationTypeId">
-                                    <option value="0">
-                                        - Please select -
-                                    </option>
-                                    <?php foreach ($organisationTypes AS $organisationType) { ?>
-                                        <option
-                                            <?php if ($organisationType->getId() == $organisation->getOrganisationTypeId()) echo 'selected' ?>
-                                            value="<?php echo $organisationType->getId() ?>">
-                                            <?php echo $organisationType->getName() ?>
-                                        </option>
-                                    <?php } ?>
-                                </select>
-                            <?php } else { ?>
-                                <?php if ($organisation->getOrganisationType()) { ?>
-                                    <?php echo $organisation->getOrganisationType()->getName() ?>
-                                <?php } ?>
-                            <?php } ?>
-                        </div>
-                        <h3 class="org-detail-h3">Size</h3>
-                        <div class="org-detail-p">
-                            <?php if ($isOwner) { ?>
-                                <select style="border:0" ng-change="updateBasic()"
-                                        ng-model="organisation.organisationSizeId">
-                                    <option value="0">
-                                        - Please select -
-                                    </option>
-                                    <?php foreach ($organisationSizes AS $organisationSize) { ?>
-                                        <option
-                                            <?php if ($organisationSize->getId() == $organisation->getOrganisationSizeId()) echo 'selected' ?>
-                                            value="<?php echo $organisationSize->getId() ?>">
-                                            <?php echo $organisationSize->getName() ?>
-                                        </option>
-                                    <?php } ?>
-                                </select>
-                            <?php } else { ?>
-                                <?php if ($organisation->getOrganisationSize()) { ?>
-                                    <?php echo $organisation->getOrganisationSize()->getName() ?>
-                                <?php } ?>
-                            <?php } ?>
-                        </div>
-                    </div>
-
-                    <div class="info-card">
-                        <h3 class="info-h card-h">
-                            <div style="float:left">
-                                Members
-                            </div>
-                            <?php if ($isOwner) { ?>
-                                <div class="add-item-block" ng-click="addingMember = !addingMember"
-                                     style="float:right;margin-right:20px">
-                                    <div class="add-item">+</div>
-                                </div>
-                            <?php } ?>
-                            <div style="clear:both"></div>
-                        </h3>
-
-                        <form ng-show="addingMember" ng-submit="addMember()">
-                            <label>
-                                Select new member:
-                                <select data-tags="true"
-                                        data-placeholder="Select new member"
-                                        id="Add-member"
-                                        style="width:150px">
-                                    <option></option>
-                                </select>
-                                <input type="submit" value="Add" class="w-button add-skill-btn">
-                            </label>
-
-                            <div style="color:red;padding:12px 0 10px 100px;">
-                                <div style="color:orange">
-                                    <div ng-show="addOrganisationMember.loading">Loading...</div>
-                                </div>
-                                <div style="color:green">
-                                    <div ng-show="addOrganisationMember.success"
-                                         ng-bind="addOrganisationMember.success"></div>
-                                </div>
-                                <div
-                                    ng-show="addOrganisationMember.errors.email"
-                                    ng-bind="addOrganisationMember.errors.email"></div>
-                                <div
-                                    ng-show="addOrganisationMember.errors.member"
-                                    ng-bind="addOrganisationMember.errors.member"></div>
-                            </div>
-                        </form>
-
-                        <div style="clear:both"></div>
-
-                        <div class="project-owner">
-                            <a href="<?php echo SITE_RELATIVE_PATH ?>/profile/<?php echo $organisation->getOwner()->getId() ?>"
-                               class="w-inline-block owner-link">
-                                <img width="50" height="50"
-                                     src="<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/<?php echo $organisation->getOwner()->getProfilePicOrDefault() ?>"
-                                     class="project-creator-img">
-                                <div class="creator-name"><?php echo $organisation->getOwner()->getFirstName() ?></div>
-                                <div class="project-creator-text">
-                                    <?php echo $organisation->getOwner()->getLastName() ?>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="w-row contributors">
-                            <div class="w-col w-col-6 contributor-col" ng-repeat="member in organisation.members">
-                                <a href="<?php echo SITE_RELATIVE_PATH ?>/profile/{{member.id}}"
-                                   class="w-inline-block contributor">
-                                    <img width="40" height="40"
-                                         ng-src="<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/{{member.profilePic}}"
-                                         class="contributor-small-img">
-                                    <div class="contributor-name" ng-bind="member.firstName"></div>
-                                    <div class="contributor-position" ng-bind="member.lastName"></div>
-                                </a>
-                                <?php if ($isOwner) { ?>
-                                    <div class="delete" style="display:block" ng-click="removeMember(member)">-
-                                    </div>
-                                <?php } ?>
-                            </div>
-                        </div>
-
-                        <?php if ($canUserRequestMembership) { ?>
-                            <div class="join-organisation">
-                                <div ng-hide="requestToJoin.requestSent">
-                                    <a href="#" class="w-button btn btn-join"
-                                       style="position: static;width:170px"
-                                       ng-click="sendRequestToJoin()"
-                                       ng-bind="requestToJoin.loading ? 'Sending Request...' : 'Request to join'"
-                                       ng-disabled="requestToJoin.loading">
-                                        Request to join
-                                    </a>
-                                </div>
-                                <button ng-show="requestToJoin.requestSent" class="w-button btn btn-join"
-                                        style="position: static;">
-                                    Request Sent
-                                </button>
-                            </div>
-                        <?php } ?>
-                    </div>
-
-                    <?php if ($isOwner) { ?>
-                        <div class="info-card" style="min-height: 0;" ng-show="organisation.memberRequests.length > 0">
-                            <h3 class="info-h card-h">
-                                Member Requests
-                            </h3>
-
-                            <div class="w-row contributors">
-                                <div class="w-col w-col-6 contributor-col"
-                                     ng-repeat="member in organisation.memberRequests">
-                                    <a href="<?php echo SITE_RELATIVE_PATH ?>/profile/{{member.id}}"
-                                       class="w-inline-block contributor">
-                                        <img width="40" height="40"
-                                             ng-src="<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/{{member.profilePic}}"
-                                             class="contributor-small-img">
-                                        <div class="contributor-name" ng-bind="member.firstName"></div>
-                                        <div class="contributor-position" ng-bind="member.lastName"></div>
-                                    </a>
-                                    <div style="margin-left:30px">
-                                        <a href="#" title="Approve Member Request" class="add-item"
-                                           ng-click="approveRequestToJoin(member)"
-                                           style="background-color: green">+</a>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <a href="#" title="Reject Member Request" class="add-item"
-                                           ng-click="rejectRequestToJoin(member)"
-                                           style="background-color: red">-</a>
-                                    </div>
+                <h1 class="header-large-h1-centre"
+                    data-ix="fadeinuponload"><?php echo show_input($organisation->getName()) ?></h1>
+                <div class="header-large-desc">
+                    <a class="ext-url" data-ix="fadeinup-2" href="#">www.nesta.org</a>
+                    <div class="project-single-social" data-ix="fadeinup-3">
+                        <div class="w-row">
+                            <div class="w-col w-col-3 w-col-small-6 w-col-tiny-6">
+                                <div class="sm-nu-bloxk w-clearfix">
+                                    <img class="sm-icon" src="<?php echo SITE_RELATIVE_PATH ?>/images/facebook-logo.png"
+                                         width="40">
+                                    <div class="hero-social-label">Facebook</div>
                                 </div>
                             </div>
-                        </div>
-                    <?php } ?>
-
-                    <div class="info-card map">
-                        <h3 class="info-h card-h map">
-                            <span ng-bind="organisation.name"><?php echo $organisation->getName() ?></span>'s location
-                        </h3>
-
-                        <div class="map-overlay-address" style="position:static">
-                            <div style="margin:10px 10px 0 10px;padding:0">
-                                <img src="<?php echo SITE_RELATIVE_PATH ?>/images/pin.png" class="card-pin"
-                                     style="position:static;float:left;margin-top:7px;margin-right:10px">
-                                <?php if ($isOwner) { ?>
-                                    <div class="card-city" style="text-shadow: 0 0 0 #000">
-                                        <form ng-submit="saveCountryRegion()">
-                                            <select id="Edit-country"
-                                                    data-placeholder="Select country"
-                                                    style="width:150px;background:transparent">
-                                                <option></option>
-                                            </select>
-                                            <span ng-show="regionsLoaded">
-                                                <select
-                                                    data-tags="true"
-                                                    id="Edit-countryRegion"
-                                                    data-placeholder="Type the city"
-                                                    style="width:150px;background:transparent">
-                                                </select>
-                                            </span>
-                                            <span ng-show="regionsLoading">
-                                                Loading...
-                                            </span>
-                                            <span ng-show="regionsLoaded">
-                                                <input
-                                                    ng-hide="savingCountryRegion.loading || savingCountryRegion.saved"
-                                                    type="submit" value="Save" class="w-button add-skill-btn">
-                                                <button
-                                                    ng-show="savingCountryRegion.loading && !savingCountryRegion.saved"
-                                                    type="button" class="w-button add-skill-btn">Saving...
-                                                </button>
-                                                <input
-                                                    ng-show="!savingCountryRegion.loading && savingCountryRegion.saved"
-                                                    type="submit" value="Saved" class="w-button add-skill-btn">
-                                            </span>
-                                        </form>
-                                    </div>
-                                <?php } else { ?>
-                                    <div class="card-city">
-                                        <?php if ($organisation->getCountryRegion()) { ?>
-                                            <?php echo $organisation->getCountryRegion()->getName() ?>,
-                                            <?php echo $organisation->getCountry()->getName() ?>
-                                        <?php } ?>
-                                    </div>
-                                <?php } ?>
-                                <div style="clear:both"></div>
-                            </div>
-
-                            <div class="overlay-address">
-                                <?php if ($isOwner) { ?>
-                                    <textarea
-                                        class="readjustTextarea"
-                                        placeholder="Please type the address"
-                                        ng-model="organisation.address"
-                                        ng-blur="updateBasic()"
-                                        style="min-height:80px;border:0;width:100%;background: transparent">
-                                        <?php echo show_input($organisation->getAddress()) ?>
-                                    </textarea>
-                                <?php } else { ?>
-                                    <?php echo nl2br(show_input($organisation->getAddress())) ?>
-                                <?php } ?>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="info-card" style="min-height:0">
-                        <h3 class="info-h card-h">This organisation is tagged under:</h3>
-                        <div class="w-clearfix tags-block">
-                            <div class="skill" ng-repeat="tag in organisation.tags">
-                                <?php if ($isOwner) { ?>
-                                    <div class="delete" ng-click="removeTag(tag)">-</div>
-                                <?php } ?>
-                                <div ng-bind="tag"></div>
-                            </div>
-                            <div ng-show="organisation.tags.length == 0">
-                                No tags selected
-                            </div>
-                            <?php if ($isOwner) { ?>
-                                <div class="add-item-block" ng-click="addingTag = !addingTag">
-                                    <div class="add-item">+</div>
+                            <div class="w-col w-col-3 w-col-small-6 w-col-tiny-6">
+                                <div class="sm-nu-bloxk w-clearfix">
+                                    <img class="sm-icon"
+                                         src="<?php echo SITE_RELATIVE_PATH ?>/images/twitter-logo-silhouette.png">
+                                    <div class="hero-social-label">Twitter</div>
                                 </div>
-
-                                <div class="w-form" style="float:left"
-                                     ng-show="addingTag">
-                                    <form class="w-clearfix add-skill-section"
-                                          ng-submit="addTag()">
-                                        <select data-tags="true"
-                                                data-placeholder="Add a tag"
-                                                id="Add-tag"
-                                                class="w-input add-language"
-                                                style="width:200px;display:inline">
-                                            <option></option>
-                                        </select>
-                                        <input type="submit" value="Add" class="w-button add-skill-btn">
-                                    </form>
-                                </div>
-                            <?php } ?>
-                        </div>
-                    </div>
-                </div>
-                <div class="w-col w-col-6">
-                    <div class="info-card">
-                        <div data-duration-in="300" data-duration-out="100" class="w-tabs">
-                            <div class="w-tab-menu">
-                                <a data-w-tab="Tab 1" class="w-tab-link w-inline-block w--current org-tab">
-                                    <div>Projects</div>
-                                </a>
-                                <a data-w-tab="Tab 2" class="w-tab-link w-inline-block org-tab">
-                                    <div>Partner organisations</div>
-                                </a>
                             </div>
-                            <div class="w-tab-content">
-                                <div data-w-tab="Tab 1" class="w-tab-pane w--tab-active">
-                                    <div class="list-items">
-                                        <div class="w-inline-block partner-link">
-                                            <?php if ($isOwner) { ?>
-                                                <form method="post" class="list-item" ng-submit="addProject()">
-                                                    <div class="partner-title" style="width:100%">
-                                                        <input type="text" style="line-height:25px;"
-                                                               ng-model="newProjectName" placeholder="Project Name"/>
-                                                        <input ng-hide="addNewProject.loading" type="submit"
-                                                               value="Create Project" class="w-button add-skill-btn">
-                                                        <input ng-show="addNewProject.loading" type="button"
-                                                               value="Loading..." class="w-button add-skill-btn">
-                                                    </div>
-                                                </form>
-                                            <?php } ?>
-                                            <div class="list-item"
-                                                 ng-repeat="project in organisation.organisationProjects">
-                                                <div class="partner-title">
-                                                    <a ng-href="{{project.url}}" ng-bind="project.name"></a>
-                                                </div>
-                                                <div class="no-of-projects">
-                                                    <span ng-bind="project.organisationsCount"></span>
-                                                    Organisation<span
-                                                        ng-bind="project.organisationsCount > 1 ? 's' : ''"></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                            <div class="w-col w-col-3 w-col-small-6 w-col-tiny-6">
+                                <div class="sm-nu-bloxk w-clearfix">
+                                    <img class="sm-icon" src="<?php echo SITE_RELATIVE_PATH ?>/images/social.png">
+                                    <div class="hero-social-label">Github</div>
                                 </div>
-                                <div data-w-tab="Tab 2" class="w-tab-pane">
-                                    <div class="list-items">
-                                        <div class="w-inline-block partner-link">
-                                            <div class="w-clearfix list-item"
-                                                 ng-repeat="partnerOrganisation in organisation.partnerOrganisations">
-                                                <a href="{{partnerOrganisation.url}}" class="partner-title"
-                                                   ng-bind="partnerOrganisation.name"></a>
-                                                <div class="no-of-projects">
-                                                    <span ng-bind="partnerOrganisation.commonProjects"></span>
-                                                    Project<span
-                                                        ng-bind="partnerOrganisation.commonProjects == 1 ? '' : 's'"></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                            </div>
+                            <div class="w-col w-col-3 w-col-small-6 w-col-tiny-6">
+                                <div class="sm-nu-bloxk w-clearfix">
+                                    <img class="sm-icon"
+                                         src="<?php echo SITE_RELATIVE_PATH ?>/images/google-plus-logo.png">
+                                    <div class="hero-social-label">Google +</div>
                                 </div>
                             </div>
                         </div>
@@ -444,4 +53,153 @@ require __DIR__ . '/header.php';
             </div>
         </div>
     </div>
+    <div class="case-study-main">
+        <div class="container-wide">
+            <div class="case-study-logo" data-ix="fadeinuponload-3">
+                <div class="ab-fab">
+                    <img class="logo-img"
+                         src="<?php echo SITE_RELATIVE_PATH ?>/images/nesta-6a9b5fe999e8323b379ccc0d8e70290f.png">
+                </div>
+            </div>
+            <div class="case-study-single-container w-container">
+                <h2 class="centered" data-ix="fadeinuponload-4">
+                    About <?php echo show_input($organisation->getName()) ?></h2>
+                <p class="centered" data-ix="fadeinuponload-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor
+                    interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum
+                    lorem imperdiet. Nunc ut sem vit</p>
+                <h4 class="case-study-intro-detail centered"
+                    data-ix="fadeinuponload-5"><?php echo show_input($organisation->getName()) ?> is based in England
+                    and
+                    has been running since 2005</h4>
+                <div class="centered tagged" data-ix="fadeinup-5">Tagged under: <span class="tag">Technology</span>
+                    <span class="tag">Science</span> <span class="tag">Obfuscation</span>
+                </div>
+                <h2 class="centered" data-ix="fadeinup">Overview
+                    of <?php echo show_input($organisation->getName()) ?></h2>
+                <p class="case-study-main-text" data-ix="fadeinup">The Tor network is a group of&nbsp;volunteer-operated
+                    servers that allows people to improve their privacy and security on the Internet. Tor's users employ
+                    this network by connecting through a series of virtual tunnels rather than making a direct
+                    connection, thus allowing both organizations and individuals to share information over public
+                    networks without compromising their privacy. Along the same line, Tor is an effective censorship
+                    circumvention tool, allowing its users to reach otherwise blocked destinations or content. Tor can
+                    also be used as a building block for software developers to create new communication tools with
+                    built-in privacy features.Individuals use Tor to keep websites from tracking them and their family
+                    members, or to connect to news sites, instant messaging services, or the like when these are blocked
+                    by their local Internet providers.
+                    <br>
+                    <br>Tor's&nbsp;hidden services&nbsp;let users publish web sites and other services without needing
+                    to reveal the location of the site. Individuals also use Tor for socially sensitive communication:
+                    chat rooms and web forums for rape and abuse survivors, or people with illnesses.Journalists use Tor
+                    to communicate more safely with whistleblowers and dissidents. Non-governmental organizations (NGOs)
+                    use Tor to allow their workers to connect to their home website while they're in a foreign country,
+                    without notifying everybody nearby that they're working with that organization.Groups such as
+                    Indymedia recommend Tor for safeguarding their members' online privacy and security. Activist groups
+                    like the Electronic Frontier Foundation (EFF) recommend Tor as a mechanism for maintaining civil
+                    liberties online.
+                    <br>
+                    <br>Corporations use Tor as a safe way to conduct competitive analysis, and to protect sensitive
+                    procurement patterns from eavesdroppers. They also use it to replace traditional VPNs, which reveal
+                    the exact amount and timing of communication. Which locations have employees working late? Which
+                    locations have employees consulting job-hunting websites? Which research divisions are communicating
+                    with the company's patent lawyers?A branch of the U.S. Navy uses Tor for open source intelligence
+                    gathering, and one of its teams used Tor while deployed in the Middle East recently. Law enforcement
+                    uses Tor for visiting or surveilling web sites without leaving government IP addresses in their web
+                    logs, and for security during sting operations.</p>
+                <div class="centered org url-block" data-ix="fadeinup">
+                    <div class="involved">
+                        <h2 class="centered" data-ix="fadeinup"><?php echo show_input($organisation->getName()) ?> is
+                            involved with:</h2>
+                        <div class="w-row">
+                            <div class="people-col w-col w-col-6">
+                                <h4 class="involved-h4">Projects</h4>
+                                <div class="involved-card">
+                                    <div class="w-row">
+                                        <div class="w-col w-col-5 w-col-small-5 w-col-tiny-5">
+                                            <img class="involved-organisation-img"
+                                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/waag.png">
+                                        </div>
+                                        <div class="w-clearfix w-col w-col-7 w-col-small-7 w-col-tiny-7">
+                                            <div class="card-name">The Waag Society</div>
+                                            <div class="card-position">Holland</div>
+                                        </div>
+                                    </div>
+                                    <a class="view-profile" href="#">View</a>
+                                </div>
+                                <div class="involved-card">
+                                    <div class="w-row">
+                                        <div class="w-col w-col-5 w-col-small-5 w-col-tiny-5">
+                                            <img class="involved-organisation-img"
+                                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/waag.png">
+                                        </div>
+                                        <div class="w-clearfix w-col w-col-7 w-col-small-7 w-col-tiny-7">
+                                            <div class="card-name">The Waag Society</div>
+                                            <div class="card-position">Holland</div>
+                                        </div>
+                                    </div>
+                                    <a class="view-profile" href="#">View</a>
+                                </div>
+                                <div class="involved-card">
+                                    <div class="w-row">
+                                        <div class="w-col w-col-5 w-col-small-5 w-col-tiny-5">
+                                            <img class="involved-organisation-img"
+                                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/waag.png">
+                                        </div>
+                                        <div class="w-clearfix w-col w-col-7 w-col-small-7 w-col-tiny-7">
+                                            <div class="card-name">The Waag Society</div>
+                                            <div class="card-position">Holland</div>
+                                        </div>
+                                    </div>
+                                    <a class="view-profile" href="#">View</a>
+                                </div>
+                                <div class="involved-card">
+                                    <div class="w-row">
+                                        <div class="w-col w-col-5 w-col-small-5 w-col-tiny-5">
+                                            <img class="involved-organisation-img"
+                                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/waag.png">
+                                        </div>
+                                        <div class="w-clearfix w-col w-col-7 w-col-small-7 w-col-tiny-7">
+                                            <div class="card-name">The Waag Society</div>
+                                            <div class="card-position">Holland</div>
+                                        </div>
+                                    </div>
+                                    <a class="view-profile" href="#">View</a>
+                                </div>
+                            </div>
+                            <div class="orgs-col w-col w-col-6">
+                                <h4 class="involved-h4">Organisations</h4>
+                                <div class="involved-card">
+                                    <div class="w-row">
+                                        <div class="w-col w-col-5 w-col-small-5 w-col-tiny-5">
+                                            <img class="involved-organisation-img"
+                                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/waag.png">
+                                        </div>
+                                        <div class="w-clearfix w-col w-col-7 w-col-small-7 w-col-tiny-7">
+                                            <div class="card-name">The Waag Society</div>
+                                            <div class="card-position">Holland</div>
+                                        </div>
+                                    </div>
+                                    <a class="view-profile" href="#">View</a>
+                                </div>
+                                <div class="involved-card">
+                                    <div class="w-row">
+                                        <div class="w-col w-col-5 w-col-small-5 w-col-tiny-5">
+                                            <img class="involved-organisation-img"
+                                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/waag.png">
+                                        </div>
+                                        <div class="w-clearfix w-col w-col-7 w-col-small-7 w-col-tiny-7">
+                                            <div class="card-name">The Waag Society</div>
+                                            <div class="card-position">Holland</div>
+                                        </div>
+                                    </div>
+                                    <a class="view-profile" href="#">View</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 <?php require __DIR__ . '/footer.php' ?>
