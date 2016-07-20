@@ -150,6 +150,19 @@ class Router
         } elseif (preg_match('<^/case-study/([0-9]+)(\/.*)?$>', $this->pageURL, $matches)) {
             $this->caseStudyPage($matches);
 
+// Organisations
+        } elseif (preg_match('<^/org/edit/([0-9]+)\.json$>', $this->pageURL, $matches)) {
+            $this->editOrganisationPage($matches, 'json');
+
+        } elseif (preg_match('<^/org/edit/([0-9]+)$>', $this->pageURL, $matches)) {
+            $this->editOrganisationPage($matches);
+
+        } elseif (preg_match('<^/org/([0-9]+)\.json?$>', $this->pageURL, $matches)) {
+            $this->organisationJsonPage($matches);
+
+        } elseif (preg_match('<^/org/([0-9]+)(\/.*)?$>', $this->pageURL, $matches)) {
+            $this->organisationPage($matches);
+
 // Static pages
         } elseif ($this->pageURL === '/robots.txt') {
             $this->robotsTxtPage();
@@ -195,12 +208,6 @@ class Router
 
         } elseif (preg_match('<^/story/edit/([0-9]+)$>', $this->pageURL, $matches)) {
             $this->editStoryPage($matches);
-
-        } elseif (preg_match('<^/org/([0-9]+)\.json?$>', $this->pageURL, $matches)) {
-            $this->organisationJsonPage($matches);
-
-        } elseif (preg_match('<^/org/([0-9]+)(\/.*)?$>', $this->pageURL, $matches)) {
-            $this->organisationPage($matches);
 
         } elseif (preg_match('<^/.*\.(gif|jpe?g|png|svg|js|css|map)$>', $this->pageURL)) {
             pr('not found');
@@ -445,6 +452,14 @@ class Router
     {
         $command = new \DSI\Controller\ProjectEditController();
         $command->projectID = $matches[1];
+        $command->format = $format;
+        $command->exec();
+    }
+
+    private function editOrganisationPage($matches, $format = 'html')
+    {
+        $command = new \DSI\Controller\OrganisationEditController();
+        $command->organisationID = $matches[1];
         $command->format = $format;
         $command->exec();
     }

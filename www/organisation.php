@@ -52,7 +52,7 @@ require __DIR__ . '/header.php';
             */ ?>
             <?php if ($isOwner) { ?>
                 <a class="w-button dsi-button profile-edit project-header-exp"
-                   href="<?php echo \DSI\Service\URL::organisation($organisation) ?>">
+                   href="<?php echo \DSI\Service\URL::editOrganisation($organisation) ?>">
                     Edit organisation</a>
             <?php } ?>
         </div>

@@ -29,7 +29,6 @@ class PersonalDetailsController
         $userID = $user->getId();
 
         $loggedInUser = (new UserRepository())->getById($authUser->getUserId());
-        $angularModules['fileUpload'] = true;
         $languages = (new LanguageRepository())->getAll();
         $userLanguages = (new UserLanguageRepository())->getLanguageIDsForUser($loggedInUser->getId());
         $skills = (new SkillRepository())->getAll();
@@ -38,6 +37,7 @@ class PersonalDetailsController
         $userProjects = (new ProjectMemberRepository())->getProjectIDsForMember($loggedInUser->getId());
         $organisations = (new OrganisationRepository())->getAll();
         $userOrganisations = (new OrganisationMemberRepository())->getOrganisationIDsForMember($loggedInUser->getId());
+        $angularModules['fileUpload'] = true;
         require __DIR__ . '/../../../www/personal-details.php';
     }
 }

@@ -76,7 +76,7 @@ class URL
 
     public static function editOrganisation(Organisation $org)
     {
-        return SITE_RELATIVE_PATH . '/org/' . $org->getId();
+        return SITE_RELATIVE_PATH . '/org/edit/' . $org->getId();
     }
 
     public static function feedback()
