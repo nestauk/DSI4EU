@@ -173,7 +173,7 @@ require __DIR__ . '/header.php';
 
     <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
     <script type="text/javascript"
-            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/CaseStudyEditController.js?v=<?php echo Sysctl::$version ?>"></script>
+            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/CaseStudyEditController.js?v=<?php echo \DSI\Service\Sysctl::$version ?>"></script>
 
     <script>
         $(function () {
