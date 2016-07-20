@@ -15,6 +15,7 @@ use \DSI\Service\URL;
 
 <?php require __DIR__ . '/partialViews/loginModal.php' ?>
 
+<?php /*
 <div class="alt nav-main w-nav white-menu" data-animation="default" data-collapse="medium" data-duration="400"
      data-ix="menuhide">
     <div class="container-wide w-clearfix">
@@ -35,13 +36,17 @@ use \DSI\Service\URL;
         </div>
     </div>
 </div>
+*/ ?>
 <div class="nav-main w-nav" data-animation="default" data-collapse="medium" data-duration="400">
     <div class="container-wide nav-container w-clearfix">
-        <a class="w-nav-brand" href="<?php echo URL::home()?>">
+        <a class="w-nav-brand" href="<?php echo URL::home() ?>">
             <img class="brand" src="images/all white.svg" width="160">
         </a>
         <nav class="m-nav-open w-nav-menu" role="navigation">
-            <a class="nav w-nav-link" href="<?php echo URL::exploreDSI() ?>">Explore DSI</a>
+            <?php /* <a class="nav w-nav-link" href="<?php echo URL::exploreDSI() ?>">Explore DSI</a> */ ?>
+            <?php if ($loggedInUser) { ?>
+                <a class="nav w-nav-link" href="<?php echo URL::dashboard() ?>">Dashboard</a>
+            <?php } ?>
             <a class="nav w-nav-link" href="<?php echo URL::caseStudies() ?>">Case Studies</a>
             <a class="nav w-nav-link" href="<?php echo URL::stories() ?>">Blog</a>
             <a class="nav w-nav-link" href="<?php echo URL::projects() ?>">Projects</a>

@@ -7,6 +7,7 @@ if (!isset($loggedInUser))
 /** @var $pageTitle string[] */
 use \DSI\Service\URL;
 use \DSI\Service\Sysctl;
+
 ?>
     <!DOCTYPE html>
     <html data-wf-site="56e2e31a1b1f8f784728a08c" data-wf-page="56fbef6ecf591b312d56f8be">
@@ -56,7 +57,11 @@ use \DSI\Service\Sysctl;
         </div>
     </div>
 
-<?php require __DIR__ . '/partialViews/loginModal.php' ?>
+<?php if ($loggedInUser) { ?>
+    <?php require __DIR__ . '/partialViews/createProjectAndOrganisation.php' ?>
+<?php } else { ?>
+    <?php require __DIR__ . '/partialViews/loginModal.php' ?>
+<?php } ?>
 
 <?php if (!isset($hideSearch) OR $hideSearch !== true) { ?>
     <div class="search bg-blur">

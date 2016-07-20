@@ -1,5 +1,6 @@
 <?php
-    use DSI\Service\URL;
+use DSI\Service\URL;
+
 ?>
 <script type="text/javascript"
         src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/LoginController.js?v=<?php echo \DSI\Service\Sysctl::$version ?>"></script>
