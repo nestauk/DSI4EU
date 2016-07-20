@@ -82,9 +82,12 @@ class CaseStudyEditController
                 'projectEndDate' => $caseStudy->getProjectEndDate(),
                 'url' => $caseStudy->getUrl(),
                 'buttonLabel' => $caseStudy->getButtonLabel(),
-                'logo' => Image::CASE_STUDY_LOGO_URL . $caseStudy->getLogo(),
-                'cardImage' => Image::CASE_STUDY_CARD_BG_URL . $caseStudy->getCardImage(),
-                'headerImage' => Image::CASE_STUDY_HEADER_URL . $caseStudy->getHeaderImage(),
+                'logo' => $caseStudy->getLogo() ?
+                    Image::CASE_STUDY_LOGO_URL . $caseStudy->getLogo() : '',
+                'cardImage' => $caseStudy->getCardImage() ?
+                    Image::CASE_STUDY_CARD_BG_URL . $caseStudy->getCardImage() : '',
+                'headerImage' => $caseStudy->getHeaderImage() ?
+                    Image::CASE_STUDY_HEADER_URL . $caseStudy->getHeaderImage() : '',
                 'cardColour' => $caseStudy->getCardColour(),
                 'isPublished' => $caseStudy->isPublished(),
                 'countryID' => $caseStudy->getCountryId(),
