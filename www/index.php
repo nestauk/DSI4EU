@@ -19,8 +19,11 @@ class Router
         if ($this->pageURL === '/') {
             $this->homePage();
 
+        } elseif ($this->pageURL === '/dashboard') {
+            $this->dashboardPage();
+
         } elseif ($this->pageURL === '/dashboard.json') {
-            $this->homePage('json');
+            $this->dashboardPage('json');
 
         } elseif ($this->pageURL === '/import') {
             $this->importPage();
@@ -213,6 +216,13 @@ class Router
     private function homePage($format = 'html')
     {
         $command = new \DSI\Controller\HomeController();
+        $command->format = $format;
+        $command->exec();
+    }
+
+    private function dashboardPage($format = 'html')
+    {
+        $command = new \DSI\Controller\DashboardController();
         $command->format = $format;
         $command->exec();
     }

@@ -15,6 +15,11 @@ use DSI\Entity\Project;
 
 class URL
 {
+    public static function dashboard()
+    {
+        return SITE_RELATIVE_PATH . '/dashboard';
+    }
+
     public static function myProfile()
     {
         return SITE_RELATIVE_PATH . '/my-profile';
@@ -23,6 +28,11 @@ class URL
     public static function login()
     {
         return SITE_RELATIVE_PATH . '/login';
+    }
+
+    public static function logout()
+    {
+        return SITE_RELATIVE_PATH . '/logout';
     }
 
     public static function profile($userProfileURL)

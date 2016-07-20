@@ -4,5 +4,5 @@ namespace DSI\Service;
 
 class Sysctl
 {
-    public static $version = '1.1i';
+    public static $version = '1.1j';
 }

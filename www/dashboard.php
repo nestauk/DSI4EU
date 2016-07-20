@@ -13,7 +13,7 @@ require __DIR__ . '/header.php';
 
         <div class="w-section page-header">
             <div class="container-wide header">
-                <h1 class="page-h1 light">Your dashboard</h1>
+                <h1 class="page-h1 light">My dashboard</h1>
             </div>
         </div>
 
