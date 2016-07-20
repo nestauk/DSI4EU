@@ -15,7 +15,7 @@ require __DIR__ . '/header.php';
         </div>
         <div class="section-white w-section">
             <div class="container-wide step-window">
-                <form id="email-form-2" name="email-form-2" ng-submit="add()">
+                <form id="email-form-2" name="email-form-2" ng-submit="save()">
                     <div class="w-form">
                         <div class="w-row">
                             <div class="form-col-left w-col w-col-6">

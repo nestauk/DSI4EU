@@ -43,7 +43,7 @@ angular
         $scope.cardImage = new UploadImageHandler();
         $scope.headerImage = new UploadImageHandler();
 
-        // addStory
+        // saveStory
         (function () {
             $scope.caseStudy = {};
             $http.get(SITE_RELATIVE_PATH + '/case-study/edit/' + caseStudyId + '.json')
@@ -53,12 +53,9 @@ angular
                     $scope.logo.image = $scope.caseStudy.logo;
                     $scope.cardImage.image = $scope.caseStudy.cardImage;
                     $scope.headerImage.image = $scope.caseStudy.headerImage;
-                    $timeout(function () {
-                        editCountry.val($scope.caseStudy.countryID).trigger("change");
-                    }, 2000);
                 });
 
-            $scope.add = function () {
+            $scope.save = function () {
                 $scope.loading = true;
                 var data = $scope.caseStudy;
                 data.logo = $scope.logo.image;
@@ -97,6 +94,9 @@ angular
                     editCountry.select2({data: result.data});
                     editCountry.on("change", function () {
                         listCountryRegions(editCountry.val());
+                    });
+                    $scope.$watch('caseStudy.countryID', function (param) {
+                        editCountry.val($scope.caseStudy.countryID).trigger("change")
                     });
                 });
         };
