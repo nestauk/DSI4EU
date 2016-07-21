@@ -140,12 +140,3 @@ angular
         paste_data_images: false
     });
 }());
-
-(function () {
-    $("#startDate").datepicker({
-        dateFormat: 'yy-mm-dd',
-        changeMonth: true,
-        changeYear: true,
-        yearRange: "-100:+0"
-    });
-}());
