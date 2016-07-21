@@ -13,6 +13,8 @@ class OrganisationRepository
         $insert = array();
         $insert[] = "`ownerID` = '" . addslashes($organisation->getOwner()->getId()) . "'";
         $insert[] = "`name` = '" . addslashes($organisation->getName()) . "'";
+        $insert[] = "`url` = '" . addslashes($organisation->getUrl()) . "'";
+        $insert[] = "`shortDescription` = '" . addslashes($organisation->getShortDescription()) . "'";
         $insert[] = "`description` = '" . addslashes($organisation->getDescription()) . "'";
         if ($organisation->getCountry())
             $insert[] = "`countryID` = '" . addslashes($organisation->getCountry()->getId()) . "'";
@@ -23,6 +25,9 @@ class OrganisationRepository
             $insert[] = "`organisationTypeID` = '" . addslashes($organisation->getOrganisationTypeId()) . "'";
         if ($organisation->getOrganisationSize())
             $insert[] = "`organisationSizeID` = '" . addslashes($organisation->getOrganisationSizeId()) . "'";
+        $insert[] = "`startDate` = '" . addslashes($organisation->getStartDate()) . "'";
+        $insert[] = "`logo` = '" . addslashes($organisation->getLogo()) . "'";
+        $insert[] = "`headerImage` = '" . addslashes($organisation->getHeaderImage()) . "'";
         $insert[] = "`projectsCount` = '" . (int)($organisation->getProjectsCount()) . "'";
         $insert[] = "`partnersCount` = '" . (int)($organisation->getPartnersCount()) . "'";
         $insert[] = "`importID` = '" . addslashes($organisation->getImportID()) . "'";
@@ -43,16 +48,21 @@ class OrganisationRepository
         $insert = array();
         $insert[] = "`ownerID` = '" . addslashes($organisation->getOwner()->getId()) . "'";
         $insert[] = "`name` = '" . addslashes($organisation->getName()) . "'";
+        $insert[] = "`url` = '" . addslashes($organisation->getUrl()) . "'";
+        $insert[] = "`shortDescription` = '" . addslashes($organisation->getShortDescription()) . "'";
         $insert[] = "`description` = '" . addslashes($organisation->getDescription()) . "'";
         if ($organisation->getCountry())
             $insert[] = "`countryID` = '" . addslashes($organisation->getCountry()->getId()) . "'";
         if ($organisation->getCountryRegion())
             $insert[] = "`countryRegionID` = '" . addslashes($organisation->getCountryRegion()->getId()) . "'";
+        $insert[] = "`address` = '" . addslashes($organisation->getAddress()) . "'";
         if ($organisation->getOrganisationType())
             $insert[] = "`organisationTypeID` = '" . addslashes($organisation->getOrganisationTypeId()) . "'";
-        $insert[] = "`address` = '" . addslashes($organisation->getAddress()) . "'";
         if ($organisation->getOrganisationSize())
             $insert[] = "`organisationSizeID` = '" . addslashes($organisation->getOrganisationSizeId()) . "'";
+        $insert[] = "`startDate` = '" . addslashes($organisation->getStartDate()) . "'";
+        $insert[] = "`logo` = '" . addslashes($organisation->getLogo()) . "'";
+        $insert[] = "`headerImage` = '" . addslashes($organisation->getHeaderImage()) . "'";
         $insert[] = "`projectsCount` = '" . (int)($organisation->getProjectsCount()) . "'";
         $insert[] = "`partnersCount` = '" . (int)($organisation->getPartnersCount()) . "'";
         $insert[] = "`importID` = '" . addslashes($organisation->getImportID()) . "'";
@@ -84,6 +94,8 @@ class OrganisationRepository
             (new UserRepository())->getById($organisation['ownerID'])
         );
         $organisationObj->setName($organisation['name'] != '' ? $organisation['name'] : '-');
+        $organisationObj->setUrl($organisation['url']);
+        $organisationObj->setShortDescription($organisation['shortDescription']);
         $organisationObj->setDescription($organisation['description']);
         if ($organisation['countryRegionID']) {
             $organisationObj->setCountryRegion(
@@ -101,6 +113,9 @@ class OrganisationRepository
                 (new OrganisationSizeRepository())->getById($organisation['organisationSizeID'])
             );
         }
+        $organisationObj->setStartDate($organisation['startDate']);
+        $organisationObj->setLogo($organisation['logo']);
+        $organisationObj->setHeaderImage($organisation['headerImage']);
         $organisationObj->setProjectsCount($organisation['projectsCount']);
         $organisationObj->setPartnersCount($organisation['partnersCount']);
         $organisationObj->setImportID($organisation['importID']);
@@ -141,9 +156,11 @@ class OrganisationRepository
     {
         $organisations = [];
         $query = new SQL("SELECT 
-            id, ownerID, name, description
+            id, ownerID, name, url
+          , shortDescription, description
           , countryRegionID, address
           , organisationTypeID, organisationSizeID
+          , startDate, logo, headerImage
           , projectsCount, partnersCount
           , importID
           FROM `organisations` 

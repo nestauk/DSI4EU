@@ -252,6 +252,7 @@ div.error {
     position: absolute;
     top: 5px;
     right: 10px;
+    z-index:1000;
 }
 
 .designSelectBox .involved-card .view-profile {

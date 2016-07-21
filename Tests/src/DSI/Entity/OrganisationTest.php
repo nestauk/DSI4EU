@@ -78,13 +78,18 @@ class OrganisationTest extends \PHPUnit_Framework_TestCase
     {
         $this->country = new \DSI\Entity\Country();
         $this->country->setId(1);
+        $this->country->setName($countryName = 'Romania');
         $this->countryRegion = new \DSI\Entity\CountryRegion();
         $this->countryRegion->setId(2);
+        $this->countryRegion->setName($regionName = 'Iasi');
         $this->countryRegion->setCountry($this->country);
 
         $this->organisation->setCountryRegion($this->countryRegion);
         $this->assertEquals($this->countryRegion->getId(), $this->organisation->getCountryRegion()->getId());
+        $this->assertEquals($this->countryRegion->getId(), $this->organisation->getCountryRegionID());
+        $this->assertEquals($this->country->getName(), $this->organisation->getCountryName());
         $this->assertEquals($this->country->getId(), $this->organisation->getCountry()->getId());
+        $this->assertEquals($this->country->getId(), $this->organisation->getCountryID());
     }
 
     /** @test setOrganisationType, getOrganisationType */
@@ -92,6 +97,7 @@ class OrganisationTest extends \PHPUnit_Framework_TestCase
     {
         $this->organisation->setOrganisationType($this->organisationType);
         $this->assertEquals($this->organisationType->getId(), $this->organisation->getOrganisationType()->getId());
+        $this->assertEquals($this->organisationType->getId(), $this->organisation->getOrganisationTypeId());
     }
 
     /** @test setOrganisationSize, getOrganisationSize */
@@ -99,6 +105,7 @@ class OrganisationTest extends \PHPUnit_Framework_TestCase
     {
         $this->organisation->setOrganisationSize($this->organisationSize);
         $this->assertEquals($this->organisationSize->getId(), $this->organisation->getOrganisationSize()->getId());
+        $this->assertEquals($this->organisationSize->getId(), $this->organisation->getOrganisationSizeId());
     }
 
     /** @test setAddress, getAddress */
@@ -122,5 +129,54 @@ class OrganisationTest extends \PHPUnit_Framework_TestCase
         $projectsCount = 10;
         $this->organisation->setProjectsCount($projectsCount);
         $this->assertEquals($projectsCount, $this->organisation->getProjectsCount());
+    }
+
+    /** @test */
+    public function settingUrl_returnsUrl()
+    {
+        $url = 'http://example.org';
+        $this->organisation->setUrl($url);
+        $this->assertEquals($url, $this->organisation->getUrl());
+    }
+
+    /** @test */
+    public function settingShortDesc_returnsShortDesc()
+    {
+        $shortDesc = 'Short Description';
+        $this->organisation->setShortDescription($shortDesc);
+        $this->assertEquals($shortDesc, $this->organisation->getShortDescription());
+    }
+
+    /** @test */
+    public function settingStartDate_returnsStartDate()
+    {
+        $shortDesc = 'Start Date';
+        $this->organisation->setStartDate($shortDesc);
+        $this->assertEquals($shortDesc, $this->organisation->getStartDate());
+    }
+
+    /** @test */
+    public function settingLogo_returnsLogo()
+    {
+        $logo = 'DSC100.jpg';
+        $this->organisation->setLogo($logo);
+        $this->assertEquals($logo, $this->organisation->getLogo());
+    }
+
+    /** @test */
+    public function settingHeaderImage_returnsHeaderImage()
+    {
+        $headerImage = 'DSC100.jpg';
+        $this->organisation->setHeaderImage($headerImage);
+        $this->assertEquals($headerImage, $this->organisation->getHeaderImage());
+    }
+
+    /** @test */
+    public function settingImportId_returnsImportId()
+    {
+        $this->assertEquals('', $this->organisation->getImportID());
+        $importID = '3245342ABC';
+        $this->organisation->setImportID($importID);
+        $this->assertEquals($importID, $this->organisation->getImportID());
     }
 }

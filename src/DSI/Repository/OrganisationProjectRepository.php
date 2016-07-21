@@ -110,7 +110,7 @@ class OrganisationProjectRepository
                     return null;
 
                 $partnerProjectIDs = $this->getProjectIDsForOrganisation($partnerOrganisation->getId());
-                $partnerOrganisation->data['common-projects'] = count(array_intersect($projectIDs, $partnerProjectIDs));
+                $partnerOrganisation->extraData['common-projects'] = count(array_intersect($projectIDs, $partnerProjectIDs));
                 return $partnerOrganisation;
             },
             $this->getByProjectIDs($projectIDs)

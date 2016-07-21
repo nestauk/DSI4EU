@@ -61,7 +61,7 @@ class OrganisationController
 
                 $updateOrganisation = new UpdateOrganisation();
                 $updateOrganisation->data()->organisation = $organisation;
-                $updateOrganisation->data()->user = $loggedInUser;
+                $updateOrganisation->data()->executor = $loggedInUser;
                 if (isset($_POST['name']))
                     $updateOrganisation->data()->name = $_POST['name'];
                 if (isset($_POST['description']))
@@ -234,7 +234,7 @@ class OrganisationController
                     return [
                         'id' => $organisation->getId(),
                         'name' => $organisation->getName(),
-                        'commonProjects' => $organisation->data['common-projects'],
+                        'commonProjects' => $organisation->extraData['common-projects'],
                         'url' => URL::organisation($organisation),
                     ];
                 }, $partnerOrganisations),

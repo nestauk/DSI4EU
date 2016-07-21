@@ -6,42 +6,9 @@ angular
         var editCountry = $('#edit-country');
         var editCountryRegion = $('#edit-countryRegion');
 
-        var UploadImageHandler = function () {
-            this.uploader = {};
-            this.upload = function (file, errFiles) {
-                var $this = this;
-                $this.errorMsg = {};
-                $this.uploader.f = file;
-                $this.uploader.errFile = errFiles && errFiles[0];
-                if (file) {
-                    file.upload = Upload.upload({
-                        url: SITE_RELATIVE_PATH + '/temp-gallery.json',
-                        data: {file: file}
-                    });
-
-                    file.upload.then(function (response) {
-                        console.log(response.data);
-                        file.result = response.data;
-                        if (response.data.code == 'ok')
-                            $this.image = response.data.imgPath;
-                        else if (response.data.code == 'error')
-                            $this.errorMsg = response.data.errors;
-
-                        $this.uploader = {};
-                    }, function (response) {
-                        if (response.status > 0)
-                            $this.errorMsg = response.status + ': ' + response.data;
-                    }, function (evt) {
-                        file.progress = Math.min(100, parseInt(100.0 *
-                            evt.loaded / evt.total));
-                    });
-                }
-            };
-        };
-
-        $scope.logo = new UploadImageHandler();
-        $scope.cardImage = new UploadImageHandler();
-        $scope.headerImage = new UploadImageHandler();
+        $scope.logo = new DSI_Helpers.UploadImageHandler(Upload);
+        $scope.cardImage = new DSI_Helpers.UploadImageHandler(Upload);
+        $scope.headerImage = new DSI_Helpers.UploadImageHandler(Upload);
 
         // saveStory
         (function () {

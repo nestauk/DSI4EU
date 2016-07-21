@@ -27,4 +27,10 @@ class Image
 
     const CASE_STUDY_HEADER = __DIR__ . '/../../../www/images/case-studies/header/';
     const CASE_STUDY_HEADER_URL = SITE_RELATIVE_PATH . '/images/case-studies/header/';
+
+    const ORGANISATION_LOGO = __DIR__ . '/../../../www/images/org/logo/';
+    const ORGANISATION_LOGO_URL = SITE_RELATIVE_PATH . '/images/org/logo/';
+
+    const ORGANISATION_HEADER = __DIR__ . '/../../../www/images/org/header/';
+    const ORGANISATION_HEADER_URL = SITE_RELATIVE_PATH . '/images/org/header/';
 }

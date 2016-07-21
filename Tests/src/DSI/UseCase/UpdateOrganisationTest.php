@@ -56,7 +56,7 @@ class UpdateOrganisationTest extends PHPUnit_Framework_TestCase
             $this->updateOrganisation->data()->name = $name;
             $this->updateOrganisation->data()->description = $description;
             $this->updateOrganisation->data()->organisation = $this->organisation;
-            $this->updateOrganisation->data()->user = $this->user1;
+            $this->updateOrganisation->data()->executor = $this->user1;
 
             $this->updateOrganisation->exec();
         } catch (ErrorHandler $e) {

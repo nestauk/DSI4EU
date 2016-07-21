@@ -159,8 +159,7 @@ class EditCaseStudy
         $this->caseStudyRepo->save($this->caseStudy);
     }
 
-    private
-    function getRegion()
+    private function getRegion()
     {
         if ($this->data()->countryID != 0) {
             if ($this->countryRegionRepo->nameExists($this->data()->countryID, $this->data()->region)) {

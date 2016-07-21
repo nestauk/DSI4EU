@@ -2,9 +2,12 @@
 
 namespace DSI\Controller;
 
+use DSI\Entity\Image;
 use DSI\Entity\Organisation;
+use DSI\Entity\OrganisationLink_Service;
 use DSI\Entity\OrganisationProject;
 use DSI\Entity\User;
+use DSI\Repository\OrganisationLinkRepository;
 use DSI\Repository\OrganisationMemberRepository;
 use DSI\Repository\OrganisationMemberRequestRepository;
 use DSI\Repository\OrganisationProjectRepository;
@@ -12,6 +15,8 @@ use DSI\Repository\OrganisationRepository;
 use DSI\Repository\OrganisationSizeRepository;
 use DSI\Repository\OrganisationTagRepository;
 use DSI\Repository\OrganisationTypeRepository;
+use DSI\Repository\ProjectRepository;
+use DSI\Repository\TagForOrganisationsRepository;
 use DSI\Repository\UserRepository;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
@@ -49,16 +54,56 @@ class OrganisationEditController
         $organisationRepo = new OrganisationRepository();
         $organisation = $organisationRepo->getById($this->organisationID);
 
-        // $organisationTypes = (new OrganisationTypeRepository())->getAll();
-        // $organisationSizes = (new OrganisationSizeRepository())->getAll();
+        $organisationTypes = (new OrganisationTypeRepository())->getAll();
+        $organisationSizes = (new OrganisationSizeRepository())->getAll();
 
         try {
+            if (isset($_POST['saveDetails'])) {
+                if ($_POST['step'] == 'step1') {
+                    $updateOrganisation = new UpdateOrganisation();
+                    $updateOrganisation->data()->organisation = $organisation;
+                    $updateOrganisation->data()->executor = $loggedInUser;
+                    $updateOrganisation->data()->name = $_POST['name'] ?? '';
+                    $updateOrganisation->data()->url = $_POST['url'] ?? '';
+                    $updateOrganisation->data()->organisationTypeId = $_POST['organisationTypeId'] ?? 0;
+                    $updateOrganisation->data()->tags = $_POST['tags'] ?? [];
+                    $updateOrganisation->data()->projects = $_POST['projects'] ?? [];
+                    $updateOrganisation->data()->links = $_POST['links'] ?? [];
+                    $updateOrganisation->exec();
+                } elseif ($_POST['step'] == 'step2') {
+                    $updateOrganisation = new UpdateOrganisation();
+                    $updateOrganisation->data()->organisation = $organisation;
+                    $updateOrganisation->data()->executor = $loggedInUser;
+                    $updateOrganisation->data()->startDate = $_POST['startDate'] ?? '';
+                    $updateOrganisation->data()->countryID = $_POST['countryID'] ?? 0;
+                    $updateOrganisation->data()->region = $_POST['region'] ?? 0;
+                    $updateOrganisation->exec();
+                } elseif ($_POST['step'] == 'step3') {
+                    $updateOrganisation = new UpdateOrganisation();
+                    $updateOrganisation->data()->organisation = $organisation;
+                    $updateOrganisation->data()->executor = $loggedInUser;
+                    $updateOrganisation->data()->shortDescription = $_POST['shortDescription'] ?? '';
+                    $updateOrganisation->data()->description = $_POST['description'] ?? '';
+                    $updateOrganisation->exec();
+                } elseif ($_POST['step'] == 'step4') {
+                    $updateOrganisation = new UpdateOrganisation();
+                    $updateOrganisation->data()->organisation = $organisation;
+                    $updateOrganisation->data()->executor = $loggedInUser;
+                    $updateOrganisation->data()->logo = $_POST['logo'] ?? '';
+                    $updateOrganisation->data()->headerImage = $_POST['headerImage'] ?? '';
+                    $updateOrganisation->exec();
+                }
+
+                echo json_encode(['code' => 'ok']);
+                return;
+            }
+
             if (isset($_POST['updateBasic'])) {
                 $authUser->ifNotLoggedInRedirectTo(URL::login());
 
                 $updateOrganisation = new UpdateOrganisation();
                 $updateOrganisation->data()->organisation = $organisation;
-                $updateOrganisation->data()->user = $loggedInUser;
+                $updateOrganisation->data()->executor = $loggedInUser;
                 if (isset($_POST['name']))
                     $updateOrganisation->data()->name = $_POST['name'];
                 if (isset($_POST['description']))
@@ -164,7 +209,7 @@ class OrganisationEditController
 
         } catch (ErrorHandler $e) {
             echo json_encode([
-                'result' => 'error',
+                'code' => 'error',
                 'errors' => $e->getErrors()
             ]);
             return;
@@ -189,14 +234,33 @@ class OrganisationEditController
 
         if ($this->format == 'json') {
             $owner = $organisation->getOwner();
+            $links = [];
+            $organisationLinks = (new OrganisationLinkRepository())->getByOrganisationID($organisation->getId());
+            foreach ($organisationLinks AS $organisationLink) {
+                if ($organisationLink->getLinkService() == OrganisationLink_Service::Facebook)
+                    $links['facebook'] = $organisationLink->getLink();
+                if ($organisationLink->getLinkService() == OrganisationLink_Service::Twitter)
+                    $links['twitter'] = $organisationLink->getLink();
+                if ($organisationLink->getLinkService() == OrganisationLink_Service::GooglePlus)
+                    $links['googleplus'] = $organisationLink->getLink();
+                if ($organisationLink->getLinkService() == OrganisationLink_Service::GitHub)
+                    $links['github'] = $organisationLink->getLink();
+            }
+
             echo json_encode([
                 'name' => $organisation->getName(),
+                'url' => $organisation->getUrl(),
+                'shortDescription' => $organisation->getShortDescription(),
                 'description' => $organisation->getDescription(),
                 'address' => $organisation->getAddress(),
                 'organisationTypeId' => (string)$organisation->getOrganisationTypeId(),
                 'organisationSizeId' => (string)$organisation->getOrganisationSizeId(),
+                'startDate' => $organisation->getStartDate(),
+                'logo' => $organisation->getLogo() ?
+                    Image::ORGANISATION_LOGO_URL . $organisation->getLogo() : '',
+                'headerImage' => $organisation->getHeaderImage() ?
+                    Image::ORGANISATION_HEADER_URL . $organisation->getHeaderImage() : '',
 
-                'tags' => (new OrganisationTagRepository())->getTagsNameByOrganisationID($organisation->getId()),
                 'members' => array_values(array_filter(array_map(function (User $user) use ($owner) {
                     if ($owner->getId() == $user->getId())
                         return null;
@@ -231,18 +295,22 @@ class OrganisationEditController
                     return [
                         'id' => $organisation->getId(),
                         'name' => $organisation->getName(),
-                        'commonProjects' => $organisation->data['common-projects'],
+                        'commonProjects' => $organisation->extraData['common-projects'],
                         'url' => URL::organisation($organisation),
                     ];
                 }, $partnerOrganisations),
                 'countryID' => $organisation->getCountryID(),
-                'countryRegionID' => $organisation->getCountryRegionID(),
-                'countryRegion' => $organisation->getCountryRegion() ? $organisation->getCountryRegion()->getName() : '',
+                'region' => $organisation->getRegionName(),
+                'links' => $links ? $links : '',
             ]);
             return;
         } else {
             $pageTitle = $organisation->getName();
             $angularModules['fileUpload'] = true;
+            $tags = (new TagForOrganisationsRepository())->getAll();
+            $orgTags = (new OrganisationTagRepository())->getTagsNameByOrganisationID($organisation->getId());
+            $projects = (new ProjectRepository())->getAll();
+            $orgProjects = (new OrganisationProjectRepository())->getProjectIDsForOrganisation($organisation->getId());
             require __DIR__ . '/../../../www/organisation-edit.php';
         }
     }

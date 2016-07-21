@@ -4,7 +4,7 @@ namespace DSI\Entity;
 
 class Organisation
 {
-    public $data;
+    public $extraData;
 
     /** @var integer */
     private $id;
@@ -14,6 +14,8 @@ class Organisation
 
     /** @var string */
     private $name,
+        $url,
+        $shortDescription,
         $description,
         $address;
 
@@ -32,6 +34,11 @@ class Organisation
     /** @var int */
     private $partnersCount,
         $projectsCount;
+
+    /** @var string */
+    private $startDate,
+        $logo,
+        $headerImage;
 
     /**
      * @return int
@@ -133,6 +140,14 @@ class Organisation
     }
 
     /**
+     * @return string
+     */
+    public function getRegionName()
+    {
+        return $this->countryRegion ? $this->countryRegion->getName() : '';
+    }
+
+    /**
      * @return int
      */
     public function getCountryRegionID()
@@ -201,15 +216,15 @@ class Organisation
      */
     public function getAddress()
     {
-        return $this->address;
+        return (string)$this->address;
     }
 
     /**
      * @param string $address
      */
-    public function setAddress(string $address)
+    public function setAddress($address)
     {
-        $this->address = $address;
+        $this->address = (string)$address;
     }
 
     /**
@@ -233,7 +248,7 @@ class Organisation
      */
     public function getImportID()
     {
-        return $this->importID;
+        return (string)$this->importID;
     }
 
     /**
@@ -241,7 +256,7 @@ class Organisation
      */
     public function setImportID($importID)
     {
-        $this->importID = $importID;
+        $this->importID = (string)$importID;
     }
 
     /**
@@ -258,5 +273,87 @@ class Organisation
     public function setProjectsCount($projectsCount)
     {
         $this->projectsCount = (int)$projectsCount;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl(): string
+    {
+        return (string)$this->url;
+    }
+
+    /**
+     * @param string $url
+     */
+    public function setUrl($url)
+    {
+        $this->url = (string)$url;
+    }
+
+    /**
+     * @return string
+     */
+    public function getShortDescription(): string
+    {
+        return (string)$this->shortDescription;
+    }
+
+    /**
+     * @param string $shortDescription
+     */
+    public function setShortDescription($shortDescription)
+    {
+        $this->shortDescription = (string)$shortDescription;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStartDate(): string
+    {
+        return (string)$this->startDate;
+    }
+
+    /**
+     * @param string $startDate
+     */
+    public function setStartDate($startDate)
+    {
+        if ($startDate == '0000-00-00')
+            $startDate = '';
+        $this->startDate = (string)$startDate;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLogo(): string
+    {
+        return (string)$this->logo;
+    }
+
+    /**
+     * @param string $logo
+     */
+    public function setLogo($logo)
+    {
+        $this->logo = (string)$logo;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHeaderImage(): string
+    {
+        return (string)$this->headerImage;
+    }
+
+    /**
+     * @param string $headerImage
+     */
+    public function setHeaderImage($headerImage)
+    {
+        $this->headerImage = (string)$headerImage;
     }
 }
