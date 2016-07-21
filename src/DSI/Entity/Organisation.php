@@ -316,6 +316,14 @@ class Organisation
     }
 
     /**
+     * @return int
+     */
+    public function getUnixStartDate()
+    {
+        return (int) strtotime($this->startDate);
+    }
+
+    /**
      * @param string $startDate
      */
     public function setStartDate($startDate)

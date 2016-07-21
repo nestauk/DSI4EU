@@ -3,8 +3,10 @@
 namespace DSI\Controller;
 
 use DSI\Entity\Organisation;
+use DSI\Entity\OrganisationLink_Service;
 use DSI\Entity\OrganisationProject;
 use DSI\Entity\User;
+use DSI\Repository\OrganisationLinkRepository;
 use DSI\Repository\OrganisationMemberRepository;
 use DSI\Repository\OrganisationMemberRequestRepository;
 use DSI\Repository\OrganisationProjectRepository;
@@ -52,6 +54,7 @@ class OrganisationController
         $organisationRepo = new OrganisationRepository();
         $organisation = $organisationRepo->getById($this->data()->organisationID);
 
+        /*
         $organisationTypes = (new OrganisationTypeRepository())->getAll();
         $organisationSizes = (new OrganisationSizeRepository())->getAll();
 
@@ -172,6 +175,7 @@ class OrganisationController
             ]);
             return;
         }
+        */
 
         $memberRequests = [];
         $isOwner = false;
@@ -190,6 +194,20 @@ class OrganisationController
                 $memberRequests = (new OrganisationMemberRequestRepository())->getMembersForOrganisation($organisation->getId());
         }
 
+        $links = [];
+        $organisationLinks = (new OrganisationLinkRepository())->getByOrganisationID($organisation->getId());
+        foreach ($organisationLinks AS $organisationLink) {
+            if ($organisationLink->getLinkService() == OrganisationLink_Service::Facebook)
+                $links['facebook'] = $organisationLink->getLink();
+            if ($organisationLink->getLinkService() == OrganisationLink_Service::Twitter)
+                $links['twitter'] = $organisationLink->getLink();
+            if ($organisationLink->getLinkService() == OrganisationLink_Service::GooglePlus)
+                $links['googleplus'] = $organisationLink->getLink();
+            if ($organisationLink->getLinkService() == OrganisationLink_Service::GitHub)
+                $links['github'] = $organisationLink->getLink();
+        }
+
+        /*
         if ($this->data()->format == 'json') {
             $owner = $organisation->getOwner();
             echo json_encode([
@@ -243,7 +261,10 @@ class OrganisationController
                 'countryRegion' => $organisation->getCountryRegion() ? $organisation->getCountryRegion()->getName() : '',
             ]);
             return;
-        } else {
+        } else
+        */
+        {
+            $tags = (new OrganisationTagRepository())->getTagsNameByOrganisationID($organisation->getId());
             $pageTitle = $organisation->getName();
             require __DIR__ . '/../../../www/organisation.php';
         }
