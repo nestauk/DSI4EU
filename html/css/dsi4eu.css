@@ -5928,7 +5928,10 @@ strong {
 }
 
 .what-h3.light {
+  margin-top: 12px;
   color: #fff;
+  font-size: 24px;
+  text-align: left;
 }
 
 .what-p {
