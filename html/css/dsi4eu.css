@@ -109,13 +109,13 @@ strong {
   -webkit-transition: opacity 200ms ease;
   transition: opacity 200ms ease;
   font-family: 'Open Sans', sans-serif;
-  color: hsla(0, 0%, 100%, .8);
-  font-weight: 400;
+  color: #08122a;
+  font-weight: 600;
   text-transform: uppercase;
 }
 
 .nav:hover {
-  color: #fff;
+  color: #08122a;
 }
 
 .nav.w--current {
@@ -175,7 +175,7 @@ strong {
   border-width: 1px;
   border-color: rgba(29, 201, 160, .94);
   background-color: transparent;
-  color: rgba(29, 201, 160, .94);
+  color: #08122a;
 }
 
 .nav.log-in.log-in-alt.alt {
@@ -234,7 +234,7 @@ strong {
   border-style: none;
   border-bottom-width: 0px;
   border-bottom-color: #18233f;
-  background-color: rgba(0, 0, 0, .36);
+  background-color: transparent;
 }
 
 .nav-main.alt {
@@ -2804,6 +2804,9 @@ strong {
 }
 
 .container-wide.nav-container {
+  max-width: 100%;
+  margin-right: 30px;
+  margin-left: 30px;
   padding-bottom: 0px;
 }
 
@@ -2883,6 +2886,17 @@ strong {
 
 .container-wide.search-results-list {
   margin-top: 140px;
+}
+
+.container-wide.map-section {
+  height: 400px;
+  background-image: url('../images/whitemap.png');
+  background-position: 50% 50%;
+  background-size: cover;
+}
+
+.container-wide.map-animation {
+  min-height: 650px;
 }
 
 .button {
@@ -5500,7 +5514,8 @@ strong {
   right: 0px;
   height: 800px;
   min-height: 800px;
-  margin-top: -101px;
+  margin: 15px 30px 30px;
+  border: 30px none #f3f3f3;
   background-color: transparent;
 }
 
@@ -5524,8 +5539,8 @@ strong {
 }
 
 .massive-hero-slide.wikihouse {
-  background-image: -webkit-linear-gradient(270deg, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url('../images/Gardenroom_night.jpg');
-  background-image: linear-gradient(180deg, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url('../images/Gardenroom_night.jpg');
+  background-image: -webkit-linear-gradient(270deg, rgba(0, 0, 0, .65), rgba(0, 0, 0, .65)), url('../images/Gardenroom_night.jpg');
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, .65), rgba(0, 0, 0, .65)), url('../images/Gardenroom_night.jpg');
   background-position: 0px 0px, 50% 50%;
   background-size: auto, cover;
   background-repeat: repeat, no-repeat;
@@ -5553,7 +5568,7 @@ strong {
   right: 0px;
   z-index: 2;
   display: block;
-  height: 100%;
+  height: 40%;
   max-width: 1170px;
   margin-right: auto;
   margin-left: auto;
@@ -5562,21 +5577,21 @@ strong {
 
 .massive-hero-h1 {
   width: auto;
-  max-width: 500px;
-  margin-top: 175px;
+  margin-top: 150px;
   margin-bottom: 20px;
   font-family: 'Open Sans', sans-serif;
   color: #fff;
-  font-size: 52px;
-  line-height: 1.3em;
-  font-weight: 800;
+  font-size: 62px;
+  line-height: 70px;
+  font-weight: 700;
   text-align: left;
 }
 
 .slide-info {
   position: absolute;
-  right: 70px;
-  bottom: 64px;
+  right: 0px;
+  bottom: 110px;
+  z-index: 200;
   width: 420px;
   height: auto;
   min-height: 210px;
@@ -5703,8 +5718,8 @@ strong {
 }
 
 .slide-nav-small {
-  bottom: 89px;
-  display: none;
+  bottom: 80px;
+  display: block;
   font-size: 6px;
 }
 
@@ -5712,10 +5727,12 @@ strong {
   position: static;
   left: 0px;
   bottom: 153px;
+  margin-top: 98px;
   font-family: 'Open Sans', sans-serif;
   color: #2c2d33;
   font-size: 28px;
   line-height: 40px;
+  text-align: left;
 }
 
 .massive-hero-sub-header {
@@ -5863,21 +5880,22 @@ strong {
 
 .massive-intro-section {
   position: relative;
-  min-height: 470px;
+  min-height: 360px;
 }
 
 .massive-light-block {
   position: absolute;
+  left: 0px;
   right: 0px;
   bottom: 0px;
-  width: 586px;
-  height: 400px;
+  width: auto;
+  height: 100px;
   background-color: hsla(0, 0%, 100%, .06);
 }
 
 .whats-your-story {
-  position: absolute;
-  top: -45px;
+  position: static;
+  top: 0px;
   right: 0px;
   bottom: 0px;
   z-index: 3;
@@ -5897,17 +5915,36 @@ strong {
 }
 
 .what-h3 {
+  display: block;
+  max-width: 850px;
   margin-top: 50px;
-  margin-right: 0px;
-  margin-left: 0px;
-  color: #fff;
+  margin-right: auto;
+  margin-left: auto;
+  color: #2c2d33;
+  font-size: 34px;
+  line-height: 40px;
   font-weight: 700;
+  text-align: center;
+}
+
+.what-h3.light {
+  color: #fff;
 }
 
 .what-p {
-  max-width: 490px;
-  color: hsla(0, 0%, 100%, .71);
-  line-height: 25px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  color: #2c2d33;
+  font-size: 24px;
+  line-height: 36px;
+  text-align: center;
+}
+
+.what-p.small {
+  color: hsla(0, 0%, 100%, .68);
+  font-size: 18px;
+  line-height: 26px;
+  text-align: left;
 }
 
 .what-text-button {
@@ -5920,7 +5957,7 @@ strong {
 
 .what-text-button.bottom {
   position: absolute;
-  left: 50px;
+  left: 30px;
   top: auto;
   right: 0px;
   bottom: 50px;
@@ -5928,13 +5965,18 @@ strong {
 
 .what-is-dsi {
   position: relative;
-  bottom: 160px;
+  bottom: 0px;
   z-index: 4;
-  width: 584px;
-  height: 390px;
+  width: auto;
+  height: 450px;
+  margin-top: 0px;
   margin-left: 0px;
   padding: 50px;
-  background-color: #fff;
+  background-color: #2c2d33;
+  background-image: none;
+  background-position: 0px 0px;
+  background-size: auto;
+  background-repeat: repeat;
   box-shadow: 0 0 50px -25px #000;
 }
 
@@ -5948,10 +5990,16 @@ strong {
 }
 
 .big-h2 {
-  color: #2c2d33;
+  display: block;
+  margin-top: 102px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 20px;
+  color: #fff;
   font-size: 52px;
-  line-height: 1.3em;
+  line-height: 53px;
   font-weight: 800;
+  text-align: left;
 }
 
 .case-study-card-name {
@@ -6053,11 +6101,14 @@ strong {
 .massive-who-card {
   position: relative;
   height: 370px;
-  padding: 50px;
+  margin-right: 10px;
+  margin-left: 10px;
+  padding: 50px 50px 50px 30px;
   background-color: #2c2d33;
 }
 
 .massive-who-card.alt {
+  padding-left: 30px;
   background-color: #282930;
 }
 
@@ -6067,6 +6118,7 @@ strong {
 }
 
 .massive-h3 {
+  margin-top: 0px;
   color: #fff;
   font-weight: 700;
 }
@@ -6800,6 +6852,230 @@ strong {
 
 .password-reset-section {
   min-height: 900px;
+}
+
+.map-background {
+  background-image: -webkit-radial-gradient(circle farthest-corner at 50% 50%, #ececec, #fff 61%);
+  background-image: radial-gradient(circle farthest-corner at 50% 50%, #ececec, #fff 61%);
+}
+
+.pin {
+  position: absolute;
+  top: 128px;
+  right: 464px;
+  bottom: 0px;
+}
+
+.pin.pin2 {
+  top: 143px;
+  right: 419px;
+}
+
+.pin.pin3 {
+  top: 41px;
+  right: 332px;
+}
+
+.pin.pin4 {
+  top: 61px;
+  right: 298px;
+}
+
+.pin.pin5 {
+  top: 22px;
+  right: 209px;
+}
+
+.pin.pin6 {
+  top: 54px;
+  right: 143px;
+}
+
+.pin.pin7 {
+  top: 97px;
+  right: 343px;
+}
+
+.pin.pin8 {
+  top: 140px;
+  right: 372px;
+}
+
+.pin.pin9 {
+  top: 278px;
+  right: 475px;
+}
+
+.pin.pin10 {
+  top: 257px;
+  right: 422px;
+}
+
+.pin.pin11 {
+  top: 166px;
+  right: 396px;
+}
+
+.pin.pin12 {
+  top: 310px;
+  right: 348px;
+}
+
+.pin.pin13 {
+  top: 313px;
+  right: 180px;
+}
+
+.pin.pin14 {
+  top: 304px;
+  right: 43px;
+}
+
+.pin.pin15 {
+  top: 232px;
+  right: 106px;
+}
+
+.pin.pin16 {
+  top: 244px;
+  right: 323px;
+}
+
+.pin.pin17 {
+  top: 202px;
+  right: 391px;
+}
+
+.pin.pin18 {
+  top: 177px;
+  right: 334px;
+}
+
+.pin.pin19 {
+  top: 187px;
+  right: 292px;
+}
+
+.pin.pin20 {
+  top: 177px;
+  right: 241px;
+}
+
+.pin.pin21 {
+  top: 143px;
+  right: 316px;
+}
+
+.pin.pin22 {
+  top: 253px;
+  right: 208px;
+}
+
+.pin.pin23 {
+  right: 242px;
+}
+
+.pin.pin24 {
+  right: 433px;
+}
+
+.pin.pin25 {
+  top: 282px;
+  right: 255px;
+}
+
+.layer1 {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+}
+
+.layer2 {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  opacity: 0;
+}
+
+.massive-hero-twitter-link {
+  padding: 7px 15px;
+  background-color: #1dc9a0;
+  font-family: 'Open Sans', sans-serif;
+  color: #08122a;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.massive-hero-h2 {
+  max-width: 700px;
+  margin-bottom: 41px;
+  line-height: 40px;
+}
+
+.intro-columns {
+  position: relative;
+  z-index: 1;
+  margin-top: -100px;
+}
+
+.intro-col-left {
+  padding-right: 0px;
+  padding-left: 0px;
+}
+
+.intro-col-right {
+  padding-right: 0px;
+  padding-left: 0px;
+}
+
+.map-dark {
+  height: 450px;
+}
+
+.map-light {
+  height: 450px;
+  padding: 50px;
+  background-color: #fff;
+  background-image: -webkit-linear-gradient(270deg, hsla(0, 0%, 100%, .68), hsla(0, 0%, 100%, .68)), url('../images/dsi-map.png');
+  background-image: linear-gradient(180deg, hsla(0, 0%, 100%, .68), hsla(0, 0%, 100%, .68)), url('../images/dsi-map.png');
+  background-position: 0px 0px, 80% 100%;
+  background-size: auto, 1170px;
+}
+
+.blank-col-left {
+  padding: 50px;
+}
+
+html.w-mod-js *[data-ix="pin-drop"] {
+  opacity: 0;
+  -webkit-transform: translate(0px, -100px);
+  -ms-transform: translate(0px, -100px);
+  transform: translate(0px, -100px);
+}
+
+html.w-mod-js *[data-ix="pin-drop-2"] {
+  opacity: 0;
+  -webkit-transform: translate(0px, -100px);
+  -ms-transform: translate(0px, -100px);
+  transform: translate(0px, -100px);
+}
+
+html.w-mod-js *[data-ix="pin-drop-3"] {
+  opacity: 0;
+  -webkit-transform: translate(0px, -100px);
+  -ms-transform: translate(0px, -100px);
+  transform: translate(0px, -100px);
+}
+
+html.w-mod-js *[data-ix="pin-drop-4"] {
+  opacity: 0;
+  -webkit-transform: translate(0px, -100px);
+  -ms-transform: translate(0px, -100px);
+  transform: translate(0px, -100px);
 }
 
 html.w-mod-js *[data-ix="downbeforeup"] {

@@ -3111,7 +3111,7 @@
 	    data.open = false;
 	    data.button.removeClass(buttonOpen);
 	    var config = data.config;
-	    if (config.animation === 'none' || !tram.support.transform) immediate = true;
+	    if (config.animation === 'none' || !tram.support.transform || config.duration <= 0) immediate = true;
 	    ix.outro(0, data.el[0]);
 
 	    // Stop listening for tap outside events
@@ -4576,6 +4576,10 @@
  * Webflow: Interactions: Init
  */
 Webflow.require('ix').init([
+  {"slug":"pin-drop","name":"pin drop","value":{"style":{"opacity":0,"x":"0px","y":"-100px","z":"0px"},"triggers":[{"type":"scroll","stepsA":[{"opacity":1,"transition":"transform 300ms ease 0ms, opacity 300ms ease 0ms","x":"0px","y":"3px","z":"0px"},{"transition":"transform 200ms ease 0ms","x":"0px","y":"0px","z":"0px"}],"stepsB":[]}]}},
+  {"slug":"pin-drop-2","name":"pin drop 2","value":{"style":{"opacity":0,"x":"0px","y":"-100px","z":"0px"},"triggers":[{"type":"scroll","stepsA":[{"wait":200},{"opacity":1,"transition":"transform 300ms ease 0ms, opacity 300ms ease 0ms","x":"0px","y":"3px","z":"0px"},{"transition":"transform 200ms ease 0ms","x":"0px","y":"0px","z":"0px"}],"stepsB":[]}]}},
+  {"slug":"pin-drop-3","name":"pin drop 3","value":{"style":{"opacity":0,"x":"0px","y":"-100px","z":"0px"},"triggers":[{"type":"scroll","stepsA":[{"wait":300},{"opacity":1,"transition":"transform 300ms ease 0ms, opacity 300ms ease 0ms","x":"0px","y":"3px","z":"0px"},{"transition":"transform 200ms ease 0ms","x":"0px","y":"0px","z":"0px"}],"stepsB":[]}]}},
+  {"slug":"pin-drop-4","name":"pin drop 4","value":{"style":{"opacity":0,"x":"0px","y":"-100px","z":"0px"},"triggers":[{"type":"scroll","stepsA":[{"wait":600},{"opacity":1,"transition":"transform 300ms ease 0ms, opacity 300ms ease 0ms","x":"0px","y":"3px","z":"0px"},{"transition":"transform 200ms ease 0ms","x":"0px","y":"0px","z":"0px"}],"stepsB":[]}]}},
   {"slug":"growimg","name":"growImg","value":{"style":{},"triggers":[{"type":"hover","selector":".country-img","descend":true,"stepsA":[{"transition":"transform 500ms ease 0ms","scaleX":1.05,"scaleY":1.05,"scaleZ":1.05}],"stepsB":[{"transition":"transform 500ms ease 0ms","scaleX":1,"scaleY":1,"scaleZ":1}],"preserve3d":true}]}},
   {"slug":"showsignup","name":"showSignUp","value":{"style":{},"triggers":[{"type":"click","selector":".modal-signup","stepsA":[{"display":"block","opacity":1,"wait":300,"transition":"opacity 300ms ease 0ms"}],"stepsB":[]},{"type":"click","selector":".signup-form","stepsA":[{"opacity":1,"transition":"transform 300ms ease 0ms, opacity 300ms ease 0ms","x":"0px","y":"-5px","z":"0px"},{"transition":"transform 300ms ease 0ms","x":"0px","y":"0px","z":"0px"}],"stepsB":[]}]}},
   {"slug":"downbeforeup","name":"downBeforeUp","value":{"style":{"opacity":0,"x":"0px","y":"50px","z":"0px"},"triggers":[]}},
@@ -4624,5 +4628,6 @@ Webflow.require('ix').init([
   {"slug":"fadeinuponload-5","name":"fadeInUpOnLoad 5","value":{"style":{"opacity":0,"x":"0px","y":"50px","z":"0px"},"triggers":[{"type":"scroll","stepsA":[{"wait":400},{"opacity":1,"transition":"transform 300ms ease 0ms, opacity 300ms ease 0ms","x":"0px","y":"-5px","z":"0px"},{"transition":"transform 300ms ease 0ms","x":"0px","y":"0px","z":"0px"}],"stepsB":[]}]}},
   {"slug":"menuhide","name":"menuHide","value":{"style":{"opacity":0,"x":"0px","y":"-75px","z":"0px"},"triggers":[]}},
   {"slug":"reveal-menu","name":"reveal menu","value":{"style":{},"triggers":[{"type":"scroll","selector":".white-menu","offsetBot":"121%","stepsA":[{"opacity":0,"transition":"transform 500ms ease 0ms, opacity 500ms ease 0ms","x":"0px","y":"-75px","z":"0px"}],"stepsB":[{"opacity":1,"transition":"transform 500ms ease 0ms, opacity 500ms ease 0ms","x":"0px","y":"0px","z":"0px"}]}]}},
-  {"slug":"edit-update","name":"edit update","value":{"style":{},"triggers":[{"type":"hover","selector":".edit-update","descend":true,"stepsA":[{"display":"block"}],"stepsB":[{"display":"none"}]}]}}
+  {"slug":"edit-update","name":"edit update","value":{"style":{},"triggers":[{"type":"hover","selector":".edit-update","descend":true,"stepsA":[{"display":"block"}],"stepsB":[{"display":"none"}]}]}},
+  {"slug":"3d-map-transform","name":"3d map transform","value":{"style":{},"triggers":[{"type":"scroll","stepsA":[{"transition":"transform 1800ms ease 0ms","rotateX":"60deg","rotateY":"0deg","rotateZ":"20deg"}],"stepsB":[{"transition":"transform 1800ms ease 0ms","x":"0px","y":"0px","z":"0px"}],"preserve3d":true},{"type":"scroll","selector":".layer2","stepsA":[{"wait":1000},{"opacity":1,"transition":"transform 1800ms ease 0ms, opacity 1800ms ease 0ms","x":"0px","y":"0px","z":"30px"}],"stepsB":[{"transition":"transform 1800ms ease 0ms","x":"0px","y":"0px","z":"0px"}],"preserve3d":true}]}}
 ]);
