@@ -59,7 +59,7 @@ class UpdateProjectTest extends PHPUnit_Framework_TestCase
             $this->updateProject->data()->url = $url;
 
             $this->updateProject->data()->project = $this->project;
-            $this->updateProject->data()->user = $this->user1;
+            $this->updateProject->data()->executor = $this->user1;
 
             $this->updateProject->exec();
         } catch (ErrorHandler $e) {

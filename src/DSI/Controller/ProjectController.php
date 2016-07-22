@@ -109,7 +109,7 @@ class ProjectController
 
                     $updateProject = new UpdateProject();
                     $updateProject->data()->project = $project;
-                    $updateProject->data()->user = $loggedInUser;
+                    $updateProject->data()->executor = $loggedInUser;
                     if (isset($_POST['name']))
                         $updateProject->data()->name = $_POST['name'];
                     if (isset($_POST['url']))

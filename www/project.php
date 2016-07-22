@@ -16,12 +16,12 @@ require __DIR__ . '/header.php';
         <div class="header-large-section">
             <div class="header-large">
                 <div class="container-wide container-wide-header-large">
-                    <h1 class="header-large-h1-centre"
-                        data-ix="fadeinuponload"><?php echo show_input($project->getName()) ?></h1>
                     <?php if ($isAdmin) { ?>
-                        <a class="dsi-button profile-edit w-button"
+                        <a class="dsi-button profile-edit w-button" style="z-index:1000"
                            href="<?php echo \DSI\Service\URL::editProject($project->getId()) ?>">Edit project</a>
                     <?php } ?>
+                    <h1 class="header-large-h1-centre"
+                        data-ix="fadeinuponload"><?php echo show_input($project->getName()) ?></h1>
                     <div class="header-large-desc">
                         <a class="ext-url" data-ix="fadeinup-2" href="<?php echo $project->getUrl() ?>" target="_blank">
                             <?php echo $project->getUrl() ?>

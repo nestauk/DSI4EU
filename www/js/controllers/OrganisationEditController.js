@@ -123,7 +123,6 @@ angular
                     });
             }
         };
-
         listCountries();
     });
 

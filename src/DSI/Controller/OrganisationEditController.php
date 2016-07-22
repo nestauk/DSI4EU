@@ -76,7 +76,7 @@ class OrganisationEditController
                     $updateOrganisation->data()->executor = $loggedInUser;
                     $updateOrganisation->data()->startDate = $_POST['startDate'] ?? '';
                     $updateOrganisation->data()->countryID = $_POST['countryID'] ?? 0;
-                    $updateOrganisation->data()->region = $_POST['region'] ?? 0;
+                    $updateOrganisation->data()->region = $_POST['region'] ?? '';
                     $updateOrganisation->exec();
                 } elseif ($_POST['step'] == 'step3') {
                     $updateOrganisation = new UpdateOrganisation();

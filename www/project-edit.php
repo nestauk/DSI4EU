@@ -1,156 +1,550 @@
 <?php
 require __DIR__ . '/header.php';
 /** @var $project \DSI\Entity\Project */
+/** @var $tags \DSI\Entity\TagForProjects[] */
+/** @var $impactTags \DSI\Entity\ImpactTag[] */
+/** @var $projectTags string[] */
+/** @var $projectImpactTagsA string[] */
+/** @var $projectImpactTagsB string[] */
+/** @var $projectImpactTagsC string[] */
+/** @var $organisations \DSI\Entity\Organisation[] */
+/** @var $projectOrganisations int[] */
 ?>
-
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+    <script type="text/javascript"
+            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/CaseStudyEditController.js?v=<?php echo \DSI\Service\Sysctl::$version ?>"></script>
+
     <script type="text/javascript"
             src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/ProjectEditController.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
-    <style>
-        .thumb {
-            width: 24px;
-            height: 24px;
-            float: none;
-            position: relative;
-            top: 7px;
-        }
-
-        form .progress {
-            line-height: 15px;
-        }
-
-        .progress {
-            display: inline-block;
-            width: 100px;
-            border: 3px groove #CCC;
-        }
-
-        .progress div {
-            font-size: smaller;
-            background: orange;
-            width: 0;
-        }
-    </style>
-
     <div ng-controller="ProjectEditController" data-projectid="<?php echo $project->getId() ?>">
-        <div class="w-section page-header">
+        <div class="creator page-header">
             <div class="container-wide header">
-                <h1 class="page-h1 light">Edit project</h1>
+                <h1 class="light page-h1">Edit project</h1>
             </div>
         </div>
-
-        <div class="container-wide">
-            <div class="body-content add-story">
-                <div class="w-form">
-                    <form class="w-clearfix" ng-submit="save()" ng-disabled="loading">
-                        <div class="w-row">
-                            <div class="w-col w-col-6">
-                                <h2 class="edit-h2">Project info</h2>
-                                <label class="story-label">Project name</label>
-                                <input class="w-input story-form personal" maxlength="256"
-                                       placeholder="Add your project's name" type="text" ng-model="project.name">
-                                <label class="story-label" for="project-url">Website</label>
-                                <input class="w-input story-form personal" maxlength="256"
-                                       placeholder="Add your projects URL" type="text" ng-model="project.url">
-                                <label class="story-label" for="project-bio">Project description</label>
-                                <textarea class="w-input story-form" maxlength="5000" ng-model="project.description"
-                                          placeholder="Briefly describe your project (no more than 500 characters)"></textarea>
-                                <label class="story-label" for="Story-wysiwyg">Current status</label>
-                                <div class="w-checkbox">
-                                    <label class="w-form-label">
-                                        <input class="w-checkbox-input" value="live" type="radio"
-                                               ng-model="project.status">
-                                        Live
-                                    </label>
-                                </div>
-                                <div class="w-checkbox">
-                                    <label class="w-form-label">
-                                        <input class="w-checkbox-input" value="closed" type="radio"
-                                               ng-model="project.status">
-                                        Closed
-                                    </label>
-                                </div>
-                                <label class="story-label profile-image" for="Title">Your project logo</label>
-                                <img class="story-image-upload"
-                                     src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg"
-                                     ng-src="{{project.logo}}">
-                                <a class="w-button dsi-button story-image-upload" href="#"
-                                   ngf-select="logo.upload($file, $invalidFiles)"
-                                   ng-bind="logo.loading ? 'Loading...' : 'Upload image'">
-                                    Upload image
-                                </a>
-                                <?php /*
-                                <label class="story-label" for="Title">Header background image</label>
-                                <img class="story-image-upload story-image-upload-large"
-                                     src="images/brussels-locations.jpg">
-                                <a class="w-button dsi-button story-image-upload" href="#">Upload image</a>
-                                */ ?>
+        <div class="creator section-white">
+            <div class="container-wide">
+                <div class="add-story body-content">
+                    <div class="w-tabs" data-easing="linear">
+                        <div class="creator-tab-menu w-tab-menu">
+                            <a class="step-tab tab-link-1 w-inline-block w-tab-link"
+                               ng-class="{'w--current': currentTab == 'step1'}" data-w-tab="Tab 1"
+                               ng-click="currentTab = 'step1'">
+                                <div>1 - Project details</div>
+                            </a>
+                            <a class="step-tab tab-link-2 w-inline-block w-tab-link"
+                               ng-class="{'w--current': currentTab == 'step2'}" data-w-tab="Tab 2"
+                               ng-click="currentTab = 'step2'">
+                                <div>2 - Duration &amp; Location</div>
+                            </a>
+                            <a class="step-tab tab-link-3 w-inline-block w-tab-link"
+                               ng-class="{'w--current': currentTab == 'step3'}" data-w-tab="Tab 3"
+                               ng-click="currentTab = 'step3'">
+                                <div>3 - project Description</div>
+                            </a>
+                            <a class="step-tab tab-link-4 w-inline-block w-tab-link"
+                               ng-class="{'w--current': currentTab == 'step4'}" data-w-tab="Tab 4" id="tab-four"
+                               ng-click="currentTab = 'step4'">
+                                <div>4 - Publish your project</div>
+                            </a>
+                        </div>
+                        <div class="w-tab-content">
+                            <div class="step-window w-tab-pane" ng-class="{'w--tab-active': currentTab == 'step1'}"
+                                 data-w-tab="Tab 1">
+                                <form id="email-form-3" name="email-form-3" ng-submit="submitStep1()">
+                                    <div class="tabbed-nav-buttons w-clearfix">
+                                        <input type="submit" class="tab-button-2 tab-button-next w-button"
+                                               ng-value="loading ? 'Loading...' : 'Save and continue'"
+                                               ng-disabled="loading"
+                                               value="Save and continue"/>
+                                    </div>
+                                    <div class="w-row">
+                                        <div class="creator-col w-col w-col-4">
+                                            <h2>1 - Project Details</h2>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+                                                varius
+                                                enim in eros elementum tristique. Duis cursus, mi quis viverra ornare,
+                                                eros
+                                                dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus
+                                                nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus
+                                                tristique posuere.</p>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+                                                varius
+                                                enim in eros elementum tristique. Duis cursus, mi quis viverra ornare,
+                                                eros
+                                                dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus
+                                                nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus
+                                                tristique posuere.</p>
+                                        </div>
+                                        <div class="creator-col creator-col-right w-col w-col-8">
+                                            <div class="w-form">
+                                                <div class="w-row">
+                                                    <div class="w-col w-col-6 w-col-stack">
+                                                        <div class="padding-right-50">
+                                                            <label for="name">Project name</label>
+                                                            <input class="creator-data-entry end w-input"
+                                                                   data-name="Name" id="name" maxlength="256"
+                                                                   name="name" placeholder="Project Name"
+                                                                   ng-model="project.name"
+                                                                   type="text">
+                                                            <label for="email">Project URL</label>
+                                                            <input class="creator-data-entry end w-input"
+                                                                   data-name="Email" id="email" maxlength="256"
+                                                                   name="email" placeholder="Add your project&#39;s URL"
+                                                                   ng-model="project.url"
+                                                                   type="text">
+                                                            <label for="email-2">Social media links</label>
+                                                            <input class="creator-data-entry w-input"
+                                                                   data-name="Email 2" id="email-2" maxlength="256"
+                                                                   name="email-2" placeholder="Facebook"
+                                                                   ng-model="project.links.facebook"
+                                                                   type="text">
+                                                            <input class="creator-data-entry w-input"
+                                                                   data-name="Email 3" id="email-3" maxlength="256"
+                                                                   name="email-3" placeholder="Twitter"
+                                                                   ng-model="project.links.twitter"
+                                                                   type="text">
+                                                            <input class="creator-data-entry w-input"
+                                                                   data-name="Email 4" id="email-4" maxlength="256"
+                                                                   name="email-4" placeholder="Google plus"
+                                                                   ng-model="project.links.googleplus"
+                                                                   type="text">
+                                                            <input class="creator-data-entry w-input"
+                                                                   data-name="Email 5" id="email-5" maxlength="256"
+                                                                   name="email-5" placeholder="Github"
+                                                                   type="text">
+                                                        </div>
+                                                    </div>
+                                                    <div class="w-col w-col-6 w-col-stack">
+                                                        <div class="padding-left-50">
+                                                            <label for="email">Project URL</label>
+                                                            <p>Add tags that best describe your project:</p>
+                                                            <select class="select2 creator-data-entry end w-input"
+                                                                    id="tagsSelect" style="width:100%;border:0"
+                                                                    multiple data-tags="true"
+                                                                    data-placeholder="Write tags">
+                                                                <?php foreach ($tags AS $tag) { ?>
+                                                                    <option value="<?php echo $tag->getName() ?>"
+                                                                        <?php if (in_array($tag->getName(), $projectTags)) echo 'selected' ?>><?php
+                                                                        echo show_input($tag->getName())
+                                                                        ?></option>
+                                                                <?php } ?>
+                                                            </select>
+                                                            <br/><br/>
+                                                            <label>Areas of society impacted</label>
+                                                            <select class="select2 creator-data-entry end w-input"
+                                                                    id="impact-tags-a" style="width:100%;border:0"
+                                                                    multiple data-tags="true"
+                                                                    data-placeholder="Write tags">
+                                                                <?php foreach ($impactTags AS $tag) { ?>
+                                                                    <option value="<?php echo $tag->getName() ?>"
+                                                                        <?php if (in_array($tag->getName(), $projectImpactTagsA)) echo 'selected' ?>><?php
+                                                                        echo show_input($tag->getName())
+                                                                        ?></option>
+                                                                <?php } ?>
+                                                            </select>
+                                                            <br/><br/>
+                                                            <label>DSI Focus</label>
+                                                            <select class="select2 creator-data-entry end w-input"
+                                                                    id="impact-tags-b" style="width:100%;border:0"
+                                                                    multiple data-tags="true"
+                                                                    data-placeholder="Write tags">
+                                                                <?php foreach ($impactTags AS $tag) { ?>
+                                                                    <option value="<?php echo $tag->getName() ?>"
+                                                                        <?php if (in_array($tag->getName(), $projectImpactTagsB)) echo 'selected' ?>><?php
+                                                                        echo show_input($tag->getName())
+                                                                        ?></option>
+                                                                <?php } ?>
+                                                            </select>
+                                                            <br/><br/>
+                                                            <label>Technology type</label>
+                                                            <select class="select2 creator-data-entry end w-input"
+                                                                    id="impact-tags-c" style="width:100%;border:0"
+                                                                    multiple data-tags="true"
+                                                                    data-placeholder="Write tags">
+                                                                <?php foreach ($impactTags AS $tag) { ?>
+                                                                    <option value="<?php echo $tag->getName() ?>"
+                                                                        <?php if (in_array($tag->getName(), $projectImpactTagsC)) echo 'selected' ?>><?php
+                                                                        echo show_input($tag->getName())
+                                                                        ?></option>
+                                                                <?php } ?>
+                                                            </select>
+                                                            <br/><br/>
+                                                            <label for="email">Which organisations are working on this
+                                                                project?</label>
+                                                            <p>Add the organisations who collaborate on this project
+                                                                below. Leave blank if there are not any other
+                                                                organisations involved.</p>
+                                                            <div id="organisationsSelectBox" class="designSelectBox">
+                                                                <?php /*
+                                                                <select
+                                                                    class="select2-withDesign creator-data-entry end w-input"
+                                                                    id="organisationsSelect"
+                                                                    style="width:100%;border:0"
+                                                                    multiple
+                                                                    data-placeholder="Click to select organisations">
+                                                                    <option></option>
+                                                                    <?php foreach ($organisations AS $organisation) { ?>
+                                                                        <option
+                                                                            value="<?php echo $organisation->getId() ?>"
+                                                                            data-url="<?php echo \DSI\Service\URL::organisation($organisation) ?>"
+                                                                            data-country="<?php echo $organisation->getCountryName() ?>"
+                                                                            data-type="organisation"
+                                                                            <?php if (in_array($organisation->getId(), $projectOrganisations)) echo 'selected' ?>><?php
+                                                                            echo show_input($organisation->getName())
+                                                                            ?></option>
+                                                                    <?php } ?>
+                                                                </select>
+                                                                 */ ?>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="w-form-done">
+                                                    <div>Thank you! Your submission has been received!</div>
+                                                </div>
+                                                <div class="w-form-fail">
+                                                    <div>Oops! Something went wrong while submitting the form</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
-                            <div class="w-col w-col-6">
-                                <h2 class="edit-h2">Duration of project</h2>
-                                <label class="story-label" for="start-date">Project start date</label>
-                                <input id="start-date-hidden" type="text" style="display:none"
-                                       ng-model="project.startDate">
-                                <input class="w-input story-form personal" id="start-date"
-                                       maxlength="256" placeholder="What date did the project start?"
-                                       type="text" ng-model="project.startDateHumanReadable"
-                                       onclick="$('#start-date-hidden').datepicker('show')">
-                                <label class="story-label" for="End-date">Project end date (leave this blank for ongoing
-                                    projects)</label>
-                                <input id="end-date-hidden" type="text" style="display:none" ng-model="project.endDate">
-                                <input class="w-input story-form personal" id="end-date"
-                                       maxlength="256" placeholder="When did/will the project end?"
-                                       type="text" ng-model="project.endDateHumanReadable"
-                                       onclick="$('#end-date-hidden').datepicker('show')">
-                                <h2 class="edit-h2">Where is your project based?</h2>
+                            <div class="step-window w-tab-pane" ng-class="{'w--tab-active': currentTab == 'step2'}"
+                                 data-w-tab="Tab 2">
+                                <form id="email-form-3" name="email-form-3" ng-submit="submitStep2()">
+                                    <div class="tabbed-nav-buttons w-clearfix">
+                                        <input type="submit" class="tab-button-3 tab-button-next w-button"
+                                               ng-value="loading ? 'Loading...' : 'Save and continue'"
+                                               ng-disabled="loading"
+                                               value="Save and continue"/>
+                                        <a ng-click="currentTab='step1'"
+                                           class="previous tab-button-1 tab-button-next w-button">Previous</a>
+                                    </div>
+                                    <div class="w-row">
+                                        <div class="creator-col w-col w-col-4 w-col-stack">
+                                            <h2>2 - Duration &amp; Location</h2>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+                                                varius
+                                                enim in eros elementum tristique. Duis cursus, mi quis viverra ornare,
+                                                eros
+                                                dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus
+                                                nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus
+                                                tristique posuere.</p>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+                                                varius
+                                                enim in eros elementum tristique. Duis cursus, mi quis viverra ornare,
+                                                eros
+                                                dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus
+                                                nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus
+                                                tristique posuere.</p>
+                                        </div>
+                                        <div class="creator-col creator-col-right w-col w-col-8 w-col-stack">
+                                            <div class="w-form">
+                                                <div class="w-row">
+                                                    <div class="w-col w-col-6">
+                                                        <div class="padding-right-50">
+                                                            <h2 class="edit-h2">Duration of project</h2>
+                                                            <label for="name">Project start date</label>
+                                                            <input class="creator-data-entry w-input" data-name="Name 2"
+                                                                   id="start-date" maxlength="256" name="name-2"
+                                                                   placeholder="When did the project start?"
+                                                                   ng-model="project.startDate"
+                                                                   type="text">
+                                                            <label for="email-6">Project end date (leave this blank for
+                                                                ongoing projects)</label>
+                                                            <input class="creator-data-entry end w-input"
+                                                                   data-name="Email 6" id="end-date" maxlength="256"
+                                                                   name="email-6"
+                                                                   ng-model="project.endDate"
+                                                                   placeholder="When did/will the project end?"
+                                                                   type="text">
+                                                        </div>
+                                                    </div>
+                                                    <div class="w-col w-col-6">
+                                                        <div class="padding-left-50">
+                                                            <h2 class="edit-h2">Where is your project based?</h2>
+                                                            <label for="email-7">Which country are you based in?</label>
+                                                            <select id="edit-country" data-placeholder="Select country"
+                                                                    class="creator-data-entry w-input"
+                                                                    style="width:100%">
+                                                                <option></option>
+                                                            </select>
 
-                                <div ng-cloak>
-                                    <div>
-                                        <label class="story-label" for="country">Which country are you based in?</label>
-                                        <select id="edit-country" data-placeholder="Select country"
-                                                style="width:400px;background:transparent">
-                                            <option></option>
-                                        </select>
+                                                            <div ng-show="regionsLoaded">
+                                                                <br/>
+                                                                <label class="story-label">and in which city?</label>
+                                                                <select class="creator-data-entry w-input"
+                                                                        data-tags="true" id="edit-countryRegion"
+                                                                        data-placeholder="Type the city"
+                                                                        style="width:100%">
+                                                                </select>
+                                                            </div>
+                                                            <div ng-show="regionsLoading">
+                                                                Loading...
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="w-form-done">
+                                                    <div>Thank you! Your submission has been received!</div>
+                                                </div>
+                                                <div class="w-form-fail">
+                                                    <div>Oops! Something went wrong while submitting the form</div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div ng-show="regionsLoaded">
-                                        <br/>
-                                        <label class="story-label" for="city">In which city?</label>
-                                        <select
-                                            data-tags="true" id="edit-countryRegion"
-                                            data-placeholder="Type the city"
-                                            style="width:400px;background:transparent">
-                                        </select>
+                                </form>
+                            </div>
+                            <div class="step-window w-tab-pane" ng-class="{'w--tab-active': currentTab == 'step3'}"
+                                 data-w-tab="Tab 3">
+                                <form id="email-form-3" name="email-form-3" ng-submit="submitStep3()">
+                                    <div class="tabbed-nav-buttons w-clearfix">
+                                        <input type="submit" class="tab-button-4 tab-button-next w-button"
+                                               ng-value="loading ? 'Loading...' : 'Save and continue'"
+                                               ng-disabled="loading"
+                                               value="Save and continue"/>
+                                        <a ng-click="currentTab='step2'"
+                                           class="previous tab-button-2 tab-button-next w-button">Previous</a>
                                     </div>
-                                    <div ng-show="regionsLoading">
-                                        Loading...
+                                    <div class="w-row">
+                                        <div class="creator-col w-col w-col-4">
+                                            <h2>3 - Describe your project</h2>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+                                                varius
+                                                enim in eros elementum tristique. Duis cursus, mi quis viverra ornare,
+                                                eros
+                                                dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus
+                                                nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus
+                                                tristique posuere.</p>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+                                                varius
+                                                enim in eros elementum tristique. Duis cursus, mi quis viverra ornare,
+                                                eros
+                                                dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus
+                                                nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus
+                                                tristique posuere.</p>
+                                        </div>
+                                        <div class="creator-col creator-col-right w-col w-col-8">
+                                            <div class="w-form">
+                                                <label for="name">Short Description</label>
+                                                <p>Please provide a short project description. How would you describe
+                                                    your project in one tweet?
+                                                    <br>(This will appear on your project card)</p>
+                                                <textarea class="creator-data-entry end w-input wide"
+                                                          data-name="Project Bio 3" id="project-bio-3" maxlength="5000"
+                                                          name="project-bio-3" ng-model="project.shortDescription"
+                                                          placeholder="Briefly describe your project (no more than 140 characters)"></textarea>
+                                                <label class="story-label" for="project-bio">Long description</label>
+                                                <p>Please provide a Longer project description. How would you describe
+                                                    your project.......? (This will appear on your project page)</p>
+                                                <textarea
+                                                    class="creator-data-entry long-description w-input wide editableTextarea"
+                                                    data-name="Project Bio 4" id="description" maxlength="5000"
+                                                    placeholder="Add an in depth project description"
+                                                    name="project-bio-4"><?php echo $project->getDescription() ?></textarea>
+                                                <label class="story-label" for="project-bio">Social impact</label>
+                                                <p>Please provide a ......................</p>
+                                                <textarea
+                                                    class="creator-data-entry long-description w-input wide editableTextarea"
+                                                    data-name="Project Bio 5" id="socialImpact" maxlength="5000"
+                                                    placeholder="Add an in depth project description"
+                                                    name="project-bio-5"><?php echo $project->getSocialImpact() ?></textarea>
+                                                <div class="w-form-done">
+                                                    <div>Thank you! Your submission has been received!</div>
+                                                </div>
+                                                <div class="w-form-fail">
+                                                    <div>Oops! Something went wrong while submitting the form</div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
+                                </form>
+                            </div>
+                            <div class="step-window w-tab-pane" ng-class="{'w--tab-active': currentTab == 'step4'}"
+                                 data-w-tab="Tab 4">
+                                <form id="email-form-3" name="email-form-3" ng-submit="submitStep4()">
+                                    <div class="tabbed-nav-buttons w-clearfix">
+                                        <input type="submit" class="tab-button-next tab-button-publish w-button"
+                                               ng-value="loading ? 'Loading...' : 'Publish now'"
+                                               ng-disabled="loading"
+                                               value="Publish now"/>
+                                        <a href="<?php echo \DSI\Service\URL::home() ?>"
+                                           class="tab-button-next update-button w-button">Save for later</a>
+                                        <a ng-click="currentTab='step3'"
+                                           class="previous tab-button-3 tab-button-next w-button">Previous</a>
+                                    </div>
+                                    <div class="w-row">
+                                        <div class="creator-col w-col w-col-4">
+                                            <h2>4 - Add images &amp; publish</h2>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+                                                varius
+                                                enim in eros elementum tristique. Duis cursus, mi quis viverra ornare,
+                                                eros
+                                                dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus
+                                                nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus
+                                                tristique posuere.</p>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+                                                varius
+                                                enim in eros elementum tristique. Duis cursus, mi quis viverra ornare,
+                                                eros
+                                                dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus
+                                                nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus
+                                                tristique posuere.</p>
+                                        </div>
+                                        <div class="creator-col creator-col-right w-col w-col-8">
+                                            <div class="w-form">
+                                                <div class="w-row">
+                                                    <div class="w-col w-col-6 w-col-stack">
+                                                        <div class="padding-right-50">
+                                                            <label for="name">Your project logo</label>
+                                                            <p>Please provide a short project description.
+                                                                <br>How would you describe your project in one tweet?
+                                                                <br>(This will appear on your project card)</p>
+                                                            <img class="story-image-upload"
+                                                                 style="max-height:140px;max-width:140px"
+                                                                 src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg"
+                                                                 ng-src="{{logo.image}}">
+                                                            <a class="dsi-button story-image-upload w-button" href="#"
+                                                               ngf-select="logo.upload($file, $invalidFiles)"
+                                                               ng-bind="logo.loading ? 'Loading...' : 'Upload image'">Upload
+                                                                image
+                                                            </a>
+                                                            <div style="color:red" ng-show="logo.errorMsg.file"
+                                                                 ng-cloak>
+                                                                {{logo.errorMsg.file}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="w-col w-col-6 w-col-stack">
+                                                        <div class="padding-left-50">
+                                                            <label class="story-label" for="Title">Header background
+                                                                image</label>
+                                                            <p>Please provide a Longer project description.
+                                                                <br>How would you describe your project.......?
+                                                                <br>(This will appear on your project page)</p>
+                                                            <img class="story-image-upload story-image-upload-large"
+                                                                 style="max-height:140px;max-width:140px"
+                                                                 src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg"
+                                                                 ng-src="{{headerImage.image}}">
+                                                            <a class="dsi-button story-image-upload w-button" href="#"
+                                                               ngf-select="headerImage.upload($file, $invalidFiles)"
+                                                               ng-bind="headerImage.loading ? 'Loading...' : 'Upload image'">Upload
+                                                                image
+                                                            </a>
+                                                            <div style="color:red" ng-show="headerImage.errorMsg.file"
+                                                                 ng-cloak>
+                                                                {{headerImage.errorMsg.file}}
+                                                            </div>
+                                                            <div class="small-print">We may use the information you have
+                                                                given us in case studies and blogs promoted on media
+                                                                owned by ourselves and our partners.
+                                                            </div>
+                                                            <div class="w-checkbox">
+                                                                <label class="w-form-label">
+                                                                    <input class="w-checkbox-input" data-name="Checkbox"
+                                                                           id="checkbox" name="checkbox" type="checkbox"
+                                                                           ng-model="project.confirm">
+                                                                    I agree
+                                                                </label>
+                                                            </div>
+                                                            <div class="error" ng-bind="errors.confirm"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="w-form-done">
+                                                    <div>Thank you! Your submission has been received!</div>
+                                                </div>
+                                                <div class="w-form-fail">
+                                                    <div>Oops! Something went wrong while submitting the form</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
-                        <input class="w-button dsi-button post-story" type="submit" value="Update project"
-                               ng-value="loading ? 'Loading...' : 'Update project'"
-                               ng-disabled="loading">
-                        <a href="<?php echo \DSI\Service\URL::project($project) ?>"
-                           class="w-button dsi-button post-story cancel">Back to project</a>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
-
     </div>
+
     <script>
         $(function () {
-            $("#start-date-hidden").datepicker({
-                dateFormat: "yy-mm-dd",
-                altField: "#start-date",
-                altFormat: "DD, d MM, yy"
+            var formatResult = function (object) {
+                var element = $(object.element);
+                var logo = element.data('logo');
+                var elmType = element.data('type');
+                if (elmType == 'project')
+                    logo = '<?php echo \DSI\Entity\Image::PROJECT_LOGO_URL?>' + logo;
+
+                return $(
+                    '<span>' +
+                    (logo ? '<img src="' + logo + '" class="select2-logo" /> ' : '') +
+                    object.text +
+                    '</span>'
+                );
+            };
+            var formatSelection = function (object) {
+                var element = $(object.element);
+                var logo = element.data('logo');
+                var url = element.data('url');
+                var country = element.data('country');
+                var elmType = element.data('type');
+                if (elmType == 'project')
+                    logo = '<?php echo \DSI\Entity\Image::PROJECT_LOGO_URL?>' + logo;
+
+                return $(
+                    '<div class="involved-card">' +
+                    '<div class="w-row">' +
+                    (
+                        logo ?
+                            (
+                                '<div class="w-col w-col-3 w-col-small-3 w-col-tiny-3">' +
+                                '<img class="involved-organisation-img" src="' + logo + '">' +
+                                '</div>'
+                            ) :
+                            (
+                                '<div class="w-col w-col-1 w-col-small-1 w-col-tiny-1"></div>'
+                            )
+                    ) +
+                    '<div class="w-clearfix w-col w-col-9 w-col-small-9 w-col-tiny-9">' +
+                    '<div class="card-name">' +
+                    (object.text.substring(0, 26)) +
+                    (object.text.length > 26 ? '...' : '') +
+                    '</div>' +
+                    '<div class="card-position">' + country + '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '<a class="view-profile" href="' + url + '" target="_blank">View</a>' +
+                    '</div>'
+                );
+            };
+
+            $('select.select2').select2();
+            $('select.select2-withDesign').select2({
+                templateResult: formatResult,
+                templateSelection: formatSelection
             });
-            $('#end-date-hidden').datepicker({
-                dateFormat: "yy-mm-dd",
-                altField: "#end-date",
-                altFormat: "DD, d MM, yy"
+
+            $("#start-date").datepicker({
+                dateFormat: 'yy-mm-dd',
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-100:+0"
+            });
+            $('#end-date').datepicker({
+                dateFormat: 'yy-mm-dd',
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-100:+0"
             });
         });
     </script>

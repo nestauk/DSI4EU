@@ -6,7 +6,7 @@ require __DIR__ . '/header.php';
 /** @var $tags \DSI\Entity\TagForOrganisations[] */
 /** @var $projects \DSI\Entity\Project[] */
 /** @var $orgTags string[] */
-/** @var $orgProjects string[] */
+/** @var $orgProjects int[] */
 ?>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
     <script src="//code.jquery.com/ui/1.12.0/jquery-ui.js"></script>

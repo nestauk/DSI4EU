@@ -13,7 +13,7 @@
 
     // close user menu popup when clicking outside
     $("body").click(function () {
-        $(".profile-popover.bg-blur").fadeOut(300);
+        $(".profile-popover.bg-blur").hide();
     });
     // Prevent events from getting pass .popup
     $("#userMenu").click(function (e) {

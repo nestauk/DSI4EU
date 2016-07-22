@@ -26,6 +26,7 @@ class ProjectRepository
         $insert[] = "`organisationsCount` = '" . (int)($project->getOrganisationsCount()) . "'";
         $insert[] = "`importID` = '" . addslashes($project->getImportID()) . "'";
         $insert[] = "`logo` = '" . addslashes($project->getLogo()) . "'";
+        $insert[] = "`headerImage` = '" . addslashes($project->getHeaderImage()) . "'";
         $insert[] = "`socialImpact` = '" . addslashes($project->getSocialImpact()) . "'";
         $insert[] = "`isPublished` = '" . (bool)($project->isPublished()) . "'";
 
@@ -58,6 +59,7 @@ class ProjectRepository
         $insert[] = "`organisationsCount` = '" . (int)($project->getOrganisationsCount()) . "'";
         $insert[] = "`importID` = '" . addslashes($project->getImportID()) . "'";
         $insert[] = "`logo` = '" . addslashes($project->getLogo()) . "'";
+        $insert[] = "`headerImage` = '" . addslashes($project->getHeaderImage()) . "'";
         $insert[] = "`socialImpact` = '" . addslashes($project->getSocialImpact()) . "'";
         $insert[] = "`isPublished` = '" . (bool)($project->isPublished()) . "'";
 
@@ -106,6 +108,7 @@ class ProjectRepository
         $projectObj->setOrganisationsCount($project['organisationsCount']);
         $projectObj->setImportID($project['importID']);
         $projectObj->setLogo($project['logo']);
+        $projectObj->setHeaderImage($project['headerImage']);
         $projectObj->setSocialImpact($project['socialImpact']);
         $projectObj->setIsPublished($project['isPublished']);
 
@@ -145,7 +148,8 @@ class ProjectRepository
           , shortDescription, description, url, status
           , startDate, endDate
           , countryRegionID, organisationsCount
-          , importID, logo, socialImpact
+          , importID, logo, headerImage
+          , socialImpact
           , isPublished
           FROM `projects`
           WHERE " . implode(' AND ', $where) . "

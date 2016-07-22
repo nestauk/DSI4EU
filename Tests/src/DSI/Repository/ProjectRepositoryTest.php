@@ -78,7 +78,8 @@ class ProjectRepositoryTest extends PHPUnit_Framework_TestCase
         $project->setEndDate($endDate = '2016-05-22');
         $project->setCountryRegion($this->countryRegion);
         $project->setOrganisationsCount($organisations = 10);
-        $project->setLogo($logo = 'DSC100.JPG');
+        $project->setLogo($logo = 'DSC111.JPG');
+        $project->setHeaderImage($headerImage = 'DSC222.JPG');
         $project->setSocialImpact($socialImpact = 'Social Impact');
         $project->setIsPublished($isPublished = true);
         $this->projectRepository->insert($project);
@@ -97,6 +98,7 @@ class ProjectRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($this->countryRegion->getCountry()->getId(), $project->getCountry()->getId());
         $this->assertEquals($organisations, $project->getOrganisationsCount());
         $this->assertEquals($logo, $project->getLogo());
+        $this->assertEquals($headerImage, $project->getHeaderImage());
         $this->assertEquals($socialImpact, $project->getSocialImpact());
         $this->assertEquals($isPublished, $project->isPublished());
     }
@@ -153,7 +155,9 @@ class ProjectRepositoryTest extends PHPUnit_Framework_TestCase
         $project->setStartDate($startDate = '2016-05-21');
         $project->setEndDate($endDate = '2016-05-22');
         $project->setCountryRegion($this->countryRegion);
-        $project->setOrganisationsCount($orgsCount = 10);
+        $project->setOrganisationsCount($organisations = 10);
+        $project->setLogo($logo = 'DSC111.JPG');
+        $project->setHeaderImage($headerImage = 'DSC222.JPG');
         $project->setSocialImpact($socialImpact = 'Social Impact');
         $project->setIsPublished($isPublished = true);
         $this->projectRepository->save($project);
@@ -169,7 +173,9 @@ class ProjectRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($endDate, $project->getEndDate());
         $this->assertEquals($this->countryRegion->getId(), $project->getCountryRegion()->getId());
         $this->assertEquals($this->countryRegion->getCountry()->getId(), $project->getCountry()->getId());
-        $this->assertEquals($orgsCount, $project->getOrganisationsCount());
+        $this->assertEquals($organisations, $project->getOrganisationsCount());
+        $this->assertEquals($logo, $project->getLogo());
+        $this->assertEquals($headerImage, $project->getHeaderImage());
         $this->assertEquals($socialImpact, $project->getSocialImpact());
         $this->assertEquals($isPublished, $project->isPublished());
     }

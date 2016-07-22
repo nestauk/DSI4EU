@@ -3,24 +3,80 @@
         .module(angularAppName)
         .controller('ProjectEditController', function ($scope, $http, $timeout, Upload, $attrs) {
             var projectID = $attrs.projectid;
+
             var editCountry = $('#edit-country');
             var editCountryRegion = $('#edit-countryRegion');
 
+            $scope.logo = new DSI_Helpers.UploadImageHandler(Upload);
+            $scope.headerImage = new DSI_Helpers.UploadImageHandler(Upload);
+
+
+            $scope.project = {};
             $http.get(SITE_RELATIVE_PATH + '/project/edit/' + projectID + '.json')
                 .then(function (result) {
-                    console.log(result.data);
                     $scope.project = result.data || {};
-                    listCountries();
+                    $scope.logo.image = $scope.project.logo;
+                    $scope.headerImage.image = $scope.project.headerImage;
                 });
 
-            $scope.save = function () {
+            $scope.currentTab = 'step1';
+            $scope.submitStep1 = function () {
+                $scope.project.tags = $('#tagsSelect').val();
+                $scope.project.impactTagsA = $('#impact-tags-a').val();
+                $scope.project.impactTagsB = $('#impact-tags-b').val();
+                $scope.project.impactTagsC = $('#impact-tags-c').val();
+                $scope.saveDetails({
+                    postField: 'step1',
+                    onSuccess: function () {
+                        $scope.currentTab = 'step2';
+                    }
+                })
+            };
+            $scope.submitStep2 = function () {
+                $scope.project.countryID = editCountry.val();
+                $scope.project.region = editCountryRegion.val();
+                $scope.saveDetails({
+                    postField: 'step2',
+                    onSuccess: function () {
+                        $scope.currentTab = 'step3';
+                    }
+                })
+            };
+            $scope.submitStep3 = function () {
+                $scope.project.description = tinyMCE.get('description').getContent();
+                $scope.project.socialImpact = tinyMCE.get('socialImpact').getContent();
+                $scope.saveDetails({
+                    postField: 'step3',
+                    onSuccess: function () {
+                        $scope.currentTab = 'step4';
+                    }
+                })
+            };
+            $scope.submitStep4 = function () {
+                $scope.errors = {};
+                if (!$scope.project.confirm) {
+                    $scope.errors = {
+                        confirm: 'You have to agree with our terms and conditions'
+                    };
+                } else {
+                    $scope.project.logo = $scope.logo.image;
+                    $scope.project.headerImage = $scope.headerImage.image;
+                    $scope.saveDetails({
+                        postField: 'step4',
+                        onSuccess: function () {
+                            swal('Success!', 'The project details have been successfully saved.', "success");
+                        }
+                    })
+                }
+            };
+
+            $scope.saveDetails = function (options) {
                 $scope.loading = true;
                 $scope.errors = {};
 
                 var data = $scope.project;
-                data.countryID = editCountry.val();
-                data.region = editCountryRegion.val();
-                data.saveDetails = true;
+                data['saveDetails'] = true;
+                data['step'] = options.postField;
 
                 console.log(data);
 
@@ -29,22 +85,28 @@
                         $scope.loading = false;
                         console.log(response.data);
 
-                        if (response.data.result == 'ok')
-                            swal(response.data.message.title, response.data.message.text, "success");
-                        else if (response.data.result == 'error')
+                        if (response.data.code == 'ok')
+                            options.onSuccess();
+                        else if (response.data.code == 'error')
                             $scope.errors = response.data.errors;
                     });
             };
 
             // country & region
+            var currentCountry = '';
             var listCountries = function () {
                 $http.get(SITE_RELATIVE_PATH + '/countries.json')
                     .then(function (result) {
                         editCountry.select2({data: result.data});
                         editCountry.on("change", function () {
-                            listCountryRegions(editCountry.val());
+                            if (currentCountry != editCountry.val()) {
+                                listCountryRegions(editCountry.val());
+                                currentCountry = editCountry.val();
+                            }
                         });
-                        editCountry.val($scope.project.countryID).trigger("change");
+                        $scope.$watch('organisation.countryID', function (param) {
+                            editCountry.val($scope.project.countryID).trigger("change")
+                        });
                     });
             };
             var listCountryRegions = function (countryID) {
@@ -54,49 +116,29 @@
                     $scope.regionsLoading = true;
                     $http.get(SITE_RELATIVE_PATH + '/countryRegions/' + countryID + '.json')
                         .then(function (result) {
-                            $timeout(function () {
-                                editCountryRegion
-                                    .html("")
-                                    .select2({data: result.data})
-                                    .val($scope.project.countryRegion)
-                                    .trigger("change");
-                                $scope.regionsLoaded = true;
-                                $scope.regionsLoading = false;
-                            }, 300);
+                            editCountryRegion
+                                .html("")
+                                .select2({data: result.data});
+                            $scope.regionsLoaded = true;
+                            $scope.regionsLoading = false;
+                            editCountryRegion.val($scope.project.region).trigger("change");
                         });
                 }
             };
-
-            $scope.logo = {};
-            $scope.logo.upload = function (file, errFiles) {
-                $scope.logo.loading = true;
-                $scope.logo.f = file;
-                $scope.logo.errFile = errFiles && errFiles[0];
-                if (file) {
-                    file.upload = Upload.upload({
-                        url: SITE_RELATIVE_PATH + '/temp-gallery.json',
-                        data: {
-                            file: file,
-                            format: 'projectLogo'
-                        }
-                    });
-
-                    file.upload.then(function (response) {
-                        $scope.logo.loading = false;
-                        console.log(response.data);
-                        file.result = response.data;
-                        if (response.data.code == 'ok')
-                            $scope.project.logo = response.data.imgPath;
-                        else if (response.data.code == 'error')
-                            $scope.logo.errorMsg = response.data.errors;
-                    }, function (response) {
-                        if (response.status > 0)
-                            $scope.logo.errorMsg = response.status + ': ' + response.data;
-                    }, function (evt) {
-                        file.progress = Math.min(100, parseInt(100.0 *
-                            evt.loaded / evt.total));
-                    });
-                }
-            };
+            listCountries();
         });
+}());
+
+(function () {
+    tinymce.init({
+        selector: '.editableTextarea',
+        height: 500,
+        plugins: "autoresize autolink lists link preview paste textcolor colorpicker image imagetools media",
+        autoresize_bottom_margin: 0,
+        autoresize_max_height: 500,
+        menubar: false,
+        toolbar1: 'styleselect | forecolor backcolor | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media | preview',
+        image_advtab: true,
+        paste_data_images: false
+    });
 }());

@@ -320,7 +320,7 @@ class Organisation
      */
     public function getUnixStartDate()
     {
-        return (int) strtotime($this->startDate);
+        return (int)strtotime($this->startDate);
     }
 
     /**
@@ -339,6 +339,14 @@ class Organisation
     public function getLogo(): string
     {
         return (string)$this->logo;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLogoOrDefault(): string
+    {
+        return (string)($this->logo ? $this->logo : '0.svg');
     }
 
     /**

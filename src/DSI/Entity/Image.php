@@ -13,6 +13,9 @@ class Image
     const PROJECT_LOGO = __DIR__ . '/../../../www/images/projects/logo/';
     const PROJECT_LOGO_URL = SITE_RELATIVE_PATH . '/images/projects/logo/';
 
+    const PROJECT_HEADER = __DIR__ . '/../../../www/images/projects/header/';
+    const PROJECT_HEADER_URL = SITE_RELATIVE_PATH . '/images/projects/header/';
+
     const STORY_FEATURED_IMAGE = __DIR__ . '/../../../www/images/stories/feat/';
     const STORY_FEATURED_IMAGE_URL = SITE_RELATIVE_PATH . '/images/stories/feat/';
 

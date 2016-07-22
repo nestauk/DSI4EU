@@ -148,6 +148,14 @@ class ProjectTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
+    public function settingHeaderImage_returnsHeaderImage()
+    {
+        $headerImage = 'DCS100.JPG';
+        $this->project->setHeaderImage($headerImage);
+        $this->assertEquals($headerImage, $this->project->getHeaderImage());
+    }
+
+    /** @test */
     public function settingSocialImpact_returnsSocialImpact()
     {
         $socialImpact = 'Social Impact of the project';

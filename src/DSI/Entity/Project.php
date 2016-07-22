@@ -26,6 +26,7 @@ class Project
     /** @var string */
     private $importID,
         $logo,
+        $headerImage,
         $socialImpact;
 
     /** @var bool */
@@ -242,6 +243,14 @@ class Project
     }
 
     /**
+     * @return string
+     */
+    public function getRegionName()
+    {
+        return $this->countryRegion ? $this->countryRegion->getName() : '';
+    }
+
+    /**
      * @return int
      */
     public function getCountryRegionID()
@@ -313,6 +322,22 @@ class Project
     public function setLogo($logo)
     {
         $this->logo = (string)$logo;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHeaderImage()
+    {
+        return (string)$this->headerImage;
+    }
+
+    /**
+     * @param string $headerImage
+     */
+    public function setHeaderImage($headerImage)
+    {
+        $this->headerImage = (string)$headerImage;
     }
 
     /**

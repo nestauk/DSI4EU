@@ -5,9 +5,19 @@ namespace DSI\Controller;
 use DSI\AccessDenied;
 use DSI\Entity\Image;
 use DSI\Entity\Project;
+use DSI\Entity\ProjectLink_Service;
 use DSI\Entity\User;
+use DSI\Repository\ImpactTagRepository;
+use DSI\Repository\OrganisationProjectRepository;
+use DSI\Repository\OrganisationRepository;
+use DSI\Repository\ProjectImpactTagARepository;
+use DSI\Repository\ProjectImpactTagBRepository;
+use DSI\Repository\ProjectImpactTagCRepository;
+use DSI\Repository\ProjectLinkRepository;
 use DSI\Repository\ProjectMemberRepository;
 use DSI\Repository\ProjectRepository;
+use DSI\Repository\ProjectTagRepository;
+use DSI\Repository\TagForProjectsRepository;
 use DSI\Repository\UserRepository;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
@@ -40,42 +50,45 @@ class ProjectEditController
         if ($this->format == 'json') {
             try {
                 if (isset($_POST['saveDetails'])) {
-                    $updateProject = new UpdateProject();
-                    $updateProject->data()->project = $project;
-                    $updateProject->data()->user = $loggedInUser;
-                    if (isset($_POST['name']))
-                        $updateProject->data()->name = $_POST['name'];
-                    if (isset($_POST['url']))
-                        $updateProject->data()->url = $_POST['url'];
-                    if (isset($_POST['status']))
-                        $updateProject->data()->status = $_POST['status'];
-                    if (isset($_POST['description']))
-                        $updateProject->data()->description = $_POST['description'];
-
-                    $updateProject->data()->startDate = $_POST['startDate'] ?? NULL;
-                    $updateProject->data()->endDate = $_POST['endDate'] ?? NULL;
-                    $updateProject->exec();
-
-                    $updateProjectCountryRegionCmd = new UpdateProjectCountryRegion();
-                    $updateProjectCountryRegionCmd->data()->projectID = $project->getId();
-                    $updateProjectCountryRegionCmd->data()->countryID = $_POST['countryID'] ?? '';
-                    $updateProjectCountryRegionCmd->data()->region = $_POST['region'] ?? '';
-                    $updateProjectCountryRegionCmd->exec();
-
-                    if ($_POST['logo'] != Image::PROJECT_LOGO_URL . $project->getLogoOrDefault()) {
-                        $updateProjectLogo = new UpdateProjectLogo();
-                        $updateProjectLogo->data()->projectID = $project->getId();
-                        $updateProjectLogo->data()->fileName = basename($_POST['logo']);
-                        $updateProjectLogo->exec();
+                    if ($_POST['step'] == 'step1') {
+                        $updateProject = new UpdateProject();
+                        $updateProject->data()->project = $project;
+                        $updateProject->data()->executor = $loggedInUser;
+                        $updateProject->data()->name = $_POST['name'] ?? '';
+                        $updateProject->data()->url = $_POST['url'] ?? '';
+                        $updateProject->data()->tags = $_POST['tags'] ?? [];
+                        $updateProject->data()->impactTagsA = $_POST['impactTagsA'] ?? [];
+                        $updateProject->data()->impactTagsB = $_POST['impactTagsB'] ?? [];
+                        $updateProject->data()->impactTagsC = $_POST['impactTagsC'] ?? [];
+                        $updateProject->data()->links = $_POST['links'] ?? [];
+                        $updateProject->exec();
+                    } elseif ($_POST['step'] == 'step2') {
+                        $updateProject = new UpdateProject();
+                        $updateProject->data()->project = $project;
+                        $updateProject->data()->executor = $loggedInUser;
+                        $updateProject->data()->startDate = $_POST['startDate'] ?? '';
+                        $updateProject->data()->endDate = $_POST['endDate'] ?? '';
+                        $updateProject->data()->countryID = $_POST['countryID'] ?? 0;
+                        $updateProject->data()->region = $_POST['region'] ?? '';
+                        $updateProject->exec();
+                    } elseif ($_POST['step'] == 'step3') {
+                        $updateProject = new UpdateProject();
+                        $updateProject->data()->project = $project;
+                        $updateProject->data()->executor = $loggedInUser;
+                        $updateProject->data()->shortDescription = $_POST['shortDescription'] ?? '';
+                        $updateProject->data()->description = $_POST['description'] ?? '';
+                        $updateProject->data()->socialImpact = $_POST['socialImpact'] ?? '';
+                        $updateProject->exec();
+                    } elseif ($_POST['step'] == 'step4') {
+                        $updateProject = new UpdateProject();
+                        $updateProject->data()->project = $project;
+                        $updateProject->data()->executor = $loggedInUser;
+                        $updateProject->data()->logo = $_POST['logo'] ?? '';
+                        $updateProject->data()->headerImage = $_POST['headerImage'] ?? '';
+                        $updateProject->exec();
                     }
 
-                    echo json_encode([
-                        'result' => 'ok',
-                        'message' => [
-                            'title' => 'Success',
-                            'text' => 'Project Details have been successfully saved',
-                        ],
-                    ]);
+                    echo json_encode(['code' => 'ok']);
                     return;
                 }
             } catch (ErrorHandler $e) {
@@ -87,24 +100,49 @@ class ProjectEditController
             }
 
             $owner = $project->getOwner();
+            $links = [];
+            $projectLinks = (new ProjectLinkRepository())->getByProjectID($project->getId());
+            foreach ($projectLinks AS $projectLink) {
+                if ($projectLink->getLinkService() == ProjectLink_Service::Facebook)
+                    $links['facebook'] = $projectLink->getLink();
+                if ($projectLink->getLinkService() == ProjectLink_Service::Twitter)
+                    $links['twitter'] = $projectLink->getLink();
+                if ($projectLink->getLinkService() == ProjectLink_Service::GooglePlus)
+                    $links['googleplus'] = $projectLink->getLink();
+                if ($projectLink->getLinkService() == ProjectLink_Service::GitHub)
+                    $links['github'] = $projectLink->getLink();
+            }
+
             echo json_encode([
                 'name' => $project->getName(),
                 'url' => $project->getUrl(),
                 'status' => $project->getStatus(),
                 'description' => $project->getDescription(),
                 'startDate' => $project->getStartDate(),
-                'startDateHumanReadable' => $project->getUnixStartDate() ? date('l, j F, Y', $project->getUnixStartDate()) : '',
+                //'startDateHumanReadable' => $project->getUnixStartDate() ? date('l, j F, Y', $project->getUnixStartDate()) : '',
                 'endDate' => $project->getEndDate(),
-                'endDateHumanReadable' => $project->getUnixEndDate() ? date('l, j F, Y', $project->getUnixEndDate()) : '',
+                //'endDateHumanReadable' => $project->getUnixEndDate() ? date('l, j F, Y', $project->getUnixEndDate()) : '',
                 'countryID' => $project->getCountryID(),
-                'countryRegionID' => $project->getCountryRegionID(),
-                'countryRegion' => $project->getCountryRegion() ? $project->getCountryRegion()->getName() : '',
-                'logo' => Image::PROJECT_LOGO_URL . $project->getLogoOrDefault(),
+                'region' => $project->getRegionName(),
+                'logo' => $project->getLogo() ?
+                    Image::PROJECT_LOGO_URL . $project->getLogo() : '',
+                'headerImage' => $project->getHeaderImage() ?
+                    Image::PROJECT_HEADER_URL . $project->getHeaderImage() : '',
+                'links' => $links ? $links : '',
             ]);
             return;
 
         } else {
             $data = ['project' => $project];
+            $tags = (new TagForProjectsRepository())->getAll();
+            $impactTags = (new ImpactTagRepository())->getAll();
+            $projectImpactTagsA = (new ProjectImpactTagARepository())->getTagsNameByProjectID($project->getId());
+            $projectImpactTagsB = (new ProjectImpactTagBRepository())->getTagsNameByProjectID($project->getId());
+            $projectImpactTagsC = (new ProjectImpactTagCRepository())->getTagsNameByProjectID($project->getId());
+            $projectTags = (new ProjectTagRepository())->getTagsNameByProjectID($project->getId());
+            $organisations = (new OrganisationRepository())->getAll();
+            pr(count($organisations));
+            $orgProjects = (new OrganisationProjectRepository())->getOrganisationIDsForProject($project->getId());
             $angularModules['fileUpload'] = true;
             require __DIR__ . '/../../../www/project-edit.php';
         }
