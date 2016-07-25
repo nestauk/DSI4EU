@@ -18,7 +18,8 @@ require __DIR__ . '/header.php';
             <?php foreach ($caseStudies AS $i => $caseStudy) { ?>
                 <div class="case-study-col-<?php echo $i % 3 + 1 ?> w-col w-col-4">
                     <div class="onloadone" data-ix="fadeinuponload-<?php echo $i % 3 + 2 ?>">
-                        <div class="case-study-card" data-ix="case-study-card-overlay">
+                        <div class="case-study-card" data-ix="case-study-card-overlay"
+                             style="background-image: url('<?php echo \DSI\Entity\Image::CASE_STUDY_CARD_BG_URL . $caseStudy->getCardImage() ?>');">
                             <div class="case-study-card-overlay"
                                  style="background-color:<?php echo $caseStudy->getCardColour() ?>"></div>
                             <div class="case-study-card-info">
