@@ -97,7 +97,7 @@ class ProjectController
             }
 
             $member = (new ProjectMemberRepository())->getByProjectIDAndMemberID($project->getId(), $loggedInUser->getId());
-            if ($member->isAdmin())
+            if ($member !== null AND $member->isAdmin())
                 $isAdmin = true;
 
             if (isset($isAdmin) AND $isAdmin === true)

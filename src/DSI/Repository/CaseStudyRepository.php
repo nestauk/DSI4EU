@@ -117,6 +117,13 @@ class CaseStudyRepository
         ]);
     }
 
+    public function getPublishedLast($limit)
+    {
+        return $this->getObjectsWhere([
+            "`isPublished` = 1"
+        ], ['limit' => $limit]);
+    }
+
     public function clearAll()
     {
         $query = new SQL("TRUNCATE TABLE `case-studies`");

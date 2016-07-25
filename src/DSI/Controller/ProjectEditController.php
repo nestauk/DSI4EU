@@ -141,7 +141,6 @@ class ProjectEditController
             $projectImpactTagsC = (new ProjectImpactTagCRepository())->getTagsNameByProjectID($project->getId());
             $projectTags = (new ProjectTagRepository())->getTagsNameByProjectID($project->getId());
             $organisations = (new OrganisationRepository())->getAll();
-            pr(count($organisations));
             $orgProjects = (new OrganisationProjectRepository())->getOrganisationIDsForProject($project->getId());
             $angularModules['fileUpload'] = true;
             require __DIR__ . '/../../../www/project-edit.php';

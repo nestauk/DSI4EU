@@ -9,6 +9,10 @@ require __DIR__ . '/header.php';
 /** @var $userProjects int[] */
 /** @var $organisations \DSI\Entity\Organisation[] */
 /** @var $userOrganisations int[] */
+
+$leftSideText = "<p>To create your profile, we would like to collect some information about you.</p>";
+$leftSideText .= "<p>The information is optional. You will be able to edit and expand on your answers later.</p>";
+
 ?>
     <script type="text/javascript"
             src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/PersonalDetailsController.js"></script>
@@ -124,21 +128,8 @@ require __DIR__ . '/header.php';
                                     </div>
                                     <div class="w-row">
                                         <div class="creator-col w-col w-col-4">
-                                            <h2>1 - Organisation Details</h2>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                                varius
-                                                enim in eros elementum tristique. Duis cursus, mi quis viverra ornare,
-                                                eros
-                                                dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus
-                                                nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus
-                                                tristique posuere.</p>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                                varius
-                                                enim in eros elementum tristique. Duis cursus, mi quis viverra ornare,
-                                                eros
-                                                dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus
-                                                nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus
-                                                tristique posuere.</p>
+                                            <h2>1 - Your details</h2>
+                                            <?php echo $leftSideText ?>
                                         </div>
                                         <div class="creator-col creator-col-right w-col w-col-8">
                                             <div class="w-form">
@@ -157,6 +148,8 @@ require __DIR__ . '/header.php';
                                                                    name="name-3" placeholder="Last name" type="text">
                                                             <div class="error" ng-bind="errors.lastName"></div>
                                                             <label for="name">Your profile picture</label>
+                                                            <p>This will appear on your profile page and when you post a
+                                                                comment.</p>
                                                             <img class="story-image-upload"
                                                                  ng-src="{{user.profilePic}}">
                                                             <a class="dsi-button story-image-upload w-button" href="#"
@@ -229,21 +222,8 @@ require __DIR__ . '/header.php';
                                     </div>
                                     <div class="w-row">
                                         <div class="creator-col w-col w-col-4 w-col-stack">
-                                            <h2>2 - Location, Languages &amp; Skills</h2>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                                varius
-                                                enim in eros elementum tristique. Duis cursus, mi quis viverra ornare,
-                                                eros
-                                                dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus
-                                                nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus
-                                                tristique posuere.</p>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                                varius
-                                                enim in eros elementum tristique. Duis cursus, mi quis viverra ornare,
-                                                eros
-                                                dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus
-                                                nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus
-                                                tristique posuere.</p>
+                                            <h2>2 - Your location, languages & skills</h2>
+                                            <?php echo $leftSideText ?>
                                         </div>
                                         <div class="creator-col creator-col-right w-col w-col-8 w-col-stack">
                                             <div class="w-form">
@@ -265,6 +245,9 @@ require __DIR__ . '/header.php';
                                                                    required="required" type="text">
                                                             <h2 class="edit-h2">Languages</h2>
                                                             <label for="name">Which languages do you know?</label>
+                                                            <p>Which languages can you read? We want to give you the
+                                                                option to filter the content of this site to the
+                                                                languages you can read.</p>
                                                             <select class="select2 creator-data-entry end w-input"
                                                                     id="languagesSelect" style="width:100%;border:0"
                                                                     multiple
@@ -281,9 +264,10 @@ require __DIR__ . '/header.php';
                                                     <div class="w-col w-col-6">
                                                         <div class="padding-left-50">
                                                             <h2 class="edit-h2">Your skills</h2>
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                                                Suspendisse varius enim in eros elementum tristique.
-                                                                Duis cursus, mi qui...</p>
+                                                            <p>Are you willing to offer your support to other DSI
+                                                                organisations and projects? Please list relevant skills
+                                                                that you would be willing to share with the
+                                                                community.</p>
                                                             <label for="name-6">What skills do you have?</label>
                                                             <select class="select2 creator-data-entry end w-input"
                                                                     id="skillsSelect" style="width:100%;border:0"
@@ -297,13 +281,14 @@ require __DIR__ . '/header.php';
                                                                 <?php } ?>
                                                             </select>
                                                             <br/><br/>
-                                                            <label for="name-7">Where do you work?</label>
+                                                            <label for="name-7">Your work</label>
+                                                            <p>Where do you work?</p>
                                                             <input class="creator-data-entry end w-input"
                                                                    data-name="Name 7" id="name-7" maxlength="256"
                                                                    name="name-7" placeholder="Your place of work"
                                                                    ng-model="user.company"
                                                                    type="text">
-                                                            <label for="name-8">What's your job title?</label>
+                                                            <p>What's your job title?</p>
                                                             <input class="creator-data-entry end w-input"
                                                                    data-name="Name 8" id="name-8" maxlength="256"
                                                                    ng-model="user.jobTitle"
@@ -335,21 +320,8 @@ require __DIR__ . '/header.php';
                                     </div>
                                     <div class="w-row">
                                         <div class="creator-col w-col w-col-4 w-col-stack">
-                                            <h2>3 - Projects &amp; Organisations</h2>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                                varius
-                                                enim in eros elementum tristique. Duis cursus, mi quis viverra ornare,
-                                                eros
-                                                dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus
-                                                nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus
-                                                tristique posuere.</p>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                                varius
-                                                enim in eros elementum tristique. Duis cursus, mi quis viverra ornare,
-                                                eros
-                                                dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus
-                                                nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus
-                                                tristique posuere.</p>
+                                            <h2>3 - Your projects &amp; organisations</h2>
+                                            <?php echo $leftSideText ?>
                                         </div>
                                         <div class="creator-col creator-col-right w-col w-col-8 w-col-stack">
                                             <div class="w-form">
@@ -357,6 +329,11 @@ require __DIR__ . '/header.php';
                                                     <div class="w-col w-col-6">
                                                         <div class="padding-right-50">
                                                             <h2 class="edit-h2">Projects</h2>
+                                                            <p>Add DSI projects that you are involved with here. This
+                                                                will send a request to the project owner(s) to accept
+                                                                you as a project collaborator.
+                                                                If the project(s) does not exist please add the project
+                                                                using Create once you’ve completed your profile.</p>
                                                             <div id="projectsSelectBox" class="designSelectBox">
                                                                 <select
                                                                     class="select2-withDesign creator-data-entry end w-input"
@@ -376,16 +353,24 @@ require __DIR__ . '/header.php';
                                                                     <?php } ?>
                                                                 </select>
                                                             </div>
+                                                            <?php /*
                                                             <div class="notification-card positive">
                                                                 <div class="notification-card-p">
                                                                     Joining requests will be sent to project owners.
                                                                 </div>
                                                             </div>
+                                                            */ ?>
                                                         </div>
                                                     </div>
                                                     <div class="w-col w-col-6">
                                                         <div class="padding-left-50">
                                                             <h2 class="edit-h2">Organisations</h2>
+                                                            <p>Add DSI organisations that you are involved with here.
+                                                                This will send a request to the organisation owner(s) to
+                                                                accept you as a member of that organisation.
+                                                                If the organisation(s) does not exist please add the
+                                                                organisation using Create once you’ve completed your
+                                                                profile.</p>
                                                             <div id="organisationsSelectBox" class="designSelectBox">
                                                                 <select
                                                                     class="select2-withDesign creator-data-entry end w-input"
@@ -406,20 +391,16 @@ require __DIR__ . '/header.php';
                                                                     <?php } ?>
                                                                 </select>
                                                             </div>
+                                                            <?php /*
                                                             <div class="notification-card positive">
                                                                 <div class="notification-card-p">
                                                                     Joining requests will be sent to organisation
                                                                     owners.
                                                                 </div>
                                                             </div>
+                                                            */ ?>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="w-form-done">
-                                                    <div>Thank you! Your submission has been received!</div>
-                                                </div>
-                                                <div class="w-form-fail">
-                                                    <div>Oops! Something went wrong while submitting the form</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -441,25 +422,17 @@ require __DIR__ . '/header.php';
                                            class="previous tab-button-3 tab-button-next w-button">Previous</a>
                                     </div>
                                     <h2>4 - Publish your profile</h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim
-                                        in
-                                        eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor
-                                        interdum
-                                        nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus
-                                        id
-                                        rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim
-                                        in
-                                        eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor
-                                        interdum
-                                        nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus
-                                        id
-                                        rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p>
+                                    <p>Once you click publish now the information you’ve submitted will be published on
+                                        the site.</p>
                                     <div class="w-form">
                                         <label>Permission</label>
-                                        <div class="small-print">We may use the information you have given us in case
-                                            studies and blogs promoted on media owned by ourselves and our partners.
-                                        </div>
+                                        <p>By creating an account, you are agreeing to our
+                                            Terms of Use (link). Our Privacy
+                                            Policy (link) explains how we will use your details.</p>
+                                        <p>Your data may be used for research and will only be published in an
+                                            aggregated
+                                            and anonymous format. Read our Privacy Policy (link) for more
+                                            information.</p>
                                         <div class="w-checkbox">
                                             <label class="w-form-label" for="checkbox">
                                                 <input class="w-checkbox-input" id="checkbox"

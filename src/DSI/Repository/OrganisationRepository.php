@@ -177,7 +177,7 @@ class OrganisationRepository
     /**
      * @return int
      */
-    public function countOrganisations()
+    public function countAll()
     {
         return $this->countObjectsWhere(['1']);
     }

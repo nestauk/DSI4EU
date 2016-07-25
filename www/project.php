@@ -144,17 +144,17 @@ require __DIR__ . '/header.php';
                     <div class="impact w-row">
                         <div class="w-col w-col-4">
                             <h3 class="col-h3">Areas of society impacted</h3>
-                            <p class="impact-descr">Lorem ipsum dolor sit amet, consectetur adipiscing elit?</p>
+                            <p class="impact-descr">Areas of society that this project aims to support</p>
                             <div class="tag" ng-repeat="tag in project.impactTagsA" ng-bind="tag"></div>
                         </div>
                         <div class="w-col w-col-4">
                             <h3 class="col-h3">DSI Focus</h3>
-                            <p class="impact-descr">Lorem ipsum dolor sit amet, consectetur adipiscing elit?</p>
+                            <p class="impact-descr">Areas of DSI that this project is a part of<br /><br /></p>
                             <div class="tag" ng-repeat="tag in project.impactTagsB" ng-bind="tag"></div>
                         </div>
                         <div class="w-col w-col-4">
                             <h3 class="col-h3">Technology type</h3>
-                            <p class="impact-descr">Lorem ipsum dolor sit amet, consectetur adipiscing elit?</p>
+                            <p class="impact-descr">The types of technology involved with this project</p>
                             <div class="tag" ng-repeat="tag in project.impactTagsC" ng-bind="tag"></div>
                         </div>
                     </div>

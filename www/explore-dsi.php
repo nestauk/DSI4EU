@@ -2,8 +2,8 @@
 $pageTitle = 'Explore DSI';
 require __DIR__ . '/header.php';
 
-$totalProjects = (new \DSI\Repository\ProjectRepository())->countProjects();
-$totalOrganisations = (new \DSI\Repository\OrganisationRepository())->countOrganisations();
+$totalProjects = (new \DSI\Repository\ProjectRepository())->countAll();
+$totalOrganisations = (new \DSI\Repository\OrganisationRepository())->countAll();
 ?>
 
     <div class="w-section page-header">

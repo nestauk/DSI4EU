@@ -129,14 +129,14 @@ class ProjectRepositoryTest extends PHPUnit_Framework_TestCase
         $this->projectRepository->insert($project);
 
         $this->assertCount(1, $this->projectRepository->getAll());
-        $this->assertEquals(1, $this->projectRepository->countProjects());
+        $this->assertEquals(1, $this->projectRepository->countAll());
 
         $project = new Project();
         $project->setOwner($this->user1);
         $this->projectRepository->insert($project);
 
         $this->assertCount(2, $this->projectRepository->getAll());
-        $this->assertEquals(2, $this->projectRepository->countProjects());
+        $this->assertEquals(2, $this->projectRepository->countAll());
     }
 
     /** @test */

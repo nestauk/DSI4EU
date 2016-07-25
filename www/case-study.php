@@ -56,7 +56,7 @@ require __DIR__ . '/header.php';
     </div>
     <div class="related-case-studies">
         <div class="container-wide">
-            <h2 class="reccomendation">If you enjoyed this case study, you'll also find these...</h2>
+            <h2 class="reccomendation">More case studies</h2>
             <div class="case-studies-row case-studies-row-grid w-row">
                 <?php foreach ($caseStudies AS $i => $caseStudy) { ?>
                     <div class="case-study-col-<?php echo $i % 3 + 1 ?> w-col w-col-4">

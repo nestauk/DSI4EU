@@ -192,14 +192,14 @@ class OrganisationRepositoryTest extends PHPUnit_Framework_TestCase
         $this->organisationRepo->insert($organisation);
 
         $this->assertCount(1, $this->organisationRepo->getAll());
-        $this->assertEquals(1, $this->organisationRepo->countOrganisations());
+        $this->assertEquals(1, $this->organisationRepo->countAll());
 
         $organisation = new Organisation();
         $organisation->setOwner($this->user1);
         $this->organisationRepo->insert($organisation);
 
         $this->assertCount(2, $this->organisationRepo->getAll());
-        $this->assertEquals(2, $this->organisationRepo->countOrganisations());
+        $this->assertEquals(2, $this->organisationRepo->countAll());
     }
 
     /** @test */

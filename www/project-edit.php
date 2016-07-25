@@ -9,6 +9,10 @@ require __DIR__ . '/header.php';
 /** @var $projectImpactTagsC string[] */
 /** @var $organisations \DSI\Entity\Organisation[] */
 /** @var $projectOrganisations int[] */
+
+$leftSideText = "<p>To add your project, we need to collect some information about your project and its aims. We are interested in hearing from both formal and informal projects.</p>";
+$leftSideText .= "<p>Some information is optional (mandatory fields are indicated with an asterisk), but the more you can provide, the better. We will add you as soon as we have some basic data. You will be able to edit and expand on your answers later.</p>";
+
 ?>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 
@@ -65,20 +69,7 @@ require __DIR__ . '/header.php';
                                     <div class="w-row">
                                         <div class="creator-col w-col w-col-4">
                                             <h2>1 - Project Details</h2>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                                varius
-                                                enim in eros elementum tristique. Duis cursus, mi quis viverra ornare,
-                                                eros
-                                                dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus
-                                                nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus
-                                                tristique posuere.</p>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                                varius
-                                                enim in eros elementum tristique. Duis cursus, mi quis viverra ornare,
-                                                eros
-                                                dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus
-                                                nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus
-                                                tristique posuere.</p>
+                                            <?php echo $leftSideText ?>
                                         </div>
                                         <div class="creator-col creator-col-right w-col w-col-8">
                                             <div class="w-form">
@@ -91,10 +82,11 @@ require __DIR__ . '/header.php';
                                                                    name="name" placeholder="Project Name"
                                                                    ng-model="project.name"
                                                                    type="text">
-                                                            <label for="email">Project URL</label>
+                                                            <label for="email">Project website</label>
                                                             <input class="creator-data-entry end w-input"
                                                                    data-name="Email" id="email" maxlength="256"
-                                                                   name="email" placeholder="Add your project&#39;s URL"
+                                                                   name="email"
+                                                                   placeholder="Add your project&#39;s website"
                                                                    ng-model="project.url"
                                                                    type="text">
                                                             <label for="email-2">Social media links</label>
@@ -121,7 +113,6 @@ require __DIR__ . '/header.php';
                                                     </div>
                                                     <div class="w-col w-col-6 w-col-stack">
                                                         <div class="padding-left-50">
-                                                            <label for="email">Project URL</label>
                                                             <p>Add tags that best describe your project:</p>
                                                             <select class="select2 creator-data-entry end w-input"
                                                                     id="tagsSelect" style="width:100%;border:0"
@@ -136,6 +127,8 @@ require __DIR__ . '/header.php';
                                                             </select>
                                                             <br/><br/>
                                                             <label>Areas of society impacted</label>
+                                                            <p>Which areas of society does you project aim to
+                                                                support?</p>
                                                             <select class="select2 creator-data-entry end w-input"
                                                                     id="impact-tags-a" style="width:100%;border:0"
                                                                     multiple data-tags="true"
@@ -149,6 +142,7 @@ require __DIR__ . '/header.php';
                                                             </select>
                                                             <br/><br/>
                                                             <label>DSI Focus</label>
+                                                            <p>Which of the DSI areas is your project part of?</p>
                                                             <select class="select2 creator-data-entry end w-input"
                                                                     id="impact-tags-b" style="width:100%;border:0"
                                                                     multiple data-tags="true"
@@ -162,6 +156,8 @@ require __DIR__ . '/header.php';
                                                             </select>
                                                             <br/><br/>
                                                             <label>Technology type</label>
+                                                            <p>What type of digital technology is involved in your
+                                                                project?</p>
                                                             <select class="select2 creator-data-entry end w-input"
                                                                     id="impact-tags-c" style="width:100%;border:0"
                                                                     multiple data-tags="true"
@@ -229,20 +225,7 @@ require __DIR__ . '/header.php';
                                     <div class="w-row">
                                         <div class="creator-col w-col w-col-4 w-col-stack">
                                             <h2>2 - Duration &amp; Location</h2>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                                varius
-                                                enim in eros elementum tristique. Duis cursus, mi quis viverra ornare,
-                                                eros
-                                                dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus
-                                                nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus
-                                                tristique posuere.</p>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                                varius
-                                                enim in eros elementum tristique. Duis cursus, mi quis viverra ornare,
-                                                eros
-                                                dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus
-                                                nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus
-                                                tristique posuere.</p>
+                                            <?php echo $leftSideText ?>
                                         </div>
                                         <div class="creator-col creator-col-right w-col w-col-8 w-col-stack">
                                             <div class="w-form">
@@ -269,7 +252,10 @@ require __DIR__ . '/header.php';
                                                     <div class="w-col w-col-6">
                                                         <div class="padding-left-50">
                                                             <h2 class="edit-h2">Where is your project based?</h2>
-                                                            <label for="email-7">Which country are you based in?</label>
+                                                            <label for="email-7">
+                                                                Which country are you based in?<br/>
+                                                                <span style="font-weight:normal">(leave this blank if your project is in multiple countries)</span>
+                                                            </label>
                                                             <select id="edit-country" data-placeholder="Select country"
                                                                     class="creator-data-entry w-input"
                                                                     style="width:100%">
@@ -316,41 +302,31 @@ require __DIR__ . '/header.php';
                                     <div class="w-row">
                                         <div class="creator-col w-col w-col-4">
                                             <h2>3 - Describe your project</h2>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                                varius
-                                                enim in eros elementum tristique. Duis cursus, mi quis viverra ornare,
-                                                eros
-                                                dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus
-                                                nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus
-                                                tristique posuere.</p>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                                varius
-                                                enim in eros elementum tristique. Duis cursus, mi quis viverra ornare,
-                                                eros
-                                                dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus
-                                                nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus
-                                                tristique posuere.</p>
+                                            <?php echo $leftSideText ?>
                                         </div>
                                         <div class="creator-col creator-col-right w-col w-col-8">
                                             <div class="w-form">
                                                 <label for="name">Short Description</label>
-                                                <p>Please provide a short project description. How would you describe
-                                                    your project in one tweet?
-                                                    <br>(This will appear on your project card)</p>
+                                                <p>Please provide a short description for your project. This should be
+                                                    up to 200 characters long. Think about how you would describe your
+                                                    project in a single Tweet?</p>
                                                 <textarea class="creator-data-entry end w-input wide"
                                                           data-name="Project Bio 3" id="project-bio-3" maxlength="5000"
                                                           name="project-bio-3" ng-model="project.shortDescription"
                                                           placeholder="Briefly describe your project (no more than 140 characters)"></textarea>
                                                 <label class="story-label" for="project-bio">Long description</label>
-                                                <p>Please provide a Longer project description. How would you describe
-                                                    your project.......? (This will appear on your project page)</p>
+                                                <p>Please provide a longer description for your organisation. How would
+                                                    you describe your organisation? What type of work do you do? Who do
+                                                    you support?</p>
                                                 <textarea
                                                     class="creator-data-entry long-description w-input wide editableTextarea"
                                                     data-name="Project Bio 4" id="description" maxlength="5000"
                                                     placeholder="Add an in depth project description"
                                                     name="project-bio-4"><?php echo $project->getDescription() ?></textarea>
                                                 <label class="story-label" for="project-bio">Social impact</label>
-                                                <p>Please provide a ......................</p>
+                                                <p>Please provide a description of the social impact your project is
+                                                    aiming to have? Which areas of society will your project support?
+                                                    Does the project aim to address a particular issue?</p>
                                                 <textarea
                                                     class="creator-data-entry long-description w-input wide editableTextarea"
                                                     data-name="Project Bio 5" id="socialImpact" maxlength="5000"
@@ -383,20 +359,7 @@ require __DIR__ . '/header.php';
                                     <div class="w-row">
                                         <div class="creator-col w-col w-col-4">
                                             <h2>4 - Add images &amp; publish</h2>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                                varius
-                                                enim in eros elementum tristique. Duis cursus, mi quis viverra ornare,
-                                                eros
-                                                dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus
-                                                nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus
-                                                tristique posuere.</p>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                                varius
-                                                enim in eros elementum tristique. Duis cursus, mi quis viverra ornare,
-                                                eros
-                                                dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus
-                                                nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus
-                                                tristique posuere.</p>
+                                            <?php echo $leftSideText ?>
                                         </div>
                                         <div class="creator-col creator-col-right w-col w-col-8">
                                             <div class="w-form">
@@ -404,9 +367,7 @@ require __DIR__ . '/header.php';
                                                     <div class="w-col w-col-6 w-col-stack">
                                                         <div class="padding-right-50">
                                                             <label for="name">Your project logo</label>
-                                                            <p>Please provide a short project description.
-                                                                <br>How would you describe your project in one tweet?
-                                                                <br>(This will appear on your project card)</p>
+                                                            <p>This will appear wherever we reference your project.</p>
                                                             <img class="story-image-upload"
                                                                  style="max-height:140px;max-width:140px"
                                                                  src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg"
@@ -426,9 +387,8 @@ require __DIR__ . '/header.php';
                                                         <div class="padding-left-50">
                                                             <label class="story-label" for="Title">Header background
                                                                 image</label>
-                                                            <p>Please provide a Longer project description.
-                                                                <br>How would you describe your project.......?
-                                                                <br>(This will appear on your project page)</p>
+                                                            <p>This will appear as the header background for your
+                                                                project’s page</p>
                                                             <img class="story-image-upload story-image-upload-large"
                                                                  style="max-height:140px;max-width:140px"
                                                                  src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg"
@@ -442,9 +402,14 @@ require __DIR__ . '/header.php';
                                                                  ng-cloak>
                                                                 {{headerImage.errorMsg.file}}
                                                             </div>
-                                                            <div class="small-print">We may use the information you have
-                                                                given us in case studies and blogs promoted on media
-                                                                owned by ourselves and our partners.
+                                                            <div class="small-print">
+                                                                Any information, project data or results that you submit
+                                                                to Nesta in relation to your project shall be released
+                                                                under the terms of a Creative Commons Attribution
+                                                                Non-Commercial Share-A-like licence (CC-BY- NC-SA). By
+                                                                submitting such information, you warrant to us that you
+                                                                have any required permissions, licences or consents to
+                                                                do so
                                                             </div>
                                                             <div class="w-checkbox">
                                                                 <label class="w-form-label">

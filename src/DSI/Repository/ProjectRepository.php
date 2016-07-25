@@ -165,7 +165,7 @@ class ProjectRepository
     /**
      * @return int
      */
-    public function countProjects()
+    public function countAll()
     {
         return $this->countObjectsWhere(['1']);
     }

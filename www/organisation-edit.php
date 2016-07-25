@@ -7,6 +7,10 @@ require __DIR__ . '/header.php';
 /** @var $projects \DSI\Entity\Project[] */
 /** @var $orgTags string[] */
 /** @var $orgProjects int[] */
+
+$leftSideText = "<p>To add your organisation, we need to collect some information about your organisation and its work. We are interested in hearing from both formal and informal groups.</p>";
+$leftSideText .= "<p>Some information is optional (mandatory fields are indicated with an asterisk), but the more you can provide, the better. We will add you as soon as we have some basic data. You will be able to edit and expand on your answers later.</p>";
+
 ?>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
     <script src="//code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
@@ -36,7 +40,7 @@ require __DIR__ . '/header.php';
                         <a class="step-tab tab-link-2 w-inline-block w-tab-link"
                            ng-class="{'w--current': currentTab == 'step2'}" data-w-tab="Tab 2"
                            ng-click="currentTab = 'step2'">
-                            <div>2 - Size, Time &amp; Location</div>
+                            <div>2 - Organisation Size &amp; Location</div>
                         </a>
                         <a class="step-tab tab-link-3 w-inline-block w-tab-link"
                            ng-class="{'w--current': currentTab == 'step3'}" data-w-tab="Tab 3"
@@ -46,7 +50,7 @@ require __DIR__ . '/header.php';
                         <a class="step-tab tab-link-4 w-inline-block w-tab-link"
                            ng-class="{'w--current': currentTab == 'step4'}" data-w-tab="Tab 4" id="tab-four"
                            ng-click="currentTab = 'step4'">
-                            <div>4 - Publish your Organisation</div>
+                            <div>4 - Add images &amp; publish</div>
                         </a>
                     </div>
                     <div class="w-tab-content">
@@ -62,20 +66,7 @@ require __DIR__ . '/header.php';
                                 <div class="w-row">
                                     <div class="creator-col w-col w-col-4">
                                         <h2>1 - Organisation Details</h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius
-                                            enim
-                                            in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor
-                                            interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et
-                                            justo
-                                            cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique
-                                            posuere.</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius
-                                            enim
-                                            in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor
-                                            interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et
-                                            justo
-                                            cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique
-                                            posuere.</p>
+                                        <?php echo $leftSideText?>
                                     </div>
                                     <div class="creator-col creator-col-right w-col w-col-8">
                                         <div class="w-form">
@@ -189,21 +180,8 @@ require __DIR__ . '/header.php';
                                 </div>
                                 <div class="w-row">
                                     <div class="creator-col w-col w-col-4 w-col-stack">
-                                        <h2>2 - Size, Time &amp; Location</h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius
-                                            enim
-                                            in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor
-                                            interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et
-                                            justo
-                                            cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique
-                                            posuere.</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius
-                                            enim
-                                            in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor
-                                            interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et
-                                            justo
-                                            cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique
-                                            posuere.</p>
+                                        <h2>2 - Organisation Size &amp; Location</h2>
+                                        <?php echo $leftSideText?>
                                     </div>
                                     <div class="creator-col creator-col-right w-col w-col-8 w-col-stack">
                                         <div class="w-form">
@@ -280,34 +258,22 @@ require __DIR__ . '/header.php';
                                 <div class="w-row">
                                     <div class="creator-col w-col w-col-4">
                                         <h2>3 - Describe your project</h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius
-                                            enim
-                                            in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor
-                                            interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et
-                                            justo
-                                            cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique
-                                            posuere.</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius
-                                            enim
-                                            in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor
-                                            interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et
-                                            justo
-                                            cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique
-                                            posuere.</p>
+                                        <?php echo $leftSideText?>
                                     </div>
                                     <div class="creator-col creator-col-right w-col w-col-8">
                                         <div class="w-form">
                                             <label for="name">Short Description</label>
-                                            <p>Please provide a short organisation description. How would you describe
-                                                your project in one tweet?
-                                                <br>(This will appear on your project card)</p>
+                                            <p>Please provide a short description for your organisation. This should be
+                                                up to 200 characters long. Think about how you would describe your
+                                                organisation in a single Tweet?</p>
                                             <textarea class="creator-data-entry end w-input wide"
                                                       data-name="Project Bio 3" id="project-bio-3" maxlength="5000"
                                                       name="project-bio-3" ng-model="organisation.shortDescription"
                                                       placeholder="Briefly describe your organisation (no more than 140 characters)"></textarea>
                                             <label class="story-label" for="project-bio">Long description</label>
-                                            <p>Please provide a longer organisation description. How would you describe
-                                                your project.......? (This will appear on your project page)</p>
+                                            <p>Please provide a longer description for your organisation. How would you
+                                                describe your organisation? What type of work do you do? Who do you
+                                                support?</p>
                                             <textarea class="creator-data-entry long-description w-input wide"
                                                       data-name="Project Bio 4" id="description" maxlength="5000"
                                                       placeholder="Add an in depth organisation description"
@@ -340,20 +306,7 @@ require __DIR__ . '/header.php';
                                 <div class="w-row">
                                     <div class="creator-col w-col w-col-4">
                                         <h2>4 - Add images &amp; publish</h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius
-                                            enim
-                                            in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor
-                                            interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et
-                                            justo
-                                            cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique
-                                            posuere.</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius
-                                            enim
-                                            in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor
-                                            interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et
-                                            justo
-                                            cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique
-                                            posuere.</p>
+                                        <?php echo $leftSideText?>
                                     </div>
                                     <div class="creator-col creator-col-right w-col w-col-8">
                                         <div class="w-form">
@@ -391,12 +344,17 @@ require __DIR__ . '/header.php';
                                                            ng-bind="headerImage.loading ? 'Loading...' : 'Upload image'">Upload
                                                             image
                                                         </a>
-                                                        <div style="color:red" ng-show="headerImage.errorMsg.file" ng-cloak>
+                                                        <div style="color:red" ng-show="headerImage.errorMsg.file"
+                                                             ng-cloak>
                                                             {{headerImage.errorMsg.file}}
                                                         </div>
-                                                        <div class="small-print">We may use the information you have
-                                                            given us in case studies and blogs promoted on media owned
-                                                            by ourselves and our partners.
+                                                        <div class="small-print">
+                                                            Any information, organisation data or results that you
+                                                            submit to Nesta in relation to your project shall be
+                                                            released under the terms of a Creative Commons Attribution
+                                                            Non-Commercial Share-A-like licence (CC-BY- NC-SA). By
+                                                            submitting such information, you warrant to us that you have
+                                                            any required permissions, licences or consents to do so
                                                         </div>
                                                         <div class="w-checkbox">
                                                             <label class="w-form-label">
