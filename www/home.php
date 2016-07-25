@@ -24,8 +24,8 @@ use \DSI\Entity\Image;
 
 <div class="nav-main w-nav" data-animation="default" data-collapse="medium" data-duration="400">
     <div class="container-wide nav-container w-clearfix">
-        <a class="w-nav-brand" href="<?php echo URL::home()?>">
-            <img class="brand" src="<?php echo SITE_RELATIVE_PATH?>/images/dark.svg" width="160">
+        <a class="w-nav-brand" href="<?php echo URL::home() ?>">
+            <img class="brand" src="<?php echo SITE_RELATIVE_PATH ?>/images/dark.svg" width="160">
         </a>
         <nav class="m-nav-open w-nav-menu" role="navigation">
             <?php if ($loggedInUser) { ?>
@@ -70,39 +70,18 @@ use \DSI\Entity\Image;
     <div class="massive-hero-slider w-slider" data-animation="outin" data-autoplay="1" data-delay="8000"
          data-duration="800" data-infinite="1">
         <div class="massive-hero-slide-mask w-slider-mask">
-            <div class="massive-hero-slide w-slide wikihouse">
-                <div class="container-wide massive-hero-slide-container">
-                    <div class="slide-info" data-ix="slide-info">
-                        <h2 class="massive-hero-slide-h2">Wikihouse</h2>
-                        <p class="massive-hero-slide-detail">WikiHouse is an open source building&nbsp;system. Many
-                            designers, collaborating&nbsp;to&nbsp;make it simple for everyone to design, print and
-                            assemble&nbsp;beautiful, low-energy homes, customised to their&nbsp;needs.</p>
-                        <a class="massive-hero-detail-link" href="home-alt.html">Read more</a>
+            <?php foreach ($caseStudies AS $caseStudy) { ?>
+                <div class="massive-hero-slide w-slide wikihouse">
+                    <div class="container-wide massive-hero-slide-container">
+                        <div class="slide-info" data-ix="slide-info">
+                            <h2 class="massive-hero-slide-h2"><?php echo show_input($caseStudy->getTitle()) ?></h2>
+                            <p class="massive-hero-slide-detail"><?php echo show_input($caseStudy->getIntroCardText()) ?></p>
+                            <a class="massive-hero-detail-link" href="<?php echo URL::caseStudy($caseStudy) ?>">Read
+                                more</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="massive-hero-slide w-slide wikihouse">
-                <div class="container-wide massive-hero-slide-container">
-                    <div class="slide-info" data-ix="slide-info">
-                        <h2 class="massive-hero-slide-h2">Case study</h2>
-                        <p class="massive-hero-slide-detail">WikiHouse is an open source building&nbsp;system. Many
-                            designers, collaborating&nbsp;to&nbsp;make it simple for everyone to design, print and
-                            assemble&nbsp;beautiful, low-energy homes, customised to their&nbsp;needs.</p>
-                        <a class="massive-hero-detail-link" href="#">View case study</a>
-                    </div>
-                </div>
-            </div>
-            <div class="massive-hero-slide w-slide wikihouse">
-                <div class="container-wide massive-hero-slide-container">
-                    <div class="slide-info" data-ix="slide-info">
-                        <h2 class="massive-hero-slide-h2">Wikihouse</h2>
-                        <p class="massive-hero-slide-detail">WikiHouse is an open source building&nbsp;system. Many
-                            designers, collaborating&nbsp;to&nbsp;make it simple for everyone to design, print and
-                            assemble&nbsp;beautiful, low-energy homes, customised to their&nbsp;needs.</p>
-                        <a class="massive-hero-detail-link" href="#">Read more</a>
-                    </div>
-                </div>
-            </div>
+            <?php } ?>
         </div>
         <div class="w-slider-arrow-left">
             <div class="icon-left w-icon-slider-left"></div>
@@ -183,7 +162,9 @@ use \DSI\Entity\Image;
     <div class="container-wide">
         <div class="case-studies-box" data-ix="fadeinuponload">
             <h3 class="light what-h3">Case studies</h3>
-            <p class="small what-p">These case studies are featured examples of DSI projects. They show the range of ways people are making a social impact using open hardware, open knowledge, open data and open networks.</p>
+            <p class="small what-p">These case studies are featured examples of DSI projects. They show the range of
+                ways people are making a social impact using open hardware, open knowledge, open data and open
+                networks.</p>
             <a class="what-text-button" href="<?php echo URL::caseStudies() ?>">See all case studies</a>
         </div>
         <div class="case-studies-row w-row">
