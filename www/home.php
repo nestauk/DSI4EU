@@ -22,76 +22,10 @@ use \DSI\Entity\Image;
     <?php require __DIR__ . '/partialViews/loginModal.php' ?>
 <?php } ?>
 
-<?php /*
-<div class="alt nav-main w-nav white-menu" data-animation="default" data-collapse="medium" data-duration="400"
-     data-ix="menuhide">
-    <div class="container-wide w-clearfix">
-        <a class="w-nav-brand" href="#">
-            <img class="logo-dark" src="images/dark.svg">
-        </a>
-        <nav class="w-nav-menu" role="navigation">
-            <a class="alt nav w-nav-link" href="#">Explore DSI</a>
-            <a class="alt nav w-nav-link" href="#">Case Studies</a>
-            <a class="alt nav w-nav-link" href="#">Blog</a>
-            <a class="alt nav w-nav-link" href="#">Projects</a>
-            <a class="alt nav w-nav-link" href="#">Organisations</a>
-            <a class="alt log-in nav w-nav-link" href="#" data-ix="open-login-modal">Login</a>
-            <a class="alt log-in log-in-alt nav w-nav-link" href="#">Signup</a>
-        </nav>
-        <div class="w-nav-button">
-            <div class="w-icon-nav-menu"></div>
-        </div>
-    </div>
-</div>
-*/ ?>
-<?php /*
 <div class="nav-main w-nav" data-animation="default" data-collapse="medium" data-duration="400">
     <div class="container-wide nav-container w-clearfix">
-        <a class="w-nav-brand" href="<?php echo URL::home() ?>">
-            <img class="brand" src="images/all white.svg" width="160">
-        </a>
-        <nav class="m-nav-open w-nav-menu" role="navigation">
-            <?php /* <a class="nav w-nav-link" href="<?php echo URL::exploreDSI() ?>">Explore DSI</a> * / ?>
-            <?php if ($loggedInUser) { ?>
-                <a class="nav w-nav-link" href="<?php echo URL::dashboard() ?>">Dashboard</a>
-            <?php } ?>
-            <a class="nav w-nav-link" href="<?php echo URL::caseStudies() ?>">Case Studies</a>
-            <a class="nav w-nav-link" href="<?php echo URL::stories() ?>">Blog</a>
-            <a class="nav w-nav-link" href="<?php echo URL::projects() ?>">Projects</a>
-            <a class="nav w-nav-link" href="<?php echo URL::organisations() ?>">Organisations</a>
-            <?php if (isset($loggedInUser) AND $loggedInUser) { ?>
-                <div class="w-dropdown" data-delay="0">
-                    <div class="log-in nav w-dropdown-toggle">
-                        <div>Create</div>
-                    </div>
-                    <nav class="create-drop-down w-dropdown-list">
-                        <a class="drop-down-link w-dropdown-link" data-ix="create-project-modal" href="#">
-                            Create a new project
-                        </a>
-                        <a class="drop-down-link w-dropdown-link" data-ix="create-organisation-modal" href="#">
-                            Create an organisation
-                        </a>
-                        <div class="arror-up"></div>
-                    </nav>
-                </div>
-            <?php } else { ?>
-                <a class="log-in log-in-alt nav w-nav-link" data-ix="open-login-modal"
-                   style="transition: all 0.2s ease 0s;">Login</a>
-                <a class="log-in log-in-alt nav w-nav-link" data-ix="showsignup"
-                   style="transition: all 0.2s ease 0s;">Signup</a>
-            <?php } ?>
-        </nav>
-        <div class="menu-open w-nav-button">
-            <div class="m-menu-btn w-icon-nav-menu"></div>
-        </div>
-    </div>
-</div>
-*/ ?>
-
-<div class="nav-main w-nav" data-animation="default" data-collapse="medium" data-duration="400">
-    <div class="container-wide nav-container w-clearfix">
-        <a class="w-nav-brand" href="index.html">
-            <img class="brand" src="images/dark.svg" width="160">
+        <a class="w-nav-brand" href="<?php echo URL::home()?>">
+            <img class="brand" src="<?php echo SITE_RELATIVE_PATH?>/images/dark.svg" width="160">
         </a>
         <nav class="m-nav-open w-nav-menu" role="navigation">
             <?php if ($loggedInUser) { ?>
@@ -124,65 +58,6 @@ use \DSI\Entity\Image;
         </div>
     </div>
 </div>
-
-<?php /*
-<div class="massive-hero w-section" data-ix="reveal-menu">
-    <div class="massive-hero-container">
-        <h1 class="massive-hero-h1" data-ix="fadeinup">Plain English heading that explains DSI4EU</h1>
-        <div class="massive-hero-sub-header" data-ix="fadeinup-2">Sub text that further explains in plain English
-            what exactly DSI4EU is and why it matters
-        </div>
-        <div class="massive-light-block" data-ix="fadeinup-4">
-            <div class="case-study-label">Case study</div>
-        </div>
-    </div>
-    <div class="massive-hero-slider w-slider" data-animation="outin" data-autoplay="1" data-delay="7000"
-         data-duration="800" data-infinite="1">
-        <div class="massive-hero-slide-mask w-slider-mask">
-            <div class="massive-hero-slide w-slide wikihouse">
-                <div class="container-wide massive-hero-slide-container">
-                    <div class="slide-info" data-ix="slide-info">
-                        <h2 class="massive-hero-slide-h2">Wikihouse</h2>
-                        <p class="massive-hero-slide-detail">WikiHouse is an open source building&nbsp;system. Many
-                            designers, collaborating&nbsp;to&nbsp;make it simple for everyone to design, print and
-                            assemble&nbsp;beautiful, low-energy homes, customised to their&nbsp;needs.</p>
-                        <a class="massive-hero-detail-link" href="home-alt.html">Read more</a>
-                    </div>
-                </div>
-            </div>
-            <div class="massive-hero-slide w-slide wikihouse">
-                <div class="container-wide massive-hero-slide-container">
-                    <div class="slide-info" data-ix="slide-info">
-                        <h2 class="massive-hero-slide-h2">Wikihouse</h2>
-                        <p class="massive-hero-slide-detail">WikiHouse is an open source building&nbsp;system. Many
-                            designers, collaborating&nbsp;to&nbsp;make it simple for everyone to design, print and
-                            assemble&nbsp;beautiful, low-energy homes, customised to their&nbsp;needs.</p>
-                        <a class="massive-hero-detail-link" href="#">Read more</a>
-                    </div>
-                </div>
-            </div>
-            <div class="massive-hero-slide w-slide wikihouse">
-                <div class="container-wide massive-hero-slide-container">
-                    <div class="slide-info" data-ix="slide-info">
-                        <h2 class="massive-hero-slide-h2">Wikihouse</h2>
-                        <p class="massive-hero-slide-detail">WikiHouse is an open source building&nbsp;system. Many
-                            designers, collaborating&nbsp;to&nbsp;make it simple for everyone to design, print and
-                            assemble&nbsp;beautiful, low-energy homes, customised to their&nbsp;needs.</p>
-                        <a class="massive-hero-detail-link" href="#">Read more</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="w-slider-arrow-left">
-            <div class="icon-left w-icon-slider-left"></div>
-        </div>
-        <div class="w-slider-arrow-right">
-            <div class="icon-right w-icon-slider-right"></div>
-        </div>
-        <div class="slide-nav-small w-round w-slider-nav"></div>
-    </div>
-</div>
- */ ?>
 
 <div class="massive-hero" data-ix="reveal-menu">
     <div class="massive-hero-container">
