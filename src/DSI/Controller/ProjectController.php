@@ -4,6 +4,7 @@ namespace DSI\Controller;
 
 use DSI\Entity\OrganisationProject;
 use DSI\Entity\Project;
+use DSI\Entity\ProjectLink_Service;
 use DSI\Entity\ProjectMember;
 use DSI\Entity\ProjectPost;
 use DSI\Entity\User;
@@ -11,6 +12,7 @@ use DSI\Repository\OrganisationProjectRepository;
 use DSI\Repository\ProjectImpactTagARepository;
 use DSI\Repository\ProjectImpactTagBRepository;
 use DSI\Repository\ProjectImpactTagCRepository;
+use DSI\Repository\ProjectLinkRepository;
 use DSI\Repository\ProjectMemberInvitationRepository;
 use DSI\Repository\ProjectMemberRepository;
 use DSI\Repository\ProjectMemberRequestRepository;
@@ -68,7 +70,10 @@ class ProjectController
         $isAdmin = false;
         $canUserRequestMembership = false;
         $projectMembers = (new ProjectMemberRepository())->getByProjectID($project->getId());
-        $organisationProjects = (new OrganisationProjectRepository())->getByProjectID($project->getId());
+        $organisationProjectsObj = (new OrganisationProjectRepository())->getByProjectID($project->getId());
+        usort($organisationProjectsObj, function (OrganisationProject $a, OrganisationProject $b) {
+            return ($a->getOrganisation()->getName() <= $b->getOrganisation()->getName()) ? -1 : 1;
+        });
         $organisationProjects = array_map(function (OrganisationProject $organisationProject) {
             $organisation = $organisationProject->getOrganisation();
             return [
@@ -77,10 +82,7 @@ class ProjectController
                 'url' => URL::organisation($organisation),
                 'projectsCount' => count((new OrganisationProjectRepository())->getByOrganisationID($organisation->getId())),
             ];
-        }, $organisationProjects);
-        usort($organisationProjects, function ($a, $b) {
-            return ($a['name'] <= $b['name']) ? -1 : 1;
-        });
+        }, $organisationProjectsObj);
 
         if ($loggedInUser) {
             $userHasInvitation = (new ProjectMemberInvitationRepository())->memberHasInvitationToProject(
@@ -89,17 +91,30 @@ class ProjectController
             );
 
             $canUserRequestMembership = $this->canUserRequestMembership($project, $loggedInUser, $userHasInvitation);
-            if ($project->getOwner()->getId() == $loggedInUser->getId()){
+            if ($project->getOwner()->getId() == $loggedInUser->getId()) {
                 $isOwner = true;
                 $isAdmin = true;
             }
 
-            if((new ProjectMemberRepository())->projectHasMember($project->getId(), $loggedInUser->getId())){
+            $member = (new ProjectMemberRepository())->getByProjectIDAndMemberID($project->getId(), $loggedInUser->getId());
+            if ($member->isAdmin())
                 $isAdmin = true;
-            }
 
             if (isset($isAdmin) AND $isAdmin === true)
                 $memberRequests = (new ProjectMemberRequestRepository())->getMembersForProject($project->getId());
+        }
+
+        $links = [];
+        $projectLinks = (new ProjectLinkRepository())->getByProjectID($project->getId());
+        foreach ($projectLinks AS $projectLink) {
+            if ($projectLink->getLinkService() == ProjectLink_Service::Facebook)
+                $links['facebook'] = $projectLink->getLink();
+            if ($projectLink->getLinkService() == ProjectLink_Service::Twitter)
+                $links['twitter'] = $projectLink->getLink();
+            if ($projectLink->getLinkService() == ProjectLink_Service::GooglePlus)
+                $links['googleplus'] = $projectLink->getLink();
+            if ($projectLink->getLinkService() == ProjectLink_Service::GitHub)
+                $links['github'] = $projectLink->getLink();
         }
 
         try {
@@ -309,7 +324,6 @@ class ProjectController
         }
 
         if ($this->data()->format == 'json') {
-            $owner = $project->getOwner();
             echo json_encode([
                 'name' => $project->getName(),
                 'url' => $project->getUrl(),
@@ -321,7 +335,7 @@ class ProjectController
                 'impactTagsA' => (new ProjectImpactTagARepository())->getTagsNameByProjectID($project->getId()),
                 'impactTagsB' => (new ProjectImpactTagBRepository())->getTagsNameByProjectID($project->getId()),
                 'impactTagsC' => (new ProjectImpactTagCRepository())->getTagsNameByProjectID($project->getId()),
-                'members' => $this->getMembers($owner, $projectMembers),
+                'members' => $this->getMembers($project->getOwner(), $projectMembers),
                 'memberRequests' => array_map(function (User $user) {
                     return [
                         'id' => $user->getId(),

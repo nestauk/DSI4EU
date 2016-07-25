@@ -6,6 +6,8 @@ require __DIR__ . '/header.php';
 /** @var $isAdmin bool */
 /** @var $isOwner bool */
 /** @var $loggedInUser \DSI\Entity\User */
+/** @var $projectMembers \DSI\Entity\ProjectMember[] */
+/** @var $organisationProjectsObj \DSI\Entity\OrganisationProject[] */
 ?>
     <script src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/ProjectController.js"></script>
 
@@ -28,33 +30,51 @@ require __DIR__ . '/header.php';
                         </a>
                         <div class="project-single-social" data-ix="fadeinup-3">
                             <div class="w-row">
-                                <div class="w-col w-col-3 w-col-small-6 w-col-tiny-6">
-                                    <div class="sm-nu-bloxk w-clearfix">
-                                        <img class="sm-icon"
-                                             src="<?php echo SITE_RELATIVE_PATH ?>/images/facebook-logo.png" width="40">
-                                        <div class="hero-social-label">Facebook</div>
+                                <?php if (isset($links['facebook'])) { ?>
+                                    <div class="w-col w-col-3 w-col-small-6 w-col-tiny-6">
+                                        <div class="sm-nu-bloxk w-clearfix">
+                                            <a href="<?php echo $links['facebook'] ?>" target="_blank">
+                                                <img class="sm-icon"
+                                                     src="<?php echo SITE_RELATIVE_PATH ?>/images/facebook-logo.png"
+                                                     width="40">
+                                                <div class="hero-social-label">Facebook</div>
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="w-col w-col-3 w-col-small-6 w-col-tiny-6">
-                                    <div class="sm-nu-bloxk w-clearfix">
-                                        <img class="sm-icon"
-                                             src="<?php echo SITE_RELATIVE_PATH ?>/images/twitter-logo-silhouette.png">
-                                        <div class="hero-social-label">Twitter</div>
+                                <?php } ?>
+                                <?php if (isset($links['twitter'])) { ?>
+                                    <div class="w-col w-col-3 w-col-small-6 w-col-tiny-6">
+                                        <div class="sm-nu-bloxk w-clearfix">
+                                            <a href="<?php echo $links['twitter'] ?>" target="_blank">
+                                                <img class="sm-icon"
+                                                     src="<?php echo SITE_RELATIVE_PATH ?>/images/twitter-logo-silhouette.png">
+                                                <div class="hero-social-label">Twitter</div>
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="w-col w-col-3 w-col-small-6 w-col-tiny-6">
-                                    <div class="sm-nu-bloxk w-clearfix">
-                                        <img class="sm-icon" src="<?php echo SITE_RELATIVE_PATH ?>/images/social.png">
-                                        <div class="hero-social-label">Github</div>
+                                <?php } ?>
+                                <?php if (isset($links['github'])) { ?>
+                                    <div class="w-col w-col-3 w-col-small-6 w-col-tiny-6">
+                                        <div class="sm-nu-bloxk w-clearfix">
+                                            <a href="<?php echo $links['github'] ?>" target="_blank">
+                                                <img class="sm-icon"
+                                                     src="<?php echo SITE_RELATIVE_PATH ?>/images/social.png">
+                                                <div class="hero-social-label">Github</div>
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="w-col w-col-3 w-col-small-6 w-col-tiny-6">
-                                    <div class="sm-nu-bloxk w-clearfix">
-                                        <img class="sm-icon"
-                                             src="<?php echo SITE_RELATIVE_PATH ?>/images/google-plus-logo.png">
-                                        <div class="hero-social-label">Google +</div>
+                                <?php } ?>
+                                <?php if (isset($links['googleplus'])) { ?>
+                                    <div class="w-col w-col-3 w-col-small-6 w-col-tiny-6">
+                                        <div class="sm-nu-bloxk w-clearfix">
+                                            <a href="<?php echo $links['googleplus'] ?>" target="_blank">
+                                                <img class="sm-icon"
+                                                     src="<?php echo SITE_RELATIVE_PATH ?>/images/google-plus-logo.png">
+                                                <div class="hero-social-label">Google +</div>
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>
@@ -85,33 +105,33 @@ require __DIR__ . '/header.php';
                         <?php
                         if ($project->getStartDate() AND !$project->getEndDate()) {
                             if ($project->startDateIsPassed()) {
-                                echo 'started in ', date('M, Y', $project->getUnixStartDate());
+                                echo 'started in ', $project->getStartDate('M, Y');
                             } else {
-                                echo 'will start in ', date('M, Y', $project->getUnixStartDate());
+                                echo 'will start in ', $project->getStartDate('M, Y');
                             }
                         } elseif (!$project->getStartDate() AND $project->getEndDate()) {
                             if ($project->endDateIsPassed()) {
-                                echo 'ran until ', date('M, Y', $project->getUnixEndDate());
+                                echo 'ran until ', $project->getEndDate('M, Y');
                             } else {
-                                echo 'is running until ', date('M, Y', $project->getUnixEndDate());
+                                echo 'is running until ', $project->getEndDate('M, Y');
                             }
                         } elseif ($project->getStartDate() AND $project->getEndDate()) {
-                            if (date('M, Y', $project->getUnixStartDate()) == date('M, Y', $project->getUnixEndDate())) {
+                            if ($project->getStartDate('M, Y') == $project->getEndDate('M, Y')) {
                                 if ($project->startDateIsPassed()) {
-                                    echo 'ran in ', date('M, Y', $project->getUnixStartDate());
+                                    echo 'ran in ', $project->getStartDate('M, Y');
                                 } elseif ($project->startDateIsInFuture()) {
-                                    echo 'will run in ', date('M, Y', $project->getUnixStartDate());
+                                    echo 'will run in ', $project->getStartDate('M, Y');
                                 }
                             } else {
                                 if ($project->endDateIsPassed()) {
-                                    echo 'ran from ', date('M, Y', $project->getUnixEndDate()),
-                                    ' to ', date('M, Y', $project->getUnixEndDate());
+                                    echo 'ran from ', $project->getStartDate('M, Y'),
+                                    ' to ', $project->getEndDate('M, Y');
                                 } elseif ($project->startDateIsInFuture()) {
-                                    echo 'will run from ', date('M, Y', $project->getUnixEndDate()),
-                                    ' to ', date('M, Y', $project->getUnixEndDate());
+                                    echo 'will run from ', $project->getStartDate('M, Y'),
+                                    ' to ', $project->getEndDate('M, Y');
                                 } else {
-                                    echo 'is running from ', date('M, Y', $project->getUnixEndDate()),
-                                    ' to ', date('M, Y', $project->getUnixEndDate());
+                                    echo 'is running from ', $project->getStartDate('M, Y'),
+                                    ' to ', $project->getEndDate('M, Y');
                                 }
                             }
                         }
@@ -148,35 +168,47 @@ require __DIR__ . '/header.php';
                             <div class="w-row">
                                 <div class="people-col w-col w-col-6">
                                     <h4 class="involved-h4">People involved</h4>
-                                    <div class="involved-card">
-                                        <div class="w-row">
-                                            <div class="image-col w-col w-col-3 w-col-small-3 w-col-tiny-3">
-                                                <img class="involved-profile-img"
-                                                     src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg"
-                                                     width="50">
+                                    <?php foreach ($projectMembers AS $projectMember) {
+                                        $member = $projectMember->getMember() ?>
+                                        <div class="involved-card">
+                                            <div class="w-row">
+                                                <div class="image-col w-col w-col-3 w-col-small-3 w-col-tiny-3">
+                                                    <img class="involved-profile-img" width="50"
+                                                         src="<?php echo \DSI\Entity\Image::PROFILE_PIC_URL . $member->getProfilePicOrDefault() ?>">
+                                                </div>
+                                                <div class="w-clearfix w-col w-col-9 w-col-small-9 w-col-tiny-9">
+                                                    <div
+                                                        class="card-name"><?php echo show_input($member->getFullName()) ?></div>
+                                                    <div
+                                                        class="card-position"><?php echo show_input($member->getJobTitle()) ?></div>
+                                                </div>
                                             </div>
-                                            <div class="w-clearfix w-col w-col-9 w-col-small-9 w-col-tiny-9">
-                                                <div class="card-name">Daniel M Pettifer</div>
-                                                <div class="card-position">Digital Product Manager</div>
-                                            </div>
+                                            <a class="view-profile"
+                                               href="<?php echo \DSI\Service\URL::profile($member->getId()) ?>">View</a>
                                         </div>
-                                        <a class="view-profile" href="#">View</a>
-                                    </div>
+                                    <?php } ?>
                                 </div>
                                 <div class="orgs-col w-col w-col-6">
                                     <h4 class="involved-h4">Organisations involved</h4>
-                                    <div class="involved-card">
-                                        <div class="w-row">
-                                            <div class="w-col w-col-5 w-col-small-5 w-col-tiny-5">
-                                                <img class="involved-organisation-img" src="images/waag.png">
+                                    <?php foreach ($organisationProjectsObj AS $organisationProject) {
+                                        $organisation = $organisationProject->getOrganisation(); ?>
+                                        <div class="involved-card">
+                                            <div class="w-row">
+                                                <div class="w-col w-col-5 w-col-small-5 w-col-tiny-5">
+                                                    <img class="involved-organisation-img"
+                                                         src="<?php echo \DSI\Entity\Image::ORGANISATION_LOGO_URL . $organisation->getLogoOrDefault() ?>">
+                                                </div>
+                                                <div class="w-clearfix w-col w-col-7 w-col-small-7 w-col-tiny-7">
+                                                    <div
+                                                        class="card-name"><?php echo show_input($organisation->getName()) ?></div>
+                                                    <div
+                                                        class="card-position"><?php echo show_input($organisation->getCountryName()) ?></div>
+                                                </div>
                                             </div>
-                                            <div class="w-clearfix w-col w-col-7 w-col-small-7 w-col-tiny-7">
-                                                <div class="card-name">The Waag Society</div>
-                                                <div class="card-position">Holland</div>
-                                            </div>
+                                            <a class="view-profile"
+                                               href="<?php echo \DSI\Service\URL::organisation($organisation) ?>">View</a>
                                         </div>
-                                        <a class="view-profile" href="#">View</a>
-                                    </div>
+                                    <?php } ?>
                                 </div>
                             </div>
                         </div>
@@ -451,10 +483,12 @@ require __DIR__ . '/header.php';
                                             <div class="profile-label">Do you have something to
                                                 share?
                                             </div>
-                                            <a href="#" data-ix="new-post-show"
-                                               class="create-new-post">Add new
-                                                post <span
-                                                    class="add-post-plus">+</span></a>
+                                            <?php if ($isAdmin) { ?>
+                                                <a href="#" data-ix="new-post-show"
+                                                   class="create-new-post">
+                                                    Add new post <span class="add-post-plus">+</span>
+                                                </a>
+                                            <?php } ?>
                                         </div>
                                     </div>
                                 <?php } ?>

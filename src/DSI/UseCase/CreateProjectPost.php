@@ -6,6 +6,7 @@ use DSI\Entity\Project;
 use DSI\Entity\ProjectPost;
 use DSI\Entity\User;
 use DSI\NotEnoughData;
+use DSI\Repository\ProjectMemberRepository;
 use DSI\Repository\ProjectPostRepository;
 use DSI\Service\ErrorHandler;
 
@@ -47,7 +48,7 @@ class CreateProjectPost
     }
 
     /**
-     * @return Project
+     * @return ProjectPost
      */
     public function getProjectPost()
     {
@@ -72,8 +73,8 @@ class CreateProjectPost
             $this->errorHandler->addTaggedError('project', 'Invalid project ID');
         if ($this->data()->user->getId() <= 0)
             $this->errorHandler->addTaggedError('user', 'Invalid user ID');
-        if ($this->data()->project->getOwner()->getId() != $this->data()->user->getId())
-            $this->errorHandler->addTaggedError('user', 'Only the owner can add a post');
+        if (!$this->userCanAddPost())
+            $this->errorHandler->addTaggedError('user', 'You are not allowed to add a new post');
 
         $this->errorHandler->throwIfNotEmpty();
     }
@@ -84,6 +85,24 @@ class CreateProjectPost
             throw new NotEnoughData('project');
         if (!isset($this->data()->user))
             throw new NotEnoughData('owner');
+    }
+
+    /**
+     * @return bool
+     */
+    private function userCanAddPost()
+    {
+        if ($this->data()->project->getOwner()->getId() == $this->data()->user->getId())
+            return true;
+
+        $member = (new ProjectMemberRepository())->getByProjectIDAndMemberID(
+            $this->data()->project->getId(),
+            $this->data()->user->getId()
+        );
+        if ($member != null AND $member->isAdmin())
+            return true;
+
+        return false;
     }
 }
 

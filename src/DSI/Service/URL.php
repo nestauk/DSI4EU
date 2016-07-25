@@ -35,9 +35,9 @@ class URL
         return SITE_RELATIVE_PATH . '/logout';
     }
 
-    public static function profile($userProfileURL)
+    public static function profile($userID)
     {
-        return SITE_RELATIVE_PATH . '/profile/' . $userProfileURL;
+        return SITE_RELATIVE_PATH . '/profile/' . $userID;
     }
 
     public static function home()

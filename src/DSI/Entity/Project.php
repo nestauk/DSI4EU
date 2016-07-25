@@ -148,10 +148,15 @@ class Project
     }
 
     /**
+     * @param string $format
      * @return string
      */
-    public function getStartDate()
+    public function getStartDate($format = null)
     {
+        if ($format !== null) {
+            return date('M, Y', $this->getUnixStartDate());
+        }
+
         return $this->startDate;
     }
 
@@ -182,10 +187,15 @@ class Project
     }
 
     /**
+     * @param string $format
      * @return string
      */
-    public function getEndDate()
+    public function getEndDate($format = null)
     {
+        if ($format !== null) {
+            return date('M, Y', $this->getUnixEndDate());
+        }
+
         return $this->endDate;
     }
 

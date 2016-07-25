@@ -102,10 +102,11 @@ class ProjectMemberRepository
      */
     public function getByProjectIDAndMemberID(int $projectID, int $memberID)
     {
-        return $this->getProjectMembersWhere([
+        $projectMember = $this->getProjectMembersWhere([
             "`projectID` = '{$projectID}'",
             "`userID` = '{$memberID}'",
-        ])[0];
+        ]);
+        return isset($projectMember[0]) ? $projectMember[0] : null;
     }
 
     /**
