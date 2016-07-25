@@ -14,7 +14,8 @@ require __DIR__ . '/header.php';
                 <p class="header-large-desc" data-ix="fadeinuponload-2">
                     <?php echo show_input($caseStudy->getIntroCardText()) ?>
                 </p>
-                <a class="button button-bottom-right edit-case-study w-button" href="<?php echo \DSI\Service\URL::caseStudyEdit($caseStudy)?>">Edit case study +</a>
+                <a class="button button-bottom-right edit-case-study w-button"
+                   href="<?php echo \DSI\Service\URL::caseStudyEdit($caseStudy) ?>">Edit case study +</a>
             </div>
         </div>
     </div>
@@ -61,7 +62,8 @@ require __DIR__ . '/header.php';
                 <?php foreach ($caseStudies AS $i => $caseStudy) { ?>
                     <div class="case-study-col-<?php echo $i % 3 + 1 ?> w-col w-col-4">
                         <div class="onloadone" data-ix="fadeinuponload-<?php echo $i % 3 + 2 ?>">
-                            <div class="case-study-card" data-ix="case-study-card-overlay">
+                            <div class="case-study-card" data-ix="case-study-card-overlay"
+                                 style="background-image: url('<?php echo \DSI\Entity\Image::CASE_STUDY_CARD_BG_URL . $caseStudy->getCardImage() ?>');">
                                 <div class="case-study-card-overlay"
                                      style="background-color:<?php echo $caseStudy->getCardColour() ?>"></div>
                                 <div class="case-study-card-info">
