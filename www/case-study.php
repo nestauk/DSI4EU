@@ -26,7 +26,7 @@ require __DIR__ . '/header.php';
                      src="<?php echo \DSI\Entity\Image::CASE_STUDY_LOGO_URL . $caseStudy->getLogo() ?>">
             </div>
             <div class="case-study-single-container w-container">
-                <h2 class="centered" data-ix="fadeinuponload-4">Intro text</h2>
+                <h2 class="centered" data-ix="fadeinuponload-4">Introduction</h2>
                 <p class="centered" data-ix="fadeinuponload-5">
                     <?php echo show_input($caseStudy->getIntroPageText()) ?>
                 </p>
