@@ -71,7 +71,8 @@ use \DSI\Entity\Image;
          data-duration="800" data-infinite="1">
         <div class="massive-hero-slide-mask w-slider-mask">
             <?php foreach ($caseStudies AS $caseStudy) { ?>
-                <div class="massive-hero-slide w-slide wikihouse">
+                <div class="massive-hero-slide w-slide wikihouse"
+                     style="background-image: linear-gradient(180deg, rgba(0, 0, 0, .65), rgba(0, 0, 0, .65)), url('<?php echo Image::CASE_STUDY_HEADER_URL . $caseStudy->getHeaderImage() ?>');">
                     <div class="container-wide massive-hero-slide-container">
                         <div class="slide-info" data-ix="slide-info">
                             <h2 class="massive-hero-slide-h2"><?php echo show_input($caseStudy->getTitle()) ?></h2>
