@@ -7227,6 +7227,9 @@ html.w-mod-js *[data-ix="menuhide"] {
   .brand {
     margin-left: 10px;
   }
+  .nav.log-in {
+    margin-bottom: 40px;
+  }
   .info-card {
     position: relative;
   }
@@ -7374,7 +7377,7 @@ html.w-mod-js *[data-ix="menuhide"] {
     background-color: transparent;
   }
   .m-nav-open {
-    background-color: #18233f;
+    background-color: #fff;
   }
   .m-nav-open.bg-blur {
     background-color: rgba(56, 65, 85, .94);
@@ -7781,6 +7784,9 @@ html.w-mod-js *[data-ix="menuhide"] {
   }
   .brand {
     margin-left: 0px;
+  }
+  .nav {
+    margin-top: 0px;
   }
   .search-field.quicksearch {
     display: none;
