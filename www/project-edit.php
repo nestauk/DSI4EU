@@ -18,13 +18,15 @@ $leftSideText .= "<p>Some information is optional (mandatory fields are indicate
 
     <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
     <script type="text/javascript"
-            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/CaseStudyEditController.js?v=<?php echo \DSI\Service\Sysctl::$version ?>"></script>
+            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/CaseStudyEditController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 
     <script type="text/javascript"
-            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/ProjectEditController.js"></script>
+            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/ProjectEditController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
-    <div ng-controller="ProjectEditController" data-projectid="<?php echo $project->getId() ?>">
+    <div ng-controller="ProjectEditController"
+         data-projectid="<?php echo $project->getId() ?>"
+         data-projecturl="<?php echo \DSI\Service\URL::project($project) ?>">
         <div class="creator page-header">
             <div class="container-wide header">
                 <h1 class="light page-h1">Edit project</h1>

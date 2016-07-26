@@ -3,6 +3,7 @@
         .module(angularAppName)
         .controller('ProjectEditController', function ($scope, $http, $timeout, Upload, $attrs) {
             var projectID = $attrs.projectid;
+            var projectURL = $attrs.projecturl;
 
             var editCountry = $('#edit-country');
             var editCountryRegion = $('#edit-countryRegion');
@@ -65,7 +66,13 @@
                     $scope.saveDetails({
                         postField: 'step4',
                         onSuccess: function () {
-                            swal('Success!', 'The project details have been successfully saved.', "success");
+                            swal({
+                                title: "Success!",
+                                text: "The project details have been successfully saved.",
+                                type: "success"
+                            }, function (isConfirm) {
+                                window.location.href = projectURL;
+                            });
                         }
                     })
                 }
