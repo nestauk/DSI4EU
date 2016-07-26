@@ -159,6 +159,16 @@ class URL
         return SITE_RELATIVE_PATH . '/personal-details';
     }
 
+    public static function termsOfUser()
+    {
+        return SITE_RELATIVE_PATH . '/terms-of-user';
+    }
+
+    public static function privacyPolicy()
+    {
+        return SITE_RELATIVE_PATH . '/privacy-policy';
+    }
+
     /**
      * @param $title
      * @return string

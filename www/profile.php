@@ -185,7 +185,7 @@ require __DIR__ . '/header.php';
                 </div>
             </div>
         </div>
-        
+
         <?php /* if ($isOwner) { ?>
             <div class="profile-update bg-blur">
                 <div class="update-modal">

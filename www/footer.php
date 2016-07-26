@@ -1,6 +1,8 @@
 <?php
 use \DSI\Service\URL;
 
+/** @var $loggedInUser \DSI\Entity\User */
+
 ?>
 </div>
 <div class="footer">
@@ -29,14 +31,9 @@ use \DSI\Service\URL;
             <div class="w-col w-col-2">
                 <h3 class="footer-h3">People</h3>
                 <ul class="w-list-unstyled">
-                    <li class="footer-link">
-                        <a class="footer-link" href="<?php echo URL::dashboard() ?>">Your dashboard</a>
-                    </li>
+                    <?php /*
                     <li class="footer-link">
                         <a class="footer-link" href="#">Who uses DSI4EU?</a>
-                    </li>
-                    <li class="footer-link">
-                        <a class="footer-link" href="#">Join DSI4EU</a>
                     </li>
                     <li class="footer-link">
                         <a class="footer-link" href="#">Help centre</a>
@@ -44,14 +41,25 @@ use \DSI\Service\URL;
                     <li class="footer-link">
                         <a class="footer-link" href="#">Report abuse</a>
                     </li>
+                    */ ?>
+                    <?php if (isset($loggedInUser) AND $loggedInUser) { ?>
+                        <li class="footer-link">
+                            <a class="footer-link" href="<?php echo URL::dashboard() ?>">Your dashboard</a>
+                        </li>
+                    <?php } else { ?>
+                        <li class="footer-link">
+                            <a class="footer-link" href="#" data-ix="showsignup">Join DSI4EU</a>
+                        </li>
+                    <?php } ?>
                     <li class="footer-link">
-                        <a class="footer-link" href="#">Terms of service</a>
+                        <a class="footer-link" href="<?php echo URL::termsOfUser() ?>">Terms of service</a>
                     </li>
                     <li class="footer-link">
-                        <a class="footer-link" href="#">Privacy policy</a>
+                        <a class="footer-link" href="<?php echo URL::privacyPolicy() ?>">Privacy policy</a>
                     </li>
                 </ul>
             </div>
+
             <div class="w-col w-col-2">
                 <h3 class="footer-h3">Projects</h3>
                 <ul class="w-list-unstyled">
@@ -272,7 +280,7 @@ use \DSI\Service\URL;
 <script type="text/javascript"
         src="<?php echo SITE_RELATIVE_PATH ?>/js/script.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 
-<?php include(__DIR__ . '/partialViews/googleAnalytics.html');?>
+<?php include(__DIR__ . '/partialViews/googleAnalytics.html'); ?>
 
 </body>
 </html>
