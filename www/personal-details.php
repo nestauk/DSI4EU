@@ -236,13 +236,13 @@ $leftSideText .= "<p>The information is optional. You will be able to edit and e
                                                                    data-name="Email 7" id="email-7" maxlength="256"
                                                                    name="email-7" placeholder="Your country"
                                                                    ng-model="user.countryName"
-                                                                   required="required" type="text">
+                                                                   type="text">
                                                             <label for="email-8">and in which city?</label>
                                                             <input class="creator-data-entry w-input"
                                                                    data-name="Email 8" id="email-8" maxlength="256"
                                                                    name="email-8" placeholder="Your city"
                                                                    ng-model="user.cityName"
-                                                                   required="required" type="text">
+                                                                   type="text">
                                                             <h2 class="edit-h2">Languages</h2>
                                                             <label for="name">Which languages do you know?</label>
                                                             <p>Which languages can you read? We want to give you the
