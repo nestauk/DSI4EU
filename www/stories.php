@@ -61,7 +61,7 @@ require __DIR__ . '/header.php';
                                 <div class="w-col w-col-2">
                                     <a class="w-button dsi-button top-filter" ng-click="searchCriteria.catg = 1"
                                        href="#">
-                                        Case studies</a>
+                                        Blogs</a>
                                 </div>
                                 <?php if ($loggedInUser) { ?>
                                     <div class="w-col w-col-2">
