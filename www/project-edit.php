@@ -501,13 +501,13 @@ $leftSideText .= "<p>Some information is optional (mandatory fields are indicate
                 dateFormat: 'yy-mm-dd',
                 changeMonth: true,
                 changeYear: true,
-                yearRange: "-100:+0"
+                yearRange: "-100:+10"
             });
             $('#end-date').datepicker({
                 dateFormat: 'yy-mm-dd',
                 changeMonth: true,
                 changeYear: true,
-                yearRange: "-100:+0"
+                yearRange: "-100:+50"
             });
         });
     </script>
