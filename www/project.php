@@ -464,6 +464,7 @@ require __DIR__ . '/header.php';
             <?php } ?>
         </div>
 
+        <?php /*
         <div class="w-section section-grey dark" id="updates">
             <div class="container-wide">
                 <div class="w-row project-info">
@@ -492,6 +493,7 @@ require __DIR__ . '/header.php';
                                         </div>
                                     </div>
                                 <?php } ?>
+
                                 <div ng-controller="ProjectPostController"
                                      ng-repeat="post in project.posts" ng-cloak>
                                     <div class="w-clearfix"
@@ -658,6 +660,7 @@ require __DIR__ . '/header.php';
                 </form>
             </div>
         </div>
+        */?>
     </div>
 
     <script>
