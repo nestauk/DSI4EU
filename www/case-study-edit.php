@@ -9,9 +9,11 @@ require __DIR__ . '/header.php';
 
     <div ng-controller="CaseStudyEditController" data-casestudyid="<?php echo $caseStudy->getId() ?>">
         <div class="header-section-grey w-section">
-            <div class="container-wide">
-                <h1 class="header-centre">Edit case study</h1>
-            </div>
+            <?php if ($loggedInUser) { ?>
+                <div class="container-wide">
+                    <h1 class="header-centre">Edit case study</h1>
+                </div>
+            <?php } ?>
         </div>
         <div class="section-white w-section">
             <div class="container-wide step-window">

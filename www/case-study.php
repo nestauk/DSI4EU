@@ -14,8 +14,10 @@ require __DIR__ . '/header.php';
                 <p class="header-large-desc" data-ix="fadeinuponload-2">
                     <?php echo show_input($caseStudy->getIntroCardText()) ?>
                 </p>
-                <a class="button button-bottom-right edit-case-study w-button"
-                   href="<?php echo \DSI\Service\URL::caseStudyEdit($caseStudy) ?>">Edit case study +</a>
+                <?php if ($loggedInUser) { ?>
+                    <a class="button button-bottom-right edit-case-study w-button"
+                       href="<?php echo \DSI\Service\URL::caseStudyEdit($caseStudy) ?>">Edit case study +</a>
+                <?php } ?>
             </div>
         </div>
     </div>
