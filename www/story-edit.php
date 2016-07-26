@@ -8,7 +8,7 @@ require __DIR__ . '/header.php';
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
     <script type="text/javascript"
-            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/StoryEditController.js"></script>
+            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/StoryEditController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 
     <style>
         .progress {

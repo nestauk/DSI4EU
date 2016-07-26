@@ -3,7 +3,7 @@ require __DIR__ . '/header.php'
 /** @var $loggedInUser \DSI\Entity\User */
 ?>
     <script type="text/javascript"
-            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/OrganisationsController.js"></script>
+            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/OrganisationsController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 
     <div ng-controller="OrganisationsController">
 

@@ -1,9 +1,5 @@
-<?php
-use DSI\Service\Sysctl;
-
-?>
 <script type="text/javascript"
-        src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/CreateProjectOrganisationController.js?v=<?php echo Sysctl::$version ?>"></script>
+        src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/CreateProjectOrganisationController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 
 <div ng-controller="CreateProjectOrganisationController">
     <div class="create-project-modal modal">

@@ -10,7 +10,7 @@ require __DIR__ . '/header.php';
 /** @var $links string[] */
 /** @var $tags string[] */
 ?>
-    <script src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/OrganisationController.js"></script>
+    <script src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/OrganisationController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 
     <div class="header-large-section">
         <div class="header-large nesta"

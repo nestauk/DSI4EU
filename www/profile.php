@@ -10,7 +10,7 @@ require __DIR__ . '/header.php';
         profileUserID = '<?php echo $userID?>';
     </script>
     <script type="text/javascript"
-            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/UserController.js"></script>
+            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/UserController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 
     <div ng-controller="UserController as ctrl" id="UserController">
 

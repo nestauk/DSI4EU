@@ -34,7 +34,7 @@ require __DIR__ . '/header.php';
     </style>
 
     <script type="text/javascript"
-            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/StoriesController.js"></script>
+            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/StoriesController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 
     <div ng-controller="StoriesController">
         <div class="w-section page-header stories-header">

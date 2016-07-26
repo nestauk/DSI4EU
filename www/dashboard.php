@@ -8,7 +8,7 @@ use \DSI\Service\URL;
 require __DIR__ . '/header.php';
 ?>
     <script type="text/javascript"
-            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/DashboardController.js"></script>
+            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/DashboardController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
     <div ng-controller="DashboardController">
 
         <div class="w-section page-header">

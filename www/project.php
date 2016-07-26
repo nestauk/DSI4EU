@@ -9,7 +9,7 @@ require __DIR__ . '/header.php';
 /** @var $projectMembers \DSI\Entity\ProjectMember[] */
 /** @var $organisationProjectsObj \DSI\Entity\OrganisationProject[] */
 ?>
-    <script src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/ProjectController.js"></script>
+    <script src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/ProjectController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 
     <div
         ng-controller="ProjectController"
@@ -149,7 +149,7 @@ require __DIR__ . '/header.php';
                         </div>
                         <div class="w-col w-col-4">
                             <h3 class="col-h3">DSI Focus</h3>
-                            <p class="impact-descr">Areas of DSI that this project is a part of<br /><br /></p>
+                            <p class="impact-descr">Areas of DSI that this project is a part of<br/><br/></p>
                             <div class="tag" ng-repeat="tag in project.impactTagsB" ng-bind="tag"></div>
                         </div>
                         <div class="w-col w-col-4">
@@ -651,8 +651,7 @@ require __DIR__ . '/header.php';
 
             <div class="add-post-modal">
                 <form ng-submit="addPost()">
-                                            <textarea id="newPost"
-                                                      style="height:100%">Please type your update here...</textarea>
+                    <textarea id="newPost" style="height:100%">Please type your update here...</textarea>
                     <a href="#" data-ix="hide-new-post" class="modal-save" style="right:140px">Cancel</a>
                     <input type="submit" class="modal-save" value="Publish post"
                            style="border-width:0;line-height:20px;font-weight:bold;"/>

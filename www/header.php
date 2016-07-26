@@ -15,7 +15,7 @@ use \DSI\Service\Sysctl;
         <?php require __DIR__ . '/partialViews/head.php' ?>
     </head>
     <script type="text/javascript"
-            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/SearchController.js?v=<?php echo Sysctl::$version ?>"></script>
+            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/SearchController.js?<?php Sysctl::echoVersion() ?>"></script>
 <body ng-app="DSIApp" ng-controller="SearchController" id="top">
 
     <div class="alt nav-main w-nav white-menu" data-animation="default" data-collapse="medium" data-duration="400">

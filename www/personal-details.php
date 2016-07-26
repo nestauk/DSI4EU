@@ -15,9 +15,9 @@ $leftSideText .= "<p>The information is optional. You will be able to edit and e
 
 ?>
     <script type="text/javascript"
-            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/PersonalDetailsController.js"></script>
+            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/PersonalDetailsController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
     <script type="text/javascript"
-            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/UpdatePasswordController.js"></script>
+            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/UpdatePasswordController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 
     <style>
         .thumb {

@@ -1,7 +1,7 @@
 <?php require __DIR__ . '/header.php' ?>
 
     <script type="text/javascript"
-            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/FeedbackController.js"></script>
+            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/FeedbackController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 
     <div class="w-container feed-back-conteiner" ng-controller="FeedbackController">
         <div class="feed-back-collection">

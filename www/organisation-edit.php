@@ -17,9 +17,10 @@ $leftSideText .= "<p>Some information is optional (mandatory fields are indicate
 
     <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
     <script type="text/javascript"
-            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/CaseStudyEditController.js?v=<?php echo \DSI\Service\Sysctl::$version ?>"></script>
+            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/CaseStudyEditController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 
-    <script src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/OrganisationEditController.js"></script>
+    <script type="text/javascript"
+        src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/OrganisationEditController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 
     <div class="creator page-header">
         <div class="container-wide header">
@@ -66,7 +67,7 @@ $leftSideText .= "<p>Some information is optional (mandatory fields are indicate
                                 <div class="w-row">
                                     <div class="creator-col w-col w-col-4">
                                         <h2>1 - Organisation Details</h2>
-                                        <?php echo $leftSideText?>
+                                        <?php echo $leftSideText ?>
                                     </div>
                                     <div class="creator-col creator-col-right w-col w-col-8">
                                         <div class="w-form">
@@ -181,7 +182,7 @@ $leftSideText .= "<p>Some information is optional (mandatory fields are indicate
                                 <div class="w-row">
                                     <div class="creator-col w-col w-col-4 w-col-stack">
                                         <h2>2 - Organisation Size &amp; Location</h2>
-                                        <?php echo $leftSideText?>
+                                        <?php echo $leftSideText ?>
                                     </div>
                                     <div class="creator-col creator-col-right w-col w-col-8 w-col-stack">
                                         <div class="w-form">
@@ -258,7 +259,7 @@ $leftSideText .= "<p>Some information is optional (mandatory fields are indicate
                                 <div class="w-row">
                                     <div class="creator-col w-col w-col-4">
                                         <h2>3 - Describe your project</h2>
-                                        <?php echo $leftSideText?>
+                                        <?php echo $leftSideText ?>
                                     </div>
                                     <div class="creator-col creator-col-right w-col w-col-8">
                                         <div class="w-form">
@@ -306,7 +307,7 @@ $leftSideText .= "<p>Some information is optional (mandatory fields are indicate
                                 <div class="w-row">
                                     <div class="creator-col w-col w-col-4">
                                         <h2>4 - Add images &amp; publish</h2>
-                                        <?php echo $leftSideText?>
+                                        <?php echo $leftSideText ?>
                                     </div>
                                     <div class="creator-col creator-col-right w-col w-col-8">
                                         <div class="w-form">

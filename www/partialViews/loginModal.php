@@ -3,7 +3,7 @@ use DSI\Service\URL;
 
 ?>
 <script type="text/javascript"
-        src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/LoginController.js?v=<?php echo \DSI\Service\Sysctl::$version ?>"></script>
+        src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/LoginController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 
 <div class="login-modal modal" ng-controller="LoginController">
     <div class="modal-container">

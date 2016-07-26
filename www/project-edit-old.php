@@ -5,7 +5,7 @@ require __DIR__ . '/header.php';
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <script type="text/javascript"
-            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/ProjectEditController.js"></script>
+            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/ProjectEditController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
     <style>
