@@ -9,7 +9,8 @@ require __DIR__ . '/header.php';
 /** @var $projectMembers \DSI\Entity\ProjectMember[] */
 /** @var $organisationProjectsObj \DSI\Entity\OrganisationProject[] */
 ?>
-    <script src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/ProjectController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
+    <script
+        src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/ProjectController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 
     <div
         ng-controller="ProjectController"
@@ -84,10 +85,12 @@ require __DIR__ . '/header.php';
 
         <div class="case-study-main">
             <div class="container-wide">
-                <div class="case-study-logo" data-ix="fadeinuponload-3">
-                    <img class="case-study-logo-over"
-                         src="<?php echo \DSI\Entity\Image::PROJECT_LOGO_URL . $project->getLogoOrDefault() ?>">
-                </div>
+                <?php if ($project->getLogo()) { ?>
+                    <div class="case-study-logo" data-ix="fadeinuponload-3">
+                        <img class="case-study-logo-over ab-fab"
+                             src="<?php echo \DSI\Entity\Image::PROJECT_LOGO_URL . $project->getLogoOrDefault() ?>">
+                    </div>
+                <?php } ?>
                 <div class="case-study-single-container w-container">
                     <h2 class="centered" data-ix="fadeinuponload-4">About the project</h2>
                     <p class="centered"
@@ -660,7 +663,7 @@ require __DIR__ . '/header.php';
                 </form>
             </div>
         </div>
-        */?>
+        */ ?>
     </div>
 
     <script>

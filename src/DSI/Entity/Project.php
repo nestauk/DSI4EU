@@ -323,7 +323,7 @@ class Project
 
     public function getLogoOrDefault()
     {
-        return ($this->logo != '' ? $this->logo : '0.svg');
+        return ($this->logo != '' ? $this->logo : '0.png');
     }
 
     /**

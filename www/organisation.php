@@ -10,7 +10,8 @@ require __DIR__ . '/header.php';
 /** @var $links string[] */
 /** @var $tags string[] */
 ?>
-    <script src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/OrganisationController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
+    <script
+        src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/OrganisationController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 
     <div class="header-large-section">
         <div class="header-large nesta"
@@ -83,10 +84,8 @@ require __DIR__ . '/header.php';
         <div class="container-wide">
             <?php if ($organisation->getLogo()) { ?>
                 <div class="case-study-logo" data-ix="fadeinuponload-3">
-                    <div class="ab-fab">
-                        <img class="logo-img"
-                             src="<?php echo \DSI\Entity\Image::ORGANISATION_LOGO_URL . $organisation->getLogo() ?>">
-                    </div>
+                    <img class="case-study-logo-over ab-fab"
+                         src="<?php echo \DSI\Entity\Image::ORGANISATION_LOGO_URL . $organisation->getLogo() ?>">
                 </div>
             <?php } ?>
             <div class="case-study-single-container w-container">
