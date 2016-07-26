@@ -17,7 +17,8 @@ require __DIR__ . '/header.php';
         data-projectid="<?php echo $project->getId() ?>">
 
         <div class="header-large-section">
-            <div class="header-large">
+            <div class="header-large"
+                 style="background-image: linear-gradient(180deg, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url('<?php echo \DSI\Entity\Image::PROJECT_HEADER_URL . $project->getHeaderImageOrDefault() ?>');">
                 <div class="container-wide container-wide-header-large">
                     <?php if ($isAdmin) { ?>
                         <a class="dsi-button profile-edit w-button" style="z-index:1000"
@@ -85,12 +86,10 @@ require __DIR__ . '/header.php';
 
         <div class="case-study-main">
             <div class="container-wide">
-                <?php if ($project->getLogo()) { ?>
-                    <div class="case-study-logo" data-ix="fadeinuponload-3">
-                        <img class="case-study-logo-over ab-fab"
-                             src="<?php echo \DSI\Entity\Image::PROJECT_LOGO_URL . $project->getLogoOrDefault() ?>">
-                    </div>
-                <?php } ?>
+                <div class="case-study-logo" data-ix="fadeinuponload-3">
+                    <img class="case-study-logo-over ab-fab"
+                         src="<?php echo \DSI\Entity\Image::PROJECT_LOGO_URL . $project->getLogoOrDefault() ?>">
+                </div>
                 <div class="case-study-single-container w-container">
                     <h2 class="centered" data-ix="fadeinuponload-4">About the project</h2>
                     <p class="centered"

@@ -30,7 +30,7 @@ CREATE TABLE `dsi-focus-tags` (
 --
 
 INSERT INTO `dsi-focus-tags` (`id`, `tag`) VALUES
-(4, 'Open knowledge\r\n'),
+(4, 'Open knowledge'),
 (8, 'Open data'),
 (9, 'Open networks'),
 (35, 'Open hardware');

@@ -7,7 +7,7 @@ require __DIR__ . '/header.php';
 
     <div class="header-large-section">
         <div class="header-large"
-             style="background-image: linear-gradient(180deg, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url('<?php echo \DSI\Entity\Image::CASE_STUDY_HEADER_URL . $caseStudy->getHeaderImage() ?>');">
+             style="background-image: linear-gradient(180deg, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url('<?php echo \DSI\Entity\Image::CASE_STUDY_HEADER_URL . $caseStudy->getHeaderImageOrDefault() ?>');">
             <div class="container-wide container-wide-header-large">
                 <h1 class="header-large-h1-centre"
                     data-ix="fadeinuponload"><?php echo show_input($caseStudy->getTitle()) ?></h1>
@@ -23,12 +23,10 @@ require __DIR__ . '/header.php';
     </div>
     <div class="case-study-main">
         <div class="container-wide">
-            <?php if ($caseStudy->getLogo()) { ?>
-                <div class="case-study-logo" data-ix="fadeinuponload-3">
-                    <img class="case-study-logo-over ab-fab"
-                         src="<?php echo \DSI\Entity\Image::CASE_STUDY_LOGO_URL . $caseStudy->getLogo() ?>">
-                </div>
-            <?php } ?>
+            <div class="case-study-logo" data-ix="fadeinuponload-3">
+                <img class="case-study-logo-over ab-fab"
+                     src="<?php echo \DSI\Entity\Image::CASE_STUDY_LOGO_URL . $caseStudy->getLogoOrDefault() ?>">
+            </div>
             <div class="case-study-single-container w-container">
                 <h2 class="centered" data-ix="fadeinuponload-4">Introduction</h2>
                 <p class="centered" data-ix="fadeinuponload-5">

@@ -323,7 +323,7 @@ class Project
 
     public function getLogoOrDefault()
     {
-        return ($this->logo != '' ? $this->logo : '0.png');
+        return (string)($this->logo != '' ? $this->logo : '0.png');
     }
 
     /**
@@ -340,6 +340,14 @@ class Project
     public function getHeaderImage()
     {
         return (string)$this->headerImage;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHeaderImageOrDefault()
+    {
+        return (string)($this->headerImage ? $this->headerImage : '0.png');
     }
 
     /**

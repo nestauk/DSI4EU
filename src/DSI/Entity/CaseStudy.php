@@ -22,7 +22,9 @@ class CaseStudy
         $cardColour;
 
     /** @var bool */
-    private $isPublished;
+    private $isPublished,
+        $isFeaturedOnSlider,
+        $isFeaturedOnHomePage;
 
     /** @var CountryRegion */
     private $region;
@@ -119,6 +121,14 @@ class CaseStudy
     }
 
     /**
+     * @return string
+     */
+    public function getHeaderImageOrDefault()
+    {
+        return (string)($this->headerImage ? $this->headerImage : '0.png');
+    }
+
+    /**
      * @param string $headerImage
      */
     public function setHeaderImage($headerImage)
@@ -132,6 +142,14 @@ class CaseStudy
     public function getLogo()
     {
         return (string)$this->logo;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLogoOrDefault()
+    {
+        return (string)($this->logo ? $this->logo : '0.png');
     }
 
     /**
@@ -310,5 +328,37 @@ class CaseStudy
     public function unsetRegion()
     {
         $this->region = null;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isFeaturedOnSlider(): bool
+    {
+        return (bool)$this->isFeaturedOnSlider;
+    }
+
+    /**
+     * @param boolean $isFeaturedOnSlider
+     */
+    public function setIsFeaturedOnSlider($isFeaturedOnSlider)
+    {
+        $this->isFeaturedOnSlider = (bool)$isFeaturedOnSlider;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isFeaturedOnHomePage(): bool
+    {
+        return (bool)$this->isFeaturedOnHomePage;
+    }
+
+    /**
+     * @param boolean $isFeaturedOnHomePage
+     */
+    public function setIsFeaturedOnHomePage($isFeaturedOnHomePage)
+    {
+        $this->isFeaturedOnHomePage = (bool)$isFeaturedOnHomePage;
     }
 }

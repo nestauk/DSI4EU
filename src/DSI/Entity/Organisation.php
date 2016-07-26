@@ -346,7 +346,7 @@ class Organisation
      */
     public function getLogoOrDefault(): string
     {
-        return (string)($this->logo ? $this->logo : '0.svg');
+        return (string)($this->logo ? $this->logo : '0.png');
     }
 
     /**
@@ -363,6 +363,14 @@ class Organisation
     public function getHeaderImage(): string
     {
         return (string)$this->headerImage;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHeaderImageOrDefault(): string
+    {
+        return (string)($this->headerImage ? $this->headerImage : '0.png');
     }
 
     /**

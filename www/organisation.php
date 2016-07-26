@@ -15,7 +15,7 @@ require __DIR__ . '/header.php';
 
     <div class="header-large-section">
         <div class="header-large nesta"
-             style="background-image: linear-gradient(180deg, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url('<?php echo \DSI\Entity\Image::ORGANISATION_HEADER_URL . $organisation->getHeaderImage() ?>');">
+             style="background-image: linear-gradient(180deg, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url('<?php echo \DSI\Entity\Image::ORGANISATION_HEADER_URL . $organisation->getHeaderImageOrDefault() ?>');">
             <div class="container-wide container-wide-header-large">
                 <?php if ($isOwner) { ?>
                     <a class="w-button dsi-button profile-edit" style="bottom: auto;top: 180px;width: auto;"
@@ -82,12 +82,10 @@ require __DIR__ . '/header.php';
     </div>
     <div class="case-study-main">
         <div class="container-wide">
-            <?php if ($organisation->getLogo()) { ?>
-                <div class="case-study-logo" data-ix="fadeinuponload-3">
-                    <img class="case-study-logo-over ab-fab"
-                         src="<?php echo \DSI\Entity\Image::ORGANISATION_LOGO_URL . $organisation->getLogo() ?>">
-                </div>
-            <?php } ?>
+            <div class="case-study-logo" data-ix="fadeinuponload-3">
+                <img class="case-study-logo-over ab-fab"
+                     src="<?php echo \DSI\Entity\Image::ORGANISATION_LOGO_URL . $organisation->getLogoOrDefault() ?>">
+            </div>
             <div class="case-study-single-container w-container">
                 <h2 class="centered" data-ix="fadeinuponload-4">
                     About <?php echo show_input($organisation->getName()) ?></h2>
