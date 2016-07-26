@@ -637,6 +637,7 @@ require __DIR__ . '/header.php';
             <script>
                 tinymce.init({
                     selector: '#newPost',
+                    statusbar: false,
                     height: 500,
                     plugins: "autoresize autolink lists link preview paste textcolor colorpicker image imagetools media",
                     autoresize_bottom_margin: 0,

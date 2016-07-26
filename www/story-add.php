@@ -142,6 +142,7 @@
     <script>
         tinymce.init({
             selector: '#newStory',
+            statusbar: false,
             height: 500,
             plugins: "autoresize autolink lists link preview paste textcolor colorpicker image imagetools media",
             autoresize_bottom_margin: 0,
