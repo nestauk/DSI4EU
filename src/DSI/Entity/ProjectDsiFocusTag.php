@@ -2,12 +2,12 @@
 
 namespace DSI\Entity;
 
-class ProjectImpactTagB
+class ProjectDsiFocusTag
 {
     /** @var Project */
     private $project;
 
-    /** @var ImpactTag */
+    /** @var DsiFocusTag */
     private $tag;
 
     /**
@@ -34,7 +34,7 @@ class ProjectImpactTagB
         $this->project = $project;
     }
 
-    public function getTag(): ImpactTag
+    public function getTag(): DsiFocusTag
     {
         return $this->tag;
     }
@@ -47,7 +47,7 @@ class ProjectImpactTagB
         return $this->tag->getId();
     }
 
-    public function setTag(ImpactTag $tag)
+    public function setTag(DsiFocusTag $tag)
     {
         $this->tag = $tag;
     }

@@ -2,21 +2,21 @@
 
 require_once __DIR__ . '/../../../config.php';
 
-class RemoveImpactTagBFromProjectTest extends PHPUnit_Framework_TestCase
+class RemoveDsiFocusTagFromProjectTest extends PHPUnit_Framework_TestCase
 {
-    /** @var \DSI\UseCase\AddImpactTagBToProject */
+    /** @var \DSI\UseCase\AddDsiFocusTagToProject */
     private $addTagToProjectCommand;
 
-    /** @var \DSI\UseCase\RemoveImpactTagBFromProject */
+    /** @var \DSI\UseCase\RemoveDsiFocusTagFromProject */
     private $removeTagFromProjectCommand;
 
-    /** @var \DSI\Repository\ImpactTagRepository */
+    /** @var \DSI\Repository\DsiFocusTagRepository */
     private $tagRepo;
 
     /** @var \DSI\Repository\UserRepository */
     private $userRepo;
 
-    /** @var \DSI\Repository\ProjectImpactTagBRepository */
+    /** @var \DSI\Repository\ProjectDsiFocusTagRepository */
     private $projectTagRepo;
 
     /** @var \DSI\Repository\ProjectRepository */
@@ -27,10 +27,10 @@ class RemoveImpactTagBFromProjectTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->addTagToProjectCommand = new \DSI\UseCase\AddImpactTagBToProject();
-        $this->removeTagFromProjectCommand = new \DSI\UseCase\RemoveImpactTagBFromProject();
-        $this->projectTagRepo = new \DSI\Repository\ProjectImpactTagBRepository();
-        $this->tagRepo = new \DSI\Repository\ImpactTagRepository();
+        $this->addTagToProjectCommand = new \DSI\UseCase\AddDsiFocusTagToProject();
+        $this->removeTagFromProjectCommand = new \DSI\UseCase\RemoveDsiFocusTagFromProject();
+        $this->projectTagRepo = new \DSI\Repository\ProjectDsiFocusTagRepository();
+        $this->tagRepo = new \DSI\Repository\DsiFocusTagRepository();
         $this->projectRepo = new \DSI\Repository\ProjectRepository();
         $this->userRepo = new \DSI\Repository\UserRepository();
 

@@ -3,25 +3,25 @@
 namespace DSI\Repository;
 
 use DSI\DuplicateEntry;
-use DSI\Entity\ProjectImpactTagB;
+use DSI\Entity\ProjectDsiFocusTag;
 use DSI\NotFound;
 use DSI\Service\SQL;
 
-class ProjectImpactTagBRepository
+class ProjectDsiFocusTagRepository
 {
     /** @var ProjectRepository */
     private $projectRepo;
 
-    /** @var ImpactTagRepository */
+    /** @var DsiFocusTagRepository */
     private $tagsRepo;
 
     public function __construct()
     {
         $this->projectRepo = new ProjectRepository();
-        $this->tagsRepo = new ImpactTagRepository();
+        $this->tagsRepo = new DsiFocusTagRepository();
     }
 
-    public function add(ProjectImpactTagB $projectTag)
+    public function add(ProjectDsiFocusTag $projectTag)
     {
         $query = new SQL("SELECT projectID 
             FROM `project-impact-tags-b`
@@ -41,7 +41,7 @@ class ProjectImpactTagBRepository
         $query->query();
     }
 
-    public function remove(ProjectImpactTagB $projectTag)
+    public function remove(ProjectDsiFocusTag $projectTag)
     {
         $query = new SQL("SELECT projectID 
             FROM `project-impact-tags-b`
@@ -62,11 +62,11 @@ class ProjectImpactTagBRepository
 
     /**
      * @param int $projectID
-     * @return \DSI\Entity\ProjectImpactTagB[]
+     * @return \DSI\Entity\ProjectDsiFocusTag[]
      */
     public function getByProjectID(int $projectID)
     {
-        return $this->getProjectImpactTagBsWhere([
+        return $this->getProjectDsiFocusTagsWhere([
             "`projectID` = '{$projectID}'"
         ]);
     }
@@ -88,8 +88,8 @@ class ProjectImpactTagBRepository
             WHERE " . implode(' AND ', $where) . "
             ORDER BY tagID
         ");
-        foreach ($query->fetch_all() AS $dbProjectImpactTagBs) {
-            $tagIDs[] = $dbProjectImpactTagBs['tagID'];
+        foreach ($query->fetch_all() AS $dbProjectDsiFocusTag) {
+            $tagIDs[] = $dbProjectDsiFocusTag['tagID'];
         }
 
         return $tagIDs;
@@ -97,11 +97,11 @@ class ProjectImpactTagBRepository
 
     /**
      * @param int $tagID
-     * @return \DSI\Entity\ProjectImpactTagB[]
+     * @return \DSI\Entity\ProjectDsiFocusTag[]
      */
     public function getByTagID(int $tagID)
     {
-        return $this->getProjectImpactTagBsWhere([
+        return $this->getProjectDsiFocusTagsWhere([
             "`tagID` = '{$tagID}'"
         ]);
     }
@@ -123,8 +123,8 @@ class ProjectImpactTagBRepository
             WHERE " . implode(' AND ', $where) . "
             ORDER BY projectID
         ");
-        foreach ($query->fetch_all() AS $dbProjectImpactTagB) {
-            $projectIDs[] = $dbProjectImpactTagB['projectID'];
+        foreach ($query->fetch_all() AS $dbProjectDsiFocusTag) {
+            $projectIDs[] = $dbProjectDsiFocusTag['projectID'];
         }
 
         return $projectIDs;
@@ -138,20 +138,20 @@ class ProjectImpactTagBRepository
 
     /**
      * @param $where
-     * @return \DSI\Entity\ProjectImpactTagB[]
+     * @return \DSI\Entity\ProjectDsiFocusTag[]
      */
-    private function getProjectImpactTagBsWhere($where)
+    private function getProjectDsiFocusTagsWhere($where)
     {
-        /** @var ProjectImpactTagB[] $projectTags */
+        /** @var ProjectDsiFocusTag[] $projectTags */
         $projectTags = [];
         $query = new SQL("SELECT projectID, tagID 
             FROM `project-impact-tags-b`
             WHERE " . implode(' AND ', $where) . "
         ");
-        foreach ($query->fetch_all() AS $dbProjectImpactTagB) {
-            $projectTag = new ProjectImpactTagB();
-            $projectTag->setProject($this->projectRepo->getById($dbProjectImpactTagB['projectID']));
-            $projectTag->setTag($this->tagsRepo->getById($dbProjectImpactTagB['tagID']));
+        foreach ($query->fetch_all() AS $dbProjectDsiFocusTag) {
+            $projectTag = new ProjectDsiFocusTag();
+            $projectTag->setProject($this->projectRepo->getById($dbProjectDsiFocusTag['projectID']));
+            $projectTag->setTag($this->tagsRepo->getById($dbProjectDsiFocusTag['tagID']));
             $projectTags[] = $projectTag;
         }
 
@@ -173,10 +173,10 @@ class ProjectImpactTagBRepository
     public function getTagsNameByProjectID(int $projectID)
     {
         $query = new SQL("SELECT tag 
-            FROM `impact-tags` 
-            LEFT JOIN `project-impact-tags-b` ON `impact-tags`.`id` = `project-impact-tags-b`.`tagID`
+            FROM `dsi-focus-tags` 
+            LEFT JOIN `project-impact-tags-b` ON `dsi-focus-tags`.`id` = `project-impact-tags-b`.`tagID`
             WHERE `project-impact-tags-b`.`projectID` = '{$projectID}'
-            ORDER BY `impact-tags`.`tag`
+            ORDER BY `dsi-focus-tags`.`tag`
         ");
         return $query->fetch_all('tag');
     }

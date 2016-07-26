@@ -2,58 +2,58 @@
 
 namespace DSI\UseCase;
 
-use DSI\Entity\ProjectImpactTagB;
-use DSI\Repository\ImpactTagRepository;
-use DSI\Repository\ProjectImpactTagBRepository;
+use DSI\Entity\ProjectDsiFocusTag;
+use DSI\Repository\DsiFocusTagRepository;
+use DSI\Repository\ProjectDsiFocusTagRepository;
 use DSI\Repository\ProjectRepository;
 use DSI\Service\ErrorHandler;
 
-class RemoveImpactTagBFromProject
+class RemoveDsiFocusTagFromProject
 {
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var ProjectImpactTagBRepository */
-    private $projectImpactTagRepo;
+    /** @var ProjectDsiFocusTagRepository */
+    private $projectDsiFocusTagRepo;
 
-    /** @var RemoveImpactTagBFromProject_Data */
+    /** @var RemoveDsiFocusTagBFromProject_Data */
     private $data;
 
     public function __construct()
     {
-        $this->data = new RemoveImpactTagBFromProject_Data();
+        $this->data = new RemoveDsiFocusTagBFromProject_Data();
     }
 
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->projectImpactTagRepo = new ProjectImpactTagBRepository();
+        $this->projectDsiFocusTagRepo = new ProjectDsiFocusTagRepository();
 
-        $tagRepo = new ImpactTagRepository();
+        $tagRepo = new DsiFocusTagRepository();
         $projectRepo = new ProjectRepository();
 
         if ($tagRepo->nameExists($this->data()->tag)) {
             $tag = $tagRepo->getByName($this->data()->tag);
         } else {
-            $createTag = new CreateImpactTag();
+            $createTag = new CreateDsiFocusTag();
             $createTag->data()->name = $this->data()->tag;
             $createTag->exec();
             $tag = $createTag->getTag();
         }
 
-        if (!$this->projectImpactTagRepo->projectHasTagName($this->data()->projectID, $this->data()->tag)) {
+        if (!$this->projectDsiFocusTagRepo->projectHasTagName($this->data()->projectID, $this->data()->tag)) {
             $this->errorHandler->addTaggedError('tag', 'Project does not have this tag');
             $this->errorHandler->throwIfNotEmpty();
         }
 
-        $projectTag = new ProjectImpactTagB();
+        $projectTag = new ProjectDsiFocusTag();
         $projectTag->setTag($tag);
         $projectTag->setProject($projectRepo->getById($this->data()->projectID));
-        $this->projectImpactTagRepo->remove($projectTag);
+        $this->projectDsiFocusTagRepo->remove($projectTag);
     }
 
     /**
-     * @return RemoveImpactTagBFromProject_Data
+     * @return RemoveDsiFocusTagBFromProject_Data
      */
     public function data()
     {
@@ -61,7 +61,7 @@ class RemoveImpactTagBFromProject
     }
 }
 
-class RemoveImpactTagBFromProject_Data
+class RemoveDsiFocusTagBFromProject_Data
 {
     /** @var string */
     public $tag;

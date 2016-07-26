@@ -2,9 +2,9 @@
 
 require_once __DIR__ . '/../../../config.php';
 
-class ProjectImpactTagsBRepositoryTest extends PHPUnit_Framework_TestCase
+class ProjectDsiFocusTagRepositoryTest extends PHPUnit_Framework_TestCase
 {
-    /** @var \DSI\Repository\ProjectImpactTagBRepository */
+    /** @var \DSI\Repository\ProjectDsiFocusTagRepository */
     protected $projectTagsRepo;
 
     /** @var \DSI\Repository\ProjectRepository */
@@ -16,17 +16,17 @@ class ProjectImpactTagsBRepositoryTest extends PHPUnit_Framework_TestCase
     /** @var \DSI\Entity\Project */
     protected $project_1, $project_2, $project_3;
 
-    /** @var \DSI\Repository\ImpactTagRepository */
+    /** @var \DSI\Repository\DsiFocusTagRepository */
     protected $tagsRepo;
 
-    /** @var \DSI\Entity\ImpactTag */
+    /** @var \DSI\Entity\DsiFocusTag */
     protected $tag_1, $tag_2, $tag_3;
 
     public function setUp()
     {
-        $this->projectTagsRepo = new \DSI\Repository\ProjectImpactTagBRepository();
+        $this->projectTagsRepo = new \DSI\Repository\ProjectDsiFocusTagRepository();
         $this->projectsRepo = new \DSI\Repository\ProjectRepository();
-        $this->tagsRepo = new \DSI\Repository\ImpactTagRepository();
+        $this->tagsRepo = new \DSI\Repository\DsiFocusTagRepository();
         $this->usersRepo = new \DSI\Repository\UserRepository();
 
         $this->project_1 = $this->createProject(1);
@@ -48,22 +48,22 @@ class ProjectImpactTagsBRepositoryTest extends PHPUnit_Framework_TestCase
     /** @test saveAsNew */
     public function projectTagCanBeSaved()
     {
-        $projectTag = new \DSI\Entity\ProjectImpactTagB();
+        $projectTag = new \DSI\Entity\ProjectDsiFocusTag();
         $projectTag->setProject($this->project_1);
         $projectTag->setTag($this->tag_1);
         $this->projectTagsRepo->add($projectTag);
 
-        $projectTag = new \DSI\Entity\ProjectImpactTagB();
+        $projectTag = new \DSI\Entity\ProjectDsiFocusTag();
         $projectTag->setProject($this->project_1);
         $projectTag->setTag($this->tag_2);
         $this->projectTagsRepo->add($projectTag);
 
-        $projectTag = new \DSI\Entity\ProjectImpactTagB();
+        $projectTag = new \DSI\Entity\ProjectDsiFocusTag();
         $projectTag->setProject($this->project_2);
         $projectTag->setTag($this->tag_1);
         $this->projectTagsRepo->add($projectTag);
 
-        $projectTag = new \DSI\Entity\ProjectImpactTagB();
+        $projectTag = new \DSI\Entity\ProjectDsiFocusTag();
         $projectTag->setProject($this->project_3);
         $projectTag->setTag($this->tag_1);
         $this->projectTagsRepo->add($projectTag);
@@ -72,14 +72,14 @@ class ProjectImpactTagsBRepositoryTest extends PHPUnit_Framework_TestCase
     }
 
     /** @test saveAsNew */
-    public function cannotAddSameProjectImpactTagBTwice()
+    public function cannotAddSameProjectDsiFocusTagBTwice()
     {
-        $projectTag = new \DSI\Entity\ProjectImpactTagB();
+        $projectTag = new \DSI\Entity\ProjectDsiFocusTag();
         $projectTag->setProject($this->project_1);
         $projectTag->setTag($this->tag_1);
         $this->projectTagsRepo->add($projectTag);
 
-        $projectTag = new \DSI\Entity\ProjectImpactTagB();
+        $projectTag = new \DSI\Entity\ProjectDsiFocusTag();
         $projectTag->setProject($this->project_1);
         $projectTag->setTag($this->tag_1);
         $this->setExpectedException(\DSI\DuplicateEntry::class);
@@ -89,12 +89,12 @@ class ProjectImpactTagsBRepositoryTest extends PHPUnit_Framework_TestCase
     /** @test saveAsNew */
     public function getAllTagIDsForProject()
     {
-        $projectTag = new \DSI\Entity\ProjectImpactTagB();
+        $projectTag = new \DSI\Entity\ProjectDsiFocusTag();
         $projectTag->setProject($this->project_1);
         $projectTag->setTag($this->tag_1);
         $this->projectTagsRepo->add($projectTag);
 
-        $projectTag = new \DSI\Entity\ProjectImpactTagB();
+        $projectTag = new \DSI\Entity\ProjectDsiFocusTag();
         $projectTag->setProject($this->project_1);
         $projectTag->setTag($this->tag_2);
         $this->projectTagsRepo->add($projectTag);
@@ -105,12 +105,12 @@ class ProjectImpactTagsBRepositoryTest extends PHPUnit_Framework_TestCase
     /** @test saveAsNew */
     public function getAllProjectsForTag()
     {
-        $projectTag = new \DSI\Entity\ProjectImpactTagB();
+        $projectTag = new \DSI\Entity\ProjectDsiFocusTag();
         $projectTag->setProject($this->project_1);
         $projectTag->setTag($this->tag_1);
         $this->projectTagsRepo->add($projectTag);
 
-        $projectTag = new \DSI\Entity\ProjectImpactTagB();
+        $projectTag = new \DSI\Entity\ProjectDsiFocusTag();
         $projectTag->setProject($this->project_2);
         $projectTag->setTag($this->tag_1);
         $this->projectTagsRepo->add($projectTag);
@@ -121,12 +121,12 @@ class ProjectImpactTagsBRepositoryTest extends PHPUnit_Framework_TestCase
     /** @test saveAsNew */
     public function getAllProjectIDsForTag()
     {
-        $projectTag = new \DSI\Entity\ProjectImpactTagB();
+        $projectTag = new \DSI\Entity\ProjectDsiFocusTag();
         $projectTag->setProject($this->project_1);
         $projectTag->setTag($this->tag_1);
         $this->projectTagsRepo->add($projectTag);
 
-        $projectTag = new \DSI\Entity\ProjectImpactTagB();
+        $projectTag = new \DSI\Entity\ProjectDsiFocusTag();
         $projectTag->setProject($this->project_2);
         $projectTag->setTag($this->tag_1);
         $this->projectTagsRepo->add($projectTag);
@@ -137,12 +137,12 @@ class ProjectImpactTagsBRepositoryTest extends PHPUnit_Framework_TestCase
     /** @test saveAsNew */
     public function canCheckIfProjectHasTagName()
     {
-        $projectTag = new \DSI\Entity\ProjectImpactTagB();
+        $projectTag = new \DSI\Entity\ProjectDsiFocusTag();
         $projectTag->setProject($this->project_1);
         $projectTag->setTag($this->tag_1);
         $this->projectTagsRepo->add($projectTag);
 
-        $projectTag = new \DSI\Entity\ProjectImpactTagB();
+        $projectTag = new \DSI\Entity\ProjectDsiFocusTag();
         $projectTag->setProject($this->project_2);
         $projectTag->setTag($this->tag_2);
         $this->projectTagsRepo->add($projectTag);
@@ -164,17 +164,17 @@ class ProjectImpactTagsBRepositoryTest extends PHPUnit_Framework_TestCase
     /** @test saveAsNew */
     public function canGetTagNamesByProjectID()
     {
-        $projectTag = new \DSI\Entity\ProjectImpactTagB();
+        $projectTag = new \DSI\Entity\ProjectDsiFocusTag();
         $projectTag->setProject($this->project_1);
         $projectTag->setTag($this->tag_1);
         $this->projectTagsRepo->add($projectTag);
 
-        $projectTag = new \DSI\Entity\ProjectImpactTagB();
+        $projectTag = new \DSI\Entity\ProjectDsiFocusTag();
         $projectTag->setProject($this->project_1);
         $projectTag->setTag($this->tag_2);
         $this->projectTagsRepo->add($projectTag);
 
-        $projectTag = new \DSI\Entity\ProjectImpactTagB();
+        $projectTag = new \DSI\Entity\ProjectDsiFocusTag();
         $projectTag->setProject($this->project_2);
         $projectTag->setTag($this->tag_3);
         $this->projectTagsRepo->add($projectTag);
@@ -204,7 +204,7 @@ class ProjectImpactTagsBRepositoryTest extends PHPUnit_Framework_TestCase
 
     private function createTag(int $tagID)
     {
-        $tag = new \DSI\Entity\ImpactTag();
+        $tag = new \DSI\Entity\DsiFocusTag();
         $tag->setId($tagID);
         $tag->setName('tag-' . $tagID);
         $this->tagsRepo->insert($tag);

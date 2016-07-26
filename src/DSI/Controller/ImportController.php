@@ -14,7 +14,7 @@ use DSI\Entity\OrganisationSize;
 use DSI\Entity\OrganisationType;
 use DSI\Entity\Project;
 use DSI\Entity\ProjectImpactTagA;
-use DSI\Entity\ProjectImpactTagB;
+use DSI\Entity\ProjectDsiFocusTag;
 use DSI\Entity\ProjectImpactTagC;
 use DSI\Entity\User;
 use DSI\NotFound;
@@ -26,7 +26,7 @@ use DSI\Repository\OrganisationRepository;
 use DSI\Repository\OrganisationSizeRepository;
 use DSI\Repository\OrganisationTypeRepository;
 use DSI\Repository\ProjectImpactTagARepository;
-use DSI\Repository\ProjectImpactTagBRepository;
+use DSI\Repository\ProjectDsiFocusTagRepository;
 use DSI\Repository\ProjectImpactTagCRepository;
 use DSI\Repository\ProjectRepository;
 use DSI\Service\ErrorHandler;
@@ -275,10 +275,10 @@ class ImportController
                 $impactTagRepository->insert($tag);
             }
 
-            $projectTag = new ProjectImpactTagB();
+            $projectTag = new ProjectDsiFocusTag();
             $projectTag->setProject($project);
             $projectTag->setTag($tag);
-            (new ProjectImpactTagBRepository())->add($projectTag);
+            (new ProjectDsiFocusTagRepository())->add($projectTag);
         }
     }
 

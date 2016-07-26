@@ -2,14 +2,14 @@
 
 require_once __DIR__ . '/../../../config.php';
 
-class ProjectImpactTagBTest extends \PHPUnit_Framework_TestCase
+class ProjectDsiFocusTagTest extends \PHPUnit_Framework_TestCase
 {
-    /** @var \DSI\Entity\ProjectImpactTagB */
+    /** @var \DSI\Entity\ProjectDsiFocusTag */
     private $projectTag;
 
     public function setUp()
     {
-        $this->projectTag = new \DSI\Entity\ProjectImpactTagB();
+        $this->projectTag = new \DSI\Entity\ProjectDsiFocusTag();
     }
 
     /** @test setId, getId */
@@ -17,10 +17,10 @@ class ProjectImpactTagBTest extends \PHPUnit_Framework_TestCase
     {
         $project = new \DSI\Entity\Project();
         $project->setId(1);
-        $tag = new \DSI\Entity\ImpactTag();
+        $tag = new \DSI\Entity\DsiFocusTag();
         $tag->setId(1);
 
-        $this->projectTag = new \DSI\Entity\ProjectImpactTagB();
+        $this->projectTag = new \DSI\Entity\ProjectDsiFocusTag();
         $this->projectTag->setProject($project);
         $this->projectTag->setTag($tag);
 

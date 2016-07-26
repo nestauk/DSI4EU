@@ -3,6 +3,7 @@ require __DIR__ . '/header.php';
 /** @var $project \DSI\Entity\Project */
 /** @var $tags \DSI\Entity\TagForProjects[] */
 /** @var $impactTags \DSI\Entity\ImpactTag[] */
+/** @var $dsiFocusTags \DSI\Entity\DsiFocusTag[] */
 /** @var $projectTags string[] */
 /** @var $projectImpactTagsA string[] */
 /** @var $projectImpactTagsB string[] */
@@ -147,9 +148,8 @@ $leftSideText .= "<p>Some information is optional (mandatory fields are indicate
                                                             <p>Which of the DSI areas is your project part of?</p>
                                                             <select class="select2 creator-data-entry end w-input"
                                                                     id="impact-tags-b" style="width:100%;border:0"
-                                                                    multiple data-tags="true"
-                                                                    data-placeholder="Write tags">
-                                                                <?php foreach ($impactTags AS $tag) { ?>
+                                                                    multiple data-placeholder="Write tags">
+                                                                <?php foreach ($dsiFocusTags AS $tag) { ?>
                                                                     <option value="<?php echo $tag->getName() ?>"
                                                                         <?php if (in_array($tag->getName(), $projectImpactTagsB)) echo 'selected' ?>><?php
                                                                         echo show_input($tag->getName())

@@ -10,7 +10,7 @@ use DSI\Entity\ProjectPost;
 use DSI\Entity\User;
 use DSI\Repository\OrganisationProjectRepository;
 use DSI\Repository\ProjectImpactTagARepository;
-use DSI\Repository\ProjectImpactTagBRepository;
+use DSI\Repository\ProjectDsiFocusTagRepository;
 use DSI\Repository\ProjectImpactTagCRepository;
 use DSI\Repository\ProjectLinkRepository;
 use DSI\Repository\ProjectMemberInvitationRepository;
@@ -25,7 +25,7 @@ use DSI\Service\ErrorHandler;
 use DSI\Service\URL;
 use DSI\UseCase\AddEmailToProject;
 use DSI\UseCase\AddImpactTagAToProject;
-use DSI\UseCase\AddImpactTagBToProject;
+use DSI\UseCase\AddDsiFocusTagToProject;
 use DSI\UseCase\AddImpactTagCToProject;
 use DSI\UseCase\AddMemberInvitationToProject;
 use DSI\UseCase\AddMemberRequestToProject;
@@ -35,7 +35,7 @@ use DSI\UseCase\ApproveMemberRequestToProject;
 use DSI\UseCase\CreateProjectPost;
 use DSI\UseCase\RejectMemberRequestToProject;
 use DSI\UseCase\RemoveImpactTagAFromProject;
-use DSI\UseCase\RemoveImpactTagBFromProject;
+use DSI\UseCase\RemoveDsiFocusTagFromProject;
 use DSI\UseCase\RemoveImpactTagCFromProject;
 use DSI\UseCase\RemoveMemberFromProject;
 use DSI\UseCase\RemoveTagFromProject;
@@ -177,7 +177,7 @@ class ProjectController
                 }
 
                 if (isset($_POST['addImpactTagB'])) {
-                    $addTagToProject = new AddImpactTagBToProject();
+                    $addTagToProject = new AddDsiFocusTagToProject();
                     $addTagToProject->data()->projectID = $project->getId();
                     $addTagToProject->data()->tag = $_POST['addImpactTagB'];
                     $addTagToProject->exec();
@@ -185,7 +185,7 @@ class ProjectController
                     return;
                 }
                 if (isset($_POST['removeImpactTagB'])) {
-                    $removeTagFromProject = new RemoveImpactTagBFromProject();
+                    $removeTagFromProject = new RemoveDsiFocusTagFromProject();
                     $removeTagFromProject->data()->projectID = $project->getId();
                     $removeTagFromProject->data()->tag = $_POST['removeImpactTagB'];
                     $removeTagFromProject->exec();
@@ -333,7 +333,7 @@ class ProjectController
                 'endDate' => $project->getEndDate(),
                 'tags' => (new ProjectTagRepository())->getTagsNameByProjectID($project->getId()),
                 'impactTagsA' => (new ProjectImpactTagARepository())->getTagsNameByProjectID($project->getId()),
-                'impactTagsB' => (new ProjectImpactTagBRepository())->getTagsNameByProjectID($project->getId()),
+                'impactTagsB' => (new ProjectDsiFocusTagRepository())->getTagsNameByProjectID($project->getId()),
                 'impactTagsC' => (new ProjectImpactTagCRepository())->getTagsNameByProjectID($project->getId()),
                 'members' => $this->getMembers($project->getOwner(), $projectMembers),
                 'memberRequests' => array_map(function (User $user) {

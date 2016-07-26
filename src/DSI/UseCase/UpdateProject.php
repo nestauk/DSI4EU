@@ -11,7 +11,7 @@ use DSI\NotFound;
 use DSI\Repository\CountryRegionRepository;
 use DSI\Repository\OrganisationProjectRepository;
 use DSI\Repository\ProjectImpactTagARepository;
-use DSI\Repository\ProjectImpactTagBRepository;
+use DSI\Repository\ProjectDsiFocusTagRepository;
 use DSI\Repository\ProjectImpactTagCRepository;
 use DSI\Repository\ProjectLinkRepository;
 use DSI\Repository\ProjectMemberRepository;
@@ -137,10 +137,10 @@ class UpdateProject
 
     private function setImpactTagsB()
     {
-        $projectTags = (new ProjectImpactTagBRepository())->getTagsNameByProjectID($this->data()->project->getId());
+        $projectTags = (new ProjectDsiFocusTagRepository())->getTagsNameByProjectID($this->data()->project->getId());
         foreach ($this->data()->impactTagsB AS $newTagName) {
             if (!in_array($newTagName, $projectTags)) {
-                $addTag = new AddImpactTagBToProject();
+                $addTag = new AddDsiFocusTagToProject();
                 $addTag->data()->projectID = $this->data()->project->getId();
                 $addTag->data()->tag = $newTagName;
                 $addTag->exec();
@@ -148,7 +148,7 @@ class UpdateProject
         }
         foreach ($projectTags AS $oldTagName) {
             if (!in_array($oldTagName, $this->data()->impactTagsB)) {
-                $remTag = new RemoveImpactTagBFromProject();
+                $remTag = new RemoveDsiFocusTagFromProject();
                 $remTag->data()->projectID = $this->data()->project->getId();
                 $remTag->data()->tag = $oldTagName;
                 $remTag->exec();

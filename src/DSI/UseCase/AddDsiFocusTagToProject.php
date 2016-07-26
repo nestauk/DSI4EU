@@ -2,61 +2,61 @@
 
 namespace DSI\UseCase;
 
-use DSI\Entity\ProjectImpactTagB;
-use DSI\Repository\ImpactTagRepository;
-use DSI\Repository\ProjectImpactTagBRepository;
+use DSI\Entity\ProjectDsiFocusTag;
+use DSI\Repository\DsiFocusTagRepository;
+use DSI\Repository\ProjectDsiFocusTagRepository;
 use DSI\Repository\ProjectRepository;
 use DSI\Service\ErrorHandler;
 
-class AddImpactTagBToProject
+class AddDsiFocusTagToProject
 {
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var ProjectImpactTagBRepository */
-    private $projectImpactTagRepository;
+    /** @var ProjectDsiFocusTagRepository */
+    private $projectDsiFocusTagRepository;
 
     /** @var ProjectRepository */
     private $projectRepository;
 
-    /** @var AddImpactTagBToProject_Data */
+    /** @var AddDsiFocusTagBToProject_Data */
     private $data;
 
     public function __construct()
     {
-        $this->data = new AddImpactTagBToProject_Data();
+        $this->data = new AddDsiFocusTagBToProject_Data();
     }
 
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->projectImpactTagRepository = new ProjectImpactTagBRepository();
+        $this->projectDsiFocusTagRepository = new ProjectDsiFocusTagRepository();
         $this->projectRepository = new ProjectRepository();
 
-        $tagRepo = new ImpactTagRepository();
+        $tagRepo = new DsiFocusTagRepository();
 
         if ($tagRepo->nameExists($this->data()->tag)) {
             $tag = $tagRepo->getByName($this->data()->tag);
         } else {
-            $createTag = new CreateImpactTag();
+            $createTag = new CreateDsiFocusTag();
             $createTag->data()->name = $this->data()->tag;
             $createTag->exec();
             $tag = $createTag->getTag();
         }
 
-        if ($this->projectImpactTagRepository->projectHasTagName($this->data()->projectID, $this->data()->tag)) {
+        if ($this->projectDsiFocusTagRepository->projectHasTagName($this->data()->projectID, $this->data()->tag)) {
             $this->errorHandler->addTaggedError('tag', 'Project already has this tag');
             $this->errorHandler->throwIfNotEmpty();
         }
 
-        $projectImpactTag = new ProjectImpactTagB();
-        $projectImpactTag->setTag($tag);
-        $projectImpactTag->setProject($this->projectRepository->getById($this->data()->projectID));
-        $this->projectImpactTagRepository->add($projectImpactTag);
+        $projectDsiFocusTag = new ProjectDsiFocusTag();
+        $projectDsiFocusTag->setTag($tag);
+        $projectDsiFocusTag->setProject($this->projectRepository->getById($this->data()->projectID));
+        $this->projectDsiFocusTagRepository->add($projectDsiFocusTag);
     }
 
     /**
-     * @return AddImpactTagBToProject_Data
+     * @return AddDsiFocusTagBToProject_Data
      */
     public function data()
     {
@@ -64,7 +64,7 @@ class AddImpactTagBToProject
     }
 }
 
-class AddImpactTagBToProject_Data
+class AddDsiFocusTagBToProject_Data
 {
     /** @var string */
     public $tag;
