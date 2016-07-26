@@ -272,7 +272,7 @@ use \DSI\Service\URL;
 <script type="text/javascript"
         src="<?php echo SITE_RELATIVE_PATH ?>/js/script.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 
-<?php include(__DIR__ . '/partialViews/googleAnalytics.txt');?>
+<?php include(__DIR__ . '/partialViews/googleAnalytics.html');?>
 
 </body>
 </html>
