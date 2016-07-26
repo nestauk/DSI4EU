@@ -2,6 +2,8 @@
 use \DSI\Service\URL;
 
 /** @var $loggedInUser \DSI\Entity\User */
+if (!isset($loggedInUser))
+    $loggedInUser = null;
 
 ?>
 </div>
@@ -42,7 +44,7 @@ use \DSI\Service\URL;
                         <a class="footer-link" href="#">Report abuse</a>
                     </li>
                     */ ?>
-                    <?php if (isset($loggedInUser) AND $loggedInUser) { ?>
+                    <?php if ($loggedInUser) { ?>
                         <li class="footer-link">
                             <a class="footer-link" href="<?php echo URL::dashboard() ?>">Your dashboard</a>
                         </li>
@@ -63,28 +65,36 @@ use \DSI\Service\URL;
             <div class="w-col w-col-2">
                 <h3 class="footer-h3">Projects</h3>
                 <ul class="w-list-unstyled">
-                    <li class="footer-link">
-                        <a class="footer-link" href="#">Add a project to DSI4EU</a>
-                    </li>
+                    <?php if ($loggedInUser) { ?>
+                        <li class="footer-link">
+                            <a class="footer-link" href="#" data-ix="create-project-modal">Add a project to DSI4EU</a>
+                        </li>
+                    <?php } ?>
+                    <?php /*
                     <li class="footer-link">
                         <a class="footer-link" href="#">Report a&nbsp;project</a>
                     </li>
+                    */ ?>
                     <li class="footer-link">
-                        <a class="footer-link" href="#">View project listing</a>
+                        <a class="footer-link" href="<?php echo URL::projects() ?>">View projects</a>
                     </li>
                 </ul>
             </div>
             <div class="w-col w-col-2">
                 <h3 class="footer-h3">Organisations</h3>
                 <ul class="w-list-unstyled">
-                    <li class="footer-link">
-                        <a class="footer-link" href="#">Add an organisation</a>
-                    </li>
+                    <?php if ($loggedInUser) { ?>
+                        <li class="footer-link">
+                            <a class="footer-link" href="#" data-ix="create-organisation-modal">Add an organisation</a>
+                        </li>
+                    <?php } ?>
+                    <?php /*
                     <li class="footer-link">
                         <a class="footer-link" href="#">Report an organisation</a>
                     </li>
+                    */ ?>
                     <li class="footer-link">
-                        <a class="footer-link" href="#">View partner organisations</a>
+                        <a class="footer-link" href="<?php echo URL::organisations() ?>">View organisations</a>
                     </li>
                 </ul>
             </div>
