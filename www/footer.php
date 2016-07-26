@@ -12,7 +12,7 @@ use \DSI\Service\URL;
                 </div>
                 <div class="w-col w-col-6">
                     <div class="w-form">
-                        <form class="w-clearfix" data-name="Email Form" id="email-form" name="email-form">
+                        <form class="w-clearfix" id="email-form" name="email-form">
                             <input class="newsletter-signup-input w-input" data-name="Email" id="email" maxlength="256"
                                    name="email" placeholder="Enter your email address" required="required" type="email">
                             <input class="newsletter-signup-submit w-button" data-wait="Please wait..." type="submit"

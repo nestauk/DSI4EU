@@ -61,6 +61,7 @@ class ProjectEditController
                         $updateProject->data()->impactTagsB = $_POST['impactTagsB'] ?? [];
                         $updateProject->data()->impactTagsC = $_POST['impactTagsC'] ?? [];
                         $updateProject->data()->links = $_POST['links'] ?? [];
+                        $updateProject->data()->organisations = $_POST['organisations'] ?? [];
                         $updateProject->exec();
                     } elseif ($_POST['step'] == 'step2') {
                         $updateProject = new UpdateProject();
@@ -141,7 +142,7 @@ class ProjectEditController
             $projectImpactTagsC = (new ProjectImpactTagCRepository())->getTagsNameByProjectID($project->getId());
             $projectTags = (new ProjectTagRepository())->getTagsNameByProjectID($project->getId());
             $organisations = (new OrganisationRepository())->getAll();
-            $orgProjects = (new OrganisationProjectRepository())->getOrganisationIDsForProject($project->getId());
+            $projectOrganisations = (new OrganisationProjectRepository())->getOrganisationIDsForProject($project->getId());
             $angularModules['fileUpload'] = true;
             require __DIR__ . '/../../../www/project-edit.php';
         }

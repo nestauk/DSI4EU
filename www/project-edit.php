@@ -176,7 +176,6 @@ $leftSideText .= "<p>Some information is optional (mandatory fields are indicate
                                                                 below. Leave blank if there are not any other
                                                                 organisations involved.</p>
                                                             <div id="organisationsSelectBox" class="designSelectBox">
-                                                                <?php /*
                                                                 <select
                                                                     class="select2-withDesign creator-data-entry end w-input"
                                                                     id="organisationsSelect"
@@ -188,14 +187,13 @@ $leftSideText .= "<p>Some information is optional (mandatory fields are indicate
                                                                         <option
                                                                             value="<?php echo $organisation->getId() ?>"
                                                                             data-url="<?php echo \DSI\Service\URL::organisation($organisation) ?>"
-                                                                            data-country="<?php echo $organisation->getCountryName() ?>"
                                                                             data-type="organisation"
-                                                                            <?php if (in_array($organisation->getId(), $projectOrganisations)) echo 'selected' ?>><?php
+                                                                            <?php if (in_array($organisation->getId(), $projectOrganisations)) echo ' selected '; ?>
+                                                                            data-country="<?php echo $organisation->getCountryName() ?>"><?php
                                                                             echo show_input($organisation->getName())
                                                                             ?></option>
                                                                     <?php } ?>
                                                                 </select>
-                                                                 */ ?>
                                                             </div>
                                                         </div>
                                                     </div>

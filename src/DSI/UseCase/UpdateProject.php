@@ -9,6 +9,7 @@ use DSI\Entity\User;
 use DSI\NotEnoughData;
 use DSI\NotFound;
 use DSI\Repository\CountryRegionRepository;
+use DSI\Repository\OrganisationProjectRepository;
 use DSI\Repository\ProjectImpactTagARepository;
 use DSI\Repository\ProjectImpactTagBRepository;
 use DSI\Repository\ProjectImpactTagCRepository;
@@ -86,6 +87,8 @@ class UpdateProject
             $this->setImpactTagsC();
         if (isset($this->data()->links))
             $this->setLinks();
+        if (isset($this->data()->organisations))
+            $this->setOrganisations();
 
         $this->saveImages();
     }
@@ -176,6 +179,7 @@ class UpdateProject
 
     private function setLinks()
     {
+        $this->data()->links = (array)$this->data()->links;
         $projectLinks = (new ProjectLinkRepository())->getLinksByProjectID($this->data()->project->getId());
         foreach ($this->data()->links AS $newLink) {
             if (!in_array($newLink, $projectLinks)) {
@@ -191,6 +195,28 @@ class UpdateProject
                 $remLink->data()->projectID = $this->data()->project->getId();
                 $remLink->data()->link = $oldLink;
                 $remLink->exec();
+            }
+        }
+    }
+
+    private function setOrganisations()
+    {
+        $this->data()->organisations = (array)$this->data()->organisations;
+        $organisationIDsForProject = (new OrganisationProjectRepository())->getOrganisationIDsForProject($this->data()->project->getId());
+        foreach ($this->data()->organisations AS $newOrganisationID) {
+            if (!in_array($newOrganisationID, $organisationIDsForProject)) {
+                $addToOrg = new AddProjectToOrganisation();
+                $addToOrg->data()->projectID = $this->data()->project->getId();
+                $addToOrg->data()->organisationID = $newOrganisationID;
+                $addToOrg->exec();
+            }
+        }
+        foreach ($organisationIDsForProject AS $oldOrganisationID) {
+            if (!in_array($oldOrganisationID, $this->data()->organisations)) {
+                $remFromOrg = new RemoveProjectFromOrganisation();
+                $remFromOrg->data()->projectID = $this->data()->project->getId();
+                $remFromOrg->data()->organisationID = $oldOrganisationID;
+                $remFromOrg->exec();
             }
         }
     }
@@ -338,7 +364,8 @@ class UpdateProject_Data
         $impactTagsA,
         $impactTagsB,
         $impactTagsC,
-        $links;
+        $links,
+        $organisations;
 
     /** @var User */
     public $executor;

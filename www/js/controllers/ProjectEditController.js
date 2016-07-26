@@ -25,6 +25,7 @@
                 $scope.project.impactTagsA = $('#impact-tags-a').val();
                 $scope.project.impactTagsB = $('#impact-tags-b').val();
                 $scope.project.impactTagsC = $('#impact-tags-c').val();
+                $scope.project.organisations = $('#organisationsSelect').val();
                 $scope.saveDetails({
                     postField: 'step1',
                     onSuccess: function () {
