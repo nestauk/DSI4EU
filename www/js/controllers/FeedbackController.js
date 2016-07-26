@@ -1,6 +1,7 @@
 angular
     .module(angularAppName)
     .controller('FeedbackController', function ($scope, $http, $timeout) {
+        $scope.feedback = {};
         $scope.sendFeedbackSubmit = function () {
             $scope.errors = {};
             $scope.loading = true;

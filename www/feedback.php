@@ -1,19 +1,11 @@
 <?php require __DIR__ . '/header.php' ?>
 
-    <script type="text/javascript"
-            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/FeedbackController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
-
     <div class="w-container feed-back-conteiner" ng-controller="FeedbackController">
         <div class="feed-back-collection">
             <h1 class="feedback-h1">DSI4EU Feed back form</h1>
-            <h2 class="feedback-h2">Sign up process</h2>
+            <br /><br />
             <p class="feed-back-info">Thank you for agreeing to help us develop the DSI4EU platform by completing the
                 following tasks. Please could you forward any feedback you have on the following items:</p>
-            <ul class="feedback-list">
-                <li>Sign up using either email &amp; password or social media login</li>
-                <li>Update your personal information</li>
-                <li>Request a password reset</li>
-            </ul>
             <div class="w-form feedback-form-wrapper">
                 <form class="w-clearfix" ng-submit="sendFeedbackSubmit()">
                     <input type="text" placeholder="Your name" class="w-input feedback-form-input"
@@ -39,5 +31,8 @@
             </div>
         </div>
     </div>
+
+    <script type="text/javascript"
+            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/FeedbackController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 
 <?php require __DIR__ . '/footer.php' ?>
