@@ -58,13 +58,13 @@ require __DIR__ . '/header.php';
                             <h3 class="info-h card-h">My skills:</h3>
                             <div class="w-clearfix tags-block">
                                 <div class="skill" ng-repeat="skill in skills" ng-cloak>
-                                    <?php if ($isOwner) { ?>
+                                    <?php /* if ($isOwner) { ?>
                                         <div class="delete" ng-click="removeSkill(skill)">-</div>
-                                    <?php } ?>
+                                    <?php } */ ?>
                                     <div ng-bind="skill"></div>
                                 </div>
                             </div>
-                            <?php if ($isOwner) { ?>
+                            <?php /* if ($isOwner) { ?>
                                 <div ng-cloak>
                                     <div class="w-clearfix add-new">
                                         <a class="w-button dsi-button add-new-item" href="#"
@@ -90,18 +90,18 @@ require __DIR__ . '/header.php';
                                         </div>
                                     </div>
                                 </div>
-                            <?php } ?>
+                            <?php } */ ?>
 
                             <h3 class="info-h card-h">My Languages:</h3>
                             <div class="w-clearfix tags-block">
                                 <div class="skill" ng-repeat="lang in languages" ng-cloak>
-                                    <?php if ($isOwner) { ?>
+                                    <?php /* if ($isOwner) { ?>
                                         <div class="delete" ng-click="removeLanguage(lang)">-</div>
-                                    <?php } ?>
+                                    <?php } */ ?>
                                     <div ng-bind="lang"></div>
                                 </div>
                             </div>
-                            <?php if ($isOwner) { ?>
+                            <?php /* if ($isOwner) { ?>
                                 <div ng-cloak>
                                     <div class="w-clearfix add-new" ng-click="showAddLanguage = !showAddLanguage">
                                         <a class="w-button dsi-button add-new-item" href="#"
@@ -126,7 +126,7 @@ require __DIR__ . '/header.php';
                                         </div>
                                     </div>
                                 </div>
-                            <?php } ?>
+                            <?php } */ ?>
                         </div>
                     </div>
                     <div class="w-col w-col-4 w-col-stack">
@@ -146,13 +146,13 @@ require __DIR__ . '/header.php';
                                     </div>
                                 </a>
                             </div>
-                            <?php if ($isOwner) { ?>
+                            <?php /* if ($isOwner) { ?>
                                 <div class="join-project">
                                     <a class="w-button btn btn-join" href="#"
                                        ng-click="editPanel = 'joinProject'"
                                        data-ix="show-profile-update">Add new project +</a>
                                 </div>
-                            <?php } ?>
+                            <?php } */ ?>
                         </div>
                     </div>
                     <div class="w-col w-col-4 w-col-stack">
@@ -171,7 +171,7 @@ require __DIR__ . '/header.php';
                                     </div>
                                 </a>
                             </div>
-                            <?php if ($isOwner) { ?>
+                            <?php /* if ($isOwner) { ?>
                                 <div class="join-project">
                                     <a href="#" class="w-button btn btn-join"
                                        ng-click="editPanel = 'joinOrganisation'"
@@ -179,15 +179,14 @@ require __DIR__ . '/header.php';
                                         Join organisation +
                                     </a>
                                 </div>
-                            <?php } ?>
+                            <?php } */ ?>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-
-        <?php if ($isOwner) { ?>
+        
+        <?php /* if ($isOwner) { ?>
             <div class="profile-update bg-blur">
                 <div class="update-modal">
                     <div class="modal-header"></div>
@@ -348,7 +347,7 @@ require __DIR__ . '/header.php';
                     </div>
                 </div>
             </div>
-        <?php } ?>
+        <?php } */ ?>
 
         <script type="text/javascript">
             (function () {
