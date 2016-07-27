@@ -252,7 +252,7 @@ div.error {
     position: absolute;
     top: 5px;
     right: 10px;
-    z-index:1000;
+    z-index: 1000;
 }
 
 .designSelectBox .involved-card .view-profile {
@@ -262,4 +262,9 @@ div.error {
 
 .designSelectBox .select2-container--default .select2-selection--multiple .select2-selection__rendered {
     padding: 0 !important;
+}
+
+.card-slim-location {
+    overflow: hidden;
+    height: 20px;
 }
