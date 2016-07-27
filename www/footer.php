@@ -67,7 +67,7 @@ if (!isset($loggedInUser))
                 <ul class="w-list-unstyled">
                     <?php if ($loggedInUser) { ?>
                         <li class="footer-link">
-                            <a class="footer-link" href="#" data-ix="create-project-modal">Add a project to DSI4EU</a>
+                            <a class="footer-link" href="#" data-ix="create-project-modal">Add a project</a>
                         </li>
                     <?php } ?>
                     <?php /*
