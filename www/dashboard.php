@@ -193,7 +193,7 @@ require __DIR__ . '/header.php';
                                             </strong>
                                         </div>
                                         <div class="latest-post-p">
-                                            <?php echo show_input(substr(strip_tags($story->getContent()), 0, 180)) ?>
+                                            <?php echo show_input(substr(strip_tags($story->getContent()), 0, 170)) ?>
                                         </div>
                                         <div class="notification-interaction">
                                             <a class="w-button dsi-button notification-decline stop-following"
