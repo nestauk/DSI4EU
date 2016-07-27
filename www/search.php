@@ -6,6 +6,11 @@ require __DIR__ . '/header.php';
 /** @var $projects \DSI\Entity\Project[] */
 /** @var $organisations \DSI\Entity\Organisation[] */
 ?>
+<style>
+    p.nothingfound{
+        padding:0 20px;
+    }
+</style>
     <div class="w-section page-header stories-header">
         <div class="container-wide header">
             <h1 class="page-h1 light">SEARCH RESULTS FOR: <?php echo show_input($term) ?></h1>
@@ -25,7 +30,7 @@ require __DIR__ . '/header.php';
                             </a>
                         <?php } ?>
                     <?php } else { ?>
-                        No case studies found
+                        <p class="nothingfound">No case studies found</p>
                     <?php } ?>
                 </div>
             </div>
@@ -40,7 +45,7 @@ require __DIR__ . '/header.php';
                             </a>
                         <?php } ?>
                     <?php } else { ?>
-                        No blog posts found
+                        <p class="nothingfound">No blog posts found</p>
                     <?php } ?>
                 </div>
             </div>
@@ -55,7 +60,7 @@ require __DIR__ . '/header.php';
                             </a>
                         <?php } ?>
                     <?php } else { ?>
-                        No projects found
+                        <p class="nothingfound">No projects found</p>
                     <?php } ?>
                 </div>
             </div>
@@ -70,7 +75,7 @@ require __DIR__ . '/header.php';
                             </a>
                         <?php } ?>
                     <?php } else { ?>
-                        No organisations found
+                        <p class="nothingfound">No organisations found</p>
                     <?php } ?>
                 </div>
             </div>
