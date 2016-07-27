@@ -179,8 +179,8 @@ require __DIR__ . '/header.php';
                                                          src="<?php echo \DSI\Entity\Image::PROFILE_PIC_URL . $member->getProfilePicOrDefault() ?>">
                                                 </div>
                                                 <div class="w-clearfix w-col w-col-9 w-col-small-9 w-col-tiny-9">
-                                                    <div
-                                                        class="card-name"><?php echo show_input($member->getFullName()) ?></div>
+                                                    <div style="overflow: hidden;"
+                                                         class="card-name"><?php echo show_input($member->getFullName()) ?></div>
                                                     <div
                                                         class="card-position"><?php echo show_input($member->getJobTitle()) ?></div>
                                                 </div>
@@ -201,8 +201,8 @@ require __DIR__ . '/header.php';
                                                          src="<?php echo \DSI\Entity\Image::ORGANISATION_LOGO_URL . $organisation->getLogoOrDefaultSilver() ?>">
                                                 </div>
                                                 <div class="w-clearfix w-col w-col-7 w-col-small-7 w-col-tiny-7">
-                                                    <div
-                                                        class="card-name"><?php echo show_input($organisation->getName()) ?></div>
+                                                    <div style="overflow: hidden;"
+                                                         class="card-name"><?php echo show_input($organisation->getName()) ?></div>
                                                     <div
                                                         class="card-position"><?php echo show_input($organisation->getCountryName()) ?></div>
                                                 </div>
