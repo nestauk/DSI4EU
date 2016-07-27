@@ -160,9 +160,9 @@ class URL
         return SITE_RELATIVE_PATH . '/personal-details';
     }
 
-    public static function termsOfUser()
+    public static function termsOfUse()
     {
-        return SITE_RELATIVE_PATH . '/terms-of-user';
+        return SITE_RELATIVE_PATH . '/terms-of-use';
     }
 
     public static function privacyPolicy()

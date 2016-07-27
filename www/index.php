@@ -170,6 +170,13 @@ class Router
         } elseif ($this->pageURL === '/explore-dsi') {
             $this->exploreDsiPage();
 
+        } elseif ($this->pageURL === '/terms-of-use') {
+            $this->termsOfUsePage();
+
+        } elseif ($this->pageURL === '/privacy-policy') {
+            $this->privacyPolicyPage();
+
+// Unfiltered
         } elseif (preg_match('<^/countryRegions/([0-9]+)\.json$>', $this->pageURL, $matches)) {
             $this->countryRegionsListJsonPage($matches);
 
@@ -579,6 +586,20 @@ class Router
     {
         $command = new \DSI\Controller\StaticHtmlController();
         $command->view = 'explore-dsi.php';
+        $command->exec();
+    }
+
+    private function termsOfUsePage()
+    {
+        $command = new \DSI\Controller\StaticHtmlController();
+        $command->view = 'terms-of-use.php';
+        $command->exec();
+    }
+
+    private function privacyPolicyPage()
+    {
+        $command = new \DSI\Controller\StaticHtmlController();
+        $command->view = 'privacy-policy.php';
         $command->exec();
     }
 
