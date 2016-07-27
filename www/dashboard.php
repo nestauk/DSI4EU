@@ -93,7 +93,8 @@ require __DIR__ . '/header.php';
                             </div>
                             <div class="w-row create-or-join">
                                 <div class="w-col w-col-6">
-                                    <a class="w-button dsi-button create" href="#" data-ix="showsignup">Create +</a>
+                                    <a class="w-button dsi-button create" href="#" data-ix="create-project-modal">Create
+                                        +</a>
                                 </div>
                                 <div class="w-col w-col-6">
                                     <a class="w-button dsi-button dash-join"
@@ -136,7 +137,7 @@ require __DIR__ . '/header.php';
                             </div>
                             <div class="w-row create-or-join">
                                 <div class="w-col w-col-6">
-                                    <a class="w-button dsi-button create" href="#" data-ix="showsignup"
+                                    <a class="w-button dsi-button create" href="#" data-ix="create-organisation-modal"
                                        data-w-tab="Tab 2">Create +</a>
                                 </div>
                                 <div class="w-col w-col-6">
@@ -198,7 +199,7 @@ require __DIR__ . '/header.php';
                                         </div>
                                         <div class="notification-interaction">
                                             <a class="w-button dsi-button notification-decline stop-following"
-                                               href="<?php echo URL::story($story) ?>">
+                                               href="<?php echo URL::story($story) ?>" style="color:#18233f">
                                                 Read
                                             </a>
                                         </div>
