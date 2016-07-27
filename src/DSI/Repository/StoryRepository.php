@@ -110,13 +110,13 @@ class StoryRepository
 
     public function getPublishedLast($limit)
     {
-        $options = [
-            'limit' => $limit,
-            'orderBy' => 'time',
-            'direction' => 'DESC'
-        ];
         $where = [
             "`isPublished` = 1"
+        ];
+        $options = [
+            'limit' => $limit,
+            'orderBy' => 'datePublished',
+            'direction' => 'DESC'
         ];
         return $this->getObjectsWhere($where, $options);
     }
