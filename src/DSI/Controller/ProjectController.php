@@ -328,6 +328,7 @@ class ProjectController
                 'name' => $project->getName(),
                 'url' => $project->getUrl(),
                 'status' => $project->getStatus(),
+                'shortDescription' => $project->getShortDescription(),
                 'description' => $project->getDescription(),
                 'startDate' => $project->getStartDate(),
                 'endDate' => $project->getEndDate(),

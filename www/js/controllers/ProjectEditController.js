@@ -16,6 +16,7 @@
             $http.get(SITE_RELATIVE_PATH + '/project/edit/' + projectID + '.json')
                 .then(function (result) {
                     $scope.project = result.data || {};
+                    console.log($scope.project);
                     $scope.logo.image = $scope.project.logo;
                     $scope.headerImage.image = $scope.project.headerImage;
                 });

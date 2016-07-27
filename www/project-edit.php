@@ -46,12 +46,12 @@ $leftSideText .= "<p>Some information is optional (mandatory fields are indicate
                             <a class="step-tab tab-link-2 w-inline-block w-tab-link"
                                ng-class="{'w--current': currentTab == 'step2'}" data-w-tab="Tab 2"
                                ng-click="currentTab = 'step2'">
-                                <div>2 - Duration &amp; Location</div>
+                                <div>2 - Project duration & location</div>
                             </a>
                             <a class="step-tab tab-link-3 w-inline-block w-tab-link"
                                ng-class="{'w--current': currentTab == 'step3'}" data-w-tab="Tab 3"
                                ng-click="currentTab = 'step3'">
-                                <div>3 - project Description</div>
+                                <div>3 - Project Description</div>
                             </a>
                             <a class="step-tab tab-link-4 w-inline-block w-tab-link"
                                ng-class="{'w--current': currentTab == 'step4'}" data-w-tab="Tab 4" id="tab-four"
@@ -224,7 +224,7 @@ $leftSideText .= "<p>Some information is optional (mandatory fields are indicate
                                     </div>
                                     <div class="w-row">
                                         <div class="creator-col w-col w-col-4 w-col-stack">
-                                            <h2>2 - Duration &amp; Location</h2>
+                                            <h2>2 - Project duration & location</h2>
                                             <?php echo $leftSideText ?>
                                         </div>
                                         <div class="creator-col creator-col-right w-col w-col-8 w-col-stack">
@@ -309,15 +309,16 @@ $leftSideText .= "<p>Some information is optional (mandatory fields are indicate
                                                 <label for="name">Short Description</label>
                                                 <p>Please provide a short description for your project. This should be
                                                     up to 200 characters long. Think about how you would describe your
-                                                    project in a single Tweet?</p>
+                                                    project in a single Tweet</p>
                                                 <textarea class="creator-data-entry end w-input wide"
-                                                          data-name="Project Bio 3" id="project-bio-3" maxlength="5000"
+                                                          data-name="Project Bio 3" id="shortDescription"
                                                           name="project-bio-3" ng-model="project.shortDescription"
-                                                          placeholder="Briefly describe your project (no more than 140 characters)"></textarea>
+                                                          placeholder="Briefly describe your project (no more than 140 characters)"
+                                                          maxlength="5000"></textarea>
                                                 <label class="story-label" for="project-bio">Long description</label>
-                                                <p>Please provide a longer description for your organisation. How would
-                                                    you describe your organisation? What type of work do you do? Who do
-                                                    you support?</p>
+                                                <p>Please provide a longer description for your project. How would you
+                                                    describe your project? What type of work do you do? Who do you
+                                                    support?</p>
                                                 <textarea
                                                     class="creator-data-entry long-description w-input wide editableTextarea"
                                                     data-name="Project Bio 4" id="description" maxlength="5000"

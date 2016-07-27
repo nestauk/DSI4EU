@@ -119,6 +119,7 @@ class ProjectEditController
                 'name' => $project->getName(),
                 'url' => $project->getUrl(),
                 'status' => $project->getStatus(),
+                'shortDescription' => $project->getShortDescription(),
                 'description' => $project->getDescription(),
                 'startDate' => $project->getStartDate(),
                 //'startDateHumanReadable' => $project->getUnixStartDate() ? date('l, j F, Y', $project->getUnixStartDate()) : '',
