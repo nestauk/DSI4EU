@@ -193,9 +193,7 @@ require __DIR__ . '/header.php';
                                             </strong>
                                         </div>
                                         <div class="latest-post-p">
-                                            <?php echo show_input(substr(strip_tags($story->getContent()), 0, 25)) ?>
-                                            Join us in Brussels the 29th of June at DG Connect for a
-                                            Policy Workshop on Digital Social Innovation...
+                                            <?php echo show_input(substr(strip_tags($story->getContent()), 0, 180)) ?>
                                         </div>
                                         <div class="notification-interaction">
                                             <a class="w-button dsi-button notification-decline stop-following"
@@ -203,7 +201,7 @@ require __DIR__ . '/header.php';
                                                 Read
                                             </a>
                                         </div>
-                                        <div class="post-card-date">25th April 2016</div>
+                                        <div class="post-card-date"><?php echo $story->getDatePublished('jS F Y')?></div>
                                     </div>
                                 </li>
                             <?php } ?>
