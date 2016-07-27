@@ -25,6 +25,7 @@ class StoryController
         $storyRepo = new StoryRepository();
         $story = $storyRepo->getById($this->data()->storyID);
         $author = $story->getAuthor();
+        $stories = $storyRepo->getPublishedLast(5);
 
         $pageTitle = $story->getTitle();
         require __DIR__ . '/../../../www/story.php';

@@ -45,7 +45,7 @@ class StoryAddController
 
                 echo json_encode([
                     'code' => 'ok',
-                    'url' => URL::story($story->getId(), $story->getTitle()),
+                    'url' => URL::story($story),
                 ]);
             } catch (ErrorHandler $e) {
                 echo json_encode([

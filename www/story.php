@@ -2,6 +2,7 @@
 require __DIR__ . '/header.php';
 /** @var $story \DSI\Entity\Story */
 /** @var $author \DSI\Entity\User */
+/** @var $stories \DSI\Entity\Story[] */
 ?>
 
     <div class="single-post-hero"
@@ -69,82 +70,26 @@ require __DIR__ . '/header.php';
                     <div class="sidebar-content-card">
                         <h2 class="sidebar-h2">Latest posts</h2>
                         <ul class="w-list-unstyled">
-                            <li class="latest-post-li-enc">
-                                <a class="w-inline-block latest-post-li" href="#">
-                                    <div class="w-row">
-                                        <div class="w-col w-col-4 w-col-stack">
-                                            <div class="latest-post-date">14Th July</div>
-                                            <div class="latest-post-year">2015</div>
-                                        </div>
-                                        <div class="w-col w-col-8 w-col-stack">
-                                            <div class="latest-post-title">In a rapidly changing world, we are all
-                                                designers
+                            <?php foreach ($stories AS $story) { ?>
+                                <li class="latest-post-li-enc">
+                                    <a class="w-inline-block latest-post-li"
+                                       href="<?php echo \DSI\Service\URL::story($story) ?>">
+                                        <div class="w-row">
+                                            <div class="w-col w-col-4 w-col-stack">
+                                                <div
+                                                    class="latest-post-date"><?php echo $story->getDatePublished('jS F') ?></div>
+                                                <div
+                                                    class="latest-post-year"><?php echo $story->getDatePublished('Y') ?></div>
+                                            </div>
+                                            <div class="w-col w-col-8 w-col-stack">
+                                                <div class="latest-post-title">
+                                                    <?php echo show_input($story->getTitle()) ?>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="w-inline-block latest-post-li" href="#">
-                                    <div class="w-row">
-                                        <div class="w-col w-col-4 w-col-stack">
-                                            <div class="latest-post-date">21St September</div>
-                                            <div class="latest-post-year">2015</div>
-                                        </div>
-                                        <div class="w-col w-col-8 w-col-stack">
-                                            <div class="latest-post-title">Digital Social Innovation, a relatively new
-                                                concept
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="w-inline-block latest-post-li" href="#">
-                                    <div class="w-row">
-                                        <div class="w-col w-col-4 w-col-stack">
-                                            <div class="latest-post-date">14Th July</div>
-                                            <div class="latest-post-year">2015</div>
-                                        </div>
-                                        <div class="w-col w-col-8 w-col-stack">
-                                            <div class="latest-post-title">Here is an example of a really long post
-                                                title. This should be tested as it's quite likely that there will be a
-                                                really long post title
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="w-inline-block latest-post-li" href="#">
-                                    <div class="w-row">
-                                        <div class="w-col w-col-4 w-col-stack">
-                                            <div class="latest-post-date">28Th October</div>
-                                            <div class="latest-post-year">2014</div>
-                                        </div>
-                                        <div class="w-col w-col-8 w-col-stack">
-                                            <div class="latest-post-title">In a rapidly changing world, we are all
-                                                designers
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="w-inline-block latest-post-li" href="#">
-                                    <div class="w-row">
-                                        <div class="w-col w-col-4 w-col-stack">
-                                            <div class="latest-post-date">14Th July</div>
-                                            <div class="latest-post-year">2012</div>
-                                        </div>
-                                        <div class="w-col w-col-8 w-col-stack">
-                                            <div class="latest-post-title">In a rapidly changing world, we are all
-                                                designers
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
+                                    </a>
+                                </li>
+                            <?php } ?>
                         </ul>
                     </div>
                 </div>

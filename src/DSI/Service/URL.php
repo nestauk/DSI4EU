@@ -12,6 +12,7 @@ namespace DSI\Service;
 use DSI\Entity\CaseStudy;
 use DSI\Entity\Organisation;
 use DSI\Entity\Project;
+use DSI\Entity\Story;
 
 class URL
 {
@@ -114,9 +115,9 @@ class URL
         return SITE_RELATIVE_PATH . '/stories';
     }
 
-    public static function story($id, $title)
+    public static function story(Story $story)
     {
-        return SITE_RELATIVE_PATH . '/story/' . $id . '/' . self::linkify($title);
+        return SITE_RELATIVE_PATH . '/story/' . $story->getId() . '/' . self::linkify($story->getTitle());
     }
 
     public static function caseStudy(CaseStudy $caseStudy)

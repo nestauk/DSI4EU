@@ -35,7 +35,7 @@ require __DIR__ . '/header.php';
                     <?php if ($blogPosts) { ?>
                         <?php foreach ($blogPosts AS $post) { ?>
                             <a class="search-result-link full-page-result"
-                               href="<?php echo \DSI\Service\URL::story($post->getId(), $post->getTitle()) ?>">
+                               href="<?php echo \DSI\Service\URL::story($post) ?>">
                                 <?php echo show_input($post->getTitle()) ?>
                             </a>
                         <?php } ?>
