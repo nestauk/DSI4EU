@@ -20,7 +20,7 @@ $leftSideText .= "<p>Some information is optional (mandatory fields are indicate
             src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/CaseStudyEditController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 
     <script type="text/javascript"
-        src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/OrganisationEditController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
+            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/OrganisationEditController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 
     <div class="creator page-header">
         <div class="container-wide header">
@@ -28,7 +28,8 @@ $leftSideText .= "<p>Some information is optional (mandatory fields are indicate
         </div>
     </div>
     <div class="creator section-white" ng-controller="OrganisationEditController"
-         data-organisationid="<?php echo $organisation->getId() ?>">
+         data-organisationid="<?php echo $organisation->getId() ?>"
+         data-organisationurl="<?php echo \DSI\Service\URL::organisation($organisation) ?>">
         <div class="container-wide">
             <div class="add-story body-content">
                 <div class="w-tabs" data-easing="linear">

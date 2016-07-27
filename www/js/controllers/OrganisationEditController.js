@@ -2,6 +2,7 @@ angular
     .module(angularAppName)
     .controller('OrganisationEditController', function ($scope, $http, $timeout, Upload, $attrs) {
         var organisationId = $attrs.organisationid;
+        var organisationURL = $attrs.organisationurl;
 
         var editCountry = $('#edit-country');
         var editCountryRegion = $('#edit-countryRegion');
@@ -62,7 +63,13 @@ angular
                 $scope.saveDetails({
                     postField: 'step4',
                     onSuccess: function () {
-                        swal('Success!', 'The organisation details have been successfully saved.', "success");
+                        swal({
+                            title: "Success!",
+                            text: "The organisation details have been successfully saved.",
+                            type: "success"
+                        }, function (isConfirm) {
+                            window.location.href = organisationURL;
+                        });
                     }
                 })
             }
