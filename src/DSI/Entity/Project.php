@@ -326,6 +326,11 @@ class Project
         return (string)($this->logo != '' ? $this->logo : '0.png');
     }
 
+    public function getLogoOrDefaultSilver()
+    {
+        return (string)($this->logo != '' ? $this->logo : '0-silver.png');
+    }
+
     /**
      * @param string $logo
      */

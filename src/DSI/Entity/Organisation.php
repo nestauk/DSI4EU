@@ -350,6 +350,14 @@ class Organisation
     }
 
     /**
+     * @return string
+     */
+    public function getLogoOrDefaultSilver(): string
+    {
+        return (string)($this->logo ? $this->logo : '0-silver.png');
+    }
+
+    /**
      * @param string $logo
      */
     public function setLogo($logo)

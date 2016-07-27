@@ -129,7 +129,7 @@ require __DIR__ . '/header.php';
                                             <div class="w-col w-col-5 w-col-small-5 w-col-tiny-5">
                                                 <img class="involved-organisation-img"
                                                      style="max-width:100px;max-height:50px"
-                                                     src="<?php echo \DSI\Entity\Image::PROJECT_LOGO_URL . $project->getLogoOrDefault() ?>">
+                                                     src="<?php echo \DSI\Entity\Image::PROJECT_LOGO_URL . $project->getLogoOrDefaultSilver() ?>">
                                             </div>
                                             <div class="w-clearfix w-col w-col-7 w-col-small-7 w-col-tiny-7">
                                                 <div
@@ -149,11 +149,9 @@ require __DIR__ . '/header.php';
                                     <div class="involved-card">
                                         <div class="w-row">
                                             <div class="w-col w-col-5 w-col-small-5 w-col-tiny-5">
-                                                <?php if ($org->getLogo()) { ?>
-                                                    <img class="involved-organisation-img"
-                                                         style="max-width:100px;max-height:50px"
-                                                         src="<?php echo \DSI\Entity\Image::ORGANISATION_LOGO_URL . $org->getLogo() ?>">
-                                                <?php } ?>
+                                                <img class="involved-organisation-img"
+                                                     style="max-width:100px;max-height:50px"
+                                                     src="<?php echo \DSI\Entity\Image::ORGANISATION_LOGO_URL . $org->getLogoOrDefaultSilver() ?>">
                                             </div>
                                             <div class="w-clearfix w-col w-col-7 w-col-small-7 w-col-tiny-7">
                                                 <div class="card-name"><?php echo show_input($org->getName()) ?></div>

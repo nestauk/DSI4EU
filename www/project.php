@@ -197,8 +197,8 @@ require __DIR__ . '/header.php';
                                         <div class="involved-card">
                                             <div class="w-row">
                                                 <div class="w-col w-col-5 w-col-small-5 w-col-tiny-5">
-                                                    <img class="involved-organisation-img"
-                                                         src="<?php echo \DSI\Entity\Image::ORGANISATION_LOGO_URL . $organisation->getLogoOrDefault() ?>">
+                                                    <img class="involved-organisation-img" style="height:50px"
+                                                         src="<?php echo \DSI\Entity\Image::ORGANISATION_LOGO_URL . $organisation->getLogoOrDefaultSilver() ?>">
                                                 </div>
                                                 <div class="w-clearfix w-col w-col-7 w-col-small-7 w-col-tiny-7">
                                                     <div
