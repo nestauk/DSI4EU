@@ -147,4 +147,40 @@ class CaseStudyTest extends \PHPUnit_Framework_TestCase
         $this->caseStudy->setCardColour($colour);
         $this->assertEquals($colour, $this->caseStudy->getCardColour());
     }
+
+    /** @test */
+    public function settingIsPublished_returnsIsPublished()
+    {
+        $this->assertEquals(false, $this->caseStudy->isPublished());
+
+        $this->caseStudy->setIsPublished(true);
+        $this->assertEquals(true, $this->caseStudy->isPublished());
+
+        $this->caseStudy->setIsPublished(false);
+        $this->assertEquals(false, $this->caseStudy->isPublished());
+    }
+
+    /** @test */
+    public function settingIsFeaturedOnSlider_returnsIsFeaturedOnSlider()
+    {
+        $this->assertEquals(false, $this->caseStudy->isFeaturedOnSlider());
+
+        $this->caseStudy->setIsFeaturedOnSlider(true);
+        $this->assertEquals(true, $this->caseStudy->isFeaturedOnSlider());
+
+        $this->caseStudy->setIsFeaturedOnSlider(false);
+        $this->assertEquals(false, $this->caseStudy->isFeaturedOnSlider());
+    }
+
+    /** @test */
+    public function settingIsFeaturedOnHomePage_returnsIsFeaturedOnHomePage()
+    {
+        $this->assertEquals(false, $this->caseStudy->isFeaturedOnHomePage());
+
+        $this->caseStudy->setIsFeaturedOnHomePage(true);
+        $this->assertEquals(true, $this->caseStudy->isFeaturedOnHomePage());
+
+        $this->caseStudy->setIsFeaturedOnHomePage(false);
+        $this->assertEquals(false, $this->caseStudy->isFeaturedOnHomePage());
+    }
 }

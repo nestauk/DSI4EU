@@ -23,7 +23,8 @@ class HomeController
             $loggedInUser = null;
 
         $hideSearch = true;
-        $caseStudies = (new CaseStudyRepository())->getPublishedLast(3);
+        $sliderCaseStudies = (new CaseStudyRepository())->getSliderStudiesLast(3);
+        $homePageCaseStudies = (new CaseStudyRepository())->getHomePageStudiesLast(3);
         $organisationCount = (new OrganisationRepository())->countAll();
         $projectCount = (new ProjectRepository())->countAll();
 

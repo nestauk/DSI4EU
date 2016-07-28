@@ -3,7 +3,8 @@
 /** @var $isHomePage bool */
 /** @var $angularModules string[] */
 /** @var $pageTitle string[] */
-/** @var $caseStudies \DSI\Entity\CaseStudy[] */
+/** @var $sliderCaseStudies \DSI\Entity\CaseStudy[] */
+/** @var $homePageCaseStudies \DSI\Entity\CaseStudy[] */
 /** @var $organisationCount int */
 /** @var $projectCount int */
 use \DSI\Service\URL;
@@ -70,7 +71,7 @@ use \DSI\Entity\Image;
     <div class="massive-hero-slider w-slider" data-animation="outin" data-autoplay="1" data-delay="8000"
          data-duration="800" data-infinite="1">
         <div class="massive-hero-slide-mask w-slider-mask">
-            <?php foreach ($caseStudies AS $caseStudy) { ?>
+            <?php foreach ($sliderCaseStudies AS $caseStudy) { ?>
                 <div class="massive-hero-slide w-slide wikihouse"
                      style="background-image: linear-gradient(180deg, rgba(0, 0, 0, .65), rgba(0, 0, 0, .65)), url('<?php echo Image::CASE_STUDY_HEADER_URL . $caseStudy->getHeaderImage() ?>');">
                     <div class="container-wide massive-hero-slide-container">
@@ -169,7 +170,7 @@ use \DSI\Entity\Image;
             <a class="what-text-button" href="<?php echo URL::caseStudies() ?>">See all case studies</a>
         </div>
         <div class="case-studies-row w-row">
-            <?php foreach ($caseStudies AS $i => $caseStudy) { ?>
+            <?php foreach ($homePageCaseStudies AS $i => $caseStudy) { ?>
                 <div class="case-study-col-<?php echo $i + 1 ?> w-col w-col-4">
                     <div class="onloadone" data-ix="fadeinuponload-<?php echo $i % 3 + 2 ?>">
                         <div class="case-study-card" data-ix="case-study-card-overlay"

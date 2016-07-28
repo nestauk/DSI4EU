@@ -66,6 +66,8 @@ class CaseStudyRepositoryTest extends PHPUnit_Framework_TestCase
         $caseStudy->setHeaderImage($headerImage = 'DSC100-headerImage.JPG');
         $caseStudy->setCardColour($cardColour = '#ffffff');
         $caseStudy->setIsPublished($isPublished = true);
+        $caseStudy->setIsFeaturedOnSlider($isFeaturedOnSlider = true);
+        $caseStudy->setIsFeaturedOnHomePage($isFeaturedOnHomePage = true);
         $caseStudy->setRegion($this->countryRegion);
         $this->caseStudyRepository->insert($caseStudy);
 
@@ -84,6 +86,8 @@ class CaseStudyRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($headerImage, $caseStudy->getHeaderImage());
         $this->assertEquals($cardColour, $caseStudy->getCardColour());
         $this->assertEquals($isPublished, $caseStudy->isPublished());
+        $this->assertEquals($isFeaturedOnSlider, $caseStudy->isFeaturedOnSlider());
+        $this->assertEquals($isFeaturedOnHomePage, $caseStudy->isFeaturedOnHomePage());
         $this->assertEquals($this->countryRegion->getId(), $caseStudy->getRegion()->getId());
         $this->assertEquals($this->countryRegion->getId(), $caseStudy->getRegionID());
     }
@@ -138,6 +142,8 @@ class CaseStudyRepositoryTest extends PHPUnit_Framework_TestCase
         $caseStudy->setHeaderImage($headerImage = 'DSC100-headerImage.JPG');
         $caseStudy->setCardColour($cardColour = '#ffffff');
         $caseStudy->setIsPublished($isPublished = true);
+        $caseStudy->setIsFeaturedOnSlider($isFeaturedOnSlider = true);
+        $caseStudy->setIsFeaturedOnHomePage($isFeaturedOnHomePage = true);
         $caseStudy->setRegion($this->countryRegion);
         $this->caseStudyRepository->save($caseStudy);
 
@@ -155,6 +161,8 @@ class CaseStudyRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($headerImage, $caseStudy->getHeaderImage());
         $this->assertEquals($cardColour, $caseStudy->getCardColour());
         $this->assertEquals($isPublished, $caseStudy->isPublished());
+        $this->assertEquals($isFeaturedOnSlider, $caseStudy->isFeaturedOnSlider());
+        $this->assertEquals($isFeaturedOnHomePage, $caseStudy->isFeaturedOnHomePage());
         $this->assertEquals($this->countryRegion->getId(), $caseStudy->getRegion()->getId());
         $this->assertEquals($this->countryRegion->getId(), $caseStudy->getRegionID());
     }

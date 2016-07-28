@@ -24,6 +24,8 @@ class CaseStudyRepository
         $insert[] = "`headerImage` = '" . addslashes($caseStudy->getHeaderImage()) . "'";
         $insert[] = "`cardColour` = '" . addslashes($caseStudy->getCardColour()) . "'";
         $insert[] = "`isPublished` = '" . addslashes($caseStudy->isPublished()) . "'";
+        $insert[] = "`isFeaturedOnSlider` = '" . addslashes($caseStudy->isFeaturedOnSlider()) . "'";
+        $insert[] = "`isFeaturedOnHomePage` = '" . addslashes($caseStudy->isFeaturedOnHomePage()) . "'";
         $insert[] = "`regionID` = '" . addslashes($caseStudy->getRegionID()) . "'";
 
         $query = new SQL("INSERT INTO `case-studies` SET " . implode(', ', $insert) . "");
@@ -53,6 +55,8 @@ class CaseStudyRepository
         $insert[] = "`headerImage` = '" . addslashes($caseStudy->getHeaderImage()) . "'";
         $insert[] = "`cardColour` = '" . addslashes($caseStudy->getCardColour()) . "'";
         $insert[] = "`isPublished` = '" . addslashes($caseStudy->isPublished()) . "'";
+        $insert[] = "`isFeaturedOnSlider` = '" . addslashes($caseStudy->isFeaturedOnSlider()) . "'";
+        $insert[] = "`isFeaturedOnHomePage` = '" . addslashes($caseStudy->isFeaturedOnHomePage()) . "'";
         $insert[] = "`regionID` = '" . addslashes($caseStudy->getRegionID()) . "'";
 
         $query = new SQL("UPDATE `case-studies` SET " . implode(', ', $insert) . " WHERE `id` = '{$caseStudy->getId()}'");
@@ -96,6 +100,8 @@ class CaseStudyRepository
         $caseStudy->setHeaderImage($caseStudyData['headerImage']);
         $caseStudy->setCardColour($caseStudyData['cardColour']);
         $caseStudy->setIsPublished($caseStudyData['isPublished']);
+        $caseStudy->setIsFeaturedOnSlider($caseStudyData['isFeaturedOnSlider']);
+        $caseStudy->setIsFeaturedOnHomePage($caseStudyData['isFeaturedOnHomePage']);
         if ($caseStudyData['regionID']) {
             $caseStudy->setRegion(
                 (new CountryRegionRepository())->getById($caseStudyData['regionID'])
@@ -122,6 +128,26 @@ class CaseStudyRepository
         return $this->getObjectsWhere([
             "`isPublished` = 1"
         ], ['limit' => $limit]);
+    }
+
+    public function getSliderStudiesLast($limit)
+    {
+        return $this->getObjectsWhere([
+            "`isPublished` = 1",
+            "`isFeaturedOnSlider` = 1",
+        ], [
+            "limit" => $limit
+        ]);
+    }
+
+    public function getHomePageStudiesLast($limit)
+    {
+        return $this->getObjectsWhere([
+            "`isPublished` = 1",
+            "`isFeaturedOnHomePage` = 1",
+        ], [
+            "limit" => $limit
+        ]);
     }
 
     public function clearAll()
@@ -154,7 +180,7 @@ class CaseStudyRepository
           , url, buttonLabel
           , logo, cardImage, headerImage
           , cardColour
-          , isPublished
+          , isPublished, isFeaturedOnSlider, isFeaturedOnHomePage
           , regionID
           FROM `case-studies`
           WHERE " . implode(' AND ', $where) . "

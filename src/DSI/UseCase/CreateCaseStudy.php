@@ -84,6 +84,8 @@ class CreateCaseStudy
         $caseStudy->setButtonLabel((string)$this->data()->buttonLabel);
         $caseStudy->setCardColour((string)$this->data()->cardColour);
         $caseStudy->setIsPublished((bool)$this->data()->isPublished);
+        $caseStudy->setIsFeaturedOnSlider((bool)$this->data()->isFeaturedOnSlider);
+        $caseStudy->setIsFeaturedOnHomePage((bool)$this->data()->isFeaturedOnHomePage);
         if ($this->countryRegion)
             $caseStudy->setRegion($this->countryRegion);
 
@@ -184,7 +186,9 @@ class CreateCaseStudy_Data
         $cardColour;
 
     /** @var bool */
-    public $isPublished;
+    public $isPublished,
+        $isFeaturedOnSlider,
+        $isFeaturedOnHomePage;
 
     /** @var string */
     public $logoImage,

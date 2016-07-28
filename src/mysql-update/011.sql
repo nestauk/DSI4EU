@@ -1,0 +1,1 @@
+ALTER TABLE `users` ADD `role` ENUM('user', 'sys-admin', 'community-admin', 'editorial-admin') NOT NULL AFTER `isDisabled`;

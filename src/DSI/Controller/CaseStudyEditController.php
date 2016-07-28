@@ -45,7 +45,9 @@ class CaseStudyEditController
                     $editCaseStudy->data()->url = $_POST['url'] ?? '';
                     $editCaseStudy->data()->buttonLabel = $_POST['buttonLabel'] ?? '';
                     $editCaseStudy->data()->cardColour = $_POST['cardColour'] ?? '';
-                    $editCaseStudy->data()->isPublished = $_POST['isPublished'] ?? '';
+                    $editCaseStudy->data()->isPublished = $_POST['isPublished'] ?? false;
+                    $editCaseStudy->data()->isFeaturedOnSlider = $_POST['isFeaturedOnSlider'] ?? false;
+                    $editCaseStudy->data()->isFeaturedOnHomePage = $_POST['isFeaturedOnHomePage'] ?? false;
 
                     $editCaseStudy->data()->logoImage = $_POST['logo'] ?? '';
                     $editCaseStudy->data()->cardBgImage = $_POST['cardImage'] ?? '';
@@ -90,6 +92,8 @@ class CaseStudyEditController
                     Image::CASE_STUDY_HEADER_URL . $caseStudy->getHeaderImage() : '',
                 'cardColour' => $caseStudy->getCardColour(),
                 'isPublished' => $caseStudy->isPublished(),
+                'isFeaturedOnSlider' => $caseStudy->isFeaturedOnSlider(),
+                'isFeaturedOnHomePage' => $caseStudy->isFeaturedOnHomePage(),
                 'countryID' => $caseStudy->getCountryId(),
                 'regionID' => $caseStudy->getRegionID(),
                 'region' => $caseStudy->getRegionName(),

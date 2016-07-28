@@ -441,12 +441,6 @@ $leftSideText .= "<p>The information is optional. You will be able to edit and e
                                             </label>
                                         </div>
                                         <div class="error" ng-bind="errors.confirm"></div>
-                                        <div class="w-form-done">
-                                            <div>Thank you! Your submission has been received!</div>
-                                        </div>
-                                        <div class="w-form-fail">
-                                            <div>Oops! Something went wrong while submitting the form</div>
-                                        </div>
                                     </div>
                                 </form>
                             </div>

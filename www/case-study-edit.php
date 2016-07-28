@@ -162,11 +162,32 @@ require __DIR__ . '/header.php';
                                         No
                                     </label>
                                 </div>
+
+                                <div ng-hide="caseStudy.isPublished == 0" style="padding-top:20px">
+                                    <div class="w-checkbox">
+                                        <label class="w-form-label">
+                                            <input class="w-checkbox-input"
+                                                   name="isFeaturedOnSlider" type="checkbox"
+                                                   ng-model="caseStudy.isFeaturedOnSlider">
+                                            Feature on slider
+                                        </label>
+                                    </div>
+                                    <div class="w-checkbox">
+                                        <label class="w-form-label">
+                                            <input class="w-checkbox-input"
+                                                   name="isFeaturedOnHomePage" type="checkbox"
+                                                   ng-model="caseStudy.isFeaturedOnHomePage">
+                                            Feature on home page
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="tabbed-nav-buttons w-clearfix">
                         <input type="submit" class="tab-button-2 tab-button-next w-button" value="Save and continue"/>
+                        <a href="<?php echo \DSI\Service\URL::caseStudy($caseStudy) ?>"
+                           class="tab-button-2 tab-button-next w-button">View case study</a>
                     </div>
                 </form>
             </div>
