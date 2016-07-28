@@ -33,6 +33,9 @@ class User
     /** @var bool */
     private $isDisabled;
 
+    /** @var string */
+    private $role;
+
     /**
      * @return int
      */
@@ -383,5 +386,36 @@ class User
     public function setIsDisabled($isDisabled)
     {
         $this->isDisabled = (bool)$isDisabled;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRole(): string
+    {
+        return (string)$this->role;
+    }
+
+    /**
+     * @param string $role
+     */
+    public function setRole(string $role)
+    {
+        $this->role = (string)$role;
+    }
+
+    public function isSysAdmin()
+    {
+        return $this->role == 'sys-admin';
+    }
+
+    public function isCommunityAdmin()
+    {
+        return $this->role == 'community-admin';
+    }
+
+    public function isEditorialAdmin()
+    {
+        return $this->role == 'editorial-admin';
     }
 }

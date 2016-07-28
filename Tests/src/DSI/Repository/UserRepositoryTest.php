@@ -26,6 +26,7 @@ class UserRepositoryTest extends PHPUnit_Framework_TestCase
     const IS_ADMIN = true;
     const IS_SUPER_ADMIN = true;
     const IS_DISABLED = true;
+    const ROLE = 'sys-admin';
 
     /** @var UserRepository */
     protected $userRepo;
@@ -284,8 +285,10 @@ class UserRepositoryTest extends PHPUnit_Framework_TestCase
         $user->setIsAdmin(self::IS_ADMIN);
         $user->setIsSuperAdmin(self::IS_SUPER_ADMIN);
         $user->setIsDisabled(self::IS_DISABLED);
+        $user->setRole(self::ROLE);
         $this->userRepo->insert($user);
 
+        $this->userRepo->clearCache();
         $sameUser = $this->userRepo->getById($user->getId());
         $this->assertEquals(self::EMAIL, $sameUser->getEmail());
         $this->assertEquals(self::SHOW_EMAIL, $sameUser->canShowEmail());
@@ -306,6 +309,7 @@ class UserRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(self::IS_ADMIN, $sameUser->isAdmin());
         $this->assertEquals(self::IS_SUPER_ADMIN, $sameUser->isSuperAdmin());
         $this->assertEquals(self::IS_DISABLED, $sameUser->isDisabled());
+        $this->assertEquals(self::ROLE, $sameUser->getRole());
     }
 
     /** @test saveAsNew getById */
@@ -333,8 +337,10 @@ class UserRepositoryTest extends PHPUnit_Framework_TestCase
         $user->setIsAdmin(self::IS_ADMIN);
         $user->setIsSuperAdmin(self::IS_SUPER_ADMIN);
         $user->setIsDisabled(self::IS_DISABLED);
+        $user->setRole(self::ROLE);
         $this->userRepo->save($user);
 
+        $this->userRepo->clearCache();
         $sameUser = $this->userRepo->getById($user->getId());
         $this->assertEquals(self::EMAIL, $sameUser->getEmail());
         $this->assertEquals(self::SHOW_EMAIL, $sameUser->canShowEmail());
@@ -355,5 +361,6 @@ class UserRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(self::IS_ADMIN, $sameUser->isAdmin());
         $this->assertEquals(self::IS_SUPER_ADMIN, $sameUser->isSuperAdmin());
         $this->assertEquals(self::IS_DISABLED, $sameUser->isDisabled());
+        $this->assertEquals(self::ROLE, $sameUser->getRole());
     }
 }

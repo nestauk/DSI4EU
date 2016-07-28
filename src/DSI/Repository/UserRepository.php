@@ -35,6 +35,7 @@ class UserRepository
         $insert[] = "`isAdmin` = '" . (bool)($user->isAdmin()) . "'";
         $insert[] = "`isSuperAdmin` = '" . (bool)($user->isSuperAdmin()) . "'";
         $insert[] = "`isDisabled` = '" . (bool)($user->isDisabled()) . "'";
+        $insert[] = "`role` = '" . addslashes($user->getRole()) . "'";
 
         $query = new SQL("INSERT INTO `users` SET " . implode(', ', $insert));
         $query->query();
@@ -73,6 +74,7 @@ class UserRepository
         $insert[] = "`isAdmin` = '" . (bool)($user->isAdmin()) . "'";
         $insert[] = "`isSuperAdmin` = '" . (bool)($user->isSuperAdmin()) . "'";
         $insert[] = "`isDisabled` = '" . (bool)($user->isDisabled()) . "'";
+        $insert[] = "`role` = '" . addslashes($user->getRole()) . "'";
 
         $query = new SQL("UPDATE `users` SET " . implode(', ', $insert) . " WHERE `id` = '{$user->getId()}'");
         $query->query();
@@ -224,6 +226,7 @@ class UserRepository
         $userObj->setIsAdmin($user['isAdmin']);
         $userObj->setIsSuperAdmin($user['isSuperAdmin']);
         $userObj->setIsDisabled($user['isDisabled']);
+        $userObj->setRole($user['role']);
 
         self::$objects[$userObj->getId()] = $userObj;
 
@@ -240,6 +243,11 @@ class UserRepository
     {
         $query = new SQL("TRUNCATE TABLE `users`");
         $query->query();
+        $this->clearCache();
+    }
+
+    public function clearCache()
+    {
         self::$objects = [];
     }
 
@@ -280,7 +288,7 @@ class UserRepository
           , jobTitle, company
           , facebookUID, googleUID, gitHubUID, twitterUID
           , profileURL, profilePic
-          , isAdmin, isSuperAdmin, isDisabled
+          , isAdmin, isSuperAdmin, isDisabled, role
           FROM `users` WHERE " . implode(' AND ', $where) . "");
         foreach ($query->fetch_all() AS $dbUser) {
             $users[] = $this->buildUserFromData($dbUser);

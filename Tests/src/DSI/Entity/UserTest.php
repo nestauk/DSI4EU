@@ -218,4 +218,11 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $this->user->setIsDisabled(false);
         $this->assertFalse($this->user->isDisabled());
     }
+
+    /** @test */
+    public function settingRole_getsRole()
+    {
+        $this->user->setRole($role = 'Sys Admin');
+        $this->assertEquals($role, $this->user->getRole());
+    }
 }
