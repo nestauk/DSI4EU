@@ -21,6 +21,8 @@ class CaseStudyController
             $loggedInUser = $userRepo->getById($authUser->getUserId());
         }
 
+        $userCanAddCaseStudy = (bool)($loggedInUser AND ($loggedInUser->isCommunityAdmin() OR $loggedInUser->isEditorialAdmin()));
+
         $caseStudyRepo = new CaseStudyRepository();
         $caseStudy = $caseStudyRepo->getById($this->caseStudyID);
 

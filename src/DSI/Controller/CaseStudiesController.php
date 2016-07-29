@@ -5,6 +5,7 @@ namespace DSI\Controller;
 use DSI\Repository\CaseStudyRepository;
 use DSI\Repository\UserRepository;
 use DSI\Service\Auth;
+use DSI\Service\URL;
 
 class CaseStudiesController
 {
@@ -16,6 +17,10 @@ class CaseStudiesController
         $authUser = new Auth();
         if ($authUser->isLoggedIn())
             $loggedInUser = (new UserRepository())->getById($authUser->getUserId());
+        else
+            $loggedInUser = null;
+
+        $userCanAddCaseStudy = (bool)($loggedInUser AND ($loggedInUser->isCommunityAdmin() OR $loggedInUser->isEditorialAdmin()));
 
         if ($this->format == 'json') {
 

@@ -3,6 +3,7 @@ require __DIR__ . '/header.php';
 /** @var $loggedInUser \DSI\Entity\User */
 /** @var $caseStudy \DSI\Entity\CaseStudy */
 /** @var $caseStudies \DSI\Entity\CaseStudy[] */
+/** @var $userCanAddCaseStudy bool */
 ?>
 
     <div class="header-large-section">
@@ -14,7 +15,7 @@ require __DIR__ . '/header.php';
                 <p class="header-large-desc" data-ix="fadeinuponload-2">
                     <?php echo show_input($caseStudy->getIntroCardText()) ?>
                 </p>
-                <?php if ($loggedInUser) { ?>
+                <?php if ($userCanAddCaseStudy) { ?>
                     <a class="button button-bottom-right edit-case-study w-button"
                        href="<?php echo \DSI\Service\URL::caseStudyEdit($caseStudy) ?>">Edit case study +</a>
                 <?php } ?>

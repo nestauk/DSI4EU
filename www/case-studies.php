@@ -2,11 +2,12 @@
 require __DIR__ . '/header.php';
 /** @var $loggedInUser \DSI\Entity\User */
 /** @var $caseStudies \DSI\Entity\CaseStudy[] */
+/** @var $userCanAddCaseStudy bool */
 ?>
     <div class="creator page-header">
         <div class="container-wide header">
             <h1 class="light page-h1">Case studies</h1>
-            <?php if ($loggedInUser) { ?>
+            <?php if ($userCanAddCaseStudy) { ?>
                 <a class="button button-bottom-right w-button" href="<?php echo \DSI\Service\URL::addCaseStudy() ?>">
                     Add case study +
                 </a>
