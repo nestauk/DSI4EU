@@ -356,8 +356,8 @@
             <div class="content">
                 <table bgcolor="#18233F">
                     <tr>
-                        <td style="width:150px"><img src="http://dsi4eu-dev.ddns.net/images/logo-white.svg"/></td>
-                        <td align="right"><h6 class="collapse">DSI4EU <?php echo $mailHeader?></h6></td>
+                        <td style="width:150px"><img src="https://digitalsocial.eu/images/logo-white.svg"/></td>
+                        <td align="right"><h6 class="collapse">DSI4EU <?php echo $mailHeader ?></h6></td>
                     </tr>
                 </table>
             </div>
@@ -400,9 +400,9 @@
                     <tr>
                         <td align="center">
                             <p>
-                                <a href="#">Terms</a> |
-                                <a href="#">Privacy</a> |
-                                <a href="#">Unsubscribe</a>
+                                <a href="https://<?php echo SITE_DOMAIN . \DSI\Service\URL::termsOfUse() ?>">Terms of use</a> |
+                                <a href="https://<?php echo SITE_DOMAIN . \DSI\Service\URL::termsOfUse() ?>">Privacy</a>
+                                <?php /*<a href="#">| Unsubscribe</a>*/ ?>
                             </p>
                         </td>
                     </tr>
