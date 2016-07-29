@@ -20,12 +20,14 @@ class StoriesController
         else
             $loggedInUser = null;
 
+        $userCanAddStory = (bool)($loggedInUser AND ($loggedInUser->isCommunityAdmin() OR $loggedInUser->isEditorialAdmin()));
+
         if ($this->format == 'json') {
-            if ($loggedInUser)
+            if ($userCanAddStory)
                 $stories = (new StoryRepository())->getAll();
             else
                 $stories = (new StoryRepository())->getAllPublished();
-            
+
             echo json_encode(array_map(function (Story $story) {
                 $data = [
                     'id' => $story->getId(),

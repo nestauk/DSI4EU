@@ -1,6 +1,6 @@
 <?php
 require __DIR__ . '/header.php';
-/** @var $loggedInUser \DSI\Entity\User */
+/** @var $userCanAddStory bool */
 ?>
 
     <style>
@@ -63,7 +63,7 @@ require __DIR__ . '/header.php';
                                        href="#">
                                         Blogs</a>
                                 </div>
-                                <?php if ($loggedInUser) { ?>
+                                <?php if ($userCanAddStory) { ?>
                                     <div class="w-col w-col-2">
                                         <a class="w-button dsi-button top-filter published-stories"
                                            ng-click="searchCriteria.published = true"
@@ -78,7 +78,7 @@ require __DIR__ . '/header.php';
                             </div>
                         </div>
                         <div class="w-col w-col-3 w-col-stack w-clearfix">
-                            <?php if ($loggedInUser) { ?>
+                            <?php if ($userCanAddStory) { ?>
                                 <a class="w-button dsi-button top-filter add-new-story"
                                    href="<?php echo \DSI\Service\URL::addStory() ?>">
                                     Add new story +</a>
@@ -106,7 +106,7 @@ require __DIR__ . '/header.php';
                                 <p class="hp-post-p" ng-bind="story.content"></p>
                             </div>
                         </a>
-                        <?php if ($loggedInUser) { ?>
+                        <?php if ($userCanAddStory) { ?>
                             <div class="w-clearfix story-admin-buttons">
                                 <a class="w-button dsi-button button-bar-button"
                                    href="{{story.editUrl}}">Edit Story</a>

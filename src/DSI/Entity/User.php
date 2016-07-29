@@ -411,11 +411,11 @@ class User
 
     public function isCommunityAdmin()
     {
-        return $this->role == 'community-admin';
+        return $this->isSysAdmin() OR $this->role == 'community-admin';
     }
 
     public function isEditorialAdmin()
     {
-        return $this->role == 'editorial-admin';
+        return $this->isSysAdmin() OR $this->role == 'editorial-admin';
     }
 }

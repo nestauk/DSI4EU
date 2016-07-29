@@ -21,6 +21,9 @@ class StoryAddController
         $authUser->ifNotLoggedInRedirectTo(URL::login());
 
         $loggedInUser = (new UserRepository())->getById($authUser->getUserId());
+        $userCanAddStory = (bool)($loggedInUser AND ($loggedInUser->isCommunityAdmin() OR $loggedInUser->isEditorialAdmin()));
+        if (!$userCanAddStory)
+            go_to(URL::home());
 
         if (isset($_POST['add'])) {
             try {
