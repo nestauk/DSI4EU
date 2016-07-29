@@ -3,7 +3,7 @@ require __DIR__ . '/header.php';
 /** @var $project \DSI\Entity\Project */
 /** @var $userHasInvitation bool */
 /** @var $canUserRequestMembership bool */
-/** @var $isAdmin bool */
+/** @var $userCanEditProject bool */
 /** @var $isOwner bool */
 /** @var $loggedInUser \DSI\Entity\User */
 /** @var $projectMembers \DSI\Entity\ProjectMember[] */
@@ -20,7 +20,7 @@ require __DIR__ . '/header.php';
             <div class="header-large"
                  style="background-image: linear-gradient(180deg, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url('<?php echo \DSI\Entity\Image::PROJECT_HEADER_URL . $project->getHeaderImageOrDefault() ?>');">
                 <div class="container-wide container-wide-header-large">
-                    <?php if ($isAdmin) { ?>
+                    <?php if ($userCanEditProject) { ?>
                         <a class="dsi-button profile-edit w-button" style="z-index:1000"
                            href="<?php echo \DSI\Service\URL::editProject($project->getId()) ?>">Edit project</a>
                     <?php } ?>
@@ -266,7 +266,7 @@ require __DIR__ . '/header.php';
                                                 </div>
                                             </a>
                                             <div class="star-holder">
-                                                <?php if ($isAdmin) { ?>
+                                                <?php if ($userCanEditProject) { ?>
                                                     <img class="star-full"
                                                          data-ix="add-star-admin"
                                                          style="opacity:1"
@@ -290,7 +290,7 @@ require __DIR__ . '/header.php';
                                                          ng-hide="member.isAdmin">
                                                 <?php } ?>
                                             </div>
-                                            <?php if ($isAdmin) { ?>
+                                            <?php if ($userCanEditProject) { ?>
                                                 <div class="remove-from-list"
                                                      ng-click="removeMember(member)">-
                                                 </div>
@@ -298,7 +298,7 @@ require __DIR__ . '/header.php';
                                         </div>
                                     </div>
                                 </div>
-                                <?php if ($isAdmin) { ?>
+                                <?php if ($userCanEditProject) { ?>
                                     <div class="join-project">
                                         <div class="add-item-block"
                                              style="float:right;margin-right:20px">
@@ -403,7 +403,7 @@ require __DIR__ . '/header.php';
                                     </div>
                                 </a>
                             </div>
-                            <?php if ($isAdmin) { ?>
+                            <?php if ($userCanEditProject) { ?>
                                 <div class="add-item-block"
                                      ng-click="addingOrganisation = !addingOrganisation"
                                      style="float:right;margin-right:20px">
@@ -476,7 +476,7 @@ require __DIR__ . '/header.php';
                     <div class="w-col w-col-6" id="postsScroll">
                         <div id="posts">
                             <div class="info-card">
-                                <?php if ($loggedInUser AND $isAdmin) { ?>
+                                <?php if ($loggedInUser AND $userCanEditProject) { ?>
                                     <div class="add-post">
                                         <div class="w-clearfix post-author new-post">
                                             <img
@@ -486,7 +486,7 @@ require __DIR__ . '/header.php';
                                             <div class="profile-label">Do you have something to
                                                 share?
                                             </div>
-                                            <?php if ($isAdmin) { ?>
+                                            <?php if ($userCanEditProject) { ?>
                                                 <a href="#" data-ix="new-post-show"
                                                    class="create-new-post">
                                                     Add new post <span class="add-post-plus">+</span>

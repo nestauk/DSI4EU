@@ -104,6 +104,8 @@ class ProjectController
                 $memberRequests = (new ProjectMemberRequestRepository())->getMembersForProject($project->getId());
         }
 
+        $userCanEditProject = ($isAdmin OR ($loggedInUser AND $loggedInUser->isCommunityAdmin()));
+
         $links = [];
         $projectLinks = (new ProjectLinkRepository())->getByProjectID($project->getId());
         foreach ($projectLinks AS $projectLink) {
@@ -118,7 +120,7 @@ class ProjectController
         }
 
         try {
-            if ($isAdmin) {
+            if ($userCanEditProject) {
                 if (isset($_POST['updateBasic'])) {
                     $authUser->ifNotLoggedInRedirectTo(URL::login());
 

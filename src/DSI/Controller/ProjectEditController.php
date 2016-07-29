@@ -46,7 +46,7 @@ class ProjectEditController
         $project = $projectRepo->getById($this->projectID);
 
         if (!$this->userCanModifyProject($project, $loggedInUser))
-            throw new AccessDenied('You cannot access this page');
+            go_to(URL::home());
 
         if ($this->format == 'json') {
             try {
@@ -157,6 +157,9 @@ class ProjectEditController
             return true;
 
         if ((new ProjectMemberRepository())->projectHasMember($project->getId(), $user->getId()))
+            return true;
+
+        if ($user->isCommunityAdmin())
             return true;
 
         return false;
