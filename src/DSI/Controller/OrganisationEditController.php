@@ -57,6 +57,14 @@ class OrganisationEditController
         $organisationTypes = (new OrganisationTypeRepository())->getAll();
         $organisationSizes = (new OrganisationSizeRepository())->getAll();
 
+        $isOwner = false;
+        if ($organisation->getOwner()->getId() == $loggedInUser->getId())
+            $isOwner = true;
+
+        $userCanEditOrganisation = ($isOwner OR ($loggedInUser AND $loggedInUser->isCommunityAdmin()));
+        if (!$userCanEditOrganisation)
+            go_to(URL::home());
+
         try {
             if (isset($_POST['saveDetails'])) {
                 if ($_POST['step'] == 'step1') {
@@ -216,22 +224,14 @@ class OrganisationEditController
             return;
         }
 
-        $memberRequests = [];
-        $isOwner = false;
-        $canUserRequestMembership = false;
+        if (isset($isOwner) AND $isOwner === true)
+            $memberRequests = (new OrganisationMemberRequestRepository())->getMembersForOrganisation($organisation->getId());
+        else
+            $memberRequests = [];
 
         $organisationMembers = (new OrganisationMemberRepository())->getMembersForOrganisation($organisation->getId());
         $organisationProjects = (new OrganisationProjectRepository())->getByOrganisationID($organisation->getId());
         $partnerOrganisations = (new OrganisationProjectRepository())->getPartnerOrganisationsFor($organisation);
-
-        if ($loggedInUser) {
-            $canUserRequestMembership = $this->canUserRequestMembership($organisation, $loggedInUser);
-            if ($organisation->getOwner()->getId() == $loggedInUser->getId())
-                $isOwner = true;
-
-            if (isset($isOwner) AND $isOwner === true)
-                $memberRequests = (new OrganisationMemberRequestRepository())->getMembersForOrganisation($organisation->getId());
-        }
 
         if ($this->format == 'json') {
             $owner = $organisation->getOwner();
@@ -306,6 +306,8 @@ class OrganisationEditController
             ]);
             return;
         } else {
+            if ($loggedInUser)
+                $canUserRequestMembership = $this->canUserRequestMembership($organisation, $loggedInUser);
             $pageTitle = $organisation->getName();
             $angularModules['fileUpload'] = true;
             $tags = (new TagForOrganisationsRepository())->getAll();

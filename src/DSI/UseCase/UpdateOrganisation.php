@@ -106,8 +106,8 @@ class UpdateOrganisation
 
     private function checkIfUserCanEditTheOrganisation()
     {
-        if ($this->data()->executor->getId() != $this->data()->organisation->getOwner()->getId()) {
-            $this->errorHandler->addTaggedError('user', 'Only the owner can make changes to the organisation');
+        if (!($this->userCanEditOrganisation())) {
+            $this->errorHandler->addTaggedError('user', 'You are not allowed to make changes to this organisation');
             throw $this->errorHandler;
         }
     }
@@ -251,6 +251,7 @@ class UpdateOrganisation
 
     private function setLinks()
     {
+        $this->data()->links = (array) $this->data()->links;
         $organisationLinks = (new OrganisationLinkRepository())->getLinksByOrganisationID($this->data()->organisation->getId());
         foreach ($this->data()->links AS $newLink) {
             if (!in_array($newLink, $organisationLinks)) {
@@ -268,6 +269,20 @@ class UpdateOrganisation
                 $remLink->exec();
             }
         }
+    }
+
+    /**
+     * @return bool
+     */
+    private function userCanEditOrganisation()
+    {
+        if ($this->data()->executor->isCommunityAdmin())
+            return true;
+
+        if ($this->data()->executor->getId() == $this->data()->organisation->getOwner()->getId())
+            return true;
+
+        return false;
     }
 }
 

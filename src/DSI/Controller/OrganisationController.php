@@ -175,6 +175,9 @@ class OrganisationController
 
             if (isset($isOwner) AND $isOwner === true)
                 $memberRequests = (new OrganisationMemberRequestRepository())->getMembersForOrganisation($organisation->getId());
+
+            // $userCanEditOrganisation = ($isAdmin OR ($loggedInUser AND $loggedInUser->isCommunityAdmin()));
+            $userCanEditOrganisation = ($isOwner OR ($loggedInUser AND $loggedInUser->isCommunityAdmin()));
         }
 
         $links = [];

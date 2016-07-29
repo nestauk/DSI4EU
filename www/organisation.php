@@ -3,6 +3,7 @@ require __DIR__ . '/header.php';
 /** @var $organisation \DSI\Entity\Organisation */
 /** @var $canUserRequestMembership bool */
 /** @var $isOwner bool */
+/** @var $userCanEditOrganisation bool */
 /** @var $organisationTypes \DSI\Entity\OrganisationType[] */
 /** @var $organisationSizes \DSI\Entity\OrganisationSize[] */
 /** @var $organisationProjects \DSI\Entity\OrganisationProject[] */
@@ -17,7 +18,7 @@ require __DIR__ . '/header.php';
         <div class="header-large nesta"
              style="background-image: linear-gradient(180deg, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url('<?php echo \DSI\Entity\Image::ORGANISATION_HEADER_URL . $organisation->getHeaderImageOrDefault() ?>');">
             <div class="container-wide container-wide-header-large">
-                <?php if ($isOwner) { ?>
+                <?php if ($userCanEditOrganisation) { ?>
                     <a class="w-button dsi-button profile-edit" style="bottom: auto;top: 180px;width: auto;"
                        href="<?php echo \DSI\Service\URL::editOrganisation($organisation) ?>">
                         Edit organisation</a>
