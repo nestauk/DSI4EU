@@ -57,7 +57,7 @@ require __DIR__ . '/header.php';
 
                             <h3 class="info-h card-h">My skills:</h3>
                             <div class="w-clearfix tags-block">
-                                <div class="skill" ng-repeat="skill in skills" ng-cloak>
+                                <div class="tag" ng-repeat="skill in skills" ng-cloak>
                                     <?php /* if ($isOwner) { ?>
                                         <div class="delete" ng-click="removeSkill(skill)">-</div>
                                     <?php } */ ?>
@@ -94,7 +94,7 @@ require __DIR__ . '/header.php';
 
                             <h3 class="info-h card-h">My Languages:</h3>
                             <div class="w-clearfix tags-block">
-                                <div class="skill" ng-repeat="lang in languages" ng-cloak>
+                                <div class="tag" ng-repeat="lang in languages" ng-cloak>
                                     <?php /* if ($isOwner) { ?>
                                         <div class="delete" ng-click="removeLanguage(lang)">-</div>
                                     <?php } */ ?>
