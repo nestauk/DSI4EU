@@ -400,8 +400,8 @@
                     <tr>
                         <td align="center">
                             <p>
-                                <a href="https://<?php echo SITE_DOMAIN . \DSI\Service\URL::termsOfUse() ?>">Terms of use</a> |
-                                <a href="https://<?php echo SITE_DOMAIN . \DSI\Service\URL::termsOfUse() ?>">Privacy</a>
+                                <a href="https://<?php echo SITE_DOMAIN . \DSI\Service\URL::termsOfUse() ?>">Terms of Use</a> |
+                                <a href="https://<?php echo SITE_DOMAIN . \DSI\Service\URL::privacyPolicy() ?>">Privacy Policy</a>
                                 <?php /*<a href="#">| Unsubscribe</a>*/ ?>
                             </p>
                         </td>
