@@ -376,7 +376,8 @@ class Router
 
     private function notFound404Page()
     {
-        echo $this->pageURL . ': 404 not found';
+        $command = new \DSI\Controller\NotFound404Controller();
+        $command->exec();
     }
 
     private function skillsListJsonPage()
