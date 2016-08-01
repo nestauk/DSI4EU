@@ -170,6 +170,11 @@ class URL
         return SITE_RELATIVE_PATH . '/privacy-policy';
     }
 
+    public static function sitemapXML()
+    {
+        return SITE_RELATIVE_PATH . '/sitemap.xml';
+    }
+
     /**
      * @param $title
      * @return string

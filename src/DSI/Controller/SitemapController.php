@@ -21,6 +21,8 @@ class SitemapController
             $loggedInUser = (new UserRepository())->getById($authUser->getUserId());
 
         if ($this->format == 'xml') {
+            header("Content-type: text/xml");
+            
             $links = [];
             $links = $this->addIndexTo($links);
             $links = $this->addProjectsTo($links);
