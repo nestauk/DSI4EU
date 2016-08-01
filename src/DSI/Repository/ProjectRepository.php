@@ -120,6 +120,11 @@ class ProjectRepository
         return $this->getObjectsWhere(["1"]);
     }
 
+    public function getAllPublished()
+    {
+        return $this->getObjectsWhere(["`isPublished` = '1'"]);
+    }
+
     public function clearAll()
     {
         $query = new SQL("TRUNCATE TABLE `projects`");

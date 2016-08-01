@@ -176,6 +176,10 @@ class Router
         } elseif ($this->pageURL === '/privacy-policy') {
             $this->privacyPolicyPage();
 
+// Sitemap
+        } elseif ($this->pageURL === '/sitemap.xml') {
+            $this->sitemapXmlPage();
+
 // Unfiltered
         } elseif (preg_match('<^/countryRegions/([0-9]+)\.json$>', $this->pageURL, $matches)) {
             $this->countryRegionsListJsonPage($matches);
@@ -600,6 +604,13 @@ class Router
     {
         $command = new \DSI\Controller\StaticHtmlController();
         $command->view = 'privacy-policy.php';
+        $command->exec();
+    }
+
+    private function sitemapXmlPage()
+    {
+        $command = new \DSI\Controller\SitemapController();
+        $command->format = 'xml';
         $command->exec();
     }
 
