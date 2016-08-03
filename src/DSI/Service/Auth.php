@@ -34,6 +34,8 @@ class Auth
 
     public function saveUserInSession(User $user)
     {
+        session_regenerate_id(TRUE);
+
         $_SESSION['user']['userID'] = $user->getId();
         $_SESSION['user']['firstName'] = $user->getFirstName();
         $_SESSION['user']['lastName'] = $user->getLastName();
@@ -42,6 +44,8 @@ class Auth
     public function removeUserFromSession(int $userID)
     {
         unset($_SESSION['user']);
+
+        session_regenerate_id(TRUE);
     }
 
     public function ifNotLoggedInRedirectTo($url)

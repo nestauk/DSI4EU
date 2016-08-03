@@ -1,15 +1,22 @@
 <?php
 
+define('SITE_DOMAIN', '{domainName}');
+define('SITE_RELATIVE_PATH', '{relativePath}');
+
 if (!defined('NO_SESSION') OR NO_SESSION != true) {
+    session_set_cookie_params(
+        $lifetime = 0,
+        $path = SITE_RELATIVE_PATH,
+        $domain = SITE_DOMAIN,
+        $secure = true,
+        $httponly = true
+    );
     session_start();
 }
 
 require __DIR__ . '/functions.php';
 require __DIR__ . '/exceptions.php';
 require __DIR__ . '/../vendor/autoload.php';
-
-define('SITE_DOMAIN', '{domainName}');
-define('SITE_RELATIVE_PATH', '{relativePath}');
 
 \DSI\Service\SQL::credentials(array(
     'username' => '',

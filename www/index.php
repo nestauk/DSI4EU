@@ -627,6 +627,16 @@ class Router
         $command = new \DSI\Controller\ImportController();
         $command->exec();
     }
+
+    public function forceHTTPS()
+    {
+        if (empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] == "off") {
+            $redirect = 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+            header('HTTP/1.1 301 Moved Permanently');
+            header('Location: ' . $redirect);
+            exit();
+        }
+    }
 }
 
 $pageURL =
@@ -640,4 +650,5 @@ if (substr($pageURL, 0, strlen(SITE_RELATIVE_PATH)) == SITE_RELATIVE_PATH) {
 }
 
 $router = new Router();
+$router->forceHTTPS();
 return $router->exec($pageURL);
