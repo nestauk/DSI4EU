@@ -6,7 +6,7 @@ define('SITE_RELATIVE_PATH', '{relativePath}');
 if (!defined('NO_SESSION') OR NO_SESSION != true) {
     session_set_cookie_params(
         $lifetime = 0,
-        $path = SITE_RELATIVE_PATH,
+        $path = SITE_RELATIVE_PATH . '/',
         $domain = SITE_DOMAIN,
         $secure = true,
         $httponly = true
