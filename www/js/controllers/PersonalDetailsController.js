@@ -8,31 +8,43 @@ angular
             });
 
         $scope.currentTab = 'step1';
-        $scope.submitStep1 = function () {
+        $scope.submitStep1 = function (params) {
             $scope.saveUserDetails({
                 postField: 'step1',
                 onSuccess: function () {
-                    $scope.currentTab = 'step2';
+                    if (params && params.proceed == false) {
+                        swal('Success!', 'The changes have been successfully saved.', 'success');
+                    } else {
+                        $scope.currentTab = 'step2';
+                    }
                 }
             })
         };
-        $scope.submitStep2 = function () {
+        $scope.submitStep2 = function (params) {
             $scope.user.languages = $('#languagesSelect').val();
             $scope.user.skills = $('#skillsSelect').val();
             $scope.saveUserDetails({
                 postField: 'step2',
                 onSuccess: function () {
-                    $scope.currentTab = 'step3';
+                    if (params && params.proceed == false) {
+                        swal('Success!', 'The changes have been successfully saved.', 'success');
+                    } else {
+                        $scope.currentTab = 'step3';
+                    }
                 }
             })
         };
-        $scope.submitStep3 = function () {
+        $scope.submitStep3 = function (params) {
             $scope.user.projects = $('#projectsSelect').val();
             $scope.user.organisations = $('#organisationsSelect').val();
             $scope.saveUserDetails({
                 postField: 'step3',
                 onSuccess: function () {
-                    $scope.currentTab = 'step4';
+                    if (params && params.proceed == false) {
+                        swal('Success!', 'The changes have been successfully saved.', 'success');
+                    } else {
+                        $scope.currentTab = 'step4';
+                    }
                 }
             })
         };
