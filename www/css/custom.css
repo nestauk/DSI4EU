@@ -283,13 +283,13 @@ div.error {
     color: #fff;
 }
 
-.customSelect2 .select2-container--open .select2-dropdown--below {
+.select2-container--open .select2-dropdown--below {
     border-top: 1px solid #1dc9a0;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
 }
 
-.customSelect2 .select2-dropdown {
+.select2-dropdown {
     background-color: white;
     border: 1px solid rgb(29, 201, 160);
     border-image-source: initial;
