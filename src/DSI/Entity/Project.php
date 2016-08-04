@@ -154,7 +154,7 @@ class Project
     public function getStartDate($format = null)
     {
         if ($format !== null) {
-            return date('M, Y', $this->getUnixStartDate());
+            return date($format, $this->getUnixStartDate());
         }
 
         return $this->startDate;
@@ -193,7 +193,7 @@ class Project
     public function getEndDate($format = null)
     {
         if ($format !== null) {
-            return date('M, Y', $this->getUnixEndDate());
+            return date($format, $this->getUnixEndDate());
         }
 
         return $this->endDate;
