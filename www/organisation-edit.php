@@ -119,17 +119,19 @@ $leftSideText .= "<p>Some information is optional (mandatory fields are indicate
                                                         <br/><br/>
                                                         <label>Tag your organisation</label>
                                                         <p>Add tags that best describe your organisation:</p>
-                                                        <select class="select2 creator-data-entry end w-input"
-                                                                id="tagsSelect" style="width:100%;border:0"
-                                                                multiple data-tags="true"
-                                                                data-placeholder="Write tags">
-                                                            <?php foreach ($tags AS $tag) { ?>
-                                                                <option value="<?php echo $tag->getName() ?>"
-                                                                    <?php if (in_array($tag->getName(), $orgTags)) echo 'selected' ?>><?php
-                                                                    echo show_input($tag->getName())
-                                                                    ?></option>
-                                                            <?php } ?>
-                                                        </select>
+                                                        <div class="customSelect2">
+                                                            <select class="select2 creator-data-entry end w-input"
+                                                                    id="tagsSelect" style="width:100%;border:0"
+                                                                    multiple data-tags="true"
+                                                                    data-placeholder="Write tags">
+                                                                <?php foreach ($tags AS $tag) { ?>
+                                                                    <option value="<?php echo $tag->getName() ?>"
+                                                                        <?php if (in_array($tag->getName(), $orgTags)) echo 'selected' ?>><?php
+                                                                        echo show_input($tag->getName())
+                                                                        ?></option>
+                                                                <?php } ?>
+                                                            </select>
+                                                        </div>
                                                         <br/><br/>
                                                         <label for="email">Projects your organisation is involved
                                                             with:</label>

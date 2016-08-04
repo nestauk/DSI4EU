@@ -248,17 +248,19 @@ $leftSideText .= "<p>The information is optional. You will be able to edit and e
                                                             <p>Which languages can you read? We want to give you the
                                                                 option to filter the content of this site to the
                                                                 languages you can read.</p>
-                                                            <select class="select2 creator-data-entry end w-input"
-                                                                    id="languagesSelect" style="width:100%;border:0"
-                                                                    multiple
-                                                                    data-placeholder="Click to select languages">
-                                                                <?php foreach ($languages AS $language) { ?>
-                                                                    <option value="<?php echo $language->getId() ?>"
-                                                                        <?php if (in_array($language->getId(), $userLanguages)) echo 'selected' ?>><?php
-                                                                        echo show_input($language->getName())
-                                                                        ?></option>
-                                                                <?php } ?>
-                                                            </select>
+                                                            <div class="customSelect2">
+                                                                <select class="select2 creator-data-entry end w-input"
+                                                                        id="languagesSelect" style="width:100%;border:0"
+                                                                        multiple
+                                                                        data-placeholder="Click to select languages">
+                                                                    <?php foreach ($languages AS $language) { ?>
+                                                                        <option value="<?php echo $language->getId() ?>"
+                                                                            <?php if (in_array($language->getId(), $userLanguages)) echo 'selected' ?>><?php
+                                                                            echo show_input($language->getName())
+                                                                            ?></option>
+                                                                    <?php } ?>
+                                                                </select>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="w-col w-col-6">
@@ -269,17 +271,19 @@ $leftSideText .= "<p>The information is optional. You will be able to edit and e
                                                                 that you would be willing to share with the
                                                                 community.</p>
                                                             <label for="name-6">What skills do you have?</label>
-                                                            <select class="select2 creator-data-entry end w-input"
-                                                                    id="skillsSelect" style="width:100%;border:0"
-                                                                    multiple data-tags="true"
-                                                                    data-placeholder="Write your skills">
-                                                                <?php foreach ($skills AS $skill) { ?>
-                                                                    <option value="<?php echo $skill->getName() ?>"
-                                                                        <?php if (in_array($skill->getName(), $userSkills)) echo 'selected' ?>><?php
-                                                                        echo show_input($skill->getName())
-                                                                        ?></option>
-                                                                <?php } ?>
-                                                            </select>
+                                                            <div class="customSelect2">
+                                                                <select class="select2 creator-data-entry end w-input"
+                                                                        id="skillsSelect" style="width:100%;border:0"
+                                                                        multiple data-tags="true"
+                                                                        data-placeholder="Write your skills">
+                                                                    <?php foreach ($skills AS $skill) { ?>
+                                                                        <option value="<?php echo $skill->getName() ?>"
+                                                                            <?php if (in_array($skill->getName(), $userSkills)) echo 'selected' ?>><?php
+                                                                            echo show_input($skill->getName())
+                                                                            ?></option>
+                                                                    <?php } ?>
+                                                                </select>
+                                                            </div>
                                                             <br/><br/>
                                                             <label for="name-7">Your work</label>
                                                             <p>Where do you work?</p>

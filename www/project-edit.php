@@ -117,60 +117,68 @@ $leftSideText .= "<p>Some information is optional (mandatory fields are indicate
                                                     <div class="w-col w-col-6 w-col-stack">
                                                         <div class="padding-left-50">
                                                             <p>Add tags that best describe your project:</p>
-                                                            <select class="select2 creator-data-entry end w-input"
-                                                                    id="tagsSelect" style="width:100%;border:0"
-                                                                    multiple data-tags="true"
-                                                                    data-placeholder="Write tags">
-                                                                <?php foreach ($tags AS $tag) { ?>
-                                                                    <option value="<?php echo $tag->getName() ?>"
-                                                                        <?php if (in_array($tag->getName(), $projectTags)) echo 'selected' ?>><?php
-                                                                        echo show_input($tag->getName())
-                                                                        ?></option>
-                                                                <?php } ?>
-                                                            </select>
+                                                            <div class="customSelect2">
+                                                                <select class="select2 creator-data-entry end w-input"
+                                                                        id="tagsSelect" style="width:100%;border:0"
+                                                                        multiple data-tags="true"
+                                                                        data-placeholder="Write tags">
+                                                                    <?php foreach ($tags AS $tag) { ?>
+                                                                        <option value="<?php echo $tag->getName() ?>"
+                                                                            <?php if (in_array($tag->getName(), $projectTags)) echo 'selected' ?>><?php
+                                                                            echo show_input($tag->getName())
+                                                                            ?></option>
+                                                                    <?php } ?>
+                                                                </select>
+                                                            </div>
                                                             <br/><br/>
                                                             <label>Areas of society impacted</label>
                                                             <p>Which areas of society does you project aim to
                                                                 support?</p>
-                                                            <select class="select2 creator-data-entry end w-input"
-                                                                    id="impact-tags-a" style="width:100%;border:0"
-                                                                    multiple data-tags="true"
-                                                                    data-placeholder="Write tags">
-                                                                <?php foreach ($impactTags AS $tag) { ?>
-                                                                    <option value="<?php echo $tag->getName() ?>"
-                                                                        <?php if (in_array($tag->getName(), $projectImpactTagsA)) echo 'selected' ?>><?php
-                                                                        echo show_input($tag->getName())
-                                                                        ?></option>
-                                                                <?php } ?>
-                                                            </select>
+                                                            <div class="customSelect2">
+                                                                <select class="select2 creator-data-entry end w-input"
+                                                                        id="impact-tags-a" style="width:100%;border:0"
+                                                                        multiple data-tags="true"
+                                                                        data-placeholder="Write tags">
+                                                                    <?php foreach ($impactTags AS $tag) { ?>
+                                                                        <option value="<?php echo $tag->getName() ?>"
+                                                                            <?php if (in_array($tag->getName(), $projectImpactTagsA)) echo 'selected' ?>><?php
+                                                                            echo show_input($tag->getName())
+                                                                            ?></option>
+                                                                    <?php } ?>
+                                                                </select>
+                                                            </div>
                                                             <br/><br/>
                                                             <label>DSI Focus</label>
                                                             <p>Which of the DSI areas is your project part of?</p>
-                                                            <select class="select2 creator-data-entry end w-input"
-                                                                    id="impact-tags-b" style="width:100%;border:0"
-                                                                    multiple data-placeholder="Write tags">
-                                                                <?php foreach ($dsiFocusTags AS $tag) { ?>
-                                                                    <option value="<?php echo $tag->getName() ?>"
-                                                                        <?php if (in_array($tag->getName(), $projectImpactTagsB)) echo 'selected' ?>><?php
-                                                                        echo show_input($tag->getName())
-                                                                        ?></option>
-                                                                <?php } ?>
-                                                            </select>
+                                                            <div class="customSelect2">
+                                                                <select class="select2 creator-data-entry end w-input"
+                                                                        id="impact-tags-b" style="width:100%;border:0"
+                                                                        multiple data-placeholder="Write tags">
+                                                                    <?php foreach ($dsiFocusTags AS $tag) { ?>
+                                                                        <option value="<?php echo $tag->getName() ?>"
+                                                                            <?php if (in_array($tag->getName(), $projectImpactTagsB)) echo 'selected' ?>><?php
+                                                                            echo show_input($tag->getName())
+                                                                            ?></option>
+                                                                    <?php } ?>
+                                                                </select>
+                                                            </div>
                                                             <br/><br/>
                                                             <label>Technology type</label>
                                                             <p>What type of digital technology is involved in your
                                                                 project?</p>
-                                                            <select class="select2 creator-data-entry end w-input"
-                                                                    id="impact-tags-c" style="width:100%;border:0"
-                                                                    multiple data-tags="true"
-                                                                    data-placeholder="Write tags">
-                                                                <?php foreach ($impactTags AS $tag) { ?>
-                                                                    <option value="<?php echo $tag->getName() ?>"
-                                                                        <?php if (in_array($tag->getName(), $projectImpactTagsC)) echo 'selected' ?>><?php
-                                                                        echo show_input($tag->getName())
-                                                                        ?></option>
-                                                                <?php } ?>
-                                                            </select>
+                                                            <div class="customSelect2">
+                                                                <select class="select2 creator-data-entry end w-input"
+                                                                        id="impact-tags-c" style="width:100%;border:0"
+                                                                        multiple data-tags="true"
+                                                                        data-placeholder="Write tags">
+                                                                    <?php foreach ($impactTags AS $tag) { ?>
+                                                                        <option value="<?php echo $tag->getName() ?>"
+                                                                            <?php if (in_array($tag->getName(), $projectImpactTagsC)) echo 'selected' ?>><?php
+                                                                            echo show_input($tag->getName())
+                                                                            ?></option>
+                                                                    <?php } ?>
+                                                                </select>
+                                                            </div>
                                                             <br/><br/>
                                                             <label for="email">Which organisations are working on this
                                                                 project?</label>
