@@ -386,6 +386,7 @@ $leftSideText .= "<p>The information is optional. You will be able to edit and e
                                                                     <?php foreach ($organisations AS $organisation) { ?>
                                                                         <option
                                                                             value="<?php echo $organisation->getId() ?>"
+                                                                            data-logo="<?php echo $organisation->getLogoOrDefaultSilver() ?>"
                                                                             data-url="<?php echo \DSI\Service\URL::organisation($organisation) ?>"
                                                                             data-country="<?php echo $organisation->getCountryName() ?>"
                                                                             data-type="organisation"
@@ -552,6 +553,8 @@ $leftSideText .= "<p>The information is optional. You will be able to edit and e
                 var elmType = element.data('type');
                 if (elmType == 'project')
                     logo = '<?php echo \DSI\Entity\Image::PROJECT_LOGO_URL?>' + logo;
+                else if (elmType == 'organisation')
+                    logo = '<?php echo \DSI\Entity\Image::ORGANISATION_LOGO_URL?>' + logo;
 
                 return $(
                     '<span>' +
@@ -568,6 +571,8 @@ $leftSideText .= "<p>The information is optional. You will be able to edit and e
                 var elmType = element.data('type');
                 if (elmType == 'project')
                     logo = '<?php echo \DSI\Entity\Image::PROJECT_LOGO_URL?>' + logo;
+                if (elmType == 'organisation')
+                    logo = '<?php echo \DSI\Entity\Image::ORGANISATION_LOGO_URL?>' + logo;
 
                 return $(
                     '<div class="involved-card">' +
