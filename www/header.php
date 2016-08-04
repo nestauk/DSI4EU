@@ -29,7 +29,7 @@ use \DSI\Service\Sysctl;
                     <a class="alt nav w-nav-link" href="<?php echo URL::dashboard() ?>">Dashboard</a>
                 <?php } ?>
                 <a class="alt nav w-nav-link" href="<?php echo URL::caseStudies() ?>">Case Studies</a>
-                <a class="alt nav w-nav-link" href="<?php echo URL::stories() ?>">Blog</a>
+                <a class="alt nav w-nav-link" href="<?php echo URL::blogPosts() ?>">Blog</a>
                 <a class="alt nav w-nav-link" href="<?php echo URL::projects() ?>">Projects</a>
                 <a class="alt nav w-nav-link" href="<?php echo URL::organisations() ?>">Organisations</a>
                 <?php if ($loggedInUser) { ?>

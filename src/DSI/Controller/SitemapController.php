@@ -62,7 +62,7 @@ class SitemapController
         $stories = (new StoryRepository())->getAllPublished();
         foreach ($stories AS $story) {
             $storyLink = new SitemapLink();
-            $storyLink->loc = 'https://' . SITE_DOMAIN . URL::story($story);
+            $storyLink->loc = 'https://' . SITE_DOMAIN . URL::blogPost($story);
             $storyLink->lastMod = date('Y-m-01');
             $storyLink->changeFreq = 'monthly';
             $storyLink->priority = '0.9';
