@@ -12,6 +12,10 @@ use \DSI\Service\Sysctl;
 <meta property="og:title" content="<?php echo isset($pageTitle) ? show_input($pageTitle) : 'Digitalsocial.eu' ?>">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Webflow">
+
+<?php /** Select2 */ ?>
+<link href="<?php echo SITE_RELATIVE_PATH ?>/lib/select2/select2.min.css" rel="stylesheet"/>
+
 <link rel="stylesheet" type="text/css"
       href="<?php echo SITE_RELATIVE_PATH ?>/lib/ionicons/css/ionicons.min.css?<?php Sysctl::echoVersion() ?>">
 <link rel="stylesheet" type="text/css"
@@ -51,7 +55,6 @@ use \DSI\Service\Sysctl;
       href="<?php echo SITE_RELATIVE_PATH ?>/css/sweet.css?<?php Sysctl::echoVersion() ?>">
 
 <?php /** Select2 */ ?>
-<link href="<?php echo SITE_RELATIVE_PATH ?>/lib/select2/select2.min.css" rel="stylesheet"/>
 <script src="<?php echo SITE_RELATIVE_PATH ?>/lib/select2/select2.full.min.js"></script>
 
 <script>
