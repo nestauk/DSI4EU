@@ -36,7 +36,7 @@ class StoriesController
                     'content' => substr(strip_tags($story->getContent()), 0, 150),
                     'categoryID' => $story->getStoryCategoryId(),
                     'datePublished' => $story->getDatePublished('jS F Y'),
-                    'url' => URL::story($story),
+                    'url' => URL::blogPost($story),
                     'editUrl' => URL::storyEdit($story->getId()),
                     'isPublished' => $story->isPublished(),
                 ];

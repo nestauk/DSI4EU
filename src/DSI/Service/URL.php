@@ -110,14 +110,14 @@ class URL
         return SITE_RELATIVE_PATH . '/story/add';
     }
 
-    public static function stories()
+    public static function blogPosts()
     {
-        return SITE_RELATIVE_PATH . '/stories';
+        return SITE_RELATIVE_PATH . '/blog';
     }
 
-    public static function story(Story $story)
+    public static function blogPost(Story $story)
     {
-        return SITE_RELATIVE_PATH . '/story/' . $story->getId() . '/' . self::linkify($story->getTitle());
+        return SITE_RELATIVE_PATH . '/blog/' . $story->getId() . '/' . self::linkify($story->getTitle());
     }
 
     public static function caseStudy(CaseStudy $caseStudy)

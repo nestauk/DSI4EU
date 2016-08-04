@@ -197,7 +197,7 @@ require __DIR__ . '/header.php';
                                         </div>
                                         <div class="notification-interaction">
                                             <a class="w-button dsi-button notification-decline stop-following"
-                                               href="<?php echo URL::story($story) ?>" style="color:#18233f">
+                                               href="<?php echo URL::blogPost($story) ?>" style="color:#18233f">
                                                 Read
                                             </a>
                                         </div>

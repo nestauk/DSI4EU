@@ -33,7 +33,7 @@ use \DSI\Entity\Image;
                 <a class="nav w-nav-link" href="<?php echo URL::dashboard() ?>">Dashboard</a>
             <?php } ?>
             <a class="nav w-nav-link" href="<?php echo URL::caseStudies() ?>">Case Studies</a>
-            <a class="nav w-nav-link" href="<?php echo URL::stories() ?>">Blog</a>
+            <a class="nav w-nav-link" href="<?php echo URL::blogPosts() ?>">Blog</a>
             <a class="nav w-nav-link" href="<?php echo URL::projects() ?>">Projects</a>
             <a class="nav w-nav-link" href="<?php echo URL::organisations() ?>">Organisations</a>
             <?php if (isset($loggedInUser) AND $loggedInUser) { ?>

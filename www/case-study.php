@@ -36,17 +36,23 @@ require __DIR__ . '/header.php';
                 <h4 class="case-study-intro-detail centered" data-ix="fadeinuponload-5">
                     <?php echo show_input($caseStudy->getTitle()) ?>
                     <?php if ($caseStudy->getRegion()) { ?>
-                        is based in <?php echo $caseStudy->getRegion()->getCountry()->getName() ?> and
+                        is based in <?php echo $caseStudy->getRegion()->getCountry()->getName() ?>
                     <?php } ?>
-                    has been running since 2005
+                    <?php if ($caseStudy->getRegion() AND $caseStudy->getProjectStartDate()) { ?>
+                        and
+                    <?php } ?>
+                    <?php if ($caseStudy->getProjectStartDate()) { ?>
+                        has been running since <?php echo $caseStudy->getProjectStartDate('Y') ?>
+                    <?php } ?>
                 </h4>
-                <div class="centered tagged">Tagged under: <span class="tag">Technology</span> <span
-                        class="tag">Science</span> <span class="tag">Obfuscation</span>
-                </div>
-                <h2 class="centered" data-ix="fadeinup">Overview</h2>
-                <p class="case-study-main-text" data-ix="fadeinup">
-                    <?php echo $caseStudy->getMainText() ?>
-                </p>
+                <?php if ($caseStudy->getMainText()) { ?>
+                    <div class="centered url-block" data-ix="fadeinup">
+                        <h2>Overview</h2>
+                        <p class="case-study-main-text" data-ix="fadeinup">
+                            <?php echo $caseStudy->getMainText() ?>
+                        </p>
+                    </div>
+                <?php } ?>
                 <?php if ($caseStudy->getUrl()) { ?>
                     <div class="centered url-block" data-ix="fadeinup">
                         <h2>Interested in finding out more?</h2>

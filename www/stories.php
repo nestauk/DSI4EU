@@ -39,14 +39,14 @@ require __DIR__ . '/header.php';
     <div ng-controller="StoriesController">
         <div class="w-section page-header stories-header">
             <div class="container-wide header">
-                <h1 class="page-h1 light">Stories</h1>
+                <h1 class="page-h1 light">Blog</h1>
                 <div class="filter-block">
                     <div class="w-row">
                         <div class="w-col w-col-9 w-col-stack">
                             <div class="w-row">
                                 <div class="w-col w-col-2">
                                     <a class="w-button dsi-button top-filter" ng-click="searchCriteria = {}" href="#">
-                                        All stories</a>
+                                        All</a>
                                 </div>
                                 <div class="w-col w-col-2">
                                     <a class="w-button dsi-button top-filter" ng-click="searchCriteria.catg = 3"

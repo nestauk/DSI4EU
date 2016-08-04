@@ -55,15 +55,6 @@ class Router
         } elseif ($this->pageURL === '/logout') {
             $this->logoutPage();
 
-        } elseif ($this->pageURL === '/stories') {
-            $this->storiesPage();
-
-        } elseif ($this->pageURL === '/stories.json') {
-            $this->storiesJsonPage();
-
-        } elseif ($this->pageURL === '/story/add') {
-            $this->addStoryPage();
-
         } elseif ($this->pageURL === '/projects') {
             $this->projectsPage();
 
@@ -126,6 +117,31 @@ class Router
 
         } elseif ($this->pageURL === '/feedback.json') {
             $this->feedbackJsonPage();
+
+// Blog
+        } elseif ($this->pageURL === '/stories' OR $this->pageURL === '/blog') {
+            $this->storiesPage();
+
+        } elseif ($this->pageURL === '/stories.json' OR $this->pageURL === '/blog.json') {
+            $this->storiesJsonPage();
+
+        } elseif ($this->pageURL === '/story/add' OR $this->pageURL === '/blog/add') {
+            $this->addStoryPage();
+
+        } elseif (preg_match('<^/story/([0-9]+)(\/.*)?$>', $this->pageURL, $matches) OR
+            preg_match('<^/blog/([0-9]+)(\/.*)?$>', $this->pageURL, $matches)
+        ) {
+            $this->storyPage($matches);
+
+        } elseif (preg_match('<^/story/edit/([0-9]+)\.json$>', $this->pageURL, $matches) OR
+            preg_match('<^/blog/edit/([0-9]+)\.json$>', $this->pageURL, $matches)
+        ) {
+            $this->editStoryPage($matches, 'json');
+
+        } elseif (preg_match('<^/story/edit/([0-9]+)$>', $this->pageURL, $matches) OR
+            preg_match('<^/blog/edit/([0-9]+)$>', $this->pageURL, $matches)
+        ) {
+            $this->editStoryPage($matches);
 
 // Search
         } elseif ($this->pageURL === '/search.json') {
@@ -210,15 +226,6 @@ class Router
 
         } elseif (preg_match('<^/project/([0-9]+)(\/.*)?$>', $this->pageURL, $matches)) {
             $this->projectPage($matches);
-
-        } elseif (preg_match('<^/story/([0-9]+)(\/.*)?$>', $this->pageURL, $matches)) {
-            $this->storyPage($matches);
-
-        } elseif (preg_match('<^/story/edit/([0-9]+)\.json$>', $this->pageURL, $matches)) {
-            $this->editStoryPage($matches, 'json');
-
-        } elseif (preg_match('<^/story/edit/([0-9]+)$>', $this->pageURL, $matches)) {
-            $this->editStoryPage($matches);
 
         } elseif (preg_match('<^/.*\.(gif|jpe?g|png|svg|js|css|map)$>', $this->pageURL)) {
             pr('not found');

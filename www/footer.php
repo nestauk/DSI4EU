@@ -117,15 +117,15 @@ if (!isset($loggedInUser))
                 </div>
             </div>
             <div class="w-clearfix w-col w-col-6">
-                <a class="footer-partner-link w-inline-block" href="#">
+                <a class="footer-partner-link w-inline-block" href="http://www.supsi.ch/" target="_blank">
                     <img class="footer-logo" src="<?php echo SITE_RELATIVE_PATH ?>/images/logo_SUPSI.png" width="125">
                 </a>
-                <a class="footer-partner-link w-inline-block" href="#">
+                <a class="footer-partner-link w-inline-block" href="http://waag.org/en" target="_blank">
                     <img class="footer-logo"
                          src="<?php echo SITE_RELATIVE_PATH ?>/images/waag-f1d052f43133268eaf2e13090a0b4bf1.png"
                          width="125">
                 </a>
-                <a class="footer-partner-link w-inline-block" href="#">
+                <a class="footer-partner-link w-inline-block" href="http://www.nesta.org.uk/" target="_blank">
                     <img class="footer-logo"
                          src="<?php echo SITE_RELATIVE_PATH ?>/images/nesta-6a9b5fe999e8323b379ccc0d8e70290f.png"
                          width="125">

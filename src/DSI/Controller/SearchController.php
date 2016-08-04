@@ -54,7 +54,7 @@ class SearchController
                     'blogPosts' => array_map(function (Story $story) {
                         return [
                             'name' => $story->getTitle(),
-                            'url' => URL::story($story),
+                            'url' => URL::blogPost($story),
                         ];
                     }, $blogPosts),
                 ]);

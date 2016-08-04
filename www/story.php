@@ -12,7 +12,7 @@ require __DIR__ . '/header.php';
             <div class="post-single-date"><?php echo $story->getDatePublished('jS F Y') ?></div>
             <div class="breadcrumb-container">
                 <div class="bread-crumbs w-clearfix">
-                    <a class="breadcrumb-root w-inline-block" href="<?php echo \DSI\Service\URL::stories() ?>">
+                    <a class="breadcrumb-root w-inline-block" href="<?php echo \DSI\Service\URL::blogPosts() ?>">
                         <div class="breadcrumb-link">Stories</div>
                         <div class="arrow-right"></div>
                     </a>
@@ -73,7 +73,7 @@ require __DIR__ . '/header.php';
                             <?php foreach ($stories AS $story) { ?>
                                 <li class="latest-post-li-enc">
                                     <a class="w-inline-block latest-post-li"
-                                       href="<?php echo \DSI\Service\URL::story($story) ?>">
+                                       href="<?php echo \DSI\Service\URL::blogPost($story) ?>">
                                         <div class="w-row">
                                             <div class="w-col w-col-4 w-col-stack">
                                                 <div
