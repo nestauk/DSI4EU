@@ -193,10 +193,15 @@ class CaseStudy
     }
 
     /**
+     * @param null $format
      * @return string
      */
-    public function getProjectStartDate(): string
+    public function getProjectStartDate($format = null): string
     {
+        if ($format !== null) {
+            return date($format, strtotime($this->projectStartDate));
+        }
+
         return (string)$this->projectStartDate;
     }
 
