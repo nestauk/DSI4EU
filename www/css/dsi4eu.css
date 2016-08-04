@@ -4804,8 +4804,13 @@ strong {
 
 .sm-nu-bloxk {
   position: relative;
-  width: 100%;
+  display: block;
+  width: 102px;
   height: 32px;
+  max-width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  float: left;
   border-radius: 3px;
   background-color: hsla(0, 0%, 100%, .1);
   -webkit-transition: all 200ms ease;
@@ -4815,6 +4820,13 @@ strong {
 
 .sm-nu-bloxk:hover {
   background-color: hsla(0, 0%, 100%, .32);
+}
+
+.sm-nu-bloxk.inline {
+  display: inline-block;
+  width: 120px;
+  margin-right: 5px;
+  margin-left: 5px;
 }
 
 .sm-icon {
@@ -6461,7 +6473,7 @@ strong {
 
 .header-large-desc {
   display: block;
-  max-width: 750px;
+  max-width: auto;
   margin-right: auto;
   margin-bottom: 0px;
   margin-left: auto;
@@ -6584,6 +6596,8 @@ strong {
 }
 
 .ext-url {
+  display: block;
+  margin-bottom: 30px;
   font-family: 'Open Sans', sans-serif;
   color: #fff;
 }
@@ -7073,6 +7087,12 @@ strong {
 
 .footer-link-small {
   color: #1dc9a0;
+}
+
+.expanding-social {
+  display: inline-block;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 html.w-mod-js *[data-ix="pin-drop"] {
@@ -8096,6 +8116,9 @@ html.w-mod-js *[data-ix="menuhide"] {
     margin-top: 13px;
     margin-bottom: 10px;
     line-height: 15px;
+  }
+  .sm-nu-bloxk.inline {
+    width: 46%;
   }
   .cta-block {
     height: 384px;

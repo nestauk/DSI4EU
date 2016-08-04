@@ -28,51 +28,42 @@ require __DIR__ . '/header.php';
                 <div class="header-large-desc">
                     <a class="ext-url" data-ix="fadeinup-2"
                        href="<?php echo $organisation->getUrl() ?>"><?php echo $organisation->getUrl() ?></a>
-                    <div class="project-single-social" data-ix="fadeinup-3">
-                        <div class="w-row">
+                    <div>
+                        <div class="expanding-social w-clearfix">
                             <?php if (isset($links['facebook'])) { ?>
-                                <div class="w-col w-col-3 w-col-small-6 w-col-tiny-6">
-                                    <div class="sm-nu-bloxk w-clearfix">
-                                        <a href="<?php echo $links['facebook'] ?>" target="_blank">
-                                            <img class="sm-icon"
-                                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/facebook-logo.png"
-                                                 width="40">
-                                            <div class="hero-social-label">Facebook</div>
-                                        </a>
-                                    </div>
+                                <div class="inline sm-nu-bloxk w-clearfix">
+                                    <a href="<?php echo $links['facebook'] ?>" target="_blank">
+                                        <img class="sm-icon" width="40"
+                                             src="<?php echo SITE_RELATIVE_PATH ?>/images/facebook-logo.png">
+                                        <div class="hero-social-label">Facebook</div>
+                                    </a>
                                 </div>
                             <?php } ?>
                             <?php if (isset($links['twitter'])) { ?>
-                                <div class="w-col w-col-3 w-col-small-6 w-col-tiny-6">
-                                    <div class="sm-nu-bloxk w-clearfix">
-                                        <a href="<?php echo $links['twitter'] ?>" target="_blank">
-                                            <img class="sm-icon"
-                                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/twitter-logo-silhouette.png">
-                                            <div class="hero-social-label">Twitter</div>
-                                        </a>
-                                    </div>
+                                <div class="inline sm-nu-bloxk w-clearfix">
+                                    <a href="<?php echo $links['twitter'] ?>" target="_blank">
+                                        <img class="sm-icon" width="40"
+                                             src="<?php echo SITE_RELATIVE_PATH ?>/images/twitter-logo-silhouette.png">
+                                        <div class="hero-social-label">Twitter</div>
+                                    </a>
                                 </div>
                             <?php } ?>
                             <?php if (isset($links['github'])) { ?>
-                                <div class="w-col w-col-3 w-col-small-6 w-col-tiny-6">
-                                    <div class="sm-nu-bloxk w-clearfix">
-                                        <a href="<?php echo $links['github'] ?>" target="_blank">
-                                            <img class="sm-icon"
-                                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/social.png">
-                                            <div class="hero-social-label">Github</div>
-                                        </a>
-                                    </div>
+                                <div class="inline sm-nu-bloxk w-clearfix">
+                                    <a href="<?php echo $links['github'] ?>" target="_blank">
+                                        <img class="sm-icon" width="40"
+                                             src="<?php echo SITE_RELATIVE_PATH ?>/images/social.png">
+                                        <div class="hero-social-label">Github</div>
+                                    </a>
                                 </div>
                             <?php } ?>
                             <?php if (isset($links['googleplus'])) { ?>
-                                <div class="w-col w-col-3 w-col-small-6 w-col-tiny-6">
-                                    <div class="sm-nu-bloxk w-clearfix">
-                                        <a href="<?php echo $links['googleplus'] ?>" target="_blank">
-                                            <img class="sm-icon"
-                                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/google-plus-logo.png">
-                                            <div class="hero-social-label">Google +</div>
-                                        </a>
-                                    </div>
+                                <div class="inline sm-nu-bloxk w-clearfix">
+                                    <a href="<?php echo $links['googleplus'] ?>" target="_blank">
+                                        <img class="sm-icon" width="40"
+                                             src="<?php echo SITE_RELATIVE_PATH ?>/images/google-plus-logo.png">
+                                        <div class="hero-social-label">Google +</div>
+                                    </a>
                                 </div>
                             <?php } ?>
                         </div>
