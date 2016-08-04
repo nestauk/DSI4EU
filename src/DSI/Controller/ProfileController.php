@@ -164,6 +164,7 @@ class ProfileController
         } else {
             $projects = (new ProjectRepository())->getAll();
             $organisations = (new OrganisationRepository())->getAll();
+            $userLinks = (new UserLinkRepository())->getLinksByUserID($userID);
             $angularModules['fileUpload'] = true;
             require __DIR__ . '/../../../www/profile.php';
         }

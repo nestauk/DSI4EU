@@ -5,6 +5,7 @@ require __DIR__ . '/header.php';
 /** @var $user \DSI\Entity\User */
 /** @var $projects \DSI\Entity\Project[] */
 /** @var $organisations \DSI\Entity\Organisation[] */
+/** @var $userLinks string[] */
 ?>
     <script type="text/javascript">
         profileUserID = '<?php echo $userID?>';
@@ -54,6 +55,17 @@ require __DIR__ . '/header.php';
                                     <?php echo $user->getCountryName() ?>
                                 </p>
                             <?php } ?>
+
+                            <h3 class="card-h info-h">Contact me</h3>
+                            <ul class="w-list-unstyled">
+                                <?php foreach ($userLinks AS $link) { ?>
+                                    <li class="profile-contact-link">
+                                        <a class="link profile-contact-link" href="<?php echo $link ?>">
+                                            <?php echo show_input($link) ?>
+                                        </a>
+                                    </li>
+                                <?php } ?>
+                            </ul>
 
                             <h3 class="info-h card-h">My skills:</h3>
                             <div class="w-clearfix tags-block">
