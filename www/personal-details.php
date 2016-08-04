@@ -347,7 +347,7 @@ $leftSideText .= "<p>The information is optional. You will be able to edit and e
                                                                     <option></option>
                                                                     <?php foreach ($projects AS $project) { ?>
                                                                         <option value="<?php echo $project->getId() ?>"
-                                                                                data-logo="<?php echo $project->getLogoOrDefault() ?>"
+                                                                                data-logo="<?php echo $project->getLogoOrDefaultSilver() ?>"
                                                                                 data-url="<?php echo \DSI\Service\URL::project($project) ?>"
                                                                                 data-country="<?php echo $project->getCountryName() ?>"
                                                                                 data-type="project"
