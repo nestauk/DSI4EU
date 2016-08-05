@@ -323,8 +323,8 @@ div.error {
     padding: 7px 10px;
     border-radius: 3px;
     margin: 20px 0;
-    background-image: url("images/add.png");
+    background-image: url("../images/add.png");
     background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: right;
+    background-position: 265px center;
+    background-size: 15px;
 }

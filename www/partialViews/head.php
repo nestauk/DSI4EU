@@ -55,7 +55,7 @@ use \DSI\Service\Sysctl;
       href="<?php echo SITE_RELATIVE_PATH ?>/css/sweet.css?<?php Sysctl::echoVersion() ?>">
 
 <?php /** Select2 */ ?>
-<script src="<?php echo SITE_RELATIVE_PATH ?>/lib/select2/select2.full.min.js"></script>
+<script src="<?php echo SITE_RELATIVE_PATH ?>/lib/select2/select2.full.js"></script>
 
 <script>
     var SITE_RELATIVE_PATH = '<?php echo SITE_RELATIVE_PATH?>';
