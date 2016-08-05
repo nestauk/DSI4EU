@@ -318,9 +318,13 @@ div.error {
 
 .select2-container .select2-search--inline {
     float: left;
-    background: #d8d8d8;
-    min-width: 200px;
-    padding: 5px 10px;
+    background: #f3f3f3;
+    min-width: 290px;
+    padding: 7px 10px;
     border-radius: 3px;
     margin: 20px 0;
+    background-image: url("images/add.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: right;
 }
