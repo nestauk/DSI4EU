@@ -156,37 +156,37 @@ use DSI\Service\URL;
                     <a href="#" data-ix="destroysignup">Cancel</a>
                 </div>
 
-                <div class="w-row social-badges">
-                    <div class="w-col w-col-3 w-col-small-3 w-col-tiny-3">
-                        <a href="<?php echo URL::loginWithGitHub() ?>"
-                           class="w-inline-block social-login">
-                            <img width="100%" height="100%"
-                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/social-1_square-github.svg"
-                                 class="social-badge">
-                        </a>
-                    </div>
-                    <div class="w-col w-col-3 w-col-small-3 w-col-tiny-3">
+                <div class="w-row">
+                    <div class="w-col w-col-3">
                         <a href="<?php echo URL::loginWithFacebook() ?>"
-                           class="w-inline-block social-login">
-                            <img width="100%" height="100%"
-                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/social-1_square-facebook.svg"
-                                 class="social-badge">
+                           class="register-social w-clearfix w-inline-block">
+                            <img class="register-social-image"
+                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/facebook-logo.png">
+                            <div class="register-social-text">Facebook</div>
                         </a>
                     </div>
-                    <div class="w-col w-col-3 w-col-small-3 w-col-tiny-3">
-                        <a href="<?php echo URL::loginWithGoogle() ?>"
-                           class="w-inline-block social-login">
-                            <img width="100%" height="100%"
-                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/social-1_square-google-plus.svg"
-                                 class="social-badge">
-                        </a>
-                    </div>
-                    <div class="w-col w-col-3 w-col-small-3 w-col-tiny-3">
+                    <div class="w-col w-col-3">
                         <a href="<?php echo URL::loginWithTwitter() ?>"
-                           class="w-inline-block social-login">
-                            <img width="100%" height="100%"
-                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/social-1_square-twitter.svg"
-                                 class="social-badge">
+                           class="register-social w-clearfix w-inline-block">
+                            <img class="register-social-image"
+                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/twitter-logo-silhouette.png">
+                            <div class="register-social-text">Twitter</div>
+                        </a>
+                    </div>
+                    <div class="w-col w-col-3">
+                        <a href="<?php echo URL::loginWithGitHub() ?>"
+                           class="register-social w-clearfix w-inline-block">
+                            <img class="register-social-image"
+                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/social.png">
+                            <div class="register-social-text">Github</div>
+                        </a>
+                    </div>
+                    <div class="w-col w-col-3">
+                        <a href="<?php echo URL::loginWithGoogle() ?>"
+                           class="register-social w-clearfix w-inline-block">
+                            <img class="register-social-image"
+                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/google-plus-logo.png">
+                            <div class="register-social-text">Google plus</div>
                         </a>
                     </div>
                 </div>
