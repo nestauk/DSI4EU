@@ -7,6 +7,7 @@ use DSI\Repository\CountryRegionRepository;
 use DSI\Repository\OrganisationProjectRepository;
 use DSI\Repository\ProjectPostCommentRepository;
 use DSI\Repository\ProjectRepository;
+use DSI\Repository\ProjectRepositoryInAPC;
 use DSI\Repository\UserRepository;
 use DSI\Service\Auth;
 use DSI\Service\URL;
@@ -19,7 +20,7 @@ class ProjectsController
     {
         if ($this->responseFormat == 'json') {
             // (new CountryRegionRepository())->getAll();
-            $projectRepo = new ProjectRepository();
+            $projectRepositoryInAPC = new ProjectRepositoryInAPC();
             echo json_encode(array_map(function (Project $project) {
                 $region = $project->getCountryRegion();
                 return [
@@ -30,7 +31,7 @@ class ProjectsController
                     'url' => URL::project($project),
                     'organisationsCount' => $project->getOrganisationsCount(),
                 ];
-            }, $projectRepo->getAll()));
+            }, $projectRepositoryInAPC->getAll()));
         } else {
             $authUser = new Auth();
             if ($authUser->getUserId())

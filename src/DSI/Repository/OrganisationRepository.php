@@ -36,6 +36,7 @@ class OrganisationRepository
         $query->query();
 
         $organisation->setId($query->insert_id());
+        OrganisationRepositoryInAPC::resetCache();
     }
 
     public function save(Organisation $organisation)
@@ -69,6 +70,7 @@ class OrganisationRepository
 
         $query = new SQL("UPDATE `organisations` SET " . implode(', ', $insert) . " WHERE `id` = '{$organisation->getId()}'");
         $query->query();
+        OrganisationRepositoryInAPC::resetCache();
     }
 
     public function getById(int $id): Organisation
@@ -135,6 +137,7 @@ class OrganisationRepository
     {
         $query = new SQL("TRUNCATE TABLE `organisations`");
         $query->query();
+        OrganisationRepositoryInAPC::resetCache();
     }
 
     private function getObjectWhere($where)

@@ -30,6 +30,9 @@ class CountryRegionRepository
         $countryRegion->setId($query->insert_id());
 
         self::$objects[$countryRegion->getId()] = $countryRegion;
+
+        OrganisationRepositoryInAPC::resetCache();
+        ProjectRepositoryInAPC::resetCache();
     }
 
     public function save(CountryRegion $countryRegion)
@@ -55,6 +58,9 @@ class CountryRegionRepository
         $query->query();
 
         self::$objects[$countryRegion->getId()] = $countryRegion;
+
+        OrganisationRepositoryInAPC::resetCache();
+        ProjectRepositoryInAPC::resetCache();
     }
 
     public function getById(int $id): CountryRegion

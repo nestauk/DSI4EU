@@ -4,7 +4,9 @@ namespace DSI\Controller;
 
 use DSI\Repository\CaseStudyRepository;
 use DSI\Repository\OrganisationRepository;
+use DSI\Repository\OrganisationRepositoryInAPC;
 use DSI\Repository\ProjectRepository;
+use DSI\Repository\ProjectRepositoryInAPC;
 use DSI\Repository\StoryRepository;
 use DSI\Repository\UserRepository;
 use DSI\Service\Auth;
@@ -40,7 +42,7 @@ class SitemapController
      */
     private function addOrganisationsTo($links)
     {
-        $organisations = (new OrganisationRepository())->getAll();
+        $organisations = (new OrganisationRepositoryInAPC())->getAll();
         // $organisations = (new OrganisationRepository())->getAllPublished();
         foreach ($organisations AS $organisation) {
             $organisationLink = new SitemapLink();
@@ -95,7 +97,7 @@ class SitemapController
      */
     private function addProjectsTo($links)
     {
-        $projects = (new ProjectRepository())->getAll();
+        $projects = (new ProjectRepositoryInAPC())->getAll();
         // $projects = (new ProjectRepository())->getAllPublished();
         foreach ($projects AS $project) {
             $projectLink = new SitemapLink();

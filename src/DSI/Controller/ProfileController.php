@@ -6,8 +6,10 @@ use DSI\Entity\OrganisationMember;
 use DSI\Entity\ProjectMember;
 use DSI\Repository\OrganisationMemberRepository;
 use DSI\Repository\OrganisationRepository;
+use DSI\Repository\OrganisationRepositoryInAPC;
 use DSI\Repository\ProjectMemberRepository;
 use DSI\Repository\ProjectRepository;
+use DSI\Repository\ProjectRepositoryInAPC;
 use DSI\Repository\UserLanguageRepository;
 use DSI\Repository\UserLinkRepository;
 use DSI\Repository\UserRepository;
@@ -162,8 +164,8 @@ class ProfileController
                 ],
             ]);
         } else {
-            $projects = (new ProjectRepository())->getAll();
-            $organisations = (new OrganisationRepository())->getAll();
+            $projects = (new ProjectRepositoryInAPC())->getAll();
+            $organisations = (new OrganisationRepositoryInAPC())->getAll();
             $userLinks = (new UserLinkRepository())->getLinksByUserID($userID);
             $angularModules['fileUpload'] = true;
             require __DIR__ . '/../../../www/profile.php';

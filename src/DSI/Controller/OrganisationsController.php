@@ -6,6 +6,7 @@ use DSI\Entity\Organisation;
 use DSI\Repository\CountryRegionRepository;
 use DSI\Repository\CountryRepository;
 use DSI\Repository\OrganisationRepository;
+use DSI\Repository\OrganisationRepositoryInAPC;
 use DSI\Repository\OrganisationSizeRepository;
 use DSI\Repository\OrganisationTypeRepository;
 use DSI\Repository\UserRepository;
@@ -30,7 +31,7 @@ class OrganisationsController
             // (new OrganisationTypeRepository())->getAll();
             // (new OrganisationSizeRepository())->getAll();
 
-            $organisationRepo = new OrganisationRepository();
+            $organisationRepositoryInAPC = new OrganisationRepositoryInAPC();
             echo json_encode(array_map(function (Organisation $organisation) {
                 $region = $organisation->getCountryRegion();
                 return [
@@ -42,7 +43,7 @@ class OrganisationsController
                     'projectsCount' => $organisation->getProjectsCount(),
                     'partnersCount' => $organisation->getPartnersCount(),
                 ];
-            }, $organisationRepo->getAll()));
+            }, $organisationRepositoryInAPC->getAll()));
         } else {
             $pageTitle = 'Organisations';
             require __DIR__ . '/../../../www/organisations.php';

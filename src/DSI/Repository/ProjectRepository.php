@@ -34,6 +34,7 @@ class ProjectRepository
         $query->query();
 
         $project->setId($query->insert_id());
+        ProjectRepositoryInAPC::resetCache();
     }
 
     public function save(Project $project)
@@ -65,6 +66,7 @@ class ProjectRepository
 
         $query = new SQL("UPDATE `projects` SET " . implode(', ', $insert) . " WHERE `id` = '{$project->getId()}'");
         $query->query();
+        ProjectRepositoryInAPC::resetCache();
     }
 
     public function getById(int $id): Project
@@ -129,6 +131,7 @@ class ProjectRepository
     {
         $query = new SQL("TRUNCATE TABLE `projects`");
         $query->query();
+        ProjectRepositoryInAPC::resetCache();
     }
 
     private function getObjectWhere($where)

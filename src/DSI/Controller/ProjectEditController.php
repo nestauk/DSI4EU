@@ -11,6 +11,7 @@ use DSI\Repository\DsiFocusTagRepository;
 use DSI\Repository\ImpactTagRepository;
 use DSI\Repository\OrganisationProjectRepository;
 use DSI\Repository\OrganisationRepository;
+use DSI\Repository\OrganisationRepositoryInAPC;
 use DSI\Repository\ProjectImpactTagARepository;
 use DSI\Repository\ProjectDsiFocusTagRepository;
 use DSI\Repository\ProjectImpactTagCRepository;
@@ -144,7 +145,7 @@ class ProjectEditController
             $projectImpactTagsB = (new ProjectDsiFocusTagRepository())->getTagsNameByProjectID($project->getId());
             $projectImpactTagsC = (new ProjectImpactTagCRepository())->getTagsNameByProjectID($project->getId());
             $projectTags = (new ProjectTagRepository())->getTagsNameByProjectID($project->getId());
-            $organisations = (new OrganisationRepository())->getAll();
+            $organisations = (new OrganisationRepositoryInAPC())->getAll();
             $projectOrganisations = (new OrganisationProjectRepository())->getOrganisationIDsForProject($project->getId());
             $angularModules['fileUpload'] = true;
             require __DIR__ . '/../../../www/project-edit.php';

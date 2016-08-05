@@ -16,6 +16,7 @@ use DSI\Repository\OrganisationSizeRepository;
 use DSI\Repository\OrganisationTagRepository;
 use DSI\Repository\OrganisationTypeRepository;
 use DSI\Repository\ProjectRepository;
+use DSI\Repository\ProjectRepositoryInAPC;
 use DSI\Repository\TagForOrganisationsRepository;
 use DSI\Repository\UserRepository;
 use DSI\Service\Auth;
@@ -312,7 +313,7 @@ class OrganisationEditController
             $angularModules['fileUpload'] = true;
             $tags = (new TagForOrganisationsRepository())->getAll();
             $orgTags = (new OrganisationTagRepository())->getTagsNameByOrganisationID($organisation->getId());
-            $projects = (new ProjectRepository())->getAll();
+            $projects = (new ProjectRepositoryInAPC())->getAll();
             $orgProjects = (new OrganisationProjectRepository())->getProjectIDsForOrganisation($organisation->getId());
             require __DIR__ . '/../../../www/organisation-edit.php';
         }

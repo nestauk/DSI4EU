@@ -43,6 +43,9 @@ class UserRepository
         $user->setId($query->insert_id());
 
         self::$objects[$user->getId()] = $user;
+
+        OrganisationRepositoryInAPC::resetCache();
+        ProjectRepositoryInAPC::resetCache();
     }
 
     public function save(User $user)
@@ -80,6 +83,9 @@ class UserRepository
         $query->query();
 
         self::$objects[$user->getId()] = $user;
+
+        OrganisationRepositoryInAPC::resetCache();
+        ProjectRepositoryInAPC::resetCache();
     }
 
     public function getById(int $id): User

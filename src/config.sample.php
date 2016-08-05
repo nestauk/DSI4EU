@@ -18,6 +18,13 @@ require __DIR__ . '/functions.php';
 require __DIR__ . '/exceptions.php';
 require __DIR__ . '/../vendor/autoload.php';
 
+\DSI\Repository\OrganisationRepositoryInAPC::setApcKey(
+    'digitalSocial:organisations'
+);
+\DSI\Repository\ProjectRepositoryInAPC::setApcKey(
+    'digitalSocial:projects'
+);
+
 \DSI\Service\SQL::credentials(array(
     'username' => '',
     'password' => '',
