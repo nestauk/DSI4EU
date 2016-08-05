@@ -313,3 +313,14 @@ div.error {
     font-weight: bold;
     margin-right: 7px;
 }
+
+/* add tags css */
+
+.select2-container .select2-search--inline {
+    float: left;
+    background: #d8d8d8;
+    min-width: 200px;
+    padding: 5px 10px;
+    border-radius: 3px;
+    margin: 20px 0;
+}
