@@ -239,11 +239,13 @@ div.error {
 .select2-logo {
     max-height: 40px;
     max-width: 40px;
+    margin-right: 15px;
+    margin-bottom: 5px;
 }
 
 .designSelectBox .involved-card .involved-organisation-img {
-    max-width: 50px;
-    max-height: 50px;
+    max-width: 40px;
+    max-height: 40px;
 }
 
 /* personal profile project and organisation card styles */
