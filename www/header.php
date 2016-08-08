@@ -19,7 +19,7 @@ use \DSI\Service\Sysctl;
 <body ng-app="DSIApp" ng-controller="SearchController" id="top">
 
     <div class="alt nav-main w-nav white-menu" data-animation="default" data-collapse="medium" data-duration="400">
-        <div class="container-wide menu w-clearfix">
+        <div class="menu w-clearfix">
             <a class="w-nav-brand" href="<?php echo URL::home() ?>">
                 <img class="logo-dark" src="<?php echo SITE_RELATIVE_PATH ?>/images/dark.svg">
                 <div class="beta-badge">Beta</div>
@@ -67,7 +67,7 @@ use \DSI\Service\Sysctl;
 <?php if (!isset($hideSearch) OR $hideSearch !== true) { ?>
     <div class="search bg-blur">
         <div class="dark-bg-overlay"></div>
-        <div class="container-wide search-container">
+        <div class="search-container">
             <div class="w-row top-row-personal">
                 <div class="w-col w-col-5 w-col-small-5 w-clearfix" id="userMenu">
                     <?php if (isset($loggedInUser)) { ?>
