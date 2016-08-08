@@ -163,6 +163,7 @@ class OrganisationController
         $memberRequests = [];
         $isOwner = false;
         $canUserRequestMembership = false;
+        $userCanEditOrganisation = false;
 
         $organisationMembers = (new OrganisationMemberRepository())->getMembersForOrganisation($organisation->getId());
         $organisationProjects = (new OrganisationProjectRepository())->getByOrganisationID($organisation->getId());
