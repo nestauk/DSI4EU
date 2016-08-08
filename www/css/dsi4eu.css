@@ -5205,7 +5205,7 @@ strong {
 }
 
 .login-modal.modal {
-  display: block;
+  display: none;
 }
 
 .signup-input {
