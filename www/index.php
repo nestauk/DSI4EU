@@ -192,6 +192,9 @@ class Router
         } elseif ($this->pageURL === '/privacy-policy') {
             $this->privacyPolicyPage();
 
+        } elseif ($this->pageURL === '/updates') {
+            $this->updatesPage();
+
 // Sitemap
         } elseif ($this->pageURL === '/sitemap.xml') {
             $this->sitemapXmlPage();
@@ -612,6 +615,13 @@ class Router
     {
         $command = new \DSI\Controller\StaticHtmlController();
         $command->view = 'privacy-policy.php';
+        $command->exec();
+    }
+
+    private function updatesPage()
+    {
+        $command = new \DSI\Controller\StaticHtmlController();
+        $command->view = 'updates.php';
         $command->exec();
     }
 

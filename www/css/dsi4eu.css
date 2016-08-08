@@ -52,7 +52,7 @@ p {
 }
 
 a {
-  color: #318ef3;
+  color: #1dc9a0;
   text-decoration: none;
 }
 
@@ -182,7 +182,7 @@ strong {
   margin-top: 17px;
   border-color: rgba(29, 201, 160, .94);
   background-color: rgba(29, 201, 160, .94);
-  color: #fff;
+  color: #08122a;
 }
 
 .nav.log-in.alt {
@@ -193,27 +193,33 @@ strong {
   color: rgba(29, 201, 160, .94);
 }
 
+.nav.log-in.alt.white-alt {
+  color: #08122a;
+}
+
 .nav.log-in.alt.white-alt:hover {
   border-style: solid;
   border-color: rgba(29, 201, 160, .94);
   background-color: #fff;
-  color: rgba(29, 201, 160, .94);
+  color: #08122a;
 }
 
 .nav.alt {
+  position: relative;
+  display: inline-block;
+  max-width: 160px;
   margin-top: 17px;
   margin-right: 5px;
   margin-left: 5px;
-  padding-top: 7px;
-  padding-bottom: 7px;
-  border: 1px solid #fff;
-  color: #2c2d33;
+  padding: 7px 20px;
+  border: 1px solid transparent;
+  color: #08122a;
 }
 
 .nav.alt:hover {
-  border: 1px solid #dadada;
+  border: 1px solid transparent;
   border-radius: 3px;
-  background-color: #dadada;
+  background-color: transparent;
   color: #2c2d33;
 }
 
@@ -260,7 +266,7 @@ strong {
   top: 105px;
   right: 0px;
   z-index: 10;
-  height: 153px;
+  height: 161px;
   margin-top: -138px;
   border-bottom-style: none;
   border-bottom-color: #18233f;
@@ -345,10 +351,12 @@ strong {
 
 .vert-nav {
   position: relative;
+  top: 6px;
   z-index: 2;
   width: 10px;
-  margin-top: 14px;
+  margin-top: 8px;
   margin-right: 13px;
+  margin-left: 12px;
   float: left;
   opacity: 0.7;
   -webkit-transition: opacity 200ms ease;
@@ -982,6 +990,8 @@ strong {
 }
 
 .link-to-profile {
+  position: relative;
+  top: -1px;
   text-decoration: none;
 }
 
@@ -3086,7 +3096,7 @@ strong {
 .dark-bg-overlay {
   position: absolute;
   left: 0px;
-  top: 104px;
+  top: 111px;
   right: 0px;
   bottom: 0px;
   width: 100%;
@@ -5195,7 +5205,7 @@ strong {
 }
 
 .login-modal.modal {
-  display: none;
+  display: block;
 }
 
 .signup-input {
@@ -5237,6 +5247,8 @@ strong {
 
 .search-input {
   position: relative;
+  top: 0px;
+  margin-right: 13px;
 }
 
 .search-clear {
@@ -6106,6 +6118,9 @@ strong {
 
 .white-menu.nav-main.alt {
   display: block;
+  height: 80px;
+  padding-right: 20px;
+  padding-left: 20px;
   border-bottom: 1px solid #f3f3f3;
 }
 
@@ -7089,6 +7104,10 @@ strong {
   color: #1dc9a0;
 }
 
+.footer-logo {
+  position: relative;
+}
+
 .expanding-social {
   display: inline-block;
   margin-right: auto;
@@ -7144,6 +7163,99 @@ strong {
 
 .badge-text {
   float: left;
+}
+
+.nav-menu {
+  height: 80px;
+}
+
+.stats {
+  position: relative;
+  bottom: 5px;
+  display: block;
+  max-width: 80px;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 1px 8px;
+  border-radius: 2px;
+  background-color: transparent;
+  -webkit-transition: all 200ms ease;
+  transition: all 200ms ease;
+  font-family: 'Open Sans', sans-serif;
+  color: #6c7e8a;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+}
+
+.stats:hover {
+  background-color: #08122a;
+  color: #fff;
+}
+
+.stats.orgs {
+  left: 544px;
+}
+
+.stat-nav {
+  display: inline-block;
+}
+
+.stat-info {
+  position: fixed;
+  top: 101px;
+  right: 219px;
+  width: 500px;
+  height: auto;
+  padding: 40px;
+  border-radius: 3px;
+  background-color: #fff;
+  box-shadow: 0 0 50px -18px rgba(0, 0, 0, .65);
+}
+
+.close-box {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  font-family: 'Open Sans', sans-serif;
+  font-size: 38px;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.stat-h2 {
+  color: #08122a;
+}
+
+.project-stat.stat-info {
+  display: block;
+}
+
+.org-stat.stat-info {
+  display: none;
+}
+
+.stat-link {
+  position: relative;
+  z-index: 97;
+}
+
+.beta-badge {
+  position: absolute;
+  left: 44px;
+  bottom: -19px;
+  padding-right: 10px;
+  padding-left: 10px;
+  border-radius: 3px;
+  background-color: #1dc9a0;
+  font-family: 'Open Sans', sans-serif;
+  color: #fff;
+  font-size: 10px;
+  line-height: 15px;
+  font-weight: 600;
 }
 
 html.w-mod-js *[data-ix="pin-drop"] {
@@ -7292,6 +7404,14 @@ html.w-mod-js *[data-ix="menuhide"] {
   -webkit-transform: translate(0px, -75px);
   -ms-transform: translate(0px, -75px);
   transform: translate(0px, -75px);
+}
+
+html.w-mod-js *[data-ix="hide-stat"] {
+  display: none;
+  opacity: 0;
+  -webkit-transform: translate(0px, 30px);
+  -ms-transform: translate(0px, 30px);
+  transform: translate(0px, 30px);
 }
 
 @media (max-width: 991px) {
