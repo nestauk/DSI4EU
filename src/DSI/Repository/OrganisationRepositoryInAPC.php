@@ -68,10 +68,10 @@ class OrganisationRepositoryInAPC extends OrganisationRepository
         error_log('apcu_exists');
         $results = \apcu_fetch(self::$apcKey, $success);
         if (!$success) {
-            error_log('NOT success');
+            error_log(self::$apcKey . ' NOT found');
             return parent::getAll();
         }
-        error_log('NOT success');
+        error_log(self::$apcKey . ' found');
 
         return $results;
     }
