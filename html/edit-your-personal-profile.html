@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Last Published: Fri Aug 05 2016 14:15:32 GMT+0000 (UTC) -->
+<!-- Last Published: Mon Aug 08 2016 10:33:29 GMT+0000 (UTC) -->
 <html data-wf-page="578a29817b80d9142bab1377" data-wf-site="56e2e31a1b1f8f784728a08c">
 <head>
   <meta charset="utf-8">
@@ -72,22 +72,38 @@
 </head>
 <body>
   <div class="alt nav-main w-nav white-menu" data-animation="default" data-collapse="medium" data-duration="400">
-    <div class="container-wide menu w-clearfix">
-      <a class="w-nav-brand" href="#">
-        <img class="logo-dark" src="images/dark.svg">
-      </a>
-      <nav class="w-nav-menu" role="navigation">
-        <a class="alt nav w-nav-link" href="#">Explore DSI</a>
-        <a class="alt nav w-nav-link" href="#">Case Studies</a>
-        <a class="alt nav w-nav-link" href="#">Blog</a>
-        <a class="alt nav w-nav-link" href="#">Projects</a>
-        <a class="alt nav w-nav-link" href="#">Organisations</a>
-        <a class="alt log-in nav w-nav-link white-alt" href="#">Login</a>
-        <a class="alt log-in log-in-alt nav w-nav-link" href="#">Signup</a>
-      </nav>
-      <div class="w-nav-button">
-        <div class="w-icon-nav-menu"></div>
+    <a class="w-nav-brand" href="#">
+      <img class="logo-dark" src="images/dark.svg">
+    </a>
+    <nav class="nav-menu w-nav-menu" role="navigation">
+      <a class="alt nav w-nav-link" href="#">Explore DSI</a>
+      <a class="alt nav w-nav-link" href="#">Case Studies</a>
+      <a class="alt nav w-nav-link" href="#">Blog</a>
+      <div class="stat-nav">
+        <a class="alt nav" href="#">Projects</a>
+        <div class="stats" data-ix="showprojectstatsinfo">1,345</div>
+        <div class="project-stat stat-info" data-ix="hide-stat">
+          <div class="close-box" data-ix="closeprojectsstatinfo">+</div>
+          <h2 class="stat-h2">{{1,345}} Projects</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p>
+          <a class="stat-link" data-ix="closeprojectsstatinfo" href="#">VIEW PROJECTS</a>
+        </div>
       </div>
+      <div class="stat-nav">
+        <a class="alt nav" href="#">Organisations</a>
+        <div class="stats" data-ix="showprojectstatsinfo-2">1,345</div>
+        <div class="org-stat stat-info" data-ix="closeprojectsstatinfo-2">
+          <div class="close-box" data-ix="closeprojectsstatinfo-2">+</div>
+          <h2 class="stat-h2">{{1,345}} Organisations</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p>
+          <a data-ix="closeprojectsstatinfo-2" href="#">VIEW ORGANISATIONS</a>
+        </div>
+      </div>
+      <a class="alt log-in nav w-nav-link white-alt" href="#">Login</a>
+      <a class="alt log-in log-in-alt nav w-nav-link" href="#">Signup</a>
+    </nav>
+    <div class="w-nav-button">
+      <div class="w-icon-nav-menu"></div>
     </div>
   </div>
   <div class="bg-blur search">
