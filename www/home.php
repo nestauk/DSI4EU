@@ -27,7 +27,9 @@ use \DSI\Entity\Image;
     <div class="container-wide nav-container w-clearfix">
         <a class="w-nav-brand" href="<?php echo URL::home() ?>">
             <img class="brand" src="<?php echo SITE_RELATIVE_PATH ?>/images/dark.svg" width="160">
+            <div class="beta-badge home">Beta</div>
         </a>
+
         <nav class="m-nav-open w-nav-menu" role="navigation">
             <?php if ($loggedInUser) { ?>
                 <a class="nav w-nav-link" href="<?php echo URL::dashboard() ?>">Dashboard</a>
