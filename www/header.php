@@ -22,8 +22,9 @@ use \DSI\Service\Sysctl;
         <div class="container-wide menu w-clearfix">
             <a class="w-nav-brand" href="<?php echo URL::home() ?>">
                 <img class="logo-dark" src="<?php echo SITE_RELATIVE_PATH ?>/images/dark.svg">
+                <div class="beta-badge">Beta</div>
             </a>
-            <nav class="w-nav-menu" role="navigation">
+            <nav class="nav-menu w-nav-menu" role="navigation">
                 <?php /* <a class="alt nav w-nav-link" href="<?php echo URL::exploreDSI() ?>">Explore DSI</a> */ ?>
                 <?php if ($loggedInUser) { ?>
                     <a class="alt nav w-nav-link" href="<?php echo URL::dashboard() ?>">Dashboard</a>

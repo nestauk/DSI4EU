@@ -28,8 +28,12 @@ if (!isset($loggedInUser))
         </div>
         <div class="footer-columns w-row">
             <div class="w-col w-col-4">
-                <img class="footer-brand" src="<?php echo SITE_RELATIVE_PATH ?>/images/all white.svg">
+                <div class="footer-logo">
+                    <img class="footer-brand" src="<?php echo SITE_RELATIVE_PATH ?>/images/all white.svg">
+                    <div class="beta-badge">Beta</div>
+                </div>
             </div>
+
             <div class="w-col w-col-2">
                 <h3 class="footer-h3">People</h3>
                 <ul class="w-list-unstyled">
