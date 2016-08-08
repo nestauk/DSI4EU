@@ -85,6 +85,11 @@ class URL
         return SITE_RELATIVE_PATH . '/feedback';
     }
 
+    public static function updates()
+    {
+        return SITE_RELATIVE_PATH . '/updates';
+    }
+
     public static function loginWithGitHub()
     {
         return SITE_RELATIVE_PATH . '/github-login';

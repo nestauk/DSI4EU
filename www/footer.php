@@ -100,7 +100,14 @@ if (!isset($loggedInUser))
             </div>
             <div class="w-col w-col-2">
                 <h3 class="footer-h3">Development</h3>
-                <a class="footer-link" href="<?php echo URL::feedback() ?>">Feedback</a>
+                <ul class="w-list-unstyled">
+                    <li class="footer-link">
+                        <a class="footer-link" href="<?php echo URL::updates() ?>">Updates</a>
+                    </li>
+                    <li class="footer-link">
+                        <a class="footer-link" href="<?php echo URL::feedback() ?>">Feedback</a>
+                    </li>
+                </ul>
             </div>
         </div>
         <div class="footer-partner-row w-row">
