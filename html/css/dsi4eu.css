@@ -7104,6 +7104,10 @@ strong {
   color: #1dc9a0;
 }
 
+.footer-logo {
+  position: relative;
+}
+
 .expanding-social {
   display: inline-block;
   margin-right: auto;
@@ -7237,6 +7241,21 @@ strong {
 .stat-link {
   position: relative;
   z-index: 97;
+}
+
+.beta-badge {
+  position: absolute;
+  left: 44px;
+  bottom: -19px;
+  padding-right: 10px;
+  padding-left: 10px;
+  border-radius: 3px;
+  background-color: #1dc9a0;
+  font-family: 'Open Sans', sans-serif;
+  color: #fff;
+  font-size: 10px;
+  line-height: 15px;
+  font-weight: 600;
 }
 
 html.w-mod-js *[data-ix="pin-drop"] {
