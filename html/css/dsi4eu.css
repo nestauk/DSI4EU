@@ -7258,6 +7258,11 @@ strong {
   font-weight: 600;
 }
 
+.beta-badge.home {
+  left: 54px;
+  bottom: 4px;
+}
+
 html.w-mod-js *[data-ix="pin-drop"] {
   opacity: 0;
   -webkit-transform: translate(0px, -100px);
