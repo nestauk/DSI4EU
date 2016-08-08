@@ -59,19 +59,17 @@ class ProjectRepositoryInAPC extends ProjectRepository
     private function getAllFromCache()
     {
         if (!\apcu_exists(self::$apcKey)) {
-            error_log('NOT apcu_exists');
+            error_log(self::$apcKey . ' was not set');
             $results = parent::getAll();
             \apcu_store(self::$apcKey, $results);
             return $results;
         }
 
-        error_log('apcu_exists');
         $results = \apcu_fetch(self::$apcKey, $success);
         if (!$success) {
-            error_log(self::$apcKey . ' NOT found');
+            error_log('could not fetch ' . self::$apcKey . ' value');
             return parent::getAll();
         }
-        error_log(self::$apcKey . ' found');
 
         return $results;
     }
