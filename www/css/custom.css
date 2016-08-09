@@ -330,3 +330,24 @@ div.error {
     background-position: 265px center;
     background-size: 15px;
 }
+
+.create-drop-down.w--open {
+    right: -10px;
+}
+
+.w-dropdown {
+    display: inline;
+}
+
+.create-drop-down.w--open {
+    margin-top: 0px;
+}
+
+.arror-up {
+    right: -80px;
+}
+
+.white-menu.nav-main.alt {
+    padding-right: 25px;
+    padding-left: 30px;
+}
