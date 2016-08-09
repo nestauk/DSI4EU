@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<!-- Last Published: Tue Aug 09 2016 07:23:17 GMT+0000 (UTC) -->
+<html data-wf-page="577149898479866150f499cd" data-wf-site="56e2e31a1b1f8f784728a08c">
+<head>
+  <meta charset="utf-8">
+  <title>Home dashboard</title>
+  <meta content="Home dashboard" property="og:title">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <link href="css/normalize.css" rel="stylesheet" type="text/css">
+  <link href="css/components.css" rel="stylesheet" type="text/css">
+  <link href="css/dsi4eu.css" rel="stylesheet" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
+  <script type="text/javascript">
+    WebFont.load({
+      google: {
+        families: ["Open Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic"]
+      }
+    });
+  </script>
+  <script src="js/modernizr.js" type="text/javascript"></script>
+  <link href="images/ico-small.png" rel="shortcut icon" type="image/x-icon">
+  <link href="images/ico-large.png" rel="apple-touch-icon">
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+  <style>
+    .bg-blur {
+      -webkit-backdrop-filter: saturate(180%) blur(5px);
+      backdrop-filter: saturate(180%) blur(5px);
+      }
+      .blur-20 {
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      backdrop-filter: saturate(180%) blur(20px);
+      }
+    .el-blur {
+      -webkit-filter: blur(25px);
+      -moz-filter: blur(25px);
+      -o-filter: blur(25px);
+      -ms-filter: blur(25px);
+      filter: blur(25px);
+      }
+      .login-field.error {
+        height: 50px;
+        border-style: none none solid;
+        border-width: 1px;
+        border-color: #000 #000 #FF3030;
+        background-color: #fff;
+        text-align: center;
+    }
+    /*  .w-input::-webkit-input-placeholder { /* WebKit browsers 
+        color:    #4CADDE;
+    }
+    .w-input:-moz-placeholder { /* Mozilla Firefox 4 to 18 
+        color:    #4CADDE;
+    }
+    .w-input::-moz-placeholder { /* Mozilla Firefox 19+ 
+        color:    #4CADDE;
+    }
+    .w-input:-ms-input-placeholder { /* Internet Explorer 10+ 
+        color:    #4CADDE;
+    }
+    /* keep modals centered */
+    .modal-container {display: table; height: 100%; position:absolute; overflow: hidden;width:100%;}
+    .modal-helper {#position: absolute; #top: 50%;display: table-cell; vertical-align: middle;}
+    .modal-content {#position: relative; #top: -50%;margin:0 auto;width:600px;}
+    /* absolute centre divs */
+    .ab-fab {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+</head>
+<body>
+  <div class="search-results-popover">
+    <h3 class="search-results">Search results for: {{search.entry}}</h3>
+    <div class="w-row">
+      <div class="search-result w-col w-col-3">
+        <h4 class="results-h4">Case Studies</h4>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+      </div>
+      <div class="search-result w-col w-col-3">
+        <h4 class="results-h4">Blogs</h4>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+      </div>
+      <div class="search-result w-col w-col-3">
+        <h4 class="results-h4">Projects</h4>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+      </div>
+      <div class="search-result w-col w-col-3">
+        <h4 class="results-h4">Organisations</h4>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+        <a class="search-result-link" href="#">This is a search result with <strong>term</strong> in bold</a>
+      </div>
+    </div>
+    <a class="view-all-search-results" href="#">View all results</a>
+  </div>
+  <div class="bg-blur search">
+    <div class="dark-bg-overlay"></div>
+    <div class="top-row-personal w-row">
+      <div class="w-clearfix w-col w-col-5 w-col-small-5">
+        <div class="bg-blur hide-on-escape profile-popover">
+          <img class="popover-icon three" src="images/ios7-arrow-thin-right.png" width="20">
+          <img class="popover-icon two" src="images/ios7-email-outline.png" width="20">
+          <img class="popover-icon" src="images/ios7-person-outline.png" width="20">
+          <a class="popover-link" data-ix="popoverfadeout" href="personal-profile-page.html">View profile</a>
+          <a class="popover-link" data-ix="popoverfadeout" href="/profile">Notifications</a>
+          <a class="inactive popover-link" href="#">Sign out</a>
+          <a class="popover-link" data-ix="popoverfadeout" href="personal-profile-page.html">Password reset</a>
+        </div>
+        <img class="vert-nav" src="images/vertical-nav.png" width="15">
+        <a class="link-to-profile w-clearfix w-inline-block" href="personal-profile-page.html">
+          <div class="profile-img"></div>
+          <h3 class="profile-name">DanielMPettifer</h3>
+          <h3 class="profile-name profile-organisation">Nesta</h3>
+        </a>
+      </div>
+      <div class="search-column w-col w-col-7 w-col-small-7">
+        <div class="w-form">
+          <form class="search-input w-clearfix" data-name="Email Form" id="email-form" name="email-form">
+            <input class="quicksearch search-field w-input" data-name="Search" id="Search" maxlength="256" name="Search" placeholder="Search DSI4EU" type="text">
+            <div class="search-clear">clear</div>
+          </form>
+          <div class="w-form-done">
+            <p>Thank you! Your submission has been received!</p>
+          </div>
+          <div class="w-form-fail">
+            <p>Oops! Something went wrong while submitting the form</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-wide search-container"></div>
+  </div>
+  <div class="alt nav-main w-nav white-menu" data-animation="default" data-collapse="medium" data-duration="400">
+    <a class="w-nav-brand" href="#">
+      <img class="logo-dark" src="images/dark.svg">
+      <div class="beta-badge">Beta</div>
+    </a>
+    <nav class="nav-menu w-nav-menu" role="navigation">
+      <a class="alt nav w-nav-link" href="#">Explore DSI</a>
+      <a class="alt nav w-nav-link" href="#">Case Studies</a>
+      <a class="alt nav w-nav-link" href="#">Blog</a>
+      <div class="stat-nav">
+        <a class="alt nav" href="#">Projects</a>
+        <div class="stats" data-ix="showprojectstatsinfo">1,345</div>
+        <div class="project-stat stat-info" data-ix="hide-stat">
+          <div class="close-box" data-ix="closeprojectsstatinfo">+</div>
+          <h2 class="stat-h2">{{1,345}} Projects</h2>
+          <p>There are {{number of projects}} DSI projects registered.
+            <br>
+            <br>Projects use digitalsocial.eu to map their collaborators, showcase their work and demonstrate their impact.</p>
+          <a class="stat-link" data-ix="closeprojectsstatinfo" href="#">VIEW PROJECTS</a>
+        </div>
+      </div>
+      <div class="stat-nav">
+        <a class="alt nav" href="#">Organisations</a>
+        <div class="stats" data-ix="showprojectstatsinfo-2">1,345</div>
+        <div class="org-stat stat-info" data-ix="closeprojectsstatinfo-2">
+          <div class="close-box" data-ix="closeprojectsstatinfo-2">+</div>
+          <h2 class="stat-h2">{{1,345}} Organisations</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p>
+          <a data-ix="closeprojectsstatinfo-2" href="#">VIEW ORGANISATIONS</a>
+        </div>
+      </div>
+      <a class="alt log-in nav w-nav-link white-alt" href="#">Login</a>
+      <a class="alt log-in log-in-alt nav w-nav-link" href="#">Signup</a>
+    </nav>
+    <div class="w-nav-button">
+      <div class="w-icon-nav-menu"></div>
+    </div>
+  </div>
+  <div class="page-header">
+    <div class="container-wide header">
+      <h1 class="light page-h1">Your dashboard</h1>
+    </div>
+  </div>
+  <div class="archive container-wide">
+    <div class="dashboard-widgets w-row">
+      <div class="notification-col w-col w-col-4 w-col-stack">
+        <div class="dashboard-widget">
+          <h3 class="card-h3">Notifications</h3>
+          <div class="card-p notification-stat">You don't have any activity at the moment</div>
+        </div>
+        <div class="dashboard-widget">
+          <h3 class="card-h3">Notifications</h3>
+          <div class="card-p notification-stat">You currently have <strong>3 </strong>requests pending</div>
+          <ul class="notification-list w-list-unstyled">
+            <li class="notification-li">
+              <div class="card-notification w-clearfix" data-ix="notification-interaction">
+                <div class="notification-profile-image"></div>
+                <div class="notification-detail"><strong>Jason Smith</strong> has added you to the <strong>RaspberryPi</strong> project</div>
+                <div class="notification-interaction">
+                  <a class="dsi-button notification-accept w-button" href="#">Accept</a>
+                  <a class="dsi-button notification-decline w-button" href="#">Decline</a>
+                  <a class="dsi-button notification-view w-button" href="#">View</a>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="card-notification w-clearfix" data-ix="notification-interaction">
+                <div class="notification-profile-image"></div>
+                <div class="notification-detail"><strong>Kat Sperry</strong>&nbsp;has invited you to join <strong>Nesta</strong>
+                </div>
+                <div class="notification-interaction">
+                  <a class="dsi-button notification-accept w-button" href="#">Accept</a>
+                  <a class="dsi-button notification-decline w-button" href="#">Decline</a>
+                  <a class="dsi-button notification-view w-button" href="#">View</a>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="card-notification w-clearfix" data-ix="notification-interaction">
+                <div class="notification-profile-image"></div>
+                <div class="notification-detail"><strong>Daniel Pettifer</strong>&nbsp;has removed you from <strong>DSI4EU</strong>
+                </div>
+                <div class="notification-interaction">
+                  <a class="dsi-button notification-decline w-button" href="#">Dismiss</a>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="w-col w-col-4 w-col-stack">
+        <div class="dashboard-widget">
+          <h3 class="card-h3">Projects &amp; Organisations</h3>
+          <div class="card-p notification-stat">You have created <strong>0 </strong>project(s)</div>
+          <div class="card-p notification-stat">You are not participating in any projects at the moment. You can create a new project, or request to join an exisiting project</div>
+          <div class="create-or-join w-row">
+            <div class="w-col w-col-6">
+              <a class="create dsi-button w-button" href="#">Create +</a>
+            </div>
+            <div class="w-col w-col-6">
+              <a class="dash-join dsi-button w-button" href="#">Join</a>
+            </div>
+          </div>
+          <div class="card-p notification-stat">You are a member of&nbsp;<strong>0</strong> organisation(s)</div>
+          <div class="card-p notification-stat">You are not associated with any organisations at the moment. You can either create a new organisation, or request to become a member of an existing organisation</div>
+          <div class="create-or-join w-row">
+            <div class="w-col w-col-6">
+              <a class="create dsi-button w-button" href="#">Create +</a>
+            </div>
+            <div class="w-col w-col-6">
+              <a class="dash-join dsi-button w-button" href="#">Join</a>
+            </div>
+          </div>
+        </div>
+        <div class="dashboard-widget">
+          <h3 class="card-h3">Projects &amp; Organisations</h3>
+          <div class="card-p notification-stat">You have created <strong>4 </strong>projects</div>
+          <ul class="w-list-unstyled">
+            <li>
+              <div class="card-notification card-project w-clearfix" data-ix="notification-interaction">
+                <div class="notification-profile-image"></div>
+                <div class="notification-detail project"><strong>A project beginnin...</strong>
+                </div>
+                <div class="notification-interaction">
+                  <a class="dsi-button notification-decline w-button" href="#">Delete</a>
+                  <a class="dsi-button notification-project notification-view w-button" href="#">View</a>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="card-notification card-project w-clearfix" data-ix="notification-interaction">
+                <div class="notification-profile-image"></div>
+                <div class="notification-detail project"><strong>Another project</strong>
+                </div>
+                <div class="notification-interaction">
+                  <a class="dsi-button notification-decline w-button" href="#">Delete</a>
+                  <a class="dsi-button notification-project notification-view w-button" href="#">View</a>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="card-notification card-project w-clearfix" data-ix="notification-interaction">
+                <div class="notification-profile-image"></div>
+                <div class="notification-detail project"><strong>A project</strong>&nbsp;</div>
+                <div class="notification-interaction">
+                  <a class="dsi-button notification-decline w-button" href="#">Delete</a>
+                  <a class="dsi-button notification-project notification-view w-button" href="#">View</a>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="card-notification card-project w-clearfix" data-ix="notification-interaction">
+                <div class="notification-profile-image"></div>
+                <div class="notification-detail project"><strong>Who's project is th...</strong>&nbsp;</div>
+                <div class="notification-interaction">
+                  <a class="dsi-button notification-decline w-button" href="#">Delete</a>
+                  <a class="dsi-button notification-project notification-view w-button" href="#">View</a>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <div class="card-p notification-stat">You are a member of <strong>2</strong> organisations</div>
+          <ul class="w-list-unstyled">
+            <li>
+              <div class="card-notification card-project w-clearfix" data-ix="notification-interaction">
+                <div class="notification-profile-image"></div>
+                <div class="notification-detail project"><strong>Nesta</strong>
+                </div>
+                <div class="notification-interaction">
+                  <a class="dsi-button notification-decline w-button" href="#">Delete</a>
+                  <a class="dsi-button notification-project notification-view w-button" href="#">View</a>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="card-notification card-project w-clearfix" data-ix="notification-interaction">
+                <div class="notification-profile-image"></div>
+                <div class="notification-detail project"><strong>DSI4EU</strong>
+                </div>
+                <div class="notification-interaction">
+                  <a class="dsi-button notification-decline w-button" href="#">Delete</a>
+                  <a class="dsi-button notification-project notification-view w-button" href="#">View</a>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="w-col w-col-4 w-col-stack">
+        <div class="dashboard-widget">
+          <h3 class="card-h3">Latest Updates</h3>
+          <div class="card-p notification-stat">You are not following any projects or organisations at the moment. This area will start to populate as you interact with your favourite projects and organisations</div>
+        </div>
+        <div class="dashboard-widget">
+          <h3 class="card-h3">Latest updates</h3>
+          <div class="card-p notification-stat">News from projects &amp; organisations you follow</div>
+          <ul class="w-list-unstyled">
+            <li>
+              <div class="card-notification latest-post w-clearfix" data-ix="notification-interaction">
+                <div class="post-card-category">NEWS</div>
+                <div class="notification-profile-image post-latest"></div>
+                <div class="notification-detail post-latest-card"><strong>Policy Workshop: Shaping the Future of Digital Social Innovation in Europe</strong>
+                </div>
+                <div class="latest-post-p">Join us in Brussels the 29th of June at DG Connect for a Policy Workshop on Digital Social Innovation...</div>
+                <div class="notification-interaction">
+                  <a class="dsi-button notification-decline stop-following w-button" href="#">Stop following</a>
+                  <a class="dsi-button notification-project notification-view read-post w-button" href="#">Read</a>
+                </div>
+                <div class="post-card-date">25th April 2016</div>
+              </div>
+            </li>
+            <li>
+              <div class="card-notification latest-post w-clearfix" data-ix="notification-interaction">
+                <div class="events post-card-category">Events</div>
+                <div class="notification-profile-image post-latest"></div>
+                <div class="notification-detail post-latest-card"><strong>In a rapidly changing world, we are all designers.</strong>
+                </div>
+                <div class="latest-post-p">Ezio Manzini is a world-leading expert on sustainable design. He is founder of the&nbsp;DESIS...</div>
+                <div class="notification-interaction">
+                  <a class="dsi-button notification-decline stop-following w-button" href="#">Stop following</a>
+                  <a class="dsi-button notification-project notification-view read-post w-button" href="#">Read</a>
+                </div>
+                <div class="post-card-date">14Th July 2015</div>
+              </div>
+            </li>
+            <li>
+              <div class="card-notification latest-post w-clearfix" data-ix="notification-interaction">
+                <div class="case-studies post-card-category">Case Studies</div>
+                <div class="notification-profile-image post-latest"></div>
+                <div class="notification-detail post-latest-card"><strong>Digital Social Innovation, a relatively new concept</strong>
+                </div>
+                <div class="latest-post-p">Digital Social Innovation (DSI) is an emerging field, with little existing knowledge on who the digital social innovators are...</div>
+                <div class="notification-interaction">
+                  <a class="dsi-button notification-decline stop-following w-button" href="#">Stop following</a>
+                  <a class="dsi-button notification-project notification-view read-post w-button" href="#">Read</a>
+                </div>
+                <div class="post-card-date">16Th June 2015</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="container-wide">
+      <div class="footer-columns w-row">
+        <div class="w-col w-col-4">
+          <div class="footer-logo">
+            <img class="footer-brand" src="images/all white.svg">
+            <div class="beta-badge">Beta</div>
+          </div>
+        </div>
+        <div class="w-col w-col-2">
+          <h3 class="footer-h3">People</h3>
+          <ul class="w-list-unstyled">
+            <li class="footer-link">
+              <a class="footer-link" href="home-dashboard.html">Your dashboard</a>
+            </li>
+            <li class="footer-link">
+              <a class="footer-link" href="#">Who uses DSI4EU?</a>
+            </li>
+            <li class="footer-link">
+              <a class="footer-link" href="#">Join DSI4EU</a>
+            </li>
+            <li class="footer-link">
+              <a class="footer-link" href="#">Help centre</a>
+            </li>
+            <li class="footer-link">
+              <a class="footer-link" href="#">Report abuse</a>
+            </li>
+            <li class="footer-link">
+              <a class="footer-link" href="#">Terms of service</a>
+            </li>
+            <li class="footer-link">
+              <a class="footer-link" href="#">Privacy policy</a>
+            </li>
+          </ul>
+        </div>
+        <div class="w-col w-col-2">
+          <h3 class="footer-h3">Projects</h3>
+          <ul class="w-list-unstyled">
+            <li class="footer-link">
+              <a class="footer-link" href="#">Add a project to DSI4EU</a>
+            </li>
+            <li class="footer-link">
+              <a class="footer-link" href="#">Report a&nbsp;project</a>
+            </li>
+            <li class="footer-link">
+              <a class="footer-link" href="#">View project listing</a>
+            </li>
+          </ul>
+        </div>
+        <div class="w-col w-col-2">
+          <h3 class="footer-h3">Organisations</h3>
+          <ul class="w-list-unstyled">
+            <li class="footer-link">
+              <a class="footer-link" href="#">Add an organisation</a>
+            </li>
+            <li class="footer-link">
+              <a class="footer-link" href="#">Report an organisation</a>
+            </li>
+            <li class="footer-link">
+              <a class="footer-link" href="#">View partner organisations</a>
+            </li>
+          </ul>
+        </div>
+        <div class="w-col w-col-2">
+          <h3 class="footer-h3">Development</h3>
+          <a class="footer-link" href="feedback.html">Feedback</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js" type="text/javascript"></script>
+  <script src="js/dsi4eu.js" type="text/javascript"></script>
+  <!--[if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
+</body>
+</html>

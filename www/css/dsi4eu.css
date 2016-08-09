@@ -7106,6 +7106,7 @@ strong {
 
 .footer-logo {
   position: relative;
+  width: 140px;
 }
 
 .expanding-social {
@@ -7182,15 +7183,15 @@ strong {
   -webkit-transition: all 200ms ease;
   transition: all 200ms ease;
   font-family: 'Open Sans', sans-serif;
-  color: #6c7e8a;
+  color: #1dc9a0;
   font-weight: 600;
   text-align: center;
   cursor: pointer;
 }
 
 .stats:hover {
-  background-color: #08122a;
-  color: #fff;
+  background-color: #1dc9a0;
+  color: #08122a;
 }
 
 .stats.orgs {
@@ -7245,8 +7246,8 @@ strong {
 
 .beta-badge {
   position: absolute;
-  left: 44px;
-  bottom: -19px;
+  right: 6px;
+  bottom: -15px;
   padding-right: 10px;
   padding-left: 10px;
   border-radius: 3px;
@@ -7259,8 +7260,9 @@ strong {
 }
 
 .beta-badge.home {
-  left: 54px;
+  right: 8px;
   bottom: 4px;
+  width: 42px;
 }
 
 html.w-mod-js *[data-ix="pin-drop"] {
