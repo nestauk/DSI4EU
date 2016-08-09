@@ -6,6 +6,17 @@ require __DIR__ . '/header.php';
     <div class="page-info">
         <div class="container-wide">
             <h1 class="updates-h1">DSI4EU updates</h1>
+            
+            
+            <div class="page-info-block update-card w-clearfix" data-ix="edit-update">
+                <div class="update-type">Feature</div>
+                <div class="update-date">9th August 2016</div>
+                <h4>Menu bar statistics for projects and organisations</h4>
+                <p>Project and organisation statistics have been added to the menu bar. Statistics can be clicked to reveal an explanation.</p>
+<!--                <a class="edit-update" href="#">Edit</a>-->
+            </div>
+            
+            
             <div class="page-info-block update-card w-clearfix" data-ix="edit-update">
                 <div class="update-type">Feature</div>
                 <div class="update-date">8th August 2016</div>
