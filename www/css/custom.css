@@ -1,0 +1,332 @@
+.skill .delete {
+    display: none;
+}
+
+.skill:hover .delete {
+    display: block;
+}
+
+.skill.add-entry {
+    cursor: pointer;
+}
+
+.add-skill-btn {
+    float: none;
+    width: auto;
+    margin-top: 0;
+    line-height: 13px;
+}
+
+form.add-skill-section, form.add-language-section {
+    margin-top: 15px;
+    width: auto;
+}
+
+#Add-skill, #Add-language, #Add-link {
+    float: left;
+}
+
+#Add-link {
+    height: 31px;
+}
+
+.social-contact-li .delete {
+    top: auto;
+    right: auto;
+    left: 46px;
+}
+
+.social-contact-li:hover .delete {
+    display: block;
+}
+
+.profile-info-left {
+    padding-left: 0;
+}
+
+.profile-info-left li {
+    padding-left: 20px;
+}
+
+.modal-createProject {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    z-index: 20;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, .45);
+}
+
+.modal-createProject.bg-blur {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, .4);
+}
+
+.contributor-col:hover .delete {
+    display: block;
+}
+
+.contributor-name {
+    min-width: 100px;
+}
+
+.delete {
+    top: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+.add-post-modal {
+    background-color: #F0F0F0;
+}
+
+.current-status p {
+    color: inherit;
+}
+
+.add-post-modal {
+    width: 585px;
+}
+
+.alphabet-link.selected {
+    background: rgba(255, 255, 255, 0.4);
+    color: #F3F3F3;
+}
+
+.modal-push-buttons .w-tab-content .w-tab-pane,
+.modal-push-buttons .w-form.login-form,
+.modal-push-buttons .w-tab-screen,
+.modal-push-buttons .w-form.login-form form {
+    height: 100%;
+}
+
+.modal-push-buttons .w-form.login-form form {
+    position: relative;
+}
+
+.modal-push-buttons .modal-footer {
+    position: absolute;
+    width: 100%;
+    bottom: 100px;
+}
+
+.reply-input {
+    display: block;
+}
+
+.card-slim-h2 {
+    font-size: 16px;
+    line-height: 21px;
+    max-height: 40px;
+    overflow: hidden;
+}
+
+.hp-post-link {
+    margin-bottom: 20px;
+}
+
+.dashboard-stats {
+    width: 400px;
+}
+
+.homePageColours a {
+    color: white;
+}
+
+.homePageColours a:hover {
+    color: #fff1fa;
+}
+
+.dsi-button.story-image-upload {
+    margin-bottom: 20px;
+}
+
+.sweet-alert button.cancel {
+
+    position: relative;
+    left: 0px;
+    right: 0px;
+    bottom: 0;
+    width: 140px;
+    height: 30px;
+    font-family: 'Open Sans', sans-serif;
+    line-height: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
+a.login-modal-back {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+}
+
+.modal-content {
+    height: 580px;
+}
+
+.remove-from-list {
+    display: none;
+}
+
+.search-results-popover {
+    top: 160px;
+    position: fixed;
+}
+
+.custom-project-section {
+    margin-top: 30px
+}
+
+.custom-project-header-exp {
+    background: none;
+}
+
+.custom-cancel {
+    background: #eee !important;
+    width: auto;
+    padding-left: 30px;
+    padding-right: 30px
+}
+
+.large-profile-img {
+    background-color: rgba(255, 255, 255, 0);
+}
+
+div.error {
+    color: red;
+}
+
+.case-study-main {
+    background: white;
+}
+
+.select2-container--default.select2-container--focus .select2-selection--multiple,
+.select2-container--default .select2-selection--multiple {
+    border: 0 !important;
+}
+
+.designSelectBox .select2-container--default .select2-selection--multiple .select2-selection__choice {
+    float: none;
+    white-space: normal;
+}
+
+.designSelectBox .select2-search__field {
+    width: 100% !important;
+}
+
+.designSelectBox .select2-container .select2-search--inline {
+    float: none !important;
+}
+
+.designSelectBox .select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background: none;
+    border: 0;
+    position: relative;
+    padding: 0;
+    margin: 0;
+}
+
+.select2-logo {
+    max-height: 40px;
+    max-width: 40px;
+    margin-right: 15px;
+    margin-bottom: 5px;
+}
+
+.designSelectBox .involved-card .involved-organisation-img {
+    max-width: 40px;
+    max-height: 40px;
+}
+
+/* personal profile project and organisation card styles */
+
+.designSelectBox .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    z-index: 1000;
+}
+
+.designSelectBox .involved-card .view-profile {
+    right: 10px;
+    bottom: 0px;
+}
+
+.designSelectBox .select2-container--default .select2-selection--multiple .select2-selection__rendered {
+    padding: 0 !important;
+}
+
+.card-slim-location {
+    overflow: hidden;
+    height: 20px;
+}
+
+/* backend tagging styles */
+
+.customSelect2 .select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: #2acca5;
+    border: 1px solid rgba(170, 170, 170, 0);
+    border-radius: 3px;
+    cursor: default;
+    float: left;
+    margin-right: 5px;
+    margin-top: 5px;
+    padding: 3px 10px;
+    color: #fff;
+}
+
+.select2-container--open .select2-dropdown--below {
+    border-top: 1px solid #1dc9a0;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.select2-dropdown {
+    background-color: white;
+    border: 1px solid rgb(29, 201, 160);
+    border-image-source: initial;
+    border-image-slice: initial;
+    border-image-width: initial;
+    border-image-outset: initial;
+    border-image-repeat: initial;
+    border-radius: 4px;
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    left: -100000px;
+    width: 100%;
+    z-index: 1051;
+}
+
+.customSelect2 .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+    color: #c5f1e6;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: bold;
+    margin-right: 7px;
+}
+
+/* add tags css */
+
+.select2-container .select2-search--inline {
+    float: left;
+    background: #f3f3f3;
+    min-width: 290px;
+    padding: 7px 10px;
+    border-radius: 3px;
+    margin: 20px 0;
+    background-image: url("../images/add.png");
+    background-repeat: no-repeat;
+    background-position: 265px center;
+    background-size: 15px;
+}

@@ -1,0 +1,21 @@
+.sweet-alert h2 {
+    font-family: 'Open Sans';
+    font-weight: 300;
+    text-transform: capitalize !important;
+}
+
+.sweet-alert button {
+    color: white;
+    border: none;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 3px;
+    padding: 5px 32px;
+    margin: 26px 5px 0 5px;
+    cursor: pointer;
+}
+
+.showSweetAlert[data-animation=pop] {
+    -webkit-animation: showSweetAlert 0s;
+    animation: showSweetAlert 0s;
+}
