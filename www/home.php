@@ -99,7 +99,7 @@ $organisationsCount = (new \DSI\Repository\OrganisationRepositoryInAPC())->count
         <h2 class="massive-hero-h2" data-ix="fadeinup-2">A community of people and projects who use the internet for
             social good</h2>
         <a class="massive-hero-twitter-link" data-ix="fadeinup-3"
-           href="https://twitter.com/search?q=%23dsi4eu&amp;src=typd" target="_blank">#DSI4EU</a>
+           href="https://twitter.com/dsi4eu" target="_blank">@DSI4EU</a>
     </div>
     <div class="massive-hero-slider w-slider" data-animation="outin" data-autoplay="1" data-delay="8000"
          data-duration="800" data-infinite="1">
