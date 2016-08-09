@@ -19,42 +19,40 @@ use \DSI\Service\Sysctl;
 <body ng-app="DSIApp" ng-controller="SearchController" id="top">
 
     <div class="alt nav-main w-nav white-menu" data-animation="default" data-collapse="medium" data-duration="400">
-        <div class="menu w-clearfix">
-            <a class="w-nav-brand" href="<?php echo URL::home() ?>">
-                <img class="logo-dark" src="<?php echo SITE_RELATIVE_PATH ?>/images/dark.svg">
-                <div class="beta-badge">Beta</div>
-            </a>
-            <nav class="nav-menu w-nav-menu" role="navigation">
-                <?php /* <a class="alt nav w-nav-link" href="<?php echo URL::exploreDSI() ?>">Explore DSI</a> */ ?>
-                <?php if ($loggedInUser) { ?>
-                    <a class="alt nav w-nav-link" href="<?php echo URL::dashboard() ?>">Dashboard</a>
-                <?php } ?>
-                <a class="alt nav w-nav-link" href="<?php echo URL::caseStudies() ?>">Case Studies</a>
-                <a class="alt nav w-nav-link" href="<?php echo URL::blogPosts() ?>">Blog</a>
-                <a class="alt nav w-nav-link" href="<?php echo URL::projects() ?>">Projects</a>
-                <a class="alt nav w-nav-link" href="<?php echo URL::organisations() ?>">Organisations</a>
-                <?php if ($loggedInUser) { ?>
-                    <div class="w-dropdown" data-delay="0">
-                        <div class="alt log-in log-in-alt nav w-nav-link w-dropdown-toggle">
-                            <div>Create</div>
-                        </div>
-                        <nav class="create-drop-down w-dropdown-list">
-                            <a class="drop-down-link w-dropdown-link" data-ix="create-project-modal" href="#">
-                                Create a new project</a>
-                            <a class="drop-down-link w-dropdown-link" data-ix="create-organisation-modal" href="#">
-                                Create an organisation
-                            </a>
-                            <div class="arror-up"></div>
-                        </nav>
+        <a class="w-nav-brand" href="<?php echo URL::home() ?>">
+            <img class="logo-dark" src="<?php echo SITE_RELATIVE_PATH ?>/images/dark.svg">
+            <div class="beta-badge">Beta</div>
+        </a>
+        <nav class="nav-menu w-nav-menu" role="navigation">
+            <?php /* <a class="alt nav w-nav-link" href="<?php echo URL::exploreDSI() ?>">Explore DSI</a> */ ?>
+            <?php if ($loggedInUser) { ?>
+                <a class="alt nav w-nav-link" href="<?php echo URL::dashboard() ?>">Dashboard</a>
+            <?php } ?>
+            <a class="alt nav w-nav-link" href="<?php echo URL::caseStudies() ?>">Case Studies</a>
+            <a class="alt nav w-nav-link" href="<?php echo URL::blogPosts() ?>">Blog</a>
+            <a class="alt nav w-nav-link" href="<?php echo URL::projects() ?>">Projects</a>
+            <a class="alt nav w-nav-link" href="<?php echo URL::organisations() ?>">Organisations</a>
+            <?php if ($loggedInUser) { ?>
+                <div class="w-dropdown" data-delay="0">
+                    <div class="alt log-in log-in-alt nav w-nav-link w-dropdown-toggle">
+                        <div>Create</div>
                     </div>
-                <?php } else { ?>
-                    <a class="alt log-in nav w-nav-link white-alt" data-ix="open-login-modal" href="#">Login</a>
-                    <a class="alt log-in log-in-alt nav w-nav-link" data-ix="showsignup" href="#">Signup</a>
-                <?php } ?>
-            </nav>
-            <div class="w-nav-button">
-                <div class="w-icon-nav-menu"></div>
-            </div>
+                    <nav class="create-drop-down w-dropdown-list">
+                        <a class="drop-down-link w-dropdown-link" data-ix="create-project-modal" href="#">
+                            Create a new project</a>
+                        <a class="drop-down-link w-dropdown-link" data-ix="create-organisation-modal" href="#">
+                            Create an organisation
+                        </a>
+                        <div class="arror-up"></div>
+                    </nav>
+                </div>
+            <?php } else { ?>
+                <a class="alt log-in nav w-nav-link white-alt" data-ix="open-login-modal" href="#">Login</a>
+                <a class="alt log-in log-in-alt nav w-nav-link" data-ix="showsignup" href="#">Signup</a>
+            <?php } ?>
+        </nav>
+        <div class="w-nav-button">
+            <div class="w-icon-nav-menu"></div>
         </div>
     </div>
 
