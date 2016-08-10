@@ -558,7 +558,7 @@ strong {
 }
 
 .info-card {
-  position: static;
+  position: relative;
   overflow: visible;
   min-height: auto;
   margin-bottom: 20px;
@@ -587,6 +587,10 @@ strong {
   padding-right: 8px;
   padding-left: 10px;
   background-color: transparent;
+}
+
+.info-card.filter {
+  padding-bottom: 5px;
 }
 
 .info-h {
@@ -1091,6 +1095,11 @@ strong {
 
 .card-p.notification-stat {
   margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.card-p.question {
+  color: #08122a;
   font-weight: 600;
 }
 
@@ -2907,6 +2916,10 @@ strong {
 
 .container-wide.map-animation {
   min-height: 650px;
+}
+
+.container-wide.content {
+  margin-top: 160px;
 }
 
 .button {
@@ -7263,6 +7276,91 @@ strong {
   right: 8px;
   bottom: 4px;
   width: 42px;
+}
+
+.funding-card-h2 {
+  margin-top: 0px;
+  margin-bottom: 20px;
+  padding: 20px;
+  border-bottom: 1px solid #f3f3f3;
+  color: #08122a;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.funding-closing-date {
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+.funding-descr {
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+.read-more {
+  margin-top: 20px;
+  margin-left: 20px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  border-radius: 3px;
+  background-color: #1dc9a0;
+  font-family: 'Open Sans', sans-serif;
+  color: #08122a;
+  font-weight: 600;
+}
+
+.funding-country {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  padding: 5px 10px;
+  border-top-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  background-color: #d5d5d5;
+  font-family: 'Open Sans', sans-serif;
+  color: #08122a;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.card-h1 {
+  margin-top: 10px;
+  padding-right: 20px;
+  padding-left: 20px;
+  color: #08122a;
+}
+
+.filter-h3 {
+  margin-top: 10px;
+  padding-left: 20px;
+}
+
+.filter-country {
+  margin-top: 6px;
+  padding-right: 0px;
+  border-right: 1px solid #f3f3f3;
+}
+
+.filter-month {
+  margin-top: 6px;
+}
+
+.filter-year {
+  padding-top: 6px;
+}
+
+.country-filter {
+  width: 185px;
+}
+
+.month-filter {
+  width: 243px;
+  margin-left: 5px;
+}
+
+.year-filter {
+  width: 181px;
 }
 
 html.w-mod-js *[data-ix="pin-drop"] {
