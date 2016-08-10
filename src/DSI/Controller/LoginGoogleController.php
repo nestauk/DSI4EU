@@ -28,7 +28,7 @@ class LoginGoogleController
 
         if (!empty($_GET['error'])) {
             // Got an error, probably user denied access
-            exit('Got error: ' . $_GET['error']);
+            exit('Got error: ' . show_input($_GET['error']));
         } elseif (empty($_GET['code'])) {
             go_to($googleLoginService->getUrl());
         } elseif (empty($_GET['state']) || ($_GET['state'] !== $_SESSION['oauth2state'])) {

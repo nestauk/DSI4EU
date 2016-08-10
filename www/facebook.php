@@ -8,11 +8,6 @@
 
 require __DIR__ . '/../src/config.php';
 
-pr([
-    'get' => $_GET,
-    'session' => $_GET,
-]);
-
 $provider = new League\OAuth2\Client\Provider\Facebook([
     // 'clientId'          => '{facebook-app-id}',
     'clientId' => '156427928091055',
@@ -54,17 +49,6 @@ try {
     /** @var \League\OAuth2\Client\Provider\FacebookUser $user */
     $user = $provider->getResourceOwner($token);
 
-    // Use these details to create a new profile
-    printf('Hello %s!', $user->getFirstName());
-    pr([
-        'id' => $user->getId(),
-        'firstName' => $user->getFirstName(),
-        'lastName' => $user->getLastName(),
-        'email' => $user->getEmail(),
-        'picture' => $user->getPictureUrl(),
-    ]);
-
-    pr($user);
     # object(League\OAuth2\Client\Provider\FacebookUser)#10 (1) { ...
 
 } catch (Exception $e) {
@@ -72,13 +56,3 @@ try {
     // Failed to get user details
     exit('Oh dear...');
 }
-
-echo '<pre>';
-// Use this to interact with an API on the users behalf
-var_dump($token->getToken());
-# string(217) "CAADAppfn3msBAI7tZBLWg...
-
-// The time (in epoch time) when an access token will expire
-var_dump($token->getExpires());
-# int(1436825866)
-echo '</pre>';
