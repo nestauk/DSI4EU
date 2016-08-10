@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Last Published: Tue Aug 09 2016 07:23:17 GMT+0000 (UTC) -->
+<!-- Last Published: Wed Aug 10 2016 12:01:48 GMT+0000 (UTC) -->
 <html data-wf-page="577149898479866150f499c7" data-wf-site="56e2e31a1b1f8f784728a08c">
 <head>
   <meta charset="utf-8">
@@ -146,35 +146,6 @@
       </div>
     </div>
   </div>
-  <div class="nav-main w-nav" data-animation="default" data-collapse="medium" data-duration="400">
-    <div class="container-wide nav-container w-clearfix">
-      <a class="w-nav-brand" href="index.html">
-        <img class="brand" src="images/dark.svg" width="160">
-        <div class="beta-badge home">Beta</div>
-      </a>
-      <nav class="m-nav-open w-nav-menu" role="navigation">
-        <a class="nav w-nav-link" href="explore-dsi.html">Explore DSI</a>
-        <a class="nav w-nav-link" href="stories.html">Case Studies</a>
-        <a class="nav w-nav-link" href="stories.html">Blog</a>
-        <a class="nav w-nav-link" href="projects.html">Projects</a>
-        <a class="nav w-nav-link" href="organisations.html">Organisations</a>
-        <a class="log-in log-in-alt nav w-nav-link" data-ix="open-login-modal">login</a>
-        <div class="w-dropdown" data-delay="0">
-          <div class="log-in nav w-dropdown-toggle">
-            <div>Sign up&nbsp;</div>
-          </div>
-          <nav class="create-drop-down w-dropdown-list">
-            <a class="drop-down-link w-dropdown-link" data-ix="create-project-modal" href="#">Create a new project</a>
-            <a class="drop-down-link w-dropdown-link" data-ix="create-organisation-modal" href="#">Create an organisation</a>
-            <div class="arror-up"></div>
-          </nav>
-        </div>
-      </nav>
-      <div class="menu-open w-nav-button">
-        <div class="m-menu-btn w-icon-nav-menu"></div>
-      </div>
-    </div>
-  </div>
   <div class="bg-blur search">
     <div class="dark-bg-overlay"></div>
     <div class="top-row-personal w-row">
@@ -212,7 +183,134 @@
     </div>
     <div class="container-wide search-container"></div>
   </div>
-  <div class="body"></div>
+  <div class="alt nav-main w-nav white-menu" data-animation="default" data-collapse="medium" data-duration="400">
+    <a class="w-nav-brand" href="#">
+      <img class="logo-dark" src="images/dark.svg">
+      <div class="beta-badge">Beta</div>
+    </a>
+    <nav class="nav-menu w-nav-menu" role="navigation">
+      <a class="alt nav w-nav-link" href="#">Explore DSI</a>
+      <a class="alt nav w-nav-link" href="#">Case Studies</a>
+      <a class="alt nav w-nav-link" href="#">Blog</a>
+      <div class="stat-nav">
+        <a class="alt nav" href="#">Projects</a>
+        <div class="stats" data-ix="showprojectstatsinfo">1,345</div>
+        <div class="project-stat stat-info" data-ix="hide-stat">
+          <div class="close-box" data-ix="closeprojectsstatinfo">+</div>
+          <h2 class="stat-h2">{{1,345}} Projects</h2>
+          <p>There are {{number of projects}} DSI projects registered.
+            <br>
+            <br>Projects use digitalsocial.eu to map their collaborators, showcase their work and demonstrate their impact.</p>
+          <a class="stat-link" data-ix="closeprojectsstatinfo" href="#">VIEW PROJECTS</a>
+        </div>
+      </div>
+      <div class="stat-nav">
+        <a class="alt nav" href="#">Organisations</a>
+        <div class="stats" data-ix="showprojectstatsinfo-2">1,345</div>
+        <div class="org-stat stat-info" data-ix="closeprojectsstatinfo-2">
+          <div class="close-box" data-ix="closeprojectsstatinfo-2">+</div>
+          <h2 class="stat-h2">{{1,345}} Organisations</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p>
+          <a data-ix="closeprojectsstatinfo-2" href="#">VIEW ORGANISATIONS</a>
+        </div>
+      </div>
+      <a class="alt log-in nav w-nav-link white-alt" href="#">Login</a>
+      <a class="alt log-in log-in-alt nav w-nav-link" href="#">Signup</a>
+    </nav>
+    <div class="w-nav-button">
+      <div class="w-icon-nav-menu"></div>
+    </div>
+  </div>
+  <div class="body">
+    <div class="container-wide content">
+      <div class="w-row">
+        <div class="w-col w-col-4">
+          <div class="info-card">
+            <h1 class="card-h1">Funding</h1>
+            <p class="card-p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique</p>
+            <p class="card-p question">Have you got funding to offer?</p>
+            <p class="card-p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <a class="read-more w-button" href="#">Offer funding</a>
+          </div>
+        </div>
+        <div class="w-col w-col-8">
+          <div class="filter info-card">
+            <div class="w-form">
+              <form data-name="Email Form 2" id="email-form-2" name="email-form-2">
+                <div class="w-row">
+                  <div class="w-col w-col-2">
+                    <h3 class="filter-h3">Filter by:</h3>
+                  </div>
+                  <div class="filter-country w-col w-col-3">
+                    <select class="country-filter w-select" data-name="country" id="country" name="country">
+                      <option value="">Available country</option>
+                      <option value="First">United kingdom</option>
+                      <option value="Second">France</option>
+                      <option value="Third">Germany</option>
+                    </select>
+                  </div>
+                  <div class="filter-month w-col w-col-4">
+                    <select class="month-filter w-select" data-name="Country 2" id="country-2" name="country-2">
+                      <option value="">Ends before month</option>
+                      <option value="First">January</option>
+                      <option value="Second">February</option>
+                      <option value="Third">March</option>
+                      <option value="">April</option>
+                      <option value="">May</option>
+                      <option value="">June</option>
+                      <option value="">July</option>
+                      <option value="">August</option>
+                      <option value="">September</option>
+                      <option value="">October</option>
+                      <option value="">November</option>
+                      <option value="">December</option>
+                    </select>
+                  </div>
+                  <div class="filter-year w-col w-col-3">
+                    <select class="w-select year-filter" data-name="Country 3" id="country-3" name="country-3">
+                      <option value="">year</option>
+                      <option value="First">2016</option>
+                      <option value="Second">2017</option>
+                      <option value="Third">2018</option>
+                      <option value="">2019</option>
+                      <option value="">2020</option>
+                    </select>
+                  </div>
+                </div>
+              </form>
+              <div class="w-form-done">
+                <div>Thank you! Your submission has been received!</div>
+              </div>
+              <div class="w-form-fail">
+                <div>Oops! Something went wrong while submitting the form</div>
+              </div>
+            </div>
+          </div>
+          <div class="info-card">
+            <h2 class="funding-card-h2">{{title.Call for proposals to develop an online tool enabling the tracking of language versions of films}}</h2>
+            <p class="funding-descr">{{descr.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.}}</p>
+            <div class="funding-closing-date"><strong>Closing date:</strong> {{27th September 2017}}</div>
+            <a class="read-more w-button" href="#">Read more</a>
+            <div class="funding-country">{{country.England}}</div>
+          </div>
+          <div class="info-card">
+            <h2 class="funding-card-h2">Call for proposals to develop an online tool enabling the tracking of language versions of films</h2>
+            <p class="funding-descr">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p>
+            <div class="funding-closing-date"><strong>Closing date:</strong> {{27th September 2017}}</div>
+            <a class="read-more w-button" href="#">Read more</a>
+            <div class="funding-country">Spain</div>
+          </div>
+          <div class="info-card">
+            <h2 class="funding-card-h2">Call for proposals to develop an online tool enabling the tracking of language versions of films</h2>
+            <p class="funding-descr">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p>
+            <div class="funding-closing-date"><strong>Closing date:</strong> {{27th September 2017}}</div>
+            <a class="read-more w-button" href="#">Read more</a>
+            <div class="funding-country">Italy</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="footer">
     <div class="container-wide">
       <div class="footer-columns w-row">
