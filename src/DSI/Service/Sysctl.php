@@ -4,7 +4,7 @@ namespace DSI\Service;
 
 class Sysctl
 {
-    public static $version = '1.2f';
+    public static $version = '1.2g';
 
     public static function echoVersion()
     {
