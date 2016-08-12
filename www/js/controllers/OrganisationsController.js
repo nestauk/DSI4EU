@@ -1,11 +1,13 @@
 angular
     .module(angularAppName)
-    .controller('OrganisationsController', function ($scope, $http, $interval) {
+    .controller('OrganisationsController', function ($scope, $http, $interval, $attrs) {
+        var organisationsJsonUrl = $attrs.organisationsjsonurl;
+
         $scope.letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
         $scope.startLetter = '';
         $scope.organisations = [];
 
-        $http.get(SITE_RELATIVE_PATH + '/organisations.json')
+        $http.get(organisationsJsonUrl)
             .then(function (result) {
                 // $interval.cancel(preloadOrganisations);
                 $scope.startLetter = 'A';

@@ -10,8 +10,9 @@ class ListCountriesController
 {
     public function exec()
     {
+        $urlHandler = new URL();
         $authUser = new Auth();
-        $authUser->ifNotLoggedInRedirectTo(URL::login());
+        $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
 
         $countryRepo = new CountryRepository();
         $countries = [];

@@ -16,8 +16,12 @@ class SitemapController
 {
     public $format = 'html';
 
+    /** @var URL */
+    private $urlHandler;
+
     public function exec()
     {
+        $this->urlHandler = new URL();
         $authUser = new Auth();
         if ($authUser->isLoggedIn())
             $loggedInUser = (new UserRepository())->getById($authUser->getUserId());
@@ -101,7 +105,7 @@ class SitemapController
         // $projects = (new ProjectRepository())->getAllPublished();
         foreach ($projects AS $project) {
             $projectLink = new SitemapLink();
-            $projectLink->loc = 'https://' . SITE_DOMAIN . URL::project($project);
+            $projectLink->loc = 'https://' . SITE_DOMAIN . $this->urlHandler->project($project);
             $projectLink->lastMod = date('Y-m-01');
             $projectLink->changeFreq = 'monthly';
             $projectLink->priority = '0.9';

@@ -44,10 +44,9 @@ class OrganisationEditController
 
     public function exec()
     {
-        $loggedInUser = null;
-
+        $urlHandler = new URL();
         $authUser = new Auth();
-        $authUser->ifNotLoggedInRedirectTo(URL::login());
+        $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
 
         $userRepo = new UserRepository();
         $loggedInUser = $userRepo->getById($authUser->getUserId());
@@ -64,7 +63,7 @@ class OrganisationEditController
 
         $userCanEditOrganisation = ($isOwner OR ($loggedInUser AND $loggedInUser->isCommunityAdmin()));
         if (!$userCanEditOrganisation)
-            go_to(URL::home());
+            go_to($urlHandler->home());
 
         try {
             if (isset($_POST['saveDetails'])) {
@@ -109,7 +108,7 @@ class OrganisationEditController
             }
 
             if (isset($_POST['updateBasic'])) {
-                $authUser->ifNotLoggedInRedirectTo(URL::login());
+                $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
 
                 $updateOrganisation = new UpdateOrganisation();
                 $updateOrganisation->data()->organisation = $organisation;
@@ -212,7 +211,7 @@ class OrganisationEditController
 
                 echo json_encode([
                     'result' => 'ok',
-                    'url' => URL::project($project),
+                    'url' => $urlHandler->project($project),
                 ]);
                 return;
             }
@@ -284,13 +283,13 @@ class OrganisationEditController
                         'profilePic' => $user->getProfilePicOrDefault()
                     ];
                 }, $memberRequests),
-                'organisationProjects' => array_map(function (OrganisationProject $organisationProject) {
+                'organisationProjects' => array_map(function (OrganisationProject $organisationProject) use ($urlHandler) {
                     $project = $organisationProject->getProject();
                     return [
                         'id' => $project->getId(),
                         'name' => $project->getName(),
                         'organisationsCount' => $project->getOrganisationsCount(),
-                        'url' => URL::project($project),
+                        'url' => $urlHandler->project($project),
                     ];
                 }, $organisationProjects),
                 'partnerOrganisations' => array_map(function (Organisation $organisation) {

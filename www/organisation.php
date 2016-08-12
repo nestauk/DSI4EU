@@ -10,6 +10,10 @@ require __DIR__ . '/header.php';
 /** @var $partnerOrganisations \DSI\Entity\Organisation[] */
 /** @var $links string[] */
 /** @var $tags string[] */
+
+if (!isset($urlHandler))
+    $urlHandler = new \DSI\Service\URL();
+
 ?>
     <script
         src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/OrganisationController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
@@ -131,7 +135,7 @@ require __DIR__ . '/header.php';
                                             </div>
                                         </div>
                                         <a class="view-profile"
-                                           href="<?php echo \DSI\Service\URL::project($project) ?>">View</a>
+                                           href="<?php echo $urlHandler->project($project) ?>">View</a>
                                     </div>
                                 <?php } ?>
                             </div>

@@ -19,6 +19,7 @@ class OrganisationsController
 
     public function exec()
     {
+        $urlHandler = new URL();
         $authUser = new Auth();
         if ($authUser->isLoggedIn())
             $loggedInUser = (new UserRepository())->getById($authUser->getUserId());
@@ -40,6 +41,7 @@ class OrganisationsController
                     'region' => ($region ? $region->getName() : ''),
                     'country' => ($region ? $region->getCountry()->getName() : ''),
                     'url' => URL::organisation($organisation),
+                    'logo' => $organisation->getLogoOrDefaultSilver(),
                     'projectsCount' => $organisation->getProjectsCount(),
                     'partnersCount' => $organisation->getPartnersCount(),
                 ];

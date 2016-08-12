@@ -19,8 +19,9 @@ class LoginController
 
     public function exec()
     {
+        $urlHandler = new URL();
         $authUser = new Auth();
-        $authUser->ifLoggedInRedirectTo(URL::myProfile());
+        $authUser->ifLoggedInRedirectTo($urlHandler->myProfile());
 
         if (isset($_POST['login'])) {
             try {
@@ -37,7 +38,7 @@ class LoginController
                     ]);
                     die();
                 } else {
-                    go_to(URL::myProfile());
+                    go_to($urlHandler->myProfile());
                 }
             } catch (ErrorHandler $e) {
                 if ($this->responseFormat === 'json') {

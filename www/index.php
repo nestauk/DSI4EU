@@ -1,5 +1,8 @@
 <?php
 
+use \DSI\Service\Translate;
+use \DSI\Entity\Translation;
+
 require __DIR__ . '/../src/config.php';
 
 if (!$_POST) {
@@ -14,22 +17,23 @@ class Router
 
     public function exec(string $pageURL)
     {
+        Translate::setCurrentLang(Translation::DEFAULT_LANGUAGE);
+        $urlHandler = new \DSI\Service\URL();
         $this->pageURL = $pageURL;
 
-        if ($this->pageURL === '/') {
-            $this->homePage();
+        $langHandler = '(([a-z]{2})/?)?';
 
-        } elseif ($this->pageURL === '/dashboard') {
-            $this->dashboardPage();
+        if (preg_match('<^/' . $langHandler . '$>', $this->pageURL, $matches)) {
+            $this->homePage($matches);
+
+        } elseif (preg_match('<^/' . $langHandler . 'dashboard$>', $this->pageURL, $matches)) {
+            $this->dashboardPage($matches);
 
         } elseif ($this->pageURL === '/dashboard.json') {
-            $this->dashboardPage('json');
+            $this->dashboardJsonPage();
 
         } elseif ($this->pageURL === '/import') {
             $this->importPage();
-
-        } elseif ($this->pageURL === '/login.json') {
-            $this->loginJsonPage();
 
         } elseif ($this->pageURL === '/forgotPassword.json') {
             $this->forgotPasswordJsonPage();
@@ -49,29 +53,35 @@ class Router
         } elseif ($this->pageURL === '/register.json') {
             $this->registerJsonPage();
 
-        } elseif ($this->pageURL === '/login') {
-            go_to(\DSI\Service\URL::home());
+        } elseif (preg_match('<^/' . $langHandler . 'login\.json$>', $this->pageURL, $matches)) {
+            $this->loginJsonPage($matches);
 
-        } elseif ($this->pageURL === '/logout') {
-            $this->logoutPage();
+        } elseif (preg_match('<^/' . $langHandler . 'login$>', $this->pageURL, $matches)) {
+            go_to($urlHandler->home());
 
-        } elseif ($this->pageURL === '/projects') {
-            $this->projectsPage();
+        } elseif (preg_match('<^/' . $langHandler . 'logout$>', $this->pageURL, $matches)) {
+            $this->logoutPage($matches);
 
-        } elseif ($this->pageURL === '/projects.json') {
-            $this->projectsJsonPage();
+// Projects
+        } elseif (preg_match('<^/' . $langHandler . 'projects$>', $this->pageURL, $matches)) {
+            $this->projectsPage($matches);
 
-        } elseif ($this->pageURL === '/organisations') {
-            $this->organisationsPage();
+        } elseif (preg_match('<^/' . $langHandler . 'projects\.json$>', $this->pageURL, $matches)) {
+            $this->projectsJsonPage($matches);
 
-        } elseif ($this->pageURL === '/organisations.json') {
-            $this->organisationsJsonPage();
+// Organisations
+        } elseif (preg_match('<^/' . $langHandler . 'organisations$>', $this->pageURL, $matches)) {
+            $this->organisationsPage($matches);
 
-        } elseif ($this->pageURL === '/my-profile') {
-            $this->myProfilePage();
+        } elseif (preg_match('<^/' . $langHandler . 'organisations.json$>', $this->pageURL, $matches)) {
+            $this->organisationsJsonPage($matches);
+
+
+        } elseif (preg_match('<^/' . $langHandler . 'my-profile$>', $this->pageURL, $matches)) {
+            $this->myProfilePage($matches);
 
         } elseif ($this->pageURL === '/my-profile.json') {
-            $this->myProfilePage('json');
+            $this->myProfilePage([], 'json');
 
         } elseif ($this->pageURL === '/createProject.json') {
             $this->createProjectPage();
@@ -199,27 +209,28 @@ class Router
         } elseif ($this->pageURL === '/sitemap.xml') {
             $this->sitemapXmlPage();
 
+// Test
+        } elseif (preg_match('<^/(([a-z]{2})/)?test$>', $this->pageURL, $matches)) {
+            $this->testPage($matches);
+
 // Unfiltered
         } elseif (preg_match('<^/countryRegions/([0-9]+)\.json$>', $this->pageURL, $matches)) {
             $this->countryRegionsListJsonPage($matches);
 
-        } elseif (preg_match('<^/profile/([a-zA-Z0-9\.]+)/details\.json$>', $this->pageURL, $matches)) {
+        } elseif (preg_match('<^/' . $langHandler . 'profile/([a-zA-Z0-9\.]+)/details\.json$>', $this->pageURL, $matches)) {
             $this->userProfilePage($matches, 'json');
 
-        } elseif (preg_match('<^/profile/([a-zA-Z0-9\.]+)$>', $this->pageURL, $matches)) {
+        } elseif (preg_match('<^/' . $langHandler . 'profile/([a-zA-Z0-9\.]+)$>', $this->pageURL, $matches)) {
             $this->userProfilePage($matches);
 
-        } elseif (preg_match('<^/project/([0-9]+)\.json$>', $this->pageURL, $matches)) {
+        } elseif (preg_match('<^/' . $langHandler . 'project/([0-9]+)\.json?$>', $this->pageURL, $matches)) {
             $this->projectJsonPage($matches);
 
-        } elseif (preg_match('<^/project/edit/([0-9]+)\.json$>', $this->pageURL, $matches)) {
+        } elseif (preg_match('<^/' . $langHandler . 'project/edit/([0-9]+)\.json$>', $this->pageURL, $matches)) {
             $this->editProjectPage($matches, 'json');
 
-        } elseif (preg_match('<^/project/edit/([0-9]+)$>', $this->pageURL, $matches)) {
+        } elseif (preg_match('<^/' . $langHandler . 'project/edit/([0-9]+)$>', $this->pageURL, $matches)) {
             $this->editProjectPage($matches);
-
-        } elseif (preg_match('<^/project/([0-9]+)\.json?$>', $this->pageURL, $matches)) {
-            $this->projectJsonPage($matches);
 
         } elseif (preg_match('<^/projectPost/([0-9]+)\.json?$>', $this->pageURL, $matches)) {
             $this->projectPostJsonPage($matches);
@@ -227,7 +238,7 @@ class Router
         } elseif (preg_match('<^/projectPostComment/([0-9]+)\.json?$>', $this->pageURL, $matches)) {
             $this->projectPostCommentJsonPage($matches);
 
-        } elseif (preg_match('<^/project/([0-9]+)(\/.*)?$>', $this->pageURL, $matches)) {
+        } elseif (preg_match('<^/' . $langHandler . 'project/([0-9]+)(\/.*)?$>', $this->pageURL, $matches)) {
             $this->projectPage($matches);
 
         } elseif (preg_match('<^/.*\.(gif|jpe?g|png|svg|js|css|map)$>', $this->pageURL)) {
@@ -241,22 +252,38 @@ class Router
         return true;
     }
 
-    private function homePage($format = 'html')
+    private function homePage($matches = [])
     {
+        if (isset($matches[2]) AND $matches[2])
+            $this->setLanguage($matches[2]);
+
         $command = new \DSI\Controller\HomeController();
-        $command->format = $format;
+        $command->format = 'html';
         $command->exec();
     }
 
-    private function dashboardPage($format = 'html')
+    private function dashboardPage($matches = [])
+    {
+        if (isset($matches[2]) AND $matches[2])
+            $this->setLanguage($matches[2]);
+
+        $command = new \DSI\Controller\DashboardController();
+        $command->format = 'html';
+        $command->exec();
+    }
+
+    private function dashboardJsonPage()
     {
         $command = new \DSI\Controller\DashboardController();
-        $command->format = $format;
+        $command->format = 'json';
         $command->exec();
     }
 
-    private function loginJsonPage()
+    private function loginJsonPage($matches = [])
     {
+        if (isset($matches[2]) AND $matches[2])
+            $this->setLanguage($matches[2]);
+
         $command = new \DSI\Controller\LoginController();
         $command->responseFormat = 'json';
         $command->exec();
@@ -300,8 +327,11 @@ class Router
         $command->exec();
     }
 
-    private function logoutPage()
+    private function logoutPage($matches = [])
     {
+        if (isset($matches[2]) AND $matches[2])
+            $this->setLanguage($matches[2]);
+
         $command = new \DSI\Controller\LogoutController();
         $command->exec();
     }
@@ -331,34 +361,49 @@ class Router
         $command->exec();
     }
 
-    private function projectsPage()
+    private function projectsPage($matches = [])
     {
+        if (isset($matches[2]) AND $matches[2])
+            $this->setLanguage($matches[2]);
+
         $command = new \DSI\Controller\ProjectsController();
         $command->exec();
     }
 
-    private function projectsJsonPage()
+    private function projectsJsonPage($matches = [])
     {
+        if (isset($matches[2]) AND $matches[2])
+            $this->setLanguage($matches[2]);
+        
         $command = new \DSI\Controller\ProjectsController();
         $command->responseFormat = 'json';
         $command->exec();
     }
 
-    private function organisationsPage()
+    private function organisationsPage($matches)
     {
+        if (isset($matches[2]) AND $matches[2])
+            $this->setLanguage($matches[2]);
+
         $command = new \DSI\Controller\OrganisationsController();
         $command->exec();
     }
 
-    private function organisationsJsonPage()
+    private function organisationsJsonPage($matches)
     {
+        if (isset($matches[2]) AND $matches[2])
+            $this->setLanguage($matches[2]);
+
         $command = new \DSI\Controller\OrganisationsController();
         $command->responseFormat = 'json';
         $command->exec();
     }
 
-    private function myProfilePage($format = 'html')
+    private function myProfilePage($matches, $format = 'html')
     {
+        if (isset($matches[2]) AND $matches[2])
+            $this->setLanguage($matches[2]);
+
         $command = new \DSI\Controller\MyProfileController();
         $command->data()->format = $format;
         $command->exec();
@@ -370,9 +415,12 @@ class Router
      */
     private function userProfilePage($matches, $format = 'html')
     {
+        if (isset($matches[2]) AND $matches[2])
+            $this->setLanguage($matches[2]);
+
         $command = new \DSI\Controller\ProfileController();
         $command->data()->format = $format;
-        $command->data()->userURL = $matches[1];
+        $command->data()->userURL = $matches[3];
         $command->exec();
     }
 
@@ -428,8 +476,11 @@ class Router
 
     private function projectPage($matches)
     {
+        if (isset($matches[2]) AND $matches[2])
+            $this->setLanguage($matches[2]);
+
         $command = new \DSI\Controller\ProjectController();
-        $command->data()->projectID = $matches[1];
+        $command->data()->projectID = $matches[3];
         $command->exec();
     }
 
@@ -462,18 +513,24 @@ class Router
         $command->exec();
     }
 
-    private function projectJsonPage($matches)
+    private function projectJsonPage($matches = [])
     {
+        if (isset($matches[2]) AND $matches[2])
+            $this->setLanguage($matches[2]);
+
         $command = new \DSI\Controller\ProjectController();
-        $command->data()->projectID = $matches[1];
+        $command->data()->projectID = $matches[3];
         $command->data()->format = 'json';
         $command->exec();
     }
 
     private function editProjectPage($matches, $format = 'html')
     {
+        if (isset($matches[2]) AND $matches[2])
+            $this->setLanguage($matches[2]);
+
         $command = new \DSI\Controller\ProjectEditController();
-        $command->projectID = $matches[1];
+        $command->projectID = $matches[3];
         $command->format = $format;
         $command->exec();
     }
@@ -625,6 +682,15 @@ class Router
         $command->exec();
     }
 
+    private function testPage($options)
+    {
+        if (isset($options[2]))
+            $this->setLanguage($options[2]);
+
+        $command = new \DSI\Controller\TestController();
+        $command->exec();
+    }
+
     private function sitemapXmlPage()
     {
         $command = new \DSI\Controller\SitemapController();
@@ -648,11 +714,16 @@ class Router
     public function forceHTTPS()
     {
         if (empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] == "off") {
-            $redirect = 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+            $redirect = 'https://' . SITE_DOMAIN . $_SERVER['REQUEST_URI'];
             header('HTTP/1.1 301 Moved Permanently');
             header('Location: ' . $redirect);
             exit();
         }
+    }
+
+    private function setLanguage($lang)
+    {
+        Translate::setCurrentLang($lang);
     }
 }
 

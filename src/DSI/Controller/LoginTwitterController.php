@@ -18,6 +18,7 @@ class LoginTwitterController
 {
     public function exec()
     {
+        $urlHandler = new URL();
         $authUser = new Auth();
 
         $twitterLoginService = new \DSI\Service\TwitterLogin();
@@ -51,7 +52,7 @@ class LoginTwitterController
                 $twitterLogin->data()->twitterUID = $user->uid;
                 $twitterLogin->exec();
                 $authUser->saveUserInSession($twitterLogin->getUser());
-                go_to(URL::myProfile());
+                go_to($urlHandler->myProfile());
             } else {
                 $twitterLogin = new TwitterRegister();
                 $twitterLogin->data()->twitterUID = $user->uid;
@@ -60,7 +61,7 @@ class LoginTwitterController
                 $twitterLogin->data()->email = $user->email;
                 $twitterLogin->exec();
                 $authUser->saveUserInSession($twitterLogin->getUser());
-                go_to(URL::myProfile());
+                go_to($urlHandler->myProfile());
             }
         } elseif (isset($_GET['denied'])) {
             // Step 2.5 - denied request to authorize client

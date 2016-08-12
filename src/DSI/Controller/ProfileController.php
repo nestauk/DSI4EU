@@ -40,8 +40,9 @@ class ProfileController
 
     public function exec()
     {
+        $urlHandler = new URL();
         $authUser = new Auth();
-        $authUser->ifNotLoggedInRedirectTo(URL::login());
+        $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
 
         $user = $this->getUserFromURL();
         $userID = $user->getId();
@@ -145,11 +146,11 @@ class ProfileController
                     'location' => $user->getCityName(),
                     'bio' => $user->getBio(),
                     'profilePic' => $user->getProfilePicOrDefault(),
-                    'projects' => array_map(function (ProjectMember $projectMember) use ($projectMemberRepo) {
+                    'projects' => array_map(function (ProjectMember $projectMember) use ($projectMemberRepo, $urlHandler) {
                         $project = $projectMember->getProject();
                         return [
                             'name' => $project->getName(),
-                            'url' => URL::project($project),
+                            'url' => $urlHandler->project($project),
                             'membersCount' => count($projectMemberRepo->getByProjectID($project->getId())),
                         ];
                     }, $projectMemberRepo->getByMemberID($user->getId())),

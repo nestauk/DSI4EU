@@ -18,27 +18,29 @@ class ProjectsController
 
     public function exec()
     {
+        $urlHandler = new URL();
+        $authUser = new Auth();
+        if ($authUser->getUserId())
+            $loggedInUser = (new UserRepository())->getById($authUser->getUserId());
+        else
+            $loggedInUser = null;
+
         if ($this->responseFormat == 'json') {
             // (new CountryRegionRepository())->getAll();
             $projectRepositoryInAPC = new ProjectRepositoryInAPC();
-            echo json_encode(array_map(function (Project $project) {
+            echo json_encode(array_map(function (Project $project) use ($urlHandler) {
                 $region = $project->getCountryRegion();
                 return [
                     'id' => $project->getId(),
                     'name' => $project->getName(),
                     'region' => ($region ? $region->getName() : ''),
                     'country' => ($region ? $region->getCountry()->getName() : ''),
-                    'url' => URL::project($project),
+                    'url' => $urlHandler->project($project),
+                    'logo' => $project->getLogoOrDefaultSilver(),
                     'organisationsCount' => $project->getOrganisationsCount(),
                 ];
             }, $projectRepositoryInAPC->getAll()));
         } else {
-            $authUser = new Auth();
-            if ($authUser->getUserId())
-                $loggedInUser = (new UserRepository())->getById($authUser->getUserId());
-            else
-                $loggedInUser = null;
-
             $pageTitle = 'Projects';
             require __DIR__ . '/../../../www/projects.php';
         }

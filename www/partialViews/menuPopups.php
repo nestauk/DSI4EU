@@ -1,5 +1,8 @@
 <?php
-    use DSI\Service\URL;
+use DSI\Service\URL;
+
+if (!isset($urlHandler))
+    $urlHandler = new URL();
 ?>
 <?php if (!isset($_SESSION['user'])) { ?>
 
@@ -10,7 +13,9 @@
             <div data-duration-in="300" data-duration-out="100" data-easing="ease-in-out"
                  class="w-tabs modal-push-buttons">
                 <div class="w-tab-content tabs-content">
-                    <div data-w-tab="Tab 1" class="w-tab-pane w--tab-active" ng-controller="LoginController">
+                    <div data-w-tab="Tab 1" class="w-tab-pane w--tab-active" ng-controller="LoginController"
+                         data-loginjsonurl="<?php echo $urlHandler->loginJson() ?>"
+                         data-afterloginurl="<?php echo $urlHandler->myProfile() ?>">
                         <div class="w-form login-form">
                             <div ng-hide="forgotPassword.show" class="w-tab-screen">
                                 <form id="email-form" name="email-form" ng-submit="onSubmit()">

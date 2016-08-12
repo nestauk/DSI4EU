@@ -34,6 +34,8 @@ class CreateProjectEmailInvitation
 
     public function exec()
     {
+        $urlHandler = new URL();
+
         $this->errorHandler = new ErrorHandler();
         $this->projectEmailInvitationRepo = new ProjectEmailInvitationRepository();
         $this->projectRepository = new ProjectRepository();
@@ -53,7 +55,7 @@ class CreateProjectEmailInvitation
         $this->projectEmailInvitationRepo->add($projectEmailInvitation);
 
         $message = "{$byUser->getFirstName()} {$byUser->getLastName()} has invited you to join DSI.<br />";
-        $message .= "<a href='http://" . SITE_DOMAIN . URL::home() . "'>Click here</a> to register";
+        $message .= "<a href='http://" . SITE_DOMAIN . $urlHandler->home() . "'>Click here</a> to register";
         $email = new Mailer();
         $email->From = 'noreply@digitalsocial.eu';
         $email->FromName = 'No Reply';

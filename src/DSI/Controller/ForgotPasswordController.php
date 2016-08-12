@@ -15,8 +15,9 @@ class ForgotPasswordController
 
     public function exec()
     {
+        $urlHandler = new URL();
         $authUser = new Auth();
-        $authUser->ifLoggedInRedirectTo(URL::myProfile());
+        $authUser->ifLoggedInRedirectTo($urlHandler->myProfile());
 
         try {
             if (isset($_POST['sendCode'])) {

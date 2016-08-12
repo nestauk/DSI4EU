@@ -13,6 +13,9 @@ use \DSI\Entity\Image;
 $projectsCount = (new \DSI\Repository\ProjectRepositoryInAPC())->countAll();
 $organisationsCount = (new \DSI\Repository\OrganisationRepositoryInAPC())->countAll();
 
+if(!isset($urlHandler))
+    $urlHandler = new URL();
+
 ?><!DOCTYPE html>
 <html data-wf-site="56e2e31a1b1f8f784728a08c" data-wf-page="56fbef6ecf591b312d56f8be">
 <head>
@@ -26,72 +29,7 @@ $organisationsCount = (new \DSI\Repository\OrganisationRepositoryInAPC())->count
     <?php require __DIR__ . '/partialViews/loginModal.php' ?>
 <?php } ?>
 
-<div class="alt nav-main w-nav white-menu" data-animation="default" data-collapse="medium" data-duration="400">
-    <a class="w-nav-brand" href="<?php echo URL::home() ?>">
-        <img class="logo-dark" src="<?php echo SITE_RELATIVE_PATH ?>/images/dark.svg">
-        <div class="beta-badge">Beta</div>
-    </a>
-    <nav class="nav-menu w-nav-menu" role="navigation">
-        <?php /* <a class="alt nav w-nav-link" href="<?php echo URL::exploreDSI() ?>">Explore DSI</a> */ ?>
-        <?php if ($loggedInUser) { ?>
-            <a class="alt nav w-nav-link" href="<?php echo URL::dashboard() ?>">Dashboard</a>
-        <?php } ?>
-        <a class="alt nav w-nav-link" href="<?php echo URL::caseStudies() ?>">Case Studies</a>
-        <a class="alt nav w-nav-link" href="<?php echo URL::blogPosts() ?>">Blog</a>
-        <div class="stat-nav">
-            <a class="alt nav" href="<?php echo URL::projects() ?>">Projects</a>
-            <div class="stats" data-ix="showprojectstatsinfo"><?php echo number_format($projectsCount) ?></div>
-            <div class="project-stat stat-info" data-ix="hide-stat">
-                <div class="close-box" data-ix="closeprojectsstatinfo">+</div>
-                <h2 class="stat-h2"><?php echo number_format($projectsCount) ?> Projects</h2>
-                <p>There are <?php echo number_format($projectsCount) ?> DSI projects registered.</p>
-                <p>
-                    Projects use digitalsocial.eu to map their collaborators, showcase their work and
-                    demonstrate their impact.
-                </p>
-                <a class="stat-link" data-ix="closeprojectsstatinfo" href="<?php echo URL::projects() ?>">VIEW
-                    PROJECTS</a>
-            </div>
-        </div>
-        <div class="stat-nav">
-            <a class="alt nav" href="<?php echo URL::organisations() ?>">Organisations</a>
-            <div class="stats"
-                 data-ix="showprojectstatsinfo-2"><?php echo number_format($organisationsCount) ?></div>
-            <div class="org-stat stat-info" data-ix="closeprojectsstatinfo-2">
-                <div class="close-box" data-ix="closeprojectsstatinfo-2">+</div>
-                <h2 class="stat-h2"><?php echo number_format($organisationsCount) ?> Organisations</h2>
-                <p>There are <?php echo number_format($organisationsCount) ?> DSI organisations registered.</p>
-                <p>
-                    Organisations use digitalsocial.eu to map their projects, find new collaborators and funding
-                    opportunities. Funding organisations also use it to find projects and people to fund.
-                </p>
-                <a data-ix="closeprojectsstatinfo-2" href="<?php echo URL::organisations() ?>">VIEW
-                    ORGANISATIONS</a>
-            </div>
-        </div>
-        <?php if ($loggedInUser) { ?>
-            <div class="w-dropdown" data-delay="0">
-                <div class="alt log-in log-in-alt nav w-nav-link w-dropdown-toggle">
-                    <div>Create</div>
-                </div>
-                <nav class="create-drop-down w-dropdown-list">
-                    <a class="drop-down-link w-dropdown-link" data-ix="create-project-modal" href="#">
-                        Create a new project</a>
-                    <a class="drop-down-link w-dropdown-link" data-ix="create-organisation-modal" href="#">
-                        Create an organisation
-                    </a>
-                    <div class="arror-up"></div>
-                </nav>
-            </div>
-        <?php } else { ?>
-            <a class="alt log-in nav w-nav-link white-alt" data-ix="open-login-modal" href="#">Login</a>
-            <a class="alt log-in log-in-alt nav w-nav-link" data-ix="showsignup" href="#">Signup</a>
-        <?php } ?>
-    </nav>
-    <div class="w-nav-button">
-        <div class="w-icon-nav-menu"></div>
-    </div>
-</div>
+<?php require(__DIR__ . '/partialViews/header.php')?>
 
 <div class="massive-hero" data-ix="reveal-menu">
     <div class="massive-hero-container">
@@ -143,7 +81,7 @@ $organisationsCount = (new \DSI\Repository\OrganisationRepositoryInAPC())->count
                         <strong><?php echo number_format($organisationCount) ?></strong> Organisations
                         <br>have collaborated on <strong><?php echo number_format($projectCount) ?></strong> projects
                     </div>
-                    <a class="what-text-button" href="<?php echo URL::projects() ?>">View projects</a>
+                    <a class="what-text-button" href="<?php echo $urlHandler->projects() ?>">View projects</a>
                 </div>
             </div>
         </div>
@@ -177,7 +115,7 @@ $organisationsCount = (new \DSI\Repository\OrganisationRepositoryInAPC())->count
                     <h3 class="massive-h3">Projects</h3>
                     <p class="small what-p">Projects use DSI4EU to map their collaborators, showcase their work and
                         demonstrate their impact.</p>
-                    <a class="bottom what-text-button" href="<?php echo URL::projects() ?>">Projects</a>
+                    <a class="bottom what-text-button" href="<?php echo $urlHandler->projects() ?>">Projects</a>
                 </div>
             </div>
             <div class="massive-who-column w-col w-col-4">
@@ -186,7 +124,7 @@ $organisationsCount = (new \DSI\Repository\OrganisationRepositoryInAPC())->count
                     <p class="small what-p">Organisations use the network to map their projects, find new collaborators
                         and funding opportunities. Funding organisations also use it to find projects and people to
                         fund.</p>
-                    <a class="bottom what-text-button" href="<?php echo URL::organisations() ?>">Organisations</a>
+                    <a class="bottom what-text-button" href="<?php echo $urlHandler->organisations() ?>">Organisations</a>
                 </div>
             </div>
         </div>

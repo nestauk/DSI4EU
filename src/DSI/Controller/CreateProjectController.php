@@ -16,8 +16,9 @@ class CreateProjectController
 
     public function exec()
     {
+        $urlHandler = new URL();
         $authUser = new Auth();
-        $authUser->ifNotLoggedInRedirectTo(URL::login());
+        $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
 
         $loggedInUser = (new UserRepository())->getById($authUser->getUserId());
 
@@ -29,7 +30,7 @@ class CreateProjectController
 
             echo json_encode([
                 'result' => 'ok',
-                'url' => URL::project($createProject->getProject()),
+                'url' => $urlHandler->project($createProject->getProject()),
             ]);
         } catch (ErrorHandler $e) {
             echo json_encode([

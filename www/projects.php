@@ -1,11 +1,13 @@
 <?php
 require __DIR__ . '/header.php'
 /** @var $loggedInUser \DSI\Entity\User */
+/** @var $urlHandler \DSI\Service\URL */
 ?>
     <script type="text/javascript"
             src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/ProjectsController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 
-    <div ng-controller="ProjectsController">
+    <div ng-controller="ProjectsController"
+         data-projectsjsonurl="<?php echo $urlHandler->projectsJson() ?>">
 
         <div class="w-section page-header stories-header">
             <div class="container-wide header">
@@ -33,7 +35,9 @@ require __DIR__ . '/header.php'
                         <a ng-href="{{project.url}}" class="w-inline-block card-thin">
                             <div class="w-row">
                                 <div class="w-col w-col-3 w-col-medium-6 w-col-small-6">
-                                    <img width="50" src="images/dsi logo placeholder.svg" class="card-logo-small">
+                                    <img width="50"
+                                         src="<?php echo \DSI\Entity\Image::PROJECT_LOGO_URL ?>{{project.logo}}"
+                                         class="card-logo-small">
                                 </div>
                                 <div class="w-col w-col-9 w-col-medium-6 w-col-small-6 card-slim-info">
                                     <h2 class="card-slim-h2" ng-bind="project.name"></h2>

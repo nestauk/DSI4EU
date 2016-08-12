@@ -1,11 +1,14 @@
 angular
     .module(angularAppName)
-    .controller('ProjectsController', function ($scope, $http) {
+    .controller('ProjectsController', function ($scope, $http, $attrs) {
+        var projectsJsonUrl = $attrs.projectsjsonurl;
+
         $scope.letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
         $scope.startLetter = 'A';
 
-        $http.get(SITE_RELATIVE_PATH + '/projects.json')
+        $http.get(projectsJsonUrl)
             .then(function (result) {
+                console.log(result.data);
                 $scope.projects = result.data;
             });
 

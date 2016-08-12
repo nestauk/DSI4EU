@@ -15,10 +15,11 @@ class LogoutController
 {
     public function exec()
     {
+        $urlHandler = new URL();
         $authUser = new Auth();
-        $authUser->ifNotLoggedInRedirectTo(URL::login());
+        $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
 
         $authUser->removeUserFromSession($authUser->getUserId());
-        go_to(URL::home());
+        go_to($urlHandler->home());
     }
 }

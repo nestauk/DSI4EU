@@ -27,8 +27,9 @@ class MyProfileController
 
     public function exec()
     {
+        $urlHandler = new URL();
         $authUser = new Auth();
-        $authUser->ifNotLoggedInRedirectTo(URL::login());
+        $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
 
         $loggedInUser = (new UserRepository())->getById($authUser->getUserId());
         $user = $loggedInUser;
@@ -135,7 +136,7 @@ class MyProfileController
 
             return;
         } else {
-            go_to(URL::profile($user->getProfileURL() ?? $user->getId()));
+            go_to($urlHandler->profile($user->getId()));
         }
     }
 

@@ -11,8 +11,9 @@ class ListOrganisationsController
 {
     public function exec()
     {
+        $urlHandler = new URL();
         $authUser = new Auth();
-        $authUser->ifNotLoggedInRedirectTo(URL::login());
+        $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
 
         $organisationRepositoryInAPC = new OrganisationRepositoryInAPC();
         $organisations = [];

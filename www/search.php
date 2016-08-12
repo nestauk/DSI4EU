@@ -5,6 +5,10 @@ require __DIR__ . '/header.php';
 /** @var $blogPosts \DSI\Entity\Story[] */
 /** @var $projects \DSI\Entity\Project[] */
 /** @var $organisations \DSI\Entity\Organisation[] */
+
+if (!isset($urlHandler))
+    $urlHandler = new \DSI\Service\URL();
+
 ?>
 <style>
     p.nothingfound{
@@ -55,7 +59,7 @@ require __DIR__ . '/header.php';
                     <?php if ($projects) { ?>
                         <?php foreach ($projects AS $project) { ?>
                             <a class="search-result-link full-page-result"
-                               href="<?php echo \DSI\Service\URL::project($project) ?>">
+                               href="<?php echo $urlHandler->project($project) ?>">
                                 <?php echo show_input($project->getName()) ?>
                             </a>
                         <?php } ?>

@@ -5,7 +5,9 @@ use DSI\Service\URL;
 <script type="text/javascript"
         src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/LoginController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 
-<div class="login-modal modal" ng-controller="LoginController">
+<div class="login-modal modal" ng-controller="LoginController"
+     data-loginjsonurl="<?php echo $urlHandler->loginJson() ?>"
+     data-afterloginurl="<?php echo $urlHandler->myProfile() ?>">
     <div class="modal-container">
         <div class="modal-helper">
             <div class="modal-content">

@@ -5,7 +5,8 @@ require __DIR__ . '/header.php'
     <script type="text/javascript"
             src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/OrganisationsController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 
-    <div ng-controller="OrganisationsController">
+    <div ng-controller="OrganisationsController"
+         data-organisationsjsonurl="<?php echo $urlHandler->organisations('json') ?>">
 
         <div class="w-section page-header stories-header">
             <div class="container-wide header">
@@ -34,7 +35,7 @@ require __DIR__ . '/header.php'
                         <a ng-href="{{organisation.url}}" class="w-inline-block card-thin">
                             <div class="w-row">
                                 <div class="w-col w-col-4 w-col-small-6 w-col-tiny-6">
-                                    <img width="50" src="images/dsi logo placeholder.svg" class="card-logo-small">
+                                    <img width="50" src="<?php echo \DSI\Entity\Image::ORGANISATION_LOGO_URL?>{{organisation.logo}}" class="card-logo-small">
                                 </div>
                                 <div class="w-col w-col-8 w-col-small-6 w-col-tiny-6 card-slim-info">
                                     <h2 class="card-slim-h2" ng-bind="organisation.name"></h2>

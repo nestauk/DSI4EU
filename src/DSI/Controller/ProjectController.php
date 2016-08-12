@@ -55,12 +55,14 @@ class ProjectController
 
     public function exec()
     {
-        $loggedInUser = null;
+        $urlHandler = new URL();
 
         $authUser = new Auth();
         if ($authUser->isLoggedIn()) {
             $userRepo = new UserRepository();
             $loggedInUser = $userRepo->getById($authUser->getUserId());
+        } else {
+            $loggedInUser = null;
         }
 
         $projectRepo = new ProjectRepository();
@@ -122,7 +124,7 @@ class ProjectController
         try {
             if ($userCanEditProject) {
                 if (isset($_POST['updateBasic'])) {
-                    $authUser->ifNotLoggedInRedirectTo(URL::login());
+                    $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
 
                     $updateProject = new UpdateProject();
                     $updateProject->data()->project = $project;

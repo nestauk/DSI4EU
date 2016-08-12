@@ -14,6 +14,9 @@ require __DIR__ . '/header.php';
 $leftSideText = "<p>To add your project, we need to collect some information about your project and its aims. We are interested in hearing from both formal and informal projects.</p>";
 $leftSideText .= "<p>Some information is optional (mandatory fields are indicated with an asterisk), but the more you can provide, the better. We will add you as soon as we have some basic data. You will be able to edit and expand on your answers later.</p>";
 
+if (!isset($urlHandler))
+    $urlHandler = new \DSI\Service\URL();
+
 ?>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 
@@ -27,7 +30,7 @@ $leftSideText .= "<p>Some information is optional (mandatory fields are indicate
 
     <div ng-controller="ProjectEditController"
          data-projectid="<?php echo $project->getId() ?>"
-         data-projecturl="<?php echo \DSI\Service\URL::project($project) ?>">
+         data-projecturl="<?php echo $urlHandler->project($project) ?>">
         <div class="creator page-header">
             <div class="container-wide header">
                 <h1 class="light page-h1">Edit project</h1>
@@ -377,7 +380,7 @@ $leftSideText .= "<p>Some information is optional (mandatory fields are indicate
                                                ng-value="loading ? 'Loading...' : 'Publish now'"
                                                ng-disabled="loading"
                                                value="Publish now"/>
-                                        <a href="<?php echo \DSI\Service\URL::project($project) ?>"
+                                        <a href="<?php echo $urlHandler->project($project) ?>"
                                            class="tab-button-next update-button w-button">Save for later</a>
                                         <a ng-click="currentTab='step3'"
                                            class="previous tab-button-3 tab-button-next w-button">Previous</a>

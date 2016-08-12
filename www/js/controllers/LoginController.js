@@ -1,6 +1,9 @@
 angular
     .module(angularAppName)
-    .controller('LoginController', function ($scope, $http, $timeout) {
+    .controller('LoginController', function ($scope, $http, $timeout, $attrs) {
+        var loginJsonUrl = $attrs.loginjsonurl;
+        var afterLoginUrl = $attrs.afterloginurl;
+
         $scope.forgotPassword = {};
         $scope.email = {value: ''};
         $scope.password = {value: ''};
@@ -14,7 +17,7 @@ angular
                 login: true
             };
 
-            $http.post(SITE_RELATIVE_PATH + '/login.json', data).then(
+            $http.post(loginJsonUrl, data).then(
                 function (response) {
                     $scope.loading = false;
                     if (response.data.response == 'error') {
@@ -22,7 +25,7 @@ angular
                     } else if (response.data.response == 'ok') {
                         $scope.loggedin = true;
                         $timeout(function () {
-                            window.location.href = SITE_RELATIVE_PATH + "/my-profile";
+                            window.location.href = afterLoginUrl;
                         }, 500);
                     }
                 },

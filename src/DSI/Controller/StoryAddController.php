@@ -17,13 +17,14 @@ class StoryAddController
 
     public function exec()
     {
+        $urlHandler = new URL();
         $authUser = new Auth();
-        $authUser->ifNotLoggedInRedirectTo(URL::login());
+        $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
 
         $loggedInUser = (new UserRepository())->getById($authUser->getUserId());
         $userCanAddStory = (bool)($loggedInUser AND ($loggedInUser->isCommunityAdmin() OR $loggedInUser->isEditorialAdmin()));
         if (!$userCanAddStory)
-            go_to(URL::home());
+            go_to($urlHandler->home());
 
         if (isset($_POST['add'])) {
             try {

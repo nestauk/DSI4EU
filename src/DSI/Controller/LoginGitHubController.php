@@ -18,6 +18,7 @@ class LoginGitHubController
 {
     public function exec()
     {
+        $urlHandler = new URL();
         $authUser = new Auth();
 
         /** @var GitHubLogin */
@@ -49,7 +50,7 @@ class LoginGitHubController
                     $gitHubLogin->data()->gitHubUID = $user->getId();
                     $gitHubLogin->exec();
                     $authUser->saveUserInSession($gitHubLogin->getUser());
-                    go_to(URL::myProfile());
+                    go_to($urlHandler->myProfile());
                 } else {
                     $name = explode(' ', $user->getName());
                     $lastName = array_pop($name);
@@ -61,7 +62,7 @@ class LoginGitHubController
                     $gitHubLogin->data()->email = $user->getEmail();
                     $gitHubLogin->exec();
                     $authUser->saveUserInSession($gitHubLogin->getUser());
-                    go_to(URL::myProfile());
+                    go_to($urlHandler->myProfile());
                 }
             } catch (\Exception $e) {
                 pr($e);

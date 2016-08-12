@@ -39,15 +39,17 @@ class ProjectEditController
 
     public function exec()
     {
+        $urlHandler = new URL();
         $authUser = new Auth();
-        $authUser->ifNotLoggedInRedirectTo(URL::login());
+        $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
+
         $loggedInUser = (new UserRepository())->getById($authUser->getUserId());
 
         $projectRepo = new ProjectRepository();
         $project = $projectRepo->getById($this->projectID);
 
         if (!$this->userCanModifyProject($project, $loggedInUser))
-            go_to(URL::home());
+            go_to($urlHandler->home());
 
         if ($this->format == 'json') {
             try {

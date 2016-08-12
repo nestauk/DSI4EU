@@ -22,6 +22,7 @@ class SearchController
 
     public function exec()
     {
+        $urlHandler = new URL();
         $authUser = new Auth();
         if ($authUser->isLoggedIn())
             $loggedInUser = (new UserRepository())->getById($authUser->getUserId());
@@ -45,10 +46,10 @@ class SearchController
                             'url' => URL::caseStudy($caseStudy),
                         ];
                     }, $caseStudies),
-                    'projects' => array_map(function (Project $project) {
+                    'projects' => array_map(function (Project $project) use ($urlHandler) {
                         return [
                             'name' => $project->getName(),
-                            'url' => URL::project($project),
+                            'url' => $urlHandler->project($project),
                         ];
                     }, $projects),
                     'blogPosts' => array_map(function (Story $story) {

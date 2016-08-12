@@ -9,6 +9,7 @@ require __DIR__ . '/header.php';
 /** @var $userProjects int[] */
 /** @var $organisations \DSI\Entity\Organisation[] */
 /** @var $userOrganisations int[] */
+/** @var $urlHandler \DSI\Service\URL */
 
 $leftSideText = "<p>To create your profile, we would like to collect some information about you.</p>";
 $leftSideText .= "<p>The information is optional. You will be able to edit and expand on your answers later.</p>";
@@ -363,7 +364,7 @@ $leftSideText .= "<p>The information is optional. You will be able to edit and e
                                                                     <?php foreach ($projects AS $project) { ?>
                                                                         <option value="<?php echo $project->getId() ?>"
                                                                                 data-logo="<?php echo $project->getLogoOrDefaultSilver() ?>"
-                                                                                data-url="<?php echo \DSI\Service\URL::project($project) ?>"
+                                                                                data-url="<?php echo $urlHandler->project($project) ?>"
                                                                                 data-country="<?php echo $project->getCountryName() ?>"
                                                                                 data-type="project"
                                                                             <?php if (in_array($project->getId(), $userProjects)) echo 'selected' ?>><?php
@@ -430,13 +431,13 @@ $leftSideText .= "<p>The information is optional. You will be able to edit and e
                             <div class="step-window w-tab-pane" ng-class="{'w--tab-active': currentTab == 'step4'}"
                                  data-w-tab="Tab 4">
                                 <form id="email-form-3" name="email-form-3"
-                                      ng-submit="submitStep4('<?php echo \DSI\Service\URL::myProfile() ?>')">
+                                      ng-submit="submitStep4('<?php echo $urlHandler->myProfile() ?>')">
                                     <div class="tabbed-nav-buttons w-clearfix">
                                         <input type="submit" class="tab-button-next tab-button-publish w-button"
                                                ng-value="loading ? 'Loading...' : 'Publish now'"
                                                ng-disabled="loading"
                                                value="Publish now"/>
-                                        <a href="<?php echo \DSI\Service\URL::home() ?>"
+                                        <a href="<?php echo $urlHandler->home() ?>"
                                            class="tab-button-next update-button w-button">Save for later</a>
                                         <a ng-click="currentTab='step3'"
                                            class="previous tab-button-3 tab-button-next w-button">Previous</a>

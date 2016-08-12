@@ -8,6 +8,7 @@ require __DIR__ . '/header.php';
 /** @var $loggedInUser \DSI\Entity\User */
 /** @var $projectMembers \DSI\Entity\ProjectMember[] */
 /** @var $organisationProjectsObj \DSI\Entity\OrganisationProject[] */
+/** @var $urlHandler \DSI\Service\URL */
 ?>
     <script
         src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/ProjectController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
@@ -22,7 +23,7 @@ require __DIR__ . '/header.php';
                 <div class="container-wide container-wide-header-large">
                     <?php if ($userCanEditProject) { ?>
                         <a class="dsi-button profile-edit w-button" style="z-index:1000"
-                           href="<?php echo \DSI\Service\URL::editProject($project->getId()) ?>">Edit project</a>
+                           href="<?php echo $urlHandler->editProject($project->getId()) ?>">Edit project</a>
                     <?php } ?>
                     <h1 class="header-large-h1-centre"
                         data-ix="fadeinuponload"><?php echo show_input($project->getName()) ?></h1>
@@ -177,7 +178,7 @@ require __DIR__ . '/header.php';
                                                 </div>
                                             </div>
                                             <a class="view-profile"
-                                               href="<?php echo \DSI\Service\URL::profile($member->getId()) ?>">View</a>
+                                               href="<?php echo $urlHandler->profile($member->getId()) ?>">View</a>
                                         </div>
                                     <?php } ?>
                                 </div>

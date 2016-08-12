@@ -18,8 +18,9 @@ class ListCountryRegionsController
 
     public function exec()
     {
+        $urlHandler = new URL();
         $authUser = new Auth();
-        $authUser->ifNotLoggedInRedirectTo(URL::login());
+        $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
 
         $countryRegionsRepo = new CountryRegionRepository();
         $countryRegions = [];

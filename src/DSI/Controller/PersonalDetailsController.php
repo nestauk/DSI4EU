@@ -24,8 +24,9 @@ class PersonalDetailsController
 
     public function exec()
     {
+        $urlHandler = new URL();
         $authUser = new Auth();
-        $authUser->ifNotLoggedInRedirectTo(URL::login());
+        $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
 
         $user = (new UserRepository())->getById($authUser->getUserId());
         $userID = $user->getId();
@@ -39,6 +40,7 @@ class PersonalDetailsController
         $userProjects = (new ProjectMemberRepository())->getProjectIDsForMember($loggedInUser->getId());
         $organisations = (new OrganisationRepositoryInAPC())->getAll();
         $userOrganisations = (new OrganisationMemberRepository())->getOrganisationIDsForMember($loggedInUser->getId());
+
         $angularModules['fileUpload'] = true;
         require __DIR__ . '/../../../www/personal-details.php';
     }

@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: apandele
- * Date: 25/04/2016
- * Time: 16:11
- */
-
 namespace DSI\Service;
 
 
@@ -13,61 +6,78 @@ use DSI\Entity\CaseStudy;
 use DSI\Entity\Organisation;
 use DSI\Entity\Project;
 use DSI\Entity\Story;
+use DSI\Entity\Translation;
 
 class URL
 {
-    public static function dashboard()
+    private $currentLanguage;
+
+    public function __construct()
     {
-        return SITE_RELATIVE_PATH . '/dashboard';
+        $this->currentLanguage = Translate::getCurrentLang();
     }
 
-    public static function myProfile()
+    public function dashboard()
     {
-        return SITE_RELATIVE_PATH . '/my-profile';
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'dashboard';
     }
 
-    public static function login()
+    public function myProfile()
     {
-        return SITE_RELATIVE_PATH . '/login';
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'my-profile';
     }
 
-    public static function logout()
+    public function login()
     {
-        return SITE_RELATIVE_PATH . '/logout';
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'login';
     }
 
-    public static function profile($userID)
+    public function loginJson()
     {
-        return SITE_RELATIVE_PATH . '/profile/' . $userID;
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'login.json';
     }
 
-    public static function home()
+    public function logout()
     {
-        return SITE_RELATIVE_PATH . '/';
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'logout';
     }
 
-    public static function projects()
+    public function profile($userID)
     {
-        return SITE_RELATIVE_PATH . '/projects';
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'profile/' . $userID;
     }
 
-    public static function project(Project $project)
+    public function home()
     {
-        return SITE_RELATIVE_PATH . '/project/' . $project->getId() . '/' . self::linkify($project->getName());
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage();
     }
 
-    /**
-     * @param int $projectID
-     * @return string
-     */
-    public static function editProject($projectID)
+    public function projects()
     {
-        return SITE_RELATIVE_PATH . '/project/edit/' . $projectID;
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'projects';
     }
 
-    public static function organisations()
+    public function projectsJson()
     {
-        return SITE_RELATIVE_PATH . '/organisations';
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'projects.json';
+    }
+
+    public function project(Project $project)
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'project/' . $project->getId() . '/' . self::linkify($project->getName());
+    }
+
+    public function editProject($projectID)
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'project/edit/' . $projectID;
+    }
+
+    public function organisations($format = null)
+    {
+        $extension = '';
+        if ($format == 'json')
+            $extension = '.json';
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'organisations' . $extension;
     }
 
     public static function organisation(Organisation $org)
@@ -180,6 +190,7 @@ class URL
         return SITE_RELATIVE_PATH . '/sitemap.xml';
     }
 
+
     /**
      * @param $title
      * @return string
@@ -190,5 +201,24 @@ class URL
         $title = trim($title, '-');
         $title = preg_replace('(\-{2,})', '-', $title);
         return strtolower($title);
+    }
+
+    /**
+     * @return string
+     */
+    private function addLanguage()
+    {
+        if ($this->currentLanguage != Translation::DEFAULT_LANGUAGE)
+            return $this->currentLanguage . '/';
+
+        return '';
+    }
+
+    /**
+     * @param string $currentLanguage
+     */
+    public function setCurrentLanguage($currentLanguage)
+    {
+        $this->currentLanguage = (string)$currentLanguage;
     }
 }

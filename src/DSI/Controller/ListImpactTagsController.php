@@ -10,8 +10,9 @@ class ListImpactTagsController
 {
     public function exec()
     {
+        $urlHandler = new URL();
         $authUser = new Auth();
-        $authUser->ifNotLoggedInRedirectTo(URL::login());
+        $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
 
         $tagRepo = new ImpactTagRepository();
         $tags = [];

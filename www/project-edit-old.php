@@ -1,6 +1,10 @@
 <?php
 require __DIR__ . '/header.php';
 /** @var $project \DSI\Entity\Project */
+
+if (!isset($urlHandler))
+    $urlHandler = new URL();
+
 ?>
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -132,7 +136,7 @@ require __DIR__ . '/header.php';
                         <input class="w-button dsi-button post-story" type="submit" value="Update project"
                                ng-value="loading ? 'Loading...' : 'Update project'"
                                ng-disabled="loading">
-                        <a href="<?php echo \DSI\Service\URL::project($project) ?>"
+                        <a href="<?php echo $urlHandler->project($project) ?>"
                            class="w-button dsi-button post-story cancel">Back to project</a>
                     </form>
                 </div>

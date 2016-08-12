@@ -24,13 +24,14 @@ class StoryEditController
 
     public function exec()
     {
+        $urlHandler = new URL();
         $authUser = new Auth();
-        $authUser->ifNotLoggedInRedirectTo(URL::login());
+        $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
 
         $loggedInUser = (new UserRepository())->getById($authUser->getUserId());
         $userCanEditStory = (bool)($loggedInUser AND ($loggedInUser->isCommunityAdmin() OR $loggedInUser->isEditorialAdmin()));
         if (!$userCanEditStory)
-            go_to(URL::home());
+            go_to($urlHandler->home());
 
         $storyRepo = new StoryRepository();
         $story = $storyRepo->getById($this->storyID);

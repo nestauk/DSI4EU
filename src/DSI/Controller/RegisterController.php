@@ -20,6 +20,7 @@ class RegisterController
 
     public function exec()
     {
+        $urlHandler = new URL();
         $authUser = new Auth();
         //$authUser->ifLoggedInRedirectTo(URL::myProfile());
 
@@ -38,7 +39,7 @@ class RegisterController
                     ]);
                     die();
                 } else {
-                    go_to(URL::myProfile());
+                    go_to($urlHandler->myProfile());
                 }
             } catch (ErrorHandler $e) {
                 if ($this->responseFormat === 'json') {

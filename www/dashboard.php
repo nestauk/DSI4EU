@@ -5,6 +5,9 @@
 
 use \DSI\Service\URL;
 
+if(!isset($urlHandler))
+    $urlHandler = new URL();
+
 require __DIR__ . '/header.php';
 ?>
     <script type="text/javascript"
@@ -98,7 +101,7 @@ require __DIR__ . '/header.php';
                                 </div>
                                 <div class="w-col w-col-6">
                                     <a class="w-button dsi-button dash-join"
-                                       href="<?php echo URL::projects() ?>">Join</a>
+                                       href="<?php echo $urlHandler->projects() ?>">Join</a>
                                 </div>
                             </div>
                         <?php } else { ?>
@@ -119,7 +122,7 @@ require __DIR__ . '/header.php';
                                             <div class="notification-interaction">
                                                 <?php /* <a class="w-button dsi-button notification-decline" href="#">Delete</a> */ ?>
                                                 <a class="w-button dsi-button notification-view notification-project"
-                                                   href="<?php echo URL::project($project) ?>">
+                                                   href="<?php echo $urlHandler->project($project) ?>">
                                                     View
                                                 </a>
                                             </div>
@@ -141,7 +144,7 @@ require __DIR__ . '/header.php';
                                        data-w-tab="Tab 2">Create +</a>
                                 </div>
                                 <div class="w-col w-col-6">
-                                    <a class="w-button dsi-button dash-join" href="<?php echo URL::organisations() ?>">Join</a>
+                                    <a class="w-button dsi-button dash-join" href="<?php echo $urlHandler->organisations() ?>">Join</a>
                                 </div>
                             </div>
                         <?php } else { ?>

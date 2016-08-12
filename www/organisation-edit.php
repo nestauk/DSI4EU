@@ -11,6 +11,9 @@ require __DIR__ . '/header.php';
 $leftSideText = "<p>To add your organisation, we need to collect some information about your organisation and its work. We are interested in hearing from both formal and informal groups.</p>";
 $leftSideText .= "<p>Some information is optional (mandatory fields are indicated with an asterisk), but the more you can provide, the better. We will add you as soon as we have some basic data. You will be able to edit and expand on your answers later.</p>";
 
+if (!isset($urlHandler))
+    $urlHandler = new URL();
+
 ?>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
     <script src="//code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
@@ -152,7 +155,7 @@ $leftSideText .= "<p>Some information is optional (mandatory fields are indicate
                                                                 <?php foreach ($projects AS $project) { ?>
                                                                     <option value="<?php echo $project->getId() ?>"
                                                                             data-logo="<?php echo $project->getLogoOrDefaultSilver() ?>"
-                                                                            data-url="<?php echo \DSI\Service\URL::project($project) ?>"
+                                                                            data-url="<?php echo $urlHandler->project($project) ?>"
                                                                             data-country="<?php echo $project->getCountryName() ?>"
                                                                             data-type="project"
                                                                         <?php if (in_array($project->getId(), $orgProjects)) echo 'selected' ?>><?php

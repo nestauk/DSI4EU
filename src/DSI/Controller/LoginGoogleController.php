@@ -21,6 +21,7 @@ class LoginGoogleController
 
     public function exec()
     {
+        $urlHandler = new URL();
         $authUser = new Auth();
 
         /** @var GoogleLogin */
@@ -51,7 +52,7 @@ class LoginGoogleController
                     $googleLogin->data()->googleUID = $user->getId();
                     $googleLogin->exec();
                     $authUser->saveUserInSession($googleLogin->getUser());
-                    go_to(URL::myProfile());
+                    go_to($urlHandler->myProfile());
                 } else {
                     $googleLogin = new GoogleRegister();
                     $googleLogin->data()->googleUID = $user->getId();
@@ -60,7 +61,7 @@ class LoginGoogleController
                     $googleLogin->data()->email = $user->getEmail();
                     $googleLogin->exec();
                     $authUser->saveUserInSession($googleLogin->getUser());
-                    go_to(URL::myProfile());
+                    go_to($urlHandler->myProfile());
                 }
             } catch (\Exception $e) {
                 pr($e);

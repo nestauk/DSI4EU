@@ -26,8 +26,9 @@ class DashboardController
 
     public function exec()
     {
+        $urlHandler = new URL();
         $authUser = new Auth();
-        $authUser->ifNotLoggedInRedirectTo(URL::login());
+        $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
         $loggedInUser = (new UserRepository())->getById($authUser->getUserId());
 
         if ($this->format == 'json') {
@@ -100,12 +101,12 @@ class DashboardController
                 $projectInvitations = (new ProjectMemberInvitationRepository())->getByMemberID($loggedInUser->getId());
                 $organisationInvitations = (new OrganisationMemberInvitationRepository())->getByMemberID($loggedInUser->getId());
                 echo json_encode([
-                    'projectInvitations' => array_map(function (ProjectMemberInvitation $projectMember) {
+                    'projectInvitations' => array_map(function (ProjectMemberInvitation $projectMember) use ($urlHandler) {
                         $project = $projectMember->getProject();
                         return [
                             'id' => $project->getId(),
                             'name' => $project->getName(),
-                            'url' => URL::project($project),
+                            'url' => $urlHandler->project($project),
                         ];
                     }, $projectInvitations),
                     'organisationInvitations' => array_map(function (OrganisationMemberInvitation $organisationMember) {

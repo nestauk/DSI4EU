@@ -5,6 +5,9 @@ use \DSI\Service\URL;
 if (!isset($loggedInUser))
     $loggedInUser = null;
 
+if(!isset($urlHandler))
+    $urlHandler = new URL();
+
 ?>
 </div>
 <div class="footer">
@@ -50,7 +53,7 @@ if (!isset($loggedInUser))
                     */ ?>
                     <?php if ($loggedInUser) { ?>
                         <li class="footer-link">
-                            <a class="footer-link" href="<?php echo URL::dashboard() ?>">Your dashboard</a>
+                            <a class="footer-link" href="<?php echo $urlHandler->dashboard() ?>">Your dashboard</a>
                         </li>
                     <?php } else { ?>
                         <li class="footer-link">
@@ -80,7 +83,7 @@ if (!isset($loggedInUser))
                     </li>
                     */ ?>
                     <li class="footer-link">
-                        <a class="footer-link" href="<?php echo URL::projects() ?>">View projects</a>
+                        <a class="footer-link" href="<?php echo $urlHandler->projects() ?>">View projects</a>
                     </li>
                 </ul>
             </div>
@@ -98,7 +101,7 @@ if (!isset($loggedInUser))
                     </li>
                     */ ?>
                     <li class="footer-link">
-                        <a class="footer-link" href="<?php echo URL::organisations() ?>">View organisations</a>
+                        <a class="footer-link" href="<?php echo $urlHandler->organisations() ?>">View organisations</a>
                     </li>
                 </ul>
             </div>

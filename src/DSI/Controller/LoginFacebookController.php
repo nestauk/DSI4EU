@@ -18,6 +18,7 @@ class LoginFacebookController
 {
     public function exec()
     {
+        $urlHandler = new URL();
         $authUser = new Auth();
 
         $facebookLoginService = new \DSI\Service\FacebookLogin();
@@ -41,7 +42,7 @@ class LoginFacebookController
                     $facebookLogin->data()->facebookUID = $user->getId();
                     $facebookLogin->exec();
                     $authUser->saveUserInSession($facebookLogin->getUser());
-                    go_to(URL::myProfile());
+                    go_to($urlHandler->myProfile());
                 } else {
                     $facebookLogin = new FacebookRegister();
                     $facebookLogin->data()->facebookUID = $user->getId();
@@ -50,7 +51,7 @@ class LoginFacebookController
                     $facebookLogin->data()->email = $user->getEmail();
                     $facebookLogin->exec();
                     $authUser->saveUserInSession($facebookLogin->getUser());
-                    go_to(URL::myProfile());
+                    go_to($urlHandler->myProfile());
                 }
             } catch (\Exception $e) {
                 pr($e);

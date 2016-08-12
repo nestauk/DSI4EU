@@ -20,8 +20,8 @@ function go_to($url = NULL, $perm = 302)
 
     if ($perm == 301)
         header('HTTP/1.1 301 Moved Permanently');
-    
-     header("Location:$url", TRUE, $perm);
+
+    header("Location:$url", TRUE, $perm);
 }
 
 function show_input($text)
@@ -37,8 +37,24 @@ function pr($text)
     echo "</pre>\n";
 }
 
-function isValidEmail($email){
+function isValidEmail($email)
+{
     return filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
+}
+
+function __($text)
+{
+    return \DSI\Service\Translate::getTranslation($text);
+}
+
+function _e($text)
+{
+    echo \DSI\Service\Translate::getTranslation($text);
+}
+
+function _ehtml($text)
+{
+    echo show_input(\DSI\Service\Translate::getTranslation($text));
 }
 
 spl_autoload_register(function ($class) {
