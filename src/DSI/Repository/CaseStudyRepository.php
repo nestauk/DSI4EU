@@ -130,6 +130,14 @@ class CaseStudyRepository
         ], ['limit' => $limit]);
     }
 
+    public function getAllSliderStudies()
+    {
+        return $this->getObjectsWhere([
+            "`isPublished` = 1",
+            "`isFeaturedOnSlider` = 1",
+        ]);
+    }
+
     public function getSliderStudiesLast($limit)
     {
         return $this->getObjectsWhere([
