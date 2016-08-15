@@ -44,6 +44,7 @@ class UpdateProject
         $this->checkIfUserCanEditTheProject();
         $this->checkIfNameIsNotEmpty();
         $this->saveProjectDetails();
+        $this->updateInvolvedOrganisationCount();
     }
 
     /**
@@ -91,6 +92,13 @@ class UpdateProject
             $this->setOrganisations();
 
         $this->saveImages();
+    }
+
+    private function updateInvolvedOrganisationCount()
+    {
+        $organisationsCount = count((new OrganisationProjectRepository())->getByProjectID($this->data()->project->getId()));
+        $this->data()->project->setOrganisationsCount($organisationsCount);
+        $this->projectRepo->save($this->data()->project);
     }
 
     private function setTags()
