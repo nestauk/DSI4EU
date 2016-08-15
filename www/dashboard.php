@@ -165,7 +165,7 @@ require __DIR__ . '/header.php';
                                             <div class="notification-interaction">
                                                 <?php /* <a class="w-button dsi-button notification-decline" href="#">Delete</a> */ ?>
                                                 <a class="w-button dsi-button notification-view notification-project"
-                                                   href="<?php echo URL::organisation($organisation) ?>">
+                                                   href="<?php echo $urlHandler->organisation($organisation) ?>">
                                                     View
                                                 </a>
                                             </div>
@@ -200,7 +200,7 @@ require __DIR__ . '/header.php';
                                         </div>
                                         <div class="notification-interaction">
                                             <a class="w-button dsi-button notification-decline stop-following"
-                                               href="<?php echo URL::blogPost($story) ?>" style="color:#18233f">
+                                               href="<?php echo $urlHandler->blogPost($story) ?>" style="color:#18233f">
                                                 Read
                                             </a>
                                         </div>

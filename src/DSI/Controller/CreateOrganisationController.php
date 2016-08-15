@@ -30,7 +30,7 @@ class CreateOrganisationController
 
             echo json_encode([
                 'result' => 'ok',
-                'url' => URL::editOrganisation($createOrganisation->getOrganisation()),
+                'url' => $urlHandler->editOrganisation($createOrganisation->getOrganisation()),
             ]);
         } catch (ErrorHandler $e) {
             echo json_encode([

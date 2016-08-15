@@ -12,8 +12,9 @@ angular
     .controller('StoriesController', function ($scope, $http, $timeout, $attrs) {
         // Get stories
         (function () {
+            var jsonUrl = $attrs.jsonurl;
             $scope.stories = [];
-            $http.get(SITE_RELATIVE_PATH + '/stories.json')
+            $http.get(jsonUrl)
                 .then(function (response) {
                     $scope.searchCriteria.published = true;
                     $scope.stories = response.data;

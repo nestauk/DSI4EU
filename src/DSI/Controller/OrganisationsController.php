@@ -33,14 +33,14 @@ class OrganisationsController
             // (new OrganisationSizeRepository())->getAll();
 
             $organisationRepositoryInAPC = new OrganisationRepositoryInAPC();
-            echo json_encode(array_map(function (Organisation $organisation) {
+            echo json_encode(array_map(function (Organisation $organisation) use ($urlHandler){
                 $region = $organisation->getCountryRegion();
                 return [
                     'id' => $organisation->getId(),
                     'name' => $organisation->getName(),
                     'region' => ($region ? $region->getName() : ''),
                     'country' => ($region ? $region->getCountry()->getName() : ''),
-                    'url' => URL::organisation($organisation),
+                    'url' => $urlHandler->organisation($organisation),
                     'logo' => $organisation->getLogoOrDefaultSilver(),
                     'projectsCount' => $organisation->getProjectsCount(),
                     'partnersCount' => $organisation->getPartnersCount(),

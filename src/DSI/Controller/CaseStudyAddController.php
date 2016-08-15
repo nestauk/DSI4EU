@@ -47,7 +47,7 @@ class CaseStudyAddController
 
                 echo json_encode([
                     'code' => 'ok',
-                    'url' => URL::caseStudy($caseStudy),
+                    'url' => $urlHandler->caseStudy($caseStudy),
                 ]);
             } catch (ErrorHandler $e) {
                 echo json_encode([

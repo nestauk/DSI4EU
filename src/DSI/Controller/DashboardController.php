@@ -109,12 +109,12 @@ class DashboardController
                             'url' => $urlHandler->project($project),
                         ];
                     }, $projectInvitations),
-                    'organisationInvitations' => array_map(function (OrganisationMemberInvitation $organisationMember) {
+                    'organisationInvitations' => array_map(function (OrganisationMemberInvitation $organisationMember) use ($urlHandler){
                         $organisation = $organisationMember->getOrganisation();
                         return [
                             'id' => $organisation->getId(),
                             'name' => $organisation->getName(),
-                            'url' => URL::organisation($organisation),
+                            'url' => $urlHandler->organisation($organisation),
                         ];
                     }, $organisationInvitations),
                 ]);

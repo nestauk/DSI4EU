@@ -31,7 +31,7 @@ require __DIR__ . '/header.php';
                                     <?php echo show_input($caseStudy->getIntroCardText()) ?>
                                 </div>
                                 <a class="case-study-card-read-more"
-                                   href="<?php echo \DSI\Service\URL::caseStudy($caseStudy) ?>">
+                                   href="<?php echo $urlHandler->caseStudy($caseStudy) ?>">
                                     See the case study
                                 </a>
                             </div>

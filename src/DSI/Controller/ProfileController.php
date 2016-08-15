@@ -154,11 +154,11 @@ class ProfileController
                             'membersCount' => count($projectMemberRepo->getByProjectID($project->getId())),
                         ];
                     }, $projectMemberRepo->getByMemberID($user->getId())),
-                    'organisations' => array_map(function (OrganisationMember $organisationMember) use ($organisationMemberRepo) {
+                    'organisations' => array_map(function (OrganisationMember $organisationMember) use ($organisationMemberRepo, $urlHandler) {
                         $organisation = $organisationMember->getOrganisation();
                         return [
                             'name' => $organisation->getName(),
-                            'url' => URL::organisation($organisation),
+                            'url' => $urlHandler->organisation($organisation),
                             'membersCount' => count($organisationMemberRepo->getByOrganisationID($organisation->getId())),
                         ];
                     }, $organisationMemberRepo->getByMemberID($user->getId())),

@@ -29,7 +29,7 @@ if (!isset($urlHandler))
                     <?php if ($caseStudies) { ?>
                         <?php foreach ($caseStudies AS $caseStudy) { ?>
                             <a class="search-result-link full-page-result"
-                               href="<?php echo \DSI\Service\URL::caseStudy($caseStudy) ?>">
+                               href="<?php echo $urlHandler->caseStudy($caseStudy) ?>">
                                 <?php echo show_input($caseStudy->getTitle()) ?>
                             </a>
                         <?php } ?>
@@ -44,7 +44,7 @@ if (!isset($urlHandler))
                     <?php if ($blogPosts) { ?>
                         <?php foreach ($blogPosts AS $post) { ?>
                             <a class="search-result-link full-page-result"
-                               href="<?php echo \DSI\Service\URL::blogPost($post) ?>">
+                               href="<?php echo $urlHandler->blogPost($post) ?>">
                                 <?php echo show_input($post->getTitle()) ?>
                             </a>
                         <?php } ?>
@@ -74,7 +74,7 @@ if (!isset($urlHandler))
                     <?php if ($organisations) { ?>
                         <?php foreach ($organisations AS $organisation) { ?>
                             <a class="search-result-link full-page-result"
-                               href="<?php echo \DSI\Service\URL::organisation($organisation) ?>">
+                               href="<?php echo $urlHandler->organisation($organisation) ?>">
                                 <?php echo show_input($organisation->getName()) ?>
                             </a>
                         <?php } ?>

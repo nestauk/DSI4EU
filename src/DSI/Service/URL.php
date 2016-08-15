@@ -80,24 +80,24 @@ class URL
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'organisations' . $extension;
     }
 
-    public static function organisation(Organisation $org)
+    public function organisation(Organisation $org)
     {
-        return SITE_RELATIVE_PATH . '/org/' . $org->getId() . '/' . self::linkify($org->getName());
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'org/' . $org->getId() . '/' . self::linkify($org->getName());
     }
 
-    public static function editOrganisation(Organisation $org)
+    public function editOrganisation(Organisation $org)
     {
-        return SITE_RELATIVE_PATH . '/org/edit/' . $org->getId();
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'org/edit/' . $org->getId();
     }
 
-    public static function feedback()
+    public function feedback()
     {
-        return SITE_RELATIVE_PATH . '/feedback';
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'feedback';
     }
 
-    public static function updates()
+    public function updates()
     {
-        return SITE_RELATIVE_PATH . '/updates';
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'updates';
     }
 
     public static function loginWithGitHub()
@@ -125,19 +125,27 @@ class URL
         return SITE_RELATIVE_PATH . '/story/add';
     }
 
-    public static function blogPosts()
+    public function blogPosts($format = null)
     {
-        return SITE_RELATIVE_PATH . '/blog';
+        $extension = '';
+        if ($format == 'json')
+            $extension = '.json';
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'blog' . $extension;
     }
 
-    public static function blogPost(Story $story)
+    public function blogPost(Story $story)
     {
-        return SITE_RELATIVE_PATH . '/blog/' . $story->getId() . '/' . self::linkify($story->getTitle());
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'blog/' . $story->getId() . '/' . self::linkify($story->getTitle());
     }
 
-    public static function caseStudy(CaseStudy $caseStudy)
+    public function blogPostEdit($id)
     {
-        return SITE_RELATIVE_PATH . '/case-study/' . $caseStudy->getId() . '/' . self::linkify($caseStudy->getTitle());
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'story/edit/' . $id;
+    }
+
+    public function caseStudy(CaseStudy $caseStudy)
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'case-study/' . $caseStudy->getId() . '/' . self::linkify($caseStudy->getTitle());
     }
 
     public static function addCaseStudy()
@@ -145,19 +153,14 @@ class URL
         return SITE_RELATIVE_PATH . '/case-study/add';
     }
 
-    public static function caseStudyEdit(CaseStudy $caseStudy)
+    public function caseStudyEdit(CaseStudy $caseStudy)
     {
-        return SITE_RELATIVE_PATH . '/case-study/edit/' . $caseStudy->getId();
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'case-study/edit/' . $caseStudy->getId();
     }
 
-    public static function caseStudies()
+    public function caseStudies()
     {
-        return SITE_RELATIVE_PATH . '/case-studies';
-    }
-
-    public static function storyEdit($id)
-    {
-        return SITE_RELATIVE_PATH . '/story/edit/' . $id;
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'case-studies';
     }
 
     public static function search()

@@ -292,12 +292,12 @@ class OrganisationEditController
                         'url' => $urlHandler->project($project),
                     ];
                 }, $organisationProjects),
-                'partnerOrganisations' => array_map(function (Organisation $organisation) {
+                'partnerOrganisations' => array_map(function (Organisation $organisation) use ($urlHandler) {
                     return [
                         'id' => $organisation->getId(),
                         'name' => $organisation->getName(),
                         'commonProjects' => $organisation->extraData['common-projects'],
-                        'url' => URL::organisation($organisation),
+                        'url' => $urlHandler->organisation($organisation),
                     ];
                 }, $partnerOrganisations),
                 'countryID' => $organisation->getCountryID(),

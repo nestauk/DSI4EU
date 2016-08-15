@@ -14,6 +14,7 @@ class StoriesController
 
     public function exec()
     {
+        $urlHandler = new URL();
         $authUser = new Auth();
         if ($authUser->isLoggedIn())
             $loggedInUser = (new UserRepository())->getById($authUser->getUserId());
@@ -28,7 +29,7 @@ class StoriesController
             else
                 $stories = (new StoryRepository())->getAllPublished();
 
-            echo json_encode(array_map(function (Story $story) {
+            echo json_encode(array_map(function (Story $story) use ($urlHandler) {
                 $data = [
                     'id' => $story->getId(),
                     'title' => $story->getTitle(),
@@ -36,8 +37,8 @@ class StoriesController
                     'content' => substr(strip_tags($story->getContent()), 0, 150),
                     'categoryID' => $story->getStoryCategoryId(),
                     'datePublished' => $story->getDatePublished('jS F Y'),
-                    'url' => URL::blogPost($story),
-                    'editUrl' => URL::storyEdit($story->getId()),
+                    'url' => $urlHandler->blogPost($story),
+                    'editUrl' => $urlHandler->blogPostEdit($story->getId()),
                     'isPublished' => $story->isPublished(),
                 ];
                 if ($category = $story->getStoryCategory())

@@ -49,7 +49,7 @@ if(!isset($urlHandler))
                         <div class="slide-info" data-ix="slide-info">
                             <h2 class="massive-hero-slide-h2"><?php echo show_input($caseStudy->getTitle()) ?></h2>
                             <p class="massive-hero-slide-detail"><?php echo show_input($caseStudy->getIntroCardText()) ?></p>
-                            <a class="massive-hero-detail-link" href="<?php echo URL::caseStudy($caseStudy) ?>">Read
+                            <a class="massive-hero-detail-link" href="<?php echo $urlHandler->caseStudy($caseStudy) ?>">Read
                                 more</a>
                         </div>
                     </div>
@@ -138,7 +138,7 @@ if(!isset($urlHandler))
             <p class="small what-p">These case studies are featured examples of DSI projects. They show the range of
                 ways people are making a social impact using open hardware, open knowledge, open data and open
                 networks.</p>
-            <a class="what-text-button" href="<?php echo URL::caseStudies() ?>">See all case studies</a>
+            <a class="what-text-button" href="<?php echo $urlHandler->caseStudies() ?>">See all case studies</a>
         </div>
         <div class="case-studies-row w-row">
             <?php foreach ($homePageCaseStudies AS $i => $caseStudy) { ?>
@@ -155,7 +155,7 @@ if(!isset($urlHandler))
                                 <div class="case-study-card-p">
                                     <?php echo show_input($caseStudy->getIntroCardText()) ?>
                                 </div>
-                                <a class="case-study-card-read-more" href="<?php echo URL::caseStudy($caseStudy) ?>">
+                                <a class="case-study-card-read-more" href="<?php echo $urlHandler->caseStudy($caseStudy) ?>">
                                     See the case study
                                 </a>
                             </div>

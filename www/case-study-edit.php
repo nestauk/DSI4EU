@@ -186,7 +186,7 @@ require __DIR__ . '/header.php';
                     </div>
                     <div class="tabbed-nav-buttons w-clearfix">
                         <input type="submit" class="tab-button-2 tab-button-next w-button" value="Save and continue"/>
-                        <a href="<?php echo \DSI\Service\URL::caseStudy($caseStudy) ?>"
+                        <a href="<?php echo $urlHandler->caseStudy($caseStudy) ?>"
                            class="tab-button-2 tab-button-next w-button">View case study</a>
                     </div>
                 </form>

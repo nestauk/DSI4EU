@@ -1,6 +1,7 @@
 <?php
 require __DIR__ . '/header.php';
 /** @var $userCanAddStory bool */
+/** @var $urlHandler \DSI\Service\URL */
 ?>
 
     <style>
@@ -36,7 +37,8 @@ require __DIR__ . '/header.php';
     <script type="text/javascript"
             src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/StoriesController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 
-    <div ng-controller="StoriesController">
+    <div ng-controller="StoriesController"
+         data-jsonurl="<?php echo $urlHandler->blogPosts('json') ?>">
         <div class="w-section page-header stories-header">
             <div class="container-wide header">
                 <h1 class="page-h1 light">Blog</h1>

@@ -4,6 +4,7 @@ require __DIR__ . '/header.php';
 /** @var $caseStudy \DSI\Entity\CaseStudy */
 /** @var $caseStudies \DSI\Entity\CaseStudy[] */
 /** @var $userCanAddCaseStudy bool */
+/** @var $urlHandler \DSI\Service\URL */
 ?>
 
     <div class="header-large-section">
@@ -17,7 +18,7 @@ require __DIR__ . '/header.php';
                 </p>
                 <?php if ($userCanAddCaseStudy) { ?>
                     <a class="button button-bottom-right edit-case-study w-button"
-                       href="<?php echo \DSI\Service\URL::caseStudyEdit($caseStudy) ?>">Edit case study +</a>
+                       href="<?php echo $urlHandler->caseStudyEdit($caseStudy) ?>">Edit case study +</a>
                 <?php } ?>
             </div>
         </div>
@@ -82,7 +83,7 @@ require __DIR__ . '/header.php';
                                         <?php echo show_input($caseStudy->getIntroCardText()) ?>
                                     </div>
                                     <a class="case-study-card-read-more"
-                                       href="<?php echo \DSI\Service\URL::caseStudy($caseStudy) ?>">
+                                       href="<?php echo $urlHandler->caseStudy($caseStudy) ?>">
                                         See the case study
                                     </a>
                                 </div>

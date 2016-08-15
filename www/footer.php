@@ -109,10 +109,10 @@ if(!isset($urlHandler))
                 <h3 class="footer-h3">Development</h3>
                 <ul class="w-list-unstyled">
                     <li class="footer-link">
-                        <a class="footer-link" href="<?php echo URL::updates() ?>">Updates</a>
+                        <a class="footer-link" href="<?php echo $urlHandler->updates() ?>">Updates</a>
                     </li>
                     <li class="footer-link">
-                        <a class="footer-link" href="<?php echo URL::feedback() ?>">Feedback</a>
+                        <a class="footer-link" href="<?php echo $urlHandler->feedback() ?>">Feedback</a>
                     </li>
                 </ul>
             </div>

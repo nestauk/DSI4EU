@@ -56,7 +56,6 @@ class ProjectController
     public function exec()
     {
         $urlHandler = new URL();
-
         $authUser = new Auth();
         if ($authUser->isLoggedIn()) {
             $userRepo = new UserRepository();
@@ -76,12 +75,12 @@ class ProjectController
         usort($organisationProjectsObj, function (OrganisationProject $a, OrganisationProject $b) {
             return ($a->getOrganisation()->getName() <= $b->getOrganisation()->getName()) ? -1 : 1;
         });
-        $organisationProjects = array_map(function (OrganisationProject $organisationProject) {
+        $organisationProjects = array_map(function (OrganisationProject $organisationProject) use ($urlHandler) {
             $organisation = $organisationProject->getOrganisation();
             return [
                 'id' => $organisation->getId(),
                 'name' => $organisation->getName(),
-                'url' => URL::organisation($organisation),
+                'url' => $urlHandler->organisation($organisation),
                 'projectsCount' => count((new OrganisationProjectRepository())->getByOrganisationID($organisation->getId())),
             ];
         }, $organisationProjectsObj);

@@ -12,7 +12,7 @@ $leftSideText = "<p>To add your organisation, we need to collect some informatio
 $leftSideText .= "<p>Some information is optional (mandatory fields are indicated with an asterisk), but the more you can provide, the better. We will add you as soon as we have some basic data. You will be able to edit and expand on your answers later.</p>";
 
 if (!isset($urlHandler))
-    $urlHandler = new URL();
+    $urlHandler = new \DSI\Service\URL();
 
 ?>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
@@ -32,7 +32,7 @@ if (!isset($urlHandler))
     </div>
     <div class="creator section-white" ng-controller="OrganisationEditController"
          data-organisationid="<?php echo $organisation->getId() ?>"
-         data-organisationurl="<?php echo \DSI\Service\URL::organisation($organisation) ?>">
+         data-organisationurl="<?php echo $urlHandler->organisation($organisation) ?>">
         <div class="container-wide">
             <div class="add-story body-content">
                 <div class="w-tabs" data-easing="linear">
@@ -313,13 +313,13 @@ if (!isset($urlHandler))
                         <div class="step-window w-tab-pane" ng-class="{'w--tab-active': currentTab == 'step4'}"
                              data-w-tab="Tab 4">
                             <form id="email-form-3" name="email-form-3"
-                                  ng-submit="submitStep4('<?php echo \DSI\Service\URL::organisation($organisation) ?>')">
+                                  ng-submit="submitStep4('<?php echo $urlHandler->organisation($organisation) ?>')">
                                 <div class="tabbed-nav-buttons w-clearfix">
                                     <input type="submit" class="tab-button-next tab-button-publish w-button"
                                            ng-value="loading ? 'Loading...' : 'Publish now'"
                                            ng-disabled="loading"
                                            value="Publish now"/>
-                                    <a href="<?php echo \DSI\Service\URL::organisation($organisation) ?>"
+                                    <a href="<?php echo $urlHandler->organisation($organisation) ?>"
                                        class="tab-button-next update-button w-button">Save for later</a>
                                     <a ng-click="currentTab='step3'"
                                        class="previous tab-button-3 tab-button-next w-button">Previous</a>

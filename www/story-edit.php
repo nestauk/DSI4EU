@@ -132,7 +132,7 @@ require __DIR__ . '/header.php';
                         <input class="w-button dsi-button post-story cancel" type="submit" value="Save"
                                ng-value="loading ? 'Loading...' : 'Save'"
                                ng-disabled="loading">
-                        <a href="<?php echo \DSI\Service\URL::blogPosts() ?>"
+                        <a href="<?php echo $urlHandler->blogPosts() ?>"
                            class="w-button dsi-button post-story cancel">Cancel</a>
                     </form>
                 </div>

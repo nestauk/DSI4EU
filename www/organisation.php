@@ -24,7 +24,7 @@ if (!isset($urlHandler))
             <div class="container-wide container-wide-header-large">
                 <?php if ($userCanEditOrganisation) { ?>
                     <a class="w-button dsi-button profile-edit" style="bottom: auto;top: 180px;width: auto;"
-                       href="<?php echo \DSI\Service\URL::editOrganisation($organisation) ?>">
+                       href="<?php echo $urlHandler->editOrganisation($organisation) ?>">
                         Edit organisation</a>
                 <?php } ?>
                 <h1 class="header-large-h1-centre"
@@ -157,7 +157,7 @@ if (!isset($urlHandler))
                                             </div>
                                         </div>
                                         <a class="view-profile"
-                                           href="<?php echo \DSI\Service\URL::organisation($org) ?>">View</a>
+                                           href="<?php echo $urlHandler->organisation($org) ?>">View</a>
                                     </div>
                                 <?php } ?>
                             </div>

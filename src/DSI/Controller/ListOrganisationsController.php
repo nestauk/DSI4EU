@@ -21,7 +21,7 @@ class ListOrganisationsController
             $organisations[] = [
                 'id' => $organisation->getId(),
                 'text' => $organisation->getName(),
-                'url' => URL::organisation($organisation),
+                'url' => $urlHandler->organisation($organisation),
             ];
         }
 

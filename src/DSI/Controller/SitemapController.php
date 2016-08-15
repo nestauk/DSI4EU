@@ -50,7 +50,7 @@ class SitemapController
         // $organisations = (new OrganisationRepository())->getAllPublished();
         foreach ($organisations AS $organisation) {
             $organisationLink = new SitemapLink();
-            $organisationLink->loc = 'https://' . SITE_DOMAIN . URL::organisation($organisation);
+            $organisationLink->loc = 'https://' . SITE_DOMAIN . $this->urlHandler->organisation($organisation);
             $organisationLink->lastMod = date('Y-m-01');
             $organisationLink->changeFreq = 'monthly';
             $organisationLink->priority = '0.9';
@@ -68,7 +68,7 @@ class SitemapController
         $stories = (new StoryRepository())->getAllPublished();
         foreach ($stories AS $story) {
             $storyLink = new SitemapLink();
-            $storyLink->loc = 'https://' . SITE_DOMAIN . URL::blogPost($story);
+            $storyLink->loc = 'https://' . SITE_DOMAIN . $this->urlHandler->blogPost($story);
             $storyLink->lastMod = date('Y-m-01');
             $storyLink->changeFreq = 'monthly';
             $storyLink->priority = '0.9';
@@ -86,7 +86,7 @@ class SitemapController
         $caseStudies = (new CaseStudyRepository())->getAllPublished();
         foreach ($caseStudies AS $caseStudy) {
             $link = new SitemapLink();
-            $link->loc = 'https://' . SITE_DOMAIN . URL::caseStudy($caseStudy);
+            $link->loc = 'https://' . SITE_DOMAIN . $this->urlHandler->caseStudy($caseStudy);
             $link->lastMod = date('Y-m-01');
             $link->changeFreq = 'monthly';
             $link->priority = '0.9';

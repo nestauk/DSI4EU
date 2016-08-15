@@ -200,7 +200,7 @@ require __DIR__ . '/header.php';
                                                 </div>
                                             </div>
                                             <a class="view-profile"
-                                               href="<?php echo \DSI\Service\URL::organisation($organisation) ?>">View</a>
+                                               href="<?php echo $urlHandler->organisation($organisation) ?>">View</a>
                                         </div>
                                     <?php } ?>
                                 </div>

@@ -34,16 +34,16 @@ class SearchController
                 $blogPosts = (new StoryRepository())->searchByTitle($_POST['term'], 5);
                 $caseStudies = (new CaseStudyRepository())->searchByTitle($_POST['term'], 5);
                 echo json_encode([
-                    'organisations' => array_map(function (Organisation $organisation) {
+                    'organisations' => array_map(function (Organisation $organisation) use ($urlHandler) {
                         return [
                             'name' => $organisation->getName(),
-                            'url' => URL::organisation($organisation),
+                            'url' => $urlHandler->organisation($organisation),
                         ];
                     }, $organisations),
-                    'caseStudies' => array_map(function (CaseStudy $caseStudy) {
+                    'caseStudies' => array_map(function (CaseStudy $caseStudy) use ($urlHandler){
                         return [
                             'name' => $caseStudy->getTitle(),
-                            'url' => URL::caseStudy($caseStudy),
+                            'url' => $urlHandler->caseStudy($caseStudy),
                         ];
                     }, $caseStudies),
                     'projects' => array_map(function (Project $project) use ($urlHandler) {
@@ -52,10 +52,10 @@ class SearchController
                             'url' => $urlHandler->project($project),
                         ];
                     }, $projects),
-                    'blogPosts' => array_map(function (Story $story) {
+                    'blogPosts' => array_map(function (Story $story) use ($urlHandler){
                         return [
                             'name' => $story->getTitle(),
-                            'url' => URL::blogPost($story),
+                            'url' => $urlHandler->blogPost($story),
                         ];
                     }, $blogPosts),
                 ]);

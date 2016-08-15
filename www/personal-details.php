@@ -403,7 +403,7 @@ $leftSideText .= "<p>The information is optional. You will be able to edit and e
                                                                         <option
                                                                             value="<?php echo $organisation->getId() ?>"
                                                                             data-logo="<?php echo $organisation->getLogoOrDefaultSilver() ?>"
-                                                                            data-url="<?php echo \DSI\Service\URL::organisation($organisation) ?>"
+                                                                            data-url="<?php echo $urlHandler->organisation($organisation) ?>"
                                                                             data-country="<?php echo $organisation->getCountryName() ?>"
                                                                             data-type="organisation"
                                                                             <?php if (in_array($organisation->getId(), $userOrganisations)) echo 'selected' ?>><?php

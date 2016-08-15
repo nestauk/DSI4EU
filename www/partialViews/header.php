@@ -15,8 +15,8 @@ if (!isset($urlHandler))
             <a class="alt nav w-nav-link"
                href="<?php echo $urlHandler->dashboard() ?>"><?php _ehtml('Dashboard'); ?></a>
         <?php } ?>
-        <a class="alt nav w-nav-link" href="<?php echo URL::caseStudies() ?>"><?php _ehtml('Case Studies'); ?></a>
-        <a class="alt nav w-nav-link" href="<?php echo URL::blogPosts() ?>"><?php _ehtml('Blog'); ?></a>
+        <a class="alt nav w-nav-link" href="<?php echo $urlHandler->caseStudies() ?>"><?php _ehtml('Case Studies'); ?></a>
+        <a class="alt nav w-nav-link" href="<?php echo $urlHandler->blogPosts() ?>"><?php _ehtml('Blog'); ?></a>
         <div class="stat-nav">
             <a class="alt nav" href="<?php echo $urlHandler->projects() ?>">Projects</a>
             <div class="stats" data-ix="showprojectstatsinfo"><?php echo number_format($projectsCount) ?></div>
