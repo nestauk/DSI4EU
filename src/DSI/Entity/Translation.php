@@ -66,6 +66,19 @@ class Translation
     }
 
     /**
+     * @param $lang
+     * @return string
+     * @throws NotFound
+     */
+    public function getTranslationOrEmptyFor($lang): string
+    {
+        if (isset($this->translations[$lang]) AND $this->translations[$lang]!='')
+            return (string)$this->translations[$lang];
+        else
+            return '';
+    }
+
+    /**
      * @param string $lang
      * @param string $translation
      */

@@ -19,7 +19,7 @@ class TranslationRepository
         $insert[] = "`index` = '" . addslashes($translation->getIndex()) . "'";
         $insert[] = "`details` = '" . addslashes($translation->getDetails()) . "'";
         foreach (Translation::LANGUAGES AS $lang)
-            $insert[] = "`" . addslashes($lang) . "` = '" . addslashes($translation->getTranslationFor($lang)) . "'";
+            $insert[] = "`" . addslashes($lang) . "` = '" . addslashes($translation->getTranslationOrEmptyFor($lang)) . "'";
 
         $query = new SQL("INSERT INTO `translate` SET " . implode(', ', $insert));
         $query->query();
@@ -35,7 +35,7 @@ class TranslationRepository
         $insert = array();
         $insert[] = "`details` = '" . addslashes($translation->getDetails()) . "'";
         foreach (Translation::LANGUAGES AS $lang)
-            $insert[] = "`" . addslashes($lang) . "` = '" . addslashes($translation->getTranslationFor($lang)) . "'";
+            $insert[] = "`" . addslashes($lang) . "` = '" . addslashes($translation->getTranslationOrEmptyFor($lang)) . "'";
 
         $query = new SQL("UPDATE `translate` SET " . implode(', ', $insert) . " WHERE `index` = '{$translation->getIndex()}'");
         $query->query();

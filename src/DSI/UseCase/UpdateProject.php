@@ -235,10 +235,13 @@ class UpdateProject
     {
         if ($this->data()->executor->getId() == $this->data()->project->getOwner()->getId())
             return true;
-        if ((new ProjectMemberRepository())->projectHasMember(
+        if ($this->data()->executor->isCommunityAdmin())
+            return true;
+        $member = (new ProjectMemberRepository())->getByProjectIDAndMemberID(
             $this->data()->project->getId(),
-            $this->data()->executor->getId())
-        )
+            $this->data()->executor->getId()
+        );
+        if ($member AND $member->isAdmin())
             return true;
 
         $this->errorHandler->addTaggedError('user', 'Only the owner can make changes to the project');
