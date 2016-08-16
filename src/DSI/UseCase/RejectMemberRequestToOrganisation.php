@@ -4,6 +4,7 @@ namespace DSI\UseCase;
 
 use DSI\Entity\OrganisationMember;
 use DSI\Entity\OrganisationMemberRequest;
+use DSI\Entity\User;
 use DSI\Repository\OrganisationMemberRepository;
 use DSI\Repository\OrganisationMemberRequestRepository;
 use DSI\Repository\OrganisationRepository;
@@ -68,6 +69,9 @@ class RejectMemberRequestToOrganisation
 
 class RejectMemberRequestToOrganisation_Data
 {
+    /** @var User */
+    public $executor;
+
     /** @var int */
     public $userID;
 

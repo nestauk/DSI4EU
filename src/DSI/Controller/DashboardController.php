@@ -3,9 +3,11 @@
 namespace DSI\Controller;
 
 use DSI\Entity\OrganisationMemberInvitation;
+use DSI\Entity\OrganisationMemberRequest;
 use DSI\Entity\ProjectMemberInvitation;
 use DSI\Repository\OrganisationMemberInvitationRepository;
 use DSI\Repository\OrganisationMemberRepository;
+use DSI\Repository\OrganisationMemberRequestRepository;
 use DSI\Repository\OrganisationRepository;
 use DSI\Repository\ProjectMemberInvitationRepository;
 use DSI\Repository\ProjectMemberRepository;
@@ -17,8 +19,10 @@ use DSI\Service\ErrorHandler;
 use DSI\Service\URL;
 use DSI\UseCase\ApproveMemberInvitationToOrganisation;
 use DSI\UseCase\ApproveMemberInvitationToProject;
+use DSI\UseCase\ApproveMemberRequestToOrganisation;
 use DSI\UseCase\RejectMemberInvitationToOrganisation;
 use DSI\UseCase\RejectMemberInvitationToProject;
+use DSI\UseCase\RejectMemberRequestToOrganisation;
 
 class DashboardController
 {
@@ -97,9 +101,52 @@ class DashboardController
                     ]);
                     return;
                 }
+                if (isset($_POST['approveOrganisationRequest'])) {
+                    $approveRequest = new ApproveMemberRequestToOrganisation();
+                    $approveRequest->data()->executor = $loggedInUser;
+                    $approveRequest->data()->userID = $_POST['userID'] ?? 0;
+                    $approveRequest->data()->organisationID = $_POST['organisationID'] ?? 0;
+                    $approveRequest->exec();
+
+                    echo json_encode([
+                        'code' => 'ok',
+                        'message' => [
+                            'title' => 'Success!',
+                            'text' => 'You have accepted user\'s request to be part of the organisation!',
+                        ]
+                    ]);
+                    return;
+                }
+                if (isset($_POST['rejectOrganisationRequest'])) {
+                    $rejectRequest = new RejectMemberRequestToOrganisation();
+                    $rejectRequest->data()->executor = $loggedInUser;
+                    $rejectRequest->data()->userID = $_POST['userID'] ?? 0;
+                    $rejectRequest->data()->organisationID = $_POST['organisationID'] ?? 0;
+                    $rejectRequest->exec();
+
+                    echo json_encode([
+                        'code' => 'ok',
+                        'message' => [
+                            'title' => 'OK',
+                            'text' => 'You have declined user\'s the request to join the organisation!',
+                        ]
+                    ]);
+                    return;
+                }
 
                 $projectInvitations = (new ProjectMemberInvitationRepository())->getByMemberID($loggedInUser->getId());
                 $organisationInvitations = (new OrganisationMemberInvitationRepository())->getByMemberID($loggedInUser->getId());
+                $organisationsWhereUserIsAdmin = (new OrganisationMemberRepository())->getByAdmin($loggedInUser);
+                if ($organisationsWhereUserIsAdmin) {
+                    $_orgIDs = [];
+                    foreach ($organisationsWhereUserIsAdmin AS $_org)
+                        $_orgIDs[] = $_org->getOrganisationID();
+
+                    $organisationRequests = (new OrganisationMemberRequestRepository())->getByOrganisationIDs($_orgIDs);
+                } else {
+                    $organisationRequests = [];
+                }
+
                 echo json_encode([
                     'projectInvitations' => array_map(function (ProjectMemberInvitation $projectMember) use ($urlHandler) {
                         $project = $projectMember->getProject();
@@ -109,7 +156,7 @@ class DashboardController
                             'url' => $urlHandler->project($project),
                         ];
                     }, $projectInvitations),
-                    'organisationInvitations' => array_map(function (OrganisationMemberInvitation $organisationMember) use ($urlHandler){
+                    'organisationInvitations' => array_map(function (OrganisationMemberInvitation $organisationMember) use ($urlHandler) {
                         $organisation = $organisationMember->getOrganisation();
                         return [
                             'id' => $organisation->getId(),
@@ -117,6 +164,23 @@ class DashboardController
                             'url' => $urlHandler->organisation($organisation),
                         ];
                     }, $organisationInvitations),
+                    'organisationRequests' => array_map(function (OrganisationMemberRequest $organisationMemberReq) use ($urlHandler) {
+                        $user = $organisationMemberReq->getMember();
+                        $organisation = $organisationMemberReq->getOrganisation();
+
+                        return [
+                            'user' => [
+                                'id' => $user->getId(),
+                                'name' => $user->getFullName(),
+                                'url' => $urlHandler->profile($user->getId()),
+                            ],
+                            'organisation' => [
+                                'id' => $organisation->getId(),
+                                'name' => $organisation->getName(),
+                                'url' => $urlHandler->organisation($organisation),
+                            ],
+                        ];
+                    }, $organisationRequests),
                 ]);
             } catch (ErrorHandler $e) {
                 echo json_encode([

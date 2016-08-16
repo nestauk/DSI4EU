@@ -10,6 +10,9 @@ class OrganisationMember
     /** @var User */
     private $member;
 
+    /** @var bool */
+    private $isAdmin;
+
     /**
      * @return Organisation
      */
@@ -50,5 +53,21 @@ class OrganisationMember
     public function setMember(User $member)
     {
         $this->member = $member;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isAdmin(): bool
+    {
+        return (bool)$this->isAdmin;
+    }
+
+    /**
+     * @param boolean $isAdmin
+     */
+    public function setIsAdmin(bool $isAdmin)
+    {
+        $this->isAdmin = $isAdmin;
     }
 }

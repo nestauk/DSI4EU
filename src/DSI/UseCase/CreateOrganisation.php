@@ -59,6 +59,7 @@ class CreateOrganisation
         $organisationMember = new OrganisationMember();
         $organisationMember->setMember($this->data()->owner);
         $organisationMember->setOrganisation($organisation);
+        $organisationMember->setIsAdmin(true);
         $organisationMemberRepository->insert($organisationMember);
 
         $this->organisation = $organisation;

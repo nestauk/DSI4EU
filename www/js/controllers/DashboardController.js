@@ -1,13 +1,12 @@
 angular
     .module(angularAppName)
-    .controller('DashboardController', function ($scope, $http, $timeout) {
-        $scope.projectInvitations = [];
-        $scope.organisationInvitations = [];
-        $http.get(SITE_RELATIVE_PATH + '/dashboard.json')
+    .controller('DashboardController', function ($scope, $http, $timeout, $attrs) {
+        var dashboardJsonUrl = $attrs.dashboardjsonurl;
+
+        $scope.notifications = {};
+        $http.get(dashboardJsonUrl)
             .then(function (response) {
-                console.log(response.data);
-                $scope.projectInvitations = response.data.projectInvitations;
-                $scope.organisationInvitations = response.data.organisationInvitations;
+                $scope.notifications = response.data;
             });
 
         function extractElm(pool, elm) {
@@ -20,16 +19,17 @@ angular
         }
 
         $scope.approveProjectInvitation = function (invitation) {
-            console.log(invitation);
-            $http.post(SITE_RELATIVE_PATH + '/dashboard.json', {
+            $http.post(dashboardJsonUrl, {
                 approveProjectInvitation: true,
                 projectID: invitation.id
             }).then(function (response) {
                 if (response.data.code == 'ok') {
                     swal(response.data.message.title, response.data.message.text, "success");
-                    $scope.projectInvitations = extractElm($scope.projectInvitations, invitation);
-                } else if (response.data.code == 'error') {
-
+                    $scope.notifications.projectInvitations =
+                        extractElm($scope.notifications.projectInvitations, invitation);
+                } else {
+                    alert('unexpected error');
+                    console.log(response.data);
                 }
             });
         };
@@ -44,33 +44,34 @@ angular
                 confirmButtonText: "Yes, continue!",
                 closeOnConfirm: false
             }, function () {
-                console.log(invitation);
-                $http.post(SITE_RELATIVE_PATH + '/dashboard.json', {
+                $http.post(dashboardJsonUrl, {
                     rejectProjectInvitation: true,
                     projectID: invitation.id
                 }).then(function (response) {
-                    console.log(response.data);
                     if (response.data.code == 'ok') {
                         swal(response.data.message.title, response.data.message.text, "warning");
-                        $scope.projectInvitations = extractElm($scope.projectInvitations, invitation);
-                    } else if (response.data.code == 'error') {
-
+                        $scope.notifications.projectInvitations =
+                            extractElm($scope.notifications.projectInvitations, invitation);
+                    } else {
+                        alert('unexpected error');
+                        console.log(response.data);
                     }
                 });
             });
         };
 
         $scope.approveOrganisationInvitation = function (invitation) {
-            console.log(invitation);
-            $http.post(SITE_RELATIVE_PATH + '/dashboard.json', {
+            $http.post(dashboardJsonUrl, {
                 approveOrganisationInvitation: true,
                 organisationID: invitation.id
             }).then(function (response) {
                 if (response.data.code == 'ok') {
                     swal(response.data.message.title, response.data.message.text, "success");
-                    $scope.organisationInvitations = extractElm($scope.organisationInvitations, invitation);
-                } else if (response.data.code == 'error') {
-
+                    $scope.notifications.organisationInvitations =
+                        extractElm($scope.notifications.organisationInvitations, invitation);
+                } else {
+                    alert('unexpected error');
+                    console.log(response.data);
                 }
             });
         };
@@ -85,37 +86,63 @@ angular
                 confirmButtonText: "Yes, continue!",
                 closeOnConfirm: false
             }, function () {
-                console.log(invitation);
-                $http.post(SITE_RELATIVE_PATH + '/dashboard.json', {
+                $http.post(dashboardJsonUrl, {
                     rejectOrganisationInvitation: true,
                     organisationID: invitation.id
                 }).then(function (response) {
-                    console.log(response.data);
                     if (response.data.code == 'ok') {
                         swal(response.data.message.title, response.data.message.text, "warning");
-                        $scope.organisationInvitations = extractElm($scope.organisationInvitations, invitation);
-                    } else if (response.data.code == 'error') {
-                        
+                        $scope.notifications.organisationInvitations =
+                            extractElm($scope.notifications.organisationInvitations, invitation);
+                    } else {
+                        alert('unexpected error');
+                        console.log(response.data);
                     }
                 });
             });
         };
 
-        $scope.tempAlertBox = function () {
-            swal('Success', 'You are now a member of Nesta', "success");
+        $scope.approveOrganisationRequest = function (invitation) {
+            $http.post(dashboardJsonUrl, {
+                approveOrganisationRequest: true,
+                organisationID: invitation.organisation.id,
+                userID: invitation.user.id
+            }).then(function (response) {
+                if (response.data.code == 'ok') {
+                    swal(response.data.message.title, response.data.message.text, "success");
+                    $scope.notifications.organisationRequests =
+                        extractElm($scope.notifications.organisationRequests, invitation);
+                } else {
+                    alert('unexpected error');
+                    console.log(response.data);
+                }
+            });
         };
 
-        $scope.tempConfirmBox = function () {
+        $scope.declineOrganisationRequest = function (invitation) {
             swal({
                 title: "Are you sure?",
-                text: "You will not be able to join this organisation at this time",
+                text: "The user will not be able to join the organisation at this time",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "Yes, continue!",
                 closeOnConfirm: false
             }, function () {
-                swal('OK', 'You have declined this invitation', "warning");
+                $http.post(dashboardJsonUrl, {
+                    rejectOrganisationRequest: true,
+                    organisationID: invitation.organisation.id,
+                    userID: invitation.user.id
+                }).then(function (response) {
+                    if (response.data.code == 'ok') {
+                        swal(response.data.message.title, response.data.message.text, "warning");
+                        $scope.notifications.organisationRequests =
+                            extractElm($scope.notifications.organisationRequests, invitation);
+                    } else {
+                        alert('unexpected error');
+                        console.log(response.data);
+                    }
+                });
             });
-        }
+        };
     });

@@ -73,6 +73,20 @@ class OrganisationMemberRequestRepository
     }
 
     /**
+     * @param int[] $organisationIDs
+     * @return \DSI\Entity\OrganisationMemberRequest[]
+     */
+    public function getByOrganisationIDs($organisationIDs)
+    {
+        if(count($organisationIDs) < 1)
+            return [];
+
+        return $this->getOrganisationMemberRequestsWhere([
+            "`organisationID` IN (".implode(', ', $organisationIDs).")"
+        ]);
+    }
+
+    /**
      * @param int $organisationID
      * @return \int[]
      */
@@ -173,7 +187,7 @@ class OrganisationMemberRequestRepository
             WHERE " . implode(' AND ', $where) . "
         ");
         foreach ($query->fetch_all() AS $dbOrganisationMember) {
-            $organisationMember = new OrganisationMember();
+            $organisationMember = new OrganisationMemberRequest();
             $organisationMember->setOrganisation($this->organisationRepo->getById($dbOrganisationMember['organisationID']));
             $organisationMember->setMember($this->userRepo->getById($dbOrganisationMember['userID']));
             $organisationMemberRequests[] = $organisationMember;

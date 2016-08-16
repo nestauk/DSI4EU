@@ -70,6 +70,27 @@ class CreateOrganisationTest extends PHPUnit_Framework_TestCase
     }
 
     /** @test */
+    public function ownerIsAdminOfTheOrganisation()
+    {
+        $this->createOrganisationCommand->data()->name = 'test';
+        $this->createOrganisationCommand->data()->description = 'test';
+        $this->createOrganisationCommand->data()->owner = $this->user;
+        $this->createOrganisationCommand->exec();
+        $organisation = $this->createOrganisationCommand->getOrganisation();
+
+        $this->assertTrue(
+            $this->organisationMemberRepo->organisationHasMember(
+                $organisation->getId(), $this->user->getId()
+            )
+        );
+        $this->assertTrue(
+            $this->organisationMemberRepo->getByMemberIdAndOrganisationId(
+                $this->user->getId(), $organisation->getId()
+            )->isAdmin()
+        );
+    }
+
+    /** @test */
     public function cannotAddWithAnEmptyName()
     {
         $e = null;

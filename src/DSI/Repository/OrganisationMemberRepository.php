@@ -4,6 +4,7 @@ namespace DSI\Repository;
 
 use DSI\DuplicateEntry;
 use DSI\Entity\OrganisationMember;
+use DSI\Entity\User;
 use DSI\NotFound;
 use DSI\Service\SQL;
 
@@ -33,8 +34,9 @@ class OrganisationMemberRepository
             throw new DuplicateEntry("organisationID: {$organisationMember->getOrganisationID()} / userID: {$organisationMember->getMemberID()}");
 
         $insert = array();
-        $insert[] = "`organisationID` = '" . (int)($organisationMember->getOrganisationID()) . "'";
-        $insert[] = "`userID` = '" . (int)($organisationMember->getMemberID()) . "'";
+        $insert[] = "`organisationID` = " . (int)($organisationMember->getOrganisationID()) . "";
+        $insert[] = "`userID` = " . (int)($organisationMember->getMemberID()) . "";
+        $insert[] = "`isAdmin` = " . (int)($organisationMember->isAdmin()) . "";
 
         $query = new SQL("INSERT INTO `organisation-members` SET " . implode(', ', $insert) . "");
         // $query->pr();
@@ -53,8 +55,8 @@ class OrganisationMemberRepository
             throw new NotFound("organisationID: {$organisationMember->getOrganisationID()} / userID: {$organisationMember->getMemberID()}");
 
         $insert = array();
-        $insert[] = "`organisationID` = '" . (int)($organisationMember->getOrganisationID()) . "'";
-        $insert[] = "`userID` = '" . (int)($organisationMember->getMemberID()) . "'";
+        $insert[] = "`organisationID` = " . (int)($organisationMember->getOrganisationID()) . "";
+        $insert[] = "`userID` = " . (int)($organisationMember->getMemberID()) . "";
 
         $query = new SQL("DELETE FROM `organisation-members` WHERE " . implode(' AND ', $insert) . "");
         $query->query();
@@ -66,8 +68,21 @@ class OrganisationMemberRepository
      */
     public function getByOrganisationID(int $organisationID)
     {
-        return $this->getOrganisationMembersWhere([
+        return $this->getObjectsWhere([
             "`organisationID` = '{$organisationID}'"
+        ]);
+    }
+
+    /**
+     * @param int $memberID
+     * @param int $organisationID
+     * @return OrganisationMember
+     */
+    public function getByMemberIdAndOrganisationId(int $memberID, int $organisationID)
+    {
+        return $this->getObjectWhere([
+            "`userID` = '{$memberID}'",
+            "`organisationID` = '{$organisationID}'",
         ]);
     }
 
@@ -112,8 +127,16 @@ class OrganisationMemberRepository
      */
     public function getByMemberID(int $userID)
     {
-        return $this->getOrganisationMembersWhere([
+        return $this->getObjectsWhere([
             "`userID` = '{$userID}'"
+        ]);
+    }
+
+    public function getByAdmin(User $user)
+    {
+        return $this->getObjectsWhere([
+            "`isAdmin` = 1",
+            "`userID` = ".$user->getId()."",
         ]);
     }
 
@@ -149,13 +172,27 @@ class OrganisationMemberRepository
 
     /**
      * @param $where
+     * @return OrganisationMember
+     * @throws NotFound
+     */
+    private function getObjectWhere($where)
+    {
+        $objects = $this->getObjectsWhere($where);
+        if (count($objects) < 1)
+            throw new NotFound();
+
+        return $objects[0];
+    }
+
+    /**
+     * @param $where
      * @return \DSI\Entity\OrganisationMember[]
      */
-    private function getOrganisationMembersWhere($where)
+    private function getObjectsWhere($where)
     {
         /** @var OrganisationMember[] $organisationMembers */
         $organisationMembers = [];
-        $query = new SQL("SELECT organisationID, userID 
+        $query = new SQL("SELECT organisationID, userID, isAdmin
             FROM `organisation-members`
             WHERE " . implode(' AND ', $where) . "
         ");
@@ -163,6 +200,7 @@ class OrganisationMemberRepository
             $organisationMember = new OrganisationMember();
             $organisationMember->setOrganisation($this->organisationRepo->getById($dbOrganisationMember['organisationID']));
             $organisationMember->setMember($this->userRepo->getById($dbOrganisationMember['userID']));
+            $organisationMember->setIsAdmin((bool)$dbOrganisationMember['isAdmin']);
             $organisationMembers[] = $organisationMember;
         }
 
