@@ -18,6 +18,12 @@ angular
             return newPool;
         }
 
+        $scope.notificationsCount = function () {
+            return ($scope.notifications.projectInvitations ? $scope.notifications.projectInvitations.length : 0)
+                + ($scope.notifications.organisationInvitations ? $scope.notifications.organisationInvitations.length : 0)
+                + ($scope.notifications.organisationRequests ? $scope.notifications.organisationRequests.length : 0);
+        };
+
         $scope.approveProjectInvitation = function (invitation) {
             $http.post(dashboardJsonUrl, {
                 approveProjectInvitation: true,

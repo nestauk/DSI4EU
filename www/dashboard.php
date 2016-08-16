@@ -26,16 +26,11 @@ require __DIR__ . '/header.php';
                 <div class="w-col w-col-4 w-col-stack notification-col">
                     <div class="dashboard-widget">
                         <h3 class="card-h3">Notifications</h3>
-                        <div class="card-p notification-stat" ng-cloak
-                             ng-hide="notifications.projectInvitations.length + notifications.organisationInvitations.length + notifications.organisationRequests.length">
+                        <div class="card-p notification-stat" ng-cloak ng-hide="notificationsCount()">
                             You don't have any notifications at the moment
                         </div>
-                        <div class="card-p notification-stat" ng-cloak
-                             ng-show="notifications.projectInvitations.length + notifications.organisationInvitations.length + notifications.organisationRequests.length">
-                            You currently have
-                            <strong
-                                ng-bind="notifications.projectInvitations.length + notifications.organisationInvitations.length + notifications.organisationRequests.length"></strong>
-                            notification(s)
+                        <div class="card-p notification-stat" ng-cloak ng-show="notificationsCount()">
+                            You currently have <strong ng-bind="notificationsCount()"></strong> notification(s)
                         </div>
                         <ul class="w-list-unstyled notification-list" ng-cloak>
                             <li class="notification-li" ng-repeat="invitation in notifications.projectInvitations">
