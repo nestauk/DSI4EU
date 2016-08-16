@@ -4,6 +4,7 @@ namespace DSI\Repository;
 
 use DSI\DuplicateEntry;
 use DSI\Entity\ProjectMember;
+use DSI\Entity\User;
 use DSI\NotFound;
 use DSI\Service\SQL;
 
@@ -152,6 +153,18 @@ class ProjectMemberRepository
     {
         return $this->getProjectMembersWhere([
             "`userID` = '{$userID}'"
+        ]);
+    }
+
+    /**
+     * @param User $user
+     * @return \DSI\Entity\ProjectMember[]
+     */
+    public function getByAdmin(User $user)
+    {
+        return $this->getProjectMembersWhere([
+            "`userID` = ".$user->getId()."",
+            "`isAdmin` = 1",
         ]);
     }
 

@@ -59,6 +59,7 @@ class CreateProject
         $projectMember = new ProjectMember();
         $projectMember->setMember($this->data()->owner);
         $projectMember->setProject($project);
+        $projectMember->setIsAdmin(true);
         $projectMemberRepository->insert($projectMember);
 
         $this->project = $project;

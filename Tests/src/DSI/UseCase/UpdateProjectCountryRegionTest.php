@@ -80,7 +80,7 @@ class UpdateProjectCountryRegionTest extends PHPUnit_Framework_TestCase
 
         $project = $this->projectRepo->getById($this->project->getId());
         $this->assertEquals($this->country->getId(), $project->getCountryID());
-        $this->assertEquals($this->countryRegion->getId(), $project->getCountryRegionID());
+        $this->assertEquals($this->countryRegion->getId(), $project->getRegionID());
     }
 
     /** @test */

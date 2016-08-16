@@ -88,7 +88,7 @@ require __DIR__ . '/header.php';
                        data-ix="fadeinuponload-5"><?php echo show_input($project->getShortDescription()) ?></p>
                     <h4 class="case-study-intro-detail centered" data-ix="fadeinuponload-5">
                         <?php echo show_input($project->getName()) ?>
-                        <?php if ($region = $project->getCountryRegion()) { ?>
+                        <?php if ($region = $project->getRegion()) { ?>
                             is based in
                             <?php echo show_input($region->getName()) ?>,
                             <?php echo show_input($region->getCountry()->getName()) ?>
@@ -98,26 +98,26 @@ require __DIR__ . '/header.php';
                         <?php } ?>
                         <?php
                         if ($project->getStartDate() AND !$project->getEndDate()) {
-                            if ($project->startDateIsPassed()) {
+                            if ($project->startDateHasPassed()) {
                                 echo 'started in ', $project->getStartDate('M, Y');
                             } else {
                                 echo 'will start in ', $project->getStartDate('M, Y');
                             }
                         } elseif (!$project->getStartDate() AND $project->getEndDate()) {
-                            if ($project->endDateIsPassed()) {
+                            if ($project->endDateHasPassed()) {
                                 echo 'ran until ', $project->getEndDate('M, Y');
                             } else {
                                 echo 'is running until ', $project->getEndDate('M, Y');
                             }
                         } elseif ($project->getStartDate() AND $project->getEndDate()) {
                             if ($project->getStartDate('M, Y') == $project->getEndDate('M, Y')) {
-                                if ($project->startDateIsPassed()) {
+                                if ($project->startDateHasPassed()) {
                                     echo 'ran in ', $project->getStartDate('M, Y');
                                 } elseif ($project->startDateIsInFuture()) {
                                     echo 'will run in ', $project->getStartDate('M, Y');
                                 }
                             } else {
-                                if ($project->endDateIsPassed()) {
+                                if ($project->endDateHasPassed()) {
                                     echo 'ran from ', $project->getStartDate('M, Y'),
                                     ' to ', $project->getEndDate('M, Y');
                                 } elseif ($project->startDateIsInFuture()) {

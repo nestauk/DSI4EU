@@ -19,17 +19,18 @@ class ProjectEmailInvitationTest extends \PHPUnit_Framework_TestCase
         $project->setId(1);
         $byUser = new \DSI\Entity\User();
         $byUser->setId(1);
-        $email = 'test@example.org';
 
         $this->projectEmailInvitation = new \DSI\Entity\ProjectEmailInvitation();
         $this->projectEmailInvitation->setProject($project);
         $this->projectEmailInvitation->setByUser($byUser);
-        $this->projectEmailInvitation->setEmail($email);
+        $this->projectEmailInvitation->setEmail($email = 'test@example.org');
+        $this->projectEmailInvitation->setDate($date = '2016-10-12');
 
         $this->assertEquals($project->getId(), $this->projectEmailInvitation->getProjectID());
         $this->assertEquals($project->getId(), $this->projectEmailInvitation->getProject()->getId());
         $this->assertEquals($byUser->getId(), $this->projectEmailInvitation->getByUserID());
         $this->assertEquals($byUser->getId(), $this->projectEmailInvitation->getByUser()->getId());
         $this->assertEquals($email, $this->projectEmailInvitation->getEmail());
+        $this->assertEquals($date, $this->projectEmailInvitation->getDate());
     }
 }

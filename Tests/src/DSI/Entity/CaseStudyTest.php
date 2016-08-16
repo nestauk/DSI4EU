@@ -1,6 +1,8 @@
 <?php
 
-use DSI\Entity\CaseStudy;
+use \DSI\Entity\CaseStudy;
+use \DSI\Repository\CountryRepository;
+use \DSI\Repository\CountryRegionRepository;
 
 require_once __DIR__ . '/../../../config.php';
 
@@ -9,9 +11,24 @@ class CaseStudyTest extends \PHPUnit_Framework_TestCase
     /** @var CaseStudy */
     private $caseStudy;
 
+    /** @var CountryRepository */
+    private $countryRepo;
+
+    /** @var  CountryRegionRepository */
+    private $regionRepo;
+
     public function setUp()
     {
         $this->caseStudy = new CaseStudy();
+
+        $this->countryRepo = new CountryRepository();
+        $this->regionRepo = new CountryRegionRepository();
+    }
+
+    public function tearDown()
+    {
+        $this->countryRepo->clearAll();
+        $this->regionRepo->clearAll();
     }
 
     /** @test */
@@ -73,9 +90,10 @@ class CaseStudyTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals('', $this->caseStudy->getProjectStartDate());
 
-        $date = '2016-10-10';
+        $date = '2016-12-10';
         $this->caseStudy->setProjectStartDate($date);
         $this->assertEquals($date, $this->caseStudy->getProjectStartDate());
+        $this->assertEquals('10-12-2016', $this->caseStudy->getProjectStartDate('d-m-Y'));
     }
 
     /** @test */
@@ -119,6 +137,16 @@ class CaseStudyTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
+    public function settingLogo_returnsLogoOrDefault()
+    {
+        $this->assertEquals(CaseStudy::DEFAULT_LOGO, $this->caseStudy->getLogoOrDefault());
+
+        $logo = 'DSC100.JPG';
+        $this->caseStudy->setLogo($logo);
+        $this->assertEquals($logo, $this->caseStudy->getLogoOrDefault());
+    }
+
+    /** @test */
     public function settingCardImage_returnsCardImage()
     {
         $this->assertEquals('', $this->caseStudy->getCardImage());
@@ -136,6 +164,16 @@ class CaseStudyTest extends \PHPUnit_Framework_TestCase
         $bgImage = 'DSC100.JPG';
         $this->caseStudy->setHeaderImage($bgImage);
         $this->assertEquals($bgImage, $this->caseStudy->getHeaderImage());
+    }
+
+    /** @test */
+    public function settingHeaderImage_returnsHeaderImageOrDefault()
+    {
+        $this->assertEquals(CaseStudy::DEFAULT_HEADER, $this->caseStudy->getHeaderImageOrDefault());
+
+        $bgImage = 'DSC100.JPG';
+        $this->caseStudy->setHeaderImage($bgImage);
+        $this->assertEquals($bgImage, $this->caseStudy->getHeaderImageOrDefault());
     }
 
     /** @test */
@@ -182,5 +220,28 @@ class CaseStudyTest extends \PHPUnit_Framework_TestCase
 
         $this->caseStudy->setIsFeaturedOnHomePage(false);
         $this->assertEquals(false, $this->caseStudy->isFeaturedOnHomePage());
+    }
+
+    /** @test */
+    public function settingRegion_returnsRegion()
+    {
+        $country = new \DSI\Entity\Country();
+        $country->setName($countryName = 'Romania');
+        $this->countryRepo->insert($country);
+
+        $region = new \DSI\Entity\CountryRegion();
+        $region->setName($regionName = 'Iasi');
+        $region->setCountry($country);
+        $this->regionRepo->insert($region);
+
+        $this->caseStudy->setRegion($region);
+
+        $this->assertEquals($country->getId(), $this->caseStudy->getCountryId());
+        $this->assertEquals($country->getName(), $this->caseStudy->getCountryName());
+        $this->assertEquals($region->getName(), $this->caseStudy->getRegionName());
+
+        $this->caseStudy->unsetRegion();
+        $this->assertEquals(0, $this->caseStudy->getCountryId());
+        $this->assertEquals(0, $this->caseStudy->getRegionID());
     }
 }

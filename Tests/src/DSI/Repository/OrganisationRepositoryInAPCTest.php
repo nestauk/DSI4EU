@@ -113,7 +113,7 @@ class OrganisationRepositoryInAPCTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($url, $organisation->getUrl());
         $this->assertEquals($shortDescription, $organisation->getShortDescription());
         $this->assertEquals($description, $organisation->getDescription());
-        $this->assertEquals($this->countryRegion->getId(), $organisation->getCountryRegion()->getId());
+        $this->assertEquals($this->countryRegion->getId(), $organisation->getRegion()->getId());
         $this->assertEquals($this->countryRegion->getCountry()->getId(), $organisation->getCountry()->getId());
         $this->assertEquals($address, $organisation->getAddress());
         $this->assertEquals($this->organisationType->getId(), $organisation->getOrganisationTypeId());
@@ -154,7 +154,7 @@ class OrganisationRepositoryInAPCTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($url, $organisation->getUrl());
         $this->assertEquals($shortDescription, $organisation->getShortDescription());
         $this->assertEquals($description, $organisation->getDescription());
-        $this->assertEquals($this->countryRegion->getId(), $organisation->getCountryRegion()->getId());
+        $this->assertEquals($this->countryRegion->getId(), $organisation->getRegion()->getId());
         $this->assertEquals($this->countryRegion->getCountry()->getId(), $organisation->getCountry()->getId());
         $this->assertEquals($address, $organisation->getAddress());
         $this->assertEquals($this->organisationType->getId(), $organisation->getOrganisationTypeId());

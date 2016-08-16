@@ -5,7 +5,7 @@ require_once __DIR__ . '/../../../config.php';
 class CreateOrganisationTest extends PHPUnit_Framework_TestCase
 {
     /** @var \DSI\UseCase\CreateOrganisation */
-    private $createOrganisationCommand;
+    private $createOrgCmd;
 
     /** @var \DSI\Repository\OrganisationMemberRepository */
     private $organisationMemberRepo;
@@ -21,7 +21,7 @@ class CreateOrganisationTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->createOrganisationCommand = new \DSI\UseCase\CreateOrganisation();
+        $this->createOrgCmd = new \DSI\UseCase\CreateOrganisation();
         $this->organisationMemberRepo = new \DSI\Repository\OrganisationMemberRepository();
         $this->organisationRepo = new \DSI\Repository\OrganisationRepository();
         $this->userRepo = new \DSI\Repository\UserRepository();
@@ -40,17 +40,17 @@ class CreateOrganisationTest extends PHPUnit_Framework_TestCase
     /** @test */
     public function successfulCreation()
     {
-        $this->createOrganisationCommand->data()->name = 'test';
-        $this->createOrganisationCommand->data()->description = 'test';
-        $this->createOrganisationCommand->data()->owner = $this->user;
-        $this->createOrganisationCommand->exec();
+        $this->createOrgCmd->data()->name = 'test';
+        $this->createOrgCmd->data()->description = 'test';
+        $this->createOrgCmd->data()->owner = $this->user;
+        $this->createOrgCmd->exec();
 
         $this->assertCount(1, $this->organisationRepo->getAll());
 
-        $this->createOrganisationCommand->data()->name = 'test2';
-        $this->createOrganisationCommand->data()->description = 'test';
-        $this->createOrganisationCommand->data()->owner = $this->user;
-        $this->createOrganisationCommand->exec();
+        $this->createOrgCmd->data()->name = 'test2';
+        $this->createOrgCmd->data()->description = 'test';
+        $this->createOrgCmd->data()->owner = $this->user;
+        $this->createOrgCmd->exec();
 
         $this->assertCount(2, $this->organisationRepo->getAll());
     }
@@ -58,11 +58,11 @@ class CreateOrganisationTest extends PHPUnit_Framework_TestCase
     /** @test */
     public function ownerIsAlsoMemberOfTheOrganisation()
     {
-        $this->createOrganisationCommand->data()->name = 'test';
-        $this->createOrganisationCommand->data()->description = 'test';
-        $this->createOrganisationCommand->data()->owner = $this->user;
-        $this->createOrganisationCommand->exec();
-        $organisation = $this->createOrganisationCommand->getOrganisation();
+        $this->createOrgCmd->data()->name = 'test';
+        $this->createOrgCmd->data()->description = 'test';
+        $this->createOrgCmd->data()->owner = $this->user;
+        $this->createOrgCmd->exec();
+        $organisation = $this->createOrgCmd->getOrganisation();
 
         $this->assertTrue(
             $this->organisationMemberRepo->organisationHasMember($organisation->getId(), $this->user->getId())
@@ -72,17 +72,12 @@ class CreateOrganisationTest extends PHPUnit_Framework_TestCase
     /** @test */
     public function ownerIsAdminOfTheOrganisation()
     {
-        $this->createOrganisationCommand->data()->name = 'test';
-        $this->createOrganisationCommand->data()->description = 'test';
-        $this->createOrganisationCommand->data()->owner = $this->user;
-        $this->createOrganisationCommand->exec();
-        $organisation = $this->createOrganisationCommand->getOrganisation();
+        $this->createOrgCmd->data()->name = 'test';
+        $this->createOrgCmd->data()->description = 'test';
+        $this->createOrgCmd->data()->owner = $this->user;
+        $this->createOrgCmd->exec();
+        $organisation = $this->createOrgCmd->getOrganisation();
 
-        $this->assertTrue(
-            $this->organisationMemberRepo->organisationHasMember(
-                $organisation->getId(), $this->user->getId()
-            )
-        );
         $this->assertTrue(
             $this->organisationMemberRepo->getByMemberIdAndOrganisationId(
                 $this->user->getId(), $organisation->getId()
@@ -94,11 +89,11 @@ class CreateOrganisationTest extends PHPUnit_Framework_TestCase
     public function cannotAddWithAnEmptyName()
     {
         $e = null;
-        $this->createOrganisationCommand->data()->name = '';
-        $this->createOrganisationCommand->data()->description = 'test';
-        $this->createOrganisationCommand->data()->owner = $this->user;
+        $this->createOrgCmd->data()->name = '';
+        $this->createOrgCmd->data()->description = 'test';
+        $this->createOrgCmd->data()->owner = $this->user;
         try {
-            $this->createOrganisationCommand->exec();
+            $this->createOrgCmd->exec();
         } catch (\DSI\Service\ErrorHandler $e) {
         }
 

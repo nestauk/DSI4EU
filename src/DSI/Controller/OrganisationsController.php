@@ -34,7 +34,7 @@ class OrganisationsController
 
             $organisationRepositoryInAPC = new OrganisationRepositoryInAPC();
             echo json_encode(array_map(function (Organisation $organisation) use ($urlHandler){
-                $region = $organisation->getCountryRegion();
+                $region = $organisation->getRegion();
                 return [
                     'id' => $organisation->getId(),
                     'name' => $organisation->getName(),

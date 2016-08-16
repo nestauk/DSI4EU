@@ -52,6 +52,14 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($lastName, $this->user->getLastName());
     }
 
+    /** @test */
+    public function settingName_canGetFullName()
+    {
+        $this->user->setFirstName($firstName = 'Alecs');
+        $this->user->setLastName($lastName = 'Viper');
+        $this->assertEquals($firstName . ' ' . $lastName, $this->user->getFullName());
+    }
+
     /** @test setProfileURL, getProfileURL */
     public function settingProfileURL_returnsProfileURL()
     {
@@ -162,9 +170,21 @@ class UserTest extends \PHPUnit_Framework_TestCase
     /** @test setProfilePic, getProfilePic */
     public function settingProfilePic_getsProfilePic()
     {
+        $this->assertEquals('', $this->user->getProfilePic());
+
         $profilePic = 'myImage.jpg';
         $this->user->setProfilePic($profilePic);
         $this->assertEquals($profilePic, $this->user->getProfilePic());
+    }
+
+    /** @test */
+    public function settingProfilePic_canGetProfilePicOrDefault()
+    {
+        $this->assertEquals(User::DEFAULT_PROFILE_PIC, $this->user->getProfilePicOrDefault());
+
+        $profilePic = 'myImage.jpg';
+        $this->user->setProfilePic($profilePic);
+        $this->assertEquals($profilePic, $this->user->getProfilePicOrDefault());
     }
 
     /** @test setJobTitle, getJobTitle */
@@ -224,5 +244,41 @@ class UserTest extends \PHPUnit_Framework_TestCase
     {
         $this->user->setRole($role = 'Sys Admin');
         $this->assertEquals($role, $this->user->getRole());
+    }
+
+    /** @test */
+    public function canCheckIfUserIsSysAdmin()
+    {
+        $this->user->setRole($role = 'sys-admin');
+        $this->assertEquals(true, $this->user->isSysAdmin());
+
+        $this->user->setRole($role = 'anything-else');
+        $this->assertEquals(false, $this->user->isSysAdmin());
+    }
+
+    /** @test */
+    public function canCheckIfUserIsCommunityAdmin()
+    {
+        $this->user->setRole($role = 'sys-admin');
+        $this->assertEquals(true, $this->user->isCommunityAdmin());
+
+        $this->user->setRole($role = 'community-admin');
+        $this->assertEquals(true, $this->user->isCommunityAdmin());
+
+        $this->user->setRole($role = 'anything-else');
+        $this->assertEquals(false, $this->user->isCommunityAdmin());
+    }
+
+    /** @test */
+    public function canCheckIfUserIsEditorialAdmin()
+    {
+        $this->user->setRole($role = 'sys-admin');
+        $this->assertEquals(true, $this->user->isEditorialAdmin());
+
+        $this->user->setRole($role = 'editorial-admin');
+        $this->assertEquals(true, $this->user->isEditorialAdmin());
+
+        $this->user->setRole($role = 'anything-else');
+        $this->assertEquals(false, $this->user->isEditorialAdmin());
     }
 }

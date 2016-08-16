@@ -57,7 +57,7 @@ class ProjectPostController
                     'comment' => [
                         'id' => $comment->getId(),
                         'comment' => $comment->getComment(),
-                        'time' => $comment->getJsTime(),
+                        'time' => $comment->getUnixTime(),
                         'user' => [
                             'name' => $loggedInUser->getFullName(),
                             'profilePic' => $loggedInUser->getProfilePicOrDefault(),
@@ -82,7 +82,7 @@ class ProjectPostController
                 return [
                     'id' => $comment->getId(),
                     'comment' => $comment->getComment(),
-                    'time' => $comment->getJsTime(),
+                    'time' => $comment->getUnixTime(),
                     'user' => [
                         'name' => $user->getFullName(),
                         'profilePic' => $user->getProfilePicOrDefault(),

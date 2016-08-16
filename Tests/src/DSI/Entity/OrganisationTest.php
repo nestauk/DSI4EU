@@ -85,7 +85,7 @@ class OrganisationTest extends \PHPUnit_Framework_TestCase
         $this->countryRegion->setCountry($this->country);
 
         $this->organisation->setCountryRegion($this->countryRegion);
-        $this->assertEquals($this->countryRegion->getId(), $this->organisation->getCountryRegion()->getId());
+        $this->assertEquals($this->countryRegion->getId(), $this->organisation->getRegion()->getId());
         $this->assertEquals($this->countryRegion->getId(), $this->organisation->getCountryRegionID());
         $this->assertEquals($this->country->getName(), $this->organisation->getCountryName());
         $this->assertEquals($this->country->getId(), $this->organisation->getCountry()->getId());

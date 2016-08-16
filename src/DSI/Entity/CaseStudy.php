@@ -4,6 +4,9 @@ namespace DSI\Entity;
 
 class CaseStudy
 {
+    const DEFAULT_HEADER = '0.png';
+    const DEFAULT_LOGO = '0.png';
+
     /** @var integer */
     private $id;
 
@@ -125,7 +128,7 @@ class CaseStudy
      */
     public function getHeaderImageOrDefault()
     {
-        return (string)($this->headerImage ? $this->headerImage : '0.png');
+        return (string)($this->headerImage ? $this->headerImage : self::DEFAULT_HEADER);
     }
 
     /**
@@ -149,7 +152,7 @@ class CaseStudy
      */
     public function getLogoOrDefault()
     {
-        return (string)($this->logo ? $this->logo : '0.png');
+        return (string)($this->logo ? $this->logo : self::DEFAULT_LOGO);
     }
 
     /**

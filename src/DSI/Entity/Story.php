@@ -182,7 +182,8 @@ class Story
     }
 
     /**
-     * @return string
+     * @param null $format
+     * @return bool|string
      */
     public function getDatePublished($format = NULL)
     {

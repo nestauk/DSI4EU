@@ -35,7 +35,7 @@ class OrganisationRepositoryTest extends PHPUnit_Framework_TestCase
     private $country;
 
     /** @var CountryRegion */
-    private $countryRegion;
+    private $region;
 
     /** @var User */
     private $user1, $user2;
@@ -64,10 +64,10 @@ class OrganisationRepositoryTest extends PHPUnit_Framework_TestCase
         $this->country->setName('test1');
         $this->countryRepo->insert($this->country);
 
-        $this->countryRegion = new CountryRegion();
-        $this->countryRegion->setName('test1');
-        $this->countryRegion->setCountry($this->country);
-        $this->countryRegionRepo->insert($this->countryRegion);
+        $this->region = new CountryRegion();
+        $this->region->setName('test1');
+        $this->region->setCountry($this->country);
+        $this->countryRegionRepo->insert($this->region);
 
         $this->organisationType = new \DSI\Entity\OrganisationType();
         $this->organisationTypeRepo->insert($this->organisationType);
@@ -95,7 +95,7 @@ class OrganisationRepositoryTest extends PHPUnit_Framework_TestCase
         $organisation->setUrl($url = 'http://example.org');
         $organisation->setShortDescription($shortDescription = 'Short Desc');
         $organisation->setDescription($description = 'Desc');
-        $organisation->setCountryRegion($this->countryRegion);
+        $organisation->setCountryRegion($this->region);
         $organisation->setAddress($address = '58 New Street');
         $organisation->setOrganisationType($this->organisationType);
         $organisation->setOrganisationSize($this->organisationSize);
@@ -113,8 +113,8 @@ class OrganisationRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($url, $organisation->getUrl());
         $this->assertEquals($shortDescription, $organisation->getShortDescription());
         $this->assertEquals($description, $organisation->getDescription());
-        $this->assertEquals($this->countryRegion->getId(), $organisation->getCountryRegion()->getId());
-        $this->assertEquals($this->countryRegion->getCountry()->getId(), $organisation->getCountry()->getId());
+        $this->assertEquals($this->region->getId(), $organisation->getRegion()->getId());
+        $this->assertEquals($this->region->getCountry()->getId(), $organisation->getCountry()->getId());
         $this->assertEquals($address, $organisation->getAddress());
         $this->assertEquals($this->organisationType->getId(), $organisation->getOrganisationTypeId());
         $this->assertEquals($this->organisationSize->getId(), $organisation->getOrganisationSizeId());
@@ -137,7 +137,7 @@ class OrganisationRepositoryTest extends PHPUnit_Framework_TestCase
         $organisation->setUrl($url = 'http://example.org');
         $organisation->setShortDescription($shortDescription = 'Short Desc');
         $organisation->setDescription($description = 'Desc');
-        $organisation->setCountryRegion($this->countryRegion);
+        $organisation->setCountryRegion($this->region);
         $organisation->setAddress($address = '58 New Street');
         $organisation->setOrganisationType($this->organisationType);
         $organisation->setOrganisationSize($this->organisationSize);
@@ -154,16 +154,39 @@ class OrganisationRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($url, $organisation->getUrl());
         $this->assertEquals($shortDescription, $organisation->getShortDescription());
         $this->assertEquals($description, $organisation->getDescription());
-        $this->assertEquals($this->countryRegion->getId(), $organisation->getCountryRegion()->getId());
-        $this->assertEquals($this->countryRegion->getCountry()->getId(), $organisation->getCountry()->getId());
+        $this->assertEquals($this->region->getId(), $organisation->getRegion()->getId());
+        $this->assertEquals($this->region->getName(), $organisation->getRegionName());
+        $this->assertEquals($this->region->getCountry()->getId(), $organisation->getCountry()->getId());
         $this->assertEquals($address, $organisation->getAddress());
         $this->assertEquals($this->organisationType->getId(), $organisation->getOrganisationTypeId());
         $this->assertEquals($this->organisationSize->getId(), $organisation->getOrganisationSizeId());
         $this->assertEquals($startDate, $organisation->getStartDate());
+        $this->assertEquals(strtotime($startDate), $organisation->getUnixStartDate());
         $this->assertEquals($logo, $organisation->getLogo());
         $this->assertEquals($headerImage, $organisation->getHeaderImage());
         $this->assertEquals($projectsCount, $organisation->getProjectsCount());
         $this->assertEquals($partnersCount, $organisation->getPartnersCount());
+    }
+
+    /** @test */
+    public function setLogo_getLogo()
+    {
+        $organisation = new Organisation();
+        $organisation->setOwner($this->user1);
+        $this->organisationRepo->insert($organisation);
+
+        $this->assertEquals(Organisation::DEFAULT_LOGO, $organisation->getLogoOrDefault());
+        $this->assertEquals(Organisation::DEFAULT_LOGO_SILVER, $organisation->getLogoOrDefaultSilver());
+        $this->assertEquals(Organisation::DEFAULT_HEADER_IMAGE, $organisation->getHeaderImageOrDefault());
+
+        $organisation->setLogo($logo = 'DSC111.JPG');
+        $organisation->setHeaderImage($header = 'DSC222.JPG');
+        $this->organisationRepo->save($organisation);
+        $organisation = $this->organisationRepo->getById($organisation->getId());
+
+        $this->assertEquals($logo, $organisation->getLogoOrDefault());
+        $this->assertEquals($logo, $organisation->getLogoOrDefaultSilver());
+        $this->assertEquals($header, $organisation->getHeaderImageOrDefault());
     }
 
     /** @test getByID */

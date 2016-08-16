@@ -37,4 +37,11 @@ class TranslationTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals($translation, $this->translation->getTranslationFor($lang));
         }
     }
+
+    /** @test */
+    public function cannotGetTranslationForInvalidLanguage()
+    {
+        $this->setExpectedException(\DSI\NotFound::class);
+        $this->translation->getTranslationFor('rou');
+    }
 }

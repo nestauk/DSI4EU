@@ -4,6 +4,9 @@ namespace DSI\Entity;
 
 class Project
 {
+    const DEFAULT_HEADER_IMAGE = '0.png';
+    const DEFAULT_LOGO = '0.png';
+    const DEFAULT_LOGO_SILVER = '0-silver.png';
     /** @var integer */
     private $id,
         $organisationsCount;
@@ -154,21 +157,13 @@ class Project
     public function getStartDate($format = null)
     {
         if ($format !== null) {
-            return date($format, $this->getUnixStartDate());
+            return date($format, strtotime($this->startDate));
         }
 
         return $this->startDate;
     }
 
-    /**
-     * @return string
-     */
-    public function getUnixStartDate()
-    {
-        return strtotime($this->startDate);
-    }
-
-    public function startDateIsPassed()
+    public function startDateHasPassed()
     {
         return strtotime($this->startDate) < time();
     }
@@ -193,21 +188,13 @@ class Project
     public function getEndDate($format = null)
     {
         if ($format !== null) {
-            return date($format, $this->getUnixEndDate());
+            return date($format, strtotime($this->endDate));
         }
 
         return $this->endDate;
     }
 
-    /**
-     * @return string
-     */
-    public function getUnixEndDate()
-    {
-        return strtotime($this->endDate);
-    }
-
-    public function endDateIsPassed()
+    public function endDateHasPassed()
     {
         return strtotime($this->endDate) < time();
     }
@@ -247,7 +234,7 @@ class Project
     /**
      * @return CountryRegion
      */
-    public function getCountryRegion()
+    public function getRegion()
     {
         return $this->countryRegion;
     }
@@ -263,7 +250,7 @@ class Project
     /**
      * @return int
      */
-    public function getCountryRegionID()
+    public function getRegionID()
     {
         return $this->countryRegion ? $this->countryRegion->getId() : 0;
     }
@@ -323,12 +310,12 @@ class Project
 
     public function getLogoOrDefault()
     {
-        return (string)($this->logo != '' ? $this->logo : '0.png');
+        return (string)($this->logo != '' ? $this->logo : self::DEFAULT_LOGO);
     }
 
     public function getLogoOrDefaultSilver()
     {
-        return (string)($this->logo != '' ? $this->logo : '0-silver.png');
+        return (string)($this->logo != '' ? $this->logo : self::DEFAULT_LOGO_SILVER);
     }
 
     /**
@@ -352,7 +339,7 @@ class Project
      */
     public function getHeaderImageOrDefault()
     {
-        return (string)($this->headerImage ? $this->headerImage : '0.png');
+        return (string)($this->headerImage ? $this->headerImage : self::DEFAULT_HEADER_IMAGE);
     }
 
     /**

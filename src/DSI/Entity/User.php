@@ -4,6 +4,7 @@ namespace DSI\Entity;
 
 class User
 {
+    const DEFAULT_PROFILE_PIC = '0.svg';
     /** @var integer */
     private $id;
 
@@ -281,7 +282,7 @@ class User
      */
     public function getProfilePicOrDefault()
     {
-        return (string)($this->profilePic ?? '0.svg');
+        return (string)($this->profilePic ?? self::DEFAULT_PROFILE_PIC);
     }
 
     /**

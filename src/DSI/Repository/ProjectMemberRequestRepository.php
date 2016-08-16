@@ -73,6 +73,20 @@ class ProjectMemberRequestRepository
     }
 
     /**
+     * @param int[] $projectIDs
+     * @return \DSI\Entity\ProjectMemberRequest[]
+     */
+    public function getByProjectIDs($projectIDs)
+    {
+        if(count($projectIDs) < 1)
+            return [];
+
+        return $this->getProjectMemberRequestsWhere([
+            "`projectID` IN (".implode(', ', $projectIDs).")"
+        ]);
+    }
+
+    /**
      * @param int $projectID
      * @return \int[]
      */
@@ -173,7 +187,7 @@ class ProjectMemberRequestRepository
             WHERE " . implode(' AND ', $where) . "
         ");
         foreach ($query->fetch_all() AS $dbProjectMember) {
-            $projectMember = new ProjectMember();
+            $projectMember = new ProjectMemberRequest();
             $projectMember->setProject($this->projectRepo->getById($dbProjectMember['projectID']));
             $projectMember->setMember($this->userRepo->getById($dbProjectMember['userID']));
             $projectMemberRequests[] = $projectMember;

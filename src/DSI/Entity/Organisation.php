@@ -5,6 +5,9 @@ namespace DSI\Entity;
 class Organisation
 {
     public $extraData;
+    const DEFAULT_HEADER_IMAGE = '0.png';
+    const DEFAULT_LOGO = '0.png';
+    const DEFAULT_LOGO_SILVER = '0-silver.png';
 
     /** @var integer */
     private $id;
@@ -134,7 +137,7 @@ class Organisation
     /**
      * @return CountryRegion
      */
-    public function getCountryRegion()
+    public function getRegion()
     {
         return $this->countryRegion;
     }
@@ -346,7 +349,7 @@ class Organisation
      */
     public function getLogoOrDefault(): string
     {
-        return (string)($this->logo ? $this->logo : '0.png');
+        return (string)($this->logo ? $this->logo : self::DEFAULT_LOGO);
     }
 
     /**
@@ -354,7 +357,7 @@ class Organisation
      */
     public function getLogoOrDefaultSilver(): string
     {
-        return (string)($this->logo ? $this->logo : '0-silver.png');
+        return (string)($this->logo ? $this->logo : self::DEFAULT_LOGO_SILVER);
     }
 
     /**
@@ -378,7 +381,7 @@ class Organisation
      */
     public function getHeaderImageOrDefault(): string
     {
-        return (string)($this->headerImage ? $this->headerImage : '0.png');
+        return (string)($this->headerImage ? $this->headerImage : self::DEFAULT_HEADER_IMAGE);
     }
 
     /**

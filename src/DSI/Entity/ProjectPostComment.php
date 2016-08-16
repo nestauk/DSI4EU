@@ -59,7 +59,7 @@ class ProjectPostComment
     }
 
     /**
-     * @return ProjectPost
+     * @return int
      */
     public function getProjectPostId()
     {
@@ -83,7 +83,7 @@ class ProjectPostComment
     }
 
     /**
-     * @return User
+     * @return int
      */
     public function getUserId()
     {
@@ -109,7 +109,7 @@ class ProjectPostComment
     /**
      * @return string
      */
-    public function getJsTime()
+    public function getUnixTime()
     {
         return (string)strtotime($this->time);
     }

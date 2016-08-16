@@ -18,8 +18,8 @@ class OrganisationRepository
         $insert[] = "`description` = '" . addslashes($organisation->getDescription()) . "'";
         if ($organisation->getCountry())
             $insert[] = "`countryID` = '" . addslashes($organisation->getCountry()->getId()) . "'";
-        if ($organisation->getCountryRegion())
-            $insert[] = "`countryRegionID` = '" . addslashes($organisation->getCountryRegion()->getId()) . "'";
+        if ($organisation->getRegion())
+            $insert[] = "`countryRegionID` = '" . addslashes($organisation->getRegion()->getId()) . "'";
         $insert[] = "`address` = '" . addslashes($organisation->getAddress()) . "'";
         if ($organisation->getOrganisationType())
             $insert[] = "`organisationTypeID` = '" . addslashes($organisation->getOrganisationTypeId()) . "'";
@@ -54,8 +54,8 @@ class OrganisationRepository
         $insert[] = "`description` = '" . addslashes($organisation->getDescription()) . "'";
         if ($organisation->getCountry())
             $insert[] = "`countryID` = '" . addslashes($organisation->getCountry()->getId()) . "'";
-        if ($organisation->getCountryRegion())
-            $insert[] = "`countryRegionID` = '" . addslashes($organisation->getCountryRegion()->getId()) . "'";
+        if ($organisation->getRegion())
+            $insert[] = "`countryRegionID` = '" . addslashes($organisation->getRegion()->getId()) . "'";
         $insert[] = "`address` = '" . addslashes($organisation->getAddress()) . "'";
         if ($organisation->getOrganisationType())
             $insert[] = "`organisationTypeID` = '" . addslashes($organisation->getOrganisationTypeId()) . "'";

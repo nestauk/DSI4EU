@@ -63,9 +63,10 @@ class StoryTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function settingDatePublished_returnsDatePublished()
     {
-        $datePublished = '2016-10-10 10:10:10';
+        $datePublished = '2016-12-10 10:12:14';
         $this->story->setDatePublished($datePublished);
         $this->assertEquals($datePublished, $this->story->getDatePublished());
+        $this->assertEquals('10-12-2016 10:12', $this->story->getDatePublished('d-m-Y H:i'));
     }
 
     /** @test */

@@ -1,6 +1,7 @@
 <?php
 
 use DSI\Entity\UserLink;
+use DSI\Entity\UserLink_Service;
 
 require_once __DIR__ . '/../../../config.php';
 
@@ -29,5 +30,25 @@ class UserLinkTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($user->getId(), $this->userLink->getUserID());
         $this->assertEquals($user->getId(), $this->userLink->getUser()->getId());
         $this->assertEquals($url, $this->userLink->getLink());
+    }
+
+    /** @test */
+    public function gettingTheCorrectService()
+    {
+        $this->userLink = new UserLink();
+
+        $this->checkLinkService('http://facebook.com/', UserLink_Service::Facebook);
+        $this->checkLinkService('http://twitter.com/', UserLink_Service::Twitter);
+        $this->checkLinkService('http://plus.google.com/', UserLink_Service::GooglePlus);
+        $this->checkLinkService('http://github.com/', UserLink_Service::GitHub);
+        $this->checkLinkService('http://inoveb.com/', UserLink_Service::Other);
+    }
+
+    private function checkLinkService($link, $service)
+    {
+        $this->userLink->setLink($link);
+        $this->assertEquals(
+            $service, $this->userLink->getLinkService()
+        );
     }
 }

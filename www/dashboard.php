@@ -65,6 +65,24 @@ require __DIR__ . '/header.php';
                                     </div>
                                 </div>
                             </li>
+                            <li class="notification-li" ng-repeat="invitation in notifications.projectRequests">
+                                <div class="w-clearfix card-notification notification-interaction-actions">
+                                    <div class="notification-profile-image"></div>
+                                    <div class="notification-detail">
+                                        <a style="font-weight:bold" href="{{invitation.user.url}}"
+                                           ng-bind="invitation.user.name"></a>
+                                        requested to join
+                                        <a style="font-weight:bold" href="{{invitation.project.url}}"
+                                           ng-bind="invitation.project.name"></a>
+                                    </div>
+                                    <div class="notification-interaction">
+                                        <a class="w-button dsi-button notification-accept" href="#"
+                                           ng-click="approveProjectRequest(invitation)">Accept</a>
+                                        <a class="w-button dsi-button notification-decline" href="#"
+                                           ng-click="declineProjectRequest(invitation)">Decline</a>
+                                    </div>
+                                </div>
+                            </li>
                             <li class="notification-li" ng-repeat="invitation in notifications.organisationRequests">
                                 <div class="w-clearfix card-notification notification-interaction-actions">
                                     <div class="notification-profile-image"></div>

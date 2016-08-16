@@ -85,6 +85,33 @@ class ProjectTest extends \PHPUnit_Framework_TestCase
         $startDate = '2016-05-21';
         $this->project->setStartDate($startDate);
         $this->assertEquals($startDate, $this->project->getStartDate());
+        $this->assertEquals('21-05-2016', $this->project->getStartDate('d-m-Y'));
+    }
+
+    /** @test */
+    public function startDateHasPassedOrInFuture()
+    {
+        $startDate = date('Y-m-d', time() - 60 * 60 * 24 * 5);
+        $this->project->setStartDate($startDate);
+        $this->assertEquals(true, $this->project->startDateHasPassed());
+        $this->assertEquals(false, $this->project->startDateIsInFuture());
+
+        $startDate = date('Y-m-d', time() + 60 * 60 * 24 * 5);
+        $this->project->setStartDate($startDate);
+        $this->assertEquals(false, $this->project->startDateHasPassed());
+        $this->assertEquals(true, $this->project->startDateIsInFuture());
+    }
+
+    /** @test */
+    public function endDateHasPassed()
+    {
+        $endDate = date('Y-m-d', time() - 60 * 60 * 24 * 5);
+        $this->project->setEndDate($endDate);
+        $this->assertEquals(true, $this->project->endDateHasPassed());
+
+        $endDate = date('Y-m-d', time() + 60 * 60 * 24 * 5);
+        $this->project->setEndDate($endDate);
+        $this->assertEquals(false, $this->project->endDateHasPassed());
     }
 
     /** @test setStartDate, getStartDate */
@@ -98,9 +125,10 @@ class ProjectTest extends \PHPUnit_Framework_TestCase
     /** @test setEndDate, getEndDate */
     public function settingEndDate_returnsEndDate()
     {
-        $EndDate = '2016-05-21';
-        $this->project->setEndDate($EndDate);
-        $this->assertEquals($EndDate, $this->project->getEndDate());
+        $endDate = '2016-05-21';
+        $this->project->setEndDate($endDate);
+        $this->assertEquals($endDate, $this->project->getEndDate());
+        $this->assertEquals('21-05-2016', $this->project->getEndDate('d-m-Y'));
     }
 
     /** @test setEndDate, getEndDate */
@@ -135,24 +163,55 @@ class ProjectTest extends \PHPUnit_Framework_TestCase
         $this->countryRegion->setCountry($this->country);
 
         $this->project->setCountryRegion($this->countryRegion);
-        $this->assertEquals($this->countryRegion->getId(), $this->project->getCountryRegion()->getId());
+        $this->assertEquals($this->countryRegion->getId(), $this->project->getRegion()->getId());
+        $this->assertEquals($this->countryRegion->getName(), $this->project->getRegionName());
         $this->assertEquals($this->country->getId(), $this->project->getCountry()->getId());
+        $this->assertEquals($this->country->getName(), $this->project->getCountryName());
     }
 
     /** @test */
     public function settingLogo_returnsLogo()
     {
+        $this->assertEquals('', $this->project->getLogo());
+
         $logo = 'DCS100.JPG';
         $this->project->setLogo($logo);
         $this->assertEquals($logo, $this->project->getLogo());
     }
 
     /** @test */
+    public function settingLogo_returnsLogoOrDefault()
+    {
+        $this->assertEquals(Project::DEFAULT_LOGO, $this->project->getLogoOrDefault());
+        $this->assertEquals(Project::DEFAULT_LOGO_SILVER, $this->project->getLogoOrDefaultSilver());
+
+        $logo = 'DCS100.JPG';
+        $this->project->setLogo($logo);
+        $this->assertEquals($logo, $this->project->getLogoOrDefault());
+        $this->assertEquals($logo, $this->project->getLogoOrDefaultSilver());
+    }
+
+    /** @test */
     public function settingHeaderImage_returnsHeaderImage()
     {
+        $this->assertEquals('', $this->project->getHeaderImage());
+
         $headerImage = 'DCS100.JPG';
         $this->project->setHeaderImage($headerImage);
         $this->assertEquals($headerImage, $this->project->getHeaderImage());
+    }
+
+    /** @test */
+    public function settingHeaderImage_returnsHeaderImageOrDefault()
+    {
+        $this->assertEquals(
+            Project::DEFAULT_HEADER_IMAGE,
+            $this->project->getHeaderImageOrDefault()
+        );
+
+        $headerImage = 'DCS100.JPG';
+        $this->project->setHeaderImage($headerImage);
+        $this->assertEquals($headerImage, $this->project->getHeaderImageOrDefault());
     }
 
     /** @test */

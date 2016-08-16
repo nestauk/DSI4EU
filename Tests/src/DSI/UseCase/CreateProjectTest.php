@@ -70,6 +70,22 @@ class CreateProjectTest extends PHPUnit_Framework_TestCase
     }
 
     /** @test */
+    public function ownerIsAdminOfTheProject()
+    {
+        $this->createProjectCommand->data()->name = 'test';
+        $this->createProjectCommand->data()->description = 'test';
+        $this->createProjectCommand->data()->owner = $this->user;
+        $this->createProjectCommand->exec();
+        $project = $this->createProjectCommand->getProject();
+
+        $this->assertTrue(
+            $this->projectMemberRepo->getByProjectIDAndMemberID(
+                $project->getId(), $this->user->getId()
+            )->isAdmin()
+        );
+    }
+
+    /** @test */
     public function cannotAddWithAnEmptyName()
     {
         $e = null;

@@ -34,6 +34,7 @@ class ProjectPostCommentTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->user->getId(), $postComment->getUser()->getId());
         $this->assertEquals($comment, $postComment->getComment());
         $this->assertEquals($time, $postComment->getTime());
+        $this->assertEquals(strtotime($time), $postComment->getUnixTime());
         $this->assertEquals($replies, $postComment->getRepliesCount());
     }
 }

@@ -351,8 +351,8 @@ class ProjectController
                 }, $memberRequests),
                 'organisationProjects' => $organisationProjects,
                 'countryID' => $project->getCountryID(),
-                'countryRegionID' => $project->getCountryRegionID(),
-                'countryRegion' => $project->getCountryRegion() ? $project->getCountryRegion()->getName() : '',
+                'countryRegionID' => $project->getRegionID(),
+                'countryRegion' => $project->getRegion() ? $project->getRegion()->getName() : '',
                 'posts' => $this->getPostsForProject($project),
             ]);
             return;

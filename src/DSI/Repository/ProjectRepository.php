@@ -21,8 +21,8 @@ class ProjectRepository
         $insert[] = "`endDate` = '" . addslashes($project->getEndDate()) . "'";
         if ($project->getCountry())
             $insert[] = "`countryID` = '" . addslashes($project->getCountry()->getId()) . "'";
-        if ($project->getCountryRegion())
-            $insert[] = "`countryRegionID` = '" . addslashes($project->getCountryRegion()->getId()) . "'";
+        if ($project->getRegion())
+            $insert[] = "`countryRegionID` = '" . addslashes($project->getRegion()->getId()) . "'";
         $insert[] = "`organisationsCount` = '" . (int)($project->getOrganisationsCount()) . "'";
         $insert[] = "`importID` = '" . addslashes($project->getImportID()) . "'";
         $insert[] = "`logo` = '" . addslashes($project->getLogo()) . "'";
@@ -55,8 +55,8 @@ class ProjectRepository
         $insert[] = "`endDate` = '" . addslashes($project->getEndDate()) . "'";
         if ($project->getCountry())
             $insert[] = "`countryID` = '" . addslashes($project->getCountry()->getId()) . "'";
-        if ($project->getCountryRegion())
-            $insert[] = "`countryRegionID` = '" . addslashes($project->getCountryRegion()->getId()) . "'";
+        if ($project->getRegion())
+            $insert[] = "`countryRegionID` = '" . addslashes($project->getRegion()->getId()) . "'";
         $insert[] = "`organisationsCount` = '" . (int)($project->getOrganisationsCount()) . "'";
         $insert[] = "`importID` = '" . addslashes($project->getImportID()) . "'";
         $insert[] = "`logo` = '" . addslashes($project->getLogo()) . "'";

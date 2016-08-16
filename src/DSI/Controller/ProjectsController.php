@@ -29,7 +29,7 @@ class ProjectsController
             // (new CountryRegionRepository())->getAll();
             $projectRepositoryInAPC = new ProjectRepositoryInAPC();
             echo json_encode(array_map(function (Project $project) use ($urlHandler) {
-                $region = $project->getCountryRegion();
+                $region = $project->getRegion();
                 return [
                     'id' => $project->getId(),
                     'name' => $project->getName(),

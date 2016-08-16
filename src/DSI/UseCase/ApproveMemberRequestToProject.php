@@ -4,6 +4,7 @@ namespace DSI\UseCase;
 
 use DSI\Entity\ProjectMember;
 use DSI\Entity\ProjectMemberRequest;
+use DSI\Entity\User;
 use DSI\Repository\ProjectMemberRepository;
 use DSI\Repository\ProjectMemberRequestRepository;
 use DSI\Repository\ProjectRepository;
@@ -73,6 +74,9 @@ class ApproveMemberRequestToProject
 
 class ApproveMemberRequestToProject_Data
 {
+    /** @var User */
+    public $executor;
+
     /** @var int */
     public $userID;
 

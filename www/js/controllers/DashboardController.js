@@ -6,6 +6,7 @@ angular
         $scope.notifications = {};
         $http.get(dashboardJsonUrl)
             .then(function (response) {
+                console.log(response.data);
                 $scope.notifications = response.data;
             });
 
@@ -21,6 +22,7 @@ angular
         $scope.notificationsCount = function () {
             return ($scope.notifications.projectInvitations ? $scope.notifications.projectInvitations.length : 0)
                 + ($scope.notifications.organisationInvitations ? $scope.notifications.organisationInvitations.length : 0)
+                + ($scope.notifications.projectRequests ? $scope.notifications.projectRequests.length : 0)
                 + ($scope.notifications.organisationRequests ? $scope.notifications.organisationRequests.length : 0);
         };
 
@@ -144,6 +146,50 @@ angular
                         swal(response.data.message.title, response.data.message.text, "warning");
                         $scope.notifications.organisationRequests =
                             extractElm($scope.notifications.organisationRequests, invitation);
+                    } else {
+                        alert('unexpected error');
+                        console.log(response.data);
+                    }
+                });
+            });
+        };
+
+        $scope.approveProjectRequest = function (invitation) {
+            $http.post(dashboardJsonUrl, {
+                approveProjectRequest: true,
+                projectID: invitation.project.id,
+                userID: invitation.user.id
+            }).then(function (response) {
+                if (response.data.code == 'ok') {
+                    swal(response.data.message.title, response.data.message.text, "success");
+                    $scope.notifications.projectRequests =
+                        extractElm($scope.notifications.projectRequests, invitation);
+                } else {
+                    alert('unexpected error');
+                    console.log(response.data);
+                }
+            });
+        };
+
+        $scope.declineProjectRequest = function (invitation) {
+            swal({
+                title: "Are you sure?",
+                text: "The user will not be able to join the project at this time",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, continue!",
+                closeOnConfirm: false
+            }, function () {
+                $http.post(dashboardJsonUrl, {
+                    rejectProjectRequest: true,
+                    projectID: invitation.project.id,
+                    userID: invitation.user.id
+                }).then(function (response) {
+                    if (response.data.code == 'ok') {
+                        swal(response.data.message.title, response.data.message.text, "warning");
+                        $scope.notifications.projectRequests =
+                            extractElm($scope.notifications.projectRequests, invitation);
                     } else {
                         alert('unexpected error');
                         console.log(response.data);

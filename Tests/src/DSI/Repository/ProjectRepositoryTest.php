@@ -94,7 +94,7 @@ class ProjectRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($status, $project->getStatus());
         $this->assertEquals($startDate, $project->getStartDate());
         $this->assertEquals($endDate, $project->getEndDate());
-        $this->assertEquals($this->countryRegion->getId(), $project->getCountryRegion()->getId());
+        $this->assertEquals($this->countryRegion->getId(), $project->getRegion()->getId());
         $this->assertEquals($this->countryRegion->getCountry()->getId(), $project->getCountry()->getId());
         $this->assertEquals($organisations, $project->getOrganisationsCount());
         $this->assertEquals($logo, $project->getLogo());
@@ -171,7 +171,7 @@ class ProjectRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($status, $project->getStatus());
         $this->assertEquals($startDate, $project->getStartDate());
         $this->assertEquals($endDate, $project->getEndDate());
-        $this->assertEquals($this->countryRegion->getId(), $project->getCountryRegion()->getId());
+        $this->assertEquals($this->countryRegion->getId(), $project->getRegion()->getId());
         $this->assertEquals($this->countryRegion->getCountry()->getId(), $project->getCountry()->getId());
         $this->assertEquals($organisations, $project->getOrganisationsCount());
         $this->assertEquals($logo, $project->getLogo());
