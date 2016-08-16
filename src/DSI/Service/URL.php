@@ -17,9 +17,12 @@ class URL
         $this->currentLanguage = Translate::getCurrentLang();
     }
 
-    public function dashboard()
+    public function dashboard($format = null)
     {
-        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'dashboard';
+        $extension = '';
+        if ($format == 'json')
+            $extension = '.json';
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'dashboard' . $extension;
     }
 
     public function myProfile()
@@ -148,9 +151,9 @@ class URL
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'case-study/' . $caseStudy->getId() . '/' . self::linkify($caseStudy->getTitle());
     }
 
-    public static function addCaseStudy()
+    public function addCaseStudy()
     {
-        return SITE_RELATIVE_PATH . '/case-study/add';
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'case-study/add';
     }
 
     public function caseStudyEdit(CaseStudy $caseStudy)
@@ -163,34 +166,34 @@ class URL
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'case-studies';
     }
 
-    public static function search()
+    public function search()
     {
-        return SITE_RELATIVE_PATH . '/search/';
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'search/';
     }
 
-    public static function exploreDSI()
+    public function exploreDSI()
     {
-        return SITE_RELATIVE_PATH . '/explore-dsi';
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'explore-dsi';
     }
 
-    public static function editProfile()
+    public function editProfile()
     {
-        return SITE_RELATIVE_PATH . '/personal-details';
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'personal-details';
     }
 
-    public static function termsOfUse()
+    public function termsOfUse()
     {
-        return SITE_RELATIVE_PATH . '/terms-of-use';
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'terms-of-use';
     }
 
-    public static function privacyPolicy()
+    public function privacyPolicy()
     {
-        return SITE_RELATIVE_PATH . '/privacy-policy';
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'privacy-policy';
     }
 
-    public static function sitemapXML()
+    public function sitemapXML()
     {
-        return SITE_RELATIVE_PATH . '/sitemap.xml';
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'sitemap.xml';
     }
 
 

@@ -1,3 +1,7 @@
+<?php
+if (!isset($urlHandler))
+    $urlHandler = new \DSI\Service\URL();
+?>
 <div class="search-results-popover" ng-cloak
      ng-show="search.entry.length >= 3">
     <h3 class="search-results">Search results for: {{search.entry}}</h3>
@@ -27,5 +31,6 @@
             <div ng-show="search.organisations.length == 0">No organisations found</div>
         </div>
     </div>
-    <a class="view-all-search-results" href="<?php echo \DSI\Service\URL::search()?>{{search.entry}}">View all results</a>
+    <a class="view-all-search-results" href="<?php echo $urlHandler->search() ?>{{search.entry}}">View all
+        results</a>
 </div>

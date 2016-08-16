@@ -48,7 +48,7 @@ if (!isset($urlHandler))
                             <a href="<?php echo $urlHandler->myProfile() ?>" class="popover-link">
                                 View profile
                             </a>
-                            <a href="<?php echo URL::editProfile() ?>" class="popover-link">
+                            <a href="<?php echo $urlHandler->editProfile() ?>" class="popover-link">
                                 Edit Profile
                             </a>
                             <a href="<?php echo $urlHandler->logout() ?>" class="popover-link">

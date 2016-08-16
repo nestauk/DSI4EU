@@ -14,6 +14,7 @@ class CaseStudiesController
 
     public function exec()
     {
+        $urlHandler = new URL();
         $authUser = new Auth();
         if ($authUser->isLoggedIn())
             $loggedInUser = (new UserRepository())->getById($authUser->getUserId());

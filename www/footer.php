@@ -61,10 +61,10 @@ if(!isset($urlHandler))
                         </li>
                     <?php } ?>
                     <li class="footer-link">
-                        <a class="footer-link" href="<?php echo URL::termsOfUse() ?>">Terms of use</a>
+                        <a class="footer-link" href="<?php echo $urlHandler->termsOfUse() ?>">Terms of use</a>
                     </li>
                     <li class="footer-link">
-                        <a class="footer-link" href="<?php echo URL::privacyPolicy() ?>">Privacy policy</a>
+                        <a class="footer-link" href="<?php echo $urlHandler->privacyPolicy() ?>">Privacy policy</a>
                     </li>
                 </ul>
             </div>

@@ -5,14 +5,15 @@
 
 use \DSI\Service\URL;
 
-if(!isset($urlHandler))
+if (!isset($urlHandler))
     $urlHandler = new URL();
 
 require __DIR__ . '/header.php';
 ?>
     <script type="text/javascript"
             src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/DashboardController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
-    <div ng-controller="DashboardController">
+    <div ng-controller="DashboardController"
+         data-dashboardjsonurl="<?php echo $urlHandler->dashboard('json') ?>">
 
         <div class="w-section page-header">
             <div class="container-wide header">
@@ -26,17 +27,18 @@ require __DIR__ . '/header.php';
                     <div class="dashboard-widget">
                         <h3 class="card-h3">Notifications</h3>
                         <div class="card-p notification-stat" ng-cloak
-                             ng-hide="projectInvitations.length + organisationInvitations.length">
+                             ng-hide="notifications.projectInvitations.length + notifications.organisationInvitations.length + notifications.organisationRequests.length">
                             You don't have any notifications at the moment
                         </div>
                         <div class="card-p notification-stat" ng-cloak
-                             ng-show="projectInvitations.length + organisationInvitations.length">
+                             ng-show="notifications.projectInvitations.length + notifications.organisationInvitations.length + notifications.organisationRequests.length">
                             You currently have
-                            <strong ng-bind="projectInvitations.length + organisationInvitations.length"></strong>
+                            <strong
+                                ng-bind="notifications.projectInvitations.length + notifications.organisationInvitations.length + notifications.organisationRequests.length"></strong>
                             notification(s)
                         </div>
                         <ul class="w-list-unstyled notification-list" ng-cloak>
-                            <li class="notification-li" ng-repeat="invitation in projectInvitations">
+                            <li class="notification-li" ng-repeat="invitation in notifications.projectInvitations">
                                 <div class="w-clearfix card-notification notification-interaction-actions">
                                     <div class="notification-profile-image"></div>
                                     <div class="notification-detail">
@@ -52,7 +54,7 @@ require __DIR__ . '/header.php';
                                     </div>
                                 </div>
                             </li>
-                            <li class="notification-li" ng-repeat="invitation in organisationInvitations">
+                            <li class="notification-li" ng-repeat="invitation in notifications.organisationInvitations">
                                 <div class="w-clearfix card-notification notification-interaction-actions">
                                     <div class="notification-profile-image"></div>
                                     <div class="notification-detail">
@@ -65,6 +67,24 @@ require __DIR__ . '/header.php';
                                            ng-click="declineOrganisationInvitation(invitation)">Decline</a>
                                         <a class="w-button dsi-button notification-view"
                                            href="{{invitation.url}}">View</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="notification-li" ng-repeat="invitation in notifications.organisationRequests">
+                                <div class="w-clearfix card-notification notification-interaction-actions">
+                                    <div class="notification-profile-image"></div>
+                                    <div class="notification-detail">
+                                        <a style="font-weight:bold" href="{{invitation.user.url}}"
+                                           ng-bind="invitation.user.name"></a>
+                                        requested to join
+                                        <a style="font-weight:bold" href="{{invitation.organisation.url}}"
+                                           ng-bind="invitation.organisation.name"></a>
+                                    </div>
+                                    <div class="notification-interaction">
+                                        <a class="w-button dsi-button notification-accept" href="#"
+                                           ng-click="approveOrganisationRequest(invitation)">Accept</a>
+                                        <a class="w-button dsi-button notification-decline" href="#"
+                                           ng-click="declineOrganisationRequest(invitation)">Decline</a>
                                     </div>
                                 </div>
                             </li>
@@ -144,7 +164,8 @@ require __DIR__ . '/header.php';
                                        data-w-tab="Tab 2">Create +</a>
                                 </div>
                                 <div class="w-col w-col-6">
-                                    <a class="w-button dsi-button dash-join" href="<?php echo $urlHandler->organisations() ?>">Join</a>
+                                    <a class="w-button dsi-button dash-join"
+                                       href="<?php echo $urlHandler->organisations() ?>">Join</a>
                                 </div>
                             </div>
                         <?php } else { ?>
@@ -204,7 +225,8 @@ require __DIR__ . '/header.php';
                                                 Read
                                             </a>
                                         </div>
-                                        <div class="post-card-date"><?php echo $story->getDatePublished('jS F Y')?></div>
+                                        <div
+                                            class="post-card-date"><?php echo $story->getDatePublished('jS F Y') ?></div>
                                     </div>
                                 </li>
                             <?php } ?>

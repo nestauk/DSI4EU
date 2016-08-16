@@ -6,6 +6,7 @@ require __DIR__ . '/header.php';
 /** @var $projects \DSI\Entity\Project[] */
 /** @var $organisations \DSI\Entity\Organisation[] */
 /** @var $userLinks string[] */
+/** @var $urlHandler \DSI\Service\URL */
 ?>
     <script type="text/javascript">
         profileUserID = '<?php echo $userID?>';
@@ -33,7 +34,7 @@ require __DIR__ . '/header.php';
                 <img class="large-profile-img"
                      src="<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/<?php echo $user->getProfilePicOrDefault() ?>">
                 <?php if ($isOwner) { ?>
-                    <a class="w-button dsi-button profile-edit" href="<?php echo \DSI\Service\URL::editProfile() ?>">
+                    <a class="w-button dsi-button profile-edit" href="<?php echo $urlHandler->editProfile() ?>">
                         Edit profile</a>
                 <?php } ?>
             </div>

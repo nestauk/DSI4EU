@@ -1,6 +1,8 @@
 <?php
 /** @var $mailBody string */
 /** @var $mailHeader string */
+if (!isset($urlHandler))
+    $urlHandler = new \DSI\Service\URL();
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -400,8 +402,8 @@
                     <tr>
                         <td align="center">
                             <p>
-                                <a href="https://<?php echo SITE_DOMAIN . \DSI\Service\URL::termsOfUse() ?>">Terms of Use</a> |
-                                <a href="https://<?php echo SITE_DOMAIN . \DSI\Service\URL::privacyPolicy() ?>">Privacy Policy</a>
+                                <a href="https://<?php echo SITE_DOMAIN . $urlHandler->termsOfUse() ?>">Terms of Use</a> |
+                                <a href="https://<?php echo SITE_DOMAIN . $urlHandler->privacyPolicy() ?>">Privacy Policy</a>
                                 <?php /*<a href="#">| Unsubscribe</a>*/ ?>
                             </p>
                         </td>

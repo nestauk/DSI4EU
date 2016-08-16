@@ -29,8 +29,8 @@ class Router
         } elseif (preg_match('<^/' . $langHandler . 'dashboard$>', $this->pageURL, $matches)) {
             $this->dashboardPage($matches);
 
-        } elseif ($this->pageURL === '/dashboard.json') {
-            $this->dashboardJsonPage();
+        } elseif (preg_match('<^/' . $langHandler . 'dashboard\.json$>', $this->pageURL, $matches)) {
+            $this->dashboardJsonPage($matches);
 
         } elseif ($this->pageURL === '/import') {
             $this->importPage();
@@ -92,8 +92,8 @@ class Router
         } elseif ($this->pageURL === '/uploadProfilePicture') {
             $this->uploadProfilePicturePage();
 
-        } elseif ($this->pageURL === '/personal-details') {
-            $this->personalDetailsPage();
+        } elseif (preg_match('<^/' . $langHandler . 'personal-details$>', $this->pageURL, $matches)) {
+            $this->personalDetailsPage($matches);
 
         } elseif ($this->pageURL === '/skills.json') {
             $this->skillsListJsonPage();
@@ -158,15 +158,15 @@ class Router
             $this->editStoryPage($matches);
 
 // Search
-        } elseif ($this->pageURL === '/search.json') {
-            $this->searchPage(null, 'json');
+        } elseif (preg_match('<^/' . $langHandler . 'search\.json$>', $this->pageURL, $matches)) {
+            $this->searchPage($matches, 'json');
 
-        } elseif (preg_match('<^/search/(.*)$>', $this->pageURL, $matches)) {
+        } elseif (preg_match('<^/' . $langHandler . 'search/(.*)$>', $this->pageURL, $matches)) {
             $this->searchPage($matches);
 
 // Case Studies
-        } elseif ($this->pageURL === '/case-study/add') {
-            $this->addCaseStudyPage();
+        } elseif (preg_match('<^/' . $langHandler . 'case-study/add$>', $this->pageURL, $matches)) {
+            $this->addCaseStudyPage($matches);
 
         } elseif (preg_match('<^/' . $langHandler . 'case-studies$>', $this->pageURL, $matches)) {
             $this->caseStudiesPage($matches);
@@ -197,21 +197,21 @@ class Router
         } elseif ($this->pageURL === '/robots.txt') {
             $this->robotsTxtPage();
 
-        } elseif ($this->pageURL === '/explore-dsi') {
-            $this->exploreDsiPage();
+        } elseif (preg_match('<^/' . $langHandler . 'explore-dsi$>', $this->pageURL, $matches)) {
+            $this->exploreDsiPage($matches);
 
-        } elseif ($this->pageURL === '/terms-of-use') {
-            $this->termsOfUsePage();
+        } elseif (preg_match('<^/' . $langHandler . 'terms-of-use$>', $this->pageURL, $matches)) {
+            $this->termsOfUsePage($matches);
 
-        } elseif ($this->pageURL === '/privacy-policy') {
-            $this->privacyPolicyPage();
+        } elseif (preg_match('<^/' . $langHandler . 'privacy-policy$>', $this->pageURL, $matches)) {
+            $this->privacyPolicyPage($matches);
 
         } elseif (preg_match('<^/' . $langHandler . 'updates$>', $this->pageURL, $matches)) {
             $this->updatesPage($matches);
 
 // Sitemap
-        } elseif ($this->pageURL === '/sitemap.xml') {
-            $this->sitemapXmlPage();
+        } elseif (preg_match('<^/' . $langHandler . 'sitemap\.xml$>', $this->pageURL, $matches)) {
+            $this->sitemapXmlPage($matches);
 
 // Test
         } elseif (preg_match('<^/(([a-z]{2})/)?test$>', $this->pageURL, $matches)) {
@@ -274,8 +274,10 @@ class Router
         $command->exec();
     }
 
-    private function dashboardJsonPage()
+    private function dashboardJsonPage($matches)
     {
+        $this->setLanguageFromUrl($matches);
+
         $command = new \DSI\Controller\DashboardController();
         $command->format = 'json';
         $command->exec();
@@ -359,8 +361,10 @@ class Router
         $command->exec();
     }
 
-    private function addCaseStudyPage()
+    private function addCaseStudyPage($matches)
     {
+        $this->setLanguageFromUrl($matches);
+
         $command = new \DSI\Controller\CaseStudyAddController();
         $command->exec();
     }
@@ -448,8 +452,10 @@ class Router
         $command->exec();
     }
 
-    private function personalDetailsPage()
+    private function personalDetailsPage($matches)
     {
+        $this->setLanguageFromUrl($matches);
+
         $command = new \DSI\Controller\PersonalDetailsController();
         $command->exec();
     }
@@ -560,8 +566,10 @@ class Router
 
     private function searchPage($matches, $format = 'html')
     {
+        $this->setLanguageFromUrl($matches);
+
         $command = new \DSI\Controller\SearchController();
-        $command->term = $matches[1];
+        $command->term = $matches[3] ?? '';
         $command->format = $format;
         $command->exec();
     }
@@ -672,22 +680,28 @@ class Router
         $command->exec();
     }
 
-    private function exploreDsiPage()
+    private function exploreDsiPage($matches)
     {
+        $this->setLanguageFromUrl($matches);
+
         $command = new \DSI\Controller\StaticHtmlController();
         $command->view = 'explore-dsi.php';
         $command->exec();
     }
 
-    private function termsOfUsePage()
+    private function termsOfUsePage($matches)
     {
+        $this->setLanguageFromUrl($matches);
+
         $command = new \DSI\Controller\StaticHtmlController();
         $command->view = 'terms-of-use.php';
         $command->exec();
     }
 
-    private function privacyPolicyPage()
+    private function privacyPolicyPage($matches)
     {
+        $this->setLanguageFromUrl($matches);
+
         $command = new \DSI\Controller\StaticHtmlController();
         $command->view = 'privacy-policy.php';
         $command->exec();
@@ -710,8 +724,10 @@ class Router
         $command->exec();
     }
 
-    private function sitemapXmlPage()
+    private function sitemapXmlPage($matches)
     {
+        $this->setLanguageFromUrl($matches);
+
         $command = new \DSI\Controller\SitemapController();
         $command->format = 'xml';
         $command->exec();
