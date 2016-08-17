@@ -165,7 +165,7 @@ class OrganisationController
         $canUserRequestMembership = false;
         $userCanEditOrganisation = false;
 
-        $organisationMembers = (new OrganisationMemberRepository())->getMembersForOrganisation($organisation->getId());
+        $organisationMembers = (new OrganisationMemberRepository())->getMembersForOrganisation($organisation);
         $organisationProjects = (new OrganisationProjectRepository())->getByOrganisationID($organisation->getId());
         $partnerOrganisations = (new OrganisationProjectRepository())->getPartnerOrganisationsFor($organisation);
 
@@ -175,7 +175,7 @@ class OrganisationController
                 $isOwner = true;
 
             if (isset($isOwner) AND $isOwner === true)
-                $memberRequests = (new OrganisationMemberRequestRepository())->getMembersForOrganisation($organisation->getId());
+                $memberRequests = (new OrganisationMemberRequestRepository())->getMembersForOrganisation($organisation);
 
             // $userCanEditOrganisation = ($isAdmin OR ($loggedInUser AND $loggedInUser->isCommunityAdmin()));
             $userCanEditOrganisation = ($isOwner OR ($loggedInUser AND $loggedInUser->isCommunityAdmin()));

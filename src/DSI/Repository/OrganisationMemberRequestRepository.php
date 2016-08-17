@@ -3,8 +3,10 @@
 namespace DSI\Repository;
 
 use DSI\DuplicateEntry;
+use DSI\Entity\Organisation;
 use DSI\Entity\OrganisationMember;
 use DSI\Entity\OrganisationMemberRequest;
+use DSI\Entity\User;
 use DSI\NotFound;
 use DSI\Service\SQL;
 
@@ -110,10 +112,14 @@ class OrganisationMemberRequestRepository
         return $memberIDs;
     }
 
-    public function getMembersForOrganisation(int $organisationID)
+    /**
+     * @param Organisation $organisation
+     * @return User[]
+     */
+    public function getMembersForOrganisation(Organisation $organisation)
     {
         $members = [];
-        $memberIDs = $this->getMemberIDsForOrganisation($organisationID);
+        $memberIDs = $this->getMemberIDsForOrganisation($organisation->getId());
 
         foreach ($memberIDs AS $memberID)
             $members[] = $this->userRepo->getById($memberID);

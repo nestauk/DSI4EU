@@ -110,6 +110,10 @@ class OrganisationMemberInvitationRepositoryTest extends PHPUnit_Framework_TestC
         $organisationMemberInvitation->setMember($this->user_1);
         $this->organisationMemberInvitationRepository->add($organisationMemberInvitation);
 
+        $this->assertEquals([1], $this->organisationMemberInvitationRepository->getOrganisationIDsForMember(
+            $this->user_1->getId()
+        ));
+
         $organisationMemberInvitation = new \DSI\Entity\OrganisationMemberInvitation();
         $organisationMemberInvitation->setOrganisation($this->organisation_2);
         $organisationMemberInvitation->setMember($this->user_1);
@@ -118,6 +122,87 @@ class OrganisationMemberInvitationRepositoryTest extends PHPUnit_Framework_TestC
         $this->assertEquals([1, 2], $this->organisationMemberInvitationRepository->getOrganisationIDsForMember(
             $this->user_1->getId()
         ));
+
+        $organisationMemberInvitation = new \DSI\Entity\OrganisationMemberInvitation();
+        $organisationMemberInvitation->setOrganisation($this->organisation_1);
+        $organisationMemberInvitation->setMember($this->user_1);
+        $this->organisationMemberInvitationRepository->remove($organisationMemberInvitation);
+
+        $this->assertEquals([2], $this->organisationMemberInvitationRepository->getOrganisationIDsForMember(
+            $this->user_1->getId()
+        ));
+    }
+
+    /** @test saveAsNew */
+    public function getMemberIDsForOrganisation()
+    {
+        $organisationMemberInvitation = new \DSI\Entity\OrganisationMemberInvitation();
+        $organisationMemberInvitation->setOrganisation($this->organisation_1);
+        $organisationMemberInvitation->setMember($this->user_1);
+        $this->organisationMemberInvitationRepository->add($organisationMemberInvitation);
+
+        $this->assertEquals([1], $this->organisationMemberInvitationRepository->getMemberIDsForOrganisation(
+            $this->organisation_1->getId()
+        ));
+
+        $organisationMemberInvitation = new \DSI\Entity\OrganisationMemberInvitation();
+        $organisationMemberInvitation->setOrganisation($this->organisation_1);
+        $organisationMemberInvitation->setMember($this->user_2);
+        $this->organisationMemberInvitationRepository->add($organisationMemberInvitation);
+
+        $this->assertEquals([1, 2], $this->organisationMemberInvitationRepository->getMemberIDsForOrganisation(
+            $this->organisation_1->getId()
+        ));
+
+        $organisationMemberInvitation = new \DSI\Entity\OrganisationMemberInvitation();
+        $organisationMemberInvitation->setOrganisation($this->organisation_1);
+        $organisationMemberInvitation->setMember($this->user_1);
+        $this->organisationMemberInvitationRepository->remove($organisationMemberInvitation);
+
+        $this->assertEquals([2], $this->organisationMemberInvitationRepository->getMemberIDsForOrganisation(
+            $this->organisation_1->getId()
+        ));
+    }
+
+    /** @test saveAsNew */
+    public function getMembersForOrganisation()
+    {
+        $organisationMemberInvitation = new \DSI\Entity\OrganisationMemberInvitation();
+        $organisationMemberInvitation->setOrganisation($this->organisation_1);
+        $organisationMemberInvitation->setMember($this->user_1);
+        $this->organisationMemberInvitationRepository->add($organisationMemberInvitation);
+
+        $this->assertCount(1, $this->organisationMemberInvitationRepository->getMembersForOrganisation(
+            $this->organisation_1->getId()
+        ));
+
+        $organisationMemberInvitation = new \DSI\Entity\OrganisationMemberInvitation();
+        $organisationMemberInvitation->setOrganisation($this->organisation_1);
+        $organisationMemberInvitation->setMember($this->user_2);
+        $this->organisationMemberInvitationRepository->add($organisationMemberInvitation);
+
+        $this->assertCount(2, $this->organisationMemberInvitationRepository->getMembersForOrganisation(
+            $this->organisation_1->getId()
+        ));
+
+        $organisationMemberInvitation = new \DSI\Entity\OrganisationMemberInvitation();
+        $organisationMemberInvitation->setOrganisation($this->organisation_1);
+        $organisationMemberInvitation->setMember($this->user_1);
+        $this->organisationMemberInvitationRepository->remove($organisationMemberInvitation);
+
+        $this->assertCount(1, $this->organisationMemberInvitationRepository->getMembersForOrganisation(
+            $this->organisation_1->getId()
+        ));
+    }
+
+    /** @test saveAsNew */
+    public function cannotRemoveNonexistentInvitation()
+    {
+        $organisationMemberInvitation = new \DSI\Entity\OrganisationMemberInvitation();
+        $organisationMemberInvitation->setOrganisation($this->organisation_1);
+        $organisationMemberInvitation->setMember($this->user_1);
+        $this->setExpectedException(\DSI\NotFound::class);
+        $this->organisationMemberInvitationRepository->remove($organisationMemberInvitation);
     }
 
     /** @test saveAsNew */

@@ -103,6 +103,7 @@ class OrganisationProjectRepository
     public function getPartnerOrganisationsFor(Organisation $organisation)
     {
         $projectIDs = $this->getProjectIDsForOrganisation($organisation->getId());
+        /** @var Organisation[] $partnerOrganisations */
         $partnerOrganisations = array_map(
             function (OrganisationProject $organisationProject) use ($organisation, $projectIDs) {
                 $partnerOrganisation = $organisationProject->getOrganisation();
@@ -115,6 +116,19 @@ class OrganisationProjectRepository
             },
             $this->getByProjectIDs($projectIDs)
         );
+
+        $_existingOrgs = [];
+        foreach ($partnerOrganisations AS &$partnerOrg) {
+            if ($partnerOrg) {
+                if (in_array($partnerOrg->getId(), $_existingOrgs)) {
+                    $partnerOrg = null;
+                } else {
+                    $_existingOrgs[] = $partnerOrg->getId();
+                }
+            }
+        }
+        unset($partnerOrg);
+
         return array_filter($partnerOrganisations);
     }
 

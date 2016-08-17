@@ -121,10 +121,14 @@ class OrganisationProjectsRepositoryTest extends PHPUnit_Framework_TestCase
     /** @test saveAsNew */
     public function getAllOrganisationIDsForProject()
     {
+        $this->assertEquals([], $this->organisationProjectsRepo->getOrganisationIDsForProject(1));
+
         $organisationProject = new \DSI\Entity\OrganisationProject();
         $organisationProject->setOrganisation($this->organisation_1);
         $organisationProject->setProject($this->project_1);
         $this->organisationProjectsRepo->add($organisationProject);
+
+        $this->assertEquals([1], $this->organisationProjectsRepo->getOrganisationIDsForProject(1));
 
         $organisationProject = new \DSI\Entity\OrganisationProject();
         $organisationProject->setOrganisation($this->organisation_2);
@@ -132,6 +136,23 @@ class OrganisationProjectsRepositoryTest extends PHPUnit_Framework_TestCase
         $this->organisationProjectsRepo->add($organisationProject);
 
         $this->assertEquals([1, 2], $this->organisationProjectsRepo->getOrganisationIDsForProject(1));
+
+        $organisationProject = new \DSI\Entity\OrganisationProject();
+        $organisationProject->setOrganisation($this->organisation_1);
+        $organisationProject->setProject($this->project_1);
+        $this->organisationProjectsRepo->remove($organisationProject);
+
+        $this->assertEquals([2], $this->organisationProjectsRepo->getOrganisationIDsForProject(1));
+    }
+
+    /** @test saveAsNew */
+    public function cannotRemoveNonexistentObject()
+    {
+        $organisationProject = new \DSI\Entity\OrganisationProject();
+        $organisationProject->setOrganisation($this->organisation_1);
+        $organisationProject->setProject($this->project_1);
+        $this->setExpectedException(\DSI\NotFound::class);
+        $this->organisationProjectsRepo->remove($organisationProject);
     }
 
     /** @test saveAsNew */
@@ -159,6 +180,80 @@ class OrganisationProjectsRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($this->organisationProjectsRepo->organisationHasProject(
             $this->organisation_2->getId(), $this->project_1->getId())
         );
+    }
+
+    /** @test saveAsNew */
+    public function getByProjectIDs()
+    {
+        $organisationProject = new \DSI\Entity\OrganisationProject();
+        $organisationProject->setOrganisation($this->organisation_1);
+        $organisationProject->setProject($this->project_1);
+        $this->organisationProjectsRepo->add($organisationProject);
+
+        $organisationProject = new \DSI\Entity\OrganisationProject();
+        $organisationProject->setOrganisation($this->organisation_2);
+        $organisationProject->setProject($this->project_2);
+        $this->organisationProjectsRepo->add($organisationProject);
+
+        $organisationProject = new \DSI\Entity\OrganisationProject();
+        $organisationProject->setOrganisation($this->organisation_1);
+        $organisationProject->setProject($this->project_2);
+        $this->organisationProjectsRepo->add($organisationProject);
+
+        $this->assertCount(0, $this->organisationProjectsRepo->getByProjectIDs([
+
+        ]));
+
+        $this->assertCount(1, $this->organisationProjectsRepo->getByProjectIDs([
+            $this->project_1->getId()
+        ]));
+
+        $this->assertCount(2, $this->organisationProjectsRepo->getByProjectIDs([
+            $this->project_2->getId()
+        ]));
+
+        $this->assertCount(3, $this->organisationProjectsRepo->getByProjectIDs([
+            $this->project_1->getId(), $this->project_2->getId()
+        ]));
+    }
+
+    /** @test saveAsNew */
+    public function canGetPartnerOrganisations()
+    {
+        $organisationProject = new \DSI\Entity\OrganisationProject();
+        $organisationProject->setOrganisation($this->organisation_1);
+        $organisationProject->setProject($this->project_1);
+        $this->organisationProjectsRepo->add($organisationProject);
+
+        $this->assertCount(0, $this->organisationProjectsRepo->getPartnerOrganisationsFor($this->organisation_1));
+
+        $organisationProject = new \DSI\Entity\OrganisationProject();
+        $organisationProject->setOrganisation($this->organisation_2);
+        $organisationProject->setProject($this->project_1);
+        $this->organisationProjectsRepo->add($organisationProject);
+
+        $this->assertCount(1, $this->organisationProjectsRepo->getPartnerOrganisationsFor($this->organisation_1));
+
+        $organisationProject = new \DSI\Entity\OrganisationProject();
+        $organisationProject->setOrganisation($this->organisation_3);
+        $organisationProject->setProject($this->project_1);
+        $this->organisationProjectsRepo->add($organisationProject);
+
+        $this->assertCount(2, $this->organisationProjectsRepo->getPartnerOrganisationsFor($this->organisation_1));
+
+        $organisationProject = new \DSI\Entity\OrganisationProject();
+        $organisationProject->setOrganisation($this->organisation_1);
+        $organisationProject->setProject($this->project_2);
+        $this->organisationProjectsRepo->add($organisationProject);
+
+        $this->assertCount(2, $this->organisationProjectsRepo->getPartnerOrganisationsFor($this->organisation_1));
+
+        $organisationProject = new \DSI\Entity\OrganisationProject();
+        $organisationProject->setOrganisation($this->organisation_2);
+        $organisationProject->setProject($this->project_2);
+        $this->organisationProjectsRepo->add($organisationProject);
+
+        $this->assertCount(2, $this->organisationProjectsRepo->getPartnerOrganisationsFor($this->organisation_1));
     }
 
     private function createOrganisation(int $organisationID)

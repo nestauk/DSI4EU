@@ -130,6 +130,10 @@ class OrganisationMemberRepositoryTest extends PHPUnit_Framework_TestCase
         $organisationMember->setMember($this->user_1);
         $this->organisationMemberRepo->insert($organisationMember);
 
+        $this->assertEquals([1], $this->organisationMemberRepo->getOrganisationIDsForMember(
+            $this->user_1->getId()
+        ));
+
         $organisationMember = new \DSI\Entity\OrganisationMember();
         $organisationMember->setOrganisation($this->organisation_2);
         $organisationMember->setMember($this->user_1);
@@ -138,6 +142,116 @@ class OrganisationMemberRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals([1, 2], $this->organisationMemberRepo->getOrganisationIDsForMember(
             $this->user_1->getId()
         ));
+
+        $organisationMember = new \DSI\Entity\OrganisationMember();
+        $organisationMember->setOrganisation($this->organisation_1);
+        $organisationMember->setMember($this->user_1);
+        $this->organisationMemberRepo->remove($organisationMember);
+
+        $this->assertEquals([2], $this->organisationMemberRepo->getOrganisationIDsForMember(
+            $this->user_1->getId()
+        ));
+    }
+
+    /** @test saveAsNew */
+    public function getMembersForOrganisation()
+    {
+        $this->assertCount(0, $this->organisationMemberRepo->getMembersForOrganisation(
+            $this->organisation_1
+        ));
+
+        $organisationMember = new \DSI\Entity\OrganisationMember();
+        $organisationMember->setOrganisation($this->organisation_1);
+        $organisationMember->setMember($this->user_1);
+        $this->organisationMemberRepo->insert($organisationMember);
+
+        $this->assertCount(1, $this->organisationMemberRepo->getMembersForOrganisation(
+            $this->organisation_1
+        ));
+
+        $organisationMember = new \DSI\Entity\OrganisationMember();
+        $organisationMember->setOrganisation($this->organisation_1);
+        $organisationMember->setMember($this->user_2);
+        $this->organisationMemberRepo->insert($organisationMember);
+
+        $this->assertCount(2, $this->organisationMemberRepo->getMembersForOrganisation(
+            $this->organisation_1
+        ));
+
+        $organisationMember = new \DSI\Entity\OrganisationMember();
+        $organisationMember->setOrganisation($this->organisation_1);
+        $organisationMember->setMember($this->user_1);
+        $this->organisationMemberRepo->remove($organisationMember);
+
+        $this->assertCount(1, $this->organisationMemberRepo->getMembersForOrganisation(
+            $this->organisation_1
+        ));
+    }
+
+    /** @test saveAsNew */
+    public function canGetByAdmin()
+    {
+        $this->assertCount(0, $this->organisationMemberRepo->getByAdmin($this->user_1));
+
+        $organisationMember = new \DSI\Entity\OrganisationMember();
+        $organisationMember->setOrganisation($this->organisation_1);
+        $organisationMember->setMember($this->user_1);
+        $organisationMember->setIsAdmin(true);
+        $this->organisationMemberRepo->insert($organisationMember);
+
+        $this->assertCount(1, $this->organisationMemberRepo->getByAdmin($this->user_1));
+
+        $organisationMember = new \DSI\Entity\OrganisationMember();
+        $organisationMember->setOrganisation($this->organisation_2);
+        $organisationMember->setMember($this->user_1);
+        $organisationMember->setIsAdmin(true);
+        $this->organisationMemberRepo->insert($organisationMember);
+
+        $this->assertCount(2, $this->organisationMemberRepo->getByAdmin($this->user_1));
+
+        $organisationMember = new \DSI\Entity\OrganisationMember();
+        $organisationMember->setOrganisation($this->organisation_3);
+        $organisationMember->setMember($this->user_1);
+        $this->organisationMemberRepo->insert($organisationMember);
+
+        $this->assertCount(2, $this->organisationMemberRepo->getByAdmin($this->user_1));
+    }
+
+    /** @test saveAsNew */
+    public function getByMemberIdAndOrganisationId()
+    {
+        $organisationMember = new \DSI\Entity\OrganisationMember();
+        $organisationMember->setOrganisation($this->organisation_3);
+        $organisationMember->setMember($this->user_2);
+        $organisationMember->setIsAdmin(true);
+        $this->organisationMemberRepo->insert($organisationMember);
+
+        $organisationMember = $this->organisationMemberRepo->getByMemberIdAndOrganisationId(
+            $this->user_2->getId(),
+            $this->organisation_3->getId()
+        );
+        $this->assertEquals($this->organisation_3->getId(), $organisationMember->getOrganisationID());
+        $this->assertEquals($this->user_2->getId(), $organisationMember->getMemberID());
+    }
+
+    /** @test saveAsNew */
+    public function cannotGetNonexistentByMemberIdAndOrganisationId()
+    {
+        $this->setExpectedException(\DSI\NotFound::class);
+        $organisationMember = $this->organisationMemberRepo->getByMemberIdAndOrganisationId(
+            $this->user_2->getId(),
+            $this->organisation_3->getId()
+        );
+    }
+
+    /** @test */
+    public function cannotRemoveNonexistentObject()
+    {
+        $organisationMember = new \DSI\Entity\OrganisationMember();
+        $organisationMember->setOrganisation($this->organisation_1);
+        $organisationMember->setMember($this->user_1);
+        $this->setExpectedException(\DSI\NotFound::class);
+        $this->organisationMemberRepo->remove($organisationMember);
     }
 
     /** @test saveAsNew */

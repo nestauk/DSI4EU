@@ -92,6 +92,7 @@ class OrganisationRepositoryTest extends PHPUnit_Framework_TestCase
         $organisation = new Organisation();
         $organisation->setOwner($this->user1);
         $organisation->setName($name = 'Name');
+        $organisation->setImportID($importID = 'random1024');
         $organisation->setUrl($url = 'http://example.org');
         $organisation->setShortDescription($shortDescription = 'Short Desc');
         $organisation->setDescription($description = 'Desc');
@@ -110,6 +111,7 @@ class OrganisationRepositoryTest extends PHPUnit_Framework_TestCase
         $organisation = $this->organisationRepo->getById($organisation->getId());
         $this->assertEquals($this->user1->getId(), $organisation->getOwner()->getId());
         $this->assertEquals($name, $organisation->getName());
+        $this->assertEquals($importID, $organisation->getImportID());
         $this->assertEquals($url, $organisation->getUrl());
         $this->assertEquals($shortDescription, $organisation->getShortDescription());
         $this->assertEquals($description, $organisation->getDescription());
@@ -134,6 +136,7 @@ class OrganisationRepositoryTest extends PHPUnit_Framework_TestCase
 
         $organisation->setOwner($this->user1);
         $organisation->setName($name = 'Name');
+        $organisation->setImportID($importID = 'random1024');
         $organisation->setUrl($url = 'http://example.org');
         $organisation->setShortDescription($shortDescription = 'Short Desc');
         $organisation->setDescription($description = 'Desc');
@@ -151,6 +154,7 @@ class OrganisationRepositoryTest extends PHPUnit_Framework_TestCase
         $organisation = $this->organisationRepo->getById($organisation->getId());
         $this->assertEquals($this->user1->getId(), $organisation->getOwner()->getId());
         $this->assertEquals($name, $organisation->getName());
+        $this->assertEquals($importID, $organisation->getImportID());
         $this->assertEquals($url, $organisation->getUrl());
         $this->assertEquals($shortDescription, $organisation->getShortDescription());
         $this->assertEquals($description, $organisation->getDescription());
@@ -223,6 +227,20 @@ class OrganisationRepositoryTest extends PHPUnit_Framework_TestCase
 
         $this->assertCount(2, $this->organisationRepo->getAll());
         $this->assertEquals(2, $this->organisationRepo->countAll());
+    }
+
+    /** @test getAll */
+    public function getByImportId()
+    {
+        $organisation = new Organisation();
+        $organisation->setOwner($this->user1);
+        $organisation->setImportID($importId_1 = 'randomID1');
+        $this->organisationRepo->insert($organisation);
+
+        $this->assertEquals(
+            $organisation->getId(),
+            $this->organisationRepo->getByImportID($importId_1)->getId()
+        );
     }
 
     /** @test */

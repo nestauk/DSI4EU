@@ -140,7 +140,7 @@ class CountryRegionRepositoryTest extends PHPUnit_Framework_TestCase
     }
 
     /** @test save */
-    public function cannotSave2CountriesWithTheSameName()
+    public function cannotSave2RegionsWithTheSameNameInTheSameCountry()
     {
         $countryRegion_1 = new \DSI\Entity\CountryRegion();
         $countryRegion_1->setCountry($this->country_1);
@@ -173,6 +173,28 @@ class CountryRegionRepositoryTest extends PHPUnit_Framework_TestCase
         $this->countryRegionRepo->insert($countryRegion);
 
         $this->assertCount(2, $this->countryRegionRepo->getAll());
+    }
+
+    /** @test getAll */
+    public function getAllCountryByCountry()
+    {
+        $countryRegion = new \DSI\Entity\CountryRegion();
+        $countryRegion->setCountry($this->country_1);
+        $countryRegion->setName('test');
+        $this->countryRegionRepo->insert($countryRegion);
+
+        $countryRegion = new \DSI\Entity\CountryRegion();
+        $countryRegion->setCountry($this->country_2);
+        $countryRegion->setName('test2');
+        $this->countryRegionRepo->insert($countryRegion);
+
+        $countryRegion = new \DSI\Entity\CountryRegion();
+        $countryRegion->setCountry($this->country_2);
+        $countryRegion->setName('test3');
+        $this->countryRegionRepo->insert($countryRegion);
+
+        $this->assertCount(1, $this->countryRegionRepo->getAllByCountryId($this->country_1->getId()));
+        $this->assertCount(2, $this->countryRegionRepo->getAllByCountryId($this->country_2->getId()));
     }
 
     /** @test saveAsNew getById */

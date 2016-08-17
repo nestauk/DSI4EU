@@ -39,8 +39,6 @@ class CountryRegionRepository
     {
         if (!$countryRegion->getName())
             throw new DSI\NotEnoughData('name');
-        elseif (!$countryRegion->hasCountry())
-            throw new DSI\NotEnoughData('country');
         elseif ($this->nameExists($countryRegion->getCountry()->getId(), $countryRegion->getName()))
             if ($this->getByName($countryRegion->getCountry()->getId(), $countryRegion->getName())->getId() != $countryRegion->getId())
                 throw new DSI\DuplicateEntry('name');
@@ -99,7 +97,7 @@ class CountryRegionRepository
      * @param int $countryID
      * @return DSI\Entity\CountryRegion[]
      */
-    public function getAllByCountry(int $countryID)
+    public function getAllByCountryId(int $countryID)
     {
         return $this->getCountryRegionsWhere([
             "`countryID` = {$countryID}"

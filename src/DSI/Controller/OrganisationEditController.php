@@ -225,11 +225,11 @@ class OrganisationEditController
         }
 
         if (isset($isOwner) AND $isOwner === true)
-            $memberRequests = (new OrganisationMemberRequestRepository())->getMembersForOrganisation($organisation->getId());
+            $memberRequests = (new OrganisationMemberRequestRepository())->getMembersForOrganisation($organisation);
         else
             $memberRequests = [];
 
-        $organisationMembers = (new OrganisationMemberRepository())->getMembersForOrganisation($organisation->getId());
+        $organisationMembers = (new OrganisationMemberRepository())->getMembersForOrganisation($organisation);
         $organisationProjects = (new OrganisationProjectRepository())->getByOrganisationID($organisation->getId());
         $partnerOrganisations = (new OrganisationProjectRepository())->getPartnerOrganisationsFor($organisation);
 

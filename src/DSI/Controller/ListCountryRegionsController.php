@@ -24,7 +24,7 @@ class ListCountryRegionsController
 
         $countryRegionsRepo = new CountryRegionRepository();
         $countryRegions = [];
-        foreach ($countryRegionsRepo->getAllByCountry($this->data()->countryID) AS $countryRegion) {
+        foreach ($countryRegionsRepo->getAllByCountryId($this->data()->countryID) AS $countryRegion) {
             $countryRegions[] = [
                 'id' => $countryRegion->getName(),
                 'text' => $countryRegion->getName(),

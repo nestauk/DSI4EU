@@ -93,14 +93,14 @@ class CaseStudyRepositoryTest extends PHPUnit_Framework_TestCase
     }
 
     /** @test getByID */
-    public function gettingAnNonExistentProjectById_throwsException()
+    public function gettingAnNonExistentCaseStudyById_throwsException()
     {
         $this->setExpectedException(\DSI\NotFound::class);
         $this->caseStudyRepository->getById(1);
     }
 
     /** @test save */
-    public function NonexistentProjectCannotBeSaved()
+    public function NonexistentObjectCannotBeSaved()
     {
         $caseStudy = new CaseStudy();
         $caseStudy->setId(1);
@@ -110,7 +110,7 @@ class CaseStudyRepositoryTest extends PHPUnit_Framework_TestCase
     }
 
     /** @test getAll */
-    public function getAllProjects()
+    public function getAll()
     {
         $caseStudy = new CaseStudy();
         $this->caseStudyRepository->insert($caseStudy);
@@ -123,8 +123,99 @@ class CaseStudyRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertCount(2, $this->caseStudyRepository->getAll());
     }
 
+    /** @test getAll */
+    public function getAllByTitle()
+    {
+        $caseStudy = new CaseStudy();
+        $caseStudy->setTitle("Title 1");
+        $this->caseStudyRepository->insert($caseStudy);
+
+        $caseStudy = new CaseStudy();
+        $caseStudy->setTitle("Title 2");
+        $this->caseStudyRepository->insert($caseStudy);
+
+        $this->assertCount(1, $this->caseStudyRepository->searchByTitle("1"));
+        $this->assertCount(1, $this->caseStudyRepository->searchByTitle("2"));
+        $this->assertCount(2, $this->caseStudyRepository->searchByTitle("Title"));
+        $this->assertCount(1, $this->caseStudyRepository->searchByTitle("Title", 1));
+    }
+
+    /** @test getAll */
+    public function getAllPublished()
+    {
+        $caseStudy = new CaseStudy();
+        $caseStudy->setIsPublished(true);
+        $this->caseStudyRepository->insert($caseStudy);
+
+        $caseStudy = new CaseStudy();
+        $caseStudy->setIsPublished(true);
+        $this->caseStudyRepository->insert($caseStudy);
+
+        $caseStudy = new CaseStudy();
+        $caseStudy->setIsPublished(false);
+        $this->caseStudyRepository->insert($caseStudy);
+
+        $this->assertCount(2, $this->caseStudyRepository->getAllPublished());
+        $this->assertCount(1, $this->caseStudyRepository->getPublishedLast(1));
+    }
+
+    /** @test getAll */
+    public function getAllPublishedForSlider()
+    {
+        $caseStudy = new CaseStudy();
+        $caseStudy->setIsPublished(true);
+        $caseStudy->setIsFeaturedOnSlider(true);
+        $this->caseStudyRepository->insert($caseStudy);
+
+        $caseStudy = new CaseStudy();
+        $caseStudy->setIsPublished(true);
+        $caseStudy->setIsFeaturedOnSlider(true);
+        $this->caseStudyRepository->insert($caseStudy);
+
+        $caseStudy = new CaseStudy();
+        $caseStudy->setIsPublished(true);
+        $caseStudy->setIsFeaturedOnSlider(false);
+        $this->caseStudyRepository->insert($caseStudy);
+
+        $caseStudy = new CaseStudy();
+        $caseStudy->setIsPublished(false);
+        $caseStudy->setIsFeaturedOnSlider(true);
+        $this->caseStudyRepository->insert($caseStudy);
+
+        $this->assertCount(2, $this->caseStudyRepository->getAllPublishedForSlider());
+        $this->assertCount(1, $this->caseStudyRepository->getSliderStudiesLast(1));
+    }
+
+    /** @test getAll */
+    public function getHomePageCaseStudies()
+    {
+        $caseStudy = new CaseStudy();
+        $caseStudy->setIsPublished(true);
+        $caseStudy->setIsFeaturedOnHomePage(true);
+        $this->caseStudyRepository->insert($caseStudy);
+
+        $caseStudy = new CaseStudy();
+        $caseStudy->setIsPublished(true);
+        $caseStudy->setIsFeaturedOnHomePage(true);
+        $this->caseStudyRepository->insert($caseStudy);
+
+        $caseStudy = new CaseStudy();
+        $caseStudy->setIsPublished(true);
+        $caseStudy->setIsFeaturedOnHomePage(false);
+        $this->caseStudyRepository->insert($caseStudy);
+
+        $caseStudy = new CaseStudy();
+        $caseStudy->setIsPublished(false);
+        $caseStudy->setIsFeaturedOnHomePage(true);
+        $this->caseStudyRepository->insert($caseStudy);
+
+        $this->assertCount(1, $this->caseStudyRepository->getHomePageStudiesLast(1));
+        $this->assertCount(2, $this->caseStudyRepository->getHomePageStudiesLast(2));
+        $this->assertCount(2, $this->caseStudyRepository->getHomePageStudiesLast(3));
+    }
+
     /** @test */
-    public function projectCanBeUpdated()
+    public function caseStudyCanBeUpdated()
     {
         $caseStudy = new CaseStudy();
         $this->caseStudyRepository->insert($caseStudy);

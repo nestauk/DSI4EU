@@ -184,6 +184,13 @@ class OrganisationRepositoryInAPCTest extends PHPUnit_Framework_TestCase
         $this->organisationRepositoryInAPC->save($organisation);
     }
 
+    /** @test */
+    public function settingKey_canGetKey()
+    {
+        OrganisationRepositoryInAPC::setApcKey($key = 'new-key');
+        $this->assertEquals($key, OrganisationRepositoryInAPC::getApcKey());
+    }
+
     /** @test getAll */
     public function getAllOrganisations()
     {
