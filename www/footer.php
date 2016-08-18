@@ -5,7 +5,7 @@ use \DSI\Service\URL;
 if (!isset($loggedInUser))
     $loggedInUser = null;
 
-if(!isset($urlHandler))
+if (!isset($urlHandler))
     $urlHandler = new URL();
 
 ?>
@@ -38,7 +38,7 @@ if(!isset($urlHandler))
             </div>
 
             <div class="w-col w-col-2">
-                <h3 class="footer-h3">People</h3>
+                <h3 class="footer-h3"><?php _ehtml('People') ?></h3>
                 <ul class="w-list-unstyled">
                     <?php /*
                     <li class="footer-link">
@@ -53,28 +53,32 @@ if(!isset($urlHandler))
                     */ ?>
                     <?php if ($loggedInUser) { ?>
                         <li class="footer-link">
-                            <a class="footer-link" href="<?php echo $urlHandler->dashboard() ?>">Your dashboard</a>
+                            <a href="<?php echo $urlHandler->dashboard() ?>"
+                               class="footer-link"><?php _ehtml('Your dashboard') ?></a>
                         </li>
                     <?php } else { ?>
                         <li class="footer-link">
-                            <a class="footer-link" href="#" data-ix="showsignup">Join DSI4EU</a>
+                            <a class="footer-link" href="#" data-ix="showsignup"><?php _ehtml('Join DSI4EU') ?></a>
                         </li>
                     <?php } ?>
                     <li class="footer-link">
-                        <a class="footer-link" href="<?php echo $urlHandler->termsOfUse() ?>">Terms of use</a>
+                        <a class="footer-link" href="<?php echo $urlHandler->termsOfUse() ?>">
+                            <?php _ehtml('Terms of use') ?></a>
                     </li>
                     <li class="footer-link">
-                        <a class="footer-link" href="<?php echo $urlHandler->privacyPolicy() ?>">Privacy policy</a>
+                        <a class="footer-link" href="<?php echo $urlHandler->privacyPolicy() ?>">
+                            <?php _ehtml('Privacy policy') ?></a>
                     </li>
                 </ul>
             </div>
 
             <div class="w-col w-col-2">
-                <h3 class="footer-h3">Projects</h3>
+                <h3 class="footer-h3"><?php _ehtml('Projects') ?></h3>
                 <ul class="w-list-unstyled">
                     <?php if ($loggedInUser) { ?>
                         <li class="footer-link">
-                            <a class="footer-link" href="#" data-ix="create-project-modal">Add a project</a>
+                            <a class="footer-link" href="#" data-ix="create-project-modal">
+                                <?php _ehtml('Add a project') ?></a>
                         </li>
                     <?php } ?>
                     <?php /*
@@ -83,16 +87,18 @@ if(!isset($urlHandler))
                     </li>
                     */ ?>
                     <li class="footer-link">
-                        <a class="footer-link" href="<?php echo $urlHandler->projects() ?>">View projects</a>
+                        <a class="footer-link" href="<?php echo $urlHandler->projects() ?>">
+                            <?php _ehtml('View projects') ?></a>
                     </li>
                 </ul>
             </div>
             <div class="w-col w-col-2">
-                <h3 class="footer-h3">Organisations</h3>
+                <h3 class="footer-h3"><?php _ehtml('Organisations') ?></h3>
                 <ul class="w-list-unstyled">
                     <?php if ($loggedInUser) { ?>
                         <li class="footer-link">
-                            <a class="footer-link" href="#" data-ix="create-organisation-modal">Add an organisation</a>
+                            <a class="footer-link" href="#" data-ix="create-organisation-modal">
+                                <?php _ehtml('Add an organisation') ?></a>
                         </li>
                     <?php } ?>
                     <?php /*
@@ -101,33 +107,36 @@ if(!isset($urlHandler))
                     </li>
                     */ ?>
                     <li class="footer-link">
-                        <a class="footer-link" href="<?php echo $urlHandler->organisations() ?>">View organisations</a>
+                        <a class="footer-link" href="<?php echo $urlHandler->organisations() ?>">
+                            <?php _ehtml('View organisations') ?></a>
                     </li>
                 </ul>
             </div>
             <div class="w-col w-col-2">
-                <h3 class="footer-h3">Development</h3>
+                <h3 class="footer-h3"><?php _ehtml('Development') ?></h3>
                 <ul class="w-list-unstyled">
                     <li class="footer-link">
-                        <a class="footer-link" href="<?php echo $urlHandler->updates() ?>">Updates</a>
+                        <a class="footer-link" href="<?php echo $urlHandler->updates() ?>">
+                            <?php _ehtml('Updates') ?></a>
                     </li>
                     <li class="footer-link">
-                        <a class="footer-link" href="<?php echo $urlHandler->feedback() ?>">Feedback</a>
+                        <a class="footer-link" href="<?php echo $urlHandler->feedback() ?>">
+                            <?php _ehtml('Feedback') ?></a>
                     </li>
                 </ul>
             </div>
         </div>
         <div class="footer-partner-row w-row">
             <div class="w-clearfix w-col w-col-6">
-                <div class="footer-small-print">Nesta is a registered charity in England and Wales 1144091 and Scotland
-                    SC042833. Our main address is 1 Plough Place, London, EC4A 1DE
+                <div class="footer-small-print">
+                    <?php _ehtml('Nesta is a registered charity') ?>
                 </div>
                 <img class="footer-cc-img" src="<?php echo SITE_RELATIVE_PATH ?>/images/88x31.png">
                 <div class="footer-small-print">All our work is licensed under a&nbsp;
                     <a target="_blank" class="footer-link-small"
-                       href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative
-                        Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>, unless it says
-                    otherwise.
+                       href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                        Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
+                    </a>, unless it says otherwise.
                 </div>
             </div>
             <div class="w-clearfix w-col w-col-6">

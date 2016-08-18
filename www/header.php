@@ -1,27 +1,27 @@
 <?php
-if (!isset($loggedInUser))
-    $loggedInUser = null;
+use \DSI\Service\URL;
+use \DSI\Service\Sysctl;
+
 /** @var $loggedInUser \DSI\Entity\User */
 /** @var $isHomePage bool */
 /** @var $angularModules string[] */
 /** @var $pageTitle string[] */
-use \DSI\Service\URL;
-use \DSI\Service\Sysctl;
 
 $projectsCount = (new \DSI\Repository\ProjectRepositoryInAPC())->countAll();
 $organisationsCount = (new \DSI\Repository\OrganisationRepositoryInAPC())->countAll();
 
+if (!isset($loggedInUser))
+    $loggedInUser = null;
 if (!isset($urlHandler))
     $urlHandler = new URL();
 
-?>
-    <!DOCTYPE html>
-    <html data-wf-site="56e2e31a1b1f8f784728a08c" data-wf-page="56fbef6ecf591b312d56f8be">
-    <head>
-        <?php require __DIR__ . '/partialViews/head.php' ?>
-    </head>
-    <script type="text/javascript"
-            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/SearchController.js?<?php Sysctl::echoVersion() ?>"></script>
+?><!DOCTYPE html>
+<html data-wf-site="56e2e31a1b1f8f784728a08c" data-wf-page="56fbef6ecf591b312d56f8be">
+<head>
+    <?php require __DIR__ . '/partialViews/head.php' ?>
+</head>
+<script src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/SearchController.js?<?php Sysctl::echoVersion() ?>"
+        type="text/javascript"></script>
 <body ng-app="DSIApp" ng-controller="SearchController" id="top">
 
 <?php require(__DIR__ . '/partialViews/header.php') ?>
@@ -40,19 +40,14 @@ if (!isset($urlHandler))
                 <div class="w-col w-col-5 w-col-small-5 w-clearfix" id="userMenu">
                     <?php if (isset($loggedInUser)) { ?>
                         <div class="profile-popover bg-blur">
-                            <?php /*
-                            <a href="<?php echo URL::dashboard() ?>" class="popover-link">
-                                My dashboard
-                            </a>
-                            */ ?>
                             <a href="<?php echo $urlHandler->myProfile() ?>" class="popover-link">
-                                View profile
+                                <?php _ehtml('View profile') ?>
                             </a>
                             <a href="<?php echo $urlHandler->editProfile() ?>" class="popover-link">
-                                Edit Profile
+                                <?php _ehtml('Edit Profile') ?>
                             </a>
                             <a href="<?php echo $urlHandler->logout() ?>" class="popover-link">
-                                Sign out
+                                <?php _ehtml('Sign out') ?>
                             </a>
                         </div>
                         <img width="15" src="<?php echo SITE_RELATIVE_PATH ?>/images/vertical-nav.png"
@@ -76,11 +71,12 @@ if (!isset($urlHandler))
                     <div class="w-form">
                         <form class="w-clearfix search-input" id="email-form">
                             <input class="w-input search-field quicksearch" id="Search"
-                                   maxlength="256" name="Search" placeholder="Search digitalsocial.eu" type="text"
+                                   maxlength="256" name="Search" type="text"
+                                   placeholder="<?php _ehtml('Search digitalsocial.eu') ?>"
                                    ng-model="search.entry" ng-focus="search.focused = true"
                                    ng-blur="search.focused = false">
                             <div ng-cloak ng-show="search.entry.length > 0" class="search-clear"
-                                 ng-click="search.entry = ''">clear
+                                 ng-click="search.entry = ''"><?php _ehtml('clear') ?>
                             </div>
                         </form>
                     </div>
@@ -90,6 +86,6 @@ if (!isset($urlHandler))
     </div>
 <?php } ?>
 
-    <div class="w-section body">
+<div class="w-section body">
 
 <?php require(__DIR__ . '/partialViews/search-results.php'); ?>

@@ -30,25 +30,37 @@ require __DIR__ . '/header.php';
                      src="<?php echo \DSI\Entity\Image::CASE_STUDY_LOGO_URL . $caseStudy->getLogoOrDefault() ?>">
             </div>
             <div class="case-study-single-container w-container">
-                <h2 class="centered" data-ix="fadeinuponload-4">Introduction</h2>
+                <h2 class="centered" data-ix="fadeinuponload-4">
+                    <?php _ehtml('Introduction') ?></h2>
                 <p class="centered" data-ix="fadeinuponload-5">
                     <?php echo show_input($caseStudy->getIntroPageText()) ?>
                 </p>
                 <h4 class="case-study-intro-detail centered" data-ix="fadeinuponload-5">
-                    <?php echo show_input($caseStudy->getTitle()) ?>
-                    <?php if ($caseStudy->getRegion()) { ?>
-                        is based in <?php echo $caseStudy->getRegion()->getCountry()->getName() ?>
-                    <?php } ?>
-                    <?php if ($caseStudy->getRegion() AND $caseStudy->getProjectStartDate()) { ?>
-                        and
-                    <?php } ?>
-                    <?php if ($caseStudy->getProjectStartDate()) { ?>
-                        has been running since <?php echo $caseStudy->getProjectStartDate('Y') ?>
-                    <?php } ?>
+                    <?php if ($caseStudy->getRegion() AND $caseStudy->getProjectStartDate()) {
+                        echo sprintf(
+                            __('%s is based in %s and has been running since %s'),
+                            show_input($caseStudy->getTitle()),
+                            show_input($caseStudy->getRegion()->getCountry()->getName()),
+                            $caseStudy->getProjectStartDate('Y')
+                        );
+                    } elseif ($caseStudy->getRegion() AND !$caseStudy->getProjectStartDate()) {
+                        echo sprintf(
+                            __('%s is based in %s'),
+                            show_input($caseStudy->getTitle()),
+                            show_input($caseStudy->getRegion()->getCountry()->getName())
+                        );
+                    } elseif (!$caseStudy->getRegion() AND $caseStudy->getProjectStartDate()) {
+                        echo sprintf(
+                            __('%s has been running since %s'),
+                            show_input($caseStudy->getTitle()),
+                            show_input($caseStudy->getRegion()->getCountry()->getName()),
+                            $caseStudy->getProjectStartDate('Y')
+                        );
+                    } ?>
                 </h4>
                 <?php if ($caseStudy->getMainText()) { ?>
                     <div class="centered url-block" data-ix="fadeinup">
-                        <h2>Overview</h2>
+                        <h2><?php _ehtml('Overview')?></h2>
                         <p class="case-study-main-text" data-ix="fadeinup">
                             <?php echo $caseStudy->getMainText() ?>
                         </p>
@@ -56,7 +68,7 @@ require __DIR__ . '/header.php';
                 <?php } ?>
                 <?php if ($caseStudy->getUrl()) { ?>
                     <div class="centered url-block" data-ix="fadeinup">
-                        <h2>Interested in finding out more?</h2>
+                        <h2><?php _ehtml('Interested in finding out more?')?></h2>
                         <a class="button-more w-button" href="<?php echo $caseStudy->getUrl() ?>">
                             <?php echo $caseStudy->getButtonLabel() ?>
                         </a>
@@ -67,7 +79,7 @@ require __DIR__ . '/header.php';
     </div>
     <div class="related-case-studies">
         <div class="container-wide">
-            <h2 class="reccomendation">More case studies</h2>
+            <h2 class="reccomendation"><?php _ehtml('More case studies')?></h2>
             <div class="case-studies-row case-studies-row-grid w-row">
                 <?php foreach ($caseStudies AS $i => $caseStudy) { ?>
                     <div class="case-study-col-<?php echo $i % 3 + 1 ?> w-col w-col-4">
@@ -84,7 +96,7 @@ require __DIR__ . '/header.php';
                                     </div>
                                     <a class="case-study-card-read-more"
                                        href="<?php echo $urlHandler->caseStudy($caseStudy) ?>">
-                                        See the case study
+                                        <?php _ehtml('See the case study')?>
                                     </a>
                                 </div>
                                 <div class="case-study-card-label w-clearfix">

@@ -7,7 +7,7 @@ require __DIR__ . '/header.php';
 ?>
     <div class="creator page-header">
         <div class="container-wide header">
-            <h1 class="light page-h1">Case studies</h1>
+            <h1 class="light page-h1"><?php _ehtml('Case studies')?></h1>
             <?php if ($userCanAddCaseStudy) { ?>
                 <a class="button button-bottom-right w-button" href="<?php echo $urlHandler->addCaseStudy() ?>">
                     Add case study +
@@ -33,7 +33,7 @@ require __DIR__ . '/header.php';
                                 </div>
                                 <a class="case-study-card-read-more"
                                    href="<?php echo $urlHandler->caseStudy($caseStudy) ?>">
-                                    See the case study
+                                    <?php _ehtml('See the case study')?>
                                 </a>
                             </div>
                             <div class="case-study-card-label w-clearfix">

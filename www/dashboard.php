@@ -17,7 +17,7 @@ require __DIR__ . '/header.php';
 
         <div class="w-section page-header">
             <div class="container-wide header">
-                <h1 class="page-h1 light">My dashboard</h1>
+                <h1 class="page-h1 light"><?php _ehtml('My dashboard') ?></h1>
             </div>
         </div>
 
@@ -25,27 +25,33 @@ require __DIR__ . '/header.php';
             <div class="w-row dashboard-widgets">
                 <div class="w-col w-col-4 w-col-stack notification-col">
                     <div class="dashboard-widget">
-                        <h3 class="card-h3">Notifications</h3>
+                        <h3 class="card-h3"><?php _ehtml('Notifications') ?></h3>
                         <div class="card-p notification-stat" ng-cloak ng-hide="notificationsCount()">
-                            You don't have any notifications at the moment
+                            <?php _ehtml('You dont have any notifications at the moment') ?>
                         </div>
                         <div class="card-p notification-stat" ng-cloak ng-show="notificationsCount()">
-                            You currently have <strong ng-bind="notificationsCount()"></strong> notification(s)
+                            <?php echo sprintf(
+                                __('You currently have %s notification(s)'),
+                                '<strong ng-bind="notificationsCount()"></strong>'
+                            ) ?>
                         </div>
                         <ul class="w-list-unstyled notification-list" ng-cloak>
                             <li class="notification-li" ng-repeat="invitation in notifications.projectInvitations">
                                 <div class="w-clearfix card-notification notification-interaction-actions">
                                     <div class="notification-profile-image"></div>
                                     <div class="notification-detail">
-                                        You have been added to the <strong ng-bind="invitation.name"></strong> project
+                                        <?php echo sprintf(
+                                            __('You have been added to the %s project'),
+                                            '<strong ng-bind="invitation.name"></strong>'
+                                        ) ?>
                                     </div>
                                     <div class="notification-interaction">
                                         <a class="w-button dsi-button notification-accept" href="#"
-                                           ng-click="approveProjectInvitation(invitation)">Accept</a>
+                                           ng-click="approveProjectInvitation(invitation)"><?php _ehtml('Accept') ?></a>
                                         <a class="w-button dsi-button notification-decline" href="#"
-                                           ng-click="declineProjectInvitation(invitation)">Decline</a>
+                                           ng-click="declineProjectInvitation(invitation)"><?php _ehtml('Decline') ?></a>
                                         <a class="w-button dsi-button notification-view"
-                                           href="{{invitation.url}}">View</a>
+                                           href="{{invitation.url}}"><?php _ehtml('View') ?></a>
                                     </div>
                                 </div>
                             </li>
@@ -53,15 +59,18 @@ require __DIR__ . '/header.php';
                                 <div class="w-clearfix card-notification notification-interaction-actions">
                                     <div class="notification-profile-image"></div>
                                     <div class="notification-detail">
-                                        You have been invited to join <strong ng-bind="invitation.name"></strong>
+                                        <?php echo sprintf(
+                                            __('You have been invited to join %s {organisation}'),
+                                            '<strong ng-bind="invitation.name"></strong>'
+                                        ) ?>
                                     </div>
                                     <div class="notification-interaction">
                                         <a class="w-button dsi-button notification-accept" href="#"
-                                           ng-click="approveOrganisationInvitation(invitation)">Accept</a>
+                                           ng-click="approveOrganisationInvitation(invitation)"><?php _ehtml('Accept') ?></a>
                                         <a class="w-button dsi-button notification-decline" href="#"
-                                           ng-click="declineOrganisationInvitation(invitation)">Decline</a>
+                                           ng-click="declineOrganisationInvitation(invitation)"><?php _ehtml('Decline') ?></a>
                                         <a class="w-button dsi-button notification-view"
-                                           href="{{invitation.url}}">View</a>
+                                           href="{{invitation.url}}"><?php _ehtml('View') ?></a>
                                     </div>
                                 </div>
                             </li>
@@ -69,17 +78,17 @@ require __DIR__ . '/header.php';
                                 <div class="w-clearfix card-notification notification-interaction-actions">
                                     <div class="notification-profile-image"></div>
                                     <div class="notification-detail">
-                                        <a style="font-weight:bold" href="{{invitation.user.url}}"
-                                           ng-bind="invitation.user.name"></a>
-                                        requested to join
-                                        <a style="font-weight:bold" href="{{invitation.project.url}}"
-                                           ng-bind="invitation.project.name"></a>
+                                        <?php echo sprintf(
+                                            __('% requested to join %'),
+                                            '<a style="font-weight:bold" href="{{invitation.user.url}}" ng-bind="invitation.user.name"></a>',
+                                            '<a style="font-weight:bold" href="{{invitation.project.url}}" ng-bind="invitation.project.name"></a>'
+                                        ) ?>
                                     </div>
                                     <div class="notification-interaction">
                                         <a class="w-button dsi-button notification-accept" href="#"
-                                           ng-click="approveProjectRequest(invitation)">Accept</a>
+                                           ng-click="approveProjectRequest(invitation)"><?php _ehtml('Accept') ?></a>
                                         <a class="w-button dsi-button notification-decline" href="#"
-                                           ng-click="declineProjectRequest(invitation)">Decline</a>
+                                           ng-click="declineProjectRequest(invitation)"><?php _ehtml('Decline') ?></a>
                                     </div>
                                 </div>
                             </li>
@@ -87,60 +96,52 @@ require __DIR__ . '/header.php';
                                 <div class="w-clearfix card-notification notification-interaction-actions">
                                     <div class="notification-profile-image"></div>
                                     <div class="notification-detail">
-                                        <a style="font-weight:bold" href="{{invitation.user.url}}"
-                                           ng-bind="invitation.user.name"></a>
-                                        requested to join
-                                        <a style="font-weight:bold" href="{{invitation.organisation.url}}"
-                                           ng-bind="invitation.organisation.name"></a>
+                                        <?php echo sprintf(
+                                            __('% requested to join %'),
+                                            '<a style="font-weight:bold" href="{{invitation.user.url}}" ng-bind="invitation.user.name"></a>',
+                                            '<a style="font-weight:bold" href="{{invitation.organisation.url}}" ng-bind="invitation.organisation.name"></a>'
+                                        ) ?>
                                     </div>
                                     <div class="notification-interaction">
                                         <a class="w-button dsi-button notification-accept" href="#"
-                                           ng-click="approveOrganisationRequest(invitation)">Accept</a>
+                                           ng-click="approveOrganisationRequest(invitation)"><?php _ehtml('Accept') ?></a>
                                         <a class="w-button dsi-button notification-decline" href="#"
-                                           ng-click="declineOrganisationRequest(invitation)">Decline</a>
+                                           ng-click="declineOrganisationRequest(invitation)"><?php _ehtml('Decline') ?></a>
                                     </div>
                                 </div>
                             </li>
-                            <?php /*
-                            <li>
-                                <div class="w-clearfix card-notification" data-ix="notification-interaction">
-                                    <div class="notification-profile-image"></div>
-                                    <div class="notification-detail"><strong>Daniel Pettifer</strong>&nbsp;has removed
-                                        you
-                                        from <strong>DSI4EU</strong>
-                                    </div>
-                                    <div class="notification-interaction">
-                                        <a class="w-button dsi-button notification-decline" href="#">Dismiss</a>
-                                    </div>
-                                </div>
-                            </li>
-                            */ ?>
                         </ul>
                     </div>
                 </div>
                 <div class="w-col w-col-4 w-col-stack">
                     <div class="dashboard-widget">
-                        <h3 class="card-h3">Projects &amp; Organisations</h3>
+                        <h3 class="card-h3"><?php _ehtml('Projects & Organisations') ?></h3>
 
                         <?php if (count($projectsMember) == 0) { ?>
                             <div class="card-p notification-stat">
-                                You are not participating in any projects at the moment.
-                                You can create a new project, or request to join an exisiting project
+                                <?php _ehtml('You are not participating in any projects at the moment.') ?>
+                                <?php _ehtml('You can create a new project, or request to join an exisiting project') ?>
                             </div>
                             <div class="w-row create-or-join">
                                 <div class="w-col w-col-6">
-                                    <a class="w-button dsi-button create" href="#" data-ix="create-project-modal">Create
-                                        +</a>
+                                    <a class="w-button dsi-button create" href="#" data-ix="create-project-modal">
+                                        <?php _ehtml('Create +') ?></a>
                                 </div>
                                 <div class="w-col w-col-6">
                                     <a class="w-button dsi-button dash-join"
-                                       href="<?php echo $urlHandler->projects() ?>">Join</a>
+                                       href="<?php echo $urlHandler->projects() ?>"><?php _ehtml('Join') ?></a>
                                 </div>
                             </div>
                         <?php } else { ?>
                             <div class="card-p notification-stat">
-                                You are participating in <strong><?php echo count($projectsMember) ?> </strong>
-                                <?php echo count($projectsMember) == 1 ? 'project' : 'projects' ?>
+                                <?php if (count($projectsMember) == 1) {
+                                    _ehtml('You are participating in one project');
+                                } else {
+                                    echo sprintf(
+                                        __('You are participating in %s projects'),
+                                        '<strong>' . count($projectsMember) . '</strong>'
+                                    );
+                                } ?>
                             </div>
                             <ul class="w-list-unstyled">
                                 <?php foreach ($projectsMember AS $projectMember) { ?>
@@ -156,7 +157,7 @@ require __DIR__ . '/header.php';
                                                 <?php /* <a class="w-button dsi-button notification-decline" href="#">Delete</a> */ ?>
                                                 <a class="w-button dsi-button notification-view notification-project"
                                                    href="<?php echo $urlHandler->project($project) ?>">
-                                                    View
+                                                    <?php _ehtml('View') ?>
                                                 </a>
                                             </div>
                                         </div>
@@ -167,24 +168,29 @@ require __DIR__ . '/header.php';
 
                         <?php if (count($organisationsMember) == 0) { ?>
                             <div class="card-p notification-stat">
-                                You are not associated with any organisations at the moment.
-                                You can either create a new organisation, or request to become a member of an existing
-                                organisation
+                                <?php _ehtml('You are not associated with any organisations at the moment.') ?>
+                                <?php _ehtml('You can either create a new organisation, or request to become a member of an existing organisation.') ?>
                             </div>
                             <div class="w-row create-or-join">
                                 <div class="w-col w-col-6">
                                     <a class="w-button dsi-button create" href="#" data-ix="create-organisation-modal"
-                                       data-w-tab="Tab 2">Create +</a>
+                                       data-w-tab="Tab 2"><?php _ehtml('Create +') ?></a>
                                 </div>
                                 <div class="w-col w-col-6">
                                     <a class="w-button dsi-button dash-join"
-                                       href="<?php echo $urlHandler->organisations() ?>">Join</a>
+                                       href="<?php echo $urlHandler->organisations() ?>"><?php _ehtml('Join') ?></a>
                                 </div>
                             </div>
                         <?php } else { ?>
                             <div class="card-p notification-stat">
-                                You are a member of <strong><?php echo count($organisationsMember) ?></strong>
-                                <?php echo count($organisationsMember) == 1 ? 'organisation' : 'organisations' ?>
+                                <?php if (count($organisationsMember) == 1) {
+                                    _ehtml('You are a member of one organisation');
+                                } else {
+                                    echo sprintf(
+                                        __('You are a member of %s organisations'),
+                                        '<strong>' . count($organisationsMember) . '</strong>'
+                                    );
+                                } ?>
                             </div>
                             <ul class="w-list-unstyled">
                                 <?php foreach ($organisationsMember AS $organisationMember) { ?>
@@ -200,7 +206,7 @@ require __DIR__ . '/header.php';
                                                 <?php /* <a class="w-button dsi-button notification-decline" href="#">Delete</a> */ ?>
                                                 <a class="w-button dsi-button notification-view notification-project"
                                                    href="<?php echo $urlHandler->organisation($organisation) ?>">
-                                                    View
+                                                    <?php _ehtml('View') ?>
                                                 </a>
                                             </div>
                                         </div>
@@ -212,7 +218,7 @@ require __DIR__ . '/header.php';
                 </div>
                 <div class="w-col w-col-4 w-col-stack">
                     <div class="dashboard-widget">
-                        <h3 class="card-h3">Latest updates</h3>
+                        <h3 class="card-h3"><?php _ehtml('Latest updates')?></h3>
                         <ul class="w-list-unstyled">
                             <?php foreach ($latestStories AS $story) { ?>
                                 <li>
@@ -235,7 +241,7 @@ require __DIR__ . '/header.php';
                                         <div class="notification-interaction">
                                             <a class="w-button dsi-button notification-decline stop-following"
                                                href="<?php echo $urlHandler->blogPost($story) ?>" style="color:#18233f">
-                                                Read
+                                                <?php _ehtml('Read')?>
                                             </a>
                                         </div>
                                         <div
