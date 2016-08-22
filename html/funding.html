@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Last Published: Wed Aug 10 2016 12:01:48 GMT+0000 (UTC) -->
+<!-- Last Published: Mon Aug 22 2016 10:53:12 GMT+0000 (UTC) -->
 <html data-wf-page="577149898479866150f499c7" data-wf-site="56e2e31a1b1f8f784728a08c">
 <head>
   <meta charset="utf-8">
@@ -224,59 +224,54 @@
   <div class="body">
     <div class="container-wide content">
       <div class="w-row">
-        <div class="w-col w-col-4">
+        <div class="w-col w-col-4 w-col-stack">
           <div class="info-card">
             <h1 class="card-h1">Funding</h1>
             <p class="card-p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique</p>
             <p class="card-p question">Have you got funding to offer?</p>
             <p class="card-p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            <a class="read-more w-button" href="#">Offer funding</a>
-          </div>
-        </div>
-        <div class="w-col w-col-8">
-          <div class="filter info-card">
             <div class="w-form">
               <form data-name="Email Form 2" id="email-form-2" name="email-form-2">
-                <div class="w-row">
-                  <div class="w-col w-col-2">
-                    <h3 class="filter-h3">Filter by:</h3>
-                  </div>
-                  <div class="filter-country w-col w-col-3">
-                    <select class="country-filter w-select" data-name="country" id="country" name="country">
-                      <option value="">Available country</option>
-                      <option value="First">United kingdom</option>
-                      <option value="Second">France</option>
-                      <option value="Third">Germany</option>
-                    </select>
-                  </div>
-                  <div class="filter-month w-col w-col-4">
-                    <select class="month-filter w-select" data-name="Country 2" id="country-2" name="country-2">
-                      <option value="">Ends before month</option>
-                      <option value="First">January</option>
-                      <option value="Second">February</option>
-                      <option value="Third">March</option>
-                      <option value="">April</option>
-                      <option value="">May</option>
-                      <option value="">June</option>
-                      <option value="">July</option>
-                      <option value="">August</option>
-                      <option value="">September</option>
-                      <option value="">October</option>
-                      <option value="">November</option>
-                      <option value="">December</option>
-                    </select>
-                  </div>
-                  <div class="filter-year w-col w-col-3">
-                    <select class="w-select year-filter" data-name="Country 3" id="country-3" name="country-3">
-                      <option value="">year</option>
-                      <option value="First">2016</option>
-                      <option value="Second">2017</option>
-                      <option value="Third">2018</option>
-                      <option value="">2019</option>
-                      <option value="">2020</option>
-                    </select>
-                  </div>
-                </div>
+                <h3 class="filter-h3">Search funding opportunities</h3>
+                <input class="funding-filter w-input" data-name="Search" id="Search-2" maxlength="256" name="Search" placeholder="Search by keyword or content" required="required" type="text">
+                <h3 class="filter-h3">Filter by:</h3>
+                <select class="funding-filter w-select" data-name="Country 4" id="country-4" name="country-4">
+                  <option value="">Available country</option>
+                  <option value="First">United kingdom</option>
+                  <option value="Second">France</option>
+                  <option value="Third">Germany</option>
+                </select>
+                <select class="funding-filter w-select" data-name="Country 6" id="country-6" name="country-6">
+                  <option value="">year</option>
+                  <option value="First">2016</option>
+                  <option value="Second">2017</option>
+                  <option value="Third">2018</option>
+                  <option value="">2019</option>
+                  <option value="">2020</option>
+                </select>
+                <select class="funding-filter w-select" data-name="Country 5" id="country-5" name="country-5">
+                  <option value="">Ends before month</option>
+                  <option value="First">January</option>
+                  <option value="Second">February</option>
+                  <option value="Third">March</option>
+                  <option value="">April</option>
+                  <option value="">May</option>
+                  <option value="">June</option>
+                  <option value="">July</option>
+                  <option value="">August</option>
+                  <option value="">September</option>
+                  <option value="">October</option>
+                  <option value="">November</option>
+                  <option value="">December</option>
+                </select>
+                <select class="funding-filter w-select" data-name="funding source" id="funding-source-2" name="funding-source">
+                  <option value="">Funding source</option>
+                  <option value="First">2016</option>
+                  <option value="Second">2017</option>
+                  <option value="Third">2018</option>
+                  <option value="">2019</option>
+                  <option value="">2020</option>
+                </select>
               </form>
               <div class="w-form-done">
                 <div>Thank you! Your submission has been received!</div>
@@ -286,11 +281,15 @@
               </div>
             </div>
           </div>
+        </div>
+        <div class="w-col w-col-8 w-col-stack">
           <div class="info-card">
             <h2 class="funding-card-h2">{{title.Call for proposals to develop an online tool enabling the tracking of language versions of films}}</h2>
             <p class="funding-descr">{{descr.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.}}</p>
             <div class="funding-closing-date"><strong>Closing date:</strong> {{27th September 2017}}</div>
             <a class="read-more w-button" href="#">Read more</a>
+            <div class="funding-country funding-new">New funding opportunity</div>
+            <div class="funding-country funding-source">Funding source</div>
             <div class="funding-country">{{country.England}}</div>
           </div>
           <div class="info-card">
