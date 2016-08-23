@@ -3,11 +3,8 @@
 namespace DSI\UseCase;
 
 use DSI\Entity\UserLink;
-use DSI\Entity\UserSkill;
-use DSI\Repository\SkillRepository;
 use DSI\Repository\UserLinkRepository;
 use DSI\Repository\UserRepository;
-use DSI\Repository\UserSkillRepository;
 use DSI\Service\ErrorHandler;
 
 class AddLinkToUser

@@ -2,15 +2,13 @@
 
 namespace DSI\Controller;
 
-use DSI\Entity\Project;
-use DSI\Repository\ProjectRepositoryInAPC;
 use DSI\Repository\UserRepository;
 use DSI\Service\Auth;
 use DSI\Service\URL;
 
-class ProjectsController
+class FundingController
 {
-    public $responseFormat = 'html';
+    public $format = 'html';
 
     public function exec()
     {
@@ -21,7 +19,8 @@ class ProjectsController
         else
             $loggedInUser = null;
 
-        if ($this->responseFormat == 'json') {
+        if ($this->format == 'json') {
+            /*
             // (new CountryRegionRepository())->getAll();
             $projectRepositoryInAPC = new ProjectRepositoryInAPC();
             echo json_encode(array_map(function (Project $project) use ($urlHandler) {
@@ -36,9 +35,10 @@ class ProjectsController
                     'organisationsCount' => $project->getOrganisationsCount(),
                 ];
             }, $projectRepositoryInAPC->getAll()));
+            */
         } else {
-            $pageTitle = 'Projects';
-            require __DIR__ . '/../../../www/projects.php';
+            $pageTitle = 'Funding Opportunities';
+            require __DIR__ . '/../../../www/funding.php';
         }
     }
 }

@@ -119,6 +119,14 @@ class Funding
     }
 
     /**
+     * @return bool
+     */
+    public function isNew(): bool
+    {
+        return (bool)(strtotime($this->closingDate) > (time() - 60 * 60 * 24 * 7));
+    }
+
+    /**
      * @return string
      */
     public function getClosingDate(): string

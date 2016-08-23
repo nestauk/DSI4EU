@@ -103,4 +103,24 @@ class FundingTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->country->getId(), $this->funding->getCountryID());
         $this->assertEquals($this->country->getName(), $this->funding->getCountryName());
     }
+
+    /** @test */
+    public function canCheckIfIsNew()
+    {
+        $this->funding->setClosingDate(date('Y-m-d', $this->daysAgo(6)));
+        $this->assertTrue($this->funding->isNew());
+
+        $this->funding->setClosingDate(date('Y-m-d', $this->daysAgo(8)));
+        $this->assertFalse($this->funding->isNew());
+    }
+
+    /**
+     * @param int $days
+     * @return int
+     */
+    private function daysAgo($days)
+    {
+        $daysAgo = time() - 60 * 60 * 24 * $days;
+        return $daysAgo;
+    }
 }
