@@ -83,6 +83,23 @@ class FundingTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
+    public function settingTimeCreated_returnsTimeCreated()
+    {
+        $this->assertEquals('', $this->funding->getTimeCreated());
+
+        $timeCreated = '2016-10-12 11:05:34';
+        $this->funding->setTimeCreated($timeCreated);
+        $this->assertEquals($timeCreated, $this->funding->getTimeCreated());
+    }
+
+    /** @test */
+    public function settingEmptyTimeCreated_returnsEmptyTimeCreated()
+    {
+        $this->funding->setTimeCreated('0000-00-00 00:00:00');
+        $this->assertEquals('', $this->funding->getTimeCreated());
+    }
+
+    /** @test */
     public function settingEmptyClosingDate_returnsEmptyClosingDate()
     {
         $this->funding->setClosingDate('0000-00-00');
@@ -107,10 +124,10 @@ class FundingTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function canCheckIfIsNew()
     {
-        $this->funding->setClosingDate(date('Y-m-d', $this->daysAgo(6)));
+        $this->funding->setTimeCreated(date('Y-m-d', $this->daysAgo(6)));
         $this->assertTrue($this->funding->isNew());
 
-        $this->funding->setClosingDate(date('Y-m-d', $this->daysAgo(8)));
+        $this->funding->setTimeCreated(date('Y-m-d', $this->daysAgo(8)));
         $this->assertFalse($this->funding->isNew());
     }
 

@@ -3,6 +3,7 @@
 namespace DSI\Repository;
 
 use DSI\DuplicateEntry;
+use DSI\Entity\User;
 use DSI\Entity\UserLanguage;
 use DSI\NotFound;
 use DSI\Service\SQL;

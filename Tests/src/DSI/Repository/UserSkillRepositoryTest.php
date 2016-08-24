@@ -43,88 +43,53 @@ class UserSkillRepositoryTest extends PHPUnit_Framework_TestCase
     /** @test saveAsNew */
     public function userSkillCanBeSaved()
     {
-        $userSkill = new \DSI\Entity\UserSkill();
-        $userSkill->setUser($this->user_1);
-        $userSkill->setSkill($this->skill_1);
-        $this->userSkillRepo->add($userSkill);
+        $this->addSkillToUser($this->skill_1, $this->user_1);
+        $this->addSkillToUser($this->skill_2, $this->user_1);
+        $this->addSkillToUser($this->skill_1, $this->user_2);
+        $this->addSkillToUser($this->skill_1, $this->user_3);
 
-        $userSkill = new \DSI\Entity\UserSkill();
-        $userSkill->setUser($this->user_1);
-        $userSkill->setSkill($this->skill_2);
-        $this->userSkillRepo->add($userSkill);
-
-        $userSkill = new \DSI\Entity\UserSkill();
-        $userSkill->setUser($this->user_2);
-        $userSkill->setSkill($this->skill_1);
-        $this->userSkillRepo->add($userSkill);
-
-        $userSkill = new \DSI\Entity\UserSkill();
-        $userSkill->setUser($this->user_3);
-        $userSkill->setSkill($this->skill_1);
-        $this->userSkillRepo->add($userSkill);
-
-        $this->assertCount(2, $this->userSkillRepo->getByUserID(1));
+        $this->assertCount(2, $this->userSkillRepo->getByUserID($this->user_1->getId()));
+        $this->assertCount(1, $this->userSkillRepo->getByUserID($this->user_2->getId()));
+        $this->assertCount(1, $this->userSkillRepo->getByUserID($this->user_3->getId()));
     }
 
     /** @test saveAsNew */
     public function cannotAddSameUserSkillTwice()
     {
-        $userSkill = new \DSI\Entity\UserSkill();
-        $userSkill->setUser($this->user_1);
-        $userSkill->setSkill($this->skill_1);
-        $this->userSkillRepo->add($userSkill);
-
-        $userSkill = new \DSI\Entity\UserSkill();
-        $userSkill->setUser($this->user_1);
-        $userSkill->setSkill($this->skill_1);
+        $this->addSkillToUser($this->skill_1, $this->user_1);
         $this->setExpectedException(\DSI\DuplicateEntry::class);
-        $this->userSkillRepo->add($userSkill);
+        $this->addSkillToUser($this->skill_1, $this->user_1);
     }
 
     /** @test saveAsNew */
     public function getAllSkillIDsForUser()
     {
-        $userSkill = new \DSI\Entity\UserSkill();
-        $userSkill->setUser($this->user_1);
-        $userSkill->setSkill($this->skill_1);
-        $this->userSkillRepo->add($userSkill);
+        $this->addSkillToUser($this->skill_1, $this->user_1);
+        $this->addSkillToUser($this->skill_2, $this->user_1);
+        $this->addSkillToUser($this->skill_1, $this->user_2);
+        $this->addSkillToUser($this->skill_2, $this->user_3);
 
-        $userSkill = new \DSI\Entity\UserSkill();
-        $userSkill->setUser($this->user_1);
-        $userSkill->setSkill($this->skill_2);
-        $this->userSkillRepo->add($userSkill);
-
-        $this->assertEquals([1, 2], $this->userSkillRepo->getSkillIDsForUser(1));
+        $this->assertEquals([
+            $this->skill_1->getId(), $this->skill_2->getId()
+        ], $this->userSkillRepo->getSkillIDsForUser(
+            $this->user_1->getId()
+        ));
     }
 
     /** @test saveAsNew */
     public function getAllUsersForSkill()
     {
-        $userSkill = new \DSI\Entity\UserSkill();
-        $userSkill->setUser($this->user_1);
-        $userSkill->setSkill($this->skill_1);
-        $this->userSkillRepo->add($userSkill);
+        $this->addSkillToUser($this->skill_1, $this->user_1);
+        $this->addSkillToUser($this->skill_1, $this->user_2);
 
-        $userSkill = new \DSI\Entity\UserSkill();
-        $userSkill->setUser($this->user_2);
-        $userSkill->setSkill($this->skill_1);
-        $this->userSkillRepo->add($userSkill);
-
-        $this->assertCount(2, $this->userSkillRepo->getBySkillID(1));
+        $this->assertCount(2, $this->userSkillRepo->getBySkillID($this->skill_1->getId()));
     }
 
     /** @test saveAsNew */
     public function getAllUserIDsForSkill()
     {
-        $userSkill = new \DSI\Entity\UserSkill();
-        $userSkill->setUser($this->user_1);
-        $userSkill->setSkill($this->skill_1);
-        $this->userSkillRepo->add($userSkill);
-
-        $userSkill = new \DSI\Entity\UserSkill();
-        $userSkill->setUser($this->user_2);
-        $userSkill->setSkill($this->skill_1);
-        $this->userSkillRepo->add($userSkill);
+        $this->addSkillToUser($this->skill_1, $this->user_1);
+        $this->addSkillToUser($this->skill_1, $this->user_2);
 
         $this->assertEquals([1, 2], $this->userSkillRepo->getUserIDsForSkill(1));
     }
@@ -132,15 +97,8 @@ class UserSkillRepositoryTest extends PHPUnit_Framework_TestCase
     /** @test saveAsNew */
     public function canCheckIfUserHasSkillName()
     {
-        $userSkill = new \DSI\Entity\UserSkill();
-        $userSkill->setUser($this->user_1);
-        $userSkill->setSkill($this->skill_1);
-        $this->userSkillRepo->add($userSkill);
-
-        $userSkill = new \DSI\Entity\UserSkill();
-        $userSkill->setUser($this->user_2);
-        $userSkill->setSkill($this->skill_2);
-        $this->userSkillRepo->add($userSkill);
+        $this->addSkillToUser($this->skill_1, $this->user_1);
+        $this->addSkillToUser($this->skill_2, $this->user_2);
 
         $this->assertTrue($this->userSkillRepo->userHasSkillName(
             $this->user_1->getId(), $this->skill_1->getName())
@@ -159,20 +117,9 @@ class UserSkillRepositoryTest extends PHPUnit_Framework_TestCase
     /** @test saveAsNew */
     public function canGetSkillNamesByUserID()
     {
-        $userSkill = new \DSI\Entity\UserSkill();
-        $userSkill->setUser($this->user_1);
-        $userSkill->setSkill($this->skill_1);
-        $this->userSkillRepo->add($userSkill);
-
-        $userSkill = new \DSI\Entity\UserSkill();
-        $userSkill->setUser($this->user_1);
-        $userSkill->setSkill($this->skill_2);
-        $this->userSkillRepo->add($userSkill);
-
-        $userSkill = new \DSI\Entity\UserSkill();
-        $userSkill->setUser($this->user_2);
-        $userSkill->setSkill($this->skill_3);
-        $this->userSkillRepo->add($userSkill);
+        $this->addSkillToUser($this->skill_1, $this->user_1);
+        $this->addSkillToUser($this->skill_2, $this->user_1);
+        $this->addSkillToUser($this->skill_3, $this->user_2);
 
         $this->assertEquals(
             [$this->skill_1->getName(), $this->skill_2->getName()],
@@ -182,6 +129,27 @@ class UserSkillRepositoryTest extends PHPUnit_Framework_TestCase
             [$this->skill_3->getName()],
             $this->userSkillRepo->getSkillsNameByUserID($this->user_2->getId())
         );
+    }
+
+    /** @test saveAsNew */
+    public function canRemoveSkillFromUser()
+    {
+        $this->addSkillToUser($this->skill_1, $this->user_1);
+        $this->addSkillToUser($this->skill_2, $this->user_1);
+        $this->addSkillToUser($this->skill_3, $this->user_1);
+
+        $this->assertCount(3, $this->userSkillRepo->getByUserID($this->user_1->getId()));
+
+        $this->removeSkillFromUser($this->skill_3, $this->user_1);
+
+        $this->assertCount(2, $this->userSkillRepo->getByUserID($this->user_1->getId()));
+    }
+
+    /** @test saveAsNew */
+    public function cannotRemoveNonexistentSkillFromUser()
+    {
+        $this->setExpectedException(\DSI\NotFound::class);
+        $this->removeSkillFromUser($this->skill_1, $this->user_1);
     }
 
 
@@ -200,5 +168,31 @@ class UserSkillRepositoryTest extends PHPUnit_Framework_TestCase
         $skill->setName('skill-' . $skillID);
         $this->skillRepo->saveAsNew($skill);
         return $skill;
+    }
+
+    /**
+     * @param $skill
+     * @param $user
+     * @return \DSI\Entity\UserSkill
+     */
+    private function addSkillToUser($skill, $user)
+    {
+        $userSkill = new \DSI\Entity\UserSkill();
+        $userSkill->setSkill($skill);
+        $userSkill->setUser($user);
+        $this->userSkillRepo->add($userSkill);
+    }
+
+    /**
+     * @param $skill
+     * @param $user
+     * @return \DSI\Entity\UserSkill
+     */
+    private function removeSkillFromUser($skill, $user)
+    {
+        $userSkill = new \DSI\Entity\UserSkill();
+        $userSkill->setSkill($skill);
+        $userSkill->setUser($user);
+        $this->userSkillRepo->remove($userSkill);
     }
 }

@@ -67,6 +67,10 @@ class FundingRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($closingDate, $funding->getClosingDate());
         $this->assertEquals($this->fundingSource->getId(), $funding->getFundingSourceID());
         $this->assertEquals($this->country->getId(), $funding->getCountryID());
+
+        $this->assertNotEquals('0000-00-00 00:00:00', $funding->getTimeCreated());
+        $this->assertNotEmpty($funding->getTimeCreated());
+        $this->assertRegExp('<^\d{4}\-\d{2}\-\d{2} \d{2}:\d{2}:\d{2}$>', $funding->getTimeCreated());
     }
 
     /** @test getByID */
@@ -121,5 +125,9 @@ class FundingRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($closingDate, $funding->getClosingDate());
         $this->assertEquals($this->fundingSource->getId(), $funding->getFundingSourceID());
         $this->assertEquals($this->country->getId(), $funding->getCountryID());
+
+        $this->assertNotEquals('0000-00-00 00:00:00', $funding->getTimeCreated());
+        $this->assertNotEmpty($funding->getTimeCreated());
+        $this->assertRegExp('<^\d{4}\-\d{2}\-\d{2} \d{2}:\d{2}:\d{2}$>', $funding->getTimeCreated());
     }
 }

@@ -86,7 +86,7 @@ class FundingRepository
     {
         $fundings = [];
         $query = new SQL("SELECT 
-            id, title, url, description, closingDate, fundingSourceID, countryID
+            id, title, url, description, closingDate, fundingSourceID, countryID, timeCreated
           FROM `{$this->dbTable}` WHERE " . implode(' AND ', $where) . "");
         foreach ($query->fetch_all() AS $dbFunding) {
             $funding = new Funding();
@@ -103,6 +103,7 @@ class FundingRepository
                 $funding->setCountry(
                     (new CountryRepository())->getById($dbFunding['countryID'])
                 );
+            $funding->setTimeCreated($dbFunding['timeCreated']);
             $fundings[] = $funding;
         }
         return $fundings;

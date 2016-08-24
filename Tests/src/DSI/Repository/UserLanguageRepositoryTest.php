@@ -43,56 +43,29 @@ class UserLanguageRepositoryTest extends PHPUnit_Framework_TestCase
     /** @test saveAsNew */
     public function userLanguageCanBeSaved()
     {
-        $userLanguage = new \DSI\Entity\UserLanguage();
-        $userLanguage->setUser($this->user_1);
-        $userLanguage->setLanguage($this->language_1);
-        $this->userLanguageRepo->add($userLanguage);
+        $this->addLanguageToUser($this->language_1, $this->user_1);
+        $this->addLanguageToUser($this->language_2, $this->user_1);
+        $this->addLanguageToUser($this->language_1, $this->user_2);
+        $this->addLanguageToUser($this->language_1, $this->user_3);
 
-        $userLanguage = new \DSI\Entity\UserLanguage();
-        $userLanguage->setUser($this->user_1);
-        $userLanguage->setLanguage($this->language_2);
-        $this->userLanguageRepo->add($userLanguage);
-
-        $userLanguage = new \DSI\Entity\UserLanguage();
-        $userLanguage->setUser($this->user_2);
-        $userLanguage->setLanguage($this->language_1);
-        $this->userLanguageRepo->add($userLanguage);
-
-        $userLanguage = new \DSI\Entity\UserLanguage();
-        $userLanguage->setUser($this->user_3);
-        $userLanguage->setLanguage($this->language_1);
-        $this->userLanguageRepo->add($userLanguage);
-
-        $this->assertCount(2, $this->userLanguageRepo->getByUserID(1));
+        $this->assertCount(2, $this->userLanguageRepo->getByUserID($this->user_1->getId()));
+        $this->assertCount(1, $this->userLanguageRepo->getByUserID($this->user_2->getId()));
+        $this->assertCount(1, $this->userLanguageRepo->getByUserID($this->user_3->getId()));
     }
 
     /** @test saveAsNew */
     public function cannotAddSameUserLanguageTwice()
     {
-        $userLanguage = new \DSI\Entity\UserLanguage();
-        $userLanguage->setUser($this->user_1);
-        $userLanguage->setLanguage($this->language_1);
-        $this->userLanguageRepo->add($userLanguage);
-
-        $userLanguage = new \DSI\Entity\UserLanguage();
-        $userLanguage->setUser($this->user_1);
-        $userLanguage->setLanguage($this->language_1);
+        $this->addLanguageToUser($this->language_1, $this->user_1);
         $this->setExpectedException(\DSI\DuplicateEntry::class);
-        $this->userLanguageRepo->add($userLanguage);
+        $this->addLanguageToUser($this->language_1, $this->user_1);
     }
 
     /** @test saveAsNew */
     public function getAllLanguageIDsForUser()
     {
-        $userLanguage = new \DSI\Entity\UserLanguage();
-        $userLanguage->setUser($this->user_1);
-        $userLanguage->setLanguage($this->language_1);
-        $this->userLanguageRepo->add($userLanguage);
-
-        $userLanguage = new \DSI\Entity\UserLanguage();
-        $userLanguage->setUser($this->user_1);
-        $userLanguage->setLanguage($this->language_2);
-        $this->userLanguageRepo->add($userLanguage);
+        $this->addLanguageToUser($this->language_1, $this->user_1);
+        $this->addLanguageToUser($this->language_2, $this->user_1);
 
         $this->assertEquals([1, 2], $this->userLanguageRepo->getLanguageIDsForUser(1));
     }
@@ -100,15 +73,8 @@ class UserLanguageRepositoryTest extends PHPUnit_Framework_TestCase
     /** @test saveAsNew */
     public function getAllUsersForLanguage()
     {
-        $userLanguage = new \DSI\Entity\UserLanguage();
-        $userLanguage->setUser($this->user_1);
-        $userLanguage->setLanguage($this->language_1);
-        $this->userLanguageRepo->add($userLanguage);
-
-        $userLanguage = new \DSI\Entity\UserLanguage();
-        $userLanguage->setUser($this->user_2);
-        $userLanguage->setLanguage($this->language_1);
-        $this->userLanguageRepo->add($userLanguage);
+        $this->addLanguageToUser($this->language_1, $this->user_1);
+        $this->addLanguageToUser($this->language_1, $this->user_2);
 
         $this->assertCount(2, $this->userLanguageRepo->getByLanguageID(1));
     }
@@ -116,15 +82,8 @@ class UserLanguageRepositoryTest extends PHPUnit_Framework_TestCase
     /** @test saveAsNew */
     public function getAllUserIDsForLanguage()
     {
-        $userLanguage = new \DSI\Entity\UserLanguage();
-        $userLanguage->setUser($this->user_1);
-        $userLanguage->setLanguage($this->language_1);
-        $this->userLanguageRepo->add($userLanguage);
-
-        $userLanguage = new \DSI\Entity\UserLanguage();
-        $userLanguage->setUser($this->user_2);
-        $userLanguage->setLanguage($this->language_1);
-        $this->userLanguageRepo->add($userLanguage);
+        $this->addLanguageToUser($this->language_1, $this->user_1);
+        $this->addLanguageToUser($this->language_1, $this->user_2);
 
         $this->assertEquals([1, 2], $this->userLanguageRepo->getUserIDsForLanguage(1));
     }
@@ -132,15 +91,8 @@ class UserLanguageRepositoryTest extends PHPUnit_Framework_TestCase
     /** @test saveAsNew */
     public function canCheckIfUserHasLanguageName()
     {
-        $userLanguage = new \DSI\Entity\UserLanguage();
-        $userLanguage->setUser($this->user_1);
-        $userLanguage->setLanguage($this->language_1);
-        $this->userLanguageRepo->add($userLanguage);
-
-        $userLanguage = new \DSI\Entity\UserLanguage();
-        $userLanguage->setUser($this->user_2);
-        $userLanguage->setLanguage($this->language_2);
-        $this->userLanguageRepo->add($userLanguage);
+        $this->addLanguageToUser($this->language_1, $this->user_1);
+        $this->addLanguageToUser($this->language_2, $this->user_2);
 
         $this->assertTrue($this->userLanguageRepo->userHasLanguageName(
             $this->user_1->getId(), $this->language_1->getName())
@@ -159,20 +111,9 @@ class UserLanguageRepositoryTest extends PHPUnit_Framework_TestCase
     /** @test saveAsNew */
     public function canGetLanguageNamesByUserID()
     {
-        $userLanguage = new \DSI\Entity\UserLanguage();
-        $userLanguage->setUser($this->user_1);
-        $userLanguage->setLanguage($this->language_1);
-        $this->userLanguageRepo->add($userLanguage);
-
-        $userLanguage = new \DSI\Entity\UserLanguage();
-        $userLanguage->setUser($this->user_1);
-        $userLanguage->setLanguage($this->language_2);
-        $this->userLanguageRepo->add($userLanguage);
-
-        $userLanguage = new \DSI\Entity\UserLanguage();
-        $userLanguage->setUser($this->user_2);
-        $userLanguage->setLanguage($this->language_3);
-        $this->userLanguageRepo->add($userLanguage);
+        $this->addLanguageToUser($this->language_1, $this->user_1);
+        $this->addLanguageToUser($this->language_2, $this->user_1);
+        $this->addLanguageToUser($this->language_3, $this->user_2);
 
         $this->assertEquals(
             [$this->language_1->getName(), $this->language_2->getName()],
@@ -182,6 +123,27 @@ class UserLanguageRepositoryTest extends PHPUnit_Framework_TestCase
             [$this->language_3->getName()],
             $this->userLanguageRepo->getLanguagesNameByUserID($this->user_2->getId())
         );
+    }
+
+    /** @test */
+    public function canRemoveLanguageFromUser()
+    {
+        $this->addLanguageToUser($this->language_1, $this->user_1);
+        $this->addLanguageToUser($this->language_2, $this->user_1);
+        $this->addLanguageToUser($this->language_3, $this->user_1);
+
+        $this->assertCount(3, $this->userLanguageRepo->getByUserID($this->user_1->getId()));
+
+        $this->removeLanguageFromUser($this->language_3, $this->user_1);
+
+        $this->assertCount(2, $this->userLanguageRepo->getByUserID($this->user_1->getId()));
+    }
+
+    /** @test */
+    public function cannotRemoveNonexistentLanguageFromUser()
+    {
+        $this->setExpectedException(\DSI\NotFound::class);
+        $this->removeLanguageFromUser($this->language_3, $this->user_1);
     }
 
 
@@ -200,5 +162,29 @@ class UserLanguageRepositoryTest extends PHPUnit_Framework_TestCase
         $language->setName('language-' . $languageID);
         $this->languageRepo->saveAsNew($language);
         return $language;
+    }
+
+    /**
+     * @param $language
+     * @param $user
+     */
+    private function addLanguageToUser($language, $user)
+    {
+        $userLanguage = new \DSI\Entity\UserLanguage();
+        $userLanguage->setLanguage($language);
+        $userLanguage->setUser($user);
+        $this->userLanguageRepo->add($userLanguage);
+    }
+
+    /**
+     * @param $language
+     * @param $user
+     */
+    private function removeLanguageFromUser($language, $user)
+    {
+        $userLanguage = new \DSI\Entity\UserLanguage();
+        $userLanguage->setLanguage($language);
+        $userLanguage->setUser($user);
+        $this->userLanguageRepo->remove($userLanguage);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace DSI\Entity;
 
-class Funding
+class Event
 {
     /** @var integer */
     private $id;
@@ -10,15 +10,14 @@ class Funding
     /** @var string */
     private $title,
         $url,
+        $shortDescription,
         $description,
         $timeCreated,
-        $closingDate;
+        $startDate,
+        $endDate;
 
-    /** @var FundingSource */
-    private $fundingSource;
-
-    /** @var Country */
-    private $country;
+    /** @var CountryRegion */
+    private $region;
 
     /**
      * @return int
@@ -58,6 +57,22 @@ class Funding
     /**
      * @return string
      */
+    public function getShortDescription(): string
+    {
+        return (string)$this->shortDescription;
+    }
+
+    /**
+     * @param string $shortDescription
+     */
+    public function setShortDescription(string $shortDescription)
+    {
+        $this->shortDescription = $shortDescription;
+    }
+
+    /**
+     * @return string
+     */
     public function getDescription(): string
     {
         return (string)$this->description;
@@ -72,35 +87,35 @@ class Funding
     }
 
     /**
-     * @return Country
+     * @return CountryRegion
      */
-    public function getCountry()
+    public function getRegion()
     {
-        return $this->country;
+        return $this->region;
     }
 
     /**
      * @return string
      */
-    public function getCountryName()
+    public function getRegionName()
     {
-        return $this->country ? $this->country->getName() : '';
+        return $this->region ? $this->region->getName() : '';
     }
 
     /**
      * @return int
      */
-    public function getCountryID()
+    public function getRegionID()
     {
-        return $this->getCountry() ? $this->getCountry()->getId() : 0;
+        return $this->getRegion() ? $this->getRegion()->getId() : 0;
     }
 
     /**
-     * @param Country $country
+     * @param CountryRegion $countryRegion
      */
-    public function setCountry(Country $country)
+    public function setRegion(CountryRegion $countryRegion)
     {
-        $this->country = $country;
+        $this->region = $countryRegion;
     }
 
     /**
@@ -130,19 +145,37 @@ class Funding
     /**
      * @return string
      */
-    public function getClosingDate(): string
+    public function getStartDate(): string
     {
-        return (string)$this->closingDate;
+        return (string)$this->startDate;
     }
 
     /**
-     * @param string $closingDate
+     * @param string $startDate
      */
-    public function setClosingDate($closingDate)
+    public function setStartDate($startDate)
     {
-        if ($closingDate == '0000-00-00')
-            $closingDate = '';
-        $this->closingDate = (string)$closingDate;
+        if ($startDate == '0000-00-00')
+            $startDate = '';
+        $this->startDate = (string)$startDate;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEndDate(): string
+    {
+        return (string)$this->endDate;
+    }
+
+    /**
+     * @param string $endDate
+     */
+    public function setEndDate($endDate)
+    {
+        if ($endDate == '0000-00-00')
+            $endDate = '';
+        $this->endDate = (string)$endDate;
     }
 
     /**
@@ -162,29 +195,5 @@ class Funding
             $timeCreated = '';
 
         $this->timeCreated = $timeCreated;
-    }
-
-    /**
-     * @return FundingSource
-     */
-    public function getFundingSource(): FundingSource
-    {
-        return $this->fundingSource;
-    }
-
-    /**
-     * @return int
-     */
-    public function getFundingSourceID(): int
-    {
-        return $this->fundingSource ? $this->fundingSource->getId() : 0;
-    }
-
-    /**
-     * @param FundingSource $fundingSource
-     */
-    public function setFundingSource(FundingSource $fundingSource)
-    {
-        $this->fundingSource = $fundingSource;
     }
 }
