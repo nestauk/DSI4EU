@@ -3107,7 +3107,7 @@ strong {
   padding-bottom: 20px;
   border-style: none;
   border-radius: 3px;
-  background-color: #fff;
+  background-color: #f3f3f3;
   font-family: 'Open Sans', sans-serif;
 }
 
@@ -5377,6 +5377,7 @@ strong {
 
 .funding-closing-date {
   margin-right: 20px;
+  margin-bottom: 10px;
   margin-left: 20px;
 }
 
@@ -5424,6 +5425,14 @@ strong {
   bottom: 0px;
 }
 
+.funding-country.full {
+  padding-top: 10px;
+  padding-right: 20px;
+  font-size: 14px;
+  line-height: 18px;
+  text-align: right;
+}
+
 .card-h1 {
   margin-top: 10px;
   padding-right: 20px;
@@ -5432,6 +5441,7 @@ strong {
 }
 
 .filter-h3 {
+  display: inline-block;
   margin-top: 10px;
   padding-left: 20px;
 }
@@ -5775,6 +5785,36 @@ strong {
 .hero-sub-header {
   max-width: 70%;
   margin-left: 75px;
+}
+
+.sorting {
+  display: none;
+  height: 75px;
+  margin-bottom: 20px;
+  padding-top: 10px;
+  padding-right: 20px;
+  background-color: #f3f3f3;
+}
+
+.sorting-button {
+  position: relative;
+  top: 10px;
+  display: inline;
+  float: right;
+  background-color: transparent;
+  font-family: 'Open Sans', sans-serif;
+  color: #000;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.sorting-button:hover {
+  border-radius: 3px;
+  background-color: #e0e0e0;
+}
+
+.back-link {
+  margin-left: 20px;
 }
 
 html.w-mod-js *[data-ix="pin-drop"] {
@@ -6672,6 +6712,7 @@ html.w-mod-js *[data-ix="growdown"] {
     padding: 10px;
   }
   .funding-card-h2 {
+    margin-top: 100px;
     font-size: 20px;
   }
   .funding-filter {

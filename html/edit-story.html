@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Last Published: Tue Aug 23 2016 14:38:28 GMT+0000 (UTC) -->
+<!-- Last Published: Wed Aug 24 2016 09:40:46 GMT+0000 (UTC) -->
 <html data-wf-page="577149898479866150f499d1" data-wf-site="56e2e31a1b1f8f784728a08c">
 <head>
   <meta charset="utf-8">
@@ -148,7 +148,7 @@
   </div>
   <div class="page-header">
     <div class="container-wide header">
-      <h1 class="light page-h1">Edit story</h1>
+      <h1 class="light page-h1">Add Event</h1>
     </div>
   </div>
   <div class="container-wide">
@@ -157,29 +157,61 @@
         <form class="w-clearfix" data-name="Email Form 2" id="email-form-2" name="email-form-2">
           <div class="w-row">
             <div class="w-col w-col-6">
-              <label class="story-label" for="Title">Title</label>
+              <h2>About your event</h2>
+              <label class="story-label" for="Title">Event title</label>
               <input class="story-form w-input" data-name="Title 2" id="Title-2" maxlength="256" name="Title-2" placeholder="Add the title of your story" type="text">
-              <label class="story-label" for="published-on">Published on</label>
-              <input class="story-form w-input" data-name="published on" id="published-on" maxlength="256" name="published-on" placeholder="Add the date picker here" type="text">
-              <label class="story-label" for="Title">Card grid image</label>
-              <img class="story-image-upload" src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg">
-              <a class="dsi-button story-image-upload w-button" href="#">Upload image</a>
-              <label class="story-label" for="Title">Main story image</label>
-              <img class="story-image-upload story-image-upload-large" src="images/brussels-locations.jpg">
-              <a class="dsi-button story-image-upload w-button" href="#">Upload image</a>
-              <label class="story-label" for="Story-wysiwyg">Categories</label>
+              <label class="story-label" for="short-description">Short description</label>
+              <textarea class="story-form w-input" data-name="short description" id="short-description" maxlength="5000" name="short-description" placeholder="Short description"></textarea>
+              <label class="story-label" for="short-description-2">Long description</label>
+              <textarea class="story-form w-input" data-name="Short Description 2" id="short-description-2" maxlength="5000" name="short-description-2" placeholder="Short description"></textarea>
+              <label class="story-label" for="Story-wysiwyg">Type of event</label>
               <div class="w-checkbox">
                 <input class="w-checkbox-input" data-name="Checkbox" id="checkbox" name="checkbox" type="checkbox">
-                <label class="w-form-label" for="checkbox">News</label>
+                <label class="w-form-label" for="checkbox">Type 1</label>
+              </div>
+              <div class="w-checkbox">
+                <input class="w-checkbox-input" data-name="Checkbox 7" id="checkbox-7" name="checkbox-7" type="checkbox">
+                <label class="w-form-label" for="checkbox-7">Type 2</label>
+              </div>
+              <div class="w-checkbox">
+                <input class="w-checkbox-input" data-name="Checkbox 6" id="checkbox-6" name="checkbox-6" type="checkbox">
+                <label class="w-form-label" for="checkbox-6">Type 3</label>
               </div>
               <div class="w-checkbox">
                 <input class="w-checkbox-input" data-name="Checkbox 3" id="checkbox-3" name="checkbox-3" type="checkbox">
-                <label class="w-form-label" for="checkbox-3">Events</label>
+                <label class="w-form-label" for="checkbox-3">Type 4</label>
               </div>
+              <h2>When is your event?</h2>
+              <label class="story-label" for="published-on">Event starts</label>
+              <input class="story-form w-input" data-name="published on" id="published-on" maxlength="256" name="published-on" placeholder="Add the date picker here" type="text">
+              <label class="story-label" for="published-on-2">Event ends</label>
+              <input class="story-form w-input" data-name="Published On 2" id="published-on-2" maxlength="256" name="published-on-2" placeholder="Add the date picker here" type="text">
+              <h2>Where is your event?</h2>
+              <label class="story-label" for="published-on-3">Event Country</label>
+              <input class="story-form w-input" data-name="Published On 3" id="published-on-3" maxlength="256" name="published-on-3" placeholder="Add the address" type="text">
+              <label class="story-label" for="published-on-8">Event City</label>
+              <input class="story-form w-input" data-name="Published On 8" id="published-on-8" maxlength="256" name="published-on-8" placeholder="Add the address" type="text">
+              <label class="story-label" for="published-on-9">Event Street address</label>
+              <input class="story-form w-input" data-name="Published On 9" id="published-on-9" maxlength="256" name="published-on-9" placeholder="Add the address" type="text">
+              <label class="story-label" for="published-on-10">Building name/number</label>
+              <input class="story-form w-input" data-name="Published On 10" id="published-on-10" maxlength="256" name="published-on-10" placeholder="Add the address" type="text">
+              <label class="story-label" for="published-on-11">Post code</label>
+              <input class="story-form w-input" data-name="Published On 11" id="published-on-11" maxlength="256" name="published-on-11" placeholder="Add the address" type="text">
             </div>
             <div class="w-col w-col-6">
-              <label class="story-label" for="Story-wysiwyg">Your story</label>
-              <textarea class="story-form w-input" data-name="Story wysiwyg" id="Story-wysiwyg" maxlength="5000" name="Story-wysiwyg" placeholder="Your story"></textarea>
+              <h2>Who is involved?</h2>
+              <label class="story-label" for="published-on-4">Event partners</label>
+              <input class="story-form w-input" data-name="Published On 4" id="published-on-4" maxlength="256" name="published-on-4" placeholder="Add the projects involved with this event" type="text">
+              <h2>Link to more information</h2>
+              <label class="story-label" for="published-on-5">External URL</label>
+              <input class="story-form w-input" data-name="Published On 5" id="published-on-5" maxlength="256" name="published-on-5" placeholder="Add the projects involved with this event" type="text">
+              <label class="story-label" for="published-on-6">Button text</label>
+              <input class="story-form w-input" data-name="Published On 6" id="published-on-6" maxlength="256" name="published-on-6" placeholder="Add the projects involved with this event" type="text">
+              <h2>Get in touch</h2>
+              <label class="story-label" for="published-on-12">Phone number</label>
+              <input class="story-form w-input" data-name="Published On 12" id="published-on-12" maxlength="256" name="published-on-12" placeholder="Add the projects involved with this event" type="text">
+              <label class="story-label" for="published-on-13">Contact email</label>
+              <input class="story-form w-input" data-name="Published On 13" id="published-on-13" maxlength="256" name="published-on-13" placeholder="Add the projects involved with this event" type="text">
               <label class="story-label" for="Story-wysiwyg">Published</label>
               <div class="w-checkbox">
                 <input class="w-checkbox-input" data-name="Checkbox 5" id="checkbox-5" name="checkbox-5" type="checkbox">

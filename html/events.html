@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<!-- Last Published: Tue Aug 23 2016 14:38:28 GMT+0000 (UTC) -->
-<html data-wf-page="57bc5d8a43f67ed95d130187" data-wf-site="56e2e31a1b1f8f784728a08c">
+<!-- Last Published: Wed Aug 24 2016 09:40:46 GMT+0000 (UTC) -->
+<html data-wf-page="57bd6a142c4298472c99de0c" data-wf-site="56e2e31a1b1f8f784728a08c">
 <head>
   <meta charset="utf-8">
   <title>Events</title>
@@ -233,14 +233,14 @@
                 <h3 class="filter-h3">Search events</h3>
                 <input class="funding-filter w-input" data-name="Search" id="Search-2" maxlength="256" name="Search" placeholder="Search by keyword or content" required="required" type="text">
                 <h3 class="filter-h3">Filter by:</h3>
-                <select class="funding-filter w-select" data-name="Country 4" id="country-4" name="country-4">
-                  <option value="">Location</option>
+                <select class="funding-filter w-select" data-name="Location" id="Location" name="Location">
+                  <option value="">Type</option>
                   <option value="First">United kingdom</option>
                   <option value="Second">France</option>
                   <option value="Third">Germany</option>
                 </select>
                 <select class="funding-filter w-select" data-name="Country 6" id="country-6" name="country-6">
-                  <option value="">Type of event</option>
+                  <option value="">Country</option>
                   <option value="First">2016</option>
                   <option value="Second">2017</option>
                   <option value="Third">2018</option>
@@ -248,7 +248,7 @@
                   <option value="">2020</option>
                 </select>
                 <select class="funding-filter w-select" data-name="Country 5" id="country-5" name="country-5">
-                  <option value="">Date</option>
+                  <option value="">City</option>
                   <option value="First">January</option>
                   <option value="Second">February</option>
                   <option value="Third">March</option>
@@ -262,6 +262,14 @@
                   <option value="">November</option>
                   <option value="">December</option>
                 </select>
+                <select class="funding-filter w-select" data-name="funding source" id="funding-source-2" name="funding-source">
+                  <option value="">Date</option>
+                  <option value="First">2016</option>
+                  <option value="Second">2017</option>
+                  <option value="Third">2018</option>
+                  <option value="">2019</option>
+                  <option value="">2020</option>
+                </select>
               </form>
               <div class="w-form-done">
                 <div>Thank you! Your submission has been received!</div>
@@ -274,31 +282,40 @@
         </div>
         <div class="w-col w-col-8 w-col-stack">
           <div class="info-card">
-            <h2 class="funding-card-h2">DSI4EU Convention</h2>
+            <h2 class="funding-card-h2">{{event.title}}</h2>
             <p class="funding-descr">{{event.short_description}}</p>
-            <div class="funding-closing-date"><strong>Date:</strong> {{27th September 2017}}</div>
+            <div class="funding-closing-date"><strong>Event date:</strong> {{27th September 2017}}</div>
             <a class="read-more w-button" href="#">Read more</a>
-            <div class="funding-country funding-new">New event published</div>
-            <div class="funding-country funding-source">TYPE OF EVENT</div>
-            <div class="funding-country">{{Event location}}</div>
+            <div class="funding-country funding-new">New event</div>
+            <div class="funding-country funding-source">Type of event</div>
+            <div class="funding-country">{{country.England}}</div>
           </div>
           <div class="info-card">
-            <h2 class="funding-card-h2">DSI4EU Convention</h2>
+            <h2 class="funding-card-h2">{{event.title}}</h2>
             <p class="funding-descr">{{event.short_description}}</p>
-            <div class="funding-closing-date"><strong>Date:</strong> {{27th September 2017}}</div>
+            <div class="funding-closing-date"><strong>Event date:</strong> {{27th September 2017}}</div>
             <a class="read-more w-button" href="#">Read more</a>
-            <div class="funding-country funding-new">New event published</div>
-            <div class="funding-country funding-source">TYPE OF EVENT</div>
-            <div class="funding-country">{{Event location}}</div>
+            <div class="funding-country funding-new">New event</div>
+            <div class="funding-country funding-source">Type of event</div>
+            <div class="funding-country">{{country.England}}</div>
           </div>
           <div class="info-card">
-            <h2 class="funding-card-h2">DSI4EU Convention</h2>
+            <h2 class="funding-card-h2">{{event.title}}</h2>
             <p class="funding-descr">{{event.short_description}}</p>
-            <div class="funding-closing-date"><strong>Date:</strong> {{27th September 2017}}</div>
+            <div class="funding-closing-date"><strong>Event date:</strong> {{27th September 2017}}</div>
             <a class="read-more w-button" href="#">Read more</a>
-            <div class="funding-country funding-new">New event published</div>
-            <div class="funding-country funding-source">TYPE OF EVENT</div>
-            <div class="funding-country">{{Event location}}</div>
+            <div class="funding-country funding-new">New event</div>
+            <div class="funding-country funding-source">Type of event</div>
+            <div class="funding-country">{{country.England}}</div>
+          </div>
+          <div class="info-card">
+            <h2 class="funding-card-h2">{{event.title}}</h2>
+            <p class="funding-descr">{{event.short_description}}</p>
+            <div class="funding-closing-date"><strong>Event date:</strong> {{27th September 2017}}</div>
+            <a class="read-more w-button" href="#">Read more</a>
+            <div class="funding-country funding-new">New event</div>
+            <div class="funding-country funding-source">Type of event</div>
+            <div class="funding-country">{{country.England}}</div>
           </div>
         </div>
       </div>
