@@ -50,6 +50,9 @@ class Router
         } elseif ($this->pageURL === '/twitter-login') {
             $this->twitterLoginPage();
 
+        } elseif ($this->pageURL === '/set-admin') {
+            $this->setAdminPage();
+
         } elseif ($this->pageURL === '/register.json') {
             $this->registerJsonPage();
 
@@ -61,6 +64,13 @@ class Router
 
         } elseif (preg_match('<^/' . $langHandler . 'logout$>', $this->pageURL, $matches)) {
             $this->logoutPage($matches);
+
+// Funding
+        } elseif (preg_match('<^/' . $langHandler . 'funding$>', $this->pageURL, $matches)) {
+            $this->fundingPage($matches);
+
+        } elseif (preg_match('<^/' . $langHandler . 'funding\.json$>', $this->pageURL, $matches)) {
+            $this->fundingPage($matches, 'json');
 
 // Projects
         } elseif (preg_match('<^/' . $langHandler . 'projects$>', $this->pageURL, $matches)) {
@@ -330,6 +340,12 @@ class Router
         $command->exec();
     }
 
+    private function setAdminPage()
+    {
+        $command = new \DSI\Controller\SetAdminController();
+        $command->exec();
+    }
+
     private function logoutPage($matches = [])
     {
         $this->setLanguageFromUrl($matches);
@@ -366,6 +382,15 @@ class Router
         $this->setLanguageFromUrl($matches);
 
         $command = new \DSI\Controller\CaseStudyAddController();
+        $command->exec();
+    }
+
+    private function fundingPage($matches = [], $format = 'html')
+    {
+        $this->setLanguageFromUrl($matches);
+
+        $command = new \DSI\Controller\FundingController();
+        $command->format = $format;
         $command->exec();
     }
 
