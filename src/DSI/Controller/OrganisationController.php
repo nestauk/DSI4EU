@@ -171,7 +171,7 @@ class OrganisationController
 
         if ($loggedInUser) {
             $canUserRequestMembership = $this->canUserRequestMembership($organisation, $loggedInUser);
-            if ($organisation->getOwner()->getId() == $loggedInUser->getId())
+            if ($organisation->getOwnerID() == $loggedInUser->getId())
                 $isOwner = true;
 
             if (isset($isOwner) AND $isOwner === true)
@@ -267,7 +267,7 @@ class OrganisationController
 
     private function canUserRequestMembership(Organisation $organisation, User $loggedInUser)
     {
-        if ($organisation->getOwner()->getId() == $loggedInUser->getId())
+        if ($organisation->getOwnerID() == $loggedInUser->getId())
             return false;
         if ((new OrganisationMemberRepository())->organisationHasMember($organisation->getId(), $loggedInUser->getId()))
             return false;

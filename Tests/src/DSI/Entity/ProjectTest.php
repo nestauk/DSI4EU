@@ -144,6 +144,7 @@ class ProjectTest extends \PHPUnit_Framework_TestCase
     {
         $this->project->setOwner($this->owner);
         $this->assertEquals($this->owner->getId(), $this->project->getOwner()->getId());
+        $this->assertEquals($this->owner->getId(), $this->project->getOwnerID());
     }
 
     /** @test setOrganisationsCount, getOrganisationsCount */

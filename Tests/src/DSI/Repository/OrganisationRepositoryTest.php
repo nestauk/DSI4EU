@@ -109,7 +109,7 @@ class OrganisationRepositoryTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(1, $organisation->getId());
         $organisation = $this->organisationRepo->getById($organisation->getId());
-        $this->assertEquals($this->user1->getId(), $organisation->getOwner()->getId());
+        $this->assertEquals($this->user1->getId(), $organisation->getOwnerID());
         $this->assertEquals($name, $organisation->getName());
         $this->assertEquals($importID, $organisation->getImportID());
         $this->assertEquals($url, $organisation->getUrl());
@@ -152,7 +152,7 @@ class OrganisationRepositoryTest extends PHPUnit_Framework_TestCase
         $this->organisationRepo->save($organisation);
 
         $organisation = $this->organisationRepo->getById($organisation->getId());
-        $this->assertEquals($this->user1->getId(), $organisation->getOwner()->getId());
+        $this->assertEquals($this->user1->getId(), $organisation->getOwnerID());
         $this->assertEquals($name, $organisation->getName());
         $this->assertEquals($importID, $organisation->getImportID());
         $this->assertEquals($url, $organisation->getUrl());

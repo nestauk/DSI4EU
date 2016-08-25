@@ -108,7 +108,7 @@ class OrganisationRepositoryInAPCTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(1, $organisation->getId());
         $organisation = $this->organisationRepositoryInAPC->getById($organisation->getId());
-        $this->assertEquals($this->user1->getId(), $organisation->getOwner()->getId());
+        $this->assertEquals($this->user1->getId(), $organisation->getOwnerID());
         $this->assertEquals($name, $organisation->getName());
         $this->assertEquals($url, $organisation->getUrl());
         $this->assertEquals($shortDescription, $organisation->getShortDescription());
@@ -149,7 +149,7 @@ class OrganisationRepositoryInAPCTest extends PHPUnit_Framework_TestCase
         $this->organisationRepositoryInAPC->save($organisation);
 
         $organisation = $this->organisationRepositoryInAPC->getById($organisation->getId());
-        $this->assertEquals($this->user1->getId(), $organisation->getOwner()->getId());
+        $this->assertEquals($this->user1->getId(), $organisation->getOwnerID());
         $this->assertEquals($name, $organisation->getName());
         $this->assertEquals($url, $organisation->getUrl());
         $this->assertEquals($shortDescription, $organisation->getShortDescription());

@@ -58,7 +58,7 @@ class OrganisationEditController
         $organisationSizes = (new OrganisationSizeRepository())->getAll();
 
         $isOwner = false;
-        if ($organisation->getOwner()->getId() == $loggedInUser->getId())
+        if ($organisation->getOwnerID() == $loggedInUser->getId())
             $isOwner = true;
 
         $userCanEditOrganisation = ($isOwner OR ($loggedInUser AND $loggedInUser->isCommunityAdmin()));
@@ -320,7 +320,7 @@ class OrganisationEditController
 
     private function canUserRequestMembership(Organisation $organisation, User $loggedInUser)
     {
-        if ($organisation->getOwner()->getId() == $loggedInUser->getId())
+        if ($organisation->getOwnerID() == $loggedInUser->getId())
             return false;
         if ((new OrganisationMemberRepository())->organisationHasMember($organisation->getId(), $loggedInUser->getId()))
             return false;

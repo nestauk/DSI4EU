@@ -11,7 +11,7 @@ class OrganisationRepository
     public function insert(Organisation $organisation)
     {
         $insert = array();
-        $insert[] = "`ownerID` = '" . addslashes($organisation->getOwner()->getId()) . "'";
+        $insert[] = "`ownerID` = '" . addslashes($organisation->getOwnerID()) . "'";
         $insert[] = "`name` = '" . addslashes($organisation->getName()) . "'";
         $insert[] = "`url` = '" . addslashes($organisation->getUrl()) . "'";
         $insert[] = "`shortDescription` = '" . addslashes($organisation->getShortDescription()) . "'";
@@ -47,7 +47,7 @@ class OrganisationRepository
             throw new DSI\NotFound('organisationID: ' . $organisation->getId());
 
         $insert = array();
-        $insert[] = "`ownerID` = '" . addslashes($organisation->getOwner()->getId()) . "'";
+        $insert[] = "`ownerID` = '" . addslashes($organisation->getOwnerID()) . "'";
         $insert[] = "`name` = '" . addslashes($organisation->getName()) . "'";
         $insert[] = "`url` = '" . addslashes($organisation->getUrl()) . "'";
         $insert[] = "`shortDescription` = '" . addslashes($organisation->getShortDescription()) . "'";

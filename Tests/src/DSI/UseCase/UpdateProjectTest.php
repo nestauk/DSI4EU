@@ -70,6 +70,6 @@ class UpdateProjectTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($name, $project->getName());
         $this->assertEquals($description, $project->getDescription());
         $this->assertEquals($url, $project->getUrl());
-        $this->assertEquals($this->user1->getId(), $project->getOwner()->getId());
+        $this->assertEquals($this->user1->getId(), $project->getOwnerID());
     }
 }

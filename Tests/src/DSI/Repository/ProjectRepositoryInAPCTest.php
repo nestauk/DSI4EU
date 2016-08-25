@@ -86,7 +86,7 @@ class ProjectRepositoryInAPCTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(1, $project->getId());
         $project = $this->projectRepositoryInAPC->getById($project->getId());
-        $this->assertEquals($this->user1->getId(), $project->getOwner()->getId());
+        $this->assertEquals($this->user1->getId(), $project->getOwnerID());
         $this->assertEquals($name, $project->getName());
         $this->assertEquals($shortDesc, $project->getShortDescription());
         $this->assertEquals($desc, $project->getDescription());
@@ -163,7 +163,7 @@ class ProjectRepositoryInAPCTest extends PHPUnit_Framework_TestCase
         $this->projectRepositoryInAPC->save($project);
 
         $project = $this->projectRepositoryInAPC->getById($project->getId());
-        $this->assertEquals($this->user1->getId(), $project->getOwner()->getId());
+        $this->assertEquals($this->user1->getId(), $project->getOwnerID());
         $this->assertEquals($name, $project->getName());
         $this->assertEquals($shortDesc, $project->getShortDescription());
         $this->assertEquals($desc, $project->getDescription());

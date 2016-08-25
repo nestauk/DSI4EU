@@ -11,7 +11,7 @@ class ProjectRepository
     public function insert(Project $project)
     {
         $insert = array();
-        $insert[] = "`ownerID` = '" . addslashes($project->getOwner()->getId()) . "'";
+        $insert[] = "`ownerID` = '" . addslashes($project->getOwnerID()) . "'";
         $insert[] = "`name` = '" . addslashes($project->getName()) . "'";
         $insert[] = "`shortDescription` = '" . addslashes($project->getShortDescription()) . "'";
         $insert[] = "`description` = '" . addslashes($project->getDescription()) . "'";
@@ -45,7 +45,7 @@ class ProjectRepository
             throw new DSI\NotFound('projectID: ' . $project->getId());
 
         $insert = array();
-        $insert[] = "`ownerID` = '" . addslashes($project->getOwner()->getId()) . "'";
+        $insert[] = "`ownerID` = '" . addslashes($project->getOwnerID()) . "'";
         $insert[] = "`name` = '" . addslashes($project->getName()) . "'";
         $insert[] = "`shortDescription` = '" . addslashes($project->getShortDescription()) . "'";
         $insert[] = "`description` = '" . addslashes($project->getDescription()) . "'";

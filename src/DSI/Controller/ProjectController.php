@@ -92,7 +92,7 @@ class ProjectController
             );
 
             $canUserRequestMembership = $this->canUserRequestMembership($project, $loggedInUser, $userHasInvitation);
-            if ($project->getOwner()->getId() == $loggedInUser->getId()) {
+            if ($project->getOwnerID() == $loggedInUser->getId()) {
                 $isOwner = true;
                 $isAdmin = true;
             }
@@ -374,7 +374,7 @@ class ProjectController
     {
         if ($userHasInvitation)
             return false;
-        if ($project->getOwner()->getId() == $loggedInUser->getId())
+        if ($project->getOwnerID() == $loggedInUser->getId())
             return false;
         if ((new ProjectMemberRepository())->projectHasMember($project->getId(), $loggedInUser->getId()))
             return false;

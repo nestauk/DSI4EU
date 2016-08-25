@@ -39,7 +39,7 @@ class ProjectPostController
         $isOwner = false;
 
         if ($loggedInUser) {
-            if ($project->getOwner()->getId() == $loggedInUser->getId())
+            if ($project->getOwnerID() == $loggedInUser->getId())
                 $isOwner = true;
         }
 

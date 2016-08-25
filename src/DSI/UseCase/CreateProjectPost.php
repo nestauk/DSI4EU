@@ -92,7 +92,7 @@ class CreateProjectPost
      */
     private function userCanAddPost()
     {
-        if ($this->data()->project->getOwner()->getId() == $this->data()->user->getId())
+        if ($this->data()->project->getOwnerID() == $this->data()->user->getId())
             return true;
 
         $member = (new ProjectMemberRepository())->getByProjectIDAndMemberID(

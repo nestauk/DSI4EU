@@ -9,6 +9,7 @@
 namespace DSI\Service;
 
 use DSI\Entity\User;
+use DSI\Repository\UserRepository;
 
 class Auth
 {
@@ -30,6 +31,11 @@ class Auth
             return (int)$_SESSION['user']['userID'];
         else
             return 0;
+    }
+
+    public function getUser()
+    {
+        return (new UserRepository())->getById($this->getUserId());
     }
 
     public function saveUserInSession(User $user)

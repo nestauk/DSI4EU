@@ -66,6 +66,6 @@ class UpdateOrganisationTest extends PHPUnit_Framework_TestCase
         $organisation = $this->organisationRepo->getById($this->organisation->getId());
         $this->assertEquals($name, $organisation->getName());
         $this->assertEquals($description, $organisation->getDescription());
-        $this->assertEquals($this->user1->getId(), $organisation->getOwner()->getId());
+        $this->assertEquals($this->user1->getId(), $organisation->getOwnerID());
     }
 }

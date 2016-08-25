@@ -44,6 +44,28 @@ class OrganisationMemberRepository
         $query->query();
     }
 
+    public function save(OrganisationMember $organisationMember)
+    {
+        $query = new SQL("SELECT organisationID 
+            FROM `organisation-members`
+            WHERE `organisationID` = '{$organisationMember->getOrganisationID()}'
+            AND `userID` = '{$organisationMember->getMemberID()}'
+            LIMIT 1
+        ");
+        if (!$query->fetch('organisationID'))
+            throw new NotFound("organisationID: {$organisationMember->getOrganisationID()} / userID: {$organisationMember->getMemberID()}");
+
+        $insert = [];
+        $insert[] = "`isAdmin` = '" . (bool)($organisationMember->isAdmin()) . "'";
+        $where = [];
+        $insert[] = "`organisationID` = " . (int)($organisationMember->getOrganisationID()) . "";
+        $where[] = "`userID` = '" . (int)($organisationMember->getMemberID()) . "'";
+
+        $query = new SQL("UPDATE `organisation-members` SET " . implode(', ', $insert) . " WHERE " . implode(' AND ', $where) . "");
+        // $query->pr();
+        $query->query();
+    }
+
     public function remove(OrganisationMember $organisationMember)
     {
         $query = new SQL("SELECT organisationID 
@@ -80,6 +102,19 @@ class OrganisationMemberRepository
      * @return OrganisationMember
      */
     public function getByMemberIdAndOrganisationId(int $memberID, int $organisationID)
+    {
+        return $this->getObjectWhere([
+            "`userID` = '{$memberID}'",
+            "`organisationID` = '{$organisationID}'",
+        ]);
+    }
+
+    /**
+     * @param int $organisationID
+     * @param int $memberID
+     * @return OrganisationMember
+     */
+    public function getByOrganisationIDAndMemberID(int $organisationID, int $memberID)
     {
         return $this->getObjectWhere([
             "`userID` = '{$memberID}'",

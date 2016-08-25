@@ -156,7 +156,7 @@ class ProjectEditController
 
     private function userCanModifyProject(Project $project, User $user)
     {
-        if ($project->getOwner()->getId() == $user->getId())
+        if ($project->getOwnerID() == $user->getId())
             return true;
 
         if ((new ProjectMemberRepository())->projectHasMember($project->getId(), $user->getId()))

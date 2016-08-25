@@ -241,7 +241,7 @@ class UpdateProject
 
     private function checkIfUserCanEditTheProject()
     {
-        if ($this->data()->executor->getId() == $this->data()->project->getOwner()->getId())
+        if ($this->data()->executor->getId() == $this->data()->project->getOwnerID())
             return true;
         if ($this->data()->executor->isCommunityAdmin())
             return true;

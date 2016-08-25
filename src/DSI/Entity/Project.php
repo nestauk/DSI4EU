@@ -111,6 +111,14 @@ class Project
     }
 
     /**
+     * @return int
+     */
+    public function getOwnerID(): int
+    {
+        return $this->owner ? $this->owner->getId() : 0;
+    }
+
+    /**
      * @param User $owner
      */
     public function setOwner(User $owner)

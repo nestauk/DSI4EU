@@ -71,6 +71,7 @@ class OrganisationTest extends \PHPUnit_Framework_TestCase
     {
         $this->organisation->setOwner($this->owner);
         $this->assertEquals($this->owner->getId(), $this->organisation->getOwner()->getId());
+        $this->assertEquals($this->owner->getId(), $this->organisation->getOwnerID());
     }
 
     /** @test setCountryRegion, getCountryRegion */

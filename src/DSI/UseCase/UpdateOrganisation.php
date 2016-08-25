@@ -279,7 +279,7 @@ class UpdateOrganisation
         if ($this->data()->executor->isCommunityAdmin())
             return true;
 
-        if ($this->data()->executor->getId() == $this->data()->organisation->getOwner()->getId())
+        if ($this->data()->executor->getId() == $this->data()->organisation->getOwnerID())
             return true;
 
         return false;
