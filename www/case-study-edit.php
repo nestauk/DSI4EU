@@ -95,7 +95,12 @@ require __DIR__ . '/header.php';
                                         <img class="story-image-upload"
                                              style="max-height:140px;max-width:140px"
                                              src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg"
-                                             ng-src="{{logo.image}}">
+                                             ng-src="{{logo.image ? logo.image : 'https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg'}}">
+                                        <button type="button" class="w-button dsi-button story-image-upload"
+                                                style="color:red" ng-show="logo.image" ng-cloak
+                                                ng-click="logo.image = null">
+                                            Remove image
+                                        </button>
                                         <a class="w-button dsi-button story-image-upload" href="#"
                                            ngf-select="logo.upload($file, $invalidFiles)"
                                            ng-bind="logo.loading ? 'Loading...' : 'Upload image'">Upload image
@@ -109,7 +114,12 @@ require __DIR__ . '/header.php';
                                         <img class="story-image-upload"
                                              style="max-height:140px;max-width:140px"
                                              src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg"
-                                             ng-src="{{cardImage.image}}">
+                                             ng-src="{{cardImage.image ? cardImage.image : 'https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg'}}">
+                                        <button type="button" class="w-button dsi-button story-image-upload"
+                                                style="color:red" ng-show="cardImage.image" ng-cloak
+                                                ng-click="cardImage.image = null">
+                                            Remove image
+                                        </button>
                                         <a class="w-button dsi-button story-image-upload" href="#"
                                            ngf-select="cardImage.upload($file, $invalidFiles)"
                                            ng-bind="cardImage.loading ? 'Loading...' : 'Upload image'">Upload image
@@ -123,7 +133,12 @@ require __DIR__ . '/header.php';
                                         <img class="story-image-upload"
                                              style="max-height:140px;max-width:140px"
                                              src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg"
-                                             ng-src="{{headerImage.image}}">
+                                             ng-src="{{headerImage.image ? headerImage.image : 'https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg'}}">
+                                        <button type="button" class="w-button dsi-button story-image-upload"
+                                                style="color:red" ng-show="headerImage.image" ng-cloak
+                                                ng-click="headerImage.image = null">
+                                            Remove image
+                                        </button>
                                         <a class="w-button dsi-button story-image-upload" href="#"
                                            ngf-select="headerImage.upload($file, $invalidFiles)"
                                            ng-bind="headerImage.loading ? 'Loading...' : 'Upload image'">Upload image
