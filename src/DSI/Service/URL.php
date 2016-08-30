@@ -65,6 +65,16 @@ class URL
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'projects.json';
     }
 
+    public function funding()
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'funding';
+    }
+
+    public function fundingJson()
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'funding.json';
+    }
+
     public function project(Project $project)
     {
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'project/' . $project->getId() . '/' . self::linkify($project->getName());

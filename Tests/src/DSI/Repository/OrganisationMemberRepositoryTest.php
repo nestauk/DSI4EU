@@ -254,6 +254,16 @@ class OrganisationMemberRepositoryTest extends PHPUnit_Framework_TestCase
         $this->organisationMemberRepo->remove($organisationMember);
     }
 
+    /** @test */
+    public function cannotSaveNonexistentObject()
+    {
+        $organisationMember = new \DSI\Entity\OrganisationMember();
+        $organisationMember->setOrganisation($this->organisation_1);
+        $organisationMember->setMember($this->user_1);
+        $this->setExpectedException(\DSI\NotFound::class);
+        $this->organisationMemberRepo->save($organisationMember);
+    }
+
     /** @test saveAsNew */
     public function canCheckIfOrganisationHasMember()
     {

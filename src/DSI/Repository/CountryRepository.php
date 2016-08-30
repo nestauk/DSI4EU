@@ -59,11 +59,18 @@ class CountryRepository
 
     public function getById(int $id): Country
     {
-        if (isset(self::$objects[$id]))
-            return self::$objects[$id];
-
-        return $this->getCountryWhere([
+        return $this->getObjectWhere([
             "`id` = {$id}"
+        ]);
+    }
+
+    public function getByIds($ids)
+    {
+        if (count($ids) == 0)
+            return [];
+
+        return $this->getObjectsWhere([
+            "`id` IN (" . implode(',', $ids) . ")"
         ]);
     }
 
@@ -84,7 +91,15 @@ class CountryRepository
     /** @return Country[] */
     public function getAll()
     {
-        $where = ["1"];
+        return $this->getObjectsWhere(["1"]);
+    }
+
+    /**
+     * @param $where
+     * @return Country[]
+     */
+    private function getObjectsWhere($where)
+    {
         $countries = [];
         $query = new SQL("SELECT 
             id, name
@@ -94,6 +109,20 @@ class CountryRepository
             $countries[] = $this->buildCountryFromData($dbCountry);
         }
         return $countries;
+    }
+
+    /**
+     * @param $where
+     * @return Country
+     * @throws DSI\NotFound
+     */
+    private function getObjectWhere($where)
+    {
+        $objects = $this->getObjectsWhere($where);
+        if (count($objects) < 1)
+            throw new DSI\NotFound();
+
+        return $objects[0];
     }
 
     public function clearAll()

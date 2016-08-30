@@ -130,8 +130,11 @@ class Funding
     /**
      * @return string
      */
-    public function getClosingDate(): string
+    public function getClosingDate($format = null): string
     {
+        if ($format !== null)
+            return date_format($format, strtotime($this->closingDate));
+
         return (string)$this->closingDate;
     }
 

@@ -155,6 +155,26 @@ class CountryRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertCount(2, $this->countryRepo->getAll());
     }
 
+    /** @test getAll */
+    public function getByIds()
+    {
+        $country1 = new Country();
+        $country1->setName('test');
+        $this->countryRepo->insert($country1);
+
+        $country2 = new Country();
+        $country2->setName('test2');
+        $this->countryRepo->insert($country2);
+
+        $country3 = new Country();
+        $country3->setName('test3');
+        $this->countryRepo->insert($country3);
+
+        $this->assertCount(0, $this->countryRepo->getByIds([]));
+        $this->assertCount(1, $this->countryRepo->getByIds([$country1->getId()]));
+        $this->assertCount(2, $this->countryRepo->getByIds([$country1->getId(), $country2->getId()]));
+    }
+
     /** @test saveAsNew getById */
     public function setAllCountriesDetails()
     {
