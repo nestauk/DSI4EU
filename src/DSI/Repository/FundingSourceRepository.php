@@ -44,6 +44,17 @@ class FundingSourceRepository
         ]);
     }
 
+    /**
+     * @param string $title
+     * @return FundingSource
+     */
+    public function getByTitle(string $title)
+    {
+        return $this->getObjectWhere([
+            "`title` = '".addslashes($title)."'"
+        ]);
+    }
+
     /** @return FundingSource[] */
     public function getAll()
     {

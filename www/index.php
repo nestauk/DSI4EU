@@ -72,6 +72,12 @@ class Router
         } elseif (preg_match('<^/' . $langHandler . 'funding\.json$>', $this->pageURL, $matches)) {
             $this->fundingPage($matches, 'json');
 
+        } elseif (preg_match('<^/' . $langHandler . 'funding/add$>', $this->pageURL, $matches)) {
+            $this->addFundingPage($matches);
+
+        } elseif (preg_match('<^/' . $langHandler . 'funding/edit/([0-9]+)$>', $this->pageURL, $matches)) {
+            $this->editFundingPage($matches);
+
 // Projects
         } elseif (preg_match('<^/' . $langHandler . 'projects$>', $this->pageURL, $matches)) {
             $this->projectsPage($matches);
@@ -391,6 +397,23 @@ class Router
 
         $command = new \DSI\Controller\FundingController();
         $command->format = $format;
+        $command->exec();
+    }
+
+    private function addFundingPage($matches = [])
+    {
+        $this->setLanguageFromUrl($matches);
+
+        $command = new \DSI\Controller\FundingAddController();
+        $command->exec();
+    }
+
+    private function editFundingPage($matches = [])
+    {
+        $this->setLanguageFromUrl($matches);
+
+        $command = new \DSI\Controller\FundingEditController();
+        $command->fundingID = $matches[3];
         $command->exec();
     }
 

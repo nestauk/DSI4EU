@@ -1,15 +1,12 @@
 <?php
-/** @var $loggedInUser \DSI\Entity\User */
-/** @var $isHomePage bool */
 /** @var $angularModules string[] */
 /** @var $pageTitle string[] */
-use \DSI\Service\URL;
 use \DSI\Service\Sysctl;
 
 ?>
 <meta charset="utf-8">
 <title><?php echo isset($pageTitle) ? show_input($pageTitle) : 'Digitalsocial.eu' ?></title>
-<meta name="google-site-verification" content="al4Vt4vNA7eWC2OyIEa0C8vjDBFl5UZWZODih8wy3r4" />
+<meta name="google-site-verification" content="al4Vt4vNA7eWC2OyIEa0C8vjDBFl5UZWZODih8wy3r4"/>
 <meta property="og:title" content="<?php echo isset($pageTitle) ? show_input($pageTitle) : 'Digitalsocial.eu' ?>">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Webflow">

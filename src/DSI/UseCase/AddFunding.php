@@ -5,7 +5,10 @@ namespace DSI\UseCase;
 use DSI\Entity\Country;
 use DSI\Entity\Funding;
 use DSI\Entity\FundingSource;
+use DSI\NotFound;
+use DSI\Repository\CountryRepository;
 use DSI\Repository\FundingRepository;
+use DSI\Repository\FundingSourceRepository;
 use DSI\Service\ErrorHandler;
 
 class AddFunding
@@ -18,6 +21,9 @@ class AddFunding
 
     /** @var FundingRepository */
     private $fundingRepository;
+
+    /** @var FundingSource */
+    private $fundingSource;
 
     public function __construct()
     {
@@ -32,6 +38,7 @@ class AddFunding
         $this->assertDataHasBeenSubmitted();
         $this->assertDataIsNotEmpty();
         $this->assertClosingDateIsValid();
+        $this->getFundingSource();
 
         $this->saveFunding();
     }
@@ -49,8 +56,9 @@ class AddFunding
         $funding = new Funding();
         $funding->setTitle($this->data()->title);
         $funding->setUrl($this->data()->url);
-        $funding->setCountry($this->data()->country);
-        $funding->setFundingSource($this->data()->fundingSource);
+        $funding->setCountry((new CountryRepository())->getById($this->data()->countryID));
+        if ($this->fundingSource)
+            $funding->setFundingSource($this->fundingSource);
         $funding->setClosingDate($this->data()->closingDate);
         $funding->setDescription($this->data()->description);
         $this->fundingRepository->insert($funding);
@@ -58,7 +66,7 @@ class AddFunding
 
     private function assertDataHasBeenSubmitted()
     {
-        if (!$this->data()->country)
+        if (!$this->data()->countryID)
             $this->errorHandler->addTaggedError('country', 'Invalid country');
         if (!$this->data()->fundingSource)
             $this->errorHandler->addTaggedError('fundingSource', 'Invalid funding source');
@@ -86,6 +94,20 @@ class AddFunding
 
         $this->errorHandler->throwIfNotEmpty();
     }
+
+    private function getFundingSource()
+    {
+        if ($this->data()->fundingSource) {
+            $fundingSourceRepository = new FundingSourceRepository();
+            try {
+                $this->fundingSource = $fundingSourceRepository->getByTitle($this->data()->fundingSource);
+            } catch (NotFound $e) {
+                $this->fundingSource = new FundingSource();
+                $this->fundingSource->setTitle($this->data()->fundingSource);
+                $fundingSourceRepository->insert($this->fundingSource);
+            }
+        }
+    }
 }
 
 class AddFunding_Data
@@ -95,10 +117,10 @@ class AddFunding_Data
         $url,
         $description;
 
-    /** @var Country */
-    public $country;
+    /** @var int */
+    public $countryID;
 
-    /** @var FundingSource */
+    /** @var string */
     public $fundingSource;
 
     /** @var string */

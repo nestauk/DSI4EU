@@ -2,6 +2,7 @@
 require __DIR__ . '/header.php'
 /** @var $loggedInUser \DSI\Entity\User */
 /** @var $urlHandler \DSI\Service\URL */
+/** @var $userCanAddFunding bool */
 ?>
     <script type="text/javascript"
             src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/FundingController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
@@ -56,40 +57,20 @@ require __DIR__ . '/header.php'
                     </div>
                 </div>
                 <div class="w-col w-col-8 w-col-stack">
-                    <div class="info-card">
-                        <h2 class="funding-card-h2">{title.Call for proposals to develop an online tool enabling the
-                            tracking of language versions of films}</h2>
-                        <p class="funding-descr">{descr.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare,
-                            eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo
-                            cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.}</p>
-                        <div class="funding-closing-date"><strong>Closing date:</strong> {27th September 2017}</div>
-                        <a class="read-more w-button" href="#">Read more</a>
-                        <div class="funding-country funding-new">New funding opportunity</div>
-                        <div class="funding-country funding-source">Funding source</div>
-                        <div class="funding-country">{country.England}</div>
-                    </div>
-                    <div class="info-card">
-                        <h2 class="funding-card-h2">Call for proposals to develop an online tool enabling the tracking
-                            of language versions of films</h2>
-                        <p class="funding-descr">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                            varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor
-                            interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id
-                            rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p>
-                        <div class="funding-closing-date"><strong>Closing date:</strong> {27th September 2017}</div>
-                        <a class="read-more w-button" href="#">Read more</a>
-                        <div class="funding-country">Spain</div>
-                    </div>
-                    <div class="info-card">
-                        <h2 class="funding-card-h2">Call for proposals to develop an online tool enabling the tracking
-                            of language versions of films</h2>
-                        <p class="funding-descr">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                            varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor
-                            interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id
-                            rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p>
-                        <div class="funding-closing-date"><strong>Closing date:</strong> {27th September 2017}</div>
-                        <a class="read-more w-button" href="#">Read more</a>
-                        <div class="funding-country">Italy</div>
+                    <div class="info-card" ng-repeat="funding in data.fundings">
+                        <h2 class="funding-card-h2" ng-bind="funding.title"></h2>
+                        <p class="funding-descr" ng-bind="funding.description"></p>
+                        <div class="funding-closing-date" ng-show="funding.closingDate">
+                            <strong>Closing date:</strong>
+                            <span ng-bind="funding.closingDate"></span>
+                        </div>
+                        <a class="read-more w-button" href="{{funding.url}}">Read more</a>
+                        <?php if ($userCanAddFunding) { ?>
+                            <a class="read-more w-button edit-funding" href="{{funding.editUrl}}">Edit Funding</a>
+                        <?php } ?>
+                        <div class="funding-country funding-new" ng-show="funding.isNew">New funding opportunity</div>
+                        <div class="funding-country funding-source" ng-bind="funding.fundingSource">Funding source</div>
+                        <div class="funding-country" ng-bind="funding.country"></div>
                     </div>
                 </div>
             </div>

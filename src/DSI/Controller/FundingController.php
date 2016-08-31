@@ -16,9 +16,12 @@ class FundingController
 {
     public $format = 'html';
 
+    /** @var URL */
+    private $urlHandler;
+
     public function exec()
     {
-        $urlHandler = new URL();
+        $this->urlHandler = $urlHandler = new URL();
         $authUser = new Auth();
         if ($authUser->getUserId())
             $loggedInUser = (new UserRepository())->getById($authUser->getUserId());
@@ -37,6 +40,7 @@ class FundingController
             ]);
         } else {
             $pageTitle = 'Funding Opportunities';
+            $userCanAddFunding = (bool)($loggedInUser AND ($loggedInUser->isCommunityAdmin() OR $loggedInUser->isEditorialAdmin()));
             require __DIR__ . '/../../../www/funding.php';
         }
     }
@@ -73,10 +77,15 @@ class FundingController
                 'title' => $funding->getTitle(),
                 'description' => $funding->getDescription(),
                 'url' => $funding->getUrl(),
+                'closingDate' => $funding->getClosingDate('d M Y'),
                 'closingYear' => $funding->getClosingDate('Y'),
                 'closingMonth' => $funding->getClosingDate('m'),
+                'country' => $funding->getCountryName(),
                 'countryID' => $funding->getCountryID(),
                 'fundingSourceID' => $funding->getFundingSourceID(),
+                'fundingSource' => $funding->getFundingSource()->getTitle(),
+                'isNew' => $funding->isNew(),
+                'editUrl' => $this->urlHandler->editFunding($funding->getId()),
             ];
         }, $fundings);
     }

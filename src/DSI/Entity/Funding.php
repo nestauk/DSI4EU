@@ -132,8 +132,11 @@ class Funding
      */
     public function getClosingDate($format = null): string
     {
+        if (!$this->closingDate OR $this->closingDate == '0000-00-00')
+            return '';
+
         if ($format !== null)
-            return date_format($format, strtotime($this->closingDate));
+            return date($format, strtotime($this->closingDate));
 
         return (string)$this->closingDate;
     }
