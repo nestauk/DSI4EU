@@ -2,6 +2,7 @@
 
 namespace DSI\Controller;
 
+use DSI\Entity\User;
 use DSI\Repository\UserRepository;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
@@ -17,8 +18,7 @@ class CaseStudyAddController
         $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
 
         $loggedInUser = (new UserRepository())->getById($authUser->getUserId());
-        $userCanAddCaseStudy = (bool)($loggedInUser AND ($loggedInUser->isCommunityAdmin() OR $loggedInUser->isEditorialAdmin()));
-        if (!$userCanAddCaseStudy)
+        if (!$this->userCanAddCaseStudy($loggedInUser))
             go_to($urlHandler->home());
 
         if (isset($_POST['add'])) {
@@ -60,5 +60,15 @@ class CaseStudyAddController
 
         $angularModules['fileUpload'] = true;
         require(__DIR__ . '/../../../www/case-study-add.php');
+    }
+
+    /**
+     * @param User $loggedInUser
+     * @return bool
+     */
+    private function userCanAddCaseStudy(User $loggedInUser):bool
+    {
+        $userCanAddCaseStudy = (bool)($loggedInUser AND ($loggedInUser->isCommunityAdmin() OR $loggedInUser->isEditorialAdmin()));
+        return $userCanAddCaseStudy;
     }
 }

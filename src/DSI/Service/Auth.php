@@ -31,6 +31,14 @@ class Auth
         return (new UserRepository())->getById($this->getUserId());
     }
 
+    public function getUserIfLoggedIn()
+    {
+        if ($this->isLoggedIn())
+            return $this->getUser();
+        else
+            return null;
+    }
+
     public function saveUserInSession(User $user)
     {
         session_regenerate_id(TRUE);

@@ -2,13 +2,13 @@
 require __DIR__ . '/header.php';
 /** @var $loggedInUser \DSI\Entity\User */
 /** @var $caseStudies \DSI\Entity\CaseStudy[] */
-/** @var $userCanAddCaseStudy bool */
+/** @var $userCanManageCaseStudies bool */
 /** @var $urlHandler \DSI\Service\URL */
 ?>
     <div class="creator page-header">
         <div class="container-wide header">
-            <h1 class="light page-h1"><?php _ehtml('Case studies')?></h1>
-            <?php if ($userCanAddCaseStudy) { ?>
+            <h1 class="light page-h1"><?php _ehtml('Case studies') ?></h1>
+            <?php if ($userCanManageCaseStudies) { ?>
                 <a class="button button-bottom-right w-button" href="<?php echo $urlHandler->addCaseStudy() ?>">
                     Add case study +
                 </a>
@@ -33,13 +33,17 @@ require __DIR__ . '/header.php';
                                 </div>
                                 <a class="case-study-card-read-more"
                                    href="<?php echo $urlHandler->caseStudy($caseStudy) ?>">
-                                    <?php _ehtml('See the case study')?>
+                                    <?php _ehtml('See the case study') ?>
                                 </a>
                             </div>
                             <div class="case-study-card-label w-clearfix">
                                 <div class="case-study-card-name">
-                                    <?php echo show_input(substr($caseStudy->getTitle(), 0, 15)) ?>
-                                    <?php if (strlen($caseStudy->getTitle()) > 15) echo '...' ?>
+                                    <?php
+                                    echo show_input(substr($caseStudy->getTitle(), 0, 15));
+                                    if (strlen($caseStudy->getTitle()) > 15) echo '...';
+                                    if ($userCanManageCaseStudies AND !$caseStudy->isPublished())
+                                        echo ' <span style="color:red">(Unpublished)</span>';
+                                    ?>
                                 </div>
                                 <div class="case-study-card-name country">
                                     <?php echo show_input($caseStudy->getCountryName()) ?>
@@ -48,6 +52,9 @@ require __DIR__ . '/header.php';
                         </div>
                     </div>
                 </div>
+                <?php if ($i % 3 == 2) { ?>
+                    <div style="clear:both"></div>
+                <?php } ?>
             <?php } ?>
         </div>
 
