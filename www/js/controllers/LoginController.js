@@ -24,9 +24,7 @@ angular
                         $scope.errors = response.data.errors;
                     } else if (response.data.response == 'ok') {
                         $scope.loggedin = true;
-                        $timeout(function () {
-                            window.location.href = afterLoginUrl;
-                        }, 500);
+                        window.location.href = afterLoginUrl;
                     }
                 },
                 function (response) {
@@ -40,17 +38,15 @@ angular
             $scope.forgotPassword.loading = true;
             $scope.forgotPassword.errors = {};
 
-            $timeout(function () {
-                if (!$scope.forgotPassword.codeSent) {
-                    sendSecurityCode_useCase();
-                    return;
-                }
-                if (!$scope.forgotPassword.codeVerified) {
-                    verifySecurityCode_useCase();
-                    return;
-                }
-                completePasswordRecovery_useCase();
-            }, 500);
+            if (!$scope.forgotPassword.codeSent) {
+                sendSecurityCode_useCase();
+                return;
+            }
+            if (!$scope.forgotPassword.codeVerified) {
+                verifySecurityCode_useCase();
+                return;
+            }
+            completePasswordRecovery_useCase();
         };
 
         function sendSecurityCode_useCase() {
@@ -105,7 +101,7 @@ angular
             );
         }
     })
-    .controller('RegisterController', function ($scope, $http, $timeout) {
+    .controller('RegisterController', function ($scope, $http) {
         $scope.email = {value: ''};
         $scope.password = {value: ''};
         $scope.onSubmit = function () {
@@ -121,25 +117,21 @@ angular
             console.log(data);
             console.log(SITE_RELATIVE_PATH + '/register.json');
 
-            $timeout(function () {
-                $http.post(SITE_RELATIVE_PATH + '/register.json', data).then(
-                    function (response) {
-                        console.log(response.data);
-                        $scope.loading = false;
-                        if (response.data.response == 'error') {
-                            $scope.errors = response.data.errors;
-                        } else if (response.data.response == 'ok') {
-                            $scope.registered = true;
-                            $timeout(function () {
-                                window.location.href = SITE_RELATIVE_PATH + "/my-profile";
-                            }, 500);
-                        }
-                    },
-                    function (response) {
-                        $scope.loading = false;
-                        alert(response);
+            $http.post(SITE_RELATIVE_PATH + '/register.json', data).then(
+                function (response) {
+                    console.log(response.data);
+                    $scope.loading = false;
+                    if (response.data.response == 'error') {
+                        $scope.errors = response.data.errors;
+                    } else if (response.data.response == 'ok') {
+                        $scope.registered = true;
+                        window.location.href = response.data.url;
                     }
-                )
-            }, 200);
+                },
+                function (response) {
+                    $scope.loading = false;
+                    alert(response);
+                }
+            )
         }
     });

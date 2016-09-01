@@ -61,7 +61,7 @@ class LoginGoogleController
                     $googleLogin->data()->email = $user->getEmail();
                     $googleLogin->exec();
                     $authUser->saveUserInSession($googleLogin->getUser());
-                    go_to($urlHandler->myProfile());
+                    go_to($urlHandler->editProfile());
                 }
             } catch (\Exception $e) {
                 pr($e);

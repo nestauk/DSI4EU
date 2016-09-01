@@ -51,7 +51,7 @@ class LoginFacebookController
                     $facebookLogin->data()->email = $user->getEmail();
                     $facebookLogin->exec();
                     $authUser->saveUserInSession($facebookLogin->getUser());
-                    go_to($urlHandler->myProfile());
+                    go_to($urlHandler->editProfile());
                 }
             } catch (\Exception $e) {
                 pr($e);

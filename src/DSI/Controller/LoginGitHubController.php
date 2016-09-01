@@ -62,7 +62,7 @@ class LoginGitHubController
                     $gitHubLogin->data()->email = $user->getEmail();
                     $gitHubLogin->exec();
                     $authUser->saveUserInSession($gitHubLogin->getUser());
-                    go_to($urlHandler->myProfile());
+                    go_to($urlHandler->editProfile());
                 }
             } catch (\Exception $e) {
                 pr($e);

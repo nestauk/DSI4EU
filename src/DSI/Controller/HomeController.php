@@ -16,12 +16,8 @@ class HomeController
     public function exec()
     {
         $authUser = new Auth();
-
-        if ($authUser->isLoggedIn())
-            $loggedInUser = (new UserRepository())->getById($authUser->getUserId());
-        else
-            $loggedInUser = null;
-
+        $loggedInUser = $authUser->getUserIfLoggedIn();
+        
         $hideSearch = true;
         $sliderCaseStudies = (new CaseStudyRepository())->getAllPublishedForSlider();
         $homePageCaseStudies = (new CaseStudyRepository())->getHomePageStudiesLast(3);

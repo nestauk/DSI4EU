@@ -35,11 +35,12 @@ class RegisterController
 
                 if ($this->responseFormat === 'json') {
                     echo json_encode([
-                        'response' => 'ok'
+                        'response' => 'ok',
+                        'url' => $urlHandler->editProfile(),
                     ]);
                     die();
                 } else {
-                    go_to($urlHandler->myProfile());
+                    go_to($urlHandler->editProfile());
                 }
             } catch (ErrorHandler $e) {
                 if ($this->responseFormat === 'json') {

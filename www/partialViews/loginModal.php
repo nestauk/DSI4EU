@@ -136,7 +136,8 @@ use DSI\Service\URL;
                                ng-model="email.value"
                                ng-class="{error: errors.email}">
                         <div style="color:red" ng-show="errors.email" ng-bind="errors.email"></div>
-                        <input id="Password-5" type="password" placeholder="<?php _ehtml('Password')?>" name="Password-5"
+                        <input id="Password-5" type="password" placeholder="<?php _ehtml('Password') ?>"
+                               name="Password-5"
                                data-name="Password 5" class="w-input modal-input log-in"
                                ng-model="password.value"
                                ng-class="{error: errors.password}">
@@ -146,17 +147,17 @@ use DSI\Service\URL;
                             <div ng-hide="registered">
                                 <input type="submit"
                                        ng-disabled="loading"
-                                       ng-value="loading ? '<?php _ehtml('Loading...')?>' : '<?php _ehtml('Register')?>'"
+                                       ng-value="loading ? '<?php _ehtml('Loading...') ?>' : '<?php _ehtml('Register') ?>'"
                                        class="w-button dsi-button creat-button">
                             </div>
                             <button ng-show="registered" type="button" class="w-button login-button register">
-                                <?php _ehtml('Welcome to Digital Social!')?>
+                                <?php _ehtml('Welcome to Digital Social!') ?>
                             </button>
                         </div>
                     </form>
                 </div>
                 <div class="cancel" ng-hide="loggedin">
-                    <a href="#" data-ix="destroysignup"><?php _ehtml('Cancel')?></a>
+                    <a href="#" data-ix="destroysignup"><?php _ehtml('Cancel') ?></a>
                 </div>
 
                 <div class="w-row">
@@ -189,7 +190,7 @@ use DSI\Service\URL;
                            class="register-social w-clearfix w-inline-block">
                             <img class="register-social-image"
                                  src="<?php echo SITE_RELATIVE_PATH ?>/images/google-plus-logo.png">
-                            <div class="register-social-text">Google plus</div>
+                            <div class="register-social-text">Google +</div>
                         </a>
                     </div>
                 </div>
