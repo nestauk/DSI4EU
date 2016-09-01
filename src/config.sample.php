@@ -7,7 +7,7 @@ if (!defined('NO_SESSION') OR NO_SESSION != true) {
     session_set_cookie_params(
         $lifetime = 0,
         $path = SITE_RELATIVE_PATH . '/',
-        $domain = SITE_DOMAIN,
+        $domain = "",
         $secure = true,
         $httponly = true
     );

@@ -22,8 +22,7 @@ class StoryAddController
         $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
 
         $loggedInUser = (new UserRepository())->getById($authUser->getUserId());
-        $userCanAddStory = (bool)($loggedInUser AND ($loggedInUser->isCommunityAdmin() OR $loggedInUser->isEditorialAdmin()));
-        if (!$userCanAddStory)
+        if (!$this->userCanAddStory($loggedInUser))
             go_to($urlHandler->home());
 
         if (isset($_POST['add'])) {
@@ -64,5 +63,15 @@ class StoryAddController
 
         $angularModules['fileUpload'] = true;
         require(__DIR__ . '/../../../www/story-add.php');
+    }
+
+    /**
+     * @param $loggedInUser
+     * @return bool
+     */
+    private function userCanAddStory($loggedInUser):bool
+    {
+        $userCanAddStory = (bool)($loggedInUser AND ($loggedInUser->isCommunityAdmin() OR $loggedInUser->isEditorialAdmin()));
+        return $userCanAddStory;
     }
 }

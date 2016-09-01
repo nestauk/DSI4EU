@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: apandele
- * Date: 25/04/2016
- * Time: 16:05
- */
-
 namespace DSI\Service;
 
 use DSI\Entity\User;
