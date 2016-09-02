@@ -50,6 +50,9 @@ class Router
         } elseif ($this->pageURL === '/twitter-login') {
             $this->twitterLoginPage();
 
+        } elseif ($this->pageURL === '/app-login') {
+            $this->appLoginPage();
+
         } elseif ($this->pageURL === '/set-admin') {
             $this->setAdminPage();
 
@@ -296,6 +299,14 @@ class Router
 
         $command = new \DSI\Controller\DashboardController();
         $command->format = 'json';
+        $command->exec();
+    }
+
+    private function appLoginPage($matches = [])
+    {
+        $this->setLanguageFromUrl($matches);
+
+        $command = new \DSI\Controller\AppLoginController();
         $command->exec();
     }
 
