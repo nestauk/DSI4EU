@@ -34,8 +34,17 @@ class AppLoginController
             $login->data()->password = $_GET['password'] ?? '';
             $login->exec();
 
+            $user = $login->getUser();
+
             echo json_encode([
-                'code' => 'ok'
+                'code' => 'ok',
+                'user' => [
+                    'id' => $user->getId(),
+                    'profilePic' => $user->getProfilePicOrDefault(),
+                    'name' => $user->getFullName(),
+                    'jobTitle' => $user->getJobTitle(),
+                    'organisation' => $user->getCompany(),
+                ],
             ]);
             die();
         } catch (ErrorHandler $e) {
