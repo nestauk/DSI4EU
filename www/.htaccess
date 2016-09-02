@@ -1,6 +1,6 @@
 RewriteEngine on
 
-Header set Access-Control-Allow-Origin "http://localhost:8100"
+Header set Access-Control-Allow-Origin "*"
 Header add Access-Control-Allow-Methods: "GET"
 
 RewriteCond %{HTTPS} !=on
