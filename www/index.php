@@ -53,6 +53,9 @@ class Router
         } elseif ($this->pageURL === '/app-login') {
             $this->appLoginPage();
 
+        } elseif ($this->pageURL === '/app-register-user') {
+            $this->appRegisterUserPage();
+
         } elseif ($this->pageURL === '/set-admin') {
             $this->setAdminPage();
 
@@ -307,6 +310,14 @@ class Router
         $this->setLanguageFromUrl($matches);
 
         $command = new \DSI\Controller\AppLoginController();
+        $command->exec();
+    }
+
+    private function appRegisterUserPage($matches = [])
+    {
+        $this->setLanguageFromUrl($matches);
+
+        $command = new \DSI\Controller\AppRegisterUserController();
         $command->exec();
     }
 
