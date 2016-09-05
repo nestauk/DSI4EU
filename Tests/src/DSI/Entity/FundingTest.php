@@ -109,8 +109,8 @@ class FundingTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function settingFundingSource_returnsFundingSource()
     {
-        $this->funding->setFundingSource($this->fundingSource);
-        $this->assertEquals($this->fundingSource->getId(), $this->funding->getFundingSource()->getId());
+        $this->funding->setSource($this->fundingSource);
+        $this->assertEquals($this->fundingSource->getId(), $this->funding->getSource()->getId());
     }
 
     /** @test */

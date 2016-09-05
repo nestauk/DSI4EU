@@ -1,8 +1,7 @@
 <?php
 
-namespace DSI\UseCase;
+namespace DSI\UseCase\Funding;
 
-use DSI\Entity\Country;
 use DSI\Entity\Funding;
 use DSI\Entity\FundingSource;
 use DSI\NotFound;
@@ -11,12 +10,12 @@ use DSI\Repository\FundingRepository;
 use DSI\Repository\FundingSourceRepository;
 use DSI\Service\ErrorHandler;
 
-class AddFunding
+class FundingEdit
 {
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var AddFunding_Data */
+    /** @var EditFunding_Data */
     private $data;
 
     /** @var FundingRepository */
@@ -27,7 +26,7 @@ class AddFunding
 
     public function __construct()
     {
-        $this->data = new AddFunding_Data();
+        $this->data = new EditFunding_Data();
     }
 
     public function exec()
@@ -44,7 +43,7 @@ class AddFunding
     }
 
     /**
-     * @return AddFunding_Data
+     * @return EditFunding_Data
      */
     public function data()
     {
@@ -53,22 +52,22 @@ class AddFunding
 
     private function saveFunding()
     {
-        $funding = new Funding();
-        $funding->setTitle($this->data()->title);
-        $funding->setUrl($this->data()->url);
-        $funding->setCountry((new CountryRepository())->getById($this->data()->countryID));
-        if ($this->fundingSource)
-            $funding->setFundingSource($this->fundingSource);
-        $funding->setClosingDate($this->data()->closingDate);
-        $funding->setDescription($this->data()->description);
-        $this->fundingRepository->insert($funding);
+        $this->data()->funding->setTitle($this->data()->title);
+        $this->data()->funding->setUrl($this->data()->url);
+        $this->data()->funding->setCountry((new CountryRepository())->getById($this->data()->countryID));
+        $this->data()->funding->setSource($this->fundingSource);
+        $this->data()->funding->setClosingDate($this->data()->closingDate);
+        $this->data()->funding->setDescription($this->data()->description);
+        $this->fundingRepository->save($this->data()->funding);
     }
 
     private function assertDataHasBeenSubmitted()
     {
+        if (!$this->data()->funding)
+            $this->errorHandler->addTaggedError('funding', 'Invalid funding');
         if (!$this->data()->countryID)
             $this->errorHandler->addTaggedError('country', 'Invalid country');
-        if (!$this->data()->fundingSource)
+        if (!$this->data()->sourceTitle)
             $this->errorHandler->addTaggedError('fundingSource', 'Invalid funding source');
 
         $this->errorHandler->throwIfNotEmpty();
@@ -97,21 +96,24 @@ class AddFunding
 
     private function getFundingSource()
     {
-        if ($this->data()->fundingSource) {
+        if ($this->data()->sourceTitle) {
             $fundingSourceRepository = new FundingSourceRepository();
             try {
-                $this->fundingSource = $fundingSourceRepository->getByTitle($this->data()->fundingSource);
+                $this->fundingSource = $fundingSourceRepository->getByTitle($this->data()->sourceTitle);
             } catch (NotFound $e) {
                 $this->fundingSource = new FundingSource();
-                $this->fundingSource->setTitle($this->data()->fundingSource);
+                $this->fundingSource->setTitle($this->data()->sourceTitle);
                 $fundingSourceRepository->insert($this->fundingSource);
             }
         }
     }
 }
 
-class AddFunding_Data
+class EditFunding_Data
 {
+    /** @var Funding */
+    public $funding;
+
     /** @var string */
     public $title,
         $url,
@@ -121,7 +123,7 @@ class AddFunding_Data
     public $countryID;
 
     /** @var string */
-    public $fundingSource;
+    public $sourceTitle;
 
     /** @var string */
     public $closingDate;

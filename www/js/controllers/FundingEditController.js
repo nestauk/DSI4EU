@@ -8,20 +8,19 @@ angular
 
         (function () {
             $http.get(editUrl).then(function (response) {
-                console.log(response)
+                $scope.funding = response.data;
+                console.log($scope.funding)
             });
-            // $scope.funding = ;
 
             $scope.save = function () {
                 $scope.loading = true;
                 var data = $scope.funding;
                 data.source = source.val();
                 data.countryID = countryID.val();
-                // data.description = tinyMCE.get('description').getContent();
-                data.add = true;
+                data.save = true;
 
                 $timeout(function () {
-                    $http.post(SITE_RELATIVE_PATH + '/funding/add', data)
+                    $http.post(editUrl, data)
                         .then(function (response) {
                             $scope.loading = false;
                             if (response.data.code == 'ok') {

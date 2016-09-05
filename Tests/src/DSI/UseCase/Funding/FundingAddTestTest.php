@@ -1,12 +1,12 @@
 <?php
 
-require_once __DIR__ . '/../../../config.php';
+require_once __DIR__ . '/../../../../config.php';
 
 use \DSI\Repository;
 use \DSI\Entity;
-use \DSI\UseCase;
+use \DSI\UseCase\Funding\FundingAdd;
 
-class AddFundingTest extends PHPUnit_Framework_TestCase
+class FundingAddTest extends PHPUnit_Framework_TestCase
 {
     /** @var Repository\FundingRepository */
     private $fundingRepository;
@@ -49,13 +49,13 @@ class AddFundingTest extends PHPUnit_Framework_TestCase
     /** @test */
     public function canAddFunding()
     {
-        $addFunding = new UseCase\AddFunding();
+        $addFunding = new FundingAdd();
         $addFunding->data()->title = $title = 'Title';
         $addFunding->data()->url = $url = 'http://example.org';
         $addFunding->data()->description = $description = 'Description';
         $addFunding->data()->closingDate = $closingDate = '2016-10-12';
-        $addFunding->data()->country = $this->country;
-        $addFunding->data()->fundingSource = $this->fundingSource;
+        $addFunding->data()->countryID = $this->country->getId();
+        $addFunding->data()->sourceTitle = $this->fundingSource->getTitle();
         $addFunding->exec();
 
         $this->assertCount(1, $this->fundingRepository->getAll());
@@ -66,10 +66,10 @@ class AddFundingTest extends PHPUnit_Framework_TestCase
     {
         $e = null;
 
-        $addFunding = new UseCase\AddFunding();
+        $addFunding = new FundingAdd();
         try {
             $addFunding->exec();
-        } catch(\DSI\Service\ErrorHandler $e){
+        } catch (\DSI\Service\ErrorHandler $e) {
         }
 
         $this->assertNotNull($e);
@@ -82,12 +82,12 @@ class AddFundingTest extends PHPUnit_Framework_TestCase
     {
         $e = null;
 
-        $addFunding = new UseCase\AddFunding();
-        $addFunding->data()->country = $this->country;
-        $addFunding->data()->fundingSource = $this->fundingSource;
+        $addFunding = new FundingAdd();
+        $addFunding->data()->countryID = $this->country->getId();
+        $addFunding->data()->sourceTitle = $this->fundingSource->getTitle();
         try {
             $addFunding->exec();
-        } catch(\DSI\Service\ErrorHandler $e){
+        } catch (\DSI\Service\ErrorHandler $e) {
         }
 
         $this->assertNotNull($e);
@@ -101,15 +101,15 @@ class AddFundingTest extends PHPUnit_Framework_TestCase
     {
         $e = null;
 
-        $addFunding = new UseCase\AddFunding();
+        $addFunding = new FundingAdd();
         $addFunding->data()->title = $title = 'Title';
         $addFunding->data()->url = $url = 'http://example.org';
         $addFunding->data()->description = $description = 'Description';
-        $addFunding->data()->country = $this->country;
-        $addFunding->data()->fundingSource = $this->fundingSource;
+        $addFunding->data()->countryID = $this->country->getId();
+        $addFunding->data()->sourceTitle = $this->fundingSource->getTitle();
         try {
             $addFunding->exec();
-        } catch(\DSI\Service\ErrorHandler $e){
+        } catch (\DSI\Service\ErrorHandler $e) {
         }
 
         $this->assertNull($e);
@@ -120,16 +120,16 @@ class AddFundingTest extends PHPUnit_Framework_TestCase
     {
         $e = null;
 
-        $addFunding = new UseCase\AddFunding();
+        $addFunding = new FundingAdd();
         $addFunding->data()->title = $title = 'Title';
         $addFunding->data()->url = $url = 'http://example.org';
         $addFunding->data()->description = $description = 'Description';
-        $addFunding->data()->country = $this->country;
-        $addFunding->data()->fundingSource = $this->fundingSource;
+        $addFunding->data()->countryID = $this->country->getId();
+        $addFunding->data()->sourceTitle = $this->fundingSource->getTitle();
         $addFunding->data()->closingDate = 'Invalid-2016-date';
         try {
             $addFunding->exec();
-        } catch(\DSI\Service\ErrorHandler $e){
+        } catch (\DSI\Service\ErrorHandler $e) {
         }
 
         $this->assertNotNull($e);

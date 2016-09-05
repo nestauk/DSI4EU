@@ -17,7 +17,7 @@ class FundingRepository
         $insert[] = "`url` = '" . addslashes($funding->getUrl()) . "'";
         $insert[] = "`description` = '" . addslashes($funding->getDescription()) . "'";
         $insert[] = "`closingDate` = '" . addslashes($funding->getClosingDate()) . "'";
-        $insert[] = "`fundingSourceID` = '" . (int)($funding->getFundingSourceID()) . "'";
+        $insert[] = "`fundingSourceID` = '" . (int)($funding->getSourceID()) . "'";
         $insert[] = "`countryID` = '" . (int)($funding->getCountryID()) . "'";
 
         $query = new SQL("INSERT INTO `{$this->dbTable}` SET " . implode(', ', $insert));
@@ -38,7 +38,7 @@ class FundingRepository
         $insert[] = "`url` = '" . addslashes($funding->getUrl()) . "'";
         $insert[] = "`description` = '" . addslashes($funding->getDescription()) . "'";
         $insert[] = "`closingDate` = '" . addslashes($funding->getClosingDate()) . "'";
-        $insert[] = "`fundingSourceID` = '" . (int)($funding->getFundingSourceID()) . "'";
+        $insert[] = "`fundingSourceID` = '" . (int)($funding->getSourceID()) . "'";
         $insert[] = "`countryID` = '" . (int)($funding->getCountryID()) . "'";
 
         $query = new SQL("UPDATE `{$this->dbTable}` SET " . implode(', ', $insert) . " WHERE `id` = '{$funding->getId()}'");
@@ -56,6 +56,14 @@ class FundingRepository
     public function getAll()
     {
         return $this->getObjectsWhere(["1"]);
+    }
+
+    /** @return Funding[] */
+    public function getFutureOnes()
+    {
+        return $this->getObjectsWhere([
+            "`closingDate` > NOW() OR `closingDate` = '0000-00-00'"
+        ]);
     }
 
     public function clearAll()
@@ -96,7 +104,7 @@ class FundingRepository
             $funding->setDescription($dbFunding['description']);
             $funding->setClosingDate($dbFunding['closingDate']);
             if ($dbFunding['fundingSourceID'])
-                $funding->setFundingSource(
+                $funding->setSource(
                     (new FundingSourceRepository())->getById($dbFunding['fundingSourceID'])
                 );
             if ($dbFunding['countryID'])

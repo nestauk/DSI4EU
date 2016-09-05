@@ -173,15 +173,23 @@ class Funding
     /**
      * @return FundingSource
      */
-    public function getFundingSource(): FundingSource
+    public function getSource(): FundingSource
     {
         return $this->fundingSource;
     }
 
     /**
+     * @return string
+     */
+    public function getSourceTitle()
+    {
+        return $this->fundingSource ? $this->fundingSource->getTitle() : '';
+    }
+
+    /**
      * @return int
      */
-    public function getFundingSourceID(): int
+    public function getSourceID(): int
     {
         return $this->fundingSource ? $this->fundingSource->getId() : 0;
     }
@@ -189,7 +197,7 @@ class Funding
     /**
      * @param FundingSource $fundingSource
      */
-    public function setFundingSource(FundingSource $fundingSource)
+    public function setSource(FundingSource $fundingSource)
     {
         $this->fundingSource = $fundingSource;
     }

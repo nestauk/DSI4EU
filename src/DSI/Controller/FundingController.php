@@ -29,7 +29,7 @@ class FundingController
             $loggedInUser = null;
 
         if ($this->format == 'json') {
-            $fundings = (new FundingRepository())->getAll();
+            $fundings = (new FundingRepository())->getFutureOnes();
 
             echo json_encode([
                 'sources' => $this->jsonSources(),
@@ -82,8 +82,8 @@ class FundingController
                 'closingMonth' => $funding->getClosingDate('m'),
                 'country' => $funding->getCountryName(),
                 'countryID' => $funding->getCountryID(),
-                'fundingSourceID' => $funding->getFundingSourceID(),
-                'fundingSource' => $funding->getFundingSource()->getTitle(),
+                'fundingSourceID' => $funding->getSourceID(),
+                'fundingSource' => $funding->getSource()->getTitle(),
                 'isNew' => $funding->isNew(),
                 'editUrl' => $this->urlHandler->editFunding($funding->getId()),
             ];

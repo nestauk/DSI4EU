@@ -8,7 +8,7 @@ use DSI\Repository\UserRepository;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\URL;
-use DSI\UseCase\AddFunding;
+use DSI\UseCase\Funding\FundingAdd;
 
 class FundingAddController
 {
@@ -25,12 +25,12 @@ class FundingAddController
 
         if (isset($_POST['add'])) {
             try {
-                $addFunding = new AddFunding;
+                $addFunding = new FundingAdd;
                 $addFunding->data()->title = $_POST['title'] ?? '';
                 $addFunding->data()->url = $_POST['url'] ?? '';
                 $addFunding->data()->description = $_POST['description'] ?? '';
                 $addFunding->data()->closingDate = $_POST['closingDate'] ?? '';
-                $addFunding->data()->fundingSource = $_POST['source'] ?? '';
+                $addFunding->data()->sourceTitle = $_POST['source'] ?? '';
                 $addFunding->data()->countryID = $_POST['countryID'] ?? 0;
 
                 $addFunding->exec();

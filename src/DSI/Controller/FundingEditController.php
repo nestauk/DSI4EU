@@ -9,12 +9,15 @@ use DSI\Repository\UserRepository;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\URL;
-use DSI\UseCase\AddFunding;
+use DSI\UseCase\Funding\FundingEdit;
 
 class FundingEditController
 {
     /** @var int */
     public $fundingID;
+
+    /** @var string */
+    public $format;
 
     public function exec()
     {
@@ -29,29 +32,42 @@ class FundingEditController
 
         $funding = (new FundingRepository())->getById($this->fundingID);
 
-        if (isset($_POST['save'])) {
-            try {
-                $addFunding = new AddFunding;
-                $addFunding->data()->title = $_POST['title'] ?? '';
-                $addFunding->data()->url = $_POST['url'] ?? '';
-                $addFunding->data()->description = $_POST['description'] ?? '';
-                $addFunding->data()->closingDate = $_POST['closingDate'] ?? '';
-                $addFunding->data()->fundingSource = $_POST['source'] ?? '';
-                $addFunding->data()->countryID = $_POST['countryID'] ?? 0;
+        if ($this->format == 'json') {
+            if (isset($_POST['save'])) {
+                try {
+                    $editFunding = new FundingEdit();
+                    $editFunding->data()->funding = $funding;
+                    $editFunding->data()->title = $_POST['title'] ?? '';
+                    $editFunding->data()->url = $_POST['url'] ?? '';
+                    $editFunding->data()->description = $_POST['description'] ?? '';
+                    $editFunding->data()->closingDate = $_POST['closingDate'] ?? '';
+                    $editFunding->data()->sourceTitle = $_POST['source'] ?? '';
+                    $editFunding->data()->countryID = $_POST['countryID'] ?? 0;
 
-                $addFunding->exec();
+                    $editFunding->exec();
 
-                echo json_encode([
-                    'code' => 'ok',
-                    'url' => $urlHandler->funding(),
-                ]);
-            } catch (ErrorHandler $e) {
-                echo json_encode([
-                    'code' => 'error',
-                    'errors' => $e->getErrors(),
-                ]);
+                    echo json_encode([
+                        'code' => 'ok',
+                        'url' => $urlHandler->funding(),
+                    ]);
+                } catch (ErrorHandler $e) {
+                    echo json_encode([
+                        'code' => 'error',
+                        'errors' => $e->getErrors(),
+                    ]);
+                }
+                return;
             }
-            die();
+
+            echo json_encode([
+                'title' => $funding->getTitle(),
+                'url' => $funding->getUrl(),
+                'description' => $funding->getDescription(),
+                'closingDate' => $funding->getClosingDate(),
+                'source' => $funding->getSourceTitle(),
+                'countryID' => $funding->getCountryID(),
+            ]);
+            return;
         }
 
         $fundingSources = (new FundingSourceRepository())->getAll();

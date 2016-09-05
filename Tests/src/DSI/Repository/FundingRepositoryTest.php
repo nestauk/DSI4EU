@@ -55,7 +55,7 @@ class FundingRepositoryTest extends PHPUnit_Framework_TestCase
         $funding->setUrl($url = 'http://example.org');
         $funding->setDescription($description = 'Description');
         $funding->setClosingDate($closingDate = '2016-10-12');
-        $funding->setFundingSource($this->fundingSource);
+        $funding->setSource($this->fundingSource);
         $funding->setCountry($this->country);
         $this->fundingRepository->insert($funding);
 
@@ -65,7 +65,7 @@ class FundingRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($url, $funding->getUrl());
         $this->assertEquals($description, $funding->getDescription());
         $this->assertEquals($closingDate, $funding->getClosingDate());
-        $this->assertEquals($this->fundingSource->getId(), $funding->getFundingSourceID());
+        $this->assertEquals($this->fundingSource->getId(), $funding->getSourceID());
         $this->assertEquals($this->country->getId(), $funding->getCountryID());
 
         $this->assertNotEquals('0000-00-00 00:00:00', $funding->getTimeCreated());
@@ -114,7 +114,7 @@ class FundingRepositoryTest extends PHPUnit_Framework_TestCase
         $funding->setUrl($url = 'http://example.org');
         $funding->setDescription($description = 'Description');
         $funding->setClosingDate($closingDate = '2016-10-12');
-        $funding->setFundingSource($this->fundingSource);
+        $funding->setSource($this->fundingSource);
         $funding->setCountry($this->country);
         $this->fundingRepository->save($funding);
 
@@ -123,7 +123,7 @@ class FundingRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($url, $funding->getUrl());
         $this->assertEquals($description, $funding->getDescription());
         $this->assertEquals($closingDate, $funding->getClosingDate());
-        $this->assertEquals($this->fundingSource->getId(), $funding->getFundingSourceID());
+        $this->assertEquals($this->fundingSource->getId(), $funding->getSourceID());
         $this->assertEquals($this->country->getId(), $funding->getCountryID());
 
         $this->assertNotEquals('0000-00-00 00:00:00', $funding->getTimeCreated());

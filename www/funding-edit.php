@@ -60,7 +60,8 @@ require __DIR__ . '/header.php';
                                         data-placeholder="Select source or add new one">
                                     <option></option>
                                     <?php foreach ($fundingSources AS $source) { ?>
-                                        <option value="<?php echo $source->getTitle() ?>">
+                                        <option value="<?php echo $source->getTitle() ?>"
+                                            <?php if ($source->getTitle() == $funding->getSourceTitle()) echo 'selected' ?>>
                                             <?php echo show_input($source->getTitle()) ?>
                                         </option>
                                     <?php } ?>
@@ -75,7 +76,8 @@ require __DIR__ . '/header.php';
                                     <option></option>
                                     <?php foreach ($countries AS $country) { ?>
                                         <?php echo show_input($country->getName()) ?>
-                                        <option value="<?php echo $country->getId() ?>">
+                                        <option value="<?php echo $country->getId() ?>"
+                                            <?php if ($country->getId() == $funding->getCountryID()) echo 'selected' ?>>
                                             <?php echo show_input($country->getName()) ?>
                                         </option>
                                     <?php } ?>
