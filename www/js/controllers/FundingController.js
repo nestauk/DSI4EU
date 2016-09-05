@@ -12,4 +12,14 @@ angular
                 $scope.beforeYear = $scope.data.years[0];
                 $scope.inCountry = $scope.data.countries[0];
             });
+
+        $scope.earlierThan = function (val) {
+            return function (item) {
+                if (val == '000000')
+                    return true;
+                if (item.closingMonth == '')
+                    return false;
+                return item.closingMonth < val;
+            }
+        }
     });

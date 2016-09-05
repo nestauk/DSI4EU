@@ -1,6 +1,6 @@
 angular
     .module(angularAppName)
-    .controller('FundingAddController', function ($scope, $http, $timeout) {
+    .controller('FundingAddController', function ($scope, $http) {
 
         var countryID = $('#countryID');
         var source = $('#fundingSource');
@@ -16,21 +16,19 @@ angular
                 // data.description = tinyMCE.get('description').getContent();
                 data.add = true;
 
-                $timeout(function () {
-                    $http.post(SITE_RELATIVE_PATH + '/funding/add', data)
-                        .then(function (response) {
-                            $scope.loading = false;
-                            if (response.data.code == 'ok') {
-                                window.location.href = response.data.url;
-                            } else if (response.data.code == 'error') {
-                                $scope.errors = response.data.errors;
-                                console.log(response.data.errors);
-                            } else {
-                                alert('unexpected error');
-                                console.log(response.data);
-                            }
-                        });
-                }, 500);
+                $http.post(SITE_RELATIVE_PATH + '/funding/add', data)
+                    .then(function (response) {
+                        $scope.loading = false;
+                        if (response.data.code == 'ok') {
+                            window.location.href = response.data.url;
+                        } else if (response.data.code == 'error') {
+                            $scope.errors = response.data.errors;
+                            console.log(response.data.errors);
+                        } else {
+                            alert('unexpected error');
+                            console.log(response.data);
+                        }
+                    });
             }
         }());
     });

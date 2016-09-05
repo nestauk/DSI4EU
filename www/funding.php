@@ -24,6 +24,7 @@ require __DIR__ . '/header.php'
                                 <h3 class="filter-h3">Search funding opportunities</h3>
                                 <input class="funding-filter w-input" data-name="Search" id="Search-2" maxlength="256"
                                        name="Search" placeholder="Search by keyword or content" required="required"
+                                       ng-model="searchName"
                                        type="text">
                                 <h3 class="filter-h3">Filter by:</h3>
                                 <select class="funding-filter w-select" data-name="Country 4" id="country-4"
@@ -57,7 +58,13 @@ require __DIR__ . '/header.php'
                     </div>
                 </div>
                 <div class="w-col w-col-8 w-col-stack">
-                    <div class="info-card" ng-repeat="funding in data.fundings">
+                    <div class="info-card"
+                         ng-repeat="funding in data.fundings
+                         | filter: searchName
+                         | filter: {countryID: inCountry.id || ''}
+                         | filter: {fundingSourceID: fundingSource.id || ''}
+                         | filter: earlierThan('' + beforeYear.id + beforeMonth.id)
+                           track by funding.id">
                         <h2 class="funding-card-h2" ng-bind="funding.title"></h2>
                         <p class="funding-descr" ng-bind="funding.description"></p>
                         <div class="funding-closing-date" ng-show="funding.closingDate">

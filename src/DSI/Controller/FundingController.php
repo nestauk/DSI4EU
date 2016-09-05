@@ -78,8 +78,7 @@ class FundingController
                 'description' => $funding->getDescription(),
                 'url' => $funding->getUrl(),
                 'closingDate' => $funding->getClosingDate('d M Y'),
-                'closingYear' => $funding->getClosingDate('Y'),
-                'closingMonth' => $funding->getClosingDate('m'),
+                'closingMonth' => $funding->getClosingDate('Ym'),
                 'country' => $funding->getCountryName(),
                 'countryID' => $funding->getCountryID(),
                 'fundingSourceID' => $funding->getSourceID(),
@@ -96,19 +95,19 @@ class FundingController
     private function jsonMonths()
     {
         return [
-            ['id' => 0, 'title' => '- Before Month -'],
-            ['id' => 1, 'title' => 'January'],
-            ['id' => 2, 'title' => 'February'],
-            ['id' => 3, 'title' => 'March'],
-            ['id' => 4, 'title' => 'April'],
-            ['id' => 5, 'title' => 'May'],
-            ['id' => 6, 'title' => 'June'],
-            ['id' => 7, 'title' => 'July'],
-            ['id' => 8, 'title' => 'August'],
-            ['id' => 9, 'title' => 'September'],
-            ['id' => 10, 'title' => 'October'],
-            ['id' => 11, 'title' => 'November'],
-            ['id' => 12, 'title' => 'December'],
+            ['id' => '00', 'title' => '- Before Month -'],
+            ['id' => '01', 'title' => 'January'],
+            ['id' => '02', 'title' => 'February'],
+            ['id' => '03', 'title' => 'March'],
+            ['id' => '04', 'title' => 'April'],
+            ['id' => '05', 'title' => 'May'],
+            ['id' => '06', 'title' => 'June'],
+            ['id' => '07', 'title' => 'July'],
+            ['id' => '08', 'title' => 'August'],
+            ['id' => '09', 'title' => 'September'],
+            ['id' => '10', 'title' => 'October'],
+            ['id' => '11', 'title' => 'November'],
+            ['id' => '12', 'title' => 'December'],
         ];
     }
 
@@ -120,7 +119,8 @@ class FundingController
     {
         $years = [date('Y')];
         foreach ($fundings AS $funding) {
-            $years[] = $funding->getClosingDate('Y');
+            if ($funding->getClosingDate('Y'))
+                $years[] = $funding->getClosingDate('Y');
         }
         $years = array_unique($years);
         sort($years);
@@ -133,7 +133,7 @@ class FundingController
         }, $years);
 
         array_unshift($endingYears, [
-            'id' => 0,
+            'id' => '0000',
             'title' => '- Before Year -',
         ]);
         return $endingYears;
