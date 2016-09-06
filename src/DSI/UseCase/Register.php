@@ -47,6 +47,7 @@ class Register
 
         $this->user = $user;
 
+        $this->sendWelcomeEmail();
         $this->checkProjectInvitations();
     }
 
@@ -94,6 +95,13 @@ class Register
             $this->errorHandler->addTaggedError('email', 'This email address is already registered');
 
         $this->errorHandler->throwIfNotEmpty();
+    }
+
+    private function sendWelcomeEmail()
+    {
+        $sendEmail = new SendWelcomeEmailAfterRegistration();
+        $sendEmail->data()->emailAddress = $this->data()->email;
+        $sendEmail->exec();
     }
 
     private function checkProjectInvitations()
