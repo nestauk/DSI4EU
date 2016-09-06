@@ -27,6 +27,17 @@ class Mailer extends \PHPMailer
 
         file_put_contents(__DIR__ . '/../../../logs/mail-logs/' . microtime(1) . '.json', json_encode($this));
 
-        return parent::send();
+        for ($i = 0; $i < 3; $i++) {
+            if ($returnCode = parent::send())
+                return $returnCode;
+            else {
+                error_log(($i + 1) . 'try: Could not send email to: ' . $this->getToAddresses());
+                error_log($this->ErrorInfo);
+                sleep(1);
+            }
+        }
+
+        error_log('no more try: Could not send email to: ' . $this->getToAddresses());
+        return false;
     }
 }
