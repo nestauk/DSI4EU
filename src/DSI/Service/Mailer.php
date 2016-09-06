@@ -31,13 +31,15 @@ class Mailer extends \PHPMailer
             if ($returnCode = parent::send())
                 return $returnCode;
             else {
-                error_log(($i + 1) . 'try: Could not send email to: ' . $this->getToAddresses());
-                error_log($this->ErrorInfo);
+                error_log(($i + 1) . ' try: Could not send email to: ');
+                error_log(var_export($this->getToAddresses(), true));
+                error_log('Error: ' . $this->ErrorInfo);
                 sleep(1);
             }
         }
 
-        error_log('no more try: Could not send email to: ' . $this->getToAddresses());
+        error_log('no more try: Could not send email to:');
+        error_log(var_export($this->getToAddresses(), true));
         return false;
     }
 }
