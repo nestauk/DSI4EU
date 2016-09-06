@@ -2,6 +2,8 @@
 
 namespace DSI\Service;
 
+use DSI\UseCase\CacheUnsentEmail;
+
 class Mailer extends \PHPMailer
 {
     public function wrapMessageInTemplate($data)
@@ -25,21 +27,21 @@ class Mailer extends \PHPMailer
     {
         $this->addBCC('alecs@inoveb.co.uk');
 
-        file_put_contents(__DIR__ . '/../../../logs/mail-logs/' . microtime(1) . '.json', json_encode($this));
+        $returnCode = parent::send();
+        if (!$returnCode) {
+            error_log('Could not send email to: ');
+            error_log(var_export($this->getToAddresses(), true));
+            error_log('Error: ' . $this->ErrorInfo);
 
-        for ($i = 0; $i < 3; $i++) {
-            if ($returnCode = parent::send())
-                return $returnCode;
-            else {
-                error_log(($i + 1) . ' try: Could not send email to: ');
-                error_log(var_export($this->getToAddresses(), true));
-                error_log('Error: ' . $this->ErrorInfo);
-                sleep(1);
-            }
+            $cacheEmail = new CacheUnsentEmail();
+            $cacheEmail->data()->content = $this;
+            $cacheEmail->exec();
+
+            return false;
+        } else {
+            file_put_contents(__DIR__ . '/../../../logs/mail-logs/' . microtime(1) . '.json', json_encode($this));
+
+            return true;
         }
-
-        error_log('no more try: Could not send email to:');
-        error_log(var_export($this->getToAddresses(), true));
-        return false;
     }
 }
