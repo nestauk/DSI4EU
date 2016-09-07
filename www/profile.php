@@ -61,7 +61,7 @@ require __DIR__ . '/header.php';
                             <ul class="w-list-unstyled">
                                 <?php foreach ($userLinks AS $link) { ?>
                                     <li class="profile-contact-link">
-                                        <a class="link profile-contact-link" href="<?php echo $link ?>">
+                                        <a class="link profile-contact-link" href="<?php echo $link ?>" rel="nofollow">
                                             <?php echo show_input($link) ?>
                                         </a>
                                     </li>

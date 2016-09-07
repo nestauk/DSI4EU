@@ -198,7 +198,7 @@ $leftSideText .= "<p>The information is optional. You will be able to edit and e
                                                                    type="text">
                                                             <input class="creator-data-entry w-input"
                                                                    data-name="Email 4" id="email-4" maxlength="256"
-                                                                   name="email-4" placeholder="Google plus"
+                                                                   name="email-4" placeholder="Google +"
                                                                    ng-model="user.links.googleplus"
                                                                    type="text">
                                                         </div>
@@ -248,12 +248,13 @@ $leftSideText .= "<p>The information is optional. You will be able to edit and e
                                                                    name="email-7" placeholder="Your country"
                                                                    ng-model="user.countryName"
                                                                    type="text">
-                                                            <label for="email-8">and in which city?</label>
+                                                            <label for="email-8">And in which city?</label>
                                                             <input class="creator-data-entry w-input"
                                                                    data-name="Email 8" id="email-8" maxlength="256"
                                                                    name="email-8" placeholder="Your city"
                                                                    ng-model="user.cityName"
                                                                    type="text">
+                                                            <br/>
                                                             <h2 class="edit-h2">Languages</h2>
                                                             <label for="name">Which languages do you know?</label>
                                                             <p>Which languages can you read? We want to give you the
@@ -277,7 +278,7 @@ $leftSideText .= "<p>The information is optional. You will be able to edit and e
                                                     <div class="w-col w-col-6">
                                                         <div class="padding-left-50">
                                                             <h2 class="edit-h2">Your skills</h2>
-                                                            <p>Are you willing to offer your support to other DSI
+                                                            <p>Would you like to offer your support to other DSI
                                                                 organisations and projects? Please list relevant skills
                                                                 that you would be willing to share with the
                                                                 community.</p>
@@ -443,8 +444,8 @@ $leftSideText .= "<p>The information is optional. You will be able to edit and e
                                            class="previous tab-button-3 tab-button-next w-button">Previous</a>
                                     </div>
                                     <h2>4 - Publish your profile</h2>
-                                    <p>Once you click publish now the information you’ve submitted will be published on
-                                        the site.</p>
+                                    <p>Once you click the Publish Now button the information you’ve submitted will be
+                                        published on the site.</p>
                                     <div class="w-form">
                                         <label>Permission</label>
                                         <p>By creating an account, you are agreeing to our
@@ -458,7 +459,14 @@ $leftSideText .= "<p>The information is optional. You will be able to edit and e
                                             <label class="w-form-label" for="checkbox">
                                                 <input class="w-checkbox-input" id="checkbox"
                                                        name="checkbox" type="checkbox" ng-model="user.confirm">
-                                                I agree
+                                                I agree to the
+                                                <a href="<?php echo $urlHandler->termsOfUse() ?>" target="_blank">
+                                                    Terms of Use
+                                                </a>
+                                                and
+                                                <a href="<?php echo $urlHandler->privacyPolicy() ?>" target="_blank">
+                                                    Privacy Policy
+                                                </a>
                                             </label>
                                         </div>
                                         <div class="error" ng-bind="errors.confirm"></div>

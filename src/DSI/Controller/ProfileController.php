@@ -43,11 +43,11 @@ class ProfileController
         $urlHandler = new URL();
         $authUser = new Auth();
         $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
+        $loggedInUser = $authUser->getUser();
 
         $user = $this->getUserFromURL();
         $userID = $user->getId();
-        $isOwner = ($user->getId() == $authUser->getUserId());
-        $loggedInUser = (new UserRepository())->getById($authUser->getUserId());
+        $isOwner = ($user->getId() == $loggedInUser->getId());
 
         if ($this->data()->format == 'json') {
             $userSkillRepo = new UserSkillRepository();

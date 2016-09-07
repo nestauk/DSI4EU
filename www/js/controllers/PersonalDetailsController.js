@@ -55,8 +55,14 @@ angular
                     confirm: 'You have to agree with our terms and conditions'
                 };
             } else {
-                $scope.loading = true;
-                window.location.href = profilePage;
+                swal({
+                    title: 'Success',
+                    text: 'Your profile has been successfully updated',
+                    type: "success",
+                    confirmButtonText: "Go to my profile"
+                }, function () {
+                    window.location.href = profilePage;
+                });
             }
         };
 
@@ -134,4 +140,4 @@ angular
                 });
             }
         };
-    });
+    })
