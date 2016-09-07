@@ -1,6 +1,6 @@
 angular
     .module(angularAppName)
-    .controller('CaseStudyAddController', function ($scope, $http, $timeout, Upload) {
+    .controller('CaseStudyAddController', function ($scope, $http, Upload) {
 
         var editCountry = $('#edit-country');
         var editCountryRegion = $('#edit-countryRegion');
@@ -56,24 +56,23 @@ angular
                 data.headerImage = $scope.headerImage.image;
                 data.countryID = editCountry.val();
                 data.region = editCountryRegion.val();
+                data.introPageText = tinyMCE.get('pageIntro').getContent();
                 data.mainText = tinyMCE.get('mainText').getContent();
                 data.add = true;
 
-                $timeout(function () {
-                    $http.post(SITE_RELATIVE_PATH + '/case-study/add', data)
-                        .then(function (response) {
-                            $scope.loading = false;
-                            if (response.data.code == 'ok') {
-                                window.location.href = response.data.url;
-                            } else if (response.data.code == 'error') {
-                                $scope.errors = response.data.errors;
-                                console.log(response.data.errors);
-                            } else {
-                                alert('unexpected error');
-                                console.log(response.data);
-                            }
-                        });
-                }, 500);
+                $http.post(SITE_RELATIVE_PATH + '/case-study/add', data)
+                    .then(function (response) {
+                        $scope.loading = false;
+                        if (response.data.code == 'ok') {
+                            window.location.href = response.data.url;
+                        } else if (response.data.code == 'error') {
+                            $scope.errors = response.data.errors;
+                            console.log(response.data.errors);
+                        } else {
+                            alert('unexpected error');
+                            console.log(response.data);
+                        }
+                    });
             }
         }());
 
@@ -94,13 +93,11 @@ angular
                 $scope.regionsLoading = true;
                 $http.get(SITE_RELATIVE_PATH + '/countryRegions/' + countryID + '.json')
                     .then(function (result) {
-                        $timeout(function () {
-                            editCountryRegion
-                                .html("")
-                                .select2({data: result.data});
-                            $scope.regionsLoaded = true;
-                            $scope.regionsLoading = false;
-                        }, 300);
+                        editCountryRegion
+                            .html("")
+                            .select2({data: result.data});
+                        $scope.regionsLoaded = true;
+                        $scope.regionsLoading = false;
                     });
             }
         };

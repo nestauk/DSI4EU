@@ -32,9 +32,10 @@ require __DIR__ . '/header.php';
             <div class="case-study-single-container w-container">
                 <h2 class="centered" data-ix="fadeinuponload-4">
                     <?php _ehtml('Introduction') ?></h2>
-                <p class="centered" data-ix="fadeinuponload-5">
-                    <?php echo show_input($caseStudy->getIntroPageText()) ?>
-                </p>
+                <div class="centered" data-ix="fadeinuponload-5">
+                    <?php echo $caseStudy->getIntroPageText() ?>
+                </div>
+                <?php /*
                 <h4 class="case-study-intro-detail centered" data-ix="fadeinuponload-5">
                     <?php if ($caseStudy->getRegion() AND $caseStudy->getProjectStartDate()) {
                         echo sprintf(
@@ -58,6 +59,7 @@ require __DIR__ . '/header.php';
                         );
                     } ?>
                 </h4>
+                */ ?>
                 <?php if ($caseStudy->getMainText()) { ?>
                     <div class="centered url-block" data-ix="fadeinup">
                         <h2><?php _ehtml('Overview') ?></h2>

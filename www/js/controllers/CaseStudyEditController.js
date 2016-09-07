@@ -30,6 +30,7 @@ angular
                 data.headerImage = $scope.headerImage.image;
                 data.countryID = editCountry.val();
                 data.region = editCountryRegion.val();
+                data.introPageText = tinyMCE.get('pageIntro').getContent();
                 data.mainText = tinyMCE.get('mainText').getContent();
                 data.save = true;
 

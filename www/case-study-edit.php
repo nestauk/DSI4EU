@@ -31,14 +31,15 @@ require __DIR__ . '/header.php';
                                 <input class="creator-data-entry w-input" data-name="Name 3" id="name-3" maxlength="256"
                                        ng-model="caseStudy.introCardText"
                                        name="name-3" placeholder="This text appears on the grid card" type="text">
-                                <label for="field">Page intro text:</label>
-                                <textarea class="creator-data-entry w-input" id="field" maxlength="5000" name="field"
-                                          ng-model="caseStudy.introPageText"
-                                          placeholder="This text appears at the top of the case study page"></textarea>
-                                <label>Main page text</label>
+                                <label>Page introduction:</label>
+                                <textarea class="creator-data-entry w-input" name="field"
+                                          placeholder="This text appears at the top of the case study page"
+                                          id="pageIntro"><?php echo $caseStudy->getIntroPageText() ?></textarea>
+                                <br/>
+                                <label>Page overview:</label>
                                 <textarea class="creator-data-entry end long-description w-input"
-                                          id="mainText"
-                                          placeholder="This is the main body text"><?php echo $caseStudy->getMainText() ?></textarea>
+                                          placeholder="This is the main body text"
+                                          id="mainText"><?php echo $caseStudy->getMainText() ?></textarea>
                                 <h2 class="edit-h2">Duration of project</h2>
                                 <label for="name-4">Project start date</label>
                                 <input class="creator-data-entry w-input" data-name="Name 4" id="projectStartDate"
@@ -216,7 +217,7 @@ require __DIR__ . '/header.php';
     <script>
         $(function () {
             tinymce.init({
-                selector: '#mainText',
+                selector: '#mainText, #pageIntro',
                 statusbar: false,
                 height: 500,
                 plugins: "autoresize autolink lists link preview paste textcolor colorpicker image imagetools media",

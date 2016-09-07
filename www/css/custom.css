@@ -355,3 +355,7 @@ div.error {
 .select2-search__field {
     width: 100% !important;
 }
+
+.centered p{
+    text-align:center !important;
+}

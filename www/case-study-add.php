@@ -19,20 +19,22 @@ require __DIR__ . '/header.php';
                         <div class="w-row">
                             <div class="form-col-left w-col w-col-6">
                                 <h2 class="edit-h2">Case study text</h2>
-                                <label for="name-2">Case study project title:</label>
+                                <label>Case study project title:</label>
                                 <input class="creator-data-entry w-input" id="name-2" maxlength="256"
                                        ng-model="caseStudy.title"
                                        name="name-2" placeholder="Project Title" type="text">
                                 <div class="error" ng-bind="errors.title"></div>
-                                <label for="name-3">Intro card text:</label>
+                                <label>Intro card text:</label>
                                 <input class="creator-data-entry w-input" data-name="Name 3" id="name-3" maxlength="256"
                                        ng-model="caseStudy.introCardText"
                                        name="name-3" placeholder="This text appears on the grid card" type="text">
-                                <label for="field">Page intro text:</label>
-                                <textarea class="creator-data-entry w-input" id="field" maxlength="5000" name="field"
+                                <label for="field">Page introduction:</label>
+                                <textarea class="creator-data-entry w-input" name="field"
+                                          id="pageIntro"
                                           ng-model="caseStudy.introPageText"
                                           placeholder="This text appears at the top of the case study page"></textarea>
-                                <label>Main page text</label>
+                                <br />
+                                <label>Page overview:</label>
                                 <textarea class="creator-data-entry end long-description w-input"
                                           id="mainText"
                                           ng-model="caseStudy.mainText"
@@ -178,7 +180,7 @@ require __DIR__ . '/header.php';
     <script>
         $(function () {
             tinymce.init({
-                selector: '#mainText',
+                selector: '#mainText, #pageIntro',
                 statusbar: false,
                 height: 500,
                 plugins: "autoresize autolink lists link preview paste textcolor colorpicker image imagetools media",
