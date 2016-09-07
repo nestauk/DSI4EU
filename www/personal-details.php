@@ -96,7 +96,7 @@ $leftSideText .= "<p>The information is optional. You will be able to edit and e
             <div class="container-wide">
                 <div class="add-story body-content">
                     <div class="w-tabs" data-easing="linear">
-                        <div class="creator-tab-menu w-tab-menu">
+                        <div class="creator-tab-menu w-tab-menu edit-personal-profile">
                             <a class="step-tab tab-link-1 w-inline-block w-tab-link"
                                ng-class="{'w--current': currentTab == 'step1'}" data-w-tab="Tab 1"
                                ng-click="currentTab = 'step1'">
