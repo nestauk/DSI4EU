@@ -83,7 +83,8 @@ $leftSideText .= "<p>The information is optional. You will be able to edit and e
         </div>
     </div>
 
-    <div ng-controller="PersonalDetailsController">
+    <div ng-controller="PersonalDetailsController"
+         data-profileurl="<?php echo $urlHandler->myProfile() ?>">
 
         <div class="w-section page-header">
             <div class="container-wide header">
@@ -111,11 +112,13 @@ $leftSideText .= "<p>The information is optional. You will be able to edit and e
                                ng-click="currentTab = 'step3'">
                                 <div>3 - Projects &amp; Organisations</div>
                             </a>
+                            <?php /*
                             <a class="step-tab tab-link-4 w-inline-block w-tab-link"
                                ng-class="{'w--current': currentTab == 'step4'}" data-w-tab="Tab 4" id="tab-four"
                                ng-click="currentTab = 'step4'">
                                 <div>4 - Publish your Profile</div>
                             </a>
+                            */ ?>
                         </div>
                         <div class="w-tab-content">
                             <div class="step-window w-tab-pane" ng-class="{'w--tab-active': currentTab == 'step1'}"
@@ -328,14 +331,16 @@ $leftSideText .= "<p>The information is optional. You will be able to edit and e
                                 <form id="email-form-3" name="email-form-3" ng-submit="submitStep3()">
                                     <div class="tabbed-nav-buttons w-clearfix">
                                         <input type="submit" class="tab-button-4 tab-button-next w-button"
-                                               ng-value="loading ? 'Loading...' : 'Next'"
+                                               ng-value="loading ? 'Loading...' : 'Finish'"
                                                ng-disabled="loading"
-                                               value="Next"/>
+                                               value="Finish"/>
+                                        <?php /*
                                         <button type="button" class="tab-button-2 tab-button-next w-button"
                                                 ng-bind="loading ? 'Loading...' : 'Save'"
                                                 ng-click="submitStep3({proceed: false})"
                                                 ng-disabled="loading">Save
                                         </button>
+                                        */ ?>
                                         <a class="previous tab-button-2 tab-button-next w-button"
                                            ng-click="currentTab='step2'">Previous</a>
                                     </div>

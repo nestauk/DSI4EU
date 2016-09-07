@@ -359,3 +359,8 @@ div.error {
 .centered p{
     text-align:center !important;
 }
+
+.w-tab-link {
+    padding-right: 90px;
+    padding-left: 90px;
+}

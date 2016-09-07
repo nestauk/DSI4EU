@@ -1,6 +1,8 @@
 angular
     .module(angularAppName)
-    .controller('PersonalDetailsController', function ($scope, $http, $timeout, Upload) {
+    .controller('PersonalDetailsController', function ($scope, $http, Upload, $attrs) {
+        var profilePage = $attrs.profileurl;
+
         $scope.user = {};
         $http.get(SITE_RELATIVE_PATH + '/my-profile.json')
             .then(function (result) {
@@ -43,28 +45,39 @@ angular
                     if (params && params.proceed == false) {
                         swal('Success!', 'The changes have been successfully saved.', 'success');
                     } else {
-                        $scope.currentTab = 'step4';
+                        swal({
+                            title: 'Success',
+                            text: 'Your profile has been successfully updated',
+                            type: "success",
+                            confirmButtonText: "Go to my profile"
+                        }, function () {
+                            window.location.href = profilePage;
+                        });
+                        // $scope.currentTab = 'step4';
                     }
                 }
             })
         };
-        $scope.submitStep4 = function (profilePage) {
-            $scope.errors = {};
-            if (!$scope.user.confirm) {
-                $scope.errors = {
-                    confirm: 'You have to agree with our terms and conditions'
-                };
-            } else {
-                swal({
-                    title: 'Success',
-                    text: 'Your profile has been successfully updated',
-                    type: "success",
-                    confirmButtonText: "Go to my profile"
-                }, function () {
-                    window.location.href = profilePage;
-                });
-            }
-        };
+        
+        /*
+         $scope.submitStep4 = function () {
+         $scope.errors = {};
+         if (!$scope.user.confirm) {
+         $scope.errors = {
+         confirm: 'You have to agree with our terms and conditions'
+         };
+         } else {
+         swal({
+         title: 'Success',
+         text: 'Your profile has been successfully updated',
+         type: "success",
+         confirmButtonText: "Go to my profile"
+         }, function () {
+         window.location.href = profilePage;
+         });
+         }
+         };
+         */
 
         $scope.saveUserDetails = function (options) {
             $scope.loading = true;
@@ -140,4 +153,4 @@ angular
                 });
             }
         };
-    })
+    });
