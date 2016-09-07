@@ -140,7 +140,7 @@ class UpdateUserBasicDetails
     private function setUserLinks()
     {
         $userLinks = (new UserLinkRepository())->getLinksByUserID($this->data()->userID);
-        foreach ($this->data()->links AS $newLink) {
+        foreach ((array)$this->data()->links AS $newLink) {
             if (!in_array($newLink, $userLinks)) {
                 $addLink = new AddLinkToUser();
                 $addLink->data()->userID = $this->data()->userID;
@@ -148,7 +148,7 @@ class UpdateUserBasicDetails
                 $addLink->exec();
             }
         }
-        foreach ($userLinks AS $oldLink) {
+        foreach ((array)$userLinks AS $oldLink) {
             if (!in_array($oldLink, $this->data()->links)) {
                 $remLink = new RemoveLinkFromUser();
                 $remLink->data()->userID = $this->data()->userID;
