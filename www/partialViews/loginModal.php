@@ -190,7 +190,7 @@ use DSI\Service\URL;
                            class="register-social w-clearfix w-inline-block">
                             <img class="register-social-image"
                                  src="<?php echo SITE_RELATIVE_PATH ?>/images/google-plus-logo.png">
-                            <div class="register-social-text">Google +</div>
+                            <div class="register-social-text">Google</div>
                         </a>
                     </div>
                 </div>
