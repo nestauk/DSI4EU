@@ -21,6 +21,17 @@ class CacheMailRepository
         $mail->setId($query->insert_id());
     }
 
+    public function remove(CacheMail $mail)
+    {
+        $query = new SQL("SELECT id FROM `{$this->dbTable}` WHERE id = '{$mail->getId()}' LIMIT 1");
+        $existingMail = $query->fetch();
+        if (!$existingMail)
+            throw new NotFound('mailID: ' . $mail->getId());
+
+        $query = new SQL("DELETE FROM `{$this->dbTable}` WHERE id = '{$mail->getId()}' LIMIT 1");
+        $query->query();
+    }
+
     public function getById(int $id)
     {
         return $this->getObjectWhere([
