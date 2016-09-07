@@ -23,7 +23,7 @@ require __DIR__ . '/header.php';
                 <div class="container-wide container-wide-header-large">
                     <?php if ($userCanEditProject) { ?>
                         <a class="dsi-button profile-edit w-button" style="z-index:1000"
-                           href="<?php echo $urlHandler->editProject($project->getId()) ?>">Edit project</a>
+                           href="<?php echo $urlHandler->editProject($project) ?>">Edit project</a>
                     <?php } ?>
                     <h1 class="header-large-h1-centre"
                         data-ix="fadeinuponload"><?php echo show_input($project->getName()) ?></h1>

@@ -30,7 +30,7 @@ class CreateProjectController
 
             echo json_encode([
                 'result' => 'ok',
-                'url' => $urlHandler->project($createProject->getProject()),
+                'url' => $urlHandler->editProject($createProject->getProject()),
             ]);
         } catch (ErrorHandler $e) {
             echo json_encode([

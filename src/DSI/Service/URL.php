@@ -85,14 +85,22 @@ class URL
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'funding.json';
     }
 
+    /**
+     * @param Project $project
+     * @return string
+     */
     public function project(Project $project)
     {
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'project/' . $project->getId() . '/' . self::linkify($project->getName());
     }
 
-    public function editProject($projectID)
+    /**
+     * @param Project $project
+     * @return string
+     */
+    public function editProject(Project $project)
     {
-        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'project/edit/' . $projectID;
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'project/edit/' . $project->getId();
     }
 
     public function organisations($format = null)
@@ -108,6 +116,10 @@ class URL
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'org/' . $org->getId() . '/' . self::linkify($org->getName());
     }
 
+    /**
+     * @param Organisation $org
+     * @return string
+     */
     public function editOrganisation(Organisation $org)
     {
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'org/edit/' . $org->getId();
