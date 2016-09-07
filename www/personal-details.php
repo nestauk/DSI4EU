@@ -105,7 +105,7 @@ $leftSideText .= "<p>The information is optional. You will be able to edit and e
                             <a class="step-tab tab-link-2 w-inline-block w-tab-link"
                                ng-class="{'w--current': currentTab == 'step2'}" data-w-tab="Tab 2"
                                ng-click="currentTab = 'step2'">
-                                <div>2 - Location, Languages &amp; Skills</div>
+                                <div>2 - Location &amp; Skills</div>
                             </a>
                             <a class="step-tab tab-link-3 w-inline-block w-tab-link"
                                ng-class="{'w--current': currentTab == 'step3'}" data-w-tab="Tab 3"
@@ -236,7 +236,7 @@ $leftSideText .= "<p>The information is optional. You will be able to edit and e
                                     </div>
                                     <div class="w-row">
                                         <div class="creator-col w-col w-col-4 w-col-stack">
-                                            <h2>2 - Your location, languages & skills</h2>
+                                            <h2>2 - Your location & skills</h2>
                                             <?php echo $leftSideText ?>
                                         </div>
                                         <div class="creator-col creator-col-right w-col w-col-8 w-col-stack">
@@ -258,6 +258,7 @@ $leftSideText .= "<p>The information is optional. You will be able to edit and e
                                                                    ng-model="user.cityName"
                                                                    type="text">
                                                             <br/>
+                                                            <?php /*
                                                             <h2 class="edit-h2">Languages</h2>
                                                             <label for="name">Which languages do you know?</label>
                                                             <p>Which languages can you read? We want to give you the
@@ -276,6 +277,7 @@ $leftSideText .= "<p>The information is optional. You will be able to edit and e
                                                                     <?php } ?>
                                                                 </select>
                                                             </div>
+                                                            */ ?>
                                                         </div>
                                                     </div>
                                                     <div class="w-col w-col-6">
