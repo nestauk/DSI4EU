@@ -19,8 +19,7 @@ class CreateProjectController
         $urlHandler = new URL();
         $authUser = new Auth();
         $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
-
-        $loggedInUser = (new UserRepository())->getById($authUser->getUserId());
+        $loggedInUser = $authUser->getUser();
 
         try {
             $createProject = new CreateProject();

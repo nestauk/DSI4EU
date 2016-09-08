@@ -13,6 +13,7 @@ class ListCountriesController
         $urlHandler = new URL();
         $authUser = new Auth();
         $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
+        $loggedInUser = $authUser->getUser();
 
         $countryRepo = new CountryRepository();
         $countries = [];

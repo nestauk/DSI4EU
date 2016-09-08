@@ -23,10 +23,7 @@ class FundingController
     {
         $this->urlHandler = $urlHandler = new URL();
         $authUser = new Auth();
-        if ($authUser->getUserId())
-            $loggedInUser = (new UserRepository())->getById($authUser->getUserId());
-        else
-            $loggedInUser = null;
+        $loggedInUser = $authUser->getUserIfLoggedIn();
 
         if ($this->format == 'json') {
             $fundings = (new FundingRepository())->getFutureOnes();

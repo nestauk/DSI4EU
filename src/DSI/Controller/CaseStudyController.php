@@ -3,7 +3,6 @@
 namespace DSI\Controller;
 
 use DSI\Repository\CaseStudyRepository;
-use DSI\Repository\UserRepository;
 use DSI\Service\Auth;
 use DSI\Service\URL;
 
@@ -16,12 +15,7 @@ class CaseStudyController
     {
         $urlHandler = new URL();
         $authUser = new Auth();
-        if ($authUser->isLoggedIn()) {
-            $userRepo = new UserRepository();
-            $loggedInUser = $userRepo->getById($authUser->getUserId());
-        } else {
-            $loggedInUser = null;
-        }
+        $loggedInUser = $authUser->getUserIfLoggedIn();
 
         $userCanAddCaseStudy = (bool)($loggedInUser AND ($loggedInUser->isCommunityAdmin() OR $loggedInUser->isEditorialAdmin()));
 

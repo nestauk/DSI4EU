@@ -16,7 +16,7 @@ class FeedbackController
     public function exec()
     {
         $authUser = new Auth();
-        // $authUser->ifNotLoggedInRedirectTo(URL::login());
+        $loggedInUser = $authUser->getUserIfLoggedIn();
 
         if ($this->format == 'json') {
             try {
@@ -36,15 +36,6 @@ class FeedbackController
             return;
         }
 
-        if ($authUser->getUserId()) {
-            $loggedInUser = (new UserRepository())->getById($authUser->getUserId());
-        } else {
-            $loggedInUser = null;
-        }
-
-        $data = [
-            'loggedInUser' => $loggedInUser,
-        ];
         $pageTitle = 'Feedback';
         require __DIR__ . '/../../../www/feedback.php';
     }

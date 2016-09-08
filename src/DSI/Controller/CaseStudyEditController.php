@@ -24,8 +24,7 @@ class CaseStudyEditController
         $urlHandler = new URL();
         $authUser = new Auth();
         $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
-
-        $loggedInUser = (new UserRepository())->getById($authUser->getUserId());
+        $loggedInUser = $authUser->getUser();
 
         $userCanAddCaseStudy = (bool)($loggedInUser AND ($loggedInUser->isCommunityAdmin() OR $loggedInUser->isEditorialAdmin()));
         if (!$userCanAddCaseStudy)

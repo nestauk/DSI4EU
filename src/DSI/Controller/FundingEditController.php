@@ -2,6 +2,7 @@
 
 namespace DSI\Controller;
 
+use DSI\Entity\User;
 use DSI\Repository\CountryRepository;
 use DSI\Repository\FundingRepository;
 use DSI\Repository\FundingSourceRepository;
@@ -24,10 +25,9 @@ class FundingEditController
         $urlHandler = new URL();
         $authUser = new Auth();
         $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
+        $loggedInUser = $authUser->getUser();
 
-        $loggedInUser = (new UserRepository())->getById($authUser->getUserId());
-        $userCanEditFunding = (bool)($loggedInUser AND ($loggedInUser->isCommunityAdmin() OR $loggedInUser->isEditorialAdmin()));
-        if (!$userCanEditFunding)
+        if (!($this->userCanManageFunding($loggedInUser)))
             go_to($urlHandler->home());
 
         $funding = (new FundingRepository())->getById($this->fundingID);
@@ -73,5 +73,20 @@ class FundingEditController
         $fundingSources = (new FundingSourceRepository())->getAll();
         $countries = (new CountryRepository())->getAll();
         require(__DIR__ . '/../../../www/funding-edit.php');
+    }
+
+    /**
+     * @param User $loggedInUser
+     * @return bool
+     */
+    private function userCanManageFunding(User $loggedInUser):bool
+    {
+        return (bool)(
+            $loggedInUser AND
+            (
+                $loggedInUser->isCommunityAdmin() OR
+                $loggedInUser->isEditorialAdmin()
+            )
+        );
     }
 }

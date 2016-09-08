@@ -5,8 +5,6 @@ namespace DSI\Controller;
 use DSI\Repository\CaseStudyRepository;
 use DSI\Repository\OrganisationRepository;
 use DSI\Repository\ProjectRepository;
-use DSI\Repository\StoryRepository;
-use DSI\Repository\UserRepository;
 use DSI\Service\Auth;
 
 class HomeController
@@ -23,6 +21,7 @@ class HomeController
         $homePageCaseStudies = (new CaseStudyRepository())->getHomePageStudiesLast(3);
         $organisationCount = (new OrganisationRepository())->countAll();
         $projectCount = (new ProjectRepository())->countAll();
+        $isIndexPage = true;
 
         require __DIR__ . '/../../../www/home.php';
     }

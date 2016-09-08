@@ -16,8 +16,8 @@ class CaseStudyAddController
         $urlHandler = new URL();
         $authUser = new Auth();
         $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
+        $loggedInUser = $authUser->getUser();
 
-        $loggedInUser = (new UserRepository())->getById($authUser->getUserId());
         if (!$this->userCanAddCaseStudy($loggedInUser))
             go_to($urlHandler->home());
 

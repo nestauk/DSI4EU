@@ -19,8 +19,7 @@ class CreateOrganisationController
         $urlHandler = new URL();
         $authUser = new Auth();
         $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
-
-        $loggedInUser = (new UserRepository())->getById($authUser->getUserId());
+        $loggedInUser = $authUser->getUser();
 
         try {
             $createOrganisation = new CreateOrganisation();
