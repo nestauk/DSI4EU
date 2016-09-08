@@ -27,10 +27,7 @@ class ProjectPostController
         $loggedInUser = null;
 
         $authUser = new Auth();
-        if ($authUser->isLoggedIn()) {
-            $userRepo = new UserRepository();
-            $loggedInUser = $userRepo->getById($authUser->getUserId());
-        }
+        $loggedInUser = $authUser->getUserIfLoggedIn();
 
         $projectPostRepo = new ProjectPostRepository();
         $post = $projectPostRepo->getById($this->data()->postID);

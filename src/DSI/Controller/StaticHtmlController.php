@@ -13,11 +13,7 @@ class StaticHtmlController
     public function exec()
     {
         $authUser = new Auth();
-
-        if ($authUser->isLoggedIn())
-            $loggedInUser = (new UserRepository())->getById($authUser->getUserId());
-        else
-            $loggedInUser = null;
+        $loggedInUser = $authUser->getUserIfLoggedIn();
 
         if($this->format == 'txt')
             header("Content-Type: text/plain");

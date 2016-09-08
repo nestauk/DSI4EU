@@ -30,8 +30,7 @@ class MyProfileController
         $urlHandler = new URL();
         $authUser = new Auth();
         $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
-
-        $loggedInUser = (new UserRepository())->getById($authUser->getUserId());
+        $loggedInUser = $authUser->getUser();
         $user = $loggedInUser;
 
         if ($this->data->format == 'json') {

@@ -42,8 +42,7 @@ class ProjectEditController
         $urlHandler = new URL();
         $authUser = new Auth();
         $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
-
-        $loggedInUser = (new UserRepository())->getById($authUser->getUserId());
+        $loggedInUser = $authUser->getUser();
 
         $projectRepo = new ProjectRepository();
         $project = $projectRepo->getById($this->projectID);

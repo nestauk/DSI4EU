@@ -12,8 +12,7 @@ class TestController
     public function exec()
     {
         $authUser = new Auth();
-        if($authUser->isLoggedIn())
-            $loggedInUser = (new UserRepository())->getById($authUser->getUserId());
+        $loggedInUser = $authUser->getUserIfLoggedIn();
 
         pr(Translate::getTranslationFor('en', 'Dashboard'));
         pr(Translate::getTranslationFor('de', 'Dashboard'));

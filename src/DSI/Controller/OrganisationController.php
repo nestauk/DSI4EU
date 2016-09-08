@@ -29,11 +29,7 @@ class OrganisationController
         $loggedInUser = null;
 
         $authUser = new Auth();
-        if ($authUser->isLoggedIn()) {
-            $userRepo = new UserRepository();
-            $loggedInUser = $userRepo->getById($authUser->getUserId());
-        }
-
+        $loggedInUser = $authUser->getUserIfLoggedIn();
         $organisationRepo = new OrganisationRepository();
         $organisation = $organisationRepo->getById($this->data()->organisationID);
 

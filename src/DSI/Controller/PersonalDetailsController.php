@@ -27,11 +27,8 @@ class PersonalDetailsController
         $urlHandler = new URL();
         $authUser = new Auth();
         $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
+        $loggedInUser = $authUser->getUser();
 
-        $user = (new UserRepository())->getById($authUser->getUserId());
-        $userID = $user->getId();
-
-        $loggedInUser = (new UserRepository())->getById($authUser->getUserId());
         $languages = (new LanguageRepository())->getAll();
         $userLanguages = (new UserLanguageRepository())->getLanguageIDsForUser($loggedInUser->getId());
         $skills = (new SkillRepository())->getAll();

@@ -27,8 +27,8 @@ class StoryEditController
         $urlHandler = new URL();
         $authUser = new Auth();
         $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
+        $loggedInUser = $authUser->getUser();
 
-        $loggedInUser = (new UserRepository())->getById($authUser->getUserId());
         $userCanEditStory = (bool)($loggedInUser AND ($loggedInUser->isCommunityAdmin() OR $loggedInUser->isEditorialAdmin()));
         if (!$userCanEditStory)
             go_to($urlHandler->home());

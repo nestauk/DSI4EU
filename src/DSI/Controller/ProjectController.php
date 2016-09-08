@@ -57,12 +57,7 @@ class ProjectController
     {
         $urlHandler = new URL();
         $authUser = new Auth();
-        if ($authUser->isLoggedIn()) {
-            $userRepo = new UserRepository();
-            $loggedInUser = $userRepo->getById($authUser->getUserId());
-        } else {
-            $loggedInUser = null;
-        }
+        $loggedInUser = $authUser->getUserIfLoggedIn();
 
         $projectRepo = new ProjectRepository();
         $project = $projectRepo->getById($this->data()->projectID);

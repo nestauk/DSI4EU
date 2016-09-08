@@ -21,10 +21,7 @@ class OrganisationsController
     {
         $urlHandler = new URL();
         $authUser = new Auth();
-        if ($authUser->isLoggedIn())
-            $loggedInUser = (new UserRepository())->getById($authUser->getUserId());
-        else
-            $loggedInUser = null;
+        $loggedInUser = $authUser->getUserIfLoggedIn();
 
         if ($this->responseFormat == 'json') {
             // (new CountryRepository())->getAll();

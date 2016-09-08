@@ -47,9 +47,7 @@ class OrganisationEditController
         $urlHandler = new URL();
         $authUser = new Auth();
         $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
-
-        $userRepo = new UserRepository();
-        $loggedInUser = $userRepo->getById($authUser->getUserId());
+        $loggedInUser = $authUser->getUser();
 
         $organisationRepo = new OrganisationRepository();
         $organisation = $organisationRepo->getById($this->organisationID);

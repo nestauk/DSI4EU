@@ -22,9 +22,6 @@ class SitemapController
     public function exec()
     {
         $this->urlHandler = new URL();
-        $authUser = new Auth();
-        if ($authUser->isLoggedIn())
-            $loggedInUser = (new UserRepository())->getById($authUser->getUserId());
 
         if ($this->format == 'xml') {
             header("Content-type: text/xml");

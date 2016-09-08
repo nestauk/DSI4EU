@@ -1,6 +1,5 @@
 <?php
 require __DIR__ . '/header.php';
-/** @var $user \DSI\Entity\User */
 /** @var $languages \DSI\Entity\Language[] */
 /** @var $userLanguages int[] */
 /** @var $skills \DSI\Entity\Skill[] */

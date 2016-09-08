@@ -24,8 +24,7 @@ class SearchController
     {
         $urlHandler = new URL();
         $authUser = new Auth();
-        if ($authUser->isLoggedIn())
-            $loggedInUser = (new UserRepository())->getById($authUser->getUserId());
+        $loggedInUser = $authUser->getUserIfLoggedIn();
 
         if ($this->format == 'json') {
             if (isset($_POST['term'])) {

@@ -23,10 +23,7 @@ class ProjectPostCommentController
         $loggedInUser = null;
 
         $authUser = new Auth();
-        if ($authUser->isLoggedIn()) {
-            $userRepo = new UserRepository();
-            $loggedInUser = $userRepo->getById($authUser->getUserId());
-        }
+        $loggedInUser = $authUser->getUserIfLoggedIn();
 
         $projectPostCommentRepo = new ProjectPostCommentRepository();
         $comment = $projectPostCommentRepo->getById($this->data()->commentID);

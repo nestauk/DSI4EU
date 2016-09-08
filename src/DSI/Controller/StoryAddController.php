@@ -20,8 +20,8 @@ class StoryAddController
         $urlHandler = new URL();
         $authUser = new Auth();
         $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
+        $loggedInUser = $authUser->getUser();
 
-        $loggedInUser = (new UserRepository())->getById($authUser->getUserId());
         if (!$this->userCanAddStory($loggedInUser))
             go_to($urlHandler->home());
 

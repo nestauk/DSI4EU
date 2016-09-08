@@ -19,6 +19,7 @@ class SetAdminController
         $authUser = new Auth();
         $authUser->ifNotLoggedInRedirectTo($urlHandler->home());
         $loggedInUser = $authUser->getUser();
+
         if (!$loggedInUser->isSysAdmin())
             go_to($urlHandler->home());
 

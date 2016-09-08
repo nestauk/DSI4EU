@@ -16,11 +16,7 @@ class StoriesController
     {
         $urlHandler = new URL();
         $authUser = new Auth();
-        if ($authUser->isLoggedIn())
-            $loggedInUser = (new UserRepository())->getById($authUser->getUserId());
-        else
-            $loggedInUser = null;
-
+        $loggedInUser = $authUser->getUserIfLoggedIn();
         $userCanAddStory = (bool)($loggedInUser AND ($loggedInUser->isCommunityAdmin() OR $loggedInUser->isEditorialAdmin()));
 
         if ($this->format == 'json') {
