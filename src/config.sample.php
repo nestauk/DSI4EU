@@ -3,13 +3,15 @@
 define('SITE_DOMAIN', '{domainName}');
 define('SITE_RELATIVE_PATH', '{relativePath}');
 
+define('MUST_USE_HTTPS', true);
+
 if (!defined('NO_SESSION') OR NO_SESSION != true) {
     session_set_cookie_params(
         $lifetime = 0,
         $path = SITE_RELATIVE_PATH . '/',
         $domain = "",
         $secure = true,
-        $httponly = true
+        $httponly = MUST_USE_HTTPS ? true : false
     );
     session_start();
 }
