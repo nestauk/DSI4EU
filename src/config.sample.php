@@ -10,8 +10,8 @@ if (!defined('NO_SESSION') OR NO_SESSION != true) {
         $lifetime = 0,
         $path = SITE_RELATIVE_PATH . '/',
         $domain = "",
-        $secure = true,
-        $httponly = MUST_USE_HTTPS ? true : false
+        $secure = MUST_USE_HTTPS ? true : false,
+        $httponly = true
     );
     session_start();
 }
