@@ -35,7 +35,7 @@ class ProjectsController
             }, $projectRepositoryInAPC->getAll()));
         } else {
             $pageTitle = 'Projects';
-            require __DIR__ . '/../../../www/projects.php';
+            require __DIR__ . '/../../../www/views/projects.php';
         }
     }
 }

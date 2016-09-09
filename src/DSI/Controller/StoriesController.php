@@ -45,7 +45,7 @@ class StoriesController
             $angularModules['animate'] = true;
             $angularModules['pagination'] = true;
             $pageTitle = 'Stories';
-            require __DIR__ . '/../../../www/stories.php';
+            require __DIR__ . '/../../../www/views/stories.php';
         }
     }
 }

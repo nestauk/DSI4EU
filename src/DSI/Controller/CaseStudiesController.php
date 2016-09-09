@@ -28,7 +28,7 @@ class CaseStudiesController
             else
                 $caseStudies = $caseStudyRepository->getAllPublished();
 
-            require __DIR__ . '/../../../www/case-studies.php';
+            require __DIR__ . '/../../../www/views/case-studies.php';
         }
     }
 

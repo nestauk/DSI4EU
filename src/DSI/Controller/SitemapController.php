@@ -33,7 +33,7 @@ class SitemapController
             $links = $this->addStoriesTo($links);
             $links = $this->addCaseStudiesTo($links);
 
-            require __DIR__ . '/../../../www/sitemap.xml.php';
+            require __DIR__ . '/../../../www/views/sitemap.xml.php';
         }
     }
 

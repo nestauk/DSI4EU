@@ -23,6 +23,6 @@ class HomeController
         $projectCount = (new ProjectRepository())->countAll();
         $isIndexPage = true;
 
-        require __DIR__ . '/../../../www/home.php';
+        require __DIR__ . '/../../../www/views/home.php';
     }
 }

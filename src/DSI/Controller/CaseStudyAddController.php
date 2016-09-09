@@ -59,7 +59,7 @@ class CaseStudyAddController
         }
 
         $angularModules['fileUpload'] = true;
-        require(__DIR__ . '/../../../www/case-study-add.php');
+        require(__DIR__ . '/../../../www/views/case-study-add.php');
     }
 
     /**

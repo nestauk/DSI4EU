@@ -169,7 +169,7 @@ class ProfileController
             $organisations = (new OrganisationRepositoryInAPC())->getAll();
             $userLinks = (new UserLinkRepository())->getLinksByUserID($userID);
             $angularModules['fileUpload'] = true;
-            require __DIR__ . '/../../../www/profile.php';
+            require __DIR__ . '/../../../www/views/profile.php';
         }
     }
 

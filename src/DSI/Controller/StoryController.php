@@ -27,7 +27,7 @@ class StoryController
         $stories = $storyRepo->getPublishedLast(5);
 
         $pageTitle = $story->getTitle();
-        require __DIR__ . '/../../../www/story.php';
+        require __DIR__ . '/../../../www/views/story.php';
     }
 
     /**

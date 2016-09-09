@@ -11,6 +11,6 @@ class NotFound404Controller
         $authUser = new Auth();
         $loggedInUser = $authUser->getUserIfLoggedIn();
 
-        require __DIR__ . '/../../../www/404-not-found.php';
+        require __DIR__ . '/../../../www/views/404-not-found.php';
     }
 }

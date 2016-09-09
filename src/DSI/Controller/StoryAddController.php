@@ -2,8 +2,8 @@
 
 namespace DSI\Controller;
 
+use DSI\Entity\User;
 use DSI\Repository\StoryCategoryRepository;
-use DSI\Repository\UserRepository;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\URL;
@@ -62,14 +62,14 @@ class StoryAddController
         $categories = (new StoryCategoryRepository())->getAll();
 
         $angularModules['fileUpload'] = true;
-        require(__DIR__ . '/../../../www/story-add.php');
+        require(__DIR__ . '/../../../www/views/story-add.php');
     }
 
     /**
      * @param $loggedInUser
      * @return bool
      */
-    private function userCanAddStory($loggedInUser):bool
+    private function userCanAddStory(User $loggedInUser):bool
     {
         $userCanAddStory = (bool)($loggedInUser AND ($loggedInUser->isCommunityAdmin() OR $loggedInUser->isEditorialAdmin()));
         return $userCanAddStory;

@@ -39,6 +39,6 @@ class PersonalDetailsController
         $userOrganisations = (new OrganisationMemberRepository())->getOrganisationIDsForMember($loggedInUser->getId());
 
         $angularModules['fileUpload'] = true;
-        require __DIR__ . '/../../../www/personal-details.php';
+        require __DIR__ . '/../../../www/views/personal-details.php';
     }
 }

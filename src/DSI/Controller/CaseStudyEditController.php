@@ -107,7 +107,7 @@ class CaseStudyEditController
 
         } else {
             $angularModules['fileUpload'] = true;
-            require __DIR__ . '/../../../www/case-study-edit.php';
+            require __DIR__ . '/../../../www/views/case-study-edit.php';
         }
     }
 

@@ -312,7 +312,7 @@ class OrganisationEditController
             $orgTags = (new OrganisationTagRepository())->getTagsNameByOrganisationID($organisation->getId());
             $projects = (new ProjectRepositoryInAPC())->getAll();
             $orgProjects = (new OrganisationProjectRepository())->getProjectIDsForOrganisation($organisation->getId());
-            require __DIR__ . '/../../../www/organisation-edit.php';
+            require __DIR__ . '/../../../www/views/organisation-edit.php';
         }
     }
 

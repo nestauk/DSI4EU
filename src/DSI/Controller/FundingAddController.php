@@ -50,7 +50,7 @@ class FundingAddController
 
         $fundingSources = (new FundingSourceRepository())->getAll();
         $countries = (new CountryRepository())->getAll();
-        require(__DIR__ . '/../../../www/funding-add.php');
+        require(__DIR__ . '/../../../www/views/funding-add.php');
     }
 
     /**

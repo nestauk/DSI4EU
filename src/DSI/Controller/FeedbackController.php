@@ -37,6 +37,6 @@ class FeedbackController
         }
 
         $pageTitle = 'Feedback';
-        require __DIR__ . '/../../../www/feedback.php';
+        require __DIR__ . '/../../../www/views/feedback.php';
     }
 }

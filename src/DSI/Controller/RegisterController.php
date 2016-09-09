@@ -55,6 +55,6 @@ class RegisterController
             }
         }
 
-        require __DIR__ . '/../../../www/register.php';
+        require __DIR__ . '/../../../www/views/register.php';
     }
 }

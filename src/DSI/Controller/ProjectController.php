@@ -353,7 +353,7 @@ class ProjectController
             return;
         } else {
             $pageTitle = $project->getName();
-            require __DIR__ . '/../../../www/project.php';
+            require __DIR__ . '/../../../www/views/project.php';
         }
     }
 

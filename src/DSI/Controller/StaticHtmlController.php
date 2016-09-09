@@ -2,7 +2,6 @@
 
 namespace DSI\Controller;
 
-use DSI\Repository\UserRepository;
 use DSI\Service\Auth;
 
 class StaticHtmlController
@@ -15,9 +14,9 @@ class StaticHtmlController
         $authUser = new Auth();
         $loggedInUser = $authUser->getUserIfLoggedIn();
 
-        if($this->format == 'txt')
+        if ($this->format == 'txt')
             header("Content-Type: text/plain");
 
-        require __DIR__ . '/../../../www/' . $this->view;
+        require __DIR__ . '/../../../www/views/' . $this->view;
     }
 }

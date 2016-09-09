@@ -149,7 +149,7 @@ class ProjectEditController
             $organisations = (new OrganisationRepositoryInAPC())->getAll();
             $projectOrganisations = (new OrganisationProjectRepository())->getOrganisationIDsForProject($project->getId());
             $angularModules['fileUpload'] = true;
-            require __DIR__ . '/../../../www/project-edit.php';
+            require __DIR__ . '/../../../www/views/project-edit.php';
         }
     }
 

@@ -49,13 +49,13 @@ $totalOrganisations = (new \DSI\Repository\OrganisationRepository())->countAll()
                 </div>
                 <div class="w-tab-content">
                     <div class="w-tab-pane" data-w-tab="Tab 1">
-                        <img src="images/3.png">
+                        <img src="../images/3.png">
                     </div>
                     <div class="w-tab-pane w--tab-active" data-w-tab="Tab 2">
-                        <img src="images/2.png">
+                        <img src="../images/2.png">
                     </div>
                     <div class="w-tab-pane" data-w-tab="Tab 3">
-                        <img src="images/1.png">
+                        <img src="../images/1.png">
                     </div>
                 </div>
             </div>

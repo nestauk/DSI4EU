@@ -83,6 +83,6 @@ class StoryEditController
         $categories = (new StoryCategoryRepository())->getAll();
 
         $angularModules['fileUpload'] = true;
-        require __DIR__ . '/../../../www/story-edit.php';
+        require __DIR__ . '/../../../www/views/story-edit.php';
     }
 }

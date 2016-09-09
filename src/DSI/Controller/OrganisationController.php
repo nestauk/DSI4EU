@@ -249,7 +249,7 @@ class OrganisationController
         {
             $tags = (new OrganisationTagRepository())->getTagsNameByOrganisationID($organisation->getId());
             $pageTitle = $organisation->getName();
-            require __DIR__ . '/../../../www/organisation.php';
+            require __DIR__ . '/../../../www/views/organisation.php';
         }
     }
 

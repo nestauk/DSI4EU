@@ -45,7 +45,7 @@ class OrganisationsController
             }, $organisationRepositoryInAPC->getAll()));
         } else {
             $pageTitle = 'Organisations';
-            require __DIR__ . '/../../../www/organisations.php';
+            require __DIR__ . '/../../../www/views/organisations.php';
         }
     }
 }

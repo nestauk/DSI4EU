@@ -65,7 +65,7 @@ class SearchController
             $organisations = (new OrganisationRepository())->searchByTitle($this->term);
             $projects = (new ProjectRepository())->searchByTitle($this->term);
             $blogPosts = (new StoryRepository())->searchByTitle($this->term);
-            require __DIR__ . '/../../../www/search.php';
+            require __DIR__ . '/../../../www/views/search.php';
         }
     }
 }

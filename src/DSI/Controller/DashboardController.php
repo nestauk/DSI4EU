@@ -237,7 +237,7 @@ class DashboardController
             $projectsMember = (new ProjectMemberRepository())->getByMemberID($loggedInUser->getId());
             $organisationsMember = (new OrganisationMemberRepository())->getByMemberID($loggedInUser->getId());
 
-            require __DIR__ . '/../../../www/dashboard.php';
+            require __DIR__ . '/../../../www/views/dashboard.php';
         }
     }
 

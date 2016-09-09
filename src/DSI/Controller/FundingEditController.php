@@ -72,7 +72,7 @@ class FundingEditController
 
         $fundingSources = (new FundingSourceRepository())->getAll();
         $countries = (new CountryRepository())->getAll();
-        require(__DIR__ . '/../../../www/funding-edit.php');
+        require(__DIR__ . '/../../../www/views/funding-edit.php');
     }
 
     /**

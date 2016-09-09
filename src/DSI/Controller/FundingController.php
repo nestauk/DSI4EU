@@ -38,7 +38,7 @@ class FundingController
         } else {
             $pageTitle = 'Funding Opportunities';
             $userCanAddFunding = (bool)($loggedInUser AND ($loggedInUser->isCommunityAdmin() OR $loggedInUser->isEditorialAdmin()));
-            require __DIR__ . '/../../../www/funding.php';
+            require __DIR__ . '/../../../www/views/funding.php';
         }
     }
 
