@@ -2,6 +2,7 @@
 
 namespace DSI\Controller;
 
+use DSI\Entity\CaseStudy;
 use DSI\Entity\User;
 use DSI\Repository\CaseStudyRepository;
 use DSI\Service\Auth;
@@ -19,15 +20,27 @@ class CaseStudiesController
         $loggedInUser = $authUser->getUserIfLoggedIn();
         $userCanManageCaseStudies = $this->userCanManageCaseStudies($loggedInUser);
 
+        $caseStudyRepository = new CaseStudyRepository();
+        if ($userCanManageCaseStudies)
+            $caseStudies = $caseStudyRepository->getAll();
+        else
+            $caseStudies = $caseStudyRepository->getAllPublished();
+
         if ($this->format == 'json') {
-
+            echo json_encode(array_map(function(CaseStudy $caseStudy) use ($urlHandler){
+                return [
+                    'id' => $caseStudy->getId(),
+                    'cardImage' => $caseStudy->getCardImage(),
+                    'cardColour' => $caseStudy->getCardColour(),
+                    'logo' => $caseStudy->getLogo(),
+                    'introCardText' => $caseStudy->getIntroCardText(),
+                    'title' => $caseStudy->getTitle(),
+                    'isPublished' => $caseStudy->isPublished(),
+                    'country' => $caseStudy->getCountryName(),
+                    'url' => $urlHandler->caseStudy($caseStudy),
+                ];
+            }, $caseStudies));
         } else {
-            $caseStudyRepository = new CaseStudyRepository();
-            if ($userCanManageCaseStudies)
-                $caseStudies = $caseStudyRepository->getAll();
-            else
-                $caseStudies = $caseStudyRepository->getAllPublished();
-
             require __DIR__ . '/../../../www/views/case-studies.php';
         }
     }

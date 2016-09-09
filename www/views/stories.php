@@ -34,9 +34,6 @@ require __DIR__ . '/header.php';
         }
     </style>
 
-    <script type="text/javascript"
-            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/StoriesController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
-
     <div ng-controller="StoriesController"
          data-jsonurl="<?php echo $urlHandler->blogPosts('json') ?>">
         <div class="w-section page-header stories-header">
@@ -124,6 +121,9 @@ require __DIR__ . '/header.php';
                         data-previous-text="&laquo;" data-next-text="&raquo;"></pagination>
         </div>
     </div>
+
+    <script type="text/javascript"
+            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/StoriesController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 
     <script type="text/javascript">
         $('#lisStories').on('mouseenter', '.admin-edit', function () {

@@ -5,310 +5,135 @@ require __DIR__ . '/header.php';
 /** @var $userCanManageCaseStudies bool */
 /** @var $urlHandler \DSI\Service\URL */
 ?>
-    <div class="creator page-header">
-        <div class="container-wide header">
-            <h1 class="light page-h1"><?php _ehtml('Case studies') ?></h1>
-            <?php if ($userCanManageCaseStudies) { ?>
-                <a class="button button-bottom-right w-button" href="<?php echo $urlHandler->addCaseStudy() ?>">
-                    Add case study +
-                </a>
-            <?php } ?>
-        </div>
-    </div>
 
-    <div class="case-study-grid container-wide">
-        <div class="case-studies-row case-studies-row-grid w-row">
-            <?php foreach ($caseStudies AS $i => $caseStudy) { ?>
-                <div class="case-study-col-<?php echo $i % 3 + 1 ?> w-col w-col-4">
-                    <div class="onloadone" data-ix="fadeinuponload-<?php echo $i % 3 + 2 ?>">
-                        <div class="case-study-card" data-ix="case-study-card-overlay"
-                             style="background-image: url('<?php echo \DSI\Entity\Image::CASE_STUDY_CARD_BG_URL . $caseStudy->getCardImage() ?>');">
-                            <div class="case-study-card-overlay"
-                                 style="background-color:<?php echo $caseStudy->getCardColour() ?>"></div>
-                            <div class="case-study-card-info">
-                                <img class="case-study-card-logo" width="75"
-                                     src="<?php echo \DSI\Entity\Image::CASE_STUDY_LOGO_URL . $caseStudy->getLogo() ?>">
-                                <div class="case-study-card-p">
-                                    <?php echo show_input($caseStudy->getIntroCardText()) ?>
+    <style>
+        .animate.ng-enter,
+        .animate.ng-leave {
+            -webkit-transition: 100ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+            -moz-transition: 100ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+            -ms-transition: 100ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+            -o-transition: 100ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+            transition: 100ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+            position: relative;
+            display: block;
+            overflow: hidden;
+            text-overflow: clip;
+            white-space: nowrap;
+        }
+
+        .animate.ng-leave.animate.ng-leave-active,
+        .animate.ng-enter {
+            opacity: 0;
+            width: 0px;
+            height: 0px;
+        }
+
+        .animate.ng-enter.ng-enter-active,
+        .animate.ng-leave {
+            opacity: 1;
+            width: 370px;
+            height: 380px;
+        }
+
+        .filter-block a {
+            width: 140px;
+        }
+    </style>
+
+    <div ng-controller="CaseStudiesController"
+         data-jsonurl="<?php echo $urlHandler->caseStudies('json') ?>">
+        <div class="w-section page-header stories-header">
+            <div class="container-wide header">
+                <h1 class="page-h1 light"><?php _ehtml('Case studies') ?></h1>
+                <div class="filter-block">
+                    <div class="w-row">
+                        <div class="w-col w-col-9 w-col-stack">
+                            <?php /*
+                            <div class="w-row">
+                                <div class="w-col w-col-2">
+                                    <a class="w-button dsi-button top-filter" ng-click="searchCriteria = {}" href="#">
+                                        All</a>
                                 </div>
-                                <a class="case-study-card-read-more"
-                                   href="<?php echo $urlHandler->caseStudy($caseStudy) ?>">
-                                    <?php _ehtml('See the case study') ?>
-                                </a>
+                                <div class="w-col w-col-2">
+                                    <a class="w-button dsi-button top-filter" ng-click="searchCriteria.catg = 3"
+                                       href="#">
+                                        Open hardware</a>
+                                </div>
+                                <div class="w-col w-col-2">
+                                    <a class="w-button dsi-button top-filter" ng-click="searchCriteria.catg = 2"
+                                       href="#">
+                                        Open networks</a>
+                                </div>
+                                <div class="w-col w-col-2">
+                                    <a class="w-button dsi-button top-filter" ng-click="searchCriteria.catg = 1"
+                                       href="#">
+                                        Open data</a>
+                                </div>
+                                <div class="w-col w-col-2">
+                                    <a class="w-button dsi-button top-filter" ng-click="searchCriteria.catg = 1"
+                                       href="#">
+                                        Open knowledge</a>
+                                </div>
                             </div>
-                            <div class="case-study-card-label w-clearfix">
-                                <div class="case-study-card-name">
-                                    <?php
-                                    echo show_input(substr($caseStudy->getTitle(), 0, 15));
-                                    if (strlen($caseStudy->getTitle()) > 15) echo '...';
-                                    if ($userCanManageCaseStudies AND !$caseStudy->isPublished())
-                                        echo ' <span style="color:red">(Unpublished)</span>';
-                                    ?>
+                            */ ?>
+                        </div>
+                        <div class="w-col w-col-3 w-col-stack w-clearfix">
+                            <?php if ($userCanManageCaseStudies) { ?>
+                                <a class="w-button dsi-button top-filter add-new-story"
+                                   href="<?php echo $urlHandler->addCaseStudy() ?>">
+                                    Add case study +</a>
+                            <?php } ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="case-study-grid container-wide">
+            <div class="case-studies-row case-studies-row-grid w-row">
+                <?php foreach ($caseStudies AS $i => $caseStudy) { ?>
+                    <div class="case-study-col-<?php echo $i % 3 + 1 ?> w-col w-col-4">
+                        <div class="onloadone" data-ix="fadeinuponload-<?php echo $i % 3 + 2 ?>">
+                            <div class="case-study-card" data-ix="case-study-card-overlay"
+                                 style="background-image: url('<?php echo \DSI\Entity\Image::CASE_STUDY_CARD_BG_URL . $caseStudy->getCardImage() ?>');">
+                                <div class="case-study-card-overlay"
+                                     style="background-color:<?php echo $caseStudy->getCardColour() ?>"></div>
+                                <div class="case-study-card-info">
+                                    <img class="case-study-card-logo" width="75"
+                                         src="<?php echo \DSI\Entity\Image::CASE_STUDY_LOGO_URL . $caseStudy->getLogo() ?>">
+                                    <div class="case-study-card-p">
+                                        <?php echo show_input($caseStudy->getIntroCardText()) ?>
+                                    </div>
+                                    <a class="case-study-card-read-more"
+                                       href="<?php echo $urlHandler->caseStudy($caseStudy) ?>">
+                                        <?php _ehtml('See the case study') ?>
+                                    </a>
                                 </div>
-                                <div class="case-study-card-name country">
-                                    <?php echo show_input($caseStudy->getCountryName()) ?>
+                                <div class="case-study-card-label w-clearfix">
+                                    <div class="case-study-card-name">
+                                        <?php
+                                        echo show_input(substr($caseStudy->getTitle(), 0, 15));
+                                        if (strlen($caseStudy->getTitle()) > 15) echo '...';
+                                        if ($userCanManageCaseStudies AND !$caseStudy->isPublished())
+                                            echo ' <span style="color:red">(Unpublished)</span>';
+                                        ?>
+                                    </div>
+                                    <div class="case-study-card-name country">
+                                        <?php echo show_input($caseStudy->getCountryName()) ?>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <?php if ($i % 3 == 2) { ?>
-                    <div style="clear:both"></div>
+                    <?php if ($i % 3 == 2) { ?>
+                        <div style="clear:both"></div>
+                    <?php } ?>
                 <?php } ?>
-            <?php } ?>
-        </div>
-
-        <?php /*
-        <div class="case-studies-row case-studies-row-grid w-row">
-            <div class="case-study-col-1 w-col w-col-4">
-                <div class="onloadone" data-ix="fadeinuponload-3">
-                    <div class="case-study-card" data-ix="case-study-card-overlay">
-                        <div class="case-study-card-overlay"></div>
-                        <div class="case-study-card-info">
-                            <img class="case-study-card-logo" src="images/arduino.png" width="75">
-                            <div class="case-study-card-p">In 2005, Massimo Banzi, an Italian engineer and designer,
-                                started the Arduino project to enable students at the Interaction Design Institute
-                                Ivrea (IDII) to build electronic devices using an open-source hardware board.
-                            </div>
-                            <a class="case-study-card-read-more" href="#">See the case study</a>
-                        </div>
-                        <div class="case-study-card-label w-clearfix">
-                            <div class="case-study-card-name">Arduino</div>
-                            <div class="case-study-card-name country">Switzerland</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="case-study-col-2 w-col w-col-4">
-                <div class="onloadtwo" data-ix="fadeinuponload">
-                    <div class="case-study-card tor" data-ix="case-study-card-overlay">
-                        <div class="case-study-card-overlay tor"></div>
-                        <div class="case-study-card-info">
-                            <img class="case-study-card-logo" src="images/tor.png" width="75">
-                            <div class="case-study-card-p">The Onion Router project (TOR) is a non-profit
-                                organisation that conducts research and development into online privacy and
-                                anonymity.&nbsp;It has developed software tools designed to stop people – including
-                                government agencies and corporations – learning web users location or tracking their
-                                browsing habits.
-                            </div>
-                            <a class="case-study-card-read-more" href="#">See the case study</a>
-                        </div>
-                        <div class="case-study-card-label w-clearfix">
-                            <div class="case-study-card-name">The Onion Router P...</div>
-                            <div class="case-study-card-name country">Germany</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="case-study-col-3 w-col w-col-4">
-                <div class="onloadthree" data-ix="fadeinuponload-2">
-                    <div class="case-study-card communia" data-ix="case-study-card-overlay">
-                        <div class="case-study-card-overlay communia"></div>
-                        <div class="case-study-card-info">
-                            <img class="case-study-card-logo" src="images/communia.png" width="75">
-                            <div class="case-study-card-p">COMMUNIA – The European Thematic Network on the Digital
-                                Public Domain, is an international association based in Brussels. The COMMUNIA
-                                association is built on the eponymous COMMUNIA Project Thematic Network, funded by
-                                the European Commission from 2007 to 2011, which issued the Public Domain Manifesto
-                                and gathered over 50 members..
-                            </div>
-                            <a class="case-study-card-read-more" href="#">See the case study</a>
-                        </div>
-                        <div class="case-study-card-label w-clearfix">
-                            <div class="case-study-card-name">Communia</div>
-                            <div class="case-study-card-name country">Italy</div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
-        <div class="case-studies-row case-studies-row-grid w-row">
-            <div class="case-study-col-1 w-col w-col-4">
-                <div class="onloadone" data-ix="fadeinuponload-5">
-                    <div class="case-study-card" data-ix="case-study-card-overlay">
-                        <div class="case-study-card-overlay"></div>
-                        <div class="case-study-card-info">
-                            <img class="case-study-card-logo" src="images/arduino.png" width="75">
-                            <div class="case-study-card-p">In 2005, Massimo Banzi, an Italian engineer and designer,
-                                started the Arduino project to enable students at the Interaction Design Institute Ivrea
-                                (IDII) to build electronic devices using an open-source hardware board.
-                            </div>
-                            <a class="case-study-card-read-more" href="#">See the case study</a>
-                        </div>
-                        <div class="case-study-card-label w-clearfix">
-                            <div class="case-study-card-name">Arduino</div>
-                            <div class="case-study-card-name country">Switzerland</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="case-study-col-2 w-col w-col-4">
-                <div class="onloadtwo" data-ix="fadeinuponload-2">
-                    <div class="case-study-card tor" data-ix="case-study-card-overlay">
-                        <div class="case-study-card-overlay tor"></div>
-                        <div class="case-study-card-info">
-                            <img class="case-study-card-logo" src="images/tor.png" width="75">
-                            <div class="case-study-card-p">The Onion Router project (TOR) is a non-profit organisation
-                                that conducts research and development into online privacy and anonymity.&nbsp;It has
-                                developed software tools designed to stop people – including government agencies and
-                                corporations – learning web users location or tracking their browsing habits.
-                            </div>
-                            <a class="case-study-card-read-more" href="#">See the case study</a>
-                        </div>
-                        <div class="case-study-card-label w-clearfix">
-                            <div class="case-study-card-name">The Onion Router P...</div>
-                            <div class="case-study-card-name country">Germany</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="case-study-col-3 w-col w-col-4">
-                <div class="onloadthree" data-ix="fadeinuponload-3">
-                    <div class="case-study-card communia" data-ix="case-study-card-overlay">
-                        <div class="case-study-card-overlay communia"></div>
-                        <div class="case-study-card-info">
-                            <img class="case-study-card-logo" src="images/communia.png" width="75">
-                            <div class="case-study-card-p">COMMUNIA – The European Thematic Network on the Digital
-                                Public Domain, is an international association based in Brussels. The COMMUNIA
-                                association is built on the eponymous COMMUNIA Project Thematic Network, funded by the
-                                European Commission from 2007 to 2011, which issued the Public Domain Manifesto and
-                                gathered over 50 members..
-                            </div>
-                            <a class="case-study-card-read-more" href="#">See the case study</a>
-                        </div>
-                        <div class="case-study-card-label w-clearfix">
-                            <div class="case-study-card-name">Communia</div>
-                            <div class="case-study-card-name country">Italy</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="case-studies-row case-studies-row-grid w-row">
-            <div class="case-study-col-1 w-col w-col-4">
-                <div class="onloadone" data-ix="fadeinuponload-3">
-                    <div class="case-study-card" data-ix="case-study-card-overlay">
-                        <div class="case-study-card-overlay"></div>
-                        <div class="case-study-card-info">
-                            <img class="case-study-card-logo" src="images/arduino.png" width="75">
-                            <div class="case-study-card-p">In 2005, Massimo Banzi, an Italian engineer and designer,
-                                started the Arduino project to enable students at the Interaction Design Institute Ivrea
-                                (IDII) to build electronic devices using an open-source hardware board.
-                            </div>
-                            <a class="case-study-card-read-more" href="#">See the case study</a>
-                        </div>
-                        <div class="case-study-card-label w-clearfix">
-                            <div class="case-study-card-name">Arduino</div>
-                            <div class="case-study-card-name country">Switzerland</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="case-study-col-2 w-col w-col-4">
-                <div class="onloadtwo" data-ix="fadeinuponload-4">
-                    <div class="case-study-card tor" data-ix="case-study-card-overlay">
-                        <div class="case-study-card-overlay tor"></div>
-                        <div class="case-study-card-info">
-                            <img class="case-study-card-logo" src="images/tor.png" width="75">
-                            <div class="case-study-card-p">The Onion Router project (TOR) is a non-profit organisation
-                                that conducts research and development into online privacy and anonymity.&nbsp;It has
-                                developed software tools designed to stop people – including government agencies and
-                                corporations – learning web users location or tracking their browsing habits.
-                            </div>
-                            <a class="case-study-card-read-more" href="#">See the case study</a>
-                        </div>
-                        <div class="case-study-card-label w-clearfix">
-                            <div class="case-study-card-name">The Onion Router P...</div>
-                            <div class="case-study-card-name country">Germany</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="case-study-col-3 w-col w-col-4">
-                <div class="onloadthree" data-ix="fadeinuponload-5">
-                    <div class="case-study-card communia" data-ix="case-study-card-overlay">
-                        <div class="case-study-card-overlay communia"></div>
-                        <div class="case-study-card-info">
-                            <img class="case-study-card-logo" src="images/communia.png" width="75">
-                            <div class="case-study-card-p">COMMUNIA – The European Thematic Network on the Digital
-                                Public Domain, is an international association based in Brussels. The COMMUNIA
-                                association is built on the eponymous COMMUNIA Project Thematic Network, funded by the
-                                European Commission from 2007 to 2011, which issued the Public Domain Manifesto and
-                                gathered over 50 members..
-                            </div>
-                            <a class="case-study-card-read-more" href="#">See the case study</a>
-                        </div>
-                        <div class="case-study-card-label w-clearfix">
-                            <div class="case-study-card-name">Communia</div>
-                            <div class="case-study-card-name country">Italy</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="case-studies-row case-studies-row-grid w-row">
-            <div class="case-study-col-1 w-col w-col-4">
-                <div class="onloadone" data-ix="fadeinuponload-3">
-                    <div class="case-study-card" data-ix="case-study-card-overlay">
-                        <div class="case-study-card-overlay"></div>
-                        <div class="case-study-card-info">
-                            <img class="case-study-card-logo" src="images/arduino.png" width="75">
-                            <div class="case-study-card-p">In 2005, Massimo Banzi, an Italian engineer and designer,
-                                started the Arduino project to enable students at the Interaction Design Institute Ivrea
-                                (IDII) to build electronic devices using an open-source hardware board.
-                            </div>
-                            <a class="case-study-card-read-more" href="#">See the case study</a>
-                        </div>
-                        <div class="case-study-card-label w-clearfix">
-                            <div class="case-study-card-name">Arduino</div>
-                            <div class="case-study-card-name country">Switzerland</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="case-study-col-2 w-col w-col-4">
-                <div class="onloadtwo" data-ix="fadeinuponload-4">
-                    <div class="case-study-card tor" data-ix="case-study-card-overlay">
-                        <div class="case-study-card-overlay tor"></div>
-                        <div class="case-study-card-info">
-                            <img class="case-study-card-logo" src="images/tor.png" width="75">
-                            <div class="case-study-card-p">The Onion Router project (TOR) is a non-profit organisation
-                                that conducts research and development into online privacy and anonymity.&nbsp;It has
-                                developed software tools designed to stop people – including government agencies and
-                                corporations – learning web users location or tracking their browsing habits.
-                            </div>
-                            <a class="case-study-card-read-more" href="#">See the case study</a>
-                        </div>
-                        <div class="case-study-card-label w-clearfix">
-                            <div class="case-study-card-name">The Onion Router P...</div>
-                            <div class="case-study-card-name country">Germany</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="case-study-col-3 w-col w-col-4">
-                <div class="onloadthree" data-ix="fadeinuponload-5">
-                    <div class="case-study-card communia" data-ix="case-study-card-overlay">
-                        <div class="case-study-card-overlay communia"></div>
-                        <div class="case-study-card-info">
-                            <img class="case-study-card-logo" src="images/communia.png" width="75">
-                            <div class="case-study-card-p">COMMUNIA – The European Thematic Network on the Digital
-                                Public Domain, is an international association based in Brussels. The COMMUNIA
-                                association is built on the eponymous COMMUNIA Project Thematic Network, funded by the
-                                European Commission from 2007 to 2011, which issued the Public Domain Manifesto and
-                                gathered over 50 members..
-                            </div>
-                            <a class="case-study-card-read-more" href="#">See the case study</a>
-                        </div>
-                        <div class="case-study-card-label w-clearfix">
-                            <div class="case-study-card-name">Communia</div>
-                            <div class="case-study-card-name country">Italy</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        */ ?>
     </div>
+
+    <script type="text/javascript"
+            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/CaseStudiesController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 
 <?php require __DIR__ . '/footer.php' ?>

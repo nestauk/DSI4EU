@@ -196,6 +196,9 @@ class Router
         } elseif (preg_match('<^/' . $langHandler . 'case-studies$>', $this->pageURL, $matches)) {
             $this->caseStudiesPage($matches);
 
+        } elseif (preg_match('<^/' . $langHandler . 'case-studies\.json$>', $this->pageURL, $matches)) {
+            $this->caseStudiesJsonPage($matches);
+
         } elseif (preg_match('<^/' . $langHandler . 'case-study/edit/([0-9]+)\.json$>', $this->pageURL, $matches)) {
             $this->editCaseStudyPage($matches, 'json');
 
@@ -653,7 +656,15 @@ class Router
         $this->setLanguageFromUrl($matches);
 
         $command = new \DSI\Controller\CaseStudiesController();
-        // $command->format = $format;
+        $command->exec();
+    }
+
+    private function caseStudiesJsonPage($matches)
+    {
+        $this->setLanguageFromUrl($matches);
+
+        $command = new \DSI\Controller\CaseStudiesController();
+        $command->format = 'json';
         $command->exec();
     }
 

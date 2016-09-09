@@ -193,9 +193,12 @@ class URL
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'case-study/edit/' . $caseStudy->getId();
     }
 
-    public function caseStudies()
+    public function caseStudies($format = null)
     {
-        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'case-studies';
+        $extension = '';
+        if ($format == 'json')
+            $extension = '.json';
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'case-studies' . $extension;
     }
 
     public function search()
