@@ -145,8 +145,16 @@ class Event
     /**
      * @return string
      */
-    public function getStartDate(): string
+    public function getStartDate($format = null): string
     {
+        if ($format) {
+            if ($this->startDate) {
+                return date($format, strtotime($this->startDate));
+            } else {
+                return '';
+            }
+        }
+
         return (string)$this->startDate;
     }
 

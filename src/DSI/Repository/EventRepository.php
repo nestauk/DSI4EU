@@ -60,6 +60,14 @@ class EventRepository
         return $this->getObjectsWhere(["1"]);
     }
 
+    /** @return Event[] */
+    public function getFutureOnes()
+    {
+        return $this->getObjectsWhere([
+            "`endDate` > NOW() OR `endDate` = '0000-00-00'"
+        ]);
+    }
+
     public function clearAll()
     {
         $query = new SQL("TRUNCATE TABLE `{$this->dbTable}`");

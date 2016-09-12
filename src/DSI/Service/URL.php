@@ -85,6 +85,21 @@ class URL
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'funding.json';
     }
 
+    public function events()
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'events';
+    }
+
+    public function editEvent($eventID)
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'event/edit/' . $eventID;
+    }
+
+    public function eventsJson()
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'events.json';
+    }
+
     /**
      * @param Project $project
      * @return string

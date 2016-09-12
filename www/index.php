@@ -87,6 +87,16 @@ class Router
         } elseif (preg_match('<^/' . $langHandler . 'funding/edit/([0-9]+)\.json$>', $this->pageURL, $matches)) {
             $this->editFundingPage($matches, 'json');
 
+// Events
+        } elseif (preg_match('<^/' . $langHandler . 'events$>', $this->pageURL, $matches)) {
+            $this->eventsPage($matches);
+
+        } elseif (preg_match('<^/' . $langHandler . 'events\.json$>', $this->pageURL, $matches)) {
+            $this->eventsPage($matches, 'json');
+
+        } elseif (preg_match('<^/' . $langHandler . 'events/add$>', $this->pageURL, $matches)) {
+            $this->addEventPage($matches);
+
 // Projects
         } elseif (preg_match('<^/' . $langHandler . 'projects$>', $this->pageURL, $matches)) {
             $this->projectsPage($matches);
@@ -419,6 +429,7 @@ class Router
         $command->exec();
     }
 
+// Funding
     private function fundingPage($matches = [], $format = 'html')
     {
         $this->setLanguageFromUrl($matches);
@@ -445,6 +456,25 @@ class Router
         $command->format = $format;
         $command->exec();
     }
+
+// Events
+    private function eventsPage($matches = [], $format = 'html')
+    {
+        $this->setLanguageFromUrl($matches);
+
+        $command = new \DSI\Controller\EventsController();
+        $command->format = $format;
+        $command->exec();
+    }
+
+    private function addEventPage($matches = [])
+    {
+        $this->setLanguageFromUrl($matches);
+
+        $command = new \DSI\Controller\EventAddController();
+        $command->exec();
+    }
+
 
     private function projectsPage($matches = [])
     {
