@@ -1,13 +1,10 @@
 <?php
 
-namespace DSI\UseCase\Funding;
+namespace DSI\UseCase\Events;
 
-use DSI\Entity\Funding;
-use DSI\Entity\FundingSource;
-use DSI\NotFound;
+use DSI\Entity\Event;
 use DSI\Repository\CountryRepository;
-use DSI\Repository\FundingRepository;
-use DSI\Repository\FundingSourceRepository;
+use DSI\Repository\EventRepository;
 use DSI\Service\ErrorHandler;
 
 class EventEdit
@@ -15,62 +12,51 @@ class EventEdit
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var EditFunding_Data */
+    /** @var EventEdit_Data */
     private $data;
 
-    /** @var FundingRepository */
-    private $fundingRepository;
-
-    /** @var FundingSource */
-    private $fundingSource;
+    /** @var EventRepository*/
+    private $eventRepository;
 
     public function __construct()
     {
-        $this->data = new EditFunding_Data();
+        $this->data = new EventEdit_Data();
     }
 
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->fundingRepository = new FundingRepository();
+        $this->eventRepository = new EventRepository();
 
         $this->assertDataHasBeenSubmitted();
         $this->assertDataIsNotEmpty();
-        $this->assertClosingDateIsValid();
-        $this->getFundingSource();
-
-        $this->saveFunding();
+        $this->assertDatesAreValid();
+        $this->saveEvent();
     }
 
     /**
-     * @return EditFunding_Data
+     * @return EventEdit_Data
      */
     public function data()
     {
         return $this->data;
     }
 
-    private function saveFunding()
+    private function saveEvent()
     {
-        $this->data()->funding->setTitle($this->data()->title);
-        $this->data()->funding->setUrl($this->data()->url);
-        $this->data()->funding->setCountry((new CountryRepository())->getById($this->data()->countryID));
-        $this->data()->funding->setSource($this->fundingSource);
-        $this->data()->funding->setClosingDate($this->data()->closingDate);
-        $this->data()->funding->setDescription($this->data()->description);
-        $this->fundingRepository->save($this->data()->funding);
+        $this->data()->event->setTitle($this->data()->title);
+        $this->data()->event->setUrl($this->data()->url);
+        $this->data()->event->setShortDescription($this->data()->shortDescription);
+        $this->data()->event->setDescription($this->data()->description);
+        $this->data()->event->setStartDate($this->data()->startDate);
+        $this->data()->event->setEndDate($this->data()->endDate);
+
+        $this->eventRepository->save($this->data()->event);
     }
 
     private function assertDataHasBeenSubmitted()
     {
-        if (!$this->data()->funding)
-            $this->errorHandler->addTaggedError('funding', 'Invalid funding');
-        if (!$this->data()->countryID)
-            $this->errorHandler->addTaggedError('country', 'Invalid country');
-        if (!$this->data()->sourceTitle)
-            $this->errorHandler->addTaggedError('fundingSource', 'Invalid funding source');
 
-        $this->errorHandler->throwIfNotEmpty();
     }
 
     private function assertDataIsNotEmpty()
@@ -79,52 +65,40 @@ class EventEdit
             $this->errorHandler->addTaggedError('title', 'Please specify a title');
         if (!$this->data()->url OR $this->data()->url == '')
             $this->errorHandler->addTaggedError('url', 'Please specify the url');
+        if (!$this->data()->shortDescription OR $this->data()->shortDescription == '')
+            $this->errorHandler->addTaggedError('shortDescription', 'Please write a short description');
         if (!$this->data()->description OR $this->data()->description == '')
-            $this->errorHandler->addTaggedError('description', 'Please specify a desription');
+            $this->errorHandler->addTaggedError('description', 'Please write a description');
 
         $this->errorHandler->throwIfNotEmpty();
     }
 
-    private function assertClosingDateIsValid()
+    private function assertDatesAreValid()
     {
-        if ($this->data()->closingDate AND $this->data()->closingDate != '')
-            if (!preg_match('<^\d{4}\-\d{2}\-\d{2}$>', $this->data()->closingDate))
-                $this->errorHandler->addTaggedError('closingDate', 'Please specify a valid date');
+        if ($this->data()->startDate AND $this->data()->startDate != '')
+            if (!preg_match('<^\d{4}\-\d{2}\-\d{2}$>', $this->data()->startDate))
+                $this->errorHandler->addTaggedError('startDate', 'Please specify a valid start date');
+
+        if ($this->data()->endDate AND $this->data()->endDate != '')
+            if (!preg_match('<^\d{4}\-\d{2}\-\d{2}$>', $this->data()->endDate))
+                $this->errorHandler->addTaggedError('endDate', 'Please specify a valid end date');
 
         $this->errorHandler->throwIfNotEmpty();
-    }
-
-    private function getFundingSource()
-    {
-        if ($this->data()->sourceTitle) {
-            $fundingSourceRepository = new FundingSourceRepository();
-            try {
-                $this->fundingSource = $fundingSourceRepository->getByTitle($this->data()->sourceTitle);
-            } catch (NotFound $e) {
-                $this->fundingSource = new FundingSource();
-                $this->fundingSource->setTitle($this->data()->sourceTitle);
-                $fundingSourceRepository->insert($this->fundingSource);
-            }
-        }
     }
 }
 
-class EditFunding_Data
+class EventEdit_Data
 {
-    /** @var Funding */
-    public $funding;
+    /** @var Event */
+    public $event;
 
     /** @var string */
     public $title,
         $url,
+        $shortDescription,
         $description;
 
-    /** @var int */
-    public $countryID;
-
     /** @var string */
-    public $sourceTitle;
-
-    /** @var string */
-    public $closingDate;
+    public $startDate,
+        $endDate;
 }

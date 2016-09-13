@@ -1,0 +1,88 @@
+<?php
+
+namespace DSI\Controller;
+
+use DSI\Entity\User;
+use DSI\Repository\CountryRepository;
+use DSI\Repository\EventRepository;
+use DSI\Service\Auth;
+use DSI\Service\ErrorHandler;
+use DSI\Service\URL;
+use DSI\UseCase\Events\EventEdit;
+
+class EventEditController
+{
+    /** @var int */
+    public $eventID;
+
+    /** @var string */
+    public $format;
+
+    public function exec()
+    {
+        $urlHandler = new URL();
+        $authUser = new Auth();
+        $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
+        $loggedInUser = $authUser->getUser();
+
+        if (!($this->userCanManageEvent($loggedInUser)))
+            go_to($urlHandler->home());
+
+        $event = (new EventRepository())->getById($this->eventID);
+
+        if ($this->format == 'json') {
+            if (isset($_POST['save'])) {
+                try {
+                    $eventEdit = new EventEdit();
+                    $eventEdit->data()->event = $event;
+                    $eventEdit->data()->title = $_POST['title'] ?? '';
+                    $eventEdit->data()->url = $_POST['url'] ?? '';
+                    $eventEdit->data()->shortDescription = $_POST['shortDescription'] ?? '';
+                    $eventEdit->data()->description = $_POST['description'] ?? '';
+                    $eventEdit->data()->startDate = $_POST['startDate'] ?? '';
+                    $eventEdit->data()->endDate = $_POST['endDate'] ?? '';
+                    $eventEdit->exec();
+
+                    echo json_encode([
+                        'code' => 'ok',
+                        'url' => $urlHandler->events(),
+                    ]);
+                } catch (ErrorHandler $e) {
+                    echo json_encode([
+                        'code' => 'error',
+                        'errors' => $e->getErrors(),
+                    ]);
+                }
+                return;
+            }
+
+            echo json_encode([
+                'title' => $event->getTitle(),
+                'url' => $event->getUrl(),
+                'shortDescription' => $event->getShortDescription(),
+                'description' => $event->getDescription(),
+                'startDate' => $event->getStartDate(),
+                'endDate' => $event->getEndDate(),
+            ]);
+            return;
+        }
+
+        $countries = (new CountryRepository())->getAll();
+        require(__DIR__ . '/../../../www/views/events-edit.php');
+    }
+
+    /**
+     * @param User $loggedInUser
+     * @return bool
+     */
+    private function userCanManageEvent(User $loggedInUser):bool
+    {
+        return (bool)(
+            $loggedInUser AND
+            (
+                $loggedInUser->isCommunityAdmin() OR
+                $loggedInUser->isEditorialAdmin()
+            )
+        );
+    }
+}

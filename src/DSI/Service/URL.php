@@ -95,6 +95,11 @@ class URL
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'event/edit/' . $eventID;
     }
 
+    public function editEventJson($eventID)
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'event/edit/' . $eventID . '.json';
+    }
+
     public function eventsJson()
     {
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'events.json';
