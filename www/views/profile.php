@@ -61,7 +61,8 @@ require __DIR__ . '/header.php';
                             <ul class="w-list-unstyled">
                                 <?php foreach ($userLinks AS $link) { ?>
                                     <li class="profile-contact-link">
-                                        <a class="link profile-contact-link" href="<?php echo $link ?>" rel="nofollow">
+                                        <a <?php if (!$user->isCommunityAdmin() AND !$user->isEditorialAdmin()) echo 'rel="nofollow"' ?>
+                                            class="link profile-contact-link" href="<?php echo $link ?>">
                                             <?php echo show_input($link) ?>
                                         </a>
                                     </li>

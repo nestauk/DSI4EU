@@ -203,6 +203,11 @@ $leftSideText .= "<p>The information is optional. You will be able to edit and e
                                                                    name="email-4" placeholder="Google +"
                                                                    ng-model="user.links.googleplus"
                                                                    type="text">
+                                                            <input class="creator-data-entry w-input"
+                                                                   data-name="Email 4" maxlength="256"
+                                                                   name="email-4" placeholder="Personal Website"
+                                                                   ng-model="user.links.other"
+                                                                   type="text">
                                                         </div>
                                                     </div>
                                                 </div>

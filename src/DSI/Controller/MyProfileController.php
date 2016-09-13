@@ -113,6 +113,8 @@ class MyProfileController
                     $links['googleplus'] = $userLink->getLink();
                 if ($userLink->getLinkService() == UserLink_Service::GitHub)
                     $links['github'] = $userLink->getLink();
+                if ($userLink->getLinkService() == UserLink_Service::Other)
+                    $links['other'] = $userLink->getLink();
             }
 
             echo json_encode([
