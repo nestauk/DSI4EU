@@ -14,7 +14,11 @@ class Event
         $description,
         $timeCreated,
         $startDate,
-        $endDate;
+        $endDate,
+        $address,
+        $phoneNumber,
+        $emailAddress,
+        $price;
 
     /** @var CountryRegion */
     private $region;
@@ -147,13 +151,8 @@ class Event
      */
     public function getStartDate($format = null): string
     {
-        if ($format) {
-            if ($this->startDate) {
-                return date($format, strtotime($this->startDate));
-            } else {
-                return '';
-            }
-        }
+        if ($format AND $this->startDate)
+            return date($format, strtotime($this->startDate));
 
         return (string)$this->startDate;
     }
@@ -203,5 +202,69 @@ class Event
             $timeCreated = '';
 
         $this->timeCreated = $timeCreated;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAddress(): string
+    {
+        return (string)$this->address;
+    }
+
+    /**
+     * @param string $address
+     */
+    public function setAddress($address)
+    {
+        $this->address = (string)$address;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhoneNumber(): string
+    {
+        return (string)$this->phoneNumber;
+    }
+
+    /**
+     * @param string $phoneNumber
+     */
+    public function setPhoneNumber($phoneNumber)
+    {
+        $this->phoneNumber = (string)$phoneNumber;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmailAddress(): string
+    {
+        return (string)$this->emailAddress;
+    }
+
+    /**
+     * @param string $emailAddress
+     */
+    public function setEmailAddress($emailAddress)
+    {
+        $this->emailAddress = (string)$emailAddress;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPrice(): string
+    {
+        return (string)$this->price;
+    }
+
+    /**
+     * @param string $price
+     */
+    public function setPrice($price)
+    {
+        $this->price = (string)$price;
     }
 }

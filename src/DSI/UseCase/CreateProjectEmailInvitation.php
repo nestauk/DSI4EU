@@ -3,6 +3,7 @@
 namespace DSI\UseCase;
 
 use DSI\Entity\ProjectEmailInvitation;
+use DSI\Entity\User;
 use DSI\Repository\ProjectEmailInvitationRepository;
 use DSI\Repository\ProjectRepository;
 use DSI\Repository\UserRepository;
@@ -54,19 +55,7 @@ class CreateProjectEmailInvitation
         $projectEmailInvitation->setEmail($this->data()->email);
         $this->projectEmailInvitationRepo->add($projectEmailInvitation);
 
-        $message = "{$byUser->getFirstName()} {$byUser->getLastName()} has invited you to join DSI.<br />";
-        $message .= "<a href='http://" . SITE_DOMAIN . $urlHandler->home() . "'>Click here</a> to register";
-        $email = new Mailer();
-        $email->From = 'noreply@digitalsocial.eu';
-        $email->FromName = 'No Reply';
-        $email->addAddress($this->data()->email);
-        $email->Subject = 'Digital Social Innovation :: Invitation';
-        $email->wrapMessageInTemplate([
-            'header' => 'Invitation',
-            'body' => $message,
-        ]);
-        $email->isHTML(true);
-        $email->send();
+        $this->sendEmail($byUser, $urlHandler);
     }
 
     /**
@@ -75,6 +64,29 @@ class CreateProjectEmailInvitation
     public function data()
     {
         return $this->data;
+    }
+
+    /**
+     * @param User $byUser
+     * @param URL $urlHandler
+     */
+    private function sendEmail(User $byUser, URL $urlHandler)
+    {
+        if ($this->data()->sendEmail) {
+            $message = "{$byUser->getFirstName()} {$byUser->getLastName()} has invited you to join DSI.<br />";
+            $message .= "<a href='http://" . SITE_DOMAIN . $urlHandler->home() . "'>Click here</a> to register";
+            $email = new Mailer();
+            $email->From = 'noreply@digitalsocial.eu';
+            $email->FromName = 'No Reply';
+            $email->addAddress($this->data()->email);
+            $email->Subject = 'Digital Social Innovation :: Invitation';
+            $email->wrapMessageInTemplate([
+                'header' => 'Invitation',
+                'body' => $message,
+            ]);
+            $email->isHTML(true);
+            $email->send();
+        }
     }
 }
 

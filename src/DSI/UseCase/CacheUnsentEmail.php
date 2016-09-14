@@ -2,15 +2,8 @@
 
 namespace DSI\UseCase;
 
-use abeautifulsite\SimpleImage;
 use DSI\Entity\CacheMail;
-use DSI\Entity\CaseStudy;
-use DSI\Entity\CountryRegion;
-use DSI\Entity\Image;
-use DSI\NotFound;
 use DSI\Repository\CacheMailRepository;
-use DSI\Repository\CaseStudyRepository;
-use DSI\Repository\CountryRegionRepository;
 use DSI\Service\ErrorHandler;
 use DSI\Service\Mailer;
 

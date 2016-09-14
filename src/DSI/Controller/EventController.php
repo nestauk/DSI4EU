@@ -7,8 +7,11 @@ use DSI\Repository\EventRepository;
 use DSI\Service\Auth;
 use DSI\Service\URL;
 
-class EventsController
+class EventController
 {
+    /** @var int */
+    public $eventID;
+
     public $format = 'html';
 
     /** @var URL */
@@ -20,6 +23,8 @@ class EventsController
         $authUser = new Auth();
         $loggedInUser = $authUser->getUserIfLoggedIn();
 
+        $event = (new EventRepository())->getById($this->eventID);
+
         if ($this->format == 'json') {
             $events = (new EventRepository())->getFutureOnes();
 
@@ -29,9 +34,8 @@ class EventsController
                 'years' => $this->jsonYearsFromEvents($events),
             ]);
         } else {
-            $pageTitle = 'Events';
-            $userCanAddEvent = (bool)($loggedInUser AND ($loggedInUser->isCommunityAdmin() OR $loggedInUser->isEditorialAdmin()));
-            require __DIR__ . '/../../../www/views/events.php';
+            $pageTitle = $event->getTitle() . ' - Digital Social Events';
+            require __DIR__ . '/../../../www/views/event.php';
         }
     }
 

@@ -21,6 +21,7 @@ class FundingTest extends \PHPUnit_Framework_TestCase
         $this->funding = new Funding();
         $this->fundingSource = new FundingSource();
         $this->fundingSource->setId(rand(1, 10));
+        $this->fundingSource->setTitle('Random Source Title');
         $this->country = new \DSI\Entity\Country();
         $this->country->setId(rand(11, 20));
         $this->country->setName('Country Name');
@@ -80,6 +81,15 @@ class FundingTest extends \PHPUnit_Framework_TestCase
         $closingDate = '2016-10-12';
         $this->funding->setClosingDate($closingDate);
         $this->assertEquals($closingDate, $this->funding->getClosingDate());
+        $this->assertEquals('12th October 2016', $this->funding->getClosingDate('jS F Y'));
+    }
+
+    /** @test */
+    public function settingEmptyClosingDate_returnsEmptyClosingDate()
+    {
+        $this->funding->setClosingDate('0000-00-00');
+        $this->assertEquals('', $this->funding->getClosingDate());
+        $this->assertEquals('', $this->funding->getClosingDate('jS F Y'));
     }
 
     /** @test */
@@ -100,17 +110,11 @@ class FundingTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function settingEmptyClosingDate_returnsEmptyClosingDate()
-    {
-        $this->funding->setClosingDate('0000-00-00');
-        $this->assertEquals('', $this->funding->getClosingDate());
-    }
-
-    /** @test */
     public function settingFundingSource_returnsFundingSource()
     {
         $this->funding->setSource($this->fundingSource);
         $this->assertEquals($this->fundingSource->getId(), $this->funding->getSource()->getId());
+        $this->assertEquals($this->fundingSource->getTitle(), $this->funding->getSourceTitle());
     }
 
     /** @test */

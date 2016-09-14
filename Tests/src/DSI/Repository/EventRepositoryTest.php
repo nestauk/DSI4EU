@@ -57,6 +57,10 @@ class EventRepositoryTest extends PHPUnit_Framework_TestCase
         $event->setDescription($description = 'Description');
         $event->setStartDate($startDate = '2016-10-12');
         $event->setEndDate($endDate = '2016-10-14');
+        $event->setAddress($address = 'Elms Crescent, London');
+        $event->setPhoneNumber($phoneNumber = '01234 567 890');
+        $event->setEmailAddress($emailAddress = 'alecs@example.org');
+        $event->setPrice($price = 'Free');
         $event->setRegion($this->region);
         $this->eventRepository->insert($event);
 
@@ -68,6 +72,10 @@ class EventRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($description, $event->getDescription());
         $this->assertEquals($startDate, $event->getStartDate());
         $this->assertEquals($endDate, $event->getEndDate());
+        $this->assertEquals($address, $event->getAddress());
+        $this->assertEquals($phoneNumber, $event->getPhoneNumber());
+        $this->assertEquals($emailAddress, $event->getEmailAddress());
+        $this->assertEquals($price, $event->getPrice());
         $this->assertEquals($this->region->getId(), $event->getRegionID());
 
         $this->assertNotEquals('0000-00-00 00:00:00', $event->getTimeCreated());
@@ -106,6 +114,24 @@ class EventRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertCount(2, $this->eventRepository->getAll());
     }
 
+    /** @test getAll */
+    public function getFutureOnes()
+    {
+        $_days = 60 * 60 * 24;
+
+        $event = new Event();
+        $event->setEndDate(date('Y-m-d', time() + 30 * $_days));
+        $this->eventRepository->insert($event);
+
+        $this->assertCount(1, $this->eventRepository->getAll());
+
+        $event = new Event();
+        $event->setEndDate(date('Y-m-d', time() - 30 * $_days));
+        $this->eventRepository->insert($event);
+
+        $this->assertCount(1, $this->eventRepository->getFutureOnes());
+    }
+
     /** @test */
     public function objectCanBeUpdated()
     {
@@ -118,6 +144,10 @@ class EventRepositoryTest extends PHPUnit_Framework_TestCase
         $event->setDescription($description = 'Description');
         $event->setStartDate($startDate = '2016-10-12');
         $event->setEndDate($endDate = '2016-10-12');
+        $event->setAddress($address = 'Elms Crescent, London');
+        $event->setPhoneNumber($phoneNumber = '01234 567 890');
+        $event->setEmailAddress($emailAddress = 'alecs@example.org');
+        $event->setPrice($price = 'Free');
         $event->setRegion($this->region);
         $this->eventRepository->save($event);
 
@@ -128,6 +158,10 @@ class EventRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($description, $event->getDescription());
         $this->assertEquals($startDate, $event->getStartDate());
         $this->assertEquals($endDate, $event->getEndDate());
+        $this->assertEquals($address, $event->getAddress());
+        $this->assertEquals($phoneNumber, $event->getPhoneNumber());
+        $this->assertEquals($emailAddress, $event->getEmailAddress());
+        $this->assertEquals($price, $event->getPrice());
         $this->assertEquals($this->region->getId(), $event->getRegionID());
 
         $this->assertNotEquals('0000-00-00 00:00:00', $event->getTimeCreated());

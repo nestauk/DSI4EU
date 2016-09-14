@@ -19,6 +19,10 @@ class EventRepository
         $insert[] = "`description` = '" . addslashes($event->getDescription()) . "'";
         $insert[] = "`startDate` = '" . addslashes($event->getStartDate()) . "'";
         $insert[] = "`endDate` = '" . addslashes($event->getEndDate()) . "'";
+        $insert[] = "`address` = '" . addslashes($event->getAddress()) . "'";
+        $insert[] = "`phoneNumber` = '" . addslashes($event->getPhoneNumber()) . "'";
+        $insert[] = "`emailAddress` = '" . addslashes($event->getEmailAddress()) . "'";
+        $insert[] = "`price` = '" . addslashes($event->getPrice()) . "'";
         $insert[] = "`regionID` = '" . (int)($event->getRegionID()) . "'";
 
         $query = new SQL("INSERT INTO `{$this->dbTable}` SET " . implode(', ', $insert));
@@ -41,6 +45,10 @@ class EventRepository
         $insert[] = "`description` = '" . addslashes($event->getDescription()) . "'";
         $insert[] = "`startDate` = '" . addslashes($event->getStartDate()) . "'";
         $insert[] = "`endDate` = '" . addslashes($event->getEndDate()) . "'";
+        $insert[] = "`address` = '" . addslashes($event->getAddress()) . "'";
+        $insert[] = "`phoneNumber` = '" . addslashes($event->getPhoneNumber()) . "'";
+        $insert[] = "`emailAddress` = '" . addslashes($event->getEmailAddress()) . "'";
+        $insert[] = "`price` = '" . addslashes($event->getPrice()) . "'";
         $insert[] = "`regionID` = '" . (int)($event->getRegionID()) . "'";
 
         $query = new SQL("UPDATE `{$this->dbTable}` SET " . implode(', ', $insert) . " WHERE `id` = '{$event->getId()}'");
@@ -98,6 +106,7 @@ class EventRepository
         $query = new SQL("SELECT 
               id, title, url, shortDesc, description
             , startDate, endDate, regionID, timeCreated
+            , address, phoneNumber, emailAddress, price
           FROM `{$this->dbTable}` WHERE " . implode(' AND ', $where) . "");
         foreach ($query->fetch_all() AS $dbEvent) {
             $event = new Event();
@@ -108,6 +117,10 @@ class EventRepository
             $event->setDescription($dbEvent['description']);
             $event->setStartDate($dbEvent['startDate']);
             $event->setEndDate($dbEvent['endDate']);
+            $event->setAddress($dbEvent['address']);
+            $event->setPhoneNumber($dbEvent['phoneNumber']);
+            $event->setEmailAddress($dbEvent['emailAddress']);
+            $event->setPrice($dbEvent['price']);
             $event->setTimeCreated($dbEvent['timeCreated']);
             if ($dbEvent['regionID'])
                 $event->setRegion(

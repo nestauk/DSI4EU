@@ -15,7 +15,8 @@ require __DIR__ . '/header.php';
                 <div class="w-col w-col-12 w-col-stack notification-col">
                     <p>The page you are looking for could not be found.</p>
                     <p>It may have been moved, or removed altogether.</p>
-                    <p>Please use the links or the search feature under the menu to find your way back to the website.</p>
+                    <p>Please use the links or the search feature under the menu to find your way back to the
+                        website.</p>
                 </div>
             </div>
         </div>

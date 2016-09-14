@@ -29,6 +29,7 @@ class RegisterController
                 $register = new Register();
                 $register->data()->email = $_POST['email'];
                 $register->data()->password = $_POST['password'];
+                $register->data()->sendEmail = true;
                 $register->exec();
 
                 $authUser->saveUserInSession($register->getUser());

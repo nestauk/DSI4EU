@@ -3,6 +3,7 @@ namespace DSI\Service;
 
 
 use DSI\Entity\CaseStudy;
+use DSI\Entity\Event;
 use DSI\Entity\Organisation;
 use DSI\Entity\Project;
 use DSI\Entity\Story;
@@ -88,6 +89,15 @@ class URL
     public function events()
     {
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'events';
+    }
+
+    /**
+     * @param Event $event
+     * @return string
+     */
+    public function event(Event $event)
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'event/' . $event->getId();
     }
 
     public function editEvent($eventID)

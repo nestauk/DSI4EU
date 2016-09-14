@@ -50,7 +50,7 @@ require __DIR__ . '/header.php'
                             <strong>Event date:</strong>
                             <span ng-bind="event.startDate"></span>
                         </div>
-                        <a class="read-more w-button" href="{{event.url}}">Read more</a>
+                        <a class="read-more w-button" href="{{event.viewUrl}}">Read more</a>
                         <?php if ($userCanAddEvent) { ?>
                             <a class="read-more w-button edit-funding" href="{{event.editUrl}}">Edit Event</a>
                         <?php } ?>

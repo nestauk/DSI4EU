@@ -85,6 +85,7 @@ class EventTest extends \PHPUnit_Framework_TestCase
         $startDate = '2016-10-12';
         $this->event->setStartDate($startDate);
         $this->assertEquals($startDate, $this->event->getStartDate());
+        $this->assertEquals('12th October 2016', $this->event->getStartDate('jS F Y'));
     }
 
     /** @test */
@@ -112,6 +113,7 @@ class EventTest extends \PHPUnit_Framework_TestCase
     {
         $this->event->setStartDate('0000-00-00');
         $this->assertEquals('', $this->event->getStartDate());
+        $this->assertEquals('', $this->event->getStartDate('jS F Y'));
     }
 
     /** @test */
@@ -154,5 +156,45 @@ class EventTest extends \PHPUnit_Framework_TestCase
     {
         $daysAgo = time() - 60 * 60 * 24 * $days;
         return $daysAgo;
+    }
+
+    /** @test */
+    public function settingAddress_returnsAddress()
+    {
+        $this->assertEquals('', $this->event->getAddress());
+
+        $address = 'Elms Crescent, London';
+        $this->event->setAddress($address);
+        $this->assertEquals($address, $this->event->getAddress());
+    }
+
+    /** @test */
+    public function settingPhoneNumber_returnsPhoneNumber()
+    {
+        $this->assertEquals('', $this->event->getPhoneNumber());
+
+        $phoneNumber = '01234 567 890';
+        $this->event->setPhoneNumber($phoneNumber);
+        $this->assertEquals($phoneNumber, $this->event->getPhoneNumber());
+    }
+
+    /** @test */
+    public function settingEmailAddress_returnsEmailAddress()
+    {
+        $this->assertEquals('', $this->event->getEmailAddress());
+
+        $emailAddress = 'alecs@example.org';
+        $this->event->setEmailAddress($emailAddress);
+        $this->assertEquals($emailAddress, $this->event->getEmailAddress());
+    }
+
+    /** @test */
+    public function settingPrice_returnsPrice()
+    {
+        $this->assertEquals('', $this->event->getPrice());
+
+        $price = 'Free';
+        $this->event->setPrice($price);
+        $this->assertEquals($price, $this->event->getPrice());
     }
 }

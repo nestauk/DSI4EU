@@ -14,6 +14,11 @@ class CacheMailTest extends \PHPUnit_Framework_TestCase
         $this->mail = new CacheMail();
     }
 
+    public function tearDown()
+    {
+        // (new \DSI\Repository\CacheMailRepository())->clearAll();
+    }
+
     /** @test setId, getId */
     public function settingAnId_returnsTheId()
     {

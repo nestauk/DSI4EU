@@ -34,7 +34,7 @@ class FundingRepositoryTest extends PHPUnit_Framework_TestCase
         $this->fundingSource = new FundingSource();
         $this->fundingSourceRepository->insert($this->fundingSource);
 
-        $this->countryRepository= new CountryRepository();
+        $this->countryRepository = new CountryRepository();
         $this->country = new Country();
         $this->country->setName('Country Name');
         $this->countryRepository->insert($this->country);
@@ -102,6 +102,21 @@ class FundingRepositoryTest extends PHPUnit_Framework_TestCase
         $this->fundingRepository->insert($funding);
 
         $this->assertCount(2, $this->fundingRepository->getAll());
+    }
+
+    /** @test getAll */
+    public function getFutureOnes()
+    {
+        $days = 60 * 60 * 24;
+        $funding = new Funding();
+        $funding->setClosingDate(date('Y-m-d', time() + 30 * $days));
+        $this->fundingRepository->insert($funding);
+
+        $funding = new Funding();
+        $funding->setClosingDate(date('Y-m-d', time() - 30 * $days));
+        $this->fundingRepository->insert($funding);
+
+        $this->assertCount(1, $this->fundingRepository->getFutureOnes());
     }
 
     /** @test */

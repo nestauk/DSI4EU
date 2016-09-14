@@ -103,6 +103,9 @@ class Router
         } elseif (preg_match('<^/' . $langHandler . 'event/edit/([0-9]+)\.json$>', $this->pageURL, $matches)) {
             $this->editEventPage($matches, 'json');
 
+        } elseif (preg_match('<^/' . $langHandler . 'event/([0-9]+)$>', $this->pageURL, $matches)) {
+            $this->eventPage($matches);
+
 // Projects
         } elseif (preg_match('<^/' . $langHandler . 'projects$>', $this->pageURL, $matches)) {
             $this->projectsPage($matches);
@@ -486,6 +489,16 @@ class Router
         $this->setLanguageFromUrl($matches);
 
         $command = new \DSI\Controller\EventEditController();
+        $command->eventID = $matches[3];
+        $command->format = $format;
+        $command->exec();
+    }
+
+    private function eventPage($matches = [], $format = 'html')
+    {
+        $this->setLanguageFromUrl($matches);
+
+        $command = new \DSI\Controller\EventController();
         $command->eventID = $matches[3];
         $command->format = $format;
         $command->exec();

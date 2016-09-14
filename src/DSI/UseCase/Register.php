@@ -99,9 +99,11 @@ class Register
 
     private function sendWelcomeEmail()
     {
-        $sendEmail = new SendWelcomeEmailAfterRegistration();
-        $sendEmail->data()->emailAddress = $this->data()->email;
-        $sendEmail->exec();
+        if ($this->data()->sendEmail) {
+            $sendEmail = new SendWelcomeEmailAfterRegistration();
+            $sendEmail->data()->emailAddress = $this->data()->email;
+            $sendEmail->exec();
+        }
     }
 
     private function checkProjectInvitations()
@@ -127,4 +129,7 @@ class Register_Data
     /** @var string */
     public $email,
         $password;
+
+    /** @var bool */
+    public $sendEmail;
 }

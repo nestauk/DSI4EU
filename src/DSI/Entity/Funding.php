@@ -135,7 +135,7 @@ class Funding
         if (!$this->closingDate OR $this->closingDate == '0000-00-00')
             return '';
 
-        if ($format !== null)
+        if ($format AND $this->closingDate)
             return date($format, strtotime($this->closingDate));
 
         return (string)$this->closingDate;
