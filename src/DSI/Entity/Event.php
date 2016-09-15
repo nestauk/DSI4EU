@@ -91,6 +91,14 @@ class Event
     }
 
     /**
+     * @return int
+     */
+    public function getCountryID()
+    {
+        return $this->region ? $this->region->getCountry()->getId() : 0;
+    }
+
+    /**
      * @return CountryRegion
      */
     public function getRegion()

@@ -3,7 +3,6 @@
 namespace DSI\Controller;
 
 use DSI\Entity\User;
-use DSI\Repository\UserRepository;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\URL;

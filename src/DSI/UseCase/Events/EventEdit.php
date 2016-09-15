@@ -2,10 +2,12 @@
 
 namespace DSI\UseCase\Events;
 
+use DSI\Entity\CountryRegion;
 use DSI\Entity\Event;
-use DSI\Repository\CountryRepository;
+use DSI\Repository\CountryRegionRepository;
 use DSI\Repository\EventRepository;
 use DSI\Service\ErrorHandler;
+use DSI\UseCase\CreateCountryRegion;
 
 class EventEdit
 {
@@ -18,9 +20,16 @@ class EventEdit
     /** @var EventRepository */
     private $eventRepository;
 
+    /** @var CountryRegionRepository */
+    private $countryRegionRepo;
+
+    /** @var CountryRegion */
+    private $countryRegion;
+
     public function __construct()
     {
         $this->data = new EventEdit_Data();
+        $this->countryRegionRepo = new CountryRegionRepository();
     }
 
     public function exec()
@@ -31,6 +40,7 @@ class EventEdit
         $this->assertDataHasBeenSubmitted();
         $this->assertDataIsNotEmpty();
         $this->assertDatesAreValid();
+        $this->getRegion();
         $this->saveEvent();
     }
 
@@ -54,6 +64,8 @@ class EventEdit
         $this->data()->event->setPhoneNumber($this->data()->phoneNumber);
         $this->data()->event->setEmailAddress($this->data()->emailAddress);
         $this->data()->event->setPrice($this->data()->price);
+        if ($this->countryRegion)
+            $this->data()->event->setRegion($this->countryRegion);
 
         $this->eventRepository->save($this->data()->event);
     }
@@ -89,6 +101,22 @@ class EventEdit
 
         $this->errorHandler->throwIfNotEmpty();
     }
+
+    private function getRegion()
+    {
+        if ($this->data()->countryID != 0) {
+            if ($this->countryRegionRepo->nameExists($this->data()->countryID, $this->data()->region)) {
+                $countryRegion = $this->countryRegionRepo->getByName($this->data()->countryID, $this->data()->region);
+            } else {
+                $createCountryRegionCmd = new CreateCountryRegion();
+                $createCountryRegionCmd->data()->countryID = $this->data()->countryID;
+                $createCountryRegionCmd->data()->name = $this->data()->region;
+                $createCountryRegionCmd->exec();
+                $countryRegion = $createCountryRegionCmd->getCountryRegion();
+            }
+            $this->countryRegion = $countryRegion;
+        }
+    }
 }
 
 class EventEdit_Data
@@ -106,5 +134,9 @@ class EventEdit_Data
         $address,
         $phoneNumber,
         $emailAddress,
-        $price;
+        $price,
+        $region;
+
+    /** @var int */
+    public $countryID;
 }

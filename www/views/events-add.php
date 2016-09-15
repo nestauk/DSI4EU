@@ -51,6 +51,35 @@ require __DIR__ . '/header.php';
                             <div class="form-col-right w-col w-col-6">
                                 <h2 class="edit-h2">Event details</h2>
 
+                                <div ng-cloak>
+                                    <div>
+                                        <label class="story-label">What country in the event taking place?</label>
+                                        <select id="edit-country" data-placeholder="Select country"
+                                                style="width:400px;background:transparent">
+                                            <option></option>
+                                        </select>
+                                    </div>
+                                    <div ng-show="regionsLoaded">
+                                        <br/>
+                                        <label class="story-label" for="city">In which city?</label>
+                                        <select
+                                            data-tags="true" id="edit-countryRegion"
+                                            data-placeholder="Type the city"
+                                            style="width:400px;background:transparent">
+                                        </select>
+                                    </div>
+                                    <div ng-show="regionsLoading">
+                                        Loading...
+                                    </div>
+                                </div>
+                                <br />
+
+                                <label>Address</label>
+                                <textarea class="creator-data-entry end long-description w-input"
+                                          ng-model="event.address"
+                                          placeholder="Event Address"></textarea>
+                                <div class="error" ng-bind="errors.address"></div>
+
                                 <label for="name-4">Event start date</label>
                                 <input class="creator-data-entry w-input" data-name="Name 4" id="startDate"
                                        maxlength="256"
@@ -64,12 +93,6 @@ require __DIR__ . '/header.php';
                                        ng-model="event.endDate"
                                        name="name-4" placeholder="When is the event last day" type="text">
                                 <div class="error" ng-bind="errors.endDate"></div>
-
-                                <label>Address</label>
-                                <textarea class="creator-data-entry end long-description w-input"
-                                          ng-model="event.address"
-                                          placeholder="Event Address"></textarea>
-                                <div class="error" ng-bind="errors.address"></div>
 
                                 <label for="name-4">Contact phone number</label>
                                 <input class="creator-data-entry w-input" maxlength="256"

@@ -32,6 +32,8 @@ class EventAddController
                 $eventAdd->data()->address = $_POST['address'] ?? '';
                 $eventAdd->data()->phoneNumber = $_POST['phoneNumber'] ?? '';
                 $eventAdd->data()->emailAddress = $_POST['emailAddress'] ?? '';
+                $eventAdd->data()->countryID = $_POST['countryID'] ?? '';
+                $eventAdd->data()->region = $_POST['region'] ?? '';
                 $eventAdd->data()->price = $_POST['price'] ?? '';
 
                 $eventAdd->exec();

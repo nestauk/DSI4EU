@@ -44,6 +44,8 @@ class EventEditController
                     $eventEdit->data()->address = $_POST['address'] ?? '';
                     $eventEdit->data()->phoneNumber = $_POST['phoneNumber'] ?? '';
                     $eventEdit->data()->emailAddress = $_POST['emailAddress'] ?? '';
+                    $eventEdit->data()->countryID = $_POST['countryID'] ?? '';
+                    $eventEdit->data()->region = $_POST['region'] ?? '';
                     $eventEdit->data()->price = $_POST['price'] ?? '';
                     $eventEdit->exec();
 
@@ -71,6 +73,8 @@ class EventEditController
                 'phoneNumber' => $event->getPhoneNumber(),
                 'emailAddress' => $event->getEmailAddress(),
                 'price' => $event->getPrice(),
+                'countryID' => $event->getCountryID(),
+                'region' => $event->getRegionName(),
             ]);
             return;
         }

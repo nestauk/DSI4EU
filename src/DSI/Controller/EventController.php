@@ -55,6 +55,8 @@ class EventController
                 'phoneNumber' => $event->getPhoneNumber(),
                 'emailAddress' => $event->getEmailAddress(),
                 'price' => $event->getPrice(),
+                'countryID' => $event->getCountryID(),
+                'region' => $event->getRegionName(),
                 'editUrl' => $this->urlHandler->editEvent($event->getId()),
                 'viewUrl' => $this->urlHandler->event($event),
             ];
