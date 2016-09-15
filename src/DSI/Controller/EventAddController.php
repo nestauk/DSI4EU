@@ -29,6 +29,10 @@ class EventAddController
                 $eventAdd->data()->description = $_POST['description'] ?? '';
                 $eventAdd->data()->startDate = $_POST['startDate'] ?? '';
                 $eventAdd->data()->endDate = $_POST['endDate'] ?? '';
+                $eventAdd->data()->address = $_POST['address'] ?? '';
+                $eventAdd->data()->phoneNumber = $_POST['phoneNumber'] ?? '';
+                $eventAdd->data()->emailAddress = $_POST['emailAddress'] ?? '';
+                $eventAdd->data()->price = $_POST['price'] ?? '';
 
                 $eventAdd->exec();
 

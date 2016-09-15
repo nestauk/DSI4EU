@@ -26,18 +26,24 @@ require __DIR__ . '/header.php'
                         <p class="funding-descr">
                             <?php echo $event->getDescription() ?>
                         </p>
-                        <div class="funding-closing-date"><strong>Contact number:</strong> {event.number}}</div>
-                        <div class="funding-closing-date"><strong>Contact email:</strong> {event.email}}</div>
+                        <div class="funding-closing-date">
+                            <strong>Contact number:</strong>
+                            <?php echo show_input($event->getPhoneNumber()) ?>
+                        </div>
+                        <div class="funding-closing-date">
+                            <strong>Contact email:</strong>
+                            <a href="mailto:<?php echo show_input($event->getEmailAddress()) ?>">
+                                <?php echo show_input($event->getEmailAddress()) ?>
+                            </a>
+                        </div>
                         <a class="read-more w-button" href="<?php echo $event->getUrl() ?>" target="_blank">
                             Read more
                         </a>
                         <?php if ($event->isNew()) { ?>
                             <div class="funding-country funding-new">New event published</div>
                         <?php } ?>
-                        <div class="full funding-country">Nesta,
-                            <br>1 Plough Place,
-                            <br>London,
-                            <br>EC4A 1DE
+                        <div class="full funding-country">
+                            <?php echo nl2br(show_input($event->getAddress())) ?>
                         </div>
                     </div>
                 </div>

@@ -64,6 +64,30 @@ require __DIR__ . '/header.php';
                                        ng-model="event.endDate"
                                        name="name-4" placeholder="When is the event last day" type="text">
                                 <div class="error" ng-bind="errors.endDate"></div>
+
+                                <label>Address</label>
+                                <textarea class="creator-data-entry end long-description w-input"
+                                          ng-model="event.address"
+                                          placeholder="Event Address"></textarea>
+                                <div class="error" ng-bind="errors.address"></div>
+
+                                <label for="name-4">Contact phone number</label>
+                                <input class="creator-data-entry w-input" maxlength="256"
+                                       ng-model="event.phoneNumber"
+                                       name="name-4" placeholder="Contact phone number" type="text">
+                                <div class="error" ng-bind="errors.phoneNumber"></div>
+
+                                <label for="name-4">Contact email address</label>
+                                <input class="creator-data-entry w-input" maxlength="256"
+                                       ng-model="event.emailAddress"
+                                       name="name-4" placeholder="Contact email address" type="text">
+                                <div class="error" ng-bind="errors.emailAddress"></div>
+
+                                <label for="name-4">Price</label>
+                                <input class="creator-data-entry w-input" maxlength="256"
+                                       ng-model="event.price"
+                                       name="name-4" placeholder="Price" type="text">
+                                <div class="error" ng-bind="errors.price"></div>
                             </div>
                         </div>
                     </div>

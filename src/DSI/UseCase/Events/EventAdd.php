@@ -51,6 +51,10 @@ class EventAdd
         $event->setDescription($this->data()->description);
         $event->setStartDate($this->data()->startDate);
         $event->setEndDate($this->data()->endDate);
+        $event->setAddress($this->data()->address);
+        $event->setPhoneNumber($this->data()->phoneNumber);
+        $event->setEmailAddress($this->data()->emailAddress);
+        $event->setPrice($this->data()->price);
 
         $this->eventRepository->insert($event);
     }
@@ -94,9 +98,11 @@ class EventAdd_Data
     public $title,
         $url,
         $shortDescription,
-        $description;
-
-    /** @var string */
-    public $startDate,
-        $endDate;
+        $description,
+        $startDate,
+        $endDate,
+        $address,
+        $phoneNumber,
+        $emailAddress,
+        $price;
 }

@@ -41,6 +41,10 @@ class EventEditController
                     $eventEdit->data()->description = $_POST['description'] ?? '';
                     $eventEdit->data()->startDate = $_POST['startDate'] ?? '';
                     $eventEdit->data()->endDate = $_POST['endDate'] ?? '';
+                    $eventEdit->data()->address = $_POST['address'] ?? '';
+                    $eventEdit->data()->phoneNumber = $_POST['phoneNumber'] ?? '';
+                    $eventEdit->data()->emailAddress = $_POST['emailAddress'] ?? '';
+                    $eventEdit->data()->price = $_POST['price'] ?? '';
                     $eventEdit->exec();
 
                     echo json_encode([
@@ -63,6 +67,10 @@ class EventEditController
                 'description' => $event->getDescription(),
                 'startDate' => $event->getStartDate(),
                 'endDate' => $event->getEndDate(),
+                'address' => $event->getAddress(),
+                'phoneNumber' => $event->getPhoneNumber(),
+                'emailAddress' => $event->getEmailAddress(),
+                'price' => $event->getPrice(),
             ]);
             return;
         }

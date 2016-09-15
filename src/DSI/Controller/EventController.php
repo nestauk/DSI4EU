@@ -26,13 +26,7 @@ class EventController
         $event = (new EventRepository())->getById($this->eventID);
 
         if ($this->format == 'json') {
-            $events = (new EventRepository())->getFutureOnes();
 
-            echo json_encode([
-                'months' => $this->jsonMonths(),
-                'events' => $this->jsonEvents($events),
-                'years' => $this->jsonYearsFromEvents($events),
-            ]);
         } else {
             $pageTitle = $event->getTitle() . ' - Digital Social Events';
             require __DIR__ . '/../../../www/views/event.php';
@@ -57,6 +51,10 @@ class EventController
                 'endDate' => $event->getEndDate(),
                 'startDay' => $event->getStartDate('d M Y'),
                 'isNew' => $event->isNew(),
+                'address' => $event->getAddress(),
+                'phoneNumber' => $event->getPhoneNumber(),
+                'emailAddress' => $event->getEmailAddress(),
+                'price' => $event->getPrice(),
                 'editUrl' => $this->urlHandler->editEvent($event->getId()),
                 'viewUrl' => $this->urlHandler->event($event),
             ];

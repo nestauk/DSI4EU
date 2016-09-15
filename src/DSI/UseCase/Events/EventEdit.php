@@ -15,7 +15,7 @@ class EventEdit
     /** @var EventEdit_Data */
     private $data;
 
-    /** @var EventRepository*/
+    /** @var EventRepository */
     private $eventRepository;
 
     public function __construct()
@@ -50,6 +50,10 @@ class EventEdit
         $this->data()->event->setDescription($this->data()->description);
         $this->data()->event->setStartDate($this->data()->startDate);
         $this->data()->event->setEndDate($this->data()->endDate);
+        $this->data()->event->setAddress($this->data()->address);
+        $this->data()->event->setPhoneNumber($this->data()->phoneNumber);
+        $this->data()->event->setEmailAddress($this->data()->emailAddress);
+        $this->data()->event->setPrice($this->data()->price);
 
         $this->eventRepository->save($this->data()->event);
     }
@@ -96,9 +100,11 @@ class EventEdit_Data
     public $title,
         $url,
         $shortDescription,
-        $description;
-
-    /** @var string */
-    public $startDate,
-        $endDate;
+        $description,
+        $startDate,
+        $endDate,
+        $address,
+        $phoneNumber,
+        $emailAddress,
+        $price;
 }
