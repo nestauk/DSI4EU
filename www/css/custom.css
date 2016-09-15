@@ -369,3 +369,15 @@ div.error {
     font-size: 14px;
     line-height: 20px;
 }
+
+.container-wide.massive-hero-slide-container {
+    background-color: transparent;
+}
+
+.massive-hero-h1 {
+    color: #fff;
+}
+
+.massive-hero-h2 {
+    color: #fff;
+}
