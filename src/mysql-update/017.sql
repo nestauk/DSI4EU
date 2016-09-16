@@ -6,7 +6,7 @@ CREATE TABLE `app-registrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 ALTER TABLE `app-registrations`
-  ADD KEY `id` (`id`);
+  ADD PRIMARY KEY (`id`);
 
 ALTER TABLE `app-registrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;

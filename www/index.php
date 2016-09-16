@@ -56,6 +56,9 @@ class Router
         } elseif ($this->pageURL === '/app-register-user') {
             $this->appRegisterUserPage();
 
+        } elseif ($this->pageURL === '/app-leader-board') {
+            $this->appLeaderBoard();
+
         } elseif ($this->pageURL === '/set-admin') {
             $this->setAdminPage();
 
@@ -330,19 +333,21 @@ class Router
         $command->exec();
     }
 
-    private function appLoginPage($matches = [])
+    private function appLoginPage()
     {
-        $this->setLanguageFromUrl($matches);
-
         $command = new \DSI\Controller\AppLoginController();
         $command->exec();
     }
 
-    private function appRegisterUserPage($matches = [])
+    private function appRegisterUserPage()
     {
-        $this->setLanguageFromUrl($matches);
-
         $command = new \DSI\Controller\AppRegisterUserController();
+        $command->exec();
+    }
+
+    private function appLeaderBoard()
+    {
+        $command = new \DSI\Controller\AppLeaderBoard();
         $command->exec();
     }
 
