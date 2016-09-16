@@ -5,6 +5,7 @@ use DSI\Repository\UserRepository;
 use DSI\Service\ErrorHandler;
 use DSI\UseCase\AppRegistration\AppRegistrationCreate;
 use DSI\UseCase\CreateUser;
+use DSI\UseCase\SendWelcomeEmailAfterRegistration;
 
 class AppRegisterUserController
 {
@@ -26,6 +27,10 @@ class AppRegisterUserController
             $createAppRegistration->data()->loggedInUser = $loggedInUser;
             $createAppRegistration->data()->registeredUser = $registeredUser;
             $createAppRegistration->exec();
+
+            $sendEmail = new SendWelcomeEmailAfterRegistration();
+            $sendEmail->data()->emailAddress = $registeredUser->getEmail();
+            $sendEmail->exec();
 
             echo json_encode([
                 'code' => 'ok',
