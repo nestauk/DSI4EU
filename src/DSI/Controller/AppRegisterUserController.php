@@ -5,7 +5,7 @@ use DSI\Repository\UserRepository;
 use DSI\Service\ErrorHandler;
 use DSI\UseCase\AppRegistration\AppRegistrationCreate;
 use DSI\UseCase\CreateUser;
-use DSI\UseCase\SendWelcomeEmailAfterRegistration;
+use DSI\UseCase\SendWelcomeEmailToAppRegisteredUser;
 
 class AppRegisterUserController
 {
@@ -28,7 +28,7 @@ class AppRegisterUserController
             $createAppRegistration->data()->registeredUser = $registeredUser;
             $createAppRegistration->exec();
 
-            $sendEmail = new SendWelcomeEmailAfterRegistration();
+            $sendEmail = new SendWelcomeEmailToAppRegisteredUser();
             $sendEmail->data()->emailAddress = $registeredUser->getEmail();
             $sendEmail->exec();
 
