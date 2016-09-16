@@ -6,7 +6,7 @@ use DSI\Entity\User;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\URL;
-use DSI\UseCase\Events\EventAdd;
+use DSI\UseCase\Events\EventCreate;
 
 class EventAddController
 {
@@ -22,7 +22,7 @@ class EventAddController
 
         if (isset($_POST['add'])) {
             try {
-                $eventAdd = new EventAdd();
+                $eventAdd = new EventCreate();
                 $eventAdd->data()->title = $_POST['title'] ?? '';
                 $eventAdd->data()->url = $_POST['url'] ?? '';
                 $eventAdd->data()->shortDescription = $_POST['shortDescription'] ?? '';

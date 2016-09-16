@@ -67,7 +67,7 @@ class CaseStudyRepositoryTest extends PHPUnit_Framework_TestCase
         $caseStudy->setCardColour($cardColour = '#ffffff');
         $caseStudy->setIsPublished($isPublished = true);
         $caseStudy->setIsFeaturedOnSlider($isFeaturedOnSlider = true);
-        $caseStudy->setIsFeaturedOnHomePage($isFeaturedOnHomePage = true);
+        $caseStudy->setPositionOnFirstPage($positionOnHomePage = 2);
         $caseStudy->setRegion($this->countryRegion);
         $this->caseStudyRepository->insert($caseStudy);
 
@@ -87,7 +87,7 @@ class CaseStudyRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($cardColour, $caseStudy->getCardColour());
         $this->assertEquals($isPublished, $caseStudy->isPublished());
         $this->assertEquals($isFeaturedOnSlider, $caseStudy->isFeaturedOnSlider());
-        $this->assertEquals($isFeaturedOnHomePage, $caseStudy->isFeaturedOnHomePage());
+        $this->assertEquals($positionOnHomePage, $caseStudy->getPositionOnFirstPage());
         $this->assertEquals($this->countryRegion->getId(), $caseStudy->getRegion()->getId());
         $this->assertEquals($this->countryRegion->getId(), $caseStudy->getRegionID());
     }
@@ -191,22 +191,22 @@ class CaseStudyRepositoryTest extends PHPUnit_Framework_TestCase
     {
         $caseStudy = new CaseStudy();
         $caseStudy->setIsPublished(true);
-        $caseStudy->setIsFeaturedOnHomePage(true);
+        $caseStudy->setPositionOnFirstPage(1);
         $this->caseStudyRepository->insert($caseStudy);
 
         $caseStudy = new CaseStudy();
         $caseStudy->setIsPublished(true);
-        $caseStudy->setIsFeaturedOnHomePage(true);
+        $caseStudy->setPositionOnFirstPage(2);
         $this->caseStudyRepository->insert($caseStudy);
 
         $caseStudy = new CaseStudy();
         $caseStudy->setIsPublished(true);
-        $caseStudy->setIsFeaturedOnHomePage(false);
+        $caseStudy->setPositionOnFirstPage(0);
         $this->caseStudyRepository->insert($caseStudy);
 
         $caseStudy = new CaseStudy();
         $caseStudy->setIsPublished(false);
-        $caseStudy->setIsFeaturedOnHomePage(true);
+        $caseStudy->setPositionOnFirstPage(3);
         $this->caseStudyRepository->insert($caseStudy);
 
         $this->assertCount(1, $this->caseStudyRepository->getHomePageStudiesLast(1));
@@ -234,7 +234,7 @@ class CaseStudyRepositoryTest extends PHPUnit_Framework_TestCase
         $caseStudy->setCardColour($cardColour = '#ffffff');
         $caseStudy->setIsPublished($isPublished = true);
         $caseStudy->setIsFeaturedOnSlider($isFeaturedOnSlider = true);
-        $caseStudy->setIsFeaturedOnHomePage($isFeaturedOnHomePage = true);
+        $caseStudy->setPositionOnFirstPage($positionOnHomePage = 2);
         $caseStudy->setRegion($this->countryRegion);
         $this->caseStudyRepository->save($caseStudy);
 
@@ -253,7 +253,7 @@ class CaseStudyRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($cardColour, $caseStudy->getCardColour());
         $this->assertEquals($isPublished, $caseStudy->isPublished());
         $this->assertEquals($isFeaturedOnSlider, $caseStudy->isFeaturedOnSlider());
-        $this->assertEquals($isFeaturedOnHomePage, $caseStudy->isFeaturedOnHomePage());
+        $this->assertEquals($positionOnHomePage, $caseStudy->getPositionOnFirstPage());
         $this->assertEquals($this->countryRegion->getId(), $caseStudy->getRegion()->getId());
         $this->assertEquals($this->countryRegion->getId(), $caseStudy->getRegionID());
     }

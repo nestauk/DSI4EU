@@ -1,6 +1,6 @@
 <?php
 
-namespace DSI\UseCase;
+namespace DSI\UseCase\CaseStudy;
 
 use abeautifulsite\SimpleImage;
 use DSI\Entity\CaseStudy;
@@ -10,8 +10,9 @@ use DSI\NotFound;
 use DSI\Repository\CaseStudyRepository;
 use DSI\Repository\CountryRegionRepository;
 use DSI\Service\ErrorHandler;
+use DSI\UseCase\CreateCountryRegion;
 
-class CreateCaseStudy
+class CaseStudyEdit
 {
     /** @var ErrorHandler */
     private $errorHandler;
@@ -22,7 +23,7 @@ class CreateCaseStudy
     /** @var CaseStudy */
     private $caseStudy;
 
-    /** @var CreateCaseStudy_Data */
+    /** @var CaseStudyEdit_Data */
     private $data;
 
     /** @var CountryRegionRepository */
@@ -33,7 +34,7 @@ class CreateCaseStudy
 
     public function __construct()
     {
-        $this->data = new CreateCaseStudy_Data();
+        $this->data = new CaseStudyEdit_Data();
         $this->errorHandler = new ErrorHandler();
         $this->caseStudyRepo = new CaseStudyRepository();
         $this->countryRegionRepo = new CountryRegionRepository();
@@ -41,14 +42,16 @@ class CreateCaseStudy
 
     public function exec()
     {
+        $this->caseStudy = $this->caseStudyRepo->getById($this->data()->caseStudyId);
         $this->assertTitleHasBeenSent();
         $this->getRegion();
-        $this->createCaseStudy();
+        $this->unsetSamePositionOnFirstPage();
+        $this->editCaseStudy();
         $this->saveImages();
     }
 
     /**
-     * @return CreateCaseStudy_Data
+     * @return CaseStudyEdit_Data
      */
     public function data()
     {
@@ -71,26 +74,36 @@ class CreateCaseStudy
         }
     }
 
-    private function createCaseStudy()
+    private function unsetSamePositionOnFirstPage()
     {
-        $caseStudy = new CaseStudy();
-        $caseStudy->setTitle((string)$this->data()->title);
-        $caseStudy->setIntroCardText((string)$this->data()->introCardText);
-        $caseStudy->setIntroPageText((string)$this->data()->introPageText);
-        $caseStudy->setMainText((string)$this->data()->mainText);
-        $caseStudy->setProjectStartDate((string)$this->data()->projectStartDate);
-        $caseStudy->setProjectEndDate((string)$this->data()->projectEndDate);
-        $caseStudy->setUrl((string)$this->data()->url);
-        $caseStudy->setButtonLabel((string)$this->data()->buttonLabel);
-        $caseStudy->setCardColour((string)$this->data()->cardColour);
-        $caseStudy->setIsPublished((bool)$this->data()->isPublished);
-        $caseStudy->setIsFeaturedOnSlider((bool)$this->data()->isFeaturedOnSlider);
-        $caseStudy->setIsFeaturedOnHomePage((bool)$this->data()->isFeaturedOnHomePage);
-        if ($this->countryRegion)
-            $caseStudy->setRegion($this->countryRegion);
+        if ($this->data()->positionOnHomePage > 0) {
+            try {
+                $caseStudy = $this->caseStudyRepo->getByPositionOnHomePage((int)$this->data()->positionOnHomePage);
+                $caseStudy->setPositionOnFirstPage(0);
+                $this->caseStudyRepo->save($caseStudy);
+            } catch (NotFound $e) {
+            }
+        }
+    }
 
-        $this->caseStudyRepo->insert($caseStudy);
-        $this->caseStudy = $caseStudy;
+    private function editCaseStudy()
+    {
+        $this->caseStudy->setTitle((string)$this->data()->title);
+        $this->caseStudy->setIntroCardText((string)$this->data()->introCardText);
+        $this->caseStudy->setIntroPageText((string)$this->data()->introPageText);
+        $this->caseStudy->setMainText((string)$this->data()->mainText);
+        $this->caseStudy->setProjectStartDate((string)$this->data()->projectStartDate);
+        $this->caseStudy->setProjectEndDate((string)$this->data()->projectEndDate);
+        $this->caseStudy->setUrl((string)$this->data()->url);
+        $this->caseStudy->setButtonLabel((string)$this->data()->buttonLabel);
+        $this->caseStudy->setCardColour((string)$this->data()->cardColour);
+        $this->caseStudy->setIsPublished((bool)$this->data()->isPublished);
+        $this->caseStudy->setIsFeaturedOnSlider((bool)$this->data()->isFeaturedOnSlider);
+        $this->caseStudy->setPositionOnFirstPage((int)$this->data()->positionOnHomePage);
+        if ($this->countryRegion)
+            $this->caseStudy->setRegion($this->countryRegion);
+
+        $this->caseStudyRepo->save($this->caseStudy);
     }
 
     private function assertFileExistsOnServer($orgFilePath)
@@ -143,15 +156,22 @@ class CreateCaseStudy
 
     private function saveImages()
     {
-        $this->caseStudy->setLogo(
-            $this->saveImage($this->data()->logoImage, Image::CASE_STUDY_LOGO)
-        );
-        $this->caseStudy->setCardImage(
-            $this->saveImage($this->data()->cardBgImage, Image::CASE_STUDY_CARD_BG)
-        );
-        $this->caseStudy->setHeaderImage(
-            $this->saveImage($this->data()->headerImage, Image::CASE_STUDY_HEADER)
-        );
+        if ($this->data()->logoImage != Image::CASE_STUDY_LOGO_URL . $this->caseStudy->getLogo()) {
+            $this->caseStudy->setLogo(
+                $this->saveImage($this->data()->logoImage, Image::CASE_STUDY_LOGO)
+            );
+        }
+        if ($this->data()->cardBgImage != Image::CASE_STUDY_CARD_BG_URL . $this->caseStudy->getCardImage()) {
+            $this->caseStudy->setCardImage(
+                $this->saveImage($this->data()->cardBgImage, Image::CASE_STUDY_CARD_BG)
+            );
+        }
+        if ($this->data()->headerImage != Image::CASE_STUDY_HEADER_URL . $this->caseStudy->getHeaderImage()) {
+            $this->caseStudy->setHeaderImage(
+                $this->saveImage($this->data()->headerImage, Image::CASE_STUDY_HEADER)
+            );
+        }
+
         $this->caseStudyRepo->save($this->caseStudy);
     }
 
@@ -172,8 +192,11 @@ class CreateCaseStudy
     }
 }
 
-class CreateCaseStudy_Data
+class CaseStudyEdit_Data
 {
+    /** @var int */
+    public $caseStudyId;
+
     /** @var string */
     public $title,
         $introCardText,
@@ -188,7 +211,7 @@ class CreateCaseStudy_Data
     /** @var bool */
     public $isPublished,
         $isFeaturedOnSlider,
-        $isFeaturedOnHomePage;
+        $positionOnHomePage;
 
     /** @var string */
     public $logoImage,

@@ -7,12 +7,10 @@ use DSI\Entity\Image;
 use DSI\Entity\CaseStudy;
 use DSI\Entity\User;
 use DSI\Repository\CaseStudyRepository;
-use DSI\Repository\CountryRegionRepository;
-use DSI\Repository\UserRepository;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\URL;
-use DSI\UseCase\EditCaseStudy;
+use DSI\UseCase\CaseStudy\CaseStudyEdit;
 
 class CaseStudyEditController
 {
@@ -39,7 +37,7 @@ class CaseStudyEditController
         if ($this->format == 'json') {
             try {
                 if (isset($_POST['save'])) {
-                    $editCaseStudy = new EditCaseStudy();
+                    $editCaseStudy = new CaseStudyEdit();
                     $editCaseStudy->data()->caseStudyId = $caseStudy->getId();
                     $editCaseStudy->data()->title = $_POST['title'] ?? '';
                     $editCaseStudy->data()->introCardText = $_POST['introCardText'] ?? '';
@@ -51,8 +49,7 @@ class CaseStudyEditController
                     $editCaseStudy->data()->buttonLabel = $_POST['buttonLabel'] ?? '';
                     $editCaseStudy->data()->cardColour = $_POST['cardColour'] ?? '';
                     $editCaseStudy->data()->isPublished = $_POST['isPublished'] ?? false;
-                    $editCaseStudy->data()->isFeaturedOnSlider = $_POST['isFeaturedOnSlider'] ?? false;
-                    $editCaseStudy->data()->isFeaturedOnHomePage = $_POST['isFeaturedOnHomePage'] ?? false;
+                    $editCaseStudy->data()->positionOnHomePage = $_POST['positionOnHomePage'] ?? false;
 
                     $editCaseStudy->data()->logoImage = $_POST['logo'] ?? '';
                     $editCaseStudy->data()->cardBgImage = $_POST['cardImage'] ?? '';
@@ -98,7 +95,7 @@ class CaseStudyEditController
                 'cardColour' => $caseStudy->getCardColour(),
                 'isPublished' => $caseStudy->isPublished(),
                 'isFeaturedOnSlider' => $caseStudy->isFeaturedOnSlider(),
-                'isFeaturedOnHomePage' => $caseStudy->isFeaturedOnHomePage(),
+                'positionOnHomePage' => $caseStudy->getPositionOnFirstPage(),
                 'countryID' => $caseStudy->getCountryId(),
                 'regionID' => $caseStudy->getRegionID(),
                 'region' => $caseStudy->getRegionName(),

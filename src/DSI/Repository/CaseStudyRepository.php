@@ -25,7 +25,7 @@ class CaseStudyRepository
         $insert[] = "`cardColour` = '" . addslashes($caseStudy->getCardColour()) . "'";
         $insert[] = "`isPublished` = '" . addslashes($caseStudy->isPublished()) . "'";
         $insert[] = "`isFeaturedOnSlider` = '" . addslashes($caseStudy->isFeaturedOnSlider()) . "'";
-        $insert[] = "`isFeaturedOnHomePage` = '" . addslashes($caseStudy->isFeaturedOnHomePage()) . "'";
+        $insert[] = "`isFeaturedOnHomePage` = '" . ((int)$caseStudy->getPositionOnFirstPage()) . "'";
         $insert[] = "`regionID` = '" . addslashes($caseStudy->getRegionID()) . "'";
 
         $query = new SQL("INSERT INTO `case-studies` SET " . implode(', ', $insert) . "");
@@ -56,10 +56,11 @@ class CaseStudyRepository
         $insert[] = "`cardColour` = '" . addslashes($caseStudy->getCardColour()) . "'";
         $insert[] = "`isPublished` = '" . addslashes($caseStudy->isPublished()) . "'";
         $insert[] = "`isFeaturedOnSlider` = '" . addslashes($caseStudy->isFeaturedOnSlider()) . "'";
-        $insert[] = "`isFeaturedOnHomePage` = '" . addslashes($caseStudy->isFeaturedOnHomePage()) . "'";
+        $insert[] = "`isFeaturedOnHomePage` = '" . ((int)$caseStudy->getPositionOnFirstPage()) . "'";
         $insert[] = "`regionID` = '" . addslashes($caseStudy->getRegionID()) . "'";
 
         $query = new SQL("UPDATE `case-studies` SET " . implode(', ', $insert) . " WHERE `id` = '{$caseStudy->getId()}'");
+
         $query->query();
     }
 
@@ -67,6 +68,13 @@ class CaseStudyRepository
     {
         return $this->getObjectWhere([
             "`id` = {$id}"
+        ]);
+    }
+
+    public function getByPositionOnHomePage(int $position): CaseStudy
+    {
+        return $this->getObjectWhere([
+            "`isFeaturedOnHomePage` = {$position}"
         ]);
     }
 
@@ -101,7 +109,7 @@ class CaseStudyRepository
         $caseStudy->setCardColour($caseStudyData['cardColour']);
         $caseStudy->setIsPublished($caseStudyData['isPublished']);
         $caseStudy->setIsFeaturedOnSlider($caseStudyData['isFeaturedOnSlider']);
-        $caseStudy->setIsFeaturedOnHomePage($caseStudyData['isFeaturedOnHomePage']);
+        $caseStudy->setPositionOnFirstPage($caseStudyData['isFeaturedOnHomePage']);
         if ($caseStudyData['regionID']) {
             $caseStudy->setRegion(
                 (new CountryRegionRepository())->getById($caseStudyData['regionID'])
@@ -152,7 +160,7 @@ class CaseStudyRepository
     {
         return $this->getObjectsWhere([
             "`isPublished` = 1",
-            "`isFeaturedOnHomePage` = 1",
+            "`isFeaturedOnHomePage` > 0",
         ], [
             "limit" => $limit
         ]);

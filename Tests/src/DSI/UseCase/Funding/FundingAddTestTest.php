@@ -4,7 +4,7 @@ require_once __DIR__ . '/../../../../config.php';
 
 use \DSI\Repository;
 use \DSI\Entity;
-use \DSI\UseCase\Funding\FundingAdd;
+use \DSI\UseCase\Funding\FundingCreate;
 
 class FundingAddTest extends PHPUnit_Framework_TestCase
 {
@@ -49,7 +49,7 @@ class FundingAddTest extends PHPUnit_Framework_TestCase
     /** @test */
     public function canAddFunding()
     {
-        $addFunding = new FundingAdd();
+        $addFunding = new FundingCreate();
         $addFunding->data()->title = $title = 'Title';
         $addFunding->data()->url = $url = 'http://example.org';
         $addFunding->data()->description = $description = 'Description';
@@ -66,7 +66,7 @@ class FundingAddTest extends PHPUnit_Framework_TestCase
     {
         $e = null;
 
-        $addFunding = new FundingAdd();
+        $addFunding = new FundingCreate();
         try {
             $addFunding->exec();
         } catch (\DSI\Service\ErrorHandler $e) {
@@ -82,7 +82,7 @@ class FundingAddTest extends PHPUnit_Framework_TestCase
     {
         $e = null;
 
-        $addFunding = new FundingAdd();
+        $addFunding = new FundingCreate();
         $addFunding->data()->countryID = $this->country->getId();
         $addFunding->data()->sourceTitle = $this->fundingSource->getTitle();
         try {
@@ -101,7 +101,7 @@ class FundingAddTest extends PHPUnit_Framework_TestCase
     {
         $e = null;
 
-        $addFunding = new FundingAdd();
+        $addFunding = new FundingCreate();
         $addFunding->data()->title = $title = 'Title';
         $addFunding->data()->url = $url = 'http://example.org';
         $addFunding->data()->description = $description = 'Description';
@@ -120,7 +120,7 @@ class FundingAddTest extends PHPUnit_Framework_TestCase
     {
         $e = null;
 
-        $addFunding = new FundingAdd();
+        $addFunding = new FundingCreate();
         $addFunding->data()->title = $title = 'Title';
         $addFunding->data()->url = $url = 'http://example.org';
         $addFunding->data()->description = $description = 'Description';

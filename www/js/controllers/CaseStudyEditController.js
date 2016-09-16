@@ -15,7 +15,6 @@ angular
             $scope.caseStudy = {};
             $http.get(SITE_RELATIVE_PATH + '/case-study/edit/' + caseStudyId + '.json')
                 .then(function (response) {
-                    console.log(response.data);
                     $scope.caseStudy = response.data;
                     $scope.logo.image = $scope.caseStudy.logo;
                     $scope.cardImage.image = $scope.caseStudy.cardImage;
@@ -33,8 +32,6 @@ angular
                 data.introPageText = tinyMCE.get('pageIntro').getContent();
                 data.mainText = tinyMCE.get('mainText').getContent();
                 data.save = true;
-
-                console.log(data);
 
                 $timeout(function () {
                     $http.post(SITE_RELATIVE_PATH + '/case-study/edit/' + caseStudyId + '.json', data)

@@ -211,15 +211,14 @@ class CaseStudyTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function settingIsFeaturedOnHomePage_returnsIsFeaturedOnHomePage()
+    public function settingPositionOnHomePage_returnsPositionOnHomePage()
     {
-        $this->assertEquals(false, $this->caseStudy->isFeaturedOnHomePage());
+        $this->assertEquals(0, $this->caseStudy->getPositionOnFirstPage());
 
-        $this->caseStudy->setIsFeaturedOnHomePage(true);
-        $this->assertEquals(true, $this->caseStudy->isFeaturedOnHomePage());
-
-        $this->caseStudy->setIsFeaturedOnHomePage(false);
-        $this->assertEquals(false, $this->caseStudy->isFeaturedOnHomePage());
+        for ($i = 0; $i <= 3; $i++) {
+            $this->caseStudy->setPositionOnFirstPage($i);
+            $this->assertEquals($i, $this->caseStudy->getPositionOnFirstPage());
+        }
     }
 
     /** @test */

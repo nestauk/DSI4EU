@@ -10,12 +10,12 @@ use DSI\Repository\FundingRepository;
 use DSI\Repository\FundingSourceRepository;
 use DSI\Service\ErrorHandler;
 
-class FundingAdd
+class FundingCreate
 {
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var AddFunding_Data */
+    /** @var FundingCreate_Data */
     private $data;
 
     /** @var FundingRepository */
@@ -26,7 +26,7 @@ class FundingAdd
 
     public function __construct()
     {
-        $this->data = new AddFunding_Data();
+        $this->data = new FundingCreate_Data();
     }
 
     public function exec()
@@ -43,7 +43,7 @@ class FundingAdd
     }
 
     /**
-     * @return AddFunding_Data
+     * @return FundingCreate_Data
      */
     public function data()
     {
@@ -109,7 +109,7 @@ class FundingAdd
     }
 }
 
-class AddFunding_Data
+class FundingCreate_Data
 {
     /** @var string */
     public $title,

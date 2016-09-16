@@ -6,7 +6,7 @@ use DSI\Entity\User;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\URL;
-use DSI\UseCase\CreateCaseStudy;
+use DSI\UseCase\CaseStudy\CaseStudyCreate;
 
 class CaseStudyAddController
 {
@@ -22,7 +22,7 @@ class CaseStudyAddController
 
         if (isset($_POST['add'])) {
             try {
-                $createCaseStudy = new CreateCaseStudy();
+                $createCaseStudy = new CaseStudyCreate();
                 $createCaseStudy->data()->title = $_POST['title'] ?? '';
                 $createCaseStudy->data()->introCardText = $_POST['introCardText'] ?? '';
                 $createCaseStudy->data()->introPageText = $_POST['introPageText'] ?? '';
@@ -33,6 +33,7 @@ class CaseStudyAddController
                 $createCaseStudy->data()->buttonLabel = $_POST['buttonLabel'] ?? '';
                 $createCaseStudy->data()->cardColour = $_POST['cardColour'] ?? '';
                 $createCaseStudy->data()->isPublished = $_POST['isPublished'] ?? '';
+                $createCaseStudy->data()->positionOnHomePage = $_POST['positionOnHomePage'] ?? false;
 
                 $createCaseStudy->data()->logoImage = $_POST['logo'] ?? '';
                 $createCaseStudy->data()->cardBgImage = $_POST['cardImage'] ?? '';

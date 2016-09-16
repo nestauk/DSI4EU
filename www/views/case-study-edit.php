@@ -55,8 +55,9 @@ require __DIR__ . '/header.php';
 
                                 <div ng-cloak>
                                     <div>
-                                        <label class="story-label" for="country">Which country in the project
-                                            based?</label>
+                                        <label class="story-label" for="country">
+                                            Which country is the project based?
+                                        </label>
                                         <select id="edit-country" data-placeholder="Select country"
                                                 style="width:400px;background:transparent">
                                             <option></option>
@@ -162,46 +163,54 @@ require __DIR__ . '/header.php';
                                 <label for="name-8">Publish your case study</label>
                                 <div class="w-radio">
                                     <label class="w-form-label">
-                                        <input class="w-radio-input" name="isPublished"
-                                               type="radio"
-                                               ng-model="caseStudy.isPublished"
-                                               value="1">
+                                        <input class="w-radio-input" name="isPublished" type="radio"
+                                               ng-model="caseStudy.isPublished" value="1">
                                         Yes
                                     </label>
                                 </div>
                                 <div class="w-radio">
                                     <label class="w-form-label">
-                                        <input class="w-radio-input" name="isPublished"
-                                               type="radio"
-                                               ng-model="caseStudy.isPublished"
-                                               value="0">
+                                        <input class="w-radio-input" name="isPublished" type="radio"
+                                               ng-model="caseStudy.isPublished" value="0">
                                         No
                                     </label>
                                 </div>
 
-                                <div ng-hide="caseStudy.isPublished == 0" style="padding-top:20px">
-                                    <div class="w-checkbox">
-                                        <label class="w-form-label">
-                                            <input class="w-checkbox-input"
-                                                   name="isFeaturedOnSlider" type="checkbox"
-                                                   ng-model="caseStudy.isFeaturedOnSlider">
-                                            Feature on slider
-                                        </label>
-                                    </div>
-                                    <div class="w-checkbox">
-                                        <label class="w-form-label">
-                                            <input class="w-checkbox-input"
-                                                   name="isFeaturedOnHomePage" type="checkbox"
-                                                   ng-model="caseStudy.isFeaturedOnHomePage">
-                                            Feature on home page
-                                        </label>
-                                    </div>
+                                <br />
+                                <label for="name-8">Publish on first page</label>
+                                <div class="w-radio">
+                                    <label class="w-form-label">
+                                        <input class="w-radio-input" name="positionOnHomePage" type="radio"
+                                               ng-model="caseStudy.positionOnHomePage" value="0">
+                                        Do not publish on first page
+                                    </label>
+                                </div>
+                                <div class="w-radio">
+                                    <label class="w-form-label">
+                                        <input class="w-radio-input" name="positionOnHomePage" type="radio"
+                                               ng-model="caseStudy.positionOnHomePage" value="1">
+                                        Publish on 1st position
+                                    </label>
+                                </div>
+                                <div class="w-radio">
+                                    <label class="w-form-label">
+                                        <input class="w-radio-input" name="positionOnHomePage" type="radio"
+                                               ng-model="caseStudy.positionOnHomePage" value="2">
+                                        Publish on 2nd position
+                                    </label>
+                                </div>
+                                <div class="w-radio">
+                                    <label class="w-form-label">
+                                        <input class="w-radio-input" name="positionOnHomePage" type="radio"
+                                               ng-model="caseStudy.positionOnHomePage" value="3">
+                                        Publish on 3rd position
+                                    </label>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="tabbed-nav-buttons w-clearfix">
-                        <input type="submit" class="tab-button-2 tab-button-next w-button" value="Save and continue"/>
+                        <input type="submit" class="tab-button-2 tab-button-next w-button" value="Save"/>
                         <a href="<?php echo $urlHandler->caseStudy($caseStudy) ?>"
                            class="tab-button-2 tab-button-next w-button">View case study</a>
                     </div>

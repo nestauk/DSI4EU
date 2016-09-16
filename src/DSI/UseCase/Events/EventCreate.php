@@ -9,12 +9,12 @@ use DSI\Repository\EventRepository;
 use DSI\Service\ErrorHandler;
 use DSI\UseCase\CreateCountryRegion;
 
-class EventAdd
+class EventCreate
 {
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var EventAdd_Data */
+    /** @var EventCreate_Data */
     private $data;
 
     /** @var EventRepository */
@@ -28,7 +28,7 @@ class EventAdd
 
     public function __construct()
     {
-        $this->data = new EventAdd_Data();
+        $this->data = new EventCreate_Data();
         $this->countryRegionRepo = new CountryRegionRepository();
     }
 
@@ -45,7 +45,7 @@ class EventAdd
     }
 
     /**
-     * @return EventAdd_Data
+     * @return EventCreate_Data
      */
     public function data()
     {
@@ -120,7 +120,7 @@ class EventAdd
     }
 }
 
-class EventAdd_Data
+class EventCreate_Data
 {
     /** @var string */
     public $title,

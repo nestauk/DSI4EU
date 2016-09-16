@@ -8,7 +8,8 @@ class CaseStudy
     const DEFAULT_LOGO = '0.png';
 
     /** @var integer */
-    private $id;
+    private $id,
+        $positionOnFirstPage;
 
     /** @var string */
     private $title,
@@ -26,8 +27,7 @@ class CaseStudy
 
     /** @var bool */
     private $isPublished,
-        $isFeaturedOnSlider,
-        $isFeaturedOnHomePage;
+        $isFeaturedOnSlider; // not used anymore
 
     /** @var CountryRegion */
     private $region;
@@ -355,18 +355,37 @@ class CaseStudy
     }
 
     /**
-     * @return boolean
+     * @return int
      */
-    public function isFeaturedOnHomePage(): bool
+    public function getPositionOnFirstPage(): int
     {
-        return (bool)$this->isFeaturedOnHomePage;
+        return (int)$this->positionOnFirstPage;
     }
 
     /**
-     * @param boolean $isFeaturedOnHomePage
+     * @param int $positionOnFirstPage
      */
-    public function setIsFeaturedOnHomePage($isFeaturedOnHomePage)
+    public function setPositionOnFirstPage($positionOnFirstPage)
     {
-        $this->isFeaturedOnHomePage = (bool)$isFeaturedOnHomePage;
+        $this->positionOnFirstPage = (int)$positionOnFirstPage;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

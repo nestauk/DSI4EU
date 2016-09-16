@@ -54,8 +54,9 @@ require __DIR__ . '/header.php';
 
                                 <div ng-cloak>
                                     <div>
-                                        <label class="story-label" for="country">Which country in the project
-                                            based?</label>
+                                        <label class="story-label" for="country">
+                                            Which country is the project based?
+                                        </label>
                                         <select id="edit-country" data-placeholder="Select country"
                                                 style="width:400px;background:transparent">
                                             <option></option>
@@ -160,6 +161,37 @@ require __DIR__ . '/header.php';
                                                ng-model="caseStudy.isPublished"
                                                value="0">
                                         No
+                                    </label>
+                                </div>
+
+                                <br />
+                                <label for="name-8">Publish on first page</label>
+                                <div class="w-radio">
+                                    <label class="w-form-label">
+                                        <input class="w-radio-input" name="positionOnHomePage" type="radio"
+                                               ng-model="caseStudy.positionOnHomePage" value="0">
+                                        Do not publish on first page
+                                    </label>
+                                </div>
+                                <div class="w-radio">
+                                    <label class="w-form-label">
+                                        <input class="w-radio-input" name="positionOnHomePage" type="radio"
+                                               ng-model="caseStudy.positionOnHomePage" value="1">
+                                        Publish on 1st position
+                                    </label>
+                                </div>
+                                <div class="w-radio">
+                                    <label class="w-form-label">
+                                        <input class="w-radio-input" name="positionOnHomePage" type="radio"
+                                               ng-model="caseStudy.positionOnHomePage" value="2">
+                                        Publish on 2nd position
+                                    </label>
+                                </div>
+                                <div class="w-radio">
+                                    <label class="w-form-label">
+                                        <input class="w-radio-input" name="positionOnHomePage" type="radio"
+                                               ng-model="caseStudy.positionOnHomePage" value="3">
+                                        Publish on 3rd position
                                     </label>
                                 </div>
                             </div>

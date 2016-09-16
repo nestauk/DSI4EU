@@ -9,6 +9,9 @@ class EventTest extends \PHPUnit_Framework_TestCase
     /** @var Event */
     private $event;
 
+    /** @var  \DSI\Entity\Country */
+    private $country;
+
     /** @var  \DSI\Entity\CountryRegion */
     private $region;
 
@@ -16,9 +19,14 @@ class EventTest extends \PHPUnit_Framework_TestCase
     {
         $this->event = new Event();
 
+        $this->country = new \DSI\Entity\Country();
+        $this->country->setId(rand(11, 20));
+        $this->country->setName('Country Name');
+
         $this->region = new \DSI\Entity\CountryRegion();
         $this->region->setId(rand(11, 20));
-        $this->region->setName('Country Name');
+        $this->region->setName('Region Name');
+        $this->region->setCountry($this->country);
     }
 
     /** @test setId, getId */
@@ -136,6 +144,7 @@ class EventTest extends \PHPUnit_Framework_TestCase
         $this->event->setRegion($this->region);
         $this->assertEquals($this->region->getId(), $this->event->getRegionID());
         $this->assertEquals($this->region->getName(), $this->event->getRegionName());
+        $this->assertEquals($this->region->getCountry()->getId(), $this->event->getCountryID());
     }
 
     /** @test */

@@ -15,7 +15,7 @@ class FundingEdit
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var EditFunding_Data */
+    /** @var FundingEdit_Data */
     private $data;
 
     /** @var FundingRepository */
@@ -26,7 +26,7 @@ class FundingEdit
 
     public function __construct()
     {
-        $this->data = new EditFunding_Data();
+        $this->data = new FundingEdit_Data();
     }
 
     public function exec()
@@ -43,7 +43,7 @@ class FundingEdit
     }
 
     /**
-     * @return EditFunding_Data
+     * @return FundingEdit_Data
      */
     public function data()
     {
@@ -109,7 +109,7 @@ class FundingEdit
     }
 }
 
-class EditFunding_Data
+class FundingEdit_Data
 {
     /** @var Funding */
     public $funding;
