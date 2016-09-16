@@ -15,7 +15,11 @@ class AppLeaderBoard
             $table = $appRegistrationRepository->getDbTable();
             $userRepo = new UserRepository();
 
-            $query = new SQL("SELECT loggedInUserID, count(*) AS signups FROM `{$table}` GROUP BY loggedInUserID");
+            $query = new SQL("SELECT 
+                loggedInUserID, count(*) AS signups 
+                FROM `{$table}`
+                GROUP BY loggedInUserID
+                ORDER BY `signups` DESC");
             $leaderBoard = $query->fetch_all();
 
             echo json_encode([
