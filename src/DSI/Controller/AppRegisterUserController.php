@@ -1,7 +1,9 @@
 <?php
 namespace DSI\Controller;
 
+use DSI\Repository\UserRepository;
 use DSI\Service\ErrorHandler;
+use DSI\UseCase\AppRegistration\AppRegistrationCreate;
 use DSI\UseCase\CreateUser;
 
 class AppRegisterUserController
@@ -16,6 +18,14 @@ class AppRegisterUserController
             $createUser->data()->jobTitle = $_GET['jobTitle'] ?? '';
             $createUser->data()->organisation = $_GET['organisation'] ?? '';
             $createUser->exec();
+
+            $registeredUser = $createUser->getUser();
+            $loggedInUser = (new UserRepository())->getById($_GET['userID'] ?? 0);
+
+            $createAppRegistration = new AppRegistrationCreate();
+            $createAppRegistration->data()->loggedInUser = $loggedInUser;
+            $createAppRegistration->data()->registeredUser = $registeredUser;
+            $createAppRegistration->exec();
 
             echo json_encode([
                 'code' => 'ok',
