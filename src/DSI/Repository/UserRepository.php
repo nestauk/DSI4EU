@@ -32,8 +32,6 @@ class UserRepository
         $insert[] = "`profileURL` = '" . addslashes($user->getProfileURL()) . "'";
         $insert[] = "`profilePic` = '" . addslashes($user->getProfilePic()) . "'";
 
-        $insert[] = "`isAdmin` = '" . (bool)($user->isAdmin()) . "'";
-        $insert[] = "`isSuperAdmin` = '" . (bool)($user->isSuperAdmin()) . "'";
         $insert[] = "`isDisabled` = '" . (bool)($user->isDisabled()) . "'";
         $insert[] = "`role` = '" . addslashes($user->getRole()) . "'";
 
@@ -74,8 +72,6 @@ class UserRepository
         $insert[] = "`profileURL` = '" . addslashes($user->getProfileURL()) . "'";
         $insert[] = "`profilePic` = '" . addslashes($user->getProfilePic()) . "'";
 
-        $insert[] = "`isAdmin` = '" . (bool)($user->isAdmin()) . "'";
-        $insert[] = "`isSuperAdmin` = '" . (bool)($user->isSuperAdmin()) . "'";
         $insert[] = "`isDisabled` = '" . (bool)($user->isDisabled()) . "'";
         $insert[] = "`role` = '" . addslashes($user->getRole()) . "'";
 
@@ -229,8 +225,6 @@ class UserRepository
         if ($user['profilePic'])
             $userObj->setProfilePic($user['profilePic']);
 
-        $userObj->setIsAdmin($user['isAdmin']);
-        $userObj->setIsSuperAdmin($user['isSuperAdmin']);
         $userObj->setIsDisabled($user['isDisabled']);
         $userObj->setRole($user['role']);
 
@@ -294,7 +288,7 @@ class UserRepository
           , jobTitle, company
           , facebookUID, googleUID, gitHubUID, twitterUID
           , profileURL, profilePic
-          , isAdmin, isSuperAdmin, isDisabled, role
+          , isDisabled, role
           FROM `users` WHERE " . implode(' AND ', $where) . "");
         foreach ($query->fetch_all() AS $dbUser) {
             $users[] = $this->buildUserFromData($dbUser);

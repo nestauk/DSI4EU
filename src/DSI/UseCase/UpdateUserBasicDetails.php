@@ -77,10 +77,6 @@ class UpdateUserBasicDetails
             $user->setCompany($this->data()->company);
         if (isset($this->data()->bio))
             $user->setBio($this->data()->bio);
-        if (isset($this->data()->isAdmin))
-            $user->setIsAdmin($this->data()->isAdmin);
-        if (isset($this->data()->isSuperAdmin))
-            $user->setIsSuperAdmin($this->data()->isSuperAdmin);
         if (isset($this->data()->languages))
             $this->setUserLanguages();
         if (isset($this->data()->skills))

@@ -25,7 +25,7 @@ class DisableUser
         $userRepo = new UserRepository();
 
         $this->assertExecutorCanMakeChange();
-        
+
         $user = $userRepo->getById($this->data()->userID);
         $user->setIsDisabled(true);
         $userRepo->save($user);
@@ -41,7 +41,7 @@ class DisableUser
 
     private function assertExecutorCanMakeChange()
     {
-        if (!$this->data()->executor->isSuperAdmin()) {
+        if (!$this->data()->executor->isSysAdmin()) {
             $this->errorHandler->addTaggedError('executor', 'You are not allowed to edit this user');
             throw $this->errorHandler;
         }

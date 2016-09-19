@@ -74,7 +74,7 @@ class SetAdminStatusToOrganisationMemberTest extends PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function ownerCanSetMemberAsAdmin()
+    public function organisationOwnerCanPromoteMemberToAdmin()
     {
         $this->addMemberToOrganisation($this->organisation, $this->member);
 
@@ -92,7 +92,7 @@ class SetAdminStatusToOrganisationMemberTest extends PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function adminCanSetMemberAsAdmin()
+    public function adminCanPromoteMemberToAdmin()
     {
         $this->addMemberToOrganisation($this->organisation, $this->member);
 
@@ -110,7 +110,7 @@ class SetAdminStatusToOrganisationMemberTest extends PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function sysAdminCanSetMemberAsAdmin()
+    public function sysAdminCanPromoteMemberToAdmin()
     {
         $this->addMemberToOrganisation($this->organisation, $this->member);
 

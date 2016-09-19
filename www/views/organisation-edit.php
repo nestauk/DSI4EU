@@ -19,8 +19,6 @@ if (!isset($urlHandler))
     <script src="//code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
 
     <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
-    <script type="text/javascript"
-            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/CaseStudyEditController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 
     <script type="text/javascript"
             src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/OrganisationEditController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
@@ -111,10 +109,8 @@ if (!isset($urlHandler))
                                                                id="email-5" maxlength="256" name="email-5"
                                                                ng-model="organisation.links.github"
                                                                placeholder="Github" type="text">
-                                                    </div>
-                                                </div>
-                                                <div class="w-col w-col-6 w-col-stack">
-                                                    <div class="padding-left-50">
+                                                        <br/>
+
                                                         <label>Type of Organisation</label>
                                                         <select class="w-select" id="field" name="field"
                                                                 ng-model="organisation.organisationTypeId">
@@ -124,6 +120,11 @@ if (!isset($urlHandler))
                                                             <?php } ?>
                                                         </select>
                                                         <br/><br/>
+                                                    </div>
+                                                </div>
+                                                <div class="w-col w-col-6 w-col-stack">
+                                                    <div class="padding-left-50">
+
                                                         <label>Tag your organisation</label>
                                                         <p>Add tags that best describe your organisation:</p>
                                                         <div class="customSelect2">
@@ -405,6 +406,9 @@ if (!isset($urlHandler))
             </div>
         </div>
     </div>
+
+    <script type="text/javascript"
+            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/OrganisationEditController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 
     <script>
         $(function () {

@@ -282,8 +282,6 @@ class UserRepositoryTest extends PHPUnit_Framework_TestCase
         $user->setTwitterUID(self::TWITTER_UID);
         $user->setProfileURL(self::PROFILE_URL);
         $user->setProfilePic(self::PROFILE_PIC);
-        $user->setIsAdmin(self::IS_ADMIN);
-        $user->setIsSuperAdmin(self::IS_SUPER_ADMIN);
         $user->setIsDisabled(self::IS_DISABLED);
         $user->setRole(self::ROLE);
         $this->userRepo->insert($user);
@@ -306,8 +304,6 @@ class UserRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(self::TWITTER_UID, $sameUser->getTwitterUID());
         $this->assertEquals(self::PROFILE_URL, $sameUser->getProfileURL());
         $this->assertEquals(self::PROFILE_PIC, $sameUser->getProfilePic());
-        $this->assertEquals(self::IS_ADMIN, $sameUser->isAdmin());
-        $this->assertEquals(self::IS_SUPER_ADMIN, $sameUser->isSuperAdmin());
         $this->assertEquals(self::IS_DISABLED, $sameUser->isDisabled());
         $this->assertEquals(self::ROLE, $sameUser->getRole());
     }
@@ -334,8 +330,6 @@ class UserRepositoryTest extends PHPUnit_Framework_TestCase
         $user->setTwitterUID(self::TWITTER_UID);
         $user->setProfileURL(self::PROFILE_URL);
         $user->setProfilePic(self::PROFILE_PIC);
-        $user->setIsAdmin(self::IS_ADMIN);
-        $user->setIsSuperAdmin(self::IS_SUPER_ADMIN);
         $user->setIsDisabled(self::IS_DISABLED);
         $user->setRole(self::ROLE);
         $this->userRepo->save($user);
@@ -358,8 +352,6 @@ class UserRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(self::TWITTER_UID, $sameUser->getTwitterUID());
         $this->assertEquals(self::PROFILE_URL, $sameUser->getProfileURL());
         $this->assertEquals(self::PROFILE_PIC, $sameUser->getProfilePic());
-        $this->assertEquals(self::IS_ADMIN, $sameUser->isAdmin());
-        $this->assertEquals(self::IS_SUPER_ADMIN, $sameUser->isSuperAdmin());
         $this->assertEquals(self::IS_DISABLED, $sameUser->isDisabled());
         $this->assertEquals(self::ROLE, $sameUser->getRole());
     }

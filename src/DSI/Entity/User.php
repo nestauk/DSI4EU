@@ -29,9 +29,6 @@ class User
     private $showEmail;
 
     /** @var bool */
-    private $isAdmin, $isSuperAdmin;
-
-    /** @var bool */
     private $isDisabled;
 
     /** @var string */
@@ -339,38 +336,6 @@ class User
     public function setShowEmail($showEmail)
     {
         $this->showEmail = (bool)$showEmail;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function isAdmin()
-    {
-        return (bool)$this->isAdmin;
-    }
-
-    /**
-     * @param boolean $isAdmin
-     */
-    public function setIsAdmin($isAdmin)
-    {
-        $this->isAdmin = (bool)$isAdmin;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function isSuperAdmin()
-    {
-        return (bool)$this->isSuperAdmin;
-    }
-
-    /**
-     * @param boolean $isSuperAdmin
-     */
-    public function setIsSuperAdmin($isSuperAdmin)
-    {
-        $this->isSuperAdmin = (bool)$isSuperAdmin;
     }
 
     /**

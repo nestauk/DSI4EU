@@ -41,7 +41,7 @@ class EnableUser
 
     private function assertExecutorCanMakeChange()
     {
-        if (!$this->data()->executor->isSuperAdmin()) {
+        if (!$this->data()->executor->isSysAdmin()) {
             $this->errorHandler->addTaggedError('executor', 'You are not allowed to edit this user');
             throw $this->errorHandler;
         }

@@ -1,6 +1,7 @@
 <?php
 require __DIR__ . '/header.php';
 /** @var $organisation \DSI\Entity\Organisation */
+/** @var $loggedInUser \DSI\Entity\User */
 /** @var $canUserRequestMembership bool */
 /** @var $isOwner bool */
 /** @var $userCanEditOrganisation bool */
@@ -26,6 +27,11 @@ if (!isset($urlHandler))
                     <a class="w-button dsi-button profile-edit" style="bottom: auto;top: 180px;width: auto;"
                        href="<?php echo $urlHandler->editOrganisation($organisation) ?>">
                         Edit organisation</a>
+                <?php } ?>
+                <?php if ($isOwner OR $loggedInUser->isSysAdmin()) { ?>
+                    <a class="w-button dsi-button profile-edit" style="bottom: auto;top: 230px;width: auto;"
+                       href="<?php echo $urlHandler->editOrganisationOwner($organisation) ?>">
+                        Change owner</a>
                 <?php } ?>
                 <h1 class="header-large-h1-centre"
                     data-ix="fadeinuponload"><?php echo show_input($organisation->getName()) ?></h1>

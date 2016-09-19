@@ -155,6 +155,15 @@ class URL
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'org/edit/' . $org->getId();
     }
 
+    /**
+     * @param Organisation $org
+     * @return string
+     */
+    public function editOrganisationOwner(Organisation $org)
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'org/editOwner/' . $org->getId();
+    }
+
     public function feedback()
     {
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'feedback';

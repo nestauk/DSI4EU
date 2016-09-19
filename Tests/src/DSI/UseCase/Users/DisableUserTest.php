@@ -25,7 +25,7 @@ class DisableUserTest extends PHPUnit_Framework_TestCase
         $this->userRepo = new UserRepository();
 
         $this->superAdmin = new \DSI\Entity\User();
-        $this->superAdmin->setIsSuperAdmin(true);
+        $this->superAdmin->setRole('sys-admin');
         $this->userRepo->insert($this->superAdmin);
 
         $this->normalUser = new \DSI\Entity\User();

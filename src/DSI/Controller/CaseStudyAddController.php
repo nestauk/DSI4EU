@@ -55,7 +55,7 @@ class CaseStudyAddController
                     'errors' => $e->getErrors(),
                 ]);
             }
-            die();
+            return;
         }
 
         $angularModules['fileUpload'] = true;
