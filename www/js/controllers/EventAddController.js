@@ -19,7 +19,13 @@ angular
                 .then(function (response) {
                     $scope.loading = false;
                     if (response.data.code == 'ok') {
-                        window.location.href = response.data.url;
+                        swal({
+                            title: 'Success',
+                            text: 'The event has been successfully created',
+                            type: "success"
+                        }, function () {
+                            window.location.href = response.data.url;
+                        });
                     } else if (response.data.code == 'error') {
                         $scope.errors = response.data.errors;
                         console.log(response.data.errors);

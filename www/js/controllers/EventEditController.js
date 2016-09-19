@@ -14,6 +14,7 @@ angular
         $scope.save = function () {
             $scope.loading = true;
             var data = $scope.event;
+            data.description = tinyMCE.get('description').getContent();
             data.countryID = editCountry.val();
             data.region = editCountryRegion.val();
             data.save = true;
@@ -22,7 +23,11 @@ angular
                 .then(function (response) {
                     $scope.loading = false;
                     if (response.data.code == 'ok') {
-                        window.location.href = response.data.url;
+                        swal({
+                            title: 'Success',
+                            text: 'The event has been successfully saved',
+                            type: "success"
+                        });
                     } else if (response.data.code == 'error') {
                         $scope.errors = response.data.errors;
                         console.log(response.data.errors);

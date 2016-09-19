@@ -115,7 +115,8 @@ require __DIR__ . '/header.php';
                         </div>
                     </div>
                     <div class="tabbed-nav-buttons w-clearfix">
-                        <input type="submit" class="tab-button-2 tab-button-next w-button" value="Save and continue"/>
+                        <input type="submit" class="tab-button-2 tab-button-next w-button" value="Save"/>
+                        <a href="<?php echo $urlHandler->events()?>" class="tab-button-2 tab-button-next w-button">Back to events</a>
                     </div>
                 </form>
             </div>
