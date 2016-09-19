@@ -106,15 +106,17 @@ require __DIR__ . '/header.php';
                                 </div>
                             <?php } */ ?>
 
+                            <?php /*
                             <h3 class="info-h card-h">My Languages:</h3>
                             <div class="w-clearfix tags-block">
                                 <div class="tag" ng-repeat="lang in languages" ng-cloak>
                                     <?php /* if ($isOwner) { ?>
                                         <div class="delete" ng-click="removeLanguage(lang)">-</div>
-                                    <?php } */ ?>
+                                    <?php } * / ?>
                                     <div ng-bind="lang"></div>
                                 </div>
                             </div>
+                            */ ?>
                             <?php /* if ($isOwner) { ?>
                                 <div ng-cloak>
                                     <div class="w-clearfix add-new" ng-click="showAddLanguage = !showAddLanguage">
