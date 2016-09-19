@@ -53,7 +53,7 @@ require __DIR__ . '/header.php';
 
                                 <div ng-cloak>
                                     <div>
-                                        <label class="story-label">What country in the event taking place?</label>
+                                        <label class="story-label">In which country is the event taking place?</label>
                                         <select id="edit-country" data-placeholder="Select country"
                                                 style="width:400px;background:transparent">
                                             <option></option>
