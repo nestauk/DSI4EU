@@ -61,7 +61,7 @@ class CreatePasswordRecovery
 
             $email = new Mailer();
             $email->From = 'noreply@digitalsocial.eu';
-            $email->FromName = 'No Reply';
+            $email->FromName = 'Digital Social';
             $email->addAddress($passwordRecovery->getUser()->getEmail());
             $email->Subject = 'Digital Social Innovation :: Password Recovery';
             $email->wrapMessageInTemplate([

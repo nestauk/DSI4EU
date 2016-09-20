@@ -61,7 +61,7 @@ class SendWelcomeEmailToAppRegisteredUser
         $message .= "</div>";
         $email = new Mailer();
         $email->From = 'noreply@digitalsocial.eu';
-        $email->FromName = 'No Reply';
+        $email->FromName = 'Digital Social';
         $email->addAddress($this->data()->emailAddress);
         $email->Subject = 'Digital Social Innovation :: Welcome';
         $email->wrapMessageInTemplate([

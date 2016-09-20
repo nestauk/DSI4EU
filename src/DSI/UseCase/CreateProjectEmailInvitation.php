@@ -77,7 +77,7 @@ class CreateProjectEmailInvitation
             $message .= "<a href='http://" . SITE_DOMAIN . $urlHandler->home() . "'>Click here</a> to register";
             $email = new Mailer();
             $email->From = 'noreply@digitalsocial.eu';
-            $email->FromName = 'No Reply';
+            $email->FromName = 'Digital Social';
             $email->addAddress($this->data()->email);
             $email->Subject = 'Digital Social Innovation :: Invitation';
             $email->wrapMessageInTemplate([

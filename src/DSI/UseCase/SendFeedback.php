@@ -65,7 +65,7 @@ class SendFeedback
             $message .= "</div>";
             $email = new Mailer();
             $email->From = 'noreply@digitalsocial.eu';
-            $email->FromName = 'No Reply';
+            $email->FromName = 'Digital Social';
             $email->addAddress('alexandru.pandele@nesta.org.uk');
             $email->addAddress('daniel.pettifer@nesta.org.uk');
             $email->addAddress('gail.dawes@nesta.org.uk');
