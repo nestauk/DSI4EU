@@ -43,7 +43,7 @@ if (!isset($urlHandler))
                                                              ng-bind="errors.code"></div>
 
                                                         <input type="password" class="w-input modal-input"
-                                                               placeholder="<?php _ehtml('New Password') ?>"
+                                                               placeholder="<?php _ehtml('Password') ?>"
                                                                ng-model="data.password" autocomplete="off"
                                                                ng-class="{error: errors.password}">
                                                         <div style="color:red" ng-show="errors.password"

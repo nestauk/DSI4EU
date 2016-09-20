@@ -53,10 +53,12 @@ class CreatePasswordRecovery
         $this->passwordRecovery = $passwordRecovery;
 
         if ($this->data()->sendEmail) {
+            ob_start();
+            require(__DIR__ . '/../../email-template/resetPassword.php');
             $message = "<div>";
-            $message .= "Email: " . $passwordRecovery->getUser()->getEmail() . '<br />' . PHP_EOL;
-            $message .= "Security Code: " . $passwordRecovery->getCode();
+            $message .= ob_get_clean();
             $message .= "</div>";
+
             $email = new Mailer();
             $email->From = 'noreply@digitalsocial.eu';
             $email->FromName = 'No Reply';
