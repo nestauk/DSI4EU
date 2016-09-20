@@ -107,7 +107,8 @@ class EventRepository
               id, title, url, shortDesc, description
             , startDate, endDate, regionID, timeCreated
             , address, phoneNumber, emailAddress, price
-          FROM `{$this->dbTable}` WHERE " . implode(' AND ', $where) . "");
+          FROM `{$this->dbTable}` WHERE " . implode(' AND ', $where) . "
+          ORDER BY startDate");
         foreach ($query->fetch_all() AS $dbEvent) {
             $event = new Event();
             $event->setId($dbEvent['id']);
