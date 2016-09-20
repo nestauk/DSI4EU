@@ -24,12 +24,12 @@ if (!isset($urlHandler))
              style="background-image: linear-gradient(180deg, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url('<?php echo \DSI\Entity\Image::ORGANISATION_HEADER_URL . $organisation->getHeaderImageOrDefault() ?>');">
             <div class="container-wide container-wide-header-large">
                 <?php if ($userCanEditOrganisation) { ?>
-                    <a class="w-button dsi-button profile-edit" style="bottom: auto;top: 180px;width: auto;"
+                    <a class="dsi-button profile-edit w-button" style="z-index:1000"
                        href="<?php echo $urlHandler->editOrganisation($organisation) ?>">
                         Edit organisation</a>
                 <?php } ?>
                 <?php if ($isOwner OR $loggedInUser->isSysAdmin()) { ?>
-                    <a class="w-button dsi-button profile-edit" style="bottom: auto;top: 230px;width: auto;"
+                    <a class="dsi-button profile-edit w-button" style="z-index:1000;bottom:80px"
                        href="<?php echo $urlHandler->editOrganisationOwner($organisation) ?>">
                         Change owner</a>
                 <?php } ?>

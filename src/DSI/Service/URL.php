@@ -133,6 +133,15 @@ class URL
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'project/edit/' . $project->getId();
     }
 
+    /**
+     * @param Project $project
+     * @return string
+     */
+    public function editProjectOwner(Project $project)
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'project/editOwner/' . $project->getId();
+    }
+
     public function organisations($format = null)
     {
         $extension = '';

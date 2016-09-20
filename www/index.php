@@ -289,6 +289,9 @@ class Router
         } elseif (preg_match('<^/' . $langHandler . 'project/edit/([0-9]+)$>', $this->pageURL, $matches)) {
             $this->editProject($matches);
 
+        } elseif (preg_match('<^/' . $langHandler . 'project/editOwner/([0-9]+)$>', $this->pageURL, $matches)) {
+            $this->editProjectOwner($matches);
+
         } elseif (preg_match('<^/projectPost/([0-9]+)\.json?$>', $this->pageURL, $matches)) {
             $this->projectPostJson($matches);
 
@@ -685,6 +688,15 @@ class Router
         $command = new \DSI\Controller\ProjectEditController();
         $command->projectID = $matches[3];
         $command->format = $format;
+        $command->exec();
+    }
+
+    private function editProjectOwner($matches)
+    {
+        $this->setLanguageFromUrl($matches);
+
+        $command = new \DSI\Controller\ProjectEditOwnerController();
+        $command->projectID = $matches[3];
         $command->exec();
     }
 
