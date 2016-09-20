@@ -99,6 +99,14 @@ class Event
     }
 
     /**
+     * @return string
+     */
+    public function getCountryName()
+    {
+        return $this->region ? $this->region->getCountry()->getName() : '';
+    }
+
+    /**
      * @return CountryRegion
      */
     public function getRegion()

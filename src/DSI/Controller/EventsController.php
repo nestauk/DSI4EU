@@ -55,6 +55,8 @@ class EventsController
                 'isNew' => $event->isNew(),
                 'editUrl' => $this->urlHandler->editEvent($event->getId()),
                 'viewUrl' => $this->urlHandler->event($event),
+                'region' => $event->getRegionName(),
+                'country' => $event->getCountryName(),
             ];
         }, $events);
     }
