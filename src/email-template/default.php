@@ -350,23 +350,23 @@ if (!isset($urlHandler))
 <body bgcolor="#FFFFFF">
 
 <!-- HEADER -->
-<table class="head-wrap" bgcolor="#18233F">
-    <tr>
-        <td></td>
-        <td class="header container">
+<table class="head-wrap" bgcolor="#eee"
+<tr>
+    <td></td>
+    <td class="header container">
 
-            <div class="content">
-                <table bgcolor="#18233F">
-                    <tr>
-                        <td style="width:150px"><img src="https://digitalsocial.eu/images/logo-white.svg"/></td>
-                        <td align="right"><h6 class="collapse">DSI4EU <?php echo $mailHeader ?></h6></td>
-                    </tr>
-                </table>
-            </div>
+        <div class="content">
+            <table bgcolor="#eee">
+                <tr>
+                    <td style="width:150px"><img src="https://digitalsocial.eu/images/dark.svg"/></td>
+                    <td align="right"><h6 class="collapse">DSI4EU <?php echo $mailHeader ?></h6></td>
+                </tr>
+            </table>
+        </div>
 
-        </td>
-        <td></td>
-    </tr>
+    </td>
+    <td></td>
+</tr>
 </table><!-- /HEADER -->
 
 <!-- BODY -->
@@ -402,9 +402,11 @@ if (!isset($urlHandler))
                     <tr>
                         <td align="center">
                             <p>
-                                <a href="https://<?php echo SITE_DOMAIN . $urlHandler->termsOfUse() ?>">Terms of Use</a> |
-                                <a href="https://<?php echo SITE_DOMAIN . $urlHandler->privacyPolicy() ?>">Privacy Policy</a>
-                                <?php /*<a href="#">| Unsubscribe</a>*/ ?>
+                                <a href="https://<?php echo SITE_DOMAIN . $urlHandler->termsOfUse() ?>">
+                                    Terms of Use</a>
+                                |
+                                <a href="https://<?php echo SITE_DOMAIN . $urlHandler->privacyPolicy() ?>">
+                                    Privacy Policy</a>
                             </p>
                         </td>
                     </tr>

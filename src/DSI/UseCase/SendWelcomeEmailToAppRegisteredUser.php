@@ -52,8 +52,12 @@ class SendWelcomeEmailToAppRegisteredUser
 
     private function sendEmail()
     {
+        $code = $this->data()->code;
+        ob_start();
+        require(__DIR__ . '/../../email-template/welcomeFromApp.php');
+
         $message = "<div>";
-        $message .= file_get_contents(__DIR__ . '/../../email-template/welcomeFromApp.php');
+        $message .= ob_get_clean();
         $message .= "</div>";
         $email = new Mailer();
         $email->From = 'noreply@digitalsocial.eu';
@@ -72,5 +76,6 @@ class SendWelcomeEmailToAppRegisteredUser
 class SendWelcomeEmailToAppRegisteredUser_Data
 {
     /** @var string */
-    public $emailAddress;
+    public $emailAddress,
+        $code;
 }

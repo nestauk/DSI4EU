@@ -24,6 +24,9 @@ class CompletePasswordRecovery
     /** @var CompletePasswordRecovery_Data */
     private $data;
 
+    /** @var User */
+    private $user;
+
     public function __construct()
     {
         $this->data = new CompletePasswordRecovery_Data();
@@ -44,15 +47,10 @@ class CompletePasswordRecovery
         $verifyPasswordRecovery->exec();
 
         $passwordRecovery = $verifyPasswordRecovery->getPasswordRecovery();
+        $this->user = $passwordRecovery->getUser();
 
-        $updateUserPassword = new UpdateUserPassword();
-        $updateUserPassword->data()->userID = $passwordRecovery->getUser()->getId();
-        $updateUserPassword->data()->password = $this->data()->password;
-        $updateUserPassword->data()->retypePassword = $this->data()->retypePassword;
-        $updateUserPassword->exec();
-
-        $passwordRecovery->setIsUsed(true);
-        $this->passwordRecoveryRepo->save($passwordRecovery);
+        $this->updateUserPassword($this->user);
+        $this->markPasswordRecoveryCodeAsUsed($passwordRecovery);
     }
 
     /**
@@ -148,6 +146,35 @@ class CompletePasswordRecovery
             $this->errorHandler->addTaggedError('code', 'This code has already been used');
             $this->errorHandler->throwIfNotEmpty();
         }
+    }
+
+    /**
+     * @param User $user
+     */
+    private function updateUserPassword(User $user)
+    {
+        $updateUserPassword = new UpdateUserPassword();
+        $updateUserPassword->data()->userID = $user->getId();
+        $updateUserPassword->data()->password = $this->data()->password;
+        $updateUserPassword->data()->retypePassword = $this->data()->retypePassword;
+        $updateUserPassword->exec();
+    }
+
+    /**
+     * @param PasswordRecovery $passwordRecovery
+     */
+    private function markPasswordRecoveryCodeAsUsed(PasswordRecovery $passwordRecovery)
+    {
+        $passwordRecovery->setIsUsed(true);
+        $this->passwordRecoveryRepo->save($passwordRecovery);
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser(): User
+    {
+        return $this->user;
     }
 }
 

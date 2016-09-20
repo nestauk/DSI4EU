@@ -1,4 +1,13 @@
-Welcome to <a href="https://digitalsocial.eu/">DigitalSocial.eu</a>,<br />
-<br />
-Please login to set your password and complete your registration.<br />
-After registration you will be able to add a project or organisation, join existing projects and organisations or view funding opportunities and events.
+<?php
+/** @var string $code */
+if (!isset($urlHandler))
+    $urlHandler = new \DSI\Service\URL();
+?>
+Welcome to <a href="https://<?php echo SITE_DOMAIN ?>/">DigitalSocial.eu</a>,
+<br/><br/>
+Please <a href="https://<?php echo SITE_DOMAIN ?>/reset-password">click here</a>
+to complete your registration.<br/>
+Your security code is: <b><?php echo $code ?></b>
+<br/><br/>
+After completing your registration you will be able to add a project or organisation,
+join existing projects and organisations or view funding opportunities and events.

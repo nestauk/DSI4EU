@@ -274,6 +274,9 @@ class Router
         } elseif (preg_match('<^/countryRegions/([0-9]+)\.json$>', $this->pageURL, $matches)) {
             $this->countryRegionsListJson($matches);
 
+        } elseif (preg_match('<^/' . $langHandler . 'reset-password$>', $this->pageURL, $matches)) {
+            $this->resetPassword($matches);
+
         } elseif (preg_match('<^/' . $langHandler . 'profile/([a-zA-Z0-9\.]+)/details\.json$>', $this->pageURL, $matches)) {
             $this->userProfile($matches, 'json');
 
@@ -570,6 +573,18 @@ class Router
         $command = new \DSI\Controller\ProfileController();
         $command->data()->format = $format;
         $command->data()->userURL = $matches[3];
+        $command->exec();
+    }
+
+    /**
+     * @param $matches
+     * @param string $format
+     */
+    private function resetPassword($matches, $format = 'html')
+    {
+        $this->setLanguageFromUrl($matches);
+
+        $command = new \DSI\Controller\ResetPasswordController();
         $command->exec();
     }
 
