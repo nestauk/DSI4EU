@@ -28,7 +28,7 @@ if (!isset($urlHandler))
                        href="<?php echo $urlHandler->editOrganisation($organisation) ?>">
                         Edit organisation</a>
                 <?php } ?>
-                <?php if ($isOwner OR $loggedInUser->isSysAdmin()) { ?>
+                <?php if ($isOwner OR ($loggedInUser AND $loggedInUser->isSysAdmin())) { ?>
                     <a class="dsi-button profile-edit w-button" style="z-index:1000;bottom:80px"
                        href="<?php echo $urlHandler->editOrganisationOwner($organisation) ?>">
                         Change owner</a>

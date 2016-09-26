@@ -25,7 +25,7 @@ require __DIR__ . '/header.php';
                         <a class="dsi-button profile-edit w-button" style="z-index:1000"
                            href="<?php echo $urlHandler->editProject($project) ?>">Edit project</a>
                     <?php } ?>
-                    <?php if ($isOwner OR $loggedInUser->isSysAdmin()) { ?>
+                    <?php if ($isOwner OR ($loggedInUser AND $loggedInUser->isSysAdmin())) { ?>
                         <a class="dsi-button profile-edit w-button" style="z-index:1000;bottom:80px"
                            href="<?php echo $urlHandler->editProjectOwner($project) ?>">
                             Change owner</a>
