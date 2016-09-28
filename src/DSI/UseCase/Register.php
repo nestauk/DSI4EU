@@ -91,7 +91,7 @@ class Register
 
     public function verifyIfEmailExists()
     {
-        if ($this->userRepo->emailExists($this->data()->email))
+        if ($this->userRepo->emailAddressExists($this->data()->email))
             $this->errorHandler->addTaggedError('email', 'This email address is already registered');
 
         $this->errorHandler->throwIfNotEmpty();

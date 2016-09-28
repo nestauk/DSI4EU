@@ -68,7 +68,7 @@ class SetAdminStatusToOrganisationMember
             $this->data()->executor->getId(),
             $this->data()->organisation->getId()
         );
-        if ($member->isAdmin())
+        if ($member AND $member->isAdmin())
             return true;
 
         return false;

@@ -291,6 +291,25 @@ class OrganisationMemberRepositoryTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    /** @test saveAsNew */
+    public function canSave2OrganisationsForSameMember()
+    {
+        $organisationMember = new \DSI\Entity\OrganisationMember();
+        $organisationMember->setOrganisation($this->organisation_1);
+        $organisationMember->setMember($this->user_1);
+        $this->organisationMemberRepo->insert($organisationMember);
+
+        $organisationMember = new \DSI\Entity\OrganisationMember();
+        $organisationMember->setOrganisation($this->organisation_2);
+        $organisationMember->setMember($this->user_1);
+        $this->organisationMemberRepo->insert($organisationMember);
+
+        $organisationMember = new \DSI\Entity\OrganisationMember();
+        $organisationMember->setOrganisation($this->organisation_1);
+        $organisationMember->setMember($this->user_1);
+        $this->organisationMemberRepo->save($organisationMember);
+    }
+
     private function createOrganisation(\DSI\Entity\User $user)
     {
         $organisation = new \DSI\Entity\Organisation();

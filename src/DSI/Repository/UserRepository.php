@@ -94,13 +94,10 @@ class UserRepository
         ]);
     }
 
-    public function emailExists(string $email): bool
-    {
-        return $this->checkExistingUserWhere([
-            "`email` = '" . addslashes($email) . "'"
-        ]);
-    }
-
+    /**
+     * @param string $email
+     * @return User
+     */
     public function getByEmail(string $email): User
     {
         return $this->getUserWhere([

@@ -58,7 +58,7 @@ class OrganisationMemberRepository
         $insert = [];
         $insert[] = "`isAdmin` = '" . (bool)($organisationMember->isAdmin()) . "'";
         $where = [];
-        $insert[] = "`organisationID` = " . (int)($organisationMember->getOrganisationID()) . "";
+        $where[] = "`organisationID` = " . (int)($organisationMember->getOrganisationID()) . "";
         $where[] = "`userID` = '" . (int)($organisationMember->getMemberID()) . "'";
 
         $query = new SQL("UPDATE `organisation-members` SET " . implode(', ', $insert) . " WHERE " . implode(' AND ', $where) . "");

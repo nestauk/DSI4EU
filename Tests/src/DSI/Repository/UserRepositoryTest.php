@@ -109,7 +109,7 @@ class UserRepositoryTest extends PHPUnit_Framework_TestCase
     /** @test emailExists */
     public function NonexistentUserCannotBeFoundByEmail()
     {
-        $this->assertFalse($this->userRepo->emailExists(self::EMAIL));
+        $this->assertFalse($this->userRepo->emailAddressExists(self::EMAIL));
     }
 
 

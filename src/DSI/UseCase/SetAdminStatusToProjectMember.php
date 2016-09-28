@@ -68,7 +68,7 @@ class SetAdminStatusToProjectMember
             $this->data()->project->getId(),
             $this->data()->executor->getId()
         );
-        if ($member->isAdmin())
+        if ($member AND $member->isAdmin())
             return true;
 
         return false;
