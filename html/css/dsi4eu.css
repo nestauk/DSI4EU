@@ -24,7 +24,7 @@ h2 {
   color: #000;
   font-size: 18px;
   line-height: 36px;
-  font-weight: 400;
+  font-weight: 700;
   text-transform: uppercase;
 }
 
@@ -80,6 +80,9 @@ label {
   display: block;
   margin-top: 2px;
   margin-bottom: 5px;
+  font-family: Montserrat, sans-serif;
+  color: #000;
+  font-size: 16px;
   font-weight: 700;
 }
 
@@ -821,6 +824,11 @@ strong {
 .body {
   height: auto;
   min-height: 500px;
+}
+
+.body.blog {
+  padding-top: 50px;
+  background-color: #f3f3f3;
 }
 
 .body-container {
@@ -1604,6 +1612,7 @@ strong {
 .section-white.creator {
   margin-top: 125px;
   padding-top: 0px;
+  background-color: #f3f3f3;
 }
 
 .showcase {
@@ -1895,20 +1904,23 @@ strong {
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
   background-color: #fff;
+  text-decoration: none;
 }
 
 .hp-post-link {
   position: relative;
   width: 100%;
-  border: 1px solid #f3f3f3;
-  border-radius: 3px;
+  border: 1px none #f3f3f3;
+  border-radius: 0px;
   -webkit-transition: all 100ms ease;
   transition: all 100ms ease;
+  font-family: Montserrat, sans-serif;
+  text-decoration: none;
 }
 
 .hp-post-link:hover {
-  border: 1px solid #1dc9a0;
-  box-shadow: 0 0 50px -17px #000;
+  border: 1px none #1dc9a0;
+  box-shadow: 0 9px 50px -17px #000;
   -webkit-transform: none;
   -ms-transform: none;
   transform: none;
@@ -1916,7 +1928,7 @@ strong {
 
 .hp-post-img {
   width: 100%;
-  height: 180px;
+  height: 260px;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
   background-image: url('../images/brussels-locations.jpg');
@@ -1927,11 +1939,13 @@ strong {
 
 .hp-post-img.post-2 {
   background-image: url('../images/great_design_from_that_media_group_graphic_studio_logo_design.jpg');
-  background-position: 50% -31px;
+  background-position: 50% 50%;
+  background-size: cover;
 }
 
 .hp-post-img.post-3 {
   background-image: url('../images/Dr.-Patrick-Meier-QCRI-Director-of-Social-Innovaiton-Crisis-Mapper.jpg');
+  background-position: 50% 50%;
   background-size: cover;
 }
 
@@ -1961,6 +1975,7 @@ strong {
 }
 
 .hp-post-meta.category.discovery {
+  font-family: Montserrat, sans-serif;
   color: #136dce;
 }
 
@@ -1968,7 +1983,7 @@ strong {
   width: 60%;
   padding-right: 0px;
   padding-bottom: 10px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: Montserrat, sans-serif;
   color: #b4b4b4;
   font-size: 12px;
   font-weight: 600;
@@ -1980,7 +1995,7 @@ strong {
   margin-bottom: 12px;
   padding-right: 15px;
   padding-left: 15px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: Montserrat, sans-serif;
   color: #18233f;
   font-size: 19px;
   line-height: 24.8px;
@@ -1990,8 +2005,8 @@ strong {
 .hp-post-p {
   padding-right: 40px;
   padding-left: 15px;
-  font-family: 'Open Sans', sans-serif;
-  line-height: 21px;
+  font-family: Montserrat, sans-serif;
+  line-height: 26px;
   font-weight: 400;
 }
 
@@ -2446,11 +2461,17 @@ strong {
 }
 
 .dsi-button.story-image-upload {
+  width: 150px;
   margin-top: 10px;
   margin-bottom: 60px;
   margin-left: 0px;
   float: none;
   clear: none;
+  border-radius: 25px;
+  background-color: #fff;
+  font-family: Montserrat, sans-serif;
+  color: #000;
+  text-transform: uppercase;
 }
 
 .dsi-button.button-bar-button {
@@ -2711,9 +2732,10 @@ strong {
   display: block;
   width: auto;
   margin: 38px auto 0px;
-  color: #1dc9a0;
+  font-family: Montserrat, sans-serif;
+  color: #000;
   font-size: 28px;
-  text-align: center;
+  text-align: left;
   text-transform: uppercase;
 }
 
@@ -3309,8 +3331,8 @@ strong {
 .edit-h2 {
   margin-top: 0px;
   margin-bottom: 30px;
-  font-family: 'Open Sans', sans-serif;
-  color: #1dc9a0;
+  font-family: Montserrat, sans-serif;
+  color: #000;
   font-size: 22px;
   font-weight: 300;
   text-transform: uppercase;
@@ -3461,15 +3483,15 @@ strong {
 
 .page-header.stories-header {
   height: 360px;
+  margin-top: 0px;
+  background-image: none;
+  background-position: 0px 0px;
+  background-size: auto;
 }
 
 .page-header.creator {
-  background-color: #2c2d33;
-  background-image: -webkit-radial-gradient(circle farthest-corner at 49% 62%, #2c2d33, rgba(44, 45, 51, .96)), url('../images/bg2.png');
-  background-image: radial-gradient(circle farthest-corner at 49% 62%, #2c2d33, rgba(44, 45, 51, .96)), url('../images/bg2.png');
-  background-position: 0px 0px, 50% 50%;
-  background-size: auto, auto;
-  background-attachment: scroll, fixed;
+  background-color: #fff;
+  background-image: none;
 }
 
 .page-header.personal-profile-header {
@@ -4518,7 +4540,7 @@ strong {
 .step-window {
   min-height: 750px;
   padding: 50px 0px 125px;
-  background-color: #fff;
+  background-color: #f3f3f3;
 }
 
 .step-tab {
@@ -4531,100 +4553,156 @@ strong {
 }
 
 .step-tab.tab-link-1 {
+  padding-right: 20px;
+  padding-left: 20px;
   background-color: transparent;
+  font-family: Montserrat, sans-serif;
   color: #2c2d33;
+  font-size: 16px;
 }
 
 .step-tab.tab-link-1.w--current {
-  border-radius: 3px;
+  border-radius: 25px;
   background-color: rgba(29, 201, 160, .94);
-  color: #fff;
+  font-family: Montserrat, sans-serif;
+  color: #000;
+  font-size: 16px;
 }
 
 .step-tab.tab-link-2 {
   border-radius: 3px;
   background-color: transparent;
-  color: #2c2d33;
+  font-family: Montserrat, sans-serif;
+  color: #000;
+  font-size: 16px;
 }
 
 .step-tab.tab-link-2.w--current {
+  padding-right: 20px;
+  padding-left: 20px;
+  border-radius: 25px;
   background-color: rgba(29, 201, 160, .94);
-  color: #fff;
+  color: #000;
 }
 
 .step-tab.tab-link-3 {
+  padding-right: 20px;
+  padding-left: 20px;
+  border-radius: 25px;
   background-color: transparent;
+  font-family: Montserrat, sans-serif;
+  font-size: 16px;
 }
 
 .step-tab.tab-link-3.w--current {
-  border-radius: 3px;
+  border-radius: 25px;
   background-color: rgba(29, 201, 160, .94);
-  color: #fff;
+  color: #000;
 }
 
 .step-tab.tab-link-4 {
+  padding-right: 20px;
+  padding-left: 20px;
   background-color: transparent;
+  font-family: Montserrat, sans-serif;
   color: #2c2d33;
+  font-size: 16px;
 }
 
 .step-tab.tab-link-4.w--current {
-  border-radius: 3px;
+  border-radius: 25px;
   background-color: rgba(29, 201, 160, .94);
-  color: #fff;
+  font-family: Montserrat, sans-serif;
+  color: #000;
 }
 
 .tab-button-next {
   position: relative;
   right: 0px;
   bottom: 0px;
-  width: 140px;
+  width: 230px;
   margin-left: 10px;
-  padding-top: 7px;
-  padding-bottom: 7px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   float: right;
-  border-style: solid;
+  border-style: none;
   border-width: 1px;
   border-color: rgba(29, 201, 160, .94);
-  border-radius: 3px;
+  border-radius: 25px;
   background-color: #fff;
   -webkit-transition: all 200ms ease;
   transition: all 200ms ease;
-  color: rgba(29, 201, 160, .94);
+  font-family: Montserrat, sans-serif;
+  color: #000;
+  font-size: 16px;
   text-align: center;
+  text-transform: uppercase;
 }
 
 .tab-button-next:hover {
-  box-shadow: 0 0 16px -6px #000;
+  box-shadow: 0 5px 50px -16px #000;
   -webkit-transform: scale(1.03);
   -ms-transform: scale(1.03);
   transform: scale(1.03);
 }
 
 .tab-button-next:active {
-  -webkit-transform: scale(0.93);
-  -ms-transform: scale(0.93);
-  transform: scale(0.93);
+  -webkit-transform: scale(0.97);
+  -ms-transform: scale(0.97);
+  transform: scale(0.97);
 }
 
 .tab-button-next.previous.tab-button-1 {
   width: 150px;
 }
 
+.tab-button-next.previous.tab-button-3 {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-style: none;
+  border-radius: 25px;
+  font-family: Montserrat, sans-serif;
+  color: #000;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+.tab-button-next.update-button {
+  width: 220px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-style: none;
+  border-radius: 25px;
+  font-family: Montserrat, sans-serif;
+  color: #000;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
 .tab-button-next.tab-button-2 {
-  width: 150px;
+  width: 220px;
 }
 
 .tab-button-next.tab-button-3 {
-  width: 150px;
+  width: 220px;
 }
 
 .tab-button-next.tab-button-4 {
-  width: 150px;
+  width: 230px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .tab-button-next.tab-button-publish {
+  width: 220px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 25px;
   background-color: rgba(29, 201, 160, .94);
-  color: #fff;
+  font-family: Montserrat, sans-serif;
+  color: #000;
+  font-size: 16px;
+  text-transform: uppercase;
 }
 
 .tabbed-nav-buttons {
@@ -4648,7 +4726,7 @@ strong {
   max-width: 320px;
   border-style: none;
   border-radius: 3px;
-  background-color: #f3f3f3;
+  background-color: #d5d5d5;
 }
 
 .creator-data-entry.long-description {
