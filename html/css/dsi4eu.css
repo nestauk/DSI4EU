@@ -4558,7 +4558,7 @@ strong {
   background-color: transparent;
   font-family: Montserrat, sans-serif;
   color: #2c2d33;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .step-tab.tab-link-1.w--current {
@@ -4566,15 +4566,17 @@ strong {
   background-color: rgba(29, 201, 160, .94);
   font-family: Montserrat, sans-serif;
   color: #000;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .step-tab.tab-link-2 {
+  padding-right: 20px;
+  padding-left: 20px;
   border-radius: 3px;
   background-color: transparent;
   font-family: Montserrat, sans-serif;
   color: #000;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .step-tab.tab-link-2.w--current {
@@ -4591,7 +4593,7 @@ strong {
   border-radius: 25px;
   background-color: transparent;
   font-family: Montserrat, sans-serif;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .step-tab.tab-link-3.w--current {
@@ -4606,7 +4608,7 @@ strong {
   background-color: transparent;
   font-family: Montserrat, sans-serif;
   color: #2c2d33;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .step-tab.tab-link-4.w--current {
