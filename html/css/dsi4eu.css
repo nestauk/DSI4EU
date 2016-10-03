@@ -1720,11 +1720,12 @@ strong {
 }
 
 .container-wide.post-hero {
-  position: absolute;
+  position: relative;
   left: 0px;
+  top: 0px;
   right: 0px;
-  bottom: 0px;
-  height: 248px;
+  height: auto;
+  margin-top: 90px;
   padding-bottom: 0px;
 }
 
@@ -2964,11 +2965,12 @@ strong {
 }
 
 .single-post-hero {
-  position: relative;
-  height: 480px;
-  margin-top: -46px;
-  background-image: -webkit-linear-gradient(270deg, rgba(14, 23, 41, .83) 26%, rgba(58, 47, 70, .7)), url('../images/brussels-locations.jpg');
-  background-image: linear-gradient(180deg, rgba(14, 23, 41, .83) 26%, rgba(58, 47, 70, .7)), url('../images/brussels-locations.jpg');
+  position: static;
+  height: auto;
+  min-height: auto;
+  margin-top: 0px;
+  background-image: -webkit-linear-gradient(270deg, rgba(0, 0, 0, .68), rgba(0, 0, 0, .68)), url('../images/brussels-locations.jpg');
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, .68), rgba(0, 0, 0, .68)), url('../images/brussels-locations.jpg');
   background-position: 0px 0px, 50% 50%;
   background-size: auto, cover;
   background-repeat: repeat, no-repeat;
@@ -2976,15 +2978,21 @@ strong {
 }
 
 .post-hero-title {
-  position: absolute;
+  position: static;
   left: 0px;
   top: 0px;
   right: 0px;
   width: 75%;
+  margin-top: 0px;
+  margin-bottom: 17px;
+  padding-top: 50px;
+  padding-bottom: 101px;
   padding-left: 10px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: Montserrat, sans-serif;
   color: #fff;
-  font-weight: 300;
+  font-size: 34px;
+  line-height: 47px;
+  font-weight: 400;
 }
 
 .post-single-date {
@@ -2999,6 +3007,7 @@ strong {
 }
 
 .single-post-detail {
+  position: relative;
   height: 85px;
 }
 
@@ -3022,7 +3031,8 @@ strong {
   margin-top: 15px;
   margin-left: 15px;
   float: left;
-  font-family: 'Open Sans', sans-serif;
+  font-family: Montserrat, sans-serif;
+  color: #000;
   font-weight: 600;
 }
 
@@ -3073,7 +3083,7 @@ strong {
   margin-top: 22px;
   padding-right: 10px;
   padding-left: 20px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: Montserrat, sans-serif;
   font-size: 28px;
   font-weight: 300;
 }
@@ -3087,14 +3097,14 @@ strong {
   border-bottom-width: 1px;
   border-bottom-color: #f3f3f3;
   background-color: #fff;
-  color: #707070;
+  color: #000;
   cursor: pointer;
 }
 
 .latest-post-li:hover {
   border-radius: 3px;
-  background-color: #1dc9a0;
-  color: #fff;
+  background-color: #f3f3f3;
+  color: #000;
 }
 
 .latest-post-date {
@@ -3119,22 +3129,25 @@ strong {
 
 .latest-post-title {
   padding-right: 10px;
-  font-family: 'Open Sans', sans-serif;
-  line-height: 19px;
+  font-family: Montserrat, sans-serif;
+  line-height: 26px;
   font-weight: 600;
+  text-transform: uppercase;
 }
 
 .content-h2 {
   margin-top: 0px;
   font-family: 'Open Sans', sans-serif;
+  font-size: 34px;
+  line-height: 47px;
   font-weight: 300;
 }
 
 .post-p {
   margin-top: 30px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: Montserrat, sans-serif;
   font-size: 16px;
-  line-height: 22px;
+  line-height: 26px;
 }
 
 .comment-toggle {
@@ -3741,7 +3754,8 @@ strong {
   background-color: #1dc9a0;
   opacity: 1;
   font-family: 'Open Sans', sans-serif;
-  color: #fff;
+  color: #000;
+  text-decoration: none;
 }
 
 .breadcrumb-root:hover {
@@ -3772,7 +3786,7 @@ strong {
 .breadcrumb-link {
   padding: 0px;
   font-family: 'Open Sans', sans-serif;
-  color: #fff;
+  color: #000;
   text-decoration: none;
 }
 
@@ -4991,6 +5005,7 @@ strong {
 }
 
 .story {
+  position: relative;
   background-color: #fff;
 }
 
@@ -9933,8 +9948,24 @@ html.w-mod-js *[data-ix="new-interaction-2"] {
     width: 100%;
     margin-top: -161px;
   }
+  .post-hero-title {
+    width: auto;
+    font-size: 24px;
+    line-height: 32px;
+  }
+  .single-post-author {
+    margin-top: 14px;
+    margin-bottom: -41px;
+  }
+  .author-details {
+    height: 261px;
+  }
   .single-post-category {
     top: -81px;
+  }
+  .content-h2 {
+    font-size: 24px;
+    line-height: 36px;
   }
   .social-login-hero {
     width: 320px;
@@ -10137,7 +10168,7 @@ html.w-mod-js *[data-ix="new-interaction-2"] {
     line-height: 27px;
   }
   .sidebar {
-    margin-bottom: 130px;
+    margin-bottom: 0px;
   }
   .footer-black {
     min-height: 970px;
