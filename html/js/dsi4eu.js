@@ -469,25 +469,40 @@
 	var cachedSetTimeout;
 	var cachedClearTimeout;
 
+	function defaultSetTimout() {
+	    throw new Error('setTimeout has not been defined');
+	}
+	function defaultClearTimeout () {
+	    throw new Error('clearTimeout has not been defined');
+	}
 	(function () {
 	    try {
-	        cachedSetTimeout = setTimeout;
-	    } catch (e) {
-	        cachedSetTimeout = function () {
-	            throw new Error('setTimeout is not defined');
+	        if (typeof setTimeout === 'function') {
+	            cachedSetTimeout = setTimeout;
+	        } else {
+	            cachedSetTimeout = defaultSetTimout;
 	        }
+	    } catch (e) {
+	        cachedSetTimeout = defaultSetTimout;
 	    }
 	    try {
-	        cachedClearTimeout = clearTimeout;
-	    } catch (e) {
-	        cachedClearTimeout = function () {
-	            throw new Error('clearTimeout is not defined');
+	        if (typeof clearTimeout === 'function') {
+	            cachedClearTimeout = clearTimeout;
+	        } else {
+	            cachedClearTimeout = defaultClearTimeout;
 	        }
+	    } catch (e) {
+	        cachedClearTimeout = defaultClearTimeout;
 	    }
 	} ())
 	function runTimeout(fun) {
 	    if (cachedSetTimeout === setTimeout) {
 	        //normal enviroments in sane situations
+	        return setTimeout(fun, 0);
+	    }
+	    // if setTimeout wasn't available but was latter defined
+	    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+	        cachedSetTimeout = setTimeout;
 	        return setTimeout(fun, 0);
 	    }
 	    try {
@@ -508,6 +523,11 @@
 	function runClearTimeout(marker) {
 	    if (cachedClearTimeout === clearTimeout) {
 	        //normal enviroments in sane situations
+	        return clearTimeout(marker);
+	    }
+	    // if clearTimeout wasn't available but was latter defined
+	    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+	        cachedClearTimeout = clearTimeout;
 	        return clearTimeout(marker);
 	    }
 	    try {
@@ -648,7 +668,7 @@
 	  }
 
 	  function createVideoNode (nativeNode) {
-	    var nodeData = nativeNode.dataset;
+	    var nodeData = $(nativeNode).data();
 
 	    if (!nodeData.videoUrls) {
 	      return $('<video />');
@@ -722,6 +742,7 @@
 	        position: 'fixed',
 	        bottom: 0,
 	        right: 0,
+	        zIndex: 2147483647,
 	        borderTopLeftRadius: '5px',
 	        backgroundColor: '#2b3239',
 	        padding: '8px 12px 5px 15px',
@@ -4687,11 +4708,16 @@ Webflow.require('ix').init([
   {"slug":"fadeinup-3","name":"fadeInUp 3","value":{"style":{"opacity":0,"x":"0px","y":"50px","z":"0px"},"triggers":[{"type":"load","stepsA":[{"wait":200},{"opacity":1,"transition":"transform 300ms ease 0ms, opacity 200ms ease 0ms","x":"0px","y":"-3px","z":"0px"},{"transition":"transform 200ms ease 0ms","x":"0px","y":"0px","z":"0px"}],"stepsB":[]}]}},
   {"slug":"fadeinup-4","name":"fadeInUp 4","value":{"style":{"opacity":0,"x":"0px","y":"50px","z":"0px"},"triggers":[{"type":"load","stepsA":[{"wait":300},{"opacity":1,"transition":"transform 300ms ease 0ms, opacity 200ms ease 0ms","x":"0px","y":"-3px","z":"0px"},{"transition":"transform 200ms ease 0ms","x":"0px","y":"0px","z":"0px"}],"stepsB":[]}]}},
   {"slug":"fadeinup-5","name":"fadeInUp 5","value":{"style":{"opacity":0,"x":"0px","y":"50px","z":"0px"},"triggers":[{"type":"load","stepsA":[{"wait":400},{"opacity":1,"transition":"transform 300ms ease 0ms, opacity 200ms ease 0ms","x":"0px","y":"-3px","z":"0px"},{"transition":"transform 200ms ease 0ms","x":"0px","y":"0px","z":"0px"}],"stepsB":[]}]}},
+  {"slug":"fadeinup-6","name":"fadeInUp 6","value":{"style":{"opacity":0,"x":"0px","y":"50px","z":"0px"},"triggers":[{"type":"load","stepsA":[{"wait":500},{"opacity":1,"transition":"transform 300ms ease 0ms, opacity 200ms ease 0ms","x":"0px","y":"-3px","z":"0px"},{"transition":"transform 200ms ease 0ms","x":"0px","y":"0px","z":"0px"}],"stepsB":[]}]}},
+  {"slug":"fadeinup-7","name":"fadeInUp 7","value":{"style":{"opacity":0,"x":"0px","y":"50px","z":"0px"},"triggers":[{"type":"load","stepsA":[{"wait":600},{"opacity":1,"transition":"transform 300ms ease 0ms, opacity 200ms ease 0ms","x":"0px","y":"-3px","z":"0px"},{"transition":"transform 200ms ease 0ms","x":"0px","y":"0px","z":"0px"}],"stepsB":[]}]}},
   {"slug":"fadeinuponload","name":"fadeInUpOnLoad","value":{"style":{"opacity":0,"x":"0px","y":"50px","z":"0px"},"triggers":[{"type":"scroll","stepsA":[{"opacity":1,"transition":"transform 300ms ease 0ms, opacity 300ms ease 0ms","x":"0px","y":"-5px","z":"0px"},{"transition":"transform 300ms ease 0ms","x":"0px","y":"0px","z":"0px"}],"stepsB":[]}]}},
   {"slug":"fadeinuponload-2","name":"fadeInUpOnLoad 2","value":{"style":{"opacity":0,"x":"0px","y":"50px","z":"0px"},"triggers":[{"type":"scroll","stepsA":[{"wait":100},{"opacity":1,"transition":"transform 300ms ease 0ms, opacity 300ms ease 0ms","x":"0px","y":"-5px","z":"0px"},{"transition":"transform 300ms ease 0ms","x":"0px","y":"0px","z":"0px"}],"stepsB":[]}]}},
   {"slug":"fadeinuponload-3","name":"fadeInUpOnLoad 3","value":{"style":{"opacity":0,"x":"0px","y":"50px","z":"0px"},"triggers":[{"type":"scroll","stepsA":[{"wait":200},{"opacity":1,"transition":"transform 300ms ease 0ms, opacity 300ms ease 0ms","x":"0px","y":"-5px","z":"0px"},{"transition":"transform 300ms ease 0ms","x":"0px","y":"0px","z":"0px"}],"stepsB":[]}]}},
   {"slug":"fadeinuponload-4","name":"fadeInUpOnLoad 4","value":{"style":{"opacity":0,"x":"0px","y":"50px","z":"0px"},"triggers":[{"type":"scroll","stepsA":[{"wait":300},{"opacity":1,"transition":"transform 300ms ease 0ms, opacity 300ms ease 0ms","x":"0px","y":"-5px","z":"0px"},{"transition":"transform 300ms ease 0ms","x":"0px","y":"0px","z":"0px"}],"stepsB":[]}]}},
   {"slug":"fadeinuponload-5","name":"fadeInUpOnLoad 5","value":{"style":{"opacity":0,"x":"0px","y":"50px","z":"0px"},"triggers":[{"type":"scroll","stepsA":[{"wait":400},{"opacity":1,"transition":"transform 300ms ease 0ms, opacity 300ms ease 0ms","x":"0px","y":"-5px","z":"0px"},{"transition":"transform 300ms ease 0ms","x":"0px","y":"0px","z":"0px"}],"stepsB":[]}]}},
+  {"slug":"fadeinuponload-6","name":"fadeInUpOnLoad 6","value":{"style":{"opacity":0,"x":"0px","y":"50px","z":"0px"},"triggers":[{"type":"scroll","stepsA":[{"wait":500},{"opacity":1,"transition":"transform 300ms ease 0ms, opacity 300ms ease 0ms","x":"0px","y":"-5px","z":"0px"},{"transition":"transform 300ms ease 0ms","x":"0px","y":"0px","z":"0px"}],"stepsB":[]}]}},
+  {"slug":"fadeinuponload-7","name":"fadeInUpOnLoad 7","value":{"style":{"opacity":0,"x":"0px","y":"50px","z":"0px"},"triggers":[{"type":"scroll","stepsA":[{"wait":600},{"opacity":1,"transition":"transform 300ms ease 0ms, opacity 300ms ease 0ms","x":"0px","y":"-5px","z":"0px"},{"transition":"transform 300ms ease 0ms","x":"0px","y":"0px","z":"0px"}],"stepsB":[]}]}},
+  {"slug":"fadeinuponload-8","name":"fadeInUpOnLoad 8","value":{"style":{"opacity":0,"x":"0px","y":"50px","z":"0px"},"triggers":[{"type":"scroll","stepsA":[{"wait":700},{"opacity":1,"transition":"transform 300ms ease 0ms, opacity 300ms ease 0ms","x":"0px","y":"-5px","z":"0px"},{"transition":"transform 300ms ease 0ms","x":"0px","y":"0px","z":"0px"}],"stepsB":[]}]}},
   {"slug":"menuhide","name":"menuHide","value":{"style":{"opacity":0,"x":"0px","y":"-75px","z":"0px"},"triggers":[]}},
   {"slug":"reveal-menu","name":"reveal menu","value":{"style":{},"triggers":[{"type":"scroll","selector":".white-menu","offsetBot":"121%","stepsA":[{"opacity":0,"transition":"transform 500ms ease 0ms, opacity 500ms ease 0ms","x":"0px","y":"-75px","z":"0px"}],"stepsB":[{"opacity":1,"transition":"transform 500ms ease 0ms, opacity 500ms ease 0ms","x":"0px","y":"0px","z":"0px"}]}]}},
   {"slug":"edit-update","name":"edit update","value":{"style":{},"triggers":[{"type":"hover","selector":".edit-update","descend":true,"stepsA":[{"display":"block"}],"stepsB":[{"display":"none"}]}]}},
@@ -4708,5 +4734,29 @@ Webflow.require('ix').init([
   {"slug":"slideonload","name":"slideOnLoad","value":{"style":{"height":"1px"},"triggers":[{"type":"load","stepsA":[{"height":"800px","transition":"height 800ms ease-out 0ms"}],"stepsB":[]}]}},
   {"slug":"fadeinonload","name":"fadeInOnLoad","value":{"style":{"opacity":1,"height":"0px"},"triggers":[{"type":"slider","stepsA":[{"opacity":1,"height":"400px","transition":"opacity 600ms ease-in 0ms, height 600ms ease-out 0ms"}],"stepsB":[{"opacity":1,"height":"0px","transition":"opacity 600ms ease-out 0ms, height 600ms ease-out 0ms"}]}]}},
   {"slug":"fadeinout","name":"fadeInOut","value":{"style":{"opacity":0},"triggers":[{"type":"load","preload":true,"loopA":true,"stepsA":[{"opacity":1,"transition":"opacity 1200ms ease-out 0ms"},{"opacity":0,"transition":"opacity 1200ms ease-out 0ms"}],"stepsB":[]}]}},
-  {"slug":"growdown","name":"growDown","value":{"style":{"opacity":0,"height":"1%"},"triggers":[{"type":"load","preload":true,"stepsA":[{"opacity":1,"height":"100%","transition":"opacity 500ms ease-in-out 0ms, height 1200ms ease-out 0ms"}],"stepsB":[]}]}}
+  {"slug":"growdown500","name":"growDown500","value":{"style":{"opacity":0,"height":"1%"},"triggers":[{"type":"load","preload":true,"stepsA":[{"opacity":1,"height":"103%","transition":"opacity 400ms ease-in-out 0ms, height 400ms ease-in-out 0ms"},{"height":"500px","transition":"height 200ms ease-in-out 0ms"}],"stepsB":[]}]}},
+  {"slug":"growdown-501","name":"growDown 501","value":{"style":{"opacity":0,"height":"1%"},"triggers":[{"type":"load","preload":true,"stepsA":[{"opacity":1,"height":"103%","transition":"opacity 400ms ease-in-out 0ms, height 400ms ease-in-out 0ms"},{"height":"500px","transition":"height 200ms ease-in-out 0ms"}],"stepsB":[]}]}},
+  {"slug":"screenfadeinonload","name":"screenFadeInOnLoad","value":{"style":{"opacity":0},"triggers":[{"type":"load","stepsA":[{"opacity":1,"transition":"opacity 500ms ease 0ms"}],"stepsB":[]}]}},
+  {"slug":"growdown-2","name":"growDown 2","value":{"style":{"opacity":0,"height":"1%"},"triggers":[{"type":"load","preload":true,"stepsA":[{"wait":700},{"opacity":1,"height":"405px","transition":"opacity 400ms ease-in-out 0ms, height 400ms ease-in-out 0ms"},{"height":"400px","transition":"height 200ms ease-in-out 0ms"}],"stepsB":[]}]}},
+  {"slug":"bg-grad","name":"bg grad","value":{"style":{"opacity":0,"width":"46px"},"triggers":[]}},
+  {"slug":"read-more-expand","name":"read more expand","value":{"style":{},"triggers":[{"type":"hover","selector":".read-more-bg","descend":true,"stepsA":[{"opacity":1,"width":"163px","transition":"opacity 300ms ease-in-out 0ms, width 300ms ease-in-out 0ms"},{"width":"160px","transition":"width 100ms ease-out 0ms"}],"stepsB":[{"opacity":0,"width":"46px","transition":"opacity 500ms ease 0ms, width 500ms ease 0ms"}]},{"type":"hover","selector":".read-more-arrow-right","descend":true,"stepsA":[{"transition":"transform 300ms ease-out 0ms","x":"4px","y":"0px","z":"0px"}],"stepsB":[{"transition":"transform 300ms ease-out 0ms","x":"0px","y":"0px","z":"0px"}]},{"type":"hover","selector":".link-label","descend":true,"stepsA":[{"display":"block","wait":350},{"opacity":1,"transition":"transform 200ms ease 0ms, opacity 200ms ease 0ms","x":"0px","y":"-2px","z":"0px"},{"transition":"transform 100ms ease-out 0ms","x":"0px","y":"0px","z":"0px"}],"stepsB":[{"display":"none","opacity":0,"transition":"opacity 100ms ease-out 0ms"},{"transition":"transform 100ms ease-out 0ms","x":"0px","y":"18px","z":"0px"}]}]}},
+  {"slug":"new-interaction","name":"New Interaction","value":{"style":{},"triggers":[]}},
+  {"slug":"roll-down","name":"roll down","value":{"style":{"opacity":0,"x":"0px","y":"18px","z":"0px"},"triggers":[]}},
+  {"slug":"roll-down-20","name":"roll down 20","value":{"style":{"opacity":1,"height":"1px"},"triggers":[{"type":"scroll","offsetBot":"71%","stepsA":[{"opacity":1,"height":"955px","transition":"opacity 500ms ease 0ms, height 500ms ease 0ms"},{"height":"950px","transition":"height 200ms ease-out 0ms"}],"stepsB":[]}]}},
+  {"slug":"roll-up-overlay","name":"roll up overlay","value":{"style":{"opacity":0,"x":"0px","y":"950px","z":"0px"},"triggers":[{"type":"scroll","offsetBot":"54%","stepsA":[{"opacity":1,"transition":"transform 200ms ease-out 0ms, opacity 200ms ease-out 0ms","x":"0px","y":"0px","z":"0px"}],"stepsB":[]}]}},
+  {"slug":"fadeinuponloadoffset","name":"fadeInUpOnLoadOffset","value":{"style":{"opacity":0,"x":"0px","y":"50px","z":"0px"},"triggers":[{"type":"scroll","offsetBot":"30%","stepsA":[{"opacity":1,"transition":"transform 300ms ease 0ms, opacity 300ms ease 0ms","x":"0px","y":"-5px","z":"0px"},{"transition":"transform 300ms ease 0ms","x":"0px","y":"0px","z":"0px"}],"stepsB":[]}]}},
+  {"slug":"fadeinuponloadoffset-2","name":"fadeInUpOnLoadOffset 2","value":{"style":{"opacity":0,"x":"0px","y":"50px","z":"0px"},"triggers":[{"type":"scroll","offsetBot":"30%","stepsA":[{"wait":900},{"opacity":1,"transition":"transform 300ms ease 0ms, opacity 300ms ease 0ms","x":"0px","y":"-5px","z":"0px"},{"transition":"transform 300ms ease 0ms","x":"0px","y":"0px","z":"0px"}],"stepsB":[]}]}},
+  {"slug":"growin","name":"growIn","value":{"style":{"opacity":0,"scaleX":0.9,"scaleY":0.9,"scaleZ":1},"triggers":[{"type":"scroll","offsetBot":"20%","stepsA":[{"wait":300},{"opacity":1,"transition":"transform 500ms ease 0ms, opacity 500ms ease 0ms","scaleX":1.02,"scaleY":1.02,"scaleZ":1},{"transition":"transform 500ms ease 0ms","scaleX":1,"scaleY":1,"scaleZ":1}],"stepsB":[]}]}},
+  {"slug":"growin-2","name":"growIn 2","value":{"style":{"opacity":0,"scaleX":0.9,"scaleY":0.9,"scaleZ":1},"triggers":[{"type":"scroll","offsetBot":"20%","stepsA":[{"wait":500},{"opacity":1,"transition":"transform 500ms ease 0ms, opacity 500ms ease 0ms","scaleX":1.02,"scaleY":1.02,"scaleZ":1},{"transition":"transform 500ms ease 0ms","scaleX":1,"scaleY":1,"scaleZ":1}],"stepsB":[]}]}},
+  {"slug":"growin-3","name":"growIn 3","value":{"style":{"opacity":0,"scaleX":0.9,"scaleY":0.9,"scaleZ":1},"triggers":[{"type":"scroll","offsetBot":"20%","stepsA":[{"wait":700},{"opacity":1,"transition":"transform 500ms ease 0ms, opacity 500ms ease 0ms","scaleX":1.02,"scaleY":1.02,"scaleZ":1},{"transition":"transform 500ms ease 0ms","scaleX":1,"scaleY":1,"scaleZ":1}],"stepsB":[]}]}},
+  {"slug":"fadeinslow","name":"fadeInSlow","value":{"style":{"opacity":0},"triggers":[{"type":"load","stepsA":[{"wait":400},{"opacity":0.22,"wait":1600,"transition":"opacity 1700ms ease-out 0ms"}],"stepsB":[]}]}},
+  {"slug":"navbarinteraction","name":" navbarInteraction","value":{"style":{},"triggers":[{"type":"navbar","selector":".top-line","stepsA":[{"transition":"transform 250ms ease-out 0ms","rotateX":"0deg","rotateY":"0deg","rotateZ":"45deg","x":"7.5px","y":"7.5px","z":"0px"}],"stepsB":[{"transition":"transform 250ms ease-out 0ms","rotateX":"0deg","rotateY":"0deg","rotateZ":"0deg","x":"0px","y":"0px","z":"0px"}]},{"type":"navbar","selector":".middle-line","stepsA":[{"opacity":0,"transition":"transform 250ms ease-out 0ms, opacity 250ms ease-out 0ms","x":"50px","y":"0px","z":"0px"}],"stepsB":[{"opacity":1,"transition":"transform 250ms ease-out 0ms, opacity 250ms ease-out 0ms","x":"0px","y":"0px","z":"0px"}]},{"type":"navbar","selector":".bottom-line","stepsA":[{"transition":"transform 250ms ease-out 0ms","rotateX":"0deg","rotateY":"0deg","rotateZ":"-45deg","x":"7.5px","y":"-7.5px","z":"0px"}],"stepsB":[{"transition":"transform 250ms ease-out 0ms","x":"0px","y":"0px","z":"0px","rotateX":"0deg","rotateY":"0deg","rotateZ":"0deg"}]},{"type":"navbar","selector":".menu-full-screen","stepsA":[{"display":"none","opacity":0,"wait":0},{"display":"block","opacity":1,"transition":"opacity 250ms ease 0ms"}],"stepsB":[{"display":"block","opacity":0,"transition":"opacity 250ms ease 0ms"},{"display":"none"}]},{"type":"hover","selector":".middle-line","stepsA":[{"transition":"transform 250ms ease 0ms","x":"5px","y":"0px","z":"0px"}],"stepsB":[{"transition":"transform 250ms ease 0ms","x":"0px","y":"0px","z":"0px"}]}]}},
+  {"slug":"log-in-arrow","name":"log in arrow","value":{"style":{},"triggers":[{"type":"hover","selector":".login-arrow","descend":true,"stepsA":[{"opacity":0,"transition":"transform 250ms ease-out 0ms, opacity 250ms ease-out 0ms","x":"15px","y":"0px","z":"0px"},{"x":"-15px","y":"0px","z":"0px"},{"opacity":1,"transition":"transform 250ms ease-out 0ms, opacity 250ms ease-out 0ms","x":"0px","y":"0px","z":"0px"}],"stepsB":[]}]}},
+  {"slug":"displaynone","name":"displayNone","value":{"style":{"display":"none"},"triggers":[]}},
+  {"slug":"new-interaction-2","name":"New Interaction 2","value":{"style":{"width":"0px"},"triggers":[]}},
+  {"slug":"underline","name":"underline","value":{"style":{},"triggers":[{"type":"hover","selector":".top3-underline","descend":true,"stepsA":[{"width":"104px","transition":"width 250ms ease 0ms"},{"width":"99px","transition":"width 100ms ease 0ms"}],"stepsB":[{"width":"0px","transition":"width 200ms ease 0ms"}]}]}},
+  {"slug":"search-roll","name":"search roll","value":{"style":{},"triggers":[{"type":"hover","selector":".search-icon","descend":true,"stepsA":[{"opacity":0,"transition":"transform 200ms ease 0ms, opacity 200ms ease 0ms","x":"0px","y":"15px","z":"0px"},{"x":"0px","y":"-15px","z":"0px"},{"opacity":1,"transition":"transform 200ms ease 0ms, opacity 200ms ease 0ms","x":"0px","y":"0px","z":"0px"}],"stepsB":[]},{"type":"click","selector":".search-block","stepsA":[{"display":"block","opacity":0},{"display":"block","opacity":1,"transition":"opacity 250ms ease 0ms"}],"stepsB":[]}]}},
+  {"slug":"scaleimage","name":"scaleImage","value":{"style":{},"triggers":[{"type":"hover","selector":".case-study-img","descend":true,"stepsA":[{"transition":"transform 2500ms ease 0ms","scaleX":1.1,"scaleY":1.1,"scaleZ":1}],"stepsB":[{"transition":"transform 2500ms ease 0ms","scaleX":1,"scaleY":1,"scaleZ":1}]}]}},
+  {"slug":"close-search-block","name":"close search block","value":{"style":{},"triggers":[{"type":"click","selector":".search-block","stepsA":[{"opacity":0,"transition":"opacity 250ms ease 0ms"},{"display":"none"}],"stepsB":[]}]}},
+  {"slug":"hide-search-icon","name":"hide search icon","value":{"style":{},"triggers":[{"type":"click","selector":".search-mag","siblings":true,"stepsA":[{"opacity":0,"transition":"transform 150ms ease 0ms, opacity 150ms ease 0ms","x":"0px","y":"20px","z":"0px"},{"opacity":0,"x":"0px","y":"-20px","z":"0px"},{"opacity":1,"transition":"transform 150ms ease 0ms, opacity 150ms ease 0ms","x":"0px","y":"0px","z":"0px"}],"stepsB":[]}]}}
 ]);
