@@ -474,3 +474,11 @@ div.error {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.full-menu-h2{
+    margin: 0;
+}
+
+.full-menu-link{
+    text-align:left;
+}

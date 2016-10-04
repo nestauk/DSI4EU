@@ -371,7 +371,6 @@ if (!isset($urlHandler))
             <div class="search-col w-col w-col-3">
                 <h2 class="full-menu-h2">News &amp; Blogs</h2>
                 <a ng-repeat="post in search.blogPosts" class="full-menu-link" href="{{post.url}}">
-                    <span class="green">-</span>
                     {{post.name}}
                 </a>
                 <div ng-show="search.blogPosts.length == 0"><?php _ehtml('No blog posts found') ?></div>
@@ -379,7 +378,6 @@ if (!isset($urlHandler))
             <div class="search-col w-col w-col-3">
                 <h2 class="full-menu-h2"><?php _ehtml('Projects') ?></h2>
                 <a ng-repeat="project in search.projects" class="full-menu-link" href="{{project.url}}">
-                    <span class="green">-</span>
                     {{project.name}}
                 </a>
                 <div ng-show="search.projects.length == 0"><?php _ehtml('No projects found') ?></div>
@@ -388,7 +386,6 @@ if (!isset($urlHandler))
                 <h2 class="full-menu-h2"><?php _ehtml('Organisations') ?></h2>
                 <a ng-repeat="organisation in search.organisations"
                    class="full-menu-link" href="{{organisation.url}}">
-                    <span class="green">-</span>
                     {{organisation.name}}
                 </a>
                 <div ng-show="search.organisations.length == 0"><?php _ehtml('No organisations found') ?></div>
@@ -396,7 +393,7 @@ if (!isset($urlHandler))
             <div class="search-col w-col w-col-3">
                 <h2 class="full-menu-h2"><?php _ehtml('Case Studies') ?></h2>
                 <a ng-repeat="caseStudy in search.caseStudies" class="full-menu-link" href="{{caseStudy.url}}">
-                    <span class="green">-</span> {{caseStudy.name}}
+                    {{caseStudy.name}}
                 </a>
                 <div ng-show="search.caseStudies.length == 0"><?php _ehtml('No case studies found') ?></div>
             </div>
