@@ -1714,7 +1714,7 @@ strong {
 .container-wide {
   position: relative;
   display: block;
-  max-width: 1170px;
+  max-width: 1290px;
   margin-right: auto;
   margin-left: auto;
   padding-bottom: 70px;
@@ -1757,6 +1757,7 @@ strong {
   position: static;
   height: auto;
   max-width: 1290px;
+  margin-top: 180px;
   padding-top: 0px;
   padding-bottom: 0px;
 }
@@ -9537,6 +9538,9 @@ html.w-mod-js *[data-ix="new-interaction-2"] {
   .alphabet-link {
     margin-bottom: 4px;
   }
+  .page-h1.light {
+    padding-left: 20px;
+  }
   .dashboard-widget {
     margin-bottom: 20px;
   }
@@ -10158,6 +10162,8 @@ html.w-mod-js *[data-ix="new-interaction-2"] {
   }
   .container-wide.header {
     height: 265px;
+    margin-top: -13px;
+    padding-top: 134px;
   }
   .hp-post {
     height: 226px;
