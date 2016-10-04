@@ -475,11 +475,12 @@ div.error {
   transform: translate(-50%, -50%);
 }
 
-.full-menu-h2{
-    margin: 0;
+.main-search-results .full-menu-h2{
+    margin-left: 0;
+    margin-right: 0;
 }
 
-.full-menu-link{
+.main-search-results .full-menu-link{
     text-align:left;
 }
 
