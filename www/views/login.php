@@ -156,5 +156,3 @@ use \DSI\Service\URL;
 
     <script type="text/javascript"
             src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/LoginController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
-
-<?php require __DIR__ . '/footer.php' ?>

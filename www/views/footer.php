@@ -351,6 +351,7 @@ if (!isset($urlHandler))
 <script
     src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/SearchController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"
     type="text/javascript"></script>
+
 <div class="search-block" ng-controller="SearchController">
     <div class="close-search" data-ix="close-search-block">+</div>
     <h1 class="search-h1">Search</h1>
@@ -365,46 +366,48 @@ if (!isset($urlHandler))
             <a class="cancel-search" ng-click="search.entry = ''" data-ix="close-search-block" href="#">Cancel</a>
         </form>
     </div>
-    <div class="main-search-results w-row">
-        <div class="search-col w-col w-col-3">
-            <h2 class="full-menu-h2">News &amp; Blogs</h2>
-            <a ng-repeat="post in search.blogPosts" class="full-menu-link" href="{{post.url}}">
-                <span class="green">-</span>
-                {{post.name}}
-            </a>
-            <div ng-show="search.blogPosts.length == 0"><?php _ehtml('No blog posts found') ?></div>
+    <div ng-show="search.entry.length >= 3">
+        <div class="main-search-results w-row">
+            <div class="search-col w-col w-col-3">
+                <h2 class="full-menu-h2">News &amp; Blogs</h2>
+                <a ng-repeat="post in search.blogPosts" class="full-menu-link" href="{{post.url}}">
+                    <span class="green">-</span>
+                    {{post.name}}
+                </a>
+                <div ng-show="search.blogPosts.length == 0"><?php _ehtml('No blog posts found') ?></div>
+            </div>
+            <div class="search-col w-col w-col-3">
+                <h2 class="full-menu-h2"><?php _ehtml('Projects') ?></h2>
+                <a ng-repeat="project in search.projects" class="full-menu-link" href="{{project.url}}">
+                    <span class="green">-</span>
+                    {{project.name}}
+                </a>
+                <div ng-show="search.projects.length == 0"><?php _ehtml('No projects found') ?></div>
+            </div>
+            <div class="search-col w-col w-col-3">
+                <h2 class="full-menu-h2"><?php _ehtml('Organisations') ?></h2>
+                <a ng-repeat="organisation in search.organisations"
+                   class="full-menu-link" href="{{organisation.url}}">
+                    <span class="green">-</span>
+                    {{organisation.name}}
+                </a>
+                <div ng-show="search.organisations.length == 0"><?php _ehtml('No organisations found') ?></div>
+            </div>
+            <div class="search-col w-col w-col-3">
+                <h2 class="full-menu-h2"><?php _ehtml('Case Studies') ?></h2>
+                <a ng-repeat="caseStudy in search.caseStudies" class="full-menu-link" href="{{caseStudy.url}}">
+                    <span class="green">-</span> {{caseStudy.name}}
+                </a>
+                <div ng-show="search.caseStudies.length == 0"><?php _ehtml('No case studies found') ?></div>
+            </div>
         </div>
-        <div class="search-col w-col w-col-3">
-            <h2 class="full-menu-h2"><?php _ehtml('Projects') ?></h2>
-            <a ng-repeat="project in search.projects" class="full-menu-link" href="{{project.url}}">
-                <span class="green">-</span>
-                {{project.name}}
+        <div class="signn">
+            <a class="large log-in-link search-results sign-up w-clearfix w-inline-block" data-ix="log-in-arrow"
+               href="<?php echo $urlHandler->search() ?>{{search.entry}}">
+                <div class="login-li menu-li">See all results</div>
+                <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
             </a>
-            <div ng-show="search.projects.length == 0"><?php _ehtml('No projects found') ?></div>
         </div>
-        <div class="search-col w-col w-col-3">
-            <h2 class="full-menu-h2"><?php _ehtml('Organisations') ?></h2>
-            <a ng-repeat="organisation in search.organisations"
-               class="full-menu-link" href="{{organisation.url}}">
-                <span class="green">-</span>
-                {{organisation.name}}
-            </a>
-            <div ng-show="search.organisations.length == 0"><?php _ehtml('No organisations found') ?></div>
-        </div>
-        <div class="search-col w-col w-col-3">
-            <h2 class="full-menu-h2"><?php _ehtml('Case Studies') ?></h2>
-            <a ng-repeat="caseStudy in search.caseStudies" class="full-menu-link" href="{{caseStudy.url}}">
-                <span class="green">-</span> {{caseStudy.name}}
-            </a>
-            <div ng-show="search.caseStudies.length == 0"><?php _ehtml('No case studies found') ?></div>
-        </div>
-    </div>
-    <div class="signn">
-        <a class="large log-in-link search-results sign-up w-clearfix w-inline-block" data-ix="log-in-arrow"
-           href="<?php echo $urlHandler->search() ?>{{search.entry}}">
-            <div class="login-li menu-li">See all results</div>
-            <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
-        </a>
     </div>
 </div>
 
