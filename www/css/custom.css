@@ -424,3 +424,53 @@ div.error {
     padding: 0;
     line-height: normal;
 }
+
+.w-nav-button.w--open {
+    background-color: transparent;
+    color: #000;
+}
+  
+.bg-blur {
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+  }
+  
+  .blur-20 {
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+  }
+  
+  
+  .login-field.error {
+    height: 50px;
+    border-style: none none solid;
+    border-width: 1px;
+    border-color: #000 #000 #FF3030;
+    background-color: #fff;
+    text-align: center;
+}
+  
+/*  .w-input::-webkit-input-placeholder { /* WebKit browsers 
+    color:    #4CADDE;
+}
+.w-input:-moz-placeholder { /* Mozilla Firefox 4 to 18 
+    color:    #4CADDE;
+}
+.w-input::-moz-placeholder { /* Mozilla Firefox 19+ 
+    color:    #4CADDE;
+}
+.w-input:-ms-input-placeholder { /* Internet Explorer 10+ 
+    color:    #4CADDE;
+}
+/* keep modals centered */
+.modal-container {display: table; height: 100%; position:absolute; overflow: hidden;width:100%;}
+.modal-helper {#position: absolute; #top: 50%;display: table-cell; vertical-align: middle;}
+.modal-content {#position: relative; #top: -50%;margin:0 auto;width:600px;}
+ 
+/* absolute centre divs */
+.ab-fab {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
