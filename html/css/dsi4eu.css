@@ -5143,8 +5143,8 @@ strong {
   position: relative;
   margin-bottom: 20px;
   padding: 25px;
-  border: 1px solid #e6e6e6;
-  border-radius: 3px;
+  border: 1px none #e6e6e6;
+  border-radius: 0px;
 }
 
 .update-type {
@@ -8923,6 +8923,13 @@ strong {
 .dash-h3 {
   padding-top: 20px;
   padding-left: 20px;
+}
+
+.detail {
+  margin-bottom: 5px;
+  font-family: Montserrat, sans-serif;
+  color: #000;
+  font-size: 16px;
 }
 
 html.w-mod-js *[data-ix="pin-drop"] {
