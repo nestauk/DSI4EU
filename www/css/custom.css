@@ -381,3 +381,46 @@ div.error {
 .massive-hero-h2 {
     color: #fff;
 }
+
+.sweet-alert .sa-icon.sa-success .sa-line {
+    height: 5px;
+    background-color: #1dc9a0;
+    display: block;
+    border-radius: 2px;
+    position: absolute;
+    z-index: 2;
+}
+
+.sweet-alert h2 {
+    font-family: 'Montserrat';
+    font-weight: 700;
+    text-transform: uppercase !important;
+}
+
+.sweet-alert button {
+    color: black;
+    font-family: montserrat;
+    text-transform: uppercase;
+    border: none;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 25px;
+    padding: 10px 32px;
+    margin: 26px 5px 0 5px;
+    cursor: pointer;
+    background-color: #1dc9a0 !important;
+}
+
+.sweet-alert p {
+    color: #000000;
+    font-size: 16px;
+    font-family: montserrat;
+    text-align: center;
+    font-weight: 400;
+    position: relative;
+    text-align: inherit;
+    float: none;
+    margin: 0;
+    padding: 0;
+    line-height: normal;
+}
