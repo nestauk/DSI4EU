@@ -5029,6 +5029,7 @@ strong {
 
 .involved-card {
   position: relative;
+  max-width: 300px;
   min-height: 76px;
   margin-right: 5px;
   margin-bottom: 10px;
@@ -5038,6 +5039,10 @@ strong {
 
 .involved-h4 {
   margin-bottom: 30px;
+}
+
+.involved-h4.orgs-h {
+  margin-top: 35px;
 }
 
 .involved-profile-img {
@@ -8978,7 +8983,7 @@ strong {
   padding-top: 10px;
   padding-bottom: 10px;
   border-radius: 25px;
-  background-color: rgba(29, 201, 160, .94);
+  background-color: #1dc9a0;
   font-family: Montserrat, sans-serif;
   color: #000;
   font-size: 16px;
