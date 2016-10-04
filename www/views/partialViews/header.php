@@ -36,11 +36,17 @@ if (!isset($urlHandler))
                 <div class="full-menu-col w-clearfix w-col w-col-4">
                     <div class="full-menu-links-block no-border">
                         <h2 class="full-menu-h2">About DSI</h2>
-                        <a class="full-menu-link" href="about-the-project">About the project</a>
-                        <a class="full-menu-link" href="partners">Partners</a>
-                        <a class="full-menu-link" href="open-data-research-resources">Open data, research &amp;
-                            resources</a>
-                        <a class="full-menu-link" href="contact-dsi">Contact DSI</a>
+                        <a class="full-menu-link" href="<?php echo $urlHandler->aboutTheProject() ?>">
+                            About the project
+                        </a>
+                        <a class="full-menu-link" href="<?php echo $urlHandler->partners() ?>">
+                            Partners
+                        </a>
+                        <a class="full-menu-link" href="<?php echo $urlHandler->openDataResearchAndResources() ?>">
+                            Open data, research &amp; resources</a>
+                        <a class="full-menu-link" href="<?php echo $urlHandler->contactDSI() ?>">
+                            Contact DSI
+                        </a>
                     </div>
                 </div>
                 <div class="full-menu-col w-col w-col-4">
@@ -96,7 +102,8 @@ if (!isset($urlHandler))
             <div class="bottom-line"></div>
             <div class="menu-li">Menu</div>
         </div>
-        <a class="ll log-in-link w-clearfix w-inline-block" data-ix="log-in-arrow" href="<?php echo $urlHandler->login()?>">
+        <a class="ll log-in-link w-clearfix w-inline-block" data-ix="log-in-arrow"
+           href="<?php echo $urlHandler->login() ?>">
             <div class="login-li menu-li">login</div>
             <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
         </a>
