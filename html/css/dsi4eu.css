@@ -1642,6 +1642,10 @@ strong {
 
 .card-h3.search-h3 {
   padding-left: 10px;
+  font-family: Montserrat, sans-serif;
+  color: #000;
+  font-size: 16px;
+  font-weight: 700;
 }
 
 .show-card-p {
@@ -2744,8 +2748,8 @@ strong {
   margin-right: 10px;
   margin-bottom: 20px;
   margin-left: 10px;
-  padding-top: 10px;
-  padding-left: 20px;
+  padding-top: 0px;
+  padding-left: 0px;
   border-radius: 5px;
   background-color: #fff;
 }
