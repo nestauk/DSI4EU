@@ -487,7 +487,7 @@ strong {
   min-height: auto;
   margin-bottom: 20px;
   padding-top: 10px;
-  padding-right: 19px;
+  padding-right: 0px;
   padding-bottom: 20px;
   border: 0px none #e2e2e2;
   border-radius: 0px;
@@ -563,15 +563,16 @@ strong {
 }
 
 .info-h.card-h {
-  margin-top: 13px;
+  margin-top: 0px;
   margin-bottom: 15px;
+  padding-top: 10px;
   padding-bottom: 10px;
   padding-left: 20px;
   border-style: none;
-  font-family: 'Open Sans', sans-serif;
-  color: #18233f;
-  font-size: 18px;
-  font-weight: 300;
+  font-family: Montserrat, sans-serif;
+  color: #000;
+  font-size: 16px;
+  font-weight: 700;
   text-transform: uppercase;
 }
 
@@ -585,7 +586,7 @@ strong {
   padding-right: 20px;
   padding-bottom: 20px;
   padding-left: 20px;
-  color: #888;
+  color: #000;
 }
 
 .project-archive {
@@ -1144,16 +1145,17 @@ strong {
   bottom: 0px;
   width: auto;
   height: auto;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding: 10px 20px;
   border-style: none;
   border-width: 0px;
   border-color: #318ef3 #318ef3 #136dce;
+  border-radius: 25px;
   background-color: rgba(29, 201, 160, .94);
   -webkit-transition: all 200ms ease;
   transition: all 200ms ease;
   font-family: 'Open Sans', sans-serif;
-  color: #18233f;
+  color: #000;
+  font-size: 16px;
   line-height: 20px;
   font-weight: 600;
 }
@@ -1408,6 +1410,10 @@ strong {
   transform: scale(1);
   -webkit-transition: all 200ms ease;
   transition: all 200ms ease;
+  font-family: Montserrat, sans-serif;
+  font-size: 16px;
+  line-height: 26px;
+  font-weight: 400;
 }
 
 .list-item:hover {
@@ -1417,11 +1423,10 @@ strong {
   height: 90px;
   border-bottom-style: none;
   border-radius: 0px;
-  background-color: #1dc9a0;
-  box-shadow: 0 0 50px -13px rgba(0, 0, 0, .27);
-  -webkit-transform: scale(1.02);
-  -ms-transform: scale(1.02);
-  transform: scale(1.02);
+  background-color: #f3f3f3;
+  -webkit-transform: none;
+  -ms-transform: none;
+  transform: none;
   color: #fff;
 }
 
@@ -1449,7 +1454,7 @@ strong {
   display: inline-block;
   padding-right: 0px;
   float: right;
-  font-family: 'Open Sans', sans-serif;
+  font-family: Montserrat, sans-serif;
   color: #6c7e8a;
   text-align: right;
 }
@@ -1634,13 +1639,14 @@ strong {
 
 .card-h3 {
   margin-top: 0px;
-  padding-top: 30px;
+  padding-top: 10px;
   padding-right: 20px;
   padding-left: 20px;
-  font-family: 'Open Sans', sans-serif;
-  color: #384155;
-  font-size: 14px;
-  font-weight: 400;
+  font-family: Montserrat, sans-serif;
+  color: #000;
+  font-size: 16px;
+  line-height: 26px;
+  font-weight: 700;
   text-transform: uppercase;
 }
 
@@ -3528,9 +3534,10 @@ strong {
   display: block;
   width: 100px;
   height: 100px;
-  margin-top: 13px;
+  margin-top: 100px;
   margin-right: auto;
-  margin-left: auto;
+  margin-left: 1px;
+  float: left;
   border-radius: 50px;
   background-color: #fff;
 }
@@ -8448,8 +8455,14 @@ strong {
   padding-top: 25px;
 }
 
+.content-h1.profile-h1 {
+  margin-bottom: 0px;
+  margin-left: 120px;
+  padding-top: 93px;
+}
+
 .intro {
-  margin-top: 25px;
+  margin-top: 47px;
   margin-bottom: 50px;
   font-family: 'Open Sans', sans-serif;
   font-size: 34px;
@@ -9055,6 +9068,13 @@ strong {
   font-size: 12px;
   text-align: center;
   text-decoration: none;
+}
+
+.profile-job-title {
+  margin-left: 120px;
+  font-family: Montserrat, sans-serif;
+  color: #000;
+  font-size: 16px;
 }
 
 html.w-mod-js *[data-ix="pin-drop"] {
@@ -10236,6 +10256,10 @@ html.w-mod-js *[data-ix="new-interaction-2"] {
   .page-header.stories-header {
     height: 410px;
   }
+  .large-profile-img {
+    margin-top: 30px;
+    float: none;
+  }
   .tab-buttons-container {
     height: 185px;
   }
@@ -10409,7 +10433,14 @@ html.w-mod-js *[data-ix="new-interaction-2"] {
     font-size: 24px;
     line-height: 36px;
   }
+  .content-h1.profile-h1 {
+    margin-top: 18px;
+    margin-left: 0px;
+    padding-top: 0px;
+  }
   .intro {
+    margin-top: 10px;
+    margin-bottom: 16px;
     font-size: 18px;
     line-height: 27px;
   }
@@ -10468,6 +10499,9 @@ html.w-mod-js *[data-ix="new-interaction-2"] {
   .profile-col {
     padding-left: 20px;
     text-align: left;
+  }
+  .profile-job-title {
+    margin-left: 0px;
   }
 }
 
