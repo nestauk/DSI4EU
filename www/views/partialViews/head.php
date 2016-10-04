@@ -21,8 +21,6 @@ use \DSI\Service\Sysctl;
       href="<?php echo SITE_RELATIVE_PATH ?>/css/components.css?<?php Sysctl::echoVersion() ?>">
 <link rel="stylesheet" type="text/css"
       href="<?php echo SITE_RELATIVE_PATH ?>/css/dsi4eu.css?<?php Sysctl::echoVersion() ?>">
-<link rel="stylesheet" type="text/css"
-      href="<?php echo SITE_RELATIVE_PATH ?>/css/custom.css?<?php Sysctl::echoVersion() ?>">
 
 <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
 <script>
@@ -62,75 +60,6 @@ use \DSI\Service\Sysctl;
     var angularAppName = 'DSIApp';
 </script>
 
-<style>
-    .w-nav-button.w--open {
-        background-color: transparent;
-        color: #000;
-    }
-
-    .bg-blur {
-        -webkit-backdrop-filter: saturate(180%) blur(20px);
-        backdrop-filter: saturate(180%) blur(20px);
-    }
-
-    .blur-20 {
-        -webkit-backdrop-filter: saturate(180%) blur(20px);
-        backdrop-filter: saturate(180%) blur(20px);
-    }
-
-    .login-field.error {
-        height: 50px;
-        border-style: none none solid;
-        border-width: 1px;
-        border-color: #000 #000 #FF3030;
-        background-color: #fff;
-        text-align: center;
-    }
-
-    /*  .w-input::-webkit-input-placeholder { /* WebKit browsers
-        color:    #4CADDE;
-    }
-    .w-input:-moz-placeholder { /* Mozilla Firefox 4 to 18
-        color:    #4CADDE;
-    }
-    .w-input::-moz-placeholder { /* Mozilla Firefox 19+
-        color:    #4CADDE;
-    }
-    .w-input:-ms-input-placeholder { /* Internet Explorer 10+
-        color:    #4CADDE;
-    }
-    /* keep modals centered */
-    .modal-container {
-        display: table;
-        height: 100%;
-        position: absolute;
-        overflow: hidden;
-        width: 100%;
-    }
-
-    .modal-helper {
-        #position: absolute;
-        #top: 50%;
-        display: table-cell;
-        vertical-align: middle;
-    }
-
-    .modal-content {
-        #position: relative;
-        #top: -50%;
-        margin: 0 auto;
-        width: 600px;
-    }
-
-    /* absolute centre divs */
-    .ab-fab {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-</style>
-
 <script type="text/javascript"
         src="<?php echo SITE_RELATIVE_PATH ?>/js/angular.min.js?<?php Sysctl::echoVersion() ?>"></script>
 
@@ -160,3 +89,6 @@ use \DSI\Service\Sysctl;
 
 <script type="text/javascript"
         src="<?php echo SITE_RELATIVE_PATH ?>/js/DSIApp.js?<?php Sysctl::echoVersion() ?>"></script>
+
+<link rel="stylesheet" type="text/css"
+      href="<?php echo SITE_RELATIVE_PATH ?>/css/custom.css?<?php Sysctl::echoVersion() ?>">
