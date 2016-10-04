@@ -910,6 +910,10 @@ strong {
 
 .card-p.notification-stat {
   margin-bottom: 20px;
+  font-family: Montserrat, sans-serif;
+  color: #000;
+  font-size: 16px;
+  line-height: 26px;
   font-weight: 600;
 }
 
@@ -1728,7 +1732,8 @@ strong {
 }
 
 .container-wide.archive {
-  margin-top: 60px;
+  max-width: 1290px;
+  margin-top: 0px;
   margin-bottom: 20px;
 }
 
@@ -1743,9 +1748,10 @@ strong {
 }
 
 .container-wide.header {
-  top: 96px;
-  height: 245px;
-  padding-top: 90px;
+  position: static;
+  height: auto;
+  max-width: 1290px;
+  padding-top: 0px;
   padding-bottom: 0px;
 }
 
@@ -2408,8 +2414,14 @@ strong {
 
 .dsi-button.create {
   width: 80%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 25px;
   background-color: #1dc9a0;
-  color: #fff;
+  font-family: Montserrat, sans-serif;
+  color: #000;
+  font-size: 16px;
+  text-transform: uppercase;
 }
 
 .dsi-button.top-filter {
@@ -2444,6 +2456,13 @@ strong {
 
 .dsi-button.dash-join {
   width: 80%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 25px;
+  font-family: Montserrat, sans-serif;
+  color: #000;
+  font-size: 16px;
+  text-transform: uppercase;
 }
 
 .dsi-button.post-story {
@@ -2761,7 +2780,7 @@ strong {
   min-height: 365px;
   margin-bottom: 20px;
   padding-bottom: 20px;
-  border-radius: 5px;
+  border-radius: 0px;
   background-color: #fff;
 }
 
@@ -2777,7 +2796,7 @@ strong {
   z-index: 6;
   border-bottom-style: solid;
   border-radius: 0px;
-  background-color: #1dc9a0;
+  background-color: #f3f3f3;
   box-shadow: none;
   -webkit-transform: none;
   -ms-transform: none;
@@ -2790,7 +2809,8 @@ strong {
 }
 
 .card-notification.latest-post {
-  height: 181px;
+  height: auto;
+  min-height: 240px;
   padding-top: 15px;
 }
 
@@ -2815,7 +2835,7 @@ strong {
   margin-top: 13px;
   margin-left: 10px;
   float: left;
-  font-family: 'Open Sans', sans-serif;
+  font-family: Montserrat, sans-serif;
   font-size: 14px;
 }
 
@@ -2841,7 +2861,9 @@ strong {
 }
 
 .latest-post-p {
+  display: block;
   margin-left: 69px;
+  padding-top: 84px;
   padding-right: 20px;
 }
 
@@ -2860,6 +2882,7 @@ strong {
 }
 
 .post-card-category.events {
+  display: block;
   background-color: #dd3ea4;
 }
 
@@ -3400,7 +3423,7 @@ strong {
   top: 179px;
   right: 0px;
   z-index: 1;
-  display: block;
+  display: none;
   height: auto;
   max-width: 1170px;
   min-height: 335px;
@@ -3477,12 +3500,8 @@ strong {
 
 .page-header {
   position: relative;
-  height: 330px;
-  margin-top: -48px;
-  background-image: -webkit-radial-gradient(circle farthest-corner at 50% 50%, #2c2d33, rgba(44, 45, 51, .94)), url('../images/bg2.png'), -webkit-linear-gradient(45deg, #18233f, #384155);
-  background-image: radial-gradient(circle farthest-corner at 50% 50%, #2c2d33, rgba(44, 45, 51, .94)), url('../images/bg2.png'), linear-gradient(45deg, #18233f, #384155);
-  background-position: 0px 0px, 0px 0px, 0px 0px;
-  background-size: auto, 960px, auto;
+  height: auto;
+  margin-top: 0px;
 }
 
 .page-header.stories-header {
@@ -8898,6 +8917,11 @@ strong {
   margin-top: 6px;
 }
 
+.dash-h3 {
+  padding-top: 20px;
+  padding-left: 20px;
+}
+
 html.w-mod-js *[data-ix="pin-drop"] {
   opacity: 0;
   -webkit-transform: translate(0px, -100px);
@@ -9618,6 +9642,9 @@ html.w-mod-js *[data-ix="new-interaction-2"] {
   }
   .filter-block {
     top: 170px;
+  }
+  .dsi-button.create {
+    margin-bottom: 15px;
   }
   .dsi-button.top-filter {
     margin-top: 15px;
