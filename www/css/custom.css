@@ -482,3 +482,8 @@ div.error {
 .full-menu-link{
     text-align:left;
 }
+
+.cradp{
+    height:50px;
+    overflow: hidden;
+}

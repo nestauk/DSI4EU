@@ -6,92 +6,55 @@ require __DIR__ . '/header.php';
 /** @var $urlHandler \DSI\Service\URL */
 ?>
 
-    <style>
-        .animate.ng-enter,
-        .animate.ng-leave {
-            -webkit-transition: 100ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-            -moz-transition: 100ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-            -ms-transition: 100ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-            -o-transition: 100ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-            transition: 100ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-            position: relative;
-            display: block;
-            overflow: hidden;
-            text-overflow: clip;
-            white-space: nowrap;
-        }
-
-        .animate.ng-leave.animate.ng-leave-active,
-        .animate.ng-enter {
-            opacity: 0;
-            width: 0px;
-            height: 0px;
-        }
-
-        .animate.ng-enter.ng-enter-active,
-        .animate.ng-leave {
-            opacity: 1;
-            width: 370px;
-            height: 380px;
-        }
-
-        .filter-block a {
-            width: 140px;
-        }
-    </style>
 
     <div ng-controller="CaseStudiesController"
          data-jsonurl="<?php echo $urlHandler->caseStudies('json') ?>">
-        <div class="w-section page-header stories-header">
-            <div class="container-wide header">
-                <h1 class="page-h1 light"><?php _ehtml('Case studies') ?></h1>
-                <div class="filter-block">
-                    <div class="w-row">
-                        <div class="w-col w-col-9 w-col-stack">
-                            <?php /*
-                            <div class="w-row">
-                                <div class="w-col w-col-2">
-                                    <a class="w-button dsi-button top-filter" ng-click="searchCriteria = {}" href="#">
-                                        All</a>
-                                </div>
-                                <div class="w-col w-col-2">
-                                    <a class="w-button dsi-button top-filter" ng-click="searchCriteria.catg = 3"
-                                       href="#">
-                                        Open hardware</a>
-                                </div>
-                                <div class="w-col w-col-2">
-                                    <a class="w-button dsi-button top-filter" ng-click="searchCriteria.catg = 2"
-                                       href="#">
-                                        Open networks</a>
-                                </div>
-                                <div class="w-col w-col-2">
-                                    <a class="w-button dsi-button top-filter" ng-click="searchCriteria.catg = 1"
-                                       href="#">
-                                        Open data</a>
-                                </div>
-                                <div class="w-col w-col-2">
-                                    <a class="w-button dsi-button top-filter" ng-click="searchCriteria.catg = 1"
-                                       href="#">
-                                        Open knowledge</a>
-                                </div>
-                            </div>
-                            */ ?>
-                        </div>
-                        <div class="w-col w-col-3 w-col-stack w-clearfix">
-                            <?php if ($userCanManageCaseStudies) { ?>
-                                <a class="w-button dsi-button top-filter add-new-story"
-                                   href="<?php echo $urlHandler->addCaseStudy() ?>">
-                                    Add case study +</a>
-                            <?php } ?>
-                        </div>
-                    </div>
+
+        <div class="content-block">
+            <div class="intro-row w-row">
+                <div class="w-col w-col-8 w-col-stack">
+                    <h1 class="content-h1">Case studies</h1>
+                    <p class="intro">Case study intro text</p>
+                    <p>Case study sub text</p>
+                </div>
+                <div class="sidebar w-col w-col-4 w-col-stack">
+                    <?php if ($userCanManageCaseStudies) { ?>
+                        <h1 class="content-h1">Admin</h1>
+                        <a class="sidebar-link" href="<?php echo $urlHandler->addCaseStudy() ?>">
+                            <span class="green">-&nbsp;</span>Add new case study
+                        </a>
+                    <?php } ?>
                 </div>
             </div>
-        </div>
-
-        <div class="case-study-grid container-wide">
-            <div class="case-studies-row case-studies-row-grid w-row">
+            <div class="case-study-row-p w-row">
                 <?php foreach ($caseStudies AS $i => $caseStudy) { ?>
+                <div class="w-col w-col-4">
+                    <a class="case-study-ind w-inline-block" data-ix="scaleimage"
+                       href="<?php echo $urlHandler->caseStudy($caseStudy) ?>">
+                        <div class="case-study-img-container">
+                            <div class="_<?php echo ($i % 3) + 1 ?> case-study-img"
+                                 style="background-image: url('<?php echo \DSI\Entity\Image::CASE_STUDY_CARD_BG_URL . $caseStudy->getCardImage() ?>');"></div>
+                        </div>
+                        <h3 class="case-study-card-h3">
+                            <?php echo show_input($caseStudy->getTitle()) ?>
+                            <?php if ($userCanManageCaseStudies AND !$caseStudy->isPublished()) {
+                                echo ' <span style="color:red">(Unpublished)</span>';
+                            } ?>
+                        </h3>
+                        <p class="cradp">
+                            <?php echo show_input($caseStudy->getIntroCardText()) ?>
+                        </p>
+                        <div class="log-in-link read-more w-clearfix" data-ix="log-in-arrow">
+                            <div class="login-li menu-li readmore-li">Read more</div>
+                            <img class="login-arrow" src="images/ios7-arrow-thin-right.png">
+                        </div>
+                    </a>
+                </div>
+                <?php if ($i % 3 == 2) { ?>
+            </div>
+            <div class="case-study-row-p w-row">
+                <?php } ?>
+                <?php /*
                     <div class="case-study-col-<?php echo $i % 3 + 1 ?> w-col w-col-4">
                         <div class="onloadone" data-ix="fadeinuponload-<?php echo $i % 3 + 2 ?>">
                             <div class="case-study-card" data-ix="case-study-card-overlay"
@@ -128,6 +91,7 @@ require __DIR__ . '/header.php';
                     <?php if ($i % 3 == 2) { ?>
                         <div style="clear:both"></div>
                     <?php } ?>
+                    */ ?>
                 <?php } ?>
             </div>
         </div>
