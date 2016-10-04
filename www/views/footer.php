@@ -10,6 +10,110 @@ if (!isset($urlHandler))
 
 ?>
 </div>
+
+<div class="footer-black">
+    <div class="footer-row w-row">
+        <div class="w-col w-col-4">
+            <a class="w-inline-block" href="<?php echo $urlHandler->home() ?>">
+                <img class="footer-logo" src="<?php echo SITE_RELATIVE_PATH ?>/images/light.svg">
+            </a>
+        </div>
+        <div class="w-col w-col-2">
+            <h3 class="footer-h3">People</h3>
+            <ul class="w-list-unstyled">
+                <li class="footer-link">
+                    <a class="footer-link" href="#">Join DSI4EU</a>
+                </li>
+                <li class="footer-link">
+                    <a class="footer-link" href="<?php echo $urlHandler->termsOfUse() ?>">Terms of use</a>
+                </li>
+                <li class="footer-link">
+                    <a class="footer-link" href="<?php echo $urlHandler->privacyPolicy() ?>">Privacy policy</a>
+                </li>
+            </ul>
+        </div>
+        <div class="w-col w-col-2">
+            <h3 class="footer-h3">Projects</h3>
+            <ul class="w-list-unstyled">
+                <li class="footer-link">
+                    <a class="footer-link" href="<?php echo $urlHandler->projects() ?>">View projects</a>
+                </li>
+            </ul>
+        </div>
+        <div class="w-col w-col-2">
+            <h3 class="footer-h3">Organisations</h3>
+            <ul class="w-list-unstyled">
+                <li class="footer-link">
+                    <a class="footer-link" href="<?php echo $urlHandler->organisations() ?>">View organisations</a>
+                </li>
+            </ul>
+        </div>
+        <div class="w-col w-col-2">
+            <h3 class="footer-h3">Development</h3>
+            <ul class="w-list-unstyled">
+                <li class="footer-link">
+                    <a class="footer-link" href="<?php echo $urlHandler->updates() ?>">Updates</a>
+                </li>
+                <li class="footer-link">
+                    <a class="footer-link" href="<?php echo $urlHandler->feedback() ?>">Feedback</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-row-bottom w-row">
+        <div class="w-col w-col-8">
+            <div>
+                <div class="w-row">
+                    <div class="w-clearfix w-col w-col-1 w-col-medium-6 w-col-small-6 w-col-tiny-6">
+                        <img class="footer-eu" src="<?php echo SITE_RELATIVE_PATH ?>/images/5000100-mono.png">
+                    </div>
+                    <div class="w-col w-col-11 w-col-medium-6 w-col-small-6 w-col-tiny-6">
+                        <div class="footer-small-print">DSI4EU is supported by the European Union and funded under the
+                            Horizon 2020 Programme. Grant agreement no 688192.
+                        </div>
+                    </div>
+                </div>
+                <div class="w-row">
+                    <div class="w-clearfix w-col w-col-1 w-col-medium-6 w-col-small-6 w-col-tiny-6">
+                        <img class="cc footer-eu" src="<?php echo SITE_RELATIVE_PATH ?>/images/88x31.png">
+                    </div>
+                    <div class="w-col w-col-11 w-col-medium-6 w-col-small-6 w-col-tiny-6">
+                        <div class="footer-small-print">All our work is licensed under a&nbsp;&nbsp;Creative Commons
+                            Attribution-NonCommercial-ShareAlike 4.0 International License&nbsp;, unless it says
+                            otherwise.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="w-col w-col-4">
+            <div class="w-row">
+                <div class="footer-logo-col w-clearfix w-col w-col-4">
+                    <a class="footer-partner-link w-inline-block" href="http://nesta.org.uk" target="_blank">
+                        <img class="footer-partner-logo nesta"
+                             src="<?php echo SITE_RELATIVE_PATH ?>/images/nesta-6a9b5fe999e8323b379ccc0d8e70290f.png">
+                    </a>
+                </div>
+                <div class="footer-logo-col w-clearfix w-col w-col-4">
+                    <a class="footer-partner-link w-inline-block" href="http://waag.org" target="_blank">
+                        <img class="footer-partner-logo"
+                             src="<?php echo SITE_RELATIVE_PATH ?>/images/waag-f1d052f43133268eaf2e13090a0b4bf1.png">
+                    </a>
+                </div>
+                <div class="footer-logo-col w-clearfix w-col w-col-4">
+                    <a class="footer-partner-link w-inline-block" href="#" target="_blank">
+                        <img class="footer-partner-logo" src="<?php echo SITE_RELATIVE_PATH ?>/images/logo_SUPSI.png">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="centre footer-small-print">Nesta is a registered charity in England and Wales 1144091 and Scotland
+        SC042833. Our main address is 1 Plough Place, London, EC4A 1DE
+    </div>
+</div>
+
+<?php /*
 <div class="footer">
     <div class="container-wide">
         <div class="newsletter-block" data-ix="fadeinuponload-3">
@@ -50,7 +154,7 @@ if (!isset($urlHandler))
                     <li class="footer-link">
                         <a class="footer-link" href="#">Report abuse</a>
                     </li>
-                    */ ?>
+                    * / ?>
                     <?php if ($loggedInUser) { ?>
                         <li class="footer-link">
                             <a href="<?php echo $urlHandler->dashboard() ?>"
@@ -85,7 +189,7 @@ if (!isset($urlHandler))
                     <li class="footer-link">
                         <a class="footer-link" href="#">Report a&nbsp;project</a>
                     </li>
-                    */ ?>
+                    * / ?>
                     <li class="footer-link">
                         <a class="footer-link" href="<?php echo $urlHandler->projects() ?>">
                             <?php _ehtml('View projects') ?></a>
@@ -105,7 +209,7 @@ if (!isset($urlHandler))
                     <li class="footer-link">
                         <a class="footer-link" href="#">Report an organisation</a>
                     </li>
-                    */ ?>
+                    * / ?>
                     <li class="footer-link">
                         <a class="footer-link" href="<?php echo $urlHandler->organisations() ?>">
                             <?php _ehtml('View organisations') ?></a>
@@ -157,7 +261,6 @@ if (!isset($urlHandler))
         </div>
     </div>
 </div>
-
 
 <?php /*
 <div class="footer w-section">
@@ -245,6 +348,66 @@ if (!isset($urlHandler))
 </div>
  */ ?>
 
+<script
+    src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/SearchController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"
+    type="text/javascript"></script>
+<div class="search-block" ng-controller="SearchController">
+    <div class="close-search" data-ix="close-search-block">+</div>
+    <h1 class="search-h1">Search</h1>
+    <div class="w-form">
+        <form id="email-form" name="email-form" autocomplete="off">
+            <input class="main-search w-input" data-name="search" id="search" maxlength="256" name="search"
+                   autocomplete="off"
+                   ng-model="search.entry"
+                   ng-focus="search.focused = true"
+                   ng-blur="search.focused = false"
+                   placeholder="Search news, projects, organisations and case studies" type="text">
+            <a class="cancel-search" ng-click="search.entry = ''" data-ix="close-search-block" href="#">Cancel</a>
+        </form>
+    </div>
+    <div class="main-search-results w-row">
+        <div class="search-col w-col w-col-3">
+            <h2 class="full-menu-h2">News &amp; Blogs</h2>
+            <a ng-repeat="post in search.blogPosts" class="full-menu-link" href="{{post.url}}">
+                <span class="green">-</span>
+                {{post.name}}
+            </a>
+            <div ng-show="search.blogPosts.length == 0"><?php _ehtml('No blog posts found') ?></div>
+        </div>
+        <div class="search-col w-col w-col-3">
+            <h2 class="full-menu-h2"><?php _ehtml('Projects') ?></h2>
+            <a ng-repeat="project in search.projects" class="full-menu-link" href="{{project.url}}">
+                <span class="green">-</span>
+                {{project.name}}
+            </a>
+            <div ng-show="search.projects.length == 0"><?php _ehtml('No projects found') ?></div>
+        </div>
+        <div class="search-col w-col w-col-3">
+            <h2 class="full-menu-h2"><?php _ehtml('Organisations') ?></h2>
+            <a ng-repeat="organisation in search.organisations"
+               class="full-menu-link" href="{{organisation.url}}">
+                <span class="green">-</span>
+                {{organisation.name}}
+            </a>
+            <div ng-show="search.organisations.length == 0"><?php _ehtml('No organisations found') ?></div>
+        </div>
+        <div class="search-col w-col w-col-3">
+            <h2 class="full-menu-h2"><?php _ehtml('Case Studies') ?></h2>
+            <a ng-repeat="caseStudy in search.caseStudies" class="full-menu-link" href="{{caseStudy.url}}">
+                <span class="green">-</span> {{caseStudy.name}}
+            </a>
+            <div ng-show="search.caseStudies.length == 0"><?php _ehtml('No case studies found') ?></div>
+        </div>
+    </div>
+    <div class="signn">
+        <a class="large log-in-link search-results sign-up w-clearfix w-inline-block" data-ix="log-in-arrow"
+           href="<?php echo $urlHandler->search() ?>{{search.entry}}">
+            <div class="login-li menu-li">See all results</div>
+            <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
+        </a>
+    </div>
+</div>
+
 <div class="cookies" id="cookies">
     <div class="container-wide">
         <div class="w-row">
@@ -265,40 +428,6 @@ if (!isset($urlHandler))
 <!--[if lte IE 9]>
 <script src="<?php echo SITE_RELATIVE_PATH ?>/js/lib/placeholders/placeholders.min.js"></script>
 <![endif]-->
-<script>
-    $(function () {
-        // quick search regex
-        var qsRegex;
-        // init Isotope
-        var $grid = $('.grid').isotope({
-            itemSelector: '.element-item',
-            layoutMode: 'fitRows',
-            filter: function () {
-                return qsRegex ? $(this).text().match(qsRegex) : true;
-            }
-        });
-        // use value of search field to filter
-        var $quicksearch = $('.quicksearch').keyup(debounce(function () {
-            qsRegex = new RegExp($quicksearch.val(), 'gi');
-            $grid.isotope();
-        }, 200));
-    });
-    // debounce so filtering doesn't happen every millisecond
-    function debounce(fn, threshold) {
-        var timeout;
-        return function debounced() {
-            if (timeout) {
-                clearTimeout(timeout);
-            }
-            function delayed() {
-                fn();
-                timeout = null;
-            }
-
-            timeout = setTimeout(delayed, threshold || 100);
-        }
-    }
-</script>
 
 <script>
     // Create Project / Organisation Dropdown

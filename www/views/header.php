@@ -20,9 +20,7 @@ if (!isset($urlHandler))
 <head>
     <?php require __DIR__ . '/partialViews/head.php' ?>
 </head>
-<script src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/SearchController.js?<?php Sysctl::echoVersion() ?>"
-        type="text/javascript"></script>
-<body ng-app="DSIApp" ng-controller="SearchController" id="top">
+<body ng-app="DSIApp">
 
 <?php require(__DIR__ . '/partialViews/header.php') ?>
 
@@ -32,13 +30,14 @@ if (!isset($urlHandler))
     <?php require __DIR__ . '/partialViews/loginModal.php' ?>
 <?php } ?>
 
+<?php /*
 <?php if (!isset($hideSearch) OR $hideSearch !== true) { ?>
     <div class="search bg-blur">
         <div class="dark-bg-overlay"></div>
         <div class="search-container">
             <div class="w-row top-row-personal">
                 <div class="w-col w-col-5 w-col-small-5 w-clearfix" id="userMenu">
-                    <?php if (isset($loggedInUser)) { ?>
+                    <?php if (isset($loggedInUser) AND $loggedInUser) { ?>
                         <div class="profile-popover bg-blur">
                             <a href="<?php echo $urlHandler->myProfile() ?>" class="popover-link">
                                 <?php _ehtml('View profile') ?>
@@ -67,6 +66,7 @@ if (!isset($urlHandler))
                         </a>
                     <?php } ?>
                 </div>
+
                 <div class="w-col w-col-7 w-col-small-7">
                     <div class="w-form">
                         <form class="w-clearfix search-input" id="email-form">
@@ -85,7 +85,6 @@ if (!isset($urlHandler))
         </div>
     </div>
 <?php } ?>
+*/ ?>
 
 <div class="w-section body">
-
-<?php require(__DIR__ . '/partialViews/search-results.php'); ?>

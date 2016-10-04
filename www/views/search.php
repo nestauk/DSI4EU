@@ -10,25 +10,23 @@ if (!isset($urlHandler))
     $urlHandler = new \DSI\Service\URL();
 
 ?>
-<style>
-    p.nothingfound{
-        padding:0 20px;
-    }
-</style>
-    <div class="w-section page-header stories-header">
-        <div class="container-wide header">
-            <h1 class="page-h1 light">SEARCH RESULTS FOR: <?php echo show_input($term) ?></h1>
-        </div>
-    </div>
+    <style>
+        p.nothingfound {
+            padding: 0 20px;
+        }
+    </style>
 
-    <div class="container-wide archive">
-        <div class="w-row dashboard-widgets">
-            <div class="w-col w-col-3 w-col-stack">
+    <div class="container-wide search-results-list">
+        <div class="intro-title">
+            <h1 class="content-h1">SEARCH RESULTS FOR: <?php echo show_input($term) ?></h1>
+        </div>
+        <div class="dashboard-widgets w-row">
+            <div class="notification-col w-col w-col-3">
                 <div class="dashboard-widget">
-                    <h3 class="card-h3">Case Studies</h3>
+                    <h3 class="card-h3 search-h3">Case studies</h3>
                     <?php if ($caseStudies) { ?>
                         <?php foreach ($caseStudies AS $caseStudy) { ?>
-                            <a class="search-result-link full-page-result"
+                            <a class="full-page-result search-result-link"
                                href="<?php echo $urlHandler->caseStudy($caseStudy) ?>">
                                 <?php echo show_input($caseStudy->getTitle()) ?>
                             </a>
@@ -38,12 +36,12 @@ if (!isset($urlHandler))
                     <?php } ?>
                 </div>
             </div>
-            <div class="w-col w-col-3 w-col-stack">
+            <div class="w-col w-col-3">
                 <div class="dashboard-widget">
-                    <h3 class="card-h3">Blog posts</h3>
+                    <h3 class="card-h3 search-h3">Blogs</h3>
                     <?php if ($blogPosts) { ?>
                         <?php foreach ($blogPosts AS $post) { ?>
-                            <a class="search-result-link full-page-result"
+                            <a class="full-page-result search-result-link"
                                href="<?php echo $urlHandler->blogPost($post) ?>">
                                 <?php echo show_input($post->getTitle()) ?>
                             </a>
@@ -53,12 +51,12 @@ if (!isset($urlHandler))
                     <?php } ?>
                 </div>
             </div>
-            <div class="w-col w-col-3 w-col-stack">
+            <div class="w-col w-col-3">
                 <div class="dashboard-widget">
-                    <h3 class="card-h3">Projects</h3>
+                    <h3 class="card-h3 search-h3">Projects</h3>
                     <?php if ($projects) { ?>
                         <?php foreach ($projects AS $project) { ?>
-                            <a class="search-result-link full-page-result"
+                            <a class="full-page-result search-result-link"
                                href="<?php echo $urlHandler->project($project) ?>">
                                 <?php echo show_input($project->getName()) ?>
                             </a>
@@ -68,12 +66,12 @@ if (!isset($urlHandler))
                     <?php } ?>
                 </div>
             </div>
-            <div class="w-col w-col-3 w-col-stack">
+            <div class="w-col w-col-3">
                 <div class="dashboard-widget">
-                    <h3 class="card-h3">Organisations</h3>
+                    <h3 class="card-h3 search-h3">Organisations</h3>
                     <?php if ($organisations) { ?>
                         <?php foreach ($organisations AS $organisation) { ?>
-                            <a class="search-result-link full-page-result"
+                            <a class="full-page-result search-result-link"
                                href="<?php echo $urlHandler->organisation($organisation) ?>">
                                 <?php echo show_input($organisation->getName()) ?>
                             </a>

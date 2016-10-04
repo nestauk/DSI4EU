@@ -65,11 +65,11 @@ class Router
         } elseif ($this->pageURL === '/register.json') {
             $this->registerJson();
 
-        } elseif (preg_match('<^/' . $langHandler . 'login\.json$>', $this->pageURL, $matches)) {
-            $this->loginJson($matches);
-
         } elseif (preg_match('<^/' . $langHandler . 'login$>', $this->pageURL, $matches)) {
-            go_to($urlHandler->home());
+            $this->login($matches);
+
+        } elseif (preg_match('<^/' . $langHandler . 'login\.json$>', $this->pageURL, $matches)) {
+            $this->login($matches, 'json');
 
         } elseif (preg_match('<^/' . $langHandler . 'logout$>', $this->pageURL, $matches)) {
             $this->logout($matches);
@@ -251,16 +251,28 @@ class Router
             $this->robotsTxt();
 
         } elseif (preg_match('<^/' . $langHandler . 'explore-dsi$>', $this->pageURL, $matches)) {
-            $this->exploreDsi($matches);
+            $this->staticPage($matches, 'explore-dsi.php');
 
         } elseif (preg_match('<^/' . $langHandler . 'terms-of-use$>', $this->pageURL, $matches)) {
-            $this->termsOfUse($matches);
+            $this->staticPage($matches, 'terms-of-use.php');
 
         } elseif (preg_match('<^/' . $langHandler . 'privacy-policy$>', $this->pageURL, $matches)) {
-            $this->privacyPolicy($matches);
+            $this->staticPage($matches, 'privacy-policy.php');
 
         } elseif (preg_match('<^/' . $langHandler . 'updates$>', $this->pageURL, $matches)) {
-            $this->updates($matches);
+            $this->staticPage($matches, 'updates.php');
+
+        } elseif (preg_match('<^/' . $langHandler . 'about-the-project$>', $this->pageURL, $matches)) {
+            $this->staticPage($matches, 'about-the-project.php');
+
+        } elseif (preg_match('<^/' . $langHandler . 'partners$>', $this->pageURL, $matches)) {
+            $this->staticPage($matches, 'partners.php');
+
+        } elseif (preg_match('<^/' . $langHandler . 'open-data-research-and-resources$>', $this->pageURL, $matches)) {
+            $this->staticPage($matches, 'open-data-research-and-resources.php');
+
+        } elseif (preg_match('<^/' . $langHandler . 'contact-dsi$>', $this->pageURL, $matches)) {
+            $this->staticPage($matches, 'contact-dsi.php');
 
 // Sitemap
         } elseif (preg_match('<^/' . $langHandler . 'sitemap\.xml$>', $this->pageURL, $matches)) {
@@ -315,6 +327,15 @@ class Router
         return true;
     }
 
+    private function login($matches = [], $format = 'html')
+    {
+        $this->setLanguageFromUrl($matches);
+
+        $command = new \DSI\Controller\LoginController();
+        $command->responseFormat = $format;
+        $command->exec();
+    }
+
     private function homePage($matches = [])
     {
         $this->setLanguageFromUrl($matches);
@@ -357,15 +378,6 @@ class Router
     private function appLeaderBoard()
     {
         $command = new \DSI\Controller\AppLeaderBoard();
-        $command->exec();
-    }
-
-    private function loginJson($matches = [])
-    {
-        $this->setLanguageFromUrl($matches);
-
-        $command = new \DSI\Controller\LoginController();
-        $command->responseFormat = 'json';
         $command->exec();
     }
 
@@ -868,39 +880,12 @@ class Router
         $command->exec();
     }
 
-    private function exploreDsi($matches)
+    private function staticPage($matches, $view)
     {
         $this->setLanguageFromUrl($matches);
 
         $command = new \DSI\Controller\StaticHtmlController();
-        $command->view = 'explore-dsi.php';
-        $command->exec();
-    }
-
-    private function termsOfUse($matches)
-    {
-        $this->setLanguageFromUrl($matches);
-
-        $command = new \DSI\Controller\StaticHtmlController();
-        $command->view = 'terms-of-use.php';
-        $command->exec();
-    }
-
-    private function privacyPolicy($matches)
-    {
-        $this->setLanguageFromUrl($matches);
-
-        $command = new \DSI\Controller\StaticHtmlController();
-        $command->view = 'privacy-policy.php';
-        $command->exec();
-    }
-
-    private function updates($matches)
-    {
-        $this->setLanguageFromUrl($matches);
-
-        $command = new \DSI\Controller\StaticHtmlController();
-        $command->view = 'updates.php';
+        $command->view = $view;
         $command->exec();
     }
 

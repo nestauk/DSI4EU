@@ -8,8 +8,7 @@ use \DSI\Service\Sysctl;
 <title><?php echo isset($pageTitle) ? show_input($pageTitle) : 'Digitalsocial.eu' ?></title>
 <meta name="google-site-verification" content="al4Vt4vNA7eWC2OyIEa0C8vjDBFl5UZWZODih8wy3r4"/>
 <meta property="og:title" content="<?php echo isset($pageTitle) ? show_input($pageTitle) : 'Digitalsocial.eu' ?>">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="generator" content="Webflow">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
 
 <?php /** Select2 */ ?>
 <link href="<?php echo SITE_RELATIVE_PATH ?>/lib/select2/select2.min.css" rel="stylesheet"/>
@@ -38,6 +37,8 @@ use \DSI\Service\Sysctl;
 
 <link rel="shortcut icon" type="image/x-icon" href="<?php echo SITE_RELATIVE_PATH ?>/images/ico-small.png">
 <link rel="apple-touch-icon" href="<?php echo SITE_RELATIVE_PATH ?>/images/ico-large.png">
+<link href="<?php echo SITE_RELATIVE_PATH ?>/images/ico-small.png" rel="shortcut icon" type="image/x-icon">
+<link href="<?php echo SITE_RELATIVE_PATH ?>/images/ico-large.png" rel="apple-touch-icon">
 
 <script src="<?php echo SITE_RELATIVE_PATH ?>/js/lib/isotope/isotope.pkgd.min.js"></script>
 
@@ -62,22 +63,19 @@ use \DSI\Service\Sysctl;
 </script>
 
 <style>
+    .w-nav-button.w--open {
+        background-color: transparent;
+        color: #000;
+    }
+
     .bg-blur {
-        -webkit-backdrop-filter: saturate(180%) blur(5px);
-        backdrop-filter: saturate(180%) blur(5px);
+        -webkit-backdrop-filter: saturate(180%) blur(20px);
+        backdrop-filter: saturate(180%) blur(20px);
     }
 
     .blur-20 {
         -webkit-backdrop-filter: saturate(180%) blur(20px);
         backdrop-filter: saturate(180%) blur(20px);
-    }
-
-    .el-blur {
-        -webkit-filter: blur(25px);
-        -moz-filter: blur(25px);
-        -o-filter: blur(25px);
-        -ms-filter: blur(25px);
-        filter: blur(25px);
     }
 
     .login-field.error {

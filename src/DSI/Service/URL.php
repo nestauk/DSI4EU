@@ -178,6 +178,26 @@ class URL
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'feedback';
     }
 
+    public function aboutTheProject()
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'about-the-project';
+    }
+
+    public function partners()
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'partners';
+    }
+
+    public function openDataResearchAndResources()
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'open-data-research-and-resources';
+    }
+
+    public function contactDSI()
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'contact-dsi';
+    }
+
     public function updates()
     {
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'updates';

@@ -36,7 +36,7 @@ class LoginController
                     echo json_encode([
                         'response' => 'ok'
                     ]);
-                    die();
+                    return;
                 } else {
                     go_to($urlHandler->myProfile());
                 }
@@ -46,13 +46,13 @@ class LoginController
                         'response' => 'error',
                         'errors' => $e->getErrors(),
                     ]);
-                    die();
+                    return;
                 } else {
                     $errors = $e->getErrors();
                 }
             }
         }
 
-        // require __DIR__ . '/../../../www/login.php';
+        require __DIR__ . '/../../../www/views/login.php';
     }
 }
