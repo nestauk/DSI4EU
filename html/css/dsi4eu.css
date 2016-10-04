@@ -2188,7 +2188,7 @@ strong {
   width: 480px;
   margin: 30px auto 0px;
   padding-left: 0px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: Montserrat, sans-serif;
   font-size: 28px;
   font-weight: 300;
   text-align: center;
@@ -2228,7 +2228,8 @@ strong {
   margin-left: auto;
   border-style: none;
   background-color: #f5f5f5;
-  font-family: 'Open Sans', sans-serif;
+  font-family: Montserrat, sans-serif;
+  font-size: 16px;
   text-align: left;
 }
 
@@ -2253,15 +2254,17 @@ strong {
 }
 
 .feedback-form-submit {
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   float: right;
-  border-radius: 3px;
+  border-radius: 25px;
   background-color: #e0e0e0;
   -webkit-transition: all 200ms ease;
   transition: all 200ms ease;
-  font-family: 'Open Sans', sans-serif;
-  color: #18233f;
+  font-family: Montserrat, sans-serif;
+  color: #000;
+  font-size: 16px;
+  text-transform: uppercase;
 }
 
 .feedback-form-submit:hover {
