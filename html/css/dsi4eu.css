@@ -9077,6 +9077,10 @@ strong {
   font-size: 16px;
 }
 
+.partner-logo-colour {
+  width: 170px;
+}
+
 html.w-mod-js *[data-ix="pin-drop"] {
   opacity: 0;
   -webkit-transform: translate(0px, -100px);
@@ -10009,6 +10013,10 @@ html.w-mod-js *[data-ix="new-interaction-2"] {
   }
   .main-menu-profile-block {
     position: relative;
+  }
+  .partner-logo-colour {
+    margin-bottom: 35px;
+    margin-left: -4px;
   }
 }
 
