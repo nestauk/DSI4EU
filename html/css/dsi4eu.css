@@ -9527,6 +9527,11 @@ html.w-mod-js *[data-ix="new-interaction-2"] {
   width: 0px;
 }
 
+html.w-mod-js *[data-ix="hero-header-fold-down"] {
+  opacity: 1;
+  height: 91px;
+}
+
 @media (max-width: 991px) {
   .brand {
     margin-left: 10px;
@@ -9818,6 +9823,28 @@ html.w-mod-js *[data-ix="new-interaction-2"] {
   .filter-col-left {
     padding-left: 10px;
   }
+  .log-in-link-note {
+    left: 0px;
+    right: 0px;
+    bottom: 6px;
+    display: block;
+    width: 114px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  .log-in-link-note.second {
+    left: 0px;
+    right: 0px;
+    bottom: 32px;
+    display: block;
+    width: 197px;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+  }
+  .login-form-nu {
+    height: 300px;
+  }
 }
 
 @media (max-width: 767px) {
@@ -10042,6 +10069,9 @@ html.w-mod-js *[data-ix="new-interaction-2"] {
   .card-orgs {
     text-align: left;
   }
+  .ab-fab.log-in-section {
+    margin-top: 50px;
+  }
   .massive-hero-h2 {
     font-size: 22px;
     line-height: 30px;
@@ -10163,6 +10193,9 @@ html.w-mod-js *[data-ix="new-interaction-2"] {
   }
   .main-menu-profile-block {
     position: relative;
+  }
+  .profile-col {
+    font-size: 16px;
   }
   .partner-logo-colour {
     margin-bottom: 35px;
@@ -10510,6 +10543,14 @@ html.w-mod-js *[data-ix="new-interaction-2"] {
   .page-info-block {
     padding: 10px;
   }
+  .ab-fab.log-in-section {
+    width: auto;
+    max-width: auto;
+    min-width: 100%;
+    margin-top: 50px;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
   .footer-small-print.centre {
     padding-right: 10px;
     padding-left: 10px;
@@ -10657,11 +10698,35 @@ html.w-mod-js *[data-ix="new-interaction-2"] {
     width: auto;
   }
   .profile-col {
+    margin-bottom: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     padding-left: 20px;
+    font-family: Montserrat, sans-serif;
     text-align: left;
+  }
+  .form-container {
+    width: auto;
+    min-height: auto;
+    min-width: 100%;
+  }
+  .log-in-form-field {
+    display: block;
+    width: auto;
+    max-width: auto;
+    min-width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  .login-form-nu {
+    max-width: auto;
+    min-width: 100%;
   }
   .profile-job-title {
     margin-left: 0px;
+  }
+  .form-wrapper {
+    min-width: 100%;
   }
 }
 
