@@ -6645,6 +6645,10 @@ strong {
   padding-left: 35px;
 }
 
+.case-study-intro.org {
+  min-height: auto;
+}
+
 .case-study-intro-block {
   position: relative;
   height: 100%;
@@ -7993,7 +7997,7 @@ strong {
   margin-bottom: 0px;
   padding-bottom: 130px;
   padding-left: 35px;
-  color: #fff;
+  color: #000;
 }
 
 .home-hero-h3.sub-text {
@@ -8004,6 +8008,11 @@ strong {
   max-width: 70%;
   padding-bottom: 0px;
   text-shadow: none;
+}
+
+.home-hero-h3.org {
+  padding-bottom: 0px;
+  padding-left: 10px;
 }
 
 .home-hero-img {
@@ -8500,6 +8509,10 @@ strong {
   font-weight: 400;
 }
 
+.intro.org {
+  margin-top: 0px;
+}
+
 .bold-p {
   margin-top: 30px;
 }
@@ -8836,6 +8849,11 @@ strong {
   background-color: #000;
 }
 
+.header-content.org {
+  min-height: auto;
+  background-color: #fff;
+}
+
 .case-study-h1 {
   position: relative;
   max-width: 50%;
@@ -8845,6 +8863,11 @@ strong {
   color: #fff;
   font-size: 88px;
   line-height: 82px;
+}
+
+.case-study-h1.org {
+  padding-left: 0px;
+  color: #000;
 }
 
 .page-content {
@@ -8870,6 +8893,10 @@ strong {
   background-size: auto, cover;
   -webkit-filter: blur(30px);
   filter: blur(30px);
+}
+
+.case-study-img-bg-blur.org {
+  background-image: none;
 }
 
 .content-left {
@@ -10040,6 +10067,9 @@ html.w-mod-js *[data-ix="new-interaction-2"] {
     padding-right: 35px;
     font-size: 35px;
     line-height: 42px;
+  }
+  .case-study-h1.org {
+    padding-left: 10px;
   }
   .side-bar-h3 {
     margin-top: 0px;
