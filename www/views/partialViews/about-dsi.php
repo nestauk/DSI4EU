@@ -9,7 +9,7 @@ use \DSI\Service\Sysctl;
         <span class="green">-&nbsp;</span>About the project
     </a>
     <a class="sidebar-link" href="<?php echo $urlHandler->partners() ?>">
-        <span class="green">-&nbsp;</span>Partners
+        <span class="green">-&nbsp;</span>Project Partners
     </a>
     <a class="sidebar-link" href="<?php echo $urlHandler->openDataResearchAndResources() ?>">
         <span class="green">-&nbsp;</span>Open data, research &amp; resources

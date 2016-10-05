@@ -15,6 +15,7 @@ class CaseStudy
     private $title,
         $introCardText,
         $introPageText,
+        $infoText,
         $mainText,
         $projectStartDate,
         $projectEndDate,
@@ -29,8 +30,11 @@ class CaseStudy
     private $isPublished,
         $isFeaturedOnSlider; // not used anymore
 
-    /** @var CountryRegion */
-    private $region;
+    /** @var Project */
+    private $project;
+
+    /** @var Organisation */
+    private $organisation;
 
     /**
      * @return int
@@ -97,6 +101,22 @@ class CaseStudy
     public function setIntroCardText($introCardText)
     {
         $this->introCardText = (string)$introCardText;
+    }
+
+    /**
+     * @return string
+     */
+    public function getInfoText(): string
+    {
+        return (string)$this->infoText;
+    }
+
+    /**
+     * @param string $infoText
+     */
+    public function setInfoText(string $infoText)
+    {
+        $this->infoText = (string)$infoText;
     }
 
     /**
@@ -286,59 +306,6 @@ class CaseStudy
     }
 
     /**
-     * @return int
-     */
-    public function getCountryId()
-    {
-        return $this->region ? $this->getRegion()->getCountry()->getId() : 0;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCountryName()
-    {
-        return $this->region ? $this->getRegion()->getCountry()->getName() : '';
-    }
-
-    /**
-     * @return CountryRegion
-     */
-    public function getRegion()
-    {
-        return $this->region;
-    }
-
-    /**
-     * @return string
-     */
-    public function getRegionName()
-    {
-        return $this->region ? $this->region->getName() : '';
-    }
-
-    /**
-     * @return int
-     */
-    public function getRegionID()
-    {
-        return $this->region ? $this->region->getId() : 0;
-    }
-
-    /**
-     * @param CountryRegion $region
-     */
-    public function setRegion(CountryRegion $region)
-    {
-        $this->region = $region;
-    }
-
-    public function unsetRegion()
-    {
-        $this->region = null;
-    }
-
-    /**
      * @return boolean
      */
     public function isFeaturedOnSlider(): bool
@@ -369,23 +336,62 @@ class CaseStudy
     {
         $this->positionOnFirstPage = (int)$positionOnFirstPage;
     }
+
+    /**
+     * @return Project
+     */
+    public function getProject()
+    {
+        return $this->project;
+    }
+
+    /**
+     * @return int
+     */
+    public function getProjectID()
+    {
+        return $this->project ? $this->project->getId() : 0;
+    }
+
+    /**
+     * @param Project $project
+     */
+    public function setProject(Project $project)
+    {
+        $this->project = $project;
+    }
+
+    public function unsetProject()
+    {
+        $this->project = null;
+    }
+
+    /**
+     * @return Organisation
+     */
+    public function getOrganisation()
+    {
+        return $this->organisation;
+    }
+
+    /**
+     * @return int
+     */
+    public function getOrganisationID()
+    {
+        return $this->organisation ? $this->organisation->getId() : 0;
+    }
+
+    /**
+     * @param Organisation $organisation
+     */
+    public function setOrganisation(Organisation $organisation)
+    {
+        $this->organisation = $organisation;
+    }
+
+    public function unsetOrganisation()
+    {
+        $this->organisation = null;
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

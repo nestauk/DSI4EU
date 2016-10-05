@@ -1,8 +1,6 @@
 <?php
 
 use \DSI\Entity\CaseStudy;
-use \DSI\Repository\CountryRepository;
-use \DSI\Repository\CountryRegionRepository;
 
 require_once __DIR__ . '/../../../config.php';
 
@@ -11,24 +9,13 @@ class CaseStudyTest extends \PHPUnit_Framework_TestCase
     /** @var CaseStudy */
     private $caseStudy;
 
-    /** @var CountryRepository */
-    private $countryRepo;
-
-    /** @var  CountryRegionRepository */
-    private $regionRepo;
-
     public function setUp()
     {
         $this->caseStudy = new CaseStudy();
-
-        $this->countryRepo = new CountryRepository();
-        $this->regionRepo = new CountryRegionRepository();
     }
 
     public function tearDown()
     {
-        $this->countryRepo->clearAll();
-        $this->regionRepo->clearAll();
     }
 
     /** @test */
@@ -219,28 +206,5 @@ class CaseStudyTest extends \PHPUnit_Framework_TestCase
             $this->caseStudy->setPositionOnFirstPage($i);
             $this->assertEquals($i, $this->caseStudy->getPositionOnFirstPage());
         }
-    }
-
-    /** @test */
-    public function settingRegion_returnsRegion()
-    {
-        $country = new \DSI\Entity\Country();
-        $country->setName($countryName = 'Romania');
-        $this->countryRepo->insert($country);
-
-        $region = new \DSI\Entity\CountryRegion();
-        $region->setName($regionName = 'Iasi');
-        $region->setCountry($country);
-        $this->regionRepo->insert($region);
-
-        $this->caseStudy->setRegion($region);
-
-        $this->assertEquals($country->getId(), $this->caseStudy->getCountryId());
-        $this->assertEquals($country->getName(), $this->caseStudy->getCountryName());
-        $this->assertEquals($region->getName(), $this->caseStudy->getRegionName());
-
-        $this->caseStudy->unsetRegion();
-        $this->assertEquals(0, $this->caseStudy->getCountryId());
-        $this->assertEquals(0, $this->caseStudy->getRegionID());
     }
 }

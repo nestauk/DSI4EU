@@ -5,8 +5,12 @@ namespace DSI\Controller;
 use DSI\AccessDenied;
 use DSI\Entity\Image;
 use DSI\Entity\CaseStudy;
+use DSI\Entity\Organisation;
+use DSI\Entity\Project;
 use DSI\Entity\User;
 use DSI\Repository\CaseStudyRepository;
+use DSI\Repository\OrganisationRepositoryInAPC;
+use DSI\Repository\ProjectRepositoryInAPC;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\URL;
@@ -42,22 +46,18 @@ class CaseStudyEditController
                     $editCaseStudy->data()->title = $_POST['title'] ?? '';
                     $editCaseStudy->data()->introCardText = $_POST['introCardText'] ?? '';
                     $editCaseStudy->data()->introPageText = $_POST['introPageText'] ?? '';
+                    $editCaseStudy->data()->infoText = $_POST['infoText'] ?? '';
                     $editCaseStudy->data()->mainText = $_POST['mainText'] ?? '';
                     $editCaseStudy->data()->projectStartDate = $_POST['projectStartDate'] ?? '';
                     $editCaseStudy->data()->projectEndDate = $_POST['projectEndDate'] ?? '';
                     $editCaseStudy->data()->url = $_POST['url'] ?? '';
                     $editCaseStudy->data()->buttonLabel = $_POST['buttonLabel'] ?? '';
                     $editCaseStudy->data()->cardColour = $_POST['cardColour'] ?? '';
-                    $editCaseStudy->data()->isPublished = $_POST['isPublished'] ?? false;
-                    $editCaseStudy->data()->positionOnHomePage = $_POST['positionOnHomePage'] ?? false;
-
-                    $editCaseStudy->data()->logoImage = $_POST['logo'] ?? '';
-                    $editCaseStudy->data()->cardBgImage = $_POST['cardImage'] ?? '';
-                    $editCaseStudy->data()->headerImage = $_POST['headerImage'] ?? '';
-
-                    $editCaseStudy->data()->countryID = $_POST['countryID'] ?? '';
-                    $editCaseStudy->data()->region = $_POST['region'] ?? '';
-
+                    $editCaseStudy->data()->isPublished = (bool)$_POST['isPublished'] ?? false;
+                    $editCaseStudy->data()->positionOnHomePage = (int)$_POST['positionOnHomePage'] ?? 0;
+                    $editCaseStudy->data()->cardBgImage = (string)$_POST['cardImage'] ?? '';
+                    $editCaseStudy->data()->projectID = (int)$_POST['projectID'] ?? 0;
+                    $editCaseStudy->data()->organisationID = (int)$_POST['organisationID'] ?? 0;
                     $editCaseStudy->exec();
 
                     echo json_encode([
@@ -81,6 +81,7 @@ class CaseStudyEditController
                 'title' => $caseStudy->getTitle(),
                 'introCardText' => $caseStudy->getIntroCardText(),
                 'introPageText' => $caseStudy->getIntroPageText(),
+                'infoText' => $caseStudy->getInfoText(),
                 'mainText' => $caseStudy->getMainText(),
                 'projectStartDate' => $caseStudy->getProjectStartDate(),
                 'projectEndDate' => $caseStudy->getProjectEndDate(),
@@ -96,9 +97,20 @@ class CaseStudyEditController
                 'isPublished' => $caseStudy->isPublished(),
                 'isFeaturedOnSlider' => $caseStudy->isFeaturedOnSlider(),
                 'positionOnHomePage' => $caseStudy->getPositionOnFirstPage(),
-                'countryID' => $caseStudy->getCountryId(),
-                'regionID' => $caseStudy->getRegionID(),
-                'region' => $caseStudy->getRegionName(),
+                'projectID' => (string)$caseStudy->getProjectID(),
+                'organisationID' => (string)$caseStudy->getOrganisationID(),
+                'projects' => array_map(function (Project $project) {
+                    return [
+                        'id' => $project->getId(),
+                        'name' => $project->getName(),
+                    ];
+                }, (new ProjectRepositoryInAPC())->getAll()),
+                'organisations' => array_map(function (Organisation $organisation) {
+                    return [
+                        'id' => $organisation->getId(),
+                        'name' => $organisation->getName(),
+                    ];
+                }, (new OrganisationRepositoryInAPC())->getAll()),
             ]);
             return;
 

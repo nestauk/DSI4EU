@@ -14,6 +14,7 @@ class CaseStudyRepository
         $insert[] = "`title` = '" . addslashes($caseStudy->getTitle()) . "'";
         $insert[] = "`introCardText` = '" . addslashes($caseStudy->getIntroCardText()) . "'";
         $insert[] = "`introPageText` = '" . addslashes($caseStudy->getIntroPageText()) . "'";
+        $insert[] = "`infoText` = '" . addslashes($caseStudy->getInfoText()) . "'";
         $insert[] = "`mainText` = '" . addslashes($caseStudy->getMainText()) . "'";
         $insert[] = "`projectStartDate` = '" . addslashes($caseStudy->getProjectStartDate()) . "'";
         $insert[] = "`projectEndDate` = '" . addslashes($caseStudy->getProjectEndDate()) . "'";
@@ -26,7 +27,8 @@ class CaseStudyRepository
         $insert[] = "`isPublished` = '" . addslashes($caseStudy->isPublished()) . "'";
         $insert[] = "`isFeaturedOnSlider` = '" . addslashes($caseStudy->isFeaturedOnSlider()) . "'";
         $insert[] = "`isFeaturedOnHomePage` = '" . ((int)$caseStudy->getPositionOnFirstPage()) . "'";
-        $insert[] = "`regionID` = '" . addslashes($caseStudy->getRegionID()) . "'";
+        $insert[] = "`projectID` = '" . ((int)$caseStudy->getProjectID()) . "'";
+        $insert[] = "`organisationID` = '" . ((int)$caseStudy->getOrganisationID()) . "'";
 
         $query = new SQL("INSERT INTO `case-studies` SET " . implode(', ', $insert) . "");
         $query->query();
@@ -45,6 +47,7 @@ class CaseStudyRepository
         $insert[] = "`title` = '" . addslashes($caseStudy->getTitle()) . "'";
         $insert[] = "`introCardText` = '" . addslashes($caseStudy->getIntroCardText()) . "'";
         $insert[] = "`introPageText` = '" . addslashes($caseStudy->getIntroPageText()) . "'";
+        $insert[] = "`infoText` = '" . addslashes($caseStudy->getInfoText()) . "'";
         $insert[] = "`mainText` = '" . addslashes($caseStudy->getMainText()) . "'";
         $insert[] = "`projectStartDate` = '" . addslashes($caseStudy->getProjectStartDate()) . "'";
         $insert[] = "`projectEndDate` = '" . addslashes($caseStudy->getProjectEndDate()) . "'";
@@ -57,7 +60,8 @@ class CaseStudyRepository
         $insert[] = "`isPublished` = '" . addslashes($caseStudy->isPublished()) . "'";
         $insert[] = "`isFeaturedOnSlider` = '" . addslashes($caseStudy->isFeaturedOnSlider()) . "'";
         $insert[] = "`isFeaturedOnHomePage` = '" . ((int)$caseStudy->getPositionOnFirstPage()) . "'";
-        $insert[] = "`regionID` = '" . addslashes($caseStudy->getRegionID()) . "'";
+        $insert[] = "`projectID` = '" . ((int)$caseStudy->getProjectID()) . "'";
+        $insert[] = "`organisationID` = '" . ((int)$caseStudy->getOrganisationID()) . "'";
 
         $query = new SQL("UPDATE `case-studies` SET " . implode(', ', $insert) . " WHERE `id` = '{$caseStudy->getId()}'");
 
@@ -98,6 +102,7 @@ class CaseStudyRepository
         $caseStudy->setTitle($caseStudyData['title']);
         $caseStudy->setIntroCardText($caseStudyData['introCardText']);
         $caseStudy->setIntroPageText($caseStudyData['introPageText']);
+        $caseStudy->setInfoText($caseStudyData['infoText']);
         $caseStudy->setMainText($caseStudyData['mainText']);
         $caseStudy->setProjectStartDate($caseStudyData['projectStartDate']);
         $caseStudy->setProjectEndDate($caseStudyData['projectEndDate']);
@@ -110,11 +115,10 @@ class CaseStudyRepository
         $caseStudy->setIsPublished($caseStudyData['isPublished']);
         $caseStudy->setIsFeaturedOnSlider($caseStudyData['isFeaturedOnSlider']);
         $caseStudy->setPositionOnFirstPage($caseStudyData['isFeaturedOnHomePage']);
-        if ($caseStudyData['regionID']) {
-            $caseStudy->setRegion(
-                (new CountryRegionRepository())->getById($caseStudyData['regionID'])
-            );
-        }
+        if ($caseStudyData['projectID'])
+            $caseStudy->setProject((new ProjectRepositoryInAPC())->getById($caseStudyData['projectID']));
+        if ($caseStudyData['organisationID'])
+            $caseStudy->setOrganisation((new OrganisationRepositoryInAPC())->getById($caseStudyData['organisationID']));
 
         return $caseStudy;
     }
@@ -191,13 +195,13 @@ class CaseStudyRepository
         $caseStudies = [];
         $query = new SQL("SELECT 
             id, title
-          , introCardText, introPageText, mainText
+          , introCardText, introPageText, infoText, mainText
           , projectStartDate, projectEndDate
           , url, buttonLabel
           , logo, cardImage, headerImage
           , cardColour
           , isPublished, isFeaturedOnSlider, isFeaturedOnHomePage
-          , regionID
+          , projectID, organisationID
           FROM `case-studies`
           WHERE " . implode(' AND ', $where) . "
           ORDER BY `id` DESC

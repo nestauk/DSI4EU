@@ -488,3 +488,12 @@ div.error {
     height:50px;
     overflow: hidden;
 }
+
+.intro p{
+    margin-top: inherit;
+    margin-bottom: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    font-weight: inherit;
+}

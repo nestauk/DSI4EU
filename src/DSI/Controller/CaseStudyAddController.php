@@ -3,6 +3,8 @@
 namespace DSI\Controller;
 
 use DSI\Entity\User;
+use DSI\Repository\OrganisationRepositoryInAPC;
+use DSI\Repository\ProjectRepositoryInAPC;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\URL;
@@ -26,6 +28,7 @@ class CaseStudyAddController
                 $createCaseStudy->data()->title = $_POST['title'] ?? '';
                 $createCaseStudy->data()->introCardText = $_POST['introCardText'] ?? '';
                 $createCaseStudy->data()->introPageText = $_POST['introPageText'] ?? '';
+                $createCaseStudy->data()->infoText = $_POST['infoText'] ?? '';
                 $createCaseStudy->data()->mainText = $_POST['mainText'] ?? '';
                 $createCaseStudy->data()->projectStartDate = $_POST['projectStartDate'] ?? '';
                 $createCaseStudy->data()->projectEndDate = $_POST['projectEndDate'] ?? '';
@@ -34,14 +37,9 @@ class CaseStudyAddController
                 $createCaseStudy->data()->cardColour = $_POST['cardColour'] ?? '';
                 $createCaseStudy->data()->isPublished = $_POST['isPublished'] ?? '';
                 $createCaseStudy->data()->positionOnHomePage = $_POST['positionOnHomePage'] ?? false;
-
-                $createCaseStudy->data()->logoImage = $_POST['logo'] ?? '';
                 $createCaseStudy->data()->cardBgImage = $_POST['cardImage'] ?? '';
-                $createCaseStudy->data()->headerImage = $_POST['headerImage'] ?? '';
-
-                $createCaseStudy->data()->countryID = $_POST['countryID'] ?? '';
-                $createCaseStudy->data()->region = $_POST['region'] ?? '';
-
+                $createCaseStudy->data()->projectID = (int)($_POST['projectID'] ?? 0);
+                $createCaseStudy->data()->organisationID = (int)($_POST['organisationID'] ?? 0);
                 $createCaseStudy->exec();
                 $caseStudy = $createCaseStudy->getCaseStudy();
 
@@ -59,6 +57,8 @@ class CaseStudyAddController
         }
 
         $angularModules['fileUpload'] = true;
+        $projects = (new ProjectRepositoryInAPC())->getAll();
+        $organisations = (new OrganisationRepositoryInAPC())->getAll();
         require(__DIR__ . '/../../../www/views/case-study-add.php');
     }
 

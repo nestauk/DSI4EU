@@ -9,6 +9,8 @@ use DSI\Entity\Image;
 use DSI\NotFound;
 use DSI\Repository\CaseStudyRepository;
 use DSI\Repository\CountryRegionRepository;
+use DSI\Repository\OrganisationRepositoryInAPC;
+use DSI\Repository\ProjectRepositoryInAPC;
 use DSI\Service\ErrorHandler;
 use DSI\UseCase\CreateCountryRegion;
 
@@ -43,7 +45,6 @@ class CaseStudyCreate
     public function exec()
     {
         $this->assertTitleHasBeenSent();
-        $this->getRegion();
         $this->unsetSamePositionOnFirstPage();
         $this->createCaseStudy();
         $this->saveImages();
@@ -91,6 +92,7 @@ class CaseStudyCreate
         $caseStudy->setTitle((string)$this->data()->title);
         $caseStudy->setIntroCardText((string)$this->data()->introCardText);
         $caseStudy->setIntroPageText((string)$this->data()->introPageText);
+        $caseStudy->setInfoText((string)$this->data()->infoText);
         $caseStudy->setMainText((string)$this->data()->mainText);
         $caseStudy->setProjectStartDate((string)$this->data()->projectStartDate);
         $caseStudy->setProjectEndDate((string)$this->data()->projectEndDate);
@@ -100,8 +102,10 @@ class CaseStudyCreate
         $caseStudy->setIsPublished((bool)$this->data()->isPublished);
         $caseStudy->setIsFeaturedOnSlider((bool)$this->data()->isFeaturedOnSlider);
         $caseStudy->setPositionOnFirstPage((int)$this->data()->positionOnHomePage);
-        if ($this->countryRegion)
-            $caseStudy->setRegion($this->countryRegion);
+        if($this->data()->projectID)
+            $caseStudy->setProject( (new ProjectRepositoryInAPC())->getById($this->data()->projectID) );
+        if($this->data()->organisationID)
+            $caseStudy->setOrganisation( (new OrganisationRepositoryInAPC())->getById($this->data()->organisationID) );
 
         $this->caseStudyRepo->insert($caseStudy);
         $this->caseStudy = $caseStudy;
@@ -157,32 +161,10 @@ class CaseStudyCreate
 
     private function saveImages()
     {
-        $this->caseStudy->setLogo(
-            $this->saveImage($this->data()->logoImage, Image::CASE_STUDY_LOGO)
-        );
         $this->caseStudy->setCardImage(
             $this->saveImage($this->data()->cardBgImage, Image::CASE_STUDY_CARD_BG)
         );
-        $this->caseStudy->setHeaderImage(
-            $this->saveImage($this->data()->headerImage, Image::CASE_STUDY_HEADER)
-        );
         $this->caseStudyRepo->save($this->caseStudy);
-    }
-
-    private function getRegion()
-    {
-        if ($this->data()->countryID != 0) {
-            if ($this->countryRegionRepo->nameExists($this->data()->countryID, $this->data()->region)) {
-                $countryRegion = $this->countryRegionRepo->getByName($this->data()->countryID, $this->data()->region);
-            } else {
-                $createCountryRegionCmd = new CreateCountryRegion();
-                $createCountryRegionCmd->data()->countryID = $this->data()->countryID;
-                $createCountryRegionCmd->data()->name = $this->data()->region;
-                $createCountryRegionCmd->exec();
-                $countryRegion = $createCountryRegionCmd->getCountryRegion();
-            }
-            $this->countryRegion = $countryRegion;
-        }
     }
 }
 
@@ -192,6 +174,7 @@ class CaseStudyCreate_Data
     public $title,
         $introCardText,
         $introPageText,
+        $infoText,
         $mainText,
         $projectStartDate,
         $projectEndDate,
@@ -212,6 +195,7 @@ class CaseStudyCreate_Data
     /** @var int */
     public $countryID;
 
-    /** @var string */
-    public $region;
+    /** @var int */
+    public $projectID,
+        $organisationID;
 }

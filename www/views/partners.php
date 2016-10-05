@@ -7,7 +7,7 @@
                 <p class="intro">DSI4EU is a project delivered by:</p>
                 <div class="partner-block w-row">
                     <div class="w-col w-col-3">
-                        <img src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg">
+                        <img class="partner-logo-colour" src="images/nesta.png">
                     </div>
                     <div class="w-col w-col-9">
                         <p><strong>Nesta</strong> is an innovation charity with a mission to help people and
@@ -26,7 +26,7 @@
                 </div>
                 <div class="partner-block w-row">
                     <div class="w-col w-col-3">
-                        <img src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg">
+                        <img class="partner-logo-colour" src="images/waag.png">
                     </div>
                     <div class="w-col w-col-9">
                         <p><strong>Waag Society</strong> — institute for art, science and technology — is a pioneer in
@@ -46,7 +46,7 @@
                 </div>
                 <div class="partner-block w-row">
                     <div class="w-col w-col-3">
-                        <img src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg">
+                        <img class="partner-logo-colour" src="images/supsi.png">
                     </div>
                     <div class="w-col w-col-9">
                         <p>The Laboratory of visual culture (LCV) is the design research unit of SUPSI University of

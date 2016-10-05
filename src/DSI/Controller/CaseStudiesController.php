@@ -36,7 +36,6 @@ class CaseStudiesController
                     'introCardText' => $caseStudy->getIntroCardText(),
                     'title' => $caseStudy->getTitle(),
                     'isPublished' => $caseStudy->isPublished(),
-                    'country' => $caseStudy->getCountryName(),
                     'url' => $urlHandler->caseStudy($caseStudy),
                 ];
             }, $caseStudies));

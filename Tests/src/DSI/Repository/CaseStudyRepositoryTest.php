@@ -68,7 +68,6 @@ class CaseStudyRepositoryTest extends PHPUnit_Framework_TestCase
         $caseStudy->setIsPublished($isPublished = true);
         $caseStudy->setIsFeaturedOnSlider($isFeaturedOnSlider = true);
         $caseStudy->setPositionOnFirstPage($positionOnHomePage = 2);
-        $caseStudy->setRegion($this->countryRegion);
         $this->caseStudyRepository->insert($caseStudy);
 
         $this->assertEquals(1, $caseStudy->getId());
@@ -88,8 +87,6 @@ class CaseStudyRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($isPublished, $caseStudy->isPublished());
         $this->assertEquals($isFeaturedOnSlider, $caseStudy->isFeaturedOnSlider());
         $this->assertEquals($positionOnHomePage, $caseStudy->getPositionOnFirstPage());
-        $this->assertEquals($this->countryRegion->getId(), $caseStudy->getRegion()->getId());
-        $this->assertEquals($this->countryRegion->getId(), $caseStudy->getRegionID());
     }
 
     /** @test getByID */
@@ -235,7 +232,6 @@ class CaseStudyRepositoryTest extends PHPUnit_Framework_TestCase
         $caseStudy->setIsPublished($isPublished = true);
         $caseStudy->setIsFeaturedOnSlider($isFeaturedOnSlider = true);
         $caseStudy->setPositionOnFirstPage($positionOnHomePage = 2);
-        $caseStudy->setRegion($this->countryRegion);
         $this->caseStudyRepository->save($caseStudy);
 
         $caseStudy = $this->caseStudyRepository->getById($caseStudy->getId());
@@ -254,8 +250,6 @@ class CaseStudyRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($isPublished, $caseStudy->isPublished());
         $this->assertEquals($isFeaturedOnSlider, $caseStudy->isFeaturedOnSlider());
         $this->assertEquals($positionOnHomePage, $caseStudy->getPositionOnFirstPage());
-        $this->assertEquals($this->countryRegion->getId(), $caseStudy->getRegion()->getId());
-        $this->assertEquals($this->countryRegion->getId(), $caseStudy->getRegionID());
     }
 
     /** @test */

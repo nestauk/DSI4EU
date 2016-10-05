@@ -1,0 +1,2 @@
+ALTER TABLE `case-studies` ADD `infoText` VARCHAR(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `introPageText`;
+ALTER TABLE `case-studies` ADD `projectID` INT UNSIGNED NOT NULL AFTER `regionID`, ADD `organisationID` INT UNSIGNED NOT NULL AFTER `projectID`;

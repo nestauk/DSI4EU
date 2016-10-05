@@ -7,116 +7,95 @@ require __DIR__ . '/header.php';
 /** @var $urlHandler \DSI\Service\URL */
 ?>
 
-    <div class="header-large-section">
-        <div class="header-large"
-             style="background-image: linear-gradient(180deg, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url('<?php echo \DSI\Entity\Image::CASE_STUDY_HEADER_URL . $caseStudy->getHeaderImageOrDefault() ?>');">
-            <div class="container-wide container-wide-header-large">
-                <h1 class="header-large-h1-centre"
-                    data-ix="fadeinuponload"><?php echo show_input($caseStudy->getTitle()) ?></h1>
-                <p class="header-large-desc" data-ix="fadeinuponload-2">
-                    <?php echo show_input($caseStudy->getIntroCardText()) ?>
-                </p>
+    <div class="case-study-intro">
+        <div class="header-content">
+            <div class="case-study-img-bg-blur"></div>
+            <div class="container-wide">
+                <h1 class="case-study-h1"><?php echo show_input($caseStudy->getTitle()) ?></h1>
+                <h3 class="home-hero-h3"><?php echo show_input($caseStudy->getIntroCardText()) ?></h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-content">
+        <div class="w-row">
+            <div class="content-left w-col w-col-8">
+                <div class="intro"><?php echo $caseStudy->getIntroPageText() ?></div>
+                <div><?php echo $caseStudy->getMainText() ?></div>
+            </div>
+            <div class="column-right-small w-col w-col-4">
                 <?php if ($userCanAddCaseStudy) { ?>
-                    <a class="button button-bottom-right edit-case-study w-button"
-                       href="<?php echo $urlHandler->caseStudyEdit($caseStudy) ?>">Edit case study +</a>
+                    <h1 class="content-h1">Actions</h1>
+                    <a class="sidebar-link" href="<?php echo $urlHandler->caseStudyEdit($caseStudy) ?>">
+                        <span class="green">-&nbsp;</span>Edit case study
+                    </a>
                 <?php } ?>
-            </div>
-        </div>
-    </div>
-    <div class="case-study-main">
-        <div class="container-wide">
-            <div class="case-study-logo" data-ix="fadeinuponload-3">
-                <img class="case-study-logo-over ab-fab"
-                     src="<?php echo \DSI\Entity\Image::CASE_STUDY_LOGO_URL . $caseStudy->getLogoOrDefault() ?>">
-            </div>
-            <div class="case-study-single-container w-container">
-                <h2 class="centered" data-ix="fadeinuponload-4">
-                    <?php _ehtml('Introduction') ?></h2>
-                <div class="centered" data-ix="fadeinuponload-5">
-                    <?php echo $caseStudy->getIntroPageText() ?>
-                </div>
-                <?php /*
-                <h4 class="case-study-intro-detail centered" data-ix="fadeinuponload-5">
-                    <?php if ($caseStudy->getRegion() AND $caseStudy->getProjectStartDate()) {
-                        echo sprintf(
-                            __('%s is based in %s and has been running since %s'),
-                            show_input($caseStudy->getTitle()),
-                            show_input($caseStudy->getCountryName()),
-                            $caseStudy->getProjectStartDate('Y')
-                        );
-                    } elseif ($caseStudy->getRegion() AND !$caseStudy->getProjectStartDate()) {
-                        echo sprintf(
-                            __('%s is based in %s'),
-                            show_input($caseStudy->getTitle()),
-                            show_input($caseStudy->getCountryName())
-                        );
-                    } elseif (!$caseStudy->getRegion() AND $caseStudy->getProjectStartDate()) {
-                        echo sprintf(
-                            __('%s has been running since %s'),
-                            show_input($caseStudy->getTitle()),
-                            show_input($caseStudy->getCountryName()),
-                            $caseStudy->getProjectStartDate('Y')
-                        );
-                    } ?>
-                </h4>
-                */ ?>
-                <?php if ($caseStudy->getMainText()) { ?>
-                    <div class="centered url-block" data-ix="fadeinup">
-                        <h2><?php _ehtml('Overview') ?></h2>
-                        <p class="case-study-main-text" data-ix="fadeinup">
-                            <?php echo $caseStudy->getMainText() ?>
-                        </p>
+
+                <h3 class="cse side-bar-h3">Info</h3>
+                <div><?php echo show_input($caseStudy->getInfoText()) ?></div>
+                <a class="log-in-link long read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
+                   href="<?php echo $caseStudy->getUrl() ?>">
+                    <div class="login-li long menu-li readmore-li">
+                        <?php echo show_input($caseStudy->getButtonLabel()) ?>
                     </div>
-                <?php } ?>
-                <?php if ($caseStudy->getUrl()) { ?>
-                    <div class="centered url-block" data-ix="fadeinup">
-                        <h2><?php _ehtml('Interested in finding out more?') ?></h2>
-                        <a class="button-more w-button" href="<?php echo $caseStudy->getUrl() ?>">
-                            <?php echo $caseStudy->getButtonLabel() ?>
+                    <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
+                </a>
+
+                <?php if ($caseStudy->getProject() OR $caseStudy->getOrganisation()) { ?>
+                    <h3 class="cse side-bar-h3"><?php echo show_input($caseStudy->getTitle()) ?> on DSI</h3>
+
+                    <?php if ($project = $caseStudy->getProject()) { ?>
+                        <p><?php echo show_input($project->getShortDescription()) ?></p>
+                        <a class="log-in-link long read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
+                           href="<?php echo $urlHandler->project($project) ?>">
+                            <div class="login-li long menu-li readmore-li">Visit Project</div>
+                            <img class="login-arrow"
+                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
                         </a>
-                    </div>
+                    <?php } ?>
+
+                    <?php if ($organisation = $caseStudy->getOrganisation()) { ?>
+                        <p><?php echo show_input($organisation->getShortDescription()) ?></p>
+                        <a class="log-in-link long read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
+                           href="<?php echo $urlHandler->organisation($organisation) ?>">
+                            <div class="login-li long menu-li readmore-li">Visit Organisation</div>
+                            <img class="login-arrow"
+                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
+                        </a>
+                    <?php } ?>
                 <?php } ?>
             </div>
         </div>
-    </div>
-    <div class="related-case-studies">
-        <div class="container-wide">
-            <h2 class="reccomendation"><?php _ehtml('More case studies') ?></h2>
-            <div class="case-studies-row case-studies-row-grid w-row">
-                <?php foreach ($caseStudies AS $i => $caseStudy) { ?>
-                    <div class="case-study-col-<?php echo $i % 3 + 1 ?> w-col w-col-4">
-                        <div class="onloadone" data-ix="fadeinuponload-<?php echo $i % 3 + 2 ?>">
-                            <div class="case-study-card" data-ix="case-study-card-overlay"
-                                 style="background-image: url('<?php echo \DSI\Entity\Image::CASE_STUDY_CARD_BG_URL . $caseStudy->getCardImage() ?>');">
-                                <div class="case-study-card-overlay"
-                                     style="background-color:<?php echo $caseStudy->getCardColour() ?>"></div>
-                                <div class="case-study-card-info">
-                                    <img class="case-study-card-logo" width="75"
-                                         src="<?php echo \DSI\Entity\Image::CASE_STUDY_LOGO_URL . $caseStudy->getLogo() ?>">
-                                    <div class="case-study-card-p">
-                                        <?php echo show_input($caseStudy->getIntroCardText()) ?>
-                                    </div>
-                                    <a class="case-study-card-read-more"
-                                       href="<?php echo $urlHandler->caseStudy($caseStudy) ?>">
-                                        <?php _ehtml('See the case study') ?>
-                                    </a>
-                                </div>
-                                <div class="case-study-card-label w-clearfix">
-                                    <div class="case-study-card-name">
-                                        <?php echo show_input(substr($caseStudy->getTitle(), 0, 15)) ?>
-                                        <?php if (strlen($caseStudy->getTitle()) > 15) echo '...' ?>
-                                    </div>
-                                    <?php if ($caseStudy->getRegion()) { ?>
-                                        <div class="case-study-card-name country">
-                                            <?php echo show_input($caseStudy->getCountryName()) ?>
-                                        </div>
-                                    <?php } ?>
-                                </div>
-                            </div>
+        <h3 class="related-h3">More case studies</h3>
+        <div class="w-row">
+            <?php foreach ($caseStudies AS $i => $_caseStudy) { ?>
+                <div class="w-col w-col-4">
+                    <a class="case-study-ind w-inline-block" data-ix="scaleimage"
+                       href="<?php echo $urlHandler->caseStudy($_caseStudy) ?>">
+                        <div class="case-study-img-container">
+                            <div class="_<?php echo ($i % 3) + 1 ?> case-study-img"
+                                 style="background-image: url('<?php echo \DSI\Entity\Image::CASE_STUDY_CARD_BG_URL . $_caseStudy->getCardImage() ?>');"></div>
                         </div>
-                    </div>
-                <?php } ?>
-            </div>
+                        <h3 class="case-study-card-h3">
+                            <?php echo show_input($_caseStudy->getTitle()) ?>
+                        </h3>
+                        <p class="cradp">
+                            <?php echo show_input($_caseStudy->getIntroCardText()) ?>
+                        </p>
+                        <div class="log-in-link read-more w-clearfix" data-ix="log-in-arrow">
+                            <div class="login-li menu-li readmore-li">Read more</div>
+                            <img class="login-arrow" src="images/ios7-arrow-thin-right.png">
+                        </div>
+                    </a>
+                </div>
+            <?php } ?>
+        </div>
+        <div class="signn">
+            <a class="large log-in-link sign-up w-clearfix w-inline-block" data-ix="log-in-arrow"
+               href="<?php echo $urlHandler->caseStudies() ?>">
+                <div class="login-li menu-li">See all case studies</div>
+                <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
+            </a>
         </div>
     </div>
 

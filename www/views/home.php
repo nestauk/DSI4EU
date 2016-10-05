@@ -174,8 +174,6 @@ if (!isset($urlHandler))
                             </div>
                             <div class="case-study-card-label w-clearfix">
                                 <div class="case-study-card-name"><?php echo show_input($caseStudy->getTitle()) ?></div>
-                                <div
-                                    class="case-study-card-name country"><?php echo show_input($caseStudy->getCountryName()) ?></div>
                             </div>
                         </div>
                     </div>

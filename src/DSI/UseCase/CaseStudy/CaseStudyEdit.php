@@ -9,8 +9,9 @@ use DSI\Entity\Image;
 use DSI\NotFound;
 use DSI\Repository\CaseStudyRepository;
 use DSI\Repository\CountryRegionRepository;
+use DSI\Repository\OrganisationRepositoryInAPC;
+use DSI\Repository\ProjectRepositoryInAPC;
 use DSI\Service\ErrorHandler;
-use DSI\UseCase\CreateCountryRegion;
 
 class CaseStudyEdit
 {
@@ -44,7 +45,6 @@ class CaseStudyEdit
     {
         $this->caseStudy = $this->caseStudyRepo->getById($this->data()->caseStudyId);
         $this->assertTitleHasBeenSent();
-        $this->getRegion();
         $this->unsetSamePositionOnFirstPage();
         $this->editCaseStudy();
         $this->saveImages();
@@ -91,6 +91,7 @@ class CaseStudyEdit
         $this->caseStudy->setTitle((string)$this->data()->title);
         $this->caseStudy->setIntroCardText((string)$this->data()->introCardText);
         $this->caseStudy->setIntroPageText((string)$this->data()->introPageText);
+        $this->caseStudy->setInfoText((string)$this->data()->infoText);
         $this->caseStudy->setMainText((string)$this->data()->mainText);
         $this->caseStudy->setProjectStartDate((string)$this->data()->projectStartDate);
         $this->caseStudy->setProjectEndDate((string)$this->data()->projectEndDate);
@@ -100,8 +101,14 @@ class CaseStudyEdit
         $this->caseStudy->setIsPublished((bool)$this->data()->isPublished);
         $this->caseStudy->setIsFeaturedOnSlider((bool)$this->data()->isFeaturedOnSlider);
         $this->caseStudy->setPositionOnFirstPage((int)$this->data()->positionOnHomePage);
-        if ($this->countryRegion)
-            $this->caseStudy->setRegion($this->countryRegion);
+        if($this->data()->projectID)
+            $this->caseStudy->setProject( (new ProjectRepositoryInAPC())->getById($this->data()->projectID) );
+        else
+            $this->caseStudy->unsetProject();
+        if($this->data()->organisationID)
+            $this->caseStudy->setOrganisation( (new OrganisationRepositoryInAPC())->getById($this->data()->organisationID) );
+        else
+            $this->caseStudy->unsetOrganisation();
 
         $this->caseStudyRepo->save($this->caseStudy);
     }
@@ -156,39 +163,13 @@ class CaseStudyEdit
 
     private function saveImages()
     {
-        if ($this->data()->logoImage != Image::CASE_STUDY_LOGO_URL . $this->caseStudy->getLogo()) {
-            $this->caseStudy->setLogo(
-                $this->saveImage($this->data()->logoImage, Image::CASE_STUDY_LOGO)
-            );
-        }
         if ($this->data()->cardBgImage != Image::CASE_STUDY_CARD_BG_URL . $this->caseStudy->getCardImage()) {
             $this->caseStudy->setCardImage(
                 $this->saveImage($this->data()->cardBgImage, Image::CASE_STUDY_CARD_BG)
             );
         }
-        if ($this->data()->headerImage != Image::CASE_STUDY_HEADER_URL . $this->caseStudy->getHeaderImage()) {
-            $this->caseStudy->setHeaderImage(
-                $this->saveImage($this->data()->headerImage, Image::CASE_STUDY_HEADER)
-            );
-        }
 
         $this->caseStudyRepo->save($this->caseStudy);
-    }
-
-    private function getRegion()
-    {
-        if ($this->data()->countryID != 0) {
-            if ($this->countryRegionRepo->nameExists($this->data()->countryID, $this->data()->region)) {
-                $countryRegion = $this->countryRegionRepo->getByName($this->data()->countryID, $this->data()->region);
-            } else {
-                $createCountryRegionCmd = new CreateCountryRegion();
-                $createCountryRegionCmd->data()->countryID = $this->data()->countryID;
-                $createCountryRegionCmd->data()->name = $this->data()->region;
-                $createCountryRegionCmd->exec();
-                $countryRegion = $createCountryRegionCmd->getCountryRegion();
-            }
-            $this->countryRegion = $countryRegion;
-        }
     }
 }
 
@@ -201,6 +182,7 @@ class CaseStudyEdit_Data
     public $title,
         $introCardText,
         $introPageText,
+        $infoText,
         $mainText,
         $projectStartDate,
         $projectEndDate,
@@ -214,13 +196,9 @@ class CaseStudyEdit_Data
         $positionOnHomePage;
 
     /** @var string */
-    public $logoImage,
-        $cardBgImage,
-        $headerImage;
+    public $cardBgImage;
 
     /** @var int */
-    public $countryID;
-
-    /** @var string */
-    public $region;
+    public $projectID,
+        $organisationID;
 }
