@@ -5159,12 +5159,16 @@ strong {
   color: #1dc9a0;
 }
 
+.profile-contact-link.link {
+  color: #000;
+}
+
 .profile-contact-link.link:hover {
   padding-top: 5px;
   padding-bottom: 5px;
   border-radius: 3px;
-  background-color: #1dc9a0;
-  color: #fff;
+  background-color: #f3f3f3;
+  color: #000;
 }
 
 .page-info {
@@ -7997,7 +8001,7 @@ strong {
   margin-bottom: 0px;
   padding-bottom: 130px;
   padding-left: 35px;
-  color: #000;
+  color: #fff;
 }
 
 .home-hero-h3.sub-text {
@@ -8013,6 +8017,7 @@ strong {
 .home-hero-h3.org {
   padding-bottom: 0px;
   padding-left: 10px;
+  color: #000;
 }
 
 .home-hero-img {
