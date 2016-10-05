@@ -2746,6 +2746,12 @@ strong {
   transform: scale(0.9);
 }
 
+.alphabet-link.post-filter {
+  width: auto;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
 .card-slim-stats {
   position: absolute;
   left: 0px;
