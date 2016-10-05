@@ -2224,8 +2224,17 @@ strong {
 }
 
 .centered.title {
+  display: block;
+  width: 935px;
+  margin-right: auto;
   margin-bottom: 25px;
+  margin-left: auto;
   font-weight: 700;
+}
+
+.centered.title.big-dsi {
+  padding-top: 35px;
+  color: #fff;
 }
 
 .feedback-form-input {
@@ -6646,7 +6655,7 @@ strong {
 
 .case-study-intro {
   display: block;
-  max-width: 1290px;
+  max-width: 100%;
   min-height: 500px;
   margin-right: auto;
   margin-bottom: 0px;
@@ -7013,12 +7022,13 @@ strong {
   right: 100px;
   bottom: auto;
   display: block;
+  width: 100%;
   margin-right: auto;
   margin-left: auto;
   padding-top: 93px;
   float: none;
   font-family: Montserrat, sans-serif;
-  color: #000;
+  color: #fff;
   font-size: 18px;
   text-align: center;
 }
@@ -7973,8 +7983,7 @@ strong {
   max-width: 1220px;
   margin-right: auto;
   margin-left: auto;
-  background-image: -webkit-linear-gradient(270deg, #1dc9a0, #1dc9a0);
-  background-image: linear-gradient(180deg, #1dc9a0, #1dc9a0);
+  background-color: transparent;
 }
 
 .hero-cta {
@@ -7982,7 +7991,7 @@ strong {
   display: block;
   width: auto;
   height: 113px;
-  max-width: 1220px;
+  max-width: 1240px;
   margin-top: 25px;
   margin-right: auto;
   margin-left: auto;
@@ -8005,7 +8014,7 @@ strong {
 .home-hero-h3 {
   max-width: 50%;
   margin-bottom: 0px;
-  padding-bottom: 130px;
+  padding-bottom: 90px;
   padding-left: 35px;
   color: #fff;
 }
@@ -8337,6 +8346,12 @@ strong {
   text-shadow: none;
 }
 
+.h2-large.centered {
+  margin-bottom: 29px;
+  padding-top: 0px;
+  color: #fff;
+}
+
 .explore-text {
   position: absolute;
   left: 0px;
@@ -8393,7 +8408,7 @@ strong {
   border-left: 1px none #000;
   background-color: transparent;
   font-family: Montserrat, sans-serif;
-  color: #000;
+  color: #fff;
   font-size: 94px;
   line-height: 94px;
   font-weight: 700;
@@ -8419,7 +8434,7 @@ strong {
   padding-left: 15px;
   background-color: transparent;
   font-family: Montserrat, sans-serif;
-  color: #000;
+  color: #fff;
   font-size: 16px;
   text-align: center;
 }
@@ -8489,6 +8504,10 @@ strong {
   margin: 90px auto 25px;
   padding-left: 25px;
   background-color: transparent;
+}
+
+.content-block.cs {
+  padding-left: 0px;
 }
 
 .content-h1 {
@@ -8682,7 +8701,13 @@ strong {
 }
 
 .stats-bg {
+  height: 420px;
   background-color: #f3f3f3;
+  background-image: -webkit-linear-gradient(270deg, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url('../images/London_City_Hall.jpg');
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url('../images/London_City_Hall.jpg');
+  background-position: 0px 0px, 50% 0px;
+  background-size: auto, cover;
+  background-repeat: repeat, no-repeat;
 }
 
 .header-intro-descr {
@@ -9153,6 +9178,11 @@ strong {
   width: 170px;
 }
 
+.hero-container {
+  height: 560px;
+  background-color: rgba(29, 201, 160, .94);
+}
+
 html.w-mod-js *[data-ix="pin-drop"] {
   opacity: 0;
   -webkit-transform: translate(0px, -100px);
@@ -9323,6 +9353,48 @@ html.w-mod-js *[data-ix="fadeinuponload-7"] {
 }
 
 html.w-mod-js *[data-ix="fadeinuponload-8"] {
+  opacity: 0;
+  -webkit-transform: translate(0px, 50px);
+  -ms-transform: translate(0px, 50px);
+  transform: translate(0px, 50px);
+}
+
+html.w-mod-js *[data-ix="fadeinuponload-9"] {
+  opacity: 0;
+  -webkit-transform: translate(0px, 50px);
+  -ms-transform: translate(0px, 50px);
+  transform: translate(0px, 50px);
+}
+
+html.w-mod-js *[data-ix="fadeinuponload-10"] {
+  opacity: 0;
+  -webkit-transform: translate(0px, 50px);
+  -ms-transform: translate(0px, 50px);
+  transform: translate(0px, 50px);
+}
+
+html.w-mod-js *[data-ix="fadeinuponload-11"] {
+  opacity: 0;
+  -webkit-transform: translate(0px, 50px);
+  -ms-transform: translate(0px, 50px);
+  transform: translate(0px, 50px);
+}
+
+html.w-mod-js *[data-ix="fadeinuponload-12"] {
+  opacity: 0;
+  -webkit-transform: translate(0px, 50px);
+  -ms-transform: translate(0px, 50px);
+  transform: translate(0px, 50px);
+}
+
+html.w-mod-js *[data-ix="fadeinuponload-13"] {
+  opacity: 0;
+  -webkit-transform: translate(0px, 50px);
+  -ms-transform: translate(0px, 50px);
+  transform: translate(0px, 50px);
+}
+
+html.w-mod-js *[data-ix="fadeinuponload-14"] {
   opacity: 0;
   -webkit-transform: translate(0px, 50px);
   -ms-transform: translate(0px, 50px);
