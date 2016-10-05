@@ -2354,14 +2354,16 @@ strong {
   position: absolute;
   right: 10px;
   bottom: 10px;
-  width: 70px;
-  padding-right: 0px;
-  padding-left: 0px;
-  background-color: #f3f3f3;
+  width: 100px;
+  height: 28px;
+  padding: 7px 0px;
+  border-radius: 25px;
+  background-color: #fff;
   color: #b92626;
   font-size: 12px;
   line-height: 12px;
   text-align: center;
+  text-transform: uppercase;
 }
 
 .dsi-button.notification-decline:hover {
@@ -2377,18 +2379,22 @@ strong {
 
 .dsi-button.notification-accept {
   position: absolute;
-  right: 85px;
+  right: 115px;
   bottom: 10px;
-  width: 70px;
+  width: 90px;
+  padding-top: 7px;
+  padding-bottom: 7px;
   border: 1px solid #fff;
-  background-color: transparent;
-  color: #fff;
+  border-radius: 25px;
+  background-color: #fff;
+  color: #000;
   font-size: 12px;
   line-height: 12px;
+  text-transform: uppercase;
 }
 
 .dsi-button.notification-accept:hover {
-  background-color: transparent;
+  background-color: #fff;
   -webkit-transform: none;
   -ms-transform: none;
   transform: none;
@@ -2396,16 +2402,18 @@ strong {
 
 .dsi-button.notification-view {
   position: absolute;
-  right: 160px;
+  right: 210px;
   bottom: 10px;
   width: 70px;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding-top: 7px;
+  padding-bottom: 7px;
   border: 1px solid #fff;
-  background-color: transparent;
-  color: #fff;
+  border-radius: 25px;
+  background-color: #fff;
+  color: #000;
   font-size: 12px;
   line-height: 12px;
+  text-transform: uppercase;
 }
 
 .dsi-button.notification-view:hover {
@@ -2415,7 +2423,7 @@ strong {
 }
 
 .dsi-button.notification-view.notification-project {
-  right: 85px;
+  right: 115px;
 }
 
 .dsi-button.notification-view.notification-project.read-post {
@@ -2476,21 +2484,35 @@ strong {
 }
 
 .dsi-button.post-story {
+  width: 160px;
   margin-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   float: right;
-  border: 1px solid #1dc9a0;
+  border: 1px none #1dc9a0;
+  border-radius: 25px;
   background-color: #fff;
-  font-family: 'Open Sans', sans-serif;
-  color: #1dc9a0;
+  font-family: Montserrat, sans-serif;
+  color: #000;
+  font-size: 16px;
+  font-weight: 400;
+  text-transform: uppercase;
 }
 
 .dsi-button.post-story.cancel {
   position: static;
   height: auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-style: none;
   border-color: #db4343;
+  border-radius: 25px;
   background-color: #fff;
+  font-family: Montserrat, sans-serif;
   color: #c73232;
+  font-size: 16px;
   line-height: 20px;
+  text-transform: uppercase;
 }
 
 .dsi-button.story-image-upload {
@@ -2856,6 +2878,7 @@ strong {
 
 .notification-detail.post-latest-card {
   margin-top: 20px;
+  font-size: 16px;
 }
 
 .notification-li {
@@ -4762,7 +4785,7 @@ strong {
   max-width: 320px;
   border-style: none;
   border-radius: 3px;
-  background-color: #d5d5d5;
+  background-color: #fff;
 }
 
 .creator-data-entry.long-description {
@@ -4781,6 +4804,7 @@ strong {
   max-width: 320px;
   margin-bottom: 40px;
   margin-left: 1px;
+  background-color: #fff;
 }
 
 .creator-data-entry.end.wide {
@@ -7912,6 +7936,11 @@ strong {
   margin-left: 10px;
 }
 
+.log-in-link.ll.auto {
+  position: static;
+  float: none;
+}
+
 .menu-col {
   position: relative;
 }
@@ -8509,6 +8538,10 @@ strong {
   color: #9b9b9b;
 }
 
+.sidebar-link.remove {
+  color: #db4343;
+}
+
 .footer-black {
   position: relative;
   min-height: 340px;
@@ -9008,12 +9041,12 @@ strong {
 .log-in-link-note {
   position: absolute;
   right: 0px;
-  bottom: 0px;
+  bottom: 6px;
   float: right;
 }
 
 .log-in-link-note.second {
-  bottom: 26px;
+  bottom: 32px;
 }
 
 .login-form-nu {
