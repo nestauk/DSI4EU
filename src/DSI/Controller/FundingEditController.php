@@ -6,6 +6,8 @@ use DSI\Entity\User;
 use DSI\Repository\CountryRepository;
 use DSI\Repository\FundingRepository;
 use DSI\Repository\FundingSourceRepository;
+use DSI\Repository\FundingTargetRepository;
+use DSI\Repository\FundingTypeRepository;
 use DSI\Repository\UserRepository;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
@@ -41,6 +43,8 @@ class FundingEditController
                     $editFunding->data()->url = $_POST['url'] ?? '';
                     $editFunding->data()->description = $_POST['description'] ?? '';
                     $editFunding->data()->closingDate = $_POST['closingDate'] ?? '';
+                    $editFunding->data()->typeID = (int)($_POST['typeID'] ?? 0);
+                    $editFunding->data()->targets = (array)($_POST['targets'] ?? []);
                     $editFunding->data()->sourceTitle = $_POST['source'] ?? '';
                     $editFunding->data()->countryID = $_POST['countryID'] ?? 0;
 
@@ -66,10 +70,14 @@ class FundingEditController
                 'closingDate' => $funding->getClosingDate(),
                 'source' => $funding->getSourceTitle(),
                 'countryID' => $funding->getCountryID(),
+                'typeID' => $funding->getTypeID(),
+                'targets' => $funding->getTargetIDs(),
             ]);
             return;
         }
 
+        $fundingTypes = (new FundingTypeRepository())->getAll();
+        $fundingTargets = (new FundingTargetRepository())->getAll();
         $fundingSources = (new FundingSourceRepository())->getAll();
         $countries = (new CountryRepository())->getAll();
         require(__DIR__ . '/../../../www/views/funding-edit.php');

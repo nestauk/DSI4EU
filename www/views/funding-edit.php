@@ -1,5 +1,7 @@
 <?php
 require __DIR__ . '/header.php';
+/** @var $fundingTypes \DSI\Entity\FundingType[] */
+/** @var $fundingTargets \DSI\Entity\FundingTarget[] */
 /** @var $fundingSources \DSI\Entity\FundingSource[] */
 /** @var $urlHandler \DSI\Service\URL */
 /** @var $countries \DSI\Entity\Country[] */
@@ -7,20 +9,25 @@ require __DIR__ . '/header.php';
 /** @var $funding \DSI\Entity\Funding */
 ?>
 
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-
     <div ng-controller="FundingEditController"
          data-editurl="<?php echo $urlHandler->editFundingJson($funding->getId()) ?>">
-        <div class="header-section-grey w-section">
-            <div class="container-wide">
-                <h1 class="header-centre">Edit funding oportunity</h1>
+        <div class="content-block">
+            <div class="w-row">
+                <div class="w-col w-col-8">
+                    <h1 class="content-h1">Edit funding oportunity</h1>
+                    <p class="intro"></p>
+                </div>
+                <div class="sidebar w-col w-col-4">
+                    <h1 class="content-h1">Actions</h1>
+                    <a class="sidebar-link" href="<?php echo $urlHandler->funding() ?>"><span
+                            class="green">-&nbsp;</span>Cancel</a>
+                </div>
             </div>
         </div>
-        <div class="section-white w-section">
+        <div class="content-directory">
             <div class="container-wide step-window">
-                <form id="email-form-2" name="email-form-2" ng-submit="save()">
-                    <div class="w-form">
+                <div class="w-form">
+                    <form id="email-form-2" name="email-form-2" ng-submit="save()">
                         <div class="w-row">
                             <div class="form-col-left w-col w-col-6">
                                 <h2 class="edit-h2">Funding text</h2>
@@ -54,6 +61,32 @@ require __DIR__ . '/header.php';
                                        name="name-4" placeholder="When is the funding deadline" type="text">
                                 <div class="error" ng-bind="errors.closingDate"></div>
 
+                                <br/>
+                                <label for="name-9">Type of funding or support: </label>
+                                <select class="select2 creator-data-entry end w-input"
+                                        id="fundingTypeID"
+                                        data-placeholder="Select type of funding or support">
+                                    <option></option>
+                                    <?php foreach ($fundingTypes AS $type) { ?>
+                                        <option value="<?php echo $type->getId() ?>"
+                                            <?php if ($type->getId() == $funding->getTypeID()) echo "selected" ?>>
+                                            <?php echo show_input($type->getTitle()) ?>
+                                        </option>
+                                    <?php } ?>
+                                </select>
+
+                                <br/><br/>
+                                <label for="name-9">Target organisations and projects: </label>
+                                <br/>
+                                <?php foreach ($fundingTargets AS $target) { ?>
+                                    <label>
+                                        <input type="checkbox" name="target[]" value="<?php echo $target->getId() ?>"
+                                            <?php if (in_array($target->getId(), $funding->getTargetIDs())) echo "checked" ?>/>
+                                        <?php echo show_input($target->getTitle()) ?>
+                                    </label>
+                                <?php } ?>
+
+                                <br/>
                                 <label for="name-9">Source</label>
                                 <select class="select2 creator-data-entry end w-input"
                                         id="fundingSource" data-tags="true"
@@ -86,16 +119,22 @@ require __DIR__ . '/header.php';
 
                             </div>
                         </div>
-                    </div>
-                    <div class="tabbed-nav-buttons w-clearfix">
-                        <input type="submit" class="tab-button-2 tab-button-next w-button" value="Save and continue"/>
-                    </div>
+                </div>
+                <div class="tabbed-nav-buttons w-clearfix">
+                    <input type="submit" class="tab-button-2 tab-button-next w-button" value="Save"/>
+                    <a class="tab-button-2 tab-button-next w-button" href="<?php echo $urlHandler->funding() ?>">
+                        Back to funding</a>
+                </div>
                 </form>
             </div>
         </div>
     </div>
 
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
     <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+
     <script type="text/javascript"
             src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/FundingEditController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 

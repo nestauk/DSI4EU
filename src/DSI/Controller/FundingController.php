@@ -8,7 +8,8 @@ use DSI\Entity\FundingSource;
 use DSI\Repository\CountryRepository;
 use DSI\Repository\FundingRepository;
 use DSI\Repository\FundingSourceRepository;
-use DSI\Repository\UserRepository;
+use DSI\Repository\FundingTargetRepository;
+use DSI\Repository\FundingTypeRepository;
 use DSI\Service\Auth;
 use DSI\Service\URL;
 
@@ -37,6 +38,8 @@ class FundingController
             ]);
         } else {
             $pageTitle = 'Funding Opportunities';
+            $fundingTypes = (new FundingTypeRepository())->getAll();
+            $fundingTargets = (new FundingTargetRepository())->getAll();
             $userCanAddFunding = (bool)($loggedInUser AND ($loggedInUser->isCommunityAdmin() OR $loggedInUser->isEditorialAdmin()));
             require __DIR__ . '/../../../www/views/funding.php';
         }
@@ -78,6 +81,8 @@ class FundingController
                 'closingMonth' => $funding->getClosingDate('Ym'),
                 'country' => $funding->getCountryName(),
                 'countryID' => $funding->getCountryID(),
+                'fundingTypeID' => $funding->getTypeID(),
+                'fundingTargets' => $funding->getTargetIDs(),
                 'fundingSourceID' => $funding->getSourceID(),
                 'fundingSource' => $funding->getSource()->getTitle(),
                 'isNew' => $funding->isNew(),

@@ -19,6 +19,8 @@ class FundingRepository
         $insert[] = "`closingDate` = '" . addslashes($funding->getClosingDate()) . "'";
         $insert[] = "`fundingSourceID` = '" . (int)($funding->getSourceID()) . "'";
         $insert[] = "`countryID` = '" . (int)($funding->getCountryID()) . "'";
+        $insert[] = "`typeID` = '" . (int)($funding->getTypeID()) . "'";
+        $insert[] = "`targets` = '" . addslashes(implode(',', $funding->getTargetIDs())) . "'";
 
         $query = new SQL("INSERT INTO `{$this->dbTable}` SET " . implode(', ', $insert));
         $query->query();
@@ -40,6 +42,8 @@ class FundingRepository
         $insert[] = "`closingDate` = '" . addslashes($funding->getClosingDate()) . "'";
         $insert[] = "`fundingSourceID` = '" . (int)($funding->getSourceID()) . "'";
         $insert[] = "`countryID` = '" . (int)($funding->getCountryID()) . "'";
+        $insert[] = "`typeID` = '" . (int)($funding->getTypeID()) . "'";
+        $insert[] = "`targets` = '" . addslashes(implode(',', $funding->getTargetIDs())) . "'";
 
         $query = new SQL("UPDATE `{$this->dbTable}` SET " . implode(', ', $insert) . " WHERE `id` = '{$funding->getId()}'");
         $query->query();
@@ -94,7 +98,7 @@ class FundingRepository
     {
         $fundings = [];
         $query = new SQL("SELECT 
-            id, title, url, description, closingDate, fundingSourceID, countryID, timeCreated
+            id, title, url, description, closingDate, fundingSourceID, countryID, timeCreated, typeID, targets
           FROM `{$this->dbTable}` WHERE " . implode(' AND ', $where) . "");
         foreach ($query->fetch_all() AS $dbFunding) {
             $funding = new Funding();
@@ -111,6 +115,16 @@ class FundingRepository
                 $funding->setCountry(
                     (new CountryRepository())->getById($dbFunding['countryID'])
                 );
+            if ($dbFunding['typeID'])
+                $funding->setType(
+                    (new FundingTypeRepository())->getById($dbFunding['typeID'])
+                );
+            if ($dbFunding['targets']) {
+                $fundingTargetRepository = new FundingTargetRepository();
+                foreach (explode(',', $dbFunding['targets']) AS $target) {
+                    $funding->addTarget($fundingTargetRepository->getById($target));
+                }
+            }
             $funding->setTimeCreated($dbFunding['timeCreated']);
             $fundings[] = $funding;
         }

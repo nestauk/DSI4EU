@@ -8,6 +8,8 @@ use DSI\NotFound;
 use DSI\Repository\CountryRepository;
 use DSI\Repository\FundingRepository;
 use DSI\Repository\FundingSourceRepository;
+use DSI\Repository\FundingTargetRepository;
+use DSI\Repository\FundingTypeRepository;
 use DSI\Service\ErrorHandler;
 
 class FundingCreate
@@ -52,12 +54,19 @@ class FundingCreate
 
     private function saveFunding()
     {
+        $fundingTargetRepository = new FundingTargetRepository();
+
         $funding = new Funding();
         $funding->setTitle($this->data()->title);
         $funding->setUrl($this->data()->url);
+        if ($this->data()->typeID)
+            $funding->setType((new FundingTypeRepository())->getById($this->data()->typeID));
         $funding->setCountry((new CountryRepository())->getById($this->data()->countryID));
         if ($this->fundingSource)
             $funding->setSource($this->fundingSource);
+        foreach ((array)$this->data()->targets AS $targetID)
+            $funding->addTarget($fundingTargetRepository->getById((int)$targetID));
+
         $funding->setClosingDate($this->data()->closingDate);
         $funding->setDescription($this->data()->description);
         $this->fundingRepository->insert($funding);
@@ -117,7 +126,11 @@ class FundingCreate_Data
         $description;
 
     /** @var int */
-    public $countryID;
+    public $countryID,
+        $typeID;
+
+    /** @var int[] */
+    public $targets;
 
     /** @var string */
     public $sourceTitle;

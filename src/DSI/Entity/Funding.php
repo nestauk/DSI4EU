@@ -17,6 +17,12 @@ class Funding
     /** @var FundingSource */
     private $fundingSource;
 
+    /** @var FundingType */
+    private $fundingType;
+
+    /** @var FundingTarget[] */
+    private $fundingTargets = [];
+
     /** @var Country */
     private $country;
 
@@ -200,5 +206,49 @@ class Funding
     public function setSource(FundingSource $fundingSource)
     {
         $this->fundingSource = $fundingSource;
+    }
+
+    /**
+     * @return FundingType
+     */
+    public function getType()
+    {
+        return $this->fundingType;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTypeID()
+    {
+        return $this->fundingType ? $this->fundingType->getId() : 0;
+    }
+
+    /**
+     * @param FundingType $fundingType
+     */
+    public function setType(FundingType $fundingType)
+    {
+        $this->fundingType = $fundingType;
+    }
+
+    /**
+     * @param FundingTarget $fundingTarget
+     */
+    public function addTarget(FundingTarget $fundingTarget)
+    {
+        $this->fundingTargets[] = $fundingTarget;
+    }
+
+    public function removeTargets()
+    {
+        $this->fundingTargets = [];
+    }
+
+    public function getTargetIDs()
+    {
+        return array_map(function (FundingTarget $fundingTarget) {
+            return $fundingTarget->getId();
+        }, $this->fundingTargets);
     }
 }

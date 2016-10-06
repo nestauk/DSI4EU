@@ -5,6 +5,8 @@ namespace DSI\Controller;
 use DSI\Entity\User;
 use DSI\Repository\CountryRepository;
 use DSI\Repository\FundingSourceRepository;
+use DSI\Repository\FundingTargetRepository;
+use DSI\Repository\FundingTypeRepository;
 use DSI\Repository\UserRepository;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
@@ -30,8 +32,10 @@ class FundingAddController
                 $addFunding->data()->url = $_POST['url'] ?? '';
                 $addFunding->data()->description = $_POST['description'] ?? '';
                 $addFunding->data()->closingDate = $_POST['closingDate'] ?? '';
+                $addFunding->data()->typeID = (int)($_POST['typeID'] ?? 0);
+                $addFunding->data()->targets = (array)($_POST['targets'] ?? []);
                 $addFunding->data()->sourceTitle = $_POST['source'] ?? '';
-                $addFunding->data()->countryID = $_POST['countryID'] ?? 0;
+                $addFunding->data()->countryID = (int)($_POST['countryID'] ?? 0);
 
                 $addFunding->exec();
 
@@ -48,6 +52,8 @@ class FundingAddController
             die();
         }
 
+        $fundingTypes = (new FundingTypeRepository())->getAll();
+        $fundingTargets = (new FundingTargetRepository())->getAll();
         $fundingSources = (new FundingSourceRepository())->getAll();
         $countries = (new CountryRepository())->getAll();
         require(__DIR__ . '/../../../www/views/funding-add.php');

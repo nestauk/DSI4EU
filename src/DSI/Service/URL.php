@@ -71,6 +71,11 @@ class URL
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'funding';
     }
 
+    public function addFunding()
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'funding/add';
+    }
+
     public function editFunding($fundingID)
     {
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'funding/edit/' . $fundingID;
