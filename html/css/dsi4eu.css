@@ -7979,6 +7979,11 @@ strong {
 .log-in-link.ll.create {
   width: 150px;
   background-color: transparent;
+  font-family: Montserrat, sans-serif;
+  font-size: 18px;
+  text-align: left;
+  text-transform: uppercase;
+  cursor: pointer;
 }
 
 .log-in-link.ll.create:hover {
@@ -9281,6 +9286,33 @@ strong {
   bottom: 20px;
   font-family: Montserrat, sans-serif;
   font-size: 16px;
+}
+
+.create-drop-down-block {
+  position: absolute;
+  left: -62px;
+  right: -12px;
+  bottom: -137px;
+  display: none;
+  width: 280px;
+  height: 120px;
+  padding: 10px 0px 0px;
+  background-color: #fff;
+  box-shadow: 0 13px 50px -11px #000;
+}
+
+.drop-down-link-li {
+  display: block;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding: 15px 10px 15px 20px;
+  float: none;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+.drop-down-link-li:hover {
+  background-color: #f3f3f3;
 }
 
 html.w-mod-js *[data-ix="pin-drop"] {
