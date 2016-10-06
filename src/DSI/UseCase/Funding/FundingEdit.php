@@ -62,7 +62,8 @@ class FundingEdit
         $this->data()->funding->setSource($this->fundingSource);
         $this->data()->funding->setClosingDate($this->data()->closingDate);
         $this->data()->funding->setDescription($this->data()->description);
-        $this->data()->funding->setType((new FundingTypeRepository())->getById($this->data()->typeID));
+        if($this->data()->typeID)
+            $this->data()->funding->setType((new FundingTypeRepository())->getById($this->data()->typeID));
 
         $this->data()->funding->removeTargets();
         foreach ((array)$this->data()->targets AS $targetID)
