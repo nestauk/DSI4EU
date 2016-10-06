@@ -129,6 +129,9 @@ require __DIR__ . '/header.php'
                                 <img class="login-arrow"
                                      src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
                             </a>
+                            <?php if ($userCanAddFunding) { ?>
+                                <a class="edit" href="{{funding.editUrl}}">Edit</a>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
