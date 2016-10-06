@@ -7976,6 +7976,15 @@ strong {
   float: none;
 }
 
+.log-in-link.ll.create {
+  width: 150px;
+  background-color: transparent;
+}
+
+.log-in-link.ll.create:hover {
+  background-color: #1dc9a0;
+}
+
 .menu-col {
   position: relative;
 }
