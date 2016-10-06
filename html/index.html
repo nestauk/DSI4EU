@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<!--  Last Published: Wed Oct 05 2016 15:16:46 GMT+0000 (UTC)  -->
+<!--  Last Published: Thu Oct 06 2016 13:07:31 GMT+0000 (UTC)  -->
 <html data-wf-page="57e14744a760f6de0524340a" data-wf-site="56e2e31a1b1f8f784728a08c">
 <head>
   <meta charset="utf-8">
-  <title>home5</title>
-  <meta content="home5" property="og:title">
+  <title>Digital Social Innovation</title>
+  <meta content="Digital Social Innovation" property="og:title">
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <link href="css/normalize.css" rel="stylesheet" type="text/css">
   <link href="css/components.css" rel="stylesheet" type="text/css">
@@ -64,6 +64,18 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+    }
+    input[type=text],
+    input[type=email],
+    input[type=tel],
+    input[type=url],
+    input[type=search] {
+      appearance: none;
+      -moz-appearance: none;
+      -webkit-appearance: none;
+      border-radius: 0;
+      -moz-border-radius: 0;
+      -webkit-border-radius: 0;
     }
   </style>
 </head>
@@ -133,7 +145,7 @@
             </div>
           </div>
           <div class="full-menu-links-block no-border">
-            <a class="full-menu-link" href="funding.html">See all funding opportunities</a>
+            <a class="full-menu-link" href="funding-list.html">See all funding opportunities</a>
           </div>
         </div>
         <div class="full-menu-col w-clearfix w-col w-col-4">
@@ -173,6 +185,62 @@
       <img class="search-icon" src="images/ios7-search.png">
     </a>
   </div>
+  <div class="search-block">
+    <div class="close-search" data-ix="close-search-block">+</div>
+    <h1 class="search-h1">Search</h1>
+    <div class="w-form">
+      <form class="fromform" data-name="Email Form" id="email-form" name="email-form">
+        <input class="main-search w-input" data-name="search" id="search" maxlength="256" name="search" placeholder="Search news, projects, organisations and case studies" type="text">
+        <a class="cancel-search" data-ix="close-search-block" href="#">Cancel</a>
+      </form>
+      <div class="w-form-done">
+        <div>Thank you! Your submission has been received!</div>
+      </div>
+      <div class="w-form-fail">
+        <div>Oops! Something went wrong while submitting the form</div>
+      </div>
+    </div>
+    <div class="main-search-results w-row">
+      <div class="search-col w-col w-col-3">
+        <h2 class="full-menu-h2">News &amp; Blogs</h2>
+        <a class="full-menu-link" href="#"><span class="green">-</span> Text Link</a>
+        <a class="full-menu-link" href="#"><span class="green">-</span> Text Link</a>
+        <a class="full-menu-link" href="#"><span class="green">-</span> Text Link</a>
+        <a class="full-menu-link" href="#"><span class="green">-</span> Text Link</a>
+        <a class="full-menu-link" href="#"><span class="green">-</span> Text Link</a>
+      </div>
+      <div class="search-col w-col w-col-3">
+        <h2 class="full-menu-h2">Projects</h2>
+        <a class="full-menu-link" href="#"><span class="green">-</span> Text Link</a>
+        <a class="full-menu-link" href="#"><span class="green">-</span> Text Link</a>
+        <a class="full-menu-link" href="#"><span class="green">-</span> Text Link</a>
+        <a class="full-menu-link" href="#"><span class="green">-</span> Text Link</a>
+        <a class="full-menu-link" href="#"><span class="green">-</span> Text Link</a>
+      </div>
+      <div class="search-col w-col w-col-3">
+        <h2 class="full-menu-h2">Organisations</h2>
+        <a class="full-menu-link" href="#"><span class="green">-</span> Text Link</a>
+        <a class="full-menu-link" href="#"><span class="green">-</span> Text Link</a>
+        <a class="full-menu-link" href="#"><span class="green">-</span> Text Link</a>
+        <a class="full-menu-link" href="#"><span class="green">-</span> Text Link</a>
+        <a class="full-menu-link" href="#"><span class="green">-</span> Text Link</a>
+      </div>
+      <div class="search-col w-col w-col-3">
+        <h2 class="full-menu-h2">Case studies</h2>
+        <a class="full-menu-link" href="#"><span class="green">-</span> Text Link</a>
+        <a class="full-menu-link" href="#"><span class="green">-</span> Text Link</a>
+        <a class="full-menu-link" href="#"><span class="green">-</span> Text Link</a>
+        <a class="full-menu-link" href="#"><span class="green">-</span> Text Link</a>
+        <a class="full-menu-link" href="#"><span class="green">-</span> Text Link</a>
+      </div>
+    </div>
+    <div class="signn">
+      <a class="large log-in-link search-results sign-up w-clearfix w-inline-block" data-ix="log-in-arrow" href="#">
+        <div class="login-li menu-li">See all results</div>
+        <img class="login-arrow" src="images/ios7-arrow-thin-right.png">
+      </a>
+    </div>
+  </div>
   <div class="hero-container" data-ix="hero-header-fold-down">
     <div class="hero">
       <div class="w-row">
@@ -189,7 +257,7 @@
   <div class="hero-cta" data-ix="fadeinuponload-9">
     <div class="w-row">
       <div class="w-clearfix w-col w-col-9 w-col-stack">
-        <div class="cta-text w-clearfix">
+        <div class="cta-text">
           <div class="home-hero-cta" data-ix="fadeinuponload-10">Join the community of <span class="sub-bold">1,345 organisations</span> and <span class="sub-bold">731 projects</span> who use the internet for social good</div>
         </div>
       </div>
@@ -210,7 +278,7 @@
           <h3 class="top3-h3">Funding</h3>
           <div class="top3-underline" data-ix="new-interaction-2"></div>
           <p class="top-3-p">Use our list of funding opportunities to find funding for your project</p>
-          <a class="log-in-link read-more w-clearfix w-inline-block" data-ix="log-in-arrow" href="funding.html">
+          <a class="log-in-link read-more w-clearfix w-inline-block" data-ix="log-in-arrow" href="funding-list.html">
             <div class="login-li menu-li readmore-li">Read more</div>
             <img class="login-arrow" src="images/ios7-arrow-thin-right.png">
           </a>
@@ -242,19 +310,19 @@
   </div>
   <div class="stats-bg">
     <div class="content">
-      <h3 class="big-dsi centered title">DSI is Big</h3>
-      <h2 class="centered h2-large">EXPLORE EUROPE’S GROWING NETWORK OF DIGITAL SOCIAL INNOVATION</h2>
-      <div class="w-row">
+      <h3 class="big-dsi centered title" data-ix="fadeinuponload">DSI is Big</h3>
+      <h2 class="centered h2-large" data-ix="fadeinuponload-2">EXPLORE EUROPE’S GROWING NETWORK OF DIGITAL SOCIAL INNOVATION</h2>
+      <div class="stat-text w-row">
         <div class="w-col w-col-5">
-          <div class="number-of-orgs">1,134</div>
-          <div class="organisations-2">organisations</div>
+          <div class="number-of-orgs" data-ix="fadeinuponload-3">1,134</div>
+          <a class="organisations-2" data-ix="fadeinuponload-4" href="organisations.html">Organisations</a>
         </div>
         <div class="w-col w-col-2">
-          <div class="have-collab">have collaborated on</div>
+          <div class="have-collab" data-ix="fadeinuponload-5">have collaborated on</div>
         </div>
         <div class="w-col w-col-5">
-          <div class="number-of-orgs pro">720</div>
-          <div class="organisations-2 pro">projects</div>
+          <div class="number-of-orgs pro" data-ix="fadeinuponload-6">720</div>
+          <a class="organisations-2" data-ix="fadeinuponload-7" href="projects.html">Projects</a>
         </div>
       </div>
     </div>
@@ -292,50 +360,9 @@
           </a>
         </div>
         <div class="w-col w-col-4">
-          <a class="case-study-ind w-inline-block" data-ix="scaleimage" href="#">
+          <a class="case-study-ind end-cs w-inline-block" data-ix="scaleimage" href="#">
             <div class="case-study-img-container">
               <div class="_3 case-study-img"></div>
-            </div>
-            <h3 class="case-study-card-h3">Goteo</h3>
-            <p class="cradp">The first open, digital house building house building system</p>
-            <div class="log-in-link read-more w-clearfix" data-ix="log-in-arrow">
-              <div class="login-li menu-li readmore-li">Read more</div>
-              <img class="login-arrow" src="images/ios7-arrow-thin-right.png">
-            </div>
-          </a>
-        </div>
-      </div>
-      <div class="w-row">
-        <div class="w-col w-col-4">
-          <a class="case-study-ind w-inline-block" data-ix="scaleimage" href="#">
-            <div class="case-study-img-container">
-              <div class="_4 case-study-img"></div>
-            </div>
-            <h3 class="case-study-card-h3">Wikihouse</h3>
-            <p class="cradp">The first open, digital house building house building system</p>
-            <div class="card log-in-link read-more w-clearfix" data-ix="log-in-arrow">
-              <div class="login-li menu-li readmore-li">Read more</div>
-              <img class="login-arrow" src="images/ios7-arrow-thin-right.png">
-            </div>
-          </a>
-        </div>
-        <div class="w-col w-col-4">
-          <a class="case-study-ind w-inline-block" data-ix="scaleimage" href="#">
-            <div class="case-study-img-container">
-              <div class="_5 case-study-img"></div>
-            </div>
-            <h3 class="case-study-card-h3">Open corporates</h3>
-            <p class="cradp">The first open, digital house building house building system</p>
-            <div class="log-in-link read-more w-clearfix" data-ix="log-in-arrow">
-              <div class="login-li menu-li readmore-li">Read more</div>
-              <img class="login-arrow" src="images/ios7-arrow-thin-right.png">
-            </div>
-          </a>
-        </div>
-        <div class="w-col w-col-4">
-          <a class="case-study-ind w-inline-block" data-ix="scaleimage" href="#">
-            <div class="case-study-img-container">
-              <div class="_6 case-study-img"></div>
             </div>
             <h3 class="case-study-card-h3">Goteo</h3>
             <p class="cradp">The first open, digital house building house building system</p>
@@ -419,7 +446,7 @@
               <img class="cc footer-eu" src="images/88x31.png">
             </div>
             <div class="w-col w-col-11 w-col-medium-6 w-col-small-6 w-col-tiny-6">
-              <div class="footer-small-print">All our work is licensed under a&nbsp;&nbsp;Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License&nbsp;, unless it says otherwise.</div>
+              <div class="footer-small-print">All our work is licensed under a&nbsp;<span class="footer-link-small"></span><span class="footer-link-small"><span xmlns="http://www.w3.org/1999/xhtml">&nbsp;<a class="footer-link-small" href="#">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a></span>&nbsp;</span><span>, unless</span> it says otherwise.</div>
             </div>
           </div>
         </div>
@@ -445,62 +472,6 @@
       </div>
     </div>
     <div class="centre footer-small-print">Nesta is a registered charity in England and Wales 1144091 and Scotland SC042833. Our main address is 1 Plough Place, London, EC4A 1DE</div>
-  </div>
-  <div class="search-block">
-    <div class="close-search" data-ix="close-search-block">+</div>
-    <h1 class="search-h1">Search</h1>
-    <div class="w-form">
-      <form data-name="Email Form" id="email-form" name="email-form">
-        <input class="main-search w-input" data-name="search" id="search" maxlength="256" name="search" placeholder="Search news, projects, organisations and case studies" type="text">
-        <a class="cancel-search" data-ix="close-search-block" href="#">Cancel</a>
-      </form>
-      <div class="w-form-done">
-        <div>Thank you! Your submission has been received!</div>
-      </div>
-      <div class="w-form-fail">
-        <div>Oops! Something went wrong while submitting the form</div>
-      </div>
-    </div>
-    <div class="main-search-results w-row">
-      <div class="search-col w-col w-col-3">
-        <h2 class="full-menu-h2">News &amp; Blogs</h2>
-        <a class="full-menu-link" href="#"><span class="green">-</span> Text Link</a>
-        <a class="full-menu-link" href="#"><span class="green">-</span> Text Link</a>
-        <a class="full-menu-link" href="#"><span class="green">-</span> Text Link</a>
-        <a class="full-menu-link" href="#"><span class="green">-</span> Text Link</a>
-        <a class="full-menu-link" href="#"><span class="green">-</span> Text Link</a>
-      </div>
-      <div class="search-col w-col w-col-3">
-        <h2 class="full-menu-h2">Projects</h2>
-        <a class="full-menu-link" href="#"><span class="green">-</span> Text Link</a>
-        <a class="full-menu-link" href="#"><span class="green">-</span> Text Link</a>
-        <a class="full-menu-link" href="#"><span class="green">-</span> Text Link</a>
-        <a class="full-menu-link" href="#"><span class="green">-</span> Text Link</a>
-        <a class="full-menu-link" href="#"><span class="green">-</span> Text Link</a>
-      </div>
-      <div class="search-col w-col w-col-3">
-        <h2 class="full-menu-h2">Organisations</h2>
-        <a class="full-menu-link" href="#"><span class="green">-</span> Text Link</a>
-        <a class="full-menu-link" href="#"><span class="green">-</span> Text Link</a>
-        <a class="full-menu-link" href="#"><span class="green">-</span> Text Link</a>
-        <a class="full-menu-link" href="#"><span class="green">-</span> Text Link</a>
-        <a class="full-menu-link" href="#"><span class="green">-</span> Text Link</a>
-      </div>
-      <div class="search-col w-col w-col-3">
-        <h2 class="full-menu-h2">Case studies</h2>
-        <a class="full-menu-link" href="#"><span class="green">-</span> Text Link</a>
-        <a class="full-menu-link" href="#"><span class="green">-</span> Text Link</a>
-        <a class="full-menu-link" href="#"><span class="green">-</span> Text Link</a>
-        <a class="full-menu-link" href="#"><span class="green">-</span> Text Link</a>
-        <a class="full-menu-link" href="#"><span class="green">-</span> Text Link</a>
-      </div>
-    </div>
-    <div class="signn">
-      <a class="large log-in-link search-results sign-up w-clearfix w-inline-block" data-ix="log-in-arrow" href="#">
-        <div class="login-li menu-li">See all results</div>
-        <img class="login-arrow" src="images/ios7-arrow-thin-right.png">
-      </a>
-    </div>
   </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js" type="text/javascript"></script>
   <script src="js/dsi4eu.js" type="text/javascript"></script>

@@ -1728,7 +1728,7 @@
 	      // Apply empty fix for certain Chrome versions
 	      if (emptyFix) $el.addClass('w-ix-emptyfix');
 
-	      // Set preserve3d for triggers with transforms
+	      // Set preserve3d for triggers with 3d transforms
 	      if (preserve3d) $el.css('transform-style', 'preserve-3d');
 	    }
 
@@ -1874,6 +1874,7 @@
 	    var found = false;
 	    for (var key in obj) {
 	      if (key === 'transition') continue;
+	      if (key === 'keysort') continue;
 	      if (omit3d) {
 	        if (key === 'z' || key === 'rotateX' || key === 'rotateY' || key === 'scaleZ') {
 	          continue;
@@ -3938,10 +3939,9 @@
 	var Webflow = __webpack_require__(1);
 	var IXEvents = __webpack_require__(2);
 
-	Webflow.define('tabs', module.exports = function($, _) {
+	Webflow.define('tabs', module.exports = function($) {
 	  var api = {};
 	  var tram = $.tram;
-	  var $win = $(window);
 	  var $doc = $(document);
 	  var $tabs;
 	  var design;
@@ -3953,7 +3953,7 @@
 	  var linkCurrent = 'w--current';
 	  var tabActive = 'w--tab-active';
 	  var ix = IXEvents.triggers;
-	  var inRedraw;
+	  var inRedraw = false;
 
 	  // -----------------------------------
 	  // Module methods
@@ -3963,6 +3963,7 @@
 	  api.redraw = function() {
 	    inRedraw = true;
 	    init();
+	    inRedraw = false;
 	  };
 
 	  api.destroy = function() {
@@ -3982,8 +3983,9 @@
 	    $tabs = $doc.find(namespace);
 	    if (!$tabs.length) return;
 	    $tabs.each(build);
-	    Webflow.env('preview') && $tabs.each(resetIX);
-	    inRedraw = null;
+	    if (Webflow.env('preview') && !inRedraw) {
+	      $tabs.each(resetIX);
+	    }
 
 	    removeListeners();
 	    addListeners();
@@ -3998,7 +4000,6 @@
 	  }
 
 	  function resetIX(i, el) {
-	    var $el = $(el);
 	    var data = $.data(el, namespace);
 	    if (!data) return;
 	    data.links && data.links.each(ix.reset);
@@ -4037,15 +4038,14 @@
 
 	  function configure(data) {
 	    var config = {};
-	    var old = data.config || {};
 
 	    // Set config options from data attributes
 	    config.easing = data.el.attr('data-easing') || 'ease';
 
-	    var intro = +data.el.attr('data-duration-in');
+	    var intro = parseInt(data.el.attr('data-duration-in'), 10);
 	    intro = config.intro = intro === intro ? intro : 0;
 
-	    var outro = +data.el.attr('data-duration-out');
+	    var outro = parseInt(data.el.attr('data-duration-out'), 10);
 	    outro = config.outro = outro === outro ? outro : 0;
 
 	    config.immediate = !intro && !outro;
@@ -4772,5 +4772,6 @@ Webflow.require('ix').init([
   {"slug":"scaleimage","name":"scaleImage","value":{"style":{},"triggers":[{"type":"hover","selector":".case-study-img","descend":true,"stepsA":[{"transition":"transform 2500ms ease 0ms","scaleX":1.1,"scaleY":1.1,"scaleZ":1}],"stepsB":[{"transition":"transform 2500ms ease 0ms","scaleX":1,"scaleY":1,"scaleZ":1}]}]}},
   {"slug":"close-search-block","name":"close search block","value":{"style":{},"triggers":[{"type":"click","selector":".search-block","stepsA":[{"opacity":0,"transition":"opacity 250ms ease 0ms"},{"display":"none"}],"stepsB":[]}]}},
   {"slug":"hide-search-icon","name":"hide search icon","value":{"style":{},"triggers":[{"type":"click","selector":".search-mag","siblings":true,"stepsA":[{"opacity":0,"transition":"transform 150ms ease 0ms, opacity 150ms ease 0ms","x":"0px","y":"20px","z":"0px"},{"opacity":0,"x":"0px","y":"-20px","z":"0px"},{"opacity":1,"transition":"transform 150ms ease 0ms, opacity 150ms ease 0ms","x":"0px","y":"0px","z":"0px"}],"stepsB":[]}]}},
-  {"slug":"hero-header-fold-down","name":"hero header fold down","value":{"style":{"opacity":1,"height":"91px"},"triggers":[{"type":"load","stepsA":[{"height":"105px","transition":"height 250ms ease-in-out 0"},{"opacity":1,"height":"570px","transition":"height 300ms ease-in-out 0"},{"height":"560px","transition":"height 250ms ease 0"}],"stepsB":[]}]}}
+  {"slug":"hero-header-fold-down","name":"hero header fold down","value":{"style":{"opacity":1,"height":"91px"},"triggers":[{"type":"load","stepsA":[{"height":"105px","transition":"height 250ms ease-in-out 0"},{"opacity":1,"height":"570px","transition":"height 300ms ease-in-out 0"},{"height":"560px","transition":"height 250ms ease 0"}],"stepsB":[]}]}},
+  {"slug":"growinanim","name":"growInAnim","value":{"style":{"opacity":0,"x":"0px","y":"15px","z":"0px","scaleX":0.8,"scaleY":0.8,"scaleZ":1},"triggers":[{"type":"scroll","stepsA":[{"opacity":1,"transition":"transform 200 ease 0, opacity 200 ease 0","x":"0px","y":"0px","z":"0px"}],"stepsB":[]}]}}
 ]);

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!--  Last Published: Wed Oct 05 2016 15:16:46 GMT+0000 (UTC)  -->
+<!--  Last Published: Thu Oct 06 2016 13:07:31 GMT+0000 (UTC)  -->
 <html data-wf-page="57e504565ca171515efd85f9" data-wf-site="56e2e31a1b1f8f784728a08c">
 <head>
   <meta charset="utf-8">
@@ -64,6 +64,18 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+    }
+    input[type=text],
+    input[type=email],
+    input[type=tel],
+    input[type=url],
+    input[type=search] {
+      appearance: none;
+      -moz-appearance: none;
+      -webkit-appearance: none;
+      border-radius: 0;
+      -moz-border-radius: 0;
+      -webkit-border-radius: 0;
     }
   </style>
 </head>
@@ -155,7 +167,7 @@
             </div>
           </div>
           <div class="full-menu-links-block no-border">
-            <a class="full-menu-link" href="funding.html">See all funding opportunities</a>
+            <a class="full-menu-link" href="funding-list.html">See all funding opportunities</a>
           </div>
         </div>
         <div class="full-menu-col w-clearfix w-col w-col-4">
@@ -183,7 +195,7 @@
             <img class="partner-logo-colour" data-ix="fadeinuponload-3" src="images/nesta.png">
           </div>
           <div class="w-col w-col-9" data-ix="fadeinuponload-4">
-            <p><strong>Nesta</strong> is an innovation charity with a mission to help people and organisations bring great ideas to life. Nesta &nbsp;invests in &nbsp;early-stage &nbsp;companies, informs &nbsp;policy &nbsp;and delivers practical programmes &nbsp;that &nbsp;inspire others to solve the big challenges of the future. Nesta has been a key champion in the UK for the idea that innovation comes from open, collaborative approaches to problem solving and has undertaken research and policy work, as well as practical programmes, to demonstrate this.</p>
+            <p><strong>Nesta</strong> is the UK's innovation foundation. We help people and organisations bring great ideas to life. We do this by providing investments and grants and mobilising research, networks and skills. We are an independent charity and our work is enabled by an endowment from the National Lottery. Nesta is a registered charity in England and Wales 1144091 and Scotland SC042833</p>
             <a class="log-in-link long read-more w-clearfix w-inline-block" data-ix="log-in-arrow" href="http://nesta.org.uk" target="_blank">
               <div class="login-li long menu-li readmore-li">Nesta.org.uk</div>
               <img class="login-arrow" src="images/ios7-arrow-thin-right.png">
@@ -232,7 +244,7 @@
     <div class="close-search" data-ix="close-search-block">+</div>
     <h1 class="search-h1">Search</h1>
     <div class="w-form">
-      <form data-name="Email Form" id="email-form" name="email-form">
+      <form class="fromform" data-name="Email Form" id="email-form" name="email-form">
         <input class="main-search w-input" data-name="search" id="search" maxlength="256" name="search" placeholder="Search news, projects, organisations and case studies" type="text">
         <a class="cancel-search" data-ix="close-search-block" href="#">Cancel</a>
       </form>
@@ -349,7 +361,7 @@
               <img class="cc footer-eu" src="images/88x31.png">
             </div>
             <div class="w-col w-col-11 w-col-medium-6 w-col-small-6 w-col-tiny-6">
-              <div class="footer-small-print">All our work is licensed under a&nbsp;&nbsp;Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License&nbsp;, unless it says otherwise.</div>
+              <div class="footer-small-print">All our work is licensed under a&nbsp;<span class="footer-link-small"></span><span class="footer-link-small"><span xmlns="http://www.w3.org/1999/xhtml">&nbsp;<a class="footer-link-small" href="#">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a></span>&nbsp;</span><span>, unless</span> it says otherwise.</div>
             </div>
           </div>
         </div>

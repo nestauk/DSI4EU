@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!--  Last Published: Wed Oct 05 2016 15:16:46 GMT+0000 (UTC)  -->
+<!--  Last Published: Thu Oct 06 2016 13:07:31 GMT+0000 (UTC)  -->
 <html data-wf-page="578cd38318f10cd163afc8ef" data-wf-site="56e2e31a1b1f8f784728a08c">
 <head>
   <meta charset="utf-8">
@@ -64,6 +64,18 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+    }
+    input[type=text],
+    input[type=email],
+    input[type=tel],
+    input[type=url],
+    input[type=search] {
+      appearance: none;
+      -moz-appearance: none;
+      -webkit-appearance: none;
+      border-radius: 0;
+      -moz-border-radius: 0;
+      -webkit-border-radius: 0;
     }
   </style>
 </head>
@@ -155,7 +167,7 @@
             </div>
           </div>
           <div class="full-menu-links-block no-border">
-            <a class="full-menu-link" href="funding.html">See all funding opportunities</a>
+            <a class="full-menu-link" href="funding-list.html">See all funding opportunities</a>
           </div>
         </div>
         <div class="full-menu-col w-clearfix w-col w-col-4">
@@ -177,7 +189,7 @@
     <div class="close-search" data-ix="close-search-block">+</div>
     <h1 class="search-h1">Search</h1>
     <div class="w-form">
-      <form data-name="Email Form" id="email-form" name="email-form">
+      <form class="fromform" data-name="Email Form" id="email-form" name="email-form">
         <input class="main-search w-input" data-name="search" id="search" maxlength="256" name="search" placeholder="Search news, projects, organisations and case studies" type="text">
         <a class="cancel-search" data-ix="close-search-block" href="#">Cancel</a>
       </form>
@@ -335,7 +347,7 @@
               <img class="cc footer-eu" src="images/88x31.png">
             </div>
             <div class="w-col w-col-11 w-col-medium-6 w-col-small-6 w-col-tiny-6">
-              <div class="footer-small-print">All our work is licensed under a&nbsp;&nbsp;Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License&nbsp;, unless it says otherwise.</div>
+              <div class="footer-small-print">All our work is licensed under a&nbsp;<span class="footer-link-small"></span><span class="footer-link-small"><span xmlns="http://www.w3.org/1999/xhtml">&nbsp;<a class="footer-link-small" href="#">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a></span>&nbsp;</span><span>, unless</span> it says otherwise.</div>
             </div>
           </div>
         </div>

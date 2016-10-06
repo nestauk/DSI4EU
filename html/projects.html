@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!--  Last Published: Wed Oct 05 2016 15:16:46 GMT+0000 (UTC)  -->
+<!--  Last Published: Thu Oct 06 2016 13:07:31 GMT+0000 (UTC)  -->
 <html data-wf-page="577149898479866150f499d2" data-wf-site="56e2e31a1b1f8f784728a08c">
 <head>
   <meta charset="utf-8">
@@ -63,6 +63,18 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+    }
+    input[type=text],
+    input[type=email],
+    input[type=tel],
+    input[type=url],
+    input[type=search] {
+      appearance: none;
+      -moz-appearance: none;
+      -webkit-appearance: none;
+      border-radius: 0;
+      -moz-border-radius: 0;
+      -webkit-border-radius: 0;
     }
   </style>
 </head>
@@ -154,7 +166,7 @@
             </div>
           </div>
           <div class="full-menu-links-block no-border">
-            <a class="full-menu-link" href="funding.html">See all funding opportunities</a>
+            <a class="full-menu-link" href="funding-list.html">See all funding opportunities</a>
           </div>
         </div>
         <div class="full-menu-col w-clearfix w-col w-col-4">
@@ -180,8 +192,8 @@
         <p class="header-intro-descr">While DSI is an incredibly diverse field, the many types of practice can be understood as manifestations of four main technological trends: Open Hardware, Open Networks, Open Data and Open Knowledge.</p>
       </div>
       <div class="sidebar w-col w-col-4 w-col-stack">
-        <h1 class="content-h1 side-bar-space-h1">...</h1>
-        <p>...</p>
+        <h1 class="content-h1 side-bar-space-h1">Add your project</h1>
+        <p>Text here to encourage people to add their projects to the platform</p>
         <a class="log-in-link long read-more w-clearfix w-inline-block" data-ix="log-in-arrow" href="#">
           <div class="login-li long menu-li readmore-li">Add your project</div>
           <img class="login-arrow" src="images/ios7-arrow-thin-right.png">
@@ -285,17 +297,17 @@
                   <input class="w-checkbox-input" data-name="Checkbox 2" id="checkbox-2" name="checkbox-2" type="checkbox">
                   <label class="w-form-label" for="checkbox-2">Open hardware</label>
                 </div>
-                <div class="trend-notes">Open hardware explanation text for this trend to go in this section here</div>
+                <div class="trend-notes">The use of open hardware and maker spaces to develop, make, adapt, hack and shape tools for social change</div>
                 <div class="filter-checkbox w-checkbox">
                   <input class="w-checkbox-input" data-name="Checkbox 5" id="checkbox-5" name="checkbox-5" type="checkbox">
                   <label class="w-form-label" for="checkbox-5">Open networks</label>
                 </div>
-                <div class="trend-notes">Open networks explanation text for this trend to go in this section here</div>
+                <div class="trend-notes">New networks and infrastructures, e.g. sensor networks, where people connect their devices such as phones and internet modems to collectively share resources and solve problems</div>
                 <div class="filter-checkbox w-checkbox">
                   <input class="w-checkbox-input" data-name="Checkbox 4" id="checkbox-4" name="checkbox-4" type="checkbox">
                   <label class="w-form-label" for="checkbox-4">Open data</label>
                 </div>
-                <div class="trend-notes">Open data explanation text for this trend to go in this section here</div>
+                <div class="trend-notes">Innovative ways of opening up, capturing, using, analysing and interpreting open data</div>
                 <div class="filter-checkbox w-checkbox">
                   <input class="w-checkbox-input" data-name="Checkbox 3" id="checkbox-3" name="checkbox-3" type="checkbox">
                   <label class="w-form-label" for="checkbox-3">Open knowledge</label>
@@ -308,7 +320,7 @@
                 <div>Oops! Something went wrong while submitting the form</div>
               </div>
             </div>
-            <div class="trend-notes">Open knowledge explanation text for this trend to go in this section here</div>
+            <div class="trend-notes">Where &nbsp;people come together through online platforms to crowdsource or crowdfund solutions, collectively analyse data and develop new DSI projects</div>
           </div>
         </div>
         <div class="w-col w-col-8">
@@ -374,7 +386,7 @@
     <div class="close-search" data-ix="close-search-block">+</div>
     <h1 class="search-h1">Search</h1>
     <div class="w-form">
-      <form data-name="Email Form" id="email-form" name="email-form">
+      <form class="fromform" data-name="Email Form" id="email-form" name="email-form">
         <input class="main-search w-input" data-name="search" id="search" maxlength="256" name="search" placeholder="Search news, projects, organisations and case studies" type="text">
         <a class="cancel-search" data-ix="close-search-block" href="#">Cancel</a>
       </form>
@@ -491,7 +503,7 @@
               <img class="cc footer-eu" src="images/88x31.png">
             </div>
             <div class="w-col w-col-11 w-col-medium-6 w-col-small-6 w-col-tiny-6">
-              <div class="footer-small-print">All our work is licensed under a&nbsp;&nbsp;Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License&nbsp;, unless it says otherwise.</div>
+              <div class="footer-small-print">All our work is licensed under a&nbsp;<span class="footer-link-small"></span><span class="footer-link-small"><span xmlns="http://www.w3.org/1999/xhtml">&nbsp;<a class="footer-link-small" href="#">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a></span>&nbsp;</span><span>, unless</span> it says otherwise.</div>
             </div>
           </div>
         </div>
