@@ -11,54 +11,47 @@ require __DIR__ . '/header.php';
     <script type="text/javascript">
         profileUserID = '<?php echo $userID?>';
     </script>
-    <script type="text/javascript"
-            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/UserController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 
     <div ng-controller="UserController as ctrl" id="UserController">
-
-        <div class="w-section page-header">
-            <div class="container-wide header">
-                <h1 class="page-h1 light">
-                    <?php echo show_input($user->getFirstName()) ?>
-                    <?php echo show_input($user->getLastName()) ?>
-                </h1>
-                <div class="position">
-                    <?php if ($user->getJobTitle() OR $user->getCompany()) { ?>
+        <div class="content-block">
+            <div class="w-row">
+                <div class="w-col w-col-8">
+                    <img class="large-profile-img"
+                         src="<?php echo \DSI\Entity\Image::PROFILE_PIC_URL . $user->getProfilePicOrDefault() ?>">
+                    <h1 class="content-h1 profile-h1"><?php echo show_input($user->getFullName()) ?></h1>
+                    <div class="profile-job-title">
                         <?php echo show_input($user->getJobTitle()) ?>
                         <?php if ($user->getJobTitle() AND $user->getCompany()) echo ' at ' ?>
                         <?php echo show_input($user->getCompany()) ?>
-                    <?php } else { ?>
-                        &nbsp;
+                    </div>
+                    <p class="intro"><?php echo nl2br(show_input($user->getBio())) ?></p>
+                    <h3>Location</h3>
+                    <p>
+                        <?php echo show_input($user->getCityName()) ?>,
+                        <?php if ($user->getCityName() != '' AND $user->getCountryName() != '') echo ', '; ?>
+                        <?php echo show_input($user->getCountryName()) ?>
+                    </p>
+                </div>
+                <div class="sidebar w-col w-col-4">
+                    <?php if ($isOwner) { ?>
+                        <?php require __DIR__ . '/partialViews/profile-menu.php'?>
                     <?php } ?>
                 </div>
-                <img class="large-profile-img"
-                     src="<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/<?php echo $user->getProfilePicOrDefault() ?>">
-                <?php if ($isOwner) { ?>
-                    <a class="w-button dsi-button profile-edit" href="<?php echo $urlHandler->editProfile() ?>">
-                        Edit profile</a>
-                <?php } ?>
             </div>
         </div>
 
-        <div class="w-section project-section">
+        <div class="content-directory">
             <div class="container-wide">
-                <div class="w-row profile-info">
+                <div class="profile-info w-row">
                     <div class="w-col w-col-4 w-col-stack">
                         <div class="info-card">
-                            <h3 class="info-h card-h">About me</h3>
-                            <p class="project-summary" ng-bind="user.bio" style="white-space: pre-line">
-                                <?php echo nl2br(show_input($user->getBio())) ?>
-                            </p>
-                            <?php if ($user->getCityName() OR $user->getCountryName()) { ?>
-                                <h3 class="info-h card-h">Location</h3>
-                                <p class="project-summary">
-                                    <?php echo $user->getCityName() ?>,
-                                    <?php echo $user->getCountryName() ?>
-                                </p>
-                            <?php } ?>
-
                             <h3 class="card-h info-h">Contact me</h3>
                             <ul class="w-list-unstyled">
+                                <?php /*
+                                <li class="profile-contact-link">
+                                    <a class="link profile-contact-link" href="#">Daniel.pettifer@nesta.org.uk</a>
+                                </li>
+                                */ ?>
                                 <?php foreach ($userLinks AS $link) { ?>
                                     <li class="profile-contact-link">
                                         <a <?php if (!$user->isCommunityAdmin() AND !$user->isEditorialAdmin()) echo 'rel="nofollow"' ?>
@@ -68,91 +61,21 @@ require __DIR__ . '/header.php';
                                     </li>
                                 <?php } ?>
                             </ul>
-
-                            <h3 class="info-h card-h">My skills:</h3>
-                            <div class="w-clearfix tags-block">
+                            <h3 class="card-h info-h">My skills:</h3>
+                            <div class="tags-block">
                                 <div class="tag" ng-repeat="skill in skills" ng-cloak>
-                                    <?php /* if ($isOwner) { ?>
-                                        <div class="delete" ng-click="removeSkill(skill)">-</div>
-                                    <?php } */ ?>
                                     <div ng-bind="skill"></div>
                                 </div>
                             </div>
-                            <?php /* if ($isOwner) { ?>
-                                <div ng-cloak>
-                                    <div class="w-clearfix add-new">
-                                        <a class="w-button dsi-button add-new-item" href="#"
-                                           ng-click="showAddSkill = !showAddSkill"
-                                           ng-bind="showAddSkill ? 'Close' : 'Add new skill +'">Add new skill +</a>
-                                    </div>
-
-                                    <div class="add-new-input" ng-show="showAddSkill">
-                                        <div class="w-form">
-                                            <form class="w-clearfix" id="email-form-2"
-                                                  name="email-form-2">
-                                                <select data-tags="true"
-                                                        data-placeholder="Add your skill"
-                                                        id="Add-skill" name="Add-skill"
-                                                        class="w-input add-skill"
-                                                        multiple
-                                                        style="width:200px">
-                                                    <option></option>
-                                                </select>
-                                                <input class="w-button add-new-input-button" data-wait="Please wait..."
-                                                       type="submit" value="Add +">
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php } */ ?>
-
-                            <?php /*
-                            <h3 class="info-h card-h">My Languages:</h3>
-                            <div class="w-clearfix tags-block">
-                                <div class="tag" ng-repeat="lang in languages" ng-cloak>
-                                    <?php /* if ($isOwner) { ?>
-                                        <div class="delete" ng-click="removeLanguage(lang)">-</div>
-                                    <?php } * / ?>
-                                    <div ng-bind="lang"></div>
-                                </div>
-                            </div>
-                            */ ?>
-                            <?php /* if ($isOwner) { ?>
-                                <div ng-cloak>
-                                    <div class="w-clearfix add-new" ng-click="showAddLanguage = !showAddLanguage">
-                                        <a class="w-button dsi-button add-new-item" href="#"
-                                           ng-bind="showAddLanguage ? 'Close' : 'Add new language +'">Add new language
-                                            +</a>
-                                    </div>
-
-                                    <div class="add-new-input" ng-show="showAddLanguage">
-                                        <div class="w-form">
-                                            <form class="w-clearfix" id="email-form-2"
-                                                  name="email-form-2">
-                                                <select data-placeholder="Select your language"
-                                                        id="Add-language" name="Add-language"
-                                                        class="w-input add-language"
-                                                        multiple
-                                                        style="width:200px">
-                                                    <option></option>
-                                                </select>
-                                                <input class="w-button add-new-input-button" data-wait="Please wait..."
-                                                       type="submit" value="Add +">
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php } */ ?>
                         </div>
                     </div>
                     <div class="w-col w-col-4 w-col-stack">
                         <div class="info-card">
-                            <h3 class="info-h card-h">Projects i'm involved with</h3>
+                            <h3 class="card-h info-h">Projects i'm involved with</h3>
                             <div class="list-items">
-                                <a class="w-inline-block partner-link" href="#"
-                                   ng-href="{{project.url}}"
+                                <a class="partner-link w-inline-block" href="{{project.url}}"
                                    ng-repeat="project in user.projects" ng-cloak>
-                                    <div class="w-clearfix list-item">
+                                    <div class="list-item w-clearfix">
                                         <div class="partner-title" ng-bind="project.name"></div>
                                         <div class="no-of-projects">
                                             <span ng-bind="project.membersCount"></span>
@@ -162,22 +85,21 @@ require __DIR__ . '/header.php';
                                     </div>
                                 </a>
                             </div>
-                            <?php /* if ($isOwner) { ?>
+                            <?php if ($isOwner) { ?>
                                 <div class="join-project">
-                                    <a class="w-button btn btn-join" href="#"
-                                       ng-click="editPanel = 'joinProject'"
-                                       data-ix="show-profile-update">Add new project +</a>
+                                    <a class="btn btn-join w-button" data-ix="show-join-project" href="#">Add new
+                                        project +</a>
                                 </div>
-                            <?php } */ ?>
+                            <?php } ?>
                         </div>
                     </div>
                     <div class="w-col w-col-4 w-col-stack">
                         <div class="info-card">
-                            <h3 class="info-h card-h">Organisations i'm involved with</h3>
+                            <h3 class="card-h3">Organisations i'm involved with</h3>
                             <div class="list-items">
-                                <a ng-href="{{organisation.url}}" href="#" class="w-inline-block partner-link"
+                                <a class="partner-link w-inline-block" href="{{organisation.url}}"
                                    ng-repeat="organisation in user.organisations" ng-cloak>
-                                    <div class="w-clearfix list-item">
+                                    <div class="list-item w-clearfix">
                                         <div class="partner-title" ng-bind="organisation.name"></div>
                                         <div class="no-of-projects">
                                             <span ng-bind="organisation.membersCount"></span>
@@ -187,102 +109,30 @@ require __DIR__ . '/header.php';
                                     </div>
                                 </a>
                             </div>
-                            <?php /* if ($isOwner) { ?>
+                            <?php if ($isOwner) { ?>
                                 <div class="join-project">
-                                    <a href="#" class="w-button btn btn-join"
-                                       ng-click="editPanel = 'joinOrganisation'"
-                                       data-ix="show-profile-update">
-                                        Join organisation +
-                                    </a>
+                                    <a class="btn btn-join w-button" data-ix="show-join-organisation" href="#">Join
+                                        organisation +</a>
                                 </div>
-                            <?php } */ ?>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <?php /* if ($isOwner) { ?>
-            <div class="profile-update bg-blur">
-                <div class="update-modal">
-                    <div class="modal-header"></div>
-                    <div data-ix="close-profile-update" class="close modal-close">+</div>
-                    <img width="160" src="<?php echo SITE_RELATIVE_PATH ?>/images/logo-white.svg" class="modal-brand">
+        <?php if ($isOwner) { ?>
 
-                    <div style="padding:90px 0">
-                        <div ng-show="editPanel == 'basicDetails'">
-                            <h2 class="modal-h2">Update personal info</h2>
-
-                            <div class="w-form login-form" style="margin-top:0">
-                                <form ng-submit="saveBasicDetails()">
-                                    <input type="text" placeholder="First Name" class="w-input login-field"
-                                           ng-class="{error: userEdit.errors.firstName}" ng-model="userEdit.firstName">
-                                    <div style="color:red" ng-show="userEdit.errors.firstName"
-                                         ng-bind="userEdit.errors.firstName"></div>
-
-                                    <input type="text" placeholder="Last Name" class="w-input login-field"
-                                           ng-model="userEdit.lastName" ng-class="{error: userEdit.errors.lastName}">
-                                    <div style="color:red" ng-show="userEdit.errors.lastName"
-                                         ng-bind="userEdit.errors.lastName"></div>
-
-                                    <input type="text" placeholder="Job Title" class="w-input login-field"
-                                           ng-model="userEdit.jobTitle" ng-class="{error: userEdit.errors.jobTitle}">
-                                    <div style="color:red" ng-show="userEdit.errors.jobTitle"
-                                         ng-bind="userEdit.errors.jobTitle"></div>
-
-                                    <input type="text" placeholder="Location" class="w-input login-field"
-                                           ng-model="userEdit.location" ng-class="{error: userEdit.errors.location}">
-                                    <div style="color:red" ng-show="userEdit.errors.location"
-                                         ng-bind="userEdit.errors.location"></div>
-
-                                    <div class="cancel-save">
-                                        <div class="w-row">
-                                            <div class="w-col w-col-6">
-                                                <a href="#" data-ix="close-profile-update"
-                                                   class="w-button dsi-button cors cancel">Close</a>
-                                            </div>
-                                            <div class="w-col w-col-6">
-                                                <input type="submit" class="w-button dsi-button cors"
-                                                       ng-value="userEdit.loading ? 'Saving...' : 'Save'"
-                                                       ng-disabled="userEdit.loading"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <div ng-show="editPanel == 'bio'">
-                            <h2 class="modal-h2">Update biography</h2>
-                            <div class="w-form login-form" style="margin-top:0">
-                                <form ng-submit="saveBio()">
-                                <textarea class="readjustTextarea w-input profile-text"
-                                          style="width:100%;border: 1px solid #cccccc;"
-                                          placeholder="Add a short biography" ng-model="userEdit.bio"></textarea>
-
-                                    <div style="color:red" ng-show="userEdit.errors.bio"
-                                         ng-bind="userEdit.errors.bio"></div>
-
-                                    <div class="cancel-save">
-                                        <div class="w-row">
-                                            <div class="w-col w-col-6">
-                                                <a href="#" data-ix="close-profile-update"
-                                                   class="w-button dsi-button cors cancel">Close</a>
-                                            </div>
-                                            <div class="w-col w-col-6">
-                                                <input type="submit" class="w-button dsi-button cors"
-                                                       ng-value="userEdit.loading ? 'Saving...' : 'Save'"
-                                                       ng-disabled="userEdit.loading"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <div ng-show="editPanel == 'joinProject'">
-                            <h2 class="modal-h2">Join project</h2>
-                            <div class="w-form login-form" style="margin-top:0">
-                                <form ng-submit="joinProject.submit()" id="joinProjectForm">
-                                    <select style="width:100%" data-placeholder="Select a project"
+            <div class="join-project-modal modal">
+                <div class="modal-container">
+                    <div class="modal-helper">
+                        <div class="modal-content">
+                            <h1 class="centered" style="padding-top:125px">
+                                Join project
+                            </h1>
+                            <div class="w-form">
+                                <form ng-submit="joinProject.submit()" id="joinProjectForm" style="text-align:center">
+                                    <select style="width:60%" data-placeholder="Select a project"
                                             ng-model="joinProject.data.project">
                                         <option value=""></option>
                                         <?php foreach ($projects AS $project) { ?>
@@ -303,27 +153,30 @@ require __DIR__ . '/header.php';
                                         Your request to join the project has been successfully send.
                                     </div>
 
-                                    <div class="cancel-save">
-                                        <div class="w-row">
-                                            <div class="w-col w-col-6">
-                                                <a href="#" data-ix="close-profile-update"
-                                                   class="w-button dsi-button post-story cancel custom-cancel">Close</a>
-                                            </div>
-                                            <div class="w-col w-col-6">
-                                                <input type="submit" class="w-button dsi-button cors"
-                                                       ng-value="joinProject.loading ? 'Saving...' : 'Join'"
-                                                       ng-disabled="joinProject.loading"/>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <input class="btn btn-join w-button" type="submit"
+                                           style="position:static;min-width:200px"
+                                           ng-value="joinProject.loading ? 'Saving...' : 'Join'"
+                                           ng-disabled="joinProject.loading">
                                 </form>
                             </div>
+                            <div class="cancel">
+                                <a href="#" data-ix="close-join-project"><?php _ehtml('Cancel') ?></a>
+                            </div>
                         </div>
-                        <div ng-show="editPanel == 'joinOrganisation'">
-                            <h2 class="modal-h2">Join Organisation</h2>
-                            <div class="w-form login-form" style="margin-top:0">
-                                <form ng-submit="joinOrganisation.submit()" id="joinOrganisationForm">
-                                    <select style="width:100%" data-placeholder="Select an organisation"
+                    </div>
+                </div>
+            </div>
+
+            <div class="join-organisation-modal modal">
+                <div class="modal-container">
+                    <div class="modal-helper">
+                        <div class="modal-content">
+                            <h1 class="centered" style="padding-top:125px">
+                                Join Organisation
+                            </h1>
+                            <div class="w-form">
+                                <form ng-submit="joinOrganisation.submit()" id="joinOrganisationForm" style="text-align:center">
+                                    <select style="width:60%" data-placeholder="Select an organisation"
                                             ng-model="joinOrganisation.data.organisation">
                                         <option value=""></option>
                                         <?php foreach ($organisations AS $organisation) { ?>
@@ -344,26 +197,23 @@ require __DIR__ . '/header.php';
                                         Your request to join the organisation has been successfully send.
                                     </div>
 
-                                    <div class="cancel-save">
-                                        <div class="w-row">
-                                            <div class="w-col w-col-6">
-                                                <a href="#" data-ix="close-profile-update"
-                                                   class="w-button dsi-button post-story cancel custom-cancel">Close</a>
-                                            </div>
-                                            <div class="w-col w-col-6">
-                                                <input type="submit" class="w-button dsi-button cors"
-                                                       ng-value="joinOrganisation.loading ? 'Saving...' : 'Join'"
-                                                       ng-disabled="joinOrganisation.loading"/>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <input class="btn btn-join w-button" type="submit"
+                                           style="position:static;min-width:200px"
+                                           ng-value="joinOrganisation.loading ? 'Saving...' : 'Join'"
+                                           ng-disabled="joinOrganisation.loading">
                                 </form>
+                            </div>
+                            <div class="cancel">
+                                <a href="#" data-ix="close-join-organisation"><?php _ehtml('Cancel') ?></a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        <?php } */ ?>
+        <?php } ?>
+
+        <script type="text/javascript"
+                src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/UserController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 
         <script type="text/javascript">
             (function () {

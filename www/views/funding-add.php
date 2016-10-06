@@ -74,7 +74,7 @@ require __DIR__ . '/header.php';
                                     <?php } ?>
                                 </select>
 
-                                <br/>
+                                <br/><br/>
                                 <label for="name-9">Target organisations and projects: </label>
                                 <br/>
                                 <?php foreach ($fundingTargets AS $target) { ?>
