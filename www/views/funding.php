@@ -34,7 +34,7 @@ require __DIR__ . '/header.php'
                         </a>
                     <?php } else { ?>
                         <a class="log-in-link long read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
-                           href="https://docs.google.com/forms/d/e/1FAIpQLSdqqKchxmluTwVZ65P-gvT2Qt076xW_EJRYVp4H1bV2n7_a1Q/viewform">
+                           href="https://docs.google.com/forms/d/e/1FAIpQLSd8V-vyQADRo_ofvc5n49CBB-qeEgMlymLgQ6EUTJJWLD7DkQ/viewform">
                             <div class="login-li long menu-li readmore-li">Submit funding</div>
                             <img class="login-arrow"
                                  src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
