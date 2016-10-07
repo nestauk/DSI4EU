@@ -10,214 +10,297 @@ require __DIR__ . '/header.php';
 /** @var $organisationProjectsObj \DSI\Entity\OrganisationProject[] */
 /** @var $urlHandler \DSI\Service\URL */
 ?>
-    <script
-        src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/ProjectController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
-
     <div
         ng-controller="ProjectController"
         data-projectid="<?php echo $project->getId() ?>">
 
-        <div class="header-large-section">
-            <div class="header-large"
-                 style="background-image: linear-gradient(180deg, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url('<?php echo \DSI\Entity\Image::PROJECT_HEADER_URL . $project->getHeaderImageOrDefault() ?>');">
-                <div class="container-wide container-wide-header-large">
+        <div class="case-study-intro">
+            <div class="header-content">
+                <div class="case-study-img-bg-blur"
+                     style="background-image: linear-gradient(180deg, rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), url('<?php echo \DSI\Entity\Image::PROJECT_HEADER_URL . $project->getHeaderImageOrDefault() ?>');"></div>
+                <div class="container-wide">
+                    <h1 class="case-study-h1"><?php echo show_input($project->getName()) ?></h1>
+                    <h3 class="home-hero-h3"></h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-content">
+            <div class="w-row">
+                <div class="content-left w-col w-col-8">
+                    <div class="intro"><?php echo show_input($project->getShortDescription()) ?></div>
+                    <div><?php echo $project->getDescription() ?></div>
+                    <h3 class="descr-h3">Social Impact</h3>
+                    <div><?php echo $project->getSocialImpact() ?></div>
+                    <div class="involved">
+                        <h3 class="descr-h3 space">Who's involved</h3>
+                        <h4 class="involved-h4">People</h4>
+                        <?php foreach ($projectMembers AS $projectMember) {
+                            $member = $projectMember->getMember() ?>
+                            <a class="involved-card w-inline-block"
+                               href="<?php echo $urlHandler->profile($member->getId()) ?>">
+                                <div class="involved-card">
+                                    <div class="w-row">
+                                        <div class="image-col w-col w-col-3 w-col-small-3 w-col-tiny-3">
+                                            <img class="involved-profile-img"
+                                                 src="<?php echo \DSI\Entity\Image::PROFILE_PIC_URL . $member->getProfilePicOrDefault() ?>"
+                                                 width="50">
+                                        </div>
+                                        <div class="w-clearfix w-col w-col-9 w-col-small-9 w-col-tiny-9">
+                                            <div
+                                                class="card-name"><?php echo show_input($member->getFullName()) ?></div>
+                                            <div
+                                                class="card-position"><?php echo show_input($member->getJobTitle()) ?></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        <?php } ?>
+                        <h4 class="involved-h4 orgs-h">Organisations</h4>
+                        <?php foreach ($organisationProjectsObj AS $organisationProject) {
+                            $organisation = $organisationProject->getOrganisation(); ?>
+                            <a class="sidebar-link" href="<?php echo $urlHandler->organisation($organisation) ?>">
+                                <span class="green">-&nbsp;</span><?php echo show_input($organisation->getName()) ?></a>
+                        <?php } ?>
+                    </div>
+                </div>
+                <div class="column-right-small w-col w-col-4">
                     <?php if ($userCanEditProject) { ?>
-                        <a class="dsi-button profile-edit w-button" style="z-index:1000"
-                           href="<?php echo $urlHandler->editProject($project) ?>">Edit project</a>
+                        <h3 class="cse side-bar-h3">Actions</h3>
+                        <a class="sidebar-link" href="<?php echo $urlHandler->editProject($project) ?>">
+                            <span class="green">-&nbsp;</span>Edit project</a>
+                        <?php /* <a class="sidebar-link"><span class="green">-&nbsp;</span>Publish / unpublish</a> */ ?>
+                        <?php /* <a class="remove sidebar-link"><span class="green">-&nbsp;</span>Remove project</a> */ ?>
                     <?php } ?>
-                    <?php if ($isOwner OR ($loggedInUser AND $loggedInUser->isSysAdmin())) { ?>
-                        <a class="dsi-button profile-edit w-button" style="z-index:1000;bottom:80px"
-                           href="<?php echo $urlHandler->editProjectOwner($project) ?>">
-                            Change owner</a>
-                    <?php } ?>
-                    <h1 class="header-large-h1-centre"
-                        data-ix="fadeinuponload"><?php echo show_input($project->getName()) ?></h1>
-                    <div class="header-large-desc">
-                        <a class="ext-url" data-ix="fadeinup-2" href="<?php echo $project->getUrl() ?>" target="_blank">
-                            <?php echo $project->getUrl() ?>
-                        </a>
-                        <div>
-                            <div class="expanding-social w-clearfix">
-                                <?php if (isset($links['facebook'])) { ?>
-                                    <div class="inline sm-nu-bloxk w-clearfix">
-                                        <a href="<?php echo $links['facebook'] ?>" target="_blank">
-                                            <img class="sm-icon" width="40"
-                                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/facebook-logo.png">
-                                            <div class="hero-social-label">Facebook</div>
-                                        </a>
-                                    </div>
-                                <?php } ?>
-                                <?php if (isset($links['twitter'])) { ?>
-                                    <div class="inline sm-nu-bloxk w-clearfix">
-                                        <a href="<?php echo $links['twitter'] ?>" target="_blank">
-                                            <img class="sm-icon" width="40"
-                                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/twitter-logo-silhouette.png">
-                                            <div class="hero-social-label">Twitter</div>
-                                        </a>
-                                    </div>
-                                <?php } ?>
-                                <?php if (isset($links['github'])) { ?>
-                                    <div class="inline sm-nu-bloxk w-clearfix">
-                                        <a href="<?php echo $links['github'] ?>" target="_blank">
-                                            <img class="sm-icon" width="40"
-                                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/social.png">
-                                            <div class="hero-social-label">Github</div>
-                                        </a>
-                                    </div>
-                                <?php } ?>
-                                <?php if (isset($links['googleplus'])) { ?>
-                                    <div class="inline sm-nu-bloxk w-clearfix">
-                                        <a href="<?php echo $links['googleplus'] ?>" target="_blank">
-                                            <img class="sm-icon" width="40"
-                                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/google-plus-logo.png">
-                                            <div class="hero-social-label">Google +</div>
-                                        </a>
-                                    </div>
-                                <?php } ?>
-                            </div>
+                    <?php /*
+                    <h3 class="cse side-bar-h3">Info</h3>
+                    <p>DSI4EU has been running since February 2016 and is partnered by Nesta, The Waag Society, and
+                        SUPSI</p>
+                    */ ?>
+                    <a class="log-in-link long read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
+                       href="<?php echo $project->getUrl() ?>">
+                        <div class="login-li long menu-li readmore-li">Visit website</div>
+                        <img class="login-arrow"
+                             src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
+                    </a>
+                    <h3 class="cse side-bar-h3">Tagged under</h3>
+                    <div class="tag" ng-repeat="tag in project.tags" ng-bind="tag"></div>
+                    <h3 class="cse side-bar-h3">Areas of society impacted</h3>
+                    <p>Areas of society that this project aims to support</p>
+                    <div class="tag" ng-repeat="tag in project.impactTagsA" ng-bind="tag"></div>
+                    <h3 class="cse side-bar-h3">DSI Focus</h3>
+                    <p>Areas of DSI that this project is a part of</p>
+                    <div class="tag" ng-repeat="tag in project.impactTagsB" ng-bind="tag"></div>
+                    <h3 class="cse side-bar-h3">Technology type</h3>
+                    <p>The types of technology involved with this project</p>
+                    <div class="tag" ng-repeat="tag in project.impactTagsC" ng-bind="tag"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <?php /*
+    <div class="header-large-section">
+        <div class="header-large"
+             style="background-image: linear-gradient(180deg, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url('<?php echo \DSI\Entity\Image::PROJECT_HEADER_URL . $project->getHeaderImageOrDefault() ?>');">
+            <div class="container-wide container-wide-header-large">
+                <?php if ($userCanEditProject) { ?>
+                    <a class="dsi-button profile-edit w-button" style="z-index:1000"
+                       href="<?php echo $urlHandler->editProject($project) ?>">Edit project</a>
+                <?php } ?>
+                <?php if ($isOwner OR ($loggedInUser AND $loggedInUser->isSysAdmin())) { ?>
+                    <a class="dsi-button profile-edit w-button" style="z-index:1000;bottom:80px"
+                       href="<?php echo $urlHandler->editProjectOwner($project) ?>">
+                        Change owner</a>
+                <?php } ?>
+                <h1 class="header-large-h1-centre"
+                    data-ix="fadeinuponload"><?php echo show_input($project->getName()) ?></h1>
+                <div class="header-large-desc">
+                    <a class="ext-url" data-ix="fadeinup-2" href="<?php echo $project->getUrl() ?>" target="_blank">
+                        <?php echo $project->getUrl() ?>
+                    </a>
+                    <div>
+                        <div class="expanding-social w-clearfix">
+                            <?php if (isset($links['facebook'])) { ?>
+                                <div class="inline sm-nu-bloxk w-clearfix">
+                                    <a href="<?php echo $links['facebook'] ?>" target="_blank">
+                                        <img class="sm-icon" width="40"
+                                             src="<?php echo SITE_RELATIVE_PATH ?>/images/facebook-logo.png">
+                                        <div class="hero-social-label">Facebook</div>
+                                    </a>
+                                </div>
+                            <?php } ?>
+                            <?php if (isset($links['twitter'])) { ?>
+                                <div class="inline sm-nu-bloxk w-clearfix">
+                                    <a href="<?php echo $links['twitter'] ?>" target="_blank">
+                                        <img class="sm-icon" width="40"
+                                             src="<?php echo SITE_RELATIVE_PATH ?>/images/twitter-logo-silhouette.png">
+                                        <div class="hero-social-label">Twitter</div>
+                                    </a>
+                                </div>
+                            <?php } ?>
+                            <?php if (isset($links['github'])) { ?>
+                                <div class="inline sm-nu-bloxk w-clearfix">
+                                    <a href="<?php echo $links['github'] ?>" target="_blank">
+                                        <img class="sm-icon" width="40"
+                                             src="<?php echo SITE_RELATIVE_PATH ?>/images/social.png">
+                                        <div class="hero-social-label">Github</div>
+                                    </a>
+                                </div>
+                            <?php } ?>
+                            <?php if (isset($links['googleplus'])) { ?>
+                                <div class="inline sm-nu-bloxk w-clearfix">
+                                    <a href="<?php echo $links['googleplus'] ?>" target="_blank">
+                                        <img class="sm-icon" width="40"
+                                             src="<?php echo SITE_RELATIVE_PATH ?>/images/google-plus-logo.png">
+                                        <div class="hero-social-label">Google +</div>
+                                    </a>
+                                </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="case-study-main">
-            <div class="container-wide">
-                <div class="case-study-logo" data-ix="fadeinuponload-3">
-                    <img class="case-study-logo-over ab-fab"
-                         src="<?php echo \DSI\Entity\Image::PROJECT_LOGO_URL . $project->getLogoOrDefault() ?>">
-                </div>
-                <div class="case-study-single-container w-container">
-                    <h2 class="centered" data-ix="fadeinuponload-4">About the project</h2>
-                    <p class="centered"
-                       data-ix="fadeinuponload-5"><?php echo show_input($project->getShortDescription()) ?></p>
-                    <h4 class="case-study-intro-detail centered" data-ix="fadeinuponload-5">
-                        <?php echo show_input($project->getName()) ?>
-                        <?php if ($region = $project->getRegion()) { ?>
-                            is based in
-                            <?php echo show_input($region->getName()) ?>,
-                            <?php echo show_input($region->getCountry()->getName()) ?>
-                            <?php if ($project->getStartDate() OR $project->getEndDate()) { ?>
-                                and
-                            <?php } ?>
+    <div class="case-study-main">
+        <div class="container-wide">
+            <div class="case-study-logo" data-ix="fadeinuponload-3">
+                <img class="case-study-logo-over ab-fab"
+                     src="<?php echo \DSI\Entity\Image::PROJECT_LOGO_URL . $project->getLogoOrDefault() ?>">
+            </div>
+            <div class="case-study-single-container w-container">
+                <h2 class="centered" data-ix="fadeinuponload-4">About the project</h2>
+                <p class="centered"
+                   data-ix="fadeinuponload-5"><?php echo show_input($project->getShortDescription()) ?></p>
+                <h4 class="case-study-intro-detail centered" data-ix="fadeinuponload-5">
+                    <?php echo show_input($project->getName()) ?>
+                    <?php if ($region = $project->getRegion()) { ?>
+                        is based in
+                        <?php echo show_input($region->getName()) ?>,
+                        <?php echo show_input($region->getCountry()->getName()) ?>
+                        <?php if ($project->getStartDate() OR $project->getEndDate()) { ?>
+                            and
                         <?php } ?>
-                        <?php
-                        if ($project->getStartDate() AND !$project->getEndDate()) {
+                    <?php } ?>
+                    <?php
+                    if ($project->getStartDate() AND !$project->getEndDate()) {
+                        if ($project->startDateHasPassed()) {
+                            echo 'started in ', $project->getStartDate('M, Y');
+                        } else {
+                            echo 'will start in ', $project->getStartDate('M, Y');
+                        }
+                    } elseif (!$project->getStartDate() AND $project->getEndDate()) {
+                        if ($project->endDateHasPassed()) {
+                            echo 'ran until ', $project->getEndDate('M, Y');
+                        } else {
+                            echo 'is running until ', $project->getEndDate('M, Y');
+                        }
+                    } elseif ($project->getStartDate() AND $project->getEndDate()) {
+                        if ($project->getStartDate('M, Y') == $project->getEndDate('M, Y')) {
                             if ($project->startDateHasPassed()) {
-                                echo 'started in ', $project->getStartDate('M, Y');
-                            } else {
-                                echo 'will start in ', $project->getStartDate('M, Y');
+                                echo 'ran in ', $project->getStartDate('M, Y');
+                            } elseif ($project->startDateIsInFuture()) {
+                                echo 'will run in ', $project->getStartDate('M, Y');
                             }
-                        } elseif (!$project->getStartDate() AND $project->getEndDate()) {
+                        } else {
                             if ($project->endDateHasPassed()) {
-                                echo 'ran until ', $project->getEndDate('M, Y');
+                                echo 'ran from ', $project->getStartDate('M, Y'),
+                                ' to ', $project->getEndDate('M, Y');
+                            } elseif ($project->startDateIsInFuture()) {
+                                echo 'will run from ', $project->getStartDate('M, Y'),
+                                ' to ', $project->getEndDate('M, Y');
                             } else {
-                                echo 'is running until ', $project->getEndDate('M, Y');
-                            }
-                        } elseif ($project->getStartDate() AND $project->getEndDate()) {
-                            if ($project->getStartDate('M, Y') == $project->getEndDate('M, Y')) {
-                                if ($project->startDateHasPassed()) {
-                                    echo 'ran in ', $project->getStartDate('M, Y');
-                                } elseif ($project->startDateIsInFuture()) {
-                                    echo 'will run in ', $project->getStartDate('M, Y');
-                                }
-                            } else {
-                                if ($project->endDateHasPassed()) {
-                                    echo 'ran from ', $project->getStartDate('M, Y'),
-                                    ' to ', $project->getEndDate('M, Y');
-                                } elseif ($project->startDateIsInFuture()) {
-                                    echo 'will run from ', $project->getStartDate('M, Y'),
-                                    ' to ', $project->getEndDate('M, Y');
-                                } else {
-                                    echo 'is running from ', $project->getStartDate('M, Y'),
-                                    ' to ', $project->getEndDate('M, Y');
-                                }
+                                echo 'is running from ', $project->getStartDate('M, Y'),
+                                ' to ', $project->getEndDate('M, Y');
                             }
                         }
-                        ?>
-                    </h4>
-                    <div class="centered tagged" data-ix="fadeinup-5">
-                        Tagged under:
-                        <span class="tag" ng-repeat="tag in project.tags" ng-bind="tag"></span>
+                    }
+                    ?>
+                </h4>
+                <div class="centered tagged" data-ix="fadeinup-5">
+                    Tagged under:
+                    <span class="tag" ng-repeat="tag in project.tags" ng-bind="tag"></span>
+                </div>
+                <div class="impact w-row">
+                    <div class="w-col w-col-4">
+                        <h3 class="col-h3">Areas of society impacted</h3>
+                        <p class="impact-descr">Areas of society that this project aims to support</p>
+                        <div class="tag" ng-repeat="tag in project.impactTagsA" ng-bind="tag"></div>
                     </div>
-                    <div class="impact w-row">
-                        <div class="w-col w-col-4">
-                            <h3 class="col-h3">Areas of society impacted</h3>
-                            <p class="impact-descr">Areas of society that this project aims to support</p>
-                            <div class="tag" ng-repeat="tag in project.impactTagsA" ng-bind="tag"></div>
-                        </div>
-                        <div class="w-col w-col-4">
-                            <h3 class="col-h3">DSI Focus</h3>
-                            <p class="impact-descr">Areas of DSI that this project is a part of<br/><br/></p>
-                            <div class="tag" ng-repeat="tag in project.impactTagsB" ng-bind="tag"></div>
-                        </div>
-                        <div class="w-col w-col-4">
-                            <h3 class="col-h3">Technology type</h3>
-                            <p class="impact-descr">The types of technology involved with this project</p>
-                            <div class="tag" ng-repeat="tag in project.impactTagsC" ng-bind="tag"></div>
-                        </div>
+                    <div class="w-col w-col-4">
+                        <h3 class="col-h3">DSI Focus</h3>
+                        <p class="impact-descr">Areas of DSI that this project is a part of<br/><br/></p>
+                        <div class="tag" ng-repeat="tag in project.impactTagsB" ng-bind="tag"></div>
                     </div>
-                    <h2 class="centered" data-ix="fadeinup">Project Overview</h2>
-                    <p class="case-study-main-text" data-ix="fadeinup"><?php echo $project->getDescription() ?></p>
-                    <div class="centered url-block" data-ix="fadeinup">
-                        <h2 class="centered" data-ix="fadeinup">Social Impact</h2>
-                        <p class="case-study-main-text" data-ix="fadeinup"><?php echo $project->getSocialImpact() ?></p>
-                        <div class="involved">
-                            <h2 class="centered" data-ix="fadeinup">Who's involved</h2>
-                            <div class="w-row">
-                                <div class="people-col w-col w-col-6">
-                                    <h4 class="involved-h4">People involved</h4>
-                                    <?php foreach ($projectMembers AS $projectMember) {
-                                        $member = $projectMember->getMember() ?>
-                                        <div class="involved-card">
-                                            <div class="w-row">
-                                                <div class="image-col w-col w-col-3 w-col-small-3 w-col-tiny-3">
-                                                    <img class="involved-profile-img" width="50"
-                                                         src="<?php echo \DSI\Entity\Image::PROFILE_PIC_URL . $member->getProfilePicOrDefault() ?>">
-                                                </div>
-                                                <div class="w-clearfix w-col w-col-9 w-col-small-9 w-col-tiny-9">
-                                                    <div style="overflow: hidden;"
-                                                         class="card-name"><?php echo show_input($member->getFullName()) ?></div>
-                                                    <div
-                                                        class="card-position"><?php echo show_input($member->getJobTitle()) ?></div>
-                                                </div>
+                    <div class="w-col w-col-4">
+                        <h3 class="col-h3">Technology type</h3>
+                        <p class="impact-descr">The types of technology involved with this project</p>
+                        <div class="tag" ng-repeat="tag in project.impactTagsC" ng-bind="tag"></div>
+                    </div>
+                </div>
+                <h2 class="centered" data-ix="fadeinup">Project Overview</h2>
+                <p class="case-study-main-text" data-ix="fadeinup"><?php echo $project->getDescription() ?></p>
+                <div class="centered url-block" data-ix="fadeinup">
+                    <h2 class="centered" data-ix="fadeinup">Social Impact</h2>
+                    <p class="case-study-main-text" data-ix="fadeinup"><?php echo $project->getSocialImpact() ?></p>
+                    <div class="involved">
+                        <h2 class="centered" data-ix="fadeinup">Who's involved</h2>
+                        <div class="w-row">
+                            <div class="people-col w-col w-col-6">
+                                <h4 class="involved-h4">People involved</h4>
+                                <?php foreach ($projectMembers AS $projectMember) {
+                                    $member = $projectMember->getMember() ?>
+                                    <div class="involved-card">
+                                        <div class="w-row">
+                                            <div class="image-col w-col w-col-3 w-col-small-3 w-col-tiny-3">
+                                                <img class="involved-profile-img" width="50"
+                                                     src="<?php echo \DSI\Entity\Image::PROFILE_PIC_URL . $member->getProfilePicOrDefault() ?>">
                                             </div>
-                                            <a class="view-profile"
-                                               href="<?php echo $urlHandler->profile($member->getId()) ?>">View</a>
-                                        </div>
-                                    <?php } ?>
-                                </div>
-                                <div class="orgs-col w-col w-col-6">
-                                    <h4 class="involved-h4">Organisations involved</h4>
-                                    <?php foreach ($organisationProjectsObj AS $organisationProject) {
-                                        $organisation = $organisationProject->getOrganisation(); ?>
-                                        <div class="involved-card">
-                                            <div class="w-row">
-                                                <div class="w-col w-col-5 w-col-small-5 w-col-tiny-5">
-                                                    <img class="involved-organisation-img" style="height:50px"
-                                                         src="<?php echo \DSI\Entity\Image::ORGANISATION_LOGO_URL . $organisation->getLogoOrDefaultSilver() ?>">
-                                                </div>
-                                                <div class="w-clearfix w-col w-col-7 w-col-small-7 w-col-tiny-7">
-                                                    <div style="overflow: hidden;"
-                                                         class="card-name"><?php echo show_input($organisation->getName()) ?></div>
-                                                    <div
-                                                        class="card-position"><?php echo show_input($organisation->getCountryName()) ?></div>
-                                                </div>
+                                            <div class="w-clearfix w-col w-col-9 w-col-small-9 w-col-tiny-9">
+                                                <div style="overflow: hidden;"
+                                                     class="card-name"><?php echo show_input($member->getFullName()) ?></div>
+                                                <div
+                                                    class="card-position"><?php echo show_input($member->getJobTitle()) ?></div>
                                             </div>
-                                            <a class="view-profile"
-                                               href="<?php echo $urlHandler->organisation($organisation) ?>">View</a>
                                         </div>
-                                    <?php } ?>
-                                </div>
+                                        <a class="view-profile"
+                                           href="<?php echo $urlHandler->profile($member->getId()) ?>">View</a>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                            <div class="orgs-col w-col w-col-6">
+                                <h4 class="involved-h4">Organisations involved</h4>
+                                <?php foreach ($organisationProjectsObj AS $organisationProject) {
+                                    $organisation = $organisationProject->getOrganisation(); ?>
+                                    <div class="involved-card">
+                                        <div class="w-row">
+                                            <div class="w-col w-col-5 w-col-small-5 w-col-tiny-5">
+                                                <img class="involved-organisation-img" style="height:50px"
+                                                     src="<?php echo \DSI\Entity\Image::ORGANISATION_LOGO_URL . $organisation->getLogoOrDefaultSilver() ?>">
+                                            </div>
+                                            <div class="w-clearfix w-col w-col-7 w-col-small-7 w-col-tiny-7">
+                                                <div style="overflow: hidden;"
+                                                     class="card-name"><?php echo show_input($organisation->getName()) ?></div>
+                                                <div
+                                                    class="card-position"><?php echo show_input($organisation->getCountryName()) ?></div>
+                                            </div>
+                                        </div>
+                                        <a class="view-profile"
+                                           href="<?php echo $urlHandler->organisation($organisation) ?>">View</a>
+                                    </div>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="w-section section-grey" id="who">
-            <?php /*
+    <div class="w-section section-grey" id="who">
+        <?php /*
             <div class="container-wide">
                 <h3 class="section-header">Who's involved</h3>
                 <div class="w-row project-info">
@@ -436,34 +519,34 @@ require __DIR__ . '/header.php';
                     </div>
                 <?php } ?>
             </div>
-            */ ?>
+            * / ?>
 
-            <?php if ($canUserRequestMembership) { ?>
-                <div class="section-cta" ng-cloak>
-                    <div class="container-wide section-cta">
-                        <div class="w-row">
-                            <div class="w-col w-col-6">
-                                <h3>Are you involved with this project?</h3>
-                                <div>If you are involved you can request to join this project
-                                </div>
+        <?php if ($canUserRequestMembership) { ?>
+            <div class="section-cta" ng-cloak>
+                <div class="container-wide section-cta">
+                    <div class="w-row">
+                        <div class="w-col w-col-6">
+                            <h3>Are you involved with this project?</h3>
+                            <div>If you are involved you can request to join this project
                             </div>
-                            <div class="w-col w-col-6">
-                                <a class="w-button btn btn-join section-cta" href="#"
-                                   ng-click="sendRequestToJoin()"
-                                   ng-hide="requestToJoin.requestSent"
-                                   ng-bind="requestToJoin.loading ? 'Sending Request...' : 'Request to join +'"></a>
-                                <button ng-show="requestToJoin.requestSent"
-                                        class="w-button btn btn-join section-cta">
-                                    Request Sent
-                                </button>
-                            </div>
+                        </div>
+                        <div class="w-col w-col-6">
+                            <a class="w-button btn btn-join section-cta" href="#"
+                               ng-click="sendRequestToJoin()"
+                               ng-hide="requestToJoin.requestSent"
+                               ng-bind="requestToJoin.loading ? 'Sending Request...' : 'Request to join +'"></a>
+                            <button ng-show="requestToJoin.requestSent"
+                                    class="w-button btn btn-join section-cta">
+                                Request Sent
+                            </button>
                         </div>
                     </div>
                 </div>
-            <?php } ?>
-        </div>
-
-        <?php /*
+            </div>
+        <?php } ?>
+    </div>
+    */ ?>
+    <?php /*
         <div class="w-section section-grey dark" id="updates">
             <div class="container-wide">
                 <div class="w-row project-info">
@@ -660,7 +743,9 @@ require __DIR__ . '/header.php';
             </div>
         </div>
         */ ?>
-    </div>
+
+    <script
+        src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/ProjectController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 
     <script>
         $(function () {
