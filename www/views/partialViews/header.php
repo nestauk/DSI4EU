@@ -9,7 +9,7 @@ if (!isset($urlHandler))
     <div class="menu-full-screen" data-ix="displaynone">
         <div class="main-menu">
             <div class="main-menu-profile-block w-clearfix">
-                <?php if (isset($loggedInUser) AND $loggedInUser) { ?>
+                <?php if ($loggedInUser) { ?>
                     <div class="profile-img"
                          style="background-image: url('<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/<?php echo $loggedInUser->getProfilePicOrDefault() ?>');"></div>
                     <h3 class="profile-name"><?php echo show_input($loggedInUser->getFullName()) ?></h3>
@@ -27,6 +27,17 @@ if (!isset($urlHandler))
                             </div>
                             <div class="profile-col w-col w-col-3">
                                 <a href="<?php echo $urlHandler->logout() ?>">Sign out</a>
+                            </div>
+                        </div>
+                    </div>
+                <?php } else { ?>
+                    <div class="profile-options">
+                        <div class="profile-options w-row">
+                            <div class="profile-col w-col w-col-6">
+                                <a href="<?php echo $urlHandler->login() ?>">Login</a>
+                            </div>
+                            <div class="profile-col w-col w-col-6">
+                                <a href="<?php echo $urlHandler->register() ?>">Create account</a>
                             </div>
                         </div>
                     </div>
@@ -53,6 +64,11 @@ if (!isset($urlHandler))
                     <h2 class="full-menu-h2"><strong><?php echo number_format($projectsCount) ?></strong> Projects</h2>
                     <a class="full-menu-link" href="<?php echo $urlHandler->projects() ?>">View all projects&nbsp;</a>
                     <a class="full-menu-link" href="<?php echo $urlHandler->caseStudies() ?>">Case studies</a>
+                    <?php if ($loggedInUser) { ?>
+                        <a class="full-menu-link" data-ix="create-project-modal" href="#">
+                            Add new project
+                        </a>
+                    <?php } ?>
                 </div>
                 <div class="full-menu-col w-col w-col-4">
                     <h2 class="full-menu-h2">
@@ -62,6 +78,11 @@ if (!isset($urlHandler))
                     <a class="full-menu-link" href="<?php echo $urlHandler->organisations() ?>">
                         View <span class="stat-number">all</span> organisations
                     </a>
+                    <?php if ($loggedInUser) { ?>
+                        <a class="full-menu-link" data-ix="create-organisation-modal" href="#">
+                            Add new organisation
+                        </a>
+                    <?php } ?>
                 </div>
             </div>
             <div class="full-menu-items w-row">
@@ -102,11 +123,22 @@ if (!isset($urlHandler))
             <div class="bottom-line"></div>
             <div class="menu-li">Menu</div>
         </div>
-        <a class="ll log-in-link w-clearfix w-inline-block" data-ix="log-in-arrow"
-           href="<?php echo $urlHandler->login() ?>">
-            <div class="login-li menu-li">login</div>
-            <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
-        </a>
+        <?php if (isset($loggedInUser) AND $loggedInUser) { ?>
+            <div class="create ll log-in-link w-clearfix" data-ix="create-dropdown">
+                <div class="login-li menu-li">Create</div>
+                <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-plus-empty.png">
+                <div class="create-drop-down-block">
+                    <a class="drop-down-link-li" data-ix="create-project-modal" href="#">Create Project</a>
+                    <a class="drop-down-link-li" data-ix="create-organisation-modal" href="#">Create organisation</a>
+                </div>
+            </div>
+        <?php } else { ?>
+            <a class="ll log-in-link w-clearfix w-inline-block" data-ix="log-in-arrow"
+               href="<?php echo $urlHandler->login() ?>">
+                <div class="login-li menu-li">login</div>
+                <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
+            </a>
+        <?php } ?>
         <a class="log-in-link menu-search w-clearfix w-inline-block" data-ix="search-roll" href="#">
             <div class="menu-li menu-search">Search</div>
             <img class="search-icon" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-search.png">

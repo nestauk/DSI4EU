@@ -31,6 +31,11 @@ class URL
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'my-profile';
     }
 
+    public function register()
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'register';
+    }
+
     public function login()
     {
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'login';
