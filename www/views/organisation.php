@@ -16,30 +16,82 @@ if (!isset($urlHandler))
     $urlHandler = new \DSI\Service\URL();
 
 ?>
-    <script
-        src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/OrganisationController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
+    <div class="case-study-intro org">
+        <div class="header-content org">
+            <h1 class="case-study-h1 org"><?php echo show_input($organisation->getName()) ?></h1>
+            <h3 class="home-hero-h3 org"></h3>
+        </div>
+    </div>
 
-    <div class="header-large-section">
-        <div class="header-large nesta"
-             style="background-image: linear-gradient(180deg, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url('<?php echo \DSI\Entity\Image::ORGANISATION_HEADER_URL . $organisation->getHeaderImageOrDefault() ?>');">
-            <div class="container-wide container-wide-header-large">
+    <div class="page-content">
+        <div class="w-row">
+            <div class="content-left w-col w-col-8">
+                <div class="intro org"><?php echo show_input($organisation->getShortDescription()) ?></div>
+                <div class="intro org"><?php echo show_input($organisation->getDescription()) ?></div>
+                <div class="involved">
+                    <h3 class="descr-h3 space">Nesta is involved with:</h3>
+                    <div class="w-row">
+                        <div class="w-col w-col-6">
+                            <h4 class="involved-h4 orgs-h">Projects</h4>
+                            <?php foreach ($organisationProjects AS $organisationProject) { ?>
+                                <?php $project = $organisationProject->getProject() ?>
+                                <a class="sidebar-link" href="<?php echo $urlHandler->project($project) ?>">
+                                    <span class="green">-&nbsp;</span><?php echo show_input($project->getName()) ?>
+                                </a>
+                            <?php } ?>
+                        </div>
+                        <div class="w-col w-col-6">
+                            <h4 class="involved-h4 orgs-h">Organisations</h4>
+                            <?php foreach ($partnerOrganisations AS $org) { ?>
+                                <a class="sidebar-link" href="<?php echo $urlHandler->organisation($org) ?>">
+                                    <span class="green">-&nbsp;</span><?php echo show_input($org->getName()) ?>
+                                </a>
+                            <?php } ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="column-right-small w-col w-col-4">
                 <?php if ($userCanEditOrganisation) { ?>
-                    <a class="dsi-button profile-edit w-button" style="z-index:1000"
-                       href="<?php echo $urlHandler->editOrganisation($organisation) ?>">
-                        Edit organisation</a>
+                    <h3 class="cse side-bar-h3">Actions</h3>
+                    <a class="sidebar-link" href="<?php echo $urlHandler->editOrganisation($organisation) ?>">
+                        <span class="green">-&nbsp;</span>Edit organisation
+                    </a>
+                    <?php if ($isOwner OR ($loggedInUser AND $loggedInUser->isSysAdmin())) { ?>
+                        <a class="sidebar-link" href="<?php echo $urlHandler->editOrganisationOwner($organisation) ?>">
+                            <span class="green">-&nbsp;</span>Change owner
+                        </a>
+                    <?php } ?>
+                    <?php /* <a class="sidebar-link"><span class="green">-&nbsp;</span>Publish / unpublish</a> */ ?>
+                    <?php /* <a class="remove sidebar-link"><span class="green">-&nbsp;</span>Remove project</a> */ ?>
                 <?php } ?>
-                <?php if ($isOwner OR ($loggedInUser AND $loggedInUser->isSysAdmin())) { ?>
-                    <a class="dsi-button profile-edit w-button" style="z-index:1000;bottom:80px"
-                       href="<?php echo $urlHandler->editOrganisationOwner($organisation) ?>">
-                        Change owner</a>
+                <h3 class="cse side-bar-h3">Info</h3>
+                <p>
+                    <?php echo show_input($organisation->getName()) ?>
+                    <?php if ($organisation->getCountry()) { ?>
+                        is based in <?php echo $organisation->getCountryName() ?>
+                    <?php } ?>
+                    <?php if ($organisation->getCountry() AND $organisation->getStartDate()) { ?>
+                        and
+                    <?php } ?>
+                    <?php if ($organisation->getStartDate()) { ?>
+                        has been running since <?php echo date('M Y', $organisation->getUnixStartDate()) ?>
+                    <?php } ?>
+                </p>
+                <a class="log-in-link long read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
+                   href="<?php echo $organisation->getUrl() ?>">
+                    <div class="login-li long menu-li readmore-li">Visit website</div>
+                    <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
+                </a>
+                <h3 class="cse side-bar-h3">Tagged under</h3>
+                <?php foreach ($tags AS $tag) { ?>
+                    <div class="tag"><?php echo show_input($tag) ?></div>
                 <?php } ?>
-                <h1 class="header-large-h1-centre"
-                    data-ix="fadeinuponload"><?php echo show_input($organisation->getName()) ?></h1>
-                <div class="header-large-desc">
-                    <a class="ext-url" data-ix="fadeinup-2"
-                       href="<?php echo $organisation->getUrl() ?>"><?php echo $organisation->getUrl() ?></a>
-                    <div>
-                        <div class="expanding-social w-clearfix">
+            </div>
+        </div>
+    </div>
+
+<?php /*
                             <?php if (isset($links['facebook'])) { ?>
                                 <div class="inline sm-nu-bloxk w-clearfix">
                                     <a href="<?php echo $links['facebook'] ?>" target="_blank">
@@ -76,102 +128,9 @@ if (!isset($urlHandler))
                                     </a>
                                 </div>
                             <?php } ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="case-study-main">
-        <div class="container-wide">
-            <div class="case-study-logo" data-ix="fadeinuponload-3">
-                <img class="case-study-logo-over ab-fab"
-                     src="<?php echo \DSI\Entity\Image::ORGANISATION_LOGO_URL . $organisation->getLogoOrDefault() ?>">
-            </div>
-            <div class="case-study-single-container w-container">
-                <h2 class="centered" data-ix="fadeinuponload-4">
-                    About <?php echo show_input($organisation->getName()) ?></h2>
-                <p class="centered" data-ix="fadeinuponload-5">
-                    <?php echo show_input($organisation->getShortDescription()) ?>
-                </p>
-                <h4 class="case-study-intro-detail centered" data-ix="fadeinuponload-5">
-                    <?php echo show_input($organisation->getName()) ?>
-                    <?php if ($organisation->getCountry()) { ?>
-                        is based in <?php echo $organisation->getCountryName() ?>
-                    <?php } ?>
-                    <?php if ($organisation->getCountry() AND $organisation->getStartDate()) { ?>
-                        and
-                    <?php } ?>
-                    <?php if ($organisation->getStartDate()) { ?>
-                        has been running since <?php echo date('M Y', $organisation->getUnixStartDate()) ?>
-                    <?php } ?>
-                </h4>
-                <div class="centered tagged" data-ix="fadeinup-5">
-                    Tagged under:
-                    <?php foreach ($tags AS $tag) { ?>
-                        <span class="tag"><?php echo show_input($tag) ?></span>
-                    <?php } ?>
-                </div>
-                <h2 class="centered" data-ix="fadeinup">Overview
-                    of <?php echo show_input($organisation->getName()) ?></h2>
-                <p class="case-study-main-text" data-ix="fadeinup">
-                    <?php echo $organisation->getDescription() ?>
-                </p>
-                <div class="centered org url-block" data-ix="fadeinup">
-                    <div class="involved">
-                        <h2 class="centered" data-ix="fadeinup"><?php echo show_input($organisation->getName()) ?> is
-                            involved with:</h2>
-                        <div class="w-row">
-                            <div class="people-col w-col w-col-6">
-                                <h4 class="involved-h4">Projects</h4>
-                                <?php foreach ($organisationProjects AS $organisationProject) { ?>
-                                    <?php $project = $organisationProject->getProject() ?>
-                                    <div class="involved-card">
-                                        <div class="w-row">
-                                            <div class="w-col w-col-5 w-col-small-5 w-col-tiny-5">
-                                                <img class="involved-organisation-img"
-                                                     style="max-width:100px;max-height:50px"
-                                                     src="<?php echo \DSI\Entity\Image::PROJECT_LOGO_URL . $project->getLogoOrDefaultSilver() ?>">
-                                            </div>
-                                            <div class="w-clearfix w-col w-col-7 w-col-small-7 w-col-tiny-7">
-                                                <div style="overflow: hidden;"
-                                                     class="card-name"><?php echo show_input($project->getName()) ?></div>
-                                                <div
-                                                    class="card-position"><?php echo show_input($project->getCountryName()) ?></div>
-                                            </div>
-                                        </div>
-                                        <a class="view-profile"
-                                           href="<?php echo $urlHandler->project($project) ?>">View</a>
-                                    </div>
-                                <?php } ?>
-                            </div>
-                            <div class="orgs-col w-col w-col-6">
-                                <h4 class="involved-h4">Organisations</h4>
-                                <?php foreach ($partnerOrganisations AS $org) { ?>
-                                    <div class="involved-card">
-                                        <div class="w-row">
-                                            <div class="w-col w-col-5 w-col-small-5 w-col-tiny-5">
-                                                <img class="involved-organisation-img"
-                                                     style="max-width:100px;max-height:50px"
-                                                     src="<?php echo \DSI\Entity\Image::ORGANISATION_LOGO_URL . $org->getLogoOrDefaultSilver() ?>">
-                                            </div>
-                                            <div class="w-clearfix w-col w-col-7 w-col-small-7 w-col-tiny-7">
-                                                <div style="overflow: hidden;"
-                                                     class="card-name"><?php echo show_input($org->getName()) ?></div>
-                                                <div
-                                                    class="card-position"><?php echo show_input($org->getCountryName()) ?></div>
-                                            </div>
-                                        </div>
-                                        <a class="view-profile"
-                                           href="<?php echo $urlHandler->organisation($org) ?>">View</a>
-                                    </div>
-                                <?php } ?>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                            */ ?>
+
+    <script
+        src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/OrganisationController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 
 <?php require __DIR__ . '/footer.php' ?>
