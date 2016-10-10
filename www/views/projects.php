@@ -22,7 +22,7 @@ require __DIR__ . '/header.php'
                 </div>
                 <div class="sidebar w-col w-col-4 w-col-stack">
                     <h1 class="content-h1 side-bar-space-h1">Add your project</h1>
-                    <p>Text here to encourage people to add their projects to the platform</p>
+                    <p>Showcase your current and past work, identify potential collaborations and link your projects to your organisation.</p>
                     <?php if ($loggedInUser) { ?>
                         <a class="log-in-link long read-more w-clearfix w-inline-block"
                            data-ix="create-project-modal" href="#">

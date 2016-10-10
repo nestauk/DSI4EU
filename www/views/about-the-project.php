@@ -21,7 +21,8 @@ require __DIR__ . '/header.php'
                     innovation in Europe. People and projects interested in DSI can use the site to showcase their work,
                     learn about DSI , find collaborators for future projects &nbsp;and find information on events and
                     funding opportunities for DSI.</p>
-                <a class="log-in-link long read-more w-clearfix w-inline-block" href="#" data-ix="log-in-arrow">
+                <a class="log-in-link long read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
+                   href="http://www.nesta.org.uk/project/digital-social-innovation">
                     <div class="login-li long menu-li readmore-li">Read more about previous research into mapping and
                         defining DSI in Europe
                     </div>

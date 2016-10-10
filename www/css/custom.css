@@ -98,8 +98,8 @@ form.add-skill-section, form.add-language-section {
 }
 
 .alphabet-link.selected {
-    background: rgba(255, 255, 255, 0.4);
-    color: #F3F3F3;
+    background: #1dc9a0;
+    color: black;
 }
 
 .modal-push-buttons .w-tab-content .w-tab-pane,
