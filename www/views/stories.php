@@ -52,7 +52,9 @@ require __DIR__ . '/header.php';
                 <?php } ?>
 
             </div>
-            <div class="alphabet-selectors w-clearfix">
+            <?php if ($userCanAddStory) { ?>
+                <div class="alphabet-selectors w-clearfix">
+                    <?php /*
                 <a class="alphabet-link post-filter w-inline-block" ng-click="searchCriteria = {}" href="#">
                     <div>All posts</div>
                 </a>
@@ -65,7 +67,8 @@ require __DIR__ . '/header.php';
                 <a class="alphabet-link post-filter w-inline-block" ng-click="searchCriteria.catg = 1" href="#">
                     <div>Blogs</div>
                 </a>
-                <?php if ($userCanAddStory) { ?>
+                */ ?>
+
                     <a class="alphabet-link post-filter w-inline-block" ng-click="searchCriteria.published = true"
                        href="#">
                         <div>Published</div>
@@ -74,8 +77,8 @@ require __DIR__ . '/header.php';
                        href="#">
                         <div>Unpublished</div>
                     </a>
-                <?php } ?>
-            </div>
+                </div>
+            <?php } ?>
         </div>
 
         <div class="content-directory">
@@ -89,9 +92,8 @@ require __DIR__ . '/header.php';
                                 <div class="hp-post-img"
                                      style="background-image: url('<?php echo SITE_RELATIVE_PATH ?>/images/stories/feat/{{story.featuredImage}}')"></div>
                                 <div class="w-clearfix hp-post">
-                                    <div class="hp-post-meta category" ng-bind="story.category"></div>
-                                    <div
-                                        class="hp-post-meta hp-date" ng-bind="story.datePublished"></div>
+                                    <div class="hp-post-meta category" ng-bind="story.datePublished"></div>
+                                    <div class="hp-post-meta hp-date">&nbsp;</div>
                                     <h3 class="hp-post-h3" ng-bind="story.title"></h3>
                                     <p class="hp-post-p" ng-bind="story.content"></p>
                                 </div>
