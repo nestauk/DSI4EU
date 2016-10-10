@@ -110,9 +110,9 @@ class URL
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'event/' . $event->getId();
     }
 
-    public function eventEdit($eventID)
+    public function eventEdit(Event $event)
     {
-        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'event/edit/' . $eventID;
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'event/edit/' . $event->getId();
     }
 
     public function editEventJson($eventID)
