@@ -58,10 +58,12 @@ use \DSI\Service\URL;
                                        ng-value="loading ? '<?php _ehtml('Loading...') ?>' : '<?php _ehtml('Register') ?>'"
                                        class="w-button dsi-button creat-button">
                             </div>
+                            <?php /*
                             <input type="button" style="width:250px"
                                    ng-show="registered"
                                    value="<?php _ehtml('Welcome to Digital Social!') ?>"
                                    class="w-button dsi-button creat-button">
+                            */ ?>
                         </div>
                     </form>
                 </div>

@@ -68,9 +68,7 @@ if (!isset($urlHandler))
                         <img class="footer-eu" src="<?php echo SITE_RELATIVE_PATH ?>/images/5000100-mono.png">
                     </div>
                     <div class="w-col w-col-11 w-col-medium-6 w-col-small-6 w-col-tiny-6">
-                        <div class="footer-small-print">DSI4EU is supported by the European Union and funded under the
-                            Horizon 2020 Programme. Grant agreement no 688192.
-                        </div>
+                        <div class="footer-small-print">DSI4EU is funded by the European Union</div>
                     </div>
                 </div>
                 <div class="w-row">
@@ -78,9 +76,17 @@ if (!isset($urlHandler))
                         <img class="cc footer-eu" src="<?php echo SITE_RELATIVE_PATH ?>/images/88x31.png">
                     </div>
                     <div class="w-col w-col-11 w-col-medium-6 w-col-small-6 w-col-tiny-6">
-                        <div class="footer-small-print">All our work is licensed under a&nbsp;&nbsp;Creative Commons
-                            Attribution-NonCommercial-ShareAlike 4.0 International License&nbsp;, unless it says
-                            otherwise.
+                        <div class="footer-small-print">All our work is licensed under a
+                            <span class="footer-link-small"></span>
+                            <span class="footer-link-small">
+                                <span xmlns="http://www.w3.org/1999/xhtml">&nbsp;
+                                    <a class="footer-link-small"
+                                       href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                                        Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
+                                    </a>
+                                </span>&nbsp;
+                            </span>
+                            <span>, unless</span> it says otherwise.
                         </div>
                     </div>
                 </div>
