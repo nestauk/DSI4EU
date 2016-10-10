@@ -9,15 +9,19 @@ require __DIR__ . '/header.php'
             <div class="w-row">
                 <div class="w-col w-col-8 w-col-stack">
                     <h1 class="content-h1">Organisations</h1>
-                    <p class="intro">Organisation intro text explaining more about organisations and leading in to
-                        description of four main areas below this text</p>
-                    <p class="header-intro-descr">While DSI is an incredibly diverse field, the many types of practice
-                        can be understood as manifestations of four main technological trends: Open Hardware, Open
-                        Networks, Open Data and Open Knowledge.</p>
+                    <p class="intro">There are thousands of organisations working to develop digital social innovation,
+                        including governments, charities, social enterprises, research organisations and startups.</p>
+                    <p class="first header-intro-descr">Here you can look through the organisations across Europe which
+                        have signed up to DSI4EU. You can find out who else is working in your area and what they're
+                        doing and find potential collaborators.</p>
+                    <p class="p-bottom">You can filter them by the four categories of digital social innovation which we
+                        have identified: <strong>Open hardware</strong>, <strong>Open networks</strong>, <strong>Open
+                            data</strong> and <strong>Open knowledge</strong>.</p>
                 </div>
                 <div class="sidebar w-col w-col-4 w-col-stack">
                     <h1 class="content-h1 side-bar-space-h1">Add your organisation</h1>
-                    <p>Here are reasons to add your organisation</p>
+                    <p>Let others know who you are and what you do, meet potential collaborators and link your projects
+                        to your organisation.</p>
                     <?php if ($loggedInUser) { ?>
                         <a class="log-in-link long read-more w-clearfix w-inline-block" data-ix="log-in-arrow" href="#">
                             <div class="login-li long menu-li readmore-li" data-ix="create-organisation-modal">Add your
@@ -60,34 +64,36 @@ require __DIR__ . '/header.php'
                                                name="checkbox-2" type="checkbox">
                                         <label class="w-form-label" for="checkbox-2">Open hardware</label>
                                     </div>
-                                    <div class="trend-notes">Open hardware explanation text for this trend to go in this
-                                        section here
+                                    <div class="trend-notes">The use of open hardware and maker spaces to develop, make,
+                                        adapt, hack and shape tools for social change
                                     </div>
                                     <div class="filter-checkbox w-checkbox">
                                         <input class="w-checkbox-input" data-name="Checkbox 5" id="checkbox-5"
                                                name="checkbox-5" type="checkbox">
                                         <label class="w-form-label" for="checkbox-5">Open networks</label>
                                     </div>
-                                    <div class="trend-notes">Open networks explanation text for this trend to go in this
-                                        section here
+                                    <div class="trend-notes">New networks and infrastructures, e.g. sensor networks,
+                                        where people connect their devices such as phones and internet modems to
+                                        collectively share resources and solve problems
                                     </div>
                                     <div class="filter-checkbox w-checkbox">
                                         <input class="w-checkbox-input" data-name="Checkbox 4" id="checkbox-4"
                                                name="checkbox-4" type="checkbox">
                                         <label class="w-form-label" for="checkbox-4">Open data</label>
                                     </div>
-                                    <div class="trend-notes">Open data explanation text for this trend to go in this
-                                        section here
+                                    <div class="trend-notes">Innovative ways of opening up, capturing, using, analysing
+                                        and interpreting open data
                                     </div>
                                     <div class="filter-checkbox w-checkbox">
                                         <input class="w-checkbox-input" data-name="Checkbox 3" id="checkbox-3"
                                                name="checkbox-3" type="checkbox">
                                         <label class="w-form-label" for="checkbox-3">Open knowledge</label>
                                     </div>
+                                    <div class="trend-notes">Where &nbsp;people come together through online platforms
+                                        to crowdsource or crowdfund solutions, collectively analyse data and develop new
+                                        DSI projects
+                                    </div>
                                 </form>
-                            </div>
-                            <div class="trend-notes">Open knowledge explanation text for this trend to go in this
-                                section here
                             </div>
                         </div>
                     </div>
