@@ -3,6 +3,7 @@ require __DIR__ . '/header.php';
 /** @var $story \DSI\Entity\Story */
 /** @var $author \DSI\Entity\User */
 /** @var $stories \DSI\Entity\Story[] */
+/** @var $userCanManageStory bool */
 ?>
 
     <div class="single-post-hero"
@@ -36,16 +37,18 @@ require __DIR__ . '/header.php';
         <div class="container-wide single-post-content">
             <div class="author-details">
                 <div class="w-row">
-                    <div class="w-col w-col-9">
+                    <div class="w-col w-col-6">
                         <div class="w-clearfix single-post-author">
                             <div class="single-post-author-img"
-                                 style="background-image: url('<?php echo SITE_RELATIVE_PATH . '/images/users/profile/' . $author->getProfilePicOrDefault() ?>');"></div>
-                            <div class="single-post-author-name">Written
-                                by <?php echo show_input($author->getFirstName()) ?> <?php echo show_input($author->getLastName()) ?></div>
+                                 style="background-image: url('<?php echo SITE_RELATIVE_PATH . '/images/users/profile/' . $author->getProfilePicOrDefault() ?>');">
+                            </div>
+                            <div class="single-post-author-name">
+                                Written by <?php echo show_input($author->getFullName()) ?>
+                            </div>
                         </div>
                     </div>
                     <?php if ($category = $story->getStoryCategory()) { ?>
-                        <div class="w-col w-col-3">
+                        <div class="w-col w-col-6">
                             <div class="w-clearfix">
                                 <div class="single-post-category">
                                     <?php echo $category->getName() ?>
@@ -61,13 +64,22 @@ require __DIR__ . '/header.php';
     <div class="story">
         <div class="container-wide">
             <div class="w-row">
-                <div class="w-col w-col-7">
+                <div class="w-col w-col-8">
                     <div class="single-post-content-card">
                         <p class="post-p"><?php echo $story->getContent() ?></p>
                     </div>
                 </div>
-                <div class="w-col w-col-5">
+                <div class="w-col w-col-4">
                     <div class="sidebar-content-card">
+                        <?php if ($userCanManageStory) { ?>
+                            <h2 class="content-h1 side-bar-space-h1">Actions</h2>
+                            <a class="sidebar-link" href="<?php echo $urlHandler->editStory($story) ?>">
+                                <span class="green">-&nbsp;</span>Edit story
+                            </a>
+                            <?php /* <a class="sidebar-link"><span class="green">-&nbsp;</span>Publish / unpublish</a> */ ?>
+                            <?php /* <a class="remove sidebar-link"><span class="green">-&nbsp;</span>Remove post</a> */ ?>
+                        <?php } ?>
+
                         <h2 class="sidebar-h2">Latest posts</h2>
                         <ul class="w-list-unstyled">
                             <?php foreach ($stories AS $story) { ?>

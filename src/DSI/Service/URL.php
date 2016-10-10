@@ -238,6 +238,11 @@ class URL
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'story/add';
     }
 
+    public function editStory(Story $story)
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'story/edit/' . $story->getId();
+    }
+
     public function blogPosts($format = null)
     {
         $extension = '';
