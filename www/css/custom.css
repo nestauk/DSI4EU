@@ -497,3 +497,24 @@ div.error {
     line-height: inherit;
     font-weight: inherit;
 }
+
+/* Updates 10th Oct 2016 */
+
+.modal {
+    z-index: 99999;
+}
+
+.centered.modal-h2, .modal-input {
+    font-family: 'Montserrat';
+}
+
+.dsi-button.creat-button {
+    margin-top: 43px;
+    background-color: rgba(29, 201, 160, .94);
+    font-family: 'Montserrat';
+    padding: 10px 20px;
+    border-radius: 25px;
+    min-width: 175px;
+    font-size: 16px;
+    text-transform: uppercase;
+}
