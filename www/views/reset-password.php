@@ -28,32 +28,32 @@ if (!isset($urlHandler))
                                     <div class="w-form">
                                         <div class="w-row">
                                             <div class="w-col w-col-6 w-col-stack">
-                                                <div class="padding-right-50">
+                                                <div class="form-wrapper w-form">
                                                     <form ng-submit="submit()" autocomplete="off">
-                                                        <input type="email" class="w-input modal-input"
+                                                        <input type="email" class="log-in-form-field w-input"
                                                                placeholder="<?php _ehtml('Enter your email address') ?>"
                                                                ng-model="data.email" ng-class="{error: errors.email}">
-                                                        <div style="color:red;text-align:center" ng-show="errors.email"
+                                                        <div class="log-in-error" ng-show="errors.email"
                                                              ng-bind="errors.email"></div>
 
-                                                        <input type="text" class="w-input modal-input"
+                                                        <input type="text" class="log-in-form-field w-input"
                                                                placeholder="<?php _ehtml('Security code') ?>"
                                                                ng-model="data.code" ng-class="{error: errors.code}">
-                                                        <div style="color:red;text-align:center" ng-show="errors.code"
+                                                        <div class="log-in-error" ng-show="errors.code"
                                                              ng-bind="errors.code"></div>
 
-                                                        <input type="password" class="w-input modal-input"
+                                                        <input type="password" class="log-in-form-field w-input"
                                                                placeholder="<?php _ehtml('Password') ?>"
                                                                ng-model="data.password" autocomplete="off"
                                                                ng-class="{error: errors.password}">
-                                                        <div style="color:red" ng-show="errors.password"
+                                                        <div class="log-in-error" ng-show="errors.password"
                                                              ng-bind="errors.password"></div>
 
-                                                        <input type="password" class="w-input modal-input"
+                                                        <input type="password" class="log-in-form-field w-input"
                                                                placeholder="<?php _ehtml('Retype Password') ?>"
                                                                ng-model="data.retypePassword" autocomplete="off"
                                                                ng-class="{error: errors.retypePassword}">
-                                                        <div style="color:red" ng-show="errors.retypePassword"
+                                                        <div class="log-in-error" ng-show="errors.retypePassword"
                                                              ng-bind="errors.retypePassword"></div>
 
                                                         <br/>
