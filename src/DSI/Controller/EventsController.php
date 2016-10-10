@@ -53,10 +53,10 @@ class EventsController
                 'endDate' => $event->getEndDate(),
                 'startDay' => $event->getStartDate('d M Y'),
                 'isNew' => $event->isNew(),
-                'editUrl' => $this->urlHandler->eventEdit($event->getId()),
                 'viewUrl' => $this->urlHandler->event($event),
                 'region' => $event->getRegionName(),
                 'country' => $event->getCountryName(),
+                'price' => $event->getPrice(),
             ];
         }, $events);
     }

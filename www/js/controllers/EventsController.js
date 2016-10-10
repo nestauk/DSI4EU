@@ -3,6 +3,8 @@ angular
     .controller('EventsController', function ($scope, $http, $attrs) {
         var eventsJsonUrl = $attrs.eventsjsonurl;
 
+        $scope.searchFee = "0";
+
         $http.get(eventsJsonUrl)
             .then(function (result) {
                 console.log(result.data);
@@ -19,5 +21,17 @@ angular
                     return false;
                 return item.startMonth < val;
             }
-        }
+        };
+
+        $scope.hasFee = function (val) {
+            return function (item) {
+                if (val == '1')
+                    return item.price != '';
+
+                if (val == '2')
+                    return item.price == '';
+
+                return true;
+            }
+        };
     });
