@@ -1,4 +1,6 @@
 <?php
+/** @var $urlHandler \DSI\Service\URL */
+
 $pageTitle = 'Updates';
 require __DIR__ . '/header.php';
 ?>
@@ -12,9 +14,9 @@ require __DIR__ . '/header.php';
             <div class="sidebar w-col w-col-4 w-col-stack">
                 <h1 class="content-h1 side-bar-space-h1">Feedback</h1>
                 <p>If you would like to give us feedback, report a bug or suggest a feature please contact us through our feedback form</p>
-                <a class="log-in-link long read-more w-clearfix w-inline-block" data-ix="log-in-arrow" href="#">
+                <a class="log-in-link long read-more w-clearfix w-inline-block" data-ix="log-in-arrow" href="<?php echo $urlHandler->feedback()?>">
                     <div class="login-li long menu-li readmore-li">Feedback form</div>
-                    <img class="login-arrow" src="images/ios7-arrow-thin-right.png">
+                    <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH?>/images/ios7-arrow-thin-right.png">
                 </a>
             </div>
         </div>

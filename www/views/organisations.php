@@ -11,7 +11,7 @@ require __DIR__ . '/header.php'
                     <h1 class="content-h1">Organisations</h1>
                     <p class="intro">There are thousands of organisations working to develop digital social innovation,
                         including governments, charities, social enterprises, research organisations and startups.</p>
-                    <p class="first header-intro-descr">Here you can look through the organisations across Europe which
+                    <p class="header-intro-descr">Here you can look through the organisations across Europe which
                         have signed up to DSI4EU. You can find out who else is working in your area and what they're
                         doing and find potential collaborators.</p>
                     <?php /*
