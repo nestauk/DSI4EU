@@ -31,10 +31,19 @@ angular
                     return true;
 
                 var length = item.fundingTargets.length;
-                for(var i = 0; i < length; i++) {
-                    if(item.fundingTargets[i] == val) return true;
+                for (var i = 0; i < length; i++) {
+                    if (item.fundingTargets[i] == val) return true;
                 }
                 return false;
+            }
+        };
+
+        $scope.fundingHasType = function (val) {
+            return function (item) {
+                if (val == "0")
+                    return true;
+
+                if (item.fundingTypeID == val) return true;
             }
         }
     });

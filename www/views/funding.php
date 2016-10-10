@@ -111,7 +111,7 @@ require __DIR__ . '/header.php'
                         <div class="info-card" data-ix="underline"
                              ng-repeat="funding in data.fundings
                                  | filter: searchName
-                                 | filter: {fundingTypeID: fundingType || ''}
+                                 | filter: fundingHasType(fundingType)
                                  | filter: fundingHasTarget(fundingTarget)
                                  | filter: {countryID: inCountry.id || ''}
                                  | filter: {fundingSourceID: fundingSource.id || ''}
