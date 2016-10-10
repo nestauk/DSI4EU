@@ -50,7 +50,8 @@ require __DIR__ . '/header.php'
                                     <div class="search-div">
                                         <input class="sidebar-search-field w-input" data-ix="hide-search-icon"
                                                data-name="Search" id="Search" maxlength="256" name="Search"
-                                               placeholder="Search by keyword, type or project" type="text">
+                                               placeholder="Search by keyword, type or project" type="text"
+                                               ng-model="searchName">
                                         <img class="search-mag"
                                              src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-search.png">
                                     </div>
@@ -94,8 +95,11 @@ require __DIR__ . '/header.php'
                         <div class="w-row">
                             <div class="w-col w-col-6 w-col-stack">
                                 <a class="info-card left small w-inline-block" href="{{organisation.url}}"
-                                   ng-repeat="organisation in organisations | filter:startsWithLetter as filtered"
-                                   ng-if="$index <= (filtered.length / 2)">
+                                   ng-repeat="organisation in organisations
+                                   | filter: startsWithLetter
+                                   | filter: searchName
+                                    as filtered"
+                                   ng-if="$index < (filtered.length / 2)">
                                     <h3 class="info-card-h3" ng-bind="organisation.name"></h3>
                                     <div class="involved-tag">
                                         <strong ng-bind="organisation.projectsCount"></strong>
@@ -112,8 +116,11 @@ require __DIR__ . '/header.php'
                             </div>
                             <div class="w-col w-col-6 w-col-stack">
                                 <a class="info-card left small w-inline-block" href="{{organisation.url}}"
-                                   ng-repeat="organisation in organisations | filter:startsWithLetter as filtered"
-                                   ng-if="$index > (filtered.length / 2)">
+                                   ng-repeat="organisation in organisations
+                                   | filter: startsWithLetter
+                                   | filter: searchName
+                                   as filtered"
+                                   ng-if="$index >= (filtered.length / 2)">
                                     <h3 class="info-card-h3" ng-bind="organisation.name"></h3>
                                     <div class="involved-tag">
                                         <strong ng-bind="organisation.projectsCount"></strong>
