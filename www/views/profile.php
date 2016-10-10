@@ -27,7 +27,7 @@ require __DIR__ . '/header.php';
                     <p class="intro"><?php echo nl2br(show_input($user->getBio())) ?></p>
                     <h3>Location</h3>
                     <p>
-                        <?php echo show_input($user->getCityName()) ?>,
+                        <?php echo show_input($user->getCityName()) ?>
                         <?php if ($user->getCityName() != '' AND $user->getCountryName() != '') echo ', '; ?>
                         <?php echo show_input($user->getCountryName()) ?>
                     </p>

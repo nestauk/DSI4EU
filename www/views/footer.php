@@ -21,9 +21,11 @@ if (!isset($urlHandler))
         <div class="w-col w-col-2">
             <h3 class="footer-h3">People</h3>
             <ul class="w-list-unstyled">
-                <li class="footer-link">
-                    <a class="footer-link" href="#">Join DSI4EU</a>
-                </li>
+                <?php if (!$loggedInUser) { ?>
+                    <li class="footer-link">
+                        <a class="footer-link" href="<?php echo $urlHandler->register() ?>">Join DSI4EU</a>
+                    </li>
+                <?php } ?>
                 <li class="footer-link">
                     <a class="footer-link" href="<?php echo $urlHandler->termsOfUse() ?>">Terms of use</a>
                 </li>
