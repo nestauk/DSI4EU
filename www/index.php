@@ -65,6 +65,9 @@ class Router
         } elseif ($this->pageURL === '/register.json') {
             $this->registerJson();
 
+        } elseif (preg_match('<^/' . $langHandler . 'register>', $this->pageURL, $matches)) {
+            $this->register($matches);
+
         } elseif (preg_match('<^/' . $langHandler . 'login$>', $this->pageURL, $matches)) {
             $this->login($matches);
 
@@ -325,6 +328,15 @@ class Router
         }
 
         return true;
+    }
+
+    private function register($matches = [], $format = 'html')
+    {
+        $this->setLanguageFromUrl($matches);
+
+        $command = new \DSI\Controller\RegisterController();
+        $command->responseFormat = $format;
+        $command->exec();
     }
 
     private function login($matches = [], $format = 'html')

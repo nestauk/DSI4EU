@@ -43,7 +43,7 @@ use \DSI\Service\URL;
                                    value="<?php _ehtml('Welcome back to Digital Social!') ?>">
 
                             <br/><br/>
-                            <a class="forgotten-password" href="<?php echo $urlHandler->login()?>">
+                            <a class="forgotten-password" href="<?php echo $urlHandler->register()?>">
                                 <?php _ehtml('Register') ?></a>
                             <a class="forgotten-password" href="#" ng-click="forgotPassword.show = true">
                                 <?php _ehtml('Forgotten password?') ?></a>
