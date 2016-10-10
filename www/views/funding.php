@@ -120,7 +120,8 @@ require __DIR__ . '/header.php'
                             <h2 class="funding-card-h2" ng-bind="funding.title"></h2>
                             <div class="infocard top3-underline" data-ix="new-interaction-2"></div>
                             <p class="funding-descr" ng-bind="funding.description"></p>
-                            <div class="funding-closing-date"><strong>Closing date:</strong> {{funding.closingDate}}
+                            <div class="funding-closing-date" ng-show="funding.closingDate">
+                                <strong>Closing date:</strong> {{funding.closingDate}}
                             </div>
                             <div class="funding-country funding-new" ng-show="funding.isNew">New funding opportunity
                             </div>
