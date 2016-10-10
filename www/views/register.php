@@ -12,9 +12,10 @@ use \DSI\Service\URL;
 <div class="ab-fab log-in-section" ng-controller="RegisterController">
     <div class="w-row">
         <div class="content-left w-col w-col-12">
-            <p class="intro">
-                <?php _ehtml('Register') ?>
-            </p>
+            <a href="<?php echo $urlHandler->home() ?>">
+                <img class="log-in-logo" src="<?php echo SITE_RELATIVE_PATH ?>/images/dark_1.svg">
+            </a>
+            <h2><?php _ehtml('Register') ?></h2>
 
             <div class="form-wrapper w-form">
                 <form id="email-form" method="post"
@@ -56,11 +57,13 @@ use \DSI\Service\URL;
 
                     <div class="modal-footer">
                         <div ng-hide="registered">
-                            <input type="submit" style="width:250px"
-                                   ng-disabled="loading"
-                                   name="register"
-                                   ng-value="loading ? '<?php _ehtml('Loading...') ?>' : '<?php _ehtml('Register') ?>'"
-                                   class="w-button dsi-button creat-button">
+                            <button type="submit" class="auto ll log-in-link w-clearfix w-inline-block"
+                                    data-ix="log-in-arrow" name="register"
+                                    style="width:250px;display:block">
+                                <span class="login-li menu-li">Register</span>
+                                <img class="login-arrow"
+                                     src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
+                            </button>
                         </div>
                         <?php /*
                             <input type="button" style="width:250px"

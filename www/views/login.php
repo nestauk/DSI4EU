@@ -15,7 +15,9 @@ use \DSI\Service\URL;
      data-afterloginurl="<?php echo $urlHandler->myProfile() ?>">
 
     <div class="form-container" ng-hide="forgotPassword.show">
-        <img class="log-in-logo" src="<?php echo SITE_RELATIVE_PATH ?>/images/dark_1.svg">
+        <a href="<?php echo $urlHandler->home() ?>">
+            <img class="log-in-logo" src="<?php echo SITE_RELATIVE_PATH ?>/images/dark_1.svg">
+        </a>
         <h2>Log in to my account</h2>
 
         <div class="form-wrapper w-form">
