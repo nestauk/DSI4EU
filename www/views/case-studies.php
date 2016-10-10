@@ -20,7 +20,7 @@ require __DIR__ . '/header.php';
                 <div class="sidebar w-col w-col-4 w-col-stack">
                     <?php if ($userCanManageCaseStudies) { ?>
                         <h1 class="content-h1">Actions</h1>
-                        <a class="sidebar-link" href="<?php echo $urlHandler->addCaseStudy() ?>">
+                        <a class="sidebar-link" href="<?php echo $urlHandler->caseStudyAdd() ?>">
                             <span class="green">-&nbsp;</span>Add new case study
                         </a>
                     <?php } ?>

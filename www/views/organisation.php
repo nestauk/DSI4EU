@@ -54,11 +54,11 @@ if (!isset($urlHandler))
             <div class="column-right-small w-col w-col-4">
                 <?php if ($userCanEditOrganisation) { ?>
                     <h3 class="cse side-bar-h3">Actions</h3>
-                    <a class="sidebar-link" href="<?php echo $urlHandler->editOrganisation($organisation) ?>">
+                    <a class="sidebar-link" href="<?php echo $urlHandler->organisationEdit($organisation) ?>">
                         <span class="green">-&nbsp;</span>Edit organisation
                     </a>
                     <?php if ($isOwner OR ($loggedInUser AND $loggedInUser->isSysAdmin())) { ?>
-                        <a class="sidebar-link" href="<?php echo $urlHandler->editOrganisationOwner($organisation) ?>">
+                        <a class="sidebar-link" href="<?php echo $urlHandler->organisationOwnerEdit($organisation) ?>">
                             <span class="green">-&nbsp;</span>Change owner
                         </a>
                     <?php } ?>

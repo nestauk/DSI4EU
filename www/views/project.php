@@ -67,7 +67,7 @@ require __DIR__ . '/header.php';
                 <div class="column-right-small w-col w-col-4">
                     <?php if ($userCanEditProject) { ?>
                         <h3 class="cse side-bar-h3">Actions</h3>
-                        <a class="sidebar-link" href="<?php echo $urlHandler->editProject($project) ?>">
+                        <a class="sidebar-link" href="<?php echo $urlHandler->projectEdit($project) ?>">
                             <span class="green">-&nbsp;</span>Edit project</a>
                         <?php /* <a class="sidebar-link"><span class="green">-&nbsp;</span>Publish / unpublish</a> */ ?>
                         <?php /* <a class="remove sidebar-link"><span class="green">-&nbsp;</span>Remove project</a> */ ?>

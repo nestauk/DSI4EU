@@ -110,7 +110,7 @@ class URL
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'event/' . $event->getId();
     }
 
-    public function editEvent($eventID)
+    public function eventEdit($eventID)
     {
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'event/edit/' . $eventID;
     }
@@ -138,7 +138,7 @@ class URL
      * @param Project $project
      * @return string
      */
-    public function editProject(Project $project)
+    public function projectEdit(Project $project)
     {
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'project/edit/' . $project->getId();
     }
@@ -147,7 +147,7 @@ class URL
      * @param Project $project
      * @return string
      */
-    public function editProjectOwner(Project $project)
+    public function projectOwnerEdit(Project $project)
     {
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'project/editOwner/' . $project->getId();
     }
@@ -169,7 +169,7 @@ class URL
      * @param Organisation $org
      * @return string
      */
-    public function editOrganisation(Organisation $org)
+    public function organisationEdit(Organisation $org)
     {
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'org/edit/' . $org->getId();
     }
@@ -178,7 +178,7 @@ class URL
      * @param Organisation $org
      * @return string
      */
-    public function editOrganisationOwner(Organisation $org)
+    public function organisationOwnerEdit(Organisation $org)
     {
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'org/editOwner/' . $org->getId();
     }
@@ -233,14 +233,9 @@ class URL
         return SITE_RELATIVE_PATH . '/twitter-login';
     }
 
-    public function addStory()
+    public function blogPostAdd()
     {
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'story/add';
-    }
-
-    public function editStory(Story $story)
-    {
-        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'story/edit/' . $story->getId();
     }
 
     public function blogPosts($format = null)
@@ -266,7 +261,7 @@ class URL
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'case-study/' . $caseStudy->getId() . '/' . self::linkify($caseStudy->getTitle());
     }
 
-    public function addCaseStudy()
+    public function caseStudyAdd()
     {
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'case-study/add';
     }

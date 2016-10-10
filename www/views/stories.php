@@ -46,7 +46,7 @@ require __DIR__ . '/header.php';
                 <?php if ($userCanAddStory) { ?>
                     <div class="sidebar w-col w-col-4 w-col-stack">
                         <h1 class="content-h1 side-bar-space-h1">Actions</h1>
-                        <a class="sidebar-link" href="<?php echo $urlHandler->addStory() ?>"><span
+                        <a class="sidebar-link" href="<?php echo $urlHandler->blogPostAdd() ?>"><span
                                 class="green">- </span>Add new post</a>
                     </div>
                 <?php } ?>

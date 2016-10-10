@@ -73,7 +73,7 @@ require __DIR__ . '/header.php';
                     <div class="sidebar-content-card">
                         <?php if ($userCanManageStory) { ?>
                             <h2 class="content-h1 side-bar-space-h1">Actions</h2>
-                            <a class="sidebar-link" href="<?php echo $urlHandler->editStory($story) ?>">
+                            <a class="sidebar-link" href="<?php echo $urlHandler->blogPostEdit($story) ?>">
                                 <span class="green">-&nbsp;</span>Edit story
                             </a>
                             <?php /* <a class="sidebar-link"><span class="green">-&nbsp;</span>Publish / unpublish</a> */ ?>

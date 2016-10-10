@@ -29,7 +29,7 @@ class CreateOrganisationController
 
             echo json_encode([
                 'result' => 'ok',
-                'url' => $urlHandler->editOrganisation($createOrganisation->getOrganisation()),
+                'url' => $urlHandler->organisationEdit($createOrganisation->getOrganisation()),
             ]);
         } catch (ErrorHandler $e) {
             echo json_encode([

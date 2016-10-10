@@ -57,7 +57,7 @@ class EventController
                 'price' => $event->getPrice(),
                 'countryID' => $event->getCountryID(),
                 'region' => $event->getRegionName(),
-                'editUrl' => $this->urlHandler->editEvent($event->getId()),
+                'editUrl' => $this->urlHandler->eventEdit($event->getId()),
                 'viewUrl' => $this->urlHandler->event($event),
             ];
         }, $events);
