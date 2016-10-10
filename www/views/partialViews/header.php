@@ -46,7 +46,7 @@ if (!isset($urlHandler))
             <div class="full-menu-items w-row">
                 <div class="full-menu-col w-clearfix w-col w-col-4">
                     <div class="full-menu-links-block no-border">
-                        <h2 class="full-menu-h2">About DSI</h2>
+                        <h2 class="full-menu-h2">About DSI4EU</h2>
                         <a class="full-menu-link" href="<?php echo $urlHandler->aboutTheProject() ?>">
                             About the project
                         </a>
@@ -56,7 +56,7 @@ if (!isset($urlHandler))
                         <a class="full-menu-link" href="<?php echo $urlHandler->openDataResearchAndResources() ?>">
                             Open data, research &amp; resources</a>
                         <a class="full-menu-link" href="<?php echo $urlHandler->contactDSI() ?>">
-                            Contact DSI
+                            Contact DSI4EU
                         </a>
                     </div>
                 </div>
