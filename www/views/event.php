@@ -33,7 +33,7 @@ require __DIR__ . '/header.php'
                 <div class="sidebar w-col w-col-4 w-col-stack">
                     <?php if($userCanManageEvent) { ?>
                         <h1 class="content-h1 side-bar-space-h1">Actions</h1>
-                        <a class="sidebar-link" href="edit-story.html"><span class="green">-&nbsp;</span>Edit event</a>
+                        <a class="sidebar-link" href="<?php echo $urlHandler->eventEdit($event)?>"><span class="green">-&nbsp;</span>Edit event</a>
                         <?php /* <a class="sidebar-link"><span class="green">-&nbsp;</span>Publish / unpublish</a> */ ?>
                         <?php /* <a class="remove sidebar-link"><span class="green">-&nbsp;</span>Remove</a> */ ?>
                     <?php } ?>
