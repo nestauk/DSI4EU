@@ -14,9 +14,11 @@ require __DIR__ . '/header.php'
                     <p class="first header-intro-descr">Here you can look through the organisations across Europe which
                         have signed up to DSI4EU. You can find out who else is working in your area and what they're
                         doing and find potential collaborators.</p>
+                    <?php /*
                     <p class="p-bottom">You can filter them by the four categories of digital social innovation which we
                         have identified: <strong>Open hardware</strong>, <strong>Open networks</strong>, <strong>Open
                             data</strong> and <strong>Open knowledge</strong>.</p>
+                    */ ?>
                 </div>
                 <div class="sidebar w-col w-col-4 w-col-stack">
                     <h1 class="content-h1 side-bar-space-h1">Add your organisation</h1>
@@ -59,6 +61,7 @@ require __DIR__ . '/header.php'
                                         <img class="search-mag"
                                              src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-search.png">
                                     </div>
+                                    <?php /*
                                     <div class="filter-checkbox w-checkbox">
                                         <input class="w-checkbox-input" data-name="Checkbox 2" id="checkbox-2"
                                                name="checkbox-2" type="checkbox">
@@ -93,6 +96,7 @@ require __DIR__ . '/header.php'
                                         to crowdsource or crowdfund solutions, collectively analyse data and develop new
                                         DSI projects
                                     </div>
+                                    */ ?>
                                 </form>
                             </div>
                         </div>
