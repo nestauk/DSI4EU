@@ -64,7 +64,7 @@ require __DIR__ . '/header.php'
                         </div>
                     </div>
                     <div class="w-col w-col-8">
-                        <div class="info-card" data-ix="underline"
+                        <div class="info-card" data-ix="underline" ng-cloak
                              ng-repeat="event in data.events
                              | filter: searchName
                              | filter: hasFee(searchFee)
