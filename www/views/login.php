@@ -33,7 +33,7 @@ use \DSI\Service\URL;
                 <div class="log-in-error" ng-show="errors.password" ng-bind="errors.password"></div>
 
                 <button type="submit" class="auto ll log-in-link w-clearfix w-inline-block" data-ix="log-in-arrow"
-                        ng-hide="loggedin">
+                        style="width:180px;display:block">
                     <span class="login-li menu-li"
                           ng-bind="loading ? '<?php _ehtml('Loading...') ?>' : '<?php _ehtml('login') ?>'"></span>
                     <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
@@ -97,7 +97,7 @@ use \DSI\Service\URL;
                 </div>
 
                 <button type="submit" class="auto ll log-in-link w-clearfix w-inline-block" data-ix="log-in-arrow"
-                        ng-disabled="forgotPassword.loading" style="width:300px">
+                        ng-disabled="forgotPassword.loading" style="width:300px;display:block">
                     <span class="login-li menu-li"
                           ng-bind="forgotPassword.loading ? '<?php _ehtml('Loading...') ?>' : '<?php _ehtml('Reset my password') ?>'"></span>
                     <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
