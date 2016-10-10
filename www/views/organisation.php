@@ -29,7 +29,7 @@ if (!isset($urlHandler))
                 <div class="intro org"><?php echo show_input($organisation->getShortDescription()) ?></div>
                 <div class="intro org"><?php echo show_input($organisation->getDescription()) ?></div>
                 <div class="involved">
-                    <h3 class="descr-h3 space">Nesta is involved with:</h3>
+                    <h3 class="descr-h3 space"><?php echo show_input($organisation->getName()) ?> is involved with:</h3>
                     <div class="w-row">
                         <div class="w-col w-col-6">
                             <h4 class="involved-h4 orgs-h">Projects</h4>

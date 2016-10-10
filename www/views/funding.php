@@ -16,7 +16,7 @@ require __DIR__ . '/header.php'
                     <p class="intro">One of the biggest challenges to developing and growing DSI is access to funding.
                         Here we list the different types of funding and support for DSI in Europe.</p>
                     <p>To find the opportunities that best fit with what you are looking for you can filter the types of
-                        funding available by [insert details on filters].</p>
+                        funding available by type of funding, target of funding, end date, and country.</p>
                 </div>
                 <div class="sidebar w-col w-col-4 w-col-stack">
                     <h1 class="content-h1 side-bar-space-h1">Funding to offer?</h1>

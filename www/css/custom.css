@@ -356,8 +356,8 @@ div.error {
     width: 100% !important;
 }
 
-.centered p{
-    text-align:center !important;
+.centered p {
+    text-align: center !important;
 }
 
 .edit-personal-profile .w-tab-link {
@@ -429,19 +429,18 @@ div.error {
     background-color: transparent;
     color: #000;
 }
-  
+
 .bg-blur {
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
-  backdrop-filter: saturate(180%) blur(20px);
-  }
-  
-  .blur-20 {
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
-  backdrop-filter: saturate(180%) blur(20px);
-  }
-  
-  
-  .login-field.error {
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+}
+
+.blur-20 {
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+}
+
+.login-field.error {
     height: 50px;
     border-style: none none solid;
     border-width: 1px;
@@ -449,7 +448,7 @@ div.error {
     background-color: #fff;
     text-align: center;
 }
-  
+
 /*  .w-input::-webkit-input-placeholder { /* WebKit browsers 
     color:    #4CADDE;
 }
@@ -463,33 +462,51 @@ div.error {
     color:    #4CADDE;
 }
 /* keep modals centered */
-.modal-container {display: table; height: 100%; position:absolute; overflow: hidden;width:100%;}
-.modal-helper {#position: absolute; #top: 50%;display: table-cell; vertical-align: middle;}
-.modal-content {#position: relative; #top: -50%;margin:0 auto;width:600px;}
- 
-/* absolute centre divs */
-.ab-fab {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.modal-container {
+    display: table;
+    height: 100%;
+    position: absolute;
+    overflow: hidden;
+    width: 100%;
 }
 
-.main-search-results .full-menu-h2{
+.modal-helper {
+    #position: absolute;
+    #top: 50%;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.modal-content {
+    #position: relative;
+    #top: -50%;
+    margin: 0 auto;
+    width: 600px;
+}
+
+/* absolute centre divs */
+.ab-fab {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.main-search-results .full-menu-h2 {
     margin-left: 0;
     margin-right: 0;
 }
 
-.main-search-results .full-menu-link{
-    text-align:left;
+.main-search-results .full-menu-link {
+    text-align: left;
 }
 
-.cradp{
-    height:50px;
+.cradp {
+    height: 50px;
     overflow: hidden;
 }
 
-.intro p{
+.intro p {
     margin-top: inherit;
     margin-bottom: inherit;
     font-family: inherit;
@@ -525,4 +542,14 @@ div.error {
 
 .select2-container .select2-search--inline {
     background: #ffffff;
+}
+
+.hp-post-meta.category {
+    width: 100%;
+    padding-bottom: 10px;
+}
+
+.hp-post-h3 {
+    height: 69px;
+    overflow: hidden;
 }

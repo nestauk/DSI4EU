@@ -93,7 +93,6 @@ require __DIR__ . '/header.php';
                                      style="background-image: url('<?php echo SITE_RELATIVE_PATH ?>/images/stories/feat/{{story.featuredImage}}')"></div>
                                 <div class="w-clearfix hp-post">
                                     <div class="hp-post-meta category" ng-bind="story.datePublished"></div>
-                                    <div class="hp-post-meta hp-date">&nbsp;</div>
                                     <h3 class="hp-post-h3" ng-bind="story.title"></h3>
                                     <p class="hp-post-p" ng-bind="story.content"></p>
                                 </div>

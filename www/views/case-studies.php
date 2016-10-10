@@ -14,8 +14,8 @@ require __DIR__ . '/header.php';
             <div class="intro-row w-row">
                 <div class="w-col w-col-8 w-col-stack">
                     <h1 class="content-h1">Case studies</h1>
-                    <p class="intro">Case study intro text</p>
-                    <p>Case study sub text</p>
+                    <p class="intro">What does digital social innovation look like in practice?</p>
+                    <p>Here you can find examples of digital social innovation to inform and inspire you. These case studies give a quick overview of different organisations' and projects' work. You can click through to their websites to find out more.</p>
                 </div>
                 <div class="sidebar w-col w-col-4 w-col-stack">
                     <?php if ($userCanManageCaseStudies) { ?>
