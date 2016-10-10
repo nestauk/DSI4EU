@@ -34,6 +34,7 @@ class Register
         if (!$this->userRepo)
             $this->userRepo = new UserRepository();
 
+        $this->verifyCaptcha();
         $this->verifyEmail();
         $this->verifyPassword();
         $this->errorHandler->throwIfNotEmpty();
@@ -70,6 +71,14 @@ class Register
     public function getUser()
     {
         return $this->user;
+    }
+
+    public function verifyCaptcha()
+    {
+        if (!$this->data()->recaptchaResponse) {
+            $this->errorHandler->addTaggedError('captcha', 'Please resolve the captcha');
+            $this->errorHandler->throwIfNotEmpty();
+        }
     }
 
     public function verifyEmail()
@@ -132,4 +141,7 @@ class Register_Data
 
     /** @var bool */
     public $sendEmail;
+
+    /** @var bool */
+    public $recaptchaResponse;
 }

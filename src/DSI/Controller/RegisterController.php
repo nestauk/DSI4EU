@@ -22,6 +22,7 @@ class RegisterController
                 $register->data()->email = $_POST['email'];
                 $register->data()->password = $_POST['password'];
                 $register->data()->sendEmail = true;
+                $register->data()->recaptchaResponse = $this->checkRecaptcha();
                 $register->exec();
 
                 $authUser->saveUserInSession($register->getUser());
@@ -49,5 +50,22 @@ class RegisterController
         }
 
         require __DIR__ . '/../../../www/views/register.php';
+    }
+
+    private function checkRecaptcha():bool
+    {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, 'https://www.google.com/recaptcha/api/siteverify');
+        curl_setopt($ch, CURLOPT_POST, TRUE);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, [
+            'secret' => '6Ldc3QgUAAAAALNmk8zJczokhAVEa_7mvUpEotQ_',
+            'response' => $_POST['g-recaptcha-response'],
+            'remoteip' => $_SERVER['REMOTE_ADDR']
+        ]);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        $response = curl_exec($ch);
+        $response = json_decode($response, true);
+
+        return (bool)$response['success'];
     }
 }
