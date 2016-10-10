@@ -11,16 +11,14 @@ require __DIR__ . '/header.php'
             <div class="w-row">
                 <div class="w-col w-col-8 w-col-stack">
                     <h1 class="content-h1">Projects</h1>
-                    <p class="intro">Project intro text explaining more about projects and leading in to description of
-                        four
-                        main areas below this text</p>
-                    <p class="header-intro-descr">While DSI is an incredibly diverse field, the many types of practice
-                        can
-                        be
-                        understood as manifestations of four main technological trends: Open Hardware, Open Networks,
-                        Open
-                        Data
-                        and Open Knowledge.</p>
+                    <p class="intro">Digital Social Innovation (DSI) covers a range of areas, from providing tools to
+                        improve democratic processes to helping citizens measure pollution in their local environment,
+                        from platforms for understanding more about how taxpayers' money is used to crowdfunding
+                        community projects.</p>
+                    <p class="header-intro-descr">Here you can look through projects which digital social innovators
+                        across Europe have submitted to the website. You can filter them by the four categories of
+                        digital social innovation which we have identified: <strong>Open hardware</strong>, <strong>Open
+                            networks</strong>, <strong>Open data</strong> and <strong>Open knowledge</strong>.</p>
                 </div>
                 <div class="sidebar w-col w-col-4 w-col-stack">
                     <h1 class="content-h1 side-bar-space-h1">Add your project</h1>
@@ -58,7 +56,8 @@ require __DIR__ . '/header.php'
                                                data-name="Search" id="Search" maxlength="256" name="Search"
                                                placeholder="Search by keyword, type or project" type="text"
                                                ng-model="searchName">
-                                        <img class="search-mag" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-search.png">
+                                        <img class="search-mag"
+                                             src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-search.png">
                                     </div>
                                     <div class="filter-checkbox w-checkbox">
                                         <input class="w-checkbox-input" data-name="Checkbox 2" id="checkbox-2"
