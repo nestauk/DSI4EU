@@ -518,3 +518,11 @@ div.error {
     font-size: 16px;
     text-transform: uppercase;
 }
+
+.select2-container--default .select2-selection--multiple {
+    background-color: transparent;
+}
+
+.select2-container .select2-search--inline {
+    background: #ffffff;
+}
