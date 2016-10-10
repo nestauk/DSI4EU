@@ -8757,8 +8757,8 @@ strong {
 .stats-bg {
   height: 500px;
   background-color: #f3f3f3;
-  background-image: -webkit-radial-gradient(circle farthest-corner at 50% 50%, rgba(56, 65, 85, .8), #212735), url('../images/bg.png');
-  background-image: radial-gradient(circle farthest-corner at 50% 50%, rgba(56, 65, 85, .8), #212735), url('../images/bg.png');
+  background-image: -webkit-radial-gradient(circle farthest-corner at 50% 50%, rgba(13, 26, 54, .72), #11151f), url('../images/bg-map-opt.png');
+  background-image: radial-gradient(circle farthest-corner at 50% 50%, rgba(13, 26, 54, .72), #11151f), url('../images/bg-map-opt.png');
   background-position: 0px 0px, 50% 50%;
   background-size: auto, cover;
   background-repeat: repeat, no-repeat;
