@@ -233,9 +233,9 @@ class URL
         return SITE_RELATIVE_PATH . '/twitter-login';
     }
 
-    public static function addStory()
+    public function addStory()
     {
-        return SITE_RELATIVE_PATH . '/story/add';
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'story/add';
     }
 
     public function blogPosts($format = null)
