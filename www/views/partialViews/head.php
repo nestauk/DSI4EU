@@ -34,10 +34,10 @@ use \DSI\Service\Sysctl;
 <script type="text/javascript"
         src="<?php echo SITE_RELATIVE_PATH ?>/js/modernizr.js?<?php Sysctl::echoVersion() ?>"></script>
 
-<link rel="shortcut icon" type="image/x-icon" href="<?php echo SITE_RELATIVE_PATH ?>/images/ico-small.png">
-<link rel="apple-touch-icon" href="<?php echo SITE_RELATIVE_PATH ?>/images/ico-large.png">
-<link href="<?php echo SITE_RELATIVE_PATH ?>/images/ico-small.png" rel="shortcut icon" type="image/x-icon">
-<link href="<?php echo SITE_RELATIVE_PATH ?>/images/ico-large.png" rel="apple-touch-icon">
+<link rel="shortcut icon" type="image/x-icon" href="<?php echo SITE_RELATIVE_PATH ?>/favicon.ico">
+<link rel="apple-touch-icon" href="<?php echo SITE_RELATIVE_PATH ?>/favicon.ico">
+<link href="<?php echo SITE_RELATIVE_PATH ?>/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+<link href="<?php echo SITE_RELATIVE_PATH ?>/images/favicon.ico" rel="apple-touch-icon">
 
 <script src="<?php echo SITE_RELATIVE_PATH ?>/js/lib/isotope/isotope.pkgd.min.js"></script>
 
