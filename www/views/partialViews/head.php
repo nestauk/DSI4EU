@@ -1,6 +1,7 @@
 <?php
 /** @var $angularModules string[] */
 /** @var $pageTitle string[] */
+/** @var $loggedInUser \DSI\Entity\User */
 use \DSI\Service\Sysctl;
 
 ?>
@@ -26,7 +27,7 @@ use \DSI\Service\Sysctl;
 <script>
     WebFont.load({
         google: {
-            families: ["Montserrat:400,700","Open Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic"]
+            families: ["Montserrat:400,700", "Open Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic"]
         }
     });
 </script>
@@ -92,3 +93,11 @@ use \DSI\Service\Sysctl;
 
 <link rel="stylesheet" type="text/css"
       href="<?php echo SITE_RELATIVE_PATH ?>/css/custom.css?<?php Sysctl::echoVersion() ?>">
+
+<?php if ($loggedInUser) { ?>
+    <style>
+        .hero-cta {
+            display: none
+        }
+    </style>
+<?php } ?>

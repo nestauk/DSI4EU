@@ -352,7 +352,7 @@ if (!isset($urlHandler))
                                                           maxlength="140"></textarea>
                                                 <div class="log-in-error" ng-show="errors.shortDescription"
                                                      ng-bind="errors.shortDescription"></div>
-                                                <br />
+                                                <br/>
 
                                                 <label class="story-label" for="project-bio">Long description</label>
                                                 <p>Please provide a longer description for your project. How would you
@@ -444,6 +444,10 @@ if (!isset($urlHandler))
                                                                  ng-cloak>
                                                                 {{headerImage.errorMsg.file}}
                                                             </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="w-col w-col-6 w-col-stack">
+                                                        <div class="padding-left-50">
                                                             <div class="small-print">
                                                                 Any information, project data or results that you submit
                                                                 to Nesta in relation to your project shall be released

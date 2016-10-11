@@ -44,6 +44,11 @@ class UpdateUserBasicDetails
                 $this->errorHandler->addTaggedError('lastName', 'Please type the last name');
             }
         }
+        if (isset($this->data()->bio)) {
+            if (strlen($this->data()->bio) > 140) {
+                $this->errorHandler->addTaggedError('bio', 'Please submit a shorter bio');
+            }
+        }
 
         $this->errorHandler->throwIfNotEmpty();
 

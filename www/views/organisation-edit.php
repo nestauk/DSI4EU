@@ -333,6 +333,7 @@ if (!isset($urlHandler))
                                     <div class="creator-col creator-col-right w-col w-col-8">
                                         <div class="w-form">
                                             <div class="w-row">
+                                                <?php /*
                                                 <div class="w-col w-col-6 w-col-stack">
                                                     <div class="padding-right-50">
                                                         <label for="name">Your organisation's logo</label>
@@ -351,6 +352,7 @@ if (!isset($urlHandler))
                                                         </div>
                                                     </div>
                                                 </div>
+                                                */ ?>
                                                 <div class="w-col w-col-6 w-col-stack">
                                                     <div class="padding-left-50">
                                                         <label class="story-label" for="Title">Header background
@@ -370,6 +372,10 @@ if (!isset($urlHandler))
                                                              ng-cloak>
                                                             {{headerImage.errorMsg.file}}
                                                         </div>
+                                                    </div>
+                                                </div>
+                                                <div class="w-col w-col-6 w-col-stack">
+                                                    <div class="padding-left-50">
                                                         <div class="small-print">
                                                             Any information, organisation data or results that you
                                                             submit to Nesta in relation to your project shall be
