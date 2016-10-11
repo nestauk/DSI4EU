@@ -34,7 +34,7 @@ require __DIR__ . '/header.php';
                 </div>
                 <div class="sidebar w-col w-col-4">
                     <?php if ($isOwner) { ?>
-                        <?php require __DIR__ . '/partialViews/profile-menu.php'?>
+                        <?php require __DIR__ . '/partialViews/profile-menu.php' ?>
                     <?php } ?>
                 </div>
             </div>
@@ -87,7 +87,8 @@ require __DIR__ . '/header.php';
                             </div>
                             <?php if ($isOwner) { ?>
                                 <div class="join-project">
-                                    <a class="btn btn-join w-button" data-ix="show-join-project" href="#">Add new
+                                    <a class="btn btn-join w-button" <?php /* data-ix="show-join-project" */?>
+                                       href="<?php echo $urlHandler->editProfile() ?>#step3">Add new
                                         project +</a>
                                 </div>
                             <?php } ?>
@@ -111,8 +112,8 @@ require __DIR__ . '/header.php';
                             </div>
                             <?php if ($isOwner) { ?>
                                 <div class="join-project">
-                                    <a class="btn btn-join w-button" data-ix="show-join-organisation" href="#">Join
-                                        organisation +</a>
+                                    <a class="btn btn-join w-button" <?php /* data-ix="show-join-organisation" */?>
+                                       href="<?php echo $urlHandler->editProfile() ?>#step3">Join organisation +</a>
                                 </div>
                             <?php } ?>
                         </div>
@@ -175,7 +176,8 @@ require __DIR__ . '/header.php';
                                 Join Organisation
                             </h1>
                             <div class="w-form">
-                                <form ng-submit="joinOrganisation.submit()" id="joinOrganisationForm" style="text-align:center">
+                                <form ng-submit="joinOrganisation.submit()" id="joinOrganisationForm"
+                                      style="text-align:center">
                                     <select style="width:60%" data-placeholder="Select an organisation"
                                             ng-model="joinOrganisation.data.organisation">
                                         <option value=""></option>

@@ -27,7 +27,7 @@ if (!isset($urlHandler))
         <div class="w-row">
             <div class="content-left w-col w-col-8">
                 <div class="intro org"><?php echo show_input($organisation->getShortDescription()) ?></div>
-                <div class="intro org"><?php echo show_input($organisation->getDescription()) ?></div>
+                <div class="intro org"><?php echo $organisation->getDescription() ?></div>
                 <div class="involved">
                     <h3 class="descr-h3 space"><?php echo show_input($organisation->getName()) ?> is involved with:</h3>
                     <div class="w-row">

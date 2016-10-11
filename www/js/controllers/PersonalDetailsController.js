@@ -10,6 +10,12 @@ angular
             });
 
         $scope.currentTab = 'step1';
+        if (window.location.hash) {
+            var hash = window.location.hash.substring(1);
+            if (hash == 'step3')
+                $scope.currentTab = 'step3';
+        }
+
         $scope.submitStep1 = function (params) {
             $scope.saveUserDetails({
                 postField: 'step1',
@@ -58,7 +64,7 @@ angular
                 }
             })
         };
-        
+
         /*
          $scope.submitStep4 = function () {
          $scope.errors = {};
