@@ -5,13 +5,10 @@
 /** @var $pageTitle string[] */
 /** @var $sliderCaseStudies \DSI\Entity\CaseStudy[] */
 /** @var $homePageCaseStudies \DSI\Entity\CaseStudy[] */
-/** @var $organisationCount int */
-/** @var $projectCount int */
+/** @var $organisationsCount int */
+/** @var $projectsCount int */
 use \DSI\Service\URL;
 use \DSI\Entity\Image;
-
-$projectsCount = (new \DSI\Repository\ProjectRepositoryInAPC())->countAll();
-$organisationsCount = (new \DSI\Repository\OrganisationRepositoryInAPC())->countAll();
 
 if (!isset($urlHandler))
     $urlHandler = new URL();
@@ -48,9 +45,11 @@ if (!isset($urlHandler))
     <div class="cta-row w-row">
         <div class="w-clearfix w-col w-col-9 w-col-stack">
             <div class="cta-text">
-                <div class="home-hero-cta" data-ix="fadeinuponload-10">Join the community of <span class="sub-bold">1,345 organisations</span>
-                    and <span class="sub-bold">731 projects</span>&nbsp;USING DIGITAL TECHNOLOGIES TO TACKLE SOCIAL
-                    PROBLEMS
+                <div class="home-hero-cta" data-ix="fadeinuponload-10">
+                    Join the community of
+                    <span class="sub-bold"><?php echo number_format($organisationsCount)?> organisations</span>
+                    and <span class="sub-bold"><?php echo number_format($projectsCount)?> projects</span>
+                    USING DIGITAL TECHNOLOGIES TO TACKLE SOCIAL CHALLENGES
                 </div>
             </div>
         </div>
@@ -113,7 +112,7 @@ if (!isset($urlHandler))
         <div class="stat-text w-row">
             <div class="w-col w-col-5">
                 <div class="number-of-orgs"
-                     data-ix="fadeinuponload-3"><?php echo number_format($organisationCount) ?></div>
+                     data-ix="fadeinuponload-3"><?php echo number_format($organisationsCount) ?></div>
                 <a class="organisations-2" data-ix="fadeinuponload-4" href="<?php echo $urlHandler->organisations() ?>">Organisations</a>
             </div>
             <div class="w-col w-col-2">

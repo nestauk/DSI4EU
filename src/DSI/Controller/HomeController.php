@@ -19,8 +19,10 @@ class HomeController
         $hideSearch = true;
         $sliderCaseStudies = (new CaseStudyRepository())->getAllPublishedForSlider();
         $homePageCaseStudies = (new CaseStudyRepository())->getHomePageStudiesLast(3);
-        $organisationCount = (new OrganisationRepository())->countAll();
-        $projectCount = (new ProjectRepository())->countAll();
+
+        $organisationsCount = (new \DSI\Repository\OrganisationRepositoryInAPC())->countAll();
+        $projectsCount = (new \DSI\Repository\ProjectRepositoryInAPC())->countAll();
+
         $isIndexPage = true;
 
         require __DIR__ . '/../../../www/views/home.php';
