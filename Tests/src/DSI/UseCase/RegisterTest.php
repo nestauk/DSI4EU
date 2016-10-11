@@ -33,6 +33,7 @@ class RegisterTest extends PHPUnit_Framework_TestCase
         try {
             $this->registerCommand->data()->email = 'test@example.org';
             $this->registerCommand->data()->password = 'testPassword';
+            $this->registerCommand->data()->recaptchaResponse = true;
             $this->registerCommand->exec();
         } catch (ErrorHandler $e) {
             $this->assertNull($e);
@@ -50,12 +51,14 @@ class RegisterTest extends PHPUnit_Framework_TestCase
     {
         $this->registerCommand->data()->email = 'test@example.org';
         $this->registerCommand->data()->password = 'testPassword';
+        $this->registerCommand->data()->recaptchaResponse = true;
         $this->registerCommand->exec();
 
         $e = null;
         try {
             $this->registerCommand->data()->email = 'test@example.org';
             $this->registerCommand->data()->password = 'testPassword';
+            $this->registerCommand->data()->recaptchaResponse = true;
             $this->registerCommand->exec();
         } catch (ErrorHandler $e) {
         }
@@ -69,6 +72,7 @@ class RegisterTest extends PHPUnit_Framework_TestCase
     {
         $e = null;
         try {
+            $this->registerCommand->data()->recaptchaResponse = true;
             $this->registerCommand->exec();
         } catch (ErrorHandler $e) {
         }

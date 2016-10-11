@@ -45,26 +45,30 @@ require __DIR__ . '/header.php';
                 <div class="profile-info w-row">
                     <div class="w-col w-col-4 w-col-stack">
                         <div class="info-card">
-                            <h3 class="card-h info-h">Contact me</h3>
-                            <ul class="w-list-unstyled">
-                                <?php /*
-                                <li class="profile-contact-link">
-                                    <a class="link profile-contact-link" href="#">Daniel.pettifer@nesta.org.uk</a>
-                                </li>
-                                */ ?>
-                                <?php foreach ($userLinks AS $link) { ?>
+                            <?php if ($userLinks) { ?>
+                                <h3 class="card-h info-h">Contact me</h3>
+                                <ul class="w-list-unstyled">
+                                    <?php /*
                                     <li class="profile-contact-link">
-                                        <a <?php if (!$user->isCommunityAdmin() AND !$user->isEditorialAdmin()) echo 'rel="nofollow"' ?>
-                                            class="link profile-contact-link" href="<?php echo $link ?>">
-                                            <?php echo show_input($link) ?>
-                                        </a>
+                                        <a class="link profile-contact-link" href="#">Daniel.pettifer@nesta.org.uk</a>
                                     </li>
-                                <?php } ?>
-                            </ul>
-                            <h3 class="card-h info-h">My skills:</h3>
-                            <div class="tags-block">
-                                <div class="tag" ng-repeat="skill in skills" ng-cloak>
-                                    <div ng-bind="skill"></div>
+                                    */ ?>
+                                    <?php foreach ($userLinks AS $link) { ?>
+                                        <li class="profile-contact-link">
+                                            <a <?php if (!$user->isCommunityAdmin() AND !$user->isEditorialAdmin()) echo 'rel="nofollow"' ?>
+                                                class="link profile-contact-link" href="<?php echo $link ?>">
+                                                <?php echo show_input($link) ?>
+                                            </a>
+                                        </li>
+                                    <?php } ?>
+                                </ul>
+                            <?php } ?>
+                            <div ng-show="skills" ng-cloak>
+                                <h3 class="card-h info-h">My skills:</h3>
+                                <div class="tags-block">
+                                    <div class="tag" ng-repeat="skill in skills">
+                                        <div ng-bind="skill"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -87,7 +91,7 @@ require __DIR__ . '/header.php';
                             </div>
                             <?php if ($isOwner) { ?>
                                 <div class="join-project">
-                                    <a class="btn btn-join w-button" <?php /* data-ix="show-join-project" */?>
+                                    <a class="btn btn-join w-button" <?php /* data-ix="show-join-project" */ ?>
                                        href="<?php echo $urlHandler->editProfile() ?>#step3">Add new
                                         project +</a>
                                 </div>
@@ -112,7 +116,7 @@ require __DIR__ . '/header.php';
                             </div>
                             <?php if ($isOwner) { ?>
                                 <div class="join-project">
-                                    <a class="btn btn-join w-button" <?php /* data-ix="show-join-organisation" */?>
+                                    <a class="btn btn-join w-button" <?php /* data-ix="show-join-organisation" */ ?>
                                        href="<?php echo $urlHandler->editProfile() ?>#step3">Join organisation +</a>
                                 </div>
                             <?php } ?>

@@ -103,6 +103,7 @@ class UserLinkRepository
         $query = new SQL("SELECT link 
             FROM `user-links` 
             WHERE `userID` = '{$userID}'
+              AND `link` != ''
             ORDER BY `link`
         ");
         return $query->fetch_all('link');
