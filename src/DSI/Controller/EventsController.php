@@ -3,6 +3,7 @@
 namespace DSI\Controller;
 
 use DSI\Entity\Event;
+use DSI\Repository\CountryRepository;
 use DSI\Repository\EventRepository;
 use DSI\Service\Auth;
 use DSI\Service\URL;
@@ -27,6 +28,7 @@ class EventsController
                 'months' => $this->jsonMonths(),
                 'events' => $this->jsonEvents($events),
                 'years' => $this->jsonYearsFromEvents($events),
+                'countries' => $this->jsonCountriesFromEvents($events),
             ]);
         } else {
             $pageTitle = 'Events';
@@ -55,6 +57,7 @@ class EventsController
                 'isNew' => $event->isNew(),
                 'viewUrl' => $this->urlHandler->event($event),
                 'region' => $event->getRegionName(),
+                'countryID' => $event->getCountryID(),
                 'country' => $event->getCountryName(),
                 'price' => $event->getPrice(),
             ];
@@ -109,5 +112,31 @@ class EventsController
             'title' => '- Before Year -',
         ]);
         return $endingYears;
+    }
+
+    /**
+     * @param Event[] $events
+     * @return array
+     */
+    private function jsonCountriesFromEvents($events)
+    {
+        $countryIDs = [];
+        $countries = [];
+        foreach ($events AS $event) {
+            if($event->getCountryID() AND !in_array($event->getCountryID(), $countryIDs)){
+                $countries[] = [
+                    'id' => $event->getCountryID(),
+                    'name' => $event->getCountryName(),
+                ];
+                $countryIDs[] = $event->getCountryID();
+            }
+        }
+        //sort($countries);
+
+        array_unshift($countries, [
+            'id' => '0',
+            'name' => '- All -',
+        ]);
+        return $countries;
     }
 }

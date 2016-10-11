@@ -4,6 +4,7 @@ angular
         var eventsJsonUrl = $attrs.eventsjsonurl;
 
         $scope.searchFee = "0";
+        $scope.searchCountryID = "0";
 
         $http.get(eventsJsonUrl)
             .then(function (result) {
@@ -32,6 +33,15 @@ angular
                     return item.price == '';
 
                 return true;
+            }
+        };
+
+        $scope.inCountry = function (val) {
+            return function (item) {
+                if (val == '0')
+                    return true;
+
+                return (val == item.countryID);
             }
         };
     });

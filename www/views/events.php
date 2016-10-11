@@ -3,6 +3,7 @@ require __DIR__ . '/header.php'
 /** @var $loggedInUser \DSI\Entity\User */
 /** @var $urlHandler \DSI\Service\URL */
 /** @var $userCanAddEvent bool */
+/** @var $countries \DSI\Entity\Country[] */
 ?>
     <div ng-controller="EventsController"
          data-eventsjsonurl="<?php echo $urlHandler->eventsJson() ?>">
@@ -53,21 +54,18 @@ require __DIR__ . '/header.php'
                                         <img class="search-mag"
                                              src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-search.png">
                                     </div>
+                                    <?php /*
                                     <label class="dropdown-label" for="field">Choose between paid or free events</label>
                                     <select class="w-select" id="field" name="field" ng-model="searchFee">
                                         <option value="0">- All -</option>
                                         <option value="1">Paid</option>
                                         <option value="2">Free</option>
                                     </select>
-                                    <?php /*
-                                    <label class="dropdown-label" for="field-2">Event location</label>
-                                    <select class="w-select" data-name="Field 2" id="field-2" name="field-2">
-                                        <option value="location">Select</option>
-                                        <option value="First">First Choice</option>
-                                        <option value="Second">Second Choice</option>
-                                        <option value="Third">Third Choice</option>
-                                    </select>
                                     */ ?>
+                                    <label class="dropdown-label" for="field-2">Event location</label>
+                                    <select class="w-select" ng-model="searchCountryID">
+                                        <option ng-repeat="country in data.countries" value="{{country.id}}">{{country.name}}</option>
+                                    </select>
                                 </form>
                             </div>
                         </div>
@@ -76,7 +74,7 @@ require __DIR__ . '/header.php'
                         <div class="info-card" data-ix="underline" ng-cloak
                              ng-repeat="event in data.events
                              | filter: searchName
-                             | filter: hasFee(searchFee)
+                             | filter: inCountry(searchCountryID)
                                track by event.id">
                             <h2 class="funding-card-h2" ng-bind="event.title"></h2>
                             <div class="infocard top3-underline" data-ix="new-interaction-2"></div>
