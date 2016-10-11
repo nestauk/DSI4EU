@@ -319,7 +319,7 @@ class Router
         } elseif (preg_match('<^/' . $langHandler . 'project/([0-9]+)(\/.*)?$>', $this->pageURL, $matches)) {
             $this->project($matches);
 
-        } elseif (preg_match('<^/.*\.(gif|jpe?g|png|svg|js|css|map)$>', $this->pageURL)) {
+        } elseif (preg_match('<^/.*\.(gif|jpe?g|png|svg|js|css|map|ico)$>', $this->pageURL)) {
             pr('not found');
             return $this->staticContent();
 
