@@ -123,7 +123,7 @@ class EventsController
         $countryIDs = [];
         $countries = [];
         foreach ($events AS $event) {
-            if($event->getCountryID() AND !in_array($event->getCountryID(), $countryIDs)){
+            if ($event->getCountryID() AND !in_array($event->getCountryID(), $countryIDs)) {
                 $countries[] = [
                     'id' => $event->getCountryID(),
                     'name' => $event->getCountryName(),
@@ -131,7 +131,9 @@ class EventsController
                 $countryIDs[] = $event->getCountryID();
             }
         }
-        //sort($countries);
+        usort($countries, function ($a, $b) {
+            return strcmp($a['name'], $b['name']);
+        });
 
         array_unshift($countries, [
             'id' => '0',
