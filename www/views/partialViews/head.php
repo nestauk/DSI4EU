@@ -94,7 +94,7 @@ use \DSI\Service\Sysctl;
 <link rel="stylesheet" type="text/css"
       href="<?php echo SITE_RELATIVE_PATH ?>/css/custom.css?<?php Sysctl::echoVersion() ?>">
 
-<?php if ($loggedInUser) { ?>
+<?php if (isset($loggedInUser) AND $loggedInUser) { ?>
     <style>
         .hero-cta {
             display: none
