@@ -43,6 +43,7 @@ class UpdateProject
         $this->checkIfAllInfoHaveBeenSent();
         $this->checkIfUserCanEditTheProject();
         $this->checkIfMandatoryDetailsHaveBeenSent();
+        $this->fixUrl();
         $this->saveProjectDetails();
         $this->updateInvolvedOrganisationCount();
     }
@@ -265,6 +266,15 @@ class UpdateProject
             $this->errorHandler->addTaggedError('shortDescription', 'Please type the project short description');
 
         $this->errorHandler->throwIfNotEmpty();
+    }
+
+    private function fixUrl()
+    {
+        if (isset($this->data()->url) AND $this->data()->url != '') {
+            if (!preg_match('<^http>', $this->data()->url)) {
+                $this->data()->url = 'http://' . $this->data()->url;
+            }
+        }
     }
 
     private function setRegion()

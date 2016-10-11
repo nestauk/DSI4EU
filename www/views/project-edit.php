@@ -105,6 +105,7 @@ if (!isset($urlHandler))
                                                                    ng-model="project.url"
                                                                    type="text">
                                                             <i>* Please include http:// at the beginning of the URL</i>
+                                                            <?php /*
                                                             <br/><br/>
                                                             <label for="email-2">Social media links</label>
                                                             <input class="creator-data-entry w-input"
@@ -128,6 +129,7 @@ if (!isset($urlHandler))
                                                                    ng-model="project.links.github"
                                                                    type="text">
                                                             <i>* Please include http:// at the beginning of the URL</i>
+                                                            */ ?>
                                                         </div>
                                                     </div>
                                                     <div class="w-col w-col-6 w-col-stack">
