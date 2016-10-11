@@ -360,11 +360,6 @@ div.error {
     text-align: center !important;
 }
 
-.edit-personal-profile .w-tab-link {
-    padding-right: 90px;
-    padding-left: 90px;
-}
-
 .small-print {
     font-size: 14px;
     line-height: 20px;
@@ -552,4 +547,9 @@ div.error {
 .hp-post-h3 {
     height: 69px;
     overflow: hidden;
+}
+
+.step-tab{
+    padding-left:90px !important;
+    padding-right:90px !important;
 }
