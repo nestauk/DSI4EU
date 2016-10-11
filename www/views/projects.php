@@ -99,7 +99,7 @@ require __DIR__ . '/header.php'
                                     </div>
                                 </form>
                             </div>
-                            <div class="trend-notes">Where &nbsp;people come together through online platforms to
+                            <div class="trend-notes">Where people come together through online platforms to
                                 crowdsource or
                                 crowdfund solutions, collectively analyse data and develop new DSI projects
                             </div>
