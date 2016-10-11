@@ -251,9 +251,9 @@ class URL
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'blog/' . $story->getId() . '/' . self::linkify($story->getTitle());
     }
 
-    public function blogPostEdit($id)
+    public function blogPostEdit(Story $story)
     {
-        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'story/edit/' . $id;
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'story/edit/' . $story->getId();
     }
 
     public function caseStudy(CaseStudy $caseStudy)

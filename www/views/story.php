@@ -4,6 +4,7 @@ require __DIR__ . '/header.php';
 /** @var $author \DSI\Entity\User */
 /** @var $stories \DSI\Entity\Story[] */
 /** @var $userCanManageStory bool */
+/** @var $urlHandler \DSI\Service\URL */
 ?>
 
     <div class="single-post-hero"

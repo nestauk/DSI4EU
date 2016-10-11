@@ -7,6 +7,7 @@ use DSI\Entity\User;
 use DSI\Repository\StoryRepository;
 use DSI\Repository\UserRepository;
 use DSI\Service\Auth;
+use DSI\Service\URL;
 
 class StoryController
 {
@@ -20,6 +21,7 @@ class StoryController
 
     public function exec()
     {
+        $urlHandler = new URL();
         $authUser = new Auth();
         $loggedInUser = $authUser->getUserIfLoggedIn();
 

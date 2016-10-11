@@ -79,16 +79,14 @@ if (!isset($urlHandler))
                     </div>
                     <div class="w-col w-col-11 w-col-medium-6 w-col-small-6 w-col-tiny-6">
                         <div class="footer-small-print">All our work is licensed under a
-                            <span class="footer-link-small"></span>
                             <span class="footer-link-small">
-                                <span xmlns="http://www.w3.org/1999/xhtml">&nbsp;
+                                <span xmlns="http://www.w3.org/1999/xhtml">
                                     <a class="footer-link-small"
                                        href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
-                                        Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
-                                    </a>
-                                </span>&nbsp;
+                                        Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>,
+                                </span>
                             </span>
-                            <span>, unless</span> it says otherwise.
+                            <span>unless</span> it says otherwise.
                         </div>
                     </div>
                 </div>

@@ -34,7 +34,7 @@ class StoriesController
                     'categoryID' => $story->getStoryCategoryId(),
                     'datePublished' => $story->getDatePublished('jS F Y'),
                     'url' => $urlHandler->blogPost($story),
-                    'editUrl' => $urlHandler->blogPostEdit($story->getId()),
+                    'editUrl' => $urlHandler->blogPostEdit($story),
                     'isPublished' => $story->isPublished(),
                 ];
                 if ($category = $story->getStoryCategory())
