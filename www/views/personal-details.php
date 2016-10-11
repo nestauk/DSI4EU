@@ -364,8 +364,9 @@ $leftSideText .= "<p>The information is optional. You will be able to edit and e
                                                             <p>Add DSI projects that you are involved with here. This
                                                                 will send a request to the project owner(s) to accept
                                                                 you as a project collaborator.
-                                                                If the project(s) does not exist please add the project
-                                                                using Create once you’ve completed your profile.</p>
+                                                                If the project does not exist on the website yet,
+                                                                please add it by clicking on the "Create" button at the
+                                                                top of the page once you've completed your profile.</p>
                                                             <div id="projectsSelectBox" class="designSelectBox">
                                                                 <select
                                                                     class="select2-withDesign creator-data-entry end w-input"
@@ -400,9 +401,9 @@ $leftSideText .= "<p>The information is optional. You will be able to edit and e
                                                             <p>Add DSI organisations that you are involved with here.
                                                                 This will send a request to the organisation owner(s) to
                                                                 accept you as a member of that organisation.
-                                                                If the organisation(s) does not exist please add the
-                                                                organisation using Create once you’ve completed your
-                                                                profile.</p>
+                                                                If the organisation does not exist on the website yet,
+                                                                please add it by clicking on the "Create" button at the
+                                                                top of the page once you've completed your profile.</p>
                                                             <div id="organisationsSelectBox" class="designSelectBox">
                                                                 <select
                                                                     class="select2-withDesign creator-data-entry end w-input"

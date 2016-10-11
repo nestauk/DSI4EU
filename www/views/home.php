@@ -34,7 +34,7 @@ if (!isset($urlHandler))
         <div class="w-row">
             <div class="w-col w-col-7">
                 <h1 class="home-hero-h1" data-ix="fadeinuponload-6">Digital Social Innovation</h1>
-                <h3 class="home-hero-h3 main" data-ix="fadeinuponload-7">Showcase your project, find collaborators and
+                <h3 class="home-hero-h3 main" data-ix="fadeinuponload-7">Showcase your project, meet collaborators and
                     find funding</h3>
             </div>
             <div class="w-col w-col-5">
@@ -131,8 +131,9 @@ if (!isset($urlHandler))
     <div class="content-block cs">
         <h3 class="centered title">Case studies</h3>
         <div class="sub-header-centre">In need of inspiration?</div>
-        <p class="centered">Our case studies tell the stories of the people and projects pioneering digital social
-            innovation</p>
+        <p class="centered">
+            Short stories introducing digital social innovations which we love
+        </p>
         <div class="w-row">
             <?php foreach ($homePageCaseStudies AS $i => $caseStudy) { ?>
                 <div class="w-col w-col-4">

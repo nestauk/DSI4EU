@@ -48,7 +48,7 @@ require __DIR__ . '/header.php';
                             </div>
                         </div>
                     </div>
-                    <?php if ($category = $story->getStoryCategory()) { ?>
+                    <?php /* if ($category = $story->getStoryCategory()) { ?>
                         <div class="w-col w-col-6">
                             <div class="w-clearfix">
                                 <div class="single-post-category">
@@ -56,7 +56,7 @@ require __DIR__ . '/header.php';
                                 </div>
                             </div>
                         </div>
-                    <?php } ?>
+                    <?php } */ ?>
                 </div>
             </div>
         </div>

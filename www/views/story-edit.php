@@ -72,6 +72,7 @@ require __DIR__ . '/header.php';
                                     <div style="color:red" ng-bind="{{featuredImageUpload.errorMsg.file}}"></div>
                                 </div>
 
+                                <?php /*
                                 <label class="story-label" for="Title">Main story image</label>
 
                                 <img ng-show="story.mainImage" class="story-image-upload"
@@ -92,7 +93,9 @@ require __DIR__ . '/header.php';
                                     </div>
                                     <div style="color:red" ng-bind="{{mainImageUpload.errorMsg.file}}"></div>
                                 </div>
+                                */ ?>
 
+                                <?php /*
                                 <label class="story-label" for="Story-wysiwyg">Categories</label>
                                 <?php foreach ($categories AS $category) { ?>
                                     <div class="w-checkbox">
@@ -103,6 +106,7 @@ require __DIR__ . '/header.php';
                                         </label>
                                     </div>
                                 <?php } ?>
+                                */ ?>
                                 <div style="color:red" ng-bind="errors.category"></div>
                             </div>
                             <div class="w-col w-col-6">
@@ -132,8 +136,8 @@ require __DIR__ . '/header.php';
                         <input class="w-button dsi-button post-story cancel" type="submit" value="Save"
                                ng-value="loading ? 'Loading...' : 'Save'"
                                ng-disabled="loading">
-                        <a href="<?php echo $urlHandler->blogPosts() ?>"
-                           class="w-button dsi-button post-story cancel">Cancel</a>
+                        <a href="<?php echo $urlHandler->blogPosts() ?>" style="width:250px"
+                           class="w-button dsi-button post-story cancel">Back to blog posts</a>
                     </form>
                 </div>
             </div>

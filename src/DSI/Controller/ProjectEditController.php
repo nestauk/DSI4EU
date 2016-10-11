@@ -97,7 +97,7 @@ class ProjectEditController
                 }
             } catch (ErrorHandler $e) {
                 echo json_encode([
-                    'result' => 'error',
+                    'code' => 'error',
                     'errors' => $e->getErrors()
                 ]);
                 return;

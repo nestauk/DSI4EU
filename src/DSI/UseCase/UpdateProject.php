@@ -42,7 +42,7 @@ class UpdateProject
 
         $this->checkIfAllInfoHaveBeenSent();
         $this->checkIfUserCanEditTheProject();
-        $this->checkIfNameIsNotEmpty();
+        $this->checkIfMandatoryDetailsHaveBeenSent();
         $this->saveProjectDetails();
         $this->updateInvolvedOrganisationCount();
     }
@@ -256,13 +256,15 @@ class UpdateProject
         throw $this->errorHandler;
     }
 
-    private function checkIfNameIsNotEmpty()
+    private function checkIfMandatoryDetailsHaveBeenSent()
     {
-        if (isset($this->data()->name))
-            if ($this->data()->name == '') {
-                $this->errorHandler->addTaggedError('name', 'Please type a project name');
-                throw $this->errorHandler;
-            }
+        if (isset($this->data()->name) AND $this->data()->name == '')
+            $this->errorHandler->addTaggedError('name', 'Please type the project name');
+
+        if (isset($this->data()->shortDescription) AND $this->data()->shortDescription == '')
+            $this->errorHandler->addTaggedError('shortDescription', 'Please type the project short description');
+
+        $this->errorHandler->throwIfNotEmpty();
     }
 
     private function setRegion()

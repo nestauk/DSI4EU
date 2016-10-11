@@ -123,8 +123,7 @@ require __DIR__ . '/header.php'
                             <div class="funding-closing-date" ng-show="funding.closingDate">
                                 <strong>Closing date:</strong> {{funding.closingDate}}
                             </div>
-                            <div class="funding-country funding-new" ng-show="funding.isNew">New funding opportunity
-                            </div>
+                            <div class="funding-country funding-new" ng-show="funding.isNew">New opportunity</div>
                             <a class="infocard log-in-link read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
                                href="{{funding.url}}" target="_blank" ng-show="funding.url">
                                 <div class="login-li menu-li readmore-li">Read more</div>

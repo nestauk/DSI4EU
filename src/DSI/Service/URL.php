@@ -110,6 +110,11 @@ class URL
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'event/' . $event->getId();
     }
 
+    public function eventAdd()
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'events/add';
+    }
+
     public function eventEdit(Event $event)
     {
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'event/edit/' . $event->getId();

@@ -77,12 +77,14 @@ require __DIR__ . '/header.php';
                     <p>DSI4EU has been running since February 2016 and is partnered by Nesta, The Waag Society, and
                         SUPSI</p>
                     */ ?>
-                    <a class="log-in-link long read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
-                       href="<?php echo $project->getUrl() ?>">
-                        <div class="login-li long menu-li readmore-li">Visit website</div>
-                        <img class="login-arrow"
-                             src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
-                    </a>
+                    <?php if ($project->getUrl()) { ?>
+                        <a class="log-in-link long read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
+                           href="<?php echo $project->getUrl() ?>">
+                            <div class="login-li long menu-li readmore-li">Visit website</div>
+                            <img class="login-arrow"
+                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
+                        </a>
+                    <?php } ?>
                     <h3 class="cse side-bar-h3">Tagged under</h3>
                     <div class="tag" ng-repeat="tag in project.tags" ng-bind="tag"></div>
                     <h3 class="cse side-bar-h3">Areas of society impacted</h3>
@@ -99,7 +101,7 @@ require __DIR__ . '/header.php';
         </div>
     </div>
 
-    <?php /*
+<?php /*
     <div class="header-large-section">
         <div class="header-large"
              style="background-image: linear-gradient(180deg, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url('<?php echo \DSI\Entity\Image::PROJECT_HEADER_URL . $project->getHeaderImageOrDefault() ?>');">
@@ -546,7 +548,7 @@ require __DIR__ . '/header.php';
         <?php } ?>
     </div>
     */ ?>
-    <?php /*
+<?php /*
         <div class="w-section section-grey dark" id="updates">
             <div class="container-wide">
                 <div class="w-row project-info">

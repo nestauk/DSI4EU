@@ -87,19 +87,25 @@ if (!isset($urlHandler))
                                                 <div class="w-row">
                                                     <div class="w-col w-col-6 w-col-stack">
                                                         <div class="padding-right-50">
-                                                            <label for="name">Project name</label>
-                                                            <input class="creator-data-entry end w-input"
+                                                            <label for="name">Project name: * </label>
+                                                            <input class="creator-data-entry w-input"
                                                                    data-name="Name" id="name" maxlength="256"
                                                                    name="name" placeholder="Project Name"
                                                                    ng-model="project.name"
                                                                    type="text">
+                                                            <div class="log-in-error" ng-show="errors.name"
+                                                                 ng-bind="errors.name"></div>
+                                                            <br/>
+
                                                             <label for="email">Project website</label>
-                                                            <input class="creator-data-entry end w-input"
+                                                            <input class="creator-data-entry w-input"
                                                                    data-name="Email" id="email" maxlength="256"
                                                                    name="email"
-                                                                   placeholder="Add your project&#39;s website"
+                                                                   placeholder="http://"
                                                                    ng-model="project.url"
                                                                    type="text">
+                                                            <i>* Please include http:// at the beginning of the URL</i>
+                                                            <br/><br/>
                                                             <label for="email-2">Social media links</label>
                                                             <input class="creator-data-entry w-input"
                                                                    data-name="Email 2" id="email-2" maxlength="256"
@@ -121,6 +127,7 @@ if (!isset($urlHandler))
                                                                    name="email-5" placeholder="Github"
                                                                    ng-model="project.links.github"
                                                                    type="text">
+                                                            <i>* Please include http:// at the beginning of the URL</i>
                                                         </div>
                                                     </div>
                                                     <div class="w-col w-col-6 w-col-stack">
@@ -334,15 +341,19 @@ if (!isset($urlHandler))
                                         </div>
                                         <div class="creator-col creator-col-right w-col w-col-8">
                                             <div class="w-form">
-                                                <label for="name">Short Description</label>
+                                                <label for="name">Short Description: *</label>
                                                 <p>Please provide a short description for your project. This should be
                                                     up to 200 characters long. Think about how you would describe your
                                                     project in a single Tweet</p>
-                                                <textarea class="creator-data-entry end w-input wide"
+                                                <textarea class="creator-data-entry w-input wide" style="width:100%"
                                                           data-name="Project Bio 3" id="shortDescription"
                                                           name="project-bio-3" ng-model="project.shortDescription"
                                                           placeholder="Briefly describe your project (no more than 140 characters)"
-                                                          maxlength="5000"></textarea>
+                                                          maxlength="140"></textarea>
+                                                <div class="log-in-error" ng-show="errors.shortDescription"
+                                                     ng-bind="errors.shortDescription"></div>
+                                                <br />
+
                                                 <label class="story-label" for="project-bio">Long description</label>
                                                 <p>Please provide a longer description for your project. How would you
                                                     describe your project? What type of work do you do? Who do you
@@ -393,6 +404,7 @@ if (!isset($urlHandler))
                                         <div class="creator-col creator-col-right w-col w-col-8">
                                             <div class="w-form">
                                                 <div class="w-row">
+                                                    <?php /*
                                                     <div class="w-col w-col-6 w-col-stack">
                                                         <div class="padding-right-50">
                                                             <label for="name">Your project logo</label>
@@ -412,6 +424,7 @@ if (!isset($urlHandler))
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    */ ?>
                                                     <div class="w-col w-col-6 w-col-stack">
                                                         <div class="padding-left-50">
                                                             <label class="story-label" for="Title">Header background

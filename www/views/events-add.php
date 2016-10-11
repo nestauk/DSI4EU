@@ -111,6 +111,7 @@ require __DIR__ . '/header.php';
                                        ng-model="event.price"
                                        name="name-4" placeholder="Price" type="text">
                                 <div class="error" ng-bind="errors.price"></div>
+                                <i>* Leave empty price for free event</i>
                             </div>
                         </div>
                     </div>

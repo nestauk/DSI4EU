@@ -11,7 +11,7 @@ require __DIR__ . '/header.php'
             <div class="w-row">
                 <div class="w-col w-col-8 w-col-stack">
                     <h1 class="content-h1">Projects</h1>
-                    <p class="intro">Digital Social Innovation (DSI) covers a range of areas, from providing tools to
+                    <p class="intro">Digital social innovation (DSI) covers a range of areas, from providing tools to
                         improve democratic processes to helping citizens measure pollution in their local environment,
                         from platforms for understanding more about how taxpayers' money is used to crowdfunding
                         community projects.</p>

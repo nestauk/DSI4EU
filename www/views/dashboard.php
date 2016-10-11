@@ -35,7 +35,7 @@ require __DIR__ . '/header.php';
                         <div class="dashboard-widget">
                             <h3 class="card-h3"><?php _ehtml('Notifications') ?></h3>
                             <div class="card-p notification-stat" ng-cloak ng-hide="notificationsCount()">
-                                <?php _ehtml('You dont have any notifications at the moment') ?>
+                                <?php _ehtml('You don\'t have any notifications at the moment.') ?>
                             </div>
                             <div class="card-p notification-stat" ng-cloak ng-show="notificationsCount()">
                                 <?php echo sprintf(
@@ -130,7 +130,7 @@ require __DIR__ . '/header.php';
                             <?php if (count($projectsMember) == 0) { ?>
                                 <div class="card-p notification-stat">
                                     <?php _ehtml('You are not participating in any projects at the moment.') ?>
-                                    <?php _ehtml('You can create a new project, or request to join an exisiting project') ?>
+                                    <?php _ehtml('You can create a new project, or request to join an existing project.') ?>
                                 </div>
                                 <div class="w-row create-or-join">
                                     <div class="w-col w-col-6">
@@ -145,10 +145,10 @@ require __DIR__ . '/header.php';
                             <?php } else { ?>
                                 <div class="card-p notification-stat">
                                     <?php if (count($projectsMember) == 1) {
-                                        _ehtml('You are participating in one project');
+                                        _ehtml('You are participating in one project.');
                                     } else {
                                         echo sprintf(
-                                            __('You are participating in %s projects'),
+                                            __('You are participating in %s projects.'),
                                             '<strong>' . count($projectsMember) . '</strong>'
                                         );
                                     } ?>
@@ -235,11 +235,11 @@ require __DIR__ . '/header.php';
                                     <li>
                                         <div class="w-clearfix card-notification latest-post"
                                              data-ix="notification-interaction">
-                                            <?php if ($category = $story->getStoryCategory()) { ?>
+                                            <?php /* if ($category = $story->getStoryCategory()) { ?>
                                                 <div class="post-card-category">
                                                     <?php echo $category->getName(); ?>
                                                 </div>
-                                            <?php } ?>
+                                            <?php } */ ?>
                                             <div class="notification-profile-image post-latest"></div>
                                             <div class="notification-detail post-latest-card">
                                                 <strong>

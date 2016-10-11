@@ -69,6 +69,7 @@
                                     <div style="color:red" ng-bind="{{featuredImageUpload.errorMsg.file}}"></div>
                                 </div>
 
+                                <?php /*
                                 <label class="story-label" for="Title">Main story image</label>
 
                                 <img ng-show="mainImage" class="story-image-upload"
@@ -89,7 +90,9 @@
                                     </div>
                                     <div style="color:red" ng-bind="{{mainImageUpload.errorMsg.file}}"></div>
                                 </div>
+                                */ ?>
 
+                                <?php /*
                                 <label class="story-label" for="Story-wysiwyg">Category</label>
                                 <?php foreach ($categories AS $category) { ?>
                                     <div class="w-checkbox">
@@ -100,6 +103,7 @@
                                         </label>
                                     </div>
                                 <?php } ?>
+                                */ ?>
                             </div>
                             <div class="w-col w-col-6">
                                 <label class="story-label">Your story</label>

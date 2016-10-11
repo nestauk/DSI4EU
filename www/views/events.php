@@ -19,12 +19,21 @@ require __DIR__ . '/header.php'
                 <div class="sidebar w-col w-col-4 w-col-stack">
                     <h1 class="content-h1 side-bar-space-h1">Add an event</h1>
                     <p>Are you organising a DSI event? Let us know and we will add it to the list.</p>
-                    <a class="log-in-link long read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
-                       href="http://bit.ly/DSIEvent" target="_blank">
-                        <div class="login-li long menu-li readmore-li">Add an event</div>
-                        <img class="login-arrow"
-                             src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
-                    </a>
+                    <?php if ($userCanAddEvent) { ?>
+                        <a class="log-in-link long read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
+                           href="<?php echo $urlHandler->eventAdd() ?>">
+                            <div class="login-li long menu-li readmore-li">Add an event</div>
+                            <img class="login-arrow"
+                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
+                        </a>
+                    <?php } else { ?>
+                        <a class="log-in-link long read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
+                           href="http://bit.ly/DSIEvent" target="_blank">
+                            <div class="login-li long menu-li readmore-li">Add an event</div>
+                            <img class="login-arrow"
+                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
+                        </a>
+                    <?php } ?>
                 </div>
             </div>
         </div>
@@ -85,7 +94,6 @@ require __DIR__ . '/header.php'
                             </p>
                             <div class="funding-closing-date" ng-show="event.startDate">
                                 <strong>Event date:</strong>
-                                2016-09-26
                                 <span ng-bind="event.startDate"></span>
                             </div>
                             <div class="funding-country funding-new" ng-show="event.isNew">New event</div>
