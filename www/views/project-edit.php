@@ -87,7 +87,7 @@ if (!isset($urlHandler))
                                                 <div class="w-row">
                                                     <div class="w-col w-col-6 w-col-stack">
                                                         <div class="padding-right-50">
-                                                            <label for="name">Project name: * </label>
+                                                            <label for="name">Project name * </label>
                                                             <input class="creator-data-entry w-input"
                                                                    data-name="Name" id="name" maxlength="256"
                                                                    name="name" placeholder="Project Name"
@@ -104,7 +104,6 @@ if (!isset($urlHandler))
                                                                    placeholder="http://"
                                                                    ng-model="project.url"
                                                                    type="text">
-                                                            <i>* Please include http:// at the beginning of the URL</i>
                                                             <?php /*
                                                             <br/><br/>
                                                             <label for="email-2">Social media links</label>
@@ -134,7 +133,7 @@ if (!isset($urlHandler))
                                                     </div>
                                                     <div class="w-col w-col-6 w-col-stack">
                                                         <div class="padding-left-50">
-                                                            <p>Add tags that best describe your project:</p>
+                                                            <label>Add tags that best describe your project</label>
                                                             <div class="customSelect2">
                                                                 <select class="select2 creator-data-entry end w-input"
                                                                         id="tagsSelect" style="width:100%;border:0"
