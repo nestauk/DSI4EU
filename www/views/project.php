@@ -37,7 +37,7 @@ require __DIR__ . '/header.php';
                         <h4 class="involved-h4">People</h4>
                         <?php foreach ($projectMembers AS $projectMember) {
                             $member = $projectMember->getMember();
-                            if ($member->getFullName() == '') continue; ?>
+                            if (trim($member->getFullName()) == '') continue; ?>
                             <a class="involved-card w-inline-block"
                                href="<?php echo $urlHandler->profile($member->getId()) ?>">
                                 <div class="involved-card">
