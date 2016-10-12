@@ -11,18 +11,25 @@ require __DIR__ . '/header.php'
             <div class="w-row">
                 <div class="w-col w-col-8 w-col-stack">
                     <h1 class="content-h1">Projects</h1>
-                    <p class="intro">Digital social innovation (DSI) covers a range of areas, from providing tools to
-                        improve democratic processes to helping citizens measure pollution in their local environment,
-                        from platforms for understanding more about how taxpayers' money is used to crowdfunding
-                        community projects.</p>
-                    <p class="header-intro-descr">Here you can look through projects which digital social innovators
+                    <p class="intro">
+                        Digital social innovation (DSI) covers a range of areas, from providing tools to
+                        improve democratic processes to helping citizens measure pollution in their local environment, and
+                        from crowdfunding community projects to creating platforms to scrutinise public spending.
+                    </p>
+                    <p class="header-intro-descr">
+                        Here you can look through projects which digital social innovators
                         across Europe have submitted to the website. You can filter them by the four categories of
-                        digital social innovation which we have identified: <strong>Open hardware</strong>, <strong>Open
-                            networks</strong>, <strong>Open data</strong> and <strong>Open knowledge</strong>.</p>
+                        digital social innovation which we have identified:
+                        <strong>Open hardware</strong>,
+                        <strong>Open networks</strong>,
+                        <strong>Open data</strong> and
+                        <strong>Open knowledge</strong>.
+                    </p>
                 </div>
                 <div class="sidebar w-col w-col-4 w-col-stack">
                     <h1 class="content-h1 side-bar-space-h1">Add your project</h1>
-                    <p>Showcase your current and past work, identify potential collaborations and link your projects to your organisation.</p>
+                    <p>Showcase your current and past work, identify potential collaborations and link your projects to
+                        your organisation.</p>
                     <?php if ($loggedInUser) { ?>
                         <a class="log-in-link long read-more w-clearfix w-inline-block"
                            data-ix="create-project-modal" href="#">

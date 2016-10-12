@@ -44,8 +44,9 @@ require __DIR__ . '/header.php'
                         policymakers and funders can best support, engage with and make the most of DSI and ensure it
                         can continue to grow in the future.
                     </li>
-                    <li class="li-bottom">Develops a set of tools that supports people and organisations interested in
-                        develop digital solutions that address social challenges.
+                    <li class="li-bottom">
+                        Provides a set of tools that supports people and organisations interested in
+                        developing digital solutions that address social challenges.
                     </li>
                 </ul>
                 <p>DSI4EU is supported by the European Union and funded under the Horizon 2020 Programme. Grant
