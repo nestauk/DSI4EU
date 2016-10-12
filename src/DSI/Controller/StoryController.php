@@ -31,6 +31,7 @@ class StoryController
         $stories = $storyRepo->getPublishedLast(5);
 
         $userCanManageStory = $this->userCanManageStory($loggedInUser, $story);
+        $userCanDeleteStory = $this->userCanDeleteStory($loggedInUser, $story);
 
         $pageTitle = $story->getTitle();
         require __DIR__ . '/../../../www/views/story.php';
@@ -59,6 +60,22 @@ class StoryController
             return true;
 
         if ($loggedInUser->isCommunityAdmin() OR $loggedInUser->isEditorialAdmin())
+            return true;
+
+        return false;
+    }
+
+    /**
+     * @param User $loggedInUser
+     * @param Story $story
+     * @return bool
+     */
+    private function userCanDeleteStory($loggedInUser, Story $story)
+    {
+        if (!$loggedInUser)
+            return false;
+
+        if ($loggedInUser->isSysAdmin())
             return true;
 
         return false;

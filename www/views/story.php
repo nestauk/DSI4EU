@@ -4,6 +4,7 @@ require __DIR__ . '/header.php';
 /** @var $author \DSI\Entity\User */
 /** @var $stories \DSI\Entity\Story[] */
 /** @var $userCanManageStory bool */
+/** @var $userCanDeleteStory bool */
 /** @var $urlHandler \DSI\Service\URL */
 ?>
 
@@ -78,7 +79,11 @@ require __DIR__ . '/header.php';
                                 <span class="green">-&nbsp;</span>Edit story
                             </a>
                             <?php /* <a class="sidebar-link"><span class="green">-&nbsp;</span>Publish / unpublish</a> */ ?>
-                            <?php /* <a class="remove sidebar-link"><span class="green">-&nbsp;</span>Remove post</a> */ ?>
+                            <?php /* if ($userCanDeleteStory) { ?>
+                                <a class="remove sidebar-link">
+                                    <span class="green">-&nbsp;</span>Delete story
+                                </a>
+                            <?php } */ ?>
                         <?php } ?>
 
                         <h2 class="sidebar-h2">Latest posts</h2>

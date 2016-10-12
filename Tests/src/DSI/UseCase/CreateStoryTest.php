@@ -44,14 +44,12 @@ class CreateStoryTest extends PHPUnit_Framework_TestCase
         $category = new \DSI\Entity\StoryCategory();
         $this->storyCategoryRepo->insert($category);
 
-        $this->createStoryCmd->data()->categoryID = $category->getId();
         $this->createStoryCmd->data()->title = 'test';
         $this->createStoryCmd->data()->content = 'test';
         $this->createStoryCmd->data()->authorID = $this->user->getId();
         $this->createStoryCmd->exec();
         $this->assertCount(1, $this->storyRepo->getAll());
 
-        $this->createStoryCmd->data()->categoryID = $category->getId();
         $this->createStoryCmd->data()->title = 'test';
         $this->createStoryCmd->data()->content = 'test';
         $this->createStoryCmd->data()->authorID = $this->user->getId();

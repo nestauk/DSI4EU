@@ -40,7 +40,6 @@ class StoryEdit
         $story = $this->storyRepo->getById($this->data()->id);
         $story->setTitle((string)$this->data()->title);
         $story->setContent((string)$this->data()->content);
-        $this->setCategory($story);
         // $this->setAuthor($story);
         $this->setFeaturedImage($story);
         $this->setMainImage($story);
@@ -84,10 +83,12 @@ class StoryEdit
         }
         */
 
+        /*
         if (isset($this->data()->categoryID) AND $this->data()->categoryID <= 0) {
             $this->errorHandler->addTaggedError('category', 'Invalid category ID');
             throw $this->errorHandler;
         }
+        */
 
         if ($this->data()->title == '') {
             $this->errorHandler->addTaggedError('title', 'Please type a story title');
@@ -146,17 +147,6 @@ class StoryEdit
         $author = (new UserRepository())->getById($this->data()->authorID);
         $story->setAuthor($author);
     }
-
-    /**
-     * @param $story
-     */
-    private function setCategory(Story $story)
-    {
-        if ($this->data()->categoryID) {
-            $category = (new StoryCategoryRepository())->getById($this->data()->categoryID);
-            $story->setStoryCategory($category);
-        }
-    }
 }
 
 class StoryEdit_Data
@@ -166,7 +156,6 @@ class StoryEdit_Data
         $title,
         $content,
         $authorID,
-        $categoryID,
         $featuredImage,
         $mainImage,
         $isPublished,

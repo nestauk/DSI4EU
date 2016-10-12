@@ -30,8 +30,6 @@ class StoryAddController
                 $createStory = new StoryAdd();
                 $createStory->data()->authorID = $loggedInUser->getId();
                 $createStory->data()->title = $_POST['title'] ?? '';
-                if (isset($_POST['categoryID']))
-                    $createStory->data()->categoryID = $_POST['categoryID'];
                 if (isset($_POST['content']))
                     $createStory->data()->content = $_POST['content'];
                 if (isset($_POST['featuredImage']))

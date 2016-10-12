@@ -42,8 +42,8 @@ class StoryEditController
                     $editStory = new StoryEdit();
                     $editStory->data()->id = $story->getId();
                     $editStory->data()->title = $_POST['title'] ?? '';
-                    if (isset($_POST['categoryID']))
-                        $editStory->data()->categoryID = $_POST['categoryID'];
+                    // if (isset($_POST['categoryID']))
+                    //     $editStory->data()->categoryID = $_POST['categoryID'];
                     if (isset($_POST['content']))
                         $editStory->data()->content = $_POST['content'];
                     if (isset($_POST['featuredImage']))
