@@ -314,6 +314,11 @@ class URL
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'sitemap.xml';
     }
 
+    public function uploadImage()
+    {
+        return SITE_RELATIVE_PATH . '/uploadImage.json';
+    }
+
 
     /**
      * @param $title

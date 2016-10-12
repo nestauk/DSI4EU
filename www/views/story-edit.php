@@ -142,8 +142,9 @@ require __DIR__ . '/header.php';
                 </div>
             </div>
         </div>
-
     </div>
+
+    <input name="image" id="my_image" type="file" style="display:none"/>
 
     <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
     <script>
@@ -157,7 +158,19 @@ require __DIR__ . '/header.php';
             menubar: false,
             toolbar1: 'styleselect | forecolor backcolor | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media | preview',
             image_advtab: true,
-            paste_data_images: false
+            paste_data_images: false,
+
+            file_browser_callback_types: 'image',
+            convert_urls: false,
+            file_picker_callback: function (callback, value, meta) {
+                if (meta.filetype == 'image') {
+                    DSI_Helpers.TinyMCEImageUpload({
+                        element: $('#my_image'),
+                        uploadUrl: '<?php echo $urlHandler->uploadImage()?>',
+                        callback: callback
+                    });
+                }
+            }
         });
         $(function () {
             $("#datePublished").datepicker({

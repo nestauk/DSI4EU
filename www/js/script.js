@@ -1,9 +1,9 @@
-(function(){
+(function () {
     function textAreaAdjust(o) {
         o.style.height = "1px";
-        o.style.height = (25+o.scrollHeight)+"px";
+        o.style.height = (25 + o.scrollHeight) + "px";
     }
-    
+
     $('.readjustTextarea').each(function () {
         textAreaAdjust($(this).get(0));
         $(this).on('keydown', function () {
@@ -53,5 +53,33 @@ var DSI_Helpers = {
                 });
             }
         };
+    },
+
+    TinyMCEImageUpload: function (uploadData) {
+        uploadData.element
+            .unbind('change')
+            .change(function () {
+                var formData = new FormData();
+                formData.append('upload', true);
+                formData.append('file', $(this)[0].files[0]);
+
+                $.ajax({
+                    url: uploadData.uploadUrl,
+                    type: 'POST',
+                    data: formData,
+                    dataType: 'json',
+                    processData: false,  // tell jQuery not to process the data
+                    contentType: false,  // tell jQuery not to set contentType
+                    success: function (data) {
+                        uploadData.callback(data.location, {
+                            alt: data.name,
+                            width: data.width,
+                            height: data.height
+                        });
+                    }
+                });
+                $(this)[0].value = '';
+            })
+            .click();
     }
 };

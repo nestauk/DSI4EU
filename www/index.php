@@ -178,6 +178,9 @@ class Router
         } elseif ($this->pageURL === '/temp-gallery.json') {
             $this->tempGalleryJson();
 
+        } elseif ($this->pageURL === '/uploadImage.json') {
+            $this->uploadImageJson();
+
 // Blog
         } elseif (preg_match('<^/' . $langHandler . 'stories$>', $this->pageURL, $matches)) {
             $this->stories($matches);
@@ -921,6 +924,13 @@ class Router
     private function tempGalleryJson()
     {
         $command = new \DSI\Controller\TempGalleryController();
+        $command->format = 'json';
+        $command->exec();
+    }
+
+    private function uploadImageJson()
+    {
+        $command = new \DSI\Controller\UploadImageController();
         $command->format = 'json';
         $command->exec();
     }
