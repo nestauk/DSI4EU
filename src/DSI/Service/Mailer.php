@@ -27,6 +27,11 @@ class Mailer extends \PHPMailer
     {
         $this->addBCC('alecs@inoveb.co.uk');
 
+        if(count($this->getToAddresses()) == 0){
+            error_log('Empty Recipients');
+            return true;
+        }
+
         $returnCode = parent::send();
         if (!$returnCode) {
             error_log('Could not send email to: ');
