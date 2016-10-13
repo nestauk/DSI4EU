@@ -14,6 +14,7 @@ class StoryRepository
         $insert[] = "`categoryID` = '" . (int)($story->getStoryCategoryId()) . "'";
         $insert[] = "`writerID` = '" . (int)($story->getAuthor()->getId()) . "'";
         $insert[] = "`title` = '" . addslashes($story->getTitle()) . "'";
+        $insert[] = "`cardShortDescription` = '" . addslashes($story->getCardShortDescription()) . "'";
         $insert[] = "`content` = '" . addslashes($story->getContent()) . "'";
         $insert[] = "`featuredImage` = '" . addslashes($story->getFeaturedImage()) . "'";
         $insert[] = "`bgImage` = '" . addslashes($story->getMainImage()) . "'";
@@ -37,6 +38,7 @@ class StoryRepository
         $insert[] = "`categoryID` = '" . (int)($story->getStoryCategoryId()) . "'";
         $insert[] = "`writerID` = '" . (int)($story->getAuthor()->getId()) . "'";
         $insert[] = "`title` = '" . addslashes($story->getTitle()) . "'";
+        $insert[] = "`cardShortDescription` = '" . addslashes($story->getCardShortDescription()) . "'";
         $insert[] = "`content` = '" . addslashes($story->getContent()) . "'";
         $insert[] = "`featuredImage` = '" . addslashes($story->getFeaturedImage()) . "'";
         $insert[] = "`bgImage` = '" . addslashes($story->getMainImage()) . "'";
@@ -76,6 +78,7 @@ class StoryRepository
             (new UserRepository())->getById($story['writerID'])
         );
         $storyObj->setTitle($story['title']);
+        $storyObj->setCardShortDescription($story['cardShortDescription']);
         $storyObj->setContent($story['content']);
         $storyObj->setTime($story['time']);
         $storyObj->setFeaturedImage($story['featuredImage']);
@@ -152,7 +155,7 @@ class StoryRepository
         $stories = [];
         $query = new SQL("SELECT 
             `id`, `categoryID`
-          , `writerID`, `title`, `content`
+          , `writerID`, `title`, `cardShortDescription`, `content`
           , `featuredImage`, `bgImage`
           , `time`, `isPublished`, `datePublished`
           FROM `stories`

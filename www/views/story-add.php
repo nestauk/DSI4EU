@@ -37,19 +37,15 @@
                                 <label class="story-label" for="Title">Title</label>
                                 <div style="color:red" ng-cloak ng-show="errors.title" ng-bind="errors.title"></div>
                                 <input class="w-input story-form" maxlength="256" ng-model="title"
-                                       placeholder="Add the title of your story" type="text">
+                                       style="border:1px solid #999;" placeholder="Add the title of your story"
+                                       type="text"/>
 
-                                <label class="story-label" for="published-on">Published on</label>
-                                <div onclick="$('#datePublished').datepicker('show');">
-                                    <span style="font-size:30px" class="ion-ios-calendar-outline"></span>
-                                    <input id="datePublishedReadable" style="border:0;font-size:18px;margin-left:10px"/>
-                                </div>
-                                <input type="text" style="display:none" id="datePublished" maxlength="256"
-                                       ng-model="datePublished">
+                                <label class="story-label">Short Card Description</label>
+                                <textarea ng-model="cardShortDescription" class="w-input story-form"
+                                          style="border:1px solid #999;" maxlength="140"></textarea>
                                 <br/><br/>
 
                                 <label class="story-label" for="Title">Card grid image</label>
-
                                 <img ng-show="featuredImage" class="story-image-upload"
                                      ng-src="{{featuredImage}}">
                                 <a ngf-select="uploadFeaturedImage($file, $invalidFiles)" accept="image/*"
@@ -108,7 +104,15 @@
                             <div class="w-col w-col-6">
                                 <label class="story-label">Your story</label>
                                 <textarea id="newStory" class="w-input story-form"></textarea>
+                                <br/><br/>
 
+                                <label class="story-label" for="published-on">Published on</label>
+                                <div onclick="$('#datePublished').datepicker('show');">
+                                    <span style="font-size:30px" class="ion-ios-calendar-outline"></span>
+                                    <input id="datePublishedReadable" style="border:0;font-size:18px;margin-left:10px"/>
+                                </div>
+                                <input type="text" style="display:none" id="datePublished" maxlength="256"
+                                       ng-model="datePublished">
                                 <br/><br/>
 
                                 <label class="story-label" for="Story-wysiwyg">Published</label>

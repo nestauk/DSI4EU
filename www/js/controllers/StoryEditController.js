@@ -73,17 +73,10 @@ angular
                 $scope.errors = {};
                 $scope.loading = true;
 
-                var data = {
-                    save: true,
-                    title: $scope.story.title,
-                    categoryID: $scope.story.categoryID,
-                    datePublished: $scope.story.datePublished,
-                    featuredImage: $scope.story.featuredImage,
-                    mainImage: $scope.story.mainImage,
-                    content: tinyMCE.get('newStory').getContent(),
-                    isPublished: $scope.story.isPublished
-                };
-                console.log(data);
+                var data = $scope.story;
+                data.save = true;
+                data.content = tinyMCE.get('newStory').getContent();
+
                 $timeout(function () {
                     $http.post(SITE_RELATIVE_PATH + '/story/edit/' + storyID + '.json', data)
                         .then(function (response) {
@@ -109,7 +102,6 @@ angular
                 .then(function (response) {
                     $scope.story = response.data;
                     $("#datePublished").datepicker("setDate", $scope.story.datePublished);
-                    console.log($scope.story);
                 })
         }());
     });

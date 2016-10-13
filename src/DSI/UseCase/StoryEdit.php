@@ -39,6 +39,7 @@ class StoryEdit
 
         $story = $this->storyRepo->getById($this->data()->id);
         $story->setTitle((string)$this->data()->title);
+        $story->setCardShortDescription((string)$this->data()->cardShortDescription);
         $story->setContent((string)$this->data()->content);
         // $this->setAuthor($story);
         $this->setFeaturedImage($story);
@@ -154,6 +155,7 @@ class StoryEdit_Data
     /** @var string */
     public $id,
         $title,
+        $cardShortDescription,
         $content,
         $authorID,
         $featuredImage,

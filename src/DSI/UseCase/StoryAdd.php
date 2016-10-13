@@ -39,6 +39,7 @@ class StoryAdd
 
         $story = new Story();
         $story->setTitle((string)$this->data()->title);
+        $story->setCardShortDescription((string)$this->data()->cardShortDescription);
         $story->setContent((string)$this->data()->content);
         $this->setAuthor($story);
         $this->setDatePublished($story);
@@ -138,6 +139,7 @@ class StoryAdd_Data
 {
     /** @var string */
     public $title,
+        $cardShortDescription,
         $content,
         $authorID,
         $featuredImage,

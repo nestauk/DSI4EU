@@ -1,6 +1,6 @@
 angular
     .module(angularAppName)
-    .controller('AddStoryController', function ($scope, $http, $timeout, Upload) {
+    .controller('AddStoryController', function ($scope, $http, Upload) {
         // featuredImage
         (function () {
             $scope.featuredImageUpload = {};
@@ -73,29 +73,32 @@ angular
                 var data = {
                     add: true,
                     title: $scope.title,
-                    categoryID: $scope.categoryID,
+                    cardShortDescription: $scope.cardShortDescription,
                     datePublished: $scope.datePublished,
                     featuredImage: $scope.featuredImage,
                     mainImage: $scope.mainImage,
                     content: tinyMCE.get('newStory').getContent(),
                     isPublished: $scope.isPublished
                 };
-                console.log(data);
-                $timeout(function () {
-                    $http.post(SITE_RELATIVE_PATH + '/story/add', data)
-                        .then(function (response) {
-                            $scope.loading = false;
-                            if (response.data.code == 'ok') {
+                $http.post(SITE_RELATIVE_PATH + '/story/add', data)
+                    .then(function (response) {
+                        $scope.loading = false;
+                        if (response.data.code == 'ok') {
+                            swal({
+                                title: 'Success',
+                                text: 'The story has been successfully created',
+                                type: "success"
+                            }, function () {
                                 window.location.href = response.data.url;
-                            } else if (response.data.code == 'error') {
-                                $scope.errors = response.data.errors;
-                                console.log(response.data.errors);
-                            } else {
-                                alert('unexpected error');
-                                console.log(response.data);
-                            }
-                        });
-                }, 500);
+                            });
+                        } else if (response.data.code == 'error') {
+                            $scope.errors = response.data.errors;
+                            console.log(response.data.errors);
+                        } else {
+                            alert('unexpected error');
+                            console.log(response.data);
+                        }
+                    });
             }
         }())
     });

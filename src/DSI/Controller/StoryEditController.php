@@ -42,18 +42,14 @@ class StoryEditController
                     $editStory = new StoryEdit();
                     $editStory->data()->id = $story->getId();
                     $editStory->data()->title = $_POST['title'] ?? '';
-                    // if (isset($_POST['categoryID']))
-                    //     $editStory->data()->categoryID = $_POST['categoryID'];
-                    if (isset($_POST['content']))
-                        $editStory->data()->content = $_POST['content'];
+                    $editStory->data()->cardShortDescription = $_POST['cardShortDescription'] ?? '';
+                    $editStory->data()->content = $_POST['content'] ?? '';
                     if (isset($_POST['featuredImage']))
                         $editStory->data()->featuredImage = $_POST['featuredImage'];
                     if (isset($_POST['mainImage']))
                         $editStory->data()->mainImage = $_POST['mainImage'];
-                    if (isset($_POST['datePublished']))
-                        $editStory->data()->datePublished = $_POST['datePublished'];
-                    if (isset($_POST['isPublished']))
-                        $editStory->data()->isPublished = (bool)$_POST['isPublished'];
+                    $editStory->data()->datePublished = $_POST['datePublished'] ?? '';
+                    $editStory->data()->isPublished = (bool)$_POST['isPublished'] ?? false;
 
                     $editStory->exec();
 
@@ -71,11 +67,11 @@ class StoryEditController
 
             echo json_encode([
                 'title' => $story->getTitle(),
+                'cardShortDescription' => $story->getCardShortDescription(),
                 'datePublished' => $story->getDatePublished(),
                 'featuredImage' => Image::STORY_FEATURED_IMAGE_URL . $story->getFeaturedImage(),
                 'mainImage' => Image::STORY_MAIN_IMAGE_URL . $story->getMainImage(),
                 'isPublished' => $story->isPublished(),
-                'categoryID' => $story->getStoryCategoryId(),
             ]);
             die();
         }

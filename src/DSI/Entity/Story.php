@@ -12,6 +12,7 @@ class Story
 
     /** @var string */
     private $title,
+        $cardShortDescription,
         $content,
         $time,
         $featuredImage,
@@ -200,5 +201,21 @@ class Story
     public function setDatePublished($datePublished)
     {
         $this->datePublished = (string)$datePublished;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCardShortDescription(): string
+    {
+        return (string)$this->cardShortDescription;
+    }
+
+    /**
+     * @param string $cardShortDescription
+     */
+    public function setCardShortDescription($cardShortDescription)
+    {
+        $this->cardShortDescription = (string)$cardShortDescription;
     }
 }

@@ -40,19 +40,15 @@ require __DIR__ . '/header.php';
                                 <label class="story-label" for="Title">Title</label>
                                 <div style="color:red" ng-cloak ng-show="errors.title" ng-bind="errors.title"></div>
                                 <input class="w-input story-form" maxlength="256" ng-model="story.title"
-                                       placeholder="Add the title of your story" type="text" value="">
+                                       style="border:1px solid #999;" placeholder="Add the title of your story"
+                                       type="text" value=""/>
 
-                                <label class="story-label" for="published-on">Published on</label>
-                                <div onclick="$('#datePublished').datepicker('show');">
-                                    <span style="font-size:30px" class="ion-ios-calendar-outline"></span>
-                                    <input id="datePublishedReadable" style="border:0;font-size:18px;margin-left:10px"/>
-                                </div>
-                                <input type="text" style="display:none" id="datePublished" maxlength="256"
-                                       ng-model="story.datePublished">
+                                <label class="story-label">Short Card Description</label>
+                                <textarea ng-model="story.cardShortDescription" class="w-input story-form"
+                                          style="border:1px solid #999;" maxlength="140"></textarea>
                                 <br/><br/>
 
                                 <label class="story-label" for="Title">Card grid image</label>
-
                                 <img ng-show="story.featuredImage" class="story-image-upload"
                                      ng-src="{{story.featuredImage}}">
                                 <a ngf-select="uploadFeaturedImage($file, $invalidFiles)" accept="image/*"
@@ -113,8 +109,17 @@ require __DIR__ . '/header.php';
                                 <label class="story-label">Your story</label>
                                 <textarea id="newStory"
                                           class="w-input story-form"><?php echo show_input($story->getContent()) ?></textarea>
-
                                 <br/><br/>
+
+                                <label class="story-label" for="published-on">Published on</label>
+                                <div onclick="$('#datePublished').datepicker('show');">
+                                    <span style="font-size:30px" class="ion-ios-calendar-outline"></span>
+                                    <input id="datePublishedReadable" style="border:0;font-size:18px;margin-left:10px"/>
+                                </div>
+                                <input type="text" style="display:none" id="datePublished" maxlength="256"
+                                       ng-model="story.datePublished">
+                                <br/><br/>
+
 
                                 <label class="story-label" for="Story-wysiwyg">Published</label>
                                 <div class="w-checkbox">
