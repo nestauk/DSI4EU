@@ -30,7 +30,7 @@ class StoriesController
                     'id' => $story->getId(),
                     'title' => $story->getTitle(),
                     'featuredImage' => $story->getFeaturedImage(),
-                    'content' => substr(strip_tags($story->getContent()), 0, 150),
+                    'content' => html_entity_decode(substr(strip_tags($story->getContent()), 0, 150)),
                     'categoryID' => $story->getStoryCategoryId(),
                     'datePublished' => $story->getDatePublished('jS F Y'),
                     'url' => $urlHandler->blogPost($story),

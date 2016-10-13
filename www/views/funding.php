@@ -23,7 +23,7 @@ require __DIR__ . '/header.php'
                     <p>Are you a funder that provides grants, investment or social investment for DSI projects and
                         organisations? Are you an organisation offering other types of support, such as incubation,
                         acceleration or non-financial support to DSI projects and organisations? If so, you can add your
-                        latest opportunities here, and we’ll get them listed on the website..</p>
+                        latest opportunities here, and we’ll get them listed on the website.</p>
 
                     <?php if ($userCanAddFunding) { ?>
                         <a class="log-in-link long read-more w-clearfix w-inline-block" data-ix="log-in-arrow"

@@ -30,7 +30,8 @@ require __DIR__ . '/header.php' ?>
                         <img class="partner-logo-colour" src="<?php echo SITE_RELATIVE_PATH ?>/images/waag.png">
                     </div>
                     <div class="w-col w-col-9">
-                        <p><strong>Waag Society</strong> — institute for art, science and technology — is a pioneer in
+                        <p><strong>Waag Society</strong> — the institute for art, science and technology — is a pioneer
+                            in
                             the field of digital media. Over the past 22 years, the foundation has developed into an
                             institution of international stature, a platform for artistic research and experimentation,
                             and has become both a catalyst for events and a breeding ground for cultural and social
@@ -53,7 +54,7 @@ require __DIR__ . '/header.php' ?>
                     <div class="w-col w-col-9">
                         <p>
                             The Laboratory of Visual Culture (LCV) is the design research unit of SUPSI, the University
-                            of Applied Sciences and Arts of Southern Switzerland. The laboratory applies interaction
+                            of Applied Sciences and Arts of Southern Switzerland. The laboratory applies interactive
                             design methods and a human-centred design perspective to develop research projects focusing
                             on people's experiences mediated by the internet and digital technologies. LCV researches
                             and develops educational models that explore the convergence of technology and design via
@@ -85,7 +86,7 @@ require __DIR__ . '/header.php' ?>
                     networks of people, ideas, services and technologies enabling new forms of social innovation. CAPSSI
                     supports environment-aware efforts, grassroots processes and practices to share knowledge, achieve
                     changes in lifestyle, production and consumption patterns, and set up more participatory democratic
-                    processes on a global pan-European scale.</p>
+                    processes on a pan-European scale.</p>
                 <a class="log-in-link long read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
                    href="https://capssi.eu/" target="_blank">
                     <div class="login-li long menu-li readmore-li">Capssi.eu</div>
@@ -95,7 +96,7 @@ require __DIR__ . '/header.php' ?>
                     is &nbsp;a small but powerful and experienced consortium which aims to empower the community of
                     CAPSSI projects and promote their outcomes and results.</p>
                 <a class="log-in-link long next-page read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
-                   href="<?php echo $urlHandler->openDataResearchAndResources()?>">
+                   href="<?php echo $urlHandler->openDataResearchAndResources() ?>">
                     <div class="login-li long menu-li readmore-li">Explore our open data, research &amp; resources</div>
                     <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
                 </a>

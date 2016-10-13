@@ -549,7 +549,11 @@ div.error {
     overflow: hidden;
 }
 
-.step-tab{
-    padding-left:40px !important;
-    padding-right:40px !important;
+.step-tab {
+    padding-left: 40px !important;
+    padding-right: 40px !important;
+}
+
+.page-h1.light {
+    margin-left: 20px
 }
