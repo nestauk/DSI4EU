@@ -66,7 +66,8 @@ use \DSI\Service\URL;
                 <div ng-show="forgotPassword.codeSent">
                     <div ng-hide="forgotPassword.codeVerified">
                         <div class="log-in-error success" ng-hide="forgotPassword.codeVerified">
-                            <?php _ehtml('The security code has been emailed to you.') ?>
+                            <?php _ehtml('The security code has been emailed to you.') ?><br />
+                            <?php _ehtml('Please allow 5-10 minutes for the message to arrive into your inbox.') ?>
                         </div>
                         <input type="text" placeholder="<?php _ehtml('Security code') ?>" name="code"
                                class="log-in-form-field w-input"
