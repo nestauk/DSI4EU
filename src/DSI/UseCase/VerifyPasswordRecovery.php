@@ -102,7 +102,7 @@ class VerifyPasswordRecovery
         $passwordRecovery = $this->retrievePasswordRecovery($user, $this->data()->code);
 
         if (!$passwordRecovery) {
-            $this->errorHandler->addTaggedError('code', 'The code is not valid');
+            $this->errorHandler->addTaggedError('code', 'The code is not valid or has expired');
             $this->errorHandler->throwIfNotEmpty();
         }
 
@@ -116,7 +116,7 @@ class VerifyPasswordRecovery
     private function checkIfCodeHasExpired(PasswordRecovery $passwordRecovery)
     {
         if ($passwordRecovery->isExpired()) {
-            $this->errorHandler->addTaggedError('code', 'This code has expired');
+            $this->errorHandler->addTaggedError('code', 'The code is not valid or has expired');
             $this->errorHandler->throwIfNotEmpty();
         }
     }
