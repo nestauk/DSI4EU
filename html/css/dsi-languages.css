@@ -2844,7 +2844,7 @@ strong {
   position: relative;
   overflow: visible;
   height: auto;
-  min-height: 365px;
+  min-height: auto;
   margin-bottom: 20px;
   padding-bottom: 20px;
   border-radius: 0px;
