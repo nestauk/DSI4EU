@@ -558,9 +558,9 @@ div.error {
     margin-left: 20px
 }
 
-@media only screen 
-  and (min-device-width: 414px) 
-  and (max-device-width: 736px) 
-  and (-webkit-min-device-pixel-ratio: 3) { 
-      .modal-content {max-width:100%,max-height:100%}
+@media (max-width: 767px) {
+.modal-content {
+    width: 100% !important;
+    height: 100% !important;
+}
 }
