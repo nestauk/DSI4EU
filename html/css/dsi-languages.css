@@ -9407,6 +9407,15 @@ strong {
   cursor: pointer;
 }
 
+.report-project {
+  display: block;
+  margin-top: 51px;
+  margin-left: 0px;
+  font-family: Montserrat, sans-serif;
+  color: #db4343;
+  font-size: 12px;
+}
+
 html.w-mod-js *[data-ix="pin-drop"] {
   opacity: 0;
   -webkit-transform: translate(0px, -100px);
