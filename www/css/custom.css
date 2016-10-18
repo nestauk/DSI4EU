@@ -568,3 +568,37 @@ div.error {
     height: 500px;
 }
 }
+
+.sweet-alert button.cancel {
+    position: relative;
+    left: 0px;
+    right: 0px;
+    bottom: 0;
+    width: 140px;
+    height: 42px;
+    background-color: #ff0000 !important;
+    
+}
+
+.sweet-alert button {
+    color: black;
+    font-family: montserrat;
+    text-transform: uppercase;
+    border: 0px solid;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 25px;
+    padding: 10px 32px;
+    margin: 26px 5px 0 5px;
+    cursor: pointer;
+    background-color: #1dc9a0 !important;
+    box-shadow: white 0 0 0 0 !important;
+}
+
+.sweet-alert p {
+    padding: 0 25px;
+}
+
+.sweet-alert {
+    padding:50px;
+}
