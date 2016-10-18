@@ -2844,7 +2844,7 @@ strong {
   position: relative;
   overflow: visible;
   height: auto;
-  min-height: 365px;
+  min-height: auto;
   margin-bottom: 20px;
   padding-bottom: 20px;
   border-radius: 0px;
@@ -5059,6 +5059,11 @@ strong {
   font-family: Montserrat, sans-serif;
   color: #000;
   text-transform: none;
+}
+
+.tag.remove-tag {
+  position: relative;
+  padding-left: 30px;
 }
 
 .col-h3 {
@@ -9380,6 +9385,35 @@ strong {
 
 .side-bar-action:hover {
   background-color: #1dc9a0;
+}
+
+.remove-tag {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+
+.remove-tag-x {
+  position: absolute;
+  left: 9px;
+  top: 1px;
+  bottom: 0px;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  color: #fff;
+  font-size: 25px;
+  line-height: 33px;
+  cursor: pointer;
+}
+
+.report-project {
+  display: block;
+  margin-top: 51px;
+  margin-left: 0px;
+  font-family: Montserrat, sans-serif;
+  color: #db4343;
+  font-size: 12px;
 }
 
 html.w-mod-js *[data-ix="pin-drop"] {
