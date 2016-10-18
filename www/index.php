@@ -32,9 +32,6 @@ class Router
         } elseif (preg_match('<^/' . $langHandler . 'dashboard\.json$>', $this->pageURL, $matches)) {
             $this->dashboardJson($matches);
 
-        } elseif ($this->pageURL === '/import') {
-            $this->import();
-
         } elseif ($this->pageURL === '/forgotPassword.json') {
             $this->forgotPasswordJson();
 
@@ -932,12 +929,6 @@ class Router
     {
         $command = new \DSI\Controller\UploadImageController();
         $command->format = 'json';
-        $command->exec();
-    }
-
-    private function import()
-    {
-        $command = new \DSI\Controller\ImportController();
         $command->exec();
     }
 

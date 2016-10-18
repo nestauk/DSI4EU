@@ -15,6 +15,8 @@ class CliRouter
             $this->sendCachedEmails();
         } elseif ($args[1] == 'import-user-project-organisation-links') {
             $this->importUserProjectOrganisationLink();
+        } elseif ($args[1] == 'import-organisation-urls') {
+            $this->importOrganisationURLs();
         }
     }
 
@@ -27,6 +29,12 @@ class CliRouter
     private function importUserProjectOrganisationLink()
     {
         $command = new \DSI\Controller\ImportUserProjectOrganisationLinkController();
+        $command->exec();
+    }
+
+    private function importOrganisationURLs()
+    {
+        $command = new \DSI\Controller\ImportOrgLinksController();
         $command->exec();
     }
 }

@@ -4,12 +4,10 @@ namespace DSI\Controller;
 
 set_time_limit(0);
 
-use DSI\DuplicateEntry;
 use DSI\Entity\Country;
 use DSI\Entity\CountryRegion;
 use DSI\Entity\ImpactTag;
 use DSI\Entity\Organisation;
-use DSI\Entity\OrganisationProject;
 use DSI\Entity\OrganisationSize;
 use DSI\Entity\OrganisationType;
 use DSI\Entity\Project;
@@ -21,7 +19,6 @@ use DSI\NotFound;
 use DSI\Repository\CountryRegionRepository;
 use DSI\Repository\CountryRepository;
 use DSI\Repository\ImpactTagRepository;
-use DSI\Repository\OrganisationProjectRepository;
 use DSI\Repository\OrganisationRepository;
 use DSI\Repository\OrganisationSizeRepository;
 use DSI\Repository\OrganisationTypeRepository;
@@ -69,16 +66,12 @@ class ImportController
     {
         var_dump($data);
         $organisation = new Organisation();
-        $organisation->setOwner($this->setOwner());
+        $organisation->setOwner($this->getRootUser());
 
         $organisation->setImportID($data[0]);
         $organisation->setName($data[1]);
         $this->setOrganisationType($data[2], $organisation);
         $this->setOrganisationSize($data[3], $organisation);
-        // TODO create organisation URLs
-        // TODO add twitter $data[4]
-        // TODO add website $data[5]
-        // TODO add lat + long $data[8,9]
         $organisation->setAddress("{$data[11]},\n{$data[12]}");
         // ignore region $data[13]
         $this->setCountryRegion($organisation, $data[14], $data[15]);
@@ -89,33 +82,12 @@ class ImportController
     /**
      * @return User
      */
-    private function setOwner()
+    private function getRootUser()
     {
         // TODO create root user
         $owner = new User();
         $owner->setId(1);
         return $owner;
-    }
-
-    /**
-     * @param $organisationTypeName
-     * @return OrganisationType
-     */
-    private function getOrganisationType($organisationTypeName)
-    {
-        if ($organisationTypeName == '')
-            return null;
-
-        $organisationTypeRepo = new OrganisationTypeRepository();
-        try {
-            $organisationType = $organisationTypeRepo->getByName($organisationTypeName);
-            return $organisationType;
-        } catch (NotFound $e) {
-            $organisationType = new OrganisationType();
-            $organisationType->setName($organisationTypeName);
-            $organisationTypeRepo->insert($organisationType);
-            return $organisationType;
-        }
     }
 
     private function setOrganisationType($organisationTypeName, Organisation $organisation)
@@ -212,7 +184,7 @@ class ImportController
     {
         var_dump($data);
         $project = new Project();
-        $project->setOwner($this->setOwner());
+        $project->setOwner($this->getRootUser());
 
         $project->setImportID($data[0]);
         $project->setName($data[1]);
