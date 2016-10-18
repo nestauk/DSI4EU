@@ -9350,6 +9350,25 @@ strong {
   margin-left: auto;
 }
 
+.side-bar-action {
+  padding: 10px 20px;
+  border: 1px solid #1dc9a0;
+  border-radius: 35px;
+  background-color: rgba(29, 201, 160, .22);
+  -webkit-transition: all 200ms ease;
+  transition: all 200ms ease;
+  font-family: Montserrat, sans-serif;
+  color: #000;
+  font-size: 16px;
+  line-height: 26px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.side-bar-action:hover {
+  background-color: #1dc9a0;
+}
+
 html.w-mod-js *[data-ix="pin-drop"] {
   opacity: 0;
   -webkit-transform: translate(0px, -100px);
