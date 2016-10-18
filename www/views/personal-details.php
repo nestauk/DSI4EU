@@ -178,7 +178,7 @@ $leftSideText .= "<p>The information is optional. You will be able to edit and e
                                                                       placeholder="Quick bio"></textarea>
                                                             <div class="log-in-error" ng-show="errors.bio"
                                                                  ng-bind="errors.bio"></div>
-                                                            <br />
+                                                            <br/>
 
                                                             <label for="email-9">Your email address</label>
                                                             <input class="creator-data-entry end w-input"
@@ -615,29 +615,15 @@ $leftSideText .= "<p>The information is optional. You will be able to edit and e
                     logo = '<?php echo \DSI\Entity\Image::ORGANISATION_LOGO_URL?>' + logo;
 
                 return $(
-                    '<div class="involved-card">' +
-                    '<div class="w-row">' +
-                    (
-                        logo ?
-                            (
-                                '<div class="w-col w-col-3 w-col-small-3 w-col-tiny-3">' +
-                                '<img class="involved-organisation-img" src="' + logo + '">' +
-                                '</div>'
-                            ) :
-                            (
-                                '<div class="w-col w-col-1 w-col-small-1 w-col-tiny-1"></div>'
-                            )
-                    ) +
-                    '<div class="w-clearfix w-col w-col-9 w-col-small-9 w-col-tiny-9">' +
-                    '<div class="card-name">' +
+                    '<span class="info-card left small w-inline-block" href="">' +
+                    '<h3 class="info-card-h3">' +
                     (object.text.substring(0, 26)) +
                     (object.text.length > 26 ? '...' : '') +
+                    '</h3>' +
+                    '<div class="involved-tag">' +
+                    '<a href="' + url + '" target="_blank">View</a>' +
                     '</div>' +
-                    '<div class="card-position">' + country + '</div>' +
-                    '</div>' +
-                    '</div>' +
-                    '<a class="view-profile" href="' + url + '" target="_blank">View</a>' +
-                    '</div>'
+                    '</span>'
                 );
             };
 
