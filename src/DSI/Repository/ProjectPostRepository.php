@@ -42,6 +42,17 @@ class ProjectPostRepository
         $query->query();
     }
 
+    public function remove(ProjectPost $projectPost)
+    {
+        $query = new SQL("SELECT id FROM `project-posts` WHERE id = '{$projectPost->getId()}' LIMIT 1");
+        $existingPost = $query->fetch();
+        if (!$existingPost)
+            throw new DSI\NotFound('postID: ' . $projectPost->getId());
+
+        $query = new SQL("DELETE FROM `project-posts` WHERE id = '{$projectPost->getId()}'");
+        $query->query();
+    }
+
     public function getById(int $id): ProjectPost
     {
         return $this->getPostWhere([

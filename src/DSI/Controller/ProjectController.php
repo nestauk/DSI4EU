@@ -9,8 +9,8 @@ use DSI\Entity\ProjectMember;
 use DSI\Entity\ProjectPost;
 use DSI\Entity\User;
 use DSI\Repository\OrganisationProjectRepository;
-use DSI\Repository\ProjectImpactTagARepository;
 use DSI\Repository\ProjectDsiFocusTagRepository;
+use DSI\Repository\ProjectImpactTagARepository;
 use DSI\Repository\ProjectImpactTagCRepository;
 use DSI\Repository\ProjectLinkRepository;
 use DSI\Repository\ProjectMemberInvitationRepository;
@@ -23,9 +23,9 @@ use DSI\Repository\UserRepository;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\URL;
+use DSI\UseCase\AddDsiFocusTagToProject;
 use DSI\UseCase\AddEmailToProject;
 use DSI\UseCase\AddImpactTagAToProject;
-use DSI\UseCase\AddDsiFocusTagToProject;
 use DSI\UseCase\AddImpactTagCToProject;
 use DSI\UseCase\AddMemberInvitationToProject;
 use DSI\UseCase\AddMemberRequestToProject;
@@ -33,12 +33,14 @@ use DSI\UseCase\AddProjectToOrganisation;
 use DSI\UseCase\AddTagToProject;
 use DSI\UseCase\ApproveMemberRequestToProject;
 use DSI\UseCase\CreateProjectPost;
+use DSI\UseCase\Projects\RemoveProject;
 use DSI\UseCase\RejectMemberRequestToProject;
-use DSI\UseCase\RemoveImpactTagAFromProject;
 use DSI\UseCase\RemoveDsiFocusTagFromProject;
+use DSI\UseCase\RemoveImpactTagAFromProject;
 use DSI\UseCase\RemoveImpactTagCFromProject;
 use DSI\UseCase\RemoveMemberFromProject;
 use DSI\UseCase\RemoveTagFromProject;
+use DSI\UseCase\SecureCode;
 use DSI\UseCase\SetAdminStatusToProjectMember;
 use DSI\UseCase\UpdateProject;
 use DSI\UseCase\UpdateProjectCountryRegion;
@@ -61,6 +63,41 @@ class ProjectController
 
         $projectRepo = new ProjectRepository();
         $project = $projectRepo->getById($this->data()->projectID);
+
+        if (isset($_POST['getSecureCode'])) {
+            $genSecureCode = new SecureCode();
+            $genSecureCode->exec();
+            echo json_encode([
+                'code' => 'ok',
+                'secureCode' => $genSecureCode->getCode(),
+            ]);
+            return;
+        }
+
+        if (isset($_POST['deleteProject'])) {
+            $genSecureCode = new SecureCode();
+            if ($genSecureCode->checkCode($_POST['secureCode'])) {
+                try {
+                    $removeProject = new RemoveProject();
+                    $removeProject->data()->executor = $loggedInUser;
+                    $removeProject->data()->project = $project;
+                    $removeProject->exec();
+
+                    echo json_encode([
+                        'code' => 'ok',
+                        'url' => $urlHandler->projects()
+                    ]);
+                    return;
+                } catch (ErrorHandler $e) {
+                    echo json_encode([
+                        'code' => 'error',
+                        'errors' => $e->getErrors()
+                    ]);
+                    return;
+                }
+            }
+            return;
+        }
 
         $memberRequests = [];
         $isAdmin = false;

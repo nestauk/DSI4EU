@@ -69,14 +69,16 @@ require __DIR__ . '/header.php';
                     <?php if ($userCanEditProject) { ?>
                         <h3 class="cse side-bar-h3">Actions</h3>
                         <a class="sidebar-link" href="<?php echo $urlHandler->projectEdit($project) ?>">
-                            <span class="green">-&nbsp;</span>Edit project</a>
+                            <span class="green">-&nbsp;</span>Edit project
+                        </a>
                         <?php if ($isOwner OR ($loggedInUser AND $loggedInUser->isSysAdmin())) { ?>
-                            <a class="sidebar-link" style="z-index:1000;bottom:80px"
-                               href="<?php echo $urlHandler->projectOwnerEdit($project) ?>">
-                                <span class="green">-&nbsp;</span>Change owner</a>
+                            <a class="sidebar-link" href="<?php echo $urlHandler->projectOwnerEdit($project) ?>">
+                                <span class="green">-&nbsp;</span>Change owner
+                            </a>
+                            <a class="sidebar-link remove" href="#" ng-click="confirmDelete()">
+                                <span class="green">-&nbsp;</span>Delete project
+                            </a>
                         <?php } ?>
-                        <?php /* <a class="sidebar-link"><span class="green">-&nbsp;</span>Publish / unpublish</a> */ ?>
-                        <?php /* <a class="remove sidebar-link"><span class="green">-&nbsp;</span>Remove project</a> */ ?>
                     <?php } ?>
                     <?php /*
                     <h3 class="cse side-bar-h3">Info</h3>
@@ -754,6 +756,8 @@ require __DIR__ . '/header.php';
 
     <script
         src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/ProjectController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
+
+    <script src="https://www.google.com/recaptcha/api.js?render=explicit" async defer></script>
 
     <script>
         $(function () {

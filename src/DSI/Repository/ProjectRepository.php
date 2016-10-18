@@ -69,6 +69,18 @@ class ProjectRepository
         ProjectRepositoryInAPC::resetCache();
     }
 
+    public function remove(Project $project)
+    {
+        $query = new SQL("SELECT id FROM `projects` WHERE id = '{$project->getId()}' LIMIT 1");
+        $existingProject = $query->fetch();
+        if (!$existingProject)
+            throw new DSI\NotFound('projectID: ' . $project->getId());
+
+        $query = new SQL("DELETE FROM `projects` WHERE `id` = '{$project->getId()}'");
+        $query->query();
+        ProjectRepositoryInAPC::resetCache();
+    }
+
     public function getById(int $id): Project
     {
         return $this->getObjectWhere([
