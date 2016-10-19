@@ -4,6 +4,7 @@ namespace DSI\UseCase\Projects;
 
 use DSI\Entity\Project;
 use DSI\Entity\User;
+use DSI\Repository\OrganisationProjectRepository;
 use DSI\Repository\ProjectDsiFocusTagRepository;
 use DSI\Repository\ProjectEmailInvitationRepository;
 use DSI\Repository\ProjectImpactTagARepository;
@@ -89,6 +90,7 @@ class RemoveProject
         $this->removeProjectRequests();
         $this->removeProjectMembers();
         $this->removeProjectPosts();
+        $this->removeProjectsOrganisations();
 
         $this->removeProjectTags();
         $this->removeProjectTagsA();
@@ -144,6 +146,15 @@ class RemoveProject
         $projectPosts = $projectPostRepo->getByProjectID($this->data()->project->getId());
         foreach ($projectPosts AS $projectPost) {
             $projectPostRepo->remove($projectPost);
+        }
+    }
+
+    private function removeProjectsOrganisations()
+    {
+        $orgProjectsRepo = new OrganisationProjectRepository();
+        $orgProjects = $orgProjectsRepo->getByProjectID($this->data()->project->getId());
+        foreach ($orgProjects AS $orgProject) {
+            $orgProjectsRepo->remove($orgProject);
         }
     }
 

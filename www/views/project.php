@@ -757,8 +757,6 @@ require __DIR__ . '/header.php';
     <script
         src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/ProjectController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 
-    <script src="https://www.google.com/recaptcha/api.js?render=explicit" async defer></script>
-
     <script>
         $(function () {
             $('.project-members')
