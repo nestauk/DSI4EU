@@ -1,49 +1,9 @@
 angular
     .module(angularAppName)
     .controller('OrganisationController', function ($scope, $http, $attrs, $timeout) {
-        var addTagSelect = $('#Add-tag');
-        var editCountry = $('#Edit-country');
-        var editCountryRegion = $('#Edit-countryRegion');
         var addMemberSelect = $('#Add-member');
 
         $scope.organisationid = $attrs.organisationid;
-
-        $scope.updateBasic = function () {
-            var data = {
-                updateBasic: true,
-                name: $scope.organisation.name,
-                description: $scope.organisation.description,
-                address: $scope.organisation.address,
-                organisationTypeId: $scope.organisation.organisationTypeId,
-                organisationSizeId: $scope.organisation.organisationSizeId
-            };
-
-            $http.post(SITE_RELATIVE_PATH + '/org/' + $attrs.organisationid + '.json', data)
-                .then(function (response) {
-                    console.log(response.data);
-                    if (response.data.result == 'error') {
-                        alert('error');
-                        console.log(response.data);
-                    }
-                });
-        };
-
-        $scope.addTag = function () {
-            var newTag = addTagSelect.select2().val();
-            addTag({
-                tag: newTag,
-                selectBox: addTagSelect,
-                currentTags: $scope.organisation.tags,
-                postFields: {addTag: newTag}
-            });
-        };
-        $scope.removeTag = function (tag) {
-            removeTag({
-                tag: tag,
-                currentTags: $scope.organisation.tags,
-                postFields: {removeTag: tag}
-            });
-        };
 
         $scope.addMember = function () {
             var newMemberID = addMemberSelect.select2().val();
@@ -52,6 +12,55 @@ angular
             if (newMemberID == '') return;
 
             addNewMember(newMemberID);
+        };
+        $scope.confirmDelete = function (url) {
+            swal({
+                title: "Delete the organisation",
+                text: "Are you sure you want to delete this organisation?",
+                type: "warning",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                showLoaderOnConfirm: true
+            }, function () {
+                $http
+                    .post(window.location.href, {
+                        getSecureCode: true
+                    })
+                    .then(function (response) {
+                        if (response.data.code == 'ok') {
+                            receivedCode(response.data.secureCode)
+                        } else {
+                            alert('unexpected error');
+                            console.log(response.data)
+                        }
+                    });
+
+                function receivedCode(secureCode) {
+                    $http
+                        .post(window.location.href, {
+                            deleteOrganisation: true,
+                            secureCode: secureCode
+                        })
+                        .then(function (response) {
+                            if (response.data.code == 'ok') {
+                                successfulDeletion(response.data.url)
+                            } else {
+                                alert('unexpected error');
+                                console.log(response.data)
+                            }
+                        })
+                }
+
+                function successfulDeletion(url) {
+                    swal({
+                        title: "Deleted",
+                        text: "The organisation has been deleted.",
+                        type: "success"
+                    }, function () {
+                        window.location.href = url
+                    });
+                }
+            });
         };
 
         $scope.addOrganisationMember = {};
@@ -62,15 +71,12 @@ angular
             $scope.addOrganisationMember.loading = true;
             $scope.addOrganisationMember.success = false;
 
-            $timeout(function () {
-                var existingMemberId = Helpers.getItemIndexById($scope.users, memberIdOrEmail);
+            var existingMemberId = Helpers.getItemIndexById($scope.users, memberIdOrEmail);
 
-                if (existingMemberId != -1)
-                    return addExistingMember($scope.users[existingMemberId]);
-                else
-                    return addNewMemberFromEmailAddress(memberIdOrEmail);
-
-            }, 500);
+            if (existingMemberId != -1)
+                return addExistingMember($scope.users[existingMemberId]);
+            else
+                return addNewMemberFromEmailAddress(memberIdOrEmail);
         };
 
         var addExistingMember = function (newMember) {
@@ -92,7 +98,6 @@ angular
                 }
             });
         };
-
         var addNewMemberFromEmailAddress = function (emailAddress) {
             console.log('add email: ' + emailAddress);
 
@@ -126,104 +131,6 @@ angular
                     console.log(result.data);
                 });
             }
-        };
-
-        // Get Organisation Details
-        $http.get(SITE_RELATIVE_PATH + '/org/' + $attrs.organisationid + '.json')
-            .then(function (response) {
-                $scope.organisation = response.data || {};
-                console.log($scope.organisation);
-                listCountries();
-            });
-
-        // List Tags
-        $http.get(SITE_RELATIVE_PATH + '/tags-for-organisations.json')
-            .then(function (result) {
-                addTagSelect.select2({
-                    data: result.data
-                });
-            });
-        // List Users
-        $http.get(SITE_RELATIVE_PATH + '/users.json')
-            .then(function (result) {
-                $scope.users = result.data;
-                addMemberSelect.select2({data: result.data});
-            });
-
-        var addTag = function (data) {
-            data.selectBox.select2().val('').trigger("change");
-
-            if (data.tag == '')
-                return;
-
-            var index = data.currentTags.indexOf(data.tag);
-            if (index == -1) {
-                data.currentTags.push(data.tag);
-                data.currentTags.sort();
-
-                $http.post(SITE_RELATIVE_PATH + '/org/' + $attrs.organisationid + '.json', data.postFields)
-                    .then(function (result) {
-                        console.log(result.data);
-                    });
-            }
-        };
-        var removeTag = function (data) {
-            var index = data.currentTags.indexOf(data.tag);
-            if (index > -1) {
-                data.currentTags.splice(index, 1);
-
-                $http.post(SITE_RELATIVE_PATH + '/org/' + $attrs.organisationid + '.json', data.postFields)
-                    .then(function (result) {
-                        console.log(result.data);
-                    });
-            }
-        };
-
-        var listCountries = function () {
-            $http.get(SITE_RELATIVE_PATH + '/countries.json')
-                .then(function (result) {
-                    editCountry.select2({data: result.data});
-                    editCountry.on("change", function () {
-                        listCountryRegions(editCountry.val());
-                    });
-                    editCountry.val($scope.organisation.countryID).trigger("change");
-                });
-        };
-        var listCountryRegions = function (countryID) {
-            countryID = parseInt(countryID) || 0;
-            if (countryID > 0) {
-                $scope.regionsLoaded = false;
-                $scope.regionsLoading = true;
-                $http.get(SITE_RELATIVE_PATH + '/countryRegions/' + countryID + '.json')
-                    .then(function (result) {
-                        $timeout(function () {
-                            editCountryRegion
-                                .html("")
-                                .select2({data: result.data})
-                                .val($scope.organisation.countryRegion)
-                                .trigger("change");
-                            $scope.regionsLoaded = true;
-                            $scope.regionsLoading = false;
-                        }, 500);
-                    });
-            }
-        };
-
-        $scope.savingCountryRegion = {};
-        $scope.saveCountryRegion = function () {
-            $scope.savingCountryRegion.loading = true;
-            $scope.savingCountryRegion.saved = false;
-            $http.post(SITE_RELATIVE_PATH + '/org/' + $attrs.organisationid + '.json', {
-                updateCountryRegion: true,
-                countryID: editCountry.val(),
-                region: editCountryRegion.val()
-            }).then(function (result) {
-                $timeout(function () {
-                    $scope.savingCountryRegion.loading = false;
-                    $scope.savingCountryRegion.saved = true;
-                    console.log(result.data);
-                }, 500);
-            });
         };
 
         $scope.requestToJoin = {};
@@ -262,24 +169,6 @@ angular
                 }).then(function (result) {
                     console.log(result.data);
                 });
-            }
-        };
-
-        $scope.newProjectName = '';
-        $scope.addNewProject = {};
-        $scope.addProject = function () {
-            if ($scope.newProjectName != '') {
-                $scope.addNewProject.loading = true;
-                $timeout(function () {
-                    $http.post(SITE_RELATIVE_PATH + '/org/' + $attrs.organisationid + '.json', {
-                        createProject: $scope.newProjectName
-                    }).then(function (response) {
-                        if (response.data.result == 'ok')
-                            window.location.href = response.data.url;
-                        else
-                            console.log(response.data);
-                    });
-                }, 500);
             }
         };
 

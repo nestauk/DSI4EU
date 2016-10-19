@@ -73,6 +73,18 @@ class OrganisationRepository
         OrganisationRepositoryInAPC::resetCache();
     }
 
+    public function remove(Organisation $organisation)
+    {
+        $query = new SQL("SELECT id FROM `organisations` WHERE id = '{$organisation->getId()}' LIMIT 1");
+        $existingOrg = $query->fetch();
+        if (!$existingOrg)
+            throw new DSI\NotFound('organisationID: ' . $organisation->getId());
+
+        $query = new SQL("DELETE FROM `organisations` WHERE `id` = '{$organisation->getId()}'");
+        $query->query();
+        OrganisationRepositoryInAPC::resetCache();
+    }
+
     public function getById(int $id): Organisation
     {
         return $this->getObjectWhere([

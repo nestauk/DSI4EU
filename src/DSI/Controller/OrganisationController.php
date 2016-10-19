@@ -11,8 +11,11 @@ use DSI\Repository\OrganisationMemberRequestRepository;
 use DSI\Repository\OrganisationProjectRepository;
 use DSI\Repository\OrganisationRepository;
 use DSI\Repository\OrganisationTagRepository;
-use DSI\Repository\UserRepository;
 use DSI\Service\Auth;
+use DSI\Service\ErrorHandler;
+use DSI\Service\URL;
+use DSI\UseCase\Organisations\RemoveOrganisation;
+use DSI\UseCase\SecureCode;
 
 class OrganisationController
 {
@@ -26,12 +29,47 @@ class OrganisationController
 
     public function exec()
     {
+        $urlHandler = new URL();
         $loggedInUser = null;
-
         $authUser = new Auth();
         $loggedInUser = $authUser->getUserIfLoggedIn();
         $organisationRepo = new OrganisationRepository();
         $organisation = $organisationRepo->getById($this->data()->organisationID);
+
+        if (isset($_POST['getSecureCode'])) {
+            $genSecureCode = new SecureCode();
+            $genSecureCode->exec();
+            echo json_encode([
+                'code' => 'ok',
+                'secureCode' => $genSecureCode->getCode(),
+            ]);
+            return;
+        }
+
+        if (isset($_POST['deleteOrganisation'])) {
+            $genSecureCode = new SecureCode();
+            if ($genSecureCode->checkCode($_POST['secureCode'])) {
+                try {
+                    $removeOrganisation = new RemoveOrganisation();
+                    $removeOrganisation->data()->executor = $loggedInUser;
+                    $removeOrganisation->data()->organisation = $organisation;
+                    $removeOrganisation->exec();
+
+                    echo json_encode([
+                        'code' => 'ok',
+                        'url' => $urlHandler->organisations()
+                    ]);
+                    return;
+                } catch (ErrorHandler $e) {
+                    echo json_encode([
+                        'code' => 'error',
+                        'errors' => $e->getErrors()
+                    ]);
+                    return;
+                }
+            }
+            return;
+        }
 
         /*
         $organisationTypes = (new OrganisationTypeRepository())->getAll();
