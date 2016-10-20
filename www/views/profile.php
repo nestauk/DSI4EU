@@ -2,6 +2,7 @@
 require __DIR__ . '/header.php';
 /** @var $userID int */
 /** @var $isOwner bool */
+/** @var $loggedInUser \DSI\Entity\User */
 /** @var $user \DSI\Entity\User */
 /** @var $projects \DSI\Entity\Project[] */
 /** @var $organisations \DSI\Entity\Organisation[] */
@@ -35,6 +36,12 @@ require __DIR__ . '/header.php';
                 <div class="sidebar w-col w-col-4">
                     <?php if ($isOwner) { ?>
                         <?php require __DIR__ . '/partialViews/profile-menu.php' ?>
+                    <?php } elseif ($loggedInUser->isSysAdmin()) { ?>
+                        <h1 class="content-h1 side-bar-space-h1">Actions</h1>
+                        <a class="sidebar-link" href="<?php echo $urlHandler->editUserProfile($user) ?>">
+                            <span class="green">-&nbsp;</span>Edit profile</a>
+                        <?php /* <a class="sidebar-link" href="<?php echo $urlHandler->logout() ?>">
+                            <span class="green">- Sign out</span></a> */ ?>
                     <?php } ?>
                 </div>
             </div>
@@ -92,8 +99,9 @@ require __DIR__ . '/header.php';
                             <?php if ($isOwner) { ?>
                                 <div class="join-project">
                                     <a class="btn btn-join w-button" <?php /* data-ix="show-join-project" */ ?>
-                                       href="<?php echo $urlHandler->editProfile() ?>#step3">Add new
-                                        project +</a>
+                                       href="<?php echo $urlHandler->editUserProfile($loggedInUser) ?>#step3">
+                                        Add new project +
+                                    </a>
                                 </div>
                             <?php } ?>
                         </div>
@@ -117,7 +125,9 @@ require __DIR__ . '/header.php';
                             <?php if ($isOwner) { ?>
                                 <div class="join-project">
                                     <a class="btn btn-join w-button" <?php /* data-ix="show-join-organisation" */ ?>
-                                       href="<?php echo $urlHandler->editProfile() ?>#step3">Join organisation +</a>
+                                       href="<?php echo $urlHandler->editUserProfile($loggedInUser) ?>#step3">
+                                        Join organisation +
+                                    </a>
                                 </div>
                             <?php } ?>
                         </div>

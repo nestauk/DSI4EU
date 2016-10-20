@@ -39,7 +39,7 @@ require __DIR__ . '/header.php';
                             $member = $projectMember->getMember();
                             if (trim($member->getFullName()) == '') continue; ?>
                             <a class="involved-card w-inline-block"
-                               href="<?php echo $urlHandler->profile($member->getId()) ?>">
+                               href="<?php echo $urlHandler->profile($member) ?>">
                                 <div class="involved-card">
                                     <div class="w-row">
                                         <div class="image-col w-col w-col-3 w-col-small-3 w-col-tiny-3">

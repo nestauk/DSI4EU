@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: apandele
- * Date: 25/04/2016
- * Time: 15:45
- */
-
 namespace DSI\Controller;
 
 use DSI\Service\Auth;
@@ -21,7 +14,8 @@ class LoginController
     {
         $urlHandler = new URL();
         $authUser = new Auth();
-        $authUser->ifLoggedInRedirectTo($urlHandler->myProfile());
+        if ($authUser->isLoggedIn())
+            go_to($urlHandler->profile($authUser->getUser()));
 
         if (isset($_POST['login'])) {
             try {
@@ -32,13 +26,13 @@ class LoginController
 
                 $authUser->saveUserInSession($login->getUser());
 
-                if($this->responseFormat === 'json'){
+                if ($this->responseFormat === 'json') {
                     echo json_encode([
                         'response' => 'ok'
                     ]);
                     return;
                 } else {
-                    go_to($urlHandler->myProfile());
+                    go_to($urlHandler->profile($login->getUser()));
                 }
             } catch (ErrorHandler $e) {
                 if ($this->responseFormat === 'json') {

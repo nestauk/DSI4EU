@@ -52,7 +52,7 @@ class LoginTwitterController
                 $twitterLogin->data()->twitterUID = $user->uid;
                 $twitterLogin->exec();
                 $authUser->saveUserInSession($twitterLogin->getUser());
-                go_to($urlHandler->myProfile());
+                go_to($urlHandler->profile($twitterLogin->getUser()));
             } else {
                 $twitterLogin = new TwitterRegister();
                 $twitterLogin->data()->twitterUID = $user->uid;
@@ -61,7 +61,7 @@ class LoginTwitterController
                 $twitterLogin->data()->email = $user->email;
                 $twitterLogin->exec();
                 $authUser->saveUserInSession($twitterLogin->getUser());
-                go_to($urlHandler->editProfile());
+                go_to($urlHandler->editUserProfile($twitterLogin->getUser()));
             }
         } elseif (isset($_GET['denied'])) {
             // Step 2.5 - denied request to authorize client

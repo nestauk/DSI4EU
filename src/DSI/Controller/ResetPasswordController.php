@@ -32,7 +32,7 @@ class ResetPasswordController
 
                 echo json_encode([
                     'code' => 'ok',
-                    'url' => $urlHandler->editProfile()
+                    'url' => $urlHandler->editUserProfile($user)
                 ]);
             } catch (ErrorHandler $e) {
                 echo json_encode([

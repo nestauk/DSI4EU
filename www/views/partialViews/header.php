@@ -1,6 +1,6 @@
 <?php
 /** @var $loggedInUser \DSI\Entity\User */
-use \DSI\Service\URL;
+use DSI\Service\URL;
 
 if (!isset($urlHandler))
     $urlHandler = new URL();
@@ -20,10 +20,10 @@ if (!isset($urlHandler))
                                 <a href="<?php echo $urlHandler->dashboard() ?>">View dashboard</a>
                             </div>
                             <div class="profile-col w-col w-col-3">
-                                <a href="<?php echo $urlHandler->myProfile() ?>">View profile</a>
+                                <a href="<?php echo $urlHandler->profile($loggedInUser) ?>">View profile</a>
                             </div>
                             <div class="profile-col w-col w-col-3">
-                                <a href="<?php echo $urlHandler->editProfile() ?>">Edit profile</a>
+                                <a href="<?php echo $urlHandler->editUserProfile($loggedInUser) ?>">Edit profile</a>
                             </div>
                             <div class="profile-col w-col w-col-3">
                                 <a href="<?php echo $urlHandler->logout() ?>">Sign out</a>

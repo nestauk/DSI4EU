@@ -1,10 +1,10 @@
 angular
     .module(angularAppName)
-    .controller('PersonalDetailsController', function ($scope, $http, Upload, $attrs) {
+    .controller('ProfileEditController', function ($scope, $http, Upload, $attrs) {
         var profilePage = $attrs.profileurl;
 
         $scope.user = {};
-        $http.get(SITE_RELATIVE_PATH + '/my-profile.json')
+        $http.get(window.location.href + '.json')
             .then(function (result) {
                 $scope.user = result.data || {};
             });
@@ -65,26 +65,6 @@ angular
             })
         };
 
-        /*
-         $scope.submitStep4 = function () {
-         $scope.errors = {};
-         if (!$scope.user.confirm) {
-         $scope.errors = {
-         confirm: 'You have to agree with our terms and conditions'
-         };
-         } else {
-         swal({
-         title: 'Success',
-         text: 'Your profile has been successfully updated',
-         type: "success",
-         confirmButtonText: "Go to my profile"
-         }, function () {
-         window.location.href = profilePage;
-         });
-         }
-         };
-         */
-
         $scope.saveUserDetails = function (options) {
             $scope.loading = true;
             $scope.errors = {};
@@ -95,7 +75,7 @@ angular
 
             console.log(data);
 
-            $http.post(SITE_RELATIVE_PATH + '/my-profile.json', data)
+            $http.post(window.location.href + '.json', data)
                 .then(function (response) {
                     $scope.loading = false;
                     console.log(response.data);
@@ -106,7 +86,7 @@ angular
                         $scope.errors = response.data.errors;
                 });
         };
-
+        /*
         $scope.savePersonalDetails = function () {
             $scope.loading = true;
             $scope.errors = {};
@@ -127,6 +107,7 @@ angular
                         $scope.errors = response.data.errors;
                 });
         };
+        */
 
         $scope.profilePic = {};
         $scope.profilePic.upload = function (file, errFiles) {

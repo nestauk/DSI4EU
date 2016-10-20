@@ -200,7 +200,7 @@ class DashboardController
                             'user' => [
                                 'id' => $user->getId(),
                                 'name' => $user->getFullName(),
-                                'url' => $urlHandler->profile($user->getId()),
+                                'url' => $urlHandler->profile($user),
                             ],
                             'organisation' => [
                                 'id' => $organisation->getId(),
@@ -216,7 +216,7 @@ class DashboardController
                             'user' => [
                                 'id' => $user->getId(),
                                 'name' => $user->getFullName(),
-                                'url' => $urlHandler->profile($user->getId()),
+                                'url' => $urlHandler->profile($user),
                             ],
                             'project' => [
                                 'id' => $project->getId(),

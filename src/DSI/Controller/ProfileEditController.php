@@ -2,11 +2,20 @@
 
 namespace DSI\Controller;
 
+use DSI\AccessDenied;
 use DSI\Entity\Image;
-use DSI\Entity\UserLink;
+use DSI\Entity\User;
 use DSI\Entity\UserLink_Service;
+use DSI\Repository\LanguageRepository;
+use DSI\Repository\OrganisationMemberRepository;
+use DSI\Repository\OrganisationRepositoryInAPC;
+use DSI\Repository\ProjectMemberRepository;
+use DSI\Repository\ProjectRepositoryInAPC;
+use DSI\Repository\SkillRepository;
+use DSI\Repository\UserLanguageRepository;
 use DSI\Repository\UserLinkRepository;
 use DSI\Repository\UserRepository;
+use DSI\Repository\UserSkillRepository;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\URL;
@@ -15,14 +24,16 @@ use DSI\UseCase\UpdateUserEmailAddress;
 use DSI\UseCase\UpdateUserPassword;
 use DSI\UseCase\UpdateUserProfilePicture;
 
-class MyProfileController
+class ProfileEditController
 {
-    /** @var MyProfileController_Data */
-    private $data;
+    /** @var int */
+    public $userID;
+
+    /** @var string */
+    public $format = 'html';
 
     public function __construct()
     {
-        $this->data = new MyProfileController_Data();
     }
 
     public function exec()
@@ -31,10 +42,17 @@ class MyProfileController
         $authUser = new Auth();
         $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
         $loggedInUser = $authUser->getUser();
-        $user = $loggedInUser;
 
-        if ($this->data->format == 'json') {
+        if (!$this->userID)
+            $this->userID = $loggedInUser->getId();
 
+        $userRepo = new UserRepository();
+        $user = $userRepo->getById($this->userID);
+
+        if (!$this->loggedInUserCanManageUser($loggedInUser, $user))
+            throw new AccessDenied('You are not allowed to access this page');
+
+        if ($this->format == 'json') {
             try {
                 if (isset($_POST['saveDetails'])) {
                     if ($_POST['step'] == 'step1') {
@@ -74,8 +92,6 @@ class MyProfileController
                         $updateUserBasicDetails->data()->organisations = $_POST['organisations'] ?? [];
                         $updateUserBasicDetails->exec();
                     }
-
-                    // $updateUserBasicDetails->data()->showEmail = $_POST['showEmail'] ?? false;
 
                     echo json_encode([
                         'response' => 'ok'
@@ -136,18 +152,34 @@ class MyProfileController
             ]);
 
             return;
-        } else {
-            go_to($urlHandler->profile($user->getId()));
         }
+
+        $languages = (new LanguageRepository())->getAll();
+        $userLanguages = (new UserLanguageRepository())->getLanguageIDsForUser($user->getId());
+        $skills = (new SkillRepository())->getAll();
+        $userSkills = (new UserSkillRepository())->getSkillsNameByUserID($user->getId());
+        $projects = (new ProjectRepositoryInAPC())->getAll();
+        $userProjects = (new ProjectMemberRepository())->getProjectIDsForMember($user->getId());
+        $organisations = (new OrganisationRepositoryInAPC())->getAll();
+        $userOrganisations = (new OrganisationMemberRepository())->getOrganisationIDsForMember($user->getId());
+
+        $angularModules['fileUpload'] = true;
+        require __DIR__ . '/../../../www/views/profile-edit.php';
     }
 
-    public function data()
+    /**
+     * @param $loggedInUser
+     * @param $user
+     * @return bool
+     */
+    private function loggedInUserCanManageUser(User $loggedInUser, User $user)
     {
-        return $this->data;
-    }
-}
+        if ($loggedInUser->getId() != $user->getId())
+            return true;
 
-class MyProfileController_Data
-{
-    public $format = 'html';
+        if ($loggedInUser->isSysAdmin())
+            return true;
+
+        return false;
+    }
 }

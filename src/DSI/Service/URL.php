@@ -8,6 +8,7 @@ use DSI\Entity\Organisation;
 use DSI\Entity\Project;
 use DSI\Entity\Story;
 use DSI\Entity\Translation;
+use DSI\Entity\User;
 
 class URL
 {
@@ -24,11 +25,6 @@ class URL
         if ($format == 'json')
             $extension = '.json';
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'dashboard' . $extension;
-    }
-
-    public function myProfile()
-    {
-        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'my-profile';
     }
 
     public function register()
@@ -51,9 +47,14 @@ class URL
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'logout';
     }
 
-    public function profile($userID)
+    public function myProfile()
     {
-        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'profile/' . $userID;
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'my-profile';
+    }
+
+    public function profile(User $user)
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'profile/' . $user->getId();
     }
 
     public function home()
@@ -294,9 +295,9 @@ class URL
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'explore-dsi';
     }
 
-    public function editProfile()
+    public function editUserProfile(User $user)
     {
-        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'personal-details';
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'profile/edit/' . $user->getId();
     }
 
     public function termsOfUse()

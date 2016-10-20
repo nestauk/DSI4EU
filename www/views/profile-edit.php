@@ -9,13 +9,15 @@ require __DIR__ . '/header.php';
 /** @var $organisations \DSI\Entity\Organisation[] */
 /** @var $userOrganisations int[] */
 /** @var $urlHandler \DSI\Service\URL */
+/** @var $loggedInUser \DSI\Entity\User */
+/** @var $user \DSI\Entity\User */
 
 $leftSideText = "<p>To create your profile, we would like to collect some information about you.</p>";
 $leftSideText .= "<p>The information is optional. You will be able to edit and expand on your answers later.</p>";
 
 ?>
     <script type="text/javascript"
-            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/PersonalDetailsController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
+            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/ProfileEditController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
     <script type="text/javascript"
             src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/UpdatePasswordController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 
@@ -82,8 +84,8 @@ $leftSideText .= "<p>The information is optional. You will be able to edit and e
         </div>
     </div>
 
-    <div ng-controller="PersonalDetailsController"
-         data-profileurl="<?php echo $urlHandler->myProfile() ?>">
+    <div ng-controller="ProfileEditController"
+         data-profileurl="<?php echo $urlHandler->profile($user) ?>">
 
         <div class="w-section page-header">
             <div class="container-wide header">
@@ -448,7 +450,7 @@ $leftSideText .= "<p>The information is optional. You will be able to edit and e
                             <div class="step-window w-tab-pane" ng-class="{'w--tab-active': currentTab == 'step4'}"
                                  data-w-tab="Tab 4">
                                 <form id="email-form-3" name="email-form-3"
-                                      ng-submit="submitStep4('<?php echo $urlHandler->myProfile() ?>')">
+                                      ng-submit="submitStep4('<?php echo $urlHandler->profile($user) ?>')">
                                     <div class="tabbed-nav-buttons w-clearfix">
                                         <input type="submit" class="tab-button-next tab-button-publish w-button"
                                                ng-value="loading ? 'Loading...' : 'Publish now'"

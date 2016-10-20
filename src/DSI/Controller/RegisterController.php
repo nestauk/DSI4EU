@@ -30,11 +30,11 @@ class RegisterController
                 if ($this->responseFormat === 'json') {
                     echo json_encode([
                         'response' => 'ok',
-                        'url' => $urlHandler->editProfile(),
+                        'url' => $urlHandler->editUserProfile($register->getUser()),
                     ]);
                     die();
                 } else {
-                    go_to($urlHandler->editProfile());
+                    go_to($urlHandler->editUserProfile($register->getUser()));
                 }
             } catch (ErrorHandler $e) {
                 if ($this->responseFormat === 'json') {

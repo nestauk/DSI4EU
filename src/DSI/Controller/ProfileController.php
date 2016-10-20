@@ -45,7 +45,11 @@ class ProfileController
         $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
         $loggedInUser = $authUser->getUser();
 
-        $user = $this->getUserFromURL();
+        if(!$this->data()->userURL)
+            go_to($urlHandler->profile($loggedInUser));
+
+        $user = $this->getUserFromURL($this->data()->userURL);
+
         $userID = $user->getId();
         $isOwner = ($user->getId() == $loggedInUser->getId());
 
@@ -181,14 +185,14 @@ class ProfileController
     /**
      * @return \DSI\Entity\User
      */
-    protected function getUserFromURL()
+    protected function getUserFromURL($url)
     {
         $userRepo = new UserRepository();
-        if (ctype_digit($this->data()->userURL)) {
-            $user = $userRepo->getById((int)$this->data()->userURL);
+        if (ctype_digit($url)) {
+            $user = $userRepo->getById((int)$url);
             return $user;
         } else {
-            $user = $userRepo->getByProfileURL($this->data()->userURL);
+            $user = $userRepo->getByProfileURL($url);
             return $user;
         }
     }

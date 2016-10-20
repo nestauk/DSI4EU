@@ -141,6 +141,7 @@ class UpdateUserBasicDetails
     private function setUserLinks()
     {
         $userLinks = (new UserLinkRepository())->getLinksByUserID($this->data()->userID);
+        $this->data()->links = array_filter((array)$this->data()->links);
         foreach ((array)$this->data()->links AS $newLink) {
             if (!in_array($newLink, $userLinks)) {
                 $addLink = new AddLinkToUser();

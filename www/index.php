@@ -123,13 +123,6 @@ class Router
         } elseif (preg_match('<^/' . $langHandler . 'organisations.json$>', $this->pageURL, $matches)) {
             $this->organisationsJson($matches);
 
-
-        } elseif (preg_match('<^/' . $langHandler . 'my-profile$>', $this->pageURL, $matches)) {
-            $this->myProfile($matches);
-
-        } elseif ($this->pageURL === '/my-profile.json') {
-            $this->myProfile([], 'json');
-
         } elseif ($this->pageURL === '/createProject.json') {
             $this->createProject();
 
@@ -140,7 +133,13 @@ class Router
             $this->uploadProfilePicture();
 
         } elseif (preg_match('<^/' . $langHandler . 'personal-details$>', $this->pageURL, $matches)) {
-            $this->personalDetails($matches);
+            $this->profileEdit($matches);
+
+        } elseif (preg_match('<^/' . $langHandler . 'profile/edit/([0-9]+)$>', $this->pageURL, $matches)) {
+            $this->profileEdit($matches);
+
+        } elseif (preg_match('<^/' . $langHandler . 'profile/edit/([0-9]+)\.json$>', $this->pageURL, $matches)) {
+            $this->profileEdit($matches, 'json');
 
         } elseif ($this->pageURL === '/skills.json') {
             $this->skillsListJson();
@@ -291,6 +290,9 @@ class Router
 
         } elseif (preg_match('<^/' . $langHandler . 'reset-password$>', $this->pageURL, $matches)) {
             $this->resetPassword($matches);
+
+        } elseif (preg_match('<^/' . $langHandler . 'my-profile$>', $this->pageURL, $matches)) {
+            $this->userProfile($matches);
 
         } elseif (preg_match('<^/' . $langHandler . 'profile/([a-zA-Z0-9\.]+)/details\.json$>', $this->pageURL, $matches)) {
             $this->userProfile($matches, 'json');
@@ -577,15 +579,6 @@ class Router
         $command->exec();
     }
 
-    private function myProfile($matches, $format = 'html')
-    {
-        $this->setLanguageFromUrl($matches);
-
-        $command = new \DSI\Controller\MyProfileController();
-        $command->data()->format = $format;
-        $command->exec();
-    }
-
     /**
      * @param $matches
      * @param string $format
@@ -638,17 +631,19 @@ class Router
         $command->exec();
     }
 
-    private function personalDetails($matches)
+    private function profileEdit($matches, $format = 'html')
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\PersonalDetailsController();
+        $command = new \DSI\Controller\ProfileEditController();
+        $command->userID = $matches[3];
+        $command->format = $format;
         $command->exec();
     }
 
     private function uploadProfilePicture()
     {
-        $command = new \DSI\Controller\PersonalDetailsController();
+        $command = new \DSI\Controller\ProfileEditController();
         $command->exec();
     }
 

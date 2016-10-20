@@ -52,7 +52,7 @@ class LoginGoogleController
                     $googleLogin->data()->googleUID = $user->getId();
                     $googleLogin->exec();
                     $authUser->saveUserInSession($googleLogin->getUser());
-                    go_to($urlHandler->myProfile());
+                    go_to($urlHandler->profile($googleLogin->getUser()));
                 } else {
                     $googleLogin = new GoogleRegister();
                     $googleLogin->data()->googleUID = $user->getId();
@@ -61,7 +61,7 @@ class LoginGoogleController
                     $googleLogin->data()->email = $user->getEmail();
                     $googleLogin->exec();
                     $authUser->saveUserInSession($googleLogin->getUser());
-                    go_to($urlHandler->editProfile());
+                    go_to($urlHandler->editUserProfile($googleLogin->getUser()));
                 }
             } catch (\Exception $e) {
                 pr($e);
