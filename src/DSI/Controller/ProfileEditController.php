@@ -174,7 +174,7 @@ class ProfileEditController
      */
     private function loggedInUserCanManageUser(User $loggedInUser, User $user)
     {
-        if ($loggedInUser->getId() != $user->getId())
+        if ($loggedInUser->getId() == $user->getId())
             return true;
 
         if ($loggedInUser->isSysAdmin())
