@@ -14,7 +14,7 @@ function getIP()
 function go_to($url = NULL, $perm = 302)
 {
     if ($url == NULL)
-        $url = "http://{$_SERVER['SERVER_NAME']}{$_SERVER['REQUEST_URI']}";
+        $url = (isSecureConnection() ? 'https' : 'http') . "://{$_SERVER['SERVER_NAME']}{$_SERVER['REQUEST_URI']}";
 
     header('Content-Type: text/html; charset=UTF-8');
 
@@ -22,6 +22,13 @@ function go_to($url = NULL, $perm = 302)
         header('HTTP/1.1 301 Moved Permanently');
 
     header("Location:$url", TRUE, $perm);
+}
+
+function isSecureConnection()
+{
+    return
+        (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+        || $_SERVER['SERVER_PORT'] == 443;
 }
 
 function show_input($text)

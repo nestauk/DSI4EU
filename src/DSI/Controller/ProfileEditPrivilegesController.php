@@ -40,7 +40,7 @@ class ProfileEditPrivilegesController
                 go_to();
             }
         }
-
+        
         $securityCode = base64_encode(openssl_random_pseudo_bytes(128));
         $_SESSION[$sessionKey] = $securityCode;
 
