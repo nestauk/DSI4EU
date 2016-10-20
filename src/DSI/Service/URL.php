@@ -300,6 +300,11 @@ class URL
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'profile/edit/' . $user->getId();
     }
 
+    public function editUserPrivileges(User $user)
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'profile/editPrivileges/' . $user->getId();
+    }
+
     public function termsOfUse()
     {
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'terms-of-use';

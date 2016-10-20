@@ -138,6 +138,9 @@ class Router
         } elseif (preg_match('<^/' . $langHandler . 'profile/edit/([0-9]+)$>', $this->pageURL, $matches)) {
             $this->profileEdit($matches);
 
+        } elseif (preg_match('<^/' . $langHandler . 'profile/editPrivileges/([0-9]+)$>', $this->pageURL, $matches)) {
+            $this->profileEditPrivileges($matches);
+
         } elseif (preg_match('<^/' . $langHandler . 'profile/edit/([0-9]+)\.json$>', $this->pageURL, $matches)) {
             $this->profileEdit($matches, 'json');
 
@@ -638,6 +641,15 @@ class Router
         $command = new \DSI\Controller\ProfileEditController();
         $command->userID = $matches[3];
         $command->format = $format;
+        $command->exec();
+    }
+
+    private function profileEditPrivileges($matches, $format = 'html')
+    {
+        $this->setLanguageFromUrl($matches);
+
+        $command = new \DSI\Controller\ProfileEditPrivilegesController();
+        $command->userID = $matches[3];
         $command->exec();
     }
 

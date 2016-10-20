@@ -40,6 +40,8 @@ require __DIR__ . '/header.php';
                         <h1 class="content-h1 side-bar-space-h1">Actions</h1>
                         <a class="sidebar-link" href="<?php echo $urlHandler->editUserProfile($user) ?>">
                             <span class="green">-&nbsp;</span>Edit profile</a>
+                        <a class="sidebar-link" href="<?php echo $urlHandler->editUserPrivileges($user) ?>">
+                            <span class="green">-&nbsp;</span>Edit privileges</a>
                         <?php /* <a class="sidebar-link" href="<?php echo $urlHandler->logout() ?>">
                             <span class="green">- Sign out</span></a> */ ?>
                     <?php } ?>

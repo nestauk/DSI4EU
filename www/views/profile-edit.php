@@ -152,11 +152,13 @@ $leftSideText .= "<p>The information is optional. You will be able to edit and e
                                                                    ng-model="user.firstName"
                                                                    placeholder="First name" type="text">
                                                             <div class="error" ng-bind="errors.firstName"></div>
-                                                            <input class="creator-data-entry end w-input"
+                                                            <input class="creator-data-entry w-input"
                                                                    data-name="Name 3" id="name-3" maxlength="256"
                                                                    ng-model="user.lastName"
                                                                    name="name-3" placeholder="Last name" type="text">
                                                             <div class="error" ng-bind="errors.lastName"></div>
+                                                            <br/>
+
                                                             <label for="name">Your profile picture</label>
                                                             <p>This will appear on your profile page and when you post a
                                                                 comment.</p>
