@@ -58,7 +58,9 @@ class UserLinkRepositoryTest extends PHPUnit_Framework_TestCase
         $userLink->setLink($this->link_1);
         $this->userLinkRepo->add($userLink);
 
-        $this->assertCount(2, $this->userLinkRepo->getByUserID(1));
+        $this->assertCount(2, $this->userLinkRepo->getByUser(
+            $this->user_1
+        ));
     }
 
     /** @test */

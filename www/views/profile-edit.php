@@ -178,16 +178,18 @@ $leftSideText .= "<p>The information is optional. You will be able to edit and e
                                                                       maxlength="140" name="field"
                                                                       ng-model="user.bio"
                                                                       placeholder="Quick bio"></textarea>
-                                                            <div class="log-in-error" ng-show="errors.bio"
-                                                                 ng-bind="errors.bio"></div>
+                                                            <div class="error" ng-bind="errors.bio"></div>
                                                             <br/>
 
                                                             <label for="email-9">Your email address</label>
-                                                            <input class="creator-data-entry end w-input"
+                                                            <input class="creator-data-entry w-input"
                                                                    data-name="Email 9" id="email-9" maxlength="256"
                                                                    name="email-9" placeholder="Add your email address"
                                                                    ng-model="user.email"
                                                                    required="required" type="text">
+                                                            <div class="error" ng-bind="errors.email"></div>
+                                                            <br/>
+
                                                             <label for="email-10">Social media links</label>
                                                             <input class="creator-data-entry w-input"
                                                                    data-name="Email 10" id="email-10" maxlength="256"

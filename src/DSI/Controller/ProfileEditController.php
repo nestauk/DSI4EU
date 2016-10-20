@@ -119,7 +119,7 @@ class ProfileEditController
             }
 
             $links = [];
-            $userLinks = (new UserLinkRepository())->getByUserID($loggedInUser->getId());
+            $userLinks = (new UserLinkRepository())->getByUser($user);
             foreach ($userLinks AS $userLink) {
                 if ($userLink->getLinkService() == UserLink_Service::Facebook)
                     $links['facebook'] = $userLink->getLink();

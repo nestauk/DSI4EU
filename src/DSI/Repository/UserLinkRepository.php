@@ -3,6 +3,7 @@
 namespace DSI\Repository;
 
 use DSI\DuplicateEntry;
+use DSI\Entity\User;
 use DSI\Entity\UserLink;
 use DSI\NotFound;
 use DSI\Service\SQL;
@@ -56,13 +57,13 @@ class UserLinkRepository
     }
 
     /**
-     * @param int $userID
+     * @param User $user
      * @return \DSI\Entity\UserLink[]
      */
-    public function getByUserID(int $userID)
+    public function getByUser(User $user)
     {
         return $this->getUserLinksWhere([
-            "`userID` = '{$userID}'"
+            "`userID` = '{$user->getId()}'"
         ]);
     }
 
