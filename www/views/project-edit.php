@@ -107,10 +107,13 @@ if (!isset($urlHandler))
                                                                    placeholder="http://"
                                                                    ng-model="project.url"
                                                                    type="text"/>
-                                                            <br /><br />
-                                                            <label>Areas of society impacted</label>
-                                                            <p>Which areas of society does you project aim to
-                                                                support?</p>
+                                                            <i>please include http://</i>
+                                                            <br/><br/>
+                                                            <label>Who and what we support</label>
+                                                            <p>
+                                                                Please add tags which describe who and what your project
+                                                                supports
+                                                            </p>
                                                             <div class="customSelect2">
                                                                 <select class="select2 creator-data-entry end w-input"
                                                                         id="impact-tags-a" style="width:100%;border:0"
@@ -126,8 +129,11 @@ if (!isset($urlHandler))
                                                             </div>
                                                             <br/><br/>
 
-                                                            <label>DSI Focus</label>
-                                                            <p>Which of the DSI areas is your project part of?</p>
+                                                            <label>Your focus</label>
+                                                            <p>
+                                                                Please tag the category or categories of DSI to which
+                                                                your project belongs.
+                                                            </p>
                                                             <div class="customSelect2">
                                                                 <select class="select2 creator-data-entry end w-input"
                                                                         id="impact-tags-b" style="width:100%;border:0"
@@ -142,9 +148,11 @@ if (!isset($urlHandler))
                                                             </div>
                                                             <br/><br/>
 
-                                                            <label>Technology type</label>
-                                                            <p>What type of digital technology is involved in your
-                                                                project?</p>
+                                                            <label>Your technology</label>
+                                                            <p>
+                                                                Please add tags which describe the technology your
+                                                                project uses.
+                                                            </p>
                                                             <div class="customSelect2">
                                                                 <select class="select2 creator-data-entry end w-input"
                                                                         id="impact-tags-c" style="width:100%;border:0"
@@ -189,7 +197,8 @@ if (!isset($urlHandler))
                                                     </div>
                                                     <div class="w-col w-col-6 w-col-stack">
                                                         <div class="padding-left-50">
-                                                            <label>Add tags that best describe your project</label>
+                                                            <label>Tags</label>
+                                                            <p>Please add tags which describe your project</p>
                                                             <div class="customSelect2">
                                                                 <select class="select2 creator-data-entry end w-input"
                                                                         id="tagsSelect" style="width:100%;border:0"
