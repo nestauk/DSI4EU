@@ -17,6 +17,9 @@ angular
         };
 
         $scope.startsWithLetter = function (item) {
+            if($scope.startLetter == '')
+                return true;
+
             var letterMatch = new RegExp($scope.startLetter, 'i');
             return !!letterMatch.test(item.name.substring(0, 1));
         };

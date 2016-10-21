@@ -45,6 +45,11 @@ require __DIR__ . '/header.php'
                 </div>
             </div>
             <div class="alphabet-selectors w-clearfix">
+                <a href="#" class="w-inline-block alphabet-link" style="width:50px"
+                   ng-class="{selected: startLetter == ''}"
+                   ng-click="setStartLetter('')">
+                    <div>All</div>
+                </a>
                 <a href="#" class="w-inline-block alphabet-link"
                    ng-class="{selected: startLetter == letter}"
                    ng-repeat="letter in letters"
