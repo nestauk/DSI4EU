@@ -286,6 +286,8 @@ if (!isset($urlHandler))
                                                                    placeholder="When did the project start?"
                                                                    ng-model="project.startDate"
                                                                    type="text">
+                                                            <br />
+
                                                             <label for="email-6">Project end date (leave this blank for
                                                                 ongoing projects)</label>
                                                             <input class="creator-data-entry end w-input"
@@ -359,9 +361,10 @@ if (!isset($urlHandler))
                                         <div class="creator-col creator-col-right w-col w-col-8">
                                             <div class="w-form">
                                                 <label for="name">Short Description: *</label>
-                                                <p>Please provide a short description for your project. This should be
-                                                    up to 200 characters long. Think about how you would describe your
-                                                    project in a single Tweet</p>
+                                                <p>
+                                                    Please provide a short description for your organisation (up to 140
+                                                    characters). How would you describe your organisation in a tweet?
+                                                </p>
                                                 <textarea class="creator-data-entry w-input wide" style="width:100%"
                                                           data-name="Project Bio 3" id="shortDescription"
                                                           name="project-bio-3" ng-model="project.shortDescription"
@@ -380,7 +383,9 @@ if (!isset($urlHandler))
                                                     data-name="Project Bio 4" id="description" maxlength="5000"
                                                     placeholder="Add an in depth project description"
                                                     name="project-bio-4"><?php echo $project->getDescription() ?></textarea>
-                                                <label class="story-label" for="project-bio">Social impact</label>
+                                                <br />
+                                                
+                                                <label class="story-label" for="project-bio">Your social impact</label>
                                                 <p>Please provide a description of the social impact your project is
                                                     aiming to have? Which areas of society will your project support?
                                                     Does the project aim to address a particular issue?</p>
