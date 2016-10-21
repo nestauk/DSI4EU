@@ -29,8 +29,9 @@ require __DIR__ . '/header.php';
             <div class="w-row">
                 <div class="content-left w-col w-col-8">
                     <div class="intro"><?php echo show_input($project->getShortDescription()) ?></div>
+                    <h3 class="descr-h3">What we do</h3>
                     <div><?php echo $project->getDescription() ?></div>
-                    <h3 class="descr-h3">Social Impact</h3>
+                    <h3 class="descr-h3">Our social impact</h3>
                     <div><?php echo $project->getSocialImpact() ?></div>
                     <div class="involved">
                         <h3 class="descr-h3 space">Who's involved</h3>
@@ -95,14 +96,17 @@ require __DIR__ . '/header.php';
                     <?php } ?>
                     <h3 class="cse side-bar-h3">Tagged under</h3>
                     <div class="tag" ng-repeat="tag in project.tags" ng-bind="tag"></div>
-                    <h3 class="cse side-bar-h3">Areas of society impacted</h3>
-                    <p>Areas of society that this project aims to support</p>
+
+                    <h3 class="cse side-bar-h3">Who we help</h3>
+                    <?php /* <p>Areas of society that this project aims to support</p> */ ?>
                     <div class="tag" ng-repeat="tag in project.impactTagsA" ng-bind="tag"></div>
-                    <h3 class="cse side-bar-h3">DSI Focus</h3>
-                    <p>Areas of DSI that this project is a part of</p>
+
+                    <h3 class="cse side-bar-h3">Our focus</h3>
+                    <?php /* <p>Areas of DSI that this project is a part of</p> */ ?>
                     <div class="tag" ng-repeat="tag in project.impactTagsB" ng-bind="tag"></div>
-                    <h3 class="cse side-bar-h3">Technology type</h3>
-                    <p>The types of technology involved with this project</p>
+
+                    <h3 class="cse side-bar-h3">Our technology</h3>
+                    <?php /* <p>The types of technology involved with this project</p> */ ?>
                     <div class="tag" ng-repeat="tag in project.impactTagsC" ng-bind="tag"></div>
                 </div>
             </div>
