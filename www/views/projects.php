@@ -37,6 +37,13 @@ require __DIR__ . '/header.php'
                             <img class="login-arrow"
                                  src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
                         </a>
+                    <?php } else { ?>
+                        <a class="log-in-link long read-more w-clearfix w-inline-block"
+                           href="<?php echo $urlHandler->login()?>?from=project">
+                            <div class="login-li long menu-li readmore-li">Add your project</div>
+                            <img class="login-arrow"
+                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
+                        </a>
                     <?php } ?>
                 </div>
             </div>

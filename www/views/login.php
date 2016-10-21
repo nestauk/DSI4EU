@@ -1,5 +1,5 @@
 <?php
-use \DSI\Service\URL;
+use DSI\Service\URL;
 
 ?>
 <!DOCTYPE html>
@@ -18,7 +18,13 @@ use \DSI\Service\URL;
         <a href="<?php echo $urlHandler->home() ?>">
             <img class="log-in-logo" src="<?php echo SITE_RELATIVE_PATH ?>/images/dark_1.svg">
         </a>
-        <h2>Log in to my account</h2>
+        <?php if (isset($_GET['from']) AND $_GET['from'] == 'organisation') { ?>
+            <h2>You must be logged in to add an organisation</h2>
+        <?php } elseif (isset($_GET['from']) AND $_GET['from'] == 'project') { ?>
+            <h2>You must be logged in to add a project</h2>
+        <?php } else { ?>
+            <h2>Log in to my account</h2>
+        <?php } ?>
 
         <div class="form-wrapper w-form">
             <form class="login-form-nu" id="email-form" name="email-form" ng-submit="onSubmit()">
@@ -66,7 +72,7 @@ use \DSI\Service\URL;
                 <div ng-show="forgotPassword.codeSent">
                     <div ng-hide="forgotPassword.codeVerified">
                         <div class="log-in-error success" ng-hide="forgotPassword.codeVerified">
-                            <?php _ehtml('The security code has been emailed to you.') ?><br />
+                            <?php _ehtml('The security code has been emailed to you.') ?><br/>
                             <?php _ehtml('Please allow 5-10 minutes for the message to arrive into your inbox.') ?>
                         </div>
                         <input type="text" placeholder="<?php _ehtml('Security code') ?>" name="code"
