@@ -386,7 +386,6 @@ $leftSideText .= "<p>The information is optional. You will be able to edit and e
                                                                     <option></option>
                                                                     <?php foreach ($projects AS $project) { ?>
                                                                         <option value="<?php echo $project->getId() ?>"
-                                                                                data-logo="<?php echo $project->getLogoOrDefaultSilver() ?>"
                                                                                 data-url="<?php echo $urlHandler->project($project) ?>"
                                                                                 data-country="<?php echo $project->getCountryName() ?>"
                                                                                 data-type="project"
@@ -425,7 +424,6 @@ $leftSideText .= "<p>The information is optional. You will be able to edit and e
                                                                     <?php foreach ($organisations AS $organisation) { ?>
                                                                         <option
                                                                             value="<?php echo $organisation->getId() ?>"
-                                                                            data-logo="<?php echo $organisation->getLogoOrDefaultSilver() ?>"
                                                                             data-url="<?php echo $urlHandler->organisation($organisation) ?>"
                                                                             data-country="<?php echo $organisation->getCountryName() ?>"
                                                                             data-type="organisation"
@@ -595,30 +593,19 @@ $leftSideText .= "<p>The information is optional. You will be able to edit and e
         $(function () {
             var formatResult = function (object) {
                 var element = $(object.element);
-                var logo = element.data('logo');
                 var elmType = element.data('type');
-                if (elmType == 'project')
-                    logo = '<?php echo \DSI\Entity\Image::PROJECT_LOGO_URL?>' + logo;
-                else if (elmType == 'organisation')
-                    logo = '<?php echo \DSI\Entity\Image::ORGANISATION_LOGO_URL?>' + logo;
 
                 return $(
                     '<span>' +
-                    (logo ? '<img src="' + logo + '" class="select2-logo" /> ' : '') +
                     object.text +
                     '</span>'
                 );
             };
             var formatSelection = function (object) {
                 var element = $(object.element);
-                var logo = element.data('logo');
                 var url = element.data('url');
                 var country = element.data('country');
                 var elmType = element.data('type');
-                if (elmType == 'project')
-                    logo = '<?php echo \DSI\Entity\Image::PROJECT_LOGO_URL?>' + logo;
-                if (elmType == 'organisation')
-                    logo = '<?php echo \DSI\Entity\Image::ORGANISATION_LOGO_URL?>' + logo;
 
                 return $(
                     '<span class="info-card left small w-inline-block" href="">' +

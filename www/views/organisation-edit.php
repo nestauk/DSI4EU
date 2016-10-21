@@ -166,7 +166,6 @@ if (!isset($urlHandler))
                                                                     <option></option>
                                                                     <?php foreach ($projects AS $project) { ?>
                                                                         <option value="<?php echo $project->getId() ?>"
-                                                                                data-logo="<?php echo $project->getLogoOrDefaultSilver() ?>"
                                                                                 data-url="<?php echo $urlHandler->project($project) ?>"
                                                                                 data-country="<?php echo $project->getCountryName() ?>"
                                                                                 data-type="project"
@@ -438,51 +437,30 @@ if (!isset($urlHandler))
         $(function () {
             var formatResult = function (object) {
                 var element = $(object.element);
-                var logo = element.data('logo');
                 var elmType = element.data('type');
-                if (elmType == 'project')
-                    logo = '<?php echo \DSI\Entity\Image::PROJECT_LOGO_URL?>' + logo;
 
                 return $(
                     '<span>' +
-                    (logo ? '<img src="' + logo + '" class="select2-logo" /> ' : '') +
                     object.text +
                     '</span>'
                 );
             };
             var formatSelection = function (object) {
                 var element = $(object.element);
-                var logo = element.data('logo');
                 var url = element.data('url');
                 var country = element.data('country');
                 var elmType = element.data('type');
-                if (elmType == 'project')
-                    logo = '<?php echo \DSI\Entity\Image::PROJECT_LOGO_URL?>' + logo;
 
                 return $(
-                    '<div class="involved-card">' +
-                    '<div class="w-row">' +
-                    (
-                        logo ?
-                            (
-                                '<div class="w-col w-col-3 w-col-small-3 w-col-tiny-3">' +
-                                '<img class="involved-organisation-img" src="' + logo + '">' +
-                                '</div>'
-                            ) :
-                            (
-                                '<div class="w-col w-col-1 w-col-small-1 w-col-tiny-1"></div>'
-                            )
-                    ) +
-                    '<div class="w-clearfix w-col w-col-9 w-col-small-9 w-col-tiny-9">' +
-                    '<div class="card-name">' +
-                    (object.text.substring(0, 26)) +
-                    (object.text.length > 26 ? '...' : '') +
+                    '<span class="info-card left small w-inline-block" href="">' +
+                    '<h3 class="info-card-h3">' +
+                    (object.text.substring(0, 35)) +
+                    (object.text.length > 35 ? '...' : '') +
+                    '</h3>' +
+                    '<div class="involved-tag">' +
+                    '<a href="' + url + '" target="_blank">View</a>' +
                     '</div>' +
-                    '<div class="card-position">' + country + '</div>' +
-                    '</div>' +
-                    '</div>' +
-                    '<a class="view-profile" href="' + url + '" target="_blank">View</a>' +
-                    '</div>'
+                    '</span>'
                 );
             };
 

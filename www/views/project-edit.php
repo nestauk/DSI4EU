@@ -106,7 +106,60 @@ if (!isset($urlHandler))
                                                                    name="email"
                                                                    placeholder="http://"
                                                                    ng-model="project.url"
-                                                                   type="text">
+                                                                   type="text"/>
+                                                            <br /><br />
+                                                            <label>Areas of society impacted</label>
+                                                            <p>Which areas of society does you project aim to
+                                                                support?</p>
+                                                            <div class="customSelect2">
+                                                                <select class="select2 creator-data-entry end w-input"
+                                                                        id="impact-tags-a" style="width:100%;border:0"
+                                                                        multiple data-tags="true"
+                                                                        data-placeholder="Write tags">
+                                                                    <?php foreach ($impactTags AS $tag) { ?>
+                                                                        <option value="<?php echo $tag->getName() ?>"
+                                                                            <?php if (in_array($tag->getName(), $projectImpactTagsA)) echo 'selected' ?>><?php
+                                                                            echo show_input($tag->getName())
+                                                                            ?></option>
+                                                                    <?php } ?>
+                                                                </select>
+                                                            </div>
+                                                            <br/><br/>
+
+                                                            <label>DSI Focus</label>
+                                                            <p>Which of the DSI areas is your project part of?</p>
+                                                            <div class="customSelect2">
+                                                                <select class="select2 creator-data-entry end w-input"
+                                                                        id="impact-tags-b" style="width:100%;border:0"
+                                                                        multiple data-placeholder="Write tags">
+                                                                    <?php foreach ($dsiFocusTags AS $tag) { ?>
+                                                                        <option value="<?php echo $tag->getName() ?>"
+                                                                            <?php if (in_array($tag->getName(), $projectImpactTagsB)) echo 'selected' ?>><?php
+                                                                            echo show_input($tag->getName())
+                                                                            ?></option>
+                                                                    <?php } ?>
+                                                                </select>
+                                                            </div>
+                                                            <br/><br/>
+
+                                                            <label>Technology type</label>
+                                                            <p>What type of digital technology is involved in your
+                                                                project?</p>
+                                                            <div class="customSelect2">
+                                                                <select class="select2 creator-data-entry end w-input"
+                                                                        id="impact-tags-c" style="width:100%;border:0"
+                                                                        multiple data-tags="true"
+                                                                        data-placeholder="Write tags">
+                                                                    <?php foreach ($impactTags AS $tag) { ?>
+                                                                        <option value="<?php echo $tag->getName() ?>"
+                                                                            <?php if (in_array($tag->getName(), $projectImpactTagsC)) echo 'selected' ?>><?php
+                                                                            echo show_input($tag->getName())
+                                                                            ?></option>
+                                                                    <?php } ?>
+                                                                </select>
+                                                            </div>
+                                                            <br/><br/>
+
                                                             <?php /*
                                                             <br/><br/>
                                                             <label for="email-2">Social media links</label>
@@ -151,55 +204,7 @@ if (!isset($urlHandler))
                                                                 </select>
                                                             </div>
                                                             <br/><br/>
-                                                            <label>Areas of society impacted</label>
-                                                            <p>Which areas of society does you project aim to
-                                                                support?</p>
-                                                            <div class="customSelect2">
-                                                                <select class="select2 creator-data-entry end w-input"
-                                                                        id="impact-tags-a" style="width:100%;border:0"
-                                                                        multiple data-tags="true"
-                                                                        data-placeholder="Write tags">
-                                                                    <?php foreach ($impactTags AS $tag) { ?>
-                                                                        <option value="<?php echo $tag->getName() ?>"
-                                                                            <?php if (in_array($tag->getName(), $projectImpactTagsA)) echo 'selected' ?>><?php
-                                                                            echo show_input($tag->getName())
-                                                                            ?></option>
-                                                                    <?php } ?>
-                                                                </select>
-                                                            </div>
-                                                            <br/><br/>
-                                                            <label>DSI Focus</label>
-                                                            <p>Which of the DSI areas is your project part of?</p>
-                                                            <div class="customSelect2">
-                                                                <select class="select2 creator-data-entry end w-input"
-                                                                        id="impact-tags-b" style="width:100%;border:0"
-                                                                        multiple data-placeholder="Write tags">
-                                                                    <?php foreach ($dsiFocusTags AS $tag) { ?>
-                                                                        <option value="<?php echo $tag->getName() ?>"
-                                                                            <?php if (in_array($tag->getName(), $projectImpactTagsB)) echo 'selected' ?>><?php
-                                                                            echo show_input($tag->getName())
-                                                                            ?></option>
-                                                                    <?php } ?>
-                                                                </select>
-                                                            </div>
-                                                            <br/><br/>
-                                                            <label>Technology type</label>
-                                                            <p>What type of digital technology is involved in your
-                                                                project?</p>
-                                                            <div class="customSelect2">
-                                                                <select class="select2 creator-data-entry end w-input"
-                                                                        id="impact-tags-c" style="width:100%;border:0"
-                                                                        multiple data-tags="true"
-                                                                        data-placeholder="Write tags">
-                                                                    <?php foreach ($impactTags AS $tag) { ?>
-                                                                        <option value="<?php echo $tag->getName() ?>"
-                                                                            <?php if (in_array($tag->getName(), $projectImpactTagsC)) echo 'selected' ?>><?php
-                                                                            echo show_input($tag->getName())
-                                                                            ?></option>
-                                                                    <?php } ?>
-                                                                </select>
-                                                            </div>
-                                                            <br/><br/>
+
                                                             <label for="email">Which organisations are working on this
                                                                 project?</label>
                                                             <p>Add the organisations who collaborate on this project
@@ -216,7 +221,6 @@ if (!isset($urlHandler))
                                                                     <?php foreach ($organisations AS $organisation) { ?>
                                                                         <option
                                                                             value="<?php echo $organisation->getId() ?>"
-                                                                            data-logo="<?php echo $organisation->getLogoOrDefaultSilver() ?>"
                                                                             data-url="<?php echo $urlHandler->organisation($organisation) ?>"
                                                                             data-type="organisation"
                                                                             <?php if (in_array($organisation->getId(), $projectOrganisations)) echo ' selected '; ?>
@@ -495,55 +499,30 @@ if (!isset($urlHandler))
         $(function () {
             var formatResult = function (object) {
                 var element = $(object.element);
-                var logo = element.data('logo');
                 var elmType = element.data('type');
-                if (elmType == 'project')
-                    logo = '<?php echo \DSI\Entity\Image::PROJECT_LOGO_URL?>' + logo;
-                else if (elmType == 'organisation')
-                    logo = '<?php echo \DSI\Entity\Image::ORGANISATION_LOGO_URL?>' + logo;
 
                 return $(
                     '<span>' +
-                    (logo ? '<img src="' + logo + '" class="select2-logo" /> ' : '') +
                     object.text +
                     '</span>'
                 );
             };
             var formatSelection = function (object) {
                 var element = $(object.element);
-                var logo = element.data('logo');
                 var url = element.data('url');
                 var country = element.data('country');
                 var elmType = element.data('type');
-                if (elmType == 'project')
-                    logo = '<?php echo \DSI\Entity\Image::PROJECT_LOGO_URL?>' + logo;
-                else if (elmType == 'organisation')
-                    logo = '<?php echo \DSI\Entity\Image::ORGANISATION_LOGO_URL?>' + logo;
 
                 return $(
-                    '<div class="involved-card">' +
-                    '<div class="w-row">' +
-                    (
-                        logo ?
-                            (
-                                '<div class="w-col w-col-3 w-col-small-3 w-col-tiny-3">' +
-                                '<img class="involved-organisation-img" src="' + logo + '">' +
-                                '</div>'
-                            ) :
-                            (
-                                '<div class="w-col w-col-1 w-col-small-1 w-col-tiny-1"></div>'
-                            )
-                    ) +
-                    '<div class="w-clearfix w-col w-col-9 w-col-small-9 w-col-tiny-9">' +
-                    '<div class="card-name">' +
-                    (object.text.substring(0, 26)) +
-                    (object.text.length > 26 ? '...' : '') +
+                    '<span class="info-card left small w-inline-block" href="">' +
+                    '<h3 class="info-card-h3">' +
+                    (object.text.substring(0, 35)) +
+                    (object.text.length > 35 ? '...' : '') +
+                    '</h3>' +
+                    '<div class="involved-tag">' +
+                    '<a href="' + url + '" target="_blank">View</a>' +
                     '</div>' +
-                    '<div class="card-position">' + country + '</div>' +
-                    '</div>' +
-                    '</div>' +
-                    '<a class="view-profile" href="' + url + '" target="_blank">View</a>' +
-                    '</div>'
+                    '</span>'
                 );
             };
 
