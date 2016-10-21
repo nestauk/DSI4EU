@@ -84,7 +84,7 @@ require __DIR__ . '/header.php'
                             <p class="funding-descr" ng-bind="event.shortDescription"></p>
                             <p class="funding-descr">
                                 <span ng-show="event.price">
-                                    {{event.price}}
+                                    Cost: {{event.price}}
                                 </span>
                                 <span ng-hide="event.price">
                                     This is a <strong>free</strong> event
