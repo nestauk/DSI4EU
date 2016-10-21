@@ -98,11 +98,13 @@ require __DIR__ . '/header.php'
                                             ng-model="beforeMonth">
                                     </select>
 
+                                    <?php /*
                                     <label class="dropdown-label" for="field-7">Source</label>
                                     <select class="w-select"
                                             ng-options="item as item.title for item in data.sources track by item.id"
                                             ng-model="fundingSource">
                                     </select>
+                                    */ ?>
                                 </form>
                             </div>
                         </div>
@@ -114,7 +116,6 @@ require __DIR__ . '/header.php'
                                  | filter: fundingHasType(fundingType)
                                  | filter: fundingHasTarget(fundingTarget)
                                  | filter: {countryID: inCountry.id || ''}
-                                 | filter: {fundingSourceID: fundingSource.id || ''}
                                  | filter: earlierThan('' + beforeYear.id + beforeMonth.id)
                                    track by funding.id">
                             <h2 class="funding-card-h2" ng-bind="funding.title"></h2>
