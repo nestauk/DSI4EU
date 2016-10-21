@@ -94,7 +94,7 @@ if (!isset($urlHandler))
                                                             <input class="creator-data-entry end w-input"
                                                                    data-name="Email"
                                                                    id="email" maxlength="256" name="email"
-                                                                   placeholder="Add your organisation&#39;s URL"
+                                                                   placeholder="http://"
                                                                    ng-model="organisation.url"
                                                                    type="text">
                                                             <label for="email-2">Social media links</label>
@@ -119,7 +119,8 @@ if (!isset($urlHandler))
                                                                    id="email-5" maxlength="256" name="email-5"
                                                                    ng-model="organisation.links.github"
                                                                    placeholder="Github" type="text">
-                                                            <br/>
+                                                            <i>* please include http://</i>
+                                                            <br/><br/>
 
                                                             <label>Type of Organisation</label>
                                                             <select class="w-select" id="field" name="field"
@@ -135,8 +136,8 @@ if (!isset($urlHandler))
                                                     <div class="w-col w-col-6 w-col-stack">
                                                         <div class="padding-left-50">
 
-                                                            <label>Tag your organisation</label>
-                                                            <p>Add tags that best describe your organisation:</p>
+                                                            <label>Tags</label>
+                                                            <p>Please add tags which describe your organisation.</p>
                                                             <div class="customSelect2">
                                                                 <select class="select2 creator-data-entry end w-input"
                                                                         id="tagsSelect" style="width:100%;border:0"
@@ -225,6 +226,7 @@ if (!isset($urlHandler))
                                                                    ng-model="organisation.startDate"
                                                                    type="text">
                                                             <h2 class="edit-h2">Size of Organisation</h2>
+                                                            <label>Choose the size of your organisation</label>
                                                             <select class="w-select" id="field" name="field"
                                                                     ng-model="organisation.organisationSizeId">
                                                                 <?php foreach ($organisationSizes AS $orgSize) { ?>
@@ -232,8 +234,6 @@ if (!isset($urlHandler))
                                                                         value="<?php echo $orgSize->getId() ?>"><?php echo $orgSize->getName() ?></option>
                                                                 <?php } ?>
                                                             </select>
-                                                            <label for="field">Choose the size of your
-                                                                organisation</label>
                                                             <div class="required">*Required</div>
                                                         </div>
                                                     </div>
@@ -297,10 +297,10 @@ if (!isset($urlHandler))
                                         <div class="creator-col creator-col-right w-col w-col-8">
                                             <div class="w-form">
                                                 <label for="name">Short Description</label>
-                                                <p>Please provide a short description for your organisation. This should
-                                                    be
-                                                    up to 200 characters long. Think about how you would describe your
-                                                    organisation in a single Tweet?</p>
+                                                <p>
+                                                    Please provide a short description for your organisation (up to 140
+                                                    characters). How would you describe your organisation in a tweet?
+                                                </p>
                                                 <textarea class="creator-data-entry end w-input wide"
                                                           data-name="Project Bio 3" id="project-bio-3" maxlength="5000"
                                                           name="project-bio-3" ng-model="organisation.shortDescription"

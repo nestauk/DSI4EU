@@ -384,7 +384,7 @@ if (!isset($urlHandler))
                                                     placeholder="Add an in depth project description"
                                                     name="project-bio-4"><?php echo $project->getDescription() ?></textarea>
                                                 <br />
-                                                
+
                                                 <label class="story-label" for="project-bio">Your social impact</label>
                                                 <p>Please provide a description of the social impact your project is
                                                     aiming to have? Which areas of society will your project support?
