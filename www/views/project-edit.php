@@ -33,7 +33,10 @@ if (!isset($urlHandler))
          data-projecturl="<?php echo $urlHandler->project($project) ?>">
         <div class="creator page-header">
             <div class="container-wide header">
-                <h1 class="light page-h1">Edit project</h1>
+                <h1 class="light page-h1">
+                    Edit project -
+                    <a href="<?php echo $urlHandler->project($project) ?>" ng-bind="project.name"></a>
+                </h1>
             </div>
         </div>
         <div class="creator section-white">
