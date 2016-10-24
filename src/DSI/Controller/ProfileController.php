@@ -52,14 +52,17 @@ class ProfileController
 
         $user = $this->getUserFromURL($this->data()->userURL);
 
-        if (isset($_POST['getSecureCode'])) {
-            $this->getSecureCode();
-            return;
-        }
+        $canManageUsers = $this->canManageUsers($loggedInUser);
+        if ($canManageUsers) {
+            if (isset($_POST['getSecureCode'])) {
+                $this->getSecureCode();
+                return;
+            }
 
-        if (isset($_POST['setUserDisabled'])) {
-            $this->setUserStatus($loggedInUser, $user, $urlHandler);
-            return;
+            if (isset($_POST['setUserDisabled'])) {
+                $this->setUserStatus($loggedInUser, $user, $urlHandler);
+                return;
+            }
         }
 
         $userID = $user->getId();
@@ -251,6 +254,15 @@ class ProfileController
                 return;
             }
         }
+    }
+
+    /**
+     * @param $loggedInUser
+     * @return bool
+     */
+    private function canManageUsers(User $loggedInUser)
+    {
+        return (bool)$loggedInUser->isCommunityAdmin();
     }
 }
 

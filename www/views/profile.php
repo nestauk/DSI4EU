@@ -8,6 +8,7 @@ require __DIR__ . '/header.php';
 /** @var $organisations \DSI\Entity\Organisation[] */
 /** @var $userLinks string[] */
 /** @var $urlHandler \DSI\Service\URL */
+/** @var $canManageUsers bool */
 ?>
     <script type="text/javascript">
         profileUserID = '<?php echo $userID?>';
@@ -36,7 +37,7 @@ require __DIR__ . '/header.php';
                 <div class="sidebar w-col w-col-4">
                     <?php if ($isOwner) { ?>
                         <?php require __DIR__ . '/partialViews/profile-menu.php' ?>
-                    <?php } elseif ($loggedInUser->isSysAdmin()) { ?>
+                    <?php } elseif ($canManageUsers) { ?>
                         <h1 class="content-h1 side-bar-space-h1">Actions</h1>
                         <a class="sidebar-link" href="<?php echo $urlHandler->editUserProfile($user) ?>">
                             <span class="green">-&nbsp;</span>Edit profile</a>
