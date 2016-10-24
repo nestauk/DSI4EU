@@ -13,7 +13,6 @@ angular
             $http.post(SITE_RELATIVE_PATH + '/my-profile.json', data)
                 .then(function (response) {
                     $timeout(function () {
-                        console.log(response.data);
                         $scope.loading = false;
                         $scope.saved = false;
                         if (response.data.response == 'ok') {

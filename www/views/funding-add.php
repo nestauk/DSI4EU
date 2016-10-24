@@ -126,7 +126,6 @@ require __DIR__ . '/header.php';
         </div>
     </div>
 
-    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
     <script type="text/javascript"
             src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/FundingAddController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 

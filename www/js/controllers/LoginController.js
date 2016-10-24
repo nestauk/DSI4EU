@@ -114,12 +114,8 @@ angular
                 register: true
             };
 
-            console.log(data);
-            console.log(SITE_RELATIVE_PATH + '/register.json');
-
             $http.post(SITE_RELATIVE_PATH + '/register.json', data).then(
                 function (response) {
-                    console.log(response.data);
                     $scope.loading = false;
                     if (response.data.response == 'error') {
                         $scope.errors = response.data.errors;

@@ -86,8 +86,6 @@ angular
                 addMember: newMember.id
             }).then(function (response) {
                 $scope.addOrganisationMember.loading = false;
-                console.log(response.data);
-
                 if (response.data.result == 'ok') {
                     $scope.addOrganisationMember.success = newMember.firstName + ' ' + newMember.lastName + ' has been successfully invited';
                 } else if (response.data.result == 'error') {
@@ -99,14 +97,10 @@ angular
             });
         };
         var addNewMemberFromEmailAddress = function (emailAddress) {
-            console.log('add email: ' + emailAddress);
-
             $http.post(SITE_RELATIVE_PATH + '/org/' + $scope.organisationid + '.json', {
                 addEmail: emailAddress
             }).then(function (response) {
                 $scope.addOrganisationMember.loading = false;
-                console.log(response.data);
-
                 if (response.data.result == 'ok') {
                     $scope.addOrganisationMember.success = response.data.successMessage;
                     /* if (response.data.user)
@@ -142,7 +136,6 @@ angular
                 }).then(function (result) {
                     $scope.requestToJoin.loading = false;
                     $scope.requestToJoin.requestSent = true;
-                    console.log(result.data);
                 });
             }, 500);
         };

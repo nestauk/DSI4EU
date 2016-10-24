@@ -13,6 +13,7 @@ use DSI\Repository\OrganisationRepositoryInAPC;
 use DSI\Repository\ProjectRepositoryInAPC;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
+use DSI\Service\JsModules;
 use DSI\Service\URL;
 use DSI\UseCase\CaseStudy\CaseStudyEdit;
 
@@ -116,6 +117,7 @@ class CaseStudyEditController
 
         } else {
             $angularModules['fileUpload'] = true;
+            JsModules::setTinyMCE(true);
             require __DIR__ . '/../../../www/views/case-study-edit.php';
         }
     }

@@ -11,6 +11,7 @@ use DSI\Repository\FundingTypeRepository;
 use DSI\Repository\UserRepository;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
+use DSI\Service\JsModules;
 use DSI\Service\URL;
 use DSI\UseCase\Funding\FundingEdit;
 
@@ -80,6 +81,7 @@ class FundingEditController
         $fundingTargets = (new FundingTargetRepository())->getAll();
         $fundingSources = (new FundingSourceRepository())->getAll();
         $countries = (new CountryRepository())->getAll();
+        JsModules::setTinyMCE(true);
         require(__DIR__ . '/../../../www/views/funding-edit.php');
     }
 

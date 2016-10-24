@@ -71,7 +71,6 @@ angular
                 }).then(function (result) {
                     $scope.requestToJoin.loading = false;
                     $scope.requestToJoin.requestSent = true;
-                    console.log(result.data);
                 });
             }, 500);
         };
@@ -187,7 +186,6 @@ angular
                     addMember: newMember.id
                 }).then(function (response) {
                     $scope.addProjectMember.loading = false;
-                    console.log(response.data);
 
                     if (response.data.result == 'ok') {
                         $scope.addProjectMember.success = newMember.firstName + ' ' + newMember.lastName + ' has been successfully invited';
@@ -201,14 +199,10 @@ angular
             };
 
             var addNewMemberFromEmailAddress = function (emailAddress) {
-                console.log('add email: ' + emailAddress);
-
                 $http.post(SITE_RELATIVE_PATH + '/project/' + $scope.projectid + '.json', {
                     addEmail: emailAddress
                 }).then(function (response) {
                     $scope.addProjectMember.loading = false;
-                    console.log(response.data);
-
                     if (response.data.result == 'ok') {
                         $scope.addProjectMember.success = response.data.successMessage;
                         /* if (response.data.user)
@@ -223,7 +217,6 @@ angular
             };
 
             $scope.updateAdminStatus = function (member) {
-                console.log(member);
                 $http.post(SITE_RELATIVE_PATH + '/project/' + $scope.projectid + '.json', {
                     setAdmin: true,
                     member: member.id,
@@ -265,14 +258,11 @@ angular
                 $scope.post.newComment = '';
                 $http.post(SITE_RELATIVE_PATH + '/projectPost/' + $scope.post.id + '.json', data)
                     .then(function (response) {
-                        $timeout(function () {
-                            if (!$scope.post.comments)
-                                $scope.post.comments = [];
+                        if (!$scope.post.comments)
+                            $scope.post.comments = [];
 
-                            $scope.post.comments.unshift(response.data.comment);
-                            $scope.post.commentsCount++;
-                            console.log(response.data);
-                        }, 500);
+                        $scope.post.comments.unshift(response.data.comment);
+                        $scope.post.commentsCount++;
                     });
             };
 

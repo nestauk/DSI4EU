@@ -8,7 +8,6 @@ angular
 
         $http.get(eventsJsonUrl)
             .then(function (result) {
-                console.log(result.data);
                 $scope.data = result.data;
                 $scope.beforeMonth = $scope.data.months[0];
                 $scope.beforeYear = $scope.data.years[0];

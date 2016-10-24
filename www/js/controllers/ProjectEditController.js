@@ -16,7 +16,6 @@
             $http.get(SITE_RELATIVE_PATH + '/project/edit/' + projectID + '.json')
                 .then(function (result) {
                     $scope.project = result.data || {};
-                    console.log($scope.project);
                     $scope.logo.image = $scope.project.logo;
                     $scope.headerImage.image = $scope.project.headerImage;
                 });
@@ -99,12 +98,9 @@
                 data['saveDetails'] = true;
                 data['step'] = options.postField;
 
-                console.log(data);
-
                 $http.post(SITE_RELATIVE_PATH + '/project/edit/' + projectID + '.json', data)
                     .then(function (response) {
                         $scope.loading = false;
-                        console.log(response.data);
 
                         if (response.data.code == 'ok')
                             options.onSuccess();

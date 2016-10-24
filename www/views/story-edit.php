@@ -151,7 +151,6 @@ require __DIR__ . '/header.php';
 
     <input name="image" id="my_image" type="file" style="display:none"/>
 
-    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
     <script>
         tinymce.init({
             selector: '#newStory',

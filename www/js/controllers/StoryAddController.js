@@ -14,7 +14,6 @@ angular
                     });
 
                     file.upload.then(function (response) {
-                        console.log(response.data);
                         file.result = response.data;
                         if (response.data.code == 'ok')
                             $scope.featuredImage = response.data.imgPath;
@@ -22,7 +21,6 @@ angular
                             $scope.featuredImageUpload.errorMsg = response.data.errors;
 
                         $scope.featuredImageUpload = {};
-                        console.log($scope.featuredImage);
                     }, function (response) {
                         if (response.status > 0)
                             $scope.featuredImageUpload.errorMsg = response.status + ': ' + response.data;
@@ -47,7 +45,6 @@ angular
                     });
 
                     file.upload.then(function (response) {
-                        console.log(response.data);
                         file.result = response.data;
                         if (response.data.code == 'ok')
                             $scope.mainImage = response.data.imgPath;

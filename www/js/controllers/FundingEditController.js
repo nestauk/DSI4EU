@@ -22,8 +22,6 @@ angular
             }).toArray();
             data.save = true;
 
-            console.log(data);
-
             $http.post(editUrl, data)
                 .then(function (response) {
                     $scope.loading = false;

@@ -18,11 +18,6 @@ if (!isset($urlHandler))
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
     <script src="//code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
 
-    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
-
-    <script type="text/javascript"
-            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/OrganisationEditController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
-
     <div ng-controller="OrganisationEditController"
          data-organisationid="<?php echo $organisation->getId() ?>"
          data-organisationurl="<?php echo $urlHandler->organisation($organisation) ?>">

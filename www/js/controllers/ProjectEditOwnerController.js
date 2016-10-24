@@ -11,7 +11,6 @@ angular
             })
                 .then(function (response) {
                     $scope.loading = false;
-                    console.log(response.data);
 
                     if (response.data.code == 'ok') {
                         swal('Success!', 'The changes have been successfully saved.', 'success');

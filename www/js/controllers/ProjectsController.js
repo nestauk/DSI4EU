@@ -8,7 +8,6 @@ angular
 
         $http.get(projectsJsonUrl)
             .then(function (result) {
-                console.log(result.data);
                 $scope.projects = result.data;
             });
 

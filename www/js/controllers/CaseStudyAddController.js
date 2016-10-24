@@ -19,8 +19,6 @@ angular
                 data.mainText = tinyMCE.get('mainText').getContent();
                 data.add = true;
 
-                console.log(data);
-
                 $http.post(SITE_RELATIVE_PATH + '/case-study/add', data)
                     .then(function (response) {
                         $scope.loading = false;

@@ -16,7 +16,6 @@ angular
                     });
 
                     file.upload.then(function (response) {
-                        console.log(response.data);
                         file.result = response.data;
                         if (response.data.code == 'ok')
                             $scope.story.featuredImage = response.data.imgPath;
@@ -48,7 +47,6 @@ angular
                     });
 
                     file.upload.then(function (response) {
-                        console.log(response.data);
                         file.result = response.data;
                         if (response.data.code == 'ok')
                             $scope.story.mainImage = response.data.imgPath;

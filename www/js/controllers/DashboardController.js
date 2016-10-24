@@ -6,7 +6,6 @@ angular
         $scope.notifications = {};
         $http.get(dashboardJsonUrl)
             .then(function (response) {
-                console.log(response.data);
                 $scope.notifications = response.data;
             });
 

@@ -17,8 +17,6 @@ angular
             $http.get(jsonUrl)
                 .then(function (response) {
                     $scope.caseStudies = response.data;
-                    console.log($scope.caseStudies);
-
                     $scope.currentPage = 1; //current page
                     $scope.maxSize = 10; //pagination max size
                     $scope.entryLimit = 12; //max rows for data table

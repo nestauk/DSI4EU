@@ -14,7 +14,6 @@ angular
                     jobTitle: $scope.userEdit.jobTitle,
                     location: $scope.userEdit.location
                 }).then(function (response) {
-                    console.log(response.data);
                     $scope.userEdit.loading = false;
                     if (response.data.code == 'ok') {
                         $scope.user.firstName = $scope.userEdit.firstName;
@@ -113,7 +112,6 @@ angular
                     return;
 
                 var index = $scope.skills.indexOf(skill);
-                // console.log(index);
                 if (index == -1) {
                     $scope.skills.push(skill);
                     $scope.skills.sort();
@@ -214,8 +212,6 @@ angular
                 if (index == -1) {
                     $scope.links.push($scope.newLink);
                     $scope.links.sort(Helpers.sortUrls);
-
-                    console.log(SITE_RELATIVE_PATH + '/profile/' + profileUserID + '/details.json');
 
                     $http.post(SITE_RELATIVE_PATH + '/profile/' + profileUserID + '/details.json', {
                         addLink: $scope.newLink

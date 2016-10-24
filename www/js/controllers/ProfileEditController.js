@@ -73,12 +73,9 @@ angular
             data['saveDetails'] = true;
             data['step'] = options.postField;
 
-            console.log(data);
-
             $http.post(window.location.href + '.json', data)
                 .then(function (response) {
                     $scope.loading = false;
-                    console.log(response.data);
 
                     if (response.data.response == 'ok')
                         options.onSuccess();
@@ -94,12 +91,9 @@ angular
             var data = $scope.user;
             data.saveDetails = true;
 
-            console.log(data);
-
             $http.post(SITE_RELATIVE_PATH + '/my-profile.json', data)
                 .then(function (response) {
                     $scope.loading = false;
-                    console.log(response.data);
 
                     if (response.data.response == 'ok')
                         swal(response.data.message.title, response.data.message.text, "success");
@@ -125,7 +119,6 @@ angular
 
                 file.upload.then(function (response) {
                     $scope.profilePic.loading = false;
-                    console.log(response.data);
                     file.result = response.data;
                     if (response.data.code == 'ok')
                         $scope.user.profilePic = response.data.imgPath;

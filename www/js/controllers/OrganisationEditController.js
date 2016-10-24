@@ -17,7 +17,6 @@ angular
                 $scope.organisation = result.data || {};
                 $scope.logo.image = $scope.organisation.logo;
                 $scope.headerImage.image = $scope.organisation.headerImage;
-                console.log($scope.organisation);
             });
 
 
@@ -95,13 +94,9 @@ angular
             data['saveDetails'] = true;
             data['step'] = options.postField;
 
-            console.log(data);
-
             $http.post(SITE_RELATIVE_PATH + '/org/edit/' + organisationId + '.json', data)
                 .then(function (response) {
                     $scope.loading = false;
-                    console.log(response.data);
-
                     if (response.data.code == 'ok')
                         options.onSuccess();
                     else if (response.data.code == 'error')

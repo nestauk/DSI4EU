@@ -11,7 +11,6 @@ angular
 
             $http.post(window.location.href, data).then(
                 function (response) {
-                    console.log(response.data);
                     $scope.loading = false;
                     if (response.data.code == 'error') {
                         $scope.errors = response.data.errors;
