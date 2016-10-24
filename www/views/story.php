@@ -13,6 +13,7 @@ require __DIR__ . '/header.php';
         <div class="container-wide post-hero">
             <h1 class="post-hero-title"><?php echo show_input($story->getTitle()) ?></h1>
             <div class="post-single-date"><?php echo $story->getDatePublished('jS F Y') ?></div>
+            <?php /*
             <div class="breadcrumb-container">
                 <div class="bread-crumbs w-clearfix">
                     <a class="breadcrumb-root w-inline-block" href="<?php echo $urlHandler->blogPosts() ?>">
@@ -32,6 +33,7 @@ require __DIR__ . '/header.php';
                     </a>
                 </div>
             </div>
+            */ ?>
         </div>
     </div>
 
