@@ -31,7 +31,7 @@ class SendEmailToCommunityAdmins
         foreach($admins AS $admin){
             $mail = clone $this->data()->mail;
             $mail->addAddress($admin->getEmail());
-            $this->data()->mail->send();
+            $mail->send();
         }
     }
 
