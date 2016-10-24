@@ -43,14 +43,11 @@ class OrganisationController
             return;
         }
 
-        if (isset($_POST['deleteOrganisation'])) {
-            $this->deleteOrganisation($loggedInUser, $organisation, $urlHandler);
-            return;
-        }
-
-        if (isset($_POST['reportOrganisation'])) {
-            $this->reportOrganisation($loggedInUser, $organisation, $urlHandler);
-            return;
+        if ($loggedInUser) {
+            if (isset($_POST['reportOrganisation'])) {
+                $this->reportOrganisation($loggedInUser, $organisation, $urlHandler);
+                return;
+            }
         }
 
         /*
@@ -197,6 +194,13 @@ class OrganisationController
             $userCanEditOrganisation = ($isOwner OR ($loggedInUser AND $loggedInUser->isCommunityAdmin()));
         }
 
+        if ($isOwner OR ($loggedInUser AND $loggedInUser->isSysAdmin())) {
+            if (isset($_POST['deleteOrganisation'])) {
+                $this->deleteOrganisation($loggedInUser, $organisation, $urlHandler);
+                return;
+            }
+        }
+
         $links = [];
         $organisationLinks = (new OrganisationLinkRepository())->getByOrganisationID($organisation->getId());
         foreach ($organisationLinks AS $organisationLink) {
@@ -333,9 +337,13 @@ class OrganisationController
                 Reason: <?php echo show_input($_POST['reason']) ?>
                 <br/>
                 <?php $message = ob_get_clean();
+
                 $mail = new Mailer();
                 $mail->Subject = 'Organisation Report on DSI4EU';
-                $mail->msgHTML($message);
+                $mail->wrapMessageInTemplate([
+                    'header' => 'Organisation Report on DSI4EU',
+                    'body' => $message
+                ]);
 
                 $exec = new SendEmailToCommunityAdmins();
                 $exec->data()->executor = $loggedInUser;

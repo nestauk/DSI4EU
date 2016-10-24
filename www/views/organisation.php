@@ -98,7 +98,7 @@ if (!isset($urlHandler))
                         <div class="tag"><?php echo show_input($tag) ?></div>
                     <?php } ?>
 
-                    <?php if (!$isOwner) { ?>
+                    <?php if ($loggedInUser AND !$isOwner) { ?>
                         <a class="report-project" href="#" ng-click="report()">Report organisation</a>
                     <?php } ?>
                 </div>

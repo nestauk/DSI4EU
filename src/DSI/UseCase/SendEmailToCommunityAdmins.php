@@ -25,15 +25,14 @@ class SendEmailToCommunityAdmins
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->data()->mail->addAddress('report@digitalsocial.eu');
 
         $userRepo = new UserRepository();
         $admins = $userRepo->getAllCommunityAdmins();
         foreach($admins AS $admin){
-            $this->data()->mail->addBCC($admin->getEmail());
+            $mail = clone $this->data()->mail;
+            $mail->addAddress($admin->getEmail());
+            $this->data()->mail->send();
         }
-
-        $this->data()->mail->send();
     }
 
     /**
