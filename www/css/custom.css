@@ -612,3 +612,19 @@ iframe {
 .full-menu-h2 {
     width: 230px;
 }
+
+/* mce wysiwyg */
+.mce-panel {
+    border: 0px solid #f3f3f3;
+    background-color: #f3f3f3;
+    
+}
+
+body#tinymce.mce-content-body {
+    font-size: 16px;
+    line-height: 26px;
+}
+
+.mce-btn {
+    background-color: #f3f3f3;
+}
