@@ -1,50 +1,6 @@
 angular
     .module(angularAppName)
     .controller('UserController', function ($scope, $http, $timeout, Upload) {
-        $scope.editPanel = 'basicDetails';
-
-        $scope.saveBasicDetails = function () {
-            $scope.userEdit.loading = true;
-            $scope.userEdit.errors = {};
-            $timeout(function () {
-                $http.post(SITE_RELATIVE_PATH + '/profile/' + profileUserID + '/details.json', {
-                    updateBasicDetails: true,
-                    firstName: $scope.userEdit.firstName,
-                    lastName: $scope.userEdit.lastName,
-                    jobTitle: $scope.userEdit.jobTitle,
-                    location: $scope.userEdit.location
-                }).then(function (response) {
-                    $scope.userEdit.loading = false;
-                    if (response.data.code == 'ok') {
-                        $scope.user.firstName = $scope.userEdit.firstName;
-                        $scope.user.lastName = $scope.userEdit.lastName;
-                        $scope.user.jobTitle = $scope.userEdit.jobTitle;
-                        $scope.user.location = $scope.userEdit.location;
-                    } else {
-                        $scope.userEdit.errors = response.data.errors;
-                        console.log(response.data.errors);
-                    }
-                });
-            }, 500);
-        };
-        $scope.saveBio = function () {
-            $scope.userEdit.loading = true;
-            $scope.userEdit.errors = {};
-            $timeout(function () {
-                $http.post(SITE_RELATIVE_PATH + '/profile/' + profileUserID + '/details.json', {
-                    updateBio: true,
-                    bio: $scope.userEdit.bio
-                }).then(function (response) {
-                    $scope.userEdit.loading = false;
-                    if (response.data.code == 'ok') {
-                        $scope.user.bio = $scope.userEdit.bio;
-                    } else {
-                        $scope.userEdit.errors = response.data.errors;
-                        console.log(response.data.errors);
-                    }
-                });
-            }, 500);
-        };
         $scope.getUrlIcon = function (url) {
             switch (Helpers.getUrlType(url)) {
                 case 'facebook':
@@ -59,182 +15,7 @@ angular
                     return 'www.png';
             }
         };
-        $scope.uploadFiles = function (file, errFiles) {
-            $scope.f = file;
-            $scope.errFile = errFiles && errFiles[0];
-            if (file) {
-                file.upload = Upload.upload({
-                    url: SITE_RELATIVE_PATH + '/uploadProfilePicture',
-                    data: {file: file}
-                });
 
-                file.upload.then(function (response) {
-                    file.result = response.data;
-                    if (response.data.result == 'ok')
-                        $scope.user.profilePic = response.data.imgPath;
-                    else if (response.data.result == 'error') {
-                        $scope.errorMsg = response.data.errors;
-                    }
-                }, function (response) {
-                    if (response.status > 0)
-                        $scope.errorMsg = response.status + ': ' + response.data;
-                }, function (evt) {
-                    file.progress = Math.min(100, parseInt(100.0 *
-                        evt.loaded / evt.total));
-                });
-            }
-        };
-
-        // Skills
-        (function () {
-            $scope.skills = [];
-
-            var addSkillSelect = $('#Add-skill');
-            addSkillSelect.on("change", function (evt) {
-                $scope.addSkill(
-                    Helpers.getFirstNonEmptyValue(
-                        addSkillSelect.val()
-                    )
-                );
-                addSkillSelect.val(null).trigger("change.select2");
-            });
-
-            // List Skills
-            $http.get(SITE_RELATIVE_PATH + '/skills.json')
-                .then(function (result) {
-                    addSkillSelect.select2({
-                        data: result.data
-                    });
-                });
-
-            $scope.addSkill = function (skill) {
-                if (!skill || skill == '')
-                    return;
-
-                var index = $scope.skills.indexOf(skill);
-                if (index == -1) {
-                    $scope.skills.push(skill);
-                    $scope.skills.sort();
-
-                    $http.post(SITE_RELATIVE_PATH + '/profile/' + profileUserID + '/details.json', {
-                        addSkill: skill
-                    }).then(function (result) {
-                        if (result.data != '') {
-                            alert('unexpected error');
-                            console.log(result.data);
-                        }
-                    });
-                }
-            };
-            $scope.removeSkill = function (skill) {
-                var index = $scope.skills.indexOf(skill);
-                if (index > -1) {
-                    $scope.skills.splice(index, 1);
-
-                    $http.post(SITE_RELATIVE_PATH + '/profile/' + profileUserID + '/details.json', {
-                        removeSkill: skill
-                    }).then(function (result) {
-                        if (result.data != '') {
-                            alert('unexpected error');
-                            console.log(result.data);
-                        }
-                    });
-                }
-            };
-        }());
-        // Languages
-        (function () {
-            $scope.languages = [];
-            var addLanguageSelect = $('#Add-language');
-            addLanguageSelect.on("change", function (evt) {
-                $scope.addLanguage(
-                    Helpers.getFirstNonEmptyValue(
-                        addLanguageSelect.val()
-                    )
-                );
-                addLanguageSelect.val(null).trigger("change.select2");
-            });
-
-            // List Languages
-            $http.get(SITE_RELATIVE_PATH + '/languages.json')
-                .then(function (result) {
-                    addLanguageSelect.select2({
-                        data: result.data
-                    });
-                });
-
-            $scope.addLanguage = function (language) {
-                if (language == '')
-                    return;
-
-                var index = $scope.languages.indexOf(language);
-                if (index == -1) {
-                    $scope.languages.push(language);
-                    $scope.languages.sort();
-
-                    $http.post(SITE_RELATIVE_PATH + '/profile/' + profileUserID + '/details.json', {
-                        addLanguage: language
-                    }).then(function (result) {
-                        if (result.data) {
-                            alert('unknown error');
-                            console.log(result.data);
-                        }
-                    });
-                }
-            };
-            $scope.removeLanguage = function (language) {
-                var index = $scope.languages.indexOf(language);
-                if (index > -1) {
-                    $scope.languages.splice(index, 1);
-
-                    $http.post(SITE_RELATIVE_PATH + '/profile/' + profileUserID + '/details.json', {
-                        removeLanguage: language
-                    }).then(function (result) {
-                        if (result.data) {
-                            alert('unknown error');
-                            console.log(result.data);
-                        }
-                    });
-                }
-            };
-        }());
-        // Links
-        (function () {
-            $scope.links = [];
-
-            var addLink = $('#Add-link');
-            $scope.newLink = '';
-            $scope.addLink = function () {
-                if ($scope.newLink == '')
-                    return;
-
-                var index = $scope.links.indexOf($scope.newLink);
-                if (index == -1) {
-                    $scope.links.push($scope.newLink);
-                    $scope.links.sort(Helpers.sortUrls);
-
-                    $http.post(SITE_RELATIVE_PATH + '/profile/' + profileUserID + '/details.json', {
-                        addLink: $scope.newLink
-                    }).then(function (result) {
-                        console.log(result.data);
-                    });
-                }
-
-                $scope.newLink = '';
-            };
-            $scope.removeLink = function (link) {
-                var index = $scope.links.indexOf(link);
-                if (index > -1) {
-                    $scope.links.splice(index, 1);
-
-                    $http.post(SITE_RELATIVE_PATH + '/profile/' + profileUserID + '/details.json', {
-                        removeLink: link
-                    }).then(function (result) {
-                        console.log(result.data);
-                    });
-                }
-            };
-        }());
         // joinProject
         (function () {
             $scope.joinProject = {};
@@ -340,5 +121,59 @@ angular
                 else
                     return xLevel > yLevel;
             }
-        }
+        };
+
+        $scope.setDisabled = function (disable) {
+            swal({
+                title: disable ? "Disable the user" : "Re-enable the user",
+                text: disable ?
+                    "Are you sure you want to disable this user?" :
+                    "Are you sure you want to re-enable this user?",
+                type: "warning",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                showLoaderOnConfirm: true
+            }, function () {
+                $http
+                    .post(window.location.href, {
+                        getSecureCode: true
+                    })
+                    .then(function (response) {
+                        if (response.data.code == 'ok') {
+                            receivedCode(response.data.secureCode)
+                        } else {
+                            alert('unexpected error');
+                            console.log(response.data)
+                        }
+                    });
+
+                function receivedCode(secureCode) {
+                    $http
+                        .post(window.location.href, {
+                            setUserDisabled: disable,
+                            secureCode: secureCode
+                        })
+                        .then(function (response) {
+                            if (response.data.code == 'ok') {
+                                successfulDeletion(response.data.url)
+                            } else {
+                                alert('unexpected error');
+                                console.log(response.data)
+                            }
+                        })
+                }
+
+                function successfulDeletion(url) {
+                    swal({
+                        title: disable ? "Deleted" : "Re-enabled",
+                        text: disable ?
+                            "This user has been disabled." :
+                            "This user has been re-enabled",
+                        type: "success"
+                    }, function () {
+                        window.location.href = url
+                    });
+                }
+            });
+        };
     });

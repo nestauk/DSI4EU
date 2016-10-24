@@ -27,7 +27,7 @@ class EnableUser
         $this->assertExecutorCanMakeChange();
         
         $user = $userRepo->getById($this->data()->userID);
-        $user->setIsDisabled(false);
+        $user->setDisabled(false);
         $userRepo->save($user);
     }
 

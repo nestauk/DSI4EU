@@ -42,8 +42,13 @@ require __DIR__ . '/header.php';
                             <span class="green">-&nbsp;</span>Edit profile</a>
                         <a class="sidebar-link" href="<?php echo $urlHandler->editUserPrivileges($user) ?>">
                             <span class="green">-&nbsp;</span>Edit privileges</a>
-                        <?php /* <a class="sidebar-link" href="<?php echo $urlHandler->logout() ?>">
-                            <span class="green">- Sign out</span></a> */ ?>
+                        <?php if ($user->isDisabled()) { ?>
+                            <a class="sidebar-link remove" href="#" ng-click="setDisabled(false)">
+                                <span class="green">- </span>Enable user</a>
+                        <?php } else { ?>
+                            <a class="sidebar-link remove" href="#" ng-click="setDisabled(true)">
+                                <span class="green">- </span>Disable user</a>
+                        <?php } ?>
                     <?php } ?>
                 </div>
             </div>

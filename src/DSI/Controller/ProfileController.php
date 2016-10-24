@@ -4,11 +4,10 @@ namespace DSI\Controller;
 
 use DSI\Entity\OrganisationMember;
 use DSI\Entity\ProjectMember;
+use DSI\Entity\User;
 use DSI\Repository\OrganisationMemberRepository;
-use DSI\Repository\OrganisationRepository;
 use DSI\Repository\OrganisationRepositoryInAPC;
 use DSI\Repository\ProjectMemberRepository;
-use DSI\Repository\ProjectRepository;
 use DSI\Repository\ProjectRepositoryInAPC;
 use DSI\Repository\UserLanguageRepository;
 use DSI\Repository\UserLinkRepository;
@@ -25,8 +24,11 @@ use DSI\UseCase\AddSkillToUser;
 use DSI\UseCase\RemoveLanguageFromUser;
 use DSI\UseCase\RemoveLinkFromUser;
 use DSI\UseCase\RemoveSkillFromUser;
+use DSI\UseCase\SecureCode;
 use DSI\UseCase\UpdateUserBasicDetails;
 use DSI\UseCase\UpdateUserBio;
+use DSI\UseCase\Users\DisableUser;
+use DSI\UseCase\Users\EnableUser;
 
 class ProfileController
 {
@@ -45,10 +47,20 @@ class ProfileController
         $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
         $loggedInUser = $authUser->getUser();
 
-        if(!$this->data()->userURL)
+        if (!$this->data()->userURL)
             go_to($urlHandler->profile($loggedInUser));
 
         $user = $this->getUserFromURL($this->data()->userURL);
+
+        if (isset($_POST['getSecureCode'])) {
+            $this->getSecureCode();
+            return;
+        }
+
+        if (isset($_POST['setUserDisabled'])) {
+            $this->setUserStatus($loggedInUser, $user, $urlHandler);
+            return;
+        }
 
         $userID = $user->getId();
         $isOwner = ($user->getId() == $loggedInUser->getId());
@@ -194,6 +206,50 @@ class ProfileController
         } else {
             $user = $userRepo->getByProfileURL($url);
             return $user;
+        }
+    }
+
+    private function getSecureCode()
+    {
+        $genSecureCode = new SecureCode();
+        $genSecureCode->exec();
+        echo json_encode([
+            'code' => 'ok',
+            'secureCode' => $genSecureCode->getCode(),
+        ]);
+    }
+
+    /**
+     * @param User $loggedInUser
+     * @param User $user
+     * @param URL $urlHandler
+     */
+    private function setUserStatus(User $loggedInUser, User $user, URL $urlHandler)
+    {
+        $genSecureCode = new SecureCode();
+        if ($genSecureCode->checkCode($_POST['secureCode'])) {
+            try {
+                if ($_POST['setUserDisabled'] == true) {
+                    $userSetStatus = new DisableUser();
+                } else {
+                    $userSetStatus = new EnableUser();
+                }
+                $userSetStatus->data()->executor = $loggedInUser;
+                $userSetStatus->data()->userID = $user->getId();
+                $userSetStatus->exec();
+
+                echo json_encode([
+                    'code' => 'ok',
+                    'url' => $urlHandler->profile($user)
+                ]);
+                return;
+            } catch (ErrorHandler $e) {
+                echo json_encode([
+                    'code' => 'error',
+                    'errors' => $e->getErrors()
+                ]);
+                return;
+            }
         }
     }
 }

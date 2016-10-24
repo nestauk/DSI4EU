@@ -282,7 +282,7 @@ class UserRepositoryTest extends PHPUnit_Framework_TestCase
         $user->setTwitterUID(self::TWITTER_UID);
         $user->setProfileURL(self::PROFILE_URL);
         $user->setProfilePic(self::PROFILE_PIC);
-        $user->setIsDisabled(self::IS_DISABLED);
+        $user->setDisabled(self::IS_DISABLED);
         $user->setRole(self::ROLE);
         $this->userRepo->insert($user);
 
@@ -330,7 +330,7 @@ class UserRepositoryTest extends PHPUnit_Framework_TestCase
         $user->setTwitterUID(self::TWITTER_UID);
         $user->setProfileURL(self::PROFILE_URL);
         $user->setProfilePic(self::PROFILE_PIC);
-        $user->setIsDisabled(self::IS_DISABLED);
+        $user->setDisabled(self::IS_DISABLED);
         $user->setRole(self::ROLE);
         $this->userRepo->save($user);
 

@@ -29,7 +29,7 @@ class User
     private $showEmail;
 
     /** @var bool */
-    private $isDisabled;
+    private $disabled;
 
     /** @var string */
     private $role;
@@ -343,15 +343,15 @@ class User
      */
     public function isDisabled()
     {
-        return (bool)$this->isDisabled;
+        return (bool)$this->disabled;
     }
 
     /**
-     * @param boolean $isDisabled
+     * @param boolean $disabled
      */
-    public function setIsDisabled($isDisabled)
+    public function setDisabled($disabled)
     {
-        $this->isDisabled = (bool)$isDisabled;
+        $this->disabled = (bool)$disabled;
     }
 
     /**

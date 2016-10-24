@@ -222,7 +222,7 @@ class UserRepository
         if ($user['profilePic'])
             $userObj->setProfilePic($user['profilePic']);
 
-        $userObj->setIsDisabled($user['isDisabled']);
+        $userObj->setDisabled($user['isDisabled']);
         $userObj->setRole($user['role']);
 
         self::$objects[$userObj->getId()] = $userObj;
