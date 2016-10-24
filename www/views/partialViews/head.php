@@ -2,67 +2,67 @@
 /** @var $angularModules string[] */
 /** @var $pageTitle string[] */
 /** @var $loggedInUser \DSI\Entity\User */
-use \DSI\Service\Sysctl;
+use DSI\Service\Sysctl;
 
 ?>
-<meta charset="utf-8">
-<title><?php echo isset($pageTitle) ? show_input($pageTitle) : 'Digitalsocial.eu' ?></title>
-<meta name="google-site-verification" content="al4Vt4vNA7eWC2OyIEa0C8vjDBFl5UZWZODih8wy3r4"/>
-<meta property="og:title" content="<?php echo isset($pageTitle) ? show_input($pageTitle) : 'Digitalsocial.eu' ?>">
-<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta charset="utf-8">
+    <title><?php echo isset($pageTitle) ? show_input($pageTitle) : 'Digitalsocial.eu' ?></title>
+    <meta name="google-site-verification" content="al4Vt4vNA7eWC2OyIEa0C8vjDBFl5UZWZODih8wy3r4"/>
+    <meta property="og:title" content="<?php echo isset($pageTitle) ? show_input($pageTitle) : 'Digitalsocial.eu' ?>">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
 
 <?php /** Select2 */ ?>
-<link href="<?php echo SITE_RELATIVE_PATH ?>/lib/select2/select2.min.css" rel="stylesheet"/>
+    <link href="<?php echo SITE_RELATIVE_PATH ?>/lib/select2/select2.min.css" rel="stylesheet"/>
 
-<link rel="stylesheet" type="text/css"
-      href="<?php echo SITE_RELATIVE_PATH ?>/lib/ionicons/css/ionicons.min.css?<?php Sysctl::echoVersion() ?>">
-<link rel="stylesheet" type="text/css"
-      href="<?php echo SITE_RELATIVE_PATH ?>/css/normalize.css?<?php Sysctl::echoVersion() ?>">
-<link rel="stylesheet" type="text/css"
-      href="<?php echo SITE_RELATIVE_PATH ?>/css/components.css?<?php Sysctl::echoVersion() ?>">
-<link rel="stylesheet" type="text/css"
-      href="<?php echo SITE_RELATIVE_PATH ?>/css/dsi4eu.css?<?php Sysctl::echoVersion() ?>">
+    <link rel="stylesheet" type="text/css"
+          href="<?php echo SITE_RELATIVE_PATH ?>/lib/ionicons/css/ionicons.min.css?<?php Sysctl::echoVersion() ?>">
+    <link rel="stylesheet" type="text/css"
+          href="<?php echo SITE_RELATIVE_PATH ?>/css/normalize.css?<?php Sysctl::echoVersion() ?>">
+    <link rel="stylesheet" type="text/css"
+          href="<?php echo SITE_RELATIVE_PATH ?>/css/components.css?<?php Sysctl::echoVersion() ?>">
+    <link rel="stylesheet" type="text/css"
+          href="<?php echo SITE_RELATIVE_PATH ?>/css/dsi4eu.css?<?php Sysctl::echoVersion() ?>">
 
-<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
-<script>
-    WebFont.load({
-        google: {
-            families: ["Montserrat:400,700", "Open Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic"]
-        }
-    });
-</script>
-<script type="text/javascript"
-        src="<?php echo SITE_RELATIVE_PATH ?>/js/modernizr.js?<?php Sysctl::echoVersion() ?>"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
+    <script>
+        WebFont.load({
+            google: {
+                families: ["Montserrat:400,700", "Open Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic"]
+            }
+        });
+    </script>
+    <script type="text/javascript"
+            src="<?php echo SITE_RELATIVE_PATH ?>/js/modernizr.js?<?php Sysctl::echoVersion() ?>"></script>
 
-<link rel="shortcut icon" type="image/x-icon" href="<?php echo SITE_RELATIVE_PATH ?>/favicon.ico">
-<link rel="apple-touch-icon" href="<?php echo SITE_RELATIVE_PATH ?>/favicon.ico">
-<link href="<?php echo SITE_RELATIVE_PATH ?>/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
-<link href="<?php echo SITE_RELATIVE_PATH ?>/images/favicon.ico" rel="apple-touch-icon">
+    <link rel="shortcut icon" type="image/x-icon" href="<?php echo SITE_RELATIVE_PATH ?>/favicon.ico">
+    <link rel="apple-touch-icon" href="<?php echo SITE_RELATIVE_PATH ?>/favicon.ico">
+    <link href="<?php echo SITE_RELATIVE_PATH ?>/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <link href="<?php echo SITE_RELATIVE_PATH ?>/images/favicon.ico" rel="apple-touch-icon">
 
-<script src="<?php echo SITE_RELATIVE_PATH ?>/js/lib/isotope/isotope.pkgd.min.js"></script>
+    <script src="<?php echo SITE_RELATIVE_PATH ?>/js/lib/isotope/isotope.pkgd.min.js"></script>
 
 <?php /** jQuery */ ?>
-<script type="text/javascript" src="<?php echo SITE_RELATIVE_PATH ?>/js/lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="<?php echo SITE_RELATIVE_PATH ?>/js/lib/jquery/jquery.min.js"></script>
 
 <?php /** SweetAlert */ ?>
-<script
-    src="<?php echo SITE_RELATIVE_PATH ?>/lib/sweetalert-master/dist/sweetalert.min.js?<?php Sysctl::echoVersion() ?>"></script>
-<link rel="stylesheet" type="text/css"
-      href="<?php echo SITE_RELATIVE_PATH ?>/lib/sweetalert-master/dist/sweetalert.css?<?php Sysctl::echoVersion() ?>">
-<link rel="stylesheet" type="text/css"
-      href="<?php echo SITE_RELATIVE_PATH ?>/css/sweet.css?<?php Sysctl::echoVersion() ?>">
+    <script
+        src="<?php echo SITE_RELATIVE_PATH ?>/lib/sweetalert-master/dist/sweetalert.min.js?<?php Sysctl::echoVersion() ?>"></script>
+    <link rel="stylesheet" type="text/css"
+          href="<?php echo SITE_RELATIVE_PATH ?>/lib/sweetalert-master/dist/sweetalert.css?<?php Sysctl::echoVersion() ?>">
+    <link rel="stylesheet" type="text/css"
+          href="<?php echo SITE_RELATIVE_PATH ?>/css/sweet.css?<?php Sysctl::echoVersion() ?>">
 
 <?php /** Select2 */ ?>
-<script src="<?php echo SITE_RELATIVE_PATH ?>/lib/select2/select2.full.js"></script>
+    <script src="<?php echo SITE_RELATIVE_PATH ?>/lib/select2/select2.full.js"></script>
 
-<script>
-    var SITE_RELATIVE_PATH = '<?php echo SITE_RELATIVE_PATH?>';
-    var angularDependencies = [];
-    var angularAppName = 'DSIApp';
-</script>
+    <script>
+        var SITE_RELATIVE_PATH = '<?php echo SITE_RELATIVE_PATH?>';
+        var angularDependencies = [];
+        var angularAppName = 'DSIApp';
+    </script>
 
-<script type="text/javascript"
-        src="<?php echo SITE_RELATIVE_PATH ?>/js/angular.min.js?<?php Sysctl::echoVersion() ?>"></script>
+    <script type="text/javascript"
+            src="<?php echo SITE_RELATIVE_PATH ?>/js/angular.min.js?<?php Sysctl::echoVersion() ?>"></script>
 
 <?php if (isset($angularModules['fileUpload'])) { ?>
     <?php /** ngFileUpload */ ?>
@@ -88,11 +88,15 @@ use \DSI\Service\Sysctl;
     <script>angularDependencies.push('ui.bootstrap');</script>
 <?php } ?>
 
-<script type="text/javascript"
-        src="<?php echo SITE_RELATIVE_PATH ?>/js/DSIApp.js?<?php Sysctl::echoVersion() ?>"></script>
+<?php if (\DSI\Service\JsModules::hasTinyMCE()) { ?>
+    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+<?php } ?>
 
-<link rel="stylesheet" type="text/css"
-      href="<?php echo SITE_RELATIVE_PATH ?>/css/custom.css?<?php Sysctl::echoVersion() ?>">
+    <script type="text/javascript"
+            src="<?php echo SITE_RELATIVE_PATH ?>/js/DSIApp.js?<?php Sysctl::echoVersion() ?>"></script>
+
+    <link rel="stylesheet" type="text/css"
+          href="<?php echo SITE_RELATIVE_PATH ?>/css/custom.css?<?php Sysctl::echoVersion() ?>">
 
 <?php if (isset($loggedInUser) AND $loggedInUser) { ?>
     <style>

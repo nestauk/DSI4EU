@@ -283,7 +283,7 @@ div.error {
     margin-top: 5px;
     padding: 3px 10px;
     color: #fff;
-    margin-bottom:0;
+    margin-bottom: 0;
 }
 
 .select2-container--open .select2-dropdown--below {
@@ -560,18 +560,20 @@ div.error {
 }
 
 @media (max-width: 767px) {
-.modal-content {
-    width: 100% !important;
-    height: 100% !important;
-}
-.story-grid-card {
-    position: relative;
-    height: 500px;
-}
-iframe {
-    width:100% !important;
-    height:auto !important;
-}
+    .modal-content {
+        width: 100% !important;
+        height: 100% !important;
+    }
+
+    .story-grid-card {
+        position: relative;
+        height: 500px;
+    }
+
+    iframe {
+        width: 100% !important;
+        height: auto !important;
+    }
 }
 
 .sweet-alert button.cancel {
@@ -582,7 +584,7 @@ iframe {
     width: 140px;
     height: 42px;
     background-color: #ff0000 !important;
-    
+
 }
 
 .sweet-alert button {
@@ -605,9 +607,8 @@ iframe {
 }
 
 .sweet-alert {
-    padding:50px;
+    padding: 50px;
 }
-
 
 .full-menu-h2 {
     width: 230px;
@@ -615,16 +616,15 @@ iframe {
 
 /* mce wysiwyg */
 .mce-panel {
-    border: 0px solid #f3f3f3;
-    background-color: #f3f3f3;
-    
+    border: 0px solid #f3f3f3 !important;
+    background-color: #f3f3f3 !important;
 }
 
 body#tinymce.mce-content-body {
-    font-size: 16px;
-    line-height: 26px;
+    font-size: 16px !important;
+    line-height: 26px !important;
 }
 
 .mce-btn {
-    background-color: #f3f3f3;
+    background-color: #f3f3f3 !important;
 }
