@@ -430,7 +430,7 @@ if (!isset($urlHandler))
 </div>
 
 <script type="text/javascript"
-        src="<?php echo SITE_RELATIVE_PATH ?>/js/dsi4eu.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
+        src="<?php echo SITE_RELATIVE_PATH ?>/js/dsi-languages.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 <!--[if lte IE 9]>
 <script src="<?php echo SITE_RELATIVE_PATH ?>/js/lib/placeholders/placeholders.min.js"></script>
 <![endif]-->

@@ -97,6 +97,10 @@ if (!isset($urlHandler))
                     <?php foreach ($tags AS $tag) { ?>
                         <div class="tag"><?php echo show_input($tag) ?></div>
                     <?php } ?>
+
+                    <?php if (!$isOwner) { ?>
+                        <a class="report-project" href="#" ng-click="report()">Report organisation</a>
+                    <?php } ?>
                 </div>
             </div>
         </div>

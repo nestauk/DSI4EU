@@ -85,6 +85,10 @@ class OrganisationRepository
         OrganisationRepositoryInAPC::resetCache();
     }
 
+    /**
+     * @param int $id
+     * @return Organisation
+     */
     public function getById(int $id): Organisation
     {
         return $this->getObjectWhere([
@@ -152,6 +156,11 @@ class OrganisationRepository
         OrganisationRepositoryInAPC::resetCache();
     }
 
+    /**
+     * @param $where
+     * @return Organisation
+     * @throws DSI\NotFound
+     */
     private function getObjectWhere($where)
     {
         $objects = $this->getObjectsWhere($where);

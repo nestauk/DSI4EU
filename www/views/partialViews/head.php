@@ -21,7 +21,7 @@ use DSI\Service\Sysctl;
     <link rel="stylesheet" type="text/css"
           href="<?php echo SITE_RELATIVE_PATH ?>/css/components.css?<?php Sysctl::echoVersion() ?>">
     <link rel="stylesheet" type="text/css"
-          href="<?php echo SITE_RELATIVE_PATH ?>/css/dsi4eu.css?<?php Sysctl::echoVersion() ?>">
+          href="<?php echo SITE_RELATIVE_PATH ?>/css/dsi-languages.css?<?php Sysctl::echoVersion() ?>">
 
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
     <script>

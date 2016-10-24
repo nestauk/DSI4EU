@@ -13,9 +13,11 @@ use DSI\Repository\OrganisationRepository;
 use DSI\Repository\OrganisationTagRepository;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
+use DSI\Service\Mailer;
 use DSI\Service\URL;
 use DSI\UseCase\Organisations\RemoveOrganisation;
 use DSI\UseCase\SecureCode;
+use DSI\UseCase\SendEmailToCommunityAdmins;
 
 class OrganisationController
 {
@@ -37,37 +39,17 @@ class OrganisationController
         $organisation = $organisationRepo->getById($this->data()->organisationID);
 
         if (isset($_POST['getSecureCode'])) {
-            $genSecureCode = new SecureCode();
-            $genSecureCode->exec();
-            echo json_encode([
-                'code' => 'ok',
-                'secureCode' => $genSecureCode->getCode(),
-            ]);
+            $this->setSecureCode();
             return;
         }
 
         if (isset($_POST['deleteOrganisation'])) {
-            $genSecureCode = new SecureCode();
-            if ($genSecureCode->checkCode($_POST['secureCode'])) {
-                try {
-                    $removeOrganisation = new RemoveOrganisation();
-                    $removeOrganisation->data()->executor = $loggedInUser;
-                    $removeOrganisation->data()->organisation = $organisation;
-                    $removeOrganisation->exec();
+            $this->deleteOrganisation($loggedInUser, $organisation, $urlHandler);
+            return;
+        }
 
-                    echo json_encode([
-                        'code' => 'ok',
-                        'url' => $urlHandler->organisations()
-                    ]);
-                    return;
-                } catch (ErrorHandler $e) {
-                    echo json_encode([
-                        'code' => 'error',
-                        'errors' => $e->getErrors()
-                    ]);
-                    return;
-                }
-            }
+        if (isset($_POST['reportOrganisation'])) {
+            $this->reportOrganisation($loggedInUser, $organisation, $urlHandler);
             return;
         }
 
@@ -309,6 +291,80 @@ class OrganisationController
             return false;
 
         return true;
+    }
+
+    private function deleteOrganisation(User $loggedInUser, User $organisation, URL $urlHandler)
+    {
+        $genSecureCode = new SecureCode();
+        if ($genSecureCode->checkCode($_POST['secureCode'])) {
+            try {
+                $removeOrganisation = new RemoveOrganisation();
+                $removeOrganisation->data()->executor = $loggedInUser;
+                $removeOrganisation->data()->organisation = $organisation;
+                $removeOrganisation->exec();
+
+                echo json_encode([
+                    'code' => 'ok',
+                    'url' => $urlHandler->organisations()
+                ]);
+                return;
+            } catch (ErrorHandler $e) {
+                echo json_encode([
+                    'code' => 'error',
+                    'errors' => $e->getErrors()
+                ]);
+                return;
+            }
+        }
+        return;
+    }
+
+    private function reportOrganisation(User $loggedInUser, Organisation $organisation, URL $urlHandler)
+    {
+        $genSecureCode = new SecureCode();
+        if ($genSecureCode->checkCode($_POST['secureCode'])) {
+            try {
+                ob_start(); ?>
+                User: <?php echo show_input($loggedInUser->getFullName()) ?>
+                (<a href="http://<?php echo SITE_DOMAIN . $urlHandler->profile($loggedInUser) ?>">View profile</a>)<br/>
+                Reported Organisation: <?php echo show_input($organisation->getName()) ?>
+                (<a href="http://<?php echo SITE_DOMAIN . $urlHandler->organisation($organisation) ?>">View page</a>)
+                <br/>
+                Reason: <?php echo show_input($_POST['reason']) ?>
+                <br/>
+                <?php $message = ob_get_clean();
+                $mail = new Mailer();
+                $mail->Subject = 'Organisation Report on DSI4EU';
+                $mail->msgHTML($message);
+
+                $exec = new SendEmailToCommunityAdmins();
+                $exec->data()->executor = $loggedInUser;
+                $exec->data()->mail = $mail;
+                $exec->exec();
+
+                echo json_encode([
+                    'code' => 'ok',
+                ]);
+                return;
+            } catch (ErrorHandler $e) {
+                echo json_encode([
+                    'code' => 'error',
+                    'errors' => $e->getErrors()
+                ]);
+                return;
+            }
+        }
+        return;
+    }
+
+    private function setSecureCode()
+    {
+        $genSecureCode = new SecureCode();
+        $genSecureCode->exec();
+        echo json_encode([
+            'code' => 'ok',
+            'secureCode' => $genSecureCode->getCode(),
+        ]);
     }
 }
 

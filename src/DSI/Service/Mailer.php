@@ -29,7 +29,7 @@ class Mailer extends \PHPMailer
 
         if(count($this->getToAddresses()) == 0){
             error_log('Empty Recipients');
-            return true;
+            return false;
         }
 
         $returnCode = parent::send();

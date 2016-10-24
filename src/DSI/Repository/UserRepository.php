@@ -236,6 +236,14 @@ class UserRepository
         return $this->getObjectsWhere(["1"]);
     }
 
+    /** @return User[] */
+    public function getAllCommunityAdmins()
+    {
+        return $this->getObjectsWhere([
+            "(`role` = 'community-admin' OR `role` = 'sys-admin')"
+        ]);
+    }
+
     public function clearAll()
     {
         $query = new SQL("TRUNCATE TABLE `users`");

@@ -13,6 +13,7 @@ angular
 
             addNewMember(newMemberID);
         };
+
         $scope.confirmDelete = function (url) {
             swal({
                 title: "Delete the organisation",
@@ -58,6 +59,55 @@ angular
                         type: "success"
                     }, function () {
                         window.location.href = url
+                    });
+                }
+            });
+        };
+        $scope.report = function (url) {
+            swal({
+                title: "Report the organisation",
+                text: "Are you sure you want to report this organisation?",
+                type: "input",
+                inputPlaceholder: "Reason for report",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                showLoaderOnConfirm: true
+            }, function (inputValue) {
+                $http
+                    .post(window.location.href, {
+                        getSecureCode: true
+                    })
+                    .then(function (response) {
+                        if (response.data.code == 'ok') {
+                            receivedCode(response.data.secureCode, inputValue)
+                        } else {
+                            alert('unexpected error');
+                            console.log(response.data)
+                        }
+                    });
+
+                function receivedCode(secureCode, inputValue) {
+                    $http
+                        .post(window.location.href, {
+                            reportOrganisation: true,
+                            reason: inputValue,
+                            secureCode: secureCode
+                        })
+                        .then(function (response) {
+                            if (response.data.code == 'ok') {
+                                successfulReport(response.data.url)
+                            } else {
+                                alert('unexpected error');
+                                console.log(response.data)
+                            }
+                        })
+                }
+
+                function successfulReport(url) {
+                    swal({
+                        title: "Reported",
+                        text: "Thank you for reporting this organisation.",
+                        type: "success"
                     });
                 }
             });
