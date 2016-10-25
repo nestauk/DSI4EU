@@ -327,6 +327,9 @@ class Router
         } elseif (preg_match('<^/' . $langHandler . 'message/community-admins$>', $this->pageURL, $matches)) {
             $this->messageCommunityAdmins($matches);
 
+        } elseif (preg_match('<^/' . $langHandler . 'export/projects$>', $this->pageURL, $matches)) {
+            $this->exportProjects($matches);
+
         } elseif (preg_match('<^/.*\.(gif|jpe?g|png|svg|js|css|map|ico)$>', $this->pageURL)) {
             pr('not found');
             return $this->staticContent();
@@ -693,6 +696,14 @@ class Router
     }
 
     private function messageCommunityAdmins($matches)
+    {
+        $this->setLanguageFromUrl($matches);
+
+        $command = new \DSI\Controller\MessageCommunityAdminsController();
+        $command->exec();
+    }
+
+    private function exportProjects($matches)
     {
         $this->setLanguageFromUrl($matches);
 

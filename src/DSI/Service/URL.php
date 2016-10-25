@@ -111,7 +111,7 @@ class URL
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'event/' . $event->getId();
     }
 
-    public function eventAdd()
+    public function addEvent()
     {
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'events/add';
     }
@@ -267,7 +267,7 @@ class URL
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'case-study/' . $caseStudy->getId() . '/' . self::linkify($caseStudy->getTitle());
     }
 
-    public function caseStudyAdd()
+    public function addCaseStudy()
     {
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'case-study/add';
     }

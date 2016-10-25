@@ -1,9 +1,10 @@
 <?php
 /** @var $latestStories \DSI\Entity\Story[] */
+/** @var $loggedInUser \DSI\Entity\User */
 /** @var $projectsMember \DSI\Entity\ProjectMember[] */
 /** @var $organisationsMember \DSI\Entity\OrganisationMember[] */
 
-use \DSI\Service\URL;
+use DSI\Service\URL;
 
 if (!isset($urlHandler))
     $urlHandler = new URL();
@@ -122,6 +123,30 @@ require __DIR__ . '/header.php';
                                 </li>
                             </ul>
                         </div>
+                        <?php if ($loggedInUser->isCommunityAdmin()) { ?>
+                            <div class="dashboard-widget">
+                                <h3 class="card-h3"><?php _ehtml('Admin') ?></h3>
+                                <div class="card-p notification-stat">
+                                    <?php /*
+                                    <a class="sidebar-link" href="<?php echo $urlHandler->home() ?>">
+                                        <span class="green">-&nbsp;</span>Manage tags
+                                    </a>
+                                    */ ?>
+                                    <a class="sidebar-link" href="<?php echo $urlHandler->addFunding() ?>">
+                                        <span class="green">-&nbsp;</span>Add funding
+                                    </a>
+                                    <a class="sidebar-link" href="<?php echo $urlHandler->addCaseStudy() ?>">
+                                        <span class="green">-&nbsp;</span>Add case study
+                                    </a>
+                                    <a class="sidebar-link" href="<?php echo $urlHandler->addEvent() ?>">
+                                        <span class="green">-&nbsp;</span>Add event
+                                    </a>
+                                    <a class="sidebar-link" href="<?php echo $urlHandler->messageCommunityAdmins() ?>">
+                                        <span class="green">-&nbsp;</span>Message all community admins
+                                    </a>
+                                </div>
+                            </div>
+                        <?php } ?>
                     </div>
                     <div class="w-col w-col-4 w-col-stack">
                         <div class="dashboard-widget">

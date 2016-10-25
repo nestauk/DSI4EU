@@ -16,7 +16,7 @@ require __DIR__ . '/header.php';
                 </div>
                 <div class="sidebar w-col w-col-4">
                     <h1 class="content-h1">Actions</h1>
-                    <a class="sidebar-link" href="<?php echo $urlHandler->caseStudyAdd() ?>"><span
+                    <a class="sidebar-link" href="<?php echo $urlHandler->addCaseStudy() ?>"><span
                             class="green">-&nbsp;</span>Add new case study</a>
                     <a class="sidebar-link" href="<?php echo $urlHandler->caseStudy($caseStudy) ?>"><span class="green">-&nbsp;</span>Cancel</a>
                 </div>
