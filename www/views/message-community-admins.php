@@ -16,13 +16,6 @@ require __DIR__ . '/header.php';
                     <?php if ($loggedInUser->getJobTitle() AND $loggedInUser->getCompany()) echo ' at ' ?>
                     <?php echo show_input($loggedInUser->getCompany()) ?>
                 </div>
-                <p class="intro"><?php echo nl2br(show_input($loggedInUser->getBio())) ?></p>
-                <h3>Location</h3>
-                <p>
-                    <?php echo show_input($loggedInUser->getCityName()) ?>
-                    <?php if ($loggedInUser->getCityName() != '' AND $loggedInUser->getCountryName() != '') echo ', '; ?>
-                    <?php echo show_input($loggedInUser->getCountryName()) ?>
-                </p>
             </div>
         </div>
     </div>
