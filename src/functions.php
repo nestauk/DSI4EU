@@ -22,6 +22,7 @@ function go_to($url = NULL, $perm = 302)
         header('HTTP/1.1 301 Moved Permanently');
 
     header("Location:$url", TRUE, $perm);
+    die();
 }
 
 function isSecureConnection()

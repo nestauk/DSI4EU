@@ -320,6 +320,11 @@ class URL
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'sitemap.xml';
     }
 
+    public function messageCommunityAdmins()
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'message/community-admins';
+    }
+
     public function uploadImage()
     {
         return SITE_RELATIVE_PATH . '/uploadImage.json';

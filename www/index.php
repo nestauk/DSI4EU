@@ -324,6 +324,9 @@ class Router
         } elseif (preg_match('<^/' . $langHandler . 'project/([0-9]+)(\/.*)?$>', $this->pageURL, $matches)) {
             $this->project($matches);
 
+        } elseif (preg_match('<^/' . $langHandler . 'message/community-admins$>', $this->pageURL, $matches)) {
+            $this->messageCommunityAdmins($matches);
+
         } elseif (preg_match('<^/.*\.(gif|jpe?g|png|svg|js|css|map|ico)$>', $this->pageURL)) {
             pr('not found');
             return $this->staticContent();
@@ -686,6 +689,14 @@ class Router
 
         $command = new \DSI\Controller\CaseStudyController();
         $command->caseStudyID = $matches[3];
+        $command->exec();
+    }
+
+    private function messageCommunityAdmins($matches)
+    {
+        $this->setLanguageFromUrl($matches);
+
+        $command = new \DSI\Controller\MessageCommunityAdminsController();
         $command->exec();
     }
 
