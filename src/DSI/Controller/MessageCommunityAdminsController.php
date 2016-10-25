@@ -30,14 +30,17 @@ class MessageCommunityAdminsController
                 try {
                     if (trim($_POST['message']) != '') {
                         $message = show_input($_POST['message']);
-                        $message .= PHP_EOL . PHP_EOL;
+                        $message .= '<br /><br />';
                         $message .= 'This message has been sent by ' .
-                            '<a href="' . $urlHandler->profile($loggedInUser) . '">DSI user: ' .
+                            '<a href="https://' . SITE_DOMAIN . $urlHandler->profile($loggedInUser) . '">DSI user: ' .
                             $loggedInUser->getFullName() .
                             '</a> using the ' .
-                            '<a href="' . $urlHandler->messageCommunityAdmins() . '">' .
+                            '<a href="http://' . SITE_DOMAIN . $urlHandler->messageCommunityAdmins() . '">' .
                             'Message Community Admins' .
-                            '</a> page';
+                            '</a> page.<br /><br />' .
+                            'Click <a href="http://' . SITE_DOMAIN . $urlHandler->messageCommunityAdmins() . '">here</a> ' .
+                            'to reply to this email. ' .
+                            'Your message will be sent to all DSI community admins.';
 
                         $mail = new Mailer();
                         $mail->From = 'noreply@digitalsocial.eu';
