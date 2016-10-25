@@ -29,19 +29,15 @@ class MessageCommunityAdminsController
             if ($_POST['secureCode'] == $_SESSION[$sessionKey]) {
                 try {
                     if (trim($_POST['message']) != '') {
-                        $message = show_input($_POST['message']);
-                        $message .= '<br /><br />';
-                        $message .= 'This message has been sent by ' .
-                            '<a href="https://' . SITE_DOMAIN . $urlHandler->profile($loggedInUser) . '">DSI user: ' .
+                        $message = '<a href="https://' . SITE_DOMAIN . $urlHandler->profile($loggedInUser) . '">DSI user: ' .
                             $loggedInUser->getFullName() .
-                            '</a> using the ' .
-                            '<a href="http://' . SITE_DOMAIN . $urlHandler->messageCommunityAdmins() . '">' .
-                            'Message Community Admins' .
-                            '</a> page.<br /><br />' .
-                            'Click <a href="http://' . SITE_DOMAIN . $urlHandler->messageCommunityAdmins() . '">here</a> ' .
+                            '</a> has sent the following message to all DSI community admins.';
+                        $message .= '<br /><br />';
+                        $message .= '<i>"' . nl2br(show_input($_POST['message'])) . '"</i>';
+                        $message .= '<br /><br />';
+                        $message .= 'Click <a href="http://' . SITE_DOMAIN . $urlHandler->messageCommunityAdmins() . '">here</a> ' .
                             'to reply to this email. ' .
                             'Your message will be sent to all DSI community admins.';
-
                         $mail = new Mailer();
                         $mail->From = 'noreply@digitalsocial.eu';
                         $mail->FromName = 'Digital Social';
