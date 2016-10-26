@@ -65,7 +65,7 @@ require __DIR__ . '/header.php'
                     <div class="filter-col-left w-col w-col-4">
                         <div class="filter-bar info-card">
                             <div class="w-form">
-                                <form data-name="Email Form" id="email-form" name="email-form">
+                                <form id="email-form" name="email-form">
                                     <h3 class="sidebar-h3">Filter Organisations</h3>
                                     <div class="search-div">
                                         <input class="sidebar-search-field w-input" data-ix="hide-search-icon"

@@ -297,7 +297,7 @@ class OrganisationController
         return true;
     }
 
-    private function deleteOrganisation(User $loggedInUser, User $organisation, URL $urlHandler)
+    private function deleteOrganisation(User $loggedInUser, Organisation $organisation, URL $urlHandler)
     {
         $genSecureCode = new SecureCode();
         if ($genSecureCode->checkCode($_POST['secureCode'])) {
@@ -330,9 +330,9 @@ class OrganisationController
             try {
                 ob_start(); ?>
                 User: <?php echo show_input($loggedInUser->getFullName()) ?>
-                (<a href="http://<?php echo SITE_DOMAIN . $urlHandler->profile($loggedInUser) ?>">View profile</a>)<br/>
+                (<a href="https://<?php echo SITE_DOMAIN . $urlHandler->profile($loggedInUser) ?>">View profile</a>)<br/>
                 Reported Organisation: <?php echo show_input($organisation->getName()) ?>
-                (<a href="http://<?php echo SITE_DOMAIN . $urlHandler->organisation($organisation) ?>">View page</a>)
+                (<a href="https://<?php echo SITE_DOMAIN . $urlHandler->organisation($organisation) ?>">View page</a>)
                 <br/>
                 Reason: <?php echo show_input($_POST['reason']) ?>
                 <br/>

@@ -73,6 +73,13 @@ angular
                 closeOnConfirm: false,
                 showLoaderOnConfirm: true
             }, function (inputValue) {
+                if (inputValue === false) return false;
+
+                if (inputValue === "") {
+                    swal.showInputError("Please type the reason for reporting this organisation.");
+                    return false
+                }
+
                 $http
                     .post(window.location.href, {
                         getSecureCode: true
