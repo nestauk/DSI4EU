@@ -88,7 +88,7 @@ require __DIR__ . '/header.php';
                     */ ?>
                     <?php if ($project->getExternal()) { ?>
                         <a class="log-in-link long read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
-                           href="<?php echo $project->getExternal() ?>">
+                           href="<?php echo $project->getExternal() ?>" target="_blank">
                             <div class="login-li long menu-li readmore-li">Visit website</div>
                             <img class="login-arrow"
                                  src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">

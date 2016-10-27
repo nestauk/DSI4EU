@@ -88,7 +88,7 @@ if (!isset($urlHandler))
                         <?php } ?>
                     </p>
                     <a class="log-in-link long read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
-                       href="<?php echo $organisation->getExternalUrl() ?>">
+                       href="<?php echo $organisation->getExternalUrl() ?>" target="_blank">
                         <div class="login-li long menu-li readmore-li">Visit website</div>
                         <img class="login-arrow"
                              src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
