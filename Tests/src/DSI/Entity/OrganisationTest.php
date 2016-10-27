@@ -133,11 +133,28 @@ class OrganisationTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
+    public function settingEmptyUrl_returnsEmptyUrl()
+    {
+        $url = '';
+        $this->organisation->setUrl($url);
+        $this->assertEquals($url, $this->organisation->getUrl());
+        $this->assertEquals($url, $this->organisation->getExternalUrl());
+    }
+
+    /** @test */
     public function settingUrl_returnsUrl()
     {
         $url = 'http://example.org';
         $this->organisation->setUrl($url);
         $this->assertEquals($url, $this->organisation->getUrl());
+    }
+
+    /** @test */
+    public function settingInvalidExternalUrl_returnsValidExternalUrl()
+    {
+        $url = 'www.example.org';
+        $this->organisation->setUrl($url);
+        $this->assertEquals('http://' . $url, $this->organisation->getExternalUrl());
     }
 
     /** @test */

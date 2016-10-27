@@ -135,6 +135,19 @@ class Project
     }
 
     /**
+     * @return string
+     */
+    public function getExternal(): string
+    {
+        if ($this->url) {
+            if (substr($this->url, 0, 4) != 'http')
+                return 'http://' . $this->url;
+        }
+
+        return (string)$this->url;
+    }
+
+    /**
      * @param string $url
      */
     public function setUrl(string $url)

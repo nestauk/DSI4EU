@@ -86,9 +86,9 @@ require __DIR__ . '/header.php';
                     <p>DSI4EU has been running since February 2016 and is partnered by Nesta, The Waag Society, and
                         SUPSI</p>
                     */ ?>
-                    <?php if ($project->getUrl()) { ?>
+                    <?php if ($project->getExternal()) { ?>
                         <a class="log-in-link long read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
-                           href="<?php echo $project->getUrl() ?>">
+                           href="<?php echo $project->getExternal() ?>">
                             <div class="login-li long menu-li readmore-li">Visit website</div>
                             <img class="login-arrow"
                                  src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
