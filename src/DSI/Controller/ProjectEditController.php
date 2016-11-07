@@ -143,12 +143,12 @@ class ProjectEditController
             $tags = (new TagForProjectsRepository())->getAll();
             $impactTags = (new ImpactTagRepository())->getAll();
             $dsiFocusTags = (new DsiFocusTagRepository())->getAll();
-            $projectImpactTagsA = (new ProjectImpactTagARepository())->getTagsNameByProjectID($project->getId());
-            $projectImpactTagsB = (new ProjectDsiFocusTagRepository())->getTagsNameByProjectID($project->getId());
-            $projectImpactTagsC = (new ProjectImpactTagCRepository())->getTagsNameByProjectID($project->getId());
-            $projectTags = (new ProjectTagRepository())->getTagsNameByProjectID($project->getId());
+            $projectImpactTagsA = (new ProjectImpactTagARepository())->getTagNamesByProject($project);
+            $projectImpactTagsB = (new ProjectDsiFocusTagRepository())->getTagNamesByProject($project);
+            $projectImpactTagsC = (new ProjectImpactTagCRepository())->getTagNamesByProject($project);
+            $projectTags = (new ProjectTagRepository())->getTagNamesByProject($project);
             $organisations = (new OrganisationRepositoryInAPC())->getAll();
-            $projectOrganisations = (new OrganisationProjectRepository())->getOrganisationIDsForProject($project->getId());
+            $projectOrganisations = (new OrganisationProjectRepository())->getOrganisationIDsForProject($project);
             $angularModules['fileUpload'] = true;
             JsModules::setTinyMCE(true);
             require __DIR__ . '/../../../www/views/project-edit.php';

@@ -5,6 +5,7 @@ namespace DSI\Repository;
 use DSI\DuplicateEntry;
 use DSI\Entity\Organisation;
 use DSI\Entity\OrganisationProject;
+use DSI\Entity\Project;
 use DSI\NotFound;
 use DSI\Service\SQL;
 
@@ -163,13 +164,13 @@ class OrganisationProjectRepository
     }
 
     /**
-     * @param int $projectID
+     * @param Project $project
      * @return \int[]
      */
-    public function getOrganisationIDsForProject(int $projectID)
+    public function getOrganisationIDsForProject(Project $project)
     {
         $where = [
-            "`projectID` = '{$projectID}'"
+            "`projectID` = '{$project->getId()}'"
         ];
 
         /** @var int[] $organisationIDs */

@@ -369,10 +369,10 @@ class ProjectController
                 'description' => $project->getDescription(),
                 'startDate' => $project->getStartDate(),
                 'endDate' => $project->getEndDate(),
-                'tags' => (new ProjectTagRepository())->getTagsNameByProjectID($project->getId()),
-                'impactTagsA' => (new ProjectImpactTagARepository())->getTagsNameByProjectID($project->getId()),
-                'impactTagsB' => (new ProjectDsiFocusTagRepository())->getTagsNameByProjectID($project->getId()),
-                'impactTagsC' => (new ProjectImpactTagCRepository())->getTagsNameByProjectID($project->getId()),
+                'tags' => (new ProjectTagRepository())->getTagNamesByProject($project),
+                'impactTagsA' => (new ProjectImpactTagARepository())->getTagNamesByProject($project),
+                'impactTagsB' => (new ProjectDsiFocusTagRepository())->getTagNamesByProject($project),
+                'impactTagsC' => (new ProjectImpactTagCRepository())->getTagNamesByProject($project),
                 'members' => $this->getMembers($project->getOwner(), $projectMembers),
                 'memberRequests' => array_map(function (User $user) {
                     return [

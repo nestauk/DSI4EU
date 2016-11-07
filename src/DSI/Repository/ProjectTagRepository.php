@@ -3,6 +3,7 @@
 namespace DSI\Repository;
 
 use DSI\DuplicateEntry;
+use DSI\Entity\Project;
 use DSI\Entity\ProjectTag;
 use DSI\NotFound;
 use DSI\Service\SQL;
@@ -170,12 +171,12 @@ class ProjectTagRepository
         return false;
     }
 
-    public function getTagsNameByProjectID(int $projectID)
+    public function getTagNamesByProject(Project $project)
     {
         $query = new SQL("SELECT tag 
             FROM `tags-for-projects` 
             LEFT JOIN `project-tags` ON `tags-for-projects`.`id` = `project-tags`.`tagID`
-            WHERE `project-tags`.`projectID` = '{$projectID}'
+            WHERE `project-tags`.`projectID` = '{$project->getId()}'
             ORDER BY `tags-for-projects`.`tag`
         ");
         return $query->fetch_all('tag');

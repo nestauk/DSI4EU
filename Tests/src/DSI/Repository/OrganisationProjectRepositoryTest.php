@@ -121,28 +121,36 @@ class OrganisationProjectsRepositoryTest extends PHPUnit_Framework_TestCase
     /** @test saveAsNew */
     public function getAllOrganisationIDsForProject()
     {
-        $this->assertEquals([], $this->organisationProjectsRepo->getOrganisationIDsForProject(1));
+        $this->assertEquals([], $this->organisationProjectsRepo->getOrganisationIDsForProject(
+            $this->project_1
+        ));
 
         $organisationProject = new \DSI\Entity\OrganisationProject();
         $organisationProject->setOrganisation($this->organisation_1);
         $organisationProject->setProject($this->project_1);
         $this->organisationProjectsRepo->add($organisationProject);
 
-        $this->assertEquals([1], $this->organisationProjectsRepo->getOrganisationIDsForProject(1));
+        $this->assertEquals([1], $this->organisationProjectsRepo->getOrganisationIDsForProject(
+            $this->project_1
+        ));
 
         $organisationProject = new \DSI\Entity\OrganisationProject();
         $organisationProject->setOrganisation($this->organisation_2);
         $organisationProject->setProject($this->project_1);
         $this->organisationProjectsRepo->add($organisationProject);
 
-        $this->assertEquals([1, 2], $this->organisationProjectsRepo->getOrganisationIDsForProject(1));
+        $this->assertEquals([1, 2], $this->organisationProjectsRepo->getOrganisationIDsForProject(
+            $this->project_1
+        ));
 
         $organisationProject = new \DSI\Entity\OrganisationProject();
         $organisationProject->setOrganisation($this->organisation_1);
         $organisationProject->setProject($this->project_1);
         $this->organisationProjectsRepo->remove($organisationProject);
 
-        $this->assertEquals([2], $this->organisationProjectsRepo->getOrganisationIDsForProject(1));
+        $this->assertEquals([2], $this->organisationProjectsRepo->getOrganisationIDsForProject(
+            $this->project_1
+        ));
     }
 
     /** @test saveAsNew */

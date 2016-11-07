@@ -3,6 +3,7 @@
 namespace DSI\Repository;
 
 use DSI\DuplicateEntry;
+use DSI\Entity\Project;
 use DSI\Entity\ProjectDsiFocusTag;
 use DSI\NotFound;
 use DSI\Service\SQL;
@@ -170,12 +171,12 @@ class ProjectDsiFocusTagRepository
         return false;
     }
 
-    public function getTagsNameByProjectID(int $projectID)
+    public function getTagNamesByProject(Project $project)
     {
         $query = new SQL("SELECT tag 
             FROM `dsi-focus-tags` 
             LEFT JOIN `project-impact-tags-b` ON `dsi-focus-tags`.`id` = `project-impact-tags-b`.`tagID`
-            WHERE `project-impact-tags-b`.`projectID` = '{$projectID}'
+            WHERE `project-impact-tags-b`.`projectID` = '{$project->getId()}'
             ORDER BY `dsi-focus-tags`.`tag`
         ");
         return $query->fetch_all('tag');

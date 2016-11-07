@@ -181,11 +181,11 @@ class ProjectDsiFocusTagRepositoryTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             [$this->tag_1->getName(), $this->tag_2->getName()],
-            $this->projectTagsRepo->getTagsNameByProjectID($this->project_1->getId())
+            $this->projectTagsRepo->getTagNamesByProject($this->project_1)
         );
         $this->assertEquals(
             [$this->tag_3->getName()],
-            $this->projectTagsRepo->getTagsNameByProjectID($this->project_2->getId())
+            $this->projectTagsRepo->getTagNamesByProject($this->project_2)
         );
     }
 

@@ -1,7 +1,7 @@
 <?php
 
-use \DSI\Service\Translate;
-use \DSI\Entity\Translation;
+use DSI\Entity\Translation;
+use DSI\Service\Translate;
 
 require __DIR__ . '/../src/config.php';
 
@@ -327,8 +327,14 @@ class Router
         } elseif (preg_match('<^/' . $langHandler . 'message/community-admins$>', $this->pageURL, $matches)) {
             $this->messageCommunityAdmins($matches);
 
-        } elseif (preg_match('<^/' . $langHandler . 'export/projects$>', $this->pageURL, $matches)) {
-            $this->exportProjects($matches);
+        } elseif (preg_match('<^/' . $langHandler . 'export/projects\.json$>', $this->pageURL, $matches)) {
+            $this->exportProjects($matches, 'json');
+
+        } elseif (preg_match('<^/' . $langHandler . 'export/projects\.csv$>', $this->pageURL, $matches)) {
+            $this->exportProjects($matches, 'csv');
+
+        } elseif (preg_match('<^/' . $langHandler . 'export/projects\.xml$>', $this->pageURL, $matches)) {
+            $this->exportProjects($matches, 'xml');
 
         } elseif (preg_match('<^/.*\.(gif|jpe?g|png|svg|js|css|map|ico)$>', $this->pageURL)) {
             pr('not found');
@@ -703,11 +709,12 @@ class Router
         $command->exec();
     }
 
-    private function exportProjects($matches)
+    private function exportProjects($matches, $format = 'json')
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\MessageCommunityAdminsController();
+        $command = new \DSI\Controller\ExportProjectsController();
+        $command->format = $format;
         $command->exec();
     }
 

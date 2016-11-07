@@ -104,7 +104,7 @@ class UpdateProject
 
     private function setTags()
     {
-        $projectTags = (new ProjectTagRepository())->getTagsNameByProjectID($this->data()->project->getId());
+        $projectTags = (new ProjectTagRepository())->getTagNamesByProject($this->data()->project);
         foreach ($this->data()->tags AS $newTagName) {
             if (!in_array($newTagName, $projectTags)) {
                 $addTag = new AddTagToProject();
@@ -125,7 +125,7 @@ class UpdateProject
 
     private function setImpactTagsA()
     {
-        $projectTags = (new ProjectImpactTagARepository())->getTagsNameByProjectID($this->data()->project->getId());
+        $projectTags = (new ProjectImpactTagARepository())->getTagNamesByProject($this->data()->project);
         foreach ($this->data()->impactTagsA AS $newTagName) {
             if (!in_array($newTagName, $projectTags)) {
                 $addTag = new AddImpactTagAToProject();
@@ -146,7 +146,7 @@ class UpdateProject
 
     private function setImpactTagsB()
     {
-        $projectTags = (new ProjectDsiFocusTagRepository())->getTagsNameByProjectID($this->data()->project->getId());
+        $projectTags = (new ProjectDsiFocusTagRepository())->getTagNamesByProject($this->data()->project);
         foreach ($this->data()->impactTagsB AS $newTagName) {
             if (!in_array($newTagName, $projectTags)) {
                 $addTag = new AddDsiFocusTagToProject();
@@ -167,7 +167,7 @@ class UpdateProject
 
     private function setImpactTagsC()
     {
-        $projectTags = (new ProjectImpactTagCRepository())->getTagsNameByProjectID($this->data()->project->getId());
+        $projectTags = (new ProjectImpactTagCRepository())->getTagNamesByProject($this->data()->project);
         foreach ($this->data()->impactTagsC AS $newTagName) {
             if (!in_array($newTagName, $projectTags)) {
                 $addTag = new AddImpactTagCToProject();
@@ -211,7 +211,9 @@ class UpdateProject
     private function setOrganisations()
     {
         $this->data()->organisations = (array)$this->data()->organisations;
-        $organisationIDsForProject = (new OrganisationProjectRepository())->getOrganisationIDsForProject($this->data()->project->getId());
+        $organisationIDsForProject = (new OrganisationProjectRepository())->getOrganisationIDsForProject(
+            $this->data()->project
+        );
         foreach ($this->data()->organisations AS $newOrganisationID) {
             if (!in_array($newOrganisationID, $organisationIDsForProject)) {
                 $addToOrg = new AddProjectToOrganisation();
