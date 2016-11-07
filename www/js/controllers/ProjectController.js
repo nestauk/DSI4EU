@@ -2,6 +2,14 @@ angular
     .module(angularAppName)
     .controller('ProjectController', function ($scope, $http, $attrs, $timeout, $sce) {
         $scope.projectid = $attrs.projectid;
+
+        // Get Project Details
+        $http.get(SITE_RELATIVE_PATH + '/project/' + $scope.projectid + '.json')
+            .then(function (response) {
+                $scope.project = response.data || {};
+                console.log(response.data);
+            });
+
         $scope.datePattern = '[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])';
         $scope.getDateFrom = function (date) {
             var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
