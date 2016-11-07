@@ -336,6 +336,15 @@ class Router
         } elseif (preg_match('<^/' . $langHandler . 'export/projects\.xml$>', $this->pageURL, $matches)) {
             $this->exportProjects($matches, 'xml');
 
+        } elseif (preg_match('<^/' . $langHandler . 'export/organisations\.json$>', $this->pageURL, $matches)) {
+            $this->exportOrganisations($matches, 'json');
+
+        } elseif (preg_match('<^/' . $langHandler . 'export/organisations\.csv$>', $this->pageURL, $matches)) {
+            $this->exportOrganisations($matches, 'csv');
+
+        } elseif (preg_match('<^/' . $langHandler . 'export/organisations\.xml$>', $this->pageURL, $matches)) {
+            $this->exportOrganisations($matches, 'xml');
+
         } elseif (preg_match('<^/.*\.(gif|jpe?g|png|svg|js|css|map|ico)$>', $this->pageURL)) {
             pr('not found');
             return $this->staticContent();
@@ -714,6 +723,15 @@ class Router
         $this->setLanguageFromUrl($matches);
 
         $command = new \DSI\Controller\ExportProjectsController();
+        $command->format = $format;
+        $command->exec();
+    }
+
+    private function exportOrganisations($matches, $format = 'json')
+    {
+        $this->setLanguageFromUrl($matches);
+
+        $command = new \DSI\Controller\ExportOrganisationsController();
         $command->format = $format;
         $command->exec();
     }

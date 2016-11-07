@@ -99,7 +99,9 @@ class OrganisationProjectsRepositoryTest extends PHPUnit_Framework_TestCase
         $organisationProject->setProject($this->project_2);
         $this->organisationProjectsRepo->add($organisationProject);
 
-        $this->assertEquals([1, 2], $this->organisationProjectsRepo->getProjectIDsForOrganisation(1));
+        $this->assertEquals([1, 2], $this->organisationProjectsRepo->getProjectIDsForOrganisation(
+            $this->organisation_1
+        ));
     }
 
     /** @test saveAsNew */

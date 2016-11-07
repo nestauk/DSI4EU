@@ -253,8 +253,8 @@ class OrganisationEditController
                 'shortDescription' => $organisation->getShortDescription(),
                 'description' => $organisation->getDescription(),
                 'address' => $organisation->getAddress(),
-                'organisationTypeId' => (string)$organisation->getOrganisationTypeId(),
-                'organisationSizeId' => (string)$organisation->getOrganisationSizeId(),
+                'organisationTypeId' => (string)$organisation->getTypeId(),
+                'organisationSizeId' => (string)$organisation->getSizeId(),
                 'startDate' => $organisation->getStartDate(),
                 'logo' => $organisation->getLogo() ?
                     Image::ORGANISATION_LOGO_URL . $organisation->getLogo() : '',
@@ -312,7 +312,7 @@ class OrganisationEditController
             $tags = (new TagForOrganisationsRepository())->getAll();
             $orgTags = (new OrganisationTagRepository())->getTagsNameByOrganisationID($organisation->getId());
             $projects = (new ProjectRepositoryInAPC())->getAll();
-            $orgProjects = (new OrganisationProjectRepository())->getProjectIDsForOrganisation($organisation->getId());
+            $orgProjects = (new OrganisationProjectRepository())->getProjectIDsForOrganisation($organisation);
             JsModules::setTinyMCE(true);
             require __DIR__ . '/../../../www/views/organisation-edit.php';
         }

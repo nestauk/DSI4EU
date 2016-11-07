@@ -26,10 +26,10 @@ class Organisation
     private $countryRegion;
 
     /** @var OrganisationType */
-    private $organisationType;
+    private $type;
 
     /** @var OrganisationSize */
-    private $organisationSize;
+    private $size;
 
     /** @var string */
     private $importID;
@@ -177,49 +177,65 @@ class Organisation
     /**
      * @return OrganisationType
      */
-    public function getOrganisationType()
+    public function getType()
     {
-        return $this->organisationType;
+        return $this->type;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTypeName()
+    {
+        return $this->type ? $this->type->getName() : '';
     }
 
     /**
      * @return int
      */
-    public function getOrganisationTypeId()
+    public function getTypeId()
     {
-        return $this->organisationType ? $this->organisationType->getId() : 0;
+        return $this->type ? $this->type->getId() : 0;
     }
 
     /**
-     * @param OrganisationType $organisationType
+     * @param OrganisationType $type
      */
-    public function setOrganisationType(OrganisationType $organisationType)
+    public function setType(OrganisationType $type)
     {
-        $this->organisationType = $organisationType;
+        $this->type = $type;
     }
 
     /**
      * @return OrganisationSize
      */
-    public function getOrganisationSize()
+    public function getSize()
     {
-        return $this->organisationSize;
+        return $this->size;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSizeName()
+    {
+        return $this->size ? $this->size->getName() : '';
     }
 
     /**
      * @return int
      */
-    public function getOrganisationSizeId()
+    public function getSizeId()
     {
-        return $this->organisationSize ? $this->organisationSize->getId() : 0;
+        return $this->size ? $this->size->getId() : 0;
     }
 
     /**
-     * @param OrganisationSize $organisationSize
+     * @param OrganisationSize $size
      */
-    public function setOrganisationSize(OrganisationSize $organisationSize)
+    public function setSize(OrganisationSize $size)
     {
-        $this->organisationSize = $organisationSize;
+        $this->size = $size;
     }
 
     /**

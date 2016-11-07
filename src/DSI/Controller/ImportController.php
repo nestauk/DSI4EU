@@ -105,7 +105,7 @@ class ImportController
         }
 
         if ($organisationType)
-            $organisation->setOrganisationType($organisationType);
+            $organisation->setType($organisationType);
     }
 
     private function setOrganisationSize($organisationSizeName, Organisation $organisation)
@@ -123,7 +123,7 @@ class ImportController
         }
 
         if ($organisationSize)
-            $organisation->setOrganisationSize($organisationSize);
+            $organisation->setSize($organisationSize);
     }
 
     private function setCountryRegion(Organisation $organisation, $countryName, $regionName)

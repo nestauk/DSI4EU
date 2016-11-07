@@ -21,10 +21,10 @@ class OrganisationRepository
         if ($organisation->getRegion())
             $insert[] = "`countryRegionID` = '" . addslashes($organisation->getRegion()->getId()) . "'";
         $insert[] = "`address` = '" . addslashes($organisation->getAddress()) . "'";
-        if ($organisation->getOrganisationType())
-            $insert[] = "`organisationTypeID` = '" . addslashes($organisation->getOrganisationTypeId()) . "'";
-        if ($organisation->getOrganisationSize())
-            $insert[] = "`organisationSizeID` = '" . addslashes($organisation->getOrganisationSizeId()) . "'";
+        if ($organisation->getType())
+            $insert[] = "`organisationTypeID` = '" . addslashes($organisation->getTypeId()) . "'";
+        if ($organisation->getSize())
+            $insert[] = "`organisationSizeID` = '" . addslashes($organisation->getSizeId()) . "'";
         $insert[] = "`startDate` = '" . addslashes($organisation->getStartDate()) . "'";
         $insert[] = "`logo` = '" . addslashes($organisation->getLogo()) . "'";
         $insert[] = "`headerImage` = '" . addslashes($organisation->getHeaderImage()) . "'";
@@ -57,10 +57,10 @@ class OrganisationRepository
         if ($organisation->getRegion())
             $insert[] = "`countryRegionID` = '" . addslashes($organisation->getRegion()->getId()) . "'";
         $insert[] = "`address` = '" . addslashes($organisation->getAddress()) . "'";
-        if ($organisation->getOrganisationType())
-            $insert[] = "`organisationTypeID` = '" . addslashes($organisation->getOrganisationTypeId()) . "'";
-        if ($organisation->getOrganisationSize())
-            $insert[] = "`organisationSizeID` = '" . addslashes($organisation->getOrganisationSizeId()) . "'";
+        if ($organisation->getType())
+            $insert[] = "`organisationTypeID` = '" . addslashes($organisation->getTypeId()) . "'";
+        if ($organisation->getSize())
+            $insert[] = "`organisationSizeID` = '" . addslashes($organisation->getSizeId()) . "'";
         $insert[] = "`startDate` = '" . addslashes($organisation->getStartDate()) . "'";
         $insert[] = "`logo` = '" . addslashes($organisation->getLogo()) . "'";
         $insert[] = "`headerImage` = '" . addslashes($organisation->getHeaderImage()) . "'";
@@ -122,12 +122,12 @@ class OrganisationRepository
         }
         $organisationObj->setAddress($organisation['address']);
         if ($organisation['organisationTypeID']) {
-            $organisationObj->setOrganisationType(
+            $organisationObj->setType(
                 (new OrganisationTypeRepository())->getById($organisation['organisationTypeID'])
             );
         }
         if ($organisation['organisationSizeID']) {
-            $organisationObj->setOrganisationSize(
+            $organisationObj->setSize(
                 (new OrganisationSizeRepository())->getById($organisation['organisationSizeID'])
             );
         }

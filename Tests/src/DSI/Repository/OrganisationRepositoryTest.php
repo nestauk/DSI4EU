@@ -98,8 +98,8 @@ class OrganisationRepositoryTest extends PHPUnit_Framework_TestCase
         $organisation->setDescription($description = 'Desc');
         $organisation->setCountryRegion($this->region);
         $organisation->setAddress($address = '58 New Street');
-        $organisation->setOrganisationType($this->organisationType);
-        $organisation->setOrganisationSize($this->organisationSize);
+        $organisation->setType($this->organisationType);
+        $organisation->setSize($this->organisationSize);
         $organisation->setStartDate($startDate = '2010-10-12');
         $organisation->setLogo($logo = 'DSC111.JPG');
         $organisation->setHeaderImage($headerImage = 'DSC222.JPG');
@@ -118,8 +118,8 @@ class OrganisationRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($this->region->getId(), $organisation->getRegion()->getId());
         $this->assertEquals($this->region->getCountry()->getId(), $organisation->getCountry()->getId());
         $this->assertEquals($address, $organisation->getAddress());
-        $this->assertEquals($this->organisationType->getId(), $organisation->getOrganisationTypeId());
-        $this->assertEquals($this->organisationSize->getId(), $organisation->getOrganisationSizeId());
+        $this->assertEquals($this->organisationType->getId(), $organisation->getTypeId());
+        $this->assertEquals($this->organisationSize->getId(), $organisation->getSizeId());
         $this->assertEquals($startDate, $organisation->getStartDate());
         $this->assertEquals($logo, $organisation->getLogo());
         $this->assertEquals($headerImage, $organisation->getHeaderImage());
@@ -142,8 +142,8 @@ class OrganisationRepositoryTest extends PHPUnit_Framework_TestCase
         $organisation->setDescription($description = 'Desc');
         $organisation->setCountryRegion($this->region);
         $organisation->setAddress($address = '58 New Street');
-        $organisation->setOrganisationType($this->organisationType);
-        $organisation->setOrganisationSize($this->organisationSize);
+        $organisation->setType($this->organisationType);
+        $organisation->setSize($this->organisationSize);
         $organisation->setStartDate($startDate = '2010-10-12');
         $organisation->setLogo($logo = 'DSC111.JPG');
         $organisation->setHeaderImage($headerImage = 'DSC222.JPG');
@@ -162,8 +162,8 @@ class OrganisationRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($this->region->getName(), $organisation->getRegionName());
         $this->assertEquals($this->region->getCountry()->getId(), $organisation->getCountry()->getId());
         $this->assertEquals($address, $organisation->getAddress());
-        $this->assertEquals($this->organisationType->getId(), $organisation->getOrganisationTypeId());
-        $this->assertEquals($this->organisationSize->getId(), $organisation->getOrganisationSizeId());
+        $this->assertEquals($this->organisationType->getId(), $organisation->getTypeId());
+        $this->assertEquals($this->organisationSize->getId(), $organisation->getSizeId());
         $this->assertEquals($startDate, $organisation->getStartDate());
         $this->assertEquals(strtotime($startDate), $organisation->getUnixStartDate());
         $this->assertEquals($logo, $organisation->getLogo());

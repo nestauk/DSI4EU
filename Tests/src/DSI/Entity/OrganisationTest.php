@@ -96,17 +96,17 @@ class OrganisationTest extends \PHPUnit_Framework_TestCase
     /** @test setOrganisationType, getOrganisationType */
     public function settingOrgType_returnsOrgType()
     {
-        $this->organisation->setOrganisationType($this->organisationType);
-        $this->assertEquals($this->organisationType->getId(), $this->organisation->getOrganisationType()->getId());
-        $this->assertEquals($this->organisationType->getId(), $this->organisation->getOrganisationTypeId());
+        $this->organisation->setType($this->organisationType);
+        $this->assertEquals($this->organisationType->getId(), $this->organisation->getType()->getId());
+        $this->assertEquals($this->organisationType->getId(), $this->organisation->getTypeId());
     }
 
     /** @test setOrganisationSize, getOrganisationSize */
     public function settingOrgSize_returnsOrgSize()
     {
-        $this->organisation->setOrganisationSize($this->organisationSize);
-        $this->assertEquals($this->organisationSize->getId(), $this->organisation->getOrganisationSize()->getId());
-        $this->assertEquals($this->organisationSize->getId(), $this->organisation->getOrganisationSizeId());
+        $this->organisation->setSize($this->organisationSize);
+        $this->assertEquals($this->organisationSize->getId(), $this->organisation->getSize()->getId());
+        $this->assertEquals($this->organisationSize->getId(), $this->organisation->getSizeId());
     }
 
     /** @test setAddress, getAddress */

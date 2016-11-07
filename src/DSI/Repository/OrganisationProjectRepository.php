@@ -74,13 +74,13 @@ class OrganisationProjectRepository
     }
 
     /**
-     * @param int $organisationID
+     * @param Organisation $organisation
      * @return \int[]
      */
-    public function getProjectIDsForOrganisation(int $organisationID)
+    public function getProjectIDsForOrganisation(Organisation $organisation)
     {
         $where = [
-            "`organisationID` = '{$organisationID}'"
+            "`organisationID` = '{$organisation->getId()}'"
         ];
 
         /** @var int[] $projectIDs */
@@ -103,7 +103,7 @@ class OrganisationProjectRepository
      */
     public function getPartnerOrganisationsFor(Organisation $organisation)
     {
-        $projectIDs = $this->getProjectIDsForOrganisation($organisation->getId());
+        $projectIDs = $this->getProjectIDsForOrganisation($organisation);
         /** @var Organisation[] $partnerOrganisations */
         $partnerOrganisations = array_map(
             function (OrganisationProject $organisationProject) use ($organisation, $projectIDs) {
@@ -111,7 +111,7 @@ class OrganisationProjectRepository
                 if ($organisation->getId() == $partnerOrganisation->getId())
                     return null;
 
-                $partnerProjectIDs = $this->getProjectIDsForOrganisation($partnerOrganisation->getId());
+                $partnerProjectIDs = $this->getProjectIDsForOrganisation($partnerOrganisation);
                 $partnerOrganisation->extraData['common-projects'] = count(array_intersect($projectIDs, $partnerProjectIDs));
                 return $partnerOrganisation;
             },

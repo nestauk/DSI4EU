@@ -68,14 +68,14 @@ class UpdateOrganisation
             $this->data()->organisation->setStartDate($this->data()->startDate);
         if (isset($this->data()->organisationTypeId))
             if ($this->data()->organisationTypeId)
-                $this->data()->organisation->setOrganisationType(
+                $this->data()->organisation->setType(
                     (new OrganisationTypeRepository())->getById(
                         $this->data()->organisationTypeId
                     )
                 );
         if (isset($this->data()->organisationSizeId))
             if ($this->data()->organisationSizeId)
-                $this->data()->organisation->setOrganisationSize(
+                $this->data()->organisation->setSize(
                     (new OrganisationSizeRepository())->getById(
                         $this->data()->organisationSizeId
                     )
@@ -144,7 +144,7 @@ class UpdateOrganisation
 
     private function setProjects()
     {
-        $orgProjects = (new OrganisationProjectRepository())->getProjectIDsForOrganisation($this->data()->organisation->getId());
+        $orgProjects = (new OrganisationProjectRepository())->getProjectIDsForOrganisation($this->data()->organisation);
         foreach ($this->data()->projects AS $newProject) {
             if (!in_array($newProject, $orgProjects)) {
                 $addProject = new AddProjectToOrganisation();
