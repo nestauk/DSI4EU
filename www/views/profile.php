@@ -37,19 +37,23 @@ require __DIR__ . '/header.php';
                 <div class="sidebar w-col w-col-4">
                     <?php if ($isOwner) { ?>
                         <?php require __DIR__ . '/partialViews/profile-menu.php' ?>
-                    <?php } elseif ($canManageUsers) { ?>
+                    <?php } else { ?>
                         <h1 class="content-h1 side-bar-space-h1">Actions</h1>
-                        <a class="sidebar-link" href="<?php echo $urlHandler->editUserProfile($user) ?>">
-                            <span class="green">-&nbsp;</span>Edit profile</a>
-                        <a class="sidebar-link" href="<?php echo $urlHandler->editUserPrivileges($user) ?>">
-                            <span class="green">-&nbsp;</span>Edit privileges</a>
-                        <?php if ($user->isDisabled()) { ?>
-                            <a class="sidebar-link remove" href="#" ng-click="setDisabled(false)">
-                                <span class="green">- </span>Enable user</a>
-                        <?php } else { ?>
-                            <a class="sidebar-link remove" href="#" ng-click="setDisabled(true)">
-                                <span class="green">- </span>Disable user</a>
+                        <?php if ($canManageUsers) { ?>
+                            <a class="sidebar-link" href="<?php echo $urlHandler->editUserProfile($user) ?>">
+                                <span class="green">-&nbsp;</span>Edit profile</a>
+                            <a class="sidebar-link" href="<?php echo $urlHandler->editUserPrivileges($user) ?>">
+                                <span class="green">-&nbsp;</span>Edit privileges</a>
+                            <?php if ($user->isDisabled()) { ?>
+                                <a class="sidebar-link remove" href="#" ng-click="setDisabled(false)">
+                                    <span class="green">- </span>Enable user</a>
+                            <?php } else { ?>
+                                <a class="sidebar-link remove" href="#" ng-click="setDisabled(true)">
+                                    <span class="green">- </span>Disable user</a>
+                            <?php } ?>
                         <?php } ?>
+                        <a class="sidebar-link remove" href="#" ng-click="report()">
+                            <span class="green">- </span>Report user</a>
                     <?php } ?>
                 </div>
             </div>

@@ -15,6 +15,7 @@ use DSI\Repository\UserRepository;
 use DSI\Repository\UserSkillRepository;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
+use DSI\Service\Mailer;
 use DSI\Service\URL;
 use DSI\UseCase\AddLanguageToUser;
 use DSI\UseCase\AddLinkToUser;
@@ -25,6 +26,7 @@ use DSI\UseCase\RemoveLanguageFromUser;
 use DSI\UseCase\RemoveLinkFromUser;
 use DSI\UseCase\RemoveSkillFromUser;
 use DSI\UseCase\SecureCode;
+use DSI\UseCase\SendEmailToCommunityAdmins;
 use DSI\UseCase\UpdateUserBasicDetails;
 use DSI\UseCase\UpdateUserBio;
 use DSI\UseCase\Users\DisableUser;
@@ -52,17 +54,23 @@ class ProfileController
 
         $user = $this->getUserFromURL($this->data()->userURL);
 
-        $canManageUsers = $this->canManageUsers($loggedInUser);
-        if ($canManageUsers) {
-            if (isset($_POST['getSecureCode'])) {
-                $this->getSecureCode();
-                return;
-            }
+        if (isset($_POST['getSecureCode'])) {
+            $this->getSecureCode();
+            return;
+        }
 
+        $canManageUsers = $this->canManageUsers($loggedInUser);
+
+        if ($canManageUsers) {
             if (isset($_POST['setUserDisabled'])) {
                 $this->setUserStatus($loggedInUser, $user, $urlHandler);
                 return;
             }
+        }
+
+        if (isset($_POST['report'])) {
+            $this->reportUser($loggedInUser, $user, $urlHandler);
+            return;
         }
 
         $userID = $user->getId();
@@ -244,6 +252,53 @@ class ProfileController
                 echo json_encode([
                     'code' => 'ok',
                     'url' => $urlHandler->profile($user)
+                ]);
+                return;
+            } catch (ErrorHandler $e) {
+                echo json_encode([
+                    'code' => 'error',
+                    'errors' => $e->getErrors()
+                ]);
+                return;
+            }
+        }
+    }
+
+    /**
+     * @param User $loggedInUser
+     * @param User $user
+     * @param URL $urlHandler
+     */
+    private function reportUser(User $loggedInUser, User $user, URL $urlHandler)
+    {
+        $genSecureCode = new SecureCode();
+        if ($genSecureCode->checkCode($_POST['secureCode'])) {
+            try {
+                ob_start(); ?>
+                User: <?php echo show_input($loggedInUser->getFullName()) ?>
+                (<a href="https://<?php echo SITE_DOMAIN . $urlHandler->profile($loggedInUser) ?>">View profile</a>)
+                <br/>
+                Reported Profile: <?php echo show_input($user->getFullName()) ?>
+                (<a href="https://<?php echo SITE_DOMAIN . $urlHandler->profile($user) ?>">View profile</a>)
+                <br/>
+                Reason: <?php echo show_input($_POST['reason']) ?>
+                <br/>
+                <?php $message = ob_get_clean();
+
+                $mail = new Mailer();
+                $mail->Subject = 'Profile Report on DSI4EU';
+                $mail->wrapMessageInTemplate([
+                    'header' => 'Profile Report on DSI4EU',
+                    'body' => $message
+                ]);
+
+                $sendMassMessageToAdmins = new SendEmailToCommunityAdmins();
+                $sendMassMessageToAdmins->data()->executor = $loggedInUser;
+                $sendMassMessageToAdmins->data()->mail = $mail;
+                $sendMassMessageToAdmins->exec();
+
+                echo json_encode([
+                    'code' => 'ok'
                 ]);
                 return;
             } catch (ErrorHandler $e) {
