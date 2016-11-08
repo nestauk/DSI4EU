@@ -118,7 +118,7 @@ require __DIR__ . '/header.php'
                                  | filter: earlierThan('' + beforeYear.id + beforeMonth.id)
                                    track by funding.id" style="position:relative">
                             <a class="info-card" data-ix="underline" href="{{funding.url}}"
-                               style="display: block">
+                               style="display: block" target="_blank">
                                 <h2 class="funding-card-h2" ng-bind="funding.title"></h2>
                                 <div class="infocard top3-underline" data-ix="new-interaction-2"></div>
                                 <p class="funding-descr" ng-bind="funding.description"></p>
