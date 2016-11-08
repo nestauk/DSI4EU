@@ -22,14 +22,22 @@ class ExportOrganisationsController
         $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
 
         $organisations = (new OrganisationRepositoryInAPC())->getAll();
+
+        if (isset($_GET['download'])) {
+            header('Content-Description: File Transfer');
+            header('Content-Type: application/octet-stream');
+            header('Content-Disposition: attachment; filename="dsi-organisations.' . $this->format . '"');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate');
+            header('Pragma: public');
+        }
+
         if ($this->format == 'json') {
-            return $this->exportJson($organisations);
+            $this->exportJson($organisations);
         } elseif ($this->format == 'csv') {
-            return $this->exportCsv($organisations);
+            $this->exportCsv($organisations);
         } elseif ($this->format == 'xml') {
-            return $this->exportXml($organisations);
-        } else {
-            return false;
+            $this->exportXml($organisations);
         }
     }
 

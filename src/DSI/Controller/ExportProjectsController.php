@@ -26,14 +26,22 @@ class ExportProjectsController
         $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
 
         $projects = (new ProjectRepositoryInAPC())->getAll();
+
+        if (isset($_GET['download'])) {
+            header('Content-Description: File Transfer');
+            header('Content-Type: application/octet-stream');
+            header('Content-Disposition: attachment; filename="dsi-projects.' . $this->format . '"');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate');
+            header('Pragma: public');
+        }
+
         if ($this->format == 'json') {
-            return $this->exportJson($projects);
+            $this->exportJson($projects);
         } elseif ($this->format == 'csv') {
-            return $this->exportCsv($projects);
+            $this->exportCsv($projects);
         } elseif ($this->format == 'xml') {
-            return $this->exportXml($projects);
-        } else {
-            return false;
+            $this->exportXml($projects);
         }
     }
 
