@@ -64,42 +64,39 @@ require __DIR__ . '/header.php'
                                     */ ?>
                                     <label class="dropdown-label" for="field-2">Event location</label>
                                     <select class="w-select" ng-model="searchCountryID">
-                                        <option ng-repeat="country in data.countries" value="{{country.id}}">{{country.name}}</option>
+                                        <option ng-repeat="country in data.countries" value="{{country.id}}">
+                                            {{country.name}}
+                                        </option>
                                     </select>
                                 </form>
                             </div>
                         </div>
                     </div>
                     <div class="w-col w-col-8">
-                        <div class="info-card" data-ix="underline" ng-cloak
-                             ng-repeat="event in data.events
+                        <div ng-cloak ng-repeat="event in data.events
                              | filter: searchName
                              | filter: inCountry(searchCountryID)
                                track by event.id">
-                            <h2 class="funding-card-h2" ng-bind="event.title"></h2>
-                            <div class="infocard top3-underline" data-ix="new-interaction-2"></div>
-                            <div class="event-li-location" ng-show="event.region || event.country">
-                                {{event.region}}<span ng-show="event.region && event.country">, {{event.country}}
-                            </div>
-                            <p class="funding-descr" ng-bind="event.shortDescription"></p>
-                            <p class="funding-descr">
+                            <a class="info-card" data-ix="underline" style="display:block" href="{{event.viewUrl}}">
+                                <h2 class="funding-card-h2" ng-bind="event.title"></h2>
+                                <div class="infocard top3-underline" data-ix="new-interaction-2"></div>
+                                <div class="event-li-location" ng-show="event.region || event.country">
+                                    {{event.region}}<span ng-show="event.region && event.country">, {{event.country}}
+                                </div>
+                                <p class="funding-descr" ng-bind="event.shortDescription"></p>
+                                <p class="funding-descr">
                                 <span ng-show="event.price">
                                     Cost: {{event.price}}
                                 </span>
-                                <span ng-hide="event.price">
+                                    <span ng-hide="event.price">
                                     This is a <strong>free</strong> event
                                 </span>
-                            </p>
-                            <div class="funding-closing-date" ng-show="event.startDate">
-                                <strong>Event date:</strong>
-                                <span ng-bind="event.startDate"></span>
-                            </div>
-                            <div class="funding-country funding-new" ng-show="event.isNew">New event</div>
-                            <a class="infocard log-in-link read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
-                               href="{{event.viewUrl}}">
-                                <div class="login-li menu-li readmore-li">Read more</div>
-                                <img class="login-arrow"
-                                     src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
+                                </p>
+                                <div class="funding-closing-date" ng-show="event.startDate">
+                                    <strong>Event date:</strong>
+                                    <span ng-bind="event.startDate"></span>
+                                </div>
+                                <div class="funding-country funding-new" ng-show="event.isNew">New event</div>
                             </a>
                         </div>
                     </div>

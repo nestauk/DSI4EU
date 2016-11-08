@@ -109,27 +109,23 @@ require __DIR__ . '/header.php'
                             </div>
                         </div>
                     </div>
-                    <div class="w-col w-col-8">
-                        <div class="info-card" data-ix="underline"
-                             ng-repeat="funding in data.fundings
+                    <div class="w-col w-col-8" ng-cloak>
+                        <div ng-repeat="funding in data.fundings
                                  | filter: searchName
                                  | filter: fundingHasType(fundingType)
                                  | filter: fundingHasTarget(fundingTarget)
                                  | filter: {countryID: inCountry.id || ''}
                                  | filter: earlierThan('' + beforeYear.id + beforeMonth.id)
-                                   track by funding.id">
-                            <h2 class="funding-card-h2" ng-bind="funding.title"></h2>
-                            <div class="infocard top3-underline" data-ix="new-interaction-2"></div>
-                            <p class="funding-descr" ng-bind="funding.description"></p>
-                            <div class="funding-closing-date" ng-show="funding.closingDate">
-                                <strong>Closing date:</strong> {{funding.closingDate}}
-                            </div>
-                            <div class="funding-country funding-new" ng-show="funding.isNew">New opportunity</div>
-                            <a class="infocard log-in-link read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
-                               href="{{funding.url}}" target="_blank" ng-show="funding.url">
-                                <div class="login-li menu-li readmore-li">Read more</div>
-                                <img class="login-arrow"
-                                     src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
+                                   track by funding.id" style="position:relative">
+                            <a class="info-card" data-ix="underline" href="{{funding.url}}"
+                               style="display: block">
+                                <h2 class="funding-card-h2" ng-bind="funding.title"></h2>
+                                <div class="infocard top3-underline" data-ix="new-interaction-2"></div>
+                                <p class="funding-descr" ng-bind="funding.description"></p>
+                                <div class="funding-closing-date" ng-show="funding.closingDate">
+                                    <strong>Closing date:</strong> {{funding.closingDate}}
+                                </div>
+                                <div class="funding-country funding-new" ng-show="funding.isNew">New opportunity</div>
                             </a>
                             <?php if ($userCanAddFunding) { ?>
                                 <a class="edit" href="{{funding.editUrl}}">Edit</a>
