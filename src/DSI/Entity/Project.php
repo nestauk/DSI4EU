@@ -137,7 +137,7 @@ class Project
     /**
      * @return string
      */
-    public function getExternalURL(): string
+    public function getExternalUrl(): string
     {
         if ($this->url) {
             if (substr($this->url, 0, 4) != 'http')

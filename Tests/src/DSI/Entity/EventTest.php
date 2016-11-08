@@ -145,6 +145,7 @@ class EventTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->region->getId(), $this->event->getRegionID());
         $this->assertEquals($this->region->getName(), $this->event->getRegionName());
         $this->assertEquals($this->region->getCountry()->getId(), $this->event->getCountryID());
+        $this->assertEquals($this->region->getCountry()->getName(), $this->event->getCountryName());
     }
 
     /** @test */

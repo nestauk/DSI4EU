@@ -28,10 +28,15 @@ class OrganisationTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->organisation = new Organisation();
+
         $this->organisationType = new OrganisationType();
         $this->organisationType->setId(1);
+        $this->organisationType->setName('Type Name');
+
         $this->organisationSize = new \DSI\Entity\OrganisationSize();
         $this->organisationSize->setId(1);
+        $this->organisationSize->setName('Size Name');
+
         $this->owner = new \DSI\Entity\User();
         $this->owner->setId(1);
     }
@@ -99,6 +104,7 @@ class OrganisationTest extends \PHPUnit_Framework_TestCase
         $this->organisation->setType($this->organisationType);
         $this->assertEquals($this->organisationType->getId(), $this->organisation->getType()->getId());
         $this->assertEquals($this->organisationType->getId(), $this->organisation->getTypeId());
+        $this->assertEquals($this->organisationType->getName(), $this->organisation->getTypeName());
     }
 
     /** @test setOrganisationSize, getOrganisationSize */
@@ -107,6 +113,7 @@ class OrganisationTest extends \PHPUnit_Framework_TestCase
         $this->organisation->setSize($this->organisationSize);
         $this->assertEquals($this->organisationSize->getId(), $this->organisation->getSize()->getId());
         $this->assertEquals($this->organisationSize->getId(), $this->organisation->getSizeId());
+        $this->assertEquals($this->organisationSize->getName(), $this->organisation->getSizeName());
     }
 
     /** @test setAddress, getAddress */

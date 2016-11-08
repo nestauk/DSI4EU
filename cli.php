@@ -5,9 +5,10 @@ class CliRouter
 {
     public function exec($args)
     {
-        if(!isset($args[1])){
+        if (!isset($args[1])) {
             echo 'send-cached-emails' . PHP_EOL;
             echo 'import-user-project-organisation-links' . PHP_EOL;
+            echo 'import-organisation-urls' . PHP_EOL;
             return;
         }
 
@@ -17,6 +18,8 @@ class CliRouter
             $this->importUserProjectOrganisationLink();
         } elseif ($args[1] == 'import-organisation-urls') {
             $this->importOrganisationURLs();
+        } else {
+            echo 'Invalid argument';
         }
     }
 

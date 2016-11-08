@@ -71,6 +71,22 @@ class ProjectTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($projectUrl, $this->project->getUrl());
     }
 
+    /** @test setUrl, getUrl */
+    public function settingInvalidExternalUrl_returnsValidExternalUrl()
+    {
+        $projectUrl = 'example.org';
+        $this->project->setUrl($projectUrl);
+        $this->assertEquals('http://' . $projectUrl, $this->project->getExternalUrl());
+    }
+
+    /** @test setUrl, getUrl */
+    public function settingValidExternalUrl_returnsValidExternalUrl()
+    {
+        $projectUrl = 'http://example.org';
+        $this->project->setUrl($projectUrl);
+        $this->assertEquals($projectUrl, $this->project->getExternalUrl());
+    }
+
     /** @test setStatus, getStatus */
     public function settingStatus_returnsStatus()
     {

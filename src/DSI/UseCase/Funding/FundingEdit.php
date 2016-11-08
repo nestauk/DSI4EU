@@ -65,7 +65,7 @@ class FundingEdit
         if($this->data()->typeID)
             $this->data()->funding->setType((new FundingTypeRepository())->getById($this->data()->typeID));
 
-        $this->data()->funding->removeTargets();
+        $this->data()->funding->removeAllTargets();
         foreach ((array)$this->data()->targets AS $targetID)
             $this->data()->funding->addTarget($fundingTargetRepository->getById((int)$targetID));
 

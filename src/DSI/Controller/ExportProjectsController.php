@@ -46,7 +46,7 @@ class ExportProjectsController
             return [
                 'id' => $project->getId(),
                 'name' => $project->getName(),
-                'website' => $project->getExternalURL(),
+                'website' => $project->getExternalUrl(),
                 'description' => $project->getShortDescription(),
                 'startDate' => $project->getStartDate(),
                 'endDate' => $project->getEndDate(),
@@ -88,7 +88,7 @@ class ExportProjectsController
             fputcsv($fp, [
                 'id' => $project->getId(),
                 'name' => $project->getName(),
-                'website' => $project->getExternalURL(),
+                'website' => $project->getExternalUrl(),
                 'description' => $project->getShortDescription(),
                 'startDate' => $project->getStartDate(),
                 'endDate' => $project->getEndDate(),
@@ -116,7 +116,7 @@ class ExportProjectsController
             $xmlProject = $xml->addChild('project');
             $xmlProject->addChild('id', $project->getId());
             $xmlProject->addChild('name', htmlspecialchars($project->getName()));
-            $xmlProject->addChild('website', htmlspecialchars($project->getExternalURL()));
+            $xmlProject->addChild('website', htmlspecialchars($project->getExternalUrl()));
             $xmlProject->addChild('description', htmlspecialchars($project->getShortDescription()));
             $xmlProject->addChild('startDate', htmlspecialchars($project->getStartDate()));
             $xmlProject->addChild('endDate', htmlspecialchars($project->getEndDate()));

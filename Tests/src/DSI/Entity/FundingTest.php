@@ -13,15 +13,24 @@ class FundingTest extends \PHPUnit_Framework_TestCase
     /** @var FundingSource */
     private $fundingSource;
 
+    /** @var \DSI\Entity\FundingType */
+    private $fundingType;
+
     /** @var  \DSI\Entity\Country */
     private $country;
 
     public function setUp()
     {
         $this->funding = new Funding();
+
         $this->fundingSource = new FundingSource();
         $this->fundingSource->setId(rand(1, 10));
         $this->fundingSource->setTitle('Random Source Title');
+
+        $this->fundingType = new \DSI\Entity\FundingType();
+        $this->fundingType->setId(rand(1, 10));
+        $this->fundingType->setTitle('Random Type Title');
+
         $this->country = new \DSI\Entity\Country();
         $this->country->setId(rand(11, 20));
         $this->country->setName('Country Name');
@@ -115,6 +124,59 @@ class FundingTest extends \PHPUnit_Framework_TestCase
         $this->funding->setSource($this->fundingSource);
         $this->assertEquals($this->fundingSource->getId(), $this->funding->getSource()->getId());
         $this->assertEquals($this->fundingSource->getTitle(), $this->funding->getSourceTitle());
+    }
+
+    /** @test */
+    public function settingFundingType_returnsFundingType()
+    {
+        $this->funding->setType($this->fundingType);
+        $this->assertEquals($this->fundingType->getId(), $this->funding->getType()->getId());
+        $this->assertEquals($this->fundingType->getId(), $this->funding->getTypeID());
+    }
+
+    /** @test */
+    public function canAddTargets()
+    {
+        $this->assertEmpty($this->funding->getTargetIDs());
+
+        $target1 = new \DSI\Entity\FundingTarget();
+        $target1->setId(1);
+        $target2 = new \DSI\Entity\FundingTarget();
+        $target2->setId(2);
+        $target3 = new \DSI\Entity\FundingTarget();
+        $target3->setId(3);
+
+        $this->funding->addTarget($target1);
+        $this->assertCount(1, $this->funding->getTargetIDs());
+        $this->assertContains($target1->getId(), $this->funding->getTargetIDs());
+
+        $this->funding->addTarget($target2);
+        $this->assertCount(2, $this->funding->getTargetIDs());
+        $this->assertContains($target2->getId(), $this->funding->getTargetIDs());
+
+        $this->funding->addTarget($target3);
+        $this->assertCount(3, $this->funding->getTargetIDs());
+        $this->assertContains($target3->getId(), $this->funding->getTargetIDs());
+    }
+
+    /** @test */
+    public function canRemoveTargets()
+    {
+        $this->assertEmpty($this->funding->getTargetIDs());
+
+        $target1 = new \DSI\Entity\FundingTarget();
+        $target1->setId(1);
+        $target2 = new \DSI\Entity\FundingTarget();
+        $target2->setId(2);
+        $target3 = new \DSI\Entity\FundingTarget();
+        $target3->setId(3);
+
+        $this->funding->addTarget($target1);
+        $this->funding->addTarget($target2);
+        $this->funding->addTarget($target3);
+
+        $this->funding->removeAllTargets();
+        $this->assertEmpty($this->funding->getTargetIDs());
     }
 
     /** @test */

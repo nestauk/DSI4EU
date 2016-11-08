@@ -207,4 +207,60 @@ class CaseStudyTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals($i, $this->caseStudy->getPositionOnFirstPage());
         }
     }
+
+    /** @test */
+    public function settingProject_returnsProject()
+    {
+        $this->assertNull($this->caseStudy->getProject());
+        $this->assertEquals(0, $this->caseStudy->getProjectID());
+
+        $project = new \DSI\Entity\Project();
+        $project->setId(rand(1, 10));
+
+        $this->caseStudy->setProject($project);
+
+        $this->assertNotNull($this->caseStudy->getProject());
+        $this->assertEquals($project->getId(), $this->caseStudy->getProjectID());
+    }
+
+    /** @test */
+    public function projectCanBeUnset()
+    {
+        $project = new \DSI\Entity\Project();
+        $project->setId(rand(1, 10));
+        $this->caseStudy->setProject($project);
+
+        $this->caseStudy->unsetProject();
+
+        $this->assertNull($this->caseStudy->getProject());
+        $this->assertEquals(0, $this->caseStudy->getProjectID());
+    }
+
+    /** @test */
+    public function settingOrganisation_returnsOrganisation()
+    {
+        $this->assertNull($this->caseStudy->getOrganisation());
+        $this->assertEquals(0, $this->caseStudy->getOrganisationID());
+
+        $organisation = new \DSI\Entity\Organisation();
+        $organisation->setId(rand(1, 10));
+
+        $this->caseStudy->setOrganisation($organisation);
+
+        $this->assertNotNull($this->caseStudy->getOrganisation());
+        $this->assertEquals($organisation->getId(), $this->caseStudy->getOrganisationID());
+    }
+
+    /** @test */
+    public function organisationCanBeUnset()
+    {
+        $organisation = new \DSI\Entity\Organisation();
+        $organisation->setId(rand(1, 10));
+        $this->caseStudy->setOrganisation($organisation);
+
+        $this->caseStudy->unsetOrganisation();
+
+        $this->assertNull($this->caseStudy->getOrganisation());
+        $this->assertEquals(0, $this->caseStudy->getOrganisationID());
+    }
 }

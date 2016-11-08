@@ -240,7 +240,7 @@ class Funding
         $this->fundingTargets[] = $fundingTarget;
     }
 
-    public function removeTargets()
+    public function removeAllTargets()
     {
         $this->fundingTargets = [];
     }
