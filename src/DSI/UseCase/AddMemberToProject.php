@@ -37,7 +37,7 @@ class AddMemberToProject
         $this->projectRepository = new ProjectRepository();
         $this->userRepository = new UserRepository();
 
-        if ($this->projectMemberRepo->projectHasMember($this->data()->projectID, $this->data()->userID)) {
+        if ($this->projectMemberRepo->projectIDHasMemberID($this->data()->projectID, $this->data()->userID)) {
             $this->errorHandler->addTaggedError('member', 'This user is already a member of the project');
             $this->errorHandler->throwIfNotEmpty();
         }

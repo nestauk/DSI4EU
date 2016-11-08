@@ -50,7 +50,7 @@ class AddMemberToProjectTest extends PHPUnit_Framework_TestCase
         $this->addMemberToProject->exec();
 
         $this->assertTrue(
-            (new \DSI\Repository\ProjectMemberRepository())->projectHasMember(
+            (new \DSI\Repository\ProjectMemberRepository())->projectIDHasMemberID(
                 $this->addMemberToProject->data()->projectID,
                 $this->addMemberToProject->data()->userID
             )

@@ -3,6 +3,7 @@
 namespace DSI\Repository;
 
 use DSI\DuplicateEntry;
+use DSI\Entity\Project;
 use DSI\Entity\ProjectMember;
 use DSI\Entity\User;
 use DSI\NotFound;
@@ -163,7 +164,7 @@ class ProjectMemberRepository
     public function getByAdmin(User $user)
     {
         return $this->getProjectMembersWhere([
-            "`userID` = ".$user->getId()."",
+            "`userID` = " . $user->getId() . "",
             "`isAdmin` = 1",
         ]);
     }
@@ -221,7 +222,7 @@ class ProjectMemberRepository
         return $projectMembers;
     }
 
-    public function projectHasMember(int $projectID, int $userID)
+    public function projectIDHasMemberID(int $projectID, int $userID)
     {
         $projectMembers = $this->getByProjectID($projectID);
         foreach ($projectMembers AS $projectMember) {
@@ -231,5 +232,10 @@ class ProjectMemberRepository
         }
 
         return false;
+    }
+
+    public function projectHasMember(Project $project, User $user)
+    {
+        return $this->projectIDHasMemberID($project->getId(), $user->getId());
     }
 }

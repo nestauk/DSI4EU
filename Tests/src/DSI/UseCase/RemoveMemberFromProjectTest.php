@@ -60,7 +60,7 @@ class RemoveMemberFromProjectTest extends PHPUnit_Framework_TestCase
         $this->removeMemberFromProjectCommand->exec();
 
         $this->assertFalse(
-            $this->projectMemberRepo->projectHasMember(
+            $this->projectMemberRepo->projectIDHasMemberID(
                 $this->removeMemberFromProjectCommand->data()->projectID,
                 $this->removeMemberFromProjectCommand->data()->userID
             )

@@ -2,7 +2,9 @@
 require __DIR__ . '/header.php';
 /** @var $project \DSI\Entity\Project */
 /** @var $userHasInvitation bool */
-/** @var $canUserRequestMembership bool */
+/** @var $userIsMember bool */
+/** @var $userSentJoinRequest bool */
+/** @var $userCanSendJoinRequest bool */
 /** @var $userCanEditProject bool */
 /** @var $isOwner bool */
 /** @var $loggedInUser \DSI\Entity\User */
@@ -81,10 +83,25 @@ require __DIR__ . '/header.php';
                                     <span class="green">-&nbsp;</span>Delete project
                                 </a>
                             <?php } ?>
+                        <?php } else { ?>
+                            <a class="sidebar-link remove" href="#" ng-click="report()">
+                                <span class="green">-&nbsp;</span>Report project
+                            </a>
                         <?php } ?>
-                        <a class="sidebar-link remove" href="#" ng-click="report()">
-                            <span class="green">-&nbsp;</span>Report project
-                        </a>
+
+                        <?php if ($userIsMember) { ?>
+                            <a class="sidebar-link" href="#" ng-click="leaveProject()">
+                                <span class="green">-&nbsp;</span>Leave Project
+                            </a>
+                        <?php } elseif ($userSentJoinRequest) { ?>
+                            <a class="sidebar-link" href="#" ng-click="cancelJoinRequest()">
+                                <span class="green">-&nbsp;</span>Cancel Join Request
+                            </a>
+                        <?php } elseif ($userCanSendJoinRequest) { ?>
+                            <a class="sidebar-link" href="#" ng-click="joinProject()">
+                                <span class="green">-&nbsp;</span>Join Project
+                            </a>
+                        <?php } ?>
                     <?php } ?>
                     <?php /*
                     <h3 class="cse side-bar-h3">Info</h3>

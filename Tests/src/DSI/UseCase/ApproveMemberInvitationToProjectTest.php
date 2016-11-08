@@ -119,7 +119,7 @@ class ApproveMemberInvitationToProjectTest extends PHPUnit_Framework_TestCase
         $this->approveInvitation($this->project->getId(), $this->invitedUser->getId());
 
         $this->assertTrue(
-            $this->projectMemberRepo->projectHasMember($this->project->getId(), $this->invitedUser->getId())
+            $this->projectMemberRepo->projectIDHasMemberID($this->project->getId(), $this->invitedUser->getId())
         );
     }
 

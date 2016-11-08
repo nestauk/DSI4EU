@@ -53,7 +53,7 @@ class AddMemberInvitationToProject
 
     private function checkIfProjectAlreadyHasTheMember()
     {
-        if ((new ProjectMemberRepository())->projectHasMember($this->data()->projectID, $this->data()->userID)) {
+        if ((new ProjectMemberRepository())->projectIDHasMemberID($this->data()->projectID, $this->data()->userID)) {
             $this->errorHandler->addTaggedError('member', 'This user is already a member of the project');
             $this->errorHandler->throwIfNotEmpty();
         }

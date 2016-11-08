@@ -85,7 +85,7 @@ class ApproveMemberRequestToProjectTest extends PHPUnit_Framework_TestCase
         $this->approveRequest($this->project->getId(), $this->user_2->getId());
 
         $this->assertTrue(
-            $this->projectMemberRepo->projectHasMember($this->project->getId(), $this->user_2->getId())
+            $this->projectMemberRepo->projectIDHasMemberID($this->project->getId(), $this->user_2->getId())
         );
     }
 

@@ -1,13 +1,69 @@
 angular
     .module(angularAppName)
     .controller('ProjectController', function ($scope, $http, $attrs, $timeout, $sce) {
+        var Helpers = {
+            getFirstNonEmptyValue: function (values) {
+                for (var i in values) {
+                    if (values[i] != '')
+                        return values[i];
+                }
+                return null;
+            },
+            getItemIndexById: function (pool, id) {
+                for (var i in pool) {
+                    if (pool[i].id == id)
+                        return i;
+                }
+                return -1;
+            },
+            swalWarning: function (data) {
+                data.options.type = "warning";
+                data.options.showCancelButton = true;
+                data.optionscloseOnConfirm = false;
+                data.options.showLoaderOnConfirm = true;
+
+                swal(data.options, function () {
+                    $http
+                        .post(window.location.href, {
+                            getSecureCode: true
+                        })
+                        .then(function (response) {
+                            if (response.data.code == 'ok') {
+                                receivedCode(response.data.secureCode)
+                            } else {
+                                alert('unexpected error');
+                                console.log(response.data)
+                            }
+                        });
+
+                    function receivedCode(secureCode) {
+                        data.post.secureCode = secureCode;
+                        $http
+                            .post(window.location.href, data.post)
+                            .then(function (response) {
+                                if (response.data.code == 'ok') {
+                                    success()
+                                } else {
+                                    alert('unexpected error');
+                                    console.log(response.data)
+                                }
+                            })
+                    }
+
+                    function success() {
+                        data.success.type = "success";
+                        swal(data.success, data.successCallback);
+                    }
+                });
+            }
+        };
+
         $scope.projectid = $attrs.projectid;
 
         // Get Project Details
         $http.get(SITE_RELATIVE_PATH + '/project/' + $scope.projectid + '.json')
             .then(function (response) {
                 $scope.project = response.data || {};
-                console.log(response.data);
             });
 
         $scope.datePattern = '[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])';
@@ -69,7 +125,6 @@ angular
                 }
             });
         };
-
         $scope.report = function () {
             swal({
                 title: "Report this project",
@@ -125,6 +180,62 @@ angular
                     });
                 }
             });
+        };
+        $scope.cancelJoinRequest = function () {
+            Helpers.swalWarning({
+                options: {
+                    title: "Cancel Join Request",
+                    text: "Are you sure you want to cancel the join request?"
+                },
+                post: {
+                    cancelJoinRequest: true
+                },
+                success: {
+                    title: "Request Cancelled",
+                    text: "Your request has been cancelled"
+                },
+                successCallback: function(){
+                    location.reload();
+                }
+            });
+        };
+
+        $scope.joinProject = function () {
+            Helpers.swalWarning({
+                options: {
+                    title: "Join Project",
+                    text: "Are you sure you want to join this project?"
+                },
+                post: {
+                    joinProject: true
+                },
+                success: {
+                    title: "Success",
+                    text: "Join request has been sent"
+                },
+                successCallback: function(){
+                    location.reload();
+                }
+            })
+        };
+
+        $scope.leaveProject = function () {
+            Helpers.swalWarning({
+                options: {
+                    title: "Leave Project",
+                    text: "Are you sure you want to leave this project?"
+                },
+                post: {
+                    leaveProject: true
+                },
+                success: {
+                    title: "Success",
+                    text: "You have left this project"
+                },
+                successCallback: function(){
+                    location.reload();
+                }
+            })
         };
 
         $scope.requestToJoin = {};
@@ -294,23 +405,6 @@ angular
                 });
             };
         }());
-
-        var Helpers = {
-            getFirstNonEmptyValue: function (values) {
-                for (var i in values) {
-                    if (values[i] != '')
-                        return values[i];
-                }
-                return null;
-            },
-            getItemIndexById: function (pool, id) {
-                for (var i in pool) {
-                    if (pool[i].id == id)
-                        return i;
-                }
-                return -1;
-            }
-        }
     })
     .controller('ProjectPostController', function ($scope, $http, $timeout, $sce) {
         if ($scope.post) {

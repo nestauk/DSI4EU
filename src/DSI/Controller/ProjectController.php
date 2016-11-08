@@ -13,7 +13,6 @@ use DSI\Repository\ProjectDsiFocusTagRepository;
 use DSI\Repository\ProjectImpactTagARepository;
 use DSI\Repository\ProjectImpactTagCRepository;
 use DSI\Repository\ProjectLinkRepository;
-use DSI\Repository\ProjectMemberInvitationRepository;
 use DSI\Repository\ProjectMemberRepository;
 use DSI\Repository\ProjectMemberRequestRepository;
 use DSI\Repository\ProjectPostRepository;
@@ -66,43 +65,6 @@ class ProjectController
         $projectRepo = new ProjectRepository();
         $project = $projectRepo->getById($this->data()->projectID);
 
-        if (isset($_POST['getSecureCode'])) {
-            $this->setSecureCode();
-            return;
-        }
-
-        if ($loggedInUser) {
-            if (isset($_POST['report'])) {
-                $this->report($loggedInUser, $project, $urlHandler);
-                return;
-            }
-        }
-
-        if (isset($_POST['deleteProject'])) {
-            $genSecureCode = new SecureCode();
-            if ($genSecureCode->checkCode($_POST['secureCode'])) {
-                try {
-                    $removeProject = new RemoveProject();
-                    $removeProject->data()->executor = $loggedInUser;
-                    $removeProject->data()->project = $project;
-                    $removeProject->exec();
-
-                    echo json_encode([
-                        'code' => 'ok',
-                        'url' => $urlHandler->projects()
-                    ]);
-                    return;
-                } catch (ErrorHandler $e) {
-                    echo json_encode([
-                        'code' => 'error',
-                        'errors' => $e->getErrors()
-                    ]);
-                    return;
-                }
-            }
-            return;
-        }
-
         $memberRequests = [];
         $isAdmin = false;
         $canUserRequestMembership = false;
@@ -123,13 +85,39 @@ class ProjectController
             ];
         }, $organisationProjectsObj);
 
-        if ($loggedInUser) {
-            $userHasInvitation = (new ProjectMemberInvitationRepository())->memberHasInvitationToProject(
-                $loggedInUser->getId(),
-                $project->getId()
-            );
+        $userIsMember = false;
+        $userSentJoinRequest = false;
+        $userCanSendJoinRequest = false;
 
-            $canUserRequestMembership = $this->canUserRequestMembership($project, $loggedInUser, $userHasInvitation);
+        if ($loggedInUser) {
+            if (isset($_POST['getSecureCode']))
+                return $this->setSecureCode();
+
+            if (isset($_POST['report']))
+                return $this->report($loggedInUser, $project, $urlHandler);
+
+            if (isset($_POST['deleteProject']))
+                return $this->deleteProject($loggedInUser, $project, $urlHandler);
+
+            if (isset($_POST['joinProject']))
+                return $this->joinProject($loggedInUser, $project);
+
+            if (isset($_POST['cancelJoinRequest']))
+                return $this->cancelJoinRequest($loggedInUser, $project);
+
+            if (isset($_POST['leaveProject']))
+                return $this->leaveProject($loggedInUser, $project);
+
+            $userIsMember = (new ProjectMemberRepository())->projectHasMember($project, $loggedInUser);
+            if (!$userIsMember) {
+                $userSentJoinRequest = (new ProjectMemberRequestRepository())->projectHasRequestFromMember(
+                    $project->getId(),
+                    $loggedInUser->getId()
+                );
+                if (!$userSentJoinRequest)
+                    $userCanSendJoinRequest = true;
+            }
+
             if ($project->getOwnerID() == $loggedInUser->getId()) {
                 $isOwner = true;
                 $isAdmin = true;
@@ -408,20 +396,6 @@ class ProjectController
         return $this->data;
     }
 
-    private function canUserRequestMembership(Project $project, User $loggedInUser, $userHasInvitation)
-    {
-        if ($userHasInvitation)
-            return false;
-        if ($project->getOwnerID() == $loggedInUser->getId())
-            return false;
-        if ((new ProjectMemberRepository())->projectHasMember($project->getId(), $loggedInUser->getId()))
-            return false;
-        if ((new ProjectMemberRequestRepository())->projectHasRequestFromMember($project->getId(), $loggedInUser->getId()))
-            return false;
-
-        return true;
-    }
-
     /**
      * @param User $owner
      * @param ProjectMember[] $projectMembers
@@ -479,6 +453,7 @@ class ProjectController
             'code' => 'ok',
             'secureCode' => $genSecureCode->getCode(),
         ]);
+        return;
     }
 
     private function report(User $loggedInUser, Project $project, URL $urlHandler)
@@ -488,7 +463,8 @@ class ProjectController
             try {
                 ob_start(); ?>
                 User: <?php echo show_input($loggedInUser->getFullName()) ?>
-                (<a href="https://<?php echo SITE_DOMAIN . $urlHandler->profile($loggedInUser) ?>">View profile</a>)<br/>
+                (<a href="https://<?php echo SITE_DOMAIN . $urlHandler->profile($loggedInUser) ?>">View profile</a>)
+                <br/>
                 Reported Project: <?php echo show_input($project->getName()) ?>
                 (<a href="https://<?php echo SITE_DOMAIN . $urlHandler->project($project) ?>">View page</a>)
                 <br/>
@@ -511,13 +487,118 @@ class ProjectController
                 echo json_encode([
                     'code' => 'ok',
                 ]);
-                return;
             } catch (ErrorHandler $e) {
                 echo json_encode([
                     'code' => 'error',
                     'errors' => $e->getErrors()
                 ]);
-                return;
+            }
+        }
+        return;
+    }
+
+    /**
+     * @param User $loggedInUser
+     * @param Project $project
+     * @param URL $urlHandler
+     */
+    private function deleteProject(User $loggedInUser, Project $project, URL $urlHandler)
+    {
+        $genSecureCode = new SecureCode();
+        if ($genSecureCode->checkCode($_POST['secureCode'])) {
+            try {
+                $removeProject = new RemoveProject();
+                $removeProject->data()->executor = $loggedInUser;
+                $removeProject->data()->project = $project;
+                $removeProject->exec();
+
+                echo json_encode([
+                    'code' => 'ok',
+                    'url' => $urlHandler->projects()
+                ]);
+            } catch (ErrorHandler $e) {
+                echo json_encode([
+                    'code' => 'error',
+                    'errors' => $e->getErrors()
+                ]);
+            }
+        }
+        return;
+    }
+
+    /**
+     * @param User $user
+     * @param Project $project
+     */
+    private function cancelJoinRequest(User $user, Project $project)
+    {
+        $genSecureCode = new SecureCode();
+        if ($genSecureCode->checkCode($_POST['secureCode'])) {
+            try {
+                $cancelJoinRequest = new RejectMemberRequestToProject();
+                $cancelJoinRequest->data()->executor = $user;
+                $cancelJoinRequest->data()->projectID = $project->getId();
+                $cancelJoinRequest->data()->userID = $user->getId();
+                $cancelJoinRequest->exec();
+
+                echo json_encode([
+                    'code' => 'ok',
+                ]);
+            } catch (ErrorHandler $e) {
+                echo json_encode([
+                    'code' => 'error',
+                    'errors' => $e->getErrors()
+                ]);
+            }
+        }
+        return;
+    }
+
+    private function joinProject(User $user, Project $project)
+    {
+        $genSecureCode = new SecureCode();
+        if ($genSecureCode->checkCode($_POST['secureCode'])) {
+            try {
+                $joinProject = new AddMemberRequestToProject();
+                $joinProject->data()->projectID = $project->getId();
+                $joinProject->data()->userID = $user->getId();
+                $joinProject->exec();
+
+                echo json_encode([
+                    'code' => 'ok',
+                ]);
+            } catch (ErrorHandler $e) {
+                echo json_encode([
+                    'code' => 'error',
+                    'errors' => $e->getErrors()
+                ]);
+            }
+        }
+        return;
+    }
+
+    /**
+     * @param User $user
+     * @param Project $project
+     */
+    private function leaveProject(User $user, Project $project)
+    {
+        $genSecureCode = new SecureCode();
+        if ($genSecureCode->checkCode($_POST['secureCode'])) {
+            try {
+                $removeMember = new RemoveMemberFromProject();
+                $removeMember->data()->projectID = $project->getId();
+                $removeMember->data()->userID = $user->getId();
+                $removeMember->exec();
+
+                echo json_encode([
+                    'code' => 'ok',
+                ]);
+            } catch (ErrorHandler $e) {
+                echo json_encode([
+                    'code' => 'error',
+                    'errors' => $e->getErrors()
+                ]);
             }
         }
         return;

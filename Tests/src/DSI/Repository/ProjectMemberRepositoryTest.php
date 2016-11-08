@@ -168,16 +168,16 @@ class ProjectMemberRepositoryTest extends PHPUnit_Framework_TestCase
         $projectMember->setMember($this->user_2);
         $this->projectMemberRepo->insert($projectMember);
 
-        $this->assertTrue($this->projectMemberRepo->projectHasMember(
+        $this->assertTrue($this->projectMemberRepo->projectIDHasMemberID(
             $this->project_1->getId(), $this->user_1->getId())
         );
-        $this->assertFalse($this->projectMemberRepo->projectHasMember(
+        $this->assertFalse($this->projectMemberRepo->projectIDHasMemberID(
             $this->project_1->getId(), $this->user_2->getId())
         );
-        $this->assertTrue($this->projectMemberRepo->projectHasMember(
+        $this->assertTrue($this->projectMemberRepo->projectIDHasMemberID(
             $this->project_2->getId(), $this->user_2->getId())
         );
-        $this->assertFalse($this->projectMemberRepo->projectHasMember(
+        $this->assertFalse($this->projectMemberRepo->projectIDHasMemberID(
             $this->project_2->getId(), $this->user_1->getId())
         );
     }

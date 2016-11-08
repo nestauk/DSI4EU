@@ -76,7 +76,7 @@ class SetAdminStatusToProjectMember
 
     private function makeSureUserIsMember()
     {
-        if (!$this->projectMemberRepo->projectHasMember($this->data()->project->getId(), $this->data()->member->getId())) {
+        if (!$this->projectMemberRepo->projectIDHasMemberID($this->data()->project->getId(), $this->data()->member->getId())) {
             $addMemberToProject = new AddMemberToProject();
             $addMemberToProject->data()->projectID = $this->data()->project->getId();
             $addMemberToProject->data()->userID = $this->data()->member->getId();
