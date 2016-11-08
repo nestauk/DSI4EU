@@ -45,7 +45,7 @@ class OrganisationController
 
         if ($loggedInUser) {
             if (isset($_POST['reportOrganisation'])) {
-                $this->reportOrganisation($loggedInUser, $organisation, $urlHandler);
+                $this->report($loggedInUser, $organisation, $urlHandler);
                 return;
             }
         }
@@ -323,7 +323,7 @@ class OrganisationController
         return;
     }
 
-    private function reportOrganisation(User $loggedInUser, Organisation $organisation, URL $urlHandler)
+    private function report(User $loggedInUser, Organisation $organisation, URL $urlHandler)
     {
         $genSecureCode = new SecureCode();
         if ($genSecureCode->checkCode($_POST['secureCode'])) {

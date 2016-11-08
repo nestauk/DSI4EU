@@ -22,6 +22,7 @@ use DSI\Repository\ProjectTagRepository;
 use DSI\Repository\UserRepository;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
+use DSI\Service\Mailer;
 use DSI\Service\URL;
 use DSI\UseCase\AddDsiFocusTagToProject;
 use DSI\UseCase\AddEmailToProject;
@@ -41,6 +42,7 @@ use DSI\UseCase\RemoveImpactTagCFromProject;
 use DSI\UseCase\RemoveMemberFromProject;
 use DSI\UseCase\RemoveTagFromProject;
 use DSI\UseCase\SecureCode;
+use DSI\UseCase\SendEmailToCommunityAdmins;
 use DSI\UseCase\SetAdminStatusToProjectMember;
 use DSI\UseCase\UpdateProject;
 use DSI\UseCase\UpdateProjectCountryRegion;
@@ -65,13 +67,15 @@ class ProjectController
         $project = $projectRepo->getById($this->data()->projectID);
 
         if (isset($_POST['getSecureCode'])) {
-            $genSecureCode = new SecureCode();
-            $genSecureCode->exec();
-            echo json_encode([
-                'code' => 'ok',
-                'secureCode' => $genSecureCode->getCode(),
-            ]);
+            $this->setSecureCode();
             return;
+        }
+
+        if ($loggedInUser) {
+            if (isset($_POST['report'])) {
+                $this->report($loggedInUser, $project, $urlHandler);
+                return;
+            }
         }
 
         if (isset($_POST['deleteProject'])) {
@@ -465,6 +469,58 @@ class ProjectController
                 'commentsCount' => $post->getCommentsCount(),
             ];
         }, (new ProjectPostRepository())->getByProjectID($project->getId()));
+    }
+
+    private function setSecureCode()
+    {
+        $genSecureCode = new SecureCode();
+        $genSecureCode->exec();
+        echo json_encode([
+            'code' => 'ok',
+            'secureCode' => $genSecureCode->getCode(),
+        ]);
+    }
+
+    private function report(User $loggedInUser, Project $project, URL $urlHandler)
+    {
+        $genSecureCode = new SecureCode();
+        if ($genSecureCode->checkCode($_POST['secureCode'])) {
+            try {
+                ob_start(); ?>
+                User: <?php echo show_input($loggedInUser->getFullName()) ?>
+                (<a href="https://<?php echo SITE_DOMAIN . $urlHandler->profile($loggedInUser) ?>">View profile</a>)<br/>
+                Reported Project: <?php echo show_input($project->getName()) ?>
+                (<a href="https://<?php echo SITE_DOMAIN . $urlHandler->project($project) ?>">View page</a>)
+                <br/>
+                Reason: <?php echo show_input($_POST['reason']) ?>
+                <br/>
+                <?php $message = ob_get_clean();
+
+                $mail = new Mailer();
+                $mail->Subject = 'Project Report on DSI4EU';
+                $mail->wrapMessageInTemplate([
+                    'header' => 'Project Report on DSI4EU',
+                    'body' => $message
+                ]);
+
+                $exec = new SendEmailToCommunityAdmins();
+                $exec->data()->executor = $loggedInUser;
+                $exec->data()->mail = $mail;
+                $exec->exec();
+
+                echo json_encode([
+                    'code' => 'ok',
+                ]);
+                return;
+            } catch (ErrorHandler $e) {
+                echo json_encode([
+                    'code' => 'error',
+                    'errors' => $e->getErrors()
+                ]);
+                return;
+            }
+        }
+        return;
     }
 }
 

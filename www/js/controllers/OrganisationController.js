@@ -65,8 +65,8 @@ angular
         };
         $scope.report = function (url) {
             swal({
-                title: "Report the organisation",
-                text: "Are you sure you want to report this organisation?",
+                title: "Report this organisation",
+                text: "Please tell us why you are reporting this organisation",
                 type: "input",
                 inputPlaceholder: "Reason for report",
                 showCancelButton: true,

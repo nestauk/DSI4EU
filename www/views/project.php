@@ -67,19 +67,24 @@ require __DIR__ . '/header.php';
                     </div>
                 </div>
                 <div class="column-right-small w-col w-col-4">
-                    <?php if ($userCanEditProject) { ?>
+                    <?php if ($loggedInUser) { ?>
                         <h3 class="cse side-bar-h3">Actions</h3>
-                        <a class="sidebar-link" href="<?php echo $urlHandler->projectEdit($project) ?>">
-                            <span class="green">-&nbsp;</span>Edit project
-                        </a>
-                        <?php if ($isOwner OR ($loggedInUser AND $loggedInUser->isSysAdmin())) { ?>
-                            <a class="sidebar-link" href="<?php echo $urlHandler->projectOwnerEdit($project) ?>">
-                                <span class="green">-&nbsp;</span>Change owner
+                        <?php if ($userCanEditProject) { ?>
+                            <a class="sidebar-link" href="<?php echo $urlHandler->projectEdit($project) ?>">
+                                <span class="green">-&nbsp;</span>Edit project
                             </a>
-                            <a class="sidebar-link remove" href="#" ng-click="confirmDelete()">
-                                <span class="green">-&nbsp;</span>Delete project
-                            </a>
+                            <?php if ($isOwner OR ($loggedInUser AND $loggedInUser->isSysAdmin())) { ?>
+                                <a class="sidebar-link" href="<?php echo $urlHandler->projectOwnerEdit($project) ?>">
+                                    <span class="green">-&nbsp;</span>Change owner
+                                </a>
+                                <a class="sidebar-link remove" href="#" ng-click="confirmDelete()">
+                                    <span class="green">-&nbsp;</span>Delete project
+                                </a>
+                            <?php } ?>
                         <?php } ?>
+                        <a class="sidebar-link remove" href="#" ng-click="report()">
+                            <span class="green">-&nbsp;</span>Report project
+                        </a>
                     <?php } ?>
                     <?php /*
                     <h3 class="cse side-bar-h3">Info</h3>

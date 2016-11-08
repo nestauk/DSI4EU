@@ -70,6 +70,63 @@ angular
             });
         };
 
+        $scope.report = function () {
+            swal({
+                title: "Report this project",
+                text: "Please tell us why you are reporting this project",
+                type: "input",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                showLoaderOnConfirm: true,
+                inputPlaceholder: "Reason for reporting"
+            }, function (inputValue) {
+                if (inputValue === false) return false;
+
+                if (inputValue === "") {
+                    swal.showInputError("You need to write something!");
+                    return false
+                }
+
+                $http
+                    .post(window.location.href, {
+                        getSecureCode: true
+                    })
+                    .then(function (response) {
+                        if (response.data.code == 'ok') {
+                            receivedCode(response.data.secureCode)
+                        } else {
+                            alert('unexpected error');
+                            console.log(response.data)
+                        }
+                    });
+
+                function receivedCode(secureCode) {
+                    $http
+                        .post(window.location.href, {
+                            report: true,
+                            reason: inputValue,
+                            secureCode: secureCode
+                        })
+                        .then(function (response) {
+                            if (response.data.code == 'ok') {
+                                successfulReport(response.data.url)
+                            } else {
+                                alert('unexpected error');
+                                console.log(response.data)
+                            }
+                        })
+                }
+
+                function successfulReport(url) {
+                    swal({
+                        title: "Reported",
+                        text: "Thank you for your report",
+                        type: "success"
+                    });
+                }
+            });
+        };
+
         $scope.requestToJoin = {};
         $scope.sendRequestToJoin = function () {
             $scope.requestToJoin.loading = true;

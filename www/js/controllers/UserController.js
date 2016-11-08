@@ -176,10 +176,11 @@ angular
                 }
             });
         };
+
         $scope.report = function () {
             swal({
                 title: "Report this user",
-                text: "Please write the reason of this report",
+                text: "Please tell us why you are reporting this profile",
                 type: "input",
                 showCancelButton: true,
                 closeOnConfirm: false,
