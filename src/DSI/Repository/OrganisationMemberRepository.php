@@ -176,7 +176,7 @@ class OrganisationMemberRepository
     {
         return $this->getObjectsWhere([
             "`isAdmin` = 1",
-            "`userID` = ".$user->getId()."",
+            "`userID` = " . $user->getId() . "",
         ]);
     }
 
@@ -247,7 +247,7 @@ class OrganisationMemberRepository
         return $organisationMembers;
     }
 
-    public function organisationHasMember(int $organisationID, int $userID)
+    public function organisationIDHasMemberID(int $organisationID, int $userID)
     {
         $organisationMembers = $this->getByOrganisationID($organisationID);
         foreach ($organisationMembers AS $organisationMember) {
@@ -257,5 +257,10 @@ class OrganisationMemberRepository
         }
 
         return false;
+    }
+
+    public function organisationHasMember(Organisation $organisation, User $user)
+    {
+        return $this->organisationIDHasMemberID($organisation->getId(), $user->getId());
     }
 }

@@ -119,7 +119,7 @@ class RejectMemberInvitationToOrganisationTest extends PHPUnit_Framework_TestCas
         $this->rejectInvitation($this->organisation->getId(), $this->invitedUser->getId());
 
         $this->assertFalse(
-            $this->organisationMemberRepo->organisationHasMember($this->organisation->getId(), $this->invitedUser->getId())
+            $this->organisationMemberRepo->organisationIDHasMemberID($this->organisation->getId(), $this->invitedUser->getId())
         );
     }
 

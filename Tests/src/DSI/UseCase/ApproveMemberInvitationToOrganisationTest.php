@@ -119,7 +119,7 @@ class ApproveMemberInvitationToOrganisationTest extends PHPUnit_Framework_TestCa
         $this->approveInvitation($this->organisation->getId(), $this->invitedUser->getId());
 
         $this->assertTrue(
-            $this->organisationMemberRepo->organisationHasMember($this->organisation->getId(), $this->invitedUser->getId())
+            $this->organisationMemberRepo->organisationIDHasMemberID($this->organisation->getId(), $this->invitedUser->getId())
         );
     }
 

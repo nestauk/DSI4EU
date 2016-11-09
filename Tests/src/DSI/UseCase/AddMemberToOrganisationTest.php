@@ -50,7 +50,7 @@ class AddMemberToOrganisationTest extends PHPUnit_Framework_TestCase
         $this->addMemberToOrganisation->exec();
 
         $this->assertTrue(
-            (new \DSI\Repository\OrganisationMemberRepository())->organisationHasMember(
+            (new \DSI\Repository\OrganisationMemberRepository())->organisationIDHasMemberID(
                 $this->addMemberToOrganisation->data()->organisationID,
                 $this->addMemberToOrganisation->data()->userID
             )

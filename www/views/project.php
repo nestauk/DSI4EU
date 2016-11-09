@@ -31,10 +31,17 @@ require __DIR__ . '/header.php';
             <div class="w-row">
                 <div class="content-left w-col w-col-8">
                     <div class="intro"><?php echo show_input($project->getShortDescription()) ?></div>
-                    <h3 class="descr-h3">What we do</h3>
-                    <div><?php echo $project->getDescription() ?></div>
-                    <h3 class="descr-h3">Our social impact</h3>
-                    <div><?php echo $project->getSocialImpact() ?></div>
+
+                    <?php if ($project->getDescription()) { ?>
+                        <h3 class="descr-h3">What we do</h3>
+                        <div><?php echo $project->getDescription() ?></div>
+                    <?php } ?>
+
+                    <?php if ($project->getSocialImpact()) { ?>
+                        <h3 class="descr-h3">Our social impact</h3>
+                        <div><?php echo $project->getSocialImpact() ?></div>
+                    <?php } ?>
+
                     <div class="involved">
                         <h3 class="descr-h3 space">Who's involved</h3>
                         <h4 class="involved-h4">People</h4>
@@ -46,15 +53,17 @@ require __DIR__ . '/header.php';
                                 <div class="involved-card">
                                     <div class="w-row">
                                         <div class="image-col w-col w-col-3 w-col-small-3 w-col-tiny-3">
-                                            <img class="involved-profile-img"
-                                                 src="<?php echo \DSI\Entity\Image::PROFILE_PIC_URL . $member->getProfilePicOrDefault() ?>"
-                                                 width="50">
+                                            <img
+                                                src="<?php echo \DSI\Entity\Image::PROFILE_PIC_URL . $member->getProfilePicOrDefault() ?>"
+                                                class="involved-profile-img" width="50">
                                         </div>
                                         <div class="w-clearfix w-col w-col-9 w-col-small-9 w-col-tiny-9">
-                                            <div
-                                                class="card-name"><?php echo show_input($member->getFullName()) ?></div>
-                                            <div
-                                                class="card-position"><?php echo show_input($member->getJobTitle()) ?></div>
+                                            <div class="card-name">
+                                                <?php echo show_input($member->getFullName()) ?>
+                                            </div>
+                                            <div class="card-position">
+                                                <?php echo show_input($member->getJobTitle()) ?>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -103,11 +112,13 @@ require __DIR__ . '/header.php';
                             </a>
                         <?php } ?>
                     <?php } ?>
+
                     <?php /*
                     <h3 class="cse side-bar-h3">Info</h3>
                     <p>DSI4EU has been running since February 2016 and is partnered by Nesta, The Waag Society, and
                         SUPSI</p>
                     */ ?>
+
                     <?php if ($project->getExternalUrl()) { ?>
                         <a class="log-in-link long read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
                            href="<?php echo $project->getExternalUrl() ?>" target="_blank">
@@ -116,20 +127,28 @@ require __DIR__ . '/header.php';
                                  src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
                         </a>
                     <?php } ?>
-                    <h3 class="cse side-bar-h3">Tagged under</h3>
-                    <div class="tag" ng-repeat="tag in project.tags" ng-bind="tag"></div>
+                    <div ng-show="project.tags.length" ng-cloak>
+                        <h3 class="cse side-bar-h3">Tagged under</h3>
+                        <div class="tag" ng-repeat="tag in project.tags" ng-bind="tag"></div>
+                    </div>
 
-                    <h3 class="cse side-bar-h3">Who we help</h3>
-                    <?php /* <p>Areas of society that this project aims to support</p> */ ?>
-                    <div class="tag" ng-repeat="tag in project.impactTagsA" ng-bind="tag"></div>
+                    <div ng-show="project.impactTagsA.length" ng-cloak>
+                        <h3 class="cse side-bar-h3">Who we help</h3>
+                        <?php /* <p>Areas of society that this project aims to support</p> */ ?>
+                        <div class="tag" ng-repeat="tag in project.impactTagsA" ng-bind="tag"></div>
+                    </div>
 
-                    <h3 class="cse side-bar-h3">Our focus</h3>
-                    <?php /* <p>Areas of DSI that this project is a part of</p> */ ?>
-                    <div class="tag" ng-repeat="tag in project.impactTagsB" ng-bind="tag"></div>
+                    <div ng-show="project.impactTagsB.length" ng-cloak>
+                        <h3 class="cse side-bar-h3">Our focus</h3>
+                        <?php /* <p>Areas of DSI that this project is a part of</p> */ ?>
+                        <div class="tag" ng-repeat="tag in project.impactTagsB" ng-bind="tag"></div>
+                    </div>
 
-                    <h3 class="cse side-bar-h3">Our technology</h3>
-                    <?php /* <p>The types of technology involved with this project</p> */ ?>
-                    <div class="tag" ng-repeat="tag in project.impactTagsC" ng-bind="tag"></div>
+                    <div ng-show="project.impactTagsC.length" ng-cloak>
+                        <h3 class="cse side-bar-h3">Our technology</h3>
+                        <?php /* <p>The types of technology involved with this project</p> */ ?>
+                        <div class="tag" ng-repeat="tag in project.impactTagsC" ng-bind="tag"></div>
+                    </div>
                 </div>
             </div>
         </div>

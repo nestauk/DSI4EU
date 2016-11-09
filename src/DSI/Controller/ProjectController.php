@@ -168,7 +168,7 @@ class ProjectController
 
                     $updateProject->exec();
                     echo json_encode(['result' => 'ok']);
-                    return;
+                    return true;
                 }
 
                 if (isset($_POST['addTag'])) {
@@ -177,7 +177,7 @@ class ProjectController
                     $addTagToProject->data()->tag = $_POST['addTag'];
                     $addTagToProject->exec();
                     echo json_encode(['result' => 'ok']);
-                    return;
+                    return true;
                 }
                 if (isset($_POST['removeTag'])) {
                     $removeTagFromProject = new RemoveTagFromProject();
@@ -185,7 +185,7 @@ class ProjectController
                     $removeTagFromProject->data()->tag = $_POST['removeTag'];
                     $removeTagFromProject->exec();
                     echo json_encode(['result' => 'ok']);
-                    return;
+                    return true;
                 }
 
                 if (isset($_POST['addImpactTagA'])) {
@@ -194,7 +194,7 @@ class ProjectController
                     $addTagToProject->data()->tag = $_POST['addImpactTagA'];
                     $addTagToProject->exec();
                     echo json_encode(['result' => 'ok']);
-                    return;
+                    return true;
                 }
                 if (isset($_POST['removeImpactTagA'])) {
                     $removeTagFromProject = new RemoveImpactTagAFromProject();
@@ -202,7 +202,7 @@ class ProjectController
                     $removeTagFromProject->data()->tag = $_POST['removeImpactTagA'];
                     $removeTagFromProject->exec();
                     echo json_encode(['result' => 'ok']);
-                    return;
+                    return true;
                 }
 
                 if (isset($_POST['addImpactTagB'])) {
@@ -386,6 +386,8 @@ class ProjectController
             $pageTitle = $project->getName();
             require __DIR__ . '/../../../www/views/project.php';
         }
+
+        return true;
     }
 
     /**
@@ -453,7 +455,7 @@ class ProjectController
             'code' => 'ok',
             'secureCode' => $genSecureCode->getCode(),
         ]);
-        return;
+        return true;
     }
 
     private function report(User $loggedInUser, Project $project, URL $urlHandler)

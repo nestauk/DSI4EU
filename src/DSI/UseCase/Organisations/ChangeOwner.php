@@ -69,7 +69,7 @@ class ChangeOwner
 
     private function makeSureUserIsMember()
     {
-        if (!$this->organisationMemberRepo->organisationHasMember($this->data()->organisation->getId(), $this->data()->member->getId())) {
+        if (!$this->organisationMemberRepo->organisationIDHasMemberID($this->data()->organisation->getId(), $this->data()->member->getId())) {
             $addMemberToOrganisation = new AddMemberToOrganisation();
             $addMemberToOrganisation->data()->organisationID = $this->data()->organisation->getId();
             $addMemberToOrganisation->data()->userID = $this->data()->member->getId();

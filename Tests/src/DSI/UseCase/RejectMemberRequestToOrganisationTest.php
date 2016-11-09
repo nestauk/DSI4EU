@@ -85,7 +85,7 @@ class RejectMemberRequestToOrganisationTest extends PHPUnit_Framework_TestCase
         $this->rejectRequest($this->organisation->getId(), $this->user_2->getId());
 
         $this->assertFalse(
-            $this->organisationMemberRepo->organisationHasMember($this->organisation->getId(), $this->user_2->getId())
+            $this->organisationMemberRepo->organisationIDHasMemberID($this->organisation->getId(), $this->user_2->getId())
         );
     }
 

@@ -85,7 +85,7 @@ class ApproveMemberRequestToOrganisationTest extends PHPUnit_Framework_TestCase
         $this->approveRequest($this->organisation->getId(), $this->user_2->getId());
 
         $this->assertTrue(
-            $this->organisationMemberRepo->organisationHasMember($this->organisation->getId(), $this->user_2->getId())
+            $this->organisationMemberRepo->organisationIDHasMemberID($this->organisation->getId(), $this->user_2->getId())
         );
     }
 

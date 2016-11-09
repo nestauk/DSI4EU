@@ -1,6 +1,63 @@
 angular
     .module(angularAppName)
     .controller('OrganisationController', function ($scope, $http, $attrs, $timeout) {
+        var Helpers = {
+            getFirstNonEmptyValue: function (values) {
+                for (var i in values) {
+                    if (values[i] != '')
+                        return values[i];
+                }
+                return null;
+            },
+            getItemIndexById: function (pool, id) {
+                for (var i in pool) {
+                    if (pool[i].id == id)
+                        return i;
+                }
+                return -1;
+            },
+            swalWarning: function (data) {
+                data.options.type = "warning";
+                data.options.showCancelButton = true;
+                data.optionscloseOnConfirm = false;
+                data.options.showLoaderOnConfirm = true;
+
+                swal(data.options, function () {
+                    $http
+                        .post(window.location.href, {
+                            getSecureCode: true
+                        })
+                        .then(function (response) {
+                            if (response.data.code == 'ok') {
+                                receivedCode(response.data.secureCode)
+                            } else {
+                                alert('unexpected error');
+                                console.log(response.data)
+                            }
+                        });
+
+                    function receivedCode(secureCode) {
+                        data.post.secureCode = secureCode;
+                        $http
+                            .post(window.location.href, data.post)
+                            .then(function (response) {
+                                if (response.data.code == 'ok') {
+                                    success()
+                                } else {
+                                    alert('unexpected error');
+                                    console.log(response.data)
+                                }
+                            })
+                    }
+
+                    function success() {
+                        data.success.type = "success";
+                        swal(data.success, data.successCallback);
+                    }
+                });
+            }
+        };
+
         var addMemberSelect = $('#Add-member');
 
         $scope.organisationid = $attrs.organisationid;
@@ -222,20 +279,58 @@ angular
             }
         };
 
-        var Helpers = {
-            getFirstNonEmptyValue: function (values) {
-                for (var i in values) {
-                    if (values[i] != '')
-                        return values[i];
+        $scope.cancelJoinRequest = function () {
+            Helpers.swalWarning({
+                options: {
+                    title: "Cancel Join Request",
+                    text: "Are you sure you want to cancel the join request?"
+                },
+                post: {
+                    cancelJoinRequest: true
+                },
+                success: {
+                    title: "Request Cancelled",
+                    text: "Your request has been cancelled"
+                },
+                successCallback: function(){
+                    location.reload();
                 }
-                return null;
-            },
-            getItemIndexById: function (pool, id) {
-                for (var i in pool) {
-                    if (pool[i].id == id)
-                        return i;
+            });
+        };
+        $scope.joinOrganisation = function () {
+            Helpers.swalWarning({
+                options: {
+                    title: "Join Organisation",
+                    text: "Are you sure you want to join this organisation?"
+                },
+                post: {
+                    joinOrganisation: true
+                },
+                success: {
+                    title: "Success",
+                    text: "Join request has been sent"
+                },
+                successCallback: function(){
+                    location.reload();
                 }
-                return -1;
-            }
-        }
+            })
+        };
+        $scope.leaveOrganisation = function () {
+            Helpers.swalWarning({
+                options: {
+                    title: "Leave Organisation",
+                    text: "Are you sure you want to leave this organisation?"
+                },
+                post: {
+                    leaveOrganisation: true
+                },
+                success: {
+                    title: "Success",
+                    text: "You have left this organisation"
+                },
+                successCallback: function(){
+                    location.reload();
+                }
+            })
+        };
     });

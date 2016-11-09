@@ -53,7 +53,7 @@ class AddMemberInvitationToOrganisation
 
     private function checkIfOrganisationAlreadyHasTheMember()
     {
-        if ((new OrganisationMemberRepository())->organisationHasMember($this->data()->organisationID, $this->data()->userID)) {
+        if ((new OrganisationMemberRepository())->organisationIDHasMemberID($this->data()->organisationID, $this->data()->userID)) {
             $this->errorHandler->addTaggedError('member', 'This user is already a member of the organisation');
             $this->errorHandler->throwIfNotEmpty();
         }

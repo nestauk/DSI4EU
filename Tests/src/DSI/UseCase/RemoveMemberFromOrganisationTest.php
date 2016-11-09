@@ -60,7 +60,7 @@ class RemoveMemberFromOrganisationTest extends PHPUnit_Framework_TestCase
         $this->removeMemberFromOrganisationCommand->exec();
 
         $this->assertFalse(
-            $this->organisationMemberRepo->organisationHasMember(
+            $this->organisationMemberRepo->organisationIDHasMemberID(
                 $this->removeMemberFromOrganisationCommand->data()->organisationID,
                 $this->removeMemberFromOrganisationCommand->data()->userID
             )

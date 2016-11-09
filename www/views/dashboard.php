@@ -89,7 +89,7 @@ require __DIR__ . '/header.php';
                                         <div class="notification-profile-image"></div>
                                         <div class="notification-detail">
                                             <?php echo sprintf(
-                                                __('% requested to join %'),
+                                                __('%s requested to join %s'),
                                                 '<a style="font-weight:bold" href="{{invitation.user.url}}" ng-bind="invitation.user.name"></a>',
                                                 '<a style="font-weight:bold" href="{{invitation.project.url}}" ng-bind="invitation.project.name"></a>'
                                             ) ?>
@@ -108,7 +108,7 @@ require __DIR__ . '/header.php';
                                         <div class="notification-profile-image"></div>
                                         <div class="notification-detail">
                                             <?php echo sprintf(
-                                                __('% requested to join %'),
+                                                __('%s requested to join %s'),
                                                 '<a style="font-weight:bold" href="{{invitation.user.url}}" ng-bind="invitation.user.name"></a>',
                                                 '<a style="font-weight:bold" href="{{invitation.organisation.url}}" ng-bind="invitation.organisation.name"></a>'
                                             ) ?>

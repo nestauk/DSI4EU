@@ -4,6 +4,9 @@ require __DIR__ . '/header.php';
 /** @var $loggedInUser \DSI\Entity\User */
 /** @var $canUserRequestMembership bool */
 /** @var $isOwner bool */
+/** @var $userIsMember bool */
+/** @var $userSentJoinRequest bool */
+/** @var $userCanSendJoinRequest bool */
 /** @var $userCanEditOrganisation bool */
 /** @var $organisationTypes \DSI\Entity\OrganisationType[] */
 /** @var $organisationSizes \DSI\Entity\OrganisationSize[] */
@@ -57,23 +60,42 @@ if (!isset($urlHandler))
                     </div>
                 </div>
                 <div class="column-right-small w-col w-col-4">
-                    <?php if ($userCanEditOrganisation) { ?>
+                    <?php if ($loggedInUser) { ?>
                         <h3 class="cse side-bar-h3">Actions</h3>
-                        <a class="sidebar-link" href="<?php echo $urlHandler->organisationEdit($organisation) ?>">
-                            <span class="green">-&nbsp;</span>Edit organisation
-                        </a>
-                        <?php if ($isOwner OR ($loggedInUser AND $loggedInUser->isSysAdmin())) { ?>
-                            <a class="sidebar-link"
-                               href="<?php echo $urlHandler->organisationOwnerEdit($organisation) ?>">
-                                <span class="green">-&nbsp;</span>Change owner
+                        <?php if ($userCanEditOrganisation) { ?>
+                            <a class="sidebar-link" href="<?php echo $urlHandler->organisationEdit($organisation) ?>">
+                                <span class="green">-&nbsp;</span>Edit organisation
                             </a>
-                            <a class="sidebar-link remove" href="#" ng-click="confirmDelete()">
-                                <span class="green">-&nbsp;</span>Delete organisation
+                            <?php if ($isOwner OR ($loggedInUser AND $loggedInUser->isSysAdmin())) { ?>
+                                <a class="sidebar-link"
+                                   href="<?php echo $urlHandler->organisationOwnerEdit($organisation) ?>">
+                                    <span class="green">-&nbsp;</span>Change owner
+                                </a>
+                                <a class="sidebar-link remove" href="#" ng-click="confirmDelete()">
+                                    <span class="green">-&nbsp;</span>Delete organisation
+                                </a>
+                            <?php } ?>
+                        <?php } else { ?>
+                            <a class="sidebar-link remove" href="#" ng-click="report()">
+                                <span class="green">-&nbsp;</span>Report organisation
                             </a>
                         <?php } ?>
-                        <?php /* <a class="sidebar-link"><span class="green">-&nbsp;</span>Publish / unpublish</a> */ ?>
-                        <?php /* <a class="remove sidebar-link"><span class="green">-&nbsp;</span>Remove project</a> */ ?>
+
+                        <?php if ($userIsMember) { ?>
+                            <a class="sidebar-link" href="#" ng-click="leaveOrganisation()">
+                                <span class="green">-&nbsp;</span>Leave Organisation
+                            </a>
+                        <?php } elseif ($userSentJoinRequest) { ?>
+                            <a class="sidebar-link" href="#" ng-click="cancelJoinRequest()">
+                                <span class="green">-&nbsp;</span>Cancel Join Request
+                            </a>
+                        <?php } elseif ($userCanSendJoinRequest) { ?>
+                            <a class="sidebar-link" href="#" ng-click="joinOrganisation()">
+                                <span class="green">-&nbsp;</span>Join Organisation
+                            </a>
+                        <?php } ?>
                     <?php } ?>
+
                     <h3 class="cse side-bar-h3">Info</h3>
                     <p>
                         <?php echo show_input($organisation->getName()) ?>
@@ -87,19 +109,19 @@ if (!isset($urlHandler))
                             has been running since <?php echo date('M Y', $organisation->getUnixStartDate()) ?>
                         <?php } ?>
                     </p>
-                    <a class="log-in-link long read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
-                       href="<?php echo $organisation->getExternalUrl() ?>" target="_blank">
-                        <div class="login-li long menu-li readmore-li">Visit website</div>
-                        <img class="login-arrow"
-                             src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
-                    </a>
-                    <h3 class="cse side-bar-h3">Tagged under</h3>
-                    <?php foreach ($tags AS $tag) { ?>
-                        <div class="tag"><?php echo show_input($tag) ?></div>
+                    <?php if ($organisation->getExternalUrl()) { ?>
+                        <a class="log-in-link long read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
+                           href="<?php echo $organisation->getExternalUrl() ?>" target="_blank">
+                            <div class="login-li long menu-li readmore-li">Visit website</div>
+                            <img class="login-arrow"
+                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
+                        </a>
                     <?php } ?>
-
-                    <?php if ($loggedInUser AND !$isOwner) { ?>
-                        <a class="report-project" href="#" ng-click="report()">Report organisation</a>
+                    <?php if ($tags) { ?>
+                        <h3 class="cse side-bar-h3">Tagged under</h3>
+                        <?php foreach ($tags AS $tag) { ?>
+                            <div class="tag"><?php echo show_input($tag) ?></div>
+                        <?php } ?>
                     <?php } ?>
                 </div>
             </div>

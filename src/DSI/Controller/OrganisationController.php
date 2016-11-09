@@ -15,7 +15,10 @@ use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\Mailer;
 use DSI\Service\URL;
+use DSI\UseCase\AddMemberRequestToOrganisation;
 use DSI\UseCase\Organisations\RemoveOrganisation;
+use DSI\UseCase\RejectMemberRequestToOrganisation;
+use DSI\UseCase\RemoveMemberFromOrganisation;
 use DSI\UseCase\SecureCode;
 use DSI\UseCase\SendEmailToCommunityAdmins;
 
@@ -38,17 +41,9 @@ class OrganisationController
         $organisationRepo = new OrganisationRepository();
         $organisation = $organisationRepo->getById($this->data()->organisationID);
 
-        if (isset($_POST['getSecureCode'])) {
-            $this->setSecureCode();
-            return;
-        }
-
-        if ($loggedInUser) {
-            if (isset($_POST['reportOrganisation'])) {
-                $this->report($loggedInUser, $organisation, $urlHandler);
-                return;
-            }
-        }
+        $userIsMember = false;
+        $userSentJoinRequest = false;
+        $userCanSendJoinRequest = false;
 
         /*
         $organisationTypes = (new OrganisationTypeRepository())->getAll();
@@ -192,12 +187,33 @@ class OrganisationController
 
             // $userCanEditOrganisation = ($isAdmin OR ($loggedInUser AND $loggedInUser->isCommunityAdmin()));
             $userCanEditOrganisation = ($isOwner OR ($loggedInUser AND $loggedInUser->isCommunityAdmin()));
-        }
 
-        if ($isOwner OR ($loggedInUser AND $loggedInUser->isSysAdmin())) {
-            if (isset($_POST['deleteOrganisation'])) {
-                $this->deleteOrganisation($loggedInUser, $organisation, $urlHandler);
-                return;
+            if (isset($_POST['getSecureCode']))
+                return $this->setSecureCode();
+
+            if (isset($_POST['reportOrganisation']))
+                return $this->report($loggedInUser, $organisation, $urlHandler);
+
+            if (isset($_POST['deleteOrganisation']))
+                return $this->deleteOrganisation($loggedInUser, $organisation, $urlHandler);
+
+            if (isset($_POST['joinOrganisation']))
+                return $this->joinOrganisation($loggedInUser, $organisation);
+
+            if (isset($_POST['cancelJoinRequest']))
+                return $this->cancelJoinRequest($loggedInUser, $organisation);
+
+            if (isset($_POST['leaveOrganisation']))
+                return $this->leaveOrganisation($loggedInUser, $organisation);
+
+            $userIsMember = (new OrganisationMemberRepository())->organisationHasMember($organisation, $loggedInUser);
+            if (!$userIsMember) {
+                $userSentJoinRequest = (new OrganisationMemberRequestRepository())->organisationHasRequestFromMember(
+                    $organisation->getId(),
+                    $loggedInUser->getId()
+                );
+                if (!$userSentJoinRequest)
+                    $userCanSendJoinRequest = true;
             }
         }
 
@@ -270,11 +286,11 @@ class OrganisationController
             return;
         } else
         */
-        {
-            $tags = (new OrganisationTagRepository())->getTagsNameByOrganisationID($organisation->getId());
-            $pageTitle = $organisation->getName();
-            require __DIR__ . '/../../../www/views/organisation.php';
-        }
+        $tags = (new OrganisationTagRepository())->getTagsNameByOrganisationID($organisation->getId());
+        $pageTitle = $organisation->getName();
+        require __DIR__ . '/../../../www/views/organisation.php';
+
+        return true;
     }
 
     /**
@@ -289,7 +305,7 @@ class OrganisationController
     {
         if ($organisation->getOwnerID() == $loggedInUser->getId())
             return false;
-        if ((new OrganisationMemberRepository())->organisationHasMember($organisation->getId(), $loggedInUser->getId()))
+        if ((new OrganisationMemberRepository())->organisationIDHasMemberID($organisation->getId(), $loggedInUser->getId()))
             return false;
         if ((new OrganisationMemberRequestRepository())->organisationHasRequestFromMember($organisation->getId(), $loggedInUser->getId()))
             return false;
@@ -311,16 +327,14 @@ class OrganisationController
                     'code' => 'ok',
                     'url' => $urlHandler->organisations()
                 ]);
-                return;
             } catch (ErrorHandler $e) {
                 echo json_encode([
                     'code' => 'error',
                     'errors' => $e->getErrors()
                 ]);
-                return;
             }
         }
-        return;
+        return true;
     }
 
     private function report(User $loggedInUser, Organisation $organisation, URL $urlHandler)
@@ -330,7 +344,8 @@ class OrganisationController
             try {
                 ob_start(); ?>
                 User: <?php echo show_input($loggedInUser->getFullName()) ?>
-                (<a href="https://<?php echo SITE_DOMAIN . $urlHandler->profile($loggedInUser) ?>">View profile</a>)<br/>
+                (<a href="https://<?php echo SITE_DOMAIN . $urlHandler->profile($loggedInUser) ?>">View profile</a>)
+                <br/>
                 Reported Organisation: <?php echo show_input($organisation->getName()) ?>
                 (<a href="https://<?php echo SITE_DOMAIN . $urlHandler->organisation($organisation) ?>">View page</a>)
                 <br/>
@@ -353,16 +368,14 @@ class OrganisationController
                 echo json_encode([
                     'code' => 'ok',
                 ]);
-                return;
             } catch (ErrorHandler $e) {
                 echo json_encode([
                     'code' => 'error',
                     'errors' => $e->getErrors()
                 ]);
-                return;
             }
         }
-        return;
+        return true;
     }
 
     private function setSecureCode()
@@ -373,6 +386,88 @@ class OrganisationController
             'code' => 'ok',
             'secureCode' => $genSecureCode->getCode(),
         ]);
+
+        return true;
+    }
+
+    private function joinOrganisation(User $user, Organisation $organisation)
+    {
+        $genSecureCode = new SecureCode();
+        if ($genSecureCode->checkCode($_POST['secureCode'])) {
+            try {
+                $join = new AddMemberRequestToOrganisation();
+                $join->data()->organisationID = $organisation->getId();
+                $join->data()->userID = $user->getId();
+                $join->exec();
+
+                echo json_encode([
+                    'code' => 'ok',
+                ]);
+            } catch (ErrorHandler $e) {
+                echo json_encode([
+                    'code' => 'error',
+                    'errors' => $e->getErrors()
+                ]);
+            }
+        }
+        return true;
+    }
+
+    /**
+     * @param User $user
+     * @param Organisation $organisation
+     * @return bool
+     */
+    private function cancelJoinRequest(User $user, Organisation $organisation)
+    {
+        $genSecureCode = new SecureCode();
+        if ($genSecureCode->checkCode($_POST['secureCode'])) {
+            try {
+                $exec = new RejectMemberRequestToOrganisation();
+                $exec->data()->executor = $user;
+                $exec->data()->organisationID = $organisation->getId();
+                $exec->data()->userID = $user->getId();
+                $exec->exec();
+
+                echo json_encode([
+                    'code' => 'ok',
+                ]);
+            } catch (ErrorHandler $e) {
+                echo json_encode([
+                    'code' => 'error',
+                    'errors' => $e->getErrors()
+                ]);
+            }
+        }
+        return true;
+    }
+
+    /**
+     * @param User $user
+     * @param Organisation $organisation
+     * @return bool
+     */
+    private function leaveOrganisation(User $user, Organisation $organisation)
+    {
+        $genSecureCode = new SecureCode();
+        if ($genSecureCode->checkCode($_POST['secureCode'])) {
+            try {
+                $exec = new RemoveMemberFromOrganisation();
+                $exec->data()->organisationID = $organisation->getId();
+                $exec->data()->userID = $user->getId();
+                $exec->exec();
+
+                echo json_encode([
+                    'code' => 'ok',
+                ]);
+            } catch (ErrorHandler $e) {
+                echo json_encode([
+                    'code' => 'error',
+                    'errors' => $e->getErrors()
+                ]);
+            }
+        }
+        return true;
     }
 }
 

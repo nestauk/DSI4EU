@@ -181,6 +181,7 @@ angular
                 }
             });
         };
+
         $scope.cancelJoinRequest = function () {
             Helpers.swalWarning({
                 options: {
@@ -199,7 +200,6 @@ angular
                 }
             });
         };
-
         $scope.joinProject = function () {
             Helpers.swalWarning({
                 options: {
@@ -218,7 +218,6 @@ angular
                 }
             })
         };
-
         $scope.leaveProject = function () {
             Helpers.swalWarning({
                 options: {

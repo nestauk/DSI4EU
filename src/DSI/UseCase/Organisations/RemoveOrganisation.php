@@ -65,7 +65,7 @@ class RemoveOrganisation
     private function assertExecutorCanMakeChanges()
     {
         if (!$this->userCanDeleteOrganisation()) {
-            $this->errorHandler->addTaggedError('user', 'You cannot change member status');
+            $this->errorHandler->addTaggedError('user', 'You cannot delete this organisation');
             throw $this->errorHandler;
         }
     }

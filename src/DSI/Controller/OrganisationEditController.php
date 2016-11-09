@@ -322,7 +322,7 @@ class OrganisationEditController
     {
         if ($organisation->getOwnerID() == $loggedInUser->getId())
             return false;
-        if ((new OrganisationMemberRepository())->organisationHasMember($organisation->getId(), $loggedInUser->getId()))
+        if ((new OrganisationMemberRepository())->organisationIDHasMemberID($organisation->getId(), $loggedInUser->getId()))
             return false;
         if ((new OrganisationMemberRequestRepository())->organisationHasRequestFromMember($organisation->getId(), $loggedInUser->getId()))
             return false;

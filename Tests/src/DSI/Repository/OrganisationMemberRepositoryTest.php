@@ -277,16 +277,16 @@ class OrganisationMemberRepositoryTest extends PHPUnit_Framework_TestCase
         $organisationMember->setMember($this->user_2);
         $this->organisationMemberRepo->insert($organisationMember);
 
-        $this->assertTrue($this->organisationMemberRepo->organisationHasMember(
+        $this->assertTrue($this->organisationMemberRepo->organisationIDHasMemberID(
             $this->organisation_1->getId(), $this->user_1->getId())
         );
-        $this->assertFalse($this->organisationMemberRepo->organisationHasMember(
+        $this->assertFalse($this->organisationMemberRepo->organisationIDHasMemberID(
             $this->organisation_1->getId(), $this->user_2->getId())
         );
-        $this->assertTrue($this->organisationMemberRepo->organisationHasMember(
+        $this->assertTrue($this->organisationMemberRepo->organisationIDHasMemberID(
             $this->organisation_2->getId(), $this->user_2->getId())
         );
-        $this->assertFalse($this->organisationMemberRepo->organisationHasMember(
+        $this->assertFalse($this->organisationMemberRepo->organisationIDHasMemberID(
             $this->organisation_2->getId(), $this->user_1->getId())
         );
     }
