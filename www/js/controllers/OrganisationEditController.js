@@ -23,6 +23,7 @@ angular
         $scope.currentTab = 'step1';
         $scope.submitStep1 = function (params) {
             $scope.organisation.tags = $('#tagsSelect').val();
+            $scope.organisation.networkTags = $('#networkTagsSelect').val();
             $scope.organisation.projects = $('#projectsSelect').val();
             $scope.saveDetails({
                 postField: 'step1',

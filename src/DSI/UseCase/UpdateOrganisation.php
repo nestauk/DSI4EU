@@ -10,6 +10,7 @@ use DSI\NotEnoughData;
 use DSI\NotFound;
 use DSI\Repository\CountryRegionRepository;
 use DSI\Repository\OrganisationLinkRepository;
+use DSI\Repository\OrganisationNetworkTagRepository;
 use DSI\Repository\OrganisationProjectRepository;
 use DSI\Repository\OrganisationRepository;
 use DSI\Repository\OrganisationSizeRepository;
@@ -88,6 +89,8 @@ class UpdateOrganisation
 
         if (isset($this->data()->tags))
             $this->setTags();
+        if (isset($this->data()->networkTags))
+            $this->setNetworkTags();
         if (isset($this->data()->projects))
             $this->setProjects();
         if (isset($this->data()->links))
@@ -135,6 +138,27 @@ class UpdateOrganisation
         foreach ($orgTags AS $oldTagName) {
             if (!in_array($oldTagName, $this->data()->tags)) {
                 $remTag = new RemoveTagFromOrganisation();
+                $remTag->data()->organisationID = $this->data()->organisation->getId();
+                $remTag->data()->tag = $oldTagName;
+                $remTag->exec();
+            }
+        }
+    }
+
+    private function setNetworkTags()
+    {
+        $orgNetworkTags = (new OrganisationNetworkTagRepository())->getTagNamesByOrganisation($this->data()->organisation);
+        foreach ($this->data()->networkTags AS $newNetworkTagName) {
+            if (!in_array($newNetworkTagName, $orgNetworkTags)) {
+                $addTag = new AddNetworkTagToOrganisation();
+                $addTag->data()->organisationID = $this->data()->organisation->getId();
+                $addTag->data()->tag = $newNetworkTagName;
+                $addTag->exec();
+            }
+        }
+        foreach ($orgNetworkTags AS $oldTagName) {
+            if (!in_array($oldTagName, $this->data()->networkTags)) {
+                $remTag = new RemoveNetworkTagFromOrganisation();
                 $remTag->data()->organisationID = $this->data()->organisation->getId();
                 $remTag->data()->tag = $oldTagName;
                 $remTag->exec();
@@ -312,6 +336,7 @@ class UpdateOrganisation_Data
 
     /** @var string[] */
     public $tags,
+        $networkTags,
         $links;
 
     /** @var int[] */

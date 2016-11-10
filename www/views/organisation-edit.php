@@ -4,8 +4,10 @@ require __DIR__ . '/header.php';
 /** @var $organisationTypes \DSI\Entity\OrganisationType[] */
 /** @var $organisationSizes \DSI\Entity\OrganisationSize[] */
 /** @var $tags \DSI\Entity\TagForOrganisations[] */
+/** @var $networkTags \DSI\Entity\NetworkTag[] */
 /** @var $projects \DSI\Entity\Project[] */
 /** @var $orgTags string[] */
+/** @var $orgNetworkTags string[] */
 /** @var $orgProjects int[] */
 
 $leftSideText = "<p>To add your organisation, we need to collect some information about your organisation and its work. We are interested in hearing from both formal and informal groups.</p>";
@@ -146,6 +148,24 @@ if (!isset($urlHandler))
                                                                     <?php } ?>
                                                                 </select>
                                                             </div>
+
+                                                            <label>Network Tags</label>
+                                                            <p></p>
+                                                            <div class="customSelect2">
+                                                                <select class="select2 creator-data-entry end w-input"
+                                                                        id="networkTagsSelect" style="width:100%;border:0"
+                                                                        multiple data-tags="true"
+                                                                        data-placeholder="Write network tags">
+                                                                    <?php foreach ($networkTags AS $tag) { ?>
+                                                                        <option value="<?php echo $tag->getName() ?>"
+                                                                            <?php if (in_array($tag->getName(), $orgNetworkTags)) echo 'selected' ?>><?php
+                                                                            echo show_input($tag->getName())
+                                                                            ?></option>
+                                                                    <?php } ?>
+                                                                </select>
+                                                            </div>
+                                                            <br/><br/>
+
                                                             <br/><br/>
                                                             <label for="email">Projects your organisation is involved
                                                                 with:</label>

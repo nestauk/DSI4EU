@@ -3,7 +3,6 @@
 namespace DSI\UseCase;
 
 use DSI\Entity\ProjectNetworkTag;
-use DSI\Entity\ProjectTag;
 use DSI\Repository\NetworkTagRepository;
 use DSI\Repository\ProjectNetworkTagRepository;
 use DSI\Repository\ProjectRepository;

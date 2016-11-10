@@ -3,6 +3,7 @@
 namespace DSI\Controller;
 
 use DSI\Entity\Organisation;
+use DSI\Repository\OrganisationNetworkTagRepository;
 use DSI\Repository\OrganisationProjectRepository;
 use DSI\Repository\OrganisationRepositoryInAPC;
 use DSI\Service\Auth;
@@ -59,6 +60,7 @@ class ExportOrganisationsController
                 'size' => $organisation->getSizeName(),
                 'startDate' => $organisation->getStartDate(),
                 'projects' => $this->getOrganisationProjectIDs($organisation),
+                'networkTags' => $this->getNetworkTags($organisation),
             ];
         }, $organisations));
     }
@@ -82,6 +84,7 @@ class ExportOrganisationsController
             'Size',
             'Start Date',
             'Projects',
+            'Network Tags',
         ]);
 
         foreach ($organisations as $organisation) {
@@ -97,6 +100,7 @@ class ExportOrganisationsController
                 'size' => $organisation->getSizeName(),
                 'startDate' => $organisation->getStartDate(),
                 'projects' => implode(', ', $this->getOrganisationProjectIDs($organisation)),
+                'networkTags' => implode(', ', $this->getNetworkTags($organisation)),
             ]);
         }
 
@@ -126,6 +130,10 @@ class ExportOrganisationsController
             $xmlProjects = $xmlOrganisation->addChild('projects');
             foreach ($this->getOrganisationProjectIDs($organisation) AS $projectID)
                 $xmlProjects->addChild('project', htmlspecialchars($projectID));
+
+            $xmlTags = $xmlOrganisation->addChild('networkTags');
+            foreach ($this->getNetworkTags($organisation) AS $tagID)
+                $xmlTags->addChild('tag', htmlspecialchars($tagID));
         }
 
         header('Content-type: text/xml');
@@ -135,5 +143,10 @@ class ExportOrganisationsController
     private function getOrganisationProjectIDs(Organisation $organisation)
     {
         return (new OrganisationProjectRepository())->getProjectIDsForOrganisation($organisation);
+    }
+
+    private function getNetworkTags(Organisation $organisation)
+    {
+        return (new OrganisationNetworkTagRepository())->getTagNamesByOrganisation($organisation);
     }
 }
