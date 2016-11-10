@@ -17,16 +17,16 @@ if (!isset($urlHandler))
                     <div class="profile-options">
                         <div class="profile-options w-row">
                             <div class="profile-col w-col w-col-3">
-                                <a href="<?php echo $urlHandler->dashboard() ?>">View dashboard</a>
+                                <a href="<?php echo $urlHandler->dashboard() ?>"><?php _e('View dashboard') ?></a>
                             </div>
                             <div class="profile-col w-col w-col-3">
-                                <a href="<?php echo $urlHandler->profile($loggedInUser) ?>">View profile</a>
+                                <a href="<?php echo $urlHandler->profile($loggedInUser) ?>"><?php _e('View profile') ?></a>
                             </div>
                             <div class="profile-col w-col w-col-3">
-                                <a href="<?php echo $urlHandler->editUserProfile($loggedInUser) ?>">Edit profile</a>
+                                <a href="<?php echo $urlHandler->editUserProfile($loggedInUser) ?>"><?php _e('Edit Profile') ?></a>
                             </div>
                             <div class="profile-col w-col w-col-3">
-                                <a href="<?php echo $urlHandler->logout() ?>">Sign out</a>
+                                <a href="<?php echo $urlHandler->logout() ?>"><?php _e('Sign out') ?></a>
                             </div>
                         </div>
                     </div>
@@ -34,10 +34,10 @@ if (!isset($urlHandler))
                     <div class="profile-options">
                         <div class="profile-options w-row">
                             <div class="profile-col w-col w-col-6">
-                                <a href="<?php echo $urlHandler->login() ?>">Login</a>
+                                <a href="<?php echo $urlHandler->login() ?>"><?php _e('Login') ?></a>
                             </div>
                             <div class="profile-col w-col w-col-6">
-                                <a href="<?php echo $urlHandler->register() ?>">Create account</a>
+                                <a href="<?php echo $urlHandler->register() ?>"><?php _e('Create account') ?></a>
                             </div>
                         </div>
                     </div>
@@ -62,26 +62,35 @@ if (!isset($urlHandler))
                     </div>
                 </div>
                 <div class="full-menu-col w-col w-col-4">
-                    <h2 class="full-menu-h2"><strong><?php echo number_format($projectsCount) ?></strong> Projects</h2>
-                    <a class="full-menu-link" href="<?php echo $urlHandler->projects() ?>">View all projects&nbsp;</a>
-                    <a class="full-menu-link" href="<?php echo $urlHandler->caseStudies() ?>">Case studies</a>
+                    <h2 class="full-menu-h2">
+                        <?php echo sprintf(
+                            __('%s projects'),
+                            '<strong>' . number_format($projectsCount) . '</strong>1'
+                        ) ?>
+                    </h2>
+                    <a class="full-menu-link"
+                       href="<?php echo $urlHandler->projects() ?>"><?php _e('View all projects') ?></a>
+                    <a class="full-menu-link"
+                       href="<?php echo $urlHandler->caseStudies() ?>"><?php _e('Case Studies') ?></a>
                     <?php if ($loggedInUser) { ?>
                         <a class="full-menu-link" data-ix="create-project-modal" href="#">
-                            Add new project
+                            <?php _e('Add new project') ?>
                         </a>
                     <?php } ?>
                 </div>
                 <div class="full-menu-col w-col w-col-4">
                     <h2 class="full-menu-h2">
-                        <strong><?php echo number_format($organisationsCount) ?></strong>
-                        Organisations
+                        <?php echo sprintf(
+                            __('%s organisations'),
+                            '<strong>' . number_format($organisationsCount) . '</strong>'
+                        ) ?>
                     </h2>
                     <a class="full-menu-link" href="<?php echo $urlHandler->organisations() ?>">
-                        View <span class="stat-number">all</span> organisations
+                        <?php _e('View all organisations') ?>
                     </a>
                     <?php if ($loggedInUser) { ?>
                         <a class="full-menu-link" data-ix="create-organisation-modal" href="#">
-                            Add new organisation
+                            <?php _e('Add new organisation') ?>
                         </a>
                     <?php } ?>
                 </div>
@@ -91,23 +100,23 @@ if (!isset($urlHandler))
                     <h2 class="full-menu-h2"><?php _e('Funding & support') ?></h2>
                     <div class="full-menu-links-block no-border">
                         <a class="full-menu-link" href="<?php echo $urlHandler->funding() ?>">
-                            <?php _e('See all funding opportunities')?>
+                            <?php _e('See all funding opportunities') ?>
                         </a>
                     </div>
                 </div>
                 <div class="full-menu-col w-clearfix w-col w-col-4">
-                    <h2 class="full-menu-h2"><?php _e('Events')?></h2>
+                    <h2 class="full-menu-h2"><?php _e('Events') ?></h2>
                     <div class="full-menu-links-block no-border">
                         <a class="full-menu-link" href="<?php echo $urlHandler->events() ?>">
-                            <?php _e('See upcoming DSI events')?>
+                            <?php _e('See upcoming DSI events') ?>
                         </a>
                     </div>
                 </div>
                 <div class="full-menu-col w-clearfix w-col w-col-4">
-                    <h2 class="full-menu-h2"><?php _e('News & blogs')?></h2>
+                    <h2 class="full-menu-h2"><?php _e('News & blogs') ?></h2>
                     <div class="full-menu-links-block no-border">
                         <a class="full-menu-link" href="<?php echo $urlHandler->blogPosts() ?>">
-                            <?php _e('See all news & blogs')?>
+                            <?php _e('See all news & blogs') ?>
                         </a>
                     </div>
                 </div>
@@ -129,22 +138,24 @@ if (!isset($urlHandler))
         </div>
         <?php if (isset($loggedInUser) AND $loggedInUser) { ?>
             <div class="create ll log-in-link w-clearfix" data-ix="create-dropdown">
-                <div class="login-li menu-li">Create</div>
+                <div class="login-li menu-li"><?php _e('Create') ?></div>
                 <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-plus-empty.png">
                 <div class="create-drop-down-block">
-                    <a class="drop-down-link-li" data-ix="create-project-modal" href="#">Create Project</a>
-                    <a class="drop-down-link-li" data-ix="create-organisation-modal" href="#">Create organisation</a>
+                    <a class="drop-down-link-li" data-ix="create-project-modal"
+                       href="#"><?php _e('Create project') ?></a>
+                    <a class="drop-down-link-li" data-ix="create-organisation-modal"
+                       href="#"><?php _e('Create organisation') ?></a>
                 </div>
             </div>
         <?php } else { ?>
             <a class="ll log-in-link w-clearfix w-inline-block" data-ix="log-in-arrow"
                href="<?php echo $urlHandler->login() ?>">
-                <div class="login-li menu-li">login</div>
+                <div class="login-li menu-li" style="text-transform: lowercase"><?php _e('Login')?></div>
                 <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
             </a>
         <?php } ?>
         <a class="log-in-link menu-search w-clearfix w-inline-block" data-ix="search-roll" href="#">
-            <div class="menu-li menu-search">Search</div>
+            <div class="menu-li menu-search"><?php _e('Search')?></div>
             <img class="search-icon" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-search.png">
         </a>
     </div>
