@@ -132,6 +132,11 @@ require __DIR__ . '/header.php';
                         <div class="tag" ng-repeat="tag in project.tags" ng-bind="tag"></div>
                     </div>
 
+                    <div ng-show="project.networkTags.length" ng-cloak>
+                        <h3 class="cse side-bar-h3">Network Tags</h3>
+                        <div class="tag" ng-repeat="tag in project.networkTags" ng-bind="tag"></div>
+                    </div>
+
                     <div ng-show="project.impactTagsA.length" ng-cloak>
                         <h3 class="cse side-bar-h3">Who we help</h3>
                         <?php /* <p>Areas of society that this project aims to support</p> */ ?>

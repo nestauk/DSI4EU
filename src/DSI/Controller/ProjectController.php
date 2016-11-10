@@ -8,6 +8,7 @@ use DSI\Entity\ProjectLink_Service;
 use DSI\Entity\ProjectMember;
 use DSI\Entity\ProjectPost;
 use DSI\Entity\User;
+use DSI\Repository\NetworkTagRepository;
 use DSI\Repository\OrganisationProjectRepository;
 use DSI\Repository\ProjectDsiFocusTagRepository;
 use DSI\Repository\ProjectImpactTagARepository;
@@ -15,6 +16,7 @@ use DSI\Repository\ProjectImpactTagCRepository;
 use DSI\Repository\ProjectLinkRepository;
 use DSI\Repository\ProjectMemberRepository;
 use DSI\Repository\ProjectMemberRequestRepository;
+use DSI\Repository\ProjectNetworkTagRepository;
 use DSI\Repository\ProjectPostRepository;
 use DSI\Repository\ProjectRepository;
 use DSI\Repository\ProjectTagRepository;
@@ -362,6 +364,7 @@ class ProjectController
                 'startDate' => $project->getStartDate(),
                 'endDate' => $project->getEndDate(),
                 'tags' => (new ProjectTagRepository())->getTagNamesByProject($project),
+                'networkTags' => (new ProjectNetworkTagRepository())->getTagNamesByProject($project),
                 'impactTagsA' => (new ProjectImpactTagARepository())->getTagNamesByProject($project),
                 'impactTagsB' => (new ProjectDsiFocusTagRepository())->getTagNamesByProject($project),
                 'impactTagsC' => (new ProjectImpactTagCRepository())->getTagNamesByProject($project),

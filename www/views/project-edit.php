@@ -2,9 +2,11 @@
 require __DIR__ . '/header.php';
 /** @var $project \DSI\Entity\Project */
 /** @var $tags \DSI\Entity\TagForProjects[] */
+/** @var $networkTags \DSI\Entity\NetworkTag[] */
 /** @var $impactTags \DSI\Entity\ImpactTag[] */
 /** @var $dsiFocusTags \DSI\Entity\DsiFocusTag[] */
 /** @var $projectTags string[] */
+/** @var $projectNetworkTags string[] */
 /** @var $projectImpactTagsA string[] */
 /** @var $projectImpactTagsB string[] */
 /** @var $projectImpactTagsC string[] */
@@ -197,6 +199,22 @@ if (!isset($urlHandler))
                                                                     <?php foreach ($tags AS $tag) { ?>
                                                                         <option value="<?php echo $tag->getName() ?>"
                                                                             <?php if (in_array($tag->getName(), $projectTags)) echo 'selected' ?>><?php
+                                                                            echo show_input($tag->getName())
+                                                                            ?></option>
+                                                                    <?php } ?>
+                                                                </select>
+                                                            </div>
+
+                                                            <label>Network Tags</label>
+                                                            <p></p>
+                                                            <div class="customSelect2">
+                                                                <select class="select2 creator-data-entry end w-input"
+                                                                        id="networkTagsSelect" style="width:100%;border:0"
+                                                                        multiple data-tags="true"
+                                                                        data-placeholder="Write network tags">
+                                                                    <?php foreach ($networkTags AS $tag) { ?>
+                                                                        <option value="<?php echo $tag->getName() ?>"
+                                                                            <?php if (in_array($tag->getName(), $projectNetworkTags)) echo 'selected' ?>><?php
                                                                             echo show_input($tag->getName())
                                                                             ?></option>
                                                                     <?php } ?>

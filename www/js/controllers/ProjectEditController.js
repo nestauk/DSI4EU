@@ -23,6 +23,7 @@
             $scope.currentTab = 'step1';
             $scope.submitStep1 = function (params) {
                 $scope.project.tags = $('#tagsSelect').val();
+                $scope.project.networkTags = $('#networkTagsSelect').val();
                 $scope.project.impactTagsA = $('#impact-tags-a').val();
                 $scope.project.impactTagsB = $('#impact-tags-b').val();
                 $scope.project.impactTagsC = $('#impact-tags-c').val();
@@ -98,8 +99,11 @@
                 data['saveDetails'] = true;
                 data['step'] = options.postField;
 
+                console.log(data);
+
                 $http.post(SITE_RELATIVE_PATH + '/project/edit/' + projectID + '.json', data)
                     .then(function (response) {
+                        console.log(response.data);
                         $scope.loading = false;
 
                         if (response.data.code == 'ok')

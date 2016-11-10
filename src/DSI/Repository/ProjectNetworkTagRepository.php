@@ -4,60 +4,60 @@ namespace DSI\Repository;
 
 use DSI\DuplicateEntry;
 use DSI\Entity\Project;
+use DSI\Entity\ProjectNetworkTag;
 use DSI\Entity\ProjectTag;
 use DSI\NotFound;
 use DSI\Service\SQL;
 
-class ProjectTagRepository
+class ProjectNetworkTagRepository
 {
+    private $table = 'project-network-tags';
     /** @var ProjectRepository */
     private $projectRepo;
 
-    /** @var TagForProjectsRepository */
+    /** @var NetworkTagRepository */
     private $tagsRepo;
-
-    private $table = 'project-tags';
 
     public function __construct()
     {
         $this->projectRepo = new ProjectRepository();
-        $this->tagsRepo = new TagForProjectsRepository();
+        $this->tagsRepo = new NetworkTagRepository();
     }
 
-    public function add(ProjectTag $projectTag)
+    public function add(ProjectNetworkTag $projectNetworkTag)
     {
         $query = new SQL("SELECT projectID 
             FROM `{$this->table}`
-            WHERE `projectID` = '{$projectTag->getProjectID()}'
-            AND `tagID` = '{$projectTag->getTagID()}'
+            WHERE `projectID` = '{$projectNetworkTag->getProjectID()}'
+            AND `tagID` = '{$projectNetworkTag->getTagID()}'
             LIMIT 1
         ");
         if ($query->fetch('projectID') > 0)
-            throw new DuplicateEntry("projectID: {$projectTag->getProjectID()} / tagID: {$projectTag->getTagID()}");
+            throw new DuplicateEntry("projectID: {$projectNetworkTag->getProjectID()} / tagID: {$projectNetworkTag->getTagID()}");
 
         $insert = array();
-        $insert[] = "`projectID` = '" . (int)($projectTag->getProjectID()) . "'";
-        $insert[] = "`tagID` = '" . (int)($projectTag->getTagID()) . "'";
+        $insert[] = "`projectID` = '" . (int)($projectNetworkTag->getProjectID()) . "'";
+        $insert[] = "`tagID` = '" . (int)($projectNetworkTag->getTagID()) . "'";
 
         $query = new SQL("INSERT INTO `{$this->table}` SET " . implode(', ', $insert) . "");
         // $query->pr();
         $query->query();
     }
 
-    public function remove(ProjectTag $projectTag)
+    public function remove(ProjectNetworkTag $projectNetworkTag)
     {
         $query = new SQL("SELECT projectID 
             FROM `{$this->table}`
-            WHERE `projectID` = '{$projectTag->getProjectID()}'
-            AND `tagID` = '{$projectTag->getTagID()}'
+            WHERE `projectID` = '{$projectNetworkTag->getProjectID()}'
+            AND `tagID` = '{$projectNetworkTag->getTagID()}'
             LIMIT 1
         ");
         if (!$query->fetch('projectID'))
-            throw new NotFound("projectID: {$projectTag->getProjectID()} / tagID: {$projectTag->getTagID()}");
+            throw new NotFound("projectID: {$projectNetworkTag->getProjectID()} / tagID: {$projectNetworkTag->getTagID()}");
 
         $insert = array();
-        $insert[] = "`projectID` = '" . (int)($projectTag->getProjectID()) . "'";
-        $insert[] = "`tagID` = '" . (int)($projectTag->getTagID()) . "'";
+        $insert[] = "`projectID` = '" . (int)($projectNetworkTag->getProjectID()) . "'";
+        $insert[] = "`tagID` = '" . (int)($projectNetworkTag->getTagID()) . "'";
 
         $query = new SQL("DELETE FROM `{$this->table}` WHERE " . implode(' AND ', $insert) . "");
         $query->query();
@@ -152,7 +152,7 @@ class ProjectTagRepository
             WHERE " . implode(' AND ', $where) . "
         ");
         foreach ($query->fetch_all() AS $dbProjectTag) {
-            $projectTag = new ProjectTag();
+            $projectTag = new ProjectNetworkTag();
             $projectTag->setProject($this->projectRepo->getById($dbProjectTag['projectID']));
             $projectTag->setTag($this->tagsRepo->getById($dbProjectTag['tagID']));
             $projectTags[] = $projectTag;
@@ -176,10 +176,10 @@ class ProjectTagRepository
     public function getTagNamesByProject(Project $project)
     {
         $query = new SQL("SELECT tag 
-            FROM `tags-for-projects` 
-            LEFT JOIN `{$this->table}` ON `tags-for-projects`.`id` = `{$this->table}`.`tagID`
+            FROM `network-tags` 
+            LEFT JOIN `{$this->table}` ON `network-tags`.`id` = `{$this->table}`.`tagID`
             WHERE `{$this->table}`.`projectID` = '{$project->getId()}'
-            ORDER BY `tags-for-projects`.`tag`
+            ORDER BY `network-tags`.`tag`
         ");
         return $query->fetch_all('tag');
     }

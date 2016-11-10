@@ -7,6 +7,7 @@ use DSI\Repository\OrganisationProjectRepository;
 use DSI\Repository\ProjectDsiFocusTagRepository;
 use DSI\Repository\ProjectImpactTagARepository;
 use DSI\Repository\ProjectImpactTagCRepository;
+use DSI\Repository\ProjectNetworkTagRepository;
 use DSI\Repository\ProjectRepositoryInAPC;
 use DSI\Repository\ProjectTagRepository;
 use DSI\Service\Auth;
@@ -62,6 +63,7 @@ class ExportProjectsController
                 'region' => $project->getRegionName(),
                 'organisations' => $this->getProjectOrganisationIDs($project),
                 'tags' => $this->getTags($project),
+                'networkTags' => $this->getNetworkTags($project),
                 'supports' => $this->getSupportsTags($project),
                 'focus' => $this->getFocusTags($project),
                 'technology' => $this->getTechnologyTags($project),
@@ -87,6 +89,7 @@ class ExportProjectsController
             'Region',
             'Organisations',
             'Tags',
+            'Network Tags',
             'Supports',
             'Focus',
             'Technology',
@@ -104,6 +107,7 @@ class ExportProjectsController
                 'region' => $project->getRegionName(),
                 'organisations' => implode(', ', $this->getProjectOrganisationIDs($project)),
                 'tags' => implode(', ', $this->getTags($project)),
+                'networkTags' => implode(', ', $this->getNetworkTags($project)),
                 'supports' => implode(', ', $this->getSupportsTags($project)),
                 'focus' => implode(', ', $this->getFocusTags($project)),
                 'technology' => implode(', ', $this->getTechnologyTags($project)),
@@ -139,6 +143,10 @@ class ExportProjectsController
             foreach ($this->getTags($project) AS $tagID)
                 $xmlTags->addChild('tag', htmlspecialchars($tagID));
 
+            $xmlTags = $xmlProject->addChild('networkTags');
+            foreach ($this->getNetworkTags($project) AS $tagID)
+                $xmlTags->addChild('tag', htmlspecialchars($tagID));
+
             $xmlTags = $xmlProject->addChild('supports');
             foreach ($this->getSupportsTags($project) AS $tagID)
                 $xmlTags->addChild('tag', htmlspecialchars($tagID));
@@ -164,6 +172,11 @@ class ExportProjectsController
     private function getTags(Project $project)
     {
         return (new ProjectTagRepository())->getTagNamesByProject($project);
+    }
+
+    private function getNetworkTags(Project $project)
+    {
+        return (new ProjectNetworkTagRepository())->getTagNamesByProject($project);
     }
 
     private function getSupportsTags(Project $project)

@@ -9,6 +9,7 @@ use DSI\Entity\ProjectLink_Service;
 use DSI\Entity\User;
 use DSI\Repository\DsiFocusTagRepository;
 use DSI\Repository\ImpactTagRepository;
+use DSI\Repository\NetworkTagRepository;
 use DSI\Repository\OrganisationProjectRepository;
 use DSI\Repository\OrganisationRepository;
 use DSI\Repository\OrganisationRepositoryInAPC;
@@ -17,6 +18,7 @@ use DSI\Repository\ProjectDsiFocusTagRepository;
 use DSI\Repository\ProjectImpactTagCRepository;
 use DSI\Repository\ProjectLinkRepository;
 use DSI\Repository\ProjectMemberRepository;
+use DSI\Repository\ProjectNetworkTagRepository;
 use DSI\Repository\ProjectRepository;
 use DSI\Repository\ProjectTagRepository;
 use DSI\Repository\TagForProjectsRepository;
@@ -61,6 +63,7 @@ class ProjectEditController
                         $updateProject->data()->name = $_POST['name'] ?? '';
                         $updateProject->data()->url = $_POST['url'] ?? '';
                         $updateProject->data()->tags = $_POST['tags'] ?? [];
+                        $updateProject->data()->networkTags = $_POST['networkTags'] ?? [];
                         $updateProject->data()->impactTagsA = $_POST['impactTagsA'] ?? [];
                         $updateProject->data()->impactTagsB = $_POST['impactTagsB'] ?? [];
                         $updateProject->data()->impactTagsC = $_POST['impactTagsC'] ?? [];
@@ -141,12 +144,14 @@ class ProjectEditController
         } else {
             $data = ['project' => $project];
             $tags = (new TagForProjectsRepository())->getAll();
+            $networkTags = (new NetworkTagRepository())->getAll();
             $impactTags = (new ImpactTagRepository())->getAll();
             $dsiFocusTags = (new DsiFocusTagRepository())->getAll();
             $projectImpactTagsA = (new ProjectImpactTagARepository())->getTagNamesByProject($project);
             $projectImpactTagsB = (new ProjectDsiFocusTagRepository())->getTagNamesByProject($project);
             $projectImpactTagsC = (new ProjectImpactTagCRepository())->getTagNamesByProject($project);
             $projectTags = (new ProjectTagRepository())->getTagNamesByProject($project);
+            $projectNetworkTags = (new ProjectNetworkTagRepository())->getTagNamesByProject($project);
             $organisations = (new OrganisationRepositoryInAPC())->getAll();
             $projectOrganisations = (new OrganisationProjectRepository())->getOrganisationIDsForProject($project);
             $angularModules['fileUpload'] = true;
