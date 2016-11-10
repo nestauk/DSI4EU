@@ -1,5 +1,5 @@
 <?php
-use \DSI\Service\URL;
+use DSI\Service\URL;
 
 /** @var $loggedInUser \DSI\Entity\User */
 if (!isset($loggedInUser))
@@ -70,7 +70,7 @@ if (!isset($urlHandler))
                         <img class="footer-eu" src="<?php echo SITE_RELATIVE_PATH ?>/images/5000100-mono.png">
                     </div>
                     <div class="w-col w-col-11 w-col-medium-6 w-col-small-6 w-col-tiny-6">
-                        <div class="footer-small-print">DSI4EU is funded by the European Union</div>
+                        <div class="footer-small-print"><?php _e('DSI4EU is funded by the European Union') ?></div>
                     </div>
                 </div>
                 <div class="w-row">
@@ -78,15 +78,15 @@ if (!isset($urlHandler))
                         <img class="cc footer-eu" src="<?php echo SITE_RELATIVE_PATH ?>/images/88x31.png">
                     </div>
                     <div class="w-col w-col-11 w-col-medium-6 w-col-small-6 w-col-tiny-6">
-                        <div class="footer-small-print">All our work is licensed under a
-                            <span class="footer-link-small">
-                                <span xmlns="http://www.w3.org/1999/xhtml">
+                        <div class="footer-small-print">
+                            <?php echo sprintf(
+                                __('All our work is licensed under a %s, unless it says otherwise.'),
+                                '<span class="footer-link-small">
                                     <a class="footer-link-small"
                                        href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
-                                        Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>,
-                                </span>
-                            </span>
-                            <span>unless</span> it says otherwise.
+                                            Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>
+                                </span>'
+                            )?>
                         </div>
                     </div>
                 </div>
@@ -368,7 +368,7 @@ if (!isset($urlHandler))
                    ng-model="search.entry"
                    ng-focus="search.focused = true"
                    ng-blur="search.focused = false"
-                   placeholder="Search news, projects, organisations and case studies" type="text">
+                   placeholder="<?php _e('Search news, projects, organisations and case studies') ?>" type="text">
             <a class="cancel-search" ng-click="search.entry = ''" data-ix="close-search-block" href="#">Cancel</a>
         </form>
     </div>

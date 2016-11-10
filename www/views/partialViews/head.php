@@ -98,6 +98,9 @@ use DSI\Service\Sysctl;
     <link rel="stylesheet" type="text/css"
           href="<?php echo SITE_RELATIVE_PATH ?>/css/custom.css?<?php Sysctl::echoVersion() ?>">
 
+    <link rel="stylesheet" type="text/css"
+          href="<?php echo SITE_RELATIVE_PATH ?>/css/style.<?php echo \DSI\Service\Translate::getCurrentLang()?>.css?<?php Sysctl::echoVersion() ?>">
+
 <?php if (isset($loggedInUser) AND $loggedInUser) { ?>
     <style>
         .hero-cta {

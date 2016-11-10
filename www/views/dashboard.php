@@ -20,7 +20,7 @@ require __DIR__ . '/header.php';
             <div class="w-row">
                 <div class="w-col w-col-8 w-col-stack">
                     <h1 class="content-h1"><?php _ehtml('My dashboard') ?></h1>
-                    <p class="intro">Stay up to date on news, projects and organisations, and people</p>
+                    <p class="intro"><?php _e('Stay up to date on news, projects and organisations, and people')?></p>
                     <?php /* <p class="header-intro-descr">Dashboard explanation text</p> */ ?>
                 </div>
                 <div class="sidebar w-col w-col-4 w-col-stack">

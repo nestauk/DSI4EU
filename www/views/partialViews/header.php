@@ -46,17 +46,18 @@ if (!isset($urlHandler))
             <div class="full-menu-items w-row">
                 <div class="full-menu-col w-clearfix w-col w-col-4">
                     <div class="full-menu-links-block no-border">
-                        <h2 class="full-menu-h2">About DSI4EU</h2>
+                        <h2 class="full-menu-h2"><?php _e('About DSI4EU') ?></h2>
                         <a class="full-menu-link" href="<?php echo $urlHandler->aboutTheProject() ?>">
-                            About the project
+                            <?php _e('About the project') ?>
                         </a>
                         <a class="full-menu-link" href="<?php echo $urlHandler->partners() ?>">
-                            Partners
+                            <?php _e('Partners') ?>
                         </a>
                         <a class="full-menu-link" href="<?php echo $urlHandler->openDataResearchAndResources() ?>">
-                            Open data, research &amp; resources</a>
+                            <?php _e('Open data, research & resources') ?>
+                        </a>
                         <a class="full-menu-link" href="<?php echo $urlHandler->contactDSI() ?>">
-                            Contact DSI4EU
+                            <?php _e('Contact DSI4EU') ?>
                         </a>
                     </div>
                 </div>
@@ -87,23 +88,26 @@ if (!isset($urlHandler))
             </div>
             <div class="full-menu-items w-row">
                 <div class="full-menu-col w-clearfix w-col w-col-4">
-                    <h2 class="full-menu-h2">Funding &amp; Support</h2>
+                    <h2 class="full-menu-h2"><?php _e('Funding & support') ?></h2>
                     <div class="full-menu-links-block no-border">
-                        <a class="full-menu-link" href="<?php echo $urlHandler->funding() ?>">See all funding
-                            opportunities</a>
+                        <a class="full-menu-link" href="<?php echo $urlHandler->funding() ?>">
+                            <?php _e('See all funding opportunities')?>
+                        </a>
                     </div>
                 </div>
                 <div class="full-menu-col w-clearfix w-col w-col-4">
-                    <h2 class="full-menu-h2">Events</h2>
+                    <h2 class="full-menu-h2"><?php _e('Events')?></h2>
                     <div class="full-menu-links-block no-border">
-                        <a class="full-menu-link" href="<?php echo $urlHandler->events() ?>">See upcoming DSI events</a>
+                        <a class="full-menu-link" href="<?php echo $urlHandler->events() ?>">
+                            <?php _e('See upcoming DSI events')?>
+                        </a>
                     </div>
                 </div>
                 <div class="full-menu-col w-clearfix w-col w-col-4">
-                    <h2 class="full-menu-h2">News &amp; blogs</h2>
+                    <h2 class="full-menu-h2"><?php _e('News & blogs')?></h2>
                     <div class="full-menu-links-block no-border">
                         <a class="full-menu-link" href="<?php echo $urlHandler->blogPosts() ?>">
-                            See all news &amp; blogs
+                            <?php _e('See all news & blogs')?>
                         </a>
                     </div>
                 </div>

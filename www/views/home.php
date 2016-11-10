@@ -7,8 +7,7 @@
 /** @var $homePageCaseStudies \DSI\Entity\CaseStudy[] */
 /** @var $organisationsCount int */
 /** @var $projectsCount int */
-use \DSI\Service\URL;
-use \DSI\Entity\Image;
+use DSI\Entity\Image;use DSI\Service\URL;
 
 if (!isset($urlHandler))
     $urlHandler = new URL();
@@ -30,9 +29,10 @@ if (!isset($urlHandler))
     <div class="hero">
         <div class="w-row">
             <div class="w-col w-col-7">
-                <h1 class="home-hero-h1" data-ix="fadeinuponload-6">Digital Social Innovation</h1>
-                <h3 class="home-hero-h3 main" data-ix="fadeinuponload-7">Showcase your project, meet collaborators and
-                    find funding</h3>
+                <h1 class="home-hero-h1" data-ix="fadeinuponload-6"><?php _e('Digital social innovation') ?></h1>
+                <h3 class="home-hero-h3 main" data-ix="fadeinuponload-7">
+                    <?php _e('SHOWCASE YOUR PROJECT, MEET COLLABORATORS AND FIND FUNDING') ?>
+                </h3>
             </div>
             <div class="w-col w-col-5">
                 <img class="home-hero-img" data-ix="fadeinuponload-8"
@@ -46,10 +46,21 @@ if (!isset($urlHandler))
         <div class="w-clearfix w-col w-col-9 w-col-stack">
             <div class="cta-text">
                 <div class="home-hero-cta" data-ix="fadeinuponload-10">
-                    Join the community of
-                    <span class="sub-bold"><?php echo number_format($organisationsCount)?> organisations</span>
-                    and <span class="sub-bold"><?php echo number_format($projectsCount)?> projects</span>
-                    USING DIGITAL TECHNOLOGIES TO TACKLE SOCIAL CHALLENGES
+                    <?php echo sprintf(
+                        __('Join the community of %s organisations and %s projects'),
+                        '<span class="sub-bold">'.
+                        sprintf(
+                            __('%s organisations'),
+                            number_format($organisationsCount)
+                        )
+                        .'</span>',
+                        '<span class="sub-bold">'.
+                        sprintf(
+                            __('%s projects'),
+                            number_format($projectsCount)
+                        )
+                        .'</span>'
+                    )?>
                 </div>
             </div>
         </div>
@@ -57,7 +68,7 @@ if (!isset($urlHandler))
             <div class="signn">
                 <a class="log-in-link sign-up w-clearfix w-inline-block" data-ix="log-in-arrow"
                    href="<?php echo $urlHandler->login() ?>">
-                    <div class="login-li menu-li">Join now</div>
+                    <div class="login-li menu-li"><?php _e('JOIN NOW')?></div>
                     <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
                 </a>
             </div>
@@ -68,9 +79,9 @@ if (!isset($urlHandler))
     <div class="w-row">
         <div class="top-3-col w-col w-col-4" data-ix="fadeinuponload-12">
             <div class="top-3-link" data-ix="underline">
-                <h3 class="top3-h3">Funding</h3>
+                <h3 class="top3-h3"><?php _e('FUNDING')?></h3>
                 <div class="top3-underline" data-ix="new-interaction-2"></div>
-                <p class="top-3-p">Use our funding directory to find opportunities for your project</p>
+                <p class="top-3-p"><?php _e('Use our funding directory to find opportunities for your project')?></p>
                 <a class="log-in-link read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
                    href="<?php echo $urlHandler->funding() ?>">
                     <div class="login-li menu-li readmore-li">Read more</div>
@@ -82,7 +93,7 @@ if (!isset($urlHandler))
             <div class="top-3-link" data-ix="underline">
                 <h3 class="top3-h3">Events</h3>
                 <div class="top3-underline" data-ix="new-interaction-2"></div>
-                <p class="top-3-p">Explore DSI events happening around Europe</p>
+                <p class="top-3-p"><?php _e('Explore DSI events happening around Europe')?></p>
                 <a class="log-in-link read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
                    href="<?php echo $urlHandler->events() ?>">
                     <div class="login-li menu-li readmore-li">Read more</div>
@@ -94,8 +105,9 @@ if (!isset($urlHandler))
             <div class="top-3-link" data-ix="underline">
                 <h3 class="top3-h3">News &amp; Blogs</h3>
                 <div class="top3-underline" data-ix="new-interaction-2"></div>
-                <p class="top-3-p">Our blog features stories of the people and projects pioneering digital social
-                    innovation</p>
+                <p class="top-3-p">
+                    <?php _e('Our blog features stories of the people and projects pioneering digital social innovation')?>
+                </p>
                 <a class="log-in-link read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
                    href="<?php echo $urlHandler->blogPosts() ?>">
                     <div class="login-li menu-li readmore-li">Read more</div>
@@ -107,8 +119,9 @@ if (!isset($urlHandler))
 </div>
 <div class="stats-bg">
     <div class="content">
-        <h2 class="centered h2-large" data-ix="fadeinuponload-2">EXPLORE EUROPE’S GROWING NETWORK OF DIGITAL SOCIAL
-            INNOVATION</h2>
+        <h2 class="centered h2-large" data-ix="fadeinuponload-2">
+            <?php _e('EXPLORE EUROPE’S GROWING NETWORK OF DIGITAL SOCIAL INNOVATION')?>
+        </h2>
         <div class="stat-text w-row">
             <div class="w-col w-col-5">
                 <div class="number-of-orgs"
@@ -129,7 +142,7 @@ if (!isset($urlHandler))
 <div class="home-page-events">
     <div class="content-block cs">
         <h3 class="centered title">Case studies</h3>
-        <div class="sub-header-centre">In need of inspiration?</div>
+        <div class="sub-header-centre"><?php _e('IN NEED OF INSPIRATION?')?></div>
         <p class="centered">
             Short stories introducing digital social innovations which we love
         </p>

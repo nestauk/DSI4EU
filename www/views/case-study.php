@@ -32,7 +32,7 @@ require __DIR__ . '/header.php';
                     </a>
                 <?php } ?>
 
-                <h3 class="cse side-bar-h3">Info</h3>
+                <h3 class="cse side-bar-h3"><?php _e('Info')?></h3>
                 <div><?php echo show_input($caseStudy->getInfoText()) ?></div>
                 <a class="log-in-link long read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
                    href="<?php echo $caseStudy->getUrl() ?>">
