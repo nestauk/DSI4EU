@@ -19,45 +19,49 @@ if (!isset($urlHandler))
             </a>
         </div>
         <div class="w-col w-col-2">
-            <h3 class="footer-h3">People</h3>
+            <h3 class="footer-h3"><?php _ehtml('People') ?></h3>
             <ul class="w-list-unstyled">
                 <?php if (!$loggedInUser) { ?>
                     <li class="footer-link">
-                        <a class="footer-link" href="<?php echo $urlHandler->register() ?>">Join DSI4EU</a>
+                        <a class="footer-link"
+                           href="<?php echo $urlHandler->register() ?>"><?php _ehtml('Join DSI4EU') ?></a>
                     </li>
                 <?php } ?>
                 <li class="footer-link">
-                    <a class="footer-link" href="<?php echo $urlHandler->termsOfUse() ?>">Terms of use</a>
+                    <a class="footer-link"
+                       href="<?php echo $urlHandler->termsOfUse() ?>"><?php _ehtml('Terms of use') ?></a>
                 </li>
                 <li class="footer-link">
-                    <a class="footer-link" href="<?php echo $urlHandler->privacyPolicy() ?>">Privacy policy</a>
-                </li>
-            </ul>
-        </div>
-        <div class="w-col w-col-2">
-            <h3 class="footer-h3">Projects</h3>
-            <ul class="w-list-unstyled">
-                <li class="footer-link">
-                    <a class="footer-link" href="<?php echo $urlHandler->projects() ?>">View projects</a>
+                    <a class="footer-link"
+                       href="<?php echo $urlHandler->privacyPolicy() ?>"><?php _ehtml('Privacy policy') ?></a>
                 </li>
             </ul>
         </div>
         <div class="w-col w-col-2">
-            <h3 class="footer-h3">Organisations</h3>
+            <h3 class="footer-h3"><?php _ehtml('Projects') ?></h3>
             <ul class="w-list-unstyled">
                 <li class="footer-link">
-                    <a class="footer-link" href="<?php echo $urlHandler->organisations() ?>">View organisations</a>
+                    <a class="footer-link" href="<?php echo $urlHandler->projects() ?>"><?php _ehtml('View projects') ?></a>
                 </li>
             </ul>
         </div>
         <div class="w-col w-col-2">
-            <h3 class="footer-h3">Development</h3>
+            <h3 class="footer-h3"><?php _ehtml('Organisations') ?></h3>
             <ul class="w-list-unstyled">
                 <li class="footer-link">
-                    <a class="footer-link" href="<?php echo $urlHandler->updates() ?>">Updates</a>
+                    <a class="footer-link"
+                       href="<?php echo $urlHandler->organisations() ?>"><?php _ehtml('View organisations') ?></a>
+                </li>
+            </ul>
+        </div>
+        <div class="w-col w-col-2">
+            <h3 class="footer-h3"><?php _ehtml('Development') ?></h3>
+            <ul class="w-list-unstyled">
+                <li class="footer-link">
+                    <a class="footer-link" href="<?php echo $urlHandler->updates() ?>"><?php _ehtml('Updates') ?></a>
                 </li>
                 <li class="footer-link">
-                    <a class="footer-link" href="<?php echo $urlHandler->feedback() ?>">Feedback</a>
+                    <a class="footer-link" href="<?php echo $urlHandler->feedback() ?>"><?php _ehtml('Feedback') ?></a>
                 </li>
             </ul>
         </div>
@@ -70,7 +74,7 @@ if (!isset($urlHandler))
                         <img class="footer-eu" src="<?php echo SITE_RELATIVE_PATH ?>/images/5000100-mono.png">
                     </div>
                     <div class="w-col w-col-11 w-col-medium-6 w-col-small-6 w-col-tiny-6">
-                        <div class="footer-small-print"><?php _e('DSI4EU is funded by the European Union') ?></div>
+                        <div class="footer-small-print"><?php _ehtml('DSI4EU is funded by the European Union') ?></div>
                     </div>
                 </div>
                 <div class="w-row">
@@ -86,7 +90,7 @@ if (!isset($urlHandler))
                                        href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
                                             Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>
                                 </span>'
-                            )?>
+                            ) ?>
                         </div>
                     </div>
                 </div>
@@ -360,7 +364,7 @@ if (!isset($urlHandler))
 
 <div class="search-block" ng-controller="SearchController">
     <div class="close-search" data-ix="close-search-block">+</div>
-    <h1 class="search-h1">Search</h1>
+    <h1 class="search-h1"><?php _ehtml('Search') ?></h1>
     <div class="w-form">
         <form id="email-form" name="email-form" autocomplete="off">
             <input class="main-search w-input" data-name="search" id="search" maxlength="256" name="search"
@@ -368,14 +372,15 @@ if (!isset($urlHandler))
                    ng-model="search.entry"
                    ng-focus="search.focused = true"
                    ng-blur="search.focused = false"
-                   placeholder="<?php _e('Search news, projects, organisations and case studies') ?>" type="text">
-            <a class="cancel-search" ng-click="search.entry = ''" data-ix="close-search-block" href="#">Cancel</a>
+                   placeholder="<?php _ehtml('Search news, projects, organisations and case studies') ?>" type="text">
+            <a class="cancel-search" ng-click="search.entry = ''" data-ix="close-search-block"
+               href="#"><?php _ehtml('Cancel') ?></a>
         </form>
     </div>
     <div ng-show="search.entry.length >= 3">
         <div class="main-search-results w-row">
             <div class="search-col w-col w-col-3">
-                <h2 class="full-menu-h2">News &amp; Blogs</h2>
+                <h2 class="full-menu-h2"><?php _ehtml('News & blogs')?></h2>
                 <a ng-repeat="post in search.blogPosts" class="full-menu-link" href="{{post.url}}">
                     {{post.name}}
                 </a>
@@ -407,7 +412,7 @@ if (!isset($urlHandler))
         <div class="signn">
             <a class="large log-in-link search-results sign-up w-clearfix w-inline-block" data-ix="log-in-arrow"
                href="<?php echo $urlHandler->search() ?>{{search.entry}}">
-                <div class="login-li menu-li">See all results</div>
+                <div class="login-li menu-li"><?php _ehtml('See all results')?></div>
                 <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
             </a>
         </div>

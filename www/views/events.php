@@ -11,26 +11,24 @@ require __DIR__ . '/header.php'
         <div class="content-block">
             <div class="w-row">
                 <div class="w-col w-col-8 w-col-stack">
-                    <h1 class="content-h1">Events</h1>
-                    <p class="intro">Here you can find out about DSI events taking place across Europe.</p>
-                    <p>DSI events include everything from large conferences to small local hackathons. As long as it
-                        focusses on how digital technologies can be used to address social challenges, we are interested
-                        in listing it and sharing it with the rest of the community.</p>
+                    <h1 class="content-h1"><?php _ehtml('Events') ?></h1>
+                    <p class="intro"><?php _ehtml('Here you can find out about DSI events') ?></p>
+                    <p><?php _ehtml('DSI events include everything from large conferences to small local hackathons.') ?></p>
                 </div>
                 <div class="sidebar w-col w-col-4 w-col-stack">
-                    <h1 class="content-h1 side-bar-space-h1">Add an event</h1>
-                    <p>Are you organising a DSI event? Let us know and we will add it to the list.</p>
+                    <h1 class="content-h1 side-bar-space-h1"><?php _ehtml('Add an event') ?></h1>
+                    <p><?php _ehtml('Are you organising a DSI event?') ?></p>
                     <?php if ($userCanAddEvent) { ?>
                         <a class="log-in-link long read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
                            href="<?php echo $urlHandler->addEvent() ?>">
-                            <div class="login-li long menu-li readmore-li">Add an event</div>
+                            <div class="login-li long menu-li readmore-li"><?php _ehtml('Add an event') ?></div>
                             <img class="login-arrow"
                                  src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
                         </a>
                     <?php } else { ?>
                         <a class="log-in-link long read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
                            href="http://bit.ly/DSIEvent" target="_blank">
-                            <div class="login-li long menu-li readmore-li">Add an event</div>
+                            <div class="login-li long menu-li readmore-li"><?php _ehtml('Add an event') ?></div>
                             <img class="login-arrow"
                                  src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
                         </a>
@@ -46,11 +44,12 @@ require __DIR__ . '/header.php'
                         <div class="filter-bar info-card">
                             <div class="w-form">
                                 <form id="email-form" name="email-form">
-                                    <h3 class="sidebar-h3">Filter events</h3>
+                                    <h3 class="sidebar-h3"><?php _ehtml('Filter events') ?></h3>
                                     <div class="search-div">
                                         <input class="sidebar-search-field w-input" data-ix="hide-search-icon"
                                                data-name="Search 3" id="Search-3" maxlength="256" name="Search-3"
-                                               placeholder="Search by keyword" type="text" ng-model="searchName">
+                                               placeholder="<?php _ehtml('Search by keyword') ?>" type="text"
+                                               ng-model="searchName">
                                         <img class="search-mag"
                                              src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-search.png">
                                     </div>
@@ -62,7 +61,8 @@ require __DIR__ . '/header.php'
                                         <option value="2">Free</option>
                                     </select>
                                     */ ?>
-                                    <label class="dropdown-label" for="field-2">Event location</label>
+                                    <label class="dropdown-label"
+                                           for="field-2"><?php _ehtml('Event location') ?></label>
                                     <select class="w-select" ng-model="searchCountryID">
                                         <option ng-repeat="country in data.countries" value="{{country.id}}">
                                             {{country.name}}
@@ -85,18 +85,18 @@ require __DIR__ . '/header.php'
                                 </div>
                                 <p class="funding-descr" ng-bind="event.shortDescription"></p>
                                 <p class="funding-descr">
-                                <span ng-show="event.price">
-                                    Cost: {{event.price}}
-                                </span>
+                                    <span ng-show="event.price">
+                                        <?php _ehtml('Cost') ?>: {{event.price}}
+                                    </span>
                                     <span ng-hide="event.price">
-                                    This is a <strong>free</strong> event
-                                </span>
+                                        <?php _ehtml('This is a free event')?>
+                                    </span>
                                 </p>
                                 <div class="funding-closing-date" ng-show="event.startDate">
-                                    <strong>Event date:</strong>
+                                    <strong><?php _ehtml('Event date')?>:</strong>
                                     <span ng-bind="event.startDate"></span>
                                 </div>
-                                <div class="funding-country funding-new" ng-show="event.isNew">New event</div>
+                                <div class="funding-country funding-new" ng-show="event.isNew"><?php _ehtml('New event')?></div>
                             </a>
                         </div>
                     </div>

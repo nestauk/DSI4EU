@@ -9,7 +9,7 @@ require __DIR__ . '/header.php';
     <div ng-controller="EventAddController">
         <div class="header-section-grey w-section">
             <div class="container-wide">
-                <h1 class="header-centre">Add a new event</h1>
+                <h1 class="header-centre"><?php _ehtml('Add an event')?></h1>
             </div>
         </div>
         <div class="section-white w-section">
