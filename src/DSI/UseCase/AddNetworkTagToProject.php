@@ -2,10 +2,10 @@
 
 namespace DSI\UseCase;
 
+use DSI\Entity\Project;
 use DSI\Entity\ProjectNetworkTag;
 use DSI\Repository\NetworkTagRepository;
 use DSI\Repository\ProjectNetworkTagRepository;
-use DSI\Repository\ProjectRepository;
 use DSI\Service\ErrorHandler;
 
 class AddNetworkTagToProject
@@ -13,62 +13,55 @@ class AddNetworkTagToProject
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var ProjectNetworkTagRepository*/
+    /** @var ProjectNetworkTagRepository */
     private $projectNetworkTagRepo;
 
-    /** @var ProjectRepository */
-    private $projectRepository;
+    /** @var String */
+    private $tag;
 
-    /** @var AddNetworkTagToProject_Data */
-    private $data;
-
-    public function __construct()
-    {
-        $this->data = new AddNetworkTagToProject_Data();
-    }
+    /** @var Project */
+    private $project;
 
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
         $this->projectNetworkTagRepo = new ProjectNetworkTagRepository();
-        $this->projectRepository = new ProjectRepository();
 
         $networkTagRepo = new NetworkTagRepository();
 
-        if ($networkTagRepo->nameExists($this->data()->tag)) {
-            $tag = $networkTagRepo->getByName($this->data()->tag);
+        if ($networkTagRepo->nameExists($this->tag)) {
+            $tag = $networkTagRepo->getByName($this->tag);
         } else {
             $createTag = new CreateNetworkTag();
-            $createTag->data()->name = $this->data()->tag;
+            $createTag->data()->name = $this->tag;
             $createTag->exec();
             $tag = $createTag->getTag();
         }
 
-        if($this->projectNetworkTagRepo->projectHasTagName($this->data()->projectID, $this->data()->tag)) {
+        if ($this->projectNetworkTagRepo->projectHasTagName($this->project->getId(), $this->tag)) {
             $this->errorHandler->addTaggedError('tag', 'Project already has this tag');
             $this->errorHandler->throwIfNotEmpty();
         }
-            
+
         $projectNetworkTag = new ProjectNetworkTag();
         $projectNetworkTag->setTag($tag);
-        $projectNetworkTag->setProject( $this->projectRepository->getById($this->data()->projectID) );
+        $projectNetworkTag->setProject($this->project);
         $this->projectNetworkTagRepo->add($projectNetworkTag);
     }
 
     /**
-     * @return AddNetworkTagToProject_Data
+     * @param String $tag
      */
-    public function data()
+    public function setTag(String $tag)
     {
-        return $this->data;
+        $this->tag = $tag;
     }
-}
 
-class AddNetworkTagToProject_Data
-{
-    /** @var string */
-    public $tag;
-
-    /** @var int */
-    public $projectID;
+    /**
+     * @param Project $project
+     */
+    public function setProject(Project $project)
+    {
+        $this->project = $project;
+    }
 }

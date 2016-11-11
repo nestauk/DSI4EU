@@ -10,8 +10,8 @@ use DSI\NotEnoughData;
 use DSI\NotFound;
 use DSI\Repository\CountryRegionRepository;
 use DSI\Repository\OrganisationProjectRepository;
-use DSI\Repository\ProjectImpactTagARepository;
 use DSI\Repository\ProjectDsiFocusTagRepository;
+use DSI\Repository\ProjectImpactTagARepository;
 use DSI\Repository\ProjectImpactTagCRepository;
 use DSI\Repository\ProjectLinkRepository;
 use DSI\Repository\ProjectMemberRepository;
@@ -132,16 +132,16 @@ class UpdateProject
         foreach ($this->data()->networkTags AS $newNetworkTagName) {
             if (!in_array($newNetworkTagName, $projectNetworkTags)) {
                 $addTag = new AddNetworkTagToProject();
-                $addTag->data()->projectID = $this->data()->project->getId();
-                $addTag->data()->tag = $newNetworkTagName;
+                $addTag->setProject($this->data()->project);
+                $addTag->setTag($newNetworkTagName);
                 $addTag->exec();
             }
         }
         foreach ($projectNetworkTags AS $oldTagName) {
             if (!in_array($oldTagName, $this->data()->networkTags)) {
                 $remTag = new RemoveNetworkTagFromProject();
-                $remTag->data()->projectID = $this->data()->project->getId();
-                $remTag->data()->tag = $oldTagName;
+                $remTag->setProject($this->data()->project);
+                $remTag->setTag($oldTagName);
                 $remTag->exec();
             }
         }

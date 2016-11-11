@@ -8,6 +8,7 @@ use DSI\Entity\User;
 use DSI\Repository\OrganisationLinkRepository;
 use DSI\Repository\OrganisationMemberRepository;
 use DSI\Repository\OrganisationMemberRequestRepository;
+use DSI\Repository\OrganisationNetworkTagRepository;
 use DSI\Repository\OrganisationProjectRepository;
 use DSI\Repository\OrganisationRepository;
 use DSI\Repository\OrganisationTagRepository;
@@ -287,6 +288,7 @@ class OrganisationController
         } else
         */
         $tags = (new OrganisationTagRepository())->getTagsNameByOrganisationID($organisation->getId());
+        $networkTags = (new OrganisationNetworkTagRepository())->getTagNamesByOrganisation($organisation);
         $pageTitle = $organisation->getName();
         require __DIR__ . '/../../../www/views/organisation.php';
 

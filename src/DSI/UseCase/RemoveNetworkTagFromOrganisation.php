@@ -2,11 +2,10 @@
 
 namespace DSI\UseCase;
 
+use DSI\Entity\Organisation;
 use DSI\Entity\OrganisationNetworkTag;
 use DSI\Repository\NetworkTagRepository;
 use DSI\Repository\OrganisationNetworkTagRepository;
-use DSI\Repository\OrganisationRepository;
-use DSI\Repository\UserRepository;
 use DSI\Service\ErrorHandler;
 
 class RemoveNetworkTagFromOrganisation
@@ -17,13 +16,11 @@ class RemoveNetworkTagFromOrganisation
     /** @var OrganisationNetworkTagRepository */
     private $organisationNetworkTagRepo;
 
-    /** @var RemoveNetworkTagFromOrganisation_Data */
-    private $data;
+    /** @var String */
+    private $tag;
 
-    public function __construct()
-    {
-        $this->data = new RemoveNetworkTagFromOrganisation_Data();
-    }
+    /** @var Organisation */
+    private $organisation;
 
     public function exec()
     {
@@ -31,43 +28,40 @@ class RemoveNetworkTagFromOrganisation
         $this->organisationNetworkTagRepo = new OrganisationNetworkTagRepository();
 
         $networkTagRepo = new NetworkTagRepository();
-        $organisationRepo = new OrganisationRepository();
-        $userRepo = new UserRepository();
 
-        if ($networkTagRepo->nameExists($this->data()->tag)) {
-            $tag = $networkTagRepo->getByName($this->data()->tag);
+        if ($networkTagRepo->nameExists($this->tag)) {
+            $tag = $networkTagRepo->getByName($this->tag);
         } else {
             $createTag = new CreateNetworkTag();
-            $createTag->data()->name = $this->data()->tag;
+            $createTag->data()->name = $this->tag;
             $createTag->exec();
             $tag = $createTag->getTag();
         }
 
-        if (!$this->organisationNetworkTagRepo->organisationHasTagName($this->data()->organisationID, $this->data()->tag)) {
+        if (!$this->organisationNetworkTagRepo->organisationHasTagName($this->organisation->getId(), $this->tag)) {
             $this->errorHandler->addTaggedError('tag', 'Organisation does not have this tag');
             $this->errorHandler->throwIfNotEmpty();
         }
 
         $organisationTag = new OrganisationNetworkTag();
         $organisationTag->setTag($tag);
-        $organisationTag->setOrganisation($organisationRepo->getById($this->data()->organisationID));
+        $organisationTag->setOrganisation($this->organisation);
         $this->organisationNetworkTagRepo->remove($organisationTag);
     }
 
     /**
-     * @return RemoveNetworkTagFromOrganisation_Data
+     * @param String $tag
      */
-    public function data()
+    public function setTag(String $tag)
     {
-        return $this->data;
+        $this->tag = $tag;
     }
-}
 
-class RemoveNetworkTagFromOrganisation_Data
-{
-    /** @var string */
-    public $tag;
-
-    /** @var int */
-    public $organisationID;
+    /**
+     * @param Organisation $organisation
+     */
+    public function setOrganisation(Organisation $organisation)
+    {
+        $this->organisation = $organisation;
+    }
 }

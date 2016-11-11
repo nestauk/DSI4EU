@@ -2,10 +2,10 @@
 
 namespace DSI\UseCase;
 
+use DSI\Entity\Organisation;
 use DSI\Entity\OrganisationNetworkTag;
 use DSI\Repository\NetworkTagRepository;
 use DSI\Repository\OrganisationNetworkTagRepository;
-use DSI\Repository\OrganisationRepository;
 use DSI\Service\ErrorHandler;
 
 class AddNetworkTagToOrganisation
@@ -13,62 +13,55 @@ class AddNetworkTagToOrganisation
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var OrganisationNetworkTagRepository*/
+    /** @var OrganisationNetworkTagRepository */
     private $organisationNetworkTagRepo;
 
-    /** @var OrganisationRepository */
-    private $organisationRepo;
+    /** @var String */
+    private $tag;
 
-    /** @var AddNetworkTagToOrganisation_Data */
-    private $data;
-
-    public function __construct()
-    {
-        $this->data = new AddNetworkTagToOrganisation_Data();
-    }
+    /** @var Organisation */
+    private $organisation;
 
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
         $this->organisationNetworkTagRepo = new OrganisationNetworkTagRepository();
-        $this->organisationRepo = new OrganisationRepository();
 
         $networkTagRepo = new NetworkTagRepository();
 
-        if ($networkTagRepo->nameExists($this->data()->tag)) {
-            $tag = $networkTagRepo->getByName($this->data()->tag);
+        if ($networkTagRepo->nameExists($this->tag)) {
+            $tag = $networkTagRepo->getByName($this->tag);
         } else {
             $createTag = new CreateNetworkTag();
-            $createTag->data()->name = $this->data()->tag;
+            $createTag->data()->name = $this->tag;
             $createTag->exec();
             $tag = $createTag->getTag();
         }
 
-        if($this->organisationNetworkTagRepo->organisationHasTagName($this->data()->organisationID, $this->data()->tag)) {
+        if ($this->organisationNetworkTagRepo->organisationHasTagName($this->organisation->getId(), $this->tag)) {
             $this->errorHandler->addTaggedError('tag', 'Organisation already has this tag');
             $this->errorHandler->throwIfNotEmpty();
         }
-            
+
         $organisationNetworkTag = new OrganisationNetworkTag();
         $organisationNetworkTag->setTag($tag);
-        $organisationNetworkTag->setOrganisation( $this->organisationRepo->getById($this->data()->organisationID) );
+        $organisationNetworkTag->setOrganisation($this->organisation);
         $this->organisationNetworkTagRepo->add($organisationNetworkTag);
     }
 
     /**
-     * @return AddNetworkTagToOrganisation_Data
+     * @param String $tag
      */
-    public function data()
+    public function setTag(String $tag)
     {
-        return $this->data;
+        $this->tag = $tag;
     }
-}
 
-class AddNetworkTagToOrganisation_Data
-{
-    /** @var string */
-    public $tag;
-
-    /** @var int */
-    public $organisationID;
+    /**
+     * @param Organisation $organisation
+     */
+    public function setOrganisation(Organisation $organisation)
+    {
+        $this->organisation = $organisation;
+    }
 }

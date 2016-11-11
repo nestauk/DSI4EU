@@ -2,11 +2,10 @@
 
 namespace DSI\UseCase;
 
+use DSI\Entity\Project;
 use DSI\Entity\ProjectNetworkTag;
 use DSI\Repository\NetworkTagRepository;
 use DSI\Repository\ProjectNetworkTagRepository;
-use DSI\Repository\ProjectRepository;
-use DSI\Repository\UserRepository;
 use DSI\Service\ErrorHandler;
 
 class RemoveNetworkTagFromProject
@@ -17,13 +16,11 @@ class RemoveNetworkTagFromProject
     /** @var ProjectNetworkTagRepository */
     private $projectNetworkTagRepo;
 
-    /** @var RemoveNetworkTagFromProject_Data */
-    private $data;
+    /** @var String */
+    private $tag;
 
-    public function __construct()
-    {
-        $this->data = new RemoveNetworkTagFromProject_Data();
-    }
+    /** @var Project */
+    private $project;
 
     public function exec()
     {
@@ -31,43 +28,40 @@ class RemoveNetworkTagFromProject
         $this->projectNetworkTagRepo = new ProjectNetworkTagRepository();
 
         $networkTagRepo = new NetworkTagRepository();
-        $projectRepo = new ProjectRepository();
-        $userRepo = new UserRepository();
 
-        if ($networkTagRepo->nameExists($this->data()->tag)) {
-            $tag = $networkTagRepo->getByName($this->data()->tag);
+        if ($networkTagRepo->nameExists($this->tag)) {
+            $tag = $networkTagRepo->getByName($this->tag);
         } else {
             $createTag = new CreateNetworkTag();
-            $createTag->data()->name = $this->data()->tag;
+            $createTag->data()->name = $this->tag;
             $createTag->exec();
             $tag = $createTag->getTag();
         }
 
-        if (!$this->projectNetworkTagRepo->projectHasTagName($this->data()->projectID, $this->data()->tag)) {
+        if (!$this->projectNetworkTagRepo->projectHasTagName($this->project->getId(), $this->tag)) {
             $this->errorHandler->addTaggedError('tag', 'Project does not have this tag');
             $this->errorHandler->throwIfNotEmpty();
         }
 
         $projectTag = new ProjectNetworkTag();
         $projectTag->setTag($tag);
-        $projectTag->setProject($projectRepo->getById($this->data()->projectID));
+        $projectTag->setProject($this->project);
         $this->projectNetworkTagRepo->remove($projectTag);
     }
 
     /**
-     * @return RemoveNetworkTagFromProject_Data
+     * @param String $tag
      */
-    public function data()
+    public function setTag(String $tag)
     {
-        return $this->data;
+        $this->tag = $tag;
     }
-}
 
-class RemoveNetworkTagFromProject_Data
-{
-    /** @var string */
-    public $tag;
-
-    /** @var int */
-    public $projectID;
+    /**
+     * @param Project $project
+     */
+    public function setProject(Project $project)
+    {
+        $this->project = $project;
+    }
 }

@@ -151,16 +151,16 @@ class UpdateOrganisation
         foreach ($this->data()->networkTags AS $newNetworkTagName) {
             if (!in_array($newNetworkTagName, $orgNetworkTags)) {
                 $addTag = new AddNetworkTagToOrganisation();
-                $addTag->data()->organisationID = $this->data()->organisation->getId();
-                $addTag->data()->tag = $newNetworkTagName;
+                $addTag->setOrganisation($this->data()->organisation);
+                $addTag->setTag($newNetworkTagName);
                 $addTag->exec();
             }
         }
         foreach ($orgNetworkTags AS $oldTagName) {
             if (!in_array($oldTagName, $this->data()->networkTags)) {
                 $remTag = new RemoveNetworkTagFromOrganisation();
-                $remTag->data()->organisationID = $this->data()->organisation->getId();
-                $remTag->data()->tag = $oldTagName;
+                $remTag->setOrganisation($this->data()->organisation);
+                $remTag->setTag($oldTagName);
                 $remTag->exec();
             }
         }
@@ -275,7 +275,7 @@ class UpdateOrganisation
 
     private function setLinks()
     {
-        $this->data()->links = (array) $this->data()->links;
+        $this->data()->links = (array)$this->data()->links;
         $organisationLinks = (new OrganisationLinkRepository())->getLinksByOrganisationID($this->data()->organisation->getId());
         foreach ($this->data()->links AS $newLink) {
             if (!in_array($newLink, $organisationLinks)) {

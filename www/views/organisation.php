@@ -14,6 +14,7 @@ require __DIR__ . '/header.php';
 /** @var $partnerOrganisations \DSI\Entity\Organisation[] */
 /** @var $links string[] */
 /** @var $tags string[] */
+/** @var $networkTags string[] */
 
 if (!isset($urlHandler))
     $urlHandler = new \DSI\Service\URL();
@@ -117,9 +118,17 @@ if (!isset($urlHandler))
                                  src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
                         </a>
                     <?php } ?>
+
                     <?php if ($tags) { ?>
                         <h3 class="cse side-bar-h3">Tagged under</h3>
                         <?php foreach ($tags AS $tag) { ?>
+                            <div class="tag"><?php echo show_input($tag) ?></div>
+                        <?php } ?>
+                    <?php } ?>
+
+                    <?php if ($networkTags) { ?>
+                        <h3 class="cse side-bar-h3">Network tags</h3>
+                        <?php foreach ($networkTags AS $tag) { ?>
                             <div class="tag"><?php echo show_input($tag) ?></div>
                         <?php } ?>
                     <?php } ?>
