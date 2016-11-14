@@ -11,6 +11,7 @@ require __DIR__ . '/header.php';
 /** @var $organisationTypes \DSI\Entity\OrganisationType[] */
 /** @var $organisationSizes \DSI\Entity\OrganisationSize[] */
 /** @var $organisationProjects \DSI\Entity\OrganisationProject[] */
+/** @var $organisationMembers \DSI\Entity\User[] */
 /** @var $partnerOrganisations \DSI\Entity\Organisation[] */
 /** @var $links string[] */
 /** @var $tags string[] */
@@ -37,23 +38,36 @@ if (!isset($urlHandler))
                     <div class="intro org"><?php echo show_input($organisation->getShortDescription()) ?></div>
                     <div class="intro org"><?php echo $organisation->getDescription() ?></div>
                     <div class="involved">
-                        <h3 class="descr-h3 space"><?php echo show_input($organisation->getName()) ?> is involved
-                            with:</h3>
+                        <h3 class="descr-h3 space">
+                            <?php echo show_input(sprintf(
+                                __('%s is involved with'),
+                                $organisation->getName()
+                            ))?>:
+                        </h3>
                         <div class="w-row">
                             <div class="w-col w-col-6">
-                                <h4 class="involved-h4 orgs-h">Projects</h4>
+                                <h4 class="involved-h4 orgs-h"><?php _ehtml('Projects')?></h4>
                                 <?php foreach ($organisationProjects AS $organisationProject) { ?>
                                     <?php $project = $organisationProject->getProject() ?>
                                     <a class="sidebar-link" href="<?php echo $urlHandler->project($project) ?>">
-                                        <span class="green">-&nbsp;</span><?php echo show_input($project->getName()) ?>
+                                        <span class="green">- </span>
+                                        <?php echo show_input($project->getName()) ?>
+                                    </a>
+                                <?php } ?>
+
+                                <h4 class="involved-h4 orgs-h"><?php _ehtml('Members')?></h4>
+                                <?php foreach ($organisationMembers AS $member) { ?>
+                                    <a class="sidebar-link" href="<?php echo $urlHandler->profile($member) ?>">
+                                        <span class="green">- </span>
+                                        <?php echo show_input($member->getFullName()) ?>
                                     </a>
                                 <?php } ?>
                             </div>
                             <div class="w-col w-col-6">
-                                <h4 class="involved-h4 orgs-h">Organisations</h4>
+                                <h4 class="involved-h4 orgs-h"><?php _ehtml('Organisations')?></h4>
                                 <?php foreach ($partnerOrganisations AS $org) { ?>
                                     <a class="sidebar-link" href="<?php echo $urlHandler->organisation($org) ?>">
-                                        <span class="green">-&nbsp;</span><?php echo show_input($org->getName()) ?>
+                                        <span class="green">- </span><?php echo show_input($org->getName()) ?>
                                     </a>
                                 <?php } ?>
                             </div>
@@ -65,39 +79,46 @@ if (!isset($urlHandler))
                         <h3 class="cse side-bar-h3">Actions</h3>
                         <?php if ($userCanEditOrganisation) { ?>
                             <a class="sidebar-link" href="<?php echo $urlHandler->organisationEdit($organisation) ?>">
-                                <span class="green">-&nbsp;</span>Edit organisation
+                                <span class="green">-&nbsp;</span>
+                                <?php _ehtml('Edit organisation')?>
                             </a>
                             <?php if ($isOwner OR ($loggedInUser AND $loggedInUser->isSysAdmin())) { ?>
                                 <a class="sidebar-link"
                                    href="<?php echo $urlHandler->organisationOwnerEdit($organisation) ?>">
-                                    <span class="green">-&nbsp;</span>Change owner
+                                    <span class="green">-&nbsp;</span>
+                                    <?php _ehtml('Change owner')?>
                                 </a>
                                 <a class="sidebar-link remove" href="#" ng-click="confirmDelete()">
-                                    <span class="green">-&nbsp;</span>Delete organisation
+                                    <span class="green">-&nbsp;</span>
+                                    <?php _ehtml('Delete organisation')?>
                                 </a>
                             <?php } ?>
                         <?php } else { ?>
                             <a class="sidebar-link remove" href="#" ng-click="report()">
-                                <span class="green">-&nbsp;</span>Report organisation
+                                <span class="green">-&nbsp;</span>
+                                <?php _ehtml('Report organisation')?>
                             </a>
                         <?php } ?>
 
                         <?php if ($userIsMember) { ?>
                             <a class="sidebar-link" href="#" ng-click="leaveOrganisation()">
-                                <span class="green">-&nbsp;</span>Leave Organisation
+                                <span class="green">-&nbsp;</span>
+                                <?php _ehtml('Leave Organisation')?>
                             </a>
                         <?php } elseif ($userSentJoinRequest) { ?>
                             <a class="sidebar-link" href="#" ng-click="cancelJoinRequest()">
-                                <span class="green">-&nbsp;</span>Cancel Join Request
+                                <span class="green">-&nbsp;</span>
+                                <?php _ehtml('Cancel Join Request')?>
                             </a>
                         <?php } elseif ($userCanSendJoinRequest) { ?>
                             <a class="sidebar-link" href="#" ng-click="joinOrganisation()">
-                                <span class="green">-&nbsp;</span>Join Organisation
+                                <span class="green">-&nbsp;</span>
+                                <?php _ehtml('Join Organisation')?>
                             </a>
                         <?php } ?>
                     <?php } ?>
 
-                    <h3 class="cse side-bar-h3">Info</h3>
+                    <h3 class="cse side-bar-h3"><?php _ehtml('Info')?></h3>
                     <p>
                         <?php echo show_input($organisation->getName()) ?>
                         <?php if ($organisation->getCountry()) { ?>
@@ -113,21 +134,23 @@ if (!isset($urlHandler))
                     <?php if ($organisation->getExternalUrl()) { ?>
                         <a class="log-in-link long read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
                            href="<?php echo $organisation->getExternalUrl() ?>" target="_blank">
-                            <div class="login-li long menu-li readmore-li">Visit website</div>
+                            <div class="login-li long menu-li readmore-li">
+                                <?php _ehtml('Visit website')?>
+                            </div>
                             <img class="login-arrow"
                                  src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
                         </a>
                     <?php } ?>
 
                     <?php if ($tags) { ?>
-                        <h3 class="cse side-bar-h3">Tagged under</h3>
+                        <h3 class="cse side-bar-h3"><?php _ehtml('Tagged under')?></h3>
                         <?php foreach ($tags AS $tag) { ?>
                             <div class="tag"><?php echo show_input($tag) ?></div>
                         <?php } ?>
                     <?php } ?>
 
                     <?php if ($networkTags) { ?>
-                        <h3 class="cse side-bar-h3">Network tags</h3>
+                        <h3 class="cse side-bar-h3"><?php _ehtml('Network tags')?></h3>
                         <?php foreach ($networkTags AS $tag) { ?>
                             <div class="tag"><?php echo show_input($tag) ?></div>
                         <?php } ?>
