@@ -13,15 +13,16 @@ require __DIR__ . '/header.php';
         <div class="content-block">
             <div class="intro-row w-row">
                 <div class="w-col w-col-8 w-col-stack">
-                    <h1 class="content-h1">Case studies</h1>
-                    <p class="intro">What does digital social innovation look like in practice?</p>
-                    <p>Here you can find examples of digital social innovation to inform and inspire you. These case studies give a quick overview of different organisations' and projects' work. You can click through to their websites to find out more.</p>
+                    <h1 class="content-h1"><?php _ehtml('Case Studies') ?></h1>
+                    <p class="intro"><?php _ehtml('What does digital social innovation look like in practice?') ?></p>
+                    <p><?php _ehtml('Here you can find examples of digital social innovation to inform and inspire you.') ?></p>
                 </div>
                 <div class="sidebar w-col w-col-4 w-col-stack">
                     <?php if ($userCanManageCaseStudies) { ?>
-                        <h1 class="content-h1">Actions</h1>
+                        <h1 class="content-h1"><?php _ehtml('Actions') ?></h1>
                         <a class="sidebar-link" href="<?php echo $urlHandler->addCaseStudy() ?>">
-                            <span class="green">-&nbsp;</span>Add new case study
+                            <span class="green">-&nbsp;</span>
+                            <?php _ehtml('Add new case study') ?>
                         </a>
                     <?php } ?>
                 </div>
@@ -38,14 +39,14 @@ require __DIR__ . '/header.php';
                         <h3 class="case-study-card-h3">
                             <?php echo show_input($caseStudy->getTitle()) ?>
                             <?php if ($userCanManageCaseStudies AND !$caseStudy->isPublished()) {
-                                echo ' <span style="color:red">(Unpublished)</span>';
+                                echo ' <span style="color:red">(' . _html('Unpublished') . ')</span>';
                             } ?>
                         </h3>
                         <p class="cradp">
                             <?php echo show_input($caseStudy->getIntroCardText()) ?>
                         </p>
                         <div class="log-in-link read-more w-clearfix" data-ix="log-in-arrow">
-                            <div class="login-li menu-li readmore-li">Read more</div>
+                            <div class="login-li menu-li readmore-li"><?php _ehtml('Read more') ?></div>
                             <img class="login-arrow" src="images/ios7-arrow-thin-right.png">
                         </div>
                     </a>

@@ -12,13 +12,14 @@ require __DIR__ . '/header.php'
                 <div class="w-col w-col-8 w-col-stack">
                     <h1 class="content-h1"><?php echo show_input($event->getTitle()) ?></h1>
                     <div class="detail">
-                        <strong><?php _ehtml('Date') ?></strong>: <?php echo show_input($event->getStartDate('jS F Y')) ?>
+                        <strong><?php _ehtml('Date') ?></strong>:
+                        <?php echo show_input($event->getStartDate('jS F Y')) ?>
                     </div>
                     <div class="detail">
                         <?php if ($event->getPrice()) { ?>
                             <?php echo show_input($event->getPrice()) ?>
                         <?php } else { ?>
-                            <strong>This event is free</strong>
+                            <strong><?php _ehtml('This event is free')?></strong>
                         <?php } ?>
                     </div>
 

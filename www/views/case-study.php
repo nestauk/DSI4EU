@@ -26,13 +26,14 @@ require __DIR__ . '/header.php';
             </div>
             <div class="column-right-small w-col w-col-4">
                 <?php if ($userCanAddCaseStudy) { ?>
-                    <h1 class="content-h1">Actions</h1>
+                    <h1 class="content-h1"><?php _ehtml('Actions') ?></h1>
                     <a class="sidebar-link" href="<?php echo $urlHandler->caseStudyEdit($caseStudy) ?>">
-                        <span class="green">-&nbsp;</span>Edit case study
+                        <span class="green">- </span>
+                        <?php _ehtml('Edit case study') ?>
                     </a>
                 <?php } ?>
 
-                <h3 class="cse side-bar-h3"><?php _e('Info')?></h3>
+                <h3 class="cse side-bar-h3"><?php _e('Info') ?></h3>
                 <div><?php echo show_input($caseStudy->getInfoText()) ?></div>
                 <a class="log-in-link long read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
                    href="<?php echo $caseStudy->getUrl() ?>">
@@ -49,7 +50,7 @@ require __DIR__ . '/header.php';
                         <p><?php echo show_input($project->getShortDescription()) ?></p>
                         <a class="log-in-link long read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
                            href="<?php echo $urlHandler->project($project) ?>">
-                            <div class="login-li long menu-li readmore-li">Visit Project</div>
+                            <div class="login-li long menu-li readmore-li"><?php _ehtml('Visit Project') ?></div>
                             <img class="login-arrow"
                                  src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
                         </a>
@@ -59,7 +60,7 @@ require __DIR__ . '/header.php';
                         <p><?php echo show_input($organisation->getShortDescription()) ?></p>
                         <a class="log-in-link long read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
                            href="<?php echo $urlHandler->organisation($organisation) ?>">
-                            <div class="login-li long menu-li readmore-li">Visit Organisation</div>
+                            <div class="login-li long menu-li readmore-li"><?php _ehtml('Visit Organisation')?></div>
                             <img class="login-arrow"
                                  src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
                         </a>
@@ -67,7 +68,7 @@ require __DIR__ . '/header.php';
                 <?php } ?>
             </div>
         </div>
-        <h3 class="related-h3">More case studies</h3>
+        <h3 class="related-h3"><?php _ehtml('More case studies')?></h3>
         <div class="w-row">
             <?php foreach ($caseStudies AS $i => $_caseStudy) { ?>
                 <div class="w-col w-col-4">
@@ -84,8 +85,9 @@ require __DIR__ . '/header.php';
                             <?php echo show_input($_caseStudy->getIntroCardText()) ?>
                         </p>
                         <div class="log-in-link read-more w-clearfix" data-ix="log-in-arrow">
-                            <div class="login-li menu-li readmore-li">Read more</div>
-                            <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
+                            <div class="login-li menu-li readmore-li"><?php _ehtml('Read more')?></div>
+                            <img class="login-arrow"
+                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
                         </div>
                     </a>
                 </div>
@@ -94,7 +96,7 @@ require __DIR__ . '/header.php';
         <div class="signn">
             <a class="large log-in-link sign-up w-clearfix w-inline-block" data-ix="log-in-arrow"
                href="<?php echo $urlHandler->caseStudies() ?>">
-                <div class="login-li menu-li">See all case studies</div>
+                <div class="login-li menu-li"><?php _ehtml('See all case studies')?></div>
                 <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
             </a>
         </div>

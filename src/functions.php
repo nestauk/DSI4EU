@@ -65,6 +65,11 @@ function _ehtml($text)
     echo show_input(\DSI\Service\Translate::getTranslation($text));
 }
 
+function _html($text)
+{
+    return show_input(\DSI\Service\Translate::getTranslation($text));
+}
+
 spl_autoload_register(function ($class) {
     $file = __DIR__ . '/../src/' . str_replace('\\', '/', $class) . '.php';
     if (file_exists($file)) {
