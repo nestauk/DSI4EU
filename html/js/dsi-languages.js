@@ -740,17 +740,18 @@
 
 	      $branding.css({
 	        position: 'fixed',
-	        bottom: 0,
-	        right: 0,
+	        bottom: '12px',
+	        color: '#333',
+	        right: '12px',
 	        zIndex: 2147483647,
-	        borderTopLeftRadius: '5px',
-	        backgroundColor: '#2b3239',
-	        padding: '8px 12px 5px 15px',
-	        fontFamily: 'Arial',
-	        fontSize: '10px',
-	        textTransform: 'uppercase',
+	        backgroundColor: '#FFF',
+	        borderRadius: '3px',
+	        boxShadow: '0 0 0 1px rgba(0,0,0,0.1), 0px 1px 3px rgba(0, 0, 0, 0.1)',
+	        padding: '6px 8px 6px 6px',
+	        fontFamily: 'Segoe UI, Arial',
+	        fontSize: '12px',
 	        opacity: '0',
-	        transition: 'opacity 0.50s ease-in-out'
+	        lineHeight: '14px'
 	      });
 
 	      $link.css({
@@ -759,17 +760,21 @@
 	      });
 
 	      var $webflowLogo = $('<img>');
-	      $webflowLogo.attr('src', 'https://daks2k3a4ib2z.cloudfront.net/54153e6a3d25f2755b1f14ed/5445a4b1944ecdaa4df86d3e_subdomain-brand.svg');
+	      $webflowLogo.attr('src', 'https://d1otoma47x30pg.cloudfront.net/img/webflow-badge-icon.60efbf6ec9.svg');
 	      $webflowLogo.css({
-	        opacity: 0.9,
-	        width: '57px',
-	        verticalAlign: 'middle',
-	        paddingLeft: '4px',
-	        paddingBottom: '3px'
+	        marginRight: '8px',
+	        opacity: 1,
+	        width: '16px',
+	        verticalAlign: 'middle'
+	      });
+	      var $webflowTextLogo = $('<img>');
+	      $webflowTextLogo.attr('src', 'https://d1otoma47x30pg.cloudfront.net/img/webflow-badge-text.6faa6a38cd.svg');
+	      $webflowTextLogo.css({
+	        verticalAlign: 'middle'
 	      });
 
-	      $branding.text('Made in');
 	      $branding.append($webflowLogo);
+	      $branding.append($webflowTextLogo);
 	      $link.append($branding);
 
 	      $body.append($link);
@@ -4777,5 +4782,6 @@ Webflow.require('ix').init([
   {"slug":"create-dropdown","name":"create dropdown","value":{"style":{},"triggers":[{"type":"click","selector":".create-drop-down-block","stepsA":[{"display":"block"}],"stepsB":[{"display":"none"}]}]}},
   {"slug":"reply-comment","name":"reply comment","value":{"style":{},"triggers":[{"type":"click","selector":".reply-comment","stepsA":[{"display":"block"}],"stepsB":[{"display":"none"}]}]}},
   {"slug":"closed","name":"closed","value":{"style":{"height":"0px"},"triggers":[]}},
-  {"slug":"open-advanced","name":"open advanced","value":{"style":{},"triggers":[{"type":"click","selector":".adv-options","stepsA":[{"height":"100%","transition":"height 200 ease 0"}],"stepsB":[{"height":"0px","transition":"height 200 ease 0"}]},{"type":"click","selector":".arrow","descend":true,"preserve3d":true,"stepsA":[{"transition":"transform 200ms ease-in-out 0","rotateX":"0deg","rotateY":"0deg","rotateZ":"180deg"}],"stepsB":[{"transition":"transform 200ms ease-in-out 0","rotateX":"0deg","rotateY":"0deg","rotateZ":"0deg"}]}]}}
+  {"slug":"open-advanced","name":"open advanced","value":{"style":{},"triggers":[{"type":"click","selector":".adv-options","stepsA":[{"height":"100%","transition":"height 200 ease 0"}],"stepsB":[{"height":"0px","transition":"height 200 ease 0"}]},{"type":"click","selector":".arrow","descend":true,"preserve3d":true,"stepsA":[{"transition":"transform 200ms ease-in-out 0","rotateX":"0deg","rotateY":"0deg","rotateZ":"180deg"}],"stepsB":[{"transition":"transform 200ms ease-in-out 0","rotateX":"0deg","rotateY":"0deg","rotateZ":"0deg"}]}]}},
+  {"slug":"closed-advcanced","name":"closed advcanced","value":{"style":{},"triggers":[{"type":"click","selector":".adv-options","stepsA":[{"height":"0px","transition":"height 200 ease 0"}],"stepsB":[{"height":"100%","transition":"height 200 ease 0"}]},{"type":"click","selector":".arrow","descend":true,"preserve3d":true,"stepsA":[{"transition":"transform 200 ease 0","rotateX":"0deg","rotateY":"0deg","rotateZ":"180deg"}],"stepsB":[{"transition":"transform 200 ease 0","rotateX":"0deg","rotateY":"0deg","rotateZ":"0deg"}]}]}}
 ]);

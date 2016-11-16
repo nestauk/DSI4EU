@@ -9732,6 +9732,12 @@ strong {
   background-repeat: no-repeat;
 }
 
+.arrow._180 {
+  -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
 .adv-text {
   float: left;
   text-decoration: underline;
