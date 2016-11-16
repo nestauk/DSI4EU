@@ -8737,7 +8737,7 @@ strong {
 .footer-black {
   position: relative;
   min-height: 340px;
-  margin-top: 75px;
+  margin-top: 0px;
   background-color: #000;
 }
 
@@ -8755,6 +8755,10 @@ strong {
 
 .p-head {
   margin-bottom: 35px;
+}
+
+.home-page-events {
+  margin-bottom: 50px;
 }
 
 .case-study-ind {
@@ -9639,6 +9643,87 @@ strong {
   display: block;
 }
 
+.newsletter-signup {
+  height: 70px;
+  padding-top: 10px;
+  background-color: #f3f3f3;
+}
+
+.mailchimp-container {
+  display: block;
+  max-width: 1290px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.signup-in {
+  display: inline-block;
+  width: 23%;
+  margin-top: 7px;
+  margin-right: 2%;
+  margin-left: 0%;
+  border-style: none none solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #000;
+  background-color: transparent;
+  font-size: 16px;
+}
+
+.footer-signup {
+  width: 20%;
+  margin-left: 3%;
+  padding-top: 13px;
+  padding-bottom: 13px;
+  border-radius: 50px;
+  background-color: rgba(29, 201, 160, .94);
+  color: #000;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+.adv-options {
+  overflow: hidden;
+  height: auto;
+  margin-top: 25px;
+  background-color: transparent;
+}
+
+.open-close {
+  margin-top: -10px;
+  padding: 10px 20px;
+  float: right;
+  border-radius: 25px;
+  background-color: rgba(29, 201, 160, .94);
+  text-decoration: none;
+}
+
+.arrow {
+  width: 15px;
+  height: 15px;
+  margin-top: 5px;
+  margin-left: 15px;
+  float: left;
+  background-image: url('../images/down-arrow.png');
+  background-position: 50% 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.adv-text {
+  float: left;
+  text-decoration: underline;
+}
+
+.advanced-search {
+  border-bottom: 1px solid #dbdbdb;
+  background-color: transparent;
+}
+
+.filter-title {
+  padding-bottom: 15px;
+  border-bottom: 1px solid #dbdbdb;
+}
+
 html.w-mod-js *[data-ix="pin-drop"] {
   opacity: 0;
   -webkit-transform: translate(0px, -100px);
@@ -9993,6 +10078,10 @@ html.w-mod-js *[data-ix="growinanim"] {
   -webkit-transform: translate(0px, 15px) scale(0.8, 0.8);
   -ms-transform: translate(0px, 15px) scale(0.8, 0.8);
   transform: translate(0px, 15px) scale(0.8, 0.8);
+}
+
+html.w-mod-js *[data-ix="closed"] {
+  height: 0px;
 }
 
 @media (max-width: 991px) {

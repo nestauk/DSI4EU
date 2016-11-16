@@ -733,7 +733,7 @@
 	      doBranding = true;
 	    }
 
-	    if (doBranding) {
+	    if (doBranding && !Webflow.env('editor')) {
 	      var $branding = $('<div></div>');
 	      var $link = $('<a></a>');
 	      $link.attr('href', 'http://webflow.com?utm_campaign=brandjs');
@@ -4775,5 +4775,7 @@ Webflow.require('ix').init([
   {"slug":"hero-header-fold-down","name":"hero header fold down","value":{"style":{"opacity":1,"height":"91px"},"triggers":[{"type":"load","stepsA":[{"height":"105px","transition":"height 250ms ease-in-out 0"},{"opacity":1,"height":"570px","transition":"height 300ms ease-in-out 0"},{"height":"560px","transition":"height 250ms ease 0"}],"stepsB":[]}]}},
   {"slug":"growinanim","name":"growInAnim","value":{"style":{"opacity":0,"x":"0px","y":"15px","z":"0px","scaleX":0.8,"scaleY":0.8,"scaleZ":1},"triggers":[{"type":"scroll","stepsA":[{"opacity":1,"transition":"transform 200 ease 0, opacity 200 ease 0","x":"0px","y":"0px","z":"0px"}],"stepsB":[]}]}},
   {"slug":"create-dropdown","name":"create dropdown","value":{"style":{},"triggers":[{"type":"click","selector":".create-drop-down-block","stepsA":[{"display":"block"}],"stepsB":[{"display":"none"}]}]}},
-  {"slug":"reply-comment","name":"reply comment","value":{"style":{},"triggers":[{"type":"click","selector":".reply-comment","stepsA":[{"display":"block"}],"stepsB":[{"display":"none"}]}]}}
+  {"slug":"reply-comment","name":"reply comment","value":{"style":{},"triggers":[{"type":"click","selector":".reply-comment","stepsA":[{"display":"block"}],"stepsB":[{"display":"none"}]}]}},
+  {"slug":"closed","name":"closed","value":{"style":{"height":"0px"},"triggers":[]}},
+  {"slug":"open-advanced","name":"open advanced","value":{"style":{},"triggers":[{"type":"click","selector":".adv-options","stepsA":[{"height":"100%","transition":"height 200 ease 0"}],"stepsB":[{"height":"0px","transition":"height 200 ease 0"}]},{"type":"click","selector":".arrow","descend":true,"preserve3d":true,"stepsA":[{"transition":"transform 200ms ease-in-out 0","rotateX":"0deg","rotateY":"0deg","rotateZ":"180deg"}],"stepsB":[{"transition":"transform 200ms ease-in-out 0","rotateX":"0deg","rotateY":"0deg","rotateZ":"0deg"}]}]}}
 ]);
