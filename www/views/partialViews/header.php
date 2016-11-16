@@ -65,7 +65,7 @@ if (!isset($urlHandler))
                     <h2 class="full-menu-h2">
                         <?php echo sprintf(
                             __('%s projects'),
-                            '<strong>' . number_format($projectsCount) . '</strong>1'
+                            '<strong>' . number_format($projectsCount) . '</strong>'
                         ) ?>
                     </h2>
                     <a class="full-menu-link"

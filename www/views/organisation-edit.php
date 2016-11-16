@@ -149,11 +149,12 @@ if (!isset($urlHandler))
                                                                 </select>
                                                             </div>
 
-                                                            <label>Network Tags</label>
-                                                            <p></p>
+                                                            <label><?php _ehtml('Networks you belong to') ?></label>
+                                                            <p><?php _ehtml('Please list any formal or informal networks which you belong to') ?></p>
                                                             <div class="customSelect2">
                                                                 <select class="select2 creator-data-entry end w-input"
-                                                                        id="networkTagsSelect" style="width:100%;border:0"
+                                                                        id="networkTagsSelect"
+                                                                        style="width:100%;border:0"
                                                                         multiple data-tags="true"
                                                                         data-placeholder="Write network tags">
                                                                     <?php foreach ($networkTags AS $tag) { ?>
@@ -164,9 +165,8 @@ if (!isset($urlHandler))
                                                                     <?php } ?>
                                                                 </select>
                                                             </div>
-                                                            <br/><br/>
+                                                            <br/>
 
-                                                            <br/><br/>
                                                             <label for="email">Projects your organisation is involved
                                                                 with:</label>
                                                             <p>Add projects your organisation is involved with here.

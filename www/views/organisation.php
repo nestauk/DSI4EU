@@ -150,7 +150,7 @@ if (!isset($urlHandler))
                     <?php } ?>
 
                     <?php if ($networkTags) { ?>
-                        <h3 class="cse side-bar-h3"><?php _ehtml('Network tags')?></h3>
+                        <h3 class="cse side-bar-h3"><?php _ehtml('Networks we belong to')?></h3>
                         <?php foreach ($networkTags AS $tag) { ?>
                             <div class="tag"><?php echo show_input($tag) ?></div>
                         <?php } ?>
