@@ -99,7 +99,7 @@ class ProjectTagsRepositoryTest extends PHPUnit_Framework_TestCase
         $projectTag->setTag($this->tag_2);
         $this->projectTagsRepo->add($projectTag);
 
-        $this->assertEquals([1, 2], $this->projectTagsRepo->getTagIDsForProject(1));
+        $this->assertEquals([1, 2], $this->projectTagsRepo->getTagIDsByProject($this->project_1));
     }
 
     /** @test saveAsNew */

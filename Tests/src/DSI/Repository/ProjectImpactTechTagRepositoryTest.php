@@ -2,9 +2,9 @@
 
 require_once __DIR__ . '/../../../config.php';
 
-class ProjectImpactTagsARepositoryTest extends PHPUnit_Framework_TestCase
+class ProjectImpactTechTagRepositoryTest extends PHPUnit_Framework_TestCase
 {
-    /** @var \DSI\Repository\ProjectImpactTagARepository */
+    /** @var \DSI\Repository\ProjectImpactTechTagRepository */
     protected $projectTagsRepo;
 
     /** @var \DSI\Repository\ProjectRepository */
@@ -24,7 +24,7 @@ class ProjectImpactTagsARepositoryTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->projectTagsRepo = new \DSI\Repository\ProjectImpactTagARepository();
+        $this->projectTagsRepo = new \DSI\Repository\ProjectImpactTechTagRepository();
         $this->projectsRepo = new \DSI\Repository\ProjectRepository();
         $this->tagsRepo = new \DSI\Repository\ImpactTagRepository();
         $this->usersRepo = new \DSI\Repository\UserRepository();
@@ -48,22 +48,22 @@ class ProjectImpactTagsARepositoryTest extends PHPUnit_Framework_TestCase
     /** @test saveAsNew */
     public function projectTagCanBeSaved()
     {
-        $projectTag = new \DSI\Entity\ProjectImpactTagA();
+        $projectTag = new \DSI\Entity\ProjectImpactTechTag();
         $projectTag->setProject($this->project_1);
         $projectTag->setTag($this->tag_1);
         $this->projectTagsRepo->add($projectTag);
 
-        $projectTag = new \DSI\Entity\ProjectImpactTagA();
+        $projectTag = new \DSI\Entity\ProjectImpactTechTag();
         $projectTag->setProject($this->project_1);
         $projectTag->setTag($this->tag_2);
         $this->projectTagsRepo->add($projectTag);
 
-        $projectTag = new \DSI\Entity\ProjectImpactTagA();
+        $projectTag = new \DSI\Entity\ProjectImpactTechTag();
         $projectTag->setProject($this->project_2);
         $projectTag->setTag($this->tag_1);
         $this->projectTagsRepo->add($projectTag);
 
-        $projectTag = new \DSI\Entity\ProjectImpactTagA();
+        $projectTag = new \DSI\Entity\ProjectImpactTechTag();
         $projectTag->setProject($this->project_3);
         $projectTag->setTag($this->tag_1);
         $this->projectTagsRepo->add($projectTag);
@@ -72,14 +72,14 @@ class ProjectImpactTagsARepositoryTest extends PHPUnit_Framework_TestCase
     }
 
     /** @test saveAsNew */
-    public function cannotAddSameProjectImpactTagATwice()
+    public function cannotAddSameProjectImpactTagCTwice()
     {
-        $projectTag = new \DSI\Entity\ProjectImpactTagA();
+        $projectTag = new \DSI\Entity\ProjectImpactTechTag();
         $projectTag->setProject($this->project_1);
         $projectTag->setTag($this->tag_1);
         $this->projectTagsRepo->add($projectTag);
 
-        $projectTag = new \DSI\Entity\ProjectImpactTagA();
+        $projectTag = new \DSI\Entity\ProjectImpactTechTag();
         $projectTag->setProject($this->project_1);
         $projectTag->setTag($this->tag_1);
         $this->setExpectedException(\DSI\DuplicateEntry::class);
@@ -89,28 +89,28 @@ class ProjectImpactTagsARepositoryTest extends PHPUnit_Framework_TestCase
     /** @test saveAsNew */
     public function getAllTagIDsForProject()
     {
-        $projectTag = new \DSI\Entity\ProjectImpactTagA();
+        $projectTag = new \DSI\Entity\ProjectImpactTechTag();
         $projectTag->setProject($this->project_1);
         $projectTag->setTag($this->tag_1);
         $this->projectTagsRepo->add($projectTag);
 
-        $projectTag = new \DSI\Entity\ProjectImpactTagA();
+        $projectTag = new \DSI\Entity\ProjectImpactTechTag();
         $projectTag->setProject($this->project_1);
         $projectTag->setTag($this->tag_2);
         $this->projectTagsRepo->add($projectTag);
 
-        $this->assertEquals([1, 2], $this->projectTagsRepo->getTagIDsForProject(1));
+        $this->assertEquals([1, 2], $this->projectTagsRepo->getTagIDsByProject($this->project_1));
     }
 
     /** @test saveAsNew */
     public function getAllProjectsForTag()
     {
-        $projectTag = new \DSI\Entity\ProjectImpactTagA();
+        $projectTag = new \DSI\Entity\ProjectImpactTechTag();
         $projectTag->setProject($this->project_1);
         $projectTag->setTag($this->tag_1);
         $this->projectTagsRepo->add($projectTag);
 
-        $projectTag = new \DSI\Entity\ProjectImpactTagA();
+        $projectTag = new \DSI\Entity\ProjectImpactTechTag();
         $projectTag->setProject($this->project_2);
         $projectTag->setTag($this->tag_1);
         $this->projectTagsRepo->add($projectTag);
@@ -121,12 +121,12 @@ class ProjectImpactTagsARepositoryTest extends PHPUnit_Framework_TestCase
     /** @test saveAsNew */
     public function getAllProjectIDsForTag()
     {
-        $projectTag = new \DSI\Entity\ProjectImpactTagA();
+        $projectTag = new \DSI\Entity\ProjectImpactTechTag();
         $projectTag->setProject($this->project_1);
         $projectTag->setTag($this->tag_1);
         $this->projectTagsRepo->add($projectTag);
 
-        $projectTag = new \DSI\Entity\ProjectImpactTagA();
+        $projectTag = new \DSI\Entity\ProjectImpactTechTag();
         $projectTag->setProject($this->project_2);
         $projectTag->setTag($this->tag_1);
         $this->projectTagsRepo->add($projectTag);
@@ -137,12 +137,12 @@ class ProjectImpactTagsARepositoryTest extends PHPUnit_Framework_TestCase
     /** @test saveAsNew */
     public function canCheckIfProjectHasTagName()
     {
-        $projectTag = new \DSI\Entity\ProjectImpactTagA();
+        $projectTag = new \DSI\Entity\ProjectImpactTechTag();
         $projectTag->setProject($this->project_1);
         $projectTag->setTag($this->tag_1);
         $this->projectTagsRepo->add($projectTag);
 
-        $projectTag = new \DSI\Entity\ProjectImpactTagA();
+        $projectTag = new \DSI\Entity\ProjectImpactTechTag();
         $projectTag->setProject($this->project_2);
         $projectTag->setTag($this->tag_2);
         $this->projectTagsRepo->add($projectTag);
@@ -164,17 +164,17 @@ class ProjectImpactTagsARepositoryTest extends PHPUnit_Framework_TestCase
     /** @test saveAsNew */
     public function canGetTagNamesByProjectID()
     {
-        $projectTag = new \DSI\Entity\ProjectImpactTagA();
+        $projectTag = new \DSI\Entity\ProjectImpactTechTag();
         $projectTag->setProject($this->project_1);
         $projectTag->setTag($this->tag_1);
         $this->projectTagsRepo->add($projectTag);
 
-        $projectTag = new \DSI\Entity\ProjectImpactTagA();
+        $projectTag = new \DSI\Entity\ProjectImpactTechTag();
         $projectTag->setProject($this->project_1);
         $projectTag->setTag($this->tag_2);
         $this->projectTagsRepo->add($projectTag);
 
-        $projectTag = new \DSI\Entity\ProjectImpactTagA();
+        $projectTag = new \DSI\Entity\ProjectImpactTechTag();
         $projectTag->setProject($this->project_2);
         $projectTag->setTag($this->tag_3);
         $this->projectTagsRepo->add($projectTag);

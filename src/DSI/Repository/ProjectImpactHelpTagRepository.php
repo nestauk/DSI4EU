@@ -4,11 +4,11 @@ namespace DSI\Repository;
 
 use DSI\DuplicateEntry;
 use DSI\Entity\Project;
-use DSI\Entity\ProjectImpactTagA;
+use DSI\Entity\ProjectImpactHelpTag;
 use DSI\NotFound;
 use DSI\Service\SQL;
 
-class ProjectImpactTagARepository
+class ProjectImpactHelpTagRepository
 {
     /** @var ProjectRepository */
     private $projectRepo;
@@ -16,16 +16,18 @@ class ProjectImpactTagARepository
     /** @var ImpactTagRepository */
     private $tagsRepo;
 
+    private $table = 'project-impact-tags-a';
+
     public function __construct()
     {
         $this->projectRepo = new ProjectRepository();
         $this->tagsRepo = new ImpactTagRepository();
     }
 
-    public function add(ProjectImpactTagA $projectTag)
+    public function add(ProjectImpactHelpTag $projectTag)
     {
         $query = new SQL("SELECT projectID 
-            FROM `project-impact-tags-a`
+            FROM `{$this->table}`
             WHERE `projectID` = '{$projectTag->getProjectID()}'
             AND `tagID` = '{$projectTag->getTagID()}'
             LIMIT 1
@@ -37,15 +39,15 @@ class ProjectImpactTagARepository
         $insert[] = "`projectID` = '" . (int)($projectTag->getProjectID()) . "'";
         $insert[] = "`tagID` = '" . (int)($projectTag->getTagID()) . "'";
 
-        $query = new SQL("INSERT INTO `project-impact-tags-a` SET " . implode(', ', $insert) . "");
+        $query = new SQL("INSERT INTO `{$this->table}` SET " . implode(', ', $insert) . "");
         // $query->pr();
         $query->query();
     }
 
-    public function remove(ProjectImpactTagA $projectTag)
+    public function remove(ProjectImpactHelpTag $projectTag)
     {
         $query = new SQL("SELECT projectID 
-            FROM `project-impact-tags-a`
+            FROM `{$this->table}`
             WHERE `projectID` = '{$projectTag->getProjectID()}'
             AND `tagID` = '{$projectTag->getTagID()}'
             LIMIT 1
@@ -57,52 +59,28 @@ class ProjectImpactTagARepository
         $insert[] = "`projectID` = '" . (int)($projectTag->getProjectID()) . "'";
         $insert[] = "`tagID` = '" . (int)($projectTag->getTagID()) . "'";
 
-        $query = new SQL("DELETE FROM `project-impact-tags-a` WHERE " . implode(' AND ', $insert) . "");
+        $query = new SQL("DELETE FROM `{$this->table}` WHERE " . implode(' AND ', $insert) . "");
         $query->query();
     }
 
     /**
      * @param int $projectID
-     * @return \DSI\Entity\ProjectImpactTagA[]
+     * @return \DSI\Entity\ProjectImpactHelpTag[]
      */
     public function getByProjectID(int $projectID)
     {
-        return $this->getProjectImpactTagAsWhere([
+        return $this->getObjectsWhere([
             "`projectID` = '{$projectID}'"
         ]);
     }
 
     /**
-     * @param int $projectID
-     * @return \int[]
-     */
-    public function getTagIDsForProject(int $projectID)
-    {
-        $where = [
-            "`projectID` = '{$projectID}'"
-        ];
-
-        /** @var int[] $tagIDs */
-        $tagIDs = [];
-        $query = new SQL("SELECT tagID 
-            FROM `project-impact-tags-a`
-            WHERE " . implode(' AND ', $where) . "
-            ORDER BY tagID
-        ");
-        foreach ($query->fetch_all() AS $dbProjectImpactTagAs) {
-            $tagIDs[] = $dbProjectImpactTagAs['tagID'];
-        }
-
-        return $tagIDs;
-    }
-
-    /**
      * @param int $tagID
-     * @return \DSI\Entity\ProjectImpactTagA[]
+     * @return \DSI\Entity\ProjectImpactHelpTag[]
      */
     public function getByTagID(int $tagID)
     {
-        return $this->getProjectImpactTagAsWhere([
+        return $this->getObjectsWhere([
             "`tagID` = '{$tagID}'"
         ]);
     }
@@ -120,12 +98,12 @@ class ProjectImpactTagARepository
         /** @var int[] $projectIDs */
         $projectIDs = [];
         $query = new SQL("SELECT projectID 
-            FROM `project-impact-tags-a`
+            FROM `{$this->table}`
             WHERE " . implode(' AND ', $where) . "
             ORDER BY projectID
         ");
-        foreach ($query->fetch_all() AS $dbProjectImpactTagA) {
-            $projectIDs[] = $dbProjectImpactTagA['projectID'];
+        foreach ($query->fetch_all() AS $dbProjectHelpTag) {
+            $projectIDs[] = $dbProjectHelpTag['projectID'];
         }
 
         return $projectIDs;
@@ -133,26 +111,26 @@ class ProjectImpactTagARepository
 
     public function clearAll()
     {
-        $query = new SQL("TRUNCATE TABLE `project-impact-tags-a`");
+        $query = new SQL("TRUNCATE TABLE `{$this->table}`");
         $query->query();
     }
 
     /**
      * @param $where
-     * @return \DSI\Entity\ProjectImpactTagA[]
+     * @return \DSI\Entity\ProjectImpactHelpTag[]
      */
-    private function getProjectImpactTagAsWhere($where)
+    private function getObjectsWhere($where)
     {
-        /** @var ProjectImpactTagA[] $projectTags */
+        /** @var ProjectImpactHelpTag[] $projectTags */
         $projectTags = [];
         $query = new SQL("SELECT projectID, tagID 
-            FROM `project-impact-tags-a`
+            FROM `{$this->table}`
             WHERE " . implode(' AND ', $where) . "
         ");
-        foreach ($query->fetch_all() AS $dbProjectImpactTagA) {
-            $projectTag = new ProjectImpactTagA();
-            $projectTag->setProject($this->projectRepo->getById($dbProjectImpactTagA['projectID']));
-            $projectTag->setTag($this->tagsRepo->getById($dbProjectImpactTagA['tagID']));
+        foreach ($query->fetch_all() AS $dbProjectHelpTag) {
+            $projectTag = new ProjectImpactHelpTag();
+            $projectTag->setProject($this->projectRepo->getById($dbProjectHelpTag['projectID']));
+            $projectTag->setTag($this->tagsRepo->getById($dbProjectHelpTag['tagID']));
             $projectTags[] = $projectTag;
         }
 
@@ -175,10 +153,19 @@ class ProjectImpactTagARepository
     {
         $query = new SQL("SELECT tag 
             FROM `impact-tags` 
-            LEFT JOIN `project-impact-tags-a` ON `impact-tags`.`id` = `project-impact-tags-a`.`tagID`
-            WHERE `project-impact-tags-a`.`projectID` = '{$project->getId()}'
+            LEFT JOIN `{$this->table}` ON `impact-tags`.`id` = `{$this->table}`.`tagID`
+            WHERE `{$this->table}`.`projectID` = '{$project->getId()}'
             ORDER BY `impact-tags`.`tag`
         ");
         return $query->fetch_all('tag');
+    }
+
+    public function getTagIDsByProject(Project $project)
+    {
+        $query = new SQL("SELECT tagID 
+            FROM `{$this->table}`
+            WHERE `{$this->table}`.`projectID` = '{$project->getId()}'
+        ");
+        return $query->fetch_all('tagID');
     }
 }

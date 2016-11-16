@@ -3,18 +3,29 @@
 namespace DSI\Controller;
 
 use DSI\Entity\Project;
-use DSI\Entity\ProjectDsiFocusTag;
-use DSI\Entity\ProjectTag;
 use DSI\Repository\ProjectDsiFocusTagRepository;
+use DSI\Repository\ProjectImpactHelpTagRepository;
+use DSI\Repository\ProjectImpactTechTagRepository;
 use DSI\Repository\ProjectRepositoryInAPC;
 use DSI\Repository\ProjectTagRepository;
-use DSI\Repository\UserRepository;
 use DSI\Service\Auth;
 use DSI\Service\URL;
 
 class ProjectsController
 {
     public $responseFormat = 'html';
+
+    /** @var ProjectDsiFocusTagRepository */
+    private $projectDsiFocusTagRepo;
+
+    /** @var ProjectTagRepository */
+    private $projectTagRepo;
+
+    /** @var ProjectImpactHelpTagRepository */
+    private $projectImpactHelpTagRepo;
+
+    /** @var ProjectImpactTechTagRepository */
+    private $projectImpactTechTagRepo;
 
     public function exec()
     {
@@ -24,20 +35,24 @@ class ProjectsController
         if ($this->responseFormat == 'json') {
             // (new CountryRegionRepository())->getAll();
             $projectRepositoryInAPC = new ProjectRepositoryInAPC();
-            $projectDsiFocusTagRepository = new ProjectDsiFocusTagRepository();
-            echo json_encode(array_map(function (Project $project) use ($urlHandler, $projectDsiFocusTagRepository) {
-                $region = $project->getRegion();
+            $this->projectDsiFocusTagRepo = new ProjectDsiFocusTagRepository();
+            $this->projectTagRepo = new ProjectTagRepository();
+            $this->projectImpactHelpTagRepo = new ProjectImpactHelpTagRepository();
+            $this->projectImpactTechTagRepo = new ProjectImpactTechTagRepository();
+            echo json_encode(array_map(function (Project $project) use ($urlHandler) {
                 return [
                     'id' => $project->getId(),
                     'name' => $project->getName(),
-                    'region' => ($region ? $region->getName() : ''),
-                    'country' => ($region ? $region->getCountry()->getName() : ''),
+                    'region' => $project->getRegionName(),
+                    'country' => $project->getCountryName(),
+                    'countryID' => $project->getCountryID(),
                     'url' => $urlHandler->project($project),
                     'logo' => $project->getLogoOrDefaultSilver(),
                     'organisationsCount' => $project->getOrganisationsCount(),
-                    'dsiFocusTags' => array_map(function (ProjectDsiFocusTag $projectTag) {
-                        return $projectTag->getTagID();
-                    }, $projectDsiFocusTagRepository->getByProjectID($project->getId()))
+                    'dsiFocusTags' => $this->projectDsiFocusTagRepo->getTagIDsByProject($project),
+                    'tags' => $this->projectTagRepo->getTagIDsByProject($project),
+                    'helpTags' => $this->projectImpactHelpTagRepo->getTagIDsByProject($project),
+                    'techTags' => $this->projectImpactTechTagRepo->getTagIDsByProject($project),
                 ];
             }, $projectRepositoryInAPC->getAll()));
         } else {

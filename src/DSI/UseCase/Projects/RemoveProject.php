@@ -7,8 +7,8 @@ use DSI\Entity\User;
 use DSI\Repository\OrganisationProjectRepository;
 use DSI\Repository\ProjectDsiFocusTagRepository;
 use DSI\Repository\ProjectEmailInvitationRepository;
-use DSI\Repository\ProjectImpactTagARepository;
-use DSI\Repository\ProjectImpactTagCRepository;
+use DSI\Repository\ProjectImpactHelpTagRepository;
+use DSI\Repository\ProjectImpactTechTagRepository;
 use DSI\Repository\ProjectLinkRepository;
 use DSI\Repository\ProjectMemberInvitationRepository;
 use DSI\Repository\ProjectMemberRepository;
@@ -169,7 +169,7 @@ class RemoveProject
 
     private function removeProjectTagsA()
     {
-        $projectTagARepo = new ProjectImpactTagARepository();
+        $projectTagARepo = new ProjectImpactHelpTagRepository();
         $projectTags = $projectTagARepo->getByProjectID($this->data()->project->getId());
         foreach ($projectTags AS $projectTag) {
             $projectTagARepo->remove($projectTag);
@@ -187,7 +187,7 @@ class RemoveProject
 
     private function removeProjectTagsC()
     {
-        $projectTagCRepo = new ProjectImpactTagCRepository();
+        $projectTagCRepo = new ProjectImpactTechTagRepository();
         $projectTags = $projectTagCRepo->getByProjectID($this->data()->project->getId());
         foreach ($projectTags AS $projectTag) {
             $projectTagCRepo->remove($projectTag);

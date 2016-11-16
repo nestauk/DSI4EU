@@ -6,14 +6,14 @@ require __DIR__ . '/header.php'
     <div ng-controller="ProjectsController"
          data-projectsjsonurl="<?php echo $urlHandler->projectsJson() ?>">
 
-
         <div class="content-block">
             <div class="w-row">
                 <div class="w-col w-col-8 w-col-stack">
                     <h1 class="content-h1">Projects</h1>
                     <p class="intro">
                         Digital social innovation (DSI) covers a range of areas, from providing tools to
-                        improve democratic processes to helping citizens measure pollution in their local environment, and
+                        improve democratic processes to helping citizens measure pollution in their local environment,
+                        and
                         from crowdfunding community projects to creating platforms to scrutinise public spending.
                     </p>
                     <p class="header-intro-descr">
@@ -39,7 +39,7 @@ require __DIR__ . '/header.php'
                         </a>
                     <?php } else { ?>
                         <a class="log-in-link long read-more w-clearfix w-inline-block"
-                           href="<?php echo $urlHandler->login()?>?from=project">
+                           href="<?php echo $urlHandler->login() ?>?from=project">
                             <div class="login-li long menu-li readmore-li">Add your project</div>
                             <img class="login-arrow"
                                  src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
@@ -77,6 +77,30 @@ require __DIR__ . '/header.php'
                                                ng-model="searchName">
                                         <img class="search-mag"
                                              src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-search.png">
+                                    </div>
+                                    <div>
+                                        <div class="advanced-search w-row">
+                                            <div class="w-col w-col-6">
+                                                <a class="w-clearfix w-inline-block" data-ix="open-advanced" href="#">
+                                                    <div class="adv-text">Advanced filters</div>
+                                                    <div class="arrow"></div>
+                                                </a>
+                                            </div>
+                                            <div class="w-col w-col-6"></div>
+                                        </div>
+                                        <div class="adv-options" data-ix="closed">
+                                            <label>Country</label>
+                                            <select class="w-select" id="field" name="field" ng-model="country">
+                                                <option value="0">Select one country</option>
+                                                <option ng-repeat="country in countries" value="{{country.id}}">
+                                                    {{country.text}}
+                                                </option>
+                                            </select>
+
+                                            <br/><br/>
+                                        </div>
+                                    </div>
+                                    <div class="filter-title"><strong>Filter by category</strong>
                                     </div>
                                     <div class="filter-checkbox w-checkbox">
                                         <input class="w-checkbox-input" data-name="Checkbox 2" id="checkbox-2"
@@ -131,7 +155,8 @@ require __DIR__ . '/header.php'
                                    ng-repeat="project in projects
                                    | filter: startsWithLetter
                                    | filter: searchName
-                                   | filter: fundingHasType()
+                                   | filter: projectHasDsiFocusTag()
+                                   | filter: projectInCountry()
                                    as filtered"
                                    ng-if="$index < (filtered.length / 2)">
                                     <h3 class="info-card-h3" ng-bind="project.name"></h3>
@@ -148,7 +173,8 @@ require __DIR__ . '/header.php'
                                    ng-repeat="project in projects
                                    | filter: startsWithLetter
                                    | filter: searchName
-                                   | filter: fundingHasType()
+                                   | filter: projectHasDsiFocusTag()
+                                   | filter: projectInCountry()
                                    as filtered"
                                    ng-if="$index >= (filtered.length / 2)">
                                     <h3 class="info-card-h3" ng-bind="project.name"></h3>

@@ -2,32 +2,32 @@
 
 namespace DSI\UseCase;
 
-use DSI\Entity\ProjectImpactTagA;
+use DSI\Entity\ProjectImpactHelpTag;
 use DSI\Repository\ImpactTagRepository;
-use DSI\Repository\ProjectImpactTagARepository;
+use DSI\Repository\ProjectImpactHelpTagRepository;
 use DSI\Repository\ProjectRepository;
 use DSI\Service\ErrorHandler;
 
-class RemoveImpactTagAFromProject
+class RemoveImpactHelpTagFromProject
 {
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var ProjectImpactTagARepository */
+    /** @var ProjectImpactHelpTagRepository */
     private $projectImpactTagRepo;
 
-    /** @var RemoveImpactTagAFromProject_Data */
+    /** @var RemoveImpactHelpTagFromProject_Data */
     private $data;
 
     public function __construct()
     {
-        $this->data = new RemoveImpactTagAFromProject_Data();
+        $this->data = new RemoveImpactHelpTagFromProject_Data();
     }
 
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->projectImpactTagRepo = new ProjectImpactTagARepository();
+        $this->projectImpactTagRepo = new ProjectImpactHelpTagRepository();
 
         $tagRepo = new ImpactTagRepository();
         $projectRepo = new ProjectRepository();
@@ -46,14 +46,14 @@ class RemoveImpactTagAFromProject
             $this->errorHandler->throwIfNotEmpty();
         }
 
-        $projectTag = new ProjectImpactTagA();
+        $projectTag = new ProjectImpactHelpTag();
         $projectTag->setTag($tag);
         $projectTag->setProject($projectRepo->getById($this->data()->projectID));
         $this->projectImpactTagRepo->remove($projectTag);
     }
 
     /**
-     * @return RemoveImpactTagAFromProject_Data
+     * @return RemoveImpactHelpTagFromProject_Data
      */
     public function data()
     {
@@ -61,7 +61,7 @@ class RemoveImpactTagAFromProject
     }
 }
 
-class RemoveImpactTagAFromProject_Data
+class RemoveImpactHelpTagFromProject_Data
 {
     /** @var string */
     public $tag;

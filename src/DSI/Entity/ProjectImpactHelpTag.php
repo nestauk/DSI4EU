@@ -2,7 +2,7 @@
 
 namespace DSI\Entity;
 
-class ProjectImpactTagA
+class ProjectImpactHelpTag
 {
     /** @var Project */
     private $project;

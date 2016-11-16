@@ -2,18 +2,18 @@
 
 namespace DSI\UseCase;
 
-use DSI\Entity\ProjectImpactTagC;
+use DSI\Entity\ProjectImpactTechTag;
 use DSI\Repository\ImpactTagRepository;
-use DSI\Repository\ProjectImpactTagCRepository;
+use DSI\Repository\ProjectImpactTechTagRepository;
 use DSI\Repository\ProjectRepository;
 use DSI\Service\ErrorHandler;
 
-class RemoveImpactTagCFromProject
+class RemoveImpactTechTagFromProject
 {
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var ProjectImpactTagCRepository */
+    /** @var ProjectImpactTechTagRepository */
     private $projectImpactTagRepo;
 
     /** @var RemoveImpactTagCFromProject_Data */
@@ -27,7 +27,7 @@ class RemoveImpactTagCFromProject
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->projectImpactTagRepo = new ProjectImpactTagCRepository();
+        $this->projectImpactTagRepo = new ProjectImpactTechTagRepository();
 
         $tagRepo = new ImpactTagRepository();
         $projectRepo = new ProjectRepository();
@@ -46,7 +46,7 @@ class RemoveImpactTagCFromProject
             $this->errorHandler->throwIfNotEmpty();
         }
 
-        $projectTag = new ProjectImpactTagC();
+        $projectTag = new ProjectImpactTechTag();
         $projectTag->setTag($tag);
         $projectTag->setProject($projectRepo->getById($this->data()->projectID));
         $this->projectImpactTagRepo->remove($projectTag);

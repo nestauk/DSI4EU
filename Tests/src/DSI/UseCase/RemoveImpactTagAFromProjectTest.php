@@ -4,10 +4,10 @@ require_once __DIR__ . '/../../../config.php';
 
 class RemoveImpactTagAFromProjectTest extends PHPUnit_Framework_TestCase
 {
-    /** @var \DSI\UseCase\AddImpactTagAToProject */
+    /** @var \DSI\UseCase\AddImpactHelpTagToProject */
     private $addTagToProjectCommand;
 
-    /** @var \DSI\UseCase\RemoveImpactTagAFromProject */
+    /** @var \DSI\UseCase\RemoveImpactHelpTagFromProject */
     private $removeTagFromProjectCommand;
 
     /** @var \DSI\Repository\ImpactTagRepository */
@@ -16,7 +16,7 @@ class RemoveImpactTagAFromProjectTest extends PHPUnit_Framework_TestCase
     /** @var \DSI\Repository\UserRepository */
     private $userRepo;
 
-    /** @var \DSI\Repository\ProjectImpactTagARepository */
+    /** @var \DSI\Repository\ProjectImpactHelpTagRepository */
     private $projectTagRepo;
 
     /** @var \DSI\Repository\ProjectRepository */
@@ -27,9 +27,9 @@ class RemoveImpactTagAFromProjectTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->addTagToProjectCommand = new \DSI\UseCase\AddImpactTagAToProject();
-        $this->removeTagFromProjectCommand = new \DSI\UseCase\RemoveImpactTagAFromProject();
-        $this->projectTagRepo = new \DSI\Repository\ProjectImpactTagARepository();
+        $this->addTagToProjectCommand = new \DSI\UseCase\AddImpactHelpTagToProject();
+        $this->removeTagFromProjectCommand = new \DSI\UseCase\RemoveImpactHelpTagFromProject();
+        $this->projectTagRepo = new \DSI\Repository\ProjectImpactHelpTagRepository();
         $this->tagRepo = new \DSI\Repository\ImpactTagRepository();
         $this->projectRepo = new \DSI\Repository\ProjectRepository();
         $this->userRepo = new \DSI\Repository\UserRepository();

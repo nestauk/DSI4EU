@@ -16,6 +16,8 @@ class ProjectDsiFocusTagRepository
     /** @var DsiFocusTagRepository */
     private $tagsRepo;
 
+    private $table = 'project-impact-tags-b';
+
     public function __construct()
     {
         $this->projectRepo = new ProjectRepository();
@@ -25,7 +27,7 @@ class ProjectDsiFocusTagRepository
     public function add(ProjectDsiFocusTag $projectTag)
     {
         $query = new SQL("SELECT projectID 
-            FROM `project-impact-tags-b`
+            FROM `{$this->table}`
             WHERE `projectID` = '{$projectTag->getProjectID()}'
             AND `tagID` = '{$projectTag->getTagID()}'
             LIMIT 1
@@ -37,7 +39,7 @@ class ProjectDsiFocusTagRepository
         $insert[] = "`projectID` = '" . (int)($projectTag->getProjectID()) . "'";
         $insert[] = "`tagID` = '" . (int)($projectTag->getTagID()) . "'";
 
-        $query = new SQL("INSERT INTO `project-impact-tags-b` SET " . implode(', ', $insert) . "");
+        $query = new SQL("INSERT INTO `{$this->table}` SET " . implode(', ', $insert) . "");
         // $query->pr();
         $query->query();
     }
@@ -45,7 +47,7 @@ class ProjectDsiFocusTagRepository
     public function remove(ProjectDsiFocusTag $projectTag)
     {
         $query = new SQL("SELECT projectID 
-            FROM `project-impact-tags-b`
+            FROM `{$this->table}`
             WHERE `projectID` = '{$projectTag->getProjectID()}'
             AND `tagID` = '{$projectTag->getTagID()}'
             LIMIT 1
@@ -57,7 +59,7 @@ class ProjectDsiFocusTagRepository
         $insert[] = "`projectID` = '" . (int)($projectTag->getProjectID()) . "'";
         $insert[] = "`tagID` = '" . (int)($projectTag->getTagID()) . "'";
 
-        $query = new SQL("DELETE FROM `project-impact-tags-b` WHERE " . implode(' AND ', $insert) . "");
+        $query = new SQL("DELETE FROM `{$this->table}` WHERE " . implode(' AND ', $insert) . "");
         $query->query();
     }
 
@@ -70,30 +72,6 @@ class ProjectDsiFocusTagRepository
         return $this->getProjectDsiFocusTagsWhere([
             "`projectID` = '{$projectID}'"
         ]);
-    }
-
-    /**
-     * @param int $projectID
-     * @return \int[]
-     */
-    public function getTagIDsForProject(int $projectID)
-    {
-        $where = [
-            "`projectID` = '{$projectID}'"
-        ];
-
-        /** @var int[] $tagIDs */
-        $tagIDs = [];
-        $query = new SQL("SELECT tagID 
-            FROM `project-impact-tags-b`
-            WHERE " . implode(' AND ', $where) . "
-            ORDER BY tagID
-        ");
-        foreach ($query->fetch_all() AS $dbProjectDsiFocusTag) {
-            $tagIDs[] = $dbProjectDsiFocusTag['tagID'];
-        }
-
-        return $tagIDs;
     }
 
     /**
@@ -120,7 +98,7 @@ class ProjectDsiFocusTagRepository
         /** @var int[] $projectIDs */
         $projectIDs = [];
         $query = new SQL("SELECT projectID 
-            FROM `project-impact-tags-b`
+            FROM `{$this->table}`
             WHERE " . implode(' AND ', $where) . "
             ORDER BY projectID
         ");
@@ -133,7 +111,7 @@ class ProjectDsiFocusTagRepository
 
     public function clearAll()
     {
-        $query = new SQL("TRUNCATE TABLE `project-impact-tags-b`");
+        $query = new SQL("TRUNCATE TABLE `{$this->table}`");
         $query->query();
     }
 
@@ -146,7 +124,7 @@ class ProjectDsiFocusTagRepository
         /** @var ProjectDsiFocusTag[] $projectTags */
         $projectTags = [];
         $query = new SQL("SELECT projectID, tagID 
-            FROM `project-impact-tags-b`
+            FROM `{$this->table}`
             WHERE " . implode(' AND ', $where) . "
         ");
         foreach ($query->fetch_all() AS $dbProjectDsiFocusTag) {
@@ -175,10 +153,19 @@ class ProjectDsiFocusTagRepository
     {
         $query = new SQL("SELECT tag 
             FROM `dsi-focus-tags` 
-            LEFT JOIN `project-impact-tags-b` ON `dsi-focus-tags`.`id` = `project-impact-tags-b`.`tagID`
-            WHERE `project-impact-tags-b`.`projectID` = '{$project->getId()}'
+            LEFT JOIN `{$this->table}` ON `dsi-focus-tags`.`id` = `{$this->table}`.`tagID`
+            WHERE `{$this->table}`.`projectID` = '{$project->getId()}'
             ORDER BY `dsi-focus-tags`.`tag`
         ");
         return $query->fetch_all('tag');
+    }
+
+    public function getTagIDsByProject(Project $project)
+    {
+        $query = new SQL("SELECT tagID 
+            FROM `{$this->table}`
+            WHERE `{$this->table}`.`projectID` = '{$project->getId()}'
+        ");
+        return $query->fetch_all('tagID');
     }
 }

@@ -5,8 +5,8 @@ namespace DSI\Controller;
 use DSI\Entity\Project;
 use DSI\Repository\OrganisationProjectRepository;
 use DSI\Repository\ProjectDsiFocusTagRepository;
-use DSI\Repository\ProjectImpactTagARepository;
-use DSI\Repository\ProjectImpactTagCRepository;
+use DSI\Repository\ProjectImpactHelpTagRepository;
+use DSI\Repository\ProjectImpactTechTagRepository;
 use DSI\Repository\ProjectNetworkTagRepository;
 use DSI\Repository\ProjectRepositoryInAPC;
 use DSI\Repository\ProjectTagRepository;
@@ -181,7 +181,7 @@ class ExportProjectsController
 
     private function getSupportsTags(Project $project)
     {
-        return (new ProjectImpactTagARepository())->getTagNamesByProject($project);
+        return (new ProjectImpactHelpTagRepository())->getTagNamesByProject($project);
     }
 
     private function getFocusTags(Project $project)
@@ -191,6 +191,6 @@ class ExportProjectsController
 
     private function getTechnologyTags(Project $project)
     {
-        return (new ProjectImpactTagCRepository())->getTagNamesByProject($project);
+        return (new ProjectImpactTechTagRepository())->getTagNamesByProject($project);
     }
 }

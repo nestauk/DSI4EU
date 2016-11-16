@@ -11,8 +11,8 @@ use DSI\NotFound;
 use DSI\Repository\CountryRegionRepository;
 use DSI\Repository\OrganisationProjectRepository;
 use DSI\Repository\ProjectDsiFocusTagRepository;
-use DSI\Repository\ProjectImpactTagARepository;
-use DSI\Repository\ProjectImpactTagCRepository;
+use DSI\Repository\ProjectImpactHelpTagRepository;
+use DSI\Repository\ProjectImpactTechTagRepository;
 use DSI\Repository\ProjectLinkRepository;
 use DSI\Repository\ProjectMemberRepository;
 use DSI\Repository\ProjectNetworkTagRepository;
@@ -149,10 +149,10 @@ class UpdateProject
 
     private function setImpactTagsA()
     {
-        $projectTags = (new ProjectImpactTagARepository())->getTagNamesByProject($this->data()->project);
+        $projectTags = (new ProjectImpactHelpTagRepository())->getTagNamesByProject($this->data()->project);
         foreach ($this->data()->impactTagsA AS $newTagName) {
             if (!in_array($newTagName, $projectTags)) {
-                $addTag = new AddImpactTagAToProject();
+                $addTag = new AddImpactHelpTagToProject();
                 $addTag->data()->projectID = $this->data()->project->getId();
                 $addTag->data()->tag = $newTagName;
                 $addTag->exec();
@@ -160,7 +160,7 @@ class UpdateProject
         }
         foreach ($projectTags AS $oldTagName) {
             if (!in_array($oldTagName, $this->data()->impactTagsA)) {
-                $remTag = new RemoveImpactTagAFromProject();
+                $remTag = new RemoveImpactHelpTagFromProject();
                 $remTag->data()->projectID = $this->data()->project->getId();
                 $remTag->data()->tag = $oldTagName;
                 $remTag->exec();
@@ -191,10 +191,10 @@ class UpdateProject
 
     private function setImpactTagsC()
     {
-        $projectTags = (new ProjectImpactTagCRepository())->getTagNamesByProject($this->data()->project);
+        $projectTags = (new ProjectImpactTechTagRepository())->getTagNamesByProject($this->data()->project);
         foreach ($this->data()->impactTagsC AS $newTagName) {
             if (!in_array($newTagName, $projectTags)) {
-                $addTag = new AddImpactTagCToProject();
+                $addTag = new AddImpactTechTagToProject();
                 $addTag->data()->projectID = $this->data()->project->getId();
                 $addTag->data()->tag = $newTagName;
                 $addTag->exec();
@@ -202,7 +202,7 @@ class UpdateProject
         }
         foreach ($projectTags AS $oldTagName) {
             if (!in_array($oldTagName, $this->data()->impactTagsC)) {
-                $remTag = new RemoveImpactTagCFromProject();
+                $remTag = new RemoveImpactTechTagFromProject();
                 $remTag->data()->projectID = $this->data()->project->getId();
                 $remTag->data()->tag = $oldTagName;
                 $remTag->exec();

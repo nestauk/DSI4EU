@@ -4,7 +4,7 @@ require_once __DIR__ . '/../../../config.php';
 
 class AddImpactTagCToProjectTest extends PHPUnit_Framework_TestCase
 {
-    /** @var \DSI\UseCase\AddImpactTagCToProject */
+    /** @var \DSI\UseCase\AddImpactTechTagToProject */
     private $addImpactTagToProject;
 
     /** @var \DSI\Repository\ImpactTagRepository */
@@ -24,7 +24,7 @@ class AddImpactTagCToProjectTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->addImpactTagToProject = new \DSI\UseCase\AddImpactTagCToProject();
+        $this->addImpactTagToProject = new \DSI\UseCase\AddImpactTechTagToProject();
         $this->impactTagRepo = new \DSI\Repository\ImpactTagRepository();
         $this->projectRepo = new \DSI\Repository\ProjectRepository();
         $this->userRepo = new \DSI\Repository\UserRepository();
@@ -42,7 +42,7 @@ class AddImpactTagCToProjectTest extends PHPUnit_Framework_TestCase
         $this->impactTagRepo->clearAll();
         $this->projectRepo->clearAll();
         $this->userRepo->clearAll();
-        (new \DSI\Repository\ProjectImpactTagCRepository())->clearAll();
+        (new \DSI\Repository\ProjectImpactTechTagRepository())->clearAll();
     }
 
     /** @test */
@@ -53,7 +53,7 @@ class AddImpactTagCToProjectTest extends PHPUnit_Framework_TestCase
         $this->addImpactTagToProject->exec();
 
         $this->assertTrue(
-            (new \DSI\Repository\ProjectImpactTagCRepository())->projectHasTagName(
+            (new \DSI\Repository\ProjectImpactTechTagRepository())->projectHasTagName(
                 $this->addImpactTagToProject->data()->projectID,
                 $this->addImpactTagToProject->data()->tag
             )

@@ -2,35 +2,35 @@
 
 namespace DSI\UseCase;
 
-use DSI\Entity\ProjectImpactTagC;
+use DSI\Entity\ProjectImpactHelpTag;
 use DSI\Repository\ImpactTagRepository;
-use DSI\Repository\ProjectImpactTagCRepository;
+use DSI\Repository\ProjectImpactHelpTagRepository;
 use DSI\Repository\ProjectRepository;
 use DSI\Service\ErrorHandler;
 
-class AddImpactTagCToProject
+class AddImpactHelpTagToProject
 {
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var ProjectImpactTagCRepository */
+    /** @var ProjectImpactHelpTagRepository */
     private $projectImpactTagRepository;
 
     /** @var ProjectRepository */
     private $projectRepository;
 
-    /** @var AddImpactTagCToProject_Data */
+    /** @var AddImpactHelpTagToProject_Data */
     private $data;
 
     public function __construct()
     {
-        $this->data = new AddImpactTagCToProject_Data();
+        $this->data = new AddImpactHelpTagToProject_Data();
     }
 
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->projectImpactTagRepository = new ProjectImpactTagCRepository();
+        $this->projectImpactTagRepository = new ProjectImpactHelpTagRepository();
         $this->projectRepository = new ProjectRepository();
 
         $tagRepo = new ImpactTagRepository();
@@ -49,14 +49,14 @@ class AddImpactTagCToProject
             $this->errorHandler->throwIfNotEmpty();
         }
 
-        $projectImpactTag = new ProjectImpactTagC();
+        $projectImpactTag = new ProjectImpactHelpTag();
         $projectImpactTag->setTag($tag);
         $projectImpactTag->setProject($this->projectRepository->getById($this->data()->projectID));
         $this->projectImpactTagRepository->add($projectImpactTag);
     }
 
     /**
-     * @return AddImpactTagCToProject_Data
+     * @return AddImpactHelpTagToProject_Data
      */
     public function data()
     {
@@ -64,7 +64,7 @@ class AddImpactTagCToProject
     }
 }
 
-class AddImpactTagCToProject_Data
+class AddImpactHelpTagToProject_Data
 {
     /** @var string */
     public $tag;

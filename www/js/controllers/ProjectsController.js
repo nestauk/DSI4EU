@@ -5,10 +5,15 @@ angular
 
         $scope.letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
         $scope.startLetter = 'A';
+        $scope.country = '0';
 
         $http.get(projectsJsonUrl)
             .then(function (result) {
                 $scope.projects = result.data;
+            });
+        $http.get(SITE_RELATIVE_PATH + '/countries.json')
+            .then(function (result) {
+                $scope.countries = result.data;
             });
 
         $scope.setStartLetter = function (letter) {
@@ -16,7 +21,7 @@ angular
         };
 
         $scope.startsWithLetter = function (item) {
-            if($scope.startLetter == '')
+            if ($scope.startLetter == '')
                 return true;
 
             var letterMatch = new RegExp($scope.startLetter, 'i');
@@ -28,7 +33,7 @@ angular
         $scope.dsiFocus9 = false;
         $scope.dsiFocus35 = false;
 
-        $scope.fundingHasType = function (val) {
+        $scope.projectHasDsiFocusTag = function () {
             return function (item) {
                 if ($scope.dsiFocus4 == false && $scope.dsiFocus8 == false && $scope.dsiFocus9 == false && $scope.dsiFocus35 == false)
                     return true;
@@ -43,6 +48,15 @@ angular
                     return true;
 
                 return false;
+            }
+        };
+
+        $scope.projectInCountry = function () {
+            return function (item) {
+                if ($scope.country == '0')
+                    return true;
+
+                return $scope.country == item.countryID;
             }
         }
     });

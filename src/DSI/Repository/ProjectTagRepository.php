@@ -75,30 +75,6 @@ class ProjectTagRepository
     }
 
     /**
-     * @param int $projectID
-     * @return \int[]
-     */
-    public function getTagIDsForProject(int $projectID)
-    {
-        $where = [
-            "`projectID` = '{$projectID}'"
-        ];
-
-        /** @var int[] $tagIDs */
-        $tagIDs = [];
-        $query = new SQL("SELECT tagID 
-            FROM `{$this->table}`
-            WHERE " . implode(' AND ', $where) . "
-            ORDER BY tagID
-        ");
-        foreach ($query->fetch_all() AS $dbProjectTags) {
-            $tagIDs[] = $dbProjectTags['tagID'];
-        }
-
-        return $tagIDs;
-    }
-
-    /**
      * @param int $tagID
      * @return \DSI\Entity\ProjectTag[]
      */
@@ -182,5 +158,14 @@ class ProjectTagRepository
             ORDER BY `tags-for-projects`.`tag`
         ");
         return $query->fetch_all('tag');
+    }
+
+    public function getTagIDsByProject(Project $project)
+    {
+        $query = new SQL("SELECT tagID 
+            FROM `{$this->table}`
+            WHERE `{$this->table}`.`projectID` = '{$project->getId()}'
+        ");
+        return $query->fetch_all('tagID');
     }
 }
