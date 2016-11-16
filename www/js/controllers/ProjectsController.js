@@ -2,10 +2,29 @@ angular
     .module(angularAppName)
     .controller('ProjectsController', function ($scope, $http, $attrs) {
         var projectsJsonUrl = $attrs.projectsjsonurl;
+        var projectTagsJsonUrl = $attrs.projecttagsjsonurl;
+
+        $scope.showAdvancedSearch = $attrs.showadvancedsearch ? true : false;
 
         $scope.letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-        $scope.startLetter = 'A';
-        $scope.country = '0';
+        $scope.filter = {
+            countryID: '0',
+            tagID: $attrs.searchtag,
+            helpTagID: $attrs.searchhelptag,
+            techTagID: $attrs.searchtechtag
+        };
+        $scope.searchName = $attrs.searchname;
+
+        if (
+            $scope.searchName == '' &&
+            $scope.filter.countryID == '0' &&
+            $scope.filter.tagID == '0' &&
+            $scope.filter.helpTagID == '0' &&
+            $scope.filter.techTagID == '0'
+        )
+            $scope.startLetter = 'A';
+        else
+            $scope.startLetter = '';
 
         $http.get(projectsJsonUrl)
             .then(function (result) {
@@ -14,6 +33,10 @@ angular
         $http.get(SITE_RELATIVE_PATH + '/countries.json')
             .then(function (result) {
                 $scope.countries = result.data;
+            });
+        $http.get(projectTagsJsonUrl)
+            .then(function (result) {
+                $scope.tags = result.data;
             });
 
         $scope.setStartLetter = function (letter) {
@@ -28,10 +51,10 @@ angular
             return !!letterMatch.test(item.name.substring(0, 1));
         };
 
-        $scope.dsiFocus4 = false;
-        $scope.dsiFocus8 = false;
-        $scope.dsiFocus9 = false;
-        $scope.dsiFocus35 = false;
+        $scope.dsiFocus4 =
+            $scope.dsiFocus8 =
+                $scope.dsiFocus9 =
+                    $scope.dsiFocus35 = false;
 
         $scope.projectHasDsiFocusTag = function () {
             return function (item) {
@@ -53,10 +76,37 @@ angular
 
         $scope.projectInCountry = function () {
             return function (item) {
-                if ($scope.country == '0')
+                if ($scope.filter.countryID == '0')
                     return true;
 
-                return $scope.country == item.countryID;
+                return $scope.filter.countryID == item.countryID;
+            }
+        };
+
+        $scope.projectHasTag = function () {
+            return function (item) {
+                if ($scope.filter.tagID == '0')
+                    return true;
+
+                return $.inArray($scope.filter.tagID, item.tags) !== -1;
+            }
+        };
+
+        $scope.projectHasHelpTag = function () {
+            return function (item) {
+                if ($scope.filter.helpTagID == '0')
+                    return true;
+
+                return $.inArray($scope.filter.helpTagID, item.helpTags) !== -1;
+            }
+        };
+
+        $scope.projectHasTechTag = function () {
+            return function (item) {
+                if ($scope.filter.techTagID == '0')
+                    return true;
+
+                return $.inArray($scope.filter.techTagID, item.techTags) !== -1;
             }
         }
     });

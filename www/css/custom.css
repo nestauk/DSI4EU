@@ -628,3 +628,15 @@ body#tinymce.mce-content-body {
 .mce-btn {
     background-color: #f3f3f3 !important;
 }
+
+.advancedSearchArrow {
+    transform-style: preserve-3d;
+    transition: transform 200ms;
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+
+.showAdvancedSearch {
+    transform-style: preserve-3d;
+    transition: transform 200ms;
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(180deg);
+}

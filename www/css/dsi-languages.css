@@ -1905,7 +1905,7 @@ strong {
   margin-bottom: 5px;
   -webkit-transition: all 200ms ease;
   transition: all 200ms ease;
-  font-family: 'Open Sans', sans-serif;
+  font-family: Montserrat, sans-serif;
   color: hsla(0, 0%, 100%, .75);
   font-size: 14px;
   line-height: 20px;
@@ -9656,7 +9656,7 @@ strong {
 .newsletter-signup {
   height: 70px;
   padding-top: 10px;
-  background-color: #f3f3f3;
+  background-color: #2a2e38;
 }
 
 .mailchimp-container {
@@ -9676,7 +9676,12 @@ strong {
   border-bottom-width: 1px;
   border-bottom-color: #000;
   background-color: transparent;
+  color: #fff;
   font-size: 16px;
+}
+
+.signup-in:focus {
+  border-bottom-color: rgba(29, 201, 160, .94);
 }
 
 .footer-signup {
@@ -9684,11 +9689,19 @@ strong {
   margin-left: 3%;
   padding-top: 13px;
   padding-bottom: 13px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgba(29, 201, 160, .94);
   border-radius: 50px;
-  background-color: rgba(29, 201, 160, .94);
-  color: #000;
+  background-color: transparent;
+  color: rgba(29, 201, 160, .94);
   font-size: 18px;
   text-transform: uppercase;
+}
+
+.footer-signup:hover {
+  background-color: #1dc9a0;
+  color: #000;
 }
 
 .adv-options {
@@ -9719,6 +9732,12 @@ strong {
   background-repeat: no-repeat;
 }
 
+.arrow._180 {
+  -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
 .adv-text {
   float: left;
   text-decoration: underline;
@@ -9732,6 +9751,16 @@ strong {
 .filter-title {
   padding-bottom: 15px;
   border-bottom: 1px solid #dbdbdb;
+}
+
+.newsletter-title {
+  color: #fff;
+  font-size: 22px;
+  text-transform: uppercase;
+}
+
+.news-p {
+  color: #fff;
 }
 
 html.w-mod-js *[data-ix="pin-drop"] {
@@ -10451,6 +10480,19 @@ html.w-mod-js *[data-ix="closed"] {
   .languages.menu-languages {
     display: block;
   }
+  .newsletter-signup {
+    height: 250px;
+  }
+  .signup-in {
+    display: block;
+    width: 80%;
+    margin-right: 0%;
+  }
+  .footer-signup {
+    width: 80%;
+    margin-top: 14px;
+    margin-left: 0%;
+  }
 }
 
 @media (max-width: 767px) {
@@ -10835,6 +10877,11 @@ html.w-mod-js *[data-ix="closed"] {
   .partner-logo-colour {
     margin-bottom: 35px;
     margin-left: -4px;
+  }
+  .newsletter-signup {
+    height: 340px;
+    padding-top: 25px;
+    padding-left: 10px;
   }
 }
 
@@ -11409,6 +11456,17 @@ html.w-mod-js *[data-ix="closed"] {
   }
   .languages.menu-languages {
     margin-left: 15px;
+  }
+  .newsletter-signup {
+    height: 370px;
+    padding-top: 33px;
+    padding-left: 0px;
+  }
+  .signup-in {
+    width: 100%;
+  }
+  .footer-signup {
+    width: 100%;
   }
 }
 

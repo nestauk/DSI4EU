@@ -1,10 +1,23 @@
 <?php
-require __DIR__ . '/header.php'
+require __DIR__ . '/header.php';
 /** @var $loggedInUser \DSI\Entity\User */
 /** @var $urlHandler \DSI\Service\URL */
+
+$showAdvancedSearch = (
+    isset($_GET['q']) OR
+    isset($_GET['tag']) OR
+    isset($_GET['helpTag']) OR
+    isset($_GET['techTag'])
+);
 ?>
     <div ng-controller="ProjectsController"
-         data-projectsjsonurl="<?php echo $urlHandler->projectsJson() ?>">
+         data-projectsjsonurl="<?php echo $urlHandler->projectsJson() ?>"
+         data-projecttagsjsonurl="<?php echo $urlHandler->projectTagsJson() ?>"
+         data-searchname="<?php echo show_input($_GET['q'] ?? '') ?>"
+         data-searchtag="<?php echo show_input($_GET['tag'] ?? '0') ?>"
+         data-searchhelptag="<?php echo show_input($_GET['helpTag'] ?? '0') ?>"
+         data-searchtechtag="<?php echo show_input($_GET['techTag'] ?? '0') ?>"
+         data-showadvancedsearch="<?php echo (bool)$showAdvancedSearch ?>">
 
         <div class="content-block">
             <div class="w-row">
@@ -78,28 +91,59 @@ require __DIR__ . '/header.php'
                                         <img class="search-mag"
                                              src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-search.png">
                                     </div>
+
                                     <div>
                                         <div class="advanced-search w-row">
                                             <div class="w-col w-col-6">
-                                                <a class="w-clearfix w-inline-block" data-ix="open-advanced" href="#">
+                                                <a class="w-clearfix w-inline-block" href="#"
+                                                   ng-click="showAdvancedSearch = !showAdvancedSearch">
                                                     <div class="adv-text">Advanced filters</div>
-                                                    <div class="arrow"></div>
+                                                    <div ng-class="{showAdvancedSearch: showAdvancedSearch}"
+                                                         class="arrow advancedSearchArrow"></div>
                                                 </a>
                                             </div>
                                             <div class="w-col w-col-6"></div>
                                         </div>
-                                        <div class="adv-options" data-ix="closed">
+                                        <div class="adv-options" ng-show="showAdvancedSearch">
                                             <label>Country</label>
-                                            <select class="w-select" id="field" name="field" ng-model="country">
-                                                <option value="0">Select one country</option>
+                                            <select class="w-select" id="field" name="field"
+                                                    ng-model="filter.countryID">
+                                                <option value="0">- Select one country -</option>
                                                 <option ng-repeat="country in countries" value="{{country.id}}">
                                                     {{country.text}}
                                                 </option>
                                             </select>
 
-                                            <br/><br/>
+                                            <label>Tag</label>
+                                            <select class="w-select" id="field" name="field" ng-model="filter.tagID">
+                                                <option value="0">- Select a tag-</option>
+                                                <option ng-repeat="tag in tags.tags" value="{{tag.id}}">
+                                                    {{tag.name}}
+                                                </option>
+                                            </select>
+
+                                            <label>Impact Help</label>
+                                            <select class="w-select" id="field" name="field"
+                                                    ng-model="filter.helpTagID">
+                                                <option value="0">- Select a tag -</option>
+                                                <option ng-repeat="tag in tags.impactTags" value="{{tag.id}}">
+                                                    {{tag.name}}
+                                                </option>
+                                            </select>
+
+                                            <label>Technology</label>
+                                            <select class="w-select" id="field" name="field"
+                                                    ng-model="filter.techTagID">
+                                                <option value="0">- Select a tag -</option>
+                                                <option ng-repeat="tag in tags.impactTags" value="{{tag.id}}">
+                                                    {{tag.name}}
+                                                </option>
+                                            </select>
+
+                                            <br/>
                                         </div>
                                     </div>
+                                    <br/>
                                     <div class="filter-title"><strong>Filter by category</strong>
                                     </div>
                                     <div class="filter-checkbox w-checkbox">
@@ -157,6 +201,9 @@ require __DIR__ . '/header.php'
                                    | filter: searchName
                                    | filter: projectHasDsiFocusTag()
                                    | filter: projectInCountry()
+                                   | filter: projectHasTag()
+                                   | filter: projectHasHelpTag()
+                                   | filter: projectHasTechTag()
                                    as filtered"
                                    ng-if="$index < (filtered.length / 2)">
                                     <h3 class="info-card-h3" ng-bind="project.name"></h3>
@@ -175,6 +222,9 @@ require __DIR__ . '/header.php'
                                    | filter: searchName
                                    | filter: projectHasDsiFocusTag()
                                    | filter: projectInCountry()
+                                   | filter: projectHasTag()
+                                   | filter: projectHasHelpTag()
+                                   | filter: projectHasTechTag()
                                    as filtered"
                                    ng-if="$index >= (filtered.length / 2)">
                                     <h3 class="info-card-h3" ng-bind="project.name"></h3>
@@ -185,6 +235,10 @@ require __DIR__ . '/header.php'
                                         involved
                                     </div>
                                 </a>
+                            </div>
+
+                            <div ng-show="filtered.length == 0" ng-cloak>
+                                No results found.
                             </div>
                         </div>
                     </div>

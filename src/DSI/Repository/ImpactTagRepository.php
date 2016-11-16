@@ -3,11 +3,13 @@
 namespace DSI\Repository;
 
 use DSI;
-use DSI\Service\SQL;
 use DSI\Entity\ImpactTag;
+use DSI\Service\SQL;
 
 class ImpactTagRepository
 {
+    private $table = 'impact-tags';
+
     public function insert(ImpactTag $tag)
     {
         if (!$tag->getName())
@@ -18,7 +20,7 @@ class ImpactTagRepository
         $insert = array();
         $insert[] = "`tag` = '" . addslashes($tag->getName()) . "'";
 
-        $query = new SQL("INSERT INTO `impact-tags` SET " . implode(', ', $insert) . "");
+        $query = new SQL("INSERT INTO `{$this->table}` SET " . implode(', ', $insert) . "");
         $query->query();
 
         $tag->setId($query->insert_id());
@@ -32,7 +34,7 @@ class ImpactTagRepository
             if ($this->getByName($tag->getName())->getId() != $tag->getId())
                 throw new DSI\DuplicateEntry('name');
 
-        $query = new SQL("SELECT id FROM `impact-tags` WHERE id = '{$tag->getId()}' LIMIT 1");
+        $query = new SQL("SELECT id FROM `{$this->table}` WHERE id = '{$tag->getId()}' LIMIT 1");
         $existingTag = $query->fetch();
         if (!$existingTag)
             throw new DSI\NotFound('tagID: ' . $tag->getId());
@@ -40,7 +42,7 @@ class ImpactTagRepository
         $insert = array();
         $insert[] = "`tag` = '" . addslashes($tag->getName()) . "'";
 
-        $query = new SQL("UPDATE `impact-tags` SET " . implode(', ', $insert) . " WHERE `id` = '{$tag->getId()}'");
+        $query = new SQL("UPDATE `{$this->table}` SET " . implode(', ', $insert) . " WHERE `id` = '{$tag->getId()}'");
         $query->query();
     }
 
@@ -72,7 +74,8 @@ class ImpactTagRepository
         $tags = [];
         $query = new SQL("SELECT 
             id, tag
-          FROM `impact-tags` WHERE " . implode(' AND ', $where) . "");
+          FROM `{$this->table}` WHERE " . implode(' AND ', $where) . "
+          ORDER BY tag");
         foreach ($query->fetch_all() AS $dbTag) {
             $tags[] = $this->buildTagFromData($dbTag);
         }
@@ -81,7 +84,7 @@ class ImpactTagRepository
 
     public function clearAll()
     {
-        $query = new SQL("TRUNCATE TABLE `impact-tags`");
+        $query = new SQL("TRUNCATE TABLE `{$this->table}`");
         $query->query();
     }
 
@@ -107,7 +110,7 @@ class ImpactTagRepository
     {
         $query = new SQL("SELECT 
               id, tag
-            FROM `impact-tags` WHERE " . implode(' AND ', $where) . " LIMIT 1");
+            FROM `{$this->table}` WHERE " . implode(' AND ', $where) . " LIMIT 1");
         $dbTag = $query->fetch();
         if (!$dbTag) {
             throw new DSI\NotFound();
@@ -122,7 +125,7 @@ class ImpactTagRepository
      */
     private function checkExistingTagWhere($where)
     {
-        $query = new SQL("SELECT id FROM `impact-tags` WHERE " . implode(' AND ', $where) . " LIMIT 1");
+        $query = new SQL("SELECT id FROM `{$this->table}` WHERE " . implode(' AND ', $where) . " LIMIT 1");
         return ($query->fetch() ? true : false);
     }
 }

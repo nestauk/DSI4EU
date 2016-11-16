@@ -33,7 +33,6 @@ class ProjectsController
         $authUser = new Auth();
         $loggedInUser = $authUser->getUserIfLoggedIn();
         if ($this->responseFormat == 'json') {
-            // (new CountryRegionRepository())->getAll();
             $projectRepositoryInAPC = new ProjectRepositoryInAPC();
             $this->projectDsiFocusTagRepo = new ProjectDsiFocusTagRepository();
             $this->projectTagRepo = new ProjectTagRepository();

@@ -8,6 +8,8 @@ use DSI\Entity\TagForProjects;
 
 class TagForProjectsRepository
 {
+    private $table = 'tags-for-projects';
+
     public function saveAsNew(TagForProjects $tag)
     {
         if (!$tag->getName())
@@ -18,7 +20,7 @@ class TagForProjectsRepository
         $insert = array();
         $insert[] = "`tag` = '" . addslashes($tag->getName()) . "'";
 
-        $query = new SQL("INSERT INTO `tags-for-projects` SET " . implode(', ', $insert) . "");
+        $query = new SQL("INSERT INTO `{$this->table}` SET " . implode(', ', $insert) . "");
         $query->query();
 
         $tag->setId($query->insert_id());
@@ -32,7 +34,7 @@ class TagForProjectsRepository
             if ($this->getByName($tag->getName())->getId() != $tag->getId())
                 throw new DSI\DuplicateEntry('name');
 
-        $query = new SQL("SELECT id FROM `tags-for-projects` WHERE id = '{$tag->getId()}' LIMIT 1");
+        $query = new SQL("SELECT id FROM `{$this->table}` WHERE id = '{$tag->getId()}' LIMIT 1");
         $existingTag = $query->fetch();
         if (!$existingTag)
             throw new DSI\NotFound('tagID: ' . $tag->getId());
@@ -40,7 +42,7 @@ class TagForProjectsRepository
         $insert = array();
         $insert[] = "`tag` = '" . addslashes($tag->getName()) . "'";
 
-        $query = new SQL("UPDATE `tags-for-projects` SET " . implode(', ', $insert) . " WHERE `id` = '{$tag->getId()}'");
+        $query = new SQL("UPDATE `{$this->table}` SET " . implode(', ', $insert) . " WHERE `id` = '{$tag->getId()}'");
         $query->query();
     }
 
@@ -72,7 +74,8 @@ class TagForProjectsRepository
         $tags = [];
         $query = new SQL("SELECT 
             id, tag
-          FROM `tags-for-projects` WHERE " . implode(' AND ', $where) . "");
+          FROM `{$this->table}` WHERE " . implode(' AND ', $where) . "
+          ORDER BY tag");
         foreach ($query->fetch_all() AS $dbTag) {
             $tags[] = $this->buildTagFromData($dbTag);
         }
@@ -81,7 +84,7 @@ class TagForProjectsRepository
 
     public function clearAll()
     {
-        $query = new SQL("TRUNCATE TABLE `tags-for-projects`");
+        $query = new SQL("TRUNCATE TABLE `{$this->table}`");
         $query->query();
     }
 
@@ -107,7 +110,7 @@ class TagForProjectsRepository
     {
         $query = new SQL("SELECT 
               id, tag
-            FROM `tags-for-projects` WHERE " . implode(' AND ', $where) . " LIMIT 1");
+            FROM `{$this->table}` WHERE " . implode(' AND ', $where) . " LIMIT 1");
         $dbTag = $query->fetch();
         if (!$dbTag) {
             throw new DSI\NotFound();
@@ -122,7 +125,7 @@ class TagForProjectsRepository
      */
     private function checkExistingTagWhere($where)
     {
-        $query = new SQL("SELECT id FROM `tags-for-projects` WHERE " . implode(' AND ', $where) . " LIMIT 1");
+        $query = new SQL("SELECT id FROM `{$this->table}` WHERE " . implode(' AND ', $where) . " LIMIT 1");
         return ($query->fetch() ? true : false);
     }
 }
