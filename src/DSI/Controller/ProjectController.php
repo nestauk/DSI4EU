@@ -4,11 +4,14 @@ namespace DSI\Controller;
 
 use DSI\Entity\OrganisationProject;
 use DSI\Entity\Project;
+use DSI\Entity\ProjectDsiFocusTag;
+use DSI\Entity\ProjectImpactHelpTag;
+use DSI\Entity\ProjectImpactTechTag;
 use DSI\Entity\ProjectLink_Service;
 use DSI\Entity\ProjectMember;
 use DSI\Entity\ProjectPost;
+use DSI\Entity\ProjectTag;
 use DSI\Entity\User;
-use DSI\Repository\NetworkTagRepository;
 use DSI\Repository\OrganisationProjectRepository;
 use DSI\Repository\ProjectDsiFocusTagRepository;
 use DSI\Repository\ProjectImpactHelpTagRepository;
@@ -363,11 +366,32 @@ class ProjectController
                 'description' => $project->getDescription(),
                 'startDate' => $project->getStartDate(),
                 'endDate' => $project->getEndDate(),
-                'tags' => (new ProjectTagRepository())->getTagNamesByProject($project),
+                'tags' => array_map(function (ProjectTag $projectTag) {
+                    return [
+                        'id' => $projectTag->getTagID(),
+                        'name' => $projectTag->getTag()->getName(),
+                    ];
+                }, (new ProjectTagRepository())->getByProjectID($project->getId())),
+                'impactTagsA' => array_map(function (ProjectImpactHelpTag $projectTag) {
+                    return [
+                        'id' => $projectTag->getTagID(),
+                        'name' => $projectTag->getTag()->getName(),
+                    ];
+                }, (new ProjectImpactHelpTagRepository())->getByProjectID($project->getId())),
+                'impactTagsB' => array_map(function (ProjectDsiFocusTag $projectTag) {
+                    return [
+                        'id' => $projectTag->getTagID(),
+                        'name' => $projectTag->getTag()->getName(),
+                    ];
+                }, (new ProjectDsiFocusTagRepository())->getByProjectID($project->getId())),
+                'impactTagsC' => array_map(function (ProjectImpactTechTag $projectTag) {
+                    return [
+                        'id' => $projectTag->getTagID(),
+                        'name' => $projectTag->getTag()->getName(),
+                    ];
+                }, (new ProjectImpactTechTagRepository())->getByProjectID($project->getId())),
+
                 'networkTags' => (new ProjectNetworkTagRepository())->getTagNamesByProject($project),
-                'impactTagsA' => (new ProjectImpactHelpTagRepository())->getTagNamesByProject($project),
-                'impactTagsB' => (new ProjectDsiFocusTagRepository())->getTagNamesByProject($project),
-                'impactTagsC' => (new ProjectImpactTechTagRepository())->getTagNamesByProject($project),
                 'members' => $this->getMembers($project->getOwner(), $projectMembers),
                 'memberRequests' => array_map(function (User $user) {
                     return [
@@ -384,7 +408,6 @@ class ProjectController
                 'countryRegion' => $project->getRegion() ? $project->getRegion()->getName() : '',
                 'posts' => $this->getPostsForProject($project),
             ]);
-            return;
         } else {
             $pageTitle = $project->getName();
             require __DIR__ . '/../../../www/views/project.php';

@@ -129,7 +129,8 @@ require __DIR__ . '/header.php';
                     <?php } ?>
                     <div ng-show="project.tags.length" ng-cloak>
                         <h3 class="cse side-bar-h3">Tagged under</h3>
-                        <div class="tag" ng-repeat="tag in project.tags" ng-bind="tag"></div>
+                        <a href="<?php echo $urlHandler->projects() ?>?tag={{tag.id}}" class="tag"
+                           ng-repeat="tag in project.tags" ng-bind="tag.name"></a>
                     </div>
 
                     <div ng-show="project.networkTags.length" ng-cloak>
@@ -140,19 +141,21 @@ require __DIR__ . '/header.php';
                     <div ng-show="project.impactTagsA.length" ng-cloak>
                         <h3 class="cse side-bar-h3">Who we help</h3>
                         <?php /* <p>Areas of society that this project aims to support</p> */ ?>
-                        <div class="tag" ng-repeat="tag in project.impactTagsA" ng-bind="tag"></div>
+                        <a href="<?php echo $urlHandler->projects() ?>?helpTag={{tag.id}}" class="tag"
+                           ng-repeat="tag in project.impactTagsA" ng-bind="tag.name"></a>
                     </div>
 
                     <div ng-show="project.impactTagsB.length" ng-cloak>
                         <h3 class="cse side-bar-h3">Our focus</h3>
                         <?php /* <p>Areas of DSI that this project is a part of</p> */ ?>
-                        <div class="tag" ng-repeat="tag in project.impactTagsB" ng-bind="tag"></div>
+                        <div class="tag" ng-repeat="tag in project.impactTagsB" ng-bind="tag.name"></div>
                     </div>
 
                     <div ng-show="project.impactTagsC.length" ng-cloak>
                         <h3 class="cse side-bar-h3">Our technology</h3>
                         <?php /* <p>The types of technology involved with this project</p> */ ?>
-                        <div class="tag" ng-repeat="tag in project.impactTagsC" ng-bind="tag"></div>
+                        <a href="<?php echo $urlHandler->projects() ?>?techTag={{tag.id}}" class="tag"
+                           ng-repeat="tag in project.impactTagsC" ng-bind="tag.name"></a>
                     </div>
                 </div>
             </div>
