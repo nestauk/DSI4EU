@@ -117,7 +117,7 @@ $showAdvancedSearch = (
                                             <label>Tag</label>
                                             <select class="w-select" id="field" name="field" ng-model="filter.tagID">
                                                 <option value="0">- Select a tag-</option>
-                                                <option ng-repeat="tag in tags.tags" value="{{tag.id}}">
+                                                <option ng-repeat="tag in tags" value="{{tag.id}}">
                                                     {{tag.name}}
                                                 </option>
                                             </select>
@@ -126,7 +126,7 @@ $showAdvancedSearch = (
                                             <select class="w-select" id="field" name="field"
                                                     ng-model="filter.helpTagID">
                                                 <option value="0">- Select a tag -</option>
-                                                <option ng-repeat="tag in tags.impactTags" value="{{tag.id}}">
+                                                <option ng-repeat="tag in impactHelpTags" value="{{tag.id}}">
                                                     {{tag.name}}
                                                 </option>
                                             </select>
@@ -135,7 +135,7 @@ $showAdvancedSearch = (
                                             <select class="w-select" id="field" name="field"
                                                     ng-model="filter.techTagID">
                                                 <option value="0">- Select a tag -</option>
-                                                <option ng-repeat="tag in tags.impactTags" value="{{tag.id}}">
+                                                <option ng-repeat="tag in impactTechTags" value="{{tag.id}}">
                                                     {{tag.name}}
                                                 </option>
                                             </select>

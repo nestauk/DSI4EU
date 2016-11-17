@@ -29,15 +29,51 @@ angular
         $http.get(projectsJsonUrl)
             .then(function (result) {
                 $scope.projects = result.data;
+
+                $http.get(SITE_RELATIVE_PATH + '/countries.json')
+                    .then(function (result) {
+                        $scope.countries = filterUsedCountries(result.data, $scope.projects);
+                    });
+                $http.get(projectTagsJsonUrl)
+                    .then(function (result) {
+                        $scope.tags = filterUsedTags(result.data.tags, $scope.projects, 'tags');
+                        $scope.impactHelpTags = filterUsedTags(result.data.impactTags, $scope.projects, 'helpTags');
+                        $scope.impactTechTags = filterUsedTags(result.data.impactTags, $scope.projects, 'techTags');
+                    });
             });
-        $http.get(SITE_RELATIVE_PATH + '/countries.json')
-            .then(function (result) {
-                $scope.countries = result.data;
+
+        function filterUsedCountries(countries, projects) {
+            var existingCountryIDs = projects.map(function (project) {
+                return project.countryID
+            }).filter(function (id) {
+                return id > 0
+            }).filter(function (e, i, arr) {
+                return arr.indexOf(e, i + 1) === -1;
+            }).map(function (id) {
+                return parseInt(id);
             });
-        $http.get(projectTagsJsonUrl)
-            .then(function (result) {
-                $scope.tags = result.data;
+
+            return countries.filter(function (country) {
+                return $.inArray(country.id, existingCountryIDs) !== -1
             });
+        }
+        function filterUsedTags(tags, projects, tagKey) {
+            var existingTagIDs = projects.map(function (project) {
+                return project[tagKey];
+            }).reduce(function (p, n) {
+                return p.concat(n);
+            }, []).filter(function (id) {
+                return id > 0
+            }).filter(function (e, i, arr) {
+                return arr.indexOf(e, i + 1) === -1;
+            }).map(function (id) {
+                return parseInt(id);
+            });
+
+            return tags.filter(function (tag) {
+                return $.inArray(tag.id, existingTagIDs) !== -1
+            });
+        }
 
         $scope.setStartLetter = function (letter) {
             $scope.startLetter = letter;
