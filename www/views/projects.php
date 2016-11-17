@@ -7,8 +7,7 @@ $showAdvancedSearch = (
     isset($_GET['q']) OR
     isset($_GET['tag']) OR
     isset($_GET['helpTag']) OR
-    isset($_GET['techTag']) OR
-    isset($_GET['openTag'])
+    isset($_GET['techTag'])
 );
 
 ?>
