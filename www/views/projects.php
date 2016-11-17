@@ -7,8 +7,10 @@ $showAdvancedSearch = (
     isset($_GET['q']) OR
     isset($_GET['tag']) OR
     isset($_GET['helpTag']) OR
-    isset($_GET['techTag'])
+    isset($_GET['techTag']) OR
+    isset($_GET['openTag'])
 );
+
 ?>
     <div ng-controller="ProjectsController"
          data-projectsjsonurl="<?php echo $urlHandler->projectsJson() ?>"
@@ -17,7 +19,8 @@ $showAdvancedSearch = (
          data-searchtag="<?php echo show_input($_GET['tag'] ?? '0') ?>"
          data-searchhelptag="<?php echo show_input($_GET['helpTag'] ?? '0') ?>"
          data-searchtechtag="<?php echo show_input($_GET['techTag'] ?? '0') ?>"
-         data-showadvancedsearch="<?php echo (bool)$showAdvancedSearch ?>">
+         data-showadvancedsearch="<?php echo (bool)$showAdvancedSearch ?>"
+         data-searchopentag="<?php echo show_input($_GET['openTag'] ?? '0') ?>">
 
         <div class="content-block">
             <div class="w-row">
@@ -148,7 +151,7 @@ $showAdvancedSearch = (
                                     </div>
                                     <div class="filter-checkbox w-checkbox">
                                         <input class="w-checkbox-input" data-name="Checkbox 2" id="checkbox-2"
-                                               name="checkbox-2" ng-model="dsiFocus35"
+                                               name="checkbox-2" ng-model="dsiFocus[35]"
                                                type="checkbox">
                                         <label class="w-form-label" for="checkbox-2">Open hardware</label>
                                     </div>
@@ -158,7 +161,7 @@ $showAdvancedSearch = (
                                     </div>
                                     <div class="filter-checkbox w-checkbox">
                                         <input class="w-checkbox-input" data-name="Checkbox 5" id="checkbox-5"
-                                               name="checkbox-5" ng-model="dsiFocus9"
+                                               name="checkbox-5" ng-model="dsiFocus[9]"
                                                type="checkbox">
                                         <label class="w-form-label" for="checkbox-5">Open networks</label>
                                     </div>
@@ -170,7 +173,7 @@ $showAdvancedSearch = (
                                     </div>
                                     <div class="filter-checkbox w-checkbox">
                                         <input class="w-checkbox-input" data-name="Checkbox 4" id="checkbox-4"
-                                               name="checkbox-4" ng-model="dsiFocus8"
+                                               name="checkbox-4" ng-model="dsiFocus[8]"
                                                type="checkbox">
                                         <label class="w-form-label" for="checkbox-4">Open data</label>
                                     </div>
@@ -180,7 +183,7 @@ $showAdvancedSearch = (
                                     </div>
                                     <div class="filter-checkbox w-checkbox">
                                         <input class="w-checkbox-input" data-name="Checkbox 3" id="checkbox-3"
-                                               name="checkbox-3" ng-model="dsiFocus4"
+                                               name="checkbox-3" ng-model="dsiFocus[4]"
                                                type="checkbox">
                                         <label class="w-form-label" for="checkbox-3">Open knowledge</label>
                                     </div>

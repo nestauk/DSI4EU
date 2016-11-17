@@ -48,15 +48,20 @@ class ProjectsController
                     'url' => $urlHandler->project($project),
                     'logo' => $project->getLogoOrDefaultSilver(),
                     'organisationsCount' => $project->getOrganisationsCount(),
-                    'dsiFocusTags' => $this->projectDsiFocusTagRepo->getTagIDsByProject($project),
-                    'tags' => $this->projectTagRepo->getTagIDsByProject($project),
-                    'helpTags' => $this->projectImpactHelpTagRepo->getTagIDsByProject($project),
-                    'techTags' => $this->projectImpactTechTagRepo->getTagIDsByProject($project),
+                    'dsiFocusTags' => array_map('intval', $this->projectDsiFocusTagRepo->getTagIDsByProject($project)),
+                    'tags' => array_map('intval', $this->projectTagRepo->getTagIDsByProject($project)),
+                    'helpTags' => array_map('intval', $this->projectImpactHelpTagRepo->getTagIDsByProject($project)),
+                    'techTags' => array_map('intval', $this->projectImpactTechTagRepo->getTagIDsByProject($project)),
                 ];
             }, $projectRepositoryInAPC->getAll()));
         } else {
             $pageTitle = 'Projects';
             require __DIR__ . '/../../../www/views/projects.php';
         }
+    }
+
+    private function intval($int)
+    {
+        return (int)$int;
     }
 }

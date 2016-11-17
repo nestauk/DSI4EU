@@ -11,7 +11,8 @@ angular
             countryID: '0',
             tagID: $attrs.searchtag,
             helpTagID: $attrs.searchhelptag,
-            techTagID: $attrs.searchtechtag
+            techTagID: $attrs.searchtechtag,
+            openTagID: $attrs.searchopentag
         };
         $scope.searchName = $attrs.searchname;
 
@@ -20,7 +21,8 @@ angular
             $scope.filter.countryID == '0' &&
             $scope.filter.tagID == '0' &&
             $scope.filter.helpTagID == '0' &&
-            $scope.filter.techTagID == '0'
+            $scope.filter.techTagID == '0' &&
+            $scope.filter.openTagID == '0'
         )
             $scope.startLetter = 'A';
         else
@@ -57,6 +59,7 @@ angular
                 return $.inArray(country.id, existingCountryIDs) !== -1
             });
         }
+
         function filterUsedTags(tags, projects, tagKey) {
             var existingTagIDs = projects.map(function (project) {
                 return project[tagKey];
@@ -87,23 +90,26 @@ angular
             return !!letterMatch.test(item.name.substring(0, 1));
         };
 
-        $scope.dsiFocus4 =
-            $scope.dsiFocus8 =
-                $scope.dsiFocus9 =
-                    $scope.dsiFocus35 = false;
+        $scope.dsiFocus = {};
+        $scope.dsiFocus[4] =
+            $scope.dsiFocus[8] =
+                $scope.dsiFocus[9] =
+                    $scope.dsiFocus[35] = false;
+        if ($scope.filter.openTagID > 0)
+            $scope.dsiFocus[parseInt($scope.filter.openTagID)] = true;
 
         $scope.projectHasDsiFocusTag = function () {
             return function (item) {
-                if ($scope.dsiFocus4 == false && $scope.dsiFocus8 == false && $scope.dsiFocus9 == false && $scope.dsiFocus35 == false)
+                if ($scope.dsiFocus[4] != true && $scope.dsiFocus[8] != true && $scope.dsiFocus[9] != true && $scope.dsiFocus[35] != true)
                     return true;
 
-                if ($scope.dsiFocus4 == true && $.inArray(4, item.dsiFocusTags) === 0)
+                if ($scope.dsiFocus[4] == true && $.inArray(4, item.dsiFocusTags) === 0)
                     return true;
-                if ($scope.dsiFocus8 == true && $.inArray(8, item.dsiFocusTags) === 0)
+                if ($scope.dsiFocus[8] == true && $.inArray(8, item.dsiFocusTags) === 0)
                     return true;
-                if ($scope.dsiFocus9 == true && $.inArray(9, item.dsiFocusTags) === 0)
+                if ($scope.dsiFocus[9] == true && $.inArray(9, item.dsiFocusTags) === 0)
                     return true;
-                if ($scope.dsiFocus35 == true && $.inArray(35, item.dsiFocusTags) === 0)
+                if ($scope.dsiFocus[35] == true && $.inArray(35, item.dsiFocusTags) === 0)
                     return true;
 
                 return false;

@@ -148,7 +148,8 @@ require __DIR__ . '/header.php';
                     <div ng-show="project.impactTagsB.length" ng-cloak>
                         <h3 class="cse side-bar-h3">Our focus</h3>
                         <?php /* <p>Areas of DSI that this project is a part of</p> */ ?>
-                        <div class="tag" ng-repeat="tag in project.impactTagsB" ng-bind="tag.name"></div>
+                        <a href="<?php echo $urlHandler->projects() ?>?openTag={{tag.id}}" class="tag"
+                           ng-repeat="tag in project.impactTagsB" ng-bind="tag.name"></a>
                     </div>
 
                     <div ng-show="project.impactTagsC.length" ng-cloak>
