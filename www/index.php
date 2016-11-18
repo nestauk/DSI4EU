@@ -120,6 +120,9 @@ class Router
             $this->projectTagsJson($matches);
 
 // Organisations
+        } elseif (preg_match('<^/' . $langHandler . 'organisationTags\.json$>', $this->pageURL, $matches)) {
+            $this->organisationTagsJson($matches);
+
         } elseif (preg_match('<^/' . $langHandler . 'organisations$>', $this->pageURL, $matches)) {
             $this->organisations($matches);
 
@@ -594,6 +597,15 @@ class Router
         $this->setLanguageFromUrl($matches);
 
         $command = new \DSI\Controller\ProjectTagsController();
+        $command->responseFormat = 'json';
+        $command->exec();
+    }
+
+    private function organisationTagsJson($matches = [])
+    {
+        $this->setLanguageFromUrl($matches);
+
+        $command = new \DSI\Controller\OrganisationTagsController();
         $command->responseFormat = 'json';
         $command->exec();
     }

@@ -4,6 +4,8 @@ namespace DSI\Controller;
 
 use DSI\Entity\Organisation;
 use DSI\Entity\OrganisationLink_Service;
+use DSI\Entity\OrganisationNetworkTag;
+use DSI\Entity\OrganisationTag;
 use DSI\Entity\User;
 use DSI\Repository\OrganisationLinkRepository;
 use DSI\Repository\OrganisationMemberRepository;
@@ -287,8 +289,14 @@ class OrganisationController
             return;
         } else
         */
-        $tags = (new OrganisationTagRepository())->getTagsNameByOrganisationID($organisation->getId());
-        $networkTags = (new OrganisationNetworkTagRepository())->getTagNamesByOrganisation($organisation);
+        $tags = array_map(function (OrganisationTag $organisationTag) {
+            return $organisationTag->getTag();
+        }, (new OrganisationTagRepository())->getByOrganisationID($organisation->getId()));
+
+        $networkTags = array_map(function(OrganisationNetworkTag $organisationNetworkTag){
+            return $organisationNetworkTag->getTag();
+        }, (new OrganisationNetworkTagRepository())->getByOrganisationID($organisation->getId()));
+
         $pageTitle = $organisation->getName();
         require __DIR__ . '/../../../www/views/organisation.php';
 

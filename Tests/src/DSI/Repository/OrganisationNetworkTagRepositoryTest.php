@@ -99,7 +99,7 @@ class OrganisationNetworkTagRepositoryTest extends PHPUnit_Framework_TestCase
         $organisationTag->setTag($this->tag_2);
         $this->organisationNetworkTagRepo->add($organisationTag);
 
-        $this->assertEquals([1, 2], $this->organisationNetworkTagRepo->getTagIDsForOrganisation(1));
+        $this->assertEquals([1, 2], $this->organisationNetworkTagRepo->getTagIDsForOrganisation($this->organisation_1));
     }
 
     /** @test saveAsNew */

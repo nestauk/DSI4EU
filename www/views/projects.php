@@ -18,8 +18,8 @@ $showAdvancedSearch = (
          data-searchtag="<?php echo show_input($_GET['tag'] ?? '0') ?>"
          data-searchhelptag="<?php echo show_input($_GET['helpTag'] ?? '0') ?>"
          data-searchtechtag="<?php echo show_input($_GET['techTag'] ?? '0') ?>"
-         data-showadvancedsearch="<?php echo (bool)$showAdvancedSearch ?>"
-         data-searchopentag="<?php echo show_input($_GET['openTag'] ?? '0') ?>">
+         data-searchopentag="<?php echo show_input($_GET['openTag'] ?? '0') ?>"
+         data-showadvancedsearch="<?php echo (bool)$showAdvancedSearch ?>">
 
         <div class="content-block">
             <div class="w-row">

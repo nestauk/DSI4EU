@@ -72,6 +72,11 @@ class URL
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'projectTags.json';
     }
 
+    public function organisationTagsJson()
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'organisationTags.json';
+    }
+
     public function projectsJson()
     {
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'projects.json';

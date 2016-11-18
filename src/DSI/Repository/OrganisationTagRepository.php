@@ -3,6 +3,7 @@
 namespace DSI\Repository;
 
 use DSI\DuplicateEntry;
+use DSI\Entity\Organisation;
 use DSI\Entity\OrganisationTag;
 use DSI\NotFound;
 use DSI\Service\SQL;
@@ -72,13 +73,13 @@ class OrganisationTagRepository
     }
 
     /**
-     * @param int $organisationID
+     * @param Organisation $organisation
      * @return \int[]
      */
-    public function getTagIDsForOrganisation(int $organisationID)
+    public function getTagIDsForOrganisation(Organisation $organisation)
     {
         $where = [
-            "`organisationID` = '{$organisationID}'"
+            "`organisationID` = '{$organisation->getId()}'"
         ];
 
         /** @var int[] $tagIDs */

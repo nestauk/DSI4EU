@@ -5,7 +5,6 @@ namespace DSI\Repository;
 use DSI\DuplicateEntry;
 use DSI\Entity\Organisation;
 use DSI\Entity\OrganisationNetworkTag;
-use DSI\Entity\OrganisationTag;
 use DSI\NotFound;
 use DSI\Service\SQL;
 
@@ -65,23 +64,23 @@ class OrganisationNetworkTagRepository
 
     /**
      * @param int $organisationID
-     * @return \DSI\Entity\OrganisationTag[]
+     * @return \DSI\Entity\OrganisationNetworkTag[]
      */
     public function getByOrganisationID(int $organisationID)
     {
-        return $this->getOrganisationTagsWhere([
+        return $this->getObjectsWhere([
             "`organisationID` = '{$organisationID}'"
         ]);
     }
 
     /**
-     * @param int $organisationID
+     * @param Organisation $organisation
      * @return \int[]
      */
-    public function getTagIDsForOrganisation(int $organisationID)
+    public function getTagIDsForOrganisation(Organisation $organisation)
     {
         $where = [
-            "`organisationID` = '{$organisationID}'"
+            "`organisationID` = '{$organisation->getId()}'"
         ];
 
         /** @var int[] $tagIDs */
@@ -100,11 +99,11 @@ class OrganisationNetworkTagRepository
 
     /**
      * @param int $tagID
-     * @return \DSI\Entity\OrganisationTag[]
+     * @return \DSI\Entity\OrganisationNetworkTag[]
      */
     public function getByTagID(int $tagID)
     {
-        return $this->getOrganisationTagsWhere([
+        return $this->getObjectsWhere([
             "`tagID` = '{$tagID}'"
         ]);
     }
@@ -141,11 +140,11 @@ class OrganisationNetworkTagRepository
 
     /**
      * @param $where
-     * @return \DSI\Entity\OrganisationTag[]
+     * @return \DSI\Entity\OrganisationNetworkTag[]
      */
-    private function getOrganisationTagsWhere($where)
+    private function getObjectsWhere($where)
     {
-        /** @var OrganisationTag[] $organisationTags */
+        /** @var OrganisationNetworkTag[] $organisationTags */
         $organisationTags = [];
         $query = new SQL("SELECT organisationID, tagID 
             FROM `{$this->table}`
