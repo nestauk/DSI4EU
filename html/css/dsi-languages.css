@@ -10343,6 +10343,17 @@ html.w-mod-js *[data-ix="closed"] {
   .orgs-col {
     padding-left: 10px;
   }
+  .card-name {
+    margin-left: 10px;
+  }
+  .card-name.comment-large {
+    font-size: 14px;
+  }
+  .card-position {
+    display: inline-block;
+    width: 228px;
+    margin-left: 10px;
+  }
   .involved-organisation-img {
     max-width: 109px;
     margin-top: 19px;
@@ -10652,6 +10663,9 @@ html.w-mod-js *[data-ix="closed"] {
   .single-post-category {
     top: -52px;
   }
+  .comment-bubble {
+    width: 67px;
+  }
   .sm-nu-bloxk {
     margin-bottom: 30px;
   }
@@ -10713,6 +10727,22 @@ html.w-mod-js *[data-ix="closed"] {
   .case-study-main-text {
     padding-right: 10px;
     padding-left: 10px;
+  }
+  .involved-profile-img.comment-img {
+    margin-top: 21px;
+  }
+  .card-name {
+    width: 211px;
+    margin-left: 20px;
+  }
+  .card-name.comment-large {
+    margin-left: 23px;
+  }
+  .card-position {
+    margin-left: 20px;
+  }
+  .card-position.comment-large {
+    margin-left: 24px;
   }
   .card-orgs {
     text-align: left;
@@ -10877,6 +10907,19 @@ html.w-mod-js *[data-ix="closed"] {
   .partner-logo-colour {
     margin-bottom: 35px;
     margin-left: -4px;
+  }
+  .comment-descr {
+    display: block;
+    margin-top: 23px;
+    margin-left: 20px;
+    line-height: 20px;
+  }
+  .comment-sub {
+    width: 301px;
+    margin-left: 13px;
+  }
+  .comment-large-p {
+    margin-top: 55px;
   }
   .newsletter-signup {
     height: 340px;
@@ -11107,6 +11150,9 @@ html.w-mod-js *[data-ix="closed"] {
   .content-h2 {
     font-size: 24px;
     line-height: 36px;
+  }
+  .comment-bubble {
+    display: none;
   }
   .social-login-hero {
     width: 320px;
@@ -11456,6 +11502,27 @@ html.w-mod-js *[data-ix="closed"] {
   }
   .languages.menu-languages {
     margin-left: 15px;
+  }
+  .comment-descr {
+    margin-top: 15px;
+    margin-left: 0px;
+    padding-right: 10px;
+    padding-left: 10px;
+    font-size: 11px;
+  }
+  .comment-sub {
+    width: auto;
+  }
+  .comment-large-p {
+    margin-top: 71px;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+  .sub-comment {
+    padding-left: 0px;
+  }
+  .reply-com {
+    padding-left: 10px;
   }
   .newsletter-signup {
     height: 370px;
