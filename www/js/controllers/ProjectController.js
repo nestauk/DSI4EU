@@ -195,7 +195,7 @@ angular
                     title: "Request Cancelled",
                     text: "Your request has been cancelled"
                 },
-                successCallback: function(){
+                successCallback: function () {
                     location.reload();
                 }
             });
@@ -213,7 +213,7 @@ angular
                     title: "Success",
                     text: "Join request has been sent"
                 },
-                successCallback: function(){
+                successCallback: function () {
                     location.reload();
                 }
             })
@@ -231,7 +231,7 @@ angular
                     title: "Success",
                     text: "You have left this project"
                 },
-                successCallback: function(){
+                successCallback: function () {
                     location.reload();
                 }
             })
@@ -316,17 +316,17 @@ angular
         };
 
         $scope.addPost = function () {
-            $http.post(SITE_RELATIVE_PATH + '/project/' + $scope.projectid + '.json', {
+            $http.post(window.location.href, {
                 addPost: tinymce.activeEditor.getContent()
             }).then(function (response) {
-                    if (response.data.result == 'ok') {
-                        $('.new-post-bg.bg-blur').hide();
-                        $scope.project.posts = response.data.posts;
-                    } else {
-                        console.log(response.data);
-                    }
+                console.log(response);
+                if (response.data.result == 'ok') {
+                    $('.new-post-bg.bg-blur').hide();
+                    $scope.project.posts = response.data.posts;
+                } else {
+                    console.log(response.data);
                 }
-            );
+            });
         };
 
         $scope.renderHtml = function (html_code) {

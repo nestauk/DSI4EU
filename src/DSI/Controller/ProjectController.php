@@ -26,25 +26,18 @@ use DSI\Repository\ProjectTagRepository;
 use DSI\Repository\UserRepository;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
+use DSI\Service\JsModules;
 use DSI\Service\Mailer;
 use DSI\Service\URL;
-use DSI\UseCase\AddDsiFocusTagToProject;
 use DSI\UseCase\AddEmailToProject;
-use DSI\UseCase\AddImpactHelpTagToProject;
-use DSI\UseCase\AddImpactTechTagToProject;
 use DSI\UseCase\AddMemberInvitationToProject;
 use DSI\UseCase\AddMemberRequestToProject;
 use DSI\UseCase\AddProjectToOrganisation;
-use DSI\UseCase\AddTagToProject;
 use DSI\UseCase\ApproveMemberRequestToProject;
 use DSI\UseCase\CreateProjectPost;
 use DSI\UseCase\Projects\RemoveProject;
 use DSI\UseCase\RejectMemberRequestToProject;
-use DSI\UseCase\RemoveDsiFocusTagFromProject;
-use DSI\UseCase\RemoveImpactHelpTagFromProject;
-use DSI\UseCase\RemoveImpactTechTagFromProject;
 use DSI\UseCase\RemoveMemberFromProject;
-use DSI\UseCase\RemoveTagFromProject;
 use DSI\UseCase\SecureCode;
 use DSI\UseCase\SendEmailToCommunityAdmins;
 use DSI\UseCase\SetAdminStatusToProjectMember;
@@ -136,7 +129,7 @@ class ProjectController
                 $memberRequests = (new ProjectMemberRequestRepository())->getMembersForProject($project->getId());
         }
 
-        $userCanEditProject = ($isAdmin OR ($loggedInUser AND $loggedInUser->isCommunityAdmin()));
+        $userCanEditProject = $isAdmin;
 
         $links = [];
         $projectLinks = (new ProjectLinkRepository())->getByProjectID($project->getId());
@@ -174,74 +167,6 @@ class ProjectController
                     $updateProject->exec();
                     echo json_encode(['result' => 'ok']);
                     return true;
-                }
-
-                if (isset($_POST['addTag'])) {
-                    $addTagToProject = new AddTagToProject();
-                    $addTagToProject->data()->projectID = $project->getId();
-                    $addTagToProject->data()->tag = $_POST['addTag'];
-                    $addTagToProject->exec();
-                    echo json_encode(['result' => 'ok']);
-                    return true;
-                }
-                if (isset($_POST['removeTag'])) {
-                    $removeTagFromProject = new RemoveTagFromProject();
-                    $removeTagFromProject->data()->projectID = $project->getId();
-                    $removeTagFromProject->data()->tag = $_POST['removeTag'];
-                    $removeTagFromProject->exec();
-                    echo json_encode(['result' => 'ok']);
-                    return true;
-                }
-
-                if (isset($_POST['addImpactTagA'])) {
-                    $addTagToProject = new AddImpactHelpTagToProject();
-                    $addTagToProject->data()->projectID = $project->getId();
-                    $addTagToProject->data()->tag = $_POST['addImpactTagA'];
-                    $addTagToProject->exec();
-                    echo json_encode(['result' => 'ok']);
-                    return true;
-                }
-                if (isset($_POST['removeImpactTagA'])) {
-                    $removeTagFromProject = new RemoveImpactHelpTagFromProject();
-                    $removeTagFromProject->data()->projectID = $project->getId();
-                    $removeTagFromProject->data()->tag = $_POST['removeImpactTagA'];
-                    $removeTagFromProject->exec();
-                    echo json_encode(['result' => 'ok']);
-                    return true;
-                }
-
-                if (isset($_POST['addImpactTagB'])) {
-                    $addTagToProject = new AddDsiFocusTagToProject();
-                    $addTagToProject->data()->projectID = $project->getId();
-                    $addTagToProject->data()->tag = $_POST['addImpactTagB'];
-                    $addTagToProject->exec();
-                    echo json_encode(['result' => 'ok']);
-                    return;
-                }
-                if (isset($_POST['removeImpactTagB'])) {
-                    $removeTagFromProject = new RemoveDsiFocusTagFromProject();
-                    $removeTagFromProject->data()->projectID = $project->getId();
-                    $removeTagFromProject->data()->tag = $_POST['removeImpactTagB'];
-                    $removeTagFromProject->exec();
-                    echo json_encode(['result' => 'ok']);
-                    return;
-                }
-
-                if (isset($_POST['addImpactTagC'])) {
-                    $addTagToProject = new AddImpactTechTagToProject();
-                    $addTagToProject->data()->projectID = $project->getId();
-                    $addTagToProject->data()->tag = $_POST['addImpactTagC'];
-                    $addTagToProject->exec();
-                    echo json_encode(['result' => 'ok']);
-                    return;
-                }
-                if (isset($_POST['removeImpactTagC'])) {
-                    $removeTagFromProject = new RemoveImpactTechTagFromProject();
-                    $removeTagFromProject->data()->projectID = $project->getId();
-                    $removeTagFromProject->data()->tag = $_POST['removeImpactTagC'];
-                    $removeTagFromProject->exec();
-                    echo json_encode(['result' => 'ok']);
-                    return;
                 }
 
                 if (isset($_POST['addEmail'])) {
@@ -316,7 +241,7 @@ class ProjectController
                 if (isset($_POST['addPost'])) {
                     $addPostCmd = new CreateProjectPost();
                     $addPostCmd->data()->project = $project;
-                    $addPostCmd->data()->user = $loggedInUser;
+                    $addPostCmd->data()->executor = $loggedInUser;
                     $addPostCmd->data()->text = $_POST['addPost'];
                     $addPostCmd->exec();
                     echo json_encode([
@@ -410,6 +335,7 @@ class ProjectController
             ]);
         } else {
             $pageTitle = $project->getName();
+            JsModules::setTinyMCE(true);
             require __DIR__ . '/../../../www/views/project.php';
         }
 

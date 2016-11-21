@@ -56,7 +56,7 @@ class CreateProjectPostTest extends PHPUnit_Framework_TestCase
     {
         $e = null;
         $this->createPostCmd->data()->project = $this->project;
-        $this->createPostCmd->data()->user = $this->owner;
+        $this->createPostCmd->data()->executor = $this->owner;
         $this->createPostCmd->data()->title = 'Post Title';
         $this->createPostCmd->data()->text = 'Post Text';
         try {
@@ -72,7 +72,7 @@ class CreateProjectPostTest extends PHPUnit_Framework_TestCase
     {
         $e = null;
         $this->createPostCmd->data()->project = $this->project;
-        $this->createPostCmd->data()->user = $this->admin;
+        $this->createPostCmd->data()->executor = $this->admin;
         $this->createPostCmd->data()->title = 'Post Title';
         $this->createPostCmd->data()->text = 'Post Text';
         try {
@@ -88,7 +88,7 @@ class CreateProjectPostTest extends PHPUnit_Framework_TestCase
     {
         $e = null;
         $this->createPostCmd->data()->project = $this->project;
-        $this->createPostCmd->data()->user = $this->otherUser;
+        $this->createPostCmd->data()->executor = $this->otherUser;
         $this->createPostCmd->data()->title = 'Post Title';
         $this->createPostCmd->data()->text = 'Post Text';
         try {
@@ -104,7 +104,7 @@ class CreateProjectPostTest extends PHPUnit_Framework_TestCase
     public function successfulCreation()
     {
         $this->createPostCmd->data()->project = $this->project;
-        $this->createPostCmd->data()->user = $this->owner;
+        $this->createPostCmd->data()->executor = $this->owner;
         $this->createPostCmd->data()->title = 'Post Title';
         $this->createPostCmd->data()->text = 'Post Text';
         $this->createPostCmd->exec();
@@ -112,7 +112,7 @@ class CreateProjectPostTest extends PHPUnit_Framework_TestCase
         $this->assertCount(1, $this->projectPostRepo->getAll());
 
         $this->createPostCmd->data()->project = $this->project;
-        $this->createPostCmd->data()->user = $this->owner;
+        $this->createPostCmd->data()->executor = $this->owner;
         $this->createPostCmd->data()->title = 'Post Title';
         $this->createPostCmd->data()->text = 'Post Text';
         $this->createPostCmd->exec();

@@ -59,7 +59,7 @@ class CreateProjectPost
     {
         $post = new ProjectPost();
         $post->setProject($this->data()->project);
-        $post->setUser($this->data()->user);
+        $post->setUser($this->data()->executor);
         $post->setTitle($this->data()->title);
         $post->setText($this->data()->text);
         $this->projectPostRepo->insert($post);
@@ -71,7 +71,7 @@ class CreateProjectPost
     {
         if ($this->data()->project->getId() <= 0)
             $this->errorHandler->addTaggedError('project', 'Invalid project ID');
-        if ($this->data()->user->getId() <= 0)
+        if ($this->data()->executor->getId() <= 0)
             $this->errorHandler->addTaggedError('user', 'Invalid user ID');
         if (!$this->userCanAddPost())
             $this->errorHandler->addTaggedError('user', 'You are not allowed to add a new post');
@@ -83,7 +83,7 @@ class CreateProjectPost
     {
         if (!isset($this->data()->project))
             throw new NotEnoughData('project');
-        if (!isset($this->data()->user))
+        if (!isset($this->data()->executor))
             throw new NotEnoughData('owner');
     }
 
@@ -92,12 +92,12 @@ class CreateProjectPost
      */
     private function userCanAddPost()
     {
-        if ($this->data()->project->getOwnerID() == $this->data()->user->getId())
+        if ($this->data()->project->getOwnerID() == $this->data()->executor->getId())
             return true;
 
         $member = (new ProjectMemberRepository())->getByProjectIDAndMemberID(
             $this->data()->project->getId(),
-            $this->data()->user->getId()
+            $this->data()->executor->getId()
         );
         if ($member != null AND $member->isAdmin())
             return true;
@@ -116,5 +116,5 @@ class CreateProjectPost_Data
     public $project;
 
     /** @var User */
-    public $user;
+    public $executor;
 }
