@@ -150,9 +150,10 @@ $showAdvancedSearch = (
                                                 '<strong>1</strong>'
                                             ) ?>
                                             </span>
-                                        <span ng-show="organisation.projectsCount != 1">
+                                        <span ng-show="organisation.projectsCount != 1"
+                                              style="text-transform: capitalize">
                                             <?php echo sprintf(
-                                                _html('%s Projects'),
+                                                _html('%s projects'),
                                                 '<strong ng-bind="organisation.projectsCount"></strong>'
                                             ) ?>
                                             </span>
