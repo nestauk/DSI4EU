@@ -23,10 +23,10 @@ $showAdvancedSearch = (
                 <div class="w-col w-col-8 w-col-stack">
                     <h1 class="content-h1"><?php _ehtml('Organisations') ?></h1>
                     <p class="intro">
-                        <?php _ehtml('There are thousands of organisations working to develop digital social innovation') ?>
+                        <?php _ehtml('There are thousands of organisations working to develop digital social innovation.') ?>
                     </p>
                     <p class="header-intro-descr">
-                        <?php _ehtml('Here you can look through the organisations across Europe') ?>
+                        <?php _ehtml('Here you can browse through DSI organisations across Europe.') ?>
                     </p>
                 </div>
                 <div class="sidebar w-col w-col-4 w-col-stack">
