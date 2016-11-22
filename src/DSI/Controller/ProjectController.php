@@ -129,7 +129,8 @@ class ProjectController
                 $memberRequests = (new ProjectMemberRequestRepository())->getMembersForProject($project->getId());
         }
 
-        $userCanEditProject = $isAdmin;
+        $userCanEditProject = ($isAdmin OR ($loggedInUser AND $loggedInUser->isCommunityAdmin()));
+        $userCanAddPost = $isAdmin;
 
         $links = [];
         $projectLinks = (new ProjectLinkRepository())->getByProjectID($project->getId());

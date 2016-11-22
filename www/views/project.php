@@ -6,6 +6,7 @@ require __DIR__ . '/header.php';
 /** @var $userSentJoinRequest bool */
 /** @var $userCanSendJoinRequest bool */
 /** @var $userCanEditProject bool */
+/** @var $userCanAddPost bool */
 /** @var $isOwner bool */
 /** @var $loggedInUser \DSI\Entity\User */
 /** @var $projectMembers \DSI\Entity\ProjectMember[] */
@@ -171,7 +172,7 @@ require __DIR__ . '/header.php';
                         <div class="w-col w-col-8 w-col-stack" id="postsScroll">
                             <div id="posts">
                                 <div class="info-card">
-                                    <?php if ($loggedInUser AND $userCanEditProject) { ?>
+                                    <?php if ($userCanAddPost) { ?>
                                         <div class="add-post">
                                             <div class="w-clearfix post-author new-post">
                                                 <img
@@ -181,7 +182,7 @@ require __DIR__ . '/header.php';
                                                 <div class="profile-label">
                                                     <?php _ehtml('Do you have something to share?') ?>
                                                 </div>
-                                                <?php if ($userCanEditProject) { ?>
+                                                <?php if ($userCanAddPost) { ?>
                                                     <a href="#" data-ix="new-post-show"
                                                        class="create-new-post">
                                                         <?php _ehtml('Add new post') ?>

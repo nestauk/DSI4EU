@@ -53,6 +53,7 @@ class ProjectRepository
         $insert[] = "`status` = '" . addslashes($project->getStatus()) . "'";
         $insert[] = "`startDate` = '" . addslashes($project->getStartDate()) . "'";
         $insert[] = "`endDate` = '" . addslashes($project->getEndDate()) . "'";
+        $insert[] = "`created` = '" . addslashes($project->getCreationTime()) . "'";
         if ($project->getCountry())
             $insert[] = "`countryID` = '" . addslashes($project->getCountry()->getId()) . "'";
         if ($project->getRegion())
@@ -114,6 +115,7 @@ class ProjectRepository
         $projectObj->setStatus($project['status']);
         $projectObj->setStartDate($project['startDate'] != '0000-00-00' ? $project['startDate'] : NULL);
         $projectObj->setEndDate($project['endDate'] != '0000-00-00' ? $project['endDate'] : NULL);
+        $projectObj->setCreationTime($project['created'] != '0000-00-00 00:00:00' ? $project['created'] : NULL);
         if ($project['countryRegionID']) {
             $projectObj->setCountryRegion(
                 (new CountryRegionRepository())->getById($project['countryRegionID'])
@@ -166,7 +168,7 @@ class ProjectRepository
         $query = new SQL("SELECT 
             id, ownerID, name
           , shortDescription, description, url, status
-          , startDate, endDate
+          , startDate, endDate, created
           , countryRegionID, organisationsCount
           , importID, logo, headerImage
           , socialImpact

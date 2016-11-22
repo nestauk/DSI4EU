@@ -21,7 +21,8 @@ class Project
         $url,
         $status,
         $startDate,
-        $endDate;
+        $endDate,
+        $creationTime;
 
     /** @var CountryRegion */
     private $countryRegion;
@@ -226,6 +227,26 @@ class Project
     public function setEndDate($endDate)
     {
         $this->endDate = $endDate;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCreationTime($format = null)
+    {
+        if ($format !== null) {
+            return date($format, strtotime($this->creationTime));
+        }
+
+        return $this->creationTime;
+    }
+
+    /**
+     * @param string $creationTime
+     */
+    public function setCreationTime($creationTime)
+    {
+        $this->creationTime = $creationTime;
     }
 
     /**
