@@ -156,7 +156,8 @@ require __DIR__ . '/header.php';
         </div>
 
 
-        <div class="project-news">
+        <div class="project-news" ng-controller="ProjectPostController"
+             <?php if (!$userCanAddPost) { ?>ng-show="project.posts.length > 0"<?php } ?>>
             <div class="w-container">
                 <h2 class="centered news-header"><?php _ehtml('Project news') ?></h2>
                 <div class="project-info w-row">
@@ -188,8 +189,7 @@ require __DIR__ . '/header.php';
                                         </div>
                                     <?php } ?>
 
-                                    <div ng-controller="ProjectPostController"
-                                         ng-repeat="post in project.posts" ng-cloak>
+                                    <div ng-repeat="post in project.posts" ng-cloak>
                                         <div class="w-clearfix"
                                              ng-class="{'current-status' : $index == 0}">
 
