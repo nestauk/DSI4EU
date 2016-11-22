@@ -249,6 +249,47 @@ if (!isset($urlHandler))
         width:auto;
         display:inline;
     }
+    
+    /* Homepage mailchimp styles */
+#mc_embed_signup .mc-field-group input {
+    width: 21%;
+    display: inline-block;
+    border: 0px solid;
+    border-bottom: 1px solid #fff;
+    border-radius: 0;
+    -moz-border-radius: 0;
+    margin-top: -5px;
+}
+#mc_embed_signup .mc-field-group input:active {
+    border-bottom: #1dc9a0;
+}
+#mc_embed_signup .button {
+    clear: both;
+    background-color: #1dc9a0;
+    border: 1px solid #1dc9a0;
+    border-radius: 25px;
+    transition: all 0s ease-in-out 0s;
+    color: #000;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 600;
+    height: 45px;
+    line-height: 32px;
+    margin: -8px 5px 10px 0;
+    padding: 0px 13px;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: top;
+    white-space: nowrap;
+    width: 170px;
+}
+#mc_embed_signup .button:hover {
+    background-color: #2A2E3A;
+    color: #1dc9a0;
+}
+/* end */
+    
 </style>
 
 <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>
