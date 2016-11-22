@@ -58,6 +58,7 @@ class ExportProjectsController
                 'website' => $project->getExternalUrl(),
                 'short_description' => $project->getShortDescription(),
                 'long_description' => $project->getDescription(),
+                'social_impact' => $project->getSocialImpact(),
                 'start_date' => $project->getStartDate(),
                 'end_date' => $project->getEndDate(),
                 'country' => $project->getCountryName(),
@@ -86,6 +87,7 @@ class ExportProjectsController
             'Website',
             'Short description',
             'Long description',
+            'Social impact',
             'Start date',
             'End date',
             'Country',
@@ -106,6 +108,7 @@ class ExportProjectsController
                 'website' => $project->getExternalUrl(),
                 'short_description' => $project->getShortDescription(),
                 'long_description' => $project->getDescription(),
+                'social_impact' => $project->getSocialImpact(),
                 'start_date' => $project->getStartDate(),
                 'end_date' => $project->getEndDate(),
                 'country' => $project->getCountryName(),
@@ -137,6 +140,7 @@ class ExportProjectsController
             $xmlProject->addChild('website', htmlspecialchars($project->getExternalUrl()));
             $xmlProject->addChild('short_description', htmlspecialchars($project->getShortDescription()));
             $xmlProject->addChild('long_description', htmlspecialchars($project->getDescription()));
+            $xmlProject->addChild('social_impact', htmlspecialchars($project->getSocialImpact()));
             $xmlProject->addChild('start_date', htmlspecialchars($project->getStartDate()));
             $xmlProject->addChild('end_date', htmlspecialchars($project->getEndDate()));
             $xmlProject->addChild('country', htmlspecialchars($project->getCountryName()));
