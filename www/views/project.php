@@ -134,11 +134,6 @@ require __DIR__ . '/header.php';
                            ng-repeat="tag in project.tags" ng-bind="tag.name"></a>
                     </div>
 
-                    <div ng-show="project.networkTags.length" ng-cloak>
-                        <h3 class="cse side-bar-h3"><?php _ehtml('Network Tags') ?></h3>
-                        <div class="tag" ng-repeat="tag in project.networkTags" ng-bind="tag"></div>
-                    </div>
-
                     <div ng-show="project.impactTagsA.length" ng-cloak>
                         <h3 class="cse side-bar-h3"><?php _ehtml('Who we help') ?></h3>
                         <a href="<?php echo $urlHandler->projects() ?>?helpTag={{tag.id}}" class="tag"

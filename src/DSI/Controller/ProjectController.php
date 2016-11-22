@@ -19,7 +19,6 @@ use DSI\Repository\ProjectImpactTechTagRepository;
 use DSI\Repository\ProjectLinkRepository;
 use DSI\Repository\ProjectMemberRepository;
 use DSI\Repository\ProjectMemberRequestRepository;
-use DSI\Repository\ProjectNetworkTagRepository;
 use DSI\Repository\ProjectPostRepository;
 use DSI\Repository\ProjectRepository;
 use DSI\Repository\ProjectTagRepository;
@@ -317,7 +316,6 @@ class ProjectController
                     ];
                 }, (new ProjectImpactTechTagRepository())->getByProjectID($project->getId())),
 
-                'networkTags' => (new ProjectNetworkTagRepository())->getTagNamesByProject($project),
                 'members' => $this->getMembers($project->getOwner(), $projectMembers),
                 'memberRequests' => array_map(function (User $user) {
                     return [

@@ -2,11 +2,9 @@
 require __DIR__ . '/header.php';
 /** @var $project \DSI\Entity\Project */
 /** @var $tags \DSI\Entity\TagForProjects[] */
-/** @var $networkTags \DSI\Entity\NetworkTag[] */
 /** @var $impactTags \DSI\Entity\ImpactTag[] */
 /** @var $dsiFocusTags \DSI\Entity\DsiFocusTag[] */
 /** @var $projectTags string[] */
-/** @var $projectNetworkTags string[] */
 /** @var $projectImpactTagsA string[] */
 /** @var $projectImpactTagsB string[] */
 /** @var $projectImpactTagsC string[] */
@@ -204,22 +202,6 @@ if (!isset($urlHandler))
                                                                     <?php } ?>
                                                                 </select>
                                                             </div>
-
-                                                            <label>Network Tags</label>
-                                                            <p></p>
-                                                            <div class="customSelect2">
-                                                                <select class="select2 creator-data-entry end w-input"
-                                                                        id="networkTagsSelect" style="width:100%;border:0"
-                                                                        multiple data-tags="true"
-                                                                        data-placeholder="Write network tags">
-                                                                    <?php foreach ($networkTags AS $tag) { ?>
-                                                                        <option value="<?php echo $tag->getName() ?>"
-                                                                            <?php if (in_array($tag->getName(), $projectNetworkTags)) echo 'selected' ?>><?php
-                                                                            echo show_input($tag->getName())
-                                                                            ?></option>
-                                                                    <?php } ?>
-                                                                </select>
-                                                            </div>
                                                             <br/><br/>
 
                                                             <label for="email">Which organisations are working on this
@@ -228,11 +210,9 @@ if (!isset($urlHandler))
                                                                 below. Leave blank if there are not any other
                                                                 organisations involved.</p>
                                                             <div id="organisationsSelectBox" class="designSelectBox">
-                                                                <select
+                                                                <select multiple
                                                                     class="select2-withDesign creator-data-entry end w-input"
-                                                                    id="organisationsSelect"
-                                                                    style="width:100%;border:0"
-                                                                    multiple
+                                                                    id="organisationsSelect" style="width:100%;border:0"
                                                                     data-placeholder="Click to select organisations">
                                                                     <option></option>
                                                                     <?php foreach ($organisations AS $organisation) { ?>
@@ -294,7 +274,7 @@ if (!isset($urlHandler))
                                                                    placeholder="When did the project start?"
                                                                    ng-model="project.startDate"
                                                                    type="text">
-                                                            <br />
+                                                            <br/>
 
                                                             <label for="email-6">Project end date (leave this blank for
                                                                 ongoing projects)</label>
@@ -391,7 +371,7 @@ if (!isset($urlHandler))
                                                     data-name="Project Bio 4" id="description" maxlength="5000"
                                                     placeholder="Add an in depth project description"
                                                     name="project-bio-4"><?php echo $project->getDescription() ?></textarea>
-                                                <br />
+                                                <br/>
 
                                                 <label class="story-label" for="project-bio">Your social impact</label>
                                                 <p>Please provide a description of the social impact your project is

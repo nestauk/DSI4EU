@@ -15,7 +15,6 @@ use DSI\Repository\ProjectImpactHelpTagRepository;
 use DSI\Repository\ProjectImpactTechTagRepository;
 use DSI\Repository\ProjectLinkRepository;
 use DSI\Repository\ProjectMemberRepository;
-use DSI\Repository\ProjectNetworkTagRepository;
 use DSI\Repository\ProjectRepository;
 use DSI\Repository\ProjectTagRepository;
 use DSI\Service\ErrorHandler;
@@ -82,8 +81,6 @@ class UpdateProject
 
         if (isset($this->data()->tags))
             $this->setTags();
-        if (isset($this->data()->networkTags))
-            $this->setNetworkTags();
         if (isset($this->data()->impactTagsA))
             $this->setImpactTagsA();
         if (isset($this->data()->impactTagsB))
@@ -121,27 +118,6 @@ class UpdateProject
                 $remTag = new RemoveTagFromProject();
                 $remTag->data()->projectID = $this->data()->project->getId();
                 $remTag->data()->tag = $oldTagName;
-                $remTag->exec();
-            }
-        }
-    }
-
-    private function setNetworkTags()
-    {
-        $projectNetworkTags = (new ProjectNetworkTagRepository())->getTagNamesByProject($this->data()->project);
-        foreach ($this->data()->networkTags AS $newNetworkTagName) {
-            if (!in_array($newNetworkTagName, $projectNetworkTags)) {
-                $addTag = new AddNetworkTagToProject();
-                $addTag->setProject($this->data()->project);
-                $addTag->setTag($newNetworkTagName);
-                $addTag->exec();
-            }
-        }
-        foreach ($projectNetworkTags AS $oldTagName) {
-            if (!in_array($oldTagName, $this->data()->networkTags)) {
-                $remTag = new RemoveNetworkTagFromProject();
-                $remTag->setProject($this->data()->project);
-                $remTag->setTag($oldTagName);
                 $remTag->exec();
             }
         }
@@ -410,7 +386,6 @@ class UpdateProject_Data
 
     /** @var string[] */
     public $tags,
-        $networkTags,
         $impactTagsA,
         $impactTagsB,
         $impactTagsC,
