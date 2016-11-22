@@ -288,6 +288,32 @@ if (!isset($urlHandler))
     background-color: #2A2E3A;
     color: #1dc9a0;
 }
+#mc_embed_signup #mc-embedded-subscribe-form div.mce_inline_error {
+    display: inline-block;
+    margin: 2px 0 1em 0;
+    padding: 5px 10px;
+    background-color: rgb(42, 46, 56);
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    font-size: 14px;
+    font-weight: normal;
+    z-index: 1;
+    color: #e85c41;
+    position: absolute;
+    width: auto;
+    top: -106px;
+    left: -14px;
+}
+    #mc_embed_signup #mce-success-response {
+    color: #1dc9a0;
+    display: none;
+    position: absolute;
+    background: #2a2e38;
+    padding: 20px;
+    border-radius: 10px;
+    top: -134px;
+}
 /* end */
     
 </style>
