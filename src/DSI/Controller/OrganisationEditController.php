@@ -312,7 +312,7 @@ class OrganisationEditController
             $angularModules['fileUpload'] = true;
             $tags = (new TagForOrganisationsRepository())->getAll();
             $networkTags = (new NetworkTagRepository())->getAll();
-            $orgTags = (new OrganisationTagRepository())->getTagsNameByOrganisationID($organisation->getId());
+            $orgTags = (new OrganisationTagRepository())->getTagNamesByOrganisation($organisation);
             $orgNetworkTags = (new OrganisationNetworkTagRepository())->getTagNamesByOrganisation($organisation);
             $projects = (new ProjectRepositoryInAPC())->getAll();
             $orgProjects = (new OrganisationProjectRepository())->getProjectIDsForOrganisation($organisation);

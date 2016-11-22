@@ -126,7 +126,7 @@ class UpdateOrganisation
 
     private function setTags()
     {
-        $orgTags = (new OrganisationTagRepository())->getTagsNameByOrganisationID($this->data()->organisation->getId());
+        $orgTags = (new OrganisationTagRepository())->getTagNamesByOrganisation($this->data()->organisation);
         foreach ($this->data()->tags AS $newTagName) {
             if (!in_array($newTagName, $orgTags)) {
                 $addTag = new AddTagToOrganisation();

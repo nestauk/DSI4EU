@@ -171,12 +171,12 @@ class OrganisationTagRepository
         return false;
     }
 
-    public function getTagsNameByOrganisationID(int $organisationID)
+    public function getTagNamesByOrganisation($organisation)
     {
         $query = new SQL("SELECT tag 
             FROM `tags-for-organisations` 
             LEFT JOIN `organisation-tags` ON `tags-for-organisations`.`id` = `organisation-tags`.`tagID`
-            WHERE `organisation-tags`.`organisationID` = '{$organisationID}'
+            WHERE `organisation-tags`.`organisationID` = '{$organisation->getID()}'
             ORDER BY `tags-for-organisations`.`tag`
         ");
         return $query->fetch_all('tag');

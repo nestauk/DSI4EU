@@ -62,6 +62,7 @@ class OrganisationRepository
         if ($organisation->getSize())
             $insert[] = "`organisationSizeID` = '" . addslashes($organisation->getSizeId()) . "'";
         $insert[] = "`startDate` = '" . addslashes($organisation->getStartDate()) . "'";
+        $insert[] = "`created` = '" . addslashes($organisation->getCreationTime()) . "'";
         $insert[] = "`logo` = '" . addslashes($organisation->getLogo()) . "'";
         $insert[] = "`headerImage` = '" . addslashes($organisation->getHeaderImage()) . "'";
         $insert[] = "`projectsCount` = '" . (int)($organisation->getProjectsCount()) . "'";
@@ -132,6 +133,7 @@ class OrganisationRepository
             );
         }
         $organisationObj->setStartDate($organisation['startDate']);
+        $organisationObj->setCreationTime($organisation['created']);
         $organisationObj->setLogo($organisation['logo']);
         $organisationObj->setHeaderImage($organisation['headerImage']);
         $organisationObj->setProjectsCount($organisation['projectsCount']);
@@ -184,7 +186,7 @@ class OrganisationRepository
           , shortDescription, description
           , countryRegionID, address
           , organisationTypeID, organisationSizeID
-          , startDate, logo, headerImage
+          , startDate, created, logo, headerImage
           , projectsCount, partnersCount
           , importID
           FROM `organisations` 

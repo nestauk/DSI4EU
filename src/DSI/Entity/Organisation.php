@@ -40,6 +40,7 @@ class Organisation
 
     /** @var string */
     private $startDate,
+        $creationTime,
         $logo,
         $headerImage;
 
@@ -371,6 +372,26 @@ class Organisation
         if ($startDate == '0000-00-00')
             $startDate = '';
         $this->startDate = (string)$startDate;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCreationTime($format = null)
+    {
+        if ($format !== null) {
+            return date($format, strtotime($this->creationTime));
+        }
+
+        return $this->creationTime;
+    }
+
+    /**
+     * @param string $creationTime
+     */
+    public function setCreationTime($creationTime)
+    {
+        $this->creationTime = $creationTime;
     }
 
     /**

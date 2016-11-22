@@ -181,11 +181,11 @@ class OrganisationTagsRepositoryTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             [$this->tag_1->getName(), $this->tag_2->getName()],
-            $this->organisationTagsRepo->getTagsNameByOrganisationID($this->organisation_1->getId())
+            $this->organisationTagsRepo->getTagNamesByOrganisation($this->organisation_1)
         );
         $this->assertEquals(
             [$this->tag_£->getName()],
-            $this->organisationTagsRepo->getTagsNameByOrganisationID($this->organisation_2->getId())
+            $this->organisationTagsRepo->getTagNamesByOrganisation($this->organisation_2)
         );
     }
 

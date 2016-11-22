@@ -5,7 +5,9 @@ namespace DSI\Controller;
 use DSI\Entity\Organisation;
 use DSI\Repository\OrganisationNetworkTagRepository;
 use DSI\Repository\OrganisationProjectRepository;
+use DSI\Repository\OrganisationRepository;
 use DSI\Repository\OrganisationRepositoryInAPC;
+use DSI\Repository\OrganisationTagRepository;
 use DSI\Service\Auth;
 use DSI\Service\URL;
 
@@ -23,6 +25,7 @@ class ExportOrganisationsController
         $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
 
         $organisations = (new OrganisationRepositoryInAPC())->getAll();
+        $organisations = (new OrganisationRepository())->getAll();
 
         if (isset($_GET['download'])) {
             header('Content-Description: File Transfer');
@@ -49,18 +52,21 @@ class ExportOrganisationsController
     {
         echo json_encode(array_map(function (Organisation $organisation) {
             return [
-                'id' => $organisation->getId(),
-                'name' => $organisation->getName(),
+                'organisation_id' => $organisation->getId(),
+                'organisation_name' => $organisation->getName(),
                 'website' => $organisation->getExternalUrl(),
-                'description' => $organisation->getShortDescription(),
+                'short_description' => $organisation->getShortDescription(),
+                'long_description' => $organisation->getDescription(),
                 'country' => $organisation->getCountryName(),
                 'region' => $organisation->getRegionName(),
                 'address' => $organisation->getAddress(),
-                'type' => $organisation->getTypeName(),
-                'size' => $organisation->getSizeName(),
+                'organisation_type' => $organisation->getTypeName(),
+                'organisation_size' => $organisation->getSizeName(),
                 'startDate' => $organisation->getStartDate(),
-                'projects' => $this->getOrganisationProjectIDs($organisation),
+                'linked_project_ids' => $this->getOrganisationProjectIDs($organisation),
+                'tags' => $this->getTags($organisation),
                 'networkTags' => $this->getNetworkTags($organisation),
+                'created' => $organisation->getCreationTime('Y-m-d'),
             ];
         }, $organisations));
     }
@@ -73,34 +79,40 @@ class ExportOrganisationsController
         $fp = fopen("php://output", 'w');
 
         fputcsv($fp, [
-            'Id',
-            'Name',
+            'Organisation ID',
+            'Organisation name',
             'Website',
-            'Description',
+            'Short description',
+            'Long description',
             'Country',
             'Region',
             'Address',
-            'Type',
-            'Size',
-            'Start Date',
-            'Projects',
-            'Network Tags',
+            'Organisation type',
+            'Organisation size',
+            'Start date',
+            'Linked project IDs',
+            'Tags',
+            'Network tags',
+            'Created',
         ]);
 
         foreach ($organisations as $organisation) {
             fputcsv($fp, [
-                'id' => $organisation->getId(),
-                'name' => $organisation->getName(),
+                'organisation_id' => $organisation->getId(),
+                'organisation_name' => $organisation->getName(),
                 'website' => $organisation->getExternalUrl(),
-                'description' => $organisation->getShortDescription(),
+                'short_description' => $organisation->getShortDescription(),
+                'long_description' => $organisation->getDescription(),
                 'country' => $organisation->getCountryName(),
                 'region' => $organisation->getRegionName(),
                 'address' => $organisation->getAddress(),
-                'type' => $organisation->getTypeName(),
-                'size' => $organisation->getSizeName(),
-                'startDate' => $organisation->getStartDate(),
-                'projects' => implode(', ', $this->getOrganisationProjectIDs($organisation)),
+                'organisation_type' => $organisation->getTypeName(),
+                'organisation_size' => $organisation->getSizeName(),
+                'start_date' => $organisation->getStartDate(),
+                'linked_project_ids' => implode(', ', $this->getOrganisationProjectIDs($organisation)),
+                'tags' => implode(', ', $this->getTags($organisation)),
                 'networkTags' => implode(', ', $this->getNetworkTags($organisation)),
+                'created' => $organisation->getCreationTime('Y-m-d'),
             ]);
         }
 
@@ -116,24 +128,31 @@ class ExportOrganisationsController
 
         foreach ($organisations AS $organisation) {
             $xmlOrganisation = $xml->addChild('organisation');
-            $xmlOrganisation->addChild('id', $organisation->getId());
-            $xmlOrganisation->addChild('name', htmlspecialchars($organisation->getName()));
+            $xmlOrganisation->addChild('organisation_id', $organisation->getId());
+            $xmlOrganisation->addChild('organisation_name', htmlspecialchars($organisation->getName()));
             $xmlOrganisation->addChild('website', htmlspecialchars($organisation->getExternalUrl()));
-            $xmlOrganisation->addChild('description', htmlspecialchars($organisation->getShortDescription()));
+            $xmlOrganisation->addChild('short_description', htmlspecialchars($organisation->getShortDescription()));
+            $xmlOrganisation->addChild('long_description', htmlspecialchars($organisation->getDescription()));
             $xmlOrganisation->addChild('country', htmlspecialchars($organisation->getCountryName()));
             $xmlOrganisation->addChild('region', htmlspecialchars($organisation->getRegionName()));
             $xmlOrganisation->addChild('address', htmlspecialchars($organisation->getAddress()));
-            $xmlOrganisation->addChild('type', htmlspecialchars($organisation->getTypeName()));
-            $xmlOrganisation->addChild('size', htmlspecialchars($organisation->getSizeName()));
-            $xmlOrganisation->addChild('startDate', htmlspecialchars($organisation->getStartDate()));
+            $xmlOrganisation->addChild('organisation_type', htmlspecialchars($organisation->getTypeName()));
+            $xmlOrganisation->addChild('organisation_size', htmlspecialchars($organisation->getSizeName()));
+            $xmlOrganisation->addChild('start_date', htmlspecialchars($organisation->getStartDate()));
 
-            $xmlProjects = $xmlOrganisation->addChild('projects');
+            $xmlProjects = $xmlOrganisation->addChild('linked_project_ids');
             foreach ($this->getOrganisationProjectIDs($organisation) AS $projectID)
                 $xmlProjects->addChild('project', htmlspecialchars($projectID));
+
+            $xmlTags = $xmlOrganisation->addChild('tags');
+            foreach ($this->getTags($organisation) AS $tagID)
+                $xmlTags->addChild('tag', htmlspecialchars($tagID));
 
             $xmlTags = $xmlOrganisation->addChild('networkTags');
             foreach ($this->getNetworkTags($organisation) AS $tagID)
                 $xmlTags->addChild('tag', htmlspecialchars($tagID));
+
+            $xmlOrganisation->addChild('created', htmlspecialchars($organisation->getCreationTime('Y-m-d')));
         }
 
         header('Content-type: text/xml');
@@ -148,5 +167,10 @@ class ExportOrganisationsController
     private function getNetworkTags(Organisation $organisation)
     {
         return (new OrganisationNetworkTagRepository())->getTagNamesByOrganisation($organisation);
+    }
+
+    private function getTags(Organisation $organisation)
+    {
+        return (new OrganisationTagRepository())->getTagNamesByOrganisation($organisation);
     }
 }
