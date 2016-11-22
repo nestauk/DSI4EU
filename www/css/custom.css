@@ -493,10 +493,6 @@ div.error {
     margin-right: 0;
 }
 
-.main-search-results .full-menu-link {
-    text-align: left;
-}
-
 .cradp {
     height: 50px;
     overflow: hidden;
@@ -639,4 +635,12 @@ body#tinymce.mce-content-body {
     transform-style: preserve-3d;
     transition: transform 200ms;
     transform: rotateX(0deg) rotateY(0deg) rotateZ(180deg);
+}
+
+.main-search-results a.full-menu-link {
+    text-align: left;
+}
+
+.main-search-results a.full-menu-link.view-all{
+    text-align:center;
 }

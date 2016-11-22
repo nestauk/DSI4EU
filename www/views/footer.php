@@ -41,7 +41,8 @@ if (!isset($urlHandler))
             <h3 class="footer-h3"><?php _ehtml('Projects') ?></h3>
             <ul class="w-list-unstyled">
                 <li class="footer-link">
-                    <a class="footer-link" href="<?php echo $urlHandler->projects() ?>"><?php _ehtml('View projects') ?></a>
+                    <a class="footer-link"
+                       href="<?php echo $urlHandler->projects() ?>"><?php _ehtml('View projects') ?></a>
                 </li>
             </ul>
         </div>
@@ -380,7 +381,7 @@ if (!isset($urlHandler))
     <div ng-show="search.entry.length >= 3">
         <div class="main-search-results w-row">
             <div class="search-col w-col w-col-3">
-                <h2 class="full-menu-h2"><?php _ehtml('News & blogs')?></h2>
+                <h2 class="full-menu-h2"><?php _ehtml('News & blogs') ?></h2>
                 <a ng-repeat="post in search.blogPosts" class="full-menu-link" href="{{post.url}}">
                     {{post.name}}
                 </a>
@@ -391,6 +392,10 @@ if (!isset($urlHandler))
                 <a ng-repeat="project in search.projects" class="full-menu-link" href="{{project.url}}">
                     {{project.name}}
                 </a>
+                <a class="full-menu-link view-all" ng-show="search.projects.length > 0"
+                   href="<?php echo $urlHandler->projects() ?>?q={{search.entry}}">
+                    View all project results
+                </a>
                 <div ng-show="search.projects.length == 0"><?php _ehtml('No projects found') ?></div>
             </div>
             <div class="search-col w-col w-col-3">
@@ -398,6 +403,10 @@ if (!isset($urlHandler))
                 <a ng-repeat="organisation in search.organisations"
                    class="full-menu-link" href="{{organisation.url}}">
                     {{organisation.name}}
+                </a>
+                <a class="full-menu-link view-all" ng-show="search.organisations.length > 0"
+                   href="<?php echo $urlHandler->organisations() ?>?q={{search.entry}}">
+                    View all organisation results
                 </a>
                 <div ng-show="search.organisations.length == 0"><?php _ehtml('No organisations found') ?></div>
             </div>
@@ -412,7 +421,7 @@ if (!isset($urlHandler))
         <div class="signn">
             <a class="large log-in-link search-results sign-up w-clearfix w-inline-block" data-ix="log-in-arrow"
                href="<?php echo $urlHandler->search() ?>{{search.entry}}">
-                <div class="login-li menu-li"><?php _ehtml('See all results')?></div>
+                <div class="login-li menu-li"><?php _ehtml('See all results') ?></div>
                 <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
             </a>
         </div>
