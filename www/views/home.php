@@ -48,19 +48,19 @@ if (!isset($urlHandler))
                 <div class="home-hero-cta" data-ix="fadeinuponload-10">
                     <?php echo sprintf(
                         __('Join the community of %s organisations and %s projects'),
-                        '<span class="sub-bold">'.
+                        '<span class="sub-bold">' .
                         sprintf(
                             __('%s organisations'),
                             number_format($organisationsCount)
                         )
-                        .'</span>',
-                        '<span class="sub-bold">'.
+                        . '</span>',
+                        '<span class="sub-bold">' .
                         sprintf(
                             __('%s projects'),
                             number_format($projectsCount)
                         )
-                        .'</span>'
-                    )?>
+                        . '</span>'
+                    ) ?>
                 </div>
             </div>
         </div>
@@ -68,7 +68,7 @@ if (!isset($urlHandler))
             <div class="signn">
                 <a class="log-in-link sign-up w-clearfix w-inline-block" data-ix="log-in-arrow"
                    href="<?php echo $urlHandler->login() ?>">
-                    <div class="login-li menu-li"><?php _e('JOIN NOW')?></div>
+                    <div class="login-li menu-li"><?php _e('JOIN NOW') ?></div>
                     <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
                 </a>
             </div>
@@ -79,9 +79,9 @@ if (!isset($urlHandler))
     <div class="w-row">
         <div class="top-3-col w-col w-col-4" data-ix="fadeinuponload-12">
             <div class="top-3-link" data-ix="underline">
-                <h3 class="top3-h3"><?php _e('FUNDING')?></h3>
+                <h3 class="top3-h3"><?php _e('FUNDING') ?></h3>
                 <div class="top3-underline" data-ix="new-interaction-2"></div>
-                <p class="top-3-p"><?php _e('Use our funding directory to find opportunities for your project')?></p>
+                <p class="top-3-p"><?php _e('Use our funding directory to find opportunities for your project') ?></p>
                 <a class="log-in-link read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
                    href="<?php echo $urlHandler->funding() ?>">
                     <div class="login-li menu-li readmore-li">Read more</div>
@@ -93,7 +93,7 @@ if (!isset($urlHandler))
             <div class="top-3-link" data-ix="underline">
                 <h3 class="top3-h3">Events</h3>
                 <div class="top3-underline" data-ix="new-interaction-2"></div>
-                <p class="top-3-p"><?php _e('Explore DSI events happening around Europe')?></p>
+                <p class="top-3-p"><?php _e('Explore DSI events happening around Europe') ?></p>
                 <a class="log-in-link read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
                    href="<?php echo $urlHandler->events() ?>">
                     <div class="login-li menu-li readmore-li">Read more</div>
@@ -106,7 +106,7 @@ if (!isset($urlHandler))
                 <h3 class="top3-h3">News &amp; Blogs</h3>
                 <div class="top3-underline" data-ix="new-interaction-2"></div>
                 <p class="top-3-p">
-                    <?php _e('Our blog features stories of the people and projects pioneering digital social innovation')?>
+                    <?php _e('Our blog features stories of the people and projects pioneering digital social innovation') ?>
                 </p>
                 <a class="log-in-link read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
                    href="<?php echo $urlHandler->blogPosts() ?>">
@@ -120,7 +120,7 @@ if (!isset($urlHandler))
 <div class="stats-bg">
     <div class="content">
         <h2 class="centered h2-large" data-ix="fadeinuponload-2">
-            <?php _e('EXPLORE EUROPE’S GROWING NETWORK OF DIGITAL SOCIAL INNOVATION')?>
+            <?php _e('EXPLORE EUROPE’S GROWING NETWORK OF DIGITAL SOCIAL INNOVATION') ?>
         </h2>
         <div class="stat-text w-row">
             <div class="w-col w-col-5">
@@ -142,7 +142,7 @@ if (!isset($urlHandler))
 <div class="home-page-events">
     <div class="content-block cs">
         <h3 class="centered title">Case studies</h3>
-        <div class="sub-header-centre"><?php _e('IN NEED OF INSPIRATION?')?></div>
+        <div class="sub-header-centre"><?php _e('IN NEED OF INSPIRATION?') ?></div>
         <p class="centered">
             Short stories introducing digital social innovations which we love
         </p>
@@ -176,6 +176,93 @@ if (!isset($urlHandler))
     </div>
 </div>
 
-<!-- -->
+<div class="newsletter-signup">
+    <div class="mailchimp-container">
+        <div class="w-row">
+            <div class="w-col w-col-4">
+                <div class="newsletter-title">Newsletter</div>
+                <div class="news-p">Sign up to stay up to date with DSI4EU</div>
+            </div>
+            <div class="w-col w-col-8">
+                <div class="w-form">
+                    <div id="mc_embed_signup">
+                        <form
+                            action="//digitalsocial.us14.list-manage.com/subscribe/post?u=668c39c8408fd7322d7b61d39&amp;id=c2085cdb78"
+                            method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"
+                            class="validate" target="_blank" novalidate>
+                            <div id="mc_embed_signup_scroll">
+                                <div class="mc-field-group">
+                                    <input type="text" value="" name="FNAME" class="signup-in w-input" id="mce-FNAME"
+                                           placeholder="First name">
+                                </div>
+                                <div class="mc-field-group">
+                                    <input type="text" value="" name="LNAME" class="signup-in w-input" id="mce-LNAME"
+                                           placeholder="Last name">
+                                </div>
+                                <div class="mc-field-group">
+                                    <input type="text" value="" name="EMAIL" class="signup-in w-input email" id="mce-EMAIL"
+                                           placeholder="Email address">
+                                </div>
+                                <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                                <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                                    <input type="text"
+                                           name="b_668c39c8408fd7322d7b61d39_c2085cdb78"
+                                           tabindex="-1"
+                                           value="">
+                                </div>
+                                <div style="display: inline;">
+                                    <input type="submit" value="Subscribe" name="subscribe"
+                                           id="mc-embedded-subscribe"
+                                           class="button footer-signup w-button"></div>
+
+                                <div id="mce-responses">
+                                    <div class="response" id="mce-error-response" style="display:block">
+                                        This email address looks fake or invalid. Please enter a real email address.
+                                    </div>
+                                    <div class="response" id="mce-success-response" style="display:block">
+                                        Almost finished... We need to confirm your email address. To complete the
+                                        subscription process, please click the link in the email we just sent you.
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Begin MailChimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+    /* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
+      We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+
+    #mc_embed_signup .mc-field-group{
+        clear:none;
+        display:inline;
+        width:auto;
+    }
+
+    #mc_embed_signup .mc-field-group input{
+        width:auto;
+        display:inline;
+    }
+</style>
+
+<script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>
+<script type='text/javascript'>(function ($) {
+        window.fnames = new Array();
+        window.ftypes = new Array();
+        fnames[0] = 'EMAIL';
+        ftypes[0] = 'email';
+        fnames[1] = 'FNAME';
+        ftypes[1] = 'text';
+        fnames[2] = 'LNAME';
+        ftypes[2] = 'text';
+    }(jQuery));
+    var $mcj = jQuery.noConflict(true);</script>
+<!--End mc_embed_signup-->
 
 <?php require __DIR__ . '/footer.php' ?>

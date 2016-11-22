@@ -8175,6 +8175,7 @@ strong {
   position: relative;
   display: inline-block;
   width: 90%;
+  margin-top: 14px;
   margin-right: 40px;
   padding-top: 15px;
   padding-left: 35px;
@@ -8577,8 +8578,8 @@ strong {
   margin-top: 0px;
   margin-right: auto;
   margin-left: auto;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   padding-left: 0px;
   border: 1px solid #fff;
   border-radius: 25px;
@@ -9674,7 +9675,7 @@ strong {
   margin-left: 0%;
   border-style: none none solid;
   border-bottom-width: 1px;
-  border-bottom-color: #000;
+  border-bottom-color: #fff;
   background-color: transparent;
   color: #fff;
   font-size: 16px;
@@ -9687,8 +9688,8 @@ strong {
 .footer-signup {
   width: 20%;
   margin-left: 3%;
-  padding-top: 13px;
-  padding-bottom: 13px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   border-style: solid;
   border-width: 1px;
   border-color: rgba(29, 201, 160, .94);
@@ -9761,6 +9762,33 @@ strong {
 
 .news-p {
   color: #fff;
+}
+
+.twitter-block {
+  height: 75px;
+  border-bottom: 1px solid #ececec;
+  background-color: #fff;
+}
+
+.twitter {
+  display: block;
+  max-width: 1290px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.homepage-twitter-logo {
+  width: 43px;
+  margin-top: 16px;
+  margin-left: 40px;
+  opacity: 0.09;
+}
+
+.twitter-text {
+  margin-top: 23px;
+  margin-left: 22px;
+  font-size: 22px;
+  line-height: 28px;
 }
 
 html.w-mod-js *[data-ix="pin-drop"] {
@@ -10436,6 +10464,7 @@ html.w-mod-js *[data-ix="closed"] {
     margin-left: auto;
     padding-left: 0px;
     float: none;
+    line-height: 30px;
   }
   .h2-large.centered {
     padding-left: 0px;
@@ -10830,6 +10859,7 @@ html.w-mod-js *[data-ix="closed"] {
   }
   .home-hero-cta {
     margin-top: 2px;
+    line-height: 30px;
     text-align: left;
   }
   .full-menu-h2 {
@@ -11362,6 +11392,7 @@ html.w-mod-js *[data-ix="closed"] {
   }
   .home-hero-cta {
     margin-top: 8px;
+    line-height: 31px;
     text-align: left;
   }
   .full-menu-links-block.no-border {
