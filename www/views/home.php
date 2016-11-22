@@ -200,7 +200,8 @@ if (!isset($urlHandler))
                                            placeholder="Last name">
                                 </div>
                                 <div class="mc-field-group">
-                                    <input type="text" value="" name="EMAIL" class="signup-in w-input email" id="mce-EMAIL"
+                                    <input type="text" value="" name="EMAIL" class="signup-in w-input email"
+                                           id="mce-EMAIL"
                                            placeholder="Email address">
                                 </div>
                                 <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
@@ -213,16 +214,12 @@ if (!isset($urlHandler))
                                 <div style="display: inline;">
                                     <input type="submit" value="Subscribe" name="subscribe"
                                            id="mc-embedded-subscribe"
-                                           class="button footer-signup w-button"></div>
+                                           class="button footer-signup w-button">
+                                </div>
 
                                 <div id="mce-responses">
-                                    <div class="response" id="mce-error-response" style="display:block">
-                                        This email address looks fake or invalid. Please enter a real email address.
-                                    </div>
-                                    <div class="response" id="mce-success-response" style="display:block">
-                                        Almost finished... We need to confirm your email address. To complete the
-                                        subscription process, please click the link in the email we just sent you.
-                                    </div>
+                                    <div class="response" id="mce-error-response"></div>
+                                    <div class="response" id="mce-success-response"></div>
                                 </div>
                             </div>
                         </form>
@@ -239,98 +236,107 @@ if (!isset($urlHandler))
     /* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
       We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
 
-    #mc_embed_signup .mc-field-group{
-        clear:none;
-        display:inline;
-        width:auto;
+    #mc_embed_signup .mc-field-group {
+        clear: none;
+        display: inline;
+        width: auto;
     }
 
-    #mc_embed_signup .mc-field-group input{
-        width:auto;
-        display:inline;
+    #mc_embed_signup .mc-field-group input {
+        width: auto;
+        display: inline;
     }
-    
+
     /* Homepage mailchimp styles */
-#mc_embed_signup .mc-field-group input {
-    width: 21%;
-    display: inline-block;
-    border: 0px solid;
-    border-bottom: 1px solid #fff;
-    border-radius: 0;
-    -moz-border-radius: 0;
-    margin-top: -5px;
-}
-#mc_embed_signup .mc-field-group input:active {
-    border-bottom: #1dc9a0;
-}
-#mc_embed_signup .button {
-    clear: both;
-    background-color: #1dc9a0;
-    border: 1px solid #1dc9a0;
-    border-radius: 25px;
-    transition: all 0s ease-in-out 0s;
-    color: #000;
-    cursor: pointer;
-    display: inline-block;
-    font-size: 16px;
-    font-weight: 600;
-    height: 45px;
-    line-height: 32px;
-    margin: -8px 5px 10px 0;
-    padding: 0px 13px;
-    text-align: center;
-    text-decoration: none;
-    vertical-align: top;
-    white-space: nowrap;
-    width: 170px;
-}
-#mc_embed_signup .button:hover {
-    background-color: #2A2E3A;
-    color: #1dc9a0;
-}
-#mc_embed_signup #mc-embedded-subscribe-form div.mce_inline_error {
-    display: inline-block;
-    margin: 2px 0 1em 0;
-    padding: 5px 10px;
-    background-color: rgb(42, 46, 56);
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-    font-size: 14px;
-    font-weight: normal;
-    z-index: 1;
-    color: #e85c41;
-    position: absolute;
-    width: auto;
-    top: -106px;
-    left: -14px;
-}
-    #mc_embed_signup #mce-success-response {
-    color: #1dc9a0;
-    display: none;
-    position: absolute;
-    background: #2a2e38;
-    padding: 20px;
-    border-radius: 10px;
-    top: -134px;
-}
-    
-@media screen and (max-width: 960px) {
-   #mc_embed_signup .mc-field-group input {
-    width: 100%;
-    margin-top: 24px;
-    margin-bottom: 10px;
-    display: block;
+    #mc_embed_signup .mc-field-group input {
+        width: 21%;
+        display: inline-block;
+        border: 0px solid;
+        border-bottom: 1px solid #fff;
+        border-radius: 0;
+        -moz-border-radius: 0;
+        margin-top: -5px;
     }
-    #mc_embed_signup .button {
-    margin-top:5px;
-    width: 100%;
-    
-    }
-}
 
-/* end */
-    
+    #mc_embed_signup .mc-field-group input:active {
+        border-bottom: #1dc9a0;
+    }
+
+    #mc_embed_signup .button {
+        clear: both;
+        background-color: #1dc9a0;
+        border: 1px solid #1dc9a0;
+        border-radius: 25px;
+        transition: all 0s ease-in-out 0s;
+        color: #000;
+        cursor: pointer;
+        display: inline-block;
+        font-size: 16px;
+        font-weight: 600;
+        height: 45px;
+        line-height: 32px;
+        margin: -8px 5px 10px 0;
+        padding: 0px 13px;
+        text-align: center;
+        text-decoration: none;
+        vertical-align: top;
+        white-space: nowrap;
+        width: 170px;
+    }
+
+    #mc_embed_signup .button:hover {
+        background-color: #2A2E3A;
+        color: #1dc9a0;
+    }
+
+    #mc_embed_signup #mc-embedded-subscribe-form div.mce_inline_error {
+        display: inline-block;
+        margin: 2px 0 1em 0;
+        padding: 5px 10px;
+        background-color: rgb(42, 46, 56);
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+        font-size: 14px;
+        font-weight: normal;
+        z-index: 1;
+        color: #e85c41;
+        position: absolute;
+        width: auto;
+        top: -106px;
+        left: -14px;
+    }
+
+    #mc_embed_signup #mce-success-response {
+        color: #1dc9a0;
+        display: none;
+        position: absolute;
+        background: #2a2e38;
+        padding: 20px;
+        border-radius: 10px;
+        top: -134px;
+    }
+
+    @media screen and (max-width: 960px) {
+        #mc_embed_signup .mc-field-group input {
+            width: 100%;
+            margin-top: 24px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        #mc_embed_signup .button {
+            margin-top: 5px;
+            width: 100%;
+        }
+
+        .newsletter-signup{
+            height:auto;
+        }
+    }
+
+    /* end */
+
 </style>
 
 <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>
