@@ -314,6 +314,14 @@ if (!isset($urlHandler))
     border-radius: 10px;
     top: -134px;
 }
+    
+@media screen and (max-width: 960px) {
+   #mc_embed_signup .mc-field-group input{
+        width:auto;
+        display:block;
+    }
+}
+
 /* end */
     
 </style>
