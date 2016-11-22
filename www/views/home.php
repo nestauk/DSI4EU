@@ -316,9 +316,16 @@ if (!isset($urlHandler))
 }
     
 @media screen and (max-width: 960px) {
-   #mc_embed_signup .mc-field-group input{
-        width:auto;
-        display:block;
+   #mc_embed_signup .mc-field-group input {
+    width: 100%;
+    margin-top: 24px;
+    margin-bottom: 10px;
+    display: block;
+    }
+    #mc_embed_signup .button {
+    margin-top:5px;
+    width: 100%;
+    
     }
 }
 
