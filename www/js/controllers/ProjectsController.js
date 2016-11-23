@@ -16,17 +16,19 @@ angular
         };
         $scope.searchName = $attrs.searchname;
 
-        if (
-            $scope.searchName == '' &&
-            $scope.filter.countryID == '0' &&
-            $scope.filter.tagID == '0' &&
-            $scope.filter.helpTagID == '0' &&
-            $scope.filter.techTagID == '0' &&
-            $scope.filter.openTagID == '0'
-        )
-            $scope.startLetter = 'A';
-        else
-            $scope.startLetter = '';
+        /*
+         if (
+         $scope.searchName == '' &&
+         $scope.filter.countryID == '0' &&
+         $scope.filter.tagID == '0' &&
+         $scope.filter.helpTagID == '0' &&
+         $scope.filter.techTagID == '0' &&
+         $scope.filter.openTagID == '0'
+         )
+         $scope.startLetter = 'A';
+         else
+         */
+        $scope.startLetter = '';
 
         $http.get(projectsJsonUrl)
             .then(function (result) {
@@ -74,7 +76,7 @@ angular
             });
 
             return tags.filter(function (tag) {
-                return $.inArray(tag.id, existingTagIDs) !== -1
+                return $.inArray(parseInt(tag.id), existingTagIDs) !== -1
             });
         }
 
@@ -121,7 +123,7 @@ angular
                 if ($scope.filter.countryID == '0')
                     return true;
 
-                return $scope.filter.countryID == item.countryID;
+                return parseInt($scope.filter.countryID) == item.countryID;
             }
         };
 
@@ -130,7 +132,7 @@ angular
                 if ($scope.filter.tagID == '0')
                     return true;
 
-                return $.inArray($scope.filter.tagID, item.tags) !== -1;
+                return $.inArray(parseInt($scope.filter.tagID), item.tags) !== -1;
             }
         };
 
@@ -139,7 +141,7 @@ angular
                 if ($scope.filter.helpTagID == '0')
                     return true;
 
-                return $.inArray($scope.filter.helpTagID, item.helpTags) !== -1;
+                return $.inArray(parseInt($scope.filter.helpTagID), item.helpTags) !== -1;
             }
         };
 
@@ -148,7 +150,7 @@ angular
                 if ($scope.filter.techTagID == '0')
                     return true;
 
-                return $.inArray($scope.filter.techTagID, item.techTags) !== -1;
+                return $.inArray(parseInt($scope.filter.techTagID), item.techTags) !== -1;
             }
         }
     });
