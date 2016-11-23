@@ -132,8 +132,8 @@ class OrganisationRepository
                 (new OrganisationSizeRepository())->getById($organisation['organisationSizeID'])
             );
         }
-        $organisationObj->setStartDate($organisation['startDate']);
-        $organisationObj->setCreationTime($organisation['created']);
+        $organisationObj->setStartDate($organisation['startDate'] != '0000-00-00' ? $organisation['startDate'] : NULL);
+        $organisationObj->setCreationTime($organisation['created'] != '0000-00-00 00:00:00' ? $organisation['created'] : NULL);
         $organisationObj->setLogo($organisation['logo']);
         $organisationObj->setHeaderImage($organisation['headerImage']);
         $organisationObj->setProjectsCount($organisation['projectsCount']);

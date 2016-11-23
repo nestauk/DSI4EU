@@ -25,7 +25,6 @@ class ExportOrganisationsController
         $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
 
         $organisations = (new OrganisationRepositoryInAPC())->getAll();
-        $organisations = (new OrganisationRepository())->getAll();
 
         if (isset($_GET['download'])) {
             header('Content-Description: File Transfer');
