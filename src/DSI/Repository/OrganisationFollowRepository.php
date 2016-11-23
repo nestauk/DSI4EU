@@ -99,13 +99,13 @@ class OrganisationFollowRepository
     }
 
     /**
-     * @param int $userID
+     * @param User $user
      * @return \DSI\Entity\OrganisationFollow[]
      */
-    public function getByUserID(int $userID)
+    public function getByUser(User $user)
     {
         return $this->getObjectsWhere([
-            "`userID` = '{$userID}'"
+            "`userID` = '{$user->getId()}'"
         ]);
     }
 
