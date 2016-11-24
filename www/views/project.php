@@ -172,185 +172,166 @@ require __DIR__ . '/header.php';
             </div>
         </div>
 
-
-        <div class="project-news" ng-controller="ProjectPostController"
+        <div class="page-posts-section" id="project-posts" ng-controller="ProjectPostController"
              <?php if (!$userCanAddPost) { ?>ng-show="project.posts.length > 0"<?php } ?>>
-            <div class="w-container">
-                <h2 class="centered news-header"><?php _ehtml('Project news') ?></h2>
-                <div class="project-info w-row">
-                    <div class="w-row project-info">
-                        <div class="w-col w-col-2 w-col-stack" id="textScroll">
-                            <div id="text"></div>
-                        </div>
-                        <div class="w-col w-col-8 w-col-stack" id="postsScroll">
-                            <div id="posts">
-                                <div class="info-card">
-                                    <?php if ($userCanAddPost) { ?>
-                                        <div class="add-post">
-                                            <div class="w-clearfix post-author new-post">
-                                                <img
-                                                    src="<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/<?php echo $loggedInUser->getProfilePicOrDefault() ?>"
-                                                    width="40" height="40"
-                                                    class="post-author-img post">
-                                                <div class="profile-label">
-                                                    <?php _ehtml('Do you have something to share?') ?>
+            <div class="page-content">
+                <div class="w-row">
+                    <div class="w-col w-col-8 w-col-stack">
+                        <h3 class="descr-h3"><?php _ehtml('Project news') ?></h3>
+                        <p class="post-intro"><?php _ehtml("See what we've been up to and join in the conversation!") ?></p>
+                        <div class="page-posts">
+                            <div class="card">
+                                <div class="post-indicator">Latest post</div>
+                                <div class="proj-post-block" ng-repeat="post in project.posts" ng-cloak>
+                                    <div class="user-detail">
+                                        <div class="involved-card user-post">
+                                            <div class="w-row">
+                                                <div class="image-col w-col w-col-3 w-col-small-3 w-col-tiny-3">
+                                                    <img width="50" height="50" class="involved-profile-img"
+                                                         ng-src="<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/{{post.user.profilePic}}">
                                                 </div>
-                                                <?php if ($userCanAddPost) { ?>
-                                                    <a href="#" data-ix="new-post-show"
-                                                       class="create-new-post">
-                                                        <?php _ehtml('Add new post') ?>
-                                                        <span class="add-post-plus">+</span>
-                                                    </a>
-                                                <?php } ?>
+                                                <div class="w-col w-col-9 w-col-small-9 w-col-tiny-9">
+                                                    <a class="card-name" href="{{post.user.url}}"
+                                                       ng-bind="post.user.name"></a>
+                                                    <div class="card-position" ng-bind="post.time"></div>
+                                                </div>
                                             </div>
                                         </div>
+                                        <p ng-bind-html="renderHtml(post.text)" class="post-content"></p>
+                                    </div>
+
+                                    <a class="comment-block w-inline-block" href="#" ng-cloak
+                                       ng-click="loadComments(post)">
+                                        <div class="comment-row w-row">
+                                            <div class="w-clearfix w-col w-col-1 w-col-small-1 w-col-tiny-1">
+                                                <img class="comment-bubble"
+                                                     src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-chatbubble.png">
+                                            </div>
+                                            <div class="w-col w-col-11 w-col-small-11 w-col-tiny-11">
+                                                <div class="comment-descr">
+                                                    <span ng-show="post.commentsCount == 0">
+                                                    <?php _ehtml('There are no comments, be the first to say something') ?>
+                                                </span>
+                                                    <span ng-show="post.commentsCount == 1">
+                                                            <?php echo show_input(
+                                                                sprintf(
+                                                                    __('There is %s comment'),
+                                                                    '{{post.commentsCount}}'
+                                                                )
+                                                            ); ?>
+                                                        </span>
+                                                    <span ng-show="post.commentsCount > 1">
+                                                            <?php echo show_input(
+                                                                sprintf(
+                                                                    __('There are %s comments'),
+                                                                    '{{post.commentsCount}}'
+                                                                )
+                                                            ); ?>
+                                                        </span>
+                                                    <span ng-show="loadingComments">
+                                                            | <?php _ehtml('Loading comments...') ?>
+                                                        </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+
+                                    <?php if ($loggedInUser) { ?>
+                                        <a class="comment-block w-inline-block" href="#" ng-show="showComments"
+                                           ng-cloak>
+                                            <div class="w-row">
+                                                <div class="w-col w-col-1 w-col-small-1 w-col-tiny-1">
+                                                    <img class="comment-img involved-profile-img" width="50"
+                                                         src="<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/<?php echo $loggedInUser->getProfilePicOrDefault() ?>">
+                                                </div>
+                                                <div class="w-col w-col-11 w-col-small-11 w-col-tiny-11">
+                                                    <div class="comment-form w-form">
+                                                        <form id="email-form-2" ng-submit="submitComment(post)">
+                                                            <input class="comment-sub w-input"
+                                                                   id="name" maxlength="256"
+                                                                   placeholder="<?php _ehtml('Write your comment') ?>"
+                                                                   type="text" ng-model="post.newComment">
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
                                     <?php } ?>
 
-                                    <div ng-repeat="post in project.posts" ng-cloak>
-                                        <div class="w-clearfix"
-                                             ng-class="{'current-status' : $index == 0}">
-
-                                            <h3 ng-show="$index == 0" class="status-h3">
-                                                <?php _ehtml('Latest post') ?>
-                                            </h3>
-                                            <h3 ng-show="$index == 1" class="info-h card-h">
-                                                <?php _ehtml('Previous posts') ?>
-                                            </h3>
-
-                                            <div class="post-author"
-                                                 ng-class="{'latest' : $index == 0}">
-                                                <img width="40" height="40" class="post-author-img"
-                                                     ng-src="<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/{{post.user.profilePic}}">
-                                                <div class="post-author-detail"
-                                                     ng-class="{'latest' : $index == 0}"
-                                                     ng-bind="post.user.name"></div>
-                                                <div class="posted-on"
-                                                     ng-class="{'latest' : $index == 0}"
-                                                     ng-bind="post.time"></div>
-                                            </div>
-                                            <div class="news-content"
-                                                 ng-bind-html="renderHtml(post.text)"></div>
-                                        </div>
-                                        <div class="w-clearfix comment-count" ng-cloak>
-                                            <a href="#"
-                                               class="w-inline-block w-clearfix comment-toggle">
-                                                <img width="256" class="comment-bubble"
-                                                     src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-chatbubble.png">
-                                                <div class="comment-indicator"
-                                                     ng-click="loadComments()">
-                                                    <span ng-show="post.commentsCount == 0">
-                                                        <?php _ehtml('There are no comments, be the first to say something') ?>
-                                                    </span>
-                                                    <span ng-show="post.commentsCount == 1">
-                                                        <?php echo show_input(
-                                                            sprintf(
-                                                                __('There is %s comment'),
-                                                                '{{post.commentsCount}}'
-                                                            )
-                                                        ); ?>
-                                                    </span>
-                                                    <span ng-show="post.commentsCount > 1">
-                                                        <?php echo show_input(
-                                                            sprintf(
-                                                                __('There are %s comments'),
-                                                                '{{post.commentsCount}}'
-                                                            )
-                                                        ); ?>
-                                                    </span>
-                                                    <span ng-show="loadingComments">
-                                                        | <?php _ehtml('Loading comments...') ?>
-                                                    </span>
+                                    <div class="user-detail">
+                                        <div ng-controller="ProjectPostCommentController"
+                                             ng-repeat="comment in post.comments">
+                                            <div class="comment-large-row">
+                                                <div class="reply-large w-row">
+                                                    <div
+                                                        class="image-col w-col w-col-1 w-col-small-1 w-col-tiny-tiny-stack">
+                                                        <img class="involved-profile-img" width="50"
+                                                             ng-src="<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/{{comment.user.profilePic}}">
+                                                    </div>
+                                                    <div class="w-col w-col-3 w-col-small-3 w-col-tiny-tiny-stack">
+                                                        <a class="card-name comment-large" href="#">
+                                                            {{comment.user.name}}
+                                                        </a>
+                                                        <a class="card-position comment-large" href="#"
+                                                           ng-click="replyToComment = !replyToComment">
+                                                            <?php _ehtml('Reply') ?>
+                                                        </a>
+                                                    </div>
+                                                    <div class="w-col w-col-8 w-col-small-8 w-col-tiny-tiny-stack">
+                                                        <p class="comment-large-p">
+                                                            {{comment.comment}}
+                                                        </p>
+                                                    </div>
                                                 </div>
-                                            </a>
-                                        </div>
-                                        <div class="post-comments" ng-show="showComments"
-                                             ng-cloak="">
-                                            <div class="comment">
+                                            </div>
+                                            <div>
+                                                <div class="sub-comment w-row" ng-repeat="reply in comment.replies">
+                                                    <div class="w-clearfix w-col w-col-4">
+                                                        <img class="involved-profile-img sub-reply" width="50"
+                                                             ng-src="<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/{{reply.user.profilePic}}">
+                                                        <a class="card-name comment-large sub-reply" href="#">
+                                                            {{reply.user.name}}
+                                                        </a>
+                                                    </div>
+                                                    <div class="w-col w-col-8">
+                                                        <p class="comment-large-p">
+                                                            {{reply.comment}}
+                                                        </p>
+                                                        <a class="reply-com" href="#"
+                                                           ng-click="$parent.replyToComment = !$parent.replyToComment">
+                                                            <?php _ehtml('Reply') ?>
+                                                        </a>
+                                                    </div>
+                                                </div>
+
                                                 <?php if ($loggedInUser) { ?>
-                                                    <div class="w-row">
-                                                        <div class="w-col w-col-1 w-clearfix">
-                                                            <img class="commentor-img"
-                                                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/<?php echo $loggedInUser->getProfilePicOrDefault() ?>">
-                                                        </div>
-                                                        <div class="w-col w-col-11">
-                                                            <div class="post-comment">
-                                                                <div class="w-form">
-                                                                    <form
-                                                                        ng-submit="submitComment()">
-                                                                        <input type="text"
-                                                                               placeholder="<?php _ehtml('Write your comment') ?>"
-                                                                               class="w-input add-comment"
-                                                                               ng-model="post.newComment">
-                                                                    </form>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                <?php } ?>
-                                                <div ng-controller="ProjectPostCommentController"
-                                                     ng-repeat="comment in post.comments">
-                                                    <div class="w-row comment-original">
-                                                        <div class="w-col w-col-4 w-clearfix">
-                                                            <img class="commentor-img"
-                                                                 ng-src="<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/{{comment.user.profilePic}}">
-                                                            <div class="commentor-name">
-                                                                {{comment.user.name}}
-                                                            </div>
-                                                            <br/>
-                                                            <a href="#"
-                                                               ng-click="replyToComment = !replyToComment"
-                                                               class="reply"><?php _ehtml('Reply') ?></a>
-                                                        </div>
-                                                        <div class="w-col w-col-8">
-                                                            <div
-                                                                class="post-comment comment-original-post">
-                                                                {{comment.comment}}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div>
-                                                        <div class="w-row reply-cols"
-                                                             ng-repeat="reply in comment.replies">
-                                                            <div
-                                                                class="w-col w-col-3 w-clearfix reply-col-1">
-                                                                <img class="commentor-img commentor-reply-img"
-                                                                     ng-src="<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/{{reply.user.profilePic}}">
-                                                                <div class="commentor-name commentor-reply">
-                                                                    {{reply.user.name}}
-                                                                </div>
-                                                            </div>
-                                                            <div class="w-col w-col-9">
-                                                                <div class="post-comment reply-comment">
-                                                                    {{reply.comment}}
-                                                                </div>
-                                                                <a href="#" class="reply"
-                                                                   ng-click="$parent.replyToComment = !$parent.replyToComment">
-                                                                    <?php _ehtml('Reply') ?></a>
-                                                            </div>
-                                                        </div>
-                                                        <?php if ($loggedInUser) { ?>
-                                                            <div class="w-row reply-input"
-                                                                 ng-show="replyToComment">
-                                                                <div
-                                                                    class="w-col w-col-1 w-clearfix">
-                                                                    <img class="commentor-img commentor-reply-img"
+                                                    <div class="w-row reply-input"
+                                                         ng-show="replyToComment">
+                                                        <a class="comment-block w-inline-block" href="#"
+                                                           ng-show="showComments" ng-cloak>
+                                                            <div class="w-row">
+                                                                <div class="w-col w-col-1 w-col-small-1 w-col-tiny-1">
+                                                                    <img class="comment-img involved-profile-img"
+                                                                         width="50"
                                                                          src="<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/<?php echo $loggedInUser->getProfilePicOrDefault() ?>">
                                                                 </div>
-                                                                <div class="w-col w-col-11">
-                                                                    <div class="w-form">
-                                                                        <form
-                                                                            ng-submit="submitComment()">
-                                                                            <input type="text"
-                                                                                   ng-model="comment.newReply"
-                                                                                   class="w-input add-comment"
-                                                                                   placeholder="<?php _ehtml('Add your reply') ?>">
+                                                                <div
+                                                                    class="w-col w-col-11 w-col-small-11 w-col-tiny-11">
+                                                                    <div class="comment-form w-form">
+                                                                        <form id="email-form-2"
+                                                                              ng-submit="submitComment()">
+                                                                            <input class="comment-sub w-input"
+                                                                                   id="name" maxlength="256"
+                                                                                   placeholder="<?php _ehtml('Add your reply') ?>"
+                                                                                   type="text"
+                                                                                   ng-model="comment.newReply">
                                                                         </form>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        <?php } ?>
+                                                        </a>
                                                     </div>
-                                                </div>
+                                                <?php } ?>
                                             </div>
                                         </div>
                                     </div>
@@ -358,39 +339,47 @@ require __DIR__ . '/header.php';
                             </div>
                         </div>
                     </div>
+                    <?php if ($userCanAddPost) { ?>
+                        <div class="w-col w-col-4 w-col-stack">
+                            <h3 class="descr-h3"><?php _ehtml('Add new post') ?></h3>
+                            <p class="sidebar-intro"><?php _ehtml('Show people what you and your project have been up to') ?></p>
+                            <a class="side-bar-action w-button" href="#" data-ix="new-post-show"><?php _ehtml('Add new post') ?> +</a>
+                        </div>
+                    <?php } ?>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="new-post-bg bg-blur">
-            <script>
-                tinymce.init({
-                    selector: '#newPost',
-                    statusbar: false,
-                    height: 500,
-                    plugins: "autoresize autolink lists link preview paste textcolor colorpicker image imagetools media",
-                    autoresize_bottom_margin: 0,
-                    autoresize_max_height: 500,
-                    menubar: false,
-                    toolbar1: 'styleselect | forecolor backcolor | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media | preview',
-                    image_advtab: true,
-                    paste_data_images: false
-                });
-            </script>
+    <div class="new-post-bg bg-blur">
+        <script>
+            tinymce.init({
+                selector: '#newPost',
+                statusbar: false,
+                height: 500,
+                plugins: "autoresize autolink lists link preview paste textcolor colorpicker image imagetools media",
+                autoresize_bottom_margin: 0,
+                autoresize_max_height: 500,
+                menubar: false,
+                toolbar1: 'styleselect | forecolor backcolor | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media | preview',
+                image_advtab: true,
+                paste_data_images: false
+            });
+        </script>
 
-            <div class="add-post-modal">
-                <form ng-submit="addPost()" style="margin:5px">
+        <div class="add-post-modal">
+            <form ng-submit="addPost()" style="margin:5px">
                 <textarea id="newPost" style="width:100%"
                           data-placeholder="<?php _ehtml('Please type your update here') ?>"
                           placeholder="<?php _ehtml('Please type your update here') ?>"></textarea>
-                    <a href="#" data-ix="hide-new-post" class="modal-save" style="right:140px">
-                        <?php _ehtml('Cancel') ?>
-                    </a>
-                    <input type="submit" class="modal-save" value="<?php _ehtml('Publish post') ?>"
-                           style="border-width:0;line-height:20px;font-weight:bold;"/>
-                </form>
-            </div>
+                <a href="#" data-ix="hide-new-post" class="modal-save" style="right:140px">
+                    <?php _ehtml('Cancel') ?>
+                </a>
+                <input type="submit" class="modal-save" value="<?php _ehtml('Publish post') ?>"
+                       style="border-width:0;line-height:20px;font-weight:bold;"/>
+            </form>
         </div>
+    </div>
     </div>
 
 <?php /*
@@ -845,15 +834,4 @@ require __DIR__ . '/header.php';
     <script
         src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/ProjectController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 
-    <script>
-        $(function () {
-            $('.project-members')
-                .on('mouseenter', '.project-member', function () {
-                    $('.remove-from-list', $(this)).show();
-                })
-                .on('mouseleave', '.project-member', function () {
-                    $('.remove-from-list', $(this)).hide();
-                })
-        });
-    </script>
 <?php require __DIR__ . '/footer.php' ?>

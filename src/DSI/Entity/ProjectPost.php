@@ -72,8 +72,12 @@ class ProjectPost
     /**
      * @return string
      */
-    public function getTime()
+    public function getTime($format = null)
     {
+        if ($format !== null) {
+            return date($format, strtotime($this->time));
+        }
+
         return $this->time;
     }
 

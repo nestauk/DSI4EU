@@ -344,7 +344,7 @@ angular
                 },
                 success: {
                     title: "Success",
-                    text: "You won't receive any more news regarding this project."
+                    text: "You won't receive any more news from this project."
                 },
                 successCallback: function () {
                     location.reload();
@@ -356,7 +356,6 @@ angular
             $http.post(window.location.href, {
                 addPost: tinymce.activeEditor.getContent()
             }).then(function (response) {
-                console.log(response);
                 if (response.data.result == 'ok') {
                     $('.new-post-bg.bg-blur').hide();
                     $scope.project.posts = response.data.posts;
@@ -443,38 +442,37 @@ angular
         }());
     })
     .controller('ProjectPostController', function ($scope, $http, $timeout, $sce) {
-        if ($scope.post) {
-            $scope.submitComment = function () {
-                var data = {
-                    addPostComment: true,
-                    post: $scope.post.id,
-                    comment: $scope.post.newComment
-                };
-                $scope.post.newComment = '';
-                $http.post(SITE_RELATIVE_PATH + '/projectPost/' + $scope.post.id + '.json', data)
-                    .then(function (response) {
-                        if (!$scope.post.comments)
-                            $scope.post.comments = [];
-
-                        $scope.post.comments.unshift(response.data.comment);
-                        $scope.post.commentsCount++;
-                    });
+        $scope.submitComment = function (post) {
+            var data = {
+                addPostComment: true,
+                post: post.id,
+                comment: post.newComment
             };
+            post.newComment = '';
+            $http.post(SITE_RELATIVE_PATH + '/projectPost/' + post.id + '.json', data)
+                .then(function (response) {
+                    if (!post.comments)
+                        post.comments = [];
 
-            $scope.loadComments = function () {
-                if ($scope.showComments)
-                    return;
+                    post.comments.unshift(response.data.comment);
+                    post.commentsCount++;
+                });
+        };
 
-                $scope.loadingComments = true;
-                $http.get(SITE_RELATIVE_PATH + '/projectPost/' + $scope.post.id + '.json')
-                    .then(function (response) {
-                        $timeout(function () {
-                            $scope.loadingComments = false;
-                            $scope.post.comments = response.data.comments;
-                            $scope.showComments = true;
-                        }, 100);
-                    });
-            }
+        $scope.loadComments = function (post) {
+            console.log('loadComments');
+            if ($scope.showComments)
+                return;
+
+            $scope.loadingComments = true;
+            $http.get(SITE_RELATIVE_PATH + '/projectPost/' + post.id + '.json')
+                .then(function (response) {
+                    $timeout(function () {
+                        $scope.loadingComments = false;
+                        post.comments = response.data.comments;
+                        $scope.showComments = true;
+                    }, 100);
+                });
         }
     })
     .controller('ProjectPostCommentController', function ($scope, $http, $timeout, $sce) {

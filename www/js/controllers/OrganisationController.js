@@ -363,7 +363,7 @@ angular
                 },
                 success: {
                     title: "Success",
-                    text: "You won't receive any more news regarding this organisation."
+                    text: "You won't receive any more news from this organisation."
                 },
                 successCallback: function () {
                     location.reload();

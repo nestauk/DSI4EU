@@ -51,6 +51,9 @@ class ProjectController
     /** @var  ProjectController_Data */
     private $data;
 
+    /** @var URL */
+    private $urlHandler;
+
     public function __construct()
     {
         $this->data = new ProjectController_Data();
@@ -58,7 +61,7 @@ class ProjectController
 
     public function exec()
     {
-        $urlHandler = new URL();
+        $this->urlHandler = $urlHandler = new URL();
         $authUser = new Auth();
         $loggedInUser = $authUser->getUserIfLoggedIn();
 
@@ -396,12 +399,13 @@ class ProjectController
 
             return [
                 'id' => $post->getId(),
-                'time' => $post->getTime(),
+                'time' => $post->getTime('l, jS M Y H:i'),
                 'text' => $post->getText(),
                 'user' => [
                     'id' => $user->getId(),
                     'name' => $user->getFirstName() . ' ' . $user->getLastName(),
                     'profilePic' => $user->getProfilePicOrDefault(),
+                    'url' => $this->urlHandler->profile($user),
                 ],
                 'commentsCount' => $post->getCommentsCount(),
             ];
