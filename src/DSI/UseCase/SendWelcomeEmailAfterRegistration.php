@@ -3,8 +3,8 @@
 namespace DSI\UseCase;
 
 use DSI\NotEnoughData;
-use DSI\Service\Mailer;
 use DSI\Service\ErrorHandler;
+use DSI\Service\Mailer;
 
 class SendWelcomeEmailAfterRegistration
 {
@@ -52,16 +52,16 @@ class SendWelcomeEmailAfterRegistration
 
     private function sendEmail()
     {
-        $message = "<div>";
-        $message .= file_get_contents(__DIR__ . '/../../email-template/welcome.php');
-        $message .= "</div>";
+        ob_start();
+        include __DIR__ . '/../../email-template/welcome.php';
+        $message = ob_get_clean();
         $email = new Mailer();
         $email->From = 'noreply@digitalsocial.eu';
-        $email->FromName = 'Digital Social';
+        $email->FromName = 'Digital Social Innovation';
         $email->addAddress($this->data()->emailAddress);
-        $email->Subject = 'Digital Social Innovation :: Welcome';
+        $email->Subject = 'Welcome to Digital Social Innovation';
         $email->wrapMessageInTemplate([
-            'header' => 'Welcome to Digital Social',
+            'header' => 'Welcome to Digital Social Innovation',
             'body' => $message
         ]);
         $email->isHTML(true);

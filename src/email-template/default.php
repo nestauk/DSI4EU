@@ -12,8 +12,6 @@ if (!isset($urlHandler))
     <meta name="viewport" content="width=device-width"/>
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>DSI4EU User email</title>
-
     <style type="text/css">
         /* -------------------------------------
 		GLOBAL
@@ -359,7 +357,7 @@ if (!isset($urlHandler))
             <table bgcolor="#eee">
                 <tr>
                     <td style="width:150px"><img src="https://digitalsocial.eu/images/dark.svg"/></td>
-                    <td align="right"><h6 class="collapse" style="color:#000;">DSI4EU <?php echo $mailHeader ?></h6>
+                    <td align="right"><h6 class="collapse" style="color:#000;"><?php echo $mailHeader ?></h6>
                     </td>
                 </tr>
             </table>
