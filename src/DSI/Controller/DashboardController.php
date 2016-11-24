@@ -429,7 +429,7 @@ class DashboardController
             return $this->sortDashboardUpdates($a, $b);
         });
 
-        return $updates;
+        return array_slice($updates, 0, 3);
     }
 
     /**
