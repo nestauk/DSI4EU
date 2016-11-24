@@ -649,3 +649,8 @@ body#tinymce.mce-content-body {
 .dsi-button.notification-view.notification-project {
     right: 20px;
 }
+
+/* dashboard title */
+.notification-detail {
+    width: 320px;
+}
