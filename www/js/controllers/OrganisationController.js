@@ -292,7 +292,7 @@ angular
                     title: "Request Cancelled",
                     text: "Your request has been cancelled"
                 },
-                successCallback: function(){
+                successCallback: function () {
                     location.reload();
                 }
             });
@@ -310,7 +310,7 @@ angular
                     title: "Success",
                     text: "Join request has been sent"
                 },
-                successCallback: function(){
+                successCallback: function () {
                     location.reload();
                 }
             })
@@ -328,7 +328,44 @@ angular
                     title: "Success",
                     text: "You have left this organisation"
                 },
-                successCallback: function(){
+                successCallback: function () {
+                    location.reload();
+                }
+            })
+        };
+
+        $scope.followOrganisation = function () {
+            Helpers.swalWarning({
+                options: {
+                    title: "Follow Organisation",
+                    text: "Are you sure you want to follow this organisation?"
+                },
+                post: {
+                    followOrganisation: true
+                },
+                success: {
+                    title: "Success",
+                    text: "You are now following this organisation."
+                },
+                successCallback: function () {
+                    location.reload();
+                }
+            })
+        };
+        $scope.unfollowOrganisation = function () {
+            Helpers.swalWarning({
+                options: {
+                    title: "Unfollow Organisation",
+                    text: "Are you sure you want to unfollow this organisation?"
+                },
+                post: {
+                    unfollowOrganisation: true
+                },
+                success: {
+                    title: "Success",
+                    text: "You won't receive any more news regarding this organisation."
+                },
+                successCallback: function () {
                     location.reload();
                 }
             })

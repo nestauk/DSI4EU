@@ -7,6 +7,7 @@ require __DIR__ . '/header.php';
 /** @var $userCanSendJoinRequest bool */
 /** @var $userCanEditProject bool */
 /** @var $userCanAddPost bool */
+/** @var $userIsFollowing bool */
 /** @var $isOwner bool */
 /** @var $loggedInUser \DSI\Entity\User */
 /** @var $projectMembers \DSI\Entity\ProjectMember[] */
@@ -81,6 +82,7 @@ require __DIR__ . '/header.php';
                 <div class="column-right-small w-col w-col-4">
                     <?php if ($loggedInUser) { ?>
                         <h3 class="cse side-bar-h3"><?php _ehtml('Actions') ?></h3>
+
                         <?php if ($userCanEditProject) { ?>
                             <a class="sidebar-link" href="<?php echo $urlHandler->projectEdit($project) ?>">
                                 <span class="green">-&nbsp;</span><?php _ehtml('Edit project') ?>
@@ -89,13 +91,16 @@ require __DIR__ . '/header.php';
                                 <a class="sidebar-link" href="<?php echo $urlHandler->projectOwnerEdit($project) ?>">
                                     <span class="green">-&nbsp;</span><?php _ehtml('Change owner') ?>
                                 </a>
-                                <a class="sidebar-link remove" href="#" ng-click="confirmDelete()">
-                                    <span class="green">-&nbsp;</span><?php _ehtml('Delete project') ?>
-                                </a>
                             <?php } ?>
+                        <?php } ?>
+
+                        <?php if (!$userIsFollowing) { ?>
+                            <a class="sidebar-link" href="#" ng-click="followProject()">
+                                <span class="green">-&nbsp;</span><?php _ehtml('Follow Project') ?>
+                            </a>
                         <?php } else { ?>
-                            <a class="sidebar-link remove" href="#" ng-click="report()">
-                                <span class="green">-&nbsp;</span><?php _ehtml('Report project') ?>
+                            <a class="sidebar-link" href="#" ng-click="unfollowProject()">
+                                <span class="green">-&nbsp;</span><?php _ehtml('Unfollow Project') ?>
                             </a>
                         <?php } ?>
 
@@ -110,6 +115,18 @@ require __DIR__ . '/header.php';
                         <?php } elseif ($userCanSendJoinRequest) { ?>
                             <a class="sidebar-link" href="#" ng-click="joinProject()">
                                 <span class="green">-&nbsp;</span><?php _ehtml('Join Project') ?>
+                            </a>
+                        <?php } ?>
+
+                        <?php if (!$userCanEditProject) { ?>
+                            <a class="sidebar-link remove" href="#" ng-click="report()">
+                                <span class="green">-&nbsp;</span><?php _ehtml('Report project') ?>
+                            </a>
+                        <?php } ?>
+
+                        <?php if ($isOwner OR ($loggedInUser AND $loggedInUser->isSysAdmin())) { ?>
+                            <a class="sidebar-link remove" href="#" ng-click="confirmDelete()">
+                                <span class="green">-&nbsp;</span><?php _ehtml('Delete project') ?>
                             </a>
                         <?php } ?>
                     <?php } ?>

@@ -8,6 +8,7 @@ require __DIR__ . '/header.php';
 /** @var $userSentJoinRequest bool */
 /** @var $userCanSendJoinRequest bool */
 /** @var $userCanEditOrganisation bool */
+/** @var $userIsFollowing bool */
 /** @var $organisationTypes \DSI\Entity\OrganisationType[] */
 /** @var $organisationSizes \DSI\Entity\OrganisationSize[] */
 /** @var $organisationProjects \DSI\Entity\OrganisationProject[] */
@@ -88,15 +89,18 @@ if (!isset($urlHandler))
                                     <span class="green">-&nbsp;</span>
                                     <?php _ehtml('Change owner') ?>
                                 </a>
-                                <a class="sidebar-link remove" href="#" ng-click="confirmDelete()">
-                                    <span class="green">-&nbsp;</span>
-                                    <?php _ehtml('Delete organisation') ?>
-                                </a>
                             <?php } ?>
-                        <?php } else { ?>
-                            <a class="sidebar-link remove" href="#" ng-click="report()">
+                        <?php } ?>
+
+                        <?php if (!$userIsFollowing) { ?>
+                            <a class="sidebar-link" href="#" ng-click="followOrganisation()">
                                 <span class="green">-&nbsp;</span>
-                                <?php _ehtml('Report organisation') ?>
+                                <?php _ehtml('Follow Organisation') ?>
+                            </a>
+                        <?php } else { ?>
+                            <a class="sidebar-link" href="#" ng-click="unfollowOrganisation()">
+                                <span class="green">-&nbsp;</span>
+                                <?php _ehtml('Unfollow Organisation') ?>
                             </a>
                         <?php } ?>
 
@@ -114,6 +118,20 @@ if (!isset($urlHandler))
                             <a class="sidebar-link" href="#" ng-click="joinOrganisation()">
                                 <span class="green">-&nbsp;</span>
                                 <?php _ehtml('Join Organisation') ?>
+                            </a>
+                        <?php } ?>
+
+                        <?php if ($isOwner OR ($loggedInUser AND $loggedInUser->isSysAdmin())) { ?>
+                            <a class="sidebar-link remove" href="#" ng-click="confirmDelete()">
+                                <span class="green">-&nbsp;</span>
+                                <?php _ehtml('Delete organisation') ?>
+                            </a>
+                        <?php } ?>
+
+                        <?php if (!$userCanEditOrganisation) { ?>
+                            <a class="sidebar-link remove" href="#" ng-click="report()">
+                                <span class="green">-&nbsp;</span>
+                                <?php _ehtml('Report organisation') ?>
                             </a>
                         <?php } ?>
                     <?php } ?>

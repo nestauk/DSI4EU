@@ -14,6 +14,7 @@ use DSI\Entity\ProjectTag;
 use DSI\Entity\User;
 use DSI\Repository\OrganisationProjectRepository;
 use DSI\Repository\ProjectDsiFocusTagRepository;
+use DSI\Repository\ProjectFollowRepository;
 use DSI\Repository\ProjectImpactHelpTagRepository;
 use DSI\Repository\ProjectImpactTechTagRepository;
 use DSI\Repository\ProjectLinkRepository;
@@ -34,7 +35,9 @@ use DSI\UseCase\AddMemberRequestToProject;
 use DSI\UseCase\AddProjectToOrganisation;
 use DSI\UseCase\ApproveMemberRequestToProject;
 use DSI\UseCase\CreateProjectPost;
+use DSI\UseCase\Projects\FollowProject;
 use DSI\UseCase\Projects\RemoveProject;
+use DSI\UseCase\Projects\UnfollowProject;
 use DSI\UseCase\RejectMemberRequestToProject;
 use DSI\UseCase\RemoveMemberFromProject;
 use DSI\UseCase\SecureCode;
@@ -105,6 +108,12 @@ class ProjectController
             if (isset($_POST['leaveProject']))
                 return $this->leaveProject($loggedInUser, $project);
 
+            if (isset($_POST['followProject']))
+                return $this->followProject($loggedInUser, $project);
+
+            if (isset($_POST['unfollowProject']))
+                return $this->unfollowProject($loggedInUser, $project);
+
             $userIsMember = (new ProjectMemberRepository())->projectHasMember($project, $loggedInUser);
             if (!$userIsMember) {
                 $userSentJoinRequest = (new ProjectMemberRequestRepository())->projectHasRequestFromMember(
@@ -130,6 +139,7 @@ class ProjectController
 
         $userCanEditProject = ($isAdmin OR ($loggedInUser AND $loggedInUser->isCommunityAdmin()));
         $userCanAddPost = $isAdmin;
+        $userIsFollowing = ($loggedInUser AND (new ProjectFollowRepository())->userFollowsProject($loggedInUser, $project));
 
         $links = [];
         $projectLinks = (new ProjectLinkRepository())->getByProjectID($project->getId());
@@ -543,6 +553,62 @@ class ProjectController
                 $removeMember->data()->projectID = $project->getId();
                 $removeMember->data()->userID = $user->getId();
                 $removeMember->exec();
+
+                echo json_encode([
+                    'code' => 'ok',
+                ]);
+            } catch (ErrorHandler $e) {
+                echo json_encode([
+                    'code' => 'error',
+                    'errors' => $e->getErrors()
+                ]);
+            }
+        }
+        return;
+    }
+
+    /**
+     * @param User $user
+     * @param Project $project
+     */
+    private function followProject(User $user, Project $project)
+    {
+        $genSecureCode = new SecureCode();
+        if ($genSecureCode->checkCode($_POST['secureCode'])) {
+            try {
+                $followProject = new FollowProject();
+                $followProject->setProject($project);
+                $followProject->setUser($user);
+                $followProject->setExecutor($user);
+                $followProject->exec();
+
+                echo json_encode([
+                    'code' => 'ok',
+                ]);
+            } catch (ErrorHandler $e) {
+                echo json_encode([
+                    'code' => 'error',
+                    'errors' => $e->getErrors()
+                ]);
+            }
+        }
+        return;
+    }
+
+    /**
+     * @param User $user
+     * @param Project $project
+     */
+    private function unfollowProject(User $user, Project $project)
+    {
+        $genSecureCode = new SecureCode();
+        if ($genSecureCode->checkCode($_POST['secureCode'])) {
+            try {
+                $unfollowProject = new UnfollowProject();
+                $unfollowProject->setProject($project);
+                $unfollowProject->setUser($user);
+                $unfollowProject->setExecutor($user);
+                $unfollowProject->exec();
 
                 echo json_encode([
                     'code' => 'ok',

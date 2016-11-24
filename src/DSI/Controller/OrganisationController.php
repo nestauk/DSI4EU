@@ -7,6 +7,7 @@ use DSI\Entity\OrganisationLink_Service;
 use DSI\Entity\OrganisationNetworkTag;
 use DSI\Entity\OrganisationTag;
 use DSI\Entity\User;
+use DSI\Repository\OrganisationFollowRepository;
 use DSI\Repository\OrganisationLinkRepository;
 use DSI\Repository\OrganisationMemberRepository;
 use DSI\Repository\OrganisationMemberRequestRepository;
@@ -19,7 +20,9 @@ use DSI\Service\ErrorHandler;
 use DSI\Service\Mailer;
 use DSI\Service\URL;
 use DSI\UseCase\AddMemberRequestToOrganisation;
+use DSI\UseCase\Organisations\FollowOrganisation;
 use DSI\UseCase\Organisations\RemoveOrganisation;
+use DSI\UseCase\Organisations\UnfollowOrganisation;
 use DSI\UseCase\RejectMemberRequestToOrganisation;
 use DSI\UseCase\RemoveMemberFromOrganisation;
 use DSI\UseCase\SecureCode;
@@ -190,6 +193,10 @@ class OrganisationController
 
             // $userCanEditOrganisation = ($isAdmin OR ($loggedInUser AND $loggedInUser->isCommunityAdmin()));
             $userCanEditOrganisation = ($isOwner OR ($loggedInUser AND $loggedInUser->isCommunityAdmin()));
+            $userIsFollowing = (
+                $loggedInUser AND
+                (new OrganisationFollowRepository())->userFollowsOrganisation($loggedInUser, $organisation)
+            );
 
             if (isset($_POST['getSecureCode']))
                 return $this->setSecureCode();
@@ -208,6 +215,12 @@ class OrganisationController
 
             if (isset($_POST['leaveOrganisation']))
                 return $this->leaveOrganisation($loggedInUser, $organisation);
+
+            if (isset($_POST['followOrganisation']))
+                return $this->followOrganisation($loggedInUser, $organisation);
+
+            if (isset($_POST['unfollowOrganisation']))
+                return $this->unfollowOrganisation($loggedInUser, $organisation);
 
             $userIsMember = (new OrganisationMemberRepository())->organisationHasMember($organisation, $loggedInUser);
             if (!$userIsMember) {
@@ -293,7 +306,7 @@ class OrganisationController
             return $organisationTag->getTag();
         }, (new OrganisationTagRepository())->getByOrganisationID($organisation->getId()));
 
-        $networkTags = array_map(function(OrganisationNetworkTag $organisationNetworkTag){
+        $networkTags = array_map(function (OrganisationNetworkTag $organisationNetworkTag) {
             return $organisationNetworkTag->getTag();
         }, (new OrganisationNetworkTagRepository())->getByOrganisationID($organisation->getId()));
 
@@ -465,6 +478,64 @@ class OrganisationController
                 $exec = new RemoveMemberFromOrganisation();
                 $exec->data()->organisationID = $organisation->getId();
                 $exec->data()->userID = $user->getId();
+                $exec->exec();
+
+                echo json_encode([
+                    'code' => 'ok',
+                ]);
+            } catch (ErrorHandler $e) {
+                echo json_encode([
+                    'code' => 'error',
+                    'errors' => $e->getErrors()
+                ]);
+            }
+        }
+        return true;
+    }
+
+    /**
+     * @param User $user
+     * @param Organisation $organisation
+     * @return bool
+     */
+    private function followOrganisation(User $user, Organisation $organisation)
+    {
+        $genSecureCode = new SecureCode();
+        if ($genSecureCode->checkCode($_POST['secureCode'])) {
+            try {
+                $exec = new FollowOrganisation();
+                $exec->setOrganisation($organisation);
+                $exec->setUser($user);
+                $exec->setExecutor($user);
+                $exec->exec();
+
+                echo json_encode([
+                    'code' => 'ok',
+                ]);
+            } catch (ErrorHandler $e) {
+                echo json_encode([
+                    'code' => 'error',
+                    'errors' => $e->getErrors()
+                ]);
+            }
+        }
+        return true;
+    }
+
+    /**
+     * @param User $user
+     * @param Organisation $organisation
+     * @return bool
+     */
+    private function unfollowOrganisation(User $user, Organisation $organisation)
+    {
+        $genSecureCode = new SecureCode();
+        if ($genSecureCode->checkCode($_POST['secureCode'])) {
+            try {
+                $exec = new UnfollowOrganisation();
+                $exec->setOrganisation($organisation);
+                $exec->setUser($user);
+                $exec->setExecutor($user);
                 $exec->exec();
 
                 echo json_encode([

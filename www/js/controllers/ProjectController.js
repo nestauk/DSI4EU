@@ -315,6 +315,43 @@ angular
             });
         };
 
+        $scope.followProject = function () {
+            Helpers.swalWarning({
+                options: {
+                    title: "Follow Project",
+                    text: "Are you sure you want to follow this project?"
+                },
+                post: {
+                    followProject: true
+                },
+                success: {
+                    title: "Success",
+                    text: "You are now following this project."
+                },
+                successCallback: function () {
+                    location.reload();
+                }
+            })
+        };
+        $scope.unfollowProject = function () {
+            Helpers.swalWarning({
+                options: {
+                    title: "Unfollow Project",
+                    text: "Are you sure you want to unfollow this project?"
+                },
+                post: {
+                    unfollowProject: true
+                },
+                success: {
+                    title: "Success",
+                    text: "You won't receive any more news regarding this project."
+                },
+                successCallback: function () {
+                    location.reload();
+                }
+            })
+        };
+
         $scope.addPost = function () {
             $http.post(window.location.href, {
                 addPost: tinymce.activeEditor.getContent()
