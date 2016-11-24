@@ -4,19 +4,23 @@ namespace DSI\Controller;
 
 use DSI\Entity\OrganisationMemberInvitation;
 use DSI\Entity\OrganisationMemberRequest;
+use DSI\Entity\OrganisationProject;
 use DSI\Entity\ProjectMemberInvitation;
 use DSI\Entity\ProjectMemberRequest;
+use DSI\Entity\ProjectPost;
+use DSI\Entity\Story;
 use DSI\Entity\User;
+use DSI\Repository\OrganisationFollowRepository;
 use DSI\Repository\OrganisationMemberInvitationRepository;
 use DSI\Repository\OrganisationMemberRepository;
 use DSI\Repository\OrganisationMemberRequestRepository;
-use DSI\Repository\OrganisationRepository;
+use DSI\Repository\OrganisationProjectRepository;
+use DSI\Repository\ProjectFollowRepository;
 use DSI\Repository\ProjectMemberInvitationRepository;
 use DSI\Repository\ProjectMemberRepository;
 use DSI\Repository\ProjectMemberRequestRepository;
-use DSI\Repository\ProjectRepository;
+use DSI\Repository\ProjectPostRepository;
 use DSI\Repository\StoryRepository;
-use DSI\Repository\UserRepository;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\URL;
@@ -33,143 +37,41 @@ class DashboardController
 {
     public $format = 'html';
 
+    /** @var URL */
+    private $urlHandler;
+
     public function exec()
     {
-        $urlHandler = new URL();
+        $this->urlHandler = $urlHandler = new URL();
         $authUser = new Auth();
         $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
         $loggedInUser = $authUser->getUser();
 
         if ($this->format == 'json') {
             try {
-                if (isset($_POST['approveProjectInvitation'])) {
-                    $approveInvitation = new ApproveMemberInvitationToProject();
-                    $approveInvitation->data()->executor = $loggedInUser;
-                    $approveInvitation->data()->userID = $loggedInUser->getId();
-                    $approveInvitation->data()->projectID = isset($_POST['projectID']) ? $_POST['projectID'] : 0;
-                    $approveInvitation->exec();
+                if (isset($_POST['approveProjectInvitation']))
+                    return $this->approveProjectInvitation($loggedInUser);
 
-                    echo json_encode([
-                        'code' => 'ok',
-                        'message' => [
-                            'title' => 'Success!',
-                            'text' => 'You have accepted the invitation to be part of the project!',
-                        ]
-                    ]);
-                    return;
-                }
-                if (isset($_POST['rejectProjectInvitation'])) {
-                    $rejectInvitation = new RejectMemberInvitationToProject();
-                    $rejectInvitation->data()->executor = $loggedInUser;
-                    $rejectInvitation->data()->userID = $loggedInUser->getId();
-                    $rejectInvitation->data()->projectID = isset($_POST['projectID']) ? $_POST['projectID'] : 0;
-                    $rejectInvitation->exec();
+                if (isset($_POST['rejectProjectInvitation']))
+                    return $this->rejectProjectInvitation($loggedInUser);
 
-                    echo json_encode([
-                        'code' => 'ok',
-                        'message' => [
-                            'title' => 'OK',
-                            'text' => 'You have declined the invitation to be part of the project!',
-                        ]
-                    ]);
-                    return;
-                }
-                if (isset($_POST['approveOrganisationInvitation'])) {
-                    $approveInvitation = new ApproveMemberInvitationToOrganisation();
-                    $approveInvitation->data()->executor = $loggedInUser;
-                    $approveInvitation->data()->userID = $loggedInUser->getId();
-                    $approveInvitation->data()->organisationID = isset($_POST['organisationID']) ? $_POST['organisationID'] : 0;
-                    $approveInvitation->exec();
+                if (isset($_POST['approveOrganisationInvitation']))
+                    return $this->approveOrganisationInvitation($loggedInUser);
 
-                    echo json_encode([
-                        'code' => 'ok',
-                        'message' => [
-                            'title' => 'Success!',
-                            'text' => 'You have accepted the invitation to be part of the organisation!',
-                        ]
-                    ]);
-                    return;
-                }
-                if (isset($_POST['rejectOrganisationInvitation'])) {
-                    $rejectInvitation = new RejectMemberInvitationToOrganisation();
-                    $rejectInvitation->data()->executor = $loggedInUser;
-                    $rejectInvitation->data()->userID = $loggedInUser->getId();
-                    $rejectInvitation->data()->organisationID = isset($_POST['organisationID']) ? $_POST['organisationID'] : 0;
-                    $rejectInvitation->exec();
+                if (isset($_POST['rejectOrganisationInvitation']))
+                    return $this->rejectOrganisationInvitation($loggedInUser);
 
-                    echo json_encode([
-                        'code' => 'ok',
-                        'message' => [
-                            'title' => 'OK',
-                            'text' => 'You have declined the invitation to be part of the organisation!',
-                        ]
-                    ]);
-                    return;
-                }
-                if (isset($_POST['approveOrganisationRequest'])) {
-                    $approveRequest = new ApproveMemberRequestToOrganisation();
-                    $approveRequest->data()->executor = $loggedInUser;
-                    $approveRequest->data()->userID = $_POST['userID'] ?? 0;
-                    $approveRequest->data()->organisationID = $_POST['organisationID'] ?? 0;
-                    $approveRequest->exec();
+                if (isset($_POST['approveOrganisationRequest']))
+                    return $this->approveOrganisationRequest($loggedInUser);
 
-                    echo json_encode([
-                        'code' => 'ok',
-                        'message' => [
-                            'title' => 'Success!',
-                            'text' => 'You have accepted user\'s request to be part of the organisation!',
-                        ]
-                    ]);
-                    return;
-                }
-                if (isset($_POST['rejectOrganisationRequest'])) {
-                    $rejectRequest = new RejectMemberRequestToOrganisation();
-                    $rejectRequest->data()->executor = $loggedInUser;
-                    $rejectRequest->data()->userID = $_POST['userID'] ?? 0;
-                    $rejectRequest->data()->organisationID = $_POST['organisationID'] ?? 0;
-                    $rejectRequest->exec();
+                if (isset($_POST['rejectOrganisationRequest']))
+                    return $this->rejectOrganisationRequest($loggedInUser);
 
-                    echo json_encode([
-                        'code' => 'ok',
-                        'message' => [
-                            'title' => 'OK',
-                            'text' => 'You have declined user\'s request to join the organisation!',
-                        ]
-                    ]);
-                    return;
-                }
-                if (isset($_POST['approveProjectRequest'])) {
-                    $approveRequest = new ApproveMemberRequestToProject();
-                    $approveRequest->data()->executor = $loggedInUser;
-                    $approveRequest->data()->userID = $_POST['userID'] ?? 0;
-                    $approveRequest->data()->projectID = $_POST['projectID'] ?? 0;
-                    $approveRequest->exec();
+                if (isset($_POST['approveProjectRequest']))
+                    return $this->approveProjectRequest($loggedInUser);
 
-                    echo json_encode([
-                        'code' => 'ok',
-                        'message' => [
-                            'title' => 'Success!',
-                            'text' => 'You have accepted user\'s request to be part of the project!',
-                        ]
-                    ]);
-                    return;
-                }
-                if (isset($_POST['rejectProjectRequest'])) {
-                    $rejectRequest = new RejectMemberRequestToProject();
-                    $rejectRequest->data()->executor = $loggedInUser;
-                    $rejectRequest->data()->userID = $_POST['userID'] ?? 0;
-                    $rejectRequest->data()->projectID = $_POST['projectID'] ?? 0;
-                    $rejectRequest->exec();
-
-                    echo json_encode([
-                        'code' => 'ok',
-                        'message' => [
-                            'title' => 'OK',
-                            'text' => 'You have declined user\'s request to join the project!',
-                        ]
-                    ]);
-                    return;
-                }
+                if (isset($_POST['rejectProjectRequest']))
+                    return $this->rejectProjectRequest($loggedInUser);
 
                 $projectInvitations = (new ProjectMemberInvitationRepository())->getByMemberID($loggedInUser->getId());
                 $projectRequests = $this->getProjectRequests($loggedInUser);
@@ -233,7 +135,8 @@ class DashboardController
                 ]);
             }
         } else {
-            $latestStories = (new StoryRepository())->getLast(3);
+            /** @var DashboardController_Update[] $updates */
+            $updates = $this->getUpdates($loggedInUser);
             $projectsMember = (new ProjectMemberRepository())->getByMemberID($loggedInUser->getId());
             $organisationsMember = (new OrganisationMemberRepository())->getByMemberID($loggedInUser->getId());
 
@@ -277,5 +180,284 @@ class DashboardController
             $projectRequests = [];
         }
         return $projectRequests;
+    }
+
+    /**
+     * @param $loggedInUser
+     */
+    private function approveProjectInvitation(User $loggedInUser):void
+    {
+        $approveInvitation = new ApproveMemberInvitationToProject();
+        $approveInvitation->data()->executor = $loggedInUser;
+        $approveInvitation->data()->userID = $loggedInUser->getId();
+        $approveInvitation->data()->projectID = isset($_POST['projectID']) ? $_POST['projectID'] : 0;
+        $approveInvitation->exec();
+
+        echo json_encode([
+            'code' => 'ok',
+            'message' => [
+                'title' => 'Success!',
+                'text' => 'You have accepted the invitation to be part of the project!',
+            ]
+        ]);
+        return;
+    }
+
+    /**
+     * @param $loggedInUser
+     */
+    private function rejectProjectInvitation(User $loggedInUser):void
+    {
+        $rejectInvitation = new RejectMemberInvitationToProject();
+        $rejectInvitation->data()->executor = $loggedInUser;
+        $rejectInvitation->data()->userID = $loggedInUser->getId();
+        $rejectInvitation->data()->projectID = isset($_POST['projectID']) ? $_POST['projectID'] : 0;
+        $rejectInvitation->exec();
+
+        echo json_encode([
+            'code' => 'ok',
+            'message' => [
+                'title' => 'OK',
+                'text' => 'You have declined the invitation to be part of the project!',
+            ]
+        ]);
+        return;
+    }
+
+    /**
+     * @param $loggedInUser
+     */
+    private function approveOrganisationInvitation(User $loggedInUser):void
+    {
+        $approveInvitation = new ApproveMemberInvitationToOrganisation();
+        $approveInvitation->data()->executor = $loggedInUser;
+        $approveInvitation->data()->userID = $loggedInUser->getId();
+        $approveInvitation->data()->organisationID = isset($_POST['organisationID']) ? $_POST['organisationID'] : 0;
+        $approveInvitation->exec();
+
+        echo json_encode([
+            'code' => 'ok',
+            'message' => [
+                'title' => 'Success!',
+                'text' => 'You have accepted the invitation to be part of the organisation!',
+            ]
+        ]);
+        return;
+    }
+
+    /**
+     * @param $loggedInUser
+     */
+    private function rejectOrganisationInvitation(User $loggedInUser):void
+    {
+        $rejectInvitation = new RejectMemberInvitationToOrganisation();
+        $rejectInvitation->data()->executor = $loggedInUser;
+        $rejectInvitation->data()->userID = $loggedInUser->getId();
+        $rejectInvitation->data()->organisationID = isset($_POST['organisationID']) ? $_POST['organisationID'] : 0;
+        $rejectInvitation->exec();
+
+        echo json_encode([
+            'code' => 'ok',
+            'message' => [
+                'title' => 'OK',
+                'text' => 'You have declined the invitation to be part of the organisation!',
+            ]
+        ]);
+        return;
+    }
+
+    /**
+     * @param $loggedInUser
+     */
+    private function approveOrganisationRequest($loggedInUser):void
+    {
+        $approveRequest = new ApproveMemberRequestToOrganisation();
+        $approveRequest->data()->executor = $loggedInUser;
+        $approveRequest->data()->userID = $_POST['userID'] ?? 0;
+        $approveRequest->data()->organisationID = $_POST['organisationID'] ?? 0;
+        $approveRequest->exec();
+
+        echo json_encode([
+            'code' => 'ok',
+            'message' => [
+                'title' => 'Success!',
+                'text' => 'You have accepted user\'s request to be part of the organisation!',
+            ]
+        ]);
+        return;
+    }
+
+    /**
+     * @param $loggedInUser
+     */
+    private function rejectOrganisationRequest($loggedInUser):void
+    {
+        $rejectRequest = new RejectMemberRequestToOrganisation();
+        $rejectRequest->data()->executor = $loggedInUser;
+        $rejectRequest->data()->userID = $_POST['userID'] ?? 0;
+        $rejectRequest->data()->organisationID = $_POST['organisationID'] ?? 0;
+        $rejectRequest->exec();
+
+        echo json_encode([
+            'code' => 'ok',
+            'message' => [
+                'title' => 'OK',
+                'text' => 'You have declined user\'s request to join the organisation!',
+            ]
+        ]);
+        return;
+    }
+
+    /**
+     * @param $loggedInUser
+     */
+    private function approveProjectRequest($loggedInUser):void
+    {
+        $approveRequest = new ApproveMemberRequestToProject();
+        $approveRequest->data()->executor = $loggedInUser;
+        $approveRequest->data()->userID = $_POST['userID'] ?? 0;
+        $approveRequest->data()->projectID = $_POST['projectID'] ?? 0;
+        $approveRequest->exec();
+
+        echo json_encode([
+            'code' => 'ok',
+            'message' => [
+                'title' => 'Success!',
+                'text' => 'You have accepted user\'s request to be part of the project!',
+            ]
+        ]);
+        return;
+    }
+
+    /**
+     * @param $loggedInUser
+     */
+    private function rejectProjectRequest($loggedInUser):void
+    {
+        $rejectRequest = new RejectMemberRequestToProject();
+        $rejectRequest->data()->executor = $loggedInUser;
+        $rejectRequest->data()->userID = $_POST['userID'] ?? 0;
+        $rejectRequest->data()->projectID = $_POST['projectID'] ?? 0;
+        $rejectRequest->exec();
+
+        echo json_encode([
+            'code' => 'ok',
+            'message' => [
+                'title' => 'OK',
+                'text' => "You have declined user's request to join the project!",
+            ]
+        ]);
+        return;
+    }
+
+    private function getUpdates(User $loggedInUser)
+    {
+        $updates = array_merge(
+            $this->getLatestStories(3),
+            $this->getLatestFollowedProjectPosts($loggedInUser),
+            $this->getLatestFollowedOrganisationProjects($loggedInUser)
+        );
+
+        usort($updates, function (DashboardController_Update $a, DashboardController_Update $b) {
+            return $this->sortDashboardUpdates($a, $b);
+        });
+
+        return $updates;
+    }
+
+    /**
+     * @param $limit
+     * @return DashboardController_Update[]
+     */
+    private function getLatestStories($limit)
+    {
+        return array_map(function (Story $story) {
+            $update = new DashboardController_Update();
+            $update->title = $story->getTitle();
+            $update->content = substr(strip_tags($story->getContent()), 0, 200);
+            $update->link = $this->urlHandler->blogPost($story);
+            $update->published = strtotime($story->getDatePublished());
+            $update->timestamp = strtotime($story->getDatePublished());
+            return $update;
+        }, (new StoryRepository())->getLast($limit));
+    }
+
+    /**
+     * @param User $loggedInUser
+     * @return array
+     */
+    private function getLatestFollowedProjectPosts(User $loggedInUser)
+    {
+        $updates = array_map(function (ProjectPost $projectPost) {
+            $update = new DashboardController_Update();
+            $update->title = $projectPost->getProject()->getName() . ' added a new post';
+            $update->content = substr(strip_tags($projectPost->getText()), 0, 200);
+            $update->timestamp = strtotime($projectPost->getTime());
+            $update->link = $this->urlHandler->project($projectPost->getProject());
+            return $update;
+        }, (new ProjectPostRepository())->getByProjectIDs(
+            (new ProjectFollowRepository())->getProjectIDsForUser($loggedInUser))
+        );
+
+        usort($updates, function (DashboardController_Update $a, DashboardController_Update $b) {
+            return $this->sortDashboardUpdates($a, $b);
+        });
+
+        return array_slice($updates, 0, 3);
+    }
+
+    /**
+     * @param User $loggedInUser
+     * @return array
+     */
+    private function getLatestFollowedOrganisationProjects(User $loggedInUser)
+    {
+        $updates = array_map(function (OrganisationProject $organisationProject) {
+            $update = new DashboardController_Update();
+            $update->title = sprintf(
+                '%s has added %s',
+                $organisationProject->getOrganisation()->getName(),
+                $organisationProject->getProject()->getName()
+            );
+            $update->timestamp = strtotime($organisationProject->getProject()->getCreationTime());
+            return $update;
+        }, (new OrganisationProjectRepository())->getByOrganisationIDs(
+            (new OrganisationFollowRepository())->getOrganisationIDsForUser($loggedInUser))
+        );
+
+        usort($updates, function (DashboardController_Update $a, DashboardController_Update $b) {
+            return $this->sortDashboardUpdates($a, $b);
+        });
+
+        return $updates;
+    }
+
+    /**
+     * @param DashboardController_Update $a
+     * @param DashboardController_Update $b
+     * @return int
+     */
+    private function sortDashboardUpdates(DashboardController_Update $a, DashboardController_Update $b):int
+    {
+        if ($a->timestamp == $b->timestamp) {
+            return 0;
+        }
+        return ($a->timestamp > $b->timestamp) ? -1 : 1;
+    }
+}
+
+class DashboardController_Update
+{
+    /** @var String */
+    public $title,
+        $content,
+        $link;
+
+    /** @var int */
+    public $timestamp;
+
+    public function getPublishDate($format = 'd M Y')
+    {
+        return date($format, $this->timestamp);
     }
 }

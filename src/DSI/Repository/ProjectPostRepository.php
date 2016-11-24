@@ -97,6 +97,20 @@ class ProjectPostRepository
         ]);
     }
 
+    /**
+     * @param int[] $projectIDs
+     * @return DSI\Entity\ProjectPost[]
+     */
+    public function getByProjectIDs($projectIDs)
+    {
+        if (count($projectIDs) == 0)
+            return [];
+
+        return $this->getPostsWhere([
+            "`projectID` IN (" . implode(', ', $projectIDs) . ")"
+        ]);
+    }
+
     public function clearAll()
     {
         $query = new SQL("TRUNCATE TABLE `project-posts`");

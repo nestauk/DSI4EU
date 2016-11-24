@@ -74,6 +74,20 @@ class OrganisationProjectRepository
     }
 
     /**
+     * @param int[] $organisationIDs
+     * @return \DSI\Entity\OrganisationProject[]
+     */
+    public function getByOrganisationIDs($organisationIDs)
+    {
+        if (count($organisationIDs) == 0)
+            return [];
+
+        return $this->getOrganisationProjectsWhere([
+            "`organisationID` IN (" . implode(', ', $organisationIDs) . ")"
+        ]);
+    }
+
+    /**
      * @param Organisation $organisation
      * @return \int[]
      */

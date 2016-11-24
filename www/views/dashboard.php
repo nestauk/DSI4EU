@@ -1,5 +1,5 @@
 <?php
-/** @var $latestStories \DSI\Entity\Story[] */
+/** @var $updates \DSI\Controller\DashboardController_Update[] */
 /** @var $loggedInUser \DSI\Entity\User */
 /** @var $projectsMember \DSI\Entity\ProjectMember[] */
 /** @var $organisationsMember \DSI\Entity\OrganisationMember[] */
@@ -20,7 +20,7 @@ require __DIR__ . '/header.php';
             <div class="w-row">
                 <div class="w-col w-col-8 w-col-stack">
                     <h1 class="content-h1"><?php _ehtml('My dashboard') ?></h1>
-                    <p class="intro"><?php _e('Stay up to date on news, projects and organisations, and people')?></p>
+                    <p class="intro"><?php _e('Stay up to date on news, projects and organisations, and people') ?></p>
                     <?php /* <p class="header-intro-descr">Dashboard explanation text</p> */ ?>
                 </div>
                 <div class="sidebar w-col w-col-4 w-col-stack">
@@ -256,33 +256,26 @@ require __DIR__ . '/header.php';
                         <div class="dashboard-widget">
                             <h3 class="card-h3"><?php _ehtml('Latest updates') ?></h3>
                             <ul class="w-list-unstyled">
-                                <?php foreach ($latestStories AS $story) { ?>
+                                <?php foreach ($updates AS $update) { ?>
                                     <li>
                                         <div class="w-clearfix card-notification latest-post"
                                              data-ix="notification-interaction">
-                                            <?php /* if ($category = $story->getStoryCategory()) { ?>
-                                                <div class="post-card-category">
-                                                    <?php echo $category->getName(); ?>
-                                                </div>
-                                            <?php } */ ?>
                                             <div class="notification-profile-image post-latest"></div>
                                             <div class="notification-detail post-latest-card">
                                                 <strong>
-                                                    <?php echo show_input($story->getTitle()) ?>
+                                                    <?php echo show_input($update->title) ?>
                                                 </strong>
                                             </div>
                                             <div class="latest-post-p">
-                                                <?php echo show_input(substr(strip_tags($story->getContent()), 0, 170)) ?>
+                                                <?php echo show_input($update->content) ?>
                                             </div>
                                             <div class="notification-interaction">
                                                 <a class="w-button dsi-button notification-decline stop-following"
-                                                   href="<?php echo $urlHandler->blogPost($story) ?>"
-                                                   style="color:#18233f">
+                                                   href="<?php echo $update->link ?>" style="color:#18233f">
                                                     <?php _ehtml('Read') ?>
                                                 </a>
                                             </div>
-                                            <div
-                                                class="post-card-date"><?php echo $story->getDatePublished('jS F Y') ?></div>
+                                            <div class="post-card-date"><?php echo $update->getPublishDate() ?></div>
                                         </div>
                                     </li>
                                 <?php } ?>

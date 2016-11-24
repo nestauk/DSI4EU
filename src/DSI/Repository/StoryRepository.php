@@ -65,6 +65,10 @@ class StoryRepository
         ]);
     }
 
+    /**
+     * @param $story
+     * @return Story
+     */
     private function buildProjectFromData($story)
     {
         $storyObj = new Story();
@@ -141,7 +145,8 @@ class StoryRepository
 
     /**
      * @param $where
-     * @return array
+     * @param array $options
+     * @return Story[]
      */
     private function getObjectsWhere($where, $options = [])
     {
