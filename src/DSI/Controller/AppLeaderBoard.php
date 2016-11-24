@@ -28,9 +28,11 @@ class AppLeaderBoard
                     $user = $userRepo->getById($row['loggedInUserID']);
                     return [
                         'user' => [
+                            'id' => $user->getId(),
                             'name' => $user->getFullName(),
                             'organisation' => $user->getCompany(),
                             'profilePic' => $user->getProfilePicOrDefault(),
+                            'bio' => $user->getBio(),
                         ],
                         'signups' => $row['signups']
                     ];
