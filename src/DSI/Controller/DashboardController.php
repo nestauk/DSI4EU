@@ -420,6 +420,7 @@ class DashboardController
                 $organisationProject->getProject()->getName()
             );
             $update->timestamp = strtotime($organisationProject->getProject()->getCreationTime());
+            $update->link = $this->urlHandler->organisation($organisationProject->getOrganisation());
             return $update;
         }, (new OrganisationProjectRepository())->getByOrganisationIDs(
             (new OrganisationFollowRepository())->getOrganisationIDsForUser($loggedInUser))
