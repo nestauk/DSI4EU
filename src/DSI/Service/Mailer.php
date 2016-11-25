@@ -25,8 +25,6 @@ class Mailer extends \PHPMailer
 
     public function send()
     {
-        $this->addBCC('alecs@inoveb.co.uk');
-
         if(count($this->getToAddresses()) == 0){
             error_log('Empty Recipients');
             return false;
