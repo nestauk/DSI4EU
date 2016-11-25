@@ -197,8 +197,11 @@ class Router
         } elseif (preg_match('<^/' . $langHandler . 'blog\.json$>', $this->pageURL, $matches)) {
             $this->storiesJson($matches);
 
-        } elseif ($this->pageURL === '/story/add' OR $this->pageURL === '/blog/add') {
-            $this->addStory();
+        } elseif (preg_match('<^/' . $langHandler . 'story/add$>', $this->pageURL, $matches)) {
+            $this->addStory($matches);
+
+        } elseif (preg_match('<^/' . $langHandler . 'blog/add$>', $this->pageURL, $matches)) {
+            $this->addStory($matches);
 
         } elseif (preg_match('<^/' . $langHandler . 'story/([0-9]+)(\/.*)?$>', $this->pageURL, $matches)) {
             $this->story($matches);
@@ -251,9 +254,6 @@ class Router
         } elseif (preg_match('<^/' . $langHandler . 'org/editOwner/([0-9]+)$>', $this->pageURL, $matches)) {
             $this->editOrganisationOwner($matches);
 
-            //} elseif (preg_match('<^/' . $langHandler . 'org/([0-9]+)\.json$>', $this->pageURL, $matches)) {
-            //    $this->organisationJsonPage($matches);
-
         } elseif (preg_match('<^/' . $langHandler . 'org/([0-9]+)(\/.*)?$>', $this->pageURL, $matches)) {
             $this->organisation($matches);
 
@@ -289,11 +289,13 @@ class Router
         } elseif (preg_match('<^/' . $langHandler . 'sitemap\.xml$>', $this->pageURL, $matches)) {
             $this->sitemapXml($matches);
 
-// Test
-        } elseif (preg_match('<^/(([a-z]{2})/)?test$>', $this->pageURL, $matches)) {
-            $this->testPage($matches);
-
 // Unfiltered
+        } elseif (preg_match('<^/' . $langHandler . 'manage/tags$>', $this->pageURL, $matches)) {
+            $this->manageTags($matches);
+
+        } elseif (preg_match('<^/' . $langHandler . 'manage/tags\.json$>', $this->pageURL, $matches)) {
+            $this->manageTags($matches, 'json');
+
         } elseif (preg_match('<^/countryRegions/([0-9]+)\.json$>', $this->pageURL, $matches)) {
             $this->countryRegionsListJson($matches);
 
@@ -494,8 +496,10 @@ class Router
         $command->exec();
     }
 
-    private function addStory()
+    private function addStory($matches)
     {
+        $this->setLanguageFromUrl($matches);
+
         $command = new \DSI\Controller\StoryAddController();
         $command->exec();
     }
@@ -942,6 +946,15 @@ class Router
     {
         $command = new \DSI\Controller\ListCountryRegionsController();
         $command->data()->countryID = $matches[1];
+        $command->exec();
+    }
+
+    private function manageTags($matches, $format = 'html')
+    {
+        $this->setLanguageFromUrl($matches);
+
+        $command = new \DSI\Controller\ManageTagsController();
+        $command->responseFormat = $format;
         $command->exec();
     }
 

@@ -64,6 +64,14 @@ class ProjectImpactHelpTagRepository
     }
 
     /**
+     * @return \DSI\Entity\ProjectImpactHelpTag[]
+     */
+    public function getAll()
+    {
+        return $this->getObjectsWhere(["1"]);
+    }
+
+    /**
      * @param int $projectID
      * @return \DSI\Entity\ProjectImpactHelpTag[]
      */

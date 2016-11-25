@@ -335,6 +335,16 @@ class URL
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'message/community-admins';
     }
 
+    public function manageTags()
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'manage/tags';
+    }
+
+    public function manageTagsJson()
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'manage/tags.json';
+    }
+
     public function uploadImage()
     {
         return SITE_RELATIVE_PATH . '/uploadImage.json';

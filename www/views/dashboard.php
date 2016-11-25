@@ -144,6 +144,9 @@ require __DIR__ . '/header.php';
                                     <a class="sidebar-link" href="<?php echo $urlHandler->messageCommunityAdmins() ?>">
                                         <span class="green">-&nbsp;</span>Message all community admins
                                     </a>
+                                    <a class="sidebar-link" href="<?php echo $urlHandler->manageTags() ?>">
+                                        <span class="green">-&nbsp;</span>See all tags
+                                    </a>
                                 </div>
                             </div>
                         <?php } ?>
