@@ -110,7 +110,7 @@ $showAdvancedSearch = (
                                             <label>Country</label>
                                             <select class="w-select" id="field" name="field"
                                                     ng-model="filter.countryID">
-                                                <option value="0">- Select one country -</option>
+                                                <option value="0">- Select a country -</option>
                                                 <option ng-repeat="country in countries" value="{{country.id}}">
                                                     {{country.text}}
                                                 </option>
@@ -124,7 +124,7 @@ $showAdvancedSearch = (
                                                 </option>
                                             </select>
 
-                                            <label>Impact Help</label>
+                                            <label>Who we help</label>
                                             <select class="w-select" id="field" name="field"
                                                     ng-model="filter.helpTagID">
                                                 <option value="0">- Select a tag -</option>
