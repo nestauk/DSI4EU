@@ -364,6 +364,7 @@ if (!isset($urlHandler))
                                                 <p>Please provide a longer description for your project. How would you
                                                     describe your project? What type of work do you do? Who do you
                                                     support?</p>
+                                                <p>Make your profile stand out by adding images or videos of your work</p>
                                                 <textarea
                                                     class="creator-data-entry long-description w-input wide editableTextarea"
                                                     data-name="Project Bio 4" id="description" maxlength="5000"
