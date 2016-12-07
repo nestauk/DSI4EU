@@ -206,9 +206,7 @@ if (!isset($urlHandler))
 
                                                             <label for="email">Which organisations are working on this
                                                                 project?</label>
-                                                            <p>Add the organisations who collaborate on this project
-                                                                below. Leave blank if there are not any other
-                                                                organisations involved.</p>
+                                                            <p>Add the organisations who collaborate on the project below. If the organisation is not listed, please encourage them to create an organisation profile. Leave blank if there are no other organisations involved</p>
                                                             <div id="organisationsSelectBox" class="designSelectBox">
                                                                 <select multiple
                                                                     class="select2-withDesign creator-data-entry end w-input"
