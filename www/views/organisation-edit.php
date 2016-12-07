@@ -10,8 +10,8 @@ require __DIR__ . '/header.php';
 /** @var $orgNetworkTags string[] */
 /** @var $orgProjects int[] */
 
-$leftSideText = "<p>To add your organisation, we need to collect some information about your organisation and its work. We are interested in hearing from both formal and informal groups.</p>";
-$leftSideText .= "<p>Some information is optional (mandatory fields are indicated with an asterisk), but the more you can provide, the better. We will add you as soon as we have some basic data. You will be able to edit and expand on your answers later.</p>";
+$leftSideText = "<p>To add your organisation, we need to understand more about its activities and aims. The more information you provide, the easier it will be for others to find out about your work.</p>";
+$leftSideText .= "<p>Some information is optional (mandatory fields are indicated with an asterisk). You can edit answers later.</p>";
 
 if (!isset($urlHandler))
     $urlHandler = new \DSI\Service\URL();
