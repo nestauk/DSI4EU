@@ -11,8 +11,8 @@ require __DIR__ . '/header.php';
 /** @var $organisations \DSI\Entity\Organisation[] */
 /** @var $projectOrganisations int[] */
 
-$leftSideText = "<p>To add your project, we need to collect some information about your project and its aims. We are interested in hearing from both formal and informal projects.</p>";
-$leftSideText .= "<p>Some information is optional (mandatory fields are indicated with an asterisk), but the more you can provide, the better. We will add you as soon as we have some basic data. You will be able to edit and expand on your answers later.</p>";
+$leftSideText = "<p>To add your project, we need to understand more about its activities and aims. The more information you provide, the easier it will be for others to find out about your work.</p>";
+$leftSideText .= "<p>Some information is optional (mandatory fields are indicated with an asterisk). You can edit answers later.</p>";
 
 if (!isset($urlHandler))
     $urlHandler = new \DSI\Service\URL();
