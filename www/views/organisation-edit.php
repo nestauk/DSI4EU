@@ -325,6 +325,7 @@ if (!isset($urlHandler))
                                                     you
                                                     describe your organisation? What type of work do you do? Who do you
                                                     support?</p>
+                                                <p>Make your profile stand out by adding images or videos of your work.</p>
                                                 <textarea class="creator-data-entry long-description w-input wide"
                                                           data-name="Project Bio 4" id="description" maxlength="5000"
                                                           placeholder="Add an in depth organisation description"
