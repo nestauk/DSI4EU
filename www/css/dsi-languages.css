@@ -1559,6 +1559,10 @@ strong {
   background-color: #f3f3f3;
 }
 
+.section-grey.page-alt {
+  padding-top: 20px;
+}
+
 .image-placeholder {
   height: auto;
   margin-bottom: 50px;
@@ -8670,6 +8674,10 @@ strong {
   padding-left: 0px;
 }
 
+.content-block.alt-block {
+  margin-top: 20px;
+}
+
 .content-h1 {
   padding-top: 75px;
   font-size: 28px;
@@ -8743,6 +8751,10 @@ strong {
 
 .sidebar-link.remove {
   color: #db4343;
+}
+
+.sidebar-link.light {
+  color: #fff;
 }
 
 .footer-black {
@@ -9789,6 +9801,24 @@ strong {
   margin-left: 22px;
   font-size: 22px;
   line-height: 28px;
+}
+
+.section-green {
+  background-color: rgba(29, 201, 160, .94);
+}
+
+.menu-div {
+  display: block;
+  max-width: 1290px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.footer-div {
+  display: block;
+  max-width: 1290px;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 html.w-mod-js *[data-ix="pin-drop"] {
