@@ -1,3 +1,17 @@
+.twitter-block {
+    height:80px;
+}
+
+.homepage-twitter-logo {
+    margin-top:18px;
+    margin-left:29px;
+}
+
+.twitter-text {
+    margin-top:24px;
+    margin-left:10px;
+}
+
 .skill .delete {
     display: none;
 }
