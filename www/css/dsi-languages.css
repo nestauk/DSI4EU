@@ -6739,8 +6739,8 @@ strong {
   margin-right: auto;
   margin-bottom: 0px;
   margin-left: auto;
-  padding-right: 0;
-  padding-left: 0;
+  padding-right: 35px;
+  padding-left: 35px;
 }
 
 .case-study-intro.org {
@@ -9778,8 +9778,9 @@ strong {
 
 .twitter-block {
   height: 75px;
-  border-bottom: 1px solid #ececec;
-  background-color: #fff;
+  border-bottom: 1px solid #222;
+  background-color: #000;
+  color: #fff;
 }
 
 .twitter {
@@ -9791,14 +9792,15 @@ strong {
 
 .homepage-twitter-logo {
   width: 43px;
-  margin-top: 16px;
+  margin-top: 6px;
   margin-left: 40px;
-  opacity: 0.09;
+  opacity: 0.48;
 }
 
 .twitter-text {
-  margin-top: 23px;
+  margin-top: 16px;
   margin-left: 22px;
+  color: #fff;
   font-size: 22px;
   line-height: 28px;
 }
@@ -9819,6 +9821,11 @@ strong {
   max-width: 1290px;
   margin-right: auto;
   margin-left: auto;
+}
+
+.twitter-footer-link {
+  color: rgba(29, 201, 160, .94);
+  font-weight: 400;
 }
 
 html.w-mod-js *[data-ix="pin-drop"] {
@@ -10563,6 +10570,13 @@ html.w-mod-js *[data-ix="closed"] {
     margin-top: 14px;
     margin-left: 0%;
   }
+  .homepage-twitter-logo {
+    margin-top: 17px;
+    margin-left: 25px;
+  }
+  .twitter-text {
+    margin-top: 10px;
+  }
 }
 
 @media (max-width: 767px) {
@@ -10985,6 +10999,17 @@ html.w-mod-js *[data-ix="closed"] {
     height: 340px;
     padding-top: 25px;
     padding-left: 10px;
+  }
+  .twitter {
+    height: 140px;
+  }
+  .homepage-twitter-logo {
+    margin-top: 21px;
+  }
+  .twitter-text {
+    margin-top: 16px;
+    font-size: 16px;
+    line-height: 20px;
   }
 }
 
@@ -11595,6 +11620,13 @@ html.w-mod-js *[data-ix="closed"] {
   }
   .footer-signup {
     width: 100%;
+  }
+  .homepage-twitter-logo {
+    display: none;
+  }
+  .twitter-text {
+    margin-top: 11px;
+    font-size: 13px;
   }
 }
 

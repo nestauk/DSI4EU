@@ -10,7 +10,20 @@ if (!isset($urlHandler))
 
 ?>
 </div>
-
+<!-- twitter block -->
+ <div class="twitter-block">
+    <div class="twitter">
+      <div class="w-row">
+        <div class="w-col w-col-1 w-col-small-1 w-col-tiny-tiny-stack"><img class="homepage-twitter-logo" src="images/twitter-logo-silhouette.png">
+        </div>
+        <div class="w-col w-col-11 w-col-small-11 w-col-tiny-tiny-stack">
+          <p class="twitter-text">To keep in touch with the project and DSI in Europe, you can&nbsp;follow <a href="https://twitter.com/dsi4eu" target="_blank" class="twitter-footer-link">@DSI4EU on Twitter</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- end -->
 <div class="footer-black">
     <div style="max-width:1290px;margin:0 auto;">
     <div class="footer-row w-row">
