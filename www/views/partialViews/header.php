@@ -124,6 +124,7 @@ if (!isset($urlHandler))
         </div>
     </div>
     <div class="navbarnu w-nav" data-animation="over-left" data-collapse="all" data-duration="400">
+        <div class="menu-div">
         <a class="w-nav-brand" href="<?php echo $urlHandler->home() ?>">
             <img class="brand-logo" src="<?php echo SITE_RELATIVE_PATH ?>/images/dark_1.svg">
         </a>
@@ -158,6 +159,7 @@ if (!isset($urlHandler))
             <div class="menu-li menu-search"><?php _e('Search')?></div>
             <img class="search-icon" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-search.png">
         </a>
+            </div>
     </div>
 
 <?php /*
