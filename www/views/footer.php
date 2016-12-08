@@ -10,7 +10,7 @@ if (!isset($urlHandler))
 
 ?>
 </div>
-
+<div style="max-width:1290px;margin:0 auto;">
 <div class="footer-black">
     <div class="footer-row w-row">
         <div class="w-col w-col-4">
@@ -119,6 +119,9 @@ if (!isset($urlHandler))
             </div>
         </div>
     </div>
+    
+</div>
+    
     <div class="centre footer-small-print">Nesta is a registered charity in England and Wales 1144091 and Scotland
         SC042833. Our main address is 1 Plough Place, London, EC4A 1DE
     </div>
