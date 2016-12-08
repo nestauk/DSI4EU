@@ -10,8 +10,9 @@ if (!isset($urlHandler))
 
 ?>
 </div>
-<div style="max-width:1290px;margin:0 auto;">
+
 <div class="footer-black">
+    <div style="max-width:1290px;margin:0 auto;">
     <div class="footer-row w-row">
         <div class="w-col w-col-4">
             <a class="w-inline-block" href="<?php echo $urlHandler->home() ?>">
