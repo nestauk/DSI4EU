@@ -8,12 +8,7 @@ require __DIR__ . '/header.php'
         <div class="w-row">
             <div class="w-col w-col-8 w-col-stack">
                 <h1 class="content-h1">The DSI4EU project</h1>
-                <p class="intro">Digital technologies and the internet have transformed many
-                    areas of business – from Google and Amazon to Airbnb and Kickstarter. Huge sums of public money have
-                    supported digital innovation in business, as well as in fields ranging from the military to
-                    espionage. But there has been much less systematic support for innovations that use digital
-                    technology to address social challenges.</p>
-                <p>Across Europe a growing movement of people developing inspiring digital solutions to social challenges. We call this digital social innovation (DSI).</p>
+                <p class="intro">Across Europe a growing movement of people developing inspiring digital solutions to social challenges. We call this digital social innovation (DSI).</p>
                 <p>These range from social networks for those living with chronic health conditions, to online platforms for citizen participation in policymaking, to using open data to create more transparency about public spending.</p>
                 <p>This site is a community for digital social innovators in Europe. People, projects and organisations interested in DSI can use the site to showcase their work, learn about DSI, find collaborators for projects and find information on events and funding opportunities.</p>
                 <p>This DSI project is a continuation of a 2012-2014 project that mapped and defined the DSI community in Europe. Alongside the platform, we will be carrying out research, recommending policy, developing a sustainability toolkit and holding various events across Europe.</p>
