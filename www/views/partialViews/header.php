@@ -124,7 +124,7 @@ if (!isset($urlHandler))
         </div>
     </div>
     <div class="navbarnu w-nav" data-animation="over-left" data-collapse="all" data-duration="400">
-        <div class="menu-div">
+        <div class="menu-div" style="max-width:1290px; margin: 0 auto;">
         <a class="w-nav-brand" href="<?php echo $urlHandler->home() ?>">
             <img class="brand-logo" src="<?php echo SITE_RELATIVE_PATH ?>/images/dark_1.svg">
         </a>
