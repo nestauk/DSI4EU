@@ -14,7 +14,7 @@ if (!isset($urlHandler))
  <div class="twitter-block">
     <div class="twitter">
       <div class="w-row">
-        <div class="w-col w-col-1 w-col-small-1 w-col-tiny-tiny-stack"><img class="homepage-twitter-logo" src="images/twitter-logo-silhouette.png">
+        <div class="w-col w-col-1 w-col-small-1 w-col-tiny-tiny-stack"><img class="homepage-twitter-logo" src="https://digitalsocial.eu/images/twitter-logo-silhouette.png">
         </div>
         <div class="w-col w-col-11 w-col-small-11 w-col-tiny-tiny-stack">
           <p class="twitter-text">To keep in touch with the project and DSI in Europe, you can&nbsp;follow <a href="https://twitter.com/dsi4eu" target="_blank" class="twitter-footer-link">@DSI4EU on Twitter</a>
