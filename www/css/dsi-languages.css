@@ -8848,7 +8848,7 @@ strong {
 
 .footer-partner-logo {
   width: 131px;
-  margin-top: 15px;
+  margin-top: -15px;
 }
 
 .footer-partner-logo.nesta {
