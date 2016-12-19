@@ -116,7 +116,7 @@ if (!isset($urlHandler))
                 <div class="footer-logo-col w-clearfix w-col w-col-4">
                     <a class="footer-partner-link w-inline-block" href="http://nesta.org.uk" target="_blank">
                         <img class="footer-partner-logo nesta"
-                             src="<?php echo SITE_RELATIVE_PATH ?>/images/nesta-6a9b5fe999e8323b379ccc0d8e70290f.png">
+                             src="<?php echo SITE_RELATIVE_PATH ?>/images/nesta-white-220px.png">
                     </a>
                 </div>
                 <div class="footer-logo-col w-clearfix w-col w-col-4">
@@ -137,7 +137,7 @@ if (!isset($urlHandler))
 </div>
     
     <div class="centre footer-small-print">Nesta is a registered charity in England and Wales 1144091 and Scotland
-        SC042833. Our main address is 1 Plough Place, London, EC4A 1DE
+        SC042833. Our main address is 58 Victoria Embankment, London, EC4Y 0DS
     </div>
 </div>
 

@@ -9,7 +9,7 @@ require __DIR__ . '/header.php' ?>
                 <p class="intro">DSI4EU is a project delivered by:</p>
                 <div class="partner-block w-row">
                     <div class="w-col w-col-3">
-                        <img class="partner-logo-colour" src="<?php echo SITE_RELATIVE_PATH ?>/images/nesta.png">
+                        <img class="partner-logo-colour" src="<?php echo SITE_RELATIVE_PATH ?>/images/nesta-colour-308px.png">
                     </div>
                     <div class="w-col w-col-9">
                         <p><strong>Nesta</strong> is the UK's innovation foundation. We help people and organisations
