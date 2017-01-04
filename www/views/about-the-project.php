@@ -35,7 +35,7 @@ require __DIR__ . '/header.php'
                    
                 </ul>
                 <p>All of the data on the digitalsocial.eu platform is open and accessible, and all the source code behind the platform is available open-source on GitHub. The digitalsocial.eu platform is free to use. </p>
-                <p class="bold-p">Alongside the digitalsocial.eu platform, the DSI4EU project is:</p>
+                <p class="bold-p"><strong>Alongside the digitalsocial.eu platform, the DSI4EU project is:</strong></p>
                 <ul>
                     <li>researching what the DSI landscape in  Europe looks like, understanding routes to growth and scale, and exploring how DSI projects and organisations understand their impact;
                     </li>
