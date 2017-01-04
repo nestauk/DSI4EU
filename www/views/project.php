@@ -152,7 +152,7 @@ require __DIR__ . '/header.php';
                     </div>
 
                     <div ng-show="project.impactTagsA.length" ng-cloak>
-                        <h3 class="cse side-bar-h3"><?php _ehtml('Who we help') ?></h3>
+                        <h3 class="cse side-bar-h3"><?php _ehtml('Areas of impact') ?></h3>
                         <a href="<?php echo $urlHandler->projects() ?>?helpTag={{tag.id}}" class="tag"
                            ng-repeat="tag in project.impactTagsA" ng-bind="tag.name"></a>
                     </div>
