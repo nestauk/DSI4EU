@@ -99,10 +99,8 @@ if (!isset($urlHandler))
                                                                    type="text"/>
                                                             <i>please include http://</i>
                                                             <br/><br/>
-                                                            <label>Who and what we support</label>
-                                                            <p>
-                                                                Please add tags which describe who and what your project
-                                                                supports
+                                                            <label>Areas of impact</label>
+                                                            <p>In which area(s) of society is your project seeking to have impact? For example: education, democracy, culture, health, work, regeneration, environment, science, finance.
                                                             </p>
                                                             <div class="customSelect2">
                                                                 <select class="select2 creator-data-entry end w-input"
