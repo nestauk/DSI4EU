@@ -9,41 +9,44 @@ require __DIR__ . '/header.php'
             <div class="w-col w-col-8 w-col-stack">
                 <h1 class="content-h1">The DSI4EU project</h1>
                 <p class="intro">Across Europe there is a growing movement of people developing inspiring digital solutions to social challenges. We call this digital social innovation (DSI).</p>
-                <p>These range from social networks for those living with chronic health conditions, to online platforms for citizen participation in policymaking, to using open data to create more transparency about public spending.</p>
-                <p>This site is a community for digital social innovators in Europe. People, projects and organisations interested in DSI can use the site to showcase their work, learn about DSI, find collaborators for projects and find information on events and funding opportunities.</p>
-                <p>This DSI project is a continuation of a 2012-2014 project that mapped and defined the DSI community in Europe. Alongside the platform, we will be carrying out research, recommending policy, developing a sustainability toolkit and holding various events across Europe.</p>
-                <!-- <p>Newsletter section</p> -->
+                <p>These digital solutions have developed thanks to big advances in technology, such as the open source and open data movements, low-cost open hardware, crowdsourcing and Internet of Things (IoT). By empowering citizens and engaging them in civic action, they provide new ways of building social movements, delivering public services and creating social impact in fields as diverse as healthcare, education, democracy, environment, transport and housing.</p>
+                <p>We believe that DSI has the potential to dramatically improve the way our public services, communities and businesses work. The Digital Social Innovation for Europe (DSI4EU) project seeks to make this potential a reality.</p>
+               <!--  <p>This DSI project is a continuation of a 2012-2014 project that mapped and defined the DSI community in Europe. Alongside the platform, we will be carrying out research, recommending policy, developing a sustainability toolkit and holding various events across Europe.</p>
+                <!-- <p>Newsletter section</p> 
                 <a class="log-in-link long read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
                    href="http://digitalsocial.eu/open-data-research-and-resources">
                     <div class="login-li long menu-li readmore-li">Read more about previous research into mapping and
                         defining DSI in Europe
                     </div>
                     <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
-                </a>
-                <p class="bold-p"><strong>Specifically the project:</strong>
+                </a> -->
+                <p>At the heart of the project is the digitalsocial.eu platform, which has four main functions.</p>
+                <p class="bold-p"><strong>Users can:</strong>
                 </p>
                 <ul>
-                    <li>Creates an online resource on digitalsocial.eu that enables those interested in, and working
-                        on, digital social innovation in Europe to learn about it, showcase their work, find new
-                        collaborators and learn about events and new funding opportunities.
+                    <li>showcase their work and tag their organisations as part of networks like research alliances or membership bodies. 
                     </li>
-                    <li>
-                        Engages the existing communities of digital social innovators in the network.
+                    <li>explore the DSI community and search organisations and projects to understand what else is going on in the world of DSI, who they need to be speaking to, and who might be a potential partner or collaborator. 
                     </li>
-                    <li>
-                        Carries out research on how to grow DSI in Europe.
+                    <li>identify funding and support opportunities, along with DSI-related events, across Europe. They can also submit and promote their own event to the DSI community. 
                     </li>
-                    <li>Uses insights about the European DSI network to develop a set of recommendations about how
-                        policymakers and funders can best support, engage with and make the most of DSI and ensure it
-                        can continue to grow in the future.
+                    <li class="li-bottom">learn about what is happening across Europe through case studies and blogs focusing on DSI pioneers and their projects, and current trends. 
                     </li>
-                    <li class="li-bottom">
-                        Provides a set of tools that supports people and organisations interested in
-                        developing digital solutions that address social challenges.
-                    </li>
+                   
                 </ul>
-                <p>DSI4EU is supported by the European Union and funded under the Horizon 2020 Programme. Grant
-                    agreement no 688192.</p>
+                <p>All of the data on the digitalsocial.eu platform is open and accessible, and all the source code behind the platform is available open-source on GitHub. The digitalsocial.eu platform is free to use. </p>
+                <p>Alongside the digitalsocial.eu platform, the DSI4EU project is:</p>
+                <ul>
+                    <li>researching what the DSI landscape in  Europe looks like, understanding routes to growth and scale, and exploring how DSI projects and organisations understand their impact;
+                    </li>
+                    <li>holding a number of events across Europe to bring together the DSI community and influence policy;
+                    </li>
+                    <li>developing a set of policy recommendations to support DSI; and
+                    </li>
+                    <li class="li-bottom">creating a set of tools to support digital social innovators, especially those involved in the open hardware movement.
+                    </li>
+                   
+                </ul>
                 <a class="log-in-link long next-page read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
                    href="<?php echo $urlHandler->partners() ?>">
                     <div class="login-li long menu-li readmore-li">Find out about our partners</div>
