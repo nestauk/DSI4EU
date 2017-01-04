@@ -124,7 +124,7 @@ $showAdvancedSearch = (
                                                 </option>
                                             </select>
 
-                                            <label>Who we help</label>
+                                            <label>Areas of impact</label>
                                             <select class="w-select" id="field" name="field"
                                                     ng-model="filter.helpTagID">
                                                 <option value="0">- Select a tag -</option>
