@@ -47,6 +47,7 @@ require __DIR__ . '/header.php'
                     </li>    
                    
                 </ul>
+                <p>DSI4EU is being led by Nesta (UK) and delivered in partnership with the Waag Society (NL) and SUPSI (CH). The project is supported by the European Union and funded under the Horizon 2020 Programme, grant agreement no 688192.</p>
                 <a class="log-in-link long next-page read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
                    href="<?php echo $urlHandler->partners() ?>">
                     <div class="login-li long menu-li readmore-li">Find out about our partners</div>
