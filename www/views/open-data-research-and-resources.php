@@ -60,9 +60,10 @@ require __DIR__ . '/header.php';
         <p class="bold-p"><strong>If you are interested in further exploring the data behind DSI4EU you can:</strong>
         </p>
         <ul>
-            <li><strong>Access </strong>all the anonymised data we have captured on DSI in Europe via the DSI4EU open
-                data set. The data will include information on DSI projects and organisations that have been registered
-                on this site. This will be available in the next few months
+            <li><p><strong>Access </strong>all the anonymised data we have captured on DSI in Europe via the DSI4EU open
+                data set. The data includes information on DSI projects and organisations that have been registered
+                on this site.</p>
+                <p><strong>Projects data:</strong> <a href="https://digitalsocial.eu/export/projects\.json">json</a>, <a href="https://digitalsocial.eu/export/projects\.csv">csv</a>, <a href="https://digitalsocial.eu/export/projects\.xml">xml</a> <strong>Organisations data:</strong> <a href="https://digitalsocial.eu/export/organisations\.json">json</a>, <a href="https://digitalsocial.eu/export/organisations\.csv">csv</a>, <a href="https://digitalsocial.eu/export/organisations\.xml">xml</a></p>
             </li>
             <li><strong>Download</strong>&nbsp;the source code. All of the code used to develop this site will be shared
                 on a <strong>Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</strong> on
