@@ -18,7 +18,7 @@ require __DIR__ . '/header.php' ?>
                             endowment from the National Lottery. Nesta is a registered charity in England and Wales
                             1144091 and Scotland SC042833. </p>
                         <a class="log-in-link long read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
-                           href="http://nesta.org.uk" target="_blank">
+                           href="http://www.nesta.org.uk/" target="_blank">
                             <div class="login-li long menu-li readmore-li">Nesta.org.uk</div>
                             <img class="login-arrow"
                                  src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
