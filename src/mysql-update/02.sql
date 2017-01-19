@@ -1,1 +1,0 @@
-ALTER TABLE `projects` ADD `shortDescription` VARCHAR(1000) NOT NULL AFTER `name`;

@@ -43,4 +43,4 @@ class CliRouter
 }
 
 $router = new CliRouter();
-return $router->exec($argv);
+$router->exec($argv);

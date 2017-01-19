@@ -1061,4 +1061,4 @@ if (substr($pageURL, 0, strlen(SITE_RELATIVE_PATH)) == SITE_RELATIVE_PATH) {
 $router = new Router();
 if (MUST_USE_HTTPS)
     $router->forceHTTPS();
-return $router->exec($pageURL);
+$router->exec($pageURL);

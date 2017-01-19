@@ -1,1 +1,0 @@
-ALTER TABLE `projects` ADD `socialImpact` VARCHAR(10000) NOT NULL AFTER `logo`;
