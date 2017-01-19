@@ -13,7 +13,7 @@ if (!isset($urlHandler))
 
     <div class="creator page-header">
         <div class="container-wide header">
-            <h1 class="light page-h1">Set your password</h1>
+            <h1 class="light page-h1"><?php _ehtml('Set your password')?></h1>
         </div>
     </div>
     <div class="creator section-white" style="margin-top:0" ng-controller="ResetPasswordController">
@@ -59,8 +59,8 @@ if (!isset($urlHandler))
                                                         <br/>
                                                         <button type="submit"
                                                                 class="tab-button-2 tab-button-next w-button"
-                                                                ng-bind="loading ? 'Loading...' : 'Save password'"
-                                                                ng-disabled="loading">Save password
+                                                                ng-bind="loading ? '<?php _ehtml('Loading')?>...' : '<?php _ehtml('Save password')?>'"
+                                                                ng-disabled="loading"><?php _ehtml('Save password')?>
                                                         </button>
                                                     </form>
                                                 </div>

@@ -13,7 +13,7 @@ if (!isset($urlHandler))
 
     <div class="creator page-header">
         <div class="container-wide header">
-            <h1 class="light page-h1">Edit Project Owner</h1>
+            <h1 class="light page-h1"><?php _ehtml('Edit Project Owner') ?></h1>
         </div>
     </div>
     <div class="creator section-white" ng-controller="ProjectEditOwnerController">
@@ -25,15 +25,16 @@ if (!isset($urlHandler))
                             <form id="email-form-3" name="email-form-3" ng-submit="save()">
                                 <div class="w-row">
                                     <div class="creator-col w-col w-col-4">
-                                        <h2>Project Owner: </h2>
+                                        <h2><?php _ehtml('Project Owner') ?>: </h2>
                                     </div>
                                     <div class="creator-col creator-col-right w-col w-col-8">
                                         <div class="w-form">
                                             <div class="w-row">
                                                 <div class="w-col w-col-6 w-col-stack">
                                                     <div class="padding-right-50">
-                                                        <select id="newOwner" name="" class="select2" style="width:300px"
-                                                                data-placeholder="Select new owner">
+                                                        <select id="newOwner" name="" class="select2"
+                                                                style="width:300px"
+                                                                data-placeholder="<?php _ehtml('Select new owner') ?>">
                                                             <option></option>
                                                             <?php foreach ($users AS $user) { ?>
                                                                 <option value="<?php echo $user->getId() ?>"
@@ -48,8 +49,8 @@ if (!isset($urlHandler))
                                                     <div class="padding-left-50">
                                                         <button type="submit"
                                                                 class="tab-button-2 tab-button-next w-button"
-                                                                ng-bind="loading ? 'Loading...' : 'Save'"
-                                                                ng-disabled="loading">Save
+                                                                ng-bind="loading ? '<?php _ehtml('Loading') ?>...' : '<?php _ehtml('Save') ?>'"
+                                                                ng-disabled="loading"><?php _ehtml('Save') ?>
                                                         </button>
                                                     </div>
                                                 </div>

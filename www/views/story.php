@@ -13,27 +13,6 @@ require __DIR__ . '/header.php';
         <div class="container-wide post-hero">
             <h1 class="post-hero-title"><?php echo show_input($story->getTitle()) ?></h1>
             <div class="post-single-date"><?php echo $story->getDatePublished('jS F Y') ?></div>
-            <?php /*
-            <div class="breadcrumb-container">
-                <div class="bread-crumbs w-clearfix">
-                    <a class="breadcrumb-root w-inline-block" href="<?php echo $urlHandler->blogPosts() ?>">
-                        <div class="breadcrumb-link">Stories</div>
-                        <div class="arrow-right"></div>
-                    </a>
-                    <a class="breadcrumb-root path w-inline-block" href="#">
-                        <div class="arrow-bottom-left"></div>
-                        <div class="arrow-top-left"></div>
-                        <div class="breadcrumb-link">
-                            <?php
-                            echo show_input(substr($story->getTitle(), 0, 35));
-                            if (strlen($story->getTitle()) > 35) echo '...';
-                            ?>
-                        </div>
-                        <div class="arrow-right"></div>
-                    </a>
-                </div>
-            </div>
-            */ ?>
         </div>
     </div>
 
@@ -47,19 +26,13 @@ require __DIR__ . '/header.php';
                                  style="background-image: url('<?php echo SITE_RELATIVE_PATH . '/images/users/profile/' . $author->getProfilePicOrDefault() ?>');">
                             </div>
                             <div class="single-post-author-name">
-                                Written by <?php echo show_input($author->getFullName()) ?>
+                                <?php echo show_input(sprintf(
+                                    _html('Written by %s'),
+                                    $author->getFullName()
+                                )) ?>
                             </div>
                         </div>
                     </div>
-                    <?php /* if ($category = $story->getStoryCategory()) { ?>
-                        <div class="w-col w-col-6">
-                            <div class="w-clearfix">
-                                <div class="single-post-category">
-                                    <?php echo $category->getName() ?>
-                                </div>
-                            </div>
-                        </div>
-                    <?php } */ ?>
                 </div>
             </div>
         </div>
@@ -88,7 +61,7 @@ require __DIR__ . '/header.php';
                             <?php } */ ?>
                         <?php } ?>
 
-                        <h2 class="sidebar-h2">Latest posts</h2>
+                        <h2 class="sidebar-h2"><?php _ehtml('Latest posts') ?></h2>
                         <ul class="w-list-unstyled">
                             <?php foreach ($stories AS $story) { ?>
                                 <li class="latest-post-li-enc">
@@ -96,10 +69,10 @@ require __DIR__ . '/header.php';
                                        href="<?php echo $urlHandler->blogPost($story) ?>">
                                         <div class="w-row">
                                             <div class="w-col w-col-4 w-col-stack">
-                                                <div
-                                                    class="latest-post-date"><?php echo $story->getDatePublished('jS F') ?></div>
-                                                <div
-                                                    class="latest-post-year"><?php echo $story->getDatePublished('Y') ?></div>
+                                                <div class="latest-post-date">
+                                                    <?php echo $story->getDatePublished('jS F') ?></div>
+                                                <div class="latest-post-year">
+                                                    <?php echo $story->getDatePublished('Y') ?></div>
                                             </div>
                                             <div class="w-col w-col-8 w-col-stack">
                                                 <div class="latest-post-title">

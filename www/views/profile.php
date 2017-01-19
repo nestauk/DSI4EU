@@ -27,7 +27,7 @@ require __DIR__ . '/header.php';
                         <?php echo show_input($user->getCompany()) ?>
                     </div>
                     <p class="intro"><?php echo nl2br(show_input($user->getBio())) ?></p>
-                    <h3>Location</h3>
+                    <h3><?php _ehtml('Location')?></h3>
                     <p>
                         <?php echo show_input($user->getCityName()) ?>
                         <?php if ($user->getCityName() != '' AND $user->getCountryName() != '') echo ', '; ?>
@@ -41,9 +41,9 @@ require __DIR__ . '/header.php';
                         <h1 class="content-h1 side-bar-space-h1">Actions</h1>
                         <?php if ($canManageUsers) { ?>
                             <a class="sidebar-link" href="<?php echo $urlHandler->editUserProfile($user) ?>">
-                                <span class="green">-&nbsp;</span>Edit profile</a>
+                                <span class="green">-&nbsp;</span><?php _ehtml('Edit Profile')?></a>
                             <a class="sidebar-link" href="<?php echo $urlHandler->editUserPrivileges($user) ?>">
-                                <span class="green">-&nbsp;</span>Edit privileges</a>
+                                <span class="green">-&nbsp;</span><?php _ehtml('Edit privileges')?></a>
                             <?php if ($user->isDisabled()) { ?>
                                 <a class="sidebar-link remove" href="#" ng-click="setDisabled(false)">
                                     <span class="green">- </span>Enable user</a>
@@ -53,7 +53,7 @@ require __DIR__ . '/header.php';
                             <?php } ?>
                         <?php } ?>
                         <a class="sidebar-link remove" href="#" ng-click="report()">
-                            <span class="green">- </span>Report user</a>
+                            <span class="green">- </span><?php _ehtml('Report user')?></a>
                     <?php } ?>
                 </div>
             </div>
@@ -65,13 +65,8 @@ require __DIR__ . '/header.php';
                     <div class="w-col w-col-4 w-col-stack">
                         <div class="info-card">
                             <?php if ($userLinks) { ?>
-                                <h3 class="card-h info-h">Contact me</h3>
+                                <h3 class="card-h info-h"><?php _ehtml('Contact me')?></h3>
                                 <ul class="w-list-unstyled">
-                                    <?php /*
-                                    <li class="profile-contact-link">
-                                        <a class="link profile-contact-link" href="#">Daniel.pettifer@nesta.org.uk</a>
-                                    </li>
-                                    */ ?>
                                     <?php foreach ($userLinks AS $link) { ?>
                                         <li class="profile-contact-link">
                                             <a <?php if (!$user->isCommunityAdmin() AND !$user->isEditorialAdmin()) echo 'rel="nofollow"' ?>
@@ -83,7 +78,7 @@ require __DIR__ . '/header.php';
                                 </ul>
                             <?php } ?>
                             <div ng-show="skills" ng-cloak>
-                                <h3 class="card-h info-h">My skills:</h3>
+                                <h3 class="card-h info-h"><?php _ehtml('My skills')?>:</h3>
                                 <div class="tags-block">
                                     <div class="tag" ng-repeat="skill in skills">
                                         <div ng-bind="skill"></div>
@@ -94,7 +89,7 @@ require __DIR__ . '/header.php';
                     </div>
                     <div class="w-col w-col-4 w-col-stack">
                         <div class="info-card">
-                            <h3 class="card-h info-h">Projects i'm involved with</h3>
+                            <h3 class="card-h info-h"><?php _ehtml("Projects i'm involved with")?></h3>
                             <div class="list-items">
                                 <a class="partner-link w-inline-block" href="{{project.url}}"
                                    ng-repeat="project in user.projects" ng-cloak>
@@ -112,7 +107,7 @@ require __DIR__ . '/header.php';
                                 <div class="join-project">
                                     <a class="btn btn-join w-button" <?php /* data-ix="show-join-project" */ ?>
                                        href="<?php echo $urlHandler->editUserProfile($loggedInUser) ?>#step3">
-                                        Add new project +
+                                        <?php _ehtml('Add new project')?> +
                                     </a>
                                 </div>
                             <?php } ?>
@@ -120,7 +115,7 @@ require __DIR__ . '/header.php';
                     </div>
                     <div class="w-col w-col-4 w-col-stack">
                         <div class="info-card">
-                            <h3 class="card-h3">Organisations i'm involved with</h3>
+                            <h3 class="card-h3"><?php _ehtml("Organisations i'm involved with")?></h3>
                             <div class="list-items">
                                 <a class="partner-link w-inline-block" href="{{organisation.url}}"
                                    ng-repeat="organisation in user.organisations" ng-cloak>
@@ -138,7 +133,7 @@ require __DIR__ . '/header.php';
                                 <div class="join-project">
                                     <a class="btn btn-join w-button" <?php /* data-ix="show-join-organisation" */ ?>
                                        href="<?php echo $urlHandler->editUserProfile($loggedInUser) ?>#step3">
-                                        Join organisation +
+                                        <?php _ehtml('Join Organisation')?> +
                                     </a>
                                 </div>
                             <?php } ?>
@@ -149,13 +144,12 @@ require __DIR__ . '/header.php';
         </div>
 
         <?php if ($isOwner) { ?>
-
             <div class="join-project-modal modal">
                 <div class="modal-container">
                     <div class="modal-helper">
                         <div class="modal-content">
                             <h1 class="centered" style="padding-top:125px">
-                                Join project
+                                Join Project
                             </h1>
                             <div class="w-form">
                                 <form ng-submit="joinProject.submit()" id="joinProjectForm" style="text-align:center">

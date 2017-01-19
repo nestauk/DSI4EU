@@ -11,8 +11,8 @@ require __DIR__ . '/header.php';
 /** @var $organisations \DSI\Entity\Organisation[] */
 /** @var $projectOrganisations int[] */
 
-$leftSideText = "<p>To add your project, we need to understand more about its activities and aims. The more information you provide, the easier it will be for others to find out about your work.</p>";
-$leftSideText .= "<p>Some information is optional (mandatory fields are indicated with an asterisk). You can edit answers later.</p>";
+$leftSideText = "<p>" . _html('To add your project, we need to understand more about its activities and aims. The more information you provide, the easier it will be for others to find out about your work.') . "</p>";
+$leftSideText .= "<p>" . _html('Some information is optional (mandatory fields are indicated with an asterisk). You can edit answers later.') . "</p>";
 
 if (!isset($urlHandler))
     $urlHandler = new \DSI\Service\URL();
@@ -24,7 +24,7 @@ if (!isset($urlHandler))
         <div class="creator page-header">
             <div class="container-wide header">
                 <h1 class="light page-h1">
-                    Edit project -
+                    <?php _ehtml('Edit project') ?> -
                     <a href="<?php echo $urlHandler->project($project) ?>" ng-bind="project.name"></a>
                 </h1>
             </div>
@@ -37,22 +37,22 @@ if (!isset($urlHandler))
                             <a class="step-tab tab-link-1 w-inline-block w-tab-link"
                                ng-class="{'w--current': currentTab == 'step1'}" data-w-tab="Tab 1"
                                ng-click="currentTab = 'step1'">
-                                <div>1 - Project details</div>
+                                <div>1 - <?php _ehtml('Project details') ?></div>
                             </a>
                             <a class="step-tab tab-link-2 w-inline-block w-tab-link"
                                ng-class="{'w--current': currentTab == 'step2'}" data-w-tab="Tab 2"
                                ng-click="currentTab = 'step2'">
-                                <div>2 - Project duration & location</div>
+                                <div>2 - <?php _ehtml('Project duration & location') ?></div>
                             </a>
                             <a class="step-tab tab-link-3 w-inline-block w-tab-link"
                                ng-class="{'w--current': currentTab == 'step3'}" data-w-tab="Tab 3"
                                ng-click="currentTab = 'step3'">
-                                <div>3 - Project Description</div>
+                                <div>3 - <?php _ehtml('Project Description') ?></div>
                             </a>
                             <a class="step-tab tab-link-4 w-inline-block w-tab-link"
                                ng-class="{'w--current': currentTab == 'step4'}" data-w-tab="Tab 4" id="tab-four"
                                ng-click="currentTab = 'step4'">
-                                <div>4 - Publish your project</div>
+                                <div>4 - <?php _ehtml('Publish your project') ?></div>
                             </a>
                         </div>
                         <div class="w-tab-content">
@@ -61,18 +61,18 @@ if (!isset($urlHandler))
                                 <form id="email-form-3" name="email-form-3" ng-submit="submitStep1()">
                                     <div class="tabbed-nav-buttons w-clearfix">
                                         <input type="submit" class="tab-button-2 tab-button-next w-button"
-                                               ng-value="loading ? 'Loading...' : 'Next'"
+                                               ng-value="loading ? '<?php _ehtml('Loading') ?>...' : '<?php _ehtml('Next') ?>'"
                                                ng-disabled="loading"
-                                               value="Next"/>
+                                               value="<?php _ehtml('Next') ?>"/>
                                         <button type="button" class="tab-button-2 tab-button-next w-button"
-                                                ng-bind="loading ? 'Loading...' : 'Save'"
+                                                ng-bind="loading ? '<?php _ehtml('Loading') ?>...' : '<?php _ehtml('Save') ?>'"
                                                 ng-click="submitStep1({proceed: false})"
-                                                ng-disabled="loading">Save
+                                                ng-disabled="loading"><?php _ehtml('Save') ?>
                                         </button>
                                     </div>
                                     <div class="w-row">
                                         <div class="creator-col w-col w-col-4">
-                                            <h2>1 - Project Details</h2>
+                                            <h2>1 - <?php _ehtml('Project details') ?></h2>
                                             <?php echo $leftSideText ?>
                                         </div>
                                         <div class="creator-col creator-col-right w-col w-col-8">
@@ -80,7 +80,7 @@ if (!isset($urlHandler))
                                                 <div class="w-row">
                                                     <div class="w-col w-col-6 w-col-stack">
                                                         <div class="padding-right-50">
-                                                            <label for="name">Project name * </label>
+                                                            <label for="name"><?php _ehtml('Project name') ?> * </label>
                                                             <input class="creator-data-entry w-input"
                                                                    data-name="Name" id="name" maxlength="256"
                                                                    name="name" placeholder="Project Name"
@@ -90,23 +90,21 @@ if (!isset($urlHandler))
                                                                  ng-bind="errors.name"></div>
                                                             <br/>
 
-                                                            <label for="email">Project website</label>
-                                                            <input class="creator-data-entry w-input"
-                                                                   data-name="Email" id="email" maxlength="256"
-                                                                   name="email"
-                                                                   placeholder="http://"
-                                                                   ng-model="project.url"
-                                                                   type="text"/>
-                                                            <i>please include http://</i>
+                                                            <label for="email"><?php _ehtml('Project website') ?></label>
+                                                            <input class="creator-data-entry w-input" data-name="Email"
+                                                                   id="email" maxlength="256" name="email" type="text"
+                                                                   placeholder="http://" ng-model="project.url"/>
+                                                            <i><?php _ehtml('please include http://') ?></i>
                                                             <br/><br/>
-                                                            <label>Areas of impact</label>
-                                                            <p>In which area(s) of society is your project seeking to have impact? For example: education, democracy, culture, health, work, regeneration, environment, science, finance.
+                                                            <label><?php _ehtml('Areas of impact') ?></label>
+                                                            <p>
+                                                                <?php _ehtml('In which area(s) of society is your project seeking to have impact? For example: education, democracy, culture, health, work, regeneration, environment, science, finance.') ?>
                                                             </p>
                                                             <div class="customSelect2">
                                                                 <select class="select2 creator-data-entry end w-input"
                                                                         id="impact-tags-a" style="width:100%;border:0"
                                                                         multiple data-tags="true"
-                                                                        data-placeholder="Write tags">
+                                                                        data-placeholder="<?php _ehtml('Write tags') ?>">
                                                                     <?php foreach ($impactTags AS $tag) { ?>
                                                                         <option value="<?php echo $tag->getName() ?>"
                                                                             <?php if (in_array($tag->getName(), $projectImpactTagsA)) echo 'selected' ?>><?php
@@ -117,15 +115,15 @@ if (!isset($urlHandler))
                                                             </div>
                                                             <br/><br/>
 
-                                                            <label>Your focus</label>
+                                                            <label><?php _ehtml('Your focus') ?></label>
                                                             <p>
-                                                                Please tag the category or categories of DSI to which
-                                                                your project belongs.
+                                                                <?php _ehtml('Please tag the category or categories of DSI to which your project belongs.') ?>
                                                             </p>
                                                             <div class="customSelect2">
                                                                 <select class="select2 creator-data-entry end w-input"
                                                                         id="impact-tags-b" style="width:100%;border:0"
-                                                                        multiple data-placeholder="Write tags">
+                                                                        multiple
+                                                                        data-placeholder="<?php _ehtml('Write tags') ?>">
                                                                     <?php foreach ($dsiFocusTags AS $tag) { ?>
                                                                         <option value="<?php echo $tag->getName() ?>"
                                                                             <?php if (in_array($tag->getName(), $projectImpactTagsB)) echo 'selected' ?>><?php
@@ -136,16 +134,15 @@ if (!isset($urlHandler))
                                                             </div>
                                                             <br/><br/>
 
-                                                            <label>Your technology</label>
+                                                            <label><?php _ehtml('Your technology') ?></label>
                                                             <p>
-                                                                Please add tags which describe the technology your
-                                                                project uses.
+                                                                <?php _ehtml('Please add tags which describe the technology your project uses.') ?>
                                                             </p>
                                                             <div class="customSelect2">
                                                                 <select class="select2 creator-data-entry end w-input"
                                                                         id="impact-tags-c" style="width:100%;border:0"
                                                                         multiple data-tags="true"
-                                                                        data-placeholder="Write tags">
+                                                                        data-placeholder="<?php _ehtml('Write tags') ?>">
                                                                     <?php foreach ($impactTags AS $tag) { ?>
                                                                         <option value="<?php echo $tag->getName() ?>"
                                                                             <?php if (in_array($tag->getName(), $projectImpactTagsC)) echo 'selected' ?>><?php
@@ -185,13 +182,13 @@ if (!isset($urlHandler))
                                                     </div>
                                                     <div class="w-col w-col-6 w-col-stack">
                                                         <div class="padding-left-50">
-                                                            <label>Tags</label>
-                                                            <p>Please add tags which describe your project</p>
+                                                            <label><?php _ehtml('Tags') ?></label>
+                                                            <p><?php _ehtml('Please add tags which describe your project') ?></p>
                                                             <div class="customSelect2">
                                                                 <select class="select2 creator-data-entry end w-input"
                                                                         id="tagsSelect" style="width:100%;border:0"
                                                                         multiple data-tags="true"
-                                                                        data-placeholder="Write tags">
+                                                                        data-placeholder="<?php _ehtml('Write tags') ?>">
                                                                     <?php foreach ($tags AS $tag) { ?>
                                                                         <option value="<?php echo $tag->getName() ?>"
                                                                             <?php if (in_array($tag->getName(), $projectTags)) echo 'selected' ?>><?php
@@ -202,22 +199,25 @@ if (!isset($urlHandler))
                                                             </div>
                                                             <br/><br/>
 
-                                                            <label for="email">Which organisations are working on this
-                                                                project?</label>
-                                                            <p>Add the organisations who collaborate on the project below. If the organisation is not listed, please encourage them to create an organisation profile. Leave blank if there are no other organisations involved</p>
+                                                            <label for="email">
+                                                                <?php _ehtml('Which organisations are working on this project?') ?>
+                                                            </label>
+                                                            <p>
+                                                                <?php _ehtml('Add the organisations who collaborate on the project below [...]') ?>
+                                                            </p>
                                                             <div id="organisationsSelectBox" class="designSelectBox">
-                                                                <select multiple
-                                                                    class="select2-withDesign creator-data-entry end w-input"
-                                                                    id="organisationsSelect" style="width:100%;border:0"
-                                                                    data-placeholder="Click to select organisations">
+                                                                <select multiple id="organisationsSelect"
+                                                                        class="select2-withDesign creator-data-entry end w-input"
+                                                                        style="width:100%;border:0"
+                                                                        data-placeholder="<?php _ehtml('Click to select organisations') ?>">
                                                                     <option></option>
                                                                     <?php foreach ($organisations AS $organisation) { ?>
                                                                         <option
-                                                                            value="<?php echo $organisation->getId() ?>"
-                                                                            data-url="<?php echo $urlHandler->organisation($organisation) ?>"
-                                                                            data-type="organisation"
+                                                                                value="<?php echo $organisation->getId() ?>"
+                                                                                data-url="<?php echo $urlHandler->organisation($organisation) ?>"
+                                                                                data-type="organisation"
                                                                             <?php if (in_array($organisation->getId(), $projectOrganisations)) echo ' selected '; ?>
-                                                                            data-country="<?php echo $organisation->getCountryName() ?>"><?php
+                                                                                data-country="<?php echo $organisation->getCountryName() ?>"><?php
                                                                             echo show_input($organisation->getName())
                                                                             ?></option>
                                                                     <?php } ?>
@@ -225,12 +225,6 @@ if (!isset($urlHandler))
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="w-form-done">
-                                                    <div>Thank you! Your submission has been received!</div>
-                                                </div>
-                                                <div class="w-form-fail">
-                                                    <div>Oops! Something went wrong while submitting the form</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -242,20 +236,20 @@ if (!isset($urlHandler))
                                 <form id="email-form-3" name="email-form-3" ng-submit="submitStep2()">
                                     <div class="tabbed-nav-buttons w-clearfix">
                                         <input type="submit" class="tab-button-3 tab-button-next w-button"
-                                               ng-value="loading ? 'Loading...' : 'Next'"
+                                               ng-value="loading ? '<?php _ehtml('Loading') ?>...' : '<?php _ehtml('Next') ?>'"
                                                ng-disabled="loading"
-                                               value="Next"/>
+                                               value="<?php _ehtml('Next') ?>"/>
                                         <button type="button" class="tab-button-2 tab-button-next w-button"
-                                                ng-bind="loading ? 'Loading...' : 'Save'"
+                                                ng-bind="loading ? '<?php _ehtml('Loading') ?>...' : '<?php _ehtml('Save') ?>'"
                                                 ng-click="submitStep2({proceed: false})"
-                                                ng-disabled="loading">Save
+                                                ng-disabled="loading"><?php _ehtml('Save') ?>
                                         </button>
                                         <a ng-click="currentTab='step1'"
                                            class="previous tab-button-1 tab-button-next w-button">Previous</a>
                                     </div>
                                     <div class="w-row">
                                         <div class="creator-col w-col w-col-4 w-col-stack">
-                                            <h2>2 - Project duration & location</h2>
+                                            <h2>2 - <?php _ehtml('Project duration & location') ?></h2>
                                             <?php echo $leftSideText ?>
                                         </div>
                                         <div class="creator-col creator-col-right w-col w-col-8 w-col-stack">
@@ -263,58 +257,55 @@ if (!isset($urlHandler))
                                                 <div class="w-row">
                                                     <div class="w-col w-col-6">
                                                         <div class="padding-right-50">
-                                                            <h2 class="edit-h2">Duration of project</h2>
-                                                            <label for="name">Project start date</label>
+                                                            <h2 class="edit-h2"><?php _ehtml('Duration of project') ?></h2>
+                                                            <label for="name"><?php _ehtml('Project start date') ?></label>
                                                             <input class="creator-data-entry w-input" data-name="Name 2"
                                                                    id="start-date" maxlength="256" name="name-2"
-                                                                   placeholder="When did the project start?"
-                                                                   ng-model="project.startDate"
-                                                                   type="text">
+                                                                   placeholder="<?php _ehtml('When did the project start?') ?>"
+                                                                   ng-model="project.startDate" type="text">
                                                             <br/>
 
-                                                            <label for="email-6">Project end date (leave this blank for
-                                                                ongoing projects)</label>
+                                                            <label for="email-6">
+                                                                <?php _ehtml('Project end date (leave this blank for ongoing projects)') ?>
+                                                            </label>
                                                             <input class="creator-data-entry end w-input"
                                                                    data-name="Email 6" id="end-date" maxlength="256"
-                                                                   name="email-6"
-                                                                   ng-model="project.endDate"
-                                                                   placeholder="When did/will the project end?"
-                                                                   type="text">
+                                                                   name="email-6" ng-model="project.endDate" type="text"
+                                                                   placeholder="<?php _ehtml('When did/will the project end?') ?>">
                                                         </div>
                                                     </div>
                                                     <div class="w-col w-col-6">
                                                         <div class="padding-left-50">
-                                                            <h2 class="edit-h2">Where is your project based?</h2>
+                                                            <h2 class="edit-h2"><?php _ehtml('Where is your project based?') ?></h2>
                                                             <label for="email-7">
-                                                                Which country are you based in?<br/>
-                                                                <span style="font-weight:normal">(leave this blank if your project is in multiple countries)</span>
+                                                                <?php _ehtml('Which country is your project based in?') ?>
+                                                                <br/>
+                                                                <span style="font-weight:normal">
+                                                                    (
+                                                                    <?php _ehtml('leave this blank if your project is in multiple countries') ?>
+                                                                    )
+                                                                </span>
                                                             </label>
-                                                            <select id="edit-country" data-placeholder="Select country"
-                                                                    class="creator-data-entry w-input"
+                                                            <select id="edit-country" class="creator-data-entry w-input"
+                                                                    data-placeholder="<?php _ehtml('Select country') ?>"
                                                                     style="width:100%">
                                                                 <option></option>
                                                             </select>
 
                                                             <div ng-show="regionsLoaded">
                                                                 <br/>
-                                                                <label class="story-label">and in which city?</label>
+                                                                <label class="story-label"><?php _ehtml('And in which city?') ?></label>
                                                                 <select class="creator-data-entry w-input"
                                                                         data-tags="true" id="edit-countryRegion"
-                                                                        data-placeholder="Type the city"
+                                                                        data-placeholder="<?php _ehtml('Type the city') ?>"
                                                                         style="width:100%">
                                                                 </select>
                                                             </div>
                                                             <div ng-show="regionsLoading">
-                                                                Loading...
+                                                                <?php _ehtml('Loading') ?>...
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="w-form-done">
-                                                    <div>Thank you! Your submission has been received!</div>
-                                                </div>
-                                                <div class="w-form-fail">
-                                                    <div>Oops! Something went wrong while submitting the form</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -326,65 +317,59 @@ if (!isset($urlHandler))
                                 <form id="email-form-3" name="email-form-3" ng-submit="submitStep3()">
                                     <div class="tabbed-nav-buttons w-clearfix">
                                         <input type="submit" class="tab-button-4 tab-button-next w-button"
-                                               ng-value="loading ? 'Loading...' : 'Next'"
+                                               ng-value="loading ? '<?php _ehtml('Loading') ?>...' : '<?php _ehtml('Next') ?>'"
                                                ng-disabled="loading"
-                                               value="Next"/>
+                                               value="<?php _ehtml('Next') ?>"/>
                                         <button type="button" class="tab-button-2 tab-button-next w-button"
-                                                ng-bind="loading ? 'Loading...' : 'Save'"
+                                                ng-bind="loading ? '<?php _ehtml('Loading') ?>...' : '<?php _ehtml('Save') ?>'"
                                                 ng-click="submitStep3({proceed: false})"
-                                                ng-disabled="loading">Save
+                                                ng-disabled="loading"><?php _ehtml('Save') ?>
                                         </button>
                                         <a ng-click="currentTab='step2'"
                                            class="previous tab-button-2 tab-button-next w-button">Previous</a>
                                     </div>
                                     <div class="w-row">
                                         <div class="creator-col w-col w-col-4">
-                                            <h2>3 - Describe your project</h2>
+                                            <h2>3 - <?php _ehtml('Describe your project') ?></h2>
                                             <?php echo $leftSideText ?>
                                         </div>
                                         <div class="creator-col creator-col-right w-col w-col-8">
                                             <div class="w-form">
-                                                <label for="name">Short Description: *</label>
+                                                <label for="name"><?php _ehtml('Short description') ?>: *</label>
                                                 <p>
-                                                    Please provide a short description for your organisation (up to 140
-                                                    characters). How would you describe your organisation in a tweet?
+                                                    <?php _ehtml('Please provide a short description for your project (up to 140 characters) [...]') ?>
                                                 </p>
                                                 <textarea class="creator-data-entry w-input wide" style="width:100%"
                                                           data-name="Project Bio 3" id="shortDescription"
                                                           name="project-bio-3" ng-model="project.shortDescription"
-                                                          placeholder="Briefly describe your project (no more than 140 characters)"
+                                                          placeholder="<?php _ehtml('Briefly describe your project (no more than 140 characters)') ?>"
                                                           maxlength="140"></textarea>
                                                 <div class="log-in-error" ng-show="errors.shortDescription"
                                                      ng-bind="errors.shortDescription"></div>
                                                 <br/>
 
-                                                <label class="story-label" for="project-bio">Long description</label>
-                                                <p>Please provide a longer description for your project. How would you
-                                                    describe your project? What type of work do you do? Who do you
-                                                    support?</p>
-                                                <p>Make your profile stand out by adding images or videos of your work</p>
+                                                <label class="story-label"
+                                                       for="project-bio"><?php _ehtml('Long description') ?></label>
+                                                <p><?php _ehtml('Please provide a longer description for your project. [...]') ?></p>
+                                                <p><?php _ehtml('Make your project stand out by adding images or videos of your work') ?></p>
                                                 <textarea
-                                                    class="creator-data-entry long-description w-input wide editableTextarea"
-                                                    data-name="Project Bio 4" id="description" maxlength="5000"
-                                                    placeholder="Add an in depth project description"
-                                                    name="project-bio-4"><?php echo $project->getDescription() ?></textarea>
+                                                        class="creator-data-entry long-description w-input wide editableTextarea"
+                                                        data-name="Project Bio 4" id="description" maxlength="5000"
+                                                        placeholder="<?php _ehtml('Add an in depth project description') ?>"
+                                                        name="project-bio-4"><?php echo $project->getDescription() ?></textarea>
                                                 <br/>
 
-                                                <label class="story-label" for="project-bio">Your social impact</label>
-                                                <p>Please provide a description of the social impact your project is
-                                                    aiming to have? Which areas of society will your project support?
-                                                    Does the project aim to address a particular issue?</p>
+                                                <label class="story-label" for="project-bio">
+                                                    <?php _ehtml('Your social impact') ?>
+                                                </label>
+                                                <p>
+                                                    <?php _ehtml('Please provide a description of the social impact your project is aiming to have. [...]') ?>
+                                                </p>
                                                 <textarea
-                                                    class="creator-data-entry long-description w-input wide editableTextarea"
-                                                    data-name="Project Bio 5" id="socialImpact" maxlength="5000"
-                                                    placeholder="Add an in depth project description"
-                                                    name="project-bio-5"><?php echo $project->getSocialImpact() ?></textarea>
-                                                <div class="w-form-done">
-                                                    <div>Thank you! Your submission has been received!</div>
-                                                </div>
-                                                <div class="w-form-fail">
-                                                    <div>Oops! Something went wrong while submitting the form</div>
-                                                </div>
+                                                        class="creator-data-entry long-description w-input wide editableTextarea"
+                                                        data-name="Project Bio 5" id="socialImpact" maxlength="5000"
+                                                        placeholder="<?php _ehtml('Add an in depth project description') ?>"
+                                                        name="project-bio-5"><?php echo $project->getSocialImpact() ?></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -395,57 +380,40 @@ if (!isset($urlHandler))
                                 <form id="email-form-3" name="email-form-3" ng-submit="submitStep4()">
                                     <div class="tabbed-nav-buttons w-clearfix">
                                         <input type="submit" class="tab-button-next tab-button-publish w-button"
-                                               ng-value="loading ? 'Loading...' : 'Publish now'"
+                                               ng-value="loading ? '<?php _ehtml('Loading') ?>...' : '<?php _ehtml('Publish now') ?>'"
                                                ng-disabled="loading"
-                                               value="Publish now"/>
+                                               value="<?php _ehtml('Publish now') ?>"/>
                                         <a href="<?php echo $urlHandler->project($project) ?>"
-                                           class="tab-button-next update-button w-button">Save for later</a>
+                                           class="tab-button-next update-button w-button">
+                                            <?php _ehtml('Save for later') ?></a>
                                         <a ng-click="currentTab='step3'"
-                                           class="previous tab-button-3 tab-button-next w-button">Previous</a>
+                                           class="previous tab-button-3 tab-button-next w-button">
+                                            <?php _ehtml('Previous') ?></a>
                                     </div>
                                     <div class="w-row">
                                         <div class="creator-col w-col w-col-4">
-                                            <h2>4 - Add images &amp; publish</h2>
+                                            <h2>4 - <?php _ehtml('Add images & publish')?></h2>
                                             <?php echo $leftSideText ?>
                                         </div>
                                         <div class="creator-col creator-col-right w-col w-col-8">
                                             <div class="w-form">
                                                 <div class="w-row">
-                                                    <?php /*
-                                                    <div class="w-col w-col-6 w-col-stack">
-                                                        <div class="padding-right-50">
-                                                            <label for="name">Your project logo</label>
-                                                            <p>This will appear wherever we reference your project.</p>
-                                                            <img class="story-image-upload"
-                                                                 style="max-height:140px;max-width:140px"
-                                                                 src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg"
-                                                                 ng-src="{{logo.image}}">
-                                                            <a class="dsi-button story-image-upload w-button" href="#"
-                                                               ngf-select="logo.upload($file, $invalidFiles)"
-                                                               ng-bind="logo.loading ? 'Loading...' : 'Upload image'">Upload
-                                                                image
-                                                            </a>
-                                                            <div style="color:red" ng-show="logo.errorMsg.file"
-                                                                 ng-cloak>
-                                                                {{logo.errorMsg.file}}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    */ ?>
                                                     <div class="w-col w-col-6 w-col-stack">
                                                         <div class="padding-left-50">
-                                                            <label class="story-label" for="Title">Header background
-                                                                image</label>
-                                                            <p>This will appear as the header background for your
-                                                                project’s page</p>
+                                                            <label class="story-label" for="Title">
+                                                                <?php _ehtml('Header background image')?>
+                                                            </label>
+                                                            <p>
+                                                                <?php _ehtml("This will appear as the header background for your project's page")?>
+                                                            </p>
                                                             <img class="story-image-upload story-image-upload-large"
                                                                  style="max-height:140px;max-width:140px"
                                                                  src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg"
                                                                  ng-src="{{headerImage.image}}">
                                                             <a class="dsi-button story-image-upload w-button" href="#"
                                                                ngf-select="headerImage.upload($file, $invalidFiles)"
-                                                               ng-bind="headerImage.loading ? 'Loading...' : 'Upload image'">Upload
-                                                                image
+                                                               ng-bind="headerImage.loading ? '<?php _ehtml('Loading') ?>...' : '<?php _ehtml('Upload image')?>'">
+                                                                <?php _ehtml('Upload image')?>
                                                             </a>
                                                             <div style="color:red" ng-show="headerImage.errorMsg.file"
                                                                  ng-cloak>
@@ -456,31 +424,19 @@ if (!isset($urlHandler))
                                                     <div class="w-col w-col-6 w-col-stack">
                                                         <div class="padding-left-50">
                                                             <div class="small-print">
-                                                                Any information, project data or results that you submit
-                                                                to Nesta in relation to your project shall be released
-                                                                under the terms of a Creative Commons Attribution
-                                                                Non-Commercial Share-A-like licence (CC-BY- NC-SA). By
-                                                                submitting such information, you warrant to us that you
-                                                                have any required permissions, licences or consents to
-                                                                do so
+                                                                <?php _ehtml('Any information, project data or results that you submit to Nesta in relation to your project shall be released under the terms of a licence [...]')?>
                                                             </div>
                                                             <div class="w-checkbox">
                                                                 <label class="w-form-label">
                                                                     <input class="w-checkbox-input" data-name="Checkbox"
                                                                            id="checkbox" name="checkbox" type="checkbox"
                                                                            ng-model="project.confirm">
-                                                                    I agree
+                                                                    <?php _ehtml('I agree')?>
                                                                 </label>
                                                             </div>
                                                             <div class="error" ng-bind="errors.confirm"></div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="w-form-done">
-                                                    <div>Thank you! Your submission has been received!</div>
-                                                </div>
-                                                <div class="w-form-fail">
-                                                    <div>Oops! Something went wrong while submitting the form</div>
                                                 </div>
                                             </div>
                                         </div>

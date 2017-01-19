@@ -40,8 +40,8 @@ require __DIR__ . '/header.php';
         <div class="content-block">
             <div class="w-row">
                 <div class="w-col w-col-8 w-col-stack">
-                    <h1 class="content-h1">News &amp; Blogs</h1>
-                    <p class="intro">Stay up to date with news, events, and blogs</p>
+                    <h1 class="content-h1"><?php _ehtml('News & blogs')?></h1>
+                    <p class="intro"><?php _ehtml('Stay up to date with news, events, and blogs')?></p>
                 </div>
                 <?php if ($userCanAddStory) { ?>
                     <div class="sidebar w-col w-col-4 w-col-stack">
@@ -54,21 +54,6 @@ require __DIR__ . '/header.php';
             </div>
             <?php if ($userCanAddStory) { ?>
                 <div class="alphabet-selectors w-clearfix">
-                    <?php /*
-                <a class="alphabet-link post-filter w-inline-block" ng-click="searchCriteria = {}" href="#">
-                    <div>All posts</div>
-                </a>
-                <a class="alphabet-link post-filter w-inline-block" ng-click="searchCriteria.catg = 3" href="#">
-                    <div>News</div>
-                </a>
-                <a class="alphabet-link post-filter w-inline-block" ng-click="searchCriteria.catg = 2" href="#">
-                    <div>Events</div>
-                </a>
-                <a class="alphabet-link post-filter w-inline-block" ng-click="searchCriteria.catg = 1" href="#">
-                    <div>Blogs</div>
-                </a>
-                */ ?>
-
                     <a class="alphabet-link post-filter w-inline-block" ng-click="searchCriteria.published = true"
                        href="#">
                         <div>Published</div>

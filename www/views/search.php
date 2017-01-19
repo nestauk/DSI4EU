@@ -18,7 +18,12 @@ if (!isset($urlHandler))
 
     <div class="container-wide search-results-list">
         <div class="intro-title">
-            <h1 class="content-h1">SEARCH RESULTS FOR: <?php echo show_input($term) ?></h1>
+            <h1 class="content-h1">
+                <?php echo show_input(sprintf(
+                    _html('Search results for: %s'),
+                    $term
+                )) ?>
+            </h1>
         </div>
         <div class="main-search-results w-row">
             <div class="search-col w-col w-col-3">

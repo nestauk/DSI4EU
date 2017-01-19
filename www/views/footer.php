@@ -11,133 +11,143 @@ if (!isset($urlHandler))
 ?>
 </div>
 <!-- twitter block -->
- <div class="twitter-block">
+<div class="twitter-block">
     <div class="twitter">
-      <div class="w-row">
-        <div class="w-col w-col-1 w-col-small-1 w-col-tiny-tiny-stack"><img class="homepage-twitter-logo" src="https://digitalsocial.eu/images/twitter-logo-silhouette.png">
+        <div class="w-row">
+            <div class="w-col w-col-1 w-col-small-1 w-col-tiny-tiny-stack">
+                <img class="homepage-twitter-logo" src="https://digitalsocial.eu/images/twitter-logo-silhouette.png">
+            </div>
+            <div class="w-col w-col-11 w-col-small-11 w-col-tiny-tiny-stack">
+                <p class="twitter-text">
+                    <?php echo str_replace(
+                        '@DSI4EU',
+                        '<a href="https://twitter.com/dsi4eu" target="_blank" class="twitter-footer-link">@DSI4EU</a>',
+                        _html('To keep in touch with the project and DSI in Europe, you can follow @DSI4EU on Twitter')
+                    );
+                    ?>
+                </p>
+            </div>
         </div>
-        <div class="w-col w-col-11 w-col-small-11 w-col-tiny-tiny-stack">
-          <p class="twitter-text">To keep in touch with the project and DSI in Europe, you can&nbsp;follow <a href="https://twitter.com/dsi4eu" target="_blank" class="twitter-footer-link">@DSI4EU on Twitter</a>
-          </p>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
 <!-- end -->
 <div class="footer-black">
     <div style="max-width:1290px;margin:0 auto;">
-    <div class="footer-row w-row">
-        <div class="w-col w-col-4">
-            <a class="w-inline-block" href="<?php echo $urlHandler->home() ?>">
-                <img class="footer-logo" src="<?php echo SITE_RELATIVE_PATH ?>/images/light.svg">
-            </a>
-        </div>
-        <div class="w-col w-col-2">
-            <h3 class="footer-h3"><?php _ehtml('People') ?></h3>
-            <ul class="w-list-unstyled">
-                <?php if (!$loggedInUser) { ?>
+        <div class="footer-row w-row">
+            <div class="w-col w-col-4">
+                <a class="w-inline-block" href="<?php echo $urlHandler->home() ?>">
+                    <img class="footer-logo" src="<?php echo SITE_RELATIVE_PATH ?>/images/light.svg">
+                </a>
+            </div>
+            <div class="w-col w-col-2">
+                <h3 class="footer-h3"><?php _ehtml('People') ?></h3>
+                <ul class="w-list-unstyled">
+                    <?php if (!$loggedInUser) { ?>
+                        <li class="footer-link">
+                            <a class="footer-link"
+                               href="<?php echo $urlHandler->register() ?>"><?php _ehtml('Join DSI4EU') ?></a>
+                        </li>
+                    <?php } ?>
                     <li class="footer-link">
                         <a class="footer-link"
-                           href="<?php echo $urlHandler->register() ?>"><?php _ehtml('Join DSI4EU') ?></a>
+                           href="<?php echo $urlHandler->termsOfUse() ?>"><?php _ehtml('Terms of use') ?></a>
                     </li>
-                <?php } ?>
-                <li class="footer-link">
-                    <a class="footer-link"
-                       href="<?php echo $urlHandler->termsOfUse() ?>"><?php _ehtml('Terms of use') ?></a>
-                </li>
-                <li class="footer-link">
-                    <a class="footer-link"
-                       href="<?php echo $urlHandler->privacyPolicy() ?>"><?php _ehtml('Privacy policy') ?></a>
-                </li>
-            </ul>
+                    <li class="footer-link">
+                        <a class="footer-link"
+                           href="<?php echo $urlHandler->privacyPolicy() ?>"><?php _ehtml('Privacy policy') ?></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="w-col w-col-2">
+                <h3 class="footer-h3"><?php _ehtml('Projects') ?></h3>
+                <ul class="w-list-unstyled">
+                    <li class="footer-link">
+                        <a class="footer-link"
+                           href="<?php echo $urlHandler->projects() ?>"><?php _ehtml('View projects') ?></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="w-col w-col-2">
+                <h3 class="footer-h3"><?php _ehtml('Organisations') ?></h3>
+                <ul class="w-list-unstyled">
+                    <li class="footer-link">
+                        <a class="footer-link"
+                           href="<?php echo $urlHandler->organisations() ?>"><?php _ehtml('View organisations') ?></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="w-col w-col-2">
+                <h3 class="footer-h3"><?php _ehtml('Development') ?></h3>
+                <ul class="w-list-unstyled">
+                    <li class="footer-link">
+                        <a class="footer-link"
+                           href="<?php echo $urlHandler->updates() ?>"><?php _ehtml('Updates') ?></a>
+                    </li>
+                    <li class="footer-link">
+                        <a class="footer-link"
+                           href="<?php echo $urlHandler->feedback() ?>"><?php _ehtml('Feedback') ?></a>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <div class="w-col w-col-2">
-            <h3 class="footer-h3"><?php _ehtml('Projects') ?></h3>
-            <ul class="w-list-unstyled">
-                <li class="footer-link">
-                    <a class="footer-link"
-                       href="<?php echo $urlHandler->projects() ?>"><?php _ehtml('View projects') ?></a>
-                </li>
-            </ul>
-        </div>
-        <div class="w-col w-col-2">
-            <h3 class="footer-h3"><?php _ehtml('Organisations') ?></h3>
-            <ul class="w-list-unstyled">
-                <li class="footer-link">
-                    <a class="footer-link"
-                       href="<?php echo $urlHandler->organisations() ?>"><?php _ehtml('View organisations') ?></a>
-                </li>
-            </ul>
-        </div>
-        <div class="w-col w-col-2">
-            <h3 class="footer-h3"><?php _ehtml('Development') ?></h3>
-            <ul class="w-list-unstyled">
-                <li class="footer-link">
-                    <a class="footer-link" href="<?php echo $urlHandler->updates() ?>"><?php _ehtml('Updates') ?></a>
-                </li>
-                <li class="footer-link">
-                    <a class="footer-link" href="<?php echo $urlHandler->feedback() ?>"><?php _ehtml('Feedback') ?></a>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div class="footer-row-bottom w-row">
-        <div class="w-col w-col-8">
-            <div>
-                <div class="w-row">
-                    <div class="w-clearfix w-col w-col-1 w-col-medium-6 w-col-small-6 w-col-tiny-6">
-                        <img class="footer-eu" src="<?php echo SITE_RELATIVE_PATH ?>/images/5000100-mono.png">
+        <div class="footer-row-bottom w-row">
+            <div class="w-col w-col-8">
+                <div>
+                    <div class="w-row">
+                        <div class="w-clearfix w-col w-col-1 w-col-medium-6 w-col-small-6 w-col-tiny-6">
+                            <img class="footer-eu" src="<?php echo SITE_RELATIVE_PATH ?>/images/5000100-mono.png">
+                        </div>
+                        <div class="w-col w-col-11 w-col-medium-6 w-col-small-6 w-col-tiny-6">
+                            <div class="footer-small-print"><?php _ehtml('DSI4EU is funded by the European Union') ?></div>
+                        </div>
                     </div>
-                    <div class="w-col w-col-11 w-col-medium-6 w-col-small-6 w-col-tiny-6">
-                        <div class="footer-small-print"><?php _ehtml('DSI4EU is funded by the European Union') ?></div>
-                    </div>
-                </div>
-                <div class="w-row">
-                    <div class="w-clearfix w-col w-col-1 w-col-medium-6 w-col-small-6 w-col-tiny-6">
-                        <img class="cc footer-eu" src="<?php echo SITE_RELATIVE_PATH ?>/images/88x31.png">
-                    </div>
-                    <div class="w-col w-col-11 w-col-medium-6 w-col-small-6 w-col-tiny-6">
-                        <div class="footer-small-print">
-                            <?php echo sprintf(
-                                __('All our work is licensed under a %s, unless it says otherwise.'),
-                                '<span class="footer-link-small">
+                    <div class="w-row">
+                        <div class="w-clearfix w-col w-col-1 w-col-medium-6 w-col-small-6 w-col-tiny-6">
+                            <img class="cc footer-eu" src="<?php echo SITE_RELATIVE_PATH ?>/images/88x31.png">
+                        </div>
+                        <div class="w-col w-col-11 w-col-medium-6 w-col-small-6 w-col-tiny-6">
+                            <div class="footer-small-print">
+                                <?php echo sprintf(
+                                    __('All our work is licensed under a %s, unless it says otherwise.'),
+                                    '<span class="footer-link-small">
                                     <a class="footer-link-small"
                                        href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
                                             Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>
                                 </span>'
-                            ) ?>
+                                ) ?>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="w-col w-col-4">
-            <div class="w-row">
-                <div class="footer-logo-col w-clearfix w-col w-col-4">
-                    <a class="footer-partner-link w-inline-block" href="http://nesta.org.uk" target="_blank">
-                        <img class="footer-partner-logo nesta"
-                             src="<?php echo SITE_RELATIVE_PATH ?>/images/nesta-white-220px.png">
-                    </a>
-                </div>
-                <div class="footer-logo-col w-clearfix w-col w-col-4">
-                    <a class="footer-partner-link w-inline-block" href="http://waag.org" target="_blank">
-                        <img class="footer-partner-logo"
-                             src="<?php echo SITE_RELATIVE_PATH ?>/images/waag-f1d052f43133268eaf2e13090a0b4bf1.png">
-                    </a>
-                </div>
-                <div class="footer-logo-col w-clearfix w-col w-col-4">
-                    <a class="footer-partner-link w-inline-block" href="#" target="_blank">
-                        <img class="footer-partner-logo" src="<?php echo SITE_RELATIVE_PATH ?>/images/logo_SUPSI.png">
-                    </a>
+            <div class="w-col w-col-4">
+                <div class="w-row">
+                    <div class="footer-logo-col w-clearfix w-col w-col-4">
+                        <a class="footer-partner-link w-inline-block" href="http://nesta.org.uk" target="_blank">
+                            <img class="footer-partner-logo nesta"
+                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/nesta-white-220px.png">
+                        </a>
+                    </div>
+                    <div class="footer-logo-col w-clearfix w-col w-col-4">
+                        <a class="footer-partner-link w-inline-block" href="http://waag.org" target="_blank">
+                            <img class="footer-partner-logo"
+                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/waag-f1d052f43133268eaf2e13090a0b4bf1.png">
+                        </a>
+                    </div>
+                    <div class="footer-logo-col w-clearfix w-col w-col-4">
+                        <a class="footer-partner-link w-inline-block" href="#" target="_blank">
+                            <img class="footer-partner-logo"
+                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/logo_SUPSI.png">
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
+
     </div>
-    
-</div>
-    
-    <div class="centre footer-small-print">Nesta is a registered charity in England and Wales 1144091 and Scotland
-        SC042833. Our main address is 58 Victoria Embankment, London, EC4Y 0DS
+
+    <div class="centre footer-small-print">
+        <?php _ehtml('Nesta is a registered charity')?>
     </div>
 </div>
 
@@ -377,8 +387,8 @@ if (!isset($urlHandler))
  */ ?>
 
 <script
-    src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/SearchController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"
-    type="text/javascript"></script>
+        src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/SearchController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"
+        type="text/javascript"></script>
 
 <div class="search-block" ng-controller="SearchController">
     <div class="close-search" data-ix="close-search-block">+</div>
@@ -411,7 +421,7 @@ if (!isset($urlHandler))
                 </a>
                 <a class="full-menu-link view-all" ng-show="search.projects.length > 0"
                    href="<?php echo $urlHandler->projects() ?>?q={{search.entry}}">
-                    View all project results
+                    <?php _ehtml('View all project results')?>
                 </a>
                 <div ng-show="search.projects.length == 0"><?php _ehtml('No projects found') ?></div>
             </div>
@@ -423,7 +433,7 @@ if (!isset($urlHandler))
                 </a>
                 <a class="full-menu-link view-all" ng-show="search.organisations.length > 0"
                    href="<?php echo $urlHandler->organisations() ?>?q={{search.entry}}">
-                    View all organisation results
+                    <?php _ehtml('View all organisation results')?>
                 </a>
                 <div ng-show="search.organisations.length == 0"><?php _ehtml('No organisations found') ?></div>
             </div>
@@ -449,12 +459,13 @@ if (!isset($urlHandler))
     <div class="container-wide">
         <div class="w-row">
             <div class="w-col w-col-6">
-                <h3 class="cookie-h3">We use cookies to help us improve this site and your experience. Continue to use
-                    the site if you’re happy with this or click to find out more.</h3>
+                <h3 class="cookie-h3">
+                    <?php _ehtml('We use cookies')?>
+                </h3>
             </div>
             <div class="w-clearfix w-col w-col-6">
-                <a class="cookie-button w-button" href="#">Find out more</a>
-                <a class="cookie-button w-button" href="#" onclick="$('#cookies').hide()">Continue</a>
+                <a class="cookie-button w-button" href="#"><?php _ehtml('Find out more')?></a>
+                <a class="cookie-button w-button" href="#" onclick="$('#cookies').hide()"><?php _ehtml('Continue')?></a>
             </div>
         </div>
     </div>

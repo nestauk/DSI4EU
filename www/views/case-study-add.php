@@ -14,8 +14,9 @@ require __DIR__ . '/header.php';
                 </div>
                 <div class="sidebar w-col w-col-4">
                     <h1 class="content-h1">Actions</h1>
-                    <a class="sidebar-link" href="<?php echo $urlHandler->caseStudies() ?>"><span
-                            class="green">-&nbsp;</span>Cancel</a>
+                    <a class="sidebar-link" href="<?php echo $urlHandler->caseStudies() ?>">
+                        <span class="green">-&nbsp;</span>Cancel
+                    </a>
                 </div>
             </div>
         </div>
@@ -33,24 +34,22 @@ require __DIR__ . '/header.php';
                                 <div class="error" ng-bind="errors.title"></div>
                                 <label>Intro card text:</label>
                                 <input class="creator-data-entry w-input" data-name="Name 3" id="name-3" maxlength="256"
-                                       ng-model="caseStudy.introCardText"
-                                       name="name-3" placeholder="This text appears on the grid card" type="text">
+                                       name="name-3" placeholder="This text appears on the grid card"
+                                       ng-model="caseStudy.introCardText" type="text">
                                 <label for="field">Page introduction:</label>
                                 <textarea class="creator-data-entry w-input" name="field"
-                                          id="pageIntro"
-                                          ng-model="caseStudy.introPageText"
-                                          placeholder="This text appears at the top of the case study page"></textarea>
+                                          placeholder="This text appears at the top of the case study page"
+                                          id="pageIntro" ng-model="caseStudy.introPageText"></textarea>
                                 <br/>
                                 <label>Page overview:</label>
                                 <textarea class="creator-data-entry end long-description w-input"
-                                          id="mainText"
-                                          ng-model="caseStudy.mainText"
+                                          id="mainText" ng-model="caseStudy.mainText"
                                           placeholder="This is the main body text"></textarea>
 
                                 <br/>
                                 <h2 class="edit-h2">Project</h2>
                                 <select class="creator-data-entry w-input" ng-model="caseStudy.projectID">
-                                    <option value="0"> - None selected -</option>
+                                    <option value="0"> - None selected - </option>
                                     <?php foreach ($projects AS $project) { ?>
                                         <option value="<?php echo $project->getId() ?>">
                                             <?php echo show_input($project->getName()) ?>
@@ -63,8 +62,8 @@ require __DIR__ . '/header.php';
                                 <select class="creator-data-entry w-input" ng-model="caseStudy.organisationID">
                                     <option value="0"> - None selected -</option>
                                     <?php foreach ($organisations AS $organisation) { ?>
-                                        <option value="<?php echo $organisation->getId()?>">
-                                            <?php echo show_input($organisation->getName())?>
+                                        <option value="<?php echo $organisation->getId() ?>">
+                                            <?php echo show_input($organisation->getName()) ?>
                                         </option>
                                     <?php } ?>
                                 </select>

@@ -180,8 +180,8 @@ if (!isset($urlHandler))
     <div class="mailchimp-container">
         <div class="w-row">
             <div class="w-col w-col-4">
-                <div class="newsletter-title">Newsletter</div>
-                <div class="news-p">Sign up to stay up to date with DSI4EU</div>
+                <div class="newsletter-title"><?php _ehtml('Newsletter')?></div>
+                <div class="news-p"><?php _ehtml('Sign up to stay up to date with DSI4EU')?></div>
             </div>
             <div class="w-col w-col-8">
                 <div class="w-form">
@@ -193,16 +193,16 @@ if (!isset($urlHandler))
                             <div id="mc_embed_signup_scroll">
                                 <div class="mc-field-group">
                                     <input type="text" value="" name="FNAME" class="signup-in w-input" id="mce-FNAME"
-                                           placeholder="First name">
+                                           placeholder="<?php _ehtml('First name')?>">
                                 </div>
                                 <div class="mc-field-group">
                                     <input type="text" value="" name="LNAME" class="signup-in w-input" id="mce-LNAME"
-                                           placeholder="Last name">
+                                           placeholder="<?php _ehtml('Last name')?>">
                                 </div>
                                 <div class="mc-field-group">
                                     <input type="text" value="" name="EMAIL" class="signup-in w-input email"
                                            id="mce-EMAIL"
-                                           placeholder="Email address">
+                                           placeholder="<?php _ehtml('Email address')?>">
                                 </div>
                                 <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
                                 <div style="position: absolute; left: -5000px;" aria-hidden="true">
@@ -212,7 +212,7 @@ if (!isset($urlHandler))
                                            value="">
                                 </div>
                                 <div style="display: inline;">
-                                    <input type="submit" value="Subscribe" name="subscribe"
+                                    <input type="submit" value="<?php _ehtml('Subscribe')?>" name="subscribe"
                                            id="mc-embedded-subscribe"
                                            class="button footer-signup w-button">
                                 </div>

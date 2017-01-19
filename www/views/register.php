@@ -60,23 +60,17 @@ use \DSI\Service\URL;
                             <button type="submit" class="auto ll log-in-link w-clearfix w-inline-block"
                                     data-ix="log-in-arrow" name="register"
                                     style="width:250px;display:block">
-                                <span class="login-li menu-li">Register</span>
+                                <span class="login-li menu-li"><?php _ehtml('Register')?></span>
                                 <img class="login-arrow"
                                      src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
                             </button>
                         </div>
-                        <?php /*
-                            <input type="button" style="width:250px"
-                                   ng-show="registered"
-                                   value="<?php _ehtml('Welcome to Digital Social!') ?>"
-                                   class="w-button dsi-button creat-button">
-                            */ ?>
                     </div>
                 </form>
             </div>
 
             <br/><br/>
-            <div class="or-login-with">- or log in with -</div>
+            <div class="or-login-with">- <?php _ehtml('or log in with')?> -</div>
             <div class="w-row">
                 <div class="w-col w-col-3 w-col-small-3 w-col-tiny-6">
                     <a class="log-in-with-link w-inline-block" href="<?php echo URL::loginWithFacebook() ?>">

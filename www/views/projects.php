@@ -24,38 +24,34 @@ $showAdvancedSearch = (
         <div class="content-block">
             <div class="w-row">
                 <div class="w-col w-col-8 w-col-stack">
-                    <h1 class="content-h1">Projects</h1>
+                    <h1 class="content-h1"><?php _ehtml('Projects') ?></h1>
                     <p class="intro">
-                        Digital social innovation (DSI) covers a range of areas, from providing tools to
-                        improve democratic processes to helping citizens measure pollution in their local environment,
-                        and
-                        from crowdfunding community projects to creating platforms to scrutinise public spending.
+                        <?php _ehtml('Digital social innovation (DSI) covers a range of areas, from providing tools to improve democratic processes to [...]') ?>
                     </p>
                     <p class="header-intro-descr">
-                        Here you can look through projects which digital social innovators
-                        across Europe have submitted to the website. You can filter them by the four categories of
-                        digital social innovation which we have identified:
-                        <strong>Open hardware</strong>,
-                        <strong>Open networks</strong>,
-                        <strong>Open data</strong> and
-                        <strong>Open knowledge</strong>.
+                        <?php _ehtml('Here you can look through projects which digital social innovators across Europe have submitted to the website. [...]') ?>
+                        <strong><?php _ehtml('Open hardware') ?></strong>,
+                        <strong><?php _ehtml('Open networks') ?></strong>,
+                        <strong><?php _ehtml('Open data') ?></strong> <?php _ehtml('and') ?>
+                        <strong><?php _ehtml('Open knowledge') ?></strong>.
                     </p>
                 </div>
                 <div class="sidebar w-col w-col-4 w-col-stack">
-                    <h1 class="content-h1 side-bar-space-h1">Add your project</h1>
-                    <p>Showcase your current and past work, identify potential collaborations and link your projects to
-                        your organisation.</p>
+                    <h1 class="content-h1 side-bar-space-h1"><?php _ehtml('Add your project') ?></h1>
+                    <p>
+                        <?php _ehtml('Showcase your current and past work, identify potential collaborations and link your projects to your organisation.') ?>
+                    </p>
                     <?php if ($loggedInUser) { ?>
                         <a class="log-in-link long read-more w-clearfix w-inline-block"
                            data-ix="create-project-modal" href="#">
-                            <div class="login-li long menu-li readmore-li">Add your project</div>
+                            <div class="login-li long menu-li readmore-li"><?php _ehtml('Add your project') ?></div>
                             <img class="login-arrow"
                                  src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
                         </a>
                     <?php } else { ?>
                         <a class="log-in-link long read-more w-clearfix w-inline-block"
                            href="<?php echo $urlHandler->login() ?>?from=project">
-                            <div class="login-li long menu-li readmore-li">Add your project</div>
+                            <div class="login-li long menu-li readmore-li"><?php _ehtml('Add your project') ?></div>
                             <img class="login-arrow"
                                  src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
                         </a>
@@ -66,7 +62,7 @@ $showAdvancedSearch = (
                 <a href="#" class="w-inline-block alphabet-link" style="width:50px"
                    ng-class="{selected: startLetter == ''}"
                    ng-click="setStartLetter('')">
-                    <div>All</div>
+                    <div><?php _ehtml('All') ?></div>
                 </a>
                 <a href="#" class="w-inline-block alphabet-link"
                    ng-class="{selected: startLetter == letter}"
@@ -84,12 +80,12 @@ $showAdvancedSearch = (
                         <div class="filter-bar info-card">
                             <div class="w-form">
                                 <form id="email-form" name="email-form">
-                                    <h3 class="sidebar-h3">Filter projects</h3>
+                                    <h3 class="sidebar-h3"><?php _ehtml('Filter projects') ?></h3>
                                     <div class="search-div">
                                         <input class="sidebar-search-field w-input" data-ix="hide-search-icon"
                                                data-name="Search" id="Search" maxlength="256" name="Search"
-                                               placeholder="Search by keyword, type or project" type="text"
-                                               ng-model="searchName">
+                                               placeholder="<?php _ehtml('Search by keyword, type or project') ?>"
+                                               type="text" ng-model="searchName">
                                         <img class="search-mag"
                                              src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-search.png">
                                     </div>
@@ -99,7 +95,7 @@ $showAdvancedSearch = (
                                             <div class="w-col w-col-6">
                                                 <a class="w-clearfix w-inline-block" href="#"
                                                    ng-click="showAdvancedSearch = !showAdvancedSearch">
-                                                    <div class="adv-text">Advanced filters</div>
+                                                    <div class="adv-text"><?php _ehtml('Advanced filters') ?></div>
                                                     <div ng-class="{showAdvancedSearch: showAdvancedSearch}"
                                                          class="arrow advancedSearchArrow"></div>
                                                 </a>
@@ -107,36 +103,36 @@ $showAdvancedSearch = (
                                             <div class="w-col w-col-6"></div>
                                         </div>
                                         <div class="adv-options" ng-show="showAdvancedSearch">
-                                            <label>Country</label>
+                                            <label><?php _ehtml('Country') ?></label>
                                             <select class="w-select" id="field" name="field"
                                                     ng-model="filter.countryID">
-                                                <option value="0">- Select a country -</option>
+                                                <option value="0">- <?php _ehtml('Select a country') ?> -</option>
                                                 <option ng-repeat="country in countries" value="{{country.id}}">
                                                     {{country.text}}
                                                 </option>
                                             </select>
 
-                                            <label>Tag</label>
+                                            <label><?php _ehtml('Tag') ?></label>
                                             <select class="w-select" id="field" name="field" ng-model="filter.tagID">
-                                                <option value="0">- Select a tag-</option>
+                                                <option value="0">- <?php _ehtml('Select a tag') ?> -</option>
                                                 <option ng-repeat="tag in tags" value="{{tag.id}}">
                                                     {{tag.name}}
                                                 </option>
                                             </select>
 
-                                            <label>Areas of impact</label>
+                                            <label><?php _ehtml('Areas of impact') ?></label>
                                             <select class="w-select" id="field" name="field"
                                                     ng-model="filter.helpTagID">
-                                                <option value="0">- Select a tag -</option>
+                                                <option value="0">- <?php _ehtml('Select a tag') ?> -</option>
                                                 <option ng-repeat="tag in impactHelpTags" value="{{tag.id}}">
                                                     {{tag.name}}
                                                 </option>
                                             </select>
 
-                                            <label>Technology</label>
+                                            <label><?php _ehtml('Technology') ?></label>
                                             <select class="w-select" id="field" name="field"
                                                     ng-model="filter.techTagID">
-                                                <option value="0">- Select a tag -</option>
+                                                <option value="0">- <?php _ehtml('Select a tag') ?> -</option>
                                                 <option ng-repeat="tag in impactTechTags" value="{{tag.id}}">
                                                     {{tag.name}}
                                                 </option>
@@ -146,51 +142,49 @@ $showAdvancedSearch = (
                                         </div>
                                     </div>
                                     <br/>
-                                    <div class="filter-title"><strong>Filter by category</strong>
+                                    <div class="filter-title"><strong><?php _ehtml('Filter by category') ?></strong>
                                     </div>
                                     <div class="filter-checkbox w-checkbox">
                                         <input class="w-checkbox-input" data-name="Checkbox 2" id="checkbox-2"
                                                name="checkbox-2" ng-model="dsiFocus[35]"
                                                type="checkbox">
-                                        <label class="w-form-label" for="checkbox-2">Open hardware</label>
+                                        <label class="w-form-label"
+                                               for="checkbox-2"><?php _ehtml('Open hardware') ?></label>
                                     </div>
-                                    <div class="trend-notes">The use of open hardware and maker spaces to develop, make,
-                                        adapt,
-                                        hack and shape tools for social change
+                                    <div class="trend-notes">
+                                        <?php _ehtml('The use of open hardware and maker spaces to develop, make, adapt, hack and shape tools for social change') ?>
                                     </div>
                                     <div class="filter-checkbox w-checkbox">
                                         <input class="w-checkbox-input" data-name="Checkbox 5" id="checkbox-5"
                                                name="checkbox-5" ng-model="dsiFocus[9]"
                                                type="checkbox">
-                                        <label class="w-form-label" for="checkbox-5">Open networks</label>
+                                        <label class="w-form-label"
+                                               for="checkbox-5"><?php _ehtml('Open networks') ?></label>
                                     </div>
-                                    <div class="trend-notes">New networks and infrastructures, e.g. sensor networks,
-                                        where
-                                        people connect their devices such as phones and internet modems to collectively
-                                        share
-                                        resources and solve problems
+                                    <div class="trend-notes">
+                                        <?php _ehtml('New networks and infrastructures, e.g. sensor networks, where people connect their devices [...]') ?>
                                     </div>
                                     <div class="filter-checkbox w-checkbox">
                                         <input class="w-checkbox-input" data-name="Checkbox 4" id="checkbox-4"
                                                name="checkbox-4" ng-model="dsiFocus[8]"
                                                type="checkbox">
-                                        <label class="w-form-label" for="checkbox-4">Open data</label>
+                                        <label class="w-form-label"
+                                               for="checkbox-4"><?php _ehtml('Open data') ?></label>
                                     </div>
-                                    <div class="trend-notes">Innovative ways of opening up, capturing, using, analysing
-                                        and
-                                        interpreting open data
+                                    <div class="trend-notes">
+                                        <?php _ehtml('Innovative ways of opening up, capturing, using, analysing and interpreting open data') ?>
                                     </div>
                                     <div class="filter-checkbox w-checkbox">
                                         <input class="w-checkbox-input" data-name="Checkbox 3" id="checkbox-3"
                                                name="checkbox-3" ng-model="dsiFocus[4]"
                                                type="checkbox">
-                                        <label class="w-form-label" for="checkbox-3">Open knowledge</label>
+                                        <label class="w-form-label"
+                                               for="checkbox-3"><?php _ehtml('Open knowledge') ?></label>
                                     </div>
                                 </form>
                             </div>
-                            <div class="trend-notes">Where people come together through online platforms to
-                                crowdsource or
-                                crowdfund solutions, collectively analyse data and develop new DSI projects
+                            <div class="trend-notes">
+                                <?php _ehtml('Where people come together through online platforms to crowdsource or crowdfund solutions, [...]') ?>
                             </div>
                         </div>
                     </div>
@@ -210,10 +204,15 @@ $showAdvancedSearch = (
                                    ng-if="$index < (filtered.length / 2)">
                                     <h3 class="info-card-h3" ng-bind="project.name"></h3>
                                     <div class="involved-tag">
-                                        <span ng-bind="project.organisationsCount"></span>
-                                        <span
-                                            ng-bind="project.organisationsCount == 1 ? 'Organisation' : 'Organisations'">
-                                        involved
+                                        <span ng-show="project.organisationsCount == 1">
+                                            <?php _ehtml('1 Organisation involved') ?>
+                                        </span>
+                                        <span ng-show="project.organisationsCount != 1">
+                                            <?php echo show_input(sprintf(
+                                                _html('%s Organisations involved'),
+                                                '<span ng-bind="project.organisationsCount"></span>'
+                                            )) ?>
+                                        </span>
                                     </div>
                                 </a>
                             </div>
@@ -231,16 +230,21 @@ $showAdvancedSearch = (
                                    ng-if="$index >= (filtered.length / 2)">
                                     <h3 class="info-card-h3" ng-bind="project.name"></h3>
                                     <div class="involved-tag">
-                                        <span ng-bind="project.organisationsCount"></span>
-                                        <span
-                                            ng-bind="project.organisationsCount == 1 ? 'Organisation' : 'Organisations'">
-                                        involved
+                                        <span ng-show="project.organisationsCount == 1">
+                                            <?php _ehtml('1 Organisation involved') ?>
+                                        </span>
+                                        <span ng-show="project.organisationsCount != 1">
+                                            <?php echo sprintf(
+                                                _html('%s Organisations involved'),
+                                                '<span ng-bind="project.organisationsCount"></span>'
+                                            ) ?>
+                                        </span>
                                     </div>
                                 </a>
                             </div>
 
                             <div ng-show="filtered.length == 0" ng-cloak>
-                                No results found.
+                                <?php _ehtml('No results found.') ?>
                             </div>
                         </div>
                     </div>

@@ -12,8 +12,8 @@ require __DIR__ . '/header.php';
 /** @var $loggedInUser \DSI\Entity\User */
 /** @var $user \DSI\Entity\User */
 
-$leftSideText = "<p>" . show_input(__('To create your profile, we would like to collect some information about you.')) . "</p>";
-$leftSideText .= "<p>" . show_input(__('Boost your profile by registering as a team member of your projects and organisations . You can edit your answers later.')) . "</p>";
+$leftSideText = "<p>" . _html('To create your profile, we would like to collect some information about you.') . "</p>";
+$leftSideText .= "<p>" . _html('Boost your profile by registering as a team member of your projects and organisations . You can edit your answers later.') . "</p>";
 
 ?>
     <script type="text/javascript"
@@ -51,7 +51,7 @@ $leftSideText .= "<p>" . show_input(__('Boost your profile by registering as a t
         <div class="modal-container">
             <div class="modal-helper">
                 <div class="modal-content">
-                    <h2 class="centered modal-h2 log-in">Change password</h2>
+                    <h2 class="centered modal-h2 log-in"><?php _ehtml('Change password')?></h2>
                     <div class="w-form" style="text-align:center">
                         <div data-ix="destroypasswordchange"
                              style="color: silver;font-family: open sans-serif;font-weight: 300"
@@ -59,20 +59,20 @@ $leftSideText .= "<p>" . show_input(__('Boost your profile by registering as a t
                         </div>
                         <form id="email-form" name="email-form"
                               ng-submit="savePassword()">
-                            <input id="new-password" type="password" placeholder="Enter your new password"
+                            <input id="new-password" type="password" placeholder="<?php _ehtml('Enter your new password')?>"
                                    name="new-password" data-name="new password"
                                    class="w-input login-field" ng-class="{error: errors.password}"
                                    ng-model="password">
                             <div style="color:red" ng-bind="errors.password"></div>
-                            <input id="confirm-password" type="password" placeholder="Confirm password"
+                            <input id="confirm-password" type="password" placeholder="<?php _ehtml('Confirm password')?>"
                                    name="confirm-password" data-name="confirm password"
                                    class="w-input login-field" ng-class="{error: errors.retypePassword}"
                                    ng-model="retypePassword">
                             <div style="color:red" ng-bind="errors.retypePassword"></div>
                             <input ng-hide="saved" type="submit"
-                                   value="Update password" ng-disabled="loading" class="w-button login-button"
-                                   ng-value="loading ? '<?php _ehtml('Loading...') ?>' : 'Update password'">
-                            <div ng-show="saved" class="success-message">Your password has been saved</div>
+                                   value="<?php _ehtml('Update password')?>" ng-disabled="loading" class="w-button login-button"
+                                   ng-value="loading ? '<?php _ehtml('Loading...') ?>' : '<?php _ehtml('Update password')?>'">
+                            <div ng-show="saved" class="success-message"><?php _ehtml('Your password has been changed')?></div>
                         </form>
                     </div>
                 </div>

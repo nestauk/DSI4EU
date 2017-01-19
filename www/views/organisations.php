@@ -89,7 +89,7 @@ $showAdvancedSearch = (
                                             <div class="w-col w-col-6">
                                                 <a class="w-clearfix w-inline-block" href="#"
                                                    ng-click="showAdvancedSearch = !showAdvancedSearch">
-                                                    <div class="adv-text">Advanced filters</div>
+                                                    <div class="adv-text"><?php _ehtml('Advanced filters')?></div>
                                                     <div ng-class="{showAdvancedSearch: showAdvancedSearch}"
                                                          class="arrow advancedSearchArrow"></div>
                                                 </a>
@@ -97,27 +97,27 @@ $showAdvancedSearch = (
                                             <div class="w-col w-col-6"></div>
                                         </div>
                                         <div class="adv-options" ng-show="showAdvancedSearch">
-                                            <label>Country</label>
+                                            <label><?php _ehtml('Country')?></label>
                                             <select class="w-select" id="field" name="field"
                                                     ng-model="filter.countryID">
-                                                <option value="0">- Select one country -</option>
+                                                <option value="0">- <?php _ehtml('Select one country')?> -</option>
                                                 <option ng-repeat="country in countries" value="{{country.id}}">
                                                     {{country.text}}
                                                 </option>
                                             </select>
 
-                                            <label>Tag</label>
+                                            <label><?php _ehtml('Tag')?></label>
                                             <select class="w-select" id="field" name="field" ng-model="filter.tagID">
-                                                <option value="0">- Select a tag-</option>
+                                                <option value="0">- <?php _ehtml('Select a tag')?> -</option>
                                                 <option ng-repeat="tag in tags" value="{{tag.id}}">
                                                     {{tag.name}}
                                                 </option>
                                             </select>
 
-                                            <label>Network</label>
+                                            <label><?php _ehtml('Network')?></label>
                                             <select class="w-select" id="field" name="field"
                                                     ng-model="filter.netwTagID">
-                                                <option value="0">- Select a tag -</option>
+                                                <option value="0">- <?php _ehtml('Select a tag')?> -</option>
                                                 <option ng-repeat="tag in netwTags" value="{{tag.id}}">
                                                     {{tag.name}}
                                                 </option>
