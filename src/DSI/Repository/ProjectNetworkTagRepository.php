@@ -65,7 +65,7 @@ class ProjectNetworkTagRepository
 
     /**
      * @param int $projectID
-     * @return \DSI\Entity\ProjectTag[]
+     * @return ProjectNetworkTag[]
      */
     public function getByProjectID(int $projectID)
     {
@@ -100,7 +100,7 @@ class ProjectNetworkTagRepository
 
     /**
      * @param int $tagID
-     * @return \DSI\Entity\ProjectTag[]
+     * @return ProjectNetworkTag[]
      */
     public function getByTagID(int $tagID)
     {
@@ -141,12 +141,12 @@ class ProjectNetworkTagRepository
 
     /**
      * @param $where
-     * @return \DSI\Entity\ProjectTag[]
+     * @return ProjectNetworkTag[]
      */
     private function getProjectTagsWhere($where)
     {
-        /** @var ProjectTag[] $projectTags */
-        $projectTags = [];
+        /** @var ProjectNetworkTag[] $projectNetworkTags */
+        $projectNetworkTags = [];
         $query = new SQL("SELECT projectID, tagID 
             FROM `{$this->table}`
             WHERE " . implode(' AND ', $where) . "
@@ -155,10 +155,10 @@ class ProjectNetworkTagRepository
             $projectTag = new ProjectNetworkTag();
             $projectTag->setProject($this->projectRepo->getById($dbProjectTag['projectID']));
             $projectTag->setTag($this->tagsRepo->getById($dbProjectTag['tagID']));
-            $projectTags[] = $projectTag;
+            $projectNetworkTags[] = $projectTag;
         }
 
-        return $projectTags;
+        return $projectNetworkTags;
     }
 
     public function projectHasTagName(int $projectID, string $tagName)

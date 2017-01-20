@@ -46,6 +46,17 @@ class TagForProjectsRepository
         $query->query();
     }
 
+    public function remove(TagForProjects $tag)
+    {
+        $query = new SQL("SELECT id FROM `{$this->table}` WHERE id = '{$tag->getId()}' LIMIT 1");
+        $existingTag = $query->fetch();
+        if (!$existingTag)
+            throw new DSI\NotFound('tagID: ' . $tag->getId());
+
+        $query = new SQL("DELETE FROM `{$this->table}` WHERE `id` = '{$tag->getId()}'");
+        $query->query();
+    }
+
     public function getById(int $id): TagForProjects
     {
         return $this->getTagWhere([

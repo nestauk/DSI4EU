@@ -4,6 +4,32 @@ require __DIR__ . '/header.php';
 /** @var $urlHandler \DSI\Service\URL */
 
 ?>
+<style>
+    .manage-tag{
+        background-color: #2acca5;
+        border: 1px solid rgba(170, 170, 170, 0);
+        border-radius: 3px;
+        cursor: default;
+        float: left;
+        margin-right: 5px;
+        margin-top: 5px;
+        padding: 3px 10px;
+        color: #fff;
+        margin-bottom: 0;
+    }
+    .manage-tag a{
+        color: inherit;
+        text-decoration: none;
+    }
+    .manage-tag span{
+        color: #c5f1e6;
+        cursor: pointer;
+        display: inline-block;
+        font-weight: bold;
+        margin-right: 7px;
+    }
+
+</style>
     <div ng-controller="ManageTagsController"
          data-managetagsjsonurl="<?php echo $urlHandler->manageTagsJson() ?>">
         <div class="content-block">
@@ -52,42 +78,50 @@ require __DIR__ . '/header.php';
                         <div class="w-row">
                             <div class="w-col">
                                 <h3>Network Tags</h3>
-                                <span ng-repeat="tag in data.networkTags
+                                <span class="manage-tag" ng-repeat="tag in data.networkTags
                                    | filter: startsWithLetter
                                    | filter: searchName
                                     as filtered">
+                                    <span ng-click="deleteNetworkTag(tag)">X</span>
                                     <a href="<?php echo $urlHandler->organisations() ?>?netwTag={{tag.id}}"
                                        ng-bind="tag.name"></a> &nbsp;
                                 </span>
+                                <div style="clear:both"></div>
 
-                                <br/><br/>
+                                <br/>
                                 <h3>Organisation Tags</h3>
-                                <span ng-repeat="tag in data.organisationTags
+                                <span class="manage-tag" ng-repeat="tag in data.organisationTags
                                    | filter: startsWithLetter
                                    | filter: searchName
                                     as filtered">
+                                    <span ng-click="deleteOrganisationTag(tag)">X</span>
                                     <a href="<?php echo $urlHandler->organisations() ?>?tag={{tag.id}}"
                                        ng-bind="tag.name"></a> &nbsp;
                                 </span>
+                                <div style="clear:both"></div>
 
-                                <br/><br/>
+                                <br/>
                                 <h3>Project Tags</h3>
-                                <span ng-repeat="tag in data.projectTags
+                                <span class="manage-tag" ng-repeat="tag in data.projectTags
                                    | filter: startsWithLetter
                                    | filter: searchName
                                     as filtered">
+                                    <span ng-click="deleteProjectTag(tag)">X</span>
                                     <a href="<?php echo $urlHandler->projects() ?>?tag={{tag.id}}"
                                        ng-bind="tag.name"></a> &nbsp;
                                 </span>
+                                <div style="clear:both"></div>
 
-                                <br/><br/>
+                                <br/>
                                 <h3>Project Impact Tags</h3>
-                                <span ng-repeat="tag in data.projectImpactTags
+                                <span class="manage-tag" ng-repeat="tag in data.projectImpactTags
                                    | filter: startsWithLetter
                                    | filter: searchName
                                     as filtered">
+                                    <span ng-click="deleteProjectImpactTag(tag)">X</span>
                                     <a href="#" ng-bind="tag.name"></a> &nbsp;
                                 </span>
+                                <div style="clear:both"></div>
                             </div>
                         </div>
                     </div>
