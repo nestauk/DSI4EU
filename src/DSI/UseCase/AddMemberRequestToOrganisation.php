@@ -54,7 +54,7 @@ class AddMemberRequestToOrganisation
     private function checkIfOrganisationAlreadyHasTheMember()
     {
         if ((new OrganisationMemberRepository())->organisationIDHasMemberID($this->data()->organisationID, $this->data()->userID)) {
-            $this->errorHandler->addTaggedError('member', 'This user is already a member of the organisation');
+            $this->errorHandler->addTaggedError('member', __('This user is already a member of the organisation'));
             $this->errorHandler->throwIfNotEmpty();
         }
     }
@@ -62,7 +62,7 @@ class AddMemberRequestToOrganisation
     private function checkIfThereIsAlreadyARequestFromTheUser()
     {
         if ($this->organisationMemberRequestRepo->organisationHasRequestFromMember($this->data()->organisationID, $this->data()->userID)) {
-            $this->errorHandler->addTaggedError('member', 'This user has already made a request to join the organisation');
+            $this->errorHandler->addTaggedError('member', __('This user has already made a request to join the organisation'));
             $this->errorHandler->throwIfNotEmpty();
         }
     }

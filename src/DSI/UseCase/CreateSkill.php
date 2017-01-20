@@ -31,7 +31,7 @@ class CreateSkill
         $this->skillRepo = new SkillRepository();
 
         if($this->skillRepo->nameExists($this->data()->name)){
-            $this->errorHandler->addTaggedError('skill', 'Skill Already Exists');
+            $this->errorHandler->addTaggedError('skill', __('Skill name already exists'));
             $this->errorHandler->throwIfNotEmpty();
         }
 

@@ -45,7 +45,7 @@ class SendWelcomeEmailToAppRegisteredUser
     private function checkValidData()
     {
         if (!filter_var($this->data()->emailAddress, FILTER_VALIDATE_EMAIL))
-            $this->errorHandler->addTaggedError('email', 'Please type a valid email address');
+            $this->errorHandler->addTaggedError('email', __('Please type a valid email address'));
 
         $this->errorHandler->throwIfNotEmpty();
     }

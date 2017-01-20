@@ -36,7 +36,7 @@ class CreateCountryRegion
         $this->countryRepo = new CountryRepository();
 
         if ($this->countryRegionRepo->nameExists($this->data()->countryID, $this->data()->name)) {
-            $this->errorHandler->addTaggedError('region', 'Country Region Already Exists');
+            $this->errorHandler->addTaggedError('region', __('The region name already exists'));
             $this->errorHandler->throwIfNotEmpty();
         }
 

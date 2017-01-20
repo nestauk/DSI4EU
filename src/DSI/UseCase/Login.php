@@ -53,16 +53,16 @@ class Login
     public function verifyEmail()
     {
         if (trim($this->data()->email) == '')
-            $this->errorHandler->addTaggedError('email', 'Please type an email address');
+            $this->errorHandler->addTaggedError('email', __('Please type your email address'));
 
         if (!filter_var($this->data()->email, FILTER_VALIDATE_EMAIL))
-            $this->errorHandler->addTaggedError('email', "Invalid email address");
+            $this->errorHandler->addTaggedError('email', __('Please type a valid email address'));
     }
 
     public function verifyPassword()
     {
         if (trim($this->data()->password) == '')
-            $this->errorHandler->addTaggedError('password', 'Please type a password');
+            $this->errorHandler->addTaggedError('password', __('Please type a password'));
     }
 
     public function assertEmailAndPasswordMatch()
@@ -71,11 +71,11 @@ class Login
             $user = $this->userRepo->getByEmail($this->data()->email);
 
             if (!$user->checkPassword($this->data()->password))
-                $this->errorHandler->addTaggedError('password', 'Invalid email or password');
+                $this->errorHandler->addTaggedError('password', __('Invalid email or password'));
 
             $this->user = $user;
         } catch (NotFound $e) {
-            $this->errorHandler->addTaggedError('email', 'This email address is not registered');
+            $this->errorHandler->addTaggedError('email', __('The email address is not registered'));
         }
 
         $this->errorHandler->throwIfNotEmpty();
@@ -92,7 +92,7 @@ class Login
     private function assertUserIsEnabled()
     {
         if ($this->user->isDisabled()) {
-            $this->errorHandler->addTaggedError('email', 'This user has been disabled. Please contact the website admin.');
+            $this->errorHandler->addTaggedError('email', __('This user has been disabled. Please contact the website admin'));
             throw $this->errorHandler;
         }
     }

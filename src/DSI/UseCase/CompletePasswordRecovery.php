@@ -76,16 +76,16 @@ class CompletePasswordRecovery
     private function checkValidData()
     {
         if (!filter_var($this->data()->email, FILTER_VALIDATE_EMAIL))
-            $this->errorHandler->addTaggedError('email', 'Please type a valid email address');
+            $this->errorHandler->addTaggedError('email', _('Please type a valid email address'));
 
         if (strlen($this->data()->code) == 0)
-            $this->errorHandler->addTaggedError('code', 'Please type the security code');
+            $this->errorHandler->addTaggedError('code', __('Please type the security code'));
 
         if (strlen($this->data()->password) < 8)
-            $this->errorHandler->addTaggedError('password', 'Password must have at least 8 characters');
+            $this->errorHandler->addTaggedError('password', __('Password must have at least 8 characters'));
 
         if ($this->data()->password != $this->data()->retypePassword)
-            $this->errorHandler->addTaggedError('retypePassword', 'Passwords do not match');
+            $this->errorHandler->addTaggedError('retypePassword', __('Passwords do not match'));
 
         $this->errorHandler->throwIfNotEmpty();
     }
@@ -93,7 +93,7 @@ class CompletePasswordRecovery
     private function checkIfEmailIsRegistered()
     {
         if (!(new UserRepository())->emailAddressExists($this->data()->email)) {
-            $this->errorHandler->addTaggedError('email', 'This email address is not registered');
+            $this->errorHandler->addTaggedError('email', __('The email address is not registered'));
             $this->errorHandler->throwIfNotEmpty();
         }
     }
@@ -117,7 +117,7 @@ class CompletePasswordRecovery
         $passwordRecovery = $this->getPasswordRecovery($user, $this->data()->code);
 
         if (!$passwordRecovery) {
-            $this->errorHandler->addTaggedError('code', 'The code is not valid');
+            $this->errorHandler->addTaggedError('code', __('The security code is not valid'));
             $this->errorHandler->throwIfNotEmpty();
         }
 
@@ -131,7 +131,7 @@ class CompletePasswordRecovery
     private function checkIfCodeHasExpired(PasswordRecovery $passwordRecovery)
     {
         if ($passwordRecovery->isExpired()) {
-            $this->errorHandler->addTaggedError('code', 'This code has expired');
+            $this->errorHandler->addTaggedError('code', __('The security code has expired'));
             $this->errorHandler->throwIfNotEmpty();
         }
     }
@@ -143,7 +143,7 @@ class CompletePasswordRecovery
     private function checkIfCodeHasBeenUsed(PasswordRecovery $passwordRecovery)
     {
         if ($passwordRecovery->isUsed()) {
-            $this->errorHandler->addTaggedError('code', 'This code has already been used');
+            $this->errorHandler->addTaggedError('code', __('This security code has already been used'));
             $this->errorHandler->throwIfNotEmpty();
         }
     }

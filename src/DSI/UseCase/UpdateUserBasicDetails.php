@@ -36,17 +36,17 @@ class UpdateUserBasicDetails
 
         if (isset($this->data()->firstName)) {
             if ($this->data()->firstName == '') {
-                $this->errorHandler->addTaggedError('firstName', 'Please type the first name');
+                $this->errorHandler->addTaggedError('firstName', __('Please type the first name'));
             }
         }
         if (isset($this->data()->lastName)) {
             if ($this->data()->lastName == '') {
-                $this->errorHandler->addTaggedError('lastName', 'Please type the last name');
+                $this->errorHandler->addTaggedError('lastName', __('Please type the last name'));
             }
         }
         if (isset($this->data()->bio)) {
             if (strlen($this->data()->bio) > 140) {
-                $this->errorHandler->addTaggedError('bio', 'Please submit a shorter bio');
+                $this->errorHandler->addTaggedError('bio', __('Please submit a shorter bio'));
             }
         }
 

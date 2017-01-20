@@ -44,7 +44,7 @@ class RemoveTagFromOrganisation
         }
 
         if (!$this->organisationTagRepo->organisationHasTagName($this->data()->organisationID, $this->data()->tag)) {
-            $this->errorHandler->addTaggedError('tag', 'Organisation does not have this tag');
+            $this->errorHandler->addTaggedError('tag', 'The organisation does not have this tag');
             $this->errorHandler->throwIfNotEmpty();
         }
 

@@ -31,12 +31,12 @@ class UpdateUserEmailAddress
             throw new NotEnoughData('email');
 
         if ($this->data()->email == '') {
-            $this->errorHandler->addTaggedError('email', 'Please type the email address');
+            $this->errorHandler->addTaggedError('email', __('Please type an email address'));
             throw $this->errorHandler;
         }
 
         if (!isValidEmail($this->data()->email)) {
-            $this->errorHandler->addTaggedError('email', 'Please type a valid email address');
+            $this->errorHandler->addTaggedError('email', __('Please type a valid email address'));
             throw $this->errorHandler;
         }
 
@@ -45,7 +45,7 @@ class UpdateUserEmailAddress
             [$this->data()->userID]
         )
         ) {
-            $this->errorHandler->addTaggedError('email', 'This email address is already registered');
+            $this->errorHandler->addTaggedError('email', __('The email address is already registered'));
             throw $this->errorHandler;
         }
 

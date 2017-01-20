@@ -43,7 +43,7 @@ class AddSkillToUser
         }
 
         if($this->userSkillRepo->userHasSkillName($this->data()->userID, $this->data()->skill)) {
-            $this->errorHandler->addTaggedError('skill', 'User already has this skill');
+            $this->errorHandler->addTaggedError('skill', __('The user already has this skill'));
             $this->errorHandler->throwIfNotEmpty();
         }
             

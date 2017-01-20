@@ -45,7 +45,7 @@ class CreateOrganisation
         }
 
         if($this->data()->name == ''){
-            $this->errorHandler->addTaggedError('name', 'Please type a organisation name');
+            $this->errorHandler->addTaggedError('name', __('Please type a organisation name'));
             throw $this->errorHandler;
         }
 

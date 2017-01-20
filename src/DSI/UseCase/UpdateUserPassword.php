@@ -27,10 +27,10 @@ class UpdateUserPassword
         $this->checkIfAllInfoHaveBeenSubmitted();
 
         if(strlen($this->data()->password) < 8)
-            $this->errorHandler->addTaggedError('password', 'Password must have at least 8 characters');
+            $this->errorHandler->addTaggedError('password', __('Password must have at least 8 characters'));
 
         if($this->data()->password != $this->data()->retypePassword)
-            $this->errorHandler->addTaggedError('retypePassword', 'Passwords do not match');
+            $this->errorHandler->addTaggedError('retypePassword', __('Passwords do not match'));
 
         $this->errorHandler->throwIfNotEmpty();
 

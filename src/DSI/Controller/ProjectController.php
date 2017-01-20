@@ -197,7 +197,7 @@ class ProjectController
                         'An invitation email has been sent to the person';
 
                     echo json_encode($response);
-                    return;
+                    return true;
                 }
                 if (isset($_POST['addMember'])) {
                     $addMemberToProject = new AddMemberInvitationToProject();
@@ -205,7 +205,7 @@ class ProjectController
                     $addMemberToProject->data()->userID = $_POST['addMember'];
                     $addMemberToProject->exec();
                     echo json_encode(['result' => 'ok']);
-                    return;
+                    return true;
                 }
                 if (isset($_POST['removeMember'])) {
                     $removeMemberFromProject = new RemoveMemberFromProject();
@@ -213,7 +213,7 @@ class ProjectController
                     $removeMemberFromProject->data()->userID = $_POST['removeMember'];
                     $removeMemberFromProject->exec();
                     echo json_encode(['result' => 'ok']);
-                    return;
+                    return true;
                 }
                 if (isset($_POST['approveRequestToJoin'])) {
                     $approveMemberRequestToJoinProject = new ApproveMemberRequestToProject();
@@ -221,7 +221,7 @@ class ProjectController
                     $approveMemberRequestToJoinProject->data()->userID = $_POST['approveRequestToJoin'];
                     $approveMemberRequestToJoinProject->exec();
                     echo json_encode(['result' => 'ok']);
-                    return;
+                    return true;
                 }
                 if (isset($_POST['rejectRequestToJoin'])) {
                     $rejectMemberRequestToJoinProject = new RejectMemberRequestToProject();
@@ -229,7 +229,7 @@ class ProjectController
                     $rejectMemberRequestToJoinProject->data()->userID = $_POST['rejectRequestToJoin'];
                     $rejectMemberRequestToJoinProject->exec();
                     echo json_encode(['result' => 'ok']);
-                    return;
+                    return true;
                 }
 
                 if (isset($_POST['updateCountryRegion'])) {
@@ -239,7 +239,7 @@ class ProjectController
                     $updateProjectCountryRegionCmd->data()->region = $_POST['region'];
                     $updateProjectCountryRegionCmd->exec();
                     echo json_encode(['result' => 'ok']);
-                    return;
+                    return true;
                 }
 
                 if (isset($_POST['newOrganisationID'])) {
@@ -248,7 +248,7 @@ class ProjectController
                     $addOrganisationProjectCmd->data()->organisationID = $_POST['newOrganisationID'];
                     $addOrganisationProjectCmd->exec();
                     echo json_encode(['result' => 'ok']);
-                    return;
+                    return true;
                 }
 
                 if (isset($_POST['addPost'])) {
@@ -261,7 +261,7 @@ class ProjectController
                         'result' => 'ok',
                         'posts' => $this->getPostsForProject($project),
                     ]);
-                    return;
+                    return true;
                 }
 
                 if (isset($_POST['setAdmin'])) {
@@ -275,7 +275,7 @@ class ProjectController
                     echo json_encode([
                         'result' => 'ok'
                     ]);
-                    return;
+                    return true;
                 }
             } else {
                 if (isset($_POST['requestToJoin'])) {
@@ -284,7 +284,7 @@ class ProjectController
                     $addMemberRequestToJoinProject->data()->userID = $loggedInUser->getId();
                     $addMemberRequestToJoinProject->exec();
                     echo json_encode(['result' => 'ok']);
-                    return;
+                    return true;
                 }
             }
         } catch (ErrorHandler $e) {
@@ -292,7 +292,7 @@ class ProjectController
                 'result' => 'error',
                 'errors' => $e->getErrors()
             ]);
-            return;
+            return true;
         }
 
         if ($this->data()->format == 'json') {
@@ -423,6 +423,12 @@ class ProjectController
         return true;
     }
 
+    /**
+     * @param User $loggedInUser
+     * @param Project $project
+     * @param URL $urlHandler
+     * @return bool
+     */
     private function report(User $loggedInUser, Project $project, URL $urlHandler)
     {
         $genSecureCode = new SecureCode();
@@ -461,13 +467,14 @@ class ProjectController
                 ]);
             }
         }
-        return;
+        return true;
     }
 
     /**
      * @param User $loggedInUser
      * @param Project $project
      * @param URL $urlHandler
+     * @return bool
      */
     private function deleteProject(User $loggedInUser, Project $project, URL $urlHandler)
     {
@@ -490,12 +497,13 @@ class ProjectController
                 ]);
             }
         }
-        return;
+        return true;
     }
 
     /**
      * @param User $user
      * @param Project $project
+     * @return bool
      */
     private function cancelJoinRequest(User $user, Project $project)
     {
@@ -518,7 +526,7 @@ class ProjectController
                 ]);
             }
         }
-        return;
+        return true;
     }
 
     private function joinProject(User $user, Project $project)
@@ -541,12 +549,13 @@ class ProjectController
                 ]);
             }
         }
-        return;
+        return true;
     }
 
     /**
      * @param User $user
      * @param Project $project
+     * @return bool
      */
     private function leaveProject(User $user, Project $project)
     {
@@ -568,12 +577,13 @@ class ProjectController
                 ]);
             }
         }
-        return;
+        return true;
     }
 
     /**
      * @param User $user
      * @param Project $project
+     * @return bool
      */
     private function followProject(User $user, Project $project)
     {
@@ -596,12 +606,13 @@ class ProjectController
                 ]);
             }
         }
-        return;
+        return true;
     }
 
     /**
      * @param User $user
      * @param Project $project
+     * @return bool
      */
     private function unfollowProject(User $user, Project $project)
     {
@@ -624,7 +635,7 @@ class ProjectController
                 ]);
             }
         }
-        return;
+        return true;
     }
 }
 

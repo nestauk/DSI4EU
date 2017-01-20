@@ -64,7 +64,7 @@ class UpdateProjectCountryRegion
     private function assertNameHasBeenSent()
     {
         if ($this->data()->region == '') {
-            $this->errorHandler->addTaggedError('region', 'Please type a region name');
+            $this->errorHandler->addTaggedError('region', __('Please specify a region'));
             throw $this->errorHandler;
         }
     }

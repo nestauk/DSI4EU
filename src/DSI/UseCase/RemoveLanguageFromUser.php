@@ -41,7 +41,7 @@ class RemoveLanguageFromUser
         }
 
         if (!$this->userLanguageRepo->userHasLanguageName($this->data()->userID, $this->data()->language)) {
-            $this->errorHandler->addTaggedError('language', 'User does not have this language');
+            $this->errorHandler->addTaggedError('language', __('The user does not have this language'));
             $this->errorHandler->throwIfNotEmpty();
         }
 

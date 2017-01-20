@@ -77,7 +77,7 @@ class UpdateUserProfilePicture
             'jpg', 'jpeg', 'png'
         ])
         ) {
-            $this->errorHandler->addTaggedError('file', 'Only image files accepted (received .' . $fileInfo->getExtension() . ')');
+            $this->errorHandler->addTaggedError('file', __('Only image files are accepted') . ' (received .' . $fileInfo->getExtension() . ')');
             $this->errorHandler->throwIfNotEmpty();
         }
     }
@@ -103,7 +103,7 @@ class UpdateUserProfilePicture
     private function checkImageDimensions(SimpleImage $img)
     {
         if ($img->get_height() < 100 OR $img->get_width() < 100) {
-            $this->errorHandler->addTaggedError('file', 'Image must be at least 100x100');
+            $this->errorHandler->addTaggedError('file', __('Image must be at least 100 x 100 pixels'));
             $this->errorHandler->throwIfNotEmpty();
         }
     }

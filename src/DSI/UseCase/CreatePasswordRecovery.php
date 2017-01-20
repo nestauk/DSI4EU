@@ -39,7 +39,7 @@ class CreatePasswordRecovery
         $userRepository = new UserRepository();
 
         if (!$userRepository->emailAddressExists($this->data()->email)) {
-            $this->errorHandler->addTaggedError('email', 'This email address is not registered');
+            $this->errorHandler->addTaggedError('email', __('The email address is not registered'));
             throw $this->errorHandler;
         }
 

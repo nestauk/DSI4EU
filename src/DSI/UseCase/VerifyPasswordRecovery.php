@@ -67,10 +67,10 @@ class VerifyPasswordRecovery
     private function checkValidData()
     {
         if (!filter_var($this->data()->email, FILTER_VALIDATE_EMAIL))
-            $this->errorHandler->addTaggedError('email', 'Please type a valid email address');
+            $this->errorHandler->addTaggedError('email', __('Please type a valid email address'));
 
         if (strlen($this->data()->code) == 0)
-            $this->errorHandler->addTaggedError('code', 'Please type the security code');
+            $this->errorHandler->addTaggedError('code', __('Please type the security code'));
 
         $this->errorHandler->throwIfNotEmpty();
     }
@@ -78,7 +78,7 @@ class VerifyPasswordRecovery
     private function checkIfEmailIsRegistered()
     {
         if (!(new UserRepository())->emailAddressExists($this->data()->email)) {
-            $this->errorHandler->addTaggedError('email', 'This email address is not registered');
+            $this->errorHandler->addTaggedError('email', __('The email address is not registered'));
             $this->errorHandler->throwIfNotEmpty();
         }
     }
@@ -102,7 +102,7 @@ class VerifyPasswordRecovery
         $passwordRecovery = $this->retrievePasswordRecovery($user, $this->data()->code);
 
         if (!$passwordRecovery) {
-            $this->errorHandler->addTaggedError('code', 'The code is not valid or has expired');
+            $this->errorHandler->addTaggedError('code', __('The security code is not valid or has expired'));
             $this->errorHandler->throwIfNotEmpty();
         }
 
@@ -116,7 +116,7 @@ class VerifyPasswordRecovery
     private function checkIfCodeHasExpired(PasswordRecovery $passwordRecovery)
     {
         if ($passwordRecovery->isExpired()) {
-            $this->errorHandler->addTaggedError('code', 'The code is not valid or has expired');
+            $this->errorHandler->addTaggedError('code', __('The security code is not valid or has expired'));
             $this->errorHandler->throwIfNotEmpty();
         }
     }
@@ -128,7 +128,7 @@ class VerifyPasswordRecovery
     private function checkIfCodeHasBeenUsed(PasswordRecovery $passwordRecovery)
     {
         if ($passwordRecovery->isUsed()) {
-            $this->errorHandler->addTaggedError('code', 'This code has already been used');
+            $this->errorHandler->addTaggedError('code', __('This security code has already been used'));
             $this->errorHandler->throwIfNotEmpty();
         }
     }

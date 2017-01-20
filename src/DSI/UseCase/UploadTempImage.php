@@ -78,7 +78,7 @@ class UploadTempImage
             'jpg', 'jpeg', 'png'
         ])
         ) {
-            $this->errorHandler->addTaggedError('file', 'Only image files accepted (received .' . $fileInfo->getExtension() . ')');
+            $this->errorHandler->addTaggedError('file', __('Only image files are accepted') . ' (received .' . $fileInfo->getExtension() . ')');
             $this->errorHandler->throwIfNotEmpty();
         }
     }

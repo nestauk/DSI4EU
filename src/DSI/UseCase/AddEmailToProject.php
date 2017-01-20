@@ -78,7 +78,7 @@ class AddEmailToProject
     private function assertValidEmailAddress()
     {
         if (!isValidEmail($this->data()->email)) {
-            $this->errorHandler->addTaggedError('email', 'Please type a valid email address');
+            $this->errorHandler->addTaggedError('email', __('Please type a valid email address'));
             throw $this->errorHandler;
         }
     }

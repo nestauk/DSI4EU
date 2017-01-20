@@ -76,7 +76,7 @@ class Register
     public function verifyCaptcha()
     {
         if (!$this->data()->recaptchaResponse) {
-            $this->errorHandler->addTaggedError('captcha', 'Please resolve the captcha');
+            $this->errorHandler->addTaggedError('captcha', __('Please resolve the captcha'));
             $this->errorHandler->throwIfNotEmpty();
         }
     }
@@ -84,24 +84,24 @@ class Register
     public function verifyEmail()
     {
         if (trim($this->data()->email) == '')
-            $this->errorHandler->addTaggedError('email', 'Please type your email address');
+            $this->errorHandler->addTaggedError('email', __('Please type your email address'));
 
         if (!filter_var($this->data()->email, FILTER_VALIDATE_EMAIL))
-            $this->errorHandler->addTaggedError('email', "Invalid email address");
+            $this->errorHandler->addTaggedError('email', __('Please type a valid email address'));
     }
 
     public function verifyPassword()
     {
         if (trim($this->data()->password) == '')
-            $this->errorHandler->addTaggedError('password', 'Please type a password');
-        if (strlen($this->data()->password) < 6)
-            $this->errorHandler->addTaggedError('password', 'Please type a longer password');
+            $this->errorHandler->addTaggedError('password', __('Please type a password'));
+        if (strlen($this->data()->password) < 8)
+            $this->errorHandler->addTaggedError('password', __('Password must have at least 8 characters'));
     }
 
     public function verifyIfEmailExists()
     {
         if ($this->userRepo->emailAddressExists($this->data()->email))
-            $this->errorHandler->addTaggedError('email', 'This email address is already registered');
+            $this->errorHandler->addTaggedError('email', __('The email address is already registered'));
 
         $this->errorHandler->throwIfNotEmpty();
     }

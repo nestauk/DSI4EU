@@ -32,13 +32,13 @@ class UpdateOrganisationCountryRegion
         $this->countryRegionRepo = new CountryRegionRepository();
 
         if ($this->data()->countryID == 0)
-            $this->errorHandler->addTaggedError('country', 'Please select a country');
+            $this->errorHandler->addTaggedError('country', __('Please select a country'));
 
         if ($this->data()->organisationID == 0)
-            $this->errorHandler->addTaggedError('organisation', 'Please select a organisation');
+            $this->errorHandler->addTaggedError('organisation', 'Please select an organisation');
 
         if ($this->data()->region == '')
-            $this->errorHandler->addTaggedError('region', 'Please specify a region');
+            $this->errorHandler->addTaggedError('region', __('Please specify a region'));
 
         $this->errorHandler->throwIfNotEmpty();
 

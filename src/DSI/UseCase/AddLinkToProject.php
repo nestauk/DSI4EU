@@ -31,7 +31,7 @@ class AddLinkToProject
         $projectRepository = new ProjectRepository();
 
         if($this->projectLinkRepository->projectHasLink($this->data()->projectID, $this->data()->link)) {
-            $this->errorHandler->addTaggedError('skill', 'Project already has this link');
+            $this->errorHandler->addTaggedError('skill', __('The project already has this link'));
             $this->errorHandler->throwIfNotEmpty();
         }
             

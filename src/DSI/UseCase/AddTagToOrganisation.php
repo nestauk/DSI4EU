@@ -45,7 +45,7 @@ class AddTagToOrganisation
         }
 
         if($this->organisationTagRepository->organisationHasTagName($this->data()->organisationID, $this->data()->tag)) {
-            $this->errorHandler->addTaggedError('tag', 'Organisation already has this tag');
+            $this->errorHandler->addTaggedError('tag', __('The organisation already has this tag'));
             $this->errorHandler->throwIfNotEmpty();
         }
             

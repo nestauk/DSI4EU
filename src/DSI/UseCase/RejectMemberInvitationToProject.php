@@ -9,7 +9,6 @@ use DSI\Repository\ProjectMemberInvitationRepository;
 use DSI\Repository\ProjectRepository;
 use DSI\Repository\UserRepository;
 use DSI\Service\ErrorHandler;
-use Guzzle\Common\Exception\InvalidArgumentException;
 
 class RejectMemberInvitationToProject
 {
@@ -73,7 +72,7 @@ class RejectMemberInvitationToProject
     private function assertExecutorIsSet()
     {
         if (!$this->data()->executor OR $this->data()->executor->getId() < 1)
-            throw new InvalidArgumentException('executor');
+            throw new \InvalidArgumentException('executor');
     }
 
     private function assertExecutorCanExecute()

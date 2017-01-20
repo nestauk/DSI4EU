@@ -71,7 +71,7 @@ class AddReplyToProjectPostComment
         if ($this->data()->user->getId() <= 0)
             $this->errorHandler->addTaggedError('user', 'Invalid user ID');
         if ($this->data()->reply == '')
-            $this->errorHandler->addTaggedError('comment', 'The comment cannot be empty');
+            $this->errorHandler->addTaggedError('comment', __('Please type a comment'));
 
         $this->errorHandler->throwIfNotEmpty();
     }

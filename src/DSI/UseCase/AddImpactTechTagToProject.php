@@ -45,7 +45,7 @@ class AddImpactTechTagToProject
         }
 
         if ($this->projectImpactTagRepository->projectHasTagName($this->data()->projectID, $this->data()->tag)) {
-            $this->errorHandler->addTaggedError('tag', 'Project already has this tag');
+            $this->errorHandler->addTaggedError('tag', __('The project already has this tag'));
             $this->errorHandler->throwIfNotEmpty();
         }
 

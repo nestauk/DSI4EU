@@ -65,16 +65,16 @@ class CreateUser
     public function verifyEmail()
     {
         if (trim($this->data()->email) == '')
-            $this->errorHandler->addTaggedError('email', 'Please type your email address');
+            $this->errorHandler->addTaggedError('email', __('Please type your email address'));
 
         if (!filter_var($this->data()->email, FILTER_VALIDATE_EMAIL))
-            $this->errorHandler->addTaggedError('email', "Invalid email address");
+            $this->errorHandler->addTaggedError('email', __('Please type a valid email address'));
     }
 
     public function verifyIfEmailExists()
     {
         if ($this->userRepo->emailAddressExists($this->data()->email))
-            $this->errorHandler->addTaggedError('email', 'This email address is already registered');
+            $this->errorHandler->addTaggedError('email', __('The email address is already registered'));
 
         $this->errorHandler->throwIfNotEmpty();
     }

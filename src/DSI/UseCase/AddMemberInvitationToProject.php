@@ -54,7 +54,7 @@ class AddMemberInvitationToProject
     private function checkIfProjectAlreadyHasTheMember()
     {
         if ((new ProjectMemberRepository())->projectIDHasMemberID($this->data()->projectID, $this->data()->userID)) {
-            $this->errorHandler->addTaggedError('member', 'This user is already a member of the project');
+            $this->errorHandler->addTaggedError('member', __('This user is already a member of the project'));
             $this->errorHandler->throwIfNotEmpty();
         }
     }
@@ -62,7 +62,7 @@ class AddMemberInvitationToProject
     private function checkIfUserHasAlreadyBeenInvited()
     {
         if ($this->projectMemberInvitationRepo->memberHasInvitationToProject($this->data()->userID, $this->data()->projectID)) {
-            $this->errorHandler->addTaggedError('member', 'This user has already been invited to join the project');
+            $this->errorHandler->addTaggedError('member', __('This user has already been invited to join the project'));
             $this->errorHandler->throwIfNotEmpty();
         }
     }

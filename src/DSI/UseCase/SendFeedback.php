@@ -38,11 +38,11 @@ class SendFeedback
     private function checkDataHasBeenSubmitted()
     {
         if (!$this->data()->name)
-            $this->errorHandler->addTaggedError('name', 'Please type your name');
+            $this->errorHandler->addTaggedError('name', __('Please type your name'));
         if (!$this->data()->email)
-            $this->errorHandler->addTaggedError('email', 'Please type your email');
+            $this->errorHandler->addTaggedError('email', __('Please type your email address'));
         if (!$this->data()->message)
-            $this->errorHandler->addTaggedError('message', 'Please type your message');
+            $this->errorHandler->addTaggedError('message', __('Please type your message'));
 
         $this->errorHandler->throwIfNotEmpty();
     }
@@ -50,7 +50,7 @@ class SendFeedback
     private function checkEmailIsValid()
     {
         if (!filter_var($this->data()->email, FILTER_VALIDATE_EMAIL)) {
-            $this->errorHandler->addTaggedError('email', "Please type a valid email address");
+            $this->errorHandler->addTaggedError('email', __('Please type a valid email address'));
             throw $this->errorHandler;
         }
     }

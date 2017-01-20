@@ -39,7 +39,7 @@ class RemoveNetworkTagFromProject
         }
 
         if (!$this->projectNetworkTagRepo->projectHasTagName($this->project->getId(), $this->tag)) {
-            $this->errorHandler->addTaggedError('tag', 'Project does not have this tag');
+            $this->errorHandler->addTaggedError('tag', 'The project does not have this tag');
             $this->errorHandler->throwIfNotEmpty();
         }
 

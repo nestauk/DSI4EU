@@ -31,7 +31,7 @@ class AddLinkToOrganisation
         $organisationRepository = new OrganisationRepository();
 
         if($this->organisationLinkRepository->organisationHasLink($this->data()->organisationID, $this->data()->link)) {
-            $this->errorHandler->addTaggedError('skill', 'Organisation already has this link');
+            $this->errorHandler->addTaggedError('skill', __('The organisation already has this link'));
             $this->errorHandler->throwIfNotEmpty();
         }
             

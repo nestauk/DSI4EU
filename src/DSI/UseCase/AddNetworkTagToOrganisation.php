@@ -39,7 +39,7 @@ class AddNetworkTagToOrganisation
         }
 
         if ($this->organisationNetworkTagRepo->organisationHasTagName($this->organisation->getId(), $this->tag)) {
-            $this->errorHandler->addTaggedError('tag', 'Organisation already has this tag');
+            $this->errorHandler->addTaggedError('tag', __('The organisation already has this tag'));
             $this->errorHandler->throwIfNotEmpty();
         }
 

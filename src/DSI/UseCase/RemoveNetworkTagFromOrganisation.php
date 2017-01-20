@@ -39,7 +39,7 @@ class RemoveNetworkTagFromOrganisation
         }
 
         if (!$this->organisationNetworkTagRepo->organisationHasTagName($this->organisation->getId(), $this->tag)) {
-            $this->errorHandler->addTaggedError('tag', 'Organisation does not have this tag');
+            $this->errorHandler->addTaggedError('tag', 'The organisation does not have this tag');
             $this->errorHandler->throwIfNotEmpty();
         }
 

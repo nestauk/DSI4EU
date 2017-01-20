@@ -262,10 +262,10 @@ class UpdateProject
     private function checkIfMandatoryDetailsHaveBeenSent()
     {
         if (isset($this->data()->name) AND $this->data()->name == '')
-            $this->errorHandler->addTaggedError('name', 'Please type the project name');
+            $this->errorHandler->addTaggedError('name', __('Please type a project name'));
 
         if (isset($this->data()->shortDescription) AND $this->data()->shortDescription == '')
-            $this->errorHandler->addTaggedError('shortDescription', 'Please type the project short description');
+            $this->errorHandler->addTaggedError('shortDescription', __('Please type the project short description'));
 
         $this->errorHandler->throwIfNotEmpty();
     }

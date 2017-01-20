@@ -31,7 +31,7 @@ class AddLinkToUser
         $userRepo = new UserRepository();
 
         if($this->userLinkRepo->userHasLink($this->data()->userID, $this->data()->link)) {
-            $this->errorHandler->addTaggedError('skill', 'User already has this link');
+            $this->errorHandler->addTaggedError('skill', __('The user already has this link'));
             $this->errorHandler->throwIfNotEmpty();
         }
             

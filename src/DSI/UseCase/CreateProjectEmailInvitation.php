@@ -43,7 +43,7 @@ class CreateProjectEmailInvitation
         $this->userRepository = new UserRepository();
 
         if ($this->projectEmailInvitationRepo->projectInvitedEmail($this->data()->projectID, $this->data()->email)) {
-            $this->errorHandler->addTaggedError('email', 'This user has already been invited to the project');
+            $this->errorHandler->addTaggedError('email', __('This user has already been invited to join the project'));
             $this->errorHandler->throwIfNotEmpty();
         }
 

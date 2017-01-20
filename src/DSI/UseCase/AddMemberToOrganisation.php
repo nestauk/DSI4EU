@@ -38,7 +38,7 @@ class AddMemberToOrganisation
         $this->userRepository = new UserRepository();
 
         if ($this->organisationMemberRepo->organisationIDHasMemberID($this->data()->organisationID, $this->data()->userID)) {
-            $this->errorHandler->addTaggedError('member', 'This user is already a member of the organisation');
+            $this->errorHandler->addTaggedError('member', __('This user is already a member of the organisation'));
             $this->errorHandler->throwIfNotEmpty();
         }
 

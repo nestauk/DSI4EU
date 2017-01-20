@@ -119,7 +119,7 @@ class UpdateOrganisation
     {
         if (isset($this->data()->name))
             if ($this->data()->name == '')
-                $this->errorHandler->addTaggedError('name', 'Please type a organisation name');
+                $this->errorHandler->addTaggedError('name', __('Please type a organisation name'));
 
         $this->errorHandler->throwIfNotEmpty();
     }
@@ -268,7 +268,7 @@ class UpdateOrganisation
             'jpg', 'jpeg', 'png'
         ])
         ) {
-            $this->errorHandler->addTaggedError('file', 'Only image files accepted (received .' . $fileInfo->getExtension() . ')');
+            $this->errorHandler->addTaggedError('file', __('Only image files are accepted') . ' (received .' . $fileInfo->getExtension() . ')');
             $this->errorHandler->throwIfNotEmpty();
         }
     }

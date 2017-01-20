@@ -31,7 +31,7 @@ class CreateNetworkTag
         $this->networkTagRepo = new NetworkTagRepository();
 
         if($this->networkTagRepo->nameExists($this->data()->name)){
-            $this->errorHandler->addTaggedError('tag', 'Tag Already Exists');
+            $this->errorHandler->addTaggedError('tag', __('Tag name already exists'));
             $this->errorHandler->throwIfNotEmpty();
         }
 

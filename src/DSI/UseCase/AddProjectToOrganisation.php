@@ -96,7 +96,7 @@ class AddProjectToOrganisation
     private function checkIfTheOrganisationAlreadyHasTheProject()
     {
         if ($this->organisationProjectRepo->organisationHasProject($this->data()->organisationID, $this->data()->projectID)) {
-            $this->errorHandler->addTaggedError('project', 'The organisation already has this project');
+            $this->errorHandler->addTaggedError('project', __('The organisation already has this project'));
             $this->errorHandler->throwIfNotEmpty();
         }
     }

@@ -43,7 +43,7 @@ class RemoveSkillFromUser
         }
 
         if (!$this->userSkillRepo->userHasSkillName($this->data()->userID, $this->data()->skill)) {
-            $this->errorHandler->addTaggedError('skill', 'User does not have this skill');
+            $this->errorHandler->addTaggedError('skill', 'The user does not have this skill');
             $this->errorHandler->throwIfNotEmpty();
         }
 

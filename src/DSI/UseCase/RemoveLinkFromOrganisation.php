@@ -31,7 +31,7 @@ class RemoveLinkFromOrganisation
         $organisationRepository = new OrganisationRepository();
 
         if (!$this->organisationLinkRepository->organisationHasLink($this->data()->organisationID, $this->data()->link)) {
-            $this->errorHandler->addTaggedError('link', 'Organisation does not have this link');
+            $this->errorHandler->addTaggedError('link', __('The organisation does not have this link'));
             $this->errorHandler->throwIfNotEmpty();
         }
 

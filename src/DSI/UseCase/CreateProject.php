@@ -45,7 +45,7 @@ class CreateProject
         }
 
         if($this->data()->name == ''){
-            $this->errorHandler->addTaggedError('name', 'Please type a project name');
+            $this->errorHandler->addTaggedError('name', __('Please type a project name'));
             throw $this->errorHandler;
         }
 

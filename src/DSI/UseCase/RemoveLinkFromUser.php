@@ -31,7 +31,7 @@ class RemoveLinkFromUser
         $userRepo = new UserRepository();
 
         if (!$this->userLinkRepo->userHasLink($this->data()->userID, $this->data()->link)) {
-            $this->errorHandler->addTaggedError('link', 'User does not have this link');
+            $this->errorHandler->addTaggedError('link', __('The user does not have this link'));
             $this->errorHandler->throwIfNotEmpty();
         }
 

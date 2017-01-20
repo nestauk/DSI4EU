@@ -31,7 +31,7 @@ class RemoveLinkFromProject
         $projectRepository = new ProjectRepository();
 
         if (!$this->projectLinkRepository->projectHasLink($this->data()->projectID, $this->data()->link)) {
-            $this->errorHandler->addTaggedError('link', 'Project does not have this link');
+            $this->errorHandler->addTaggedError('link', __('The project does not have this link'));
             $this->errorHandler->throwIfNotEmpty();
         }
 

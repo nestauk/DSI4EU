@@ -33,7 +33,7 @@ class RemoveMemberFromProject
         $userRepo = new UserRepository();
 
         if (!$this->projectMemberRepo->projectIDHasMemberID($this->data()->projectID, $this->data()->userID)) {
-            $this->errorHandler->addTaggedError('member', 'User is not a member of the project');
+            $this->errorHandler->addTaggedError('member', 'The user is not a member of the project');
             $this->errorHandler->throwIfNotEmpty();
         }
 

@@ -44,7 +44,7 @@ class RemoveTagFromProject
         }
 
         if (!$this->projectTagRepo->projectHasTagName($this->data()->projectID, $this->data()->tag)) {
-            $this->errorHandler->addTaggedError('tag', 'Project does not have this tag');
+            $this->errorHandler->addTaggedError('tag', 'The project does not have this tag');
             $this->errorHandler->throwIfNotEmpty();
         }
 

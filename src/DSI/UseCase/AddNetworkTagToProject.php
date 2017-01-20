@@ -39,7 +39,7 @@ class AddNetworkTagToProject
         }
 
         if ($this->projectNetworkTagRepo->projectHasTagName($this->project->getId(), $this->tag)) {
-            $this->errorHandler->addTaggedError('tag', 'Project already has this tag');
+            $this->errorHandler->addTaggedError('tag', __('The project already has this tag'));
             $this->errorHandler->throwIfNotEmpty();
         }
 

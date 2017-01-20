@@ -42,7 +42,7 @@ class RemoveImpactHelpTagFromProject
         }
 
         if (!$this->projectImpactTagRepo->projectHasTagName($this->data()->projectID, $this->data()->tag)) {
-            $this->errorHandler->addTaggedError('tag', 'Project does not have this tag');
+            $this->errorHandler->addTaggedError('tag', __('Project does not have this tag'));
             $this->errorHandler->throwIfNotEmpty();
         }
 
