@@ -25,7 +25,7 @@
                 $scope.project.tags = $('#tagsSelect').val();
                 $scope.project.networkTags = $('#networkTagsSelect').val();
                 $scope.project.impactTagsA = $('#impact-tags-a').val();
-                $scope.project.impactTagsB = $('#impact-tags-b').val();
+                $scope.project.impactTagsB = getSelectedFocusTags();
                 $scope.project.impactTagsC = $('#impact-tags-c').val();
                 $scope.project.organisations = $('#organisationsSelect').val();
                 $scope.saveDetails({
@@ -37,8 +37,17 @@
                             $scope.currentTab = 'step2';
                         }
                     }
-                })
+                });
+
+                function getSelectedFocusTags() {
+                    var focusTags = [];
+                    $('input[name="focusTags[]"]:checked').each(function (i) {
+                        focusTags[i] = $(this).val();
+                    });
+                    return focusTags;
+                }
             };
+
             $scope.submitStep2 = function (params) {
                 $scope.project.countryID = editCountry.val();
                 $scope.project.region = editCountryRegion.val();

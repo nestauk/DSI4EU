@@ -125,24 +125,14 @@ if (!isset($urlHandler))
                                                                     <input type="checkbox" name="focusTags[]"
                                                                         <?php if (in_array($tag->getName(), $projectImpactTagsB)) echo 'checked' ?>
                                                                            value="<?php echo $tag->getName() ?>"/>
-                                                                    <?php echo show_input($tag->getName()) ?>
+                                                                    <strong><?php echo show_input($tag->getName()) ?></strong>
+                                                                    <br/>
+                                                                    <span style="font-weight: normal">
+                                                                        <?php _ehtml($tag->getDescription()) ?>
+                                                                    </span>
                                                                 </label>
                                                                 <br/>
                                                             <?php } ?>
-
-                                                            <div class="customSelect2">
-                                                                <select class="select2 creator-data-entry end w-input"
-                                                                        id="impact-tags-b" style="width:100%;border:0"
-                                                                        multiple
-                                                                        data-placeholder="<?php _ehtml('Write tags') ?>">
-                                                                    <?php foreach ($dsiFocusTags AS $tag) { ?>
-                                                                        <option value="<?php echo $tag->getName() ?>"
-                                                                            <?php if (in_array($tag->getName(), $projectImpactTagsB)) echo 'selected' ?>><?php
-                                                                            echo show_input($tag->getName())
-                                                                            ?></option>
-                                                                    <?php } ?>
-                                                                </select>
-                                                            </div>
                                                             <br/><br/>
 
                                                             <label><?php _ehtml('Your technology') ?></label>

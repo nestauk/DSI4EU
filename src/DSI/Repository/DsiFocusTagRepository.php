@@ -17,6 +17,7 @@ class DsiFocusTagRepository
 
         $insert = array();
         $insert[] = "`tag` = '" . addslashes($tag->getName()) . "'";
+        $insert[] = "`description` = '" . addslashes($tag->getDescription()) . "'";
 
         $query = new SQL("INSERT INTO `dsi-focus-tags` SET " . implode(', ', $insert) . "");
         $query->query();
@@ -39,6 +40,7 @@ class DsiFocusTagRepository
 
         $insert = array();
         $insert[] = "`tag` = '" . addslashes($tag->getName()) . "'";
+        $insert[] = "`description` = '" . addslashes($tag->getDescription()) . "'";
 
         $query = new SQL("UPDATE `dsi-focus-tags` SET " . implode(', ', $insert) . " WHERE `id` = '{$tag->getId()}'");
         $query->query();
@@ -71,7 +73,7 @@ class DsiFocusTagRepository
         $where = ["1"];
         $tags = [];
         $query = new SQL("SELECT 
-            id, tag
+            `id`, `tag`, `description`
           FROM `dsi-focus-tags` WHERE " . implode(' AND ', $where) . "");
         foreach ($query->fetch_all() AS $dbTag) {
             $tags[] = $this->buildTagFromData($dbTag);
@@ -95,6 +97,7 @@ class DsiFocusTagRepository
         $tagObj = new DsiFocusTag();
         $tagObj->setId($tag['id']);
         $tagObj->setName($tag['tag']);
+        $tagObj->setDescription($tag['description']);
         return $tagObj;
     }
 
@@ -106,7 +109,7 @@ class DsiFocusTagRepository
     private function getTagWhere($where)
     {
         $query = new SQL("SELECT 
-              id, tag
+              id, tag, `description`
             FROM `dsi-focus-tags` WHERE " . implode(' AND ', $where) . " LIMIT 1");
         $dbTag = $query->fetch();
         if (!$dbTag) {

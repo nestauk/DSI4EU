@@ -10,6 +10,9 @@ class DsiFocusTag
     /** @var string */
     private $name;
 
+    /** @var string */
+    private $description;
+
     /**
      * @return int
      */
@@ -43,5 +46,21 @@ class DsiFocusTag
     public function setName(string $name)
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return (string)$this->description;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription(string $description)
+    {
+        $this->description = (string)$description;
     }
 }
