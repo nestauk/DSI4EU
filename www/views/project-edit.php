@@ -133,6 +133,8 @@ if (!isset($urlHandler))
                                                                 </label>
                                                                 <br/>
                                                             <?php } ?>
+                                                            <div class="log-in-error" ng-show="errors.focusTags"
+                                                                 ng-bind="errors.focusTags"></div>
                                                             <br/><br/>
 
                                                             <label><?php _ehtml('Your technology') ?></label>
@@ -198,6 +200,8 @@ if (!isset($urlHandler))
                                                                     <?php } ?>
                                                                 </select>
                                                             </div>
+                                                            <div class="log-in-error" ng-show="errors.tags"
+                                                                 ng-bind="errors.tags"></div>
                                                             <br/><br/>
 
                                                             <label for="email">

@@ -143,6 +143,18 @@ require __DIR__ . '/header.php';
                         </ul>
                         <!-- Buttons end here -->
 
+                        This project was last updated
+                        <?php
+                            $sinceLastUpdate = $project->getSinceLastUpdate();
+                            if($sinceLastUpdate['years'] > 0)
+                                echo "{$sinceLastUpdate['years']} year(s) ago";
+                            elseif($sinceLastUpdate['months'] > 0)
+                                echo "{$sinceLastUpdate['months']} month(s) ago";
+                            elseif($sinceLastUpdate['days'] > 0)
+                                echo "{$sinceLastUpdate['days']} day(s) ago";
+                            elseif($sinceLastUpdate['days'] == 0)
+                                echo "today";
+                        ?>
 
                     </div>
                 </div>

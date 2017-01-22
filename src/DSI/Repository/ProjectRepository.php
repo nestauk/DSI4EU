@@ -19,6 +19,7 @@ class ProjectRepository
         $insert[] = "`status` = '" . addslashes($project->getStatus()) . "'";
         $insert[] = "`startDate` = '" . addslashes($project->getStartDate()) . "'";
         $insert[] = "`endDate` = '" . addslashes($project->getEndDate()) . "'";
+        $insert[] = "`lastUpdate` = NOW()";
         if ($project->getCountry())
             $insert[] = "`countryID` = '" . addslashes($project->getCountry()->getId()) . "'";
         if ($project->getRegion())
@@ -54,6 +55,7 @@ class ProjectRepository
         $insert[] = "`startDate` = '" . addslashes($project->getStartDate()) . "'";
         $insert[] = "`endDate` = '" . addslashes($project->getEndDate()) . "'";
         $insert[] = "`created` = '" . addslashes($project->getCreationTime()) . "'";
+        $insert[] = "`lastUpdate` = '" . addslashes($project->getLastUpdate()) . "'";
         if ($project->getCountry())
             $insert[] = "`countryID` = '" . addslashes($project->getCountry()->getId()) . "'";
         if ($project->getRegion())
@@ -116,6 +118,7 @@ class ProjectRepository
         $projectObj->setStartDate($project['startDate'] != '0000-00-00' ? $project['startDate'] : NULL);
         $projectObj->setEndDate($project['endDate'] != '0000-00-00' ? $project['endDate'] : NULL);
         $projectObj->setCreationTime($project['created'] != '0000-00-00 00:00:00' ? $project['created'] : NULL);
+        $projectObj->setLastUpdate($project['lastUpdate'] != '0000-00-00 00:00:00' ? $project['lastUpdate'] : NULL);
         if ($project['countryRegionID']) {
             $projectObj->setCountryRegion(
                 (new CountryRegionRepository())->getById($project['countryRegionID'])
@@ -168,7 +171,7 @@ class ProjectRepository
         $query = new SQL("SELECT 
             id, ownerID, name
           , shortDescription, description, url, status
-          , startDate, endDate, created
+          , startDate, endDate, created, lastUpdate
           , countryRegionID, organisationsCount
           , importID, logo, headerImage
           , socialImpact

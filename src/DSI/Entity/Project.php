@@ -22,7 +22,8 @@ class Project
         $status,
         $startDate,
         $endDate,
-        $creationTime;
+        $creationTime,
+        $lastUpdate;
 
     /** @var CountryRegion */
     private $countryRegion;
@@ -230,6 +231,7 @@ class Project
     }
 
     /**
+     * @param null $format
      * @return string
      */
     public function getCreationTime($format = null)
@@ -247,6 +249,39 @@ class Project
     public function setCreationTime($creationTime)
     {
         $this->creationTime = $creationTime;
+    }
+
+    /**
+     * @param null $format
+     * @return string
+     */
+    public function getLastUpdate($format = null): string
+    {
+        if ($format !== null) {
+            return date($format, strtotime($this->lastUpdate));
+        }
+
+        return $this->lastUpdate;
+    }
+
+    public function getSinceLastUpdate()
+    {
+        $today = new \DateTime();
+        $lastUpdate = new \DateTime(date($this->lastUpdate));
+
+        return [
+            'days' => $lastUpdate->diff($today)->days,
+            'months' => $lastUpdate->diff($today)->m,
+            'years' => $lastUpdate->diff($today)->y,
+        ];
+    }
+
+    /**
+     * @param string $lastUpdate
+     */
+    public function setLastUpdate($lastUpdate)
+    {
+        $this->lastUpdate = $lastUpdate;
     }
 
     /**

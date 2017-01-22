@@ -77,13 +77,14 @@ class UpdateProject
         if (isset($this->data()->countryID) AND isset($this->data()->region))
             $this->setRegion();
 
+        $this->data()->project->setLastUpdate(date('Y-m-d'));
         $this->projectRepo->save($this->data()->project);
 
         if (isset($this->data()->tags))
             $this->setTags();
         if (isset($this->data()->impactTagsA))
             $this->setImpactTagsA();
-        if (isset($this->data()->impactTagsB))
+        if (isset($this->data()->focusTags))
             $this->setImpactTagsB();
         if (isset($this->data()->impactTagsC))
             $this->setImpactTagsC();
@@ -147,7 +148,7 @@ class UpdateProject
     private function setImpactTagsB()
     {
         $projectTags = (new ProjectDsiFocusTagRepository())->getTagNamesByProject($this->data()->project);
-        foreach ($this->data()->impactTagsB AS $newTagName) {
+        foreach ($this->data()->focusTags AS $newTagName) {
             if (!in_array($newTagName, $projectTags)) {
                 $addTag = new AddDsiFocusTagToProject();
                 $addTag->data()->projectID = $this->data()->project->getId();
@@ -156,7 +157,7 @@ class UpdateProject
             }
         }
         foreach ($projectTags AS $oldTagName) {
-            if (!in_array($oldTagName, $this->data()->impactTagsB)) {
+            if (!in_array($oldTagName, $this->data()->focusTags)) {
                 $remTag = new RemoveDsiFocusTagFromProject();
                 $remTag->data()->projectID = $this->data()->project->getId();
                 $remTag->data()->tag = $oldTagName;
@@ -266,6 +267,12 @@ class UpdateProject
 
         if (isset($this->data()->shortDescription) AND $this->data()->shortDescription == '')
             $this->errorHandler->addTaggedError('shortDescription', __('Please type the project short description'));
+
+        if (isset($this->data()->focusTags) AND count($this->data()->focusTags) == 0)
+            $this->errorHandler->addTaggedError('focusTags', __('Please select at least one focus tag'));
+
+        if (isset($this->data()->tags) AND count($this->data()->tags) == 0)
+            $this->errorHandler->addTaggedError('tags', __('Please select at least one tag'));
 
         $this->errorHandler->throwIfNotEmpty();
     }
@@ -387,7 +394,7 @@ class UpdateProject_Data
     /** @var string[] */
     public $tags,
         $impactTagsA,
-        $impactTagsB,
+        $focusTags,
         $impactTagsC,
         $links,
         $organisations;
