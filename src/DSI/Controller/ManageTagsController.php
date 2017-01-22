@@ -221,7 +221,6 @@ class ManageTagsController
     private function deleteProjectImpactTag($tagID): bool
     {
         $this->removeProjectImpactTechTags($tagID);
-        $this->removeProjectDsiFocusTags($tagID);
         $this->removeProjectImpactHelpTags($tagID);
         $this->removeImpactTag($tagID);
 
@@ -308,17 +307,5 @@ class ManageTagsController
         $impactTagRepository = new ImpactTagRepository();
         $impactTag = $impactTagRepository->getById($tagID);
         $impactTagRepository->remove($impactTag);
-    }
-
-    /**
-     * @param $tagID
-     */
-    private function removeProjectDsiFocusTags($tagID)
-    {
-        $projectDsiFocusTagRepository = new ProjectDsiFocusTagRepository();
-        $projectDsiFocusTags = $projectDsiFocusTagRepository->getByTagID($tagID);
-        foreach ($projectDsiFocusTags AS $projectDsiFocusTag) {
-            $projectDsiFocusTagRepository->remove($projectDsiFocusTag);
-        }
     }
 }
