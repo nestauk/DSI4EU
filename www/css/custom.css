@@ -672,3 +672,6 @@ body#tinymce.mce-content-body {
 .notification-detail {
     width: 320px;
 }
+
+.rrssb-text {display:none;}
+.rrssb-buttons {max-width:200px;}
