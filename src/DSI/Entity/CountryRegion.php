@@ -11,7 +11,9 @@ class CountryRegion
     private $country;
 
     /** @var string */
-    private $name;
+    private $name,
+        $latitude,
+        $longitude;
 
     /**
      * @return int
@@ -67,5 +69,37 @@ class CountryRegion
     public function setCountry(Country $country)
     {
         $this->country = $country;
+    }
+
+    /**
+     * @return float
+     */
+    public function getLatitude(): float
+    {
+        return (float)$this->latitude;
+    }
+
+    /**
+     * @param float $latitude
+     */
+    public function setLatitude($latitude)
+    {
+        $this->latitude = (float)$latitude;
+    }
+
+    /**
+     * @return float
+     */
+    public function getLongitude(): float
+    {
+        return (float)$this->longitude;
+    }
+
+    /**
+     * @param float $longitude
+     */
+    public function setLongitude($longitude)
+    {
+        $this->longitude = (float)$longitude;
     }
 }

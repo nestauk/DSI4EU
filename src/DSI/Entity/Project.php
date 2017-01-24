@@ -325,6 +325,22 @@ class Project
     }
 
     /**
+     * @return string
+     */
+    public function getRegionLatitude()
+    {
+        return $this->countryRegion ? $this->countryRegion->getLatitude() : '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getRegionLongitude()
+    {
+        return $this->countryRegion ? $this->countryRegion->getLongitude() : '';
+    }
+
+    /**
      * @return int
      */
     public function getRegionID()

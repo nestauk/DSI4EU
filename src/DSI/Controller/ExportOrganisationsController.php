@@ -28,7 +28,6 @@ class ExportOrganisationsController
 
         if (isset($_GET['download'])) {
             header('Content-Description: File Transfer');
-            header('Content-Type: application/octet-stream');
             header('Content-Disposition: attachment; filename="dsi-organisations.' . $this->format . '"');
             header('Expires: 0');
             header('Cache-Control: must-revalidate');
@@ -36,10 +35,13 @@ class ExportOrganisationsController
         }
 
         if ($this->format == 'json') {
+            header('Content-Type: application/json');
             $this->exportJson($organisations);
         } elseif ($this->format == 'csv') {
+            header('Content-Type: text/csv');
             $this->exportCsv($organisations);
         } elseif ($this->format == 'xml') {
+            header('Content-Type: text/xml');
             $this->exportXml($organisations);
         }
     }
@@ -58,6 +60,8 @@ class ExportOrganisationsController
                 'long_description' => $organisation->getDescription(),
                 'country' => $organisation->getCountryName(),
                 'region' => $organisation->getRegionName(),
+                'latitude' => $organisation->getRegionLatitude(),
+                'longitude' => $organisation->getRegionLongitude(),
                 'address' => $organisation->getAddress(),
                 'organisation_type' => $organisation->getTypeName(),
                 'organisation_size' => $organisation->getSizeName(),
@@ -85,6 +89,8 @@ class ExportOrganisationsController
             'Long description',
             'Country',
             'Region',
+            'Latitude',
+            'Longitude',
             'Address',
             'Organisation type',
             'Organisation size',
@@ -104,6 +110,8 @@ class ExportOrganisationsController
                 'long_description' => $organisation->getDescription(),
                 'country' => $organisation->getCountryName(),
                 'region' => $organisation->getRegionName(),
+                'latitude' => $organisation->getRegionLatitude(),
+                'longitude' => $organisation->getRegionLongitude(),
                 'address' => $organisation->getAddress(),
                 'organisation_type' => $organisation->getTypeName(),
                 'organisation_size' => $organisation->getSizeName(),
@@ -134,6 +142,8 @@ class ExportOrganisationsController
             $xmlOrganisation->addChild('long_description', htmlspecialchars($organisation->getDescription()));
             $xmlOrganisation->addChild('country', htmlspecialchars($organisation->getCountryName()));
             $xmlOrganisation->addChild('region', htmlspecialchars($organisation->getRegionName()));
+            $xmlOrganisation->addChild('latitude', htmlspecialchars($organisation->getRegionLatitude()));
+            $xmlOrganisation->addChild('longitude', htmlspecialchars($organisation->getRegionLongitude()));
             $xmlOrganisation->addChild('address', htmlspecialchars($organisation->getAddress()));
             $xmlOrganisation->addChild('organisation_type', htmlspecialchars($organisation->getTypeName()));
             $xmlOrganisation->addChild('organisation_size', htmlspecialchars($organisation->getSizeName()));

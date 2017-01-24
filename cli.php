@@ -9,6 +9,7 @@ class CliRouter
             echo 'send-cached-emails' . PHP_EOL;
             echo 'import-user-project-organisation-links' . PHP_EOL;
             echo 'import-organisation-urls' . PHP_EOL;
+            echo 'cities-to-geolocation' . PHP_EOL;
             return;
         }
 
@@ -18,6 +19,8 @@ class CliRouter
             $this->importUserProjectOrganisationLink();
         } elseif ($args[1] == 'import-organisation-urls') {
             $this->importOrganisationURLs();
+        } elseif ($args[1] == 'cities-to-geolocation') {
+            $this->citiesToGeolocation();
         } else {
             echo 'Invalid argument';
         }
@@ -38,6 +41,12 @@ class CliRouter
     private function importOrganisationURLs()
     {
         $command = new \DSI\Controller\ImportOrgLinksController();
+        $command->exec();
+    }
+
+    private function citiesToGeolocation()
+    {
+        $command = new \DSI\Controller\CitiesToGeolocationController();
         $command->exec();
     }
 }

@@ -23,6 +23,8 @@ class CountryRegionRepository
         $insert = array();
         $insert[] = "`countryID` = '" . addslashes($countryRegion->getCountry()->getId()) . "'";
         $insert[] = "`name` = '" . addslashes($countryRegion->getName()) . "'";
+        $insert[] = "`lat` = '" . (float)($countryRegion->getLatitude()) . "'";
+        $insert[] = "`lng` = '" . (float)($countryRegion->getLongitude()) . "'";
 
         $query = new SQL("INSERT INTO `country-regions` SET " . implode(', ', $insert) . "");
         $query->query();
@@ -51,6 +53,8 @@ class CountryRegionRepository
         $insert = array();
         $insert[] = "`countryID` = '" . addslashes($countryRegion->getCountry()->getId()) . "'";
         $insert[] = "`name` = '" . addslashes($countryRegion->getName()) . "'";
+        $insert[] = "`lat` = '" . (float)($countryRegion->getLatitude()) . "'";
+        $insert[] = "`lng` = '" . (float)($countryRegion->getLongitude()) . "'";
 
         $query = new SQL("UPDATE `country-regions` SET " . implode(', ', $insert) . " WHERE `id` = '{$countryRegion->getId()}'");
         $query->query();
@@ -112,7 +116,7 @@ class CountryRegionRepository
     {
         $countryRegions = [];
         $query = new SQL("SELECT 
-            id, countryID, name
+            `id`, `countryID`, `name`, `lat`, `lng`
           FROM `country-regions` WHERE " . implode(' AND ', $where) . "");
         foreach ($query->fetch_all() AS $dbCountryRegion) {
             $countryRegions[] = $this->buildCountryRegionFromData($dbCountryRegion);
@@ -139,6 +143,8 @@ class CountryRegionRepository
             (new CountryRepository())->getById($countryRegion['countryID'])
         );
         $countryObj->setName($countryRegion['name']);
+        $countryObj->setLatitude($countryRegion['lat']);
+        $countryObj->setLongitude($countryRegion['lng']);
 
         self::$objects[$countryObj->getId()] = $countryObj;
 
@@ -153,7 +159,7 @@ class CountryRegionRepository
     private function getCountryRegionWhere($where)
     {
         $query = new SQL("SELECT 
-              id, countryID, name
+              `id`, `countryID`, `name`, `lat`, `lng`
             FROM `country-regions` WHERE " . implode(' AND ', $where) . " LIMIT 1");
         $dbCountryRegion = $query->fetch();
         if (!$dbCountryRegion) {

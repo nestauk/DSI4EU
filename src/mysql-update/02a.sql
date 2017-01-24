@@ -7,3 +7,5 @@ UPDATE `dsi-focus-tags` SET `description` = 'Growing networks and infrastructure
 ALTER TABLE `projects` ADD `lastUpdate` DATE NOT NULL AFTER `created`;
 UPDATE `projects` SET `lastUpdate` = `created`;
 UPDATE `projects` SET `lastUpdate` = '2016-08-01' WHERE `lastUpdate` = '0000-00-00';
+
+ALTER TABLE `country-regions` ADD `lat` DECIMAL(10,7) NOT NULL AFTER `name`, ADD `lng` DECIMAL(10,7) NOT NULL AFTER `lat`;

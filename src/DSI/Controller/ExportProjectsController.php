@@ -29,7 +29,6 @@ class ExportProjectsController
 
         if (isset($_GET['download'])) {
             header('Content-Description: File Transfer');
-            header('Content-Type: application/octet-stream');
             header('Content-Disposition: attachment; filename="dsi-projects.' . $this->format . '"');
             header('Expires: 0');
             header('Cache-Control: must-revalidate');
@@ -37,10 +36,13 @@ class ExportProjectsController
         }
 
         if ($this->format == 'json') {
+            header('Content-Type: application/json');
             $this->exportJson($projects);
         } elseif ($this->format == 'csv') {
+            header('Content-Type: text/csv');
             $this->exportCsv($projects);
         } elseif ($this->format == 'xml') {
+            header('Content-Type: text/xml');
             $this->exportXml($projects);
         }
     }
@@ -62,6 +64,8 @@ class ExportProjectsController
                 'end_date' => $project->getEndDate(),
                 'country' => $project->getCountryName(),
                 'region' => $project->getRegionName(),
+                'latitude' => $project->getRegionLatitude(),
+                'longitude' => $project->getRegionLongitude(),
                 'linked_organisation_ids' => $this->getProjectOrganisationIDs($project),
                 'who_we_help_tags' => $this->getTags($project),
                 'support_tags' => $this->getSupportsTags($project),
@@ -90,6 +94,8 @@ class ExportProjectsController
             'End date',
             'Country',
             'Region',
+            'Latitude',
+            'Longitude',
             'Linked Organisation IDs',
             'Who we help tags',
             'Support tags',
@@ -110,6 +116,8 @@ class ExportProjectsController
                 'end_date' => $project->getEndDate(),
                 'country' => $project->getCountryName(),
                 'region' => $project->getRegionName(),
+                'latitude' => $project->getRegionLatitude(),
+                'longitude' => $project->getRegionLongitude(),
                 'linked_organisation_ids' => implode(', ', $this->getProjectOrganisationIDs($project)),
                 'who_we_help_tags' => implode(', ', $this->getTags($project)),
                 'support_tags' => implode(', ', $this->getSupportsTags($project)),
@@ -141,6 +149,8 @@ class ExportProjectsController
             $xmlProject->addChild('end_date', htmlspecialchars($project->getEndDate()));
             $xmlProject->addChild('country', htmlspecialchars($project->getCountryName()));
             $xmlProject->addChild('region', htmlspecialchars($project->getRegionName()));
+            $xmlProject->addChild('latitude', htmlspecialchars($project->getRegionLatitude()));
+            $xmlProject->addChild('longitude', htmlspecialchars($project->getRegionLongitude()));
 
             $xmlOrganisations = $xmlProject->addChild('linked_organisation_ids');
             foreach ($this->getProjectOrganisationIDs($project) AS $organisationID)
