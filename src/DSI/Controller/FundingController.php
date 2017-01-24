@@ -32,7 +32,7 @@ class FundingController
             echo json_encode([
                 'sources' => $this->jsonSources(),
                 'months' => $this->jsonMonths(),
-                'fundings' => $this->jsonFundings($fundings),
+                'fundings' => $this->jsonSortedFundings($fundings),
                 'countries' => $this->jsonCountriesFromFundings($fundings),
                 'years' => $this->jsonYearsFromFundings($fundings),
             ]);
@@ -164,5 +164,22 @@ class FundingController
             'title' => '- All countries -',
         ]);
         return $countries;
+    }
+
+    /**
+     * @param $fundings Funding[]
+     * @return array
+     */
+    private function jsonSortedFundings($fundings)
+    {
+        $jsonFundings = $this->jsonFundings($fundings);
+
+        usort($jsonFundings, function ($jsonFundingA, $jsonFundingB) {
+            if (!$jsonFundingA['closingMonth'] AND $jsonFundingB['closingMonth']) return 1;
+            if ($jsonFundingA['closingMonth'] AND !$jsonFundingB['closingMonth']) return -1;
+            return ($jsonFundingA['closingMonth'] < $jsonFundingB['closingMonth']) ? -1 : 1;
+        });
+
+        return $jsonFundings;
     }
 }
