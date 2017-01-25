@@ -45,6 +45,11 @@ require __DIR__ . '/header.php';
                     <div class="single-post-content-card">
                         <p class="post-p"><?php echo $story->getContent() ?></p>
                     </div>
+
+                    <?php
+                    $socialShare = new \DSI\Service\SocialShare('https://' . SITE_DOMAIN . SITE_RELATIVE_PATH . $urlHandler->blogPost($story));
+                    $socialShare->renderHtml();
+                    ?>
                 </div>
                 <div class="w-col w-col-4">
                     <div class="sidebar-content-card">

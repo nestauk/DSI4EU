@@ -23,8 +23,8 @@ if (!isset($urlHandler))
 
 ?>
     <div
-        ng-controller="OrganisationController"
-        data-organisationid="<?php echo $organisation->getId() ?>">
+            ng-controller="OrganisationController"
+            data-organisationid="<?php echo $organisation->getId() ?>">
 
         <div class="case-study-intro org">
             <div class="header-content org">
@@ -71,6 +71,14 @@ if (!isset($urlHandler))
                                         <span class="green">- </span><?php echo show_input($org->getName()) ?>
                                     </a>
                                 <?php } ?>
+                            </div>
+                        </div>
+                        <div class="w-row">
+                            <div class="w-col w-col-12">
+                                <?php
+                                $socialShare = new \DSI\Service\SocialShare('https://' . SITE_DOMAIN . SITE_RELATIVE_PATH . $urlHandler->organisation($organisation));
+                                $socialShare->renderHtml();
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -222,6 +230,6 @@ if (!isset($urlHandler))
                             */ ?>
 
     <script
-        src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/OrganisationController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
+            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/OrganisationController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 
 <?php require __DIR__ . '/footer.php' ?>

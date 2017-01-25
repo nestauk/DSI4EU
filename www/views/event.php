@@ -31,6 +31,11 @@ require __DIR__ . '/header.php'
                         <img class="login-arrow"
                              src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
                     </a>
+
+                    <?php
+                    $socialShare = new \DSI\Service\SocialShare('https://' . SITE_DOMAIN . SITE_RELATIVE_PATH . $urlHandler->event($event));
+                    $socialShare->renderHtml();
+                    ?>
                 </div>
                 <div class="sidebar w-col w-col-4 w-col-stack">
                     <?php if ($userCanManageEvent) { ?>

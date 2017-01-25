@@ -68,6 +68,12 @@ require __DIR__ . '/header.php';
                 <?php } ?>
             </div>
         </div>
+
+        <?php
+        $socialShare = new \DSI\Service\SocialShare('https://' . SITE_DOMAIN . SITE_RELATIVE_PATH . $urlHandler->caseStudy($caseStudy));
+        $socialShare->renderHtml();
+        ?>
+
         <h3 class="related-h3"><?php _ehtml('More case studies')?></h3>
         <div class="w-row">
             <?php foreach ($caseStudies AS $i => $_caseStudy) { ?>
