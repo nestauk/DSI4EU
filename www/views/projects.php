@@ -208,10 +208,10 @@ $showAdvancedSearch = (
                                             <?php _ehtml('1 Organisation involved') ?>
                                         </span>
                                         <span ng-show="project.organisationsCount != 1">
-                                            <?php echo show_input(sprintf(
+                                            <?php echo sprintf(
                                                 _html('%s Organisations involved'),
                                                 '<span ng-bind="project.organisationsCount"></span>'
-                                            )) ?>
+                                            ) ?>
                                         </span>
                                     </div>
                                 </a>
