@@ -152,7 +152,7 @@ $showAdvancedSearch = (
                                                for="checkbox-2"><?php _ehtml('Open hardware') ?></label>
                                     </div>
                                     <div class="trend-notes">
-                                        <?php _ehtml('The use of open hardware and maker spaces to develop, make, adapt, hack and shape tools for social change') ?>
+                                        <?php _ehtml('Making things with open hardware to tackle social challenges') ?>
                                     </div>
                                     <div class="filter-checkbox w-checkbox">
                                         <input class="w-checkbox-input" data-name="Checkbox 5" id="checkbox-5"
@@ -162,7 +162,7 @@ $showAdvancedSearch = (
                                                for="checkbox-5"><?php _ehtml('Open networks') ?></label>
                                     </div>
                                     <div class="trend-notes">
-                                        <?php _ehtml('New networks and infrastructures, e.g. sensor networks, where people connect their devices [...]') ?>
+                                        <?php _ehtml('Growing networks and infrastructure through technology from the bottom up to tackle social challenges') ?>
                                     </div>
                                     <div class="filter-checkbox w-checkbox">
                                         <input class="w-checkbox-input" data-name="Checkbox 4" id="checkbox-4"
@@ -172,7 +172,7 @@ $showAdvancedSearch = (
                                                for="checkbox-4"><?php _ehtml('Open data') ?></label>
                                     </div>
                                     <div class="trend-notes">
-                                        <?php _ehtml('Innovative ways of opening up, capturing, using, analysing and interpreting open data') ?>
+                                        <?php _ehtml('Capturing, sharing, analysing and using open data to tackle social challenges') ?>
                                     </div>
                                     <div class="filter-checkbox w-checkbox">
                                         <input class="w-checkbox-input" data-name="Checkbox 3" id="checkbox-3"
@@ -181,10 +181,10 @@ $showAdvancedSearch = (
                                         <label class="w-form-label"
                                                for="checkbox-3"><?php _ehtml('Open knowledge') ?></label>
                                     </div>
+                                    <div class="trend-notes">
+                                        <?php _ehtml('Harnessing the power and assets of the crowd to tackle social challenges') ?>
+                                    </div>
                                 </form>
-                            </div>
-                            <div class="trend-notes">
-                                <?php _ehtml('Where people come together through online platforms to crowdsource or crowdfund solutions, [...]') ?>
                             </div>
                         </div>
                     </div>
