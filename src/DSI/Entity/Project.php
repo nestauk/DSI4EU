@@ -261,7 +261,7 @@ class Project
             return date($format, strtotime($this->lastUpdate));
         }
 
-        return $this->lastUpdate;
+        return (string)$this->lastUpdate;
     }
 
     public function getSinceLastUpdate()
