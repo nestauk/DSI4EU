@@ -1,0 +1,2 @@
+ALTER TABLE `impact-tags` ADD `isMain` TINYINT(1) UNSIGNED NOT NULL AFTER `tag`;
+ALTER TABLE `impact-tags` ADD `order` TINYINT UNSIGNED NOT NULL AFTER `isMain`;

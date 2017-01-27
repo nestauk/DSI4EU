@@ -2,7 +2,8 @@
 require __DIR__ . '/header.php';
 /** @var $project \DSI\Entity\Project */
 /** @var $tags \DSI\Entity\TagForProjects[] */
-/** @var $impactTags \DSI\Entity\ImpactTag[] */
+/** @var $impactMainTags \DSI\Entity\ImpactTag[] */
+/** @var $impactSecondaryTags \DSI\Entity\ImpactTag[] */
 /** @var $dsiFocusTags \DSI\Entity\DsiFocusTag[] */
 /** @var $projectTags string[] */
 /** @var $projectImpactTagsA string[] */
@@ -101,17 +102,29 @@ if (!isset($urlHandler))
                                                                 <?php _ehtml('In which area(s) of society is your project seeking to have impact? For example: education, democracy, culture, health, work, regeneration, environment, science, finance.') ?>
                                                             </p>
                                                             <div class="customSelect2">
+                                                                <?php foreach ($impactMainTags AS $tag) { ?>
+                                                                    <label>
+                                                                        <input type="checkbox" name="impactTags[]"
+                                                                               value="<?php echo show_input($tag->getName()) ?>"
+                                                                            <?php if (in_array($tag->getName(), $projectImpactTagsA)) echo 'checked' ?>/>
+                                                                        <?php echo show_input($tag->getName()) ?>
+                                                                    </label>
+                                                                <?php } ?>
+                                                                Others:
                                                                 <select class="select2 creator-data-entry end w-input"
                                                                         id="impact-tags-a" style="width:100%;border:0"
                                                                         multiple data-tags="true"
                                                                         data-placeholder="<?php _ehtml('Write tags') ?>">
-                                                                    <?php foreach ($impactTags AS $tag) { ?>
+                                                                    <?php foreach ($impactSecondaryTags AS $tag) { ?>
                                                                         <option value="<?php echo $tag->getName() ?>"
                                                                             <?php if (in_array($tag->getName(), $projectImpactTagsA)) echo 'selected' ?>><?php
                                                                             echo show_input($tag->getName())
                                                                             ?></option>
                                                                     <?php } ?>
                                                                 </select>
+
+                                                                <div class="log-in-error" ng-show="errors.areasOfImpact"
+                                                                     ng-bind="errors.areasOfImpact"></div>
                                                             </div>
                                                             <br/><br/>
 

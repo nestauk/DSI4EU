@@ -24,8 +24,8 @@
             $scope.submitStep1 = function (params) {
                 $scope.project.tags = $('#tagsSelect').val();
                 $scope.project.networkTags = $('#networkTagsSelect').val();
-                $scope.project.impactTagsA = $('#impact-tags-a').val();
-                $scope.project.impactTagsB = getSelectedFocusTags();
+                $scope.project.areasOfImpact = getAreaOfImpactTags();
+                $scope.project.focusTags = getSelectedFocusTags();
                 $scope.project.impactTagsC = $('#impact-tags-c').val();
                 $scope.project.organisations = $('#organisationsSelect').val();
                 $scope.saveDetails({
@@ -45,6 +45,14 @@
                         focusTags[i] = $(this).val();
                     });
                     return focusTags;
+                }
+
+                function getAreaOfImpactTags() {
+                    var selectedTags = $('#impact-tags-a').val() || [];
+                    $('input[name="impactTags[]"]:checked').each(function (i) {
+                        selectedTags.push($(this).val());
+                    });
+                    return selectedTags;
                 }
             };
 
@@ -157,9 +165,7 @@
             };
             listCountries();
         });
-}());
 
-(function () {
     tinymce.init({
         selector: '.editableTextarea',
         statusbar: false,
@@ -172,4 +178,5 @@
         image_advtab: true,
         paste_data_images: false
     });
+
 }());

@@ -57,8 +57,8 @@ class ProjectEditController
                         $updateProject->data()->name = $_POST['name'] ?? '';
                         $updateProject->data()->url = $_POST['url'] ?? '';
                         $updateProject->data()->tags = $_POST['tags'] ?? [];
-                        $updateProject->data()->impactTagsA = $_POST['impactTagsA'] ?? [];
-                        $updateProject->data()->focusTags = $_POST['impactTagsB'] ?? [];
+                        $updateProject->data()->areasOfImpact = $_POST['areasOfImpact'] ?? [];
+                        $updateProject->data()->focusTags = $_POST['focusTags'] ?? [];
                         $updateProject->data()->impactTagsC = $_POST['impactTagsC'] ?? [];
                         $updateProject->data()->links = $_POST['links'] ?? [];
                         $updateProject->data()->organisations = $_POST['organisations'] ?? [];
@@ -138,6 +138,8 @@ class ProjectEditController
             $data = ['project' => $project];
             $tags = (new TagForProjectsRepository())->getAll();
             $impactTags = (new ImpactTagRepository())->getAll();
+            $impactMainTags = array_slice($impactTags, 0, 7);
+            $impactSecondaryTags = array_slice($impactTags, 7);
             $dsiFocusTags = (new DsiFocusTagRepository())->getAll();
             $projectImpactTagsA = (new ProjectImpactHelpTagRepository())->getTagNamesByProject($project);
             $projectImpactTagsB = (new ProjectDsiFocusTagRepository())->getTagNamesByProject($project);

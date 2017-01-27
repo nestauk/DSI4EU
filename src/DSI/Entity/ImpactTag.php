@@ -5,10 +5,14 @@ namespace DSI\Entity;
 class ImpactTag
 {
     /** @var integer */
-    private $id;
+    private $id,
+        $order;
 
     /** @var string */
     private $name;
+
+    /** @var bool */
+    private $isMain;
 
     /**
      * @return int
@@ -43,5 +47,37 @@ class ImpactTag
     public function setName(string $name)
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return int
+     */
+    public function getOrder(): int
+    {
+        return (int)$this->order;
+    }
+
+    /**
+     * @param int $order
+     */
+    public function setOrder($order)
+    {
+        $this->order = (int)$order;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isMain(): bool
+    {
+        return (bool)$this->isMain;
+    }
+
+    /**
+     * @param bool $isMain
+     */
+    public function setIsMain($isMain)
+    {
+        $this->isMain = (bool)$isMain;
     }
 }

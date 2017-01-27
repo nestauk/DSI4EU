@@ -19,6 +19,8 @@ class ImpactTagRepository
 
         $insert = array();
         $insert[] = "`tag` = '" . addslashes($tag->getName()) . "'";
+        $insert[] = "`isMain` = '" . (bool)($tag->isMain()) . "'";
+        $insert[] = "`order` = '" . (int)($tag->getOrder()) . "'";
 
         $query = new SQL("INSERT INTO `{$this->table}` SET " . implode(', ', $insert) . "");
         $query->query();
@@ -41,6 +43,8 @@ class ImpactTagRepository
 
         $insert = array();
         $insert[] = "`tag` = '" . addslashes($tag->getName()) . "'";
+        $insert[] = "`isMain` = '" . (bool)($tag->isMain()) . "'";
+        $insert[] = "`order` = '" . (int)($tag->getOrder()) . "'";
 
         $query = new SQL("UPDATE `{$this->table}` SET " . implode(', ', $insert) . " WHERE `id` = '{$tag->getId()}'");
         $query->query();
@@ -81,16 +85,31 @@ class ImpactTagRepository
     /** @return ImpactTag[] */
     public function getAll()
     {
-        $where = ["1"];
-        $tags = [];
+        return $this->getTagsWhere(["1"]);
+    }
+
+    /** @return ImpactTag[] */
+    public function getMainTags()
+    {
+        return $this->getTagsWhere([
+            "`isMain` = 1"
+        ]);
+    }
+
+    /**
+     * @param $where
+     * @return ImpactTag[]
+     */
+    private function getTagsWhere($where)
+    {
         $query = new SQL("SELECT 
-            id, tag
+            `id`, `tag`, `isMain`, `order`
           FROM `{$this->table}` WHERE " . implode(' AND ', $where) . "
-          ORDER BY tag");
-        foreach ($query->fetch_all() AS $dbTag) {
-            $tags[] = $this->buildTagFromData($dbTag);
-        }
-        return $tags;
+          ORDER BY `order` DESC, tag");
+
+        return array_map(function ($dbTag) {
+            return $this->buildTagFromData($dbTag);
+        }, $query->fetch_all());
     }
 
     public function clearAll()
@@ -109,6 +128,8 @@ class ImpactTagRepository
         $tagObj = new ImpactTag();
         $tagObj->setId($tag['id']);
         $tagObj->setName($tag['tag']);
+        $tagObj->setIsMain($tag['isMain']);
+        $tagObj->setOrder($tag['order']);
         return $tagObj;
     }
 
@@ -119,15 +140,11 @@ class ImpactTagRepository
      */
     private function getTagWhere($where)
     {
-        $query = new SQL("SELECT 
-              id, tag
-            FROM `{$this->table}` WHERE " . implode(' AND ', $where) . " LIMIT 1");
-        $dbTag = $query->fetch();
-        if (!$dbTag) {
+        $objects = $this->getTagsWhere($where);
+        if (count($objects) < 1)
             throw new DSI\NotFound();
-        }
 
-        return $this->buildTagFromData($dbTag);
+        return $objects[0];
     }
 
     /**

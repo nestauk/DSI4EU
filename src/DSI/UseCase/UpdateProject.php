@@ -82,8 +82,8 @@ class UpdateProject
 
         if (isset($this->data()->tags))
             $this->setTags();
-        if (isset($this->data()->impactTagsA))
-            $this->setImpactTagsA();
+        if (isset($this->data()->areasOfImpact))
+            $this->setAreasOfImpact();
         if (isset($this->data()->focusTags))
             $this->setImpactTagsB();
         if (isset($this->data()->impactTagsC))
@@ -124,10 +124,10 @@ class UpdateProject
         }
     }
 
-    private function setImpactTagsA()
+    private function setAreasOfImpact()
     {
         $projectTags = (new ProjectImpactHelpTagRepository())->getTagNamesByProject($this->data()->project);
-        foreach ($this->data()->impactTagsA AS $newTagName) {
+        foreach ($this->data()->areasOfImpact AS $newTagName) {
             if (!in_array($newTagName, $projectTags)) {
                 $addTag = new AddImpactHelpTagToProject();
                 $addTag->data()->projectID = $this->data()->project->getId();
@@ -136,7 +136,7 @@ class UpdateProject
             }
         }
         foreach ($projectTags AS $oldTagName) {
-            if (!in_array($oldTagName, $this->data()->impactTagsA)) {
+            if (!in_array($oldTagName, $this->data()->areasOfImpact)) {
                 $remTag = new RemoveImpactHelpTagFromProject();
                 $remTag->data()->projectID = $this->data()->project->getId();
                 $remTag->data()->tag = $oldTagName;
@@ -268,6 +268,9 @@ class UpdateProject
         if (isset($this->data()->shortDescription) AND $this->data()->shortDescription == '')
             $this->errorHandler->addTaggedError('shortDescription', __('Please type the project short description'));
 
+        if (isset($this->data()->areasOfImpact) AND count($this->data()->areasOfImpact) == 0)
+            $this->errorHandler->addTaggedError('areasOfImpact', __('Please select at least one area of impact'));
+
         if (isset($this->data()->focusTags) AND count($this->data()->focusTags) == 0)
             $this->errorHandler->addTaggedError('focusTags', __('Please select at least one focus tag'));
 
@@ -393,7 +396,7 @@ class UpdateProject_Data
 
     /** @var string[] */
     public $tags,
-        $impactTagsA,
+        $areasOfImpact,
         $focusTags,
         $impactTagsC,
         $links,
