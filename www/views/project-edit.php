@@ -99,7 +99,7 @@ if (!isset($urlHandler))
                                                             <br/><br/>
                                                             <label><?php _ehtml('Areas of impact') ?></label>
                                                             <p>
-                                                                <?php _ehtml('In which area(s) of society is your project seeking to have impact? For example: education, democracy, culture, health, work, regeneration, environment, science, finance.') ?>
+                                                                <?php _ehtml('In which area(s) of society is your project seeking to have impact? If "Other", please specify') ?>
                                                             </p>
                                                             <div class="customSelect2">
                                                                 <?php foreach ($impactMainTags AS $tag) { ?>
