@@ -110,7 +110,7 @@ if (!isset($urlHandler))
                                                                         <?php echo show_input($tag->getName()) ?>
                                                                     </label>
                                                                 <?php } ?>
-                                                                Others:
+                                                                <b><?php _ehtml('Other (please specify):') ?></b>
                                                                 <select class="select2 creator-data-entry end w-input"
                                                                         id="impact-tags-a" style="width:100%;border:0"
                                                                         multiple data-tags="true"

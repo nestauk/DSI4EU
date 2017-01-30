@@ -53,11 +53,15 @@ class OrganisationRepositoryInAPC extends OrganisationRepository
 
     public static function resetCache()
     {
-        \apcu_delete(self::$apcKey);
+        if (function_exists("apcu_exists"))
+            \apcu_delete(self::$apcKey);
     }
 
     private function getAllFromCache()
     {
+        if (!function_exists("apcu_exists"))
+            return parent::getAll();
+
         if (!\apcu_exists(self::$apcKey)) {
             error_log(self::$apcKey . ' was not set');
             $results = parent::getAll();
