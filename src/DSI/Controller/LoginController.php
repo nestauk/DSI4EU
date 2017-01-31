@@ -27,9 +27,11 @@ class LoginController
 
                 $authUser->saveUserInSession($login->getUser());
 
-                $action = new RememberPermanentLogin();
-                $action->setUser($login->getUser());
-                $action->exec();
+                if(isset($_POST['rememberMe']) AND $_POST['rememberMe']) {
+                    $action = new RememberPermanentLogin();
+                    $action->setUser($login->getUser());
+                    $action->exec();
+                }
 
                 if ($this->responseFormat === 'json') {
                     echo json_encode([

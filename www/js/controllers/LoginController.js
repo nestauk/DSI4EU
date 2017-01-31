@@ -14,6 +14,7 @@ angular
             var data = {
                 email: $scope.email.value,
                 password: $scope.password.value,
+                rememberMe: (!!$scope.rememberMe),
                 login: true
             };
 

@@ -20,11 +20,11 @@ use DSI\Service\URL;
             <img class="log-in-logo" src="<?php echo SITE_RELATIVE_PATH ?>/images/dark_1.svg">
         </a>
         <?php if (isset($_GET['from']) AND $_GET['from'] == 'organisation') { ?>
-            <h2><?php _ehtml('You must be logged in to add an organisation')?></h2>
+            <h2><?php _ehtml('You must be logged in to add an organisation') ?></h2>
         <?php } elseif (isset($_GET['from']) AND $_GET['from'] == 'project') { ?>
-            <h2><?php _ehtml('You must be logged in to add a project')?></h2>
+            <h2><?php _ehtml('You must be logged in to add a project') ?></h2>
         <?php } else { ?>
-            <h2><?php _ehtml('Log in to my account')?></h2>
+            <h2><?php _ehtml('Log in to my account') ?></h2>
         <?php } ?>
 
         <div class="form-wrapper w-form">
@@ -41,15 +41,22 @@ use DSI\Service\URL;
                        ng-class="{error: errors.password}">
                 <div class="log-in-error" ng-show="errors.password" ng-bind="errors.password"></div>
 
+                <label>
+                    <input type="checkbox" name="rememberMe" ng-model="rememberMe" value="1" />
+                    Remember me
+                    <span style="font-weight: normal;font-size: smaller">(Do not use this option on a shared or public device)</span>
+                </label>
+
                 <button type="submit" class="auto ll log-in-link w-clearfix w-inline-block" data-ix="log-in-arrow"
                         style="width:180px;display:block">
                     <span class="login-li menu-li"
                           ng-bind="loading ? '<?php _ehtml('Loading...') ?>' : '<?php _ehtml('login') ?>'"></span>
                     <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
                 </button>
-                <a class="log-in-link-note" href="#" ng-click="forgotPassword.show = true"><?php _ehtml('Forgot password')?></a>
+                <a class="log-in-link-note" href="#"
+                   ng-click="forgotPassword.show = true"><?php _ehtml('Forgot password') ?></a>
                 <a class="log-in-link-note second" href="<?php echo $urlHandler->register() ?>">
-                    <?php _ehtml("Don't have an account?")?>
+                    <?php _ehtml("Don't have an account?") ?>
                 </a>
             </form>
         </div>
@@ -57,7 +64,7 @@ use DSI\Service\URL;
 
     <div class="form-container" ng-show="forgotPassword.show" ng-cloak="">
         <img class="log-in-logo" src="<?php echo SITE_RELATIVE_PATH ?>/images/dark_1.svg">
-        <h2><?php _ehtml('Reset your password')?></h2>
+        <h2><?php _ehtml('Reset your password') ?></h2>
 
         <div class="form-wrapper w-form">
             <form class="login-form-nu" id="email-form" name="email-form"
@@ -113,13 +120,14 @@ use DSI\Service\URL;
                           ng-bind="forgotPassword.loading ? '<?php _ehtml('Loading...') ?>' : '<?php _ehtml('Reset my password') ?>'"></span>
                     <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
                 </button>
-                <a class="log-in-link-note" href="#" ng-click="forgotPassword.show = false"><?php _ehtml('Back to login')?></a>
+                <a class="log-in-link-note" href="#"
+                   ng-click="forgotPassword.show = false"><?php _ehtml('Back to login') ?></a>
             </form>
         </div>
     </div>
 
 
-    <div class="or-login-with">- <?php _ehtml('or log in with')?> -</div>
+    <div class="or-login-with">- <?php _ehtml('or log in with') ?> -</div>
     <div class="w-row">
         <div class="w-col w-col-3 w-col-small-3 w-col-tiny-6">
             <a class="log-in-with-link w-inline-block" href="<?php echo URL::loginWithFacebook() ?>">
