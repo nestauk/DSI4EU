@@ -4,36 +4,15 @@ namespace DSI\Entity;
 
 class AuthToken
 {
-    /** @var integer */
-    private $id;
-
     /** @var string */
     private $selector,
         $token,
+        $ip,
         $created,
         $lastUse;
 
     /** @var User */
     private $user;
-
-    /**
-     * @return int
-     */
-    public function getId(): int
-    {
-        return (int)$this->id;
-    }
-
-    /**
-     * @param int $id
-     */
-    public function setId(int $id)
-    {
-        if ($id <= 0)
-            throw new \InvalidArgumentException('id: ' . $id);
-
-        $this->id = $id;
-    }
 
     /**
      * @return string
@@ -113,5 +92,21 @@ class AuthToken
     public function setUser(User $user)
     {
         $this->user = $user;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIp(): string
+    {
+        return (string)$this->ip;
+    }
+
+    /**
+     * @param string $ip
+     */
+    public function setIp($ip)
+    {
+        $this->ip = (string)$ip;
     }
 }

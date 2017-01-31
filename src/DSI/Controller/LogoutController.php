@@ -19,7 +19,7 @@ class LogoutController
         $authUser = new Auth();
         $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
 
-        $authUser->removeUserFromSession($authUser->getUserId());
+        $authUser->removeUserFromSession($authUser->getUser());
         go_to($urlHandler->home());
     }
 }

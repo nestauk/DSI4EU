@@ -2,10 +2,37 @@
 namespace DSI\Service;
 
 use DSI\Entity\User;
+use DSI\Repository\AuthTokenRepository;
 use DSI\Repository\UserRepository;
 
 class Auth
 {
+    public function __construct()
+    {
+        if (isset($_COOKIE[PermanentLogin::$cookieName]) AND !$this->isLoggedIn()) {
+            try {
+                list($selector, $token) = explode(':', $_COOKIE[PermanentLogin::$cookieName], 2);
+                $authTokenRepo = new AuthTokenRepository();
+                $authToken = $authTokenRepo->getBySelector($selector);
+
+                if (!password_verify($token, $authToken->getToken()))
+                    throw new \Exception('Invalid cookie value');
+
+
+                $authToken->setLastUse(date('Y-m-d H:i:s'));
+                $authTokenRepo->save($authToken);
+
+                $this->saveUserInSession(
+                    $authToken->getUser()
+                );
+
+                error_log("auto login for: " . $authToken->getUser()->getEmail());
+            } catch (\Exception $e) {
+                setcookie(PermanentLogin::$cookieName, '', 1);
+            }
+        }
+    }
+
     public function isLoggedIn(): bool
     {
         return (
@@ -48,9 +75,12 @@ class Auth
         $_SESSION['user']['lastName'] = $user->getLastName();
     }
 
-    public function removeUserFromSession(int $userID)
+    public function removeUserFromSession(User $user)
     {
+        $this->deleteUserAuthTokens($user);
+
         unset($_SESSION['user']);
+        setcookie(PermanentLogin::$cookieName, '', 1);
 
         session_regenerate_id(TRUE);
     }
@@ -66,6 +96,18 @@ class Auth
     {
         if ($this->isLoggedIn()) {
             go_to($url);
+        }
+    }
+
+    /**
+     * @param User $user
+     */
+    private function deleteUserAuthTokens(User $user)
+    {
+        $authTokenRepository = new AuthTokenRepository();
+        $userTokens = $authTokenRepository->getAllByUser($user);
+        foreach ($userTokens AS $userToken) {
+            $authTokenRepository->remove($userToken);
         }
     }
 }

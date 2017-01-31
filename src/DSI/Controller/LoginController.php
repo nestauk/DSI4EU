@@ -5,6 +5,7 @@ use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\URL;
 use DSI\UseCase\Login;
+use DSI\UseCase\RememberPermanentLogin;
 
 class LoginController
 {
@@ -25,6 +26,10 @@ class LoginController
                 $login->exec();
 
                 $authUser->saveUserInSession($login->getUser());
+
+                $action = new RememberPermanentLogin();
+                $action->setUser($login->getUser());
+                $action->exec();
 
                 if ($this->responseFormat === 'json') {
                     echo json_encode([

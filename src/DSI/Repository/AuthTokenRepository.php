@@ -4,6 +4,7 @@ namespace DSI\Repository;
 
 use DSI\DuplicateEntry;
 use DSI\Entity\AuthToken;
+use DSI\Entity\User;
 use DSI\NotFound;
 use DSI\Service\SQL;
 
@@ -20,13 +21,12 @@ class AuthTokenRepository
         $insert[] = "`selector` = '" . addslashes($authToken->getSelector()) . "'";
         $insert[] = "`token` = '" . addslashes($authToken->getToken()) . "'";
         $insert[] = "`userID` = '" . addslashes($authToken->getUser()->getId()) . "'";
+        $insert[] = "`ip` = '" . addslashes(getIP()) . "'";
         $insert[] = "`created` = NOW()";
         $insert[] = "`lastUse` = NOW()";
 
         $query = new SQL("INSERT INTO `{$this->dbTable}` SET " . implode(', ', $insert));
         $query->query();
-
-        $authToken->setId($query->insert_id());
     }
 
     public function save(AuthToken $authToken)
@@ -34,36 +34,50 @@ class AuthTokenRepository
         if (!$authToken->getSelector())
             throw new \DSI\NotEnoughData('selector');
 
-        $query = new SQL("SELECT id FROM `{$this->table}` WHERE id = '{$authToken->getId()}' LIMIT 1");
+        $query = new SQL("SELECT selector FROM `{$this->dbTable}` WHERE selector = '{$authToken->getSelector()}' LIMIT 1");
         $existingToken = $query->fetch();
         if (!$existingToken)
-            throw new \DSI\NotFound('token ID: ' . $authToken->getId());
+            throw new \DSI\NotFound('token selector: ' . $authToken->getSelector());
 
         $insert = array();
         $insert[] = "`selector` = '" . addslashes($authToken->getSelector()) . "'";
         $insert[] = "`token` = '" . addslashes($authToken->getToken()) . "'";
         $insert[] = "`userID` = '" . addslashes($authToken->getUser()->getId()) . "'";
+        $insert[] = "`ip` = '" . addslashes($authToken->getIp()) . "'";
         $insert[] = "`lastUse` = '" . addslashes($authToken->getLastUse()) . "'";
 
-        $query = new SQL("UPDATE `{$this->table}` SET " . implode(', ', $insert) . " WHERE `id` = '{$authToken->getId()}'");
+        $query = new SQL("UPDATE `{$this->dbTable}` 
+          SET " . implode(', ', $insert) . " 
+          WHERE `selector` = '{$authToken->getSelector()}'");
         $query->query();
     }
 
     public function remove(AuthToken $authToken)
     {
-        $query = new SQL("SELECT id FROM `{$this->dbTable}` WHERE id = '{$authToken->getId()}' LIMIT 1");
+        $query = new SQL("SELECT selector FROM `{$this->dbTable}` WHERE selector = '{$authToken->getSelector()}' LIMIT 1");
         $existingToken = $query->fetch();
         if (!$existingToken)
-            throw new NotFound('token ID: ' . $authToken->getId());
+            throw new NotFound('token selector: ' . $authToken->getSelector());
 
-        $query = new SQL("DELETE FROM `{$this->dbTable}` WHERE id = '{$authToken->getId()}' LIMIT 1");
+        $query = new SQL("DELETE FROM `{$this->dbTable}` WHERE selector = '{$authToken->getSelector()}' LIMIT 1");
         $query->query();
     }
 
-    public function getById(int $id)
+    public function getBySelector($selector)
     {
         return $this->getObjectWhere([
-            "`id` = {$id}"
+            "`selector` = '" . addslashes($selector) . "'"
+        ]);
+    }
+
+    /**
+     * @param User $user
+     * @return AuthToken[]
+     */
+    public function getAllByUser(User $user)
+    {
+        return $this->getObjectsWhere([
+            "`userID` = '" . (int)($user->getId()) . "'"
         ]);
     }
 
@@ -101,16 +115,16 @@ class AuthTokenRepository
     {
         $authTokens = [];
         $query = new SQL("SELECT 
-            id, selector, token, userID, created, lastUse
+            selector, token, userID, ip, created, lastUse
           FROM `{$this->dbTable}` WHERE " . implode(' AND ', $where) . "");
         foreach ($query->fetch_all() AS $dbAuthToken) {
             $authToken = new AuthToken();
-            $authToken->setId($dbAuthToken['id']);
             $authToken->setSelector($dbAuthToken['selector']);
             $authToken->setToken($dbAuthToken['token']);
             $authToken->setUser(
                 (new UserRepository())->getById($dbAuthToken['userID'])
             );
+            $authToken->setIp($dbAuthToken['ip']);
             $authToken->setCreated($dbAuthToken['created']);
             $authToken->setLastUse($dbAuthToken['lastUse']);
             $authTokens[] = $authToken;
@@ -131,7 +145,7 @@ class AuthTokenRepository
      */
     private function checkExistingObjectWhere($where)
     {
-        $query = new SQL("SELECT id FROM `{$this->table}` WHERE " . implode(' AND ', $where) . " LIMIT 1");
+        $query = new SQL("SELECT selector FROM `{$this->dbTable}` WHERE " . implode(' AND ', $where) . " LIMIT 1");
         return ($query->fetch() ? true : false);
     }
 }

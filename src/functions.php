@@ -8,7 +8,7 @@
 
 function getIP()
 {
-    return "{$_SERVER['REMOTE_ADDR']}" . ($_SERVER['HTTP_X_FORWARDED_FOR'] ? '/' . $_SERVER['HTTP_X_FORWARDED_FOR'] : '');
+    return "{$_SERVER['REMOTE_ADDR']}" . (isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? '/' . $_SERVER['HTTP_X_FORWARDED_FOR'] : '');
 }
 
 function go_to($url = NULL, $perm = 302)

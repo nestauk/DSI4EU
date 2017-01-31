@@ -641,7 +641,7 @@ class Router
 
         $command = new \DSI\Controller\ProfileController();
         $command->data()->format = $format;
-        $command->data()->userURL = $matches[3];
+        $command->data()->userURL = $matches[3] ?? '';
         $command->exec();
     }
 
