@@ -158,11 +158,16 @@ class Funding
     }
 
     /**
+     * @param null $format
      * @return string
      */
-    public function getTimeCreated(): string
+    public function getTimeCreated($format = null): string
     {
-        return (string)$this->timeCreated;
+        if ($format) {
+            $date = strtotime($this->timeCreated);
+            return date($format, $date);
+        } else
+            return (string)$this->timeCreated;
     }
 
     /**

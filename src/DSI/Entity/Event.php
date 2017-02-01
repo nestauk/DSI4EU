@@ -163,6 +163,7 @@ class Event
     }
 
     /**
+     * @param null $format
      * @return string
      */
     public function getStartDate($format = null): string

@@ -257,6 +257,16 @@ class Router
         } elseif (preg_match('<^/' . $langHandler . 'org/([0-9]+)(\/.*)?$>', $this->pageURL, $matches)) {
             $this->organisation($matches);
 
+// RSS feeds
+        } elseif ($this->pageURL === '/rss/news-and-blogs.xml') {
+            $this->rssNewsBlogs();
+
+        } elseif ($this->pageURL === '/rss/events.xml') {
+            $this->rssEvents();
+
+        } elseif ($this->pageURL === '/rss/funding-opportunities.xml') {
+            $this->rssFundingOpportunities();
+
 // Static pages
         } elseif ($this->pageURL === '/robots.txt') {
             $this->robotsTxt();
@@ -972,6 +982,24 @@ class Router
 
         $command = new \DSI\Controller\FeedbackController();
         $command->format = 'json';
+        $command->exec();
+    }
+
+    private function rssNewsBlogs()
+    {
+        $command = new \DSI\Controller\RssNewsBlogsController();
+        $command->exec();
+    }
+
+    private function rssEvents()
+    {
+        $command = new \DSI\Controller\RssEventsController();
+        $command->exec();
+    }
+
+    private function rssFundingOpportunities()
+    {
+        $command = new \DSI\Controller\RssFundingOpportunitiesController();
         $command->exec();
     }
 

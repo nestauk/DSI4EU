@@ -350,6 +350,21 @@ class URL
         return SITE_RELATIVE_PATH . '/uploadImage.json';
     }
 
+    public function rssNewsBlogs()
+    {
+        return SITE_RELATIVE_PATH . '/rss/news-and-blogs.xml';
+    }
+
+    public function rssEvents()
+    {
+        return SITE_RELATIVE_PATH . '/rss/events.xml';
+    }
+
+    public function rssFundingOpportunities()
+    {
+        return SITE_RELATIVE_PATH . '/rss/funding-opportunities.xml';
+    }
+
 
     /**
      * @param $title
@@ -380,5 +395,13 @@ class URL
     public function setCurrentLanguage($currentLanguage)
     {
         $this->currentLanguage = (string)$currentLanguage;
+    }
+
+    public function fullUrl($shortAbsoluteUrl)
+    {
+        return
+            (MUST_USE_HTTPS ? 'https://' : 'http://') .
+            SITE_DOMAIN .
+            $shortAbsoluteUrl;
     }
 }
