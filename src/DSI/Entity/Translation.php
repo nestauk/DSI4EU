@@ -10,6 +10,9 @@ class Translation
         'en',
         'de',
         'fr',
+        'it',
+        'es',
+        'ca'
     ];
     const DEFAULT_LANGUAGE = 'en';
 
