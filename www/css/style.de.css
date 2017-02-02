@@ -11184,3 +11184,15 @@ html.w-mod-js *[data-ix="growinanim"] {
 .log-in-link.sign-up.large.search-results {
     width: 360px !important;
 }
+
+.tab-button-next.update-button {
+    width: auto !important;
+}
+
+.tab-button-next {
+    width:auto !important;
+}
+
+.tab-button-next.tab-button-publish {
+    width: auto !important;
+}
