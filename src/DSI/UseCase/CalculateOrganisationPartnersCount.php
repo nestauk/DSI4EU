@@ -19,12 +19,11 @@ class CalculateOrganisationPartnersCount
     /** @var OrganisationProjectRepository */
     private $organisationProjectRepo;
 
-    /** @var CalculateOrganisationPartnersCount_Data */
-    private $data;
+    /** @var Organisation */
+    private $organisation;
 
     public function __construct()
     {
-        $this->data = new CalculateOrganisationPartnersCount_Data();
     }
 
     public function exec()
@@ -33,30 +32,21 @@ class CalculateOrganisationPartnersCount
         $this->organisationRepo = new OrganisationRepository();
         $this->organisationProjectRepo = new OrganisationProjectRepository();
 
-        if ($this->data()->organisationID <= 0) {
+        if ($this->organisation->getId() <= 0) {
             $this->errorHandler->addTaggedError('organisation', 'Invalid organisation ID');
             throw $this->errorHandler;
         }
 
-        $organisation = $this->organisationRepo->getById($this->data()->organisationID);
-        $projectsInvolved = $this->getInvolvedProjects($organisation);
+        $projectsInvolved = $this->getInvolvedProjects($this->organisation);
         $organisationsInvolved = $this->getInvolvedOrganisations($projectsInvolved);
         $organisationsInvolved = array_unique($organisationsInvolved);
         $organisationsInvolved = array_filter($organisationsInvolved);
-        $organisationsInvolved = $this->excludeCurrentOrganisation($organisationsInvolved, $organisation);
-        
-        $organisation->setPartnersCount(
+        $organisationsInvolved = $this->excludeCurrentOrganisation($organisationsInvolved, $this->organisation);
+
+        $this->organisation->setPartnersCount(
             count($organisationsInvolved)
         );
-        $this->organisationRepo->save($organisation);
-    }
-
-    /**
-     * @return CalculateOrganisationPartnersCount_Data
-     */
-    public function data()
-    {
-        return $this->data;
+        $this->organisationRepo->save($this->organisation);
     }
 
     /**
@@ -99,10 +89,12 @@ class CalculateOrganisationPartnersCount
         $organisationsInvolved = array_diff($organisationsInvolved, [$organisation->getId()]);
         return $organisationsInvolved;
     }
-}
 
-class CalculateOrganisationPartnersCount_Data
-{
-    /** @var int */
-    public $organisationID;
+    /**
+     * @param Organisation $organisation
+     */
+    public function setOrganisation(Organisation $organisation)
+    {
+        $this->organisation = $organisation;
+    }
 }

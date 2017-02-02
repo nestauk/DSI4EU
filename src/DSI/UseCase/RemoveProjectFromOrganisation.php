@@ -59,7 +59,9 @@ class RemoveProjectFromOrganisation
     private function setOrganisationPartnersCount()
     {
         $calculateOrganisationPartnersCountCmd = new CalculateOrganisationPartnersCount();
-        $calculateOrganisationPartnersCountCmd->data()->organisationID = $this->data()->organisationID;
+        $calculateOrganisationPartnersCountCmd->setOrganisation(
+            $this->organisationRepository->getById($this->data()->organisationID)
+        );
         $calculateOrganisationPartnersCountCmd->exec();
     }
 

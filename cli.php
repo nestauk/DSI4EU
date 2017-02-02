@@ -10,6 +10,7 @@ class CliRouter
             echo 'import-user-project-organisation-links' . PHP_EOL;
             echo 'import-organisation-urls' . PHP_EOL;
             echo 'cities-to-geolocation' . PHP_EOL;
+            echo 'update-organisations-partners-count' . PHP_EOL;
             return;
         }
 
@@ -21,6 +22,8 @@ class CliRouter
             $this->importOrganisationURLs();
         } elseif ($args[1] == 'cities-to-geolocation') {
             $this->citiesToGeolocation();
+        } elseif ($args[1] == 'update-organisations-partners-count') {
+            $this->updateOrganisationsPartnersCount();
         } else {
             echo 'Invalid argument';
         }
@@ -47,6 +50,12 @@ class CliRouter
     private function citiesToGeolocation()
     {
         $command = new \DSI\Controller\CitiesToGeolocationController();
+        $command->exec();
+    }
+
+    private function updateOrganisationsPartnersCount()
+    {
+        $command = new \DSI\Controller\UpdateOrganisationsPartnersCount();
         $command->exec();
     }
 }

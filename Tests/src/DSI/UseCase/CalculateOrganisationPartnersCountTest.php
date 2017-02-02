@@ -53,12 +53,12 @@ class CalculateOrganisationPartnersCountTest extends PHPUnit_Framework_TestCase
         $this->addProjectToOrganisation($project1, $organisation1);
         $this->addProjectToOrganisation($project2, $organisation2);
 
-        $this->calculateOrgPartnersCntCmd->data()->organisationID = $organisation1->getId();
+        $this->calculateOrgPartnersCntCmd->setOrganisation($organisation1);
         $this->calculateOrgPartnersCntCmd->exec();
         $organisation = $this->organisationRepo->getById($organisation1->getId());
         $this->assertEquals(0, $organisation->getPartnersCount());
 
-        $this->calculateOrgPartnersCntCmd->data()->organisationID = $organisation2->getId();
+        $this->calculateOrgPartnersCntCmd->setOrganisation($organisation2);
         $this->calculateOrgPartnersCntCmd->exec();
         $organisation = $this->organisationRepo->getById($organisation2->getId());
         $this->assertEquals(0, $organisation->getPartnersCount());
@@ -76,13 +76,13 @@ class CalculateOrganisationPartnersCountTest extends PHPUnit_Framework_TestCase
         $this->addProjectToOrganisation($project1, $organisation2);
 
 
-        $this->calculateOrgPartnersCntCmd->data()->organisationID = $organisation1->getId();
+        $this->calculateOrgPartnersCntCmd->setOrganisation($organisation1);
         $this->calculateOrgPartnersCntCmd->exec();
         $organisation = $this->organisationRepo->getById($organisation1->getId());
         $this->assertEquals(1, $organisation->getPartnersCount());
 
 
-        $this->calculateOrgPartnersCntCmd->data()->organisationID = $organisation2->getId();
+        $this->calculateOrgPartnersCntCmd->setOrganisation($organisation2);
         $this->calculateOrgPartnersCntCmd->exec();
         $organisation = $this->organisationRepo->getById($organisation2->getId());
         $this->assertEquals(1, $organisation->getPartnersCount());
@@ -102,19 +102,19 @@ class CalculateOrganisationPartnersCountTest extends PHPUnit_Framework_TestCase
         $this->addProjectToOrganisation($project1, $organisation3);
 
 
-        $this->calculateOrgPartnersCntCmd->data()->organisationID = $organisation1->getId();
+        $this->calculateOrgPartnersCntCmd->setOrganisation($organisation1);
         $this->calculateOrgPartnersCntCmd->exec();
         $organisation = $this->organisationRepo->getById($organisation1->getId());
         $this->assertEquals(2, $organisation->getPartnersCount());
 
 
-        $this->calculateOrgPartnersCntCmd->data()->organisationID = $organisation2->getId();
+        $this->calculateOrgPartnersCntCmd->setOrganisation($organisation2);
         $this->calculateOrgPartnersCntCmd->exec();
         $organisation = $this->organisationRepo->getById($organisation2->getId());
         $this->assertEquals(2, $organisation->getPartnersCount());
 
 
-        $this->calculateOrgPartnersCntCmd->data()->organisationID = $organisation3->getId();
+        $this->calculateOrgPartnersCntCmd->setOrganisation($organisation3);
         $this->calculateOrgPartnersCntCmd->exec();
         $organisation = $this->organisationRepo->getById($organisation3->getId());
         $this->assertEquals(2, $organisation->getPartnersCount());

@@ -20,6 +20,7 @@ use DSI\Service\ErrorHandler;
 use DSI\Service\Mailer;
 use DSI\Service\URL;
 use DSI\UseCase\AddMemberRequestToOrganisation;
+use DSI\UseCase\CalculateOrganisationPartnersCount;
 use DSI\UseCase\Organisations\FollowOrganisation;
 use DSI\UseCase\Organisations\RemoveOrganisation;
 use DSI\UseCase\Organisations\UnfollowOrganisation;
@@ -46,6 +47,8 @@ class OrganisationController
         $loggedInUser = $authUser->getUserIfLoggedIn();
         $organisationRepo = new OrganisationRepository();
         $organisation = $organisationRepo->getById($this->data()->organisationID);
+
+        $this->updateOrganisationPartnersCount($organisation);
 
         $userIsMember = false;
         $userSentJoinRequest = false;
@@ -549,6 +552,16 @@ class OrganisationController
             }
         }
         return true;
+    }
+
+    /**
+     * @param $organisation
+     */
+    private function updateOrganisationPartnersCount($organisation)
+    {
+        $exec = (new CalculateOrganisationPartnersCount());
+        $exec->setOrganisation($organisation);
+        $exec->exec();
     }
 }
 
