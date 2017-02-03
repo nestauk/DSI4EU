@@ -84,33 +84,33 @@ if (!isset($urlHandler))
                 <p class="top-3-p"><?php _e('Use our funding directory to find opportunities for your project') ?></p>
                 <a class="log-in-link read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
                    href="<?php echo $urlHandler->funding() ?>">
-                    <div class="login-li menu-li readmore-li"><?php _ehtml('Read more')?></div>
+                    <div class="login-li menu-li readmore-li"><?php _ehtml('Read more') ?></div>
                     <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
                 </a>
             </div>
         </div>
         <div class="top-3-col w-col w-col-4" data-ix="fadeinuponload-13">
             <div class="top-3-link" data-ix="underline">
-                <h3 class="top3-h3"><?php _ehtml('Events')?></h3>
+                <h3 class="top3-h3"><?php _ehtml('Events') ?></h3>
                 <div class="top3-underline" data-ix="new-interaction-2"></div>
                 <p class="top-3-p"><?php _e('Explore DSI events happening around Europe') ?></p>
                 <a class="log-in-link read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
                    href="<?php echo $urlHandler->events() ?>">
-                    <div class="login-li menu-li readmore-li"><?php _ehtml('Read more')?></div>
+                    <div class="login-li menu-li readmore-li"><?php _ehtml('Read more') ?></div>
                     <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
                 </a>
             </div>
         </div>
         <div class="top-3-col w-col w-col-4" data-ix="fadeinuponload-14">
             <div class="top-3-link" data-ix="underline">
-                <h3 class="top3-h3"><?php _ehtml('News & blogs')?></h3>
+                <h3 class="top3-h3"><?php _ehtml('News & blogs') ?></h3>
                 <div class="top3-underline" data-ix="new-interaction-2"></div>
                 <p class="top-3-p">
                     <?php _e('Our blog features stories of the people and projects pioneering digital social innovation') ?>
                 </p>
                 <a class="log-in-link read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
                    href="<?php echo $urlHandler->blogPosts() ?>">
-                    <div class="login-li menu-li readmore-li"><?php _ehtml('Read more')?></div>
+                    <div class="login-li menu-li readmore-li"><?php _ehtml('Read more') ?></div>
                     <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
                 </a>
             </div>
@@ -122,29 +122,21 @@ if (!isset($urlHandler))
         <h2 class="centered h2-large" data-ix="fadeinuponload-2">
             <?php _e('EXPLORE EUROPE’S GROWING NETWORK OF DIGITAL SOCIAL INNOVATION') ?>
         </h2>
-        <div class="stat-text w-row">
-            <div class="w-col w-col-5">
-                <div class="number-of-orgs"
-                     data-ix="fadeinuponload-3"><?php echo number_format($organisationsCount) ?></div>
-                <a class="organisations-2" data-ix="fadeinuponload-4" href="<?php echo $urlHandler->organisations() ?>">Organisations</a>
-            </div>
-            <div class="w-col w-col-2">
-                <div class="have-collab" data-ix="fadeinuponload-5">have collaborated on</div>
-            </div>
-            <div class="w-col w-col-5">
-                <div class="number-of-orgs pro"
-                     data-ix="fadeinuponload-6"><?php echo number_format($projectsCount) ?></div>
-                <a class="organisations-2" data-ix="fadeinuponload-7" href="<?php echo $urlHandler->projects() ?>">Projects</a>
-            </div>
-        </div>
+
+        <?php
+        if (\DSI\Service\Translate::getCurrentLang() == 'de')
+            require __DIR__ . '/partialViews/index-de.php';
+        else
+            require __DIR__ . '/partialViews/index-en.php';
+        ?>
     </div>
 </div>
 <div class="home-page-events">
     <div class="content-block cs">
-        <h3 class="centered title"><?php _ehtml('Case Studies')?></h3>
+        <h3 class="centered title"><?php _ehtml('Case Studies') ?></h3>
         <div class="sub-header-centre"><?php _e('IN NEED OF INSPIRATION?') ?></div>
         <p class="centered">
-            <?php _ehtml('Short stories introducing digital social innovations which we love')?>
+            <?php _ehtml('Short stories introducing digital social innovations which we love') ?>
         </p>
         <div class="w-row">
             <?php foreach ($homePageCaseStudies AS $i => $caseStudy) { ?>
@@ -158,7 +150,7 @@ if (!isset($urlHandler))
                         <h3 class="case-study-card-h3"><?php echo show_input($caseStudy->getTitle()) ?></h3>
                         <p class="cradp"><?php echo show_input($caseStudy->getIntroCardText()) ?></p>
                         <div class="log-in-link read-more w-clearfix" data-ix="log-in-arrow">
-                            <div class="login-li menu-li readmore-li"><?php _ehtml('Read more')?></div>
+                            <div class="login-li menu-li readmore-li"><?php _ehtml('Read more') ?></div>
                             <img class="login-arrow"
                                  src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
                         </div>
@@ -169,7 +161,7 @@ if (!isset($urlHandler))
         <div class="signn">
             <a class="large log-in-link sign-up w-clearfix w-inline-block" data-ix="log-in-arrow"
                href="<?php echo $urlHandler->caseStudies() ?>">
-                <div class="login-li menu-li"><?php _ehtml('See all case studies')?></div>
+                <div class="login-li menu-li"><?php _ehtml('See all case studies') ?></div>
                 <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
             </a>
         </div>
@@ -180,29 +172,29 @@ if (!isset($urlHandler))
     <div class="mailchimp-container">
         <div class="w-row">
             <div class="w-col w-col-4">
-                <div class="newsletter-title"><?php _ehtml('Newsletter')?></div>
-                <div class="news-p"><?php _ehtml('Sign up to stay up to date with DSI4EU')?></div>
+                <div class="newsletter-title"><?php _ehtml('Newsletter') ?></div>
+                <div class="news-p"><?php _ehtml('Sign up to stay up to date with DSI4EU') ?></div>
             </div>
             <div class="w-col w-col-8">
                 <div class="w-form">
                     <div id="mc_embed_signup">
                         <form
-                            action="//digitalsocial.us14.list-manage.com/subscribe/post?u=668c39c8408fd7322d7b61d39&amp;id=c2085cdb78"
-                            method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"
-                            class="validate" target="_blank" novalidate>
+                                action="//digitalsocial.us14.list-manage.com/subscribe/post?u=668c39c8408fd7322d7b61d39&amp;id=c2085cdb78"
+                                method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"
+                                class="validate" target="_blank" novalidate>
                             <div id="mc_embed_signup_scroll">
                                 <div class="mc-field-group">
                                     <input type="text" value="" name="FNAME" class="signup-in w-input" id="mce-FNAME"
-                                           placeholder="<?php _ehtml('First name')?>">
+                                           placeholder="<?php _ehtml('First name') ?>">
                                 </div>
                                 <div class="mc-field-group">
                                     <input type="text" value="" name="LNAME" class="signup-in w-input" id="mce-LNAME"
-                                           placeholder="<?php _ehtml('Last name')?>">
+                                           placeholder="<?php _ehtml('Last name') ?>">
                                 </div>
                                 <div class="mc-field-group">
                                     <input type="text" value="" name="EMAIL" class="signup-in w-input email"
                                            id="mce-EMAIL"
-                                           placeholder="<?php _ehtml('Email address')?>">
+                                           placeholder="<?php _ehtml('Email address') ?>">
                                 </div>
                                 <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
                                 <div style="position: absolute; left: -5000px;" aria-hidden="true">
@@ -212,7 +204,7 @@ if (!isset($urlHandler))
                                            value="">
                                 </div>
                                 <div style="display: inline;">
-                                    <input type="submit" value="<?php _ehtml('Subscribe')?>" name="subscribe"
+                                    <input type="submit" value="<?php _ehtml('Subscribe') ?>" name="subscribe"
                                            id="mc-embedded-subscribe"
                                            class="button footer-signup w-button">
                                 </div>
@@ -330,8 +322,8 @@ if (!isset($urlHandler))
             width: 100%;
         }
 
-        .newsletter-signup{
-            height:auto;
+        .newsletter-signup {
+            height: auto;
         }
     }
 
