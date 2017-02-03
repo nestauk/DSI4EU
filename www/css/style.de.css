@@ -11163,3 +11163,36 @@ html.w-mod-js *[data-ix="growinanim"] {
   }
 }
 
+.twitter-text {
+    margin-top:21px !important;
+    font-size:16px !important;
+}
+
+.homepage-twitter-logo {
+    margin-top: 11px !important;
+}
+
+.footer-black {
+    margin-top:0 !important;
+}
+
+.full-menu-link.view-all {
+    font-size: 12px !important;
+    width: 280px !important;
+}
+
+.log-in-link.sign-up.large.search-results {
+    width: 360px !important;
+}
+
+.tab-button-next.update-button {
+    width: auto !important;
+}
+
+.tab-button-next {
+    width:auto !important;
+}
+
+.tab-button-next.tab-button-publish {
+    width: auto !important;
+}
