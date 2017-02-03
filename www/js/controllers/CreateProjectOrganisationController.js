@@ -1,8 +1,6 @@
 angular
     .module(angularAppName)
     .controller('CreateProjectOrganisationController', function ($scope, $http, $timeout, $attrs) {
-        console.log($attrs.langpath);
-
         $scope.project = {};
         $scope.createProject = function () {
             $scope.project.loading = true;

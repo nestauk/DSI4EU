@@ -1,6 +1,8 @@
 angular
     .module(angularAppName)
-    .controller('SearchController', function ($scope, $http, $timeout) {
+    .controller('SearchController', function ($scope, $http, $attrs) {
+
+
         $scope.search = {};
         $scope.search.entry = '';
         $scope.search.caseStudies = [];
@@ -14,7 +16,7 @@ angular
             $scope.search.projects = [];
             $scope.search.organisations = [];
             if ($scope.search.entry.length >= 3) {
-                $http.post(SITE_RELATIVE_PATH + '/search.json', {
+                $http.post(SITE_RELATIVE_PATH + $attrs.langpath + '/search.json', {
                     term: $scope.search.entry
                 }).then(function (result) {
                     $scope.search.caseStudies = result.data.caseStudies;

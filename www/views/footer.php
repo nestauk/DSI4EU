@@ -390,7 +390,7 @@ if (!isset($urlHandler))
         src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/SearchController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"
         type="text/javascript"></script>
 
-<div class="search-block" ng-controller="SearchController">
+<div class="search-block" ng-controller="SearchController" data-langpath="<?php echo \DSI\Service\Translate::getCurrentLangPath()?>">
     <div class="close-search" data-ix="close-search-block">+</div>
     <h1 class="search-h1"><?php _ehtml('Search') ?></h1>
     <div class="w-form">
