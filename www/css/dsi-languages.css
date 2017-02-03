@@ -916,7 +916,7 @@ strong {
   color: #000;
   font-size: 16px;
   line-height: 26px;
-  font-weight: 600;
+  font-weight: 400;
 }
 
 .card-p.question {
@@ -2455,8 +2455,9 @@ strong {
   width: 80%;
   padding-top: 10px;
   padding-bottom: 10px;
+  border: 1px solid #1dc9a0;
   border-radius: 25px;
-  background-color: #1dc9a0;
+  background-color: #fff;
   font-family: Montserrat, sans-serif;
   color: #000;
   font-size: 16px;
@@ -2497,7 +2498,9 @@ strong {
   width: 80%;
   padding-top: 10px;
   padding-bottom: 10px;
+  border: 1px solid #1dc9a0;
   border-radius: 25px;
+  background-color: #1dc9a0;
   font-family: Montserrat, sans-serif;
   color: #000;
   font-size: 16px;
@@ -2537,7 +2540,7 @@ strong {
 }
 
 .dsi-button.story-image-upload {
-  width: 150px;
+  width: 160px;
   margin-top: 10px;
   margin-bottom: 60px;
   margin-left: 0px;
@@ -2834,6 +2837,11 @@ strong {
   text-transform: uppercase;
 }
 
+.page-h1.light.test-header {
+  margin-top: -117px;
+  padding-left: 20px;
+}
+
 .intro-title {
   height: auto;
   margin-right: 10px;
@@ -2917,6 +2925,7 @@ strong {
 }
 
 .notification-detail.post-latest-card {
+  width: 290px;
   margin-top: 20px;
   font-size: 16px;
 }
@@ -4636,7 +4645,7 @@ strong {
 }
 
 .step-window {
-  min-height: 750px;
+  min-height: auto;
   padding: 50px 0px 125px;
   background-color: #f3f3f3;
 }
@@ -8093,7 +8102,17 @@ strong {
 }
 
 .log-in-link.language.active {
-  background-color: rgba(29, 201, 160, .94);
+  width: 40px;
+  height: 40px;
+  margin-top: 27px;
+  padding-right: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  background-color: #fff;
+}
+
+.log-in-link.language.active:hover {
+  background-color: #1dc9a0;
 }
 
 .menu-col {
@@ -8698,6 +8717,10 @@ strong {
   padding-top: 93px;
 }
 
+.content-h1.test-header {
+  margin-top: -90px;
+}
+
 .intro {
   margin-top: 47px;
   margin-bottom: 50px;
@@ -8848,7 +8871,7 @@ strong {
 
 .footer-partner-logo {
   width: 131px;
-  margin-top: -15px;
+  margin-top: 15px;
 }
 
 .footer-partner-logo.nesta {
@@ -9436,6 +9459,15 @@ strong {
   box-shadow: 0 13px 50px -11px #000;
 }
 
+.create-drop-down-block.language-selctor {
+  left: -62px;
+  top: 47px;
+  right: -12px;
+  bottom: auto;
+  display: none;
+  height: auto;
+}
+
 .drop-down-link-li {
   display: block;
   margin-top: 0px;
@@ -9443,8 +9475,11 @@ strong {
   padding: 15px 10px 15px 20px;
   float: none;
   font-weight: 400;
+  text-align: left;
   text-decoration: none;
+  text-transform: uppercase;
 }
+
 
 .drop-down-link-li:hover {
   background-color: #f3f3f3;
@@ -9826,6 +9861,170 @@ strong {
 .twitter-footer-link {
   color: rgba(29, 201, 160, .94);
   font-weight: 400;
+}
+
+.test-body {
+  height: 100vh;
+  background-color: #20262c;
+  background-image: url('../images/shadowlight.png');
+  background-position: 117% 195%;
+  background-size: 500px;
+  background-repeat: no-repeat;
+}
+
+.test-info {
+  padding-top: 100px;
+}
+
+.test-h1 {
+  color: #1dc9a0;
+  text-align: center;
+}
+
+.test-detail {
+  margin-bottom: 46px;
+  color: #fff;
+  text-align: center;
+}
+
+.links {
+  display: block;
+  max-width: 1090px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.story-link {
+  position: relative;
+  width: 100%;
+  height: auto;
+  padding: 25px 25px 91px;
+  background-color: rgba(16, 20, 26, .91);
+  color: #fff;
+  text-decoration: none;
+}
+
+.story-link:hover {
+  background-color: #000;
+}
+
+.letter {
+  color: rgba(29, 201, 160, .94);
+  font-size: 116px;
+  line-height: 156px;
+  text-align: center;
+}
+
+.story-detail {
+  color: #fff;
+  text-align: center;
+}
+
+.start-button {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  bottom: 33px;
+  display: block;
+  width: 250px;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 10px;
+  border: 1px solid #1dc9a0;
+  background-color: transparent;
+  color: rgba(29, 201, 160, .94);
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.start-button:hover {
+  background-color: #1dc9a0;
+  color: #000;
+}
+
+.back-to-tests {
+  position: fixed;
+  top: 12px;
+  right: 25px;
+  padding: 12px 20px;
+  background-color: rgba(29, 33, 49, .87);
+  color: #1dc9a0;
+  text-decoration: none;
+}
+
+.add-item-button {
+  width: 220px;
+  margin-bottom: 15px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border: 1px solid #1dc9a0;
+  border-radius: 25px;
+  background-color: #1dc9a0;
+  color: #000;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.add-item-button.add-button {
+  background-color: #fff;
+}
+
+.new-modal {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: 250;
+  display: none;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, .7);
+}
+
+.new-modal-detail {
+  display: block;
+  width: 650px;
+  margin-top: 100px;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 50px;
+  background-color: #fff;
+}
+
+.modal-h1 {
+  font-size: 28px;
+  text-align: center;
+}
+
+.modal-p {
+  display: block;
+  max-width: 460px;
+  margin-right: auto;
+  margin-bottom: 25px;
+  margin-left: auto;
+  text-align: center;
+}
+
+.modal-add {
+  display: inline-block;
+  width: 258px;
+  padding: 10px;
+  background-color: #1dc9a0;
+  color: #000;
+  font-size: 18px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.not-now {
+  display: block;
+  margin-top: 45px;
+  margin-right: auto;
+  margin-left: auto;
+  font-size: 18px;
+  text-align: center;
 }
 
 html.w-mod-js *[data-ix="pin-drop"] {
@@ -10576,6 +10775,12 @@ html.w-mod-js *[data-ix="closed"] {
   }
   .twitter-text {
     margin-top: 10px;
+  }
+  .test-body {
+    height: 100%;
+  }
+  .story-link {
+    margin-bottom: 25px;
   }
 }
 

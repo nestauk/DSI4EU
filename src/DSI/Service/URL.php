@@ -14,9 +14,11 @@ class URL
 {
     private $currentLanguage;
 
-    public function __construct()
+    public function __construct($lang = null)
     {
-        $this->currentLanguage = Translate::getCurrentLang();
+        $this->setCurrentLanguage(
+            $lang ? $lang : Translate::getCurrentLang()
+        );
     }
 
     public function dashboard($format = null)

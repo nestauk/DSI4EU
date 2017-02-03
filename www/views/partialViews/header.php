@@ -125,41 +125,54 @@ if (!isset($urlHandler))
     </div>
     <div class="navbarnu w-nav" data-animation="over-left" data-collapse="all" data-duration="400">
         <div class="menu-div" style="max-width:1290px; margin: 0 auto;">
-        <a class="w-nav-brand" href="<?php echo $urlHandler->home() ?>">
-            <img class="brand-logo" src="<?php echo SITE_RELATIVE_PATH ?>/images/dark_1.svg">
-        </a>
-        <a class="m-brand w-nav-brand" href="<?php echo $urlHandler->home() ?>">
-            <img class="brand-logo m-brand" src="<?php echo SITE_RELATIVE_PATH ?>/images/shadowlight.png">
-        </a>
-        <div class="menu-button w-nav-button" data-ix="navbarinteraction">
-            <div class="top-line"></div>
-            <div class="middle-line"></div>
-            <div class="bottom-line"></div>
-            <div class="menu-li">Menu</div>
-        </div>
-        <?php if (isset($loggedInUser) AND $loggedInUser) { ?>
-            <div class="create ll log-in-link w-clearfix" data-ix="create-dropdown">
-                <div class="login-li menu-li"><?php _e('Create') ?></div>
-                <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-plus-empty.png">
-                <div class="create-drop-down-block">
-                    <a class="drop-down-link-li" data-ix="create-project-modal"
-                       href="#"><?php _e('Create project') ?></a>
-                    <a class="drop-down-link-li" data-ix="create-organisation-modal"
-                       href="#"><?php _e('Create organisation') ?></a>
+            <a class="w-nav-brand" href="<?php echo $urlHandler->home() ?>">
+                <img class="brand-logo" src="<?php echo SITE_RELATIVE_PATH ?>/images/dark_1.svg">
+            </a>
+            <a class="m-brand w-nav-brand" href="<?php echo $urlHandler->home() ?>">
+                <img class="brand-logo m-brand" src="<?php echo SITE_RELATIVE_PATH ?>/images/shadowlight.png">
+            </a>
+            <div class="menu-button w-nav-button" data-ix="navbarinteraction">
+                <div class="top-line"></div>
+                <div class="middle-line"></div>
+                <div class="bottom-line"></div>
+                <div class="menu-li">Menu</div>
+            </div>
+            <?php if (isset($loggedInUser) AND $loggedInUser) { ?>
+                <div class="create ll log-in-link w-clearfix" data-ix="create-dropdown">
+                    <div class="login-li menu-li"><?php _e('Create') ?></div>
+                    <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-plus-empty.png">
+                    <div class="create-drop-down-block">
+                        <a class="drop-down-link-li" data-ix="create-project-modal"
+                           href="#"><?php _e('Create project') ?></a>
+                        <a class="drop-down-link-li" data-ix="create-organisation-modal"
+                           href="#"><?php _e('Create organisation') ?></a>
+                    </div>
+                </div>
+            <?php } else { ?>
+                <a class="ll log-in-link w-clearfix w-inline-block" data-ix="log-in-arrow"
+                   href="<?php echo $urlHandler->login() ?>">
+                    <div class="login-li menu-li"><?php _e('Login') ?></div>
+                    <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
+                </a>
+            <?php } ?>
+            <a class="log-in-link menu-search w-clearfix w-inline-block" data-ix="search-roll" href="#">
+                <div class="menu-li menu-search"><?php _e('Search') ?></div>
+                <img class="search-icon" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-search.png">
+            </a>
+            <div class="languages w-clearfix">
+                <div class="active language log-in-link" data-ix="create-dropdown">
+                    <img class="language-icon" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-world-outline.png">
+                    <div class="create-drop-down-block language-selctor">
+                        <a class="drop-down-link-li" href="<?php echo (new URL('en'))->home()?>">English</a>
+                        <a class="drop-down-link-li" href="<?php echo (new URL('fr'))->home()?>">French</a>
+                        <a class="drop-down-link-li" href="<?php echo (new URL('de'))->home()?>">German</a>
+                        <a class="drop-down-link-li" href="<?php echo (new URL('it'))->home()?>">Italian</a>
+                        <a class="drop-down-link-li" href="<?php echo (new URL('es'))->home()?>">Spanish</a>
+                        <a class="drop-down-link-li" href="<?php echo (new URL('ca'))->home()?>">Catalan</a>
+                    </div>
                 </div>
             </div>
-        <?php } else { ?>
-            <a class="ll log-in-link w-clearfix w-inline-block" data-ix="log-in-arrow"
-               href="<?php echo $urlHandler->login() ?>">
-                <div class="login-li menu-li"><?php _e('Login')?></div>
-                <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
-            </a>
-        <?php } ?>
-        <a class="log-in-link menu-search w-clearfix w-inline-block" data-ix="search-roll" href="#">
-            <div class="menu-li menu-search"><?php _e('Search')?></div>
-            <img class="search-icon" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-search.png">
-        </a>
-            </div>
+        </div>
     </div>
 
 <?php /*
