@@ -679,3 +679,10 @@ body#tinymce.mce-content-body {
 .languages.menu-languages {
     min-width:345px;
 }
+
+
+@media (max-width: 400px) {
+    .languages.menu-languages {
+        min-width:175px;
+    }
+}
