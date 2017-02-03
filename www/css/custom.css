@@ -675,3 +675,7 @@ body#tinymce.mce-content-body {
 
 .rrssb-text {display:none;}
 .rrssb-buttons {max-width:200px;}
+
+.languages.menu-languages {
+    min-width:345px;
+}
