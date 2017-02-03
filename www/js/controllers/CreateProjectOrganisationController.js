@@ -1,6 +1,8 @@
 angular
     .module(angularAppName)
-    .controller('CreateProjectOrganisationController', function ($scope, $http, $timeout) {
+    .controller('CreateProjectOrganisationController', function ($scope, $http, $timeout, $attrs) {
+        console.log($attrs.langpath);
+
         $scope.project = {};
         $scope.createProject = function () {
             $scope.project.loading = true;
@@ -9,7 +11,7 @@ angular
                 newProject: true,
                 name: $scope.project.name
             };
-            $http.post(SITE_RELATIVE_PATH + '/createProject.json', data)
+            $http.post(SITE_RELATIVE_PATH + $attrs.langpath + '/createProject.json', data)
                 .then(function (response) {
                     $timeout(function () {
                         $scope.project.loading = false;
@@ -32,7 +34,7 @@ angular
                 newOrganisation: true,
                 name: $scope.organisation.name
             };
-            $http.post(SITE_RELATIVE_PATH + '/createOrganisation.json', data)
+            $http.post(SITE_RELATIVE_PATH + $attrs.langpath + '/createOrganisation.json', data)
                 .then(function (response) {
                     $timeout(function () {
                         $scope.organisation.loading = false;

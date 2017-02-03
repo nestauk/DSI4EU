@@ -129,11 +129,11 @@ class Router
         } elseif (preg_match('<^/' . $langHandler . 'organisations.json$>', $this->pageURL, $matches)) {
             $this->organisationsJson($matches);
 
-        } elseif ($this->pageURL === '/createProject.json') {
-            $this->createProject();
+        } elseif (preg_match('<^/' . $langHandler . 'createProject.json$>', $this->pageURL, $matches)) {
+            $this->createProject($matches);
 
-        } elseif ($this->pageURL === '/createOrganisation.json') {
-            $this->createOrganisation();
+        } elseif (preg_match('<^/' . $langHandler . 'createOrganisation.json$>', $this->pageURL, $matches)) {
+            $this->createOrganisation($matches);
 
         } elseif ($this->pageURL === '/uploadProfilePicture') {
             $this->uploadProfilePicture();
@@ -718,14 +718,18 @@ class Router
         $command->exec();
     }
 
-    private function createProject()
+    private function createProject($matches)
     {
+        $this->setLanguageFromUrl($matches);
+
         $command = new \DSI\Controller\CreateProjectController();
         $command->exec();
     }
 
-    private function createOrganisation()
+    private function createOrganisation($matches)
     {
+        $this->setLanguageFromUrl($matches);
+
         $command = new \DSI\Controller\CreateOrganisationController();
         $command->exec();
     }

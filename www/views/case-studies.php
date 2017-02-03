@@ -6,7 +6,6 @@ require __DIR__ . '/header.php';
 /** @var $urlHandler \DSI\Service\URL */
 ?>
 
-
     <div ng-controller="CaseStudiesController"
          data-jsonurl="<?php echo $urlHandler->caseStudies('json') ?>">
 
@@ -47,7 +46,7 @@ require __DIR__ . '/header.php';
                         </p>
                         <div class="log-in-link read-more w-clearfix" data-ix="log-in-arrow">
                             <div class="login-li menu-li readmore-li"><?php _ehtml('Read more') ?></div>
-                            <img class="login-arrow" src="images/ios7-arrow-thin-right.png">
+                            <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH?>/images/ios7-arrow-thin-right.png">
                         </div>
                     </a>
                 </div>

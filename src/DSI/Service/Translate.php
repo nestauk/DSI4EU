@@ -84,4 +84,15 @@ class Translate
     {
         return self::$currentLang;
     }
+
+    /**
+     * @return string
+     */
+    public static function getCurrentLangPath()
+    {
+        if (self::$currentLang == Translation::DEFAULT_LANGUAGE)
+            return '';
+        else
+            return '/' . self::$currentLang;
+    }
 }

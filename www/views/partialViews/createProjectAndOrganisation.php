@@ -2,7 +2,7 @@
     src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/CreateProjectOrganisationController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"
     type="text/javascript"></script>
 
-<div ng-controller="CreateProjectOrganisationController">
+<div ng-controller="CreateProjectOrganisationController" data-langpath="<?php echo \DSI\Service\Translate::getCurrentLangPath()?>">
     <div class="create-project-modal modal">
         <div class="modal-container">
             <div class="modal-helper">
