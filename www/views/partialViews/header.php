@@ -9,6 +9,16 @@ if (!isset($urlHandler))
     <div class="menu-full-screen" data-ix="displaynone">
         <div class="main-menu">
             <div class="main-menu-profile-block w-clearfix">
+                <div class="languages menu-languages w-clearfix">
+                    <?php foreach (['ca', 'es', 'it', 'de', 'fr', 'en'] AS $lang) { ?>
+                        <a href="<?php echo (new URL($lang))->home() ?>"
+                           class="language log-in-link w-inline-block
+                           <?php if (\DSI\Service\Translate::getCurrentLang() == $lang) echo 'active' ?>">
+                            <div class="language menu-li menu-search"><?php echo ucfirst($lang) ?></div>
+                        </a>
+                    <?php } ?>
+                </div>
+
                 <?php if ($loggedInUser) { ?>
                     <div class="profile-img"
                          style="background-image: url('<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/<?php echo $loggedInUser->getProfilePicOrDefault() ?>');"></div>
@@ -163,12 +173,12 @@ if (!isset($urlHandler))
                 <div class="active language log-in-link" data-ix="create-dropdown">
                     <img class="language-icon" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-world-outline.png">
                     <div class="create-drop-down-block language-selctor">
-                        <a class="drop-down-link-li" href="<?php echo (new URL('en'))->home()?>">English</a>
-                        <a class="drop-down-link-li" href="<?php echo (new URL('fr'))->home()?>">French</a>
-                        <a class="drop-down-link-li" href="<?php echo (new URL('de'))->home()?>">German</a>
-                        <a class="drop-down-link-li" href="<?php echo (new URL('it'))->home()?>">Italian</a>
-                        <a class="drop-down-link-li" href="<?php echo (new URL('es'))->home()?>">Spanish</a>
-                        <a class="drop-down-link-li" href="<?php echo (new URL('ca'))->home()?>">Catalan</a>
+                        <a class="drop-down-link-li" href="<?php echo (new URL('en'))->home() ?>">English</a>
+                        <a class="drop-down-link-li" href="<?php echo (new URL('fr'))->home() ?>">French</a>
+                        <a class="drop-down-link-li" href="<?php echo (new URL('de'))->home() ?>">German</a>
+                        <a class="drop-down-link-li" href="<?php echo (new URL('it'))->home() ?>">Italian</a>
+                        <a class="drop-down-link-li" href="<?php echo (new URL('es'))->home() ?>">Spanish</a>
+                        <a class="drop-down-link-li" href="<?php echo (new URL('ca'))->home() ?>">Catalan</a>
                     </div>
                 </div>
             </div>
