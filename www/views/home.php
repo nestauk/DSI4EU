@@ -84,33 +84,33 @@ if (!isset($urlHandler))
                 <p class="top-3-p"><?php _e('Use our funding directory to find opportunities for your project') ?></p>
                 <a class="log-in-link read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
                    href="<?php echo $urlHandler->funding() ?>">
-                    <div class="login-li menu-li readmore-li">Read more</div>
+                    <div class="login-li menu-li readmore-li"><?php _ehtml('Read more')?></div>
                     <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
                 </a>
             </div>
         </div>
         <div class="top-3-col w-col w-col-4" data-ix="fadeinuponload-13">
             <div class="top-3-link" data-ix="underline">
-                <h3 class="top3-h3">Events</h3>
+                <h3 class="top3-h3"><?php _ehtml('Events')?></h3>
                 <div class="top3-underline" data-ix="new-interaction-2"></div>
                 <p class="top-3-p"><?php _e('Explore DSI events happening around Europe') ?></p>
                 <a class="log-in-link read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
                    href="<?php echo $urlHandler->events() ?>">
-                    <div class="login-li menu-li readmore-li">Read more</div>
+                    <div class="login-li menu-li readmore-li"><?php _ehtml('Read more')?></div>
                     <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
                 </a>
             </div>
         </div>
         <div class="top-3-col w-col w-col-4" data-ix="fadeinuponload-14">
             <div class="top-3-link" data-ix="underline">
-                <h3 class="top3-h3">News &amp; Blogs</h3>
+                <h3 class="top3-h3"><?php _ehtml('News & blogs')?></h3>
                 <div class="top3-underline" data-ix="new-interaction-2"></div>
                 <p class="top-3-p">
                     <?php _e('Our blog features stories of the people and projects pioneering digital social innovation') ?>
                 </p>
                 <a class="log-in-link read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
                    href="<?php echo $urlHandler->blogPosts() ?>">
-                    <div class="login-li menu-li readmore-li">Read more</div>
+                    <div class="login-li menu-li readmore-li"><?php _ehtml('Read more')?></div>
                     <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
                 </a>
             </div>
@@ -141,10 +141,10 @@ if (!isset($urlHandler))
 </div>
 <div class="home-page-events">
     <div class="content-block cs">
-        <h3 class="centered title">Case studies</h3>
+        <h3 class="centered title"><?php _ehtml('Case Studies')?></h3>
         <div class="sub-header-centre"><?php _e('IN NEED OF INSPIRATION?') ?></div>
         <p class="centered">
-            Short stories introducing digital social innovations which we love
+            <?php _ehtml('Short stories introducing digital social innovations which we love')?>
         </p>
         <div class="w-row">
             <?php foreach ($homePageCaseStudies AS $i => $caseStudy) { ?>
@@ -158,7 +158,7 @@ if (!isset($urlHandler))
                         <h3 class="case-study-card-h3"><?php echo show_input($caseStudy->getTitle()) ?></h3>
                         <p class="cradp"><?php echo show_input($caseStudy->getIntroCardText()) ?></p>
                         <div class="log-in-link read-more w-clearfix" data-ix="log-in-arrow">
-                            <div class="login-li menu-li readmore-li">Read more</div>
+                            <div class="login-li menu-li readmore-li"><?php _ehtml('Read more')?></div>
                             <img class="login-arrow"
                                  src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
                         </div>
@@ -169,7 +169,7 @@ if (!isset($urlHandler))
         <div class="signn">
             <a class="large log-in-link sign-up w-clearfix w-inline-block" data-ix="log-in-arrow"
                href="<?php echo $urlHandler->caseStudies() ?>">
-                <div class="login-li menu-li">See all case studies</div>
+                <div class="login-li menu-li"><?php _ehtml('See all case studies')?></div>
                 <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
             </a>
         </div>
