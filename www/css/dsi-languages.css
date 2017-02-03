@@ -9424,16 +9424,17 @@ strong {
 }
 
 .create-drop-down-block {
-  position: absolute;
-  left: -62px;
-  right: -12px;
-  bottom: -137px;
-  display: none;
-  width: 280px;
-  height: 120px;
-  padding: 10px 0px 0px;
-  background-color: #fff;
-  box-shadow: 0 13px 50px -11px #000;
+    position: absolute;
+    left: -62px;
+    right: -12px;
+    bottom: -137px;
+    display: none;
+    width: 280px;
+    height: auto;
+    padding: 10px 0px 0px;
+    background-color: #fff;
+    box-shadow: 0 13px 50px -11px #000;
+    z-index: 9999;
 }
 
 .drop-down-link-li {
