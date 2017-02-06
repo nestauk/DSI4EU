@@ -4,5 +4,6 @@ namespace DSI\Service;
 
 class PermanentLogin
 {
-    public static $cookieName = 'permlogin';
+    const CookieName = 'permLogin';
+    const ExpireTime = 3600 * 24 * 356;
 }

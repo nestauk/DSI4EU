@@ -41,8 +41,7 @@ class RememberPermanentLogin
         } while ($auth_token === null);
 
         $cookieValue = "{$selector}:{$token}";
-        $oneYear = 3600 * 24 * 356;
-        setcookie(PermanentLogin::$cookieName, $cookieValue, time() + $oneYear);
+        setcookie(PermanentLogin::CookieName, $cookieValue, time() + PermanentLogin::ExpireTime);
     }
 
     /**

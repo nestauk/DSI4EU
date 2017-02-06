@@ -9,26 +9,13 @@ class Auth
 {
     public function __construct()
     {
-        if (isset($_COOKIE[PermanentLogin::$cookieName]) AND !$this->isLoggedIn()) {
+        if (isset($_COOKIE[PermanentLogin::CookieName]) AND !$this->isLoggedIn()) {
             try {
-                list($selector, $token) = explode(':', $_COOKIE[PermanentLogin::$cookieName], 2);
-                $authTokenRepo = new AuthTokenRepository();
-                $authToken = $authTokenRepo->getBySelector($selector);
-
-                if (!password_verify($token, $authToken->getToken()))
-                    throw new \Exception('Invalid cookie value');
-
-
-                $authToken->setLastUse(date('Y-m-d H:i:s'));
-                $authTokenRepo->save($authToken);
-
-                $this->saveUserInSession(
-                    $authToken->getUser()
-                );
-
-                error_log("auto login for: " . $authToken->getUser()->getEmail());
+                $authToken = $this->getAuthToken($_COOKIE[PermanentLogin::CookieName]);
+                $this->updateCookieToExpireIn($oneYear = 3600 * 24 * 356);
+                $this->saveUserInSession($authToken->getUser());
             } catch (\Exception $e) {
-                setcookie(PermanentLogin::$cookieName, '', 1);
+                setcookie(PermanentLogin::CookieName, '', 1);
             }
         }
     }
@@ -80,7 +67,7 @@ class Auth
         $this->deleteUserAuthTokens($user);
 
         unset($_SESSION['user']);
-        setcookie(PermanentLogin::$cookieName, '', 1);
+        setcookie(PermanentLogin::CookieName, '', 1);
 
         session_regenerate_id(TRUE);
     }
@@ -109,5 +96,32 @@ class Auth
         foreach ($userTokens AS $userToken) {
             $authTokenRepository->remove($userToken);
         }
+    }
+
+    /**
+     * @param $oneYear
+     */
+    private function updateCookieToExpireIn($oneYear)
+    {
+        setcookie(PermanentLogin::CookieName, $_COOKIE[PermanentLogin::CookieName], time() + $oneYear);
+    }
+
+    /**
+     * @param string $cookieValue
+     * @return \DSI\Entity\AuthToken
+     * @throws \Exception
+     */
+    private function getAuthToken($cookieValue): \DSI\Entity\AuthToken
+    {
+        list($selector, $token) = explode(':', $cookieValue, 2);
+        $authTokenRepo = new AuthTokenRepository();
+        $authToken = $authTokenRepo->getBySelector($selector);
+
+        if (!password_verify($token, $authToken->getToken()))
+            throw new \Exception('Invalid cookie value');
+
+        $authToken->setLastUse(date('Y-m-d H:i:s'));
+        $authTokenRepo->save($authToken);
+        return $authToken;
     }
 }
