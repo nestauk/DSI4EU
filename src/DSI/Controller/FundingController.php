@@ -97,19 +97,19 @@ class FundingController
     private function jsonMonths()
     {
         return [
-            ['id' => '00', 'title' => '- Before Month -'],
-            ['id' => '01', 'title' => 'January'],
-            ['id' => '02', 'title' => 'February'],
-            ['id' => '03', 'title' => 'March'],
-            ['id' => '04', 'title' => 'April'],
-            ['id' => '05', 'title' => 'May'],
-            ['id' => '06', 'title' => 'June'],
-            ['id' => '07', 'title' => 'July'],
-            ['id' => '08', 'title' => 'August'],
-            ['id' => '09', 'title' => 'September'],
-            ['id' => '10', 'title' => 'October'],
-            ['id' => '11', 'title' => 'November'],
-            ['id' => '12', 'title' => 'December'],
+            ['id' => '00', 'title' => '- ' . __('Before Month') . ' -'],
+            ['id' => '01', 'title' => __('January')],
+            ['id' => '02', 'title' => __('February')],
+            ['id' => '03', 'title' => __('March')],
+            ['id' => '04', 'title' => __('April')],
+            ['id' => '05', 'title' => __('May')],
+            ['id' => '06', 'title' => __('June')],
+            ['id' => '07', 'title' => __('July')],
+            ['id' => '08', 'title' => __('August')],
+            ['id' => '09', 'title' => __('September')],
+            ['id' => '10', 'title' => __('October')],
+            ['id' => '11', 'title' => __('November')],
+            ['id' => '12', 'title' => __('December')],
         ];
     }
 
@@ -136,7 +136,7 @@ class FundingController
 
         array_unshift($endingYears, [
             'id' => '0000',
-            'title' => '- Before Year -',
+            'title' => '- ' . __('Before Year') . ' -',
         ]);
         return $endingYears;
     }
@@ -161,7 +161,7 @@ class FundingController
         }, $countries);
         array_unshift($countries, [
             'id' => 0,
-            'title' => '- All countries -',
+            'title' => '- ' . __('All countries') . ' -',
         ]);
         return $countries;
     }

@@ -145,7 +145,7 @@ if (!isset($urlHandler))
                 <div class="top-line"></div>
                 <div class="middle-line"></div>
                 <div class="bottom-line"></div>
-                <div class="menu-li">Menu</div>
+                <div class="menu-li"><?php _ehtml('Menu')?></div>
             </div>
             <?php if (isset($loggedInUser) AND $loggedInUser) { ?>
                 <div class="create ll log-in-link w-clearfix" data-ix="create-dropdown">

@@ -137,7 +137,7 @@ class EventsController
 
         array_unshift($countries, [
             'id' => '0',
-            'name' => '- All -',
+            'name' => '- '.('All').' -',
         ]);
         return $countries;
     }
