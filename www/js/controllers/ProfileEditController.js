@@ -4,7 +4,7 @@ angular
         var profilePage = $attrs.profileurl;
 
         $scope.user = {};
-        $http.get(window.location.href + '.json')
+        $http.get(window.location.pathname + '.json')
             .then(function (result) {
                 $scope.user = result.data || {};
             });
@@ -73,7 +73,7 @@ angular
             data['saveDetails'] = true;
             data['step'] = options.postField;
 
-            $http.post(window.location.href + '.json', data)
+            $http.post(window.location.pathname + '.json', data)
                 .then(function (response) {
                     $scope.loading = false;
 
