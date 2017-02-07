@@ -43,7 +43,7 @@ if (!isset($urlHandler))
 </div>
 <div class="hero-cta" data-ix="fadeinuponload-9">
     <div class="cta-row w-row">
-        <div class="w-clearfix w-col w-col-9 w-col-stack">
+        <div class="w-clearfix w-col w-col-8 w-col-stack">
             <div class="cta-text">
                 <div class="home-hero-cta" data-ix="fadeinuponload-10">
                     <?php echo sprintf(
@@ -64,11 +64,11 @@ if (!isset($urlHandler))
                 </div>
             </div>
         </div>
-        <div class="butcol w-col w-col-3 w-col-stack">
+        <div class="butcol w-col w-col-4 w-col-stack">
             <div class="signn">
                 <a class="log-in-link sign-up w-clearfix w-inline-block" data-ix="log-in-arrow"
                    href="<?php echo $urlHandler->login() ?>">
-                    <div class="login-li menu-li"><?php _e('JOIN NOW') ?></div>
+                    <div class="login-li menu-li" style="font-size:15px"><?php _e('JOIN NOW') ?></div>
                     <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
                 </a>
             </div>

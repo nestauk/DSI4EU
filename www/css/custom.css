@@ -692,5 +692,6 @@ body#tinymce.mce-content-body {
 }
 
 .home-hero-cta {
-    padding-top: 5px
+    padding-top: 5px;
+    font-size:16px;
 }
