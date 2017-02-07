@@ -1,15 +1,15 @@
 .twitter-block {
-    height:80px;
+    height: 80px;
 }
 
 .homepage-twitter-logo {
-    margin-top:18px;
-    margin-left:29px;
+    margin-top: 18px;
+    margin-left: 29px;
 }
 
 .twitter-text {
-    margin-top:24px;
-    margin-left:10px;
+    margin-top: 24px;
+    margin-left: 10px;
 }
 
 .w-form {
@@ -659,8 +659,8 @@ body#tinymce.mce-content-body {
     text-align: left;
 }
 
-.main-search-results a.full-menu-link.view-all{
-    text-align:center;
+.main-search-results a.full-menu-link.view-all {
+    text-align: center;
 }
 
 /* dashboard button */
@@ -673,16 +673,24 @@ body#tinymce.mce-content-body {
     width: 320px;
 }
 
-.rrssb-text {display:none;}
-.rrssb-buttons {max-width:200px;}
-
-.languages.menu-languages {
-    min-width:345px;
+.rrssb-text {
+    display: none;
 }
 
+.rrssb-buttons {
+    max-width: 200px;
+}
+
+.languages.menu-languages {
+    min-width: 345px;
+}
 
 @media (max-width: 400px) {
     .languages.menu-languages {
-        min-width:175px;
+        min-width: 175px;
     }
+}
+
+.home-hero-cta {
+    padding-top: 5px
 }

@@ -159,7 +159,7 @@ if (!isset($urlHandler))
                     </div>
                 </div>
             <?php } else { ?>
-                <a class="ll log-in-link w-clearfix w-inline-block" data-ix="log-in-arrow"
+                <a class="ll log-in-link w-clearfix w-inline-block" data-ix="log-in-arrow" style="width:auto"
                    href="<?php echo $urlHandler->login() ?>">
                     <div class="login-li menu-li"><?php _e('Login') ?></div>
                     <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">

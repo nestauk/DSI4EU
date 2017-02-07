@@ -42,21 +42,21 @@ use DSI\Service\URL;
                 <div class="log-in-error" ng-show="errors.password" ng-bind="errors.password"></div>
 
                 <label>
-                    <input type="checkbox" name="rememberMe" ng-model="rememberMe" value="1" />
+                    <input type="checkbox" name="rememberMe" ng-model="rememberMe" value="1"/>
                     Remember me
                     <span style="font-weight: normal;font-size: smaller">(Do not use this option on a shared or public device)</span>
                 </label>
 
                 <button type="submit" class="auto ll log-in-link w-clearfix w-inline-block" data-ix="log-in-arrow"
-                        style="width:180px;display:block">
+                        style="display:block;width:auto">
                     <span class="login-li menu-li"
-                          ng-bind="loading ? '<?php _ehtml('Loading...') ?>' : '<?php _ehtml('login') ?>'"></span>
+                          ng-bind="loading ? '<?php _ehtml('Login') ?>...' : '<?php _ehtml('Login') ?>'"></span>
                     <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
                 </button>
-                <a class="log-in-link-note" href="#"
+                <a class="log-in-link-note" href="#" style="font-size:11px"
                    ng-click="forgotPassword.show = true"><?php _ehtml('Forgot password') ?></a>
-                <a class="log-in-link-note second" href="<?php echo $urlHandler->register() ?>">
-                    <?php _ehtml("Don't have an account?") ?>
+                <a class="log-in-link-note second" style="font-size:11px"
+                   href="<?php echo $urlHandler->register() ?>"><?php _ehtml("Don't have an account?") ?>
                 </a>
             </form>
         </div>
