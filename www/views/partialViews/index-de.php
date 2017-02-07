@@ -1,6 +1,7 @@
 <?php
 /** @var $urlHandler \DSI\Service\URL */
 ?>
+<div class="additional" data-ix="fadeinuponload-3">Bisher haben</div>
 <div class="stat-text w-row">
     <div class="w-col w-col-5">
         <div class="number-of-orgs" data-ix="fadeinuponload-3"><?php echo number_format($organisationsCount, 0, ',', '.') ?></div>
