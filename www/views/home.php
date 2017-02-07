@@ -120,14 +120,11 @@ if (!isset($urlHandler))
 <div class="stats-bg">
     <div class="content">
         <h2 class="centered h2-large" data-ix="fadeinuponload-2">
-            <?php _e('EXPLORE EUROPE’S GROWING NETWORK OF DIGITAL SOCIAL INNOVATION') ?>
+            <?php _e("EXPLORE EUROPE’S GROWING NETWORK OF DIGITAL SOCIAL INNOVATION") ?>
         </h2>
 
         <?php
-        if (\DSI\Service\Translate::getCurrentLang() == 'de')
-            require __DIR__ . '/partialViews/index-de.php';
-        else
-            require __DIR__ . '/partialViews/index-en.php';
+        require __DIR__ . '/partialViews/index-' . \DSI\Service\Translate::getCurrentLang() . '.php';
         ?>
     </div>
 </div>

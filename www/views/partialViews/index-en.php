@@ -1,3 +1,6 @@
+<?php
+/** @var $urlHandler \DSI\Service\URL */
+?>
 <div class="stat-text w-row">
     <div class="w-col w-col-5">
         <div class="number-of-orgs"
