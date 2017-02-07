@@ -1,0 +1,26 @@
+<?php
+
+namespace DSI\Controller;
+
+use DSI\Service\Auth;
+use DSI\Service\URL;
+use DSI\UseCase\RememberPermanentLogin;
+
+class KeepUserLOggedInController
+{
+    public function exec()
+    {
+        $urlHandler = new URL();
+        $auth = new Auth();
+        $auth->ifNotLoggedInRedirectTo($urlHandler->login());
+
+        $action = new RememberPermanentLogin();
+        $action->setUser($auth->getUser());
+        $action->exec();
+
+        echo json_encode([
+            'code' => 'ok',
+            'message' => __('You will automatically be logged in next time when you visit the website.'),
+        ]);
+    }
+}

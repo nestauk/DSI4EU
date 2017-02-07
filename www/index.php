@@ -295,6 +295,10 @@ class Router
         } elseif (preg_match('<^/' . $langHandler . 'contact-dsi$>', $this->pageURL, $matches)) {
             $this->staticPage($matches, 'contact-dsi.php');
 
+// Permanent Login
+        } elseif (preg_match('<^/' . $langHandler . 'keepUserLoggedIn>', $this->pageURL, $matches)) {
+            $this->keepUserLoggedIn($matches);
+
 // Sitemap
         } elseif (preg_match('<^/' . $langHandler . 'sitemap\.xml$>', $this->pageURL, $matches)) {
             $this->sitemapXml($matches);
@@ -1021,6 +1025,14 @@ class Router
 
         $command = new \DSI\Controller\StaticHtmlController();
         $command->view = $view;
+        $command->exec();
+    }
+
+    private function keepUserLoggedIn($matches)
+    {
+        $this->setLanguageFromUrl($matches);
+
+        $command = new \DSI\Controller\KeepUserLoggedInController();
         $command->exec();
     }
 
