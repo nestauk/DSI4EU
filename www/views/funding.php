@@ -47,10 +47,14 @@ require __DIR__ . '/header.php'
                             <div class="w-form">
                                 <form id="email-form" name="email-form">
                                     <h3 class="sidebar-h3"><?php _ehtml('Filter funding opportunities') ?></h3>
+
+                                    <label class="dropdown-label">
+                                        <?php _ehtml('Search by keyword, type or project') ?>
+                                    </label>
                                     <div class="search-div">
                                         <input class="sidebar-search-field w-input" data-ix="hide-search-icon"
                                                data-name="Search 4" id="Search-4" maxlength="256" name="Search-4"
-                                               placeholder="<?php _ehtml('Search by keyword, type or project') ?>"
+                                               placeholder=""
                                                type="text" ng-model="searchName">
                                         <img class="search-mag"
                                              src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-search.png">
