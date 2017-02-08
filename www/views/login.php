@@ -43,8 +43,8 @@ use DSI\Service\URL;
 
                 <label>
                     <input type="checkbox" name="rememberMe" ng-model="rememberMe" value="1"/>
-                    Remember me
-                    <span style="font-weight: normal;font-size: smaller">(Do not use this option on a shared or public device)</span>
+                    <?php _ehtml('Remember me')?>
+                    <span style="font-weight: normal;font-size: smaller">(<?php _ehtml('Do not use this option on a shared or public device')?>)</span>
                 </label>
 
                 <button type="submit" class="auto ll log-in-link w-clearfix w-inline-block" data-ix="log-in-arrow"
