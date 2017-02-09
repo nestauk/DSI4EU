@@ -40,9 +40,19 @@ class CreateCountryRegion
             $this->errorHandler->throwIfNotEmpty();
         }
 
+        $country = $this->countryRepo->getById($this->data()->countryID);
+
+        $exec = new GetGeolocationForRegion();
+        $exec->setCountryName($country->getName());
+        $exec->setRegionName($this->data()->name);
+        $exec->exec();
+        $location = $exec->getGeoLocation();
+
         $countryRegion = new CountryRegion();
         $countryRegion->setName((string)$this->data()->name);
-        $countryRegion->setCountry($this->countryRepo->getById($this->data()->countryID));
+        $countryRegion->setCountry($country);
+        $countryRegion->setLatitude($location->lat);
+        $countryRegion->setLongitude($location->lon);
         $this->countryRegionRepo->insert($countryRegion);
 
         $this->countryRegion = $countryRegion;

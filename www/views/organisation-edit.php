@@ -267,6 +267,8 @@ if (!isset($urlHandler))
                                                                         data-placeholder="<?php _ehtml('Type the city') ?>"
                                                                         style="width:100%">
                                                                 </select>
+                                                                <div class="log-in-error" ng-show="errors.region"
+                                                                     ng-bind="errors.region"></div>
                                                             </div>
                                                             <div ng-show="regionsLoading">
                                                                 <?php _ehtml('Loading') ?>...

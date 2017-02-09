@@ -5,6 +5,8 @@ namespace DSI\Controller;
 set_time_limit(0);
 
 use DSI\Repository\CountryRegionRepository;
+use DSI\Service\ErrorHandler;
+use DSI\UseCase\GetGeolocationForRegion;
 
 class CitiesToGeolocationController
 {
@@ -14,32 +16,18 @@ class CitiesToGeolocationController
         $regions = $countryRegionRepository->getAll();
         foreach ($regions AS $region) {
             if (!$region->getLatitude() OR !$region->getLongitude()) {
-                $countryName = $region->getCountry()->getName();
-                $countryName = explode(',', $countryName)[0];
-                $url = 'http://nominatim.openstreetmap.org/search?q=' . urlencode($region->getName()) . ',' . urlencode($countryName) . '&format=json';
+                try {
+                    $exec = new GetGeolocationForRegion();
+                    $exec->setCountryName($region->getCountry()->getName());
+                    $exec->setRegionName($region->getName());
+                    $exec->exec();
+                    $location = $exec->getGeoLocation();
 
-                $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, $url);
-                curl_setopt($ch, CURLOPT_HEADER, 0);
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                curl_setopt($ch, CURLOPT_REFERER, 'https://digitalsocial.eu/');
-                $json = curl_exec($ch);
-                curl_close($ch);
-
-                $location = null;
-                if ($json) {
-                    $locations = json_decode($json, true);
-                    if ($locations)
-                        $location = $locations[0];
-                }
-
-                if (!$location) {
-                    echo $url;
-                    echo PHP_EOL;
-                } else {
-                    $region->setLatitude($location['lat']);
-                    $region->setLongitude($location['lon']);
+                    $region->setLatitude($location->lat);
+                    $region->setLongitude($location->lon);
                     $countryRegionRepository->save($region);
+                } catch (ErrorHandler $e) {
+                    echo $region->getName() . ',' . $region->getCountry()->getName() . PHP_EOL;
                 }
             }
         }
