@@ -67,6 +67,8 @@ require __DIR__ . '/header.php';
                                             data-placeholder="Type the city"
                                             style="width:400px;background:transparent">
                                         </select>
+                                        <div class="log-in-error" ng-show="errors.region"
+                                             ng-bind="errors.region"></div>
                                     </div>
                                     <div ng-show="regionsLoading">
                                         Loading...
