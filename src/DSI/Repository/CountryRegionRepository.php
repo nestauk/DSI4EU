@@ -94,7 +94,7 @@ class CountryRegionRepository
     /** @return CountryRegion[] */
     public function getAll()
     {
-        return $this->getCountryRegionsWhere(["1"]);
+        return $this->getObjectsWhere(["1"]);
     }
 
     /**
@@ -103,7 +103,7 @@ class CountryRegionRepository
      */
     public function getAllByCountryId(int $countryID)
     {
-        return $this->getCountryRegionsWhere([
+        return $this->getObjectsWhere([
             "`countryID` = {$countryID}"
         ]);
     }
@@ -112,16 +112,16 @@ class CountryRegionRepository
      * @param array $where
      * @return DSI\Entity\CountryRegion[]
      */
-    private function getCountryRegionsWhere($where)
+    private function getObjectsWhere($where)
     {
-        $countryRegions = [];
         $query = new SQL("SELECT 
             `id`, `countryID`, `name`, `lat`, `lng`
-          FROM `country-regions` WHERE " . implode(' AND ', $where) . "");
-        foreach ($query->fetch_all() AS $dbCountryRegion) {
-            $countryRegions[] = $this->buildCountryRegionFromData($dbCountryRegion);
-        }
-        return $countryRegions;
+          FROM `country-regions` WHERE " . implode(' AND ', $where) . "
+          ORDER BY `name`");
+
+        return array_map(function ($dbCountryRegion) {
+            return $this->buildCountryRegionFromData($dbCountryRegion);
+        }, $query->fetch_all());
     }
 
     public function clearAll()
