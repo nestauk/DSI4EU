@@ -10,7 +10,7 @@ if (!isset($urlHandler))
         <div class="main-menu">
             <div class="main-menu-profile-block w-clearfix">
                 <div class="languages menu-languages w-clearfix">
-                    <?php foreach (['ca', 'es', 'it', 'de', 'fr', 'en'] AS $lang) { ?>
+                    <?php foreach (['it', 'fr', 'es', 'en', 'de', 'ca'] AS $lang) { ?>
                         <a href="<?php echo (new URL($lang))->home() ?>"
                            class="language log-in-link w-inline-block
                            <?php if (\DSI\Service\Translate::getCurrentLang() == $lang) echo 'active' ?>">
@@ -173,12 +173,12 @@ if (!isset($urlHandler))
                 <div class="active language log-in-link" data-ix="create-dropdown">
                     <img class="language-icon" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-world-outline.png">
                     <div class="create-drop-down-block language-selctor">
-                        <a class="drop-down-link-li" href="<?php echo (new URL('en'))->home() ?>">English</a>
-                        <a class="drop-down-link-li" href="<?php echo (new URL('fr'))->home() ?>">Français</a>
-                        <a class="drop-down-link-li" href="<?php echo (new URL('de'))->home() ?>">Deutsch</a>
-                        <a class="drop-down-link-li" href="<?php echo (new URL('it'))->home() ?>">Italiano</a>
-                        <a class="drop-down-link-li" href="<?php echo (new URL('es'))->home() ?>">Español</a>
                         <a class="drop-down-link-li" href="<?php echo (new URL('ca'))->home() ?>">Català</a>
+                        <a class="drop-down-link-li" href="<?php echo (new URL('de'))->home() ?>">Deutsch</a>
+                        <a class="drop-down-link-li" href="<?php echo (new URL('en'))->home() ?>">English</a>
+                        <a class="drop-down-link-li" href="<?php echo (new URL('es'))->home() ?>">Español</a>
+                        <a class="drop-down-link-li" href="<?php echo (new URL('fr'))->home() ?>">Français</a>
+                        <a class="drop-down-link-li" href="<?php echo (new URL('it'))->home() ?>">Italiano</a>
                     </div>
                 </div>
             </div>
