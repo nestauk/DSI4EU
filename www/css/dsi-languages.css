@@ -5141,6 +5141,13 @@ strong {
   background-color: transparent;
 }
 
+.involved-card.manage {
+  display: inline-block;
+  margin-bottom: 0px;
+  background-image: -webkit-linear-gradient(270deg, #fff, #fff);
+  background-image: linear-gradient(180deg, #fff, #fff);
+}
+
 .involved-h4 {
   margin-bottom: 30px;
 }
@@ -9447,17 +9454,17 @@ strong {
 }
 
 .create-drop-down-block {
-    position: absolute;
-    left: -62px;
-    right: -12px;
-    bottom: -137px;
-    display: none;
-    width: 280px;
-    height: auto;
-    padding: 10px 0px 0px;
-    background-color: #fff;
-    box-shadow: 0 13px 50px -11px #000;
-    z-index: 9999;
+  position: absolute;
+  left: -62px;
+  right: -12px;
+  bottom: -137px;
+  display: none;
+  width: 280px;
+  height: auto;
+  padding: 10px 0px 0px;
+  background-color: #fff;
+  box-shadow: 0 13px 50px -11px #000;
+  z-index: 9999;
 }
 
 .create-drop-down-block.language-selctor {
@@ -9480,7 +9487,6 @@ strong {
   text-decoration: none;
   text-transform: uppercase;
 }
-
 
 .drop-down-link-li:hover {
   background-color: #f3f3f3;
@@ -10026,6 +10032,16 @@ strong {
   margin-left: auto;
   font-size: 18px;
   text-align: center;
+}
+
+.remove-user {
+  display: block;
+  width: 100%;
+  margin-bottom: 21px;
+  float: left;
+  color: #db4343;
+  font-size: 14px;
+  text-align: left;
 }
 
 html.w-mod-js *[data-ix="pin-drop"] {

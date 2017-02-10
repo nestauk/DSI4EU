@@ -123,8 +123,8 @@ class CreateProjectPostTest extends PHPUnit_Framework_TestCase
     private function makeAdmin(\DSI\Entity\User $admin)
     {
         $addMember = new \DSI\UseCase\AddMemberToProject();
-        $addMember->data()->projectID = $this->project->getId();
-        $addMember->data()->userID = $admin->getId();
+        $addMember->setProject($this->project);
+        $addMember->setUser($admin);
         $addMember->exec();
 
         $setAdmin = new \DSI\UseCase\SetAdminStatusToProjectMember();

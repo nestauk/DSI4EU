@@ -65,7 +65,7 @@ class CreateProjectTest extends PHPUnit_Framework_TestCase
         $project = $this->createProjectCommand->getProject();
 
         $this->assertTrue(
-            $this->projectMemberRepo->projectIDHasMemberID($project->getId(), $this->user->getId())
+            $this->projectMemberRepo->projectHasMember($project, $this->user)
         );
     }
 

@@ -134,7 +134,7 @@ class RemoveProject
     private function removeProjectMembers()
     {
         $projectMemberRepo = new ProjectMemberRepository();
-        $projectMembers = $projectMemberRepo->getByProjectID($this->data()->project->getId());
+        $projectMembers = $projectMemberRepo->getByProject($this->data()->project);
         foreach ($projectMembers AS $projectMember) {
             $projectMemberRepo->remove($projectMember);
         }

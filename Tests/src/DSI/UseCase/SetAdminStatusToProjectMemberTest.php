@@ -189,8 +189,8 @@ class SetAdminStatusToProjectMemberTest extends PHPUnit_Framework_TestCase
     private function addMemberToProject(\DSI\Entity\Project $project, \DSI\Entity\User $user)
     {
         $addMemberToProject = new \DSI\UseCase\AddMemberToProject();
-        $addMemberToProject->data()->projectID = $project->getId();
-        $addMemberToProject->data()->userID = $user->getId();
+        $addMemberToProject->setProject($project);
+        $addMemberToProject->setUser($user);
         $addMemberToProject->exec();
     }
 }

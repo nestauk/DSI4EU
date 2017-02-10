@@ -69,10 +69,10 @@ class ChangeOwner
 
     private function makeSureUserIsMember()
     {
-        if (!$this->projectMemberRepository->projectIDHasMemberID($this->data()->project->getId(), $this->data()->member->getId())) {
+        if (!$this->projectMemberRepository->projectHasMember($this->data()->project, $this->data()->member)) {
             $addMemberToOrganisation = new AddMemberToProject();
-            $addMemberToOrganisation->data()->projectID = $this->data()->project->getId();
-            $addMemberToOrganisation->data()->userID = $this->data()->member->getId();
+            $addMemberToOrganisation->setProject($this->data()->project);
+            $addMemberToOrganisation->setUser($this->data()->member);
             $addMemberToOrganisation->exec();
         }
     }

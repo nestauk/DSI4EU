@@ -158,7 +158,7 @@ class ProjectEditController
         if ($project->getOwnerID() == $user->getId())
             return true;
 
-        if ((new ProjectMemberRepository())->projectIDHasMemberID($project->getId(), $user->getId()))
+        if ((new ProjectMemberRepository())->projectHasMember($project, $user))
             return true;
 
         if ($user->isCommunityAdmin())

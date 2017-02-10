@@ -51,8 +51,8 @@ class RemoveMemberFromProjectTest extends PHPUnit_Framework_TestCase
     /** @test */
     public function successfulRemoveMemberFromProject()
     {
-        $this->addMemberToProjectCommand->data()->userID = $this->user->getId();
-        $this->addMemberToProjectCommand->data()->projectID = $this->project->getId();
+        $this->addMemberToProjectCommand->setUser($this->user);
+        $this->addMemberToProjectCommand->setProject($this->project);
         $this->addMemberToProjectCommand->exec();
 
         $this->removeMemberFromProjectCommand->data()->userID = $this->user->getId();

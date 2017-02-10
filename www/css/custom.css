@@ -695,3 +695,7 @@ body#tinymce.mce-content-body {
     padding-top: 5px;
     font-size:16px;
 }
+
+.log-in-link {
+    width: auto;
+}

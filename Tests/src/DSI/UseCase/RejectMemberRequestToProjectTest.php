@@ -85,7 +85,7 @@ class RejectMemberRequestToProjectTest extends PHPUnit_Framework_TestCase
         $this->rejectRequest($this->project->getId(), $this->user_2->getId());
 
         $this->assertFalse(
-            $this->projectMemberRepo->projectIDHasMemberID($this->project->getId(), $this->user_2->getId())
+            $this->projectMemberRepo->projectHasMember($this->project, $this->user_2)
         );
     }
 

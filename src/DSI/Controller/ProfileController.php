@@ -178,7 +178,7 @@ class ProfileController
                         return [
                             'name' => $project->getName(),
                             'url' => $urlHandler->project($project),
-                            'membersCount' => count($projectMemberRepo->getByProjectID($project->getId())),
+                            'membersCount' => count($projectMemberRepo->getByProject($project)),
                         ];
                     }, $projectMemberRepo->getByMemberID($user->getId())),
                     'organisations' => array_map(function (OrganisationMember $organisationMember) use ($organisationMemberRepo, $urlHandler) {

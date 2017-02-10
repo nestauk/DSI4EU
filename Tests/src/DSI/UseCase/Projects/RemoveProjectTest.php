@@ -56,9 +56,7 @@ class RemoveProjectTest extends PHPUnit_Framework_TestCase
 
         $this->assertCount(0, $this->projectRepo->getAll());
         $this->assertCount(0,
-            (new \DSI\Repository\ProjectMemberRepository())->getByProjectID(
-                $this->project->getId()
-            )
+            (new \DSI\Repository\ProjectMemberRepository())->getByProject($this->project)
         );
     }
 

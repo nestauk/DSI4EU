@@ -119,7 +119,7 @@ class RejectMemberInvitationToProjectTest extends PHPUnit_Framework_TestCase
         $this->rejectInvitation($this->project->getId(), $this->invitedUser->getId());
 
         $this->assertFalse(
-            $this->projectMemberRepo->projectIDHasMemberID($this->project->getId(), $this->invitedUser->getId())
+            $this->projectMemberRepo->projectHasMember($this->project, $this->invitedUser)
         );
     }
 

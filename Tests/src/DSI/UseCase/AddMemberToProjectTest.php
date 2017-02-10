@@ -45,14 +45,14 @@ class AddMemberToProjectTest extends PHPUnit_Framework_TestCase
     /** @test */
     public function successfulAdditionOfMemberToProject()
     {
-        $this->addMemberToProject->data()->userID = $this->user_2->getId();
-        $this->addMemberToProject->data()->projectID = $this->project->getId();
+        $this->addMemberToProject->setUser($this->user_2);
+        $this->addMemberToProject->setProject($this->project);
         $this->addMemberToProject->exec();
 
         $this->assertTrue(
-            (new \DSI\Repository\ProjectMemberRepository())->projectIDHasMemberID(
-                $this->addMemberToProject->data()->projectID,
-                $this->addMemberToProject->data()->userID
+            (new \DSI\Repository\ProjectMemberRepository())->projectHasMember(
+                $this->project,
+                $this->user_2
             )
         );
     }
@@ -61,13 +61,13 @@ class AddMemberToProjectTest extends PHPUnit_Framework_TestCase
     public function cannotAddSameMemberTwice()
     {
         $e = null;
-        $this->addMemberToProject->data()->userID = $this->user_2->getId();
-        $this->addMemberToProject->data()->projectID = $this->project->getId();
+        $this->addMemberToProject->setUser($this->user_2);
+        $this->addMemberToProject->setProject($this->project);
         $this->addMemberToProject->exec();
 
         try {
-            $this->addMemberToProject->data()->userID = $this->user_2->getId();
-            $this->addMemberToProject->data()->projectID = $this->project->getId();
+            $this->addMemberToProject->setUser($this->user_2);
+            $this->addMemberToProject->setProject($this->project);
             $this->addMemberToProject->exec();
         } catch (\DSI\Service\ErrorHandler $e) {
         }

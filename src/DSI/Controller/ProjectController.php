@@ -73,7 +73,7 @@ class ProjectController
         $canUserRequestMembership = false;
         $isOwner = false;
 
-        $projectMembers = (new ProjectMemberRepository())->getByProjectID($project->getId());
+        $projectMembers = (new ProjectMemberRepository())->getByProject($project);
         $organisationProjectsObj = (new OrganisationProjectRepository())->getByProjectID($project->getId());
         usort($organisationProjectsObj, function (OrganisationProject $a, OrganisationProject $b) {
             return ($a->getOrganisation()->getName() <= $b->getOrganisation()->getName()) ? -1 : 1;

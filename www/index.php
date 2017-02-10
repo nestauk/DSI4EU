@@ -119,6 +119,9 @@ class Router
         } elseif (preg_match('<^/' . $langHandler . 'projectTags\.json$>', $this->pageURL, $matches)) {
             $this->projectTagsJson($matches);
 
+        } elseif (preg_match('<^/' . $langHandler . 'createProject\.json$>', $this->pageURL, $matches)) {
+            $this->createProject($matches);
+
 // Organisations
         } elseif (preg_match('<^/' . $langHandler . 'organisationTags\.json$>', $this->pageURL, $matches)) {
             $this->organisationTagsJson($matches);
@@ -128,9 +131,6 @@ class Router
 
         } elseif (preg_match('<^/' . $langHandler . 'organisations.json$>', $this->pageURL, $matches)) {
             $this->organisationsJson($matches);
-
-        } elseif (preg_match('<^/' . $langHandler . 'createProject.json$>', $this->pageURL, $matches)) {
-            $this->createProject($matches);
 
         } elseif (preg_match('<^/' . $langHandler . 'createOrganisation.json$>', $this->pageURL, $matches)) {
             $this->createOrganisation($matches);
@@ -336,6 +336,12 @@ class Router
 
         } elseif (preg_match('<^/' . $langHandler . 'project/editOwner/([0-9]+)$>', $this->pageURL, $matches)) {
             $this->editProjectOwner($matches);
+
+        } elseif (preg_match('<^/' . $langHandler . 'project/members/([0-9]+)$>', $this->pageURL, $matches)) {
+            $this->editProjectMembers($matches);
+
+        } elseif (preg_match('<^/' . $langHandler . 'project/members/([0-9]+)\.json$>', $this->pageURL, $matches)) {
+            $this->editProjectMembers($matches, 'json');
 
         } elseif (preg_match('<^/projectPost/([0-9]+)\.json?$>', $this->pageURL, $matches)) {
             $this->projectPostJson($matches);
@@ -835,6 +841,16 @@ class Router
         $this->setLanguageFromUrl($matches);
 
         $command = new \DSI\Controller\ProjectEditOwnerController();
+        $command->projectID = $matches[3];
+        $command->exec();
+    }
+
+    private function editProjectMembers($matches, $format = 'html')
+    {
+        $this->setLanguageFromUrl($matches);
+
+        $command = new \DSI\Controller\ProjectEditMembersController();
+        $command->format = $format;
         $command->projectID = $matches[3];
         $command->exec();
     }

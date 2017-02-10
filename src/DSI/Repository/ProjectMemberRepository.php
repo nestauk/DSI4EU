@@ -98,6 +98,17 @@ class ProjectMemberRepository
     }
 
     /**
+     * @param Project $project
+     * @return ProjectMember[]
+     */
+    public function getByProject(Project $project)
+    {
+        return $this->getProjectMembersWhere([
+            "`projectID` = '{$project->getId()}'"
+        ]);
+    }
+
+    /**
      * @param int $projectID
      * @param int $memberID
      * @return ProjectMember

@@ -64,9 +64,7 @@ class ProjectMemberRepositoryTest extends PHPUnit_Framework_TestCase
         $projectMember->setMember($this->user_1);
         $this->projectMemberRepo->insert($projectMember);
 
-        $this->assertCount(2, $this->projectMemberRepo->getByProjectID(
-            $this->project_1->getId()
-        ));
+        $this->assertCount(2, $this->projectMemberRepo->getByProject($this->project_1));
     }
 
     /** @test saveAsNew */
@@ -168,17 +166,17 @@ class ProjectMemberRepositoryTest extends PHPUnit_Framework_TestCase
         $projectMember->setMember($this->user_2);
         $this->projectMemberRepo->insert($projectMember);
 
-        $this->assertTrue($this->projectMemberRepo->projectIDHasMemberID(
-            $this->project_1->getId(), $this->user_1->getId())
+        $this->assertTrue($this->projectMemberRepo->projectHasMember(
+            $this->project_1, $this->user_1)
         );
-        $this->assertFalse($this->projectMemberRepo->projectIDHasMemberID(
-            $this->project_1->getId(), $this->user_2->getId())
+        $this->assertFalse($this->projectMemberRepo->projectHasMember(
+            $this->project_1, $this->user_2)
         );
-        $this->assertTrue($this->projectMemberRepo->projectIDHasMemberID(
-            $this->project_2->getId(), $this->user_2->getId())
+        $this->assertTrue($this->projectMemberRepo->projectHasMember(
+            $this->project_2, $this->user_2)
         );
-        $this->assertFalse($this->projectMemberRepo->projectIDHasMemberID(
-            $this->project_2->getId(), $this->user_1->getId())
+        $this->assertFalse($this->projectMemberRepo->projectHasMember(
+            $this->project_2, $this->user_1)
         );
     }
 

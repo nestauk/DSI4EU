@@ -11,8 +11,7 @@
 
 ## Installations
 - git clone https://github.com/nestauk/DSI4EU.git
-- create MySQL database
-- create MySQL user and give database privilege
+- create MySQL user and database
 - import into MySQL database all the files from **/src/mysql-update**
 - copy **/src/config.sample.php** into **/src/config.php**
 - update **/src/config.php** with correct information
