@@ -174,11 +174,11 @@ if (!isset($urlHandler))
                     <img class="language-icon" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-world-outline.png">
                     <div class="create-drop-down-block language-selctor">
                         <a class="drop-down-link-li" href="<?php echo (new URL('en'))->home() ?>">English</a>
-                        <a class="drop-down-link-li" href="<?php echo (new URL('fr'))->home() ?>">French</a>
-                        <a class="drop-down-link-li" href="<?php echo (new URL('de'))->home() ?>">German</a>
-                        <a class="drop-down-link-li" href="<?php echo (new URL('it'))->home() ?>">Italian</a>
-                        <a class="drop-down-link-li" href="<?php echo (new URL('es'))->home() ?>">Spanish</a>
-                        <a class="drop-down-link-li" href="<?php echo (new URL('ca'))->home() ?>">Catalan</a>
+                        <a class="drop-down-link-li" href="<?php echo (new URL('fr'))->home() ?>">Français</a>
+                        <a class="drop-down-link-li" href="<?php echo (new URL('de'))->home() ?>">Deutsch</a>
+                        <a class="drop-down-link-li" href="<?php echo (new URL('it'))->home() ?>">Italiano</a>
+                        <a class="drop-down-link-li" href="<?php echo (new URL('es'))->home() ?>">Español</a>
+                        <a class="drop-down-link-li" href="<?php echo (new URL('ca'))->home() ?>">Català</a>
                     </div>
                 </div>
             </div>
