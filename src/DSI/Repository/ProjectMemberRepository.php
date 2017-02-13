@@ -109,15 +109,15 @@ class ProjectMemberRepository
     }
 
     /**
-     * @param int $projectID
-     * @param int $memberID
+     * @param Project $project
+     * @param User $member
      * @return ProjectMember
      */
-    public function getByProjectIDAndMemberID(int $projectID, int $memberID)
+    public function getByProjectAndMember(Project $project, User $member)
     {
         $projectMember = $this->getProjectMembersWhere([
-            "`projectID` = '{$projectID}'",
-            "`userID` = '{$memberID}'",
+            "`projectID` = '{$project->getId()}'",
+            "`userID` = '{$member->getId()}'",
         ]);
         return isset($projectMember[0]) ? $projectMember[0] : null;
     }

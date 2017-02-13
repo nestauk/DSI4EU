@@ -64,8 +64,8 @@ class ProjectMemberInvitationRepositoryTest extends PHPUnit_Framework_TestCase
         $projectMemberInvitation->setMember($this->user_1);
         $this->projectMemberInvitationRepository->add($projectMemberInvitation);
 
-        $this->assertCount(2, $this->projectMemberInvitationRepository->getByProjectID(
-            $this->project_1->getId()
+        $this->assertCount(2, $this->projectMemberInvitationRepository->getByProject(
+            $this->project_1
         ));
     }
 
@@ -133,17 +133,17 @@ class ProjectMemberInvitationRepositoryTest extends PHPUnit_Framework_TestCase
         $projectMemberInvitation->setMember($this->user_2);
         $this->projectMemberInvitationRepository->add($projectMemberInvitation);
 
-        $this->assertTrue($this->projectMemberInvitationRepository->memberHasInvitationToProject(
-            $this->user_1->getId(), $this->project_1->getId())
+        $this->assertTrue($this->projectMemberInvitationRepository->userHasBeenInvitedToProject(
+            $this->user_1, $this->project_1)
         );
-        $this->assertFalse($this->projectMemberInvitationRepository->memberHasInvitationToProject(
-            $this->user_2->getId(), $this->project_1->getId())
+        $this->assertFalse($this->projectMemberInvitationRepository->userHasBeenInvitedToProject(
+            $this->user_2, $this->project_1)
         );
-        $this->assertTrue($this->projectMemberInvitationRepository->memberHasInvitationToProject(
-            $this->user_2->getId(), $this->project_2->getId())
+        $this->assertTrue($this->projectMemberInvitationRepository->userHasBeenInvitedToProject(
+            $this->user_2, $this->project_2)
         );
-        $this->assertFalse($this->projectMemberInvitationRepository->memberHasInvitationToProject(
-            $this->user_1->getId(), $this->project_2->getId())
+        $this->assertFalse($this->projectMemberInvitationRepository->userHasBeenInvitedToProject(
+            $this->user_1, $this->project_2)
         );
     }
 

@@ -46,8 +46,8 @@ class AddEmailToProject
         if ($this->userRepository->emailAddressExists($this->data()->email)) {
             $this->user = $this->userRepository->getByEmail($this->data()->email);
             $addMemberToProject = new AddMemberInvitationToProject();
-            $addMemberToProject->data()->projectID = $this->data()->projectID;
-            $addMemberToProject->data()->userID = $this->user->getId();
+            $addMemberToProject->setProjectID($this->data()->projectID);
+            $addMemberToProject->setUser($this->user);
             $addMemberToProject->exec();
         } else {
             $createProjectEmailInvitation = new CreateProjectEmailInvitation();

@@ -8,6 +8,7 @@ class Sysctl
 
     public static function echoVersion()
     {
-        echo 'v=' . self::$version;
+        // echo 'v=' . self::$version;
+        echo 'v=' . rand(1, 99999);
     }
 }

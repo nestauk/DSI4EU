@@ -132,7 +132,7 @@ class ProjectController
                 $isAdmin = true;
             }
 
-            $member = (new ProjectMemberRepository())->getByProjectIDAndMemberID($project->getId(), $loggedInUser->getId());
+            $member = (new ProjectMemberRepository())->getByProjectAndMember($project, $loggedInUser);
             if ($member !== null AND $member->isAdmin())
                 $isAdmin = true;
 
@@ -201,8 +201,8 @@ class ProjectController
                 }
                 if (isset($_POST['addMember'])) {
                     $addMemberToProject = new AddMemberInvitationToProject();
-                    $addMemberToProject->data()->projectID = $project->getId();
-                    $addMemberToProject->data()->userID = $_POST['addMember'];
+                    $addMemberToProject->setProject($project);
+                    $addMemberToProject->setUserID($_POST['addMember']);
                     $addMemberToProject->exec();
                     echo json_encode(['result' => 'ok']);
                     return true;

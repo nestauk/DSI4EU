@@ -63,10 +63,11 @@ if (!isset($urlHandler))
                                                         </div>
                                                         <a class="remove-user" href="#">Remove user</a>
                                                         <div ng-show="member.isOwner">
-                                                            Owner
+                                                            Is Owner
                                                         </div>
                                                         <div ng-show="member.isAdmin">
-                                                            <a class="remove-user" href="#">Admin</a>
+                                                            Is Admin
+                                                            <a class="remove-user" href="#">Remove admin privileges</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -76,45 +77,99 @@ if (!isset($urlHandler))
                                 </div>
                             </div>
                             <div class="step-window w-tab-pane" data-w-tab="Tab 2">
-                                <div class="tabbed-nav-buttons w-clearfix"><a
-                                            class="tab-button-3 tab-button-next w-button">Save
-                                        and continue</a>
-                                </div>
                                 <div class="w-row">
                                     <div class="creator-col w-col w-col-4 w-col-stack">
                                         <h2>Add existing DSI4EU user</h2>
                                         <p>You can add existing users to your project.</p>
-                                        <p>After being notified the user will need to accept your invitation before
-                                            being
-                                            added to your project.</p>
+                                        <p>
+                                            After being notified the user will need to accept your invitation before
+                                            being added to your project.
+                                        </p>
                                     </div>
                                     <div class="creator-col creator-col-right w-col w-col-8 w-col-stack">
                                         <div class="w-form">
-                                            <form id="email-form-3" name="email-form-3">
+                                            <form id="email-form-3" name="email-form-3"
+                                                  ng-submit="searchExistingUser.submit()">
                                                 <div class="w-row">
+                                                    <label for="email-6">Search for existing user by name or
+                                                        email</label>
+
                                                     <div class="w-col w-col-6">
                                                         <div class="padding-right-50">
-                                                            <label for="email-6">Search for existing user by name or
-                                                                email</label>
                                                             <input class="creator-data-entry end w-input"
                                                                    data-name="Email 6" id="email-6" maxlength="256"
                                                                    name="email-6" placeholder="User name or email"
-                                                                   required="required" type="text">
+                                                                   required="required" type="text"
+                                                                   ng-model="searchExistingUser.input">
                                                         </div>
                                                     </div>
                                                     <div class="w-col w-col-6">
-                                                        <div class="padding-left-50"></div>
+                                                        <button class="tab-button-4 tab-button-next w-button"
+                                                                type="submit" style="float:none">
+                                                            Search
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                                <div class="w-row">
+                                                    <div ng-show="searchExistingUser.loading">
+                                                        <?php _ehtml('Loading') ?>...
+                                                    </div>
+                                                    <div class="w-clearfix w-col w-col-6 w-col-stack"
+                                                         ng-repeat="member in searchExistingUser.users">
+                                                        <div class="involved-card manage">
+                                                            <div class="w-row">
+                                                                <div class="image-col w-col w-col-3 w-col-small-3 w-col-tiny-3">
+                                                                    <img class="involved-profile-img"
+                                                                         src="http://uploads.webflow.com/img/image-placeholder.svg"
+                                                                         width="50">
+                                                                </div>
+                                                                <div class="w-clearfix w-col w-col-9 w-col-small-9 w-col-tiny-9">
+                                                                    <div class="card-name">{{member.name}}</div>
+                                                                    <div class="card-position">{{member.jobTitle}}</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <a class="remove-user add-user" style="color:green" href="#"
+                                                           ng-click="searchExistingUser.addUser(member)">
+                                                            Add user
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </form>
-                                            <div class="w-form-done">
-                                                <div>Thank you! Your submission has been received!</div>
-                                            </div>
-                                            <div class="w-form-fail">
-                                                <div>Oops! Something went wrong while submitting the form</div>
+                                        </div>
+
+                                        <div class="w-form">
+                                            <div class="w-row">
+                                                <label for="email-6">
+                                                    Invited Members
+                                                </label>
+
+                                                <div class="w-clearfix w-col w-col-6 w-col-stack"
+                                                     ng-repeat="member in invitedMembers">
+                                                    <div class="involved-card manage">
+                                                        <div class="w-row">
+                                                            <div class="image-col w-col w-col-3 w-col-small-3 w-col-tiny-3">
+                                                                <img class="involved-profile-img"
+                                                                     src="http://uploads.webflow.com/img/image-placeholder.svg"
+                                                                     width="50">
+                                                            </div>
+                                                            <div class="w-clearfix w-col w-col-9 w-col-small-9 w-col-tiny-9">
+                                                                <div class="card-name">{{member.name}}</div>
+                                                                <div class="card-position">{{member.jobTitle}}</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <a class="remove-user add-user" href="#"
+                                                       ng-click="cancelInvitationForUser(member)">
+                                                        Cancel Invitation
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+
+
                                 </div>
                             </div>
                             <div class="step-window w--tab-active w-tab-pane" data-w-tab="Tab 3">
@@ -132,17 +187,11 @@ if (!isset($urlHandler))
                                     <div class="creator-col creator-col-right w-col w-col-8">
                                         <div class="w-form">
                                             <form id="email-form-3" name="email-form-3">
-                                            <textarea class="creator-data-entry end w-input wide"
-                                                      data-name="invite by email" id="invite-by-email" maxlength="5000"
-                                                      name="invite-by-email"
-                                                      placeholder="Add email to invite"></textarea>
+                                                <textarea class="creator-data-entry end w-input wide"
+                                                          data-name="invite by email" id="invite-by-email"
+                                                          maxlength="5000" name="invite-by-email"
+                                                          placeholder="Add email to invite"></textarea>
                                             </form>
-                                            <div class="w-form-done">
-                                                <div>Thank you! Your submission has been received!</div>
-                                            </div>
-                                            <div class="w-form-fail">
-                                                <div>Oops! Something went wrong while submitting the form</div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>

@@ -108,7 +108,9 @@ class RejectMemberInvitationToProjectTest extends PHPUnit_Framework_TestCase
         }
 
         $this->assertFalse(
-            $this->projectMemberInvitationRepo->memberHasInvitationToProject($this->invitedUser->getId(), $this->project->getId())
+            $this->projectMemberInvitationRepo->userHasBeenInvitedToProject(
+                $this->invitedUser, $this->project
+            )
         );
     }
 
@@ -126,8 +128,8 @@ class RejectMemberInvitationToProjectTest extends PHPUnit_Framework_TestCase
     private function addProjectMemberInvitation($projectID, $userID)
     {
         $this->addMemberInvitationToProject = new \DSI\UseCase\AddMemberInvitationToProject();
-        $this->addMemberInvitationToProject->data()->userID = $userID;
-        $this->addMemberInvitationToProject->data()->projectID = $projectID;
+        $this->addMemberInvitationToProject->setUserID($userID);
+        $this->addMemberInvitationToProject->setProjectID($projectID);
         $this->addMemberInvitationToProject->exec();
     }
 

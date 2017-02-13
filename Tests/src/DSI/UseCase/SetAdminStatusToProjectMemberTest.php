@@ -85,8 +85,8 @@ class SetAdminStatusToProjectMemberTest extends PHPUnit_Framework_TestCase
         $setStatusCmd->data()->executor = $this->owner;
         $setStatusCmd->exec();
 
-        $projectMember = $this->projectMemberRepo->getByProjectIDAndMemberID(
-            $this->project->getId(), $this->member->getId()
+        $projectMember = $this->projectMemberRepo->getByProjectAndMember(
+            $this->project, $this->member
         );
         $this->assertTrue($projectMember->isAdmin());
     }
@@ -103,8 +103,8 @@ class SetAdminStatusToProjectMemberTest extends PHPUnit_Framework_TestCase
         $setStatusCmd->data()->executor = $this->admin;
         $setStatusCmd->exec();
 
-        $projectMember = $this->projectMemberRepo->getByProjectIDAndMemberID(
-            $this->project->getId(), $this->member->getId()
+        $projectMember = $this->projectMemberRepo->getByProjectAndMember(
+            $this->project, $this->member
         );
         $this->assertTrue($projectMember->isAdmin());
     }
@@ -121,8 +121,8 @@ class SetAdminStatusToProjectMemberTest extends PHPUnit_Framework_TestCase
         $setStatusCmd->data()->executor = $this->sysadmin;
         $setStatusCmd->exec();
 
-        $projectMember = $this->projectMemberRepo->getByProjectIDAndMemberID(
-            $this->project->getId(), $this->member->getId()
+        $projectMember = $this->projectMemberRepo->getByProjectAndMember(
+            $this->project, $this->member
         );
         $this->assertTrue($projectMember->isAdmin());
     }
@@ -139,8 +139,8 @@ class SetAdminStatusToProjectMemberTest extends PHPUnit_Framework_TestCase
         $setStatusCmd->data()->executor = $this->owner;
         $setStatusCmd->exec();
 
-        $projectMember = $this->projectMemberRepo->getByProjectIDAndMemberID(
-            $this->project->getId(), $this->member->getId()
+        $projectMember = $this->projectMemberRepo->getByProjectAndMember(
+            $this->project, $this->member
         );
         $this->assertFalse($projectMember->isAdmin());
     }
@@ -175,8 +175,8 @@ class SetAdminStatusToProjectMemberTest extends PHPUnit_Framework_TestCase
         $setStatusCmd->data()->executor = $this->sysadmin;
         $setStatusCmd->exec();
 
-        $projectMember = $this->projectMemberRepo->getByProjectIDAndMemberID(
-            $this->project->getId(), $this->member->getId()
+        $projectMember = $this->projectMemberRepo->getByProjectAndMember(
+            $this->project, $this->member
         );
         $this->assertTrue($projectMember->isAdmin());
     }

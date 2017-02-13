@@ -4,12 +4,18 @@ namespace DSI\Controller;
 
 use DSI\Entity\Project;
 use DSI\Entity\ProjectMember;
+use DSI\Entity\ProjectMemberInvitation;
 use DSI\Entity\User;
+use DSI\Repository\ProjectMemberInvitationRepository;
 use DSI\Repository\ProjectMemberRepository;
 use DSI\Repository\ProjectRepository;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\URL;
+use DSI\UseCase\AddMemberInvitationToProject;
+use DSI\UseCase\RejectMemberInvitationToProject;
+use DSI\UseCase\RemoveMemberInvitationToProject;
+use DSI\UseCase\SearchUser;
 
 class ProjectEditMembersController
 {
@@ -37,30 +43,27 @@ class ProjectEditMembersController
         if (!$isOwner AND !$isAdmin AND !$loggedInUser->isSysAdmin())
             go_to($urlHandler->home());
 
-        if (isset($_POST['save'])) {
-            try {
-                /*
-                $exec = new ChangeOwner();
-                $exec->data()->executor = $loggedInUser;
-                $exec->data()->member = (new UserRepository())->getById($_POST['newOwnerID']);
-                $exec->data()->project = $project;
-                $exec->exec();
+        try {
+            if (isset($_POST['searchExistingUser']))
+                return $this->searchExistingUser($_POST['searchExistingUser']);
 
-                echo json_encode([
-                    'code' => 'ok',
-                    'url' => $urlHandler->project($project),
-                ]);
-                */
-            } catch (ErrorHandler $e) {
-                echo json_encode([
-                    'code' => 'error',
-                    'errors' => $e->getErrors(),
-                ]);
-            }
-            return;
+            if (isset($_POST['addExistingUser']))
+                return $this->addExistingUser($project, $_POST['addExistingUser']);
+
+            if (isset($_POST['cancelUserInvitation']))
+                return $this->cancelUserInvitation($project, $_POST['cancelUserInvitation']);
+
+        } catch (ErrorHandler $e) {
+            echo json_encode([
+                'code' => 'error',
+                'errors' => $e->getErrors(),
+            ]);
+            return true;
         }
 
         if ($this->format == 'json') {
+            $invitedMembers = (new ProjectMemberInvitationRepository())->getByProject($project);
+
             echo json_encode([
                 'members' => array_map(function (ProjectMember $member) use ($project) {
                     $user = $member->getMember();
@@ -73,11 +76,22 @@ class ProjectEditMembersController
                         'isOwner' => $member->getMemberID() == $project->getOwnerID(),
                     ];
                 }, $members),
+                'invitedMembers' => array_map(function (ProjectMemberInvitation $invitedMember) use ($project) {
+                    $user = $invitedMember->getMember();
+                    return [
+                        'id' => $user->getId(),
+                        'name' => $user->getFullName(),
+                        'jobTitle' => $user->getJobTitle(),
+                        'profilePic' => $user->getProfilePic(),
+                    ];
+                }, $invitedMembers)
             ]);
         } else {
             $pageTitle = $project->getName();
             require __DIR__ . '/../../../www/views/project-edit-members.php';
         }
+
+        return true;
     }
 
     /**
@@ -107,5 +121,53 @@ class ProjectEditMembersController
         }
 
         return false;
+    }
+
+    private function searchExistingUser($term)
+    {
+        $search = new SearchUser();
+        $search->setTerm($term);
+        $search->exec();
+
+        echo json_encode([
+            'code' => 'ok',
+            'users' => array_map(function (User $user) {
+                return [
+                    'id' => $user->getId(),
+                    'name' => $user->getFullName(),
+                    'jobTitle' => $user->getJobTitle(),
+                ];
+            }, $search->getUsers()),
+        ]);
+
+        return true;
+    }
+
+    private function addExistingUser(Project $project, $userID)
+    {
+        $exec = new AddMemberInvitationToProject();
+        $exec->setProject($project);
+        $exec->setUserID($userID);
+        $exec->exec();
+
+        echo json_encode([
+            'code' => 'ok',
+        ]);
+
+        return true;
+    }
+
+    private function cancelUserInvitation(Project $project, $userID)
+    {
+        $exec = new RemoveMemberInvitationToProject();
+        $exec->setProjectID($project->getId());
+        $exec->setUserID($userID);
+        $exec->exec();
+
+        echo json_encode([
+            'code' => 'ok',
+        ]);
+
+        return true;
     }
 }

@@ -2,6 +2,7 @@
 
 namespace DSI\UseCase;
 
+use DSI\Entity\Project;
 use DSI\Entity\ProjectMember;
 use DSI\Entity\ProjectMemberInvitation;
 use DSI\Entity\User;
@@ -31,6 +32,12 @@ class ApproveMemberInvitationToProject
     /** @var ApproveMemberInvitationToProject_Data */
     private $data;
 
+    /** @var User */
+    private $user;
+
+    /** @var Project */
+    private $project;
+
     public function __construct()
     {
         $this->data = new ApproveMemberInvitationToProject_Data();
@@ -48,17 +55,17 @@ class ApproveMemberInvitationToProject
         $this->assertExecutorCanExecute();
         $this->assertUserHasBeenInvited();
 
-        $member = $this->userRepository->getById($this->data()->userID);
-        $project = $this->projectRepository->getById($this->data()->projectID);
+        $this->user = $this->userRepository->getById($this->data()->userID);
+        $this->project = $this->projectRepository->getById($this->data()->projectID);
 
         $projectMemberInvitation = new ProjectMemberInvitation();
-        $projectMemberInvitation->setMember($member);
-        $projectMemberInvitation->setProject($project);
+        $projectMemberInvitation->setMember($this->user);
+        $projectMemberInvitation->setProject($this->project);
         $this->projectMemberInvitationRepo->remove($projectMemberInvitation);
 
         $projectMember = new ProjectMember();
-        $projectMember->setMember($member);
-        $projectMember->setProject($project);
+        $projectMember->setMember($this->user);
+        $projectMember->setProject($this->project);
         $this->projectMemberRepo->insert($projectMember);
     }
 
@@ -72,7 +79,9 @@ class ApproveMemberInvitationToProject
 
     private function assertUserHasBeenInvited()
     {
-        if (!$this->projectMemberInvitationRepo->memberHasInvitationToProject($this->data()->userID, $this->data()->projectID)) {
+        if (!$this->projectMemberInvitationRepo->userHasBeenInvitedToProject(
+            $this->user, $this->project
+        )) {
             $this->errorHandler->addTaggedError('member', 'This user was not invited to join the project');
             $this->errorHandler->throwIfNotEmpty();
         }

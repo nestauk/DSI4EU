@@ -11,7 +11,7 @@ use DSI\Repository\ProjectRepository;
 use DSI\Repository\UserRepository;
 use DSI\Service\ErrorHandler;
 
-class RejectMemberInvitationToProject
+class RemoveMemberInvitationToProject
 {
     /** @var ErrorHandler */
     private $errorHandler;
@@ -28,13 +28,8 @@ class RejectMemberInvitationToProject
     /** @var UserRepository */
     private $userRepository;
 
-    /** @var RejectMemberInvitationToProject_Data */
-    private $data;
-
-    public function __construct()
-    {
-        $this->data = new RejectMemberInvitationToProject_Data();
-    }
+    private $userID,
+        $projectID;
 
     public function exec()
     {
@@ -44,22 +39,11 @@ class RejectMemberInvitationToProject
         $this->projectRepository = new ProjectRepository();
         $this->userRepository = new UserRepository();
 
-        $user = $this->userRepository->getById($this->data()->userID);
-        $project = $this->projectRepository->getById($this->data()->projectID);
+        $user = $this->userRepository->getById($this->userID);
+        $project = $this->projectRepository->getById($this->projectID);
 
-        $this->assertExecutorIsSet();
-        $this->assertExecutorCanExecute();
         $this->assertUserHasBeenInvitedToProject($user, $project);
-
         $this->deleteMemberInvitation($user, $project);
-    }
-
-    /**
-     * @return RejectMemberInvitationToProject_Data
-     */
-    public function data()
-    {
-        return $this->data;
     }
 
     private function assertUserHasBeenInvitedToProject(User $user, Project $project)
@@ -70,42 +54,31 @@ class RejectMemberInvitationToProject
         }
     }
 
-    private function assertExecutorIsSet()
-    {
-        if (!$this->data()->executor OR $this->data()->executor->getId() < 1)
-            throw new \InvalidArgumentException('executor');
-    }
-
-    private function assertExecutorCanExecute()
-    {
-        if ($this->data()->executor->getId() != $this->data()->userID) {
-            $this->errorHandler->addTaggedError('executor', 'Only the invited person can approve the invitation');
-            throw $this->errorHandler;
-        }
-    }
-
     /**
-     * @param $member
-     * @param $project
-     * @throws \DSI\NotFound
+     * @param User $member
+     * @param Project $project
      */
-    private function deleteMemberInvitation($member, $project)
+    private function deleteMemberInvitation(User $member, Project $project)
     {
         $projectMemberInvitation = new ProjectMemberInvitation();
         $projectMemberInvitation->setMember($member);
         $projectMemberInvitation->setProject($project);
         $this->projectMemberInvitationRepo->remove($projectMemberInvitation);
     }
-}
 
-class RejectMemberInvitationToProject_Data
-{
-    /** @var User */
-    public $executor;
+    /**
+     * @param mixed $userID
+     */
+    public function setUserID($userID)
+    {
+        $this->userID = (int)$userID;
+    }
 
-    /** @var int */
-    public $userID;
-
-    /** @var int */
-    public $projectID;
+    /**
+     * @param mixed $projectID
+     */
+    public function setProjectID($projectID)
+    {
+        $this->projectID = (int)$projectID;
+    }
 }

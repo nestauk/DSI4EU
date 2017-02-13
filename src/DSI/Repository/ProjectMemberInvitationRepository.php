@@ -3,7 +3,9 @@
 namespace DSI\Repository;
 
 use DSI\DuplicateEntry;
+use DSI\Entity\Project;
 use DSI\Entity\ProjectMemberInvitation;
+use DSI\Entity\User;
 use DSI\NotFound;
 use DSI\Service\SQL;
 
@@ -61,13 +63,13 @@ class ProjectMemberInvitationRepository
     }
 
     /**
-     * @param int $projectID
+     * @param Project $project
      * @return \DSI\Entity\ProjectMemberInvitation[]
      */
-    public function getByProjectID(int $projectID)
+    public function getByProject(Project $project)
     {
         return $this->getObjectsWhere([
-            "`projectID` = '{$projectID}'"
+            "`projectID` = '{$project->getId()}'"
         ]);
     }
 
@@ -147,11 +149,11 @@ class ProjectMemberInvitationRepository
         $query->query();
     }
 
-    public function memberHasInvitationToProject(int $userID, int $projectID)
+    public function userHasBeenInvitedToProject(User $user, Project $project)
     {
-        $projectMembers = $this->getByProjectID($projectID);
+        $projectMembers = $this->getByProject($project);
         foreach ($projectMembers AS $projectMember) {
-            if ($userID == $projectMember->getMemberID()) {
+            if ($user->getId() == $projectMember->getMemberID()) {
                 return true;
             }
         }

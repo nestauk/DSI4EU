@@ -2,7 +2,9 @@
 
 namespace DSI\UseCase;
 
+use DSI\Entity\Project;
 use DSI\Entity\ProjectMemberInvitation;
+use DSI\Entity\User;
 use DSI\Repository\ProjectMemberRepository;
 use DSI\Repository\ProjectMemberInvitationRepository;
 use DSI\Repository\ProjectRepository;
@@ -14,7 +16,7 @@ class AddMemberInvitationToProject
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var ProjectMemberInvitationRepository*/
+    /** @var ProjectMemberInvitationRepository */
     private $projectMemberInvitationRepo;
 
     /** @var ProjectRepository */
@@ -23,13 +25,15 @@ class AddMemberInvitationToProject
     /** @var UserRepository */
     private $userRepository;
 
-    /** @var AddMemberInvitationToProject_Data */
-    private $data;
+    /** @var Int */
+    private $userID,
+        $projectID;
 
-    public function __construct()
-    {
-        $this->data = new AddMemberInvitationToProject_Data();
-    }
+    /** @var User */
+    private $user;
+
+    /** @var Project */
+    private $project;
 
     public function exec()
     {
@@ -38,30 +42,25 @@ class AddMemberInvitationToProject
         $this->projectRepository = new ProjectRepository();
         $this->userRepository = new UserRepository();
 
-        $this->checkIfProjectAlreadyHasTheMember();
-        $this->checkIfUserHasAlreadyBeenInvited();
+        $this->user = $this->userRepository->getById($this->userID);
+        $this->project = $this->projectRepository->getById($this->projectID);
+
+        $this->assertProjectAlreadyHasTheMember();
+        $this->assertUserHasAlreadyBeenInvited();
         $this->addMemberInvitation();
     }
 
-    /**
-     * @return AddMemberInvitationToProject_Data
-     */
-    public function data()
+    private function assertProjectAlreadyHasTheMember()
     {
-        return $this->data;
-    }
-
-    private function checkIfProjectAlreadyHasTheMember()
-    {
-        if ((new ProjectMemberRepository())->projectIDHasMemberID($this->data()->projectID, $this->data()->userID)) {
+        if ((new ProjectMemberRepository())->projectIDHasMemberID($this->projectID, $this->userID)) {
             $this->errorHandler->addTaggedError('member', __('This user is already a member of the project'));
             $this->errorHandler->throwIfNotEmpty();
         }
     }
 
-    private function checkIfUserHasAlreadyBeenInvited()
+    private function assertUserHasAlreadyBeenInvited()
     {
-        if ($this->projectMemberInvitationRepo->memberHasInvitationToProject($this->data()->userID, $this->data()->projectID)) {
+        if ($this->projectMemberInvitationRepo->userHasBeenInvitedToProject($this->user, $this->project)) {
             $this->errorHandler->addTaggedError('member', __('This user has already been invited to join the project'));
             $this->errorHandler->throwIfNotEmpty();
         }
@@ -70,17 +69,40 @@ class AddMemberInvitationToProject
     private function addMemberInvitation()
     {
         $projectMemberInvitation = new ProjectMemberInvitation();
-        $projectMemberInvitation->setMember($this->userRepository->getById($this->data()->userID));
-        $projectMemberInvitation->setProject($this->projectRepository->getById($this->data()->projectID));
+        $projectMemberInvitation->setMember($this->user);
+        $projectMemberInvitation->setProject($this->project);
         $this->projectMemberInvitationRepo->add($projectMemberInvitation);
     }
-}
 
-class AddMemberInvitationToProject_Data
-{
-    /** @var int */
-    public $userID;
+    /**
+     * @param Int $userID
+     */
+    public function setUserID($userID)
+    {
+        $this->userID = (int)$userID;
+    }
 
-    /** @var int */
-    public $projectID;
+    /**
+     * @param User $user
+     */
+    public function setUser(User $user)
+    {
+        $this->userID = $user->getId();
+    }
+
+    /**
+     * @param Int $projectID
+     */
+    public function setProjectID($projectID)
+    {
+        $this->projectID = (int)$projectID;
+    }
+
+    /**
+     * @param Project $project
+     */
+    public function setProject($project)
+    {
+        $this->projectID = $project->getId();
+    }
 }

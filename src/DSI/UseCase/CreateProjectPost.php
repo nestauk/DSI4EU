@@ -95,9 +95,9 @@ class CreateProjectPost
         if ($this->data()->project->getOwnerID() == $this->data()->executor->getId())
             return true;
 
-        $member = (new ProjectMemberRepository())->getByProjectIDAndMemberID(
-            $this->data()->project->getId(),
-            $this->data()->executor->getId()
+        $member = (new ProjectMemberRepository())->getByProjectAndMember(
+            $this->data()->project,
+            $this->data()->executor
         );
         if ($member != null AND $member->isAdmin())
             return true;

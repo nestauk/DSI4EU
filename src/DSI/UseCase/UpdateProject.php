@@ -249,9 +249,9 @@ class UpdateProject
             return true;
         if ($this->data()->executor->isCommunityAdmin())
             return true;
-        $member = (new ProjectMemberRepository())->getByProjectIDAndMemberID(
-            $this->data()->project->getId(),
-            $this->data()->executor->getId()
+        $member = (new ProjectMemberRepository())->getByProjectAndMember(
+            $this->data()->project,
+            $this->data()->executor
         );
         if ($member AND $member->isAdmin())
             return true;

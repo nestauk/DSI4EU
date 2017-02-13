@@ -105,6 +105,18 @@ class UserRepository
         ]);
     }
 
+    /**
+     * @param string $name
+     * @return User[]
+     */
+    public function searchByName(string $name)
+    {
+        return $this->getObjectsWhere([
+            "(`fname` LIKE '%" . addslashes($name) . "%' OR 
+            `lname` LIKE '%" . addslashes($name) . "%')"
+        ]);
+    }
+
     public function facebookUIDExists(string $facebookUID): bool
     {
         return $this->checkExistingUserWhere([
