@@ -12,7 +12,7 @@ use DSI\Repository\ProjectRepository;
 use DSI\Repository\UserRepository;
 use DSI\Service\ErrorHandler;
 
-class ApproveMemberInvitationToProject
+class AcceptMemberInvitationToProject
 {
     /** @var ErrorHandler */
     private $errorHandler;
@@ -51,12 +51,12 @@ class ApproveMemberInvitationToProject
         $this->projectRepository = new ProjectRepository();
         $this->userRepository = new UserRepository();
 
+        $this->user = $this->userRepository->getById($this->data()->userID);
+        $this->project = $this->projectRepository->getById($this->data()->projectID);
+
         $this->assertExecutorIsSet();
         $this->assertExecutorCanExecute();
         $this->assertUserHasBeenInvited();
-
-        $this->user = $this->userRepository->getById($this->data()->userID);
-        $this->project = $this->projectRepository->getById($this->data()->projectID);
 
         $projectMemberInvitation = new ProjectMemberInvitation();
         $projectMemberInvitation->setMember($this->user);

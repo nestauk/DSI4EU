@@ -55,7 +55,7 @@ class ApproveMemberInvitationToProjectTest extends PHPUnit_Framework_TestCase
     /** @test */
     public function cannotExecuteWithoutAnExecutor()
     {
-        $approveCmd = new \DSI\UseCase\ApproveMemberInvitationToProject();
+        $approveCmd = new \DSI\UseCase\AcceptMemberInvitationToProject();
         $this->setExpectedException(InvalidArgumentException::class);
         $approveCmd->exec();
     }
@@ -65,7 +65,7 @@ class ApproveMemberInvitationToProjectTest extends PHPUnit_Framework_TestCase
     {
         $e = null;
 
-        $approveCmd = new \DSI\UseCase\ApproveMemberInvitationToProject();
+        $approveCmd = new \DSI\UseCase\AcceptMemberInvitationToProject();
         $approveCmd->data()->executor = $this->invitedUser;
         $approveCmd->data()->projectID = $this->project->getId();
         $approveCmd->data()->userID = $this->invitedUser->getId();
@@ -85,7 +85,7 @@ class ApproveMemberInvitationToProjectTest extends PHPUnit_Framework_TestCase
         try {
             $this->addProjectMemberInvitation($this->project->getId(), $this->invitedUser->getId());
 
-            $approveCmd = new \DSI\UseCase\ApproveMemberInvitationToProject();
+            $approveCmd = new \DSI\UseCase\AcceptMemberInvitationToProject();
             $approveCmd->data()->executor = $this->projectOwner;
             $approveCmd->data()->projectID = $this->project->getId();
             $approveCmd->data()->userID = $this->invitedUser->getId();
@@ -135,7 +135,7 @@ class ApproveMemberInvitationToProjectTest extends PHPUnit_Framework_TestCase
 
     private function approveInvitation($projectID, $userID)
     {
-        $approveCmd = new \DSI\UseCase\ApproveMemberInvitationToProject();
+        $approveCmd = new \DSI\UseCase\AcceptMemberInvitationToProject();
         $approveCmd->data()->executor = $this->invitedUser;
         $approveCmd->data()->projectID = $projectID;
         $approveCmd->data()->userID = $userID;

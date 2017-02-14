@@ -175,8 +175,8 @@ class UpdateUserBasicDetails
         foreach ($userProjects AS $currentProjectID) {
             if (!in_array($currentProjectID, $this->data()->projects)) {
                 $remMember = new RemoveMemberFromProject();
-                $remMember->data()->userID = $this->data()->userID;
-                $remMember->data()->projectID = $currentProjectID;
+                $remMember->setUserId($this->data()->userID);
+                $remMember->setProjectId($currentProjectID);
                 $remMember->exec();
             }
         }

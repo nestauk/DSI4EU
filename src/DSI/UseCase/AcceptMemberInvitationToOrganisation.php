@@ -11,7 +11,7 @@ use DSI\Repository\OrganisationRepository;
 use DSI\Repository\UserRepository;
 use DSI\Service\ErrorHandler;
 
-class ApproveMemberInvitationToOrganisation
+class AcceptMemberInvitationToOrganisation
 {
     /** @var ErrorHandler */
     private $errorHandler;

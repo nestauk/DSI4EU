@@ -2,7 +2,9 @@
 
 namespace DSI\UseCase;
 
+use DSI\Entity\Project;
 use DSI\Entity\ProjectMember;
+use DSI\Entity\User;
 use DSI\Repository\ProjectMemberRepository;
 use DSI\Repository\ProjectRepository;
 use DSI\Repository\UserRepository;
@@ -16,47 +18,57 @@ class RemoveMemberFromProject
     /** @var ProjectMemberRepository */
     private $projectMemberRepo;
 
-    /** @var RemoveMemberFromProject_Data */
-    private $data;
+    /** @var Project */
+    private $project;
 
-    public function __construct()
-    {
-        $this->data = new RemoveMemberFromProject_Data();
-    }
+    /** @var User */
+    private $user;
 
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
         $this->projectMemberRepo = new ProjectMemberRepository();
 
-        $projectRepo = new ProjectRepository();
-        $userRepo = new UserRepository();
-
-        if (!$this->projectMemberRepo->projectIDHasMemberID($this->data()->projectID, $this->data()->userID)) {
+        if (!$this->projectMemberRepo->projectHasMember($this->project, $this->user)) {
             $this->errorHandler->addTaggedError('member', 'The user is not a member of the project');
             $this->errorHandler->throwIfNotEmpty();
         }
 
         $projectMember = new ProjectMember();
-        $projectMember->setMember($userRepo->getById($this->data()->userID));
-        $projectMember->setProject($projectRepo->getById($this->data()->projectID));
+        $projectMember->setMember($this->user);
+        $projectMember->setProject($this->project);
         $this->projectMemberRepo->remove($projectMember);
     }
 
     /**
-     * @return RemoveMemberFromProject_Data
+     * @param Project $project
      */
-    public function data()
+    public function setProject(Project $project)
     {
-        return $this->data;
+        $this->project = $project;
     }
-}
 
-class RemoveMemberFromProject_Data
-{
-    /** @var int */
-    public $userID;
+    /**
+     * @param int $projectID
+     */
+    public function setProjectId($projectID)
+    {
+        $this->project = (new ProjectRepository())->getById($projectID);
+    }
 
-    /** @var int */
-    public $projectID;
+    /**
+     * @param User $user
+     */
+    public function setUser(User $user)
+    {
+        $this->user = $user;
+    }
+
+    /**
+     * @param int $userID
+     */
+    public function setUserId($userID)
+    {
+        $this->user = (new UserRepository())->getById((int)$userID);
+    }
 }

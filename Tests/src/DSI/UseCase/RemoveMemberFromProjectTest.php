@@ -55,14 +55,14 @@ class RemoveMemberFromProjectTest extends PHPUnit_Framework_TestCase
         $this->addMemberToProjectCommand->setProject($this->project);
         $this->addMemberToProjectCommand->exec();
 
-        $this->removeMemberFromProjectCommand->data()->userID = $this->user->getId();
-        $this->removeMemberFromProjectCommand->data()->projectID = $this->project->getId();
+        $this->removeMemberFromProjectCommand->setUser($this->user);
+        $this->removeMemberFromProjectCommand->setProject($this->project);
         $this->removeMemberFromProjectCommand->exec();
 
         $this->assertFalse(
             $this->projectMemberRepo->projectIDHasMemberID(
-                $this->removeMemberFromProjectCommand->data()->projectID,
-                $this->removeMemberFromProjectCommand->data()->userID
+                $this->project->getId(),
+                $this->user->getId()
             )
         );
     }
@@ -73,8 +73,8 @@ class RemoveMemberFromProjectTest extends PHPUnit_Framework_TestCase
         $e = null;
 
         try {
-            $this->removeMemberFromProjectCommand->data()->userID = $this->user->getId();
-            $this->removeMemberFromProjectCommand->data()->projectID = $this->project->getId();
+            $this->removeMemberFromProjectCommand->setUser($this->user);
+            $this->removeMemberFromProjectCommand->setProject($this->project);
             $this->removeMemberFromProjectCommand->exec();
         } catch (\DSI\Service\ErrorHandler $e) {
         }

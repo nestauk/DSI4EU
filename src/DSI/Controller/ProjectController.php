@@ -209,8 +209,8 @@ class ProjectController
                 }
                 if (isset($_POST['removeMember'])) {
                     $removeMemberFromProject = new RemoveMemberFromProject();
-                    $removeMemberFromProject->data()->projectID = $project->getId();
-                    $removeMemberFromProject->data()->userID = $_POST['removeMember'];
+                    $removeMemberFromProject->setProject($project);
+                    $removeMemberFromProject->setUserId($_POST['removeMember']);
                     $removeMemberFromProject->exec();
                     echo json_encode(['result' => 'ok']);
                     return true;
@@ -563,8 +563,8 @@ class ProjectController
         if ($genSecureCode->checkCode($_POST['secureCode'])) {
             try {
                 $removeMember = new RemoveMemberFromProject();
-                $removeMember->data()->projectID = $project->getId();
-                $removeMember->data()->userID = $user->getId();
+                $removeMember->setProject($project);
+                $removeMember->setUser($user);
                 $removeMember->exec();
 
                 echo json_encode([

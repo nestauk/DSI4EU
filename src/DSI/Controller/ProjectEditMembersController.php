@@ -13,7 +13,7 @@ use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\URL;
 use DSI\UseCase\AddMemberInvitationToProject;
-use DSI\UseCase\RejectMemberInvitationToProject;
+use DSI\UseCase\RemoveMemberFromProject;
 use DSI\UseCase\RemoveMemberInvitationToProject;
 use DSI\UseCase\SearchUser;
 
@@ -52,6 +52,9 @@ class ProjectEditMembersController
 
             if (isset($_POST['cancelUserInvitation']))
                 return $this->cancelUserInvitation($project, $_POST['cancelUserInvitation']);
+
+            if (isset($_POST['removeMember']))
+                return $this->removeMember($project, $_POST['removeMember']);
 
         } catch (ErrorHandler $e) {
             echo json_encode([
@@ -162,6 +165,20 @@ class ProjectEditMembersController
         $exec = new RemoveMemberInvitationToProject();
         $exec->setProjectID($project->getId());
         $exec->setUserID($userID);
+        $exec->exec();
+
+        echo json_encode([
+            'code' => 'ok',
+        ]);
+
+        return true;
+    }
+
+    private function removeMember(Project $project, $userID)
+    {
+        $exec = new RemoveMemberFromProject();
+        $exec->setProject($project);
+        $exec->setUserId($userID);
         $exec->exec();
 
         echo json_encode([

@@ -70,6 +70,30 @@ angular
                         });
                 });
         };
+        $scope.removeMember = function (user) {
+            swal({
+                    title: "Are you sure?",
+                    text: "You are about to remove this user from the project",
+                    type: "info",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Continue",
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true
+                },
+                function () {
+                    $http
+                        .post(url, {removeMember: user.id})
+                        .then(function (response) {
+                            if (response.data.code == 'ok') {
+                                getExistingAndInvitedProjectMembers();
+                                swal("Success!", "The user has been removed from the project.", "success");
+                            } else {
+                                swal("Info", Object.values(response.data.errors).join(' '), "info");
+                            }
+                        });
+                });
+        };
 
         function getExistingAndInvitedProjectMembers() {
             $http

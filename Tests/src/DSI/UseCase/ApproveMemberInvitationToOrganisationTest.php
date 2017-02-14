@@ -55,7 +55,7 @@ class ApproveMemberInvitationToOrganisationTest extends PHPUnit_Framework_TestCa
     /** @test */
     public function cannotExecuteWithoutAnExecutor()
     {
-        $approveCmd = new \DSI\UseCase\ApproveMemberInvitationToOrganisation();
+        $approveCmd = new \DSI\UseCase\AcceptMemberInvitationToOrganisation();
         $this->setExpectedException(InvalidArgumentException::class);
         $approveCmd->exec();
     }
@@ -65,7 +65,7 @@ class ApproveMemberInvitationToOrganisationTest extends PHPUnit_Framework_TestCa
     {
         $e = null;
 
-        $approveCmd = new \DSI\UseCase\ApproveMemberInvitationToOrganisation();
+        $approveCmd = new \DSI\UseCase\AcceptMemberInvitationToOrganisation();
         $approveCmd->data()->executor = $this->invitedUser;
         $approveCmd->data()->organisationID = $this->organisation->getId();
         $approveCmd->data()->userID = $this->invitedUser->getId();
@@ -85,7 +85,7 @@ class ApproveMemberInvitationToOrganisationTest extends PHPUnit_Framework_TestCa
         try {
             $this->addOrganisationMemberInvitation($this->organisation->getId(), $this->invitedUser->getId());
 
-            $approveCmd = new \DSI\UseCase\ApproveMemberInvitationToOrganisation();
+            $approveCmd = new \DSI\UseCase\AcceptMemberInvitationToOrganisation();
             $approveCmd->data()->executor = $this->organisationOwner;
             $approveCmd->data()->organisationID = $this->organisation->getId();
             $approveCmd->data()->userID = $this->invitedUser->getId();
@@ -133,7 +133,7 @@ class ApproveMemberInvitationToOrganisationTest extends PHPUnit_Framework_TestCa
 
     private function approveInvitation($organisationID, $userID)
     {
-        $approveCmd = new \DSI\UseCase\ApproveMemberInvitationToOrganisation();
+        $approveCmd = new \DSI\UseCase\AcceptMemberInvitationToOrganisation();
         $approveCmd->data()->executor = $this->invitedUser;
         $approveCmd->data()->organisationID = $organisationID;
         $approveCmd->data()->userID = $userID;

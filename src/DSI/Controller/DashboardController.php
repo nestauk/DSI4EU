@@ -24,8 +24,8 @@ use DSI\Repository\StoryRepository;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\URL;
-use DSI\UseCase\ApproveMemberInvitationToOrganisation;
-use DSI\UseCase\ApproveMemberInvitationToProject;
+use DSI\UseCase\AcceptMemberInvitationToOrganisation;
+use DSI\UseCase\AcceptMemberInvitationToProject;
 use DSI\UseCase\ApproveMemberRequestToOrganisation;
 use DSI\UseCase\ApproveMemberRequestToProject;
 use DSI\UseCase\RejectMemberInvitationToOrganisation;
@@ -142,6 +142,8 @@ class DashboardController
 
             require __DIR__ . '/../../../www/views/dashboard.php';
         }
+
+        return true;
     }
 
     /**
@@ -183,11 +185,12 @@ class DashboardController
     }
 
     /**
-     * @param $loggedInUser
+     * @param User $loggedInUser
+     * @return bool
      */
-    private function approveProjectInvitation(User $loggedInUser):void
+    private function approveProjectInvitation(User $loggedInUser)
     {
-        $approveInvitation = new ApproveMemberInvitationToProject();
+        $approveInvitation = new AcceptMemberInvitationToProject();
         $approveInvitation->data()->executor = $loggedInUser;
         $approveInvitation->data()->userID = $loggedInUser->getId();
         $approveInvitation->data()->projectID = isset($_POST['projectID']) ? $_POST['projectID'] : 0;
@@ -200,13 +203,14 @@ class DashboardController
                 'text' => 'You have accepted the invitation to be part of the project!',
             ]
         ]);
-        return;
+        return true;
     }
 
     /**
-     * @param $loggedInUser
+     * @param User $loggedInUser
+     * @return bool
      */
-    private function rejectProjectInvitation(User $loggedInUser):void
+    private function rejectProjectInvitation(User $loggedInUser)
     {
         $rejectInvitation = new RejectMemberInvitationToProject();
         $rejectInvitation->data()->executor = $loggedInUser;
@@ -221,15 +225,15 @@ class DashboardController
                 'text' => 'You have declined the invitation to be part of the project!',
             ]
         ]);
-        return;
+        return true;
     }
 
     /**
      * @param $loggedInUser
      */
-    private function approveOrganisationInvitation(User $loggedInUser):void
+    private function approveOrganisationInvitation(User $loggedInUser)
     {
-        $approveInvitation = new ApproveMemberInvitationToOrganisation();
+        $approveInvitation = new AcceptMemberInvitationToOrganisation();
         $approveInvitation->data()->executor = $loggedInUser;
         $approveInvitation->data()->userID = $loggedInUser->getId();
         $approveInvitation->data()->organisationID = isset($_POST['organisationID']) ? $_POST['organisationID'] : 0;
@@ -248,7 +252,7 @@ class DashboardController
     /**
      * @param $loggedInUser
      */
-    private function rejectOrganisationInvitation(User $loggedInUser):void
+    private function rejectOrganisationInvitation(User $loggedInUser)
     {
         $rejectInvitation = new RejectMemberInvitationToOrganisation();
         $rejectInvitation->data()->executor = $loggedInUser;
@@ -269,7 +273,7 @@ class DashboardController
     /**
      * @param $loggedInUser
      */
-    private function approveOrganisationRequest($loggedInUser):void
+    private function approveOrganisationRequest($loggedInUser)
     {
         $approveRequest = new ApproveMemberRequestToOrganisation();
         $approveRequest->data()->executor = $loggedInUser;
@@ -290,7 +294,7 @@ class DashboardController
     /**
      * @param $loggedInUser
      */
-    private function rejectOrganisationRequest($loggedInUser):void
+    private function rejectOrganisationRequest($loggedInUser)
     {
         $rejectRequest = new RejectMemberRequestToOrganisation();
         $rejectRequest->data()->executor = $loggedInUser;
@@ -311,7 +315,7 @@ class DashboardController
     /**
      * @param $loggedInUser
      */
-    private function approveProjectRequest($loggedInUser):void
+    private function approveProjectRequest($loggedInUser)
     {
         $approveRequest = new ApproveMemberRequestToProject();
         $approveRequest->data()->executor = $loggedInUser;
@@ -332,7 +336,7 @@ class DashboardController
     /**
      * @param $loggedInUser
      */
-    private function rejectProjectRequest($loggedInUser):void
+    private function rejectProjectRequest($loggedInUser)
     {
         $rejectRequest = new RejectMemberRequestToProject();
         $rejectRequest->data()->executor = $loggedInUser;

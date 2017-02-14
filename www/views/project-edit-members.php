@@ -61,7 +61,7 @@ if (!isset($urlHandler))
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <a class="remove-user" href="#">Remove user</a>
+                                                        <a class="remove-user" href="#" ng-click="removeMember(member)">Remove user</a>
                                                         <div ng-show="member.isOwner">
                                                             Is Owner
                                                         </div>
