@@ -31,7 +31,12 @@ class RemoveMemberFromProject
 
         if (!$this->projectMemberRepo->projectHasMember($this->project, $this->user)) {
             $this->errorHandler->addTaggedError('member', 'The user is not a member of the project');
-            $this->errorHandler->throwIfNotEmpty();
+            throw $this->errorHandler;
+        }
+
+        if($this->project->getOwner()->getId() == $this->user->getId()){
+            $this->errorHandler->addTaggedError('member', 'The project owner cannot be removed from the project');
+            throw $this->errorHandler;
         }
 
         $projectMember = new ProjectMember();

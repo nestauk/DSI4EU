@@ -47,10 +47,10 @@ class SetAdminStatusToProjectMemberTest extends PHPUnit_Framework_TestCase
         $this->addMemberToProject($this->project, $this->admin);
 
         $setStatusCmd = new SetAdminStatusToProjectMember();
-        $setStatusCmd->data()->member = $this->admin;
-        $setStatusCmd->data()->project = $this->project;
-        $setStatusCmd->data()->isAdmin = true;
-        $setStatusCmd->data()->executor = $this->owner;
+        $setStatusCmd->setMember($this->admin);
+        $setStatusCmd->setProject($this->project);
+        $setStatusCmd->setIsAdmin(true);
+        $setStatusCmd->setExecutor($this->owner);
         $setStatusCmd->exec();
     }
 
@@ -65,9 +65,9 @@ class SetAdminStatusToProjectMemberTest extends PHPUnit_Framework_TestCase
     public function executorMustBeSent()
     {
         $setStatusCmd = new SetAdminStatusToProjectMember();
-        $setStatusCmd->data()->member = $this->member;
-        $setStatusCmd->data()->project = $this->project;
-        $setStatusCmd->data()->isAdmin = true;
+        $setStatusCmd->setMember($this->member);
+        $setStatusCmd->setProject($this->project);
+        $setStatusCmd->setIsAdmin(true);
         
         $this->setExpectedException(InvalidArgumentException::class);
         $setStatusCmd->exec();
@@ -79,10 +79,10 @@ class SetAdminStatusToProjectMemberTest extends PHPUnit_Framework_TestCase
         $this->addMemberToProject($this->project, $this->member);
 
         $setStatusCmd = new SetAdminStatusToProjectMember();
-        $setStatusCmd->data()->member = $this->member;
-        $setStatusCmd->data()->project = $this->project;
-        $setStatusCmd->data()->isAdmin = true;
-        $setStatusCmd->data()->executor = $this->owner;
+        $setStatusCmd->setMember($this->member);
+        $setStatusCmd->setProject($this->project);
+        $setStatusCmd->setIsAdmin(true);
+        $setStatusCmd->setExecutor($this->owner);
         $setStatusCmd->exec();
 
         $projectMember = $this->projectMemberRepo->getByProjectAndMember(
@@ -97,10 +97,10 @@ class SetAdminStatusToProjectMemberTest extends PHPUnit_Framework_TestCase
         $this->addMemberToProject($this->project, $this->member);
 
         $setStatusCmd = new SetAdminStatusToProjectMember();
-        $setStatusCmd->data()->member = $this->member;
-        $setStatusCmd->data()->project = $this->project;
-        $setStatusCmd->data()->isAdmin = true;
-        $setStatusCmd->data()->executor = $this->admin;
+        $setStatusCmd->setMember($this->member);
+        $setStatusCmd->setProject($this->project);
+        $setStatusCmd->setIsAdmin(true);
+        $setStatusCmd->setExecutor($this->admin);
         $setStatusCmd->exec();
 
         $projectMember = $this->projectMemberRepo->getByProjectAndMember(
@@ -115,10 +115,10 @@ class SetAdminStatusToProjectMemberTest extends PHPUnit_Framework_TestCase
         $this->addMemberToProject($this->project, $this->member);
 
         $setStatusCmd = new SetAdminStatusToProjectMember();
-        $setStatusCmd->data()->member = $this->member;
-        $setStatusCmd->data()->project = $this->project;
-        $setStatusCmd->data()->isAdmin = true;
-        $setStatusCmd->data()->executor = $this->sysadmin;
+        $setStatusCmd->setMember($this->member);
+        $setStatusCmd->setProject($this->project);
+        $setStatusCmd->setIsAdmin(true);
+        $setStatusCmd->setExecutor($this->sysadmin);
         $setStatusCmd->exec();
 
         $projectMember = $this->projectMemberRepo->getByProjectAndMember(
@@ -133,10 +133,10 @@ class SetAdminStatusToProjectMemberTest extends PHPUnit_Framework_TestCase
         $this->addMemberToProject($this->project, $this->member);
 
         $setStatusCmd = new SetAdminStatusToProjectMember();
-        $setStatusCmd->data()->member = $this->member;
-        $setStatusCmd->data()->project = $this->project;
-        $setStatusCmd->data()->isAdmin = false;
-        $setStatusCmd->data()->executor = $this->owner;
+        $setStatusCmd->setMember($this->member);
+        $setStatusCmd->setProject($this->project);
+        $setStatusCmd->setIsAdmin(false);
+        $setStatusCmd->setExecutor($this->owner);
         $setStatusCmd->exec();
 
         $projectMember = $this->projectMemberRepo->getByProjectAndMember(
@@ -152,10 +152,10 @@ class SetAdminStatusToProjectMemberTest extends PHPUnit_Framework_TestCase
 
         $e = null;
         $setStatusCmd = new SetAdminStatusToProjectMember();
-        $setStatusCmd->data()->member = $this->member;
-        $setStatusCmd->data()->project = $this->project;
-        $setStatusCmd->data()->isAdmin = false;
-        $setStatusCmd->data()->executor = $this->member;
+        $setStatusCmd->setMember($this->member);
+        $setStatusCmd->setProject($this->project);
+        $setStatusCmd->setIsAdmin(false);
+        $setStatusCmd->setExecutor($this->member);
         try {
             $setStatusCmd->exec();
         } catch (\DSI\Service\ErrorHandler $e) {
@@ -169,10 +169,10 @@ class SetAdminStatusToProjectMemberTest extends PHPUnit_Framework_TestCase
     public function userIsAutomaticallyAddedAsMember()
     {
         $setStatusCmd = new SetAdminStatusToProjectMember();
-        $setStatusCmd->data()->member = $this->member;
-        $setStatusCmd->data()->project = $this->project;
-        $setStatusCmd->data()->isAdmin = true;
-        $setStatusCmd->data()->executor = $this->sysadmin;
+        $setStatusCmd->setMember($this->member);
+        $setStatusCmd->setProject($this->project);
+        $setStatusCmd->setIsAdmin(true);
+        $setStatusCmd->setExecutor($this->sysadmin);
         $setStatusCmd->exec();
 
         $projectMember = $this->projectMemberRepo->getByProjectAndMember(

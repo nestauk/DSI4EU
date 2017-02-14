@@ -24,13 +24,18 @@ class SetAdminStatusToProjectMember
     /** @var UserRepository */
     private $userRepository;
 
-    /** @var SetAdminStatusToProjectMember_Data */
-    private $data;
+    /** @var User */
+    private $member,
+        $executor;
+
+    /** @var Project */
+    private $project;
+
+    /** @var bool */
+    private $isAdmin;
 
     public function __construct()
     {
-        $this->data = new SetAdminStatusToProjectMember_Data();
-
         $this->errorHandler = new ErrorHandler();
         $this->projectMemberRepo = new ProjectMemberRepository();
         $this->projectRepository = new ProjectRepository();
@@ -46,29 +51,14 @@ class SetAdminStatusToProjectMember
     }
 
     /**
-     * @return SetAdminStatusToProjectMember_Data
-     */
-    public function data()
-    {
-        return $this->data;
-    }
-
-    /**
      * @return bool
      */
     private function userCanChangeStatus(): bool
     {
-        if ($this->data()->executor->isSysAdmin())
+        if ($this->executor->isSysAdmin())
             return true;
 
-        if ($this->data()->project->getOwnerID() == $this->data()->executor->getId())
-            return true;
-
-        $member = (new ProjectMemberRepository())->getByProjectAndMember(
-            $this->data()->project,
-            $this->data()->executor
-        );
-        if ($member AND $member->isAdmin())
+        if ($this->project->getOwnerID() == $this->executor->getId())
             return true;
 
         return false;
@@ -76,10 +66,10 @@ class SetAdminStatusToProjectMember
 
     private function makeSureUserIsMember()
     {
-        if (!$this->projectMemberRepo->projectHasMember($this->data()->project, $this->data()->member)) {
+        if (!$this->projectMemberRepo->projectHasMember($this->project, $this->member)) {
             $addMemberToProject = new AddMemberToProject();
-            $addMemberToProject->setProject($this->data()->project);
-            $addMemberToProject->setUser($this->data()->member);
+            $addMemberToProject->setProject($this->project);
+            $addMemberToProject->setUser($this->member);
             $addMemberToProject->exec();
         }
     }
@@ -87,9 +77,9 @@ class SetAdminStatusToProjectMember
     private function setAdminFlag()
     {
         $projectMember = new ProjectMember();
-        $projectMember->setMember($this->data()->member);
-        $projectMember->setProject($this->data()->project);
-        $projectMember->setIsAdmin($this->data()->isAdmin);
+        $projectMember->setMember($this->member);
+        $projectMember->setProject($this->project);
+        $projectMember->setIsAdmin($this->isAdmin);
         $this->projectMemberRepo->save($projectMember);
     }
 
@@ -103,22 +93,47 @@ class SetAdminStatusToProjectMember
 
     private function assertDataHasBeenSent()
     {
-        if (!$this->data()->executor)
+        if (!$this->executor)
             throw new \InvalidArgumentException('No executor');
     }
-}
 
-class SetAdminStatusToProjectMember_Data
-{
-    /** @var User */
-    public $member;
+    /**
+     * @param User $user
+     */
+    public function setMember(User $user)
+    {
+        $this->member = $user;
+    }
 
-    /** @var Project */
-    public $project;
+    /**
+     * @param int $userID
+     */
+    public function setMemberId($userID)
+    {
+        $this->member = $this->userRepository->getById($userID);
+    }
 
-    /** @var bool */
-    public $isAdmin;
+    /**
+     * @param User $executor
+     */
+    public function setExecutor(User $executor)
+    {
+        $this->executor = $executor;
+    }
 
-    /** @var User */
-    public $executor;
+    /**
+     * @param Project $project
+     */
+    public function setProject(Project $project)
+    {
+        $this->project = $project;
+    }
+
+    /**
+     * @param bool $isAdmin
+     */
+    public function setIsAdmin($isAdmin)
+    {
+        $this->isAdmin = (bool)$isAdmin;
+    }
 }

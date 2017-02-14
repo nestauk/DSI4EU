@@ -16,6 +16,7 @@ use DSI\UseCase\AddMemberInvitationToProject;
 use DSI\UseCase\RemoveMemberFromProject;
 use DSI\UseCase\RemoveMemberInvitationToProject;
 use DSI\UseCase\SearchUser;
+use DSI\UseCase\SetAdminStatusToProjectMember;
 
 class ProjectEditMembersController
 {
@@ -25,12 +26,15 @@ class ProjectEditMembersController
     /** @var String */
     public $format = 'html';
 
+    /** @var User */
+    private $loggedInUser;
+
     public function exec()
     {
         $urlHandler = new URL();
         $authUser = new Auth();
         $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
-        $loggedInUser = $authUser->getUser();
+        $this->loggedInUser = $loggedInUser = $authUser->getUser();
 
         $projectRepository = new ProjectRepository();
         $project = $projectRepository->getById($this->projectID);
@@ -55,6 +59,12 @@ class ProjectEditMembersController
 
             if (isset($_POST['removeMember']))
                 return $this->removeMember($project, $_POST['removeMember']);
+
+            if (isset($_POST['makeAdmin']))
+                return $this->makeAdmin($project, $_POST['makeAdmin']);
+
+            if (isset($_POST['removeAdmin']))
+                return $this->removeAdmin($project, $_POST['removeAdmin']);
 
         } catch (ErrorHandler $e) {
             echo json_encode([
@@ -179,6 +189,38 @@ class ProjectEditMembersController
         $exec = new RemoveMemberFromProject();
         $exec->setProject($project);
         $exec->setUserId($userID);
+        $exec->exec();
+
+        echo json_encode([
+            'code' => 'ok',
+        ]);
+
+        return true;
+    }
+
+    private function makeAdmin(Project $project, $userID)
+    {
+        $exec = new SetAdminStatusToProjectMember();
+        $exec->setProject($project);
+        $exec->setMemberId($userID);
+        $exec->setExecutor($this->loggedInUser);
+        $exec->setIsAdmin(true);
+        $exec->exec();
+
+        echo json_encode([
+            'code' => 'ok',
+        ]);
+
+        return true;
+    }
+
+    private function removeAdmin(Project $project, $userID)
+    {
+        $exec = new SetAdminStatusToProjectMember();
+        $exec->setProject($project);
+        $exec->setMemberId($userID);
+        $exec->setExecutor($this->loggedInUser);
+        $exec->setIsAdmin(false);
         $exec->exec();
 
         echo json_encode([

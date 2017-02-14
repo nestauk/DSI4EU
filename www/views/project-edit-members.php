@@ -61,13 +61,25 @@ if (!isset($urlHandler))
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <a class="remove-user" href="#" ng-click="removeMember(member)">Remove user</a>
                                                         <div ng-show="member.isOwner">
                                                             Is Owner
                                                         </div>
-                                                        <div ng-show="member.isAdmin">
-                                                            Is Admin
-                                                            <a class="remove-user" href="#">Remove admin privileges</a>
+                                                        <div ng-hide="member.isOwner">
+                                                            <a ng-hide="member.isOwner" class="remove-user" href="#"
+                                                               ng-click="removeMember(member)">Remove user</a>
+                                                            <div ng-show="member.isAdmin">
+                                                                Is Admin
+                                                                <a class="remove-user" href="#"
+                                                                   ng-click="removeAdmin(member)">
+                                                                    Remove admin privileges
+                                                                </a>
+                                                            </div>
+                                                            <div ng-hide="member.isAdmin">
+                                                                <a class="remove-user" style="color:green" href="#"
+                                                                   ng-click="makeAdmin(member)">
+                                                                    Give admin privileges
+                                                                </a>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>

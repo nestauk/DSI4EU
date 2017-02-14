@@ -110,10 +110,10 @@ class ImportUserProjectOrganisationLinkController
     private function addAdminToProject(Project $project, User $user)
     {
         $projectAdmin = new SetAdminStatusToProjectMember();
-        $projectAdmin->data()->project = $project;
-        $projectAdmin->data()->executor = $this->sysAdminUser;
-        $projectAdmin->data()->member = $user;
-        $projectAdmin->data()->isAdmin = true;
+        $projectAdmin->setProject($project);
+        $projectAdmin->setExecutor($this->sysAdminUser);
+        $projectAdmin->setMember($user);
+        $projectAdmin->setIsAdmin(true);
         $projectAdmin->exec();
     }
 

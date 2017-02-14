@@ -128,10 +128,10 @@ class CreateProjectPostTest extends PHPUnit_Framework_TestCase
         $addMember->exec();
 
         $setAdmin = new \DSI\UseCase\SetAdminStatusToProjectMember();
-        $setAdmin->data()->executor = $this->owner;
-        $setAdmin->data()->project = $this->project;
-        $setAdmin->data()->member = $admin;
-        $setAdmin->data()->isAdmin = true;
+        $setAdmin->setExecutor($this->owner);
+        $setAdmin->setProject($this->project);
+        $setAdmin->setMember($admin);
+        $setAdmin->setIsAdmin(true);
         $setAdmin->exec();
     }
 }

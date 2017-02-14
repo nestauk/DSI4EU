@@ -266,10 +266,10 @@ class ProjectController
 
                 if (isset($_POST['setAdmin'])) {
                     $setStatusCmd = new SetAdminStatusToProjectMember();
-                    $setStatusCmd->data()->executor = $loggedInUser;
-                    $setStatusCmd->data()->member = (new UserRepository())->getById($_POST['member']);
-                    $setStatusCmd->data()->project = $project;
-                    $setStatusCmd->data()->isAdmin = (bool)$_POST['isAdmin'];
+                    $setStatusCmd->setExecutor($loggedInUser);
+                    $setStatusCmd->setMemberId($_POST['member']);
+                    $setStatusCmd->setProject($project);
+                    $setStatusCmd->setIsAdmin($_POST['isAdmin']);
                     $setStatusCmd->exec();
 
                     echo json_encode([

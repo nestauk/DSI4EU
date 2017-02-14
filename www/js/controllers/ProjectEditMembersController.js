@@ -94,6 +94,54 @@ angular
                         });
                 });
         };
+        $scope.makeAdmin = function (user) {
+            swal({
+                    title: "Are you sure?",
+                    text: "You are about to give admin privileges to this user",
+                    type: "info",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Continue",
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true
+                },
+                function () {
+                    $http
+                        .post(url, {makeAdmin: user.id})
+                        .then(function (response) {
+                            if (response.data.code == 'ok') {
+                                getExistingAndInvitedProjectMembers();
+                                swal("Success!", "The user now has admin privileges.", "success");
+                            } else {
+                                swal("Info", Object.values(response.data.errors).join(' '), "info");
+                            }
+                        });
+                });
+        };
+        $scope.removeAdmin = function (user) {
+            swal({
+                    title: "Are you sure?",
+                    text: "You are about to remove admin privileges from this user",
+                    type: "info",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Continue",
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true
+                },
+                function () {
+                    $http
+                        .post(url, {removeAdmin: user.id})
+                        .then(function (response) {
+                            if (response.data.code == 'ok') {
+                                getExistingAndInvitedProjectMembers();
+                                swal("Success!", "Admin privileges have been removed from the user..", "success");
+                            } else {
+                                swal("Info", Object.values(response.data.errors).join(' '), "info");
+                            }
+                        });
+                });
+        };
 
         function getExistingAndInvitedProjectMembers() {
             $http

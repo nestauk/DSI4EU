@@ -30,10 +30,10 @@ class SetAdminController
                 $user = (new UserRepository())->getById((int)$_GET['userID']);
 
                 $exec = new SetAdminStatusToProjectMember();
-                $exec->data()->member = $user;
-                $exec->data()->project = $project;
-                $exec->data()->isAdmin = true;
-                $exec->data()->executor = $loggedInUser;
+                $exec->setMember($user);
+                $exec->setProject($project);
+                $exec->setIsAdmin(true);
+                $exec->setExecutor($loggedInUser);
                 $exec->exec();
 
                 if (isset($_GET['owner'])) {

@@ -80,7 +80,6 @@ class ProjectMemberRepository
         $insert = array();
         $insert[] = "`projectID` = '" . (int)($projectMember->getProjectID()) . "'";
         $insert[] = "`userID` = '" . (int)($projectMember->getMemberID()) . "'";
-        $insert[] = "`isAdmin` = '" . (bool)($projectMember->isAdmin()) . "'";
 
         $query = new SQL("DELETE FROM `project-members` WHERE " . implode(' AND ', $insert) . "");
         $query->query();
