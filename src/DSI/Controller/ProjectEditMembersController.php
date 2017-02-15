@@ -3,15 +3,19 @@
 namespace DSI\Controller;
 
 use DSI\Entity\Project;
+use DSI\Entity\ProjectEmailInvitation;
 use DSI\Entity\ProjectMember;
 use DSI\Entity\ProjectMemberInvitation;
 use DSI\Entity\User;
+use DSI\Repository\ProjectEmailInvitationRepository;
 use DSI\Repository\ProjectMemberInvitationRepository;
 use DSI\Repository\ProjectMemberRepository;
 use DSI\Repository\ProjectRepository;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\URL;
+use DSI\UseCase\CancelInvitationEmailToProject;
+use DSI\UseCase\InviteEmailToProject;
 use DSI\UseCase\AddMemberInvitationToProject;
 use DSI\UseCase\RemoveMemberFromProject;
 use DSI\UseCase\RemoveMemberInvitationToProject;
@@ -38,11 +42,10 @@ class ProjectEditMembersController
 
         $projectRepository = new ProjectRepository();
         $project = $projectRepository->getById($this->projectID);
-        $owner = $project->getOwner();
 
         $members = (new ProjectMemberRepository())->getByProject($project);
-        $isOwner = $this->isOwner($project, $loggedInUser);
-        $isAdmin = $this->isAdmin($members, $loggedInUser);
+        $isOwner = $this->isProjectOwner($project, $loggedInUser);
+        $isAdmin = $this->isProjectAdmin($members, $loggedInUser);
 
         if (!$isOwner AND !$isAdmin AND !$loggedInUser->isSysAdmin())
             go_to($urlHandler->home());
@@ -66,6 +69,12 @@ class ProjectEditMembersController
             if (isset($_POST['removeAdmin']))
                 return $this->removeAdmin($project, $_POST['removeAdmin']);
 
+            if (isset($_POST['inviteEmail']))
+                return $this->inviteEmail($project, $_POST['inviteEmail']);
+
+            if (isset($_POST['cancelInvitationForEmail']))
+                return $this->cancelInvitationForEmail($project, $_POST['cancelInvitationForEmail']);
+
         } catch (ErrorHandler $e) {
             echo json_encode([
                 'code' => 'error',
@@ -78,26 +87,9 @@ class ProjectEditMembersController
             $invitedMembers = (new ProjectMemberInvitationRepository())->getByProject($project);
 
             echo json_encode([
-                'members' => array_map(function (ProjectMember $member) use ($project) {
-                    $user = $member->getMember();
-                    return [
-                        'id' => $user->getId(),
-                        'name' => $user->getFullName(),
-                        'jobTitle' => $user->getJobTitle(),
-                        'profilePic' => $user->getProfilePic(),
-                        'isAdmin' => $member->isAdmin(),
-                        'isOwner' => $member->getMemberID() == $project->getOwnerID(),
-                    ];
-                }, $members),
-                'invitedMembers' => array_map(function (ProjectMemberInvitation $invitedMember) use ($project) {
-                    $user = $invitedMember->getMember();
-                    return [
-                        'id' => $user->getId(),
-                        'name' => $user->getFullName(),
-                        'jobTitle' => $user->getJobTitle(),
-                        'profilePic' => $user->getProfilePic(),
-                    ];
-                }, $invitedMembers)
+                'members' => $this->projectMembersJson($members),
+                'invitedMembers' => $this->projectInvitedMembersJson($project),
+                'invitedEmails' => $this->projectInvitedEmailsJson($project),
             ]);
         } else {
             $pageTitle = $project->getName();
@@ -112,7 +104,7 @@ class ProjectEditMembersController
      * @param User $user
      * @return bool
      */
-    private function isOwner(Project $project, User $user): bool
+    private function isProjectOwner(Project $project, User $user): bool
     {
         return $project->getOwner()->getId() == $user->getId();
     }
@@ -122,7 +114,7 @@ class ProjectEditMembersController
      * @param User $user
      * @return bool
      */
-    private function isAdmin($members, User $user): bool
+    private function isProjectAdmin($members, User $user): bool
     {
         foreach ($members AS $member) {
             if (
@@ -136,6 +128,10 @@ class ProjectEditMembersController
         return false;
     }
 
+    /**
+     * @param String $term
+     * @return bool
+     */
     private function searchExistingUser($term)
     {
         $search = new SearchUser();
@@ -156,6 +152,11 @@ class ProjectEditMembersController
         return true;
     }
 
+    /**
+     * @param Project $project
+     * @param int $userID
+     * @return bool
+     */
     private function addExistingUser(Project $project, $userID)
     {
         $exec = new AddMemberInvitationToProject();
@@ -170,6 +171,11 @@ class ProjectEditMembersController
         return true;
     }
 
+    /**
+     * @param Project $project
+     * @param int $userID
+     * @return bool
+     */
     private function cancelUserInvitation(Project $project, $userID)
     {
         $exec = new RemoveMemberInvitationToProject();
@@ -184,6 +190,11 @@ class ProjectEditMembersController
         return true;
     }
 
+    /**
+     * @param Project $project
+     * @param int $userID
+     * @return bool
+     */
     private function removeMember(Project $project, $userID)
     {
         $exec = new RemoveMemberFromProject();
@@ -198,7 +209,12 @@ class ProjectEditMembersController
         return true;
     }
 
-    private function makeAdmin(Project $project, $userID)
+    /**
+     * @param Project $project
+     * @param int $userID
+     * @return bool
+     */
+    private function makeAdmin(Project $project, int $userID)
     {
         $exec = new SetAdminStatusToProjectMember();
         $exec->setProject($project);
@@ -214,7 +230,12 @@ class ProjectEditMembersController
         return true;
     }
 
-    private function removeAdmin(Project $project, $userID)
+    /**
+     * @param Project $project
+     * @param int $userID
+     * @return bool
+     */
+    private function removeAdmin(Project $project, int $userID)
     {
         $exec = new SetAdminStatusToProjectMember();
         $exec->setProject($project);
@@ -228,5 +249,97 @@ class ProjectEditMembersController
         ]);
 
         return true;
+    }
+
+    /**
+     * @param Project $project
+     * @param string $email
+     * @return bool
+     */
+    private function inviteEmail(Project $project, string $email)
+    {
+        $exec = new InviteEmailToProject();
+        $exec->setProject($project);
+        $exec->setByUser($this->loggedInUser);
+        $exec->setEmail($email);
+        $exec->exec();
+
+        echo json_encode([
+            'code' => 'ok',
+        ]);
+
+        return true;
+    }
+
+    /**
+     * @param Project $project
+     * @param string $email
+     * @return bool
+     */
+    private function cancelInvitationForEmail(Project $project, string $email)
+    {
+        $exec = new CancelInvitationEmailToProject();
+        $exec->setProject($project);
+        $exec->setEmail($email);
+        $exec->exec();
+
+        echo json_encode([
+            'code' => 'ok',
+        ]);
+
+        return true;
+    }
+
+
+    /**
+     * @param ProjectMember[] $members
+     * @return array
+     */
+    private function projectMembersJson($members)
+    {
+        return array_map(function (ProjectMember $member) {
+            $user = $member->getMember();
+            $project = $member->getProject();
+            return [
+                'id' => $user->getId(),
+                'name' => $user->getFullName(),
+                'jobTitle' => $user->getJobTitle(),
+                'profilePic' => $user->getProfilePic(),
+                'isAdmin' => $member->isAdmin(),
+                'isOwner' => $member->getMemberID() == $project->getOwnerID(),
+            ];
+        }, $members);
+    }
+
+    /**
+     * @param Project $project
+     * @return array
+     */
+    private function projectInvitedMembersJson(Project $project)
+    {
+        $invitedMembers = (new ProjectMemberInvitationRepository())->getByProject($project);
+        return array_map(function (ProjectMemberInvitation $invitedMember) {
+            $user = $invitedMember->getMember();
+            return [
+                'id' => $user->getId(),
+                'name' => $user->getFullName(),
+                'jobTitle' => $user->getJobTitle(),
+                'profilePic' => $user->getProfilePic(),
+            ];
+        }, $invitedMembers);
+    }
+
+    /**
+     * @param Project $project
+     * @return array
+     */
+    private function projectInvitedEmailsJson(Project $project)
+    {
+        $invitedEmails = (new ProjectEmailInvitationRepository())->getByProject($project);
+        return array_map(function (ProjectEmailInvitation $invitedEmail) {
+            return [
+                'email' => $invitedEmail->getEmail(),
+            ];
+        }, $invitedEmails);
     }
 }

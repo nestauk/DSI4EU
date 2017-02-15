@@ -107,7 +107,7 @@ class RemoveProject
     private function removeProjectEmailInvitations()
     {
         $projectEmailInvitationRepo = new ProjectEmailInvitationRepository();
-        $projectInvitations = $projectEmailInvitationRepo->getByProjectID($this->data()->project->getId());
+        $projectInvitations = $projectEmailInvitationRepo->getByProject($this->data()->project);
         foreach ($projectInvitations AS $invitation) {
             $projectEmailInvitationRepo->remove($invitation);
         }

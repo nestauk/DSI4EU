@@ -29,7 +29,7 @@ use DSI\Service\ErrorHandler;
 use DSI\Service\JsModules;
 use DSI\Service\Mailer;
 use DSI\Service\URL;
-use DSI\UseCase\AddEmailToProject;
+use DSI\UseCase\InviteEmailToProject;
 use DSI\UseCase\AddMemberInvitationToProject;
 use DSI\UseCase\AddMemberRequestToProject;
 use DSI\UseCase\AddProjectToOrganisation;
@@ -159,140 +159,33 @@ class ProjectController
 
         try {
             if ($userCanEditProject) {
-                if (isset($_POST['updateBasic'])) {
-                    $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
+                if (isset($_POST['updateBasic']))
+                    return $this->updateBasicInfo($project, $loggedInUser);
 
-                    $updateProject = new UpdateProject();
-                    $updateProject->data()->project = $project;
-                    $updateProject->data()->executor = $loggedInUser;
-                    if (isset($_POST['name']))
-                        $updateProject->data()->name = $_POST['name'];
-                    if (isset($_POST['url']))
-                        $updateProject->data()->url = $_POST['url'];
-                    if (isset($_POST['status']))
-                        $updateProject->data()->status = $_POST['status'];
-                    if (isset($_POST['description']))
-                        $updateProject->data()->description = $_POST['description'];
+                if (isset($_POST['approveRequestToJoin']))
+                    return $this->approveRequestToJoin($project);
 
-                    $updateProject->data()->startDate = $_POST['startDate'] ?? NULL;
-                    $updateProject->data()->endDate = $_POST['endDate'] ?? NULL;
+                if (isset($_POST['rejectRequestToJoin']))
+                    return $this->rejectRequestToJoin($project);
 
-                    $updateProject->exec();
-                    echo json_encode(['result' => 'ok']);
-                    return true;
-                }
+                if (isset($_POST['updateCountryRegion']))
+                    return $this->updateCountryRegion($project);
 
-                if (isset($_POST['addEmail'])) {
-                    $addEmailToProject = new AddEmailToProject();
-                    $addEmailToProject->data()->projectID = $project->getId();
-                    $addEmailToProject->data()->email = $_POST['addEmail'];
-                    $addEmailToProject->data()->byUserID = $loggedInUser->getId();
-                    $addEmailToProject->exec();
-                    $user = $addEmailToProject->getUser();
+                if (isset($_POST['newOrganisationID']))
+                    return $this->addOrganisationToProject($project);
 
-                    $response = [];
-                    $response['result'] = 'ok';
-                    $response['successMessage'] = $user ?
-                        'Member has been successfully invited' :
-                        'An invitation email has been sent to the person';
-
-                    echo json_encode($response);
-                    return true;
-                }
-                if (isset($_POST['addMember'])) {
-                    $addMemberToProject = new AddMemberInvitationToProject();
-                    $addMemberToProject->setProject($project);
-                    $addMemberToProject->setUserID($_POST['addMember']);
-                    $addMemberToProject->exec();
-                    echo json_encode(['result' => 'ok']);
-                    return true;
-                }
-                if (isset($_POST['removeMember'])) {
-                    $removeMemberFromProject = new RemoveMemberFromProject();
-                    $removeMemberFromProject->setProject($project);
-                    $removeMemberFromProject->setUserId($_POST['removeMember']);
-                    $removeMemberFromProject->exec();
-                    echo json_encode(['result' => 'ok']);
-                    return true;
-                }
-                if (isset($_POST['approveRequestToJoin'])) {
-                    $approveMemberRequestToJoinProject = new ApproveMemberRequestToProject();
-                    $approveMemberRequestToJoinProject->data()->projectID = $project->getId();
-                    $approveMemberRequestToJoinProject->data()->userID = $_POST['approveRequestToJoin'];
-                    $approveMemberRequestToJoinProject->exec();
-                    echo json_encode(['result' => 'ok']);
-                    return true;
-                }
-                if (isset($_POST['rejectRequestToJoin'])) {
-                    $rejectMemberRequestToJoinProject = new RejectMemberRequestToProject();
-                    $rejectMemberRequestToJoinProject->data()->projectID = $project->getId();
-                    $rejectMemberRequestToJoinProject->data()->userID = $_POST['rejectRequestToJoin'];
-                    $rejectMemberRequestToJoinProject->exec();
-                    echo json_encode(['result' => 'ok']);
-                    return true;
-                }
-
-                if (isset($_POST['updateCountryRegion'])) {
-                    $updateProjectCountryRegionCmd = new UpdateProjectCountryRegion();
-                    $updateProjectCountryRegionCmd->data()->projectID = $project->getId();
-                    $updateProjectCountryRegionCmd->data()->countryID = $_POST['countryID'];
-                    $updateProjectCountryRegionCmd->data()->region = $_POST['region'];
-                    $updateProjectCountryRegionCmd->exec();
-                    echo json_encode(['result' => 'ok']);
-                    return true;
-                }
-
-                if (isset($_POST['newOrganisationID'])) {
-                    $addOrganisationProjectCmd = new AddProjectToOrganisation();
-                    $addOrganisationProjectCmd->data()->projectID = $project->getId();
-                    $addOrganisationProjectCmd->data()->organisationID = $_POST['newOrganisationID'];
-                    $addOrganisationProjectCmd->exec();
-                    echo json_encode(['result' => 'ok']);
-                    return true;
-                }
-
-                if (isset($_POST['addPost'])) {
-                    $addPostCmd = new CreateProjectPost();
-                    $addPostCmd->data()->project = $project;
-                    $addPostCmd->data()->executor = $loggedInUser;
-                    $addPostCmd->data()->text = $_POST['addPost'];
-                    $addPostCmd->exec();
-                    echo json_encode([
-                        'result' => 'ok',
-                        'posts' => $this->getPostsForProject($project),
-                    ]);
-                    return true;
-                }
-
-                if (isset($_POST['setAdmin'])) {
-                    $setStatusCmd = new SetAdminStatusToProjectMember();
-                    $setStatusCmd->setExecutor($loggedInUser);
-                    $setStatusCmd->setMemberId($_POST['member']);
-                    $setStatusCmd->setProject($project);
-                    $setStatusCmd->setIsAdmin($_POST['isAdmin']);
-                    $setStatusCmd->exec();
-
-                    echo json_encode([
-                        'result' => 'ok'
-                    ]);
-                    return true;
-                }
+                if (isset($_POST['addPost']))
+                    return $this->addNewPostToProject($project, $loggedInUser);
             } else {
-                if (isset($_POST['requestToJoin'])) {
-                    $addMemberRequestToJoinProject = new AddMemberRequestToProject();
-                    $addMemberRequestToJoinProject->data()->projectID = $project->getId();
-                    $addMemberRequestToJoinProject->data()->userID = $loggedInUser->getId();
-                    $addMemberRequestToJoinProject->exec();
-                    echo json_encode(['result' => 'ok']);
-                    return true;
-                }
+                if (isset($_POST['requestToJoin']))
+                    return $this->requestToJoin($project, $loggedInUser);
             }
         } catch (ErrorHandler $e) {
             echo json_encode([
                 'result' => 'error',
                 'errors' => $e->getErrors()
             ]);
-            return true;
+            return null;
         }
 
         if ($this->data()->format == 'json') {
@@ -351,7 +244,7 @@ class ProjectController
             require __DIR__ . '/../../../www/views/project.php';
         }
 
-        return true;
+        return null;
     }
 
     /**
@@ -636,6 +529,124 @@ class ProjectController
             }
         }
         return true;
+    }
+
+    /**
+     * @param Project $project
+     * @param User $loggedInUser
+     * @return null
+     */
+    private function updateBasicInfo(Project $project, User $loggedInUser)
+    {
+        $updateProject = new UpdateProject();
+        $updateProject->data()->project = $project;
+        $updateProject->data()->executor = $loggedInUser;
+        if (isset($_POST['name']))
+            $updateProject->data()->name = $_POST['name'];
+        if (isset($_POST['url']))
+            $updateProject->data()->url = $_POST['url'];
+        if (isset($_POST['status']))
+            $updateProject->data()->status = $_POST['status'];
+        if (isset($_POST['description']))
+            $updateProject->data()->description = $_POST['description'];
+
+        $updateProject->data()->startDate = $_POST['startDate'] ?? NULL;
+        $updateProject->data()->endDate = $_POST['endDate'] ?? NULL;
+
+        $updateProject->exec();
+        echo json_encode(['result' => 'ok']);
+        return;
+    }
+
+    /**
+     * @param Project $project
+     * @return null
+     */
+    private function approveRequestToJoin(Project $project)
+    {
+        $approveMemberRequestToJoinProject = new ApproveMemberRequestToProject();
+        $approveMemberRequestToJoinProject->data()->projectID = $project->getId();
+        $approveMemberRequestToJoinProject->data()->userID = $_POST['approveRequestToJoin'];
+        $approveMemberRequestToJoinProject->exec();
+        echo json_encode(['result' => 'ok']);
+        return;
+    }
+
+    /**
+     * @param Project $project
+     * @return null
+     */
+    private function rejectRequestToJoin(Project $project)
+    {
+        $rejectMemberRequestToJoinProject = new RejectMemberRequestToProject();
+        $rejectMemberRequestToJoinProject->data()->projectID = $project->getId();
+        $rejectMemberRequestToJoinProject->data()->userID = $_POST['rejectRequestToJoin'];
+        $rejectMemberRequestToJoinProject->exec();
+        echo json_encode(['result' => 'ok']);
+        return;
+    }
+
+    /**
+     * @param Project $project
+     * @return null
+     */
+    private function updateCountryRegion(Project $project)
+    {
+        $updateProjectCountryRegionCmd = new UpdateProjectCountryRegion();
+        $updateProjectCountryRegionCmd->data()->projectID = $project->getId();
+        $updateProjectCountryRegionCmd->data()->countryID = $_POST['countryID'];
+        $updateProjectCountryRegionCmd->data()->region = $_POST['region'];
+        $updateProjectCountryRegionCmd->exec();
+        echo json_encode(['result' => 'ok']);
+        return;
+    }
+
+    /**
+     * @param Project $project
+     * @return null
+     */
+    private function addOrganisationToProject(Project $project)
+    {
+        $addOrganisationProjectCmd = new AddProjectToOrganisation();
+        $addOrganisationProjectCmd->data()->projectID = $project->getId();
+        $addOrganisationProjectCmd->data()->organisationID = $_POST['newOrganisationID'];
+        $addOrganisationProjectCmd->exec();
+        echo json_encode(['result' => 'ok']);
+        return;
+    }
+
+    /**
+     * @param Project $project
+     * @param User $loggedInUser
+     * @return null
+     */
+    private function addNewPostToProject(Project $project, User $loggedInUser)
+    {
+        $addPostCmd = new CreateProjectPost();
+        $addPostCmd->data()->project = $project;
+        $addPostCmd->data()->executor = $loggedInUser;
+        $addPostCmd->data()->text = $_POST['addPost'];
+        $addPostCmd->exec();
+        echo json_encode([
+            'result' => 'ok',
+            'posts' => $this->getPostsForProject($project),
+        ]);
+        return;
+    }
+
+    /**
+     * @param Project $project
+     * @param User $loggedInUser
+     * @return null
+     */
+    private function requestToJoin(Project $project, User $loggedInUser)
+    {
+        $addMemberRequestToJoinProject = new AddMemberRequestToProject();
+        $addMemberRequestToJoinProject->data()->projectID = $project->getId();
+        $addMemberRequestToJoinProject->data()->userID = $loggedInUser->getId();
+        $addMemberRequestToJoinProject->exec();
+        echo json_encode(['result' => 'ok']);
+        return;
     }
 }
 

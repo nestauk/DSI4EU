@@ -3,6 +3,7 @@
 namespace DSI\Repository;
 
 use DSI\DuplicateEntry;
+use DSI\Entity\Project;
 use DSI\Entity\ProjectEmailInvitation;
 use DSI\NotFound;
 use DSI\Service\SQL;
@@ -55,7 +56,6 @@ class ProjectEmailInvitationRepository
 
         $insert = array();
         $insert[] = "`projectID` = '" . (int)($projectEmailInvitation->getProjectID()) . "'";
-        $insert[] = "`byUserID` = '" . (int)($projectEmailInvitation->getByUserID()) . "'";
         $insert[] = "`email` = '" . addslashes($projectEmailInvitation->getEmail()) . "'";
 
         $query = new SQL("DELETE FROM `project-email-invitations` WHERE " . implode(' AND ', $insert) . "");
@@ -70,6 +70,17 @@ class ProjectEmailInvitationRepository
     {
         return $this->getProjectEmailInvitationsWhere([
             "`projectID` = '{$projectID}'"
+        ]);
+    }
+
+    /**
+     * @param Project $project
+     * @return ProjectEmailInvitation[]
+     */
+    public function getByProject(Project $project)
+    {
+        return $this->getProjectEmailInvitationsWhere([
+            "`projectID` = '{$project->getId()}'"
         ]);
     }
 

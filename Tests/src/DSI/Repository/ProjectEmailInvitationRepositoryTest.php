@@ -68,9 +68,7 @@ class ProjectEmailInvitationRepositoryTest extends PHPUnit_Framework_TestCase
         $projectMember->setEmail('test4@example.org');
         $this->projectEmailInvitationRepo->add($projectMember);
 
-        $this->assertCount(2, $this->projectEmailInvitationRepo->getByProjectID(
-            $this->project_1->getId()
-        ));
+        $this->assertCount(2, $this->projectEmailInvitationRepo->getByProject($this->project_1));
     }
 
     /** @test saveAsNew */

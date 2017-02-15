@@ -2,6 +2,7 @@
 
 namespace DSI\UseCase;
 
+use DSI\Entity\Project;
 use DSI\Entity\ProjectEmailInvitation;
 use DSI\Entity\User;
 use DSI\Repository\ProjectEmailInvitationRepository;
@@ -25,13 +26,17 @@ class CreateProjectEmailInvitation
     /** @var UserRepository */
     private $userRepository;
 
-    /** @var CreateProjectEmailInvitation_Data */
-    private $data;
+    /** @var User */
+    private $byUser;
 
-    public function __construct()
-    {
-        $this->data = new CreateProjectEmailInvitation_Data();
-    }
+    /** @var string */
+    private $email;
+
+    /** @var boolean */
+    private $sendEmail;
+
+    /** @var int */
+    private $projectID;
 
     public function exec()
     {
@@ -42,28 +47,18 @@ class CreateProjectEmailInvitation
         $this->projectRepository = new ProjectRepository();
         $this->userRepository = new UserRepository();
 
-        if ($this->projectEmailInvitationRepo->projectInvitedEmail($this->data()->projectID, $this->data()->email)) {
+        if ($this->projectEmailInvitationRepo->projectInvitedEmail($this->projectID, $this->email)) {
             $this->errorHandler->addTaggedError('email', __('This user has already been invited to join the project'));
             $this->errorHandler->throwIfNotEmpty();
         }
 
-        $byUser = $this->userRepository->getById($this->data()->byUserID);
-
         $projectEmailInvitation = new ProjectEmailInvitation();
-        $projectEmailInvitation->setByUser($byUser);
-        $projectEmailInvitation->setProject($this->projectRepository->getById($this->data()->projectID));
-        $projectEmailInvitation->setEmail($this->data()->email);
+        $projectEmailInvitation->setByUser($this->byUser);
+        $projectEmailInvitation->setProject($this->projectRepository->getById($this->projectID));
+        $projectEmailInvitation->setEmail($this->email);
         $this->projectEmailInvitationRepo->add($projectEmailInvitation);
 
-        $this->sendEmail($byUser, $urlHandler);
-    }
-
-    /**
-     * @return CreateProjectEmailInvitation_Data
-     */
-    public function data()
-    {
-        return $this->data;
+        $this->sendEmail($this->byUser, $urlHandler);
     }
 
     /**
@@ -72,13 +67,13 @@ class CreateProjectEmailInvitation
      */
     private function sendEmail(User $byUser, URL $urlHandler)
     {
-        if ($this->data()->sendEmail) {
+        if ($this->sendEmail) {
             $message = "{$byUser->getFirstName()} {$byUser->getLastName()} has invited you to join DSI.<br />";
             $message .= "<a href='http://" . SITE_DOMAIN . $urlHandler->home() . "'>Click here</a> to register";
             $email = new Mailer();
             $email->From = 'noreply@digitalsocial.eu';
             $email->FromName = 'Digital Social';
-            $email->addAddress($this->data()->email);
+            $email->addAddress($this->email);
             $email->Subject = 'Digital Social Innovation :: Invitation';
             $email->wrapMessageInTemplate([
                 'header' => 'Invitation',
@@ -88,17 +83,44 @@ class CreateProjectEmailInvitation
             $email->send();
         }
     }
-}
 
-class CreateProjectEmailInvitation_Data
-{
-    /** @var int */
-    public $byUserID,
-        $projectID;
+    /**
+     * @param User $byUser
+     */
+    public function setByUser(User $byUser)
+    {
+        $this->byUser = $byUser;
+    }
 
-    /** @var string */
-    public $email;
+    /**
+     * @param string $email
+     */
+    public function setEmail(string $email)
+    {
+        $this->email = $email;
+    }
 
-    /** @var boolean */
-    public $sendEmail;
+    /**
+     * @param bool $sendEmail
+     */
+    public function setSendEmail(bool $sendEmail)
+    {
+        $this->sendEmail = $sendEmail;
+    }
+
+    /**
+     * @param int $projectID
+     */
+    public function setProjectID(int $projectID)
+    {
+        $this->projectID = $projectID;
+    }
+
+    /**
+     * @param Project $project
+     */
+    public function setProject(Project $project)
+    {
+        $this->projectID = $project->getId();
+    }
 }

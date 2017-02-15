@@ -1,10 +1,11 @@
 <?php
 require __DIR__ . '/header.php';
 /** @var $users \DSI\Entity\User[] */
-/** @var $owner \DSI\Entity\User */
 /** @var $loggedInUser \DSI\Entity\User */
 /** @var $project \DSI\Entity\Project */
 /** @var $urlHandler \DSI\Service\URL */
+/** @var $isAdmin bool */
+/** @var $isOwner bool */
 
 if (!isset($urlHandler))
     $urlHandler = new \DSI\Service\URL();
@@ -69,17 +70,21 @@ if (!isset($urlHandler))
                                                                ng-click="removeMember(member)">Remove user</a>
                                                             <div ng-show="member.isAdmin">
                                                                 Is Admin
-                                                                <a class="remove-user" href="#"
-                                                                   ng-click="removeAdmin(member)">
-                                                                    Remove admin privileges
-                                                                </a>
+                                                                <?php if ($isOwner) { ?>
+                                                                    <a class="remove-user" href="#"
+                                                                       ng-click="removeAdmin(member)">
+                                                                        Remove admin privileges
+                                                                    </a>
+                                                                <?php } ?>
                                                             </div>
-                                                            <div ng-hide="member.isAdmin">
-                                                                <a class="remove-user" style="color:green" href="#"
-                                                                   ng-click="makeAdmin(member)">
-                                                                    Give admin privileges
-                                                                </a>
-                                                            </div>
+                                                            <?php if ($isOwner) { ?>
+                                                                <div ng-hide="member.isAdmin">
+                                                                    <a class="remove-user" style="color:green" href="#"
+                                                                       ng-click="makeAdmin(member)">
+                                                                        Give admin privileges
+                                                                    </a>
+                                                                </div>
+                                                            <?php } ?>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -185,10 +190,6 @@ if (!isset($urlHandler))
                                 </div>
                             </div>
                             <div class="step-window w--tab-active w-tab-pane" data-w-tab="Tab 3">
-                                <div class="tabbed-nav-buttons w-clearfix"><a
-                                            class="tab-button-4 tab-button-next w-button">Save
-                                        and continue</a>
-                                </div>
                                 <div class="w-row">
                                     <div class="creator-col w-col w-col-4">
                                         <h2>Invite by email</h2>
@@ -198,11 +199,56 @@ if (!isset($urlHandler))
                                     </div>
                                     <div class="creator-col creator-col-right w-col w-col-8">
                                         <div class="w-form">
-                                            <form id="email-form-3" name="email-form-3">
-                                                <textarea class="creator-data-entry end w-input wide"
-                                                          data-name="invite by email" id="invite-by-email"
-                                                          maxlength="5000" name="invite-by-email"
-                                                          placeholder="Add email to invite"></textarea>
+                                            <form id="email-form-3" name="email-form-3" ng-submit="inviteByEmail.submit()">
+                                                <div class="w-row">
+                                                    <label for="email-6">
+                                                        Add email to invite
+                                                    </label>
+
+                                                    <div class="w-col w-col-6">
+                                                        <div class="padding-right-50">
+                                                            <input class="creator-data-entry end w-input"
+                                                                   data-name="Email 6" id="email-6" maxlength="256"
+                                                                   name="email-6" placeholder="Email address"
+                                                                   required="required" type="text"
+                                                                   ng-model="inviteByEmail.email">
+                                                        </div>
+                                                    </div>
+                                                    <div class="w-col w-col-6">
+                                                        <button class="tab-button-4 tab-button-next w-button"
+                                                                type="submit" style="float:none">
+                                                            Invite
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                                <div class="w-form">
+                                                    <div class="w-row">
+                                                        <label for="email-6">
+                                                            Invited Emails
+                                                        </label>
+
+                                                        <div class="w-clearfix w-col w-col-6 w-col-stack"
+                                                             ng-repeat="member in invitedEmails">
+                                                            <div class="involved-card manage">
+                                                                <div class="w-row">
+                                                                    <div class="image-col w-col w-col-3 w-col-small-3 w-col-tiny-3">
+                                                                        <img class="involved-profile-img"
+                                                                             src="http://uploads.webflow.com/img/image-placeholder.svg"
+                                                                             width="50">
+                                                                    </div>
+                                                                    <div class="w-clearfix w-col w-col-9 w-col-small-9 w-col-tiny-9">
+                                                                        <div class="card-name">{{member.email}}</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <a class="remove-user add-user" href="#"
+                                                               ng-click="cancelInvitationForEmail(member)">
+                                                                Cancel Invitation
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </form>
                                         </div>
                                     </div>

@@ -2,10 +2,10 @@ angular
     .module(angularAppName)
     .controller('ProjectEditMembersController', function ($scope, $http) {
         var url = window.location.pathname + '.json';
-        console.log(url);
 
         $scope.members = [];
         $scope.searchExistingUser = {};
+        $scope.inviteByEmail = {};
 
         $scope.searchExistingUser.submit = function () {
             $scope.searchExistingUser.users = [];
@@ -17,7 +17,7 @@ angular
                     if (response.data.code == 'ok') {
                         $scope.searchExistingUser.users = response.data.users;
                     } else {
-                        console.log(response.data);
+                        console.log({error: response.data});
                     }
                 });
         };
@@ -33,12 +33,36 @@ angular
                     showLoaderOnConfirm: true
                 },
                 function () {
-                    $http
-                        .post(url, {addExistingUser: user.id})
+                    $http.post(url, {addExistingUser: user.id})
                         .then(function (response) {
                             if (response.data.code == 'ok') {
-                                getExistingAndInvitedProjectMembers();
                                 swal("Success!", "The user has been invited to join the project.", "success");
+                                getExistingAndInvitedProjectMembers();
+                            } else {
+                                swal("Info", Object.values(response.data.errors).join(' '), "info");
+                            }
+                        });
+                });
+        };
+
+        $scope.inviteByEmail.submit = function () {
+            swal({
+                    title: "Are you sure?",
+                    text: "You are about to invite this person to join the project",
+                    type: "info",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Continue",
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true
+                },
+                function () {
+                    $http.post(url, {inviteEmail: $scope.inviteByEmail.email})
+                        .then(function (response) {
+                            if (response.data.code == 'ok') {
+                                swal("Success!", "An invitation to join the project has been sent by email.", "success");
+                                getExistingAndInvitedProjectMembers();
+                                $scope.inviteByEmail.email = '';
                             } else {
                                 swal("Info", Object.values(response.data.errors).join(' '), "info");
                             }
@@ -58,12 +82,11 @@ angular
                     showLoaderOnConfirm: true
                 },
                 function () {
-                    $http
-                        .post(url, {cancelUserInvitation: user.id})
+                    $http.post(url, {cancelUserInvitation: user.id})
                         .then(function (response) {
                             if (response.data.code == 'ok') {
-                                getExistingAndInvitedProjectMembers();
                                 swal("Success!", "The user has been invited to join the project.", "success");
+                                getExistingAndInvitedProjectMembers();
                             } else {
                                 swal("Info", Object.values(response.data.errors).join(' '), "info");
                             }
@@ -82,12 +105,11 @@ angular
                     showLoaderOnConfirm: true
                 },
                 function () {
-                    $http
-                        .post(url, {removeMember: user.id})
+                    $http.post(url, {removeMember: user.id})
                         .then(function (response) {
                             if (response.data.code == 'ok') {
-                                getExistingAndInvitedProjectMembers();
                                 swal("Success!", "The user has been removed from the project.", "success");
+                                getExistingAndInvitedProjectMembers();
                             } else {
                                 swal("Info", Object.values(response.data.errors).join(' '), "info");
                             }
@@ -106,12 +128,11 @@ angular
                     showLoaderOnConfirm: true
                 },
                 function () {
-                    $http
-                        .post(url, {makeAdmin: user.id})
+                    $http.post(url, {makeAdmin: user.id})
                         .then(function (response) {
                             if (response.data.code == 'ok') {
-                                getExistingAndInvitedProjectMembers();
                                 swal("Success!", "The user now has admin privileges.", "success");
+                                getExistingAndInvitedProjectMembers();
                             } else {
                                 swal("Info", Object.values(response.data.errors).join(' '), "info");
                             }
@@ -130,12 +151,34 @@ angular
                     showLoaderOnConfirm: true
                 },
                 function () {
-                    $http
-                        .post(url, {removeAdmin: user.id})
+                    $http.post(url, {removeAdmin: user.id})
                         .then(function (response) {
                             if (response.data.code == 'ok') {
+                                swal("Success!", "Admin privileges have been removed from the user.", "success");
                                 getExistingAndInvitedProjectMembers();
-                                swal("Success!", "Admin privileges have been removed from the user..", "success");
+                            } else {
+                                swal("Info", Object.values(response.data.errors).join(' '), "info");
+                            }
+                        });
+                });
+        };
+        $scope.cancelInvitationForEmail = function (user) {
+            swal({
+                    title: "Are you sure?",
+                    text: "You are about to cancel the invitation sent to the user",
+                    type: "info",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Continue",
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true
+                },
+                function () {
+                    $http.post(url, {cancelInvitationForEmail: user.email})
+                        .then(function (response) {
+                            if (response.data.code == 'ok') {
+                                swal("Success!", "The invitation to join the project has been cancelled.", "success");
+                                getExistingAndInvitedProjectMembers();
                             } else {
                                 swal("Info", Object.values(response.data.errors).join(' '), "info");
                             }
@@ -147,9 +190,9 @@ angular
             $http
                 .get(url)
                 .then(function (response) {
-                    console.log(response.data);
                     $scope.members = response.data.members;
                     $scope.invitedMembers = response.data.invitedMembers;
+                    $scope.invitedEmails = response.data.invitedEmails;
                 });
         }
 

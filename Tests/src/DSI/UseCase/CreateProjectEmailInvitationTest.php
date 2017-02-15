@@ -50,14 +50,14 @@ class CreateProjectEmailInvitationTest extends PHPUnit_Framework_TestCase
     public function successfulEmailInvitationToProject()
     {
         $email = 'test@example.org';
-        $this->createProjectEmailInvitation->data()->byUserID = $this->user_2->getId();
-        $this->createProjectEmailInvitation->data()->projectID = $this->project->getId();
-        $this->createProjectEmailInvitation->data()->email = $email;
+        $this->createProjectEmailInvitation->setByUser($this->user_2);
+        $this->createProjectEmailInvitation->setProject($this->project);
+        $this->createProjectEmailInvitation->setEmail($email);
         $this->createProjectEmailInvitation->exec();
 
         $this->assertTrue(
             $this->projectEmailInvitationRepo->projectInvitedEmail(
-                $this->createProjectEmailInvitation->data()->projectID,
+                $this->project->getId(),
                 $email
             )
         );
@@ -68,15 +68,15 @@ class CreateProjectEmailInvitationTest extends PHPUnit_Framework_TestCase
     {
         $e = null;
         $email = 'test@example.org';
-        $this->createProjectEmailInvitation->data()->byUserID = $this->user_2->getId();
-        $this->createProjectEmailInvitation->data()->projectID = $this->project->getId();
-        $this->createProjectEmailInvitation->data()->email = $email;
+        $this->createProjectEmailInvitation->setByUser($this->user_2);
+        $this->createProjectEmailInvitation->setProject($this->project);
+        $this->createProjectEmailInvitation->setEmail($email);
         $this->createProjectEmailInvitation->exec();
 
         try {
-            $this->createProjectEmailInvitation->data()->byUserID = $this->user_2->getId();
-            $this->createProjectEmailInvitation->data()->projectID = $this->project->getId();
-            $this->createProjectEmailInvitation->data()->email = $email;
+            $this->createProjectEmailInvitation->setByUser($this->user_2);
+            $this->createProjectEmailInvitation->setProject($this->project);
+            $this->createProjectEmailInvitation->setEmail($email);
             $this->createProjectEmailInvitation->exec();
         } catch (\DSI\Service\ErrorHandler $e) {
         }
