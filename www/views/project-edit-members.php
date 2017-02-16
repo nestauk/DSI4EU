@@ -54,9 +54,8 @@ if (!isset($urlHandler))
                                                         <div class="involved-card manage">
                                                             <div class="w-row">
                                                                 <div class="image-col w-col w-col-3 w-col-small-3 w-col-tiny-3">
-                                                                    <img class="involved-profile-img"
-                                                                         src="<?php echo \DSI\Entity\Image::PROFILE_PIC_URL?>{{member.profilePic}}"
-                                                                         width="50">
+                                                                    <img src="<?php echo \DSI\Entity\Image::PROFILE_PIC_URL ?>{{member.profilePic}}"
+                                                                         class="involved-profile-img" width="50">
                                                                 </div>
                                                                 <div class="w-clearfix w-col w-col-9 w-col-small-9 w-col-tiny-9">
                                                                     <div class="card-name">{{member.name}}</div>
@@ -139,9 +138,8 @@ if (!isset($urlHandler))
                                                         <div class="involved-card manage">
                                                             <div class="w-row">
                                                                 <div class="image-col w-col w-col-3 w-col-small-3 w-col-tiny-3">
-                                                                    <img class="involved-profile-img"
-                                                                         src="<?php echo \DSI\Entity\Image::PROFILE_PIC_URL?>{{member.profilePic}}"
-                                                                         width="50">
+                                                                    <img src="<?php echo \DSI\Entity\Image::PROFILE_PIC_URL ?>{{member.profilePic}}"
+                                                                         class="involved-profile-img" width="50">
                                                                 </div>
                                                                 <div class="w-clearfix w-col w-col-9 w-col-small-9 w-col-tiny-9">
                                                                     <div class="card-name">{{member.name}}</div>
@@ -169,9 +167,8 @@ if (!isset($urlHandler))
                                                     <div class="involved-card manage">
                                                         <div class="w-row">
                                                             <div class="image-col w-col w-col-3 w-col-small-3 w-col-tiny-3">
-                                                                <img class="involved-profile-img"
-                                                                     src="<?php echo \DSI\Entity\Image::PROFILE_PIC_URL?>{{member.profilePic}}"
-                                                                     width="50">
+                                                                <img src="<?php echo \DSI\Entity\Image::PROFILE_PIC_URL ?>{{member.profilePic}}"
+                                                                     class="involved-profile-img" width="50">
                                                             </div>
                                                             <div class="w-clearfix w-col w-col-9 w-col-small-9 w-col-tiny-9">
                                                                 <div class="card-name">{{member.name}}</div>
@@ -236,9 +233,8 @@ if (!isset($urlHandler))
                                                             <div class="involved-card manage">
                                                                 <div class="w-row">
                                                                     <div class="image-col w-col w-col-3 w-col-small-3 w-col-tiny-3">
-                                                                        <img class="involved-profile-img"
-                                                                             src="//uploads.webflow.com/img/image-placeholder.svg"
-                                                                             width="50">
+                                                                        <img src="//uploads.webflow.com/img/image-placeholder.svg"
+                                                                             class="involved-profile-img" width="50">
                                                                     </div>
                                                                     <div class="w-clearfix w-col w-col-9 w-col-small-9 w-col-tiny-9">
                                                                         <div class="card-name">{{member.email}}</div>
