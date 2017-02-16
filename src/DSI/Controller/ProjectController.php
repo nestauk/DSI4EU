@@ -241,6 +241,7 @@ class ProjectController
         } else {
             $pageTitle = $project->getName();
             JsModules::setTinyMCE(true);
+            JsModules::setTranslations(true);
             require __DIR__ . '/../../../www/views/project.php';
         }
 

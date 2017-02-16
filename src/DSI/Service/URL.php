@@ -156,9 +156,27 @@ class URL
      * @param Project $project
      * @return string
      */
+    public function projectJson(Project $project)
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'project/' . $project->getId() . '.json';
+    }
+
+    /**
+     * @param Project $project
+     * @return string
+     */
     public function projectEdit(Project $project)
     {
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'project/edit/' . $project->getId();
+    }
+
+    /**
+     * @param Project $project
+     * @return string
+     */
+    public function projectMembers(Project $project)
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'project/members/' . $project->getId();
     }
 
     /**

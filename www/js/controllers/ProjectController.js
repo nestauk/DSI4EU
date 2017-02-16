@@ -58,28 +58,18 @@ angular
             }
         };
 
-        $scope.projectid = $attrs.projectid;
+        var jsonUrl = $attrs.jsonurl;
 
         // Get Project Details
-        $http.get(SITE_RELATIVE_PATH + '/project/' + $scope.projectid + '.json')
+        $http.get(jsonUrl)
             .then(function (response) {
                 $scope.project = response.data || {};
             });
 
-        $scope.datePattern = '[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])';
-        $scope.getDateFrom = function (date) {
-            var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-                "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-            ];
-
-            var jsDate = new Date(date);
-            return monthNames[jsDate.getMonth()] + ' ' + jsDate.getFullYear();
-        };
-
         $scope.confirmDelete = function (url) {
             swal({
-                title: "Delete the project",
-                text: "Are you sure you want to delete this project?",
+                title: translate.get('Delete project'),
+                text: translate.get('Are you sure you want to delete this project?'),
                 type: "warning",
                 showCancelButton: true,
                 closeOnConfirm: false,
@@ -116,8 +106,8 @@ angular
 
                 function successfulDeletion(url) {
                     swal({
-                        title: "Deleted",
-                        text: "The project has been deleted.",
+                        title: translate.get("Deleted"),
+                        text: translate.get("The project has been deleted."),
                         type: "success"
                     }, function () {
                         window.location.href = url
@@ -127,18 +117,18 @@ angular
         };
         $scope.report = function () {
             swal({
-                title: "Report this project",
-                text: "Please tell us why you are reporting this project",
+                title: translate.get("Report this project"),
+                text: translate.get("Please tell us why you are reporting this project"),
                 type: "input",
                 showCancelButton: true,
                 closeOnConfirm: false,
                 showLoaderOnConfirm: true,
-                inputPlaceholder: "Reason for reporting"
+                inputPlaceholder: translate.get("Reason for reporting")
             }, function (inputValue) {
                 if (inputValue === false) return false;
 
                 if (inputValue === "") {
-                    swal.showInputError("You need to write something!");
+                    swal.showInputError(translate.get("Please write your reason for reporting."));
                     return false
                 }
 
@@ -174,8 +164,8 @@ angular
 
                 function successfulReport(url) {
                     swal({
-                        title: "Reported",
-                        text: "Thank you for your report",
+                        title: translate.get("Reported"),
+                        text: translate.get("Thank you for your report"),
                         type: "success"
                     });
                 }
@@ -185,15 +175,15 @@ angular
         $scope.cancelJoinRequest = function () {
             Helpers.swalWarning({
                 options: {
-                    title: "Cancel Join Request",
-                    text: "Are you sure you want to cancel the join request?"
+                    title: translate.get("Cancel Join Request"),
+                    text: translate.get("Are you sure you want to cancel the join request?")
                 },
                 post: {
                     cancelJoinRequest: true
                 },
                 success: {
-                    title: "Request Cancelled",
-                    text: "Your request has been cancelled"
+                    title: translate.get("Request Cancelled"),
+                    text: translate.get("Your request has been cancelled.")
                 },
                 successCallback: function () {
                     location.reload();
@@ -203,15 +193,15 @@ angular
         $scope.joinProject = function () {
             Helpers.swalWarning({
                 options: {
-                    title: "Join Project",
-                    text: "Are you sure you want to join this project?"
+                    title: translate.get("Join Project"),
+                    text: translate.get("Are you sure you want to join this project?")
                 },
                 post: {
                     joinProject: true
                 },
                 success: {
                     title: "Success",
-                    text: "Join request has been sent"
+                    text: translate.get("Your join request has been sent.")
                 },
                 successCallback: function () {
                     location.reload();
@@ -221,15 +211,15 @@ angular
         $scope.leaveProject = function () {
             Helpers.swalWarning({
                 options: {
-                    title: "Leave Project",
-                    text: "Are you sure you want to leave this project?"
+                    title: translate.get("Leave Project"),
+                    text: translate.get("Are you sure you want to leave this project?")
                 },
                 post: {
                     leaveProject: true
                 },
                 success: {
-                    title: "Success",
-                    text: "You have left this project"
+                    title: translate.get("Success"),
+                    text: translate.get("You have left this project")
                 },
                 successCallback: function () {
                     location.reload();
@@ -237,96 +227,18 @@ angular
             })
         };
 
-        $scope.requestToJoin = {};
-        $scope.sendRequestToJoin = function () {
-            $scope.requestToJoin.loading = true;
-            $timeout(function () {
-                $http.post(SITE_RELATIVE_PATH + '/project/' + $scope.projectid + '.json', {
-                    requestToJoin: true
-                }).then(function (result) {
-                    $scope.requestToJoin.loading = false;
-                    $scope.requestToJoin.requestSent = true;
-                });
-            }, 500);
-        };
-        $scope.approveRequestToJoin = function (member) {
-            var index = Helpers.getItemIndexById($scope.project.memberRequests, member.id);
-            if (index > -1) {
-                $scope.project.memberRequests.splice(index, 1);
-                $scope.project.members.push(member);
-
-                $http.post(SITE_RELATIVE_PATH + '/project/' + $scope.projectid + '.json', {
-                    approveRequestToJoin: member.id
-                }).then(function (result) {
-                    console.log(result.data);
-                });
-            }
-        };
-        $scope.rejectRequestToJoin = function (member) {
-            var index = Helpers.getItemIndexById($scope.project.memberRequests, member.id);
-            if (index > -1) {
-                $scope.project.memberRequests.splice(index, 1);
-
-                $http.post(SITE_RELATIVE_PATH + '/project/' + $scope.projectid + '.json', {
-                    rejectRequestToJoin: member.id
-                }).then(function (result) {
-                    console.log(result.data);
-                });
-            }
-        };
-
-        $scope.approveInvitationToJoin = function () {
-            var data = {
-                approveProjectInvitation: true,
-                projectID: $scope.projectid
-            };
-            $http.post(SITE_RELATIVE_PATH + '/dashboard.json', data)
-                .then(function (response) {
-                    if (response.data.code == 'ok') {
-                        swal(response.data.message.title, response.data.message.text, "success");
-                        $scope.invitationActioned = true;
-                    } else if (response.data.code == 'error') {
-
-                    }
-                });
-        };
-        $scope.rejectInvitationToJoin = function () {
-            swal({
-                title: "Are you sure?",
-                text: "You will not be able to join this project at this time",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Yes, continue!",
-                closeOnConfirm: false
-            }, function () {
-                $http.post(SITE_RELATIVE_PATH + '/dashboard.json', {
-                    rejectProjectInvitation: true,
-                    projectID: $scope.projectid
-                })
-                    .then(function (response) {
-                        if (response.data.code == 'ok') {
-                            swal(response.data.message.title, response.data.message.text, "warning");
-                            $scope.invitationActioned = true;
-                        } else if (response.data.code == 'error') {
-
-                        }
-                    });
-            });
-        };
-
         $scope.followProject = function () {
             Helpers.swalWarning({
                 options: {
-                    title: "Follow Project",
-                    text: "Are you sure you want to follow this project?"
+                    title: translate.get("Follow Project"),
+                    text: translate.get("Are you sure you want to follow this project?")
                 },
                 post: {
                     followProject: true
                 },
                 success: {
-                    title: "Success",
-                    text: "You are now following this project."
+                    title: translate.get("Success"),
+                    text: translate.get("You are now following this project.")
                 },
                 successCallback: function () {
                     location.reload();
@@ -336,15 +248,15 @@ angular
         $scope.unfollowProject = function () {
             Helpers.swalWarning({
                 options: {
-                    title: "Unfollow Project",
-                    text: "Are you sure you want to unfollow this project?"
+                    title: translate.get("Unfollow Project"),
+                    text: translate.get("Are you sure you want to unfollow this project?")
                 },
                 post: {
                     unfollowProject: true
                 },
                 success: {
-                    title: "Success",
-                    text: "You won't receive any more news from this project."
+                    title: translate.get("Success"),
+                    text: translate.get("You won't receive any more news from this project.")
                 },
                 successCallback: function () {
                     location.reload();
@@ -368,78 +280,6 @@ angular
         $scope.renderHtml = function (html_code) {
             return $sce.trustAsHtml(html_code);
         };
-
-        // Members
-        (function () {
-            var addNewMember = function (memberIdOrEmail) {
-                if (memberIdOrEmail == '') return;
-
-                $scope.addProjectMember.errors = {};
-                $scope.addProjectMember.loading = true;
-                $scope.addProjectMember.success = false;
-                $scope.$apply();
-
-                $timeout(function () {
-                    var existingMemberId = Helpers.getItemIndexById($scope.users, memberIdOrEmail);
-
-                    if (existingMemberId != -1)
-                        return addExistingMember($scope.users[existingMemberId]);
-                    else
-                        return addNewMemberFromEmailAddress(memberIdOrEmail);
-
-                }, 500);
-            };
-
-            var addExistingMember = function (newMember) {
-                $scope.addProjectMember.success = false;
-
-                $http.post(SITE_RELATIVE_PATH + '/project/' + $scope.projectid + '.json', {
-                    addMember: newMember.id
-                }).then(function (response) {
-                    $scope.addProjectMember.loading = false;
-
-                    if (response.data.result == 'ok') {
-                        $scope.addProjectMember.success = newMember.firstName + ' ' + newMember.lastName + ' has been successfully invited';
-                    } else if (response.data.result == 'error') {
-                        $scope.addProjectMember.errors = response.data.errors;
-                    } else {
-                        alert('unexpected error');
-                        console.log(response.data);
-                    }
-                });
-            };
-
-            var addNewMemberFromEmailAddress = function (emailAddress) {
-                $http.post(SITE_RELATIVE_PATH + '/project/' + $scope.projectid + '.json', {
-                    addEmail: emailAddress
-                }).then(function (response) {
-                    $scope.addProjectMember.loading = false;
-                    if (response.data.result == 'ok') {
-                        $scope.addProjectMember.success = response.data.successMessage;
-                        /* if (response.data.user)
-                         $scope.project.members.push(response.data.user); */
-                    } else if (response.data.result == 'error') {
-                        $scope.addProjectMember.errors = response.data.errors;
-                    } else {
-                        alert('unexpected error');
-                        console.log(response.data);
-                    }
-                });
-            };
-
-            $scope.updateAdminStatus = function (member) {
-                $http.post(SITE_RELATIVE_PATH + '/project/' + $scope.projectid + '.json', {
-                    setAdmin: true,
-                    member: member.id,
-                    isAdmin: member.isAdmin
-                }).then(function (response) {
-                    if (response.data.result != 'ok') {
-                        alert('unexpected error');
-                        console.log(response);
-                    }
-                });
-            };
-        }());
     })
     .controller('ProjectPostController', function ($scope, $http, $timeout, $sce) {
         $scope.submitComment = function (post) {

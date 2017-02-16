@@ -102,6 +102,9 @@ if (!$urlHandler)
 <?php if (\DSI\Service\JsModules::hasTinyMCE()) { ?>
     <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
 <?php } ?>
+<?php if (\DSI\Service\JsModules::hasTranslations()) { ?>
+    <script src="<?php echo SITE_RELATIVE_PATH ?>/js/services/translate.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
+<?php } ?>
 
 <script type="text/javascript"
         src="<?php echo SITE_RELATIVE_PATH ?>/js/DSIApp.js?<?php Sysctl::echoVersion() ?>"></script>
