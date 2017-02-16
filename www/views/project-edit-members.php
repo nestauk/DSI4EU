@@ -28,13 +28,13 @@ if (!isset($urlHandler))
                 <div class="add-story body-content">
                     <div class="w-tabs" data-easing="linear">
                         <div class="creator-tab-menu w-tab-menu">
-                            <a class="step-tab tab-link-1 w-inline-block w-tab-link" data-w-tab="Tab 1">
+                            <a class="step-tab tab-link-1 w--current w-inline-block w-tab-link" data-w-tab="Tab 1">
                                 <div><?php _ehtml('Manage existing members') ?></div>
                             </a>
                             <a class="step-tab tab-link-2 w-inline-block w-tab-link" data-w-tab="Tab 2">
                                 <div><?php _ehtml('Add existing DSI4eu user') ?></div>
                             </a>
-                            <a class="step-tab tab-link-3 w--current w-inline-block w-tab-link" data-w-tab="Tab 3">
+                            <a class="step-tab tab-link-3 w-inline-block w-tab-link" data-w-tab="Tab 3">
                                 <div><?php _ehtml('Invite by email') ?></div>
                             </a>
                         </div>
