@@ -23,12 +23,12 @@ angular
         };
         $scope.searchExistingUser.addUser = function (user) {
             swal({
-                    title: "Are you sure?",
-                    text: "You are about to invite this user to join the project",
+                    title: "",
+                    text: translate.get("You are about to invite this user to join the project"),
                     type: "info",
                     showCancelButton: true,
                     confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "Continue",
+                    confirmButtonText: translate.get("Continue"),
                     closeOnConfirm: false,
                     showLoaderOnConfirm: true
                 },
@@ -36,7 +36,11 @@ angular
                     $http.post(url, {addExistingUser: user.id})
                         .then(function (response) {
                             if (response.data.code == 'ok') {
-                                swal("Success!", "The user has been invited to join the project.", "success");
+                                swal(
+                                    translate.get("Success!"),
+                                    translate.get("The user has been invited to join the project."),
+                                    "success"
+                                );
                                 getExistingAndInvitedProjectMembers();
                             } else {
                                 swal("Info", Object.values(response.data.errors).join(' '), "info");
@@ -47,12 +51,12 @@ angular
 
         $scope.inviteByEmail.submit = function () {
             swal({
-                    title: "Are you sure?",
-                    text: "You are about to invite this person to join the project",
+                    title: "",
+                    text: translate.get("You are about to invite this person to join the project"),
                     type: "info",
                     showCancelButton: true,
                     confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "Continue",
+                    confirmButtonText: translate.get("Continue"),
                     closeOnConfirm: false,
                     showLoaderOnConfirm: true
                 },
@@ -60,7 +64,11 @@ angular
                     $http.post(url, {inviteEmail: $scope.inviteByEmail.email})
                         .then(function (response) {
                             if (response.data.code == 'ok') {
-                                swal("Success!", "An invitation to join the project has been sent by email.", "success");
+                                swal(
+                                    translate.get("Success!"),
+                                    translate.get("An invitation to join the project has been sent by email."),
+                                    "success"
+                                );
                                 getExistingAndInvitedProjectMembers();
                                 $scope.inviteByEmail.email = '';
                             } else {
@@ -72,12 +80,12 @@ angular
 
         $scope.cancelInvitationForUser = function (user) {
             swal({
-                    title: "Are you sure?",
-                    text: "You are about to cancel this user's invitation to join the project",
+                    title: "",
+                    text: translate.get("You are about to cancel this user's invitation to join the project"),
                     type: "info",
                     showCancelButton: true,
                     confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "Continue",
+                    confirmButtonText: translate.get("Continue"),
                     closeOnConfirm: false,
                     showLoaderOnConfirm: true
                 },
@@ -85,7 +93,11 @@ angular
                     $http.post(url, {cancelUserInvitation: user.id})
                         .then(function (response) {
                             if (response.data.code == 'ok') {
-                                swal("Success!", "The user has been invited to join the project.", "success");
+                                swal(
+                                    translate.get("Success!"),
+                                    translate.get("The user has been invited to join the project."),
+                                    "success"
+                                );
                                 getExistingAndInvitedProjectMembers();
                             } else {
                                 swal("Info", Object.values(response.data.errors).join(' '), "info");
@@ -95,12 +107,12 @@ angular
         };
         $scope.removeMember = function (user) {
             swal({
-                    title: "Are you sure?",
-                    text: "You are about to remove this user from the project",
+                    title: "",
+                    text: translate.get("You are about to remove this user from the project"),
                     type: "info",
                     showCancelButton: true,
                     confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "Continue",
+                    confirmButtonText: translate.get("Continue"),
                     closeOnConfirm: false,
                     showLoaderOnConfirm: true
                 },
@@ -108,7 +120,11 @@ angular
                     $http.post(url, {removeMember: user.id})
                         .then(function (response) {
                             if (response.data.code == 'ok') {
-                                swal("Success!", "The user has been removed from the project.", "success");
+                                swal(
+                                    translate.get("Success!"),
+                                    translate.get("The user has been removed from the project."),
+                                    "success"
+                                );
                                 getExistingAndInvitedProjectMembers();
                             } else {
                                 swal("Info", Object.values(response.data.errors).join(' '), "info");
@@ -118,12 +134,12 @@ angular
         };
         $scope.makeAdmin = function (user) {
             swal({
-                    title: "Are you sure?",
-                    text: "You are about to give admin privileges to this user",
+                    title: "",
+                    text: translate.get("You are about to give admin privileges to this user"),
                     type: "info",
                     showCancelButton: true,
                     confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "Continue",
+                    confirmButtonText: translate.get("Continue"),
                     closeOnConfirm: false,
                     showLoaderOnConfirm: true
                 },
@@ -131,7 +147,11 @@ angular
                     $http.post(url, {makeAdmin: user.id})
                         .then(function (response) {
                             if (response.data.code == 'ok') {
-                                swal("Success!", "The user now has admin privileges.", "success");
+                                swal(
+                                    translate.get("Success!"),
+                                    translate.get("The user now has admin privileges."),
+                                    "success"
+                                );
                                 getExistingAndInvitedProjectMembers();
                             } else {
                                 swal("Info", Object.values(response.data.errors).join(' '), "info");
@@ -141,12 +161,12 @@ angular
         };
         $scope.removeAdmin = function (user) {
             swal({
-                    title: "Are you sure?",
-                    text: "You are about to remove admin privileges from this user",
+                    title: "",
+                    text: translate.get("You are about to remove admin privileges from this user"),
                     type: "info",
                     showCancelButton: true,
                     confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "Continue",
+                    confirmButtonText: translate.get("Continue"),
                     closeOnConfirm: false,
                     showLoaderOnConfirm: true
                 },
@@ -154,7 +174,11 @@ angular
                     $http.post(url, {removeAdmin: user.id})
                         .then(function (response) {
                             if (response.data.code == 'ok') {
-                                swal("Success!", "Admin privileges have been removed from the user.", "success");
+                                swal(
+                                    translate.get("Success!"),
+                                    translate.get("Admin privileges have been removed from the user."),
+                                    "success"
+                                );
                                 getExistingAndInvitedProjectMembers();
                             } else {
                                 swal("Info", Object.values(response.data.errors).join(' '), "info");
@@ -164,12 +188,12 @@ angular
         };
         $scope.cancelInvitationForEmail = function (user) {
             swal({
-                    title: "Are you sure?",
-                    text: "You are about to cancel the invitation sent to the user",
+                    title: "",
+                    text: translate.get("You are about to cancel the invitation sent to the user"),
                     type: "info",
                     showCancelButton: true,
                     confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "Continue",
+                    confirmButtonText: translate.get("Continue"),
                     closeOnConfirm: false,
                     showLoaderOnConfirm: true
                 },
@@ -177,7 +201,11 @@ angular
                     $http.post(url, {cancelInvitationForEmail: user.email})
                         .then(function (response) {
                             if (response.data.code == 'ok') {
-                                swal("Success!", "The invitation to join the project has been cancelled.", "success");
+                                swal(
+                                    translate.get("Success!"),
+                                    translate.get("The invitation to join the project has been cancelled."),
+                                    "success"
+                                );
                                 getExistingAndInvitedProjectMembers();
                             } else {
                                 swal("Info", Object.values(response.data.errors).join(' '), "info");

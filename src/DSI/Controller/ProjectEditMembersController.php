@@ -13,6 +13,7 @@ use DSI\Repository\ProjectMemberRepository;
 use DSI\Repository\ProjectRepository;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
+use DSI\Service\JsModules;
 use DSI\Service\URL;
 use DSI\UseCase\CancelInvitationEmailToProject;
 use DSI\UseCase\InviteEmailToProject;
@@ -93,6 +94,7 @@ class ProjectEditMembersController
             ]);
         } else {
             $pageTitle = $project->getName();
+            JsModules::setTranslations(true);
             require __DIR__ . '/../../../www/views/project-edit-members.php';
         }
 

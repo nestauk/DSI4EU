@@ -447,7 +447,6 @@ require __DIR__ . '/header.php';
         ] AS $translate) { ?>
         translate.set('<?php echo show_input($translate)?>', '<?php _ehtml($translate)?>');
         <?php } ?>
-        console.log(translate);
     </script>
     <script src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/ProjectController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 

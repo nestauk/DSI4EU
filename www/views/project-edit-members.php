@@ -14,10 +14,12 @@ if (!isset($urlHandler))
         <div class="creator page-header">
             <div class="container-wide header">
                 <h1 class="light page-h1">
-                    Manage users for
-                    <a href="<?php echo $urlHandler->project($project) ?>">
-                        <?php echo show_input($project->getName()) ?>
-                    </a>
+                    <?php echo sprintf(
+                        __('Manage members for %s'),
+                        '<a href="' . $urlHandler->project($project) . '">' .
+                        show_input($project->getName()) .
+                        '</a>'
+                    ) ?>
                 </h1>
             </div>
         </div>
@@ -27,21 +29,21 @@ if (!isset($urlHandler))
                     <div class="w-tabs" data-easing="linear">
                         <div class="creator-tab-menu w-tab-menu">
                             <a class="step-tab tab-link-1 w-inline-block w-tab-link" data-w-tab="Tab 1">
-                                <div>Manage existing users</div>
+                                <div><?php _ehtml('Manage existing members') ?></div>
                             </a>
                             <a class="step-tab tab-link-2 w-inline-block w-tab-link" data-w-tab="Tab 2">
-                                <div>Add Existing DSI4eu USer</div>
+                                <div><?php _ehtml('Add existing DSI4eu user') ?></div>
                             </a>
                             <a class="step-tab tab-link-3 w--current w-inline-block w-tab-link" data-w-tab="Tab 3">
-                                <div>Invite by email</div>
+                                <div><?php _ehtml('Invite by email') ?></div>
                             </a>
                         </div>
                         <div class="w-tab-content">
                             <div class="step-window w-tab-pane" data-w-tab="Tab 1">
                                 <div class="w-row">
                                     <div class="creator-col w-col w-col-4">
-                                        <h2>Manage existing users</h2>
-                                        <p>Here you can manage existing users.</p>
+                                        <h2><?php _ehtml('Manage existing members') ?></h2>
+                                        <p><?php _ehtml('Here you can manage existing members.') ?></p>
                                     </div>
                                     <div class="creator-col creator-col-right w-col w-col-8">
                                         <div class="w-form">
@@ -53,7 +55,7 @@ if (!isset($urlHandler))
                                                             <div class="w-row">
                                                                 <div class="image-col w-col w-col-3 w-col-small-3 w-col-tiny-3">
                                                                     <img class="involved-profile-img"
-                                                                         src="http://uploads.webflow.com/img/image-placeholder.svg"
+                                                                         src="<?php echo \DSI\Entity\Image::PROFILE_PIC_URL?>{{member.profilePic}}"
                                                                          width="50">
                                                                 </div>
                                                                 <div class="w-clearfix w-col w-col-9 w-col-small-9 w-col-tiny-9">
@@ -67,7 +69,7 @@ if (!isset($urlHandler))
                                                         </div>
                                                         <div ng-hide="member.isOwner">
                                                             <a ng-hide="member.isOwner" class="remove-user" href="#"
-                                                               ng-click="removeMember(member)">Remove user</a>
+                                                               ng-click="removeMember(member)">Remove member</a>
                                                             <div ng-show="member.isAdmin">
                                                                 Is Admin
                                                                 <?php if ($isOwner) { ?>
@@ -96,11 +98,10 @@ if (!isset($urlHandler))
                             <div class="step-window w-tab-pane" data-w-tab="Tab 2">
                                 <div class="w-row">
                                     <div class="creator-col w-col w-col-4 w-col-stack">
-                                        <h2>Add existing DSI4EU user</h2>
-                                        <p>You can add existing users to your project.</p>
+                                        <h2><?php _ehtml('Add existing DSI4EU user') ?></h2>
+                                        <p><?php _ehtml('You can add existing users to your project.') ?></p>
                                         <p>
-                                            After being notified the user will need to accept your invitation before
-                                            being added to your project.
+                                            <?php _ehtml('After being notified the user will [...]') ?>
                                         </p>
                                     </div>
                                     <div class="creator-col creator-col-right w-col w-col-8 w-col-stack">
@@ -108,22 +109,23 @@ if (!isset($urlHandler))
                                             <form id="email-form-3" name="email-form-3"
                                                   ng-submit="searchExistingUser.submit()">
                                                 <div class="w-row">
-                                                    <label for="email-6">Search for existing user by name or
-                                                        email</label>
+                                                    <label for="email-6">
+                                                        <?php _ehtml('Search for existing user by name or email') ?>
+                                                    </label>
 
                                                     <div class="w-col w-col-6">
                                                         <div class="padding-right-50">
                                                             <input class="creator-data-entry end w-input"
                                                                    data-name="Email 6" id="email-6" maxlength="256"
-                                                                   name="email-6" placeholder="User name or email"
-                                                                   required="required" type="text"
+                                                                   placeholder="<?php _ehtml('User name or email') ?>"
+                                                                   required="required" type="text" name="email-6"
                                                                    ng-model="searchExistingUser.input">
                                                         </div>
                                                     </div>
                                                     <div class="w-col w-col-6">
                                                         <button class="tab-button-4 tab-button-next w-button"
                                                                 type="submit" style="float:none">
-                                                            Search
+                                                            <?php _ehtml('Search') ?>
                                                         </button>
                                                     </div>
                                                 </div>
@@ -138,7 +140,7 @@ if (!isset($urlHandler))
                                                             <div class="w-row">
                                                                 <div class="image-col w-col w-col-3 w-col-small-3 w-col-tiny-3">
                                                                     <img class="involved-profile-img"
-                                                                         src="http://uploads.webflow.com/img/image-placeholder.svg"
+                                                                         src="<?php echo \DSI\Entity\Image::PROFILE_PIC_URL?>{{member.profilePic}}"
                                                                          width="50">
                                                                 </div>
                                                                 <div class="w-clearfix w-col w-col-9 w-col-small-9 w-col-tiny-9">
@@ -149,7 +151,7 @@ if (!isset($urlHandler))
                                                         </div>
                                                         <a class="remove-user add-user" style="color:green" href="#"
                                                            ng-click="searchExistingUser.addUser(member)">
-                                                            Add user
+                                                            <?php _ehtml('Add user') ?>
                                                         </a>
                                                     </div>
                                                 </div>
@@ -159,7 +161,7 @@ if (!isset($urlHandler))
                                         <div class="w-form">
                                             <div class="w-row">
                                                 <label for="email-6">
-                                                    Invited Members
+                                                    <?php _ehtml('Invited Members') ?>
                                                 </label>
 
                                                 <div class="w-clearfix w-col w-col-6 w-col-stack"
@@ -168,7 +170,7 @@ if (!isset($urlHandler))
                                                         <div class="w-row">
                                                             <div class="image-col w-col w-col-3 w-col-small-3 w-col-tiny-3">
                                                                 <img class="involved-profile-img"
-                                                                     src="http://uploads.webflow.com/img/image-placeholder.svg"
+                                                                     src="<?php echo \DSI\Entity\Image::PROFILE_PIC_URL?>{{member.profilePic}}"
                                                                      width="50">
                                                             </div>
                                                             <div class="w-clearfix w-col w-col-9 w-col-small-9 w-col-tiny-9">
@@ -179,7 +181,7 @@ if (!isset($urlHandler))
                                                     </div>
                                                     <a class="remove-user add-user" href="#"
                                                        ng-click="cancelInvitationForUser(member)">
-                                                        Cancel Invitation
+                                                        <?php _ehtml('Cancel Invitation') ?>
                                                     </a>
                                                 </div>
                                             </div>
@@ -192,24 +194,25 @@ if (!isset($urlHandler))
                             <div class="step-window w--tab-active w-tab-pane" data-w-tab="Tab 3">
                                 <div class="w-row">
                                     <div class="creator-col w-col w-col-4">
-                                        <h2>Invite by email</h2>
-                                        <p>You can invite new users to your project by email.</p>
-                                        <p>After being invited the user will need to create a profile to complete the
-                                            process.</p>
+                                        <h2><?php _ehtml('Invite by email') ?></h2>
+                                        <p><?php _ehtml('You can invite new users to your project by email.') ?></p>
+                                        <p><?php _ehtml('After being invited the user will [...]') ?></p>
                                     </div>
                                     <div class="creator-col creator-col-right w-col w-col-8">
                                         <div class="w-form">
-                                            <form id="email-form-3" name="email-form-3" ng-submit="inviteByEmail.submit()">
+                                            <form id="email-form-3" name="email-form-3"
+                                                  ng-submit="inviteByEmail.submit()">
                                                 <div class="w-row">
                                                     <label for="email-6">
-                                                        Add email to invite
+                                                        <?php _ehtml('Add email to invite') ?>
                                                     </label>
 
                                                     <div class="w-col w-col-6">
                                                         <div class="padding-right-50">
                                                             <input class="creator-data-entry end w-input"
                                                                    data-name="Email 6" id="email-6" maxlength="256"
-                                                                   name="email-6" placeholder="Email address"
+                                                                   name="email-6"
+                                                                   placeholder="<?php _ehtml('Email address') ?>"
                                                                    required="required" type="text"
                                                                    ng-model="inviteByEmail.email">
                                                         </div>
@@ -217,7 +220,7 @@ if (!isset($urlHandler))
                                                     <div class="w-col w-col-6">
                                                         <button class="tab-button-4 tab-button-next w-button"
                                                                 type="submit" style="float:none">
-                                                            Invite
+                                                            <?php _ehtml('Invite') ?>
                                                         </button>
                                                     </div>
                                                 </div>
@@ -225,7 +228,7 @@ if (!isset($urlHandler))
                                                 <div class="w-form">
                                                     <div class="w-row">
                                                         <label for="email-6">
-                                                            Invited Emails
+                                                            <?php _ehtml('Invited Emails') ?>
                                                         </label>
 
                                                         <div class="w-clearfix w-col w-col-6 w-col-stack"
@@ -234,7 +237,7 @@ if (!isset($urlHandler))
                                                                 <div class="w-row">
                                                                     <div class="image-col w-col w-col-3 w-col-small-3 w-col-tiny-3">
                                                                         <img class="involved-profile-img"
-                                                                             src="http://uploads.webflow.com/img/image-placeholder.svg"
+                                                                             src="//uploads.webflow.com/img/image-placeholder.svg"
                                                                              width="50">
                                                                     </div>
                                                                     <div class="w-clearfix w-col w-col-9 w-col-small-9 w-col-tiny-9">
@@ -244,7 +247,7 @@ if (!isset($urlHandler))
                                                             </div>
                                                             <a class="remove-user add-user" href="#"
                                                                ng-click="cancelInvitationForEmail(member)">
-                                                                Cancel Invitation
+                                                                <?php _ehtml('Cancel Invitation') ?>
                                                             </a>
                                                         </div>
                                                     </div>
@@ -261,6 +264,26 @@ if (!isset($urlHandler))
         </div>
     </div>
 
+    <script>
+        var translate = new Translate();
+        <?php foreach([
+            'You are about to invite this user to join the project',
+            'Continue',
+            'The user has been invited to join the project.',
+            'You are about to invite this person to join the project',
+            'An invitation to join the project has been sent by email.',
+            "You are about to cancel this user's invitation to join the project",
+            'The user has been invited to join the project.',
+            'Success!',
+            'The user has been removed from the project.',
+            'The user now has admin privileges.',
+            'Admin privileges have been removed from the user.',
+            'The invitation to join the project has been cancelled.',
+
+        ] AS $translate) { ?>
+        translate.set('<?php echo show_input($translate)?>', '<?php _ehtml($translate)?>');
+        <?php } ?>
+    </script>
     <script type="text/javascript"
             src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/ProjectEditMembersController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 
