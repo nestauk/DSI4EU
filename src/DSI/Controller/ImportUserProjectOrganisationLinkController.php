@@ -120,10 +120,10 @@ class ImportUserProjectOrganisationLinkController
     private function addAdminToOrganisation(Organisation $organisation, User $user)
     {
         $organisationAdmin = new SetAdminStatusToOrganisationMember();
-        $organisationAdmin->data()->organisation = $organisation;
-        $organisationAdmin->data()->executor = $this->sysAdminUser;
-        $organisationAdmin->data()->member = $user;
-        $organisationAdmin->data()->isAdmin = true;
+        $organisationAdmin->setOrganisation($organisation);
+        $organisationAdmin->setExecutor($this->sysAdminUser);
+        $organisationAdmin->setMember($user);
+        $organisationAdmin->setIsAdmin(true);
         $organisationAdmin->exec();
     }
 

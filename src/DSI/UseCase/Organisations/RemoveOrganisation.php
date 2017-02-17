@@ -96,7 +96,7 @@ class RemoveOrganisation
     private function removeOrgInvitations()
     {
         $orgMemberInvitationRepo = new OrganisationMemberInvitationRepository();
-        $orgInvitations = $orgMemberInvitationRepo->getByOrganisationID($this->data()->organisation->getId());
+        $orgInvitations = $orgMemberInvitationRepo->getByOrganisation($this->data()->organisation);
         foreach ($orgInvitations AS $invitation) {
             $orgMemberInvitationRepo->remove($invitation);
         }
@@ -114,7 +114,7 @@ class RemoveOrganisation
     private function removeOrgMembers()
     {
         $orgMemberRepo = new OrganisationMemberRepository();
-        $orgMembers = $orgMemberRepo->getByOrganisationID($this->data()->organisation->getId());
+        $orgMembers = $orgMemberRepo->getByOrganisation($this->data()->organisation);
         foreach ($orgMembers AS $member) {
             $orgMemberRepo->remove($member);
         }

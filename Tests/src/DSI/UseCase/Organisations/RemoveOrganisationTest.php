@@ -56,9 +56,7 @@ class RemoveOrganisationTest extends PHPUnit_Framework_TestCase
 
         $this->assertCount(0, $this->organisationRepo->getAll());
         $this->assertCount(0,
-            (new \DSI\Repository\OrganisationMemberRepository())->getByOrganisationID(
-                $this->organisation->getId()
-            )
+            (new \DSI\Repository\OrganisationMemberRepository())->getByOrganisation($this->organisation)
         );
     }
 

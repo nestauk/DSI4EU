@@ -55,14 +55,14 @@ class RemoveMemberFromOrganisationTest extends PHPUnit_Framework_TestCase
         $this->addMemberToOrganisationCommand->data()->organisationID = $this->organisation->getId();
         $this->addMemberToOrganisationCommand->exec();
 
-        $this->removeMemberFromOrganisationCommand->data()->userID = $this->user->getId();
-        $this->removeMemberFromOrganisationCommand->data()->organisationID = $this->organisation->getId();
+        $this->removeMemberFromOrganisationCommand->setUser($this->user);
+        $this->removeMemberFromOrganisationCommand->setOrganisation($this->organisation);
         $this->removeMemberFromOrganisationCommand->exec();
 
         $this->assertFalse(
-            $this->organisationMemberRepo->organisationIDHasMemberID(
-                $this->removeMemberFromOrganisationCommand->data()->organisationID,
-                $this->removeMemberFromOrganisationCommand->data()->userID
+            $this->organisationMemberRepo->organisationHasMember(
+                $this->organisation,
+                $this->user
             )
         );
     }
@@ -73,8 +73,8 @@ class RemoveMemberFromOrganisationTest extends PHPUnit_Framework_TestCase
         $e = null;
 
         try {
-            $this->removeMemberFromOrganisationCommand->data()->userID = $this->user->getId();
-            $this->removeMemberFromOrganisationCommand->data()->organisationID = $this->organisation->getId();
+            $this->removeMemberFromOrganisationCommand->setUser($this->user);
+            $this->removeMemberFromOrganisationCommand->setOrganisation($this->organisation);
             $this->removeMemberFromOrganisationCommand->exec();
         } catch (\DSI\Service\ErrorHandler $e) {
         }

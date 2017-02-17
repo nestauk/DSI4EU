@@ -13,7 +13,10 @@ if (!isset($urlHandler))
 
     <div class="creator page-header">
         <div class="container-wide header">
-            <h1 class="light page-h1">Edit Organisation Owner</h1>
+            <h1 class="light page-h1">
+                Edit Organisation Owner -
+                <a href="<?php echo $urlHandler->organisation($organisation) ?>"><?php echo show_input($organisation->getName())?></a>
+            </h1>
         </div>
     </div>
     <div class="creator section-white" ng-controller="OrganisationEditOwnerController">

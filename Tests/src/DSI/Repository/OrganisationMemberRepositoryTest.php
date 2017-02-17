@@ -64,9 +64,7 @@ class OrganisationMemberRepositoryTest extends PHPUnit_Framework_TestCase
         $organisationMember->setMember($this->user_1);
         $this->organisationMemberRepo->insert($organisationMember);
 
-        $this->assertCount(2, $this->organisationMemberRepo->getByOrganisationID(
-            $this->organisation_1->getId()
-        ));
+        $this->assertCount(2, $this->organisationMemberRepo->getByOrganisation($this->organisation_1));
     }
 
     /** @test saveAsNew */
@@ -277,17 +275,17 @@ class OrganisationMemberRepositoryTest extends PHPUnit_Framework_TestCase
         $organisationMember->setMember($this->user_2);
         $this->organisationMemberRepo->insert($organisationMember);
 
-        $this->assertTrue($this->organisationMemberRepo->organisationIDHasMemberID(
-            $this->organisation_1->getId(), $this->user_1->getId())
+        $this->assertTrue($this->organisationMemberRepo->organisationHasMember(
+            $this->organisation_1, $this->user_1)
         );
-        $this->assertFalse($this->organisationMemberRepo->organisationIDHasMemberID(
-            $this->organisation_1->getId(), $this->user_2->getId())
+        $this->assertFalse($this->organisationMemberRepo->organisationHasMember(
+            $this->organisation_1, $this->user_2)
         );
-        $this->assertTrue($this->organisationMemberRepo->organisationIDHasMemberID(
-            $this->organisation_2->getId(), $this->user_2->getId())
+        $this->assertTrue($this->organisationMemberRepo->organisationHasMember(
+            $this->organisation_2, $this->user_2)
         );
-        $this->assertFalse($this->organisationMemberRepo->organisationIDHasMemberID(
-            $this->organisation_2->getId(), $this->user_1->getId())
+        $this->assertFalse($this->organisationMemberRepo->organisationHasMember(
+            $this->organisation_2, $this->user_1)
         );
     }
 

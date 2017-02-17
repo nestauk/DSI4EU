@@ -18,23 +18,20 @@ class SetAdminStatusToOrganisationMember
     /** @var OrganisationMemberRepository */
     private $organisationMemberRepo;
 
-    /** @var OrganisationRepository */
-    private $organisationRepository;
+    /** @var User */
+    private $executor,
+        $member;
 
-    /** @var UserRepository */
-    private $userRepository;
+    /** @var Organisation */
+    private $organisation;
 
-    /** @var SetAdminStatusToOrganisationMember_Data */
-    private $data;
+    /** @var  boolean */
+    private $isAdmin;
 
     public function __construct()
     {
-        $this->data = new SetAdminStatusToOrganisationMember_Data();
-
         $this->errorHandler = new ErrorHandler();
         $this->organisationMemberRepo = new OrganisationMemberRepository();
-        $this->organisationRepository = new OrganisationRepository();
-        $this->userRepository = new UserRepository();
     }
 
     public function exec()
@@ -46,27 +43,19 @@ class SetAdminStatusToOrganisationMember
     }
 
     /**
-     * @return SetAdminStatusToOrganisationMember_Data
-     */
-    public function data()
-    {
-        return $this->data;
-    }
-
-    /**
      * @return bool
      */
     private function userCanChangeStatus(): bool
     {
-        if ($this->data()->executor->isSysAdmin())
+        if ($this->executor->isSysAdmin())
             return true;
 
-        if ($this->data()->organisation->getOwnerID() == $this->data()->executor->getId())
+        if ($this->organisation->getOwnerID() == $this->executor->getId())
             return true;
 
         $member = (new OrganisationMemberRepository())->getByMemberIdAndOrganisationId(
-            $this->data()->executor->getId(),
-            $this->data()->organisation->getId()
+            $this->executor->getId(),
+            $this->organisation->getId()
         );
         if ($member AND $member->isAdmin())
             return true;
@@ -76,10 +65,10 @@ class SetAdminStatusToOrganisationMember
 
     private function makeSureUserIsMember()
     {
-        if (!$this->organisationMemberRepo->organisationIDHasMemberID($this->data()->organisation->getId(), $this->data()->member->getId())) {
+        if (!$this->organisationMemberRepo->organisationHasMember($this->organisation, $this->member)) {
             $addMemberToOrganisation = new AddMemberToOrganisation();
-            $addMemberToOrganisation->data()->organisationID = $this->data()->organisation->getId();
-            $addMemberToOrganisation->data()->userID = $this->data()->member->getId();
+            $addMemberToOrganisation->organisationID = $this->organisation->getId();
+            $addMemberToOrganisation->userID = $this->member->getId();
             $addMemberToOrganisation->exec();
         }
     }
@@ -87,9 +76,9 @@ class SetAdminStatusToOrganisationMember
     private function setAdminFlag()
     {
         $organisationMember = new OrganisationMember();
-        $organisationMember->setMember($this->data()->member);
-        $organisationMember->setOrganisation($this->data()->organisation);
-        $organisationMember->setIsAdmin($this->data()->isAdmin);
+        $organisationMember->setMember($this->member);
+        $organisationMember->setOrganisation($this->organisation);
+        $organisationMember->setIsAdmin($this->isAdmin);
         $this->organisationMemberRepo->save($organisationMember);
     }
 
@@ -103,22 +92,47 @@ class SetAdminStatusToOrganisationMember
 
     private function assertDataHasBeenSent()
     {
-        if (!$this->data()->executor)
+        if (!$this->executor)
             throw new \InvalidArgumentException('No executor');
     }
-}
 
-class SetAdminStatusToOrganisationMember_Data
-{
-    /** @var User */
-    public $member;
+    /**
+     * @param User $executor
+     */
+    public function setExecutor(User $executor)
+    {
+        $this->executor = $executor;
+    }
 
-    /** @var Organisation */
-    public $organisation;
+    /**
+     * @param User $member
+     */
+    public function setMember(User $member)
+    {
+        $this->member = $member;
+    }
 
-    /** @var bool */
-    public $isAdmin;
+    /**
+     * @param int $memberID
+     */
+    public function setMemberID(int $memberID)
+    {
+        $this->member = (new UserRepository())->getById($memberID);
+    }
 
-    /** @var User */
-    public $executor;
+    /**
+     * @param Organisation $organisation
+     */
+    public function setOrganisation(Organisation $organisation)
+    {
+        $this->organisation = $organisation;
+    }
+
+    /**
+     * @param bool $isAdmin
+     */
+    public function setIsAdmin(bool $isAdmin)
+    {
+        $this->isAdmin = $isAdmin;
+    }
 }

@@ -85,8 +85,6 @@ class ProjectEditMembersController
         }
 
         if ($this->format == 'json') {
-            $invitedMembers = (new ProjectMemberInvitationRepository())->getByProject($project);
-
             echo json_encode([
                 'members' => $this->projectMembersJson($members),
                 'invitedMembers' => $this->projectInvitedMembersJson($project),
@@ -98,7 +96,7 @@ class ProjectEditMembersController
             require __DIR__ . '/../../../www/views/project-edit-members.php';
         }
 
-        return true;
+        return null;
     }
 
     /**

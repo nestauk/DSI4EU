@@ -108,7 +108,7 @@ class RejectMemberInvitationToOrganisationTest extends PHPUnit_Framework_TestCas
         }
 
         $this->assertFalse(
-            $this->organisationMemberInvitationRepo->memberHasInvitationToOrganisation($this->invitedUser->getId(), $this->organisation->getId())
+            $this->organisationMemberInvitationRepo->userIdHasInvitationToOrganisationId($this->invitedUser->getId(), $this->organisation->getId())
         );
     }
 
@@ -119,15 +119,15 @@ class RejectMemberInvitationToOrganisationTest extends PHPUnit_Framework_TestCas
         $this->rejectInvitation($this->organisation->getId(), $this->invitedUser->getId());
 
         $this->assertFalse(
-            $this->organisationMemberRepo->organisationIDHasMemberID($this->organisation->getId(), $this->invitedUser->getId())
+            $this->organisationMemberRepo->organisationHasMember($this->organisation, $this->invitedUser)
         );
     }
 
     private function addOrganisationMemberInvitation($organisationID, $userID)
     {
         $this->addMemberInvitationToOrganisation = new \DSI\UseCase\AddMemberInvitationToOrganisation();
-        $this->addMemberInvitationToOrganisation->data()->userID = $userID;
-        $this->addMemberInvitationToOrganisation->data()->organisationID = $organisationID;
+        $this->addMemberInvitationToOrganisation->setUserID($userID);
+        $this->addMemberInvitationToOrganisation->setOrganisationID($organisationID);
         $this->addMemberInvitationToOrganisation->exec();
     }
 

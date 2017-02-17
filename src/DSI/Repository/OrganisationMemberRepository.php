@@ -97,6 +97,17 @@ class OrganisationMemberRepository
     }
 
     /**
+     * @param Organisation $organisation
+     * @return \DSI\Entity\OrganisationMember[]
+     */
+    public function getByOrganisation(Organisation $organisation)
+    {
+        return $this->getObjectsWhere([
+            "`organisationID` = '{$organisation->getId()}'"
+        ]);
+    }
+
+    /**
      * @param int $memberID
      * @param int $organisationID
      * @return OrganisationMember

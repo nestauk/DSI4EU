@@ -147,16 +147,16 @@ class OrganisationEditController
 
             if (isset($_POST['addMember'])) {
                 $addMemberToOrgCmd = new AddMemberInvitationToOrganisation();
-                $addMemberToOrgCmd->data()->organisationID = $organisation->getId();
-                $addMemberToOrgCmd->data()->userID = $_POST['addMember'];
+                $addMemberToOrgCmd->setOrganisation($organisation);
+                $addMemberToOrgCmd->setUserID($_POST['addMember']);
                 $addMemberToOrgCmd->exec();
                 echo json_encode(['result' => 'ok']);
                 return;
             }
             if (isset($_POST['removeMember'])) {
                 $removeMemberFromOrgCmd = new RemoveMemberFromOrganisation();
-                $removeMemberFromOrgCmd->data()->organisationID = $organisation->getId();
-                $removeMemberFromOrgCmd->data()->userID = $_POST['removeMember'];
+                $removeMemberFromOrgCmd->setOrganisation($organisation);
+                $removeMemberFromOrgCmd->setUserID($_POST['removeMember']);
                 $removeMemberFromOrgCmd->exec();
                 echo json_encode(['result' => 'ok']);
                 return;
@@ -325,7 +325,7 @@ class OrganisationEditController
     {
         if ($organisation->getOwnerID() == $loggedInUser->getId())
             return false;
-        if ((new OrganisationMemberRepository())->organisationIDHasMemberID($organisation->getId(), $loggedInUser->getId()))
+        if ((new OrganisationMemberRepository())->organisationHasMember($organisation, $loggedInUser))
             return false;
         if ((new OrganisationMemberRequestRepository())->organisationHasRequestFromMember($organisation->getId(), $loggedInUser->getId()))
             return false;

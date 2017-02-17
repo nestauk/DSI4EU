@@ -331,7 +331,7 @@ class OrganisationController
     {
         if ($organisation->getOwnerID() == $loggedInUser->getId())
             return false;
-        if ((new OrganisationMemberRepository())->organisationIDHasMemberID($organisation->getId(), $loggedInUser->getId()))
+        if ((new OrganisationMemberRepository())->organisationHasMember($organisation, $loggedInUser))
             return false;
         if ((new OrganisationMemberRequestRepository())->organisationHasRequestFromMember($organisation->getId(), $loggedInUser->getId()))
             return false;
@@ -479,8 +479,8 @@ class OrganisationController
         if ($genSecureCode->checkCode($_POST['secureCode'])) {
             try {
                 $exec = new RemoveMemberFromOrganisation();
-                $exec->data()->organisationID = $organisation->getId();
-                $exec->data()->userID = $user->getId();
+                $exec->setOrganisation($organisation);
+                $exec->setUser($user);
                 $exec->exec();
 
                 echo json_encode([

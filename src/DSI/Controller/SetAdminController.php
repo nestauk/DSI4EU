@@ -50,10 +50,10 @@ class SetAdminController
                 $organisation = $organisationRepository->getById((int)$_GET['organisationID']);
 
                 $exec = new SetAdminStatusToOrganisationMember();
-                $exec->data()->member = $user;
-                $exec->data()->organisation = $organisation;
-                $exec->data()->isAdmin = true;
-                $exec->data()->executor = $loggedInUser;
+                $exec->setMember($user);
+                $exec->setOrganisation($organisation);
+                $exec->setExecutor($loggedInUser);
+                $exec->setIsAdmin(true);
                 $exec->exec();
 
                 if (isset($_GET['owner'])) {

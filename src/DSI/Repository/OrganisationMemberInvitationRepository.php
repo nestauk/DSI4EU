@@ -3,7 +3,9 @@
 namespace DSI\Repository;
 
 use DSI\DuplicateEntry;
+use DSI\Entity\Organisation;
 use DSI\Entity\OrganisationMemberInvitation;
+use DSI\Entity\User;
 use DSI\NotFound;
 use DSI\Service\SQL;
 
@@ -68,6 +70,17 @@ class OrganisationMemberInvitationRepository
     {
         return $this->getObjectsWhere([
             "`organisationID` = '{$organisationID}'"
+        ]);
+    }
+
+    /**
+     * @param Organisation $organisation
+     * @return \DSI\Entity\OrganisationMemberInvitation[]
+     */
+    public function getByOrganisation(Organisation $organisation)
+    {
+        return $this->getObjectsWhere([
+            "`organisationID` = '{$organisation->getId()}'"
         ]);
     }
 
@@ -147,11 +160,23 @@ class OrganisationMemberInvitationRepository
         $query->query();
     }
 
-    public function memberHasInvitationToOrganisation(int $userID, int $organisationID)
+    public function userIdHasInvitationToOrganisationId(int $userID, int $organisationID)
     {
         $organisationMembers = $this->getByOrganisationID($organisationID);
         foreach ($organisationMembers AS $organisationMember) {
             if ($userID == $organisationMember->getMemberID()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function userHasInvitationToOrganisation(User $user, Organisation $organisation)
+    {
+        $organisationMembers = $this->getByOrganisation($organisation);
+        foreach ($organisationMembers AS $organisationMember) {
+            if ($user->getId() == $organisationMember->getMemberID()) {
                 return true;
             }
         }

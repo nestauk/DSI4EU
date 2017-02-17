@@ -197,8 +197,8 @@ class UpdateUserBasicDetails
         foreach ($userOrganisations AS $currentOrgID) {
             if (!in_array($currentOrgID, $this->data()->organisations)) {
                 $remMember = new RemoveMemberFromOrganisation();
-                $remMember->data()->userID = $this->data()->userID;
-                $remMember->data()->organisationID = $currentOrgID;
+                $remMember->setUserID($this->data()->userID);
+                $remMember->setOrganisationID($currentOrgID);
                 $remMember->exec();
             }
         }

@@ -72,7 +72,7 @@ class AcceptMemberInvitationToOrganisation
 
     private function assertUserHasBeenInvited()
     {
-        if (!$this->organisationMemberInvitationRepository->memberHasInvitationToOrganisation($this->data()->userID, $this->data()->organisationID)) {
+        if (!$this->organisationMemberInvitationRepository->userIdHasInvitationToOrganisationId($this->data()->userID, $this->data()->organisationID)) {
             $this->errorHandler->addTaggedError('member', 'This user was not invited to join the organisation');
             $this->errorHandler->throwIfNotEmpty();
         }

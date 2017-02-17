@@ -218,16 +218,16 @@ class OrganisationMemberInvitationRepositoryTest extends PHPUnit_Framework_TestC
         $organisationMemberInvitation->setMember($this->user_2);
         $this->organisationMemberInvitationRepository->add($organisationMemberInvitation);
 
-        $this->assertTrue($this->organisationMemberInvitationRepository->memberHasInvitationToOrganisation(
+        $this->assertTrue($this->organisationMemberInvitationRepository->userIdHasInvitationToOrganisationId(
             $this->user_1->getId(), $this->organisation_1->getId())
         );
-        $this->assertFalse($this->organisationMemberInvitationRepository->memberHasInvitationToOrganisation(
+        $this->assertFalse($this->organisationMemberInvitationRepository->userIdHasInvitationToOrganisationId(
             $this->user_2->getId(), $this->organisation_1->getId())
         );
-        $this->assertTrue($this->organisationMemberInvitationRepository->memberHasInvitationToOrganisation(
+        $this->assertTrue($this->organisationMemberInvitationRepository->userIdHasInvitationToOrganisationId(
             $this->user_2->getId(), $this->organisation_2->getId())
         );
-        $this->assertFalse($this->organisationMemberInvitationRepository->memberHasInvitationToOrganisation(
+        $this->assertFalse($this->organisationMemberInvitationRepository->userIdHasInvitationToOrganisationId(
             $this->user_1->getId(), $this->organisation_2->getId())
         );
     }

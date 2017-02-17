@@ -2,7 +2,9 @@
 
 namespace DSI\UseCase;
 
+use DSI\Entity\Organisation;
 use DSI\Entity\OrganisationMember;
+use DSI\Entity\User;
 use DSI\Repository\OrganisationMemberRepository;
 use DSI\Repository\OrganisationRepository;
 use DSI\Repository\UserRepository;
@@ -16,47 +18,57 @@ class RemoveMemberFromOrganisation
     /** @var OrganisationMemberRepository */
     private $organisationMemberRepo;
 
-    /** @var RemoveMemberFromOrganisation_Data */
-    private $data;
+    /** @var Organisation */
+    private $organisation;
 
-    public function __construct()
-    {
-        $this->data = new RemoveMemberFromOrganisation_Data();
-    }
+    /** @var User */
+    private $user;
 
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
         $this->organisationMemberRepo = new OrganisationMemberRepository();
 
-        $organisationRepo = new OrganisationRepository();
-        $userRepo = new UserRepository();
-
-        if (!$this->organisationMemberRepo->organisationIDHasMemberID($this->data()->organisationID, $this->data()->userID)) {
+        if (!$this->organisationMemberRepo->organisationHasMember($this->organisation, $this->user)) {
             $this->errorHandler->addTaggedError('member', 'The user is not a member of the organisation');
             $this->errorHandler->throwIfNotEmpty();
         }
 
         $organisationMember = new OrganisationMember();
-        $organisationMember->setMember($userRepo->getById($this->data()->userID));
-        $organisationMember->setOrganisation($organisationRepo->getById($this->data()->organisationID));
+        $organisationMember->setMember($this->user);
+        $organisationMember->setOrganisation($this->organisation);
         $this->organisationMemberRepo->remove($organisationMember);
     }
 
     /**
-     * @return RemoveMemberFromOrganisation_Data
+     * @param Organisation $organisation
      */
-    public function data()
+    public function setOrganisation(Organisation $organisation)
     {
-        return $this->data;
+        $this->organisation = $organisation;
     }
-}
 
-class RemoveMemberFromOrganisation_Data
-{
-    /** @var int */
-    public $userID;
+    /**
+     * @param int $organisationID
+     */
+    public function setOrganisationID(int $organisationID)
+    {
+        $this->organisation = (new OrganisationRepository())->getById($organisationID);
+    }
 
-    /** @var int */
-    public $organisationID;
+    /**
+     * @param User $user
+     */
+    public function setUser(User $user)
+    {
+        $this->user = $user;
+    }
+
+    /**
+     * @param int $userID
+     */
+    public function setUserID(int $userID)
+    {
+        $this->user = (new UserRepository())->getById($userID);
+    }
 }

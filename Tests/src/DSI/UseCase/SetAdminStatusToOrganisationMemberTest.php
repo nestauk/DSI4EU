@@ -47,10 +47,10 @@ class SetAdminStatusToOrganisationMemberTest extends PHPUnit_Framework_TestCase
         $this->addMemberToOrganisation($this->organisation, $this->admin);
 
         $setStatusCmd = new SetAdminStatusToOrganisationMember();
-        $setStatusCmd->data()->member = $this->admin;
-        $setStatusCmd->data()->organisation = $this->organisation;
-        $setStatusCmd->data()->isAdmin = true;
-        $setStatusCmd->data()->executor = $this->owner;
+        $setStatusCmd->setMember($this->admin);
+        $setStatusCmd->setOrganisation($this->organisation);
+        $setStatusCmd->setIsAdmin(true);
+        $setStatusCmd->setExecutor($this->owner);
         $setStatusCmd->exec();
     }
 
@@ -65,9 +65,9 @@ class SetAdminStatusToOrganisationMemberTest extends PHPUnit_Framework_TestCase
     public function executorMustBeSent()
     {
         $setStatusCmd = new SetAdminStatusToOrganisationMember();
-        $setStatusCmd->data()->member = $this->member;
-        $setStatusCmd->data()->organisation = $this->organisation;
-        $setStatusCmd->data()->isAdmin = true;
+        $setStatusCmd->setMember($this->member);
+        $setStatusCmd->setOrganisation($this->organisation);
+        $setStatusCmd->setIsAdmin(true);
 
         $this->setExpectedException(InvalidArgumentException::class);
         $setStatusCmd->exec();
@@ -79,10 +79,10 @@ class SetAdminStatusToOrganisationMemberTest extends PHPUnit_Framework_TestCase
         $this->addMemberToOrganisation($this->organisation, $this->member);
 
         $setStatusCmd = new SetAdminStatusToOrganisationMember();
-        $setStatusCmd->data()->member = $this->member;
-        $setStatusCmd->data()->organisation = $this->organisation;
-        $setStatusCmd->data()->isAdmin = true;
-        $setStatusCmd->data()->executor = $this->owner;
+        $setStatusCmd->setMember($this->member);
+        $setStatusCmd->setOrganisation($this->organisation);
+        $setStatusCmd->setIsAdmin(true);
+        $setStatusCmd->setExecutor($this->owner);
         $setStatusCmd->exec();
 
         $organisationMember = $this->organisationMemberRepository->getByOrganisationIDAndMemberID(
@@ -97,10 +97,10 @@ class SetAdminStatusToOrganisationMemberTest extends PHPUnit_Framework_TestCase
         $this->addMemberToOrganisation($this->organisation, $this->member);
 
         $setStatusCmd = new SetAdminStatusToOrganisationMember();
-        $setStatusCmd->data()->member = $this->member;
-        $setStatusCmd->data()->organisation = $this->organisation;
-        $setStatusCmd->data()->isAdmin = true;
-        $setStatusCmd->data()->executor = $this->admin;
+        $setStatusCmd->setMember($this->member);
+        $setStatusCmd->setOrganisation($this->organisation);
+        $setStatusCmd->setIsAdmin(true);
+        $setStatusCmd->setExecutor($this->admin);
         $setStatusCmd->exec();
 
         $organisationMember = $this->organisationMemberRepository->getByOrganisationIDAndMemberID(
@@ -115,10 +115,10 @@ class SetAdminStatusToOrganisationMemberTest extends PHPUnit_Framework_TestCase
         $this->addMemberToOrganisation($this->organisation, $this->member);
 
         $setStatusCmd = new SetAdminStatusToOrganisationMember();
-        $setStatusCmd->data()->member = $this->member;
-        $setStatusCmd->data()->organisation = $this->organisation;
-        $setStatusCmd->data()->isAdmin = true;
-        $setStatusCmd->data()->executor = $this->sysadmin;
+        $setStatusCmd->setMember($this->member);
+        $setStatusCmd->setOrganisation($this->organisation);
+        $setStatusCmd->setIsAdmin(true);
+        $setStatusCmd->setExecutor($this->sysadmin);
         $setStatusCmd->exec();
 
         $organisationMember = $this->organisationMemberRepository->getByOrganisationIDAndMemberID(
@@ -133,10 +133,10 @@ class SetAdminStatusToOrganisationMemberTest extends PHPUnit_Framework_TestCase
         $this->addMemberToOrganisation($this->organisation, $this->member);
 
         $setStatusCmd = new SetAdminStatusToOrganisationMember();
-        $setStatusCmd->data()->member = $this->member;
-        $setStatusCmd->data()->organisation = $this->organisation;
-        $setStatusCmd->data()->isAdmin = false;
-        $setStatusCmd->data()->executor = $this->owner;
+        $setStatusCmd->setMember($this->member);
+        $setStatusCmd->setOrganisation($this->organisation);
+        $setStatusCmd->setIsAdmin(false);
+        $setStatusCmd->setExecutor($this->owner);
         $setStatusCmd->exec();
 
         $organisationMember = $this->organisationMemberRepository->getByOrganisationIDAndMemberID(
@@ -152,10 +152,10 @@ class SetAdminStatusToOrganisationMemberTest extends PHPUnit_Framework_TestCase
 
         $e = null;
         $setStatusCmd = new SetAdminStatusToOrganisationMember();
-        $setStatusCmd->data()->member = $this->member;
-        $setStatusCmd->data()->organisation = $this->organisation;
-        $setStatusCmd->data()->isAdmin = false;
-        $setStatusCmd->data()->executor = $this->member;
+        $setStatusCmd->setMember($this->member);
+        $setStatusCmd->setOrganisation($this->organisation);
+        $setStatusCmd->setIsAdmin(false);
+        $setStatusCmd->setExecutor($this->member);
         try {
             $setStatusCmd->exec();
         } catch (\DSI\Service\ErrorHandler $e) {
@@ -169,10 +169,10 @@ class SetAdminStatusToOrganisationMemberTest extends PHPUnit_Framework_TestCase
     public function userIsAutomaticallyAddedAsMember()
     {
         $setStatusCmd = new SetAdminStatusToOrganisationMember();
-        $setStatusCmd->data()->member = $this->member;
-        $setStatusCmd->data()->organisation = $this->organisation;
-        $setStatusCmd->data()->isAdmin = true;
-        $setStatusCmd->data()->executor = $this->sysadmin;
+        $setStatusCmd->setMember($this->member);
+        $setStatusCmd->setOrganisation($this->organisation);
+        $setStatusCmd->setIsAdmin(true);
+        $setStatusCmd->setExecutor($this->sysadmin);
         $setStatusCmd->exec();
 
         $organisationMember = $this->organisationMemberRepository->getByOrganisationIDAndMemberID(

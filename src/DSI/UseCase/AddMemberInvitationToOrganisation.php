@@ -2,7 +2,9 @@
 
 namespace DSI\UseCase;
 
+use DSI\Entity\Organisation;
 use DSI\Entity\OrganisationMemberInvitation;
+use DSI\Entity\User;
 use DSI\Repository\OrganisationMemberRepository;
 use DSI\Repository\OrganisationMemberInvitationRepository;
 use DSI\Repository\OrganisationRepository;
@@ -14,7 +16,7 @@ class AddMemberInvitationToOrganisation
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var OrganisationMemberInvitationRepository*/
+    /** @var OrganisationMemberInvitationRepository */
     private $organisationMemberInvitationRepository;
 
     /** @var OrganisationRepository */
@@ -23,37 +25,27 @@ class AddMemberInvitationToOrganisation
     /** @var UserRepository */
     private $userRepository;
 
-    /** @var AddMemberInvitationToOrganisation_Data */
-    private $data;
+    /** @var Organisation */
+    private $organisation;
 
-    public function __construct()
-    {
-        $this->data = new AddMemberInvitationToOrganisation_Data();
-    }
+    /** @var User */
+    private $user;
+
 
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
         $this->organisationMemberInvitationRepository = new OrganisationMemberInvitationRepository();
         $this->organisationRepository = new OrganisationRepository();
-        $this->userRepository = new UserRepository();
 
         $this->checkIfOrganisationAlreadyHasTheMember();
         $this->checkIfUserHasAlreadyBeenInvited();
         $this->addMemberInvitation();
     }
 
-    /**
-     * @return AddMemberInvitationToOrganisation_Data
-     */
-    public function data()
-    {
-        return $this->data;
-    }
-
     private function checkIfOrganisationAlreadyHasTheMember()
     {
-        if ((new OrganisationMemberRepository())->organisationIDHasMemberID($this->data()->organisationID, $this->data()->userID)) {
+        if ((new OrganisationMemberRepository())->organisationHasMember($this->organisation, $this->user)) {
             $this->errorHandler->addTaggedError('member', __('This user is already a member of the organisation'));
             $this->errorHandler->throwIfNotEmpty();
         }
@@ -61,7 +53,7 @@ class AddMemberInvitationToOrganisation
 
     private function checkIfUserHasAlreadyBeenInvited()
     {
-        if ($this->organisationMemberInvitationRepository->memberHasInvitationToOrganisation($this->data()->userID, $this->data()->organisationID)) {
+        if ($this->organisationMemberInvitationRepository->userIdHasInvitationToOrganisationId($this->user->getId(), $this->organisation->getId())) {
             $this->errorHandler->addTaggedError('member', __('This user has already been invited to join the organisation'));
             $this->errorHandler->throwIfNotEmpty();
         }
@@ -70,17 +62,40 @@ class AddMemberInvitationToOrganisation
     private function addMemberInvitation()
     {
         $organisationMemberInvitation = new OrganisationMemberInvitation();
-        $organisationMemberInvitation->setMember($this->userRepository->getById($this->data()->userID));
-        $organisationMemberInvitation->setOrganisation($this->organisationRepository->getById($this->data()->organisationID));
+        $organisationMemberInvitation->setMember($this->user);
+        $organisationMemberInvitation->setOrganisation($this->organisation);
         $this->organisationMemberInvitationRepository->add($organisationMemberInvitation);
     }
-}
 
-class AddMemberInvitationToOrganisation_Data
-{
-    /** @var int */
-    public $userID;
+    /**
+     * @param Organisation $organisation
+     */
+    public function setOrganisation(Organisation $organisation)
+    {
+        $this->organisation = $organisation;
+    }
 
-    /** @var int */
-    public $organisationID;
+    /**
+     * @param int $organisationID
+     */
+    public function setOrganisationID(int $organisationID)
+    {
+        $this->organisation = $this->organisationRepository->getById($organisationID);
+    }
+
+    /**
+     * @param User $user
+     */
+    public function setUser(User $user)
+    {
+        $this->user = $user;
+    }
+
+    /**
+     * @param int $userID
+     */
+    public function setUserID(int $userID)
+    {
+        $this->user = (new UserRepository())->getById($userID);
+    }
 }

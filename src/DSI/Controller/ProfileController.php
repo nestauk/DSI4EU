@@ -186,7 +186,7 @@ class ProfileController
                         return [
                             'name' => $organisation->getName(),
                             'url' => $urlHandler->organisation($organisation),
-                            'membersCount' => count($organisationMemberRepo->getByOrganisationID($organisation->getId())),
+                            'membersCount' => count($organisationMemberRepo->getByOrganisation($organisation)),
                         ];
                     }, $organisationMemberRepo->getByMemberID($user->getId())),
                 ],

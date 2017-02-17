@@ -2,7 +2,7 @@
 require __DIR__ . '/header.php';
 /** @var $users \DSI\Entity\User[] */
 /** @var $loggedInUser \DSI\Entity\User */
-/** @var $project \DSI\Entity\Project */
+/** @var $organisation \DSI\Entity\Organisation */
 /** @var $urlHandler \DSI\Service\URL */
 /** @var $isAdmin bool */
 /** @var $isOwner bool */
@@ -10,14 +10,14 @@ require __DIR__ . '/header.php';
 if (!isset($urlHandler))
     $urlHandler = new \DSI\Service\URL();
 ?>
-    <div ng-controller="ProjectEditMembersController">
+    <div ng-controller="OrganisationEditMembersController">
         <div class="creator page-header">
             <div class="container-wide header">
                 <h1 class="light page-h1">
                     <?php echo sprintf(
                         __('Manage members for %s'),
-                        '<a href="' . $urlHandler->project($project) . '">' .
-                        show_input($project->getName()) .
+                        '<a href="' . $urlHandler->organisation($organisation) . '">' .
+                        show_input($organisation->getName()) .
                         '</a>'
                     ) ?>
                 </h1>
@@ -34,9 +34,9 @@ if (!isset($urlHandler))
                             <a class="step-tab tab-link-2 w-inline-block w-tab-link" data-w-tab="Tab 2">
                                 <div><?php _ehtml('Add existing DSI4eu user') ?></div>
                             </a>
-                            <a class="step-tab tab-link-3 w-inline-block w-tab-link" data-w-tab="Tab 3">
+                            <?php /* <a class="step-tab tab-link-3 w-inline-block w-tab-link" data-w-tab="Tab 3">
                                 <div><?php _ehtml('Invite by email') ?></div>
-                            </a>
+                            </a> */ ?>
                         </div>
                         <div class="w-tab-content">
                             <div class="step-window w--tab-active w-tab-pane" data-w-tab="Tab 1">
@@ -98,7 +98,7 @@ if (!isset($urlHandler))
                                 <div class="w-row">
                                     <div class="creator-col w-col w-col-4 w-col-stack">
                                         <h2><?php _ehtml('Add existing DSI4EU user') ?></h2>
-                                        <p><?php _ehtml('You can add existing users to your project.') ?></p>
+                                        <p><?php _ehtml('You can add existing users to your organisation.') ?></p>
                                         <p>
                                             <?php _ehtml('After being notified the user will [...]') ?>
                                         </p>
@@ -188,11 +188,11 @@ if (!isset($urlHandler))
 
                                 </div>
                             </div>
-                            <div class="step-window w-tab-pane" data-w-tab="Tab 3">
+                            <?php /*<div class="step-window w-tab-pane" data-w-tab="Tab 3">
                                 <div class="w-row">
                                     <div class="creator-col w-col w-col-4">
                                         <h2><?php _ehtml('Invite by email') ?></h2>
-                                        <p><?php _ehtml('You can invite new users to your project by email.') ?></p>
+                                        <p><?php _ehtml('You can invite new users to your organisation by email.') ?></p>
                                         <p><?php _ehtml('After being invited the user will [...]') ?></p>
                                     </div>
                                     <div class="creator-col creator-col-right w-col w-col-8">
@@ -252,7 +252,7 @@ if (!isset($urlHandler))
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> */ ?>
                         </div>
                     </div>
                 </div>
@@ -263,23 +263,23 @@ if (!isset($urlHandler))
     <script>
         var translate = new Translate();
         <?php foreach([
-            'You are about to invite this user to join the project',
+            'You are about to invite this user to join the organisation',
             'Continue',
-            'The user has been invited to join the project.',
-            'You are about to invite this person to join the project',
-            'An invitation to join the project has been sent by email.',
-            "You are about to cancel this user's invitation to join the project",
+            'The user has been invited to join the organisation.',
+            'You are about to invite this person to join the organisation',
+            'An invitation to join the organisation has been sent by email.',
+            "You are about to cancel this user's invitation to join the organisation",
             'Success!',
-            'The user has been removed from the project.',
+            'The user has been removed from the organisation.',
             'The user now has admin privileges.',
             'Admin privileges have been removed from the user.',
-            'The invitation to join the project has been cancelled.',
+            'The invitation to join the organisation has been cancelled.',
 
         ] AS $translate) { ?>
         translate.set('<?php echo show_input($translate)?>', '<?php _ehtml($translate)?>');
         <?php } ?>
     </script>
     <script type="text/javascript"
-            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/ProjectEditMembersController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
+            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/OrganisationEditMembersController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 
 <?php require __DIR__ . '/footer.php' ?>

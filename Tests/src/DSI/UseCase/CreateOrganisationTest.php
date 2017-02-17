@@ -65,7 +65,7 @@ class CreateOrganisationTest extends PHPUnit_Framework_TestCase
         $organisation = $this->createOrgCmd->getOrganisation();
 
         $this->assertTrue(
-            $this->organisationMemberRepo->organisationIDHasMemberID($organisation->getId(), $this->user->getId())
+            $this->organisationMemberRepo->organisationHasMember($organisation, $this->user)
         );
     }
 

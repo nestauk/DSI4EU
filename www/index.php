@@ -254,6 +254,12 @@ class Router
         } elseif (preg_match('<^/' . $langHandler . 'org/editOwner/([0-9]+)$>', $this->pageURL, $matches)) {
             $this->editOrganisationOwner($matches);
 
+        } elseif (preg_match('<^/' . $langHandler . 'org/members/([0-9]+)$>', $this->pageURL, $matches)) {
+            $this->editOrganisationsMembers($matches);
+
+        } elseif (preg_match('<^/' . $langHandler . 'org/members/([0-9]+)\.json$>', $this->pageURL, $matches)) {
+            $this->editOrganisationsMembers($matches, 'json');
+
         } elseif (preg_match('<^/' . $langHandler . 'org/([0-9]+)(\/.*)?$>', $this->pageURL, $matches)) {
             $this->organisation($matches);
 
@@ -871,6 +877,16 @@ class Router
 
         $command = new \DSI\Controller\OrganisationEditOwnerController();
         $command->organisationID = $matches[3];
+        $command->exec();
+    }
+
+    private function editOrganisationsMembers($matches, $format = 'html')
+    {
+        $this->setLanguageFromUrl($matches);
+
+        $command = new \DSI\Controller\OrganisationEditMembersController();
+        $command->organisationID = $matches[3];
+        $command->format = $format;
         $command->exec();
     }
 

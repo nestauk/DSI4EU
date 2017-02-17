@@ -45,14 +45,14 @@ class AddMemberInvitationToOrganisationTest extends PHPUnit_Framework_TestCase
     /** @test */
     public function successfulAdditionOfMemberToOrganisation()
     {
-        $this->addMemberInvitationToOrganisation->data()->userID = $this->user_2->getId();
-        $this->addMemberInvitationToOrganisation->data()->organisationID = $this->organisation->getId();
+        $this->addMemberInvitationToOrganisation->setUser($this->user_2);
+        $this->addMemberInvitationToOrganisation->setOrganisation($this->organisation);
         $this->addMemberInvitationToOrganisation->exec();
 
         $this->assertTrue(
-            (new \DSI\Repository\OrganisationMemberInvitationRepository())->memberHasInvitationToOrganisation(
-                $this->addMemberInvitationToOrganisation->data()->userID,
-                $this->addMemberInvitationToOrganisation->data()->organisationID
+            (new \DSI\Repository\OrganisationMemberInvitationRepository())->userIdHasInvitationToOrganisationId(
+                $this->user_2->getId(),
+                $this->organisation->getId()
             )
         );
     }
@@ -61,13 +61,13 @@ class AddMemberInvitationToOrganisationTest extends PHPUnit_Framework_TestCase
     public function cannotAddSameMemberTwice()
     {
         $e = null;
-        $this->addMemberInvitationToOrganisation->data()->userID = $this->user_2->getId();
-        $this->addMemberInvitationToOrganisation->data()->organisationID = $this->organisation->getId();
+        $this->addMemberInvitationToOrganisation->setUser($this->user_2);
+        $this->addMemberInvitationToOrganisation->setOrganisation($this->organisation);
         $this->addMemberInvitationToOrganisation->exec();
 
         try {
-            $this->addMemberInvitationToOrganisation->data()->userID = $this->user_2->getId();
-            $this->addMemberInvitationToOrganisation->data()->organisationID = $this->organisation->getId();
+            $this->addMemberInvitationToOrganisation->setUser($this->user_2);
+            $this->addMemberInvitationToOrganisation->setOrganisation($this->organisation);
             $this->addMemberInvitationToOrganisation->exec();
         } catch (\DSI\Service\ErrorHandler $e) {
         }
