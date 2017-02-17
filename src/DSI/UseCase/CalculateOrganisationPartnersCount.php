@@ -22,10 +22,6 @@ class CalculateOrganisationPartnersCount
     /** @var Organisation */
     private $organisation;
 
-    public function __construct()
-    {
-    }
-
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();

@@ -48,8 +48,6 @@ class OrganisationController
         $organisationRepo = new OrganisationRepository();
         $organisation = $organisationRepo->getById($this->data()->organisationID);
 
-        $this->updateOrganisationPartnersCount($organisation);
-
         $userIsMember = false;
         $userSentJoinRequest = false;
         $userCanSendJoinRequest = false;
@@ -552,16 +550,6 @@ class OrganisationController
             }
         }
         return true;
-    }
-
-    /**
-     * @param $organisation
-     */
-    private function updateOrganisationPartnersCount($organisation)
-    {
-        $exec = (new CalculateOrganisationPartnersCount());
-        $exec->setOrganisation($organisation);
-        $exec->exec();
     }
 }
 
