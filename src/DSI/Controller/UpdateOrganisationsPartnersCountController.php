@@ -5,7 +5,7 @@ namespace DSI\Controller;
 use DSI\Repository\OrganisationRepository;
 use DSI\UseCase\CalculateOrganisationPartnersCount;
 
-class UpdateOrganisationsPartnersCount
+class UpdateOrganisationsPartnersCountController
 {
     public function exec()
     {

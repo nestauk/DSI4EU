@@ -235,8 +235,6 @@ class UpdateProject
 
     private function checkIfAllInfoHaveBeenSent()
     {
-        //if (!isset($this->data()->name))
-        //  throw new NotEnoughData('name');
         if (!isset($this->data()->executor))
             throw new NotEnoughData('user');
         if (!isset($this->data()->project))
