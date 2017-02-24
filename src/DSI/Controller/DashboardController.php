@@ -23,6 +23,7 @@ use DSI\Repository\ProjectPostRepository;
 use DSI\Repository\StoryRepository;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
+use DSI\Service\JsModules;
 use DSI\Service\URL;
 use DSI\UseCase\AcceptMemberInvitationToOrganisation;
 use DSI\UseCase\AcceptMemberInvitationToProject;
@@ -32,6 +33,7 @@ use DSI\UseCase\RejectMemberInvitationToOrganisation;
 use DSI\UseCase\RejectMemberInvitationToProject;
 use DSI\UseCase\RejectMemberRequestToOrganisation;
 use DSI\UseCase\RejectMemberRequestToProject;
+use DSI\UseCase\SendTerminateAccountPreconfirmationEmail;
 
 class DashboardController
 {
@@ -72,6 +74,9 @@ class DashboardController
 
                 if (isset($_POST['rejectProjectRequest']))
                     return $this->rejectProjectRequest($loggedInUser);
+
+                if (isset($_POST['terminateAccount']))
+                    return $this->terminateAccount($loggedInUser);
 
                 $projectInvitations = (new ProjectMemberInvitationRepository())->getByMemberID($loggedInUser->getId());
                 $projectRequests = $this->getProjectRequests($loggedInUser);
@@ -139,11 +144,11 @@ class DashboardController
             $updates = $this->getUpdates($loggedInUser);
             $projectsMember = (new ProjectMemberRepository())->getByMemberID($loggedInUser->getId());
             $organisationsMember = (new OrganisationMemberRepository())->getByMemberID($loggedInUser->getId());
-
+            JsModules::setTranslations(true);
             require __DIR__ . '/../../../www/views/dashboard.php';
         }
 
-        return true;
+        return null;
     }
 
     /**
@@ -186,7 +191,7 @@ class DashboardController
 
     /**
      * @param User $loggedInUser
-     * @return bool
+     * @return null
      */
     private function approveProjectInvitation(User $loggedInUser)
     {
@@ -203,12 +208,13 @@ class DashboardController
                 'text' => 'You have accepted the invitation to be part of the project!',
             ]
         ]);
-        return true;
+
+        return;
     }
 
     /**
      * @param User $loggedInUser
-     * @return bool
+     * @return null
      */
     private function rejectProjectInvitation(User $loggedInUser)
     {
@@ -225,11 +231,13 @@ class DashboardController
                 'text' => 'You have declined the invitation to be part of the project!',
             ]
         ]);
-        return true;
+
+        return;
     }
 
     /**
      * @param $loggedInUser
+     * @return null
      */
     private function approveOrganisationInvitation(User $loggedInUser)
     {
@@ -246,11 +254,13 @@ class DashboardController
                 'text' => 'You have accepted the invitation to be part of the organisation!',
             ]
         ]);
+
         return;
     }
 
     /**
      * @param $loggedInUser
+     * @return null
      */
     private function rejectOrganisationInvitation(User $loggedInUser)
     {
@@ -272,6 +282,7 @@ class DashboardController
 
     /**
      * @param $loggedInUser
+     * @return null
      */
     private function approveOrganisationRequest($loggedInUser)
     {
@@ -293,6 +304,7 @@ class DashboardController
 
     /**
      * @param $loggedInUser
+     * @return null
      */
     private function rejectOrganisationRequest($loggedInUser)
     {
@@ -314,6 +326,7 @@ class DashboardController
 
     /**
      * @param $loggedInUser
+     * @return null
      */
     private function approveProjectRequest($loggedInUser)
     {
@@ -327,7 +340,7 @@ class DashboardController
             'code' => 'ok',
             'message' => [
                 'title' => 'Success!',
-                'text' => 'You have accepted user\'s request to be part of the project!',
+                'text' => "You have accepted user's request to be part of the project!",
             ]
         ]);
         return;
@@ -335,6 +348,7 @@ class DashboardController
 
     /**
      * @param $loggedInUser
+     * @return null
      */
     private function rejectProjectRequest($loggedInUser)
     {
@@ -350,6 +364,23 @@ class DashboardController
                 'title' => 'OK',
                 'text' => "You have declined user's request to join the project!",
             ]
+        ]);
+        return;
+    }
+
+    /**
+     * @param $loggedInUser
+     * @return null
+     */
+    private function terminateAccount($loggedInUser)
+    {
+        $exec = new SendTerminateAccountPreconfirmationEmail();
+        $exec->setUser($loggedInUser);
+        $exec->setSendEmail(true);
+        $exec->exec();
+
+        echo json_encode([
+            'code' => 'ok',
         ]);
         return;
     }

@@ -56,6 +56,6 @@ class OrganisationEditOwnerController
 
         $pageTitle = $organisation->getName();
         $users = (new UserRepository())->getAll();
-        require __DIR__ . '/../../../www/views/organisation-editOwner.php';
+        require __DIR__ . '/../../../www/views/organisation-edit-owner.php';
     }
 }

@@ -1,10 +1,10 @@
 angular
     .module(angularAppName)
     .controller('DashboardController', function ($scope, $http, $timeout, $attrs) {
-        var dashboardJsonUrl = $attrs.dashboardjsonurl;
+        var url = $attrs.dashboardjsonurl;
 
         $scope.notifications = {};
-        $http.get(dashboardJsonUrl)
+        $http.get(url)
             .then(function (response) {
                 $scope.notifications = response.data;
             });
@@ -26,7 +26,7 @@ angular
         };
 
         $scope.approveProjectInvitation = function (invitation) {
-            $http.post(dashboardJsonUrl, {
+            $http.post(url, {
                 approveProjectInvitation: true,
                 projectID: invitation.id
             }).then(function (response) {
@@ -51,7 +51,7 @@ angular
                 confirmButtonText: "Yes, continue!",
                 closeOnConfirm: false
             }, function () {
-                $http.post(dashboardJsonUrl, {
+                $http.post(url, {
                     rejectProjectInvitation: true,
                     projectID: invitation.id
                 }).then(function (response) {
@@ -68,7 +68,7 @@ angular
         };
 
         $scope.approveOrganisationInvitation = function (invitation) {
-            $http.post(dashboardJsonUrl, {
+            $http.post(url, {
                 approveOrganisationInvitation: true,
                 organisationID: invitation.id
             }).then(function (response) {
@@ -93,7 +93,7 @@ angular
                 confirmButtonText: "Yes, continue!",
                 closeOnConfirm: false
             }, function () {
-                $http.post(dashboardJsonUrl, {
+                $http.post(url, {
                     rejectOrganisationInvitation: true,
                     organisationID: invitation.id
                 }).then(function (response) {
@@ -110,7 +110,7 @@ angular
         };
 
         $scope.approveOrganisationRequest = function (invitation) {
-            $http.post(dashboardJsonUrl, {
+            $http.post(url, {
                 approveOrganisationRequest: true,
                 organisationID: invitation.organisation.id,
                 userID: invitation.user.id
@@ -136,7 +136,7 @@ angular
                 confirmButtonText: "Yes, continue!",
                 closeOnConfirm: false
             }, function () {
-                $http.post(dashboardJsonUrl, {
+                $http.post(url, {
                     rejectOrganisationRequest: true,
                     organisationID: invitation.organisation.id,
                     userID: invitation.user.id
@@ -154,7 +154,7 @@ angular
         };
 
         $scope.approveProjectRequest = function (invitation) {
-            $http.post(dashboardJsonUrl, {
+            $http.post(url, {
                 approveProjectRequest: true,
                 projectID: invitation.project.id,
                 userID: invitation.user.id
@@ -180,7 +180,7 @@ angular
                 confirmButtonText: "Yes, continue!",
                 closeOnConfirm: false
             }, function () {
-                $http.post(dashboardJsonUrl, {
+                $http.post(url, {
                     rejectProjectRequest: true,
                     projectID: invitation.project.id,
                     userID: invitation.user.id
@@ -196,4 +196,31 @@ angular
                 });
             });
         };
+
+        $scope.terminateAccount = function () {
+            swal({
+                    title: "",
+                    text: translate.get("Are you sure you want to terminate your account?"),
+                    type: "info",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: translate.get("Yes"),
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true
+                },
+                function () {
+                    $http.post(url, {terminateAccount: true})
+                        .then(function (response) {
+                            if (response.data.code == 'ok') {
+                                swal(
+                                    "",
+                                    translate.get("An email will be sent to you to confirm your request."),
+                                    "success"
+                                );
+                            } else {
+                                swal("Info", Object.values(response.data.errors).join(' '), "info");
+                            }
+                        });
+                });
+        }
     });

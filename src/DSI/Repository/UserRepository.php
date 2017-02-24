@@ -84,6 +84,22 @@ class UserRepository
         ProjectRepositoryInAPC::resetCache();
     }
 
+    public function remove(User $user)
+    {
+        $query = new SQL("SELECT id FROM `users` WHERE id = '{$user->getId()}' LIMIT 1");
+        $existingUser = $query->fetch();
+        if (!$existingUser)
+            throw new DSI\NotFound('userID: ' . $user->getId());
+
+        $query = new SQL("DELETE FROM `users` WHERE `id` = '{$user->getId()}'");
+        $query->query();
+
+        unset(self::$objects[$user->getId()]);
+
+        OrganisationRepositoryInAPC::resetCache();
+        ProjectRepositoryInAPC::resetCache();
+    }
+
     public function getById(int $id): User
     {
         if (isset(self::$objects[$id]))

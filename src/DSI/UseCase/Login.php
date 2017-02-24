@@ -1,13 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: apandele
- * Date: 25/04/2016
- * Time: 15:45
- */
-
 namespace DSI\UseCase;
-
 
 use DSI\Entity\User;
 use DSI\NotFound;

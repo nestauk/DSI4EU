@@ -141,7 +141,16 @@ class ProjectRepository
 
     public function getAllPublished()
     {
-        return $this->getObjectsWhere(["`isPublished` = '1'"]);
+        return $this->getObjectsWhere([
+            "`isPublished` = '1'"
+        ]);
+    }
+
+    public function getByUser(DSI\Entity\User $user)
+    {
+        return $this->getObjectsWhere([
+            "`ownerID` = '" . $user->getId() . "'"
+        ]);
     }
 
     public function clearAll()

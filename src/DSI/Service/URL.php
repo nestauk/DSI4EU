@@ -385,6 +385,11 @@ class URL
         return SITE_RELATIVE_PATH . '/rss/funding-opportunities.xml';
     }
 
+    public function terminateAccount($token)
+    {
+        return SITE_RELATIVE_PATH . '/terminateAccount?token=' . $token;
+    }
+
 
     /**
      * @param $title
@@ -416,6 +421,7 @@ class URL
     {
         $this->currentLanguage = (string)$currentLanguage;
     }
+
 
     public function fullUrl($shortAbsoluteUrl)
     {

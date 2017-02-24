@@ -44,6 +44,9 @@ class Organisation
         $logo,
         $headerImage;
 
+    /** @var boolean */
+    private $isPublished;
+
     /**
      * @return int
      */
@@ -464,5 +467,21 @@ class Organisation
     public function setHeaderImage($headerImage)
     {
         $this->headerImage = (string)$headerImage;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPublished(): bool
+    {
+        return $this->isPublished;
+    }
+
+    /**
+     * @param bool $isPublished
+     */
+    public function setIsPublished(bool $isPublished)
+    {
+        $this->isPublished = $isPublished;
     }
 }

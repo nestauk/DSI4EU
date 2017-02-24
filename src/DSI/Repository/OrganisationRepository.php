@@ -31,6 +31,7 @@ class OrganisationRepository
         $insert[] = "`projectsCount` = '" . (int)($organisation->getProjectsCount()) . "'";
         $insert[] = "`partnersCount` = '" . (int)($organisation->getPartnersCount()) . "'";
         $insert[] = "`importID` = '" . addslashes($organisation->getImportID()) . "'";
+        $insert[] = "`isPublished` = '" . (bool)($organisation->isPublished()) . "'";
 
         $query = new SQL("INSERT INTO `organisations` SET " . implode(', ', $insert) . "");
         $query->query();
@@ -68,6 +69,7 @@ class OrganisationRepository
         $insert[] = "`projectsCount` = '" . (int)($organisation->getProjectsCount()) . "'";
         $insert[] = "`partnersCount` = '" . (int)($organisation->getPartnersCount()) . "'";
         $insert[] = "`importID` = '" . addslashes($organisation->getImportID()) . "'";
+        $insert[] = "`isPublished` = '" . (bool)($organisation->isPublished()) . "'";
 
         $query = new SQL("UPDATE `organisations` SET " . implode(', ', $insert) . " WHERE `id` = '{$organisation->getId()}'");
         $query->query();
@@ -139,6 +141,7 @@ class OrganisationRepository
         $organisationObj->setProjectsCount($organisation['projectsCount']);
         $organisationObj->setPartnersCount($organisation['partnersCount']);
         $organisationObj->setImportID($organisation['importID']);
+        $organisationObj->setIsPublished($organisation['isPublished']);
 
         return $organisationObj;
     }
@@ -149,6 +152,17 @@ class OrganisationRepository
     public function getAll()
     {
         return $this->getObjectsWhere(["1"]);
+    }
+
+    /**
+     * @param DSI\Entity\User $user
+     * @return Organisation[]
+     */
+    public function getByUser(DSI\Entity\User $user)
+    {
+        return $this->getObjectsWhere([
+            "`ownerID` = '" . $user->getId() . "'"
+        ]);
     }
 
     public function clearAll()
@@ -189,6 +203,7 @@ class OrganisationRepository
           , startDate, created, logo, headerImage
           , projectsCount, partnersCount
           , importID
+          , isPublished
           FROM `organisations` 
           WHERE " . implode(' AND ', $where) . "
           ORDER BY `name`

@@ -3,6 +3,7 @@
 namespace DSI\Repository;
 
 use DSI\Entity\ProjectPostComment;
+use DSI\Entity\User;
 use DSI\NotFound;
 use DSI\Service\SQL;
 
@@ -54,9 +55,20 @@ class ProjectPostCommentRepository
         $query->query();
     }
 
+    public function remove(ProjectPostComment $projectPostComment)
+    {
+        $query = new SQL("SELECT id FROM `project-post-comments` WHERE id = '{$projectPostComment->getId()}' LIMIT 1");
+        $existingPost = $query->fetch();
+        if (!$existingPost)
+            throw new NotFound('commentID: ' . $projectPostComment->getId());
+
+        $query = new SQL("DELETE FROM `project-post-comments` WHERE `id` = '{$projectPostComment->getId()}'");
+        $query->query();
+    }
+
     public function getById(int $id): ProjectPostComment
     {
-        return $this->getCommentWhere([
+        return $this->getObjectWhere([
             "`id` = {$id}"
         ]);
     }
@@ -85,14 +97,21 @@ class ProjectPostCommentRepository
 
     public function getAll()
     {
-        return $this->getCommentsWhere([
+        return $this->getObjectsWhere([
             "1"
+        ]);
+    }
+
+    public function getByUser(User $user)
+    {
+        return $this->getObjectsWhere([
+            "`userID` = '" . $user->getId() . "'"
         ]);
     }
 
     public function getByPostID(int $postID)
     {
-        return $this->getCommentsWhere([
+        return $this->getObjectsWhere([
             "`postID` = '{$postID}'"
         ]);
     }
@@ -108,9 +127,9 @@ class ProjectPostCommentRepository
      * @return ProjectPostComment
      * @throws NotFound
      */
-    private function getCommentWhere($where)
+    private function getObjectWhere($where)
     {
-        $dbPost = $this->getCommentsWhere($where);
+        $dbPost = $this->getObjectsWhere($where);
         if (count($dbPost) < 1)
             throw new NotFound();
 
@@ -121,7 +140,7 @@ class ProjectPostCommentRepository
      * @param array $where
      * @return ProjectPostComment[]
      */
-    private function getCommentsWhere($where)
+    private function getObjectsWhere($where)
     {
         $posts = [];
         $query = new SQL("SELECT 

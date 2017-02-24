@@ -305,6 +305,10 @@ class Router
         } elseif (preg_match('<^/' . $langHandler . 'keepUserLoggedIn>', $this->pageURL, $matches)) {
             $this->keepUserLoggedIn($matches);
 
+// Terminate Account
+        } elseif (preg_match('<^/' . $langHandler . 'terminateAccount>', $this->pageURL, $matches)) {
+            $this->terminateAccount($matches);
+
 // Sitemap
         } elseif (preg_match('<^/' . $langHandler . 'sitemap\.xml$>', $this->pageURL, $matches)) {
             $this->sitemapXml($matches);
@@ -1065,6 +1069,14 @@ class Router
         $this->setLanguageFromUrl($matches);
 
         $command = new \DSI\Controller\KeepUserLoggedInController();
+        $command->exec();
+    }
+
+    private function terminateAccount($matches)
+    {
+        $this->setLanguageFromUrl($matches);
+
+        $command = new \DSI\Controller\TerminateAccountController();
         $command->exec();
     }
 

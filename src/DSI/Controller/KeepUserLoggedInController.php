@@ -6,7 +6,7 @@ use DSI\Service\Auth;
 use DSI\Service\URL;
 use DSI\UseCase\RememberPermanentLogin;
 
-class KeepUserLOggedInController
+class KeepUserLoggedInController
 {
     public function exec()
     {

@@ -158,7 +158,7 @@ require __DIR__ . '/header.php';
 
                         <?php if ($isOwner OR ($loggedInUser AND $loggedInUser->isSysAdmin())) { ?>
                             <a class="sidebar-link remove" href="#" ng-click="confirmDelete()">
-                                <span class="green">-&nbsp;</span><?php _ehtml('Delete project') ?>
+                                <span class="green">- </span><?php _ehtml('Delete project') ?>
                             </a>
                         <?php } ?>
                     <?php } ?>

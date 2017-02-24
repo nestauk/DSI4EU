@@ -11,8 +11,6 @@ if (!isset($urlHandler))
 
 require __DIR__ . '/header.php';
 ?>
-    <script type="text/javascript"
-            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/DashboardController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
     <div ng-controller="DashboardController"
          data-dashboardjsonurl="<?php echo $urlHandler->dashboard('json') ?>">
 
@@ -25,6 +23,8 @@ require __DIR__ . '/header.php';
                 </div>
                 <div class="sidebar w-col w-col-4 w-col-stack">
                     <?php require __DIR__ . '/partialViews/profile-menu.php' ?>
+                    <a class="sidebar-link remove" href="#" ng-click="terminateAccount()">
+                        <span class="green">- </span><?php _e('Terminate account') ?></a>
                 </div>
             </div>
         </div>
@@ -290,6 +290,21 @@ require __DIR__ . '/header.php';
         </div>
 
     </div>
+
+    <script>
+        var translate = new Translate();
+        <?php foreach([
+            'Are you sure you want to terminate your account?',
+            'Success!',
+            'An email will be sent to you to confirm your request.',
+            'Yes',
+        ] AS $translate) { ?>
+        translate.set('<?php echo show_input($translate)?>', '<?php _ehtml($translate)?>');
+        <?php } ?>
+    </script>
+
+    <script type="text/javascript"
+            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/DashboardController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 
     <script type="text/javascript">
         jQuery(function ($) {

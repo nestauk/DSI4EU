@@ -90,6 +90,13 @@ class ProjectPostRepository
         ]);
     }
 
+    public function getByUser(DSI\Entity\User $user)
+    {
+        return $this->getPostsWhere([
+            "`userID` = '" . $user->getId() . "'"
+        ]);
+    }
+
     public function getByProjectID(int $projectID)
     {
         return $this->getPostsWhere([

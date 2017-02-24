@@ -81,7 +81,7 @@ class ProjectEditMembersController
                 'code' => 'error',
                 'errors' => $e->getErrors(),
             ]);
-            return true;
+            return null;
         }
 
         if ($this->format == 'json') {

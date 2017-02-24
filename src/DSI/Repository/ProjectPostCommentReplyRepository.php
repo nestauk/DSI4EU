@@ -3,6 +3,7 @@
 namespace DSI\Repository;
 
 use DSI\Entity\ProjectPostCommentReply;
+use DSI\Entity\User;
 use DSI\NotFound;
 use DSI\Service\SQL;
 
@@ -33,7 +34,7 @@ class ProjectPostCommentReplyRepository
     {
         if (!$reply->getProjectPostComment())
             throw new \InvalidArgumentException();
-        if (!$reply->getUserId() OR !$reply->getUserId())
+        if (!$reply->getUserId())
             throw new \InvalidArgumentException();
         if ($reply->getComment() == '')
             throw new \InvalidArgumentException();
@@ -52,9 +53,20 @@ class ProjectPostCommentReplyRepository
         $query->query();
     }
 
+    public function remove(ProjectPostCommentReply $reply)
+    {
+        $query = new SQL("SELECT id FROM `project-post-comment-replies` WHERE id = '{$reply->getId()}' LIMIT 1");
+        $existingPost = $query->fetch();
+        if (!$existingPost)
+            throw new NotFound('commentID: ' . $reply->getId());
+
+        $query = new SQL("DELETE FROM `project-post-comment-replies` WHERE `id` = '{$reply->getId()}'");
+        $query->query();
+    }
+
     public function getById(int $id): ProjectPostCommentReply
     {
-        return $this->getReplyWhere([
+        return $this->getObjectWhere([
             "`id` = {$id}"
         ]);
     }
@@ -78,14 +90,21 @@ class ProjectPostCommentReplyRepository
 
     public function getAll()
     {
-        return $this->getRepliesWhere([
+        return $this->getObjectsWhere([
             "1"
+        ]);
+    }
+
+    public function getByUser(User $user)
+    {
+        return $this->getObjectsWhere([
+            "`userID` = '" . $user->getId() . "'"
         ]);
     }
 
     public function getByCommentID(int $commentID)
     {
-        return $this->getRepliesWhere([
+        return $this->getObjectsWhere([
             "`commentID` = '{$commentID}'"
         ]);
     }
@@ -96,16 +115,16 @@ class ProjectPostCommentReplyRepository
         $query->query();
     }
 
-    private function getReplyWhere($where)
+    private function getObjectWhere($where)
     {
-        $dbPost = $this->getRepliesWhere($where);
+        $dbPost = $this->getObjectsWhere($where);
         if (count($dbPost) < 1)
             throw new NotFound();
 
         return $dbPost[0];
     }
 
-    private function getRepliesWhere($where)
+    private function getObjectsWhere($where)
     {
         $replies = [];
         $query = new SQL("SELECT 
