@@ -332,6 +332,9 @@ class Router
         } elseif (preg_match('<^/' . $langHandler . 'profile/([a-zA-Z0-9\.]+)/details\.json$>', $this->pageURL, $matches)) {
             $this->userProfile($matches, 'json');
 
+        } elseif (preg_match('<^/' . $langHandler . 'profile/([a-zA-Z0-9\.]+)\.json$>', $this->pageURL, $matches)) {
+            $this->userProfile($matches, 'json');
+
         } elseif (preg_match('<^/' . $langHandler . 'profile/([a-zA-Z0-9\.]+)$>', $this->pageURL, $matches)) {
             $this->userProfile($matches);
 
@@ -670,8 +673,8 @@ class Router
         $this->setLanguageFromUrl($matches);
 
         $command = new \DSI\Controller\ProfileController();
-        $command->data()->format = $format;
-        $command->data()->userURL = $matches[3] ?? '';
+        $command->setFormat($format);
+        $command->setUserURL($matches[3] ?? '');
         $command->exec();
     }
 

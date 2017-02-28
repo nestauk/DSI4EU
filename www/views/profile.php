@@ -9,12 +9,11 @@ require __DIR__ . '/header.php';
 /** @var $userLinks string[] */
 /** @var $urlHandler \DSI\Service\URL */
 /** @var $canManageUsers bool */
+/** @var $askForPermanentLogin bool */
 ?>
-    <script type="text/javascript">
-        profileUserID = '<?php echo $userID?>';
-    </script>
-
-    <div ng-controller="UserController as ctrl" id="UserController">
+    <div ng-controller="UserController as ctrl" id="UserController"
+         data-askforpermanentlogin="<?= $askForPermanentLogin ?>"
+         data-profileuserid="<?= $userID ?>">
         <div class="content-block">
             <div class="w-row">
                 <div class="w-col w-col-8">
@@ -27,7 +26,7 @@ require __DIR__ . '/header.php';
                         <?php echo show_input($user->getCompany()) ?>
                     </div>
                     <p class="intro"><?php echo nl2br(show_input($user->getBio())) ?></p>
-                    <h3><?php _ehtml('Location')?></h3>
+                    <h3><?php _ehtml('Location') ?></h3>
                     <p>
                         <?php echo show_input($user->getCityName()) ?>
                         <?php if ($user->getCityName() != '' AND $user->getCountryName() != '') echo ', '; ?>
@@ -41,9 +40,9 @@ require __DIR__ . '/header.php';
                         <h1 class="content-h1 side-bar-space-h1">Actions</h1>
                         <?php if ($canManageUsers) { ?>
                             <a class="sidebar-link" href="<?php echo $urlHandler->editUserProfile($user) ?>">
-                                <span class="green">-&nbsp;</span><?php _ehtml('Edit Profile')?></a>
+                                <span class="green">-&nbsp;</span><?php _ehtml('Edit Profile') ?></a>
                             <a class="sidebar-link" href="<?php echo $urlHandler->editUserPrivileges($user) ?>">
-                                <span class="green">-&nbsp;</span><?php _ehtml('Edit privileges')?></a>
+                                <span class="green">-&nbsp;</span><?php _ehtml('Edit privileges') ?></a>
                             <?php if ($user->isDisabled()) { ?>
                                 <a class="sidebar-link remove" href="#" ng-click="setDisabled(false)">
                                     <span class="green">- </span>Enable user</a>
@@ -53,7 +52,7 @@ require __DIR__ . '/header.php';
                             <?php } ?>
                         <?php } ?>
                         <a class="sidebar-link remove" href="#" ng-click="report()">
-                            <span class="green">- </span><?php _ehtml('Report user')?></a>
+                            <span class="green">- </span><?php _ehtml('Report user') ?></a>
                     <?php } ?>
                 </div>
             </div>
@@ -65,12 +64,12 @@ require __DIR__ . '/header.php';
                     <div class="w-col w-col-4 w-col-stack">
                         <div class="info-card">
                             <?php if ($userLinks) { ?>
-                                <h3 class="card-h info-h"><?php _ehtml('Contact me')?></h3>
+                                <h3 class="card-h info-h"><?php _ehtml('Contact me') ?></h3>
                                 <ul class="w-list-unstyled">
                                     <?php foreach ($userLinks AS $link) { ?>
                                         <li class="profile-contact-link">
                                             <a <?php if (!$user->isCommunityAdmin() AND !$user->isEditorialAdmin()) echo 'rel="nofollow"' ?>
-                                                class="link profile-contact-link" href="<?php echo $link ?>">
+                                                    class="link profile-contact-link" href="<?php echo $link ?>">
                                                 <?php echo show_input($link) ?>
                                             </a>
                                         </li>
@@ -78,7 +77,7 @@ require __DIR__ . '/header.php';
                                 </ul>
                             <?php } ?>
                             <div ng-show="skills" ng-cloak>
-                                <h3 class="card-h info-h"><?php _ehtml('My skills')?>:</h3>
+                                <h3 class="card-h info-h"><?php _ehtml('My skills') ?>:</h3>
                                 <div class="tags-block">
                                     <div class="tag" ng-repeat="skill in skills">
                                         <div ng-bind="skill"></div>
@@ -89,7 +88,7 @@ require __DIR__ . '/header.php';
                     </div>
                     <div class="w-col w-col-4 w-col-stack">
                         <div class="info-card">
-                            <h3 class="card-h info-h"><?php _ehtml("Projects i'm involved with")?></h3>
+                            <h3 class="card-h info-h"><?php _ehtml("Projects i'm involved with") ?></h3>
                             <div class="list-items">
                                 <a class="partner-link w-inline-block" href="{{project.url}}"
                                    ng-repeat="project in user.projects" ng-cloak>
@@ -98,7 +97,7 @@ require __DIR__ . '/header.php';
                                         <div class="no-of-projects">
                                             <span ng-bind="project.membersCount"></span>
                                             <span
-                                                ng-bind="project.membersCount == 1 ? 'Contributor' : 'Contributors'"></span>
+                                                    ng-bind="project.membersCount == 1 ? 'Contributor' : 'Contributors'"></span>
                                         </div>
                                     </div>
                                 </a>
@@ -107,7 +106,7 @@ require __DIR__ . '/header.php';
                                 <div class="join-project">
                                     <a class="btn btn-join w-button" <?php /* data-ix="show-join-project" */ ?>
                                        href="<?php echo $urlHandler->editUserProfile($loggedInUser) ?>#step3">
-                                        <?php _ehtml('Add new project')?> +
+                                        <?php _ehtml('Add new project') ?> +
                                     </a>
                                 </div>
                             <?php } ?>
@@ -115,7 +114,7 @@ require __DIR__ . '/header.php';
                     </div>
                     <div class="w-col w-col-4 w-col-stack">
                         <div class="info-card">
-                            <h3 class="card-h3"><?php _ehtml("Organisations i'm involved with")?></h3>
+                            <h3 class="card-h3"><?php _ehtml("Organisations i'm involved with") ?></h3>
                             <div class="list-items">
                                 <a class="partner-link w-inline-block" href="{{organisation.url}}"
                                    ng-repeat="organisation in user.organisations" ng-cloak>
@@ -124,7 +123,7 @@ require __DIR__ . '/header.php';
                                         <div class="no-of-projects">
                                             <span ng-bind="organisation.membersCount"></span>
                                             <span
-                                                ng-bind="organisation.membersCount == 1 ? 'Project' : 'Projects'"></span>
+                                                    ng-bind="organisation.membersCount == 1 ? 'Project' : 'Projects'"></span>
                                         </div>
                                     </div>
                                 </a>
@@ -133,7 +132,7 @@ require __DIR__ . '/header.php';
                                 <div class="join-project">
                                     <a class="btn btn-join w-button" <?php /* data-ix="show-join-organisation" */ ?>
                                        href="<?php echo $urlHandler->editUserProfile($loggedInUser) ?>#step3">
-                                        <?php _ehtml('Join Organisation')?> +
+                                        <?php _ehtml('Join Organisation') ?> +
                                     </a>
                                 </div>
                             <?php } ?>

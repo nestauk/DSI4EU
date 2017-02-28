@@ -59,6 +59,11 @@ class URL
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'profile/' . $user->getId();
     }
 
+    public function confirmPermanentLogin(User $user)
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'profile/' . $user->getId() . '?src=login';
+    }
+
     public function home()
     {
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage();

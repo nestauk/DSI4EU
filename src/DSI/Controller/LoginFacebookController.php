@@ -35,7 +35,7 @@ class LoginFacebookController
                     $facebookLogin->data()->facebookUID = $user->getId();
                     $facebookLogin->exec();
                     $authUser->saveUserInSession($facebookLogin->getUser());
-                    go_to($urlHandler->profile($facebookLogin->getUser()));
+                    go_to($urlHandler->confirmPermanentLogin($facebookLogin->getUser()));
                 } else {
                     $facebookLogin = new FacebookRegister();
                     $facebookLogin->data()->facebookUID = $user->getId();

@@ -1,6 +1,9 @@
 angular
     .module(angularAppName)
-    .controller('UserController', function ($scope, $http, $timeout, Upload) {
+    .controller('UserController', function ($scope, $http, $attrs, Upload) {
+        var profileUserID = $attrs.profileuserid;
+        var askForPermanentLogin = $attrs.askforpermanentlogin;
+
         $scope.getUrlIcon = function (url) {
             switch (Helpers.getUrlType(url)) {
                 case 'facebook':
@@ -16,6 +19,42 @@ angular
             }
         };
 
+        if (askForPermanentLogin) {
+            swal({
+                title: "Welcome back",
+                text: "Would you like to remember you next time when you visit the website?",
+                type: "info",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                closeOnCancel: false,
+                showLoaderOnConfirm: true,
+                confirmButtonText: "Yes",
+                cancelButtonText: "No"
+            }, function (confirm) {
+                if (confirm) {
+                    $http.post(window.location.pathname + '.json', {
+                        permanentLogin: true
+                    }).then(function (response) {
+                        $scope.joinProject.loading = false;
+                        if (response.data.code == 'ok') {
+                            swal({
+                                title: "Success",
+                                text: "You will automaticaly be logged in next time when you visit the site.",
+                                type: "success"
+                            }, function () {
+                                window.location.href = window.location.pathname;
+                            });
+                        } else {
+                            alert('unexpected error');
+                            console.log(response);
+                        }
+                    });
+                } else {
+                    window.location.href = window.location.pathname;
+                }
+            });
+        }
+
         // joinProject
         (function () {
             $scope.joinProject = {};
@@ -24,22 +63,20 @@ angular
                 $scope.joinProject.loading = true;
                 $scope.joinProject.errors = {};
 
-                $timeout(function () {
-                    $http.post(SITE_RELATIVE_PATH + '/profile/' + profileUserID + '/details.json', {
-                        joinProject: true,
-                        project: $scope.joinProject.data.project
-                    }).then(function (response) {
-                        $scope.joinProject.loading = false;
-                        if (response.data.code == 'ok') {
-                            $scope.joinProject.success = true;
-                        } else if (response.data.code == 'error') {
-                            $scope.joinProject.errors = response.data.errors;
-                        } else {
-                            alert('unexpected error');
-                            console.log(response);
-                        }
-                    });
-                }, 500);
+                $http.post(SITE_RELATIVE_PATH + '/profile/' + profileUserID + '/details.json', {
+                    joinProject: true,
+                    project: $scope.joinProject.data.project
+                }).then(function (response) {
+                    $scope.joinProject.loading = false;
+                    if (response.data.code == 'ok') {
+                        $scope.joinProject.success = true;
+                    } else if (response.data.code == 'error') {
+                        $scope.joinProject.errors = response.data.errors;
+                    } else {
+                        alert('unexpected error');
+                        console.log(response);
+                    }
+                });
             };
         }());
         // joinOrganisation
@@ -50,22 +87,20 @@ angular
                 $scope.joinOrganisation.loading = true;
                 $scope.joinOrganisation.errors = {};
 
-                $timeout(function () {
-                    $http.post(SITE_RELATIVE_PATH + '/profile/' + profileUserID + '/details.json', {
-                        joinOrganisation: true,
-                        organisation: $scope.joinOrganisation.data.organisation
-                    }).then(function (response) {
-                        $scope.joinOrganisation.loading = false;
-                        if (response.data.code == 'ok') {
-                            $scope.joinOrganisation.success = true;
-                        } else if (response.data.code == 'error') {
-                            $scope.joinOrganisation.errors = response.data.errors;
-                        } else {
-                            alert('unexpected error');
-                            console.log(response);
-                        }
-                    });
-                }, 500);
+                $http.post(SITE_RELATIVE_PATH + '/profile/' + profileUserID + '/details.json', {
+                    joinOrganisation: true,
+                    organisation: $scope.joinOrganisation.data.organisation
+                }).then(function (response) {
+                    $scope.joinOrganisation.loading = false;
+                    if (response.data.code == 'ok') {
+                        $scope.joinOrganisation.success = true;
+                    } else if (response.data.code == 'error') {
+                        $scope.joinOrganisation.errors = response.data.errors;
+                    } else {
+                        alert('unexpected error');
+                        console.log(response);
+                    }
+                });
             };
         }());
 

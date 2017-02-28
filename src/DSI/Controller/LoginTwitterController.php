@@ -52,7 +52,7 @@ class LoginTwitterController
                 $twitterLogin->data()->twitterUID = $user->uid;
                 $twitterLogin->exec();
                 $authUser->saveUserInSession($twitterLogin->getUser());
-                go_to($urlHandler->profile($twitterLogin->getUser()));
+                go_to($urlHandler->confirmPermanentLogin($twitterLogin->getUser()));
             } else {
                 $twitterLogin = new TwitterRegister();
                 $twitterLogin->data()->twitterUID = $user->uid;

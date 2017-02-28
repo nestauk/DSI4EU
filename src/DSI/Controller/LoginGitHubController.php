@@ -50,7 +50,7 @@ class LoginGitHubController
                     $gitHubLogin->data()->gitHubUID = $user->getId();
                     $gitHubLogin->exec();
                     $authUser->saveUserInSession($gitHubLogin->getUser());
-                    go_to($urlHandler->profile($gitHubLogin->getUser()));
+                    go_to($urlHandler->confirmPermanentLogin($gitHubLogin->getUser()));
                 } else {
                     $name = explode(' ', $user->getName());
                     $lastName = array_pop($name);

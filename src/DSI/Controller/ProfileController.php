@@ -22,6 +22,7 @@ use DSI\UseCase\AddLinkToUser;
 use DSI\UseCase\AddMemberRequestToOrganisation;
 use DSI\UseCase\AddMemberRequestToProject;
 use DSI\UseCase\AddSkillToUser;
+use DSI\UseCase\RememberPermanentLogin;
 use DSI\UseCase\RemoveLanguageFromUser;
 use DSI\UseCase\RemoveLinkFromUser;
 use DSI\UseCase\RemoveSkillFromUser;
@@ -34,13 +35,9 @@ use DSI\UseCase\Users\EnableUser;
 
 class ProfileController
 {
-    /** @var ProfileController_Data */
-    private $data;
-
-    public function __construct()
-    {
-        $this->data = new ProfileController_Data();
-    }
+    /** @var string */
+    private $userURL,
+        $format;
 
     public function exec()
     {
@@ -49,34 +46,28 @@ class ProfileController
         $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
         $loggedInUser = $authUser->getUser();
 
-        if (!$this->data()->userURL)
+        if (!$this->userURL)
             go_to($urlHandler->profile($loggedInUser));
 
-        $user = $this->getUserFromURL($this->data()->userURL);
+        $user = $this->getUserFromURL($this->userURL);
 
-        if (isset($_POST['getSecureCode'])) {
-            $this->getSecureCode();
-            return;
-        }
+        if (isset($_POST['getSecureCode']))
+            return $this->getSecureCode();
 
         $canManageUsers = $this->canManageUsers($loggedInUser);
+        $askForPermanentLogin = $this->askForPermanentLogin();
 
-        if ($canManageUsers) {
-            if (isset($_POST['setUserDisabled'])) {
-                $this->setUserStatus($loggedInUser, $user, $urlHandler);
-                return;
-            }
-        }
+        if ($canManageUsers)
+            if (isset($_POST['setUserDisabled']))
+                return $this->setUserStatus($loggedInUser, $user, $urlHandler);
 
-        if (isset($_POST['report'])) {
-            $this->reportUser($loggedInUser, $user, $urlHandler);
-            return;
-        }
+        if (isset($_POST['report']))
+            return $this->reportUser($loggedInUser, $user, $urlHandler);
 
         $userID = $user->getId();
         $isOwner = ($user->getId() == $loggedInUser->getId());
 
-        if ($this->data()->format == 'json') {
+        if ($this->format == 'json') {
             $userSkillRepo = new UserSkillRepository();
             $userLangRepo = new UserLanguageRepository();
             $userLinkRepo = new UserLinkRepository();
@@ -85,49 +76,51 @@ class ProfileController
 
             if ($isOwner) {
                 try {
-                    if (isset($_POST['addSkill'])) {
+                    if (isset($_POST['permanentLogin'])) {
+                        return $this->permanentLogin($loggedInUser);
+                    } elseif (isset($_POST['addSkill'])) {
                         $addSkillToUser = new AddSkillToUser();
                         $addSkillToUser->data()->userID = $user->getId();
                         $addSkillToUser->data()->skill = $_POST['addSkill'];
                         $addSkillToUser->exec();
-                        return;
+                        return null;
                     } elseif (isset($_POST['removeSkill'])) {
                         $removeSkillFromUser = new RemoveSkillFromUser();
                         $removeSkillFromUser->data()->userID = $user->getId();
                         $removeSkillFromUser->data()->skill = $_POST['removeSkill'];
                         $removeSkillFromUser->exec();
-                        return;
+                        return null;
                     } elseif (isset($_POST['addLanguage'])) {
                         $addSkillToUser = new AddLanguageToUser();
                         $addSkillToUser->data()->userID = $user->getId();
                         $addSkillToUser->data()->language = $_POST['addLanguage'];
                         $addSkillToUser->exec();
-                        return;
+                        return null;
                     } elseif (isset($_POST['removeLanguage'])) {
                         $removeLanguageFromUser = new RemoveLanguageFromUser();
                         $removeLanguageFromUser->data()->userID = $user->getId();
                         $removeLanguageFromUser->data()->language = $_POST['removeLanguage'];
                         $removeLanguageFromUser->exec();
-                        return;
+                        return null;
                     } elseif (isset($_POST['updateBio'])) {
                         $updateUserBio = new UpdateUserBio();
                         $updateUserBio->data()->userID = $user->getId();
                         $updateUserBio->data()->bio = $_POST['bio'] ?? '';
                         $updateUserBio->exec();
                         echo json_encode(['code' => 'ok']);
-                        return;
+                        return null;
                     } elseif (isset($_POST['addLink'])) {
                         $addLinkToUser = new AddLinkToUser();
                         $addLinkToUser->data()->userID = $user->getId();
                         $addLinkToUser->data()->link = $_POST['addLink'];
                         $addLinkToUser->exec();
-                        return;
+                        return null;
                     } elseif (isset($_POST['removeLink'])) {
                         $removeLinkFromUser = new RemoveLinkFromUser();
                         $removeLinkFromUser->data()->userID = $user->getId();
                         $removeLinkFromUser->data()->link = $_POST['removeLink'];
                         $removeLinkFromUser->exec();
-                        return;
+                        return null;
                     } elseif (isset($_POST['updateBasicDetails'])) {
                         $updateUserBasicDetails = new UpdateUserBasicDetails();
                         $updateUserBasicDetails->data()->userID = $user->getId();
@@ -137,28 +130,28 @@ class ProfileController
                         $updateUserBasicDetails->data()->jobTitle = $_POST['jobTitle'] ?? '';
                         $updateUserBasicDetails->exec();
                         echo json_encode(['code' => 'ok']);
-                        return;
+                        return null;
                     } elseif (isset($_POST['joinProject'])) {
                         $joinProject = new AddMemberRequestToProject();
                         $joinProject->data()->projectID = $_POST['project'];
                         $joinProject->data()->userID = $loggedInUser->getId();
                         $joinProject->exec();
                         echo json_encode(['code' => 'ok']);
-                        return;
+                        return null;
                     } elseif (isset($_POST['joinOrganisation'])) {
                         $joinOrganisation = new AddMemberRequestToOrganisation();
                         $joinOrganisation->data()->organisationID = $_POST['organisation'];
                         $joinOrganisation->data()->userID = $loggedInUser->getId();
                         $joinOrganisation->exec();
                         echo json_encode(['code' => 'ok']);
-                        return;
+                        return null;
                     }
                 } catch (ErrorHandler $e) {
                     echo json_encode([
                         'code' => 'error',
                         'errors' => $e->getErrors()
                     ]);
-                    return;
+                    return null;
                 }
             }
 
@@ -198,11 +191,8 @@ class ProfileController
             $angularModules['fileUpload'] = true;
             require __DIR__ . '/../../../www/views/profile.php';
         }
-    }
 
-    public function data()
-    {
-        return $this->data;
+        return null;
     }
 
     /**
@@ -228,12 +218,14 @@ class ProfileController
             'code' => 'ok',
             'secureCode' => $genSecureCode->getCode(),
         ]);
+        return null;
     }
 
     /**
      * @param User $loggedInUser
      * @param User $user
      * @param URL $urlHandler
+     * @return null
      */
     private function setUserStatus(User $loggedInUser, User $user, URL $urlHandler)
     {
@@ -253,21 +245,22 @@ class ProfileController
                     'code' => 'ok',
                     'url' => $urlHandler->profile($user)
                 ]);
-                return;
             } catch (ErrorHandler $e) {
                 echo json_encode([
                     'code' => 'error',
                     'errors' => $e->getErrors()
                 ]);
-                return;
             }
         }
+
+        return null;
     }
 
     /**
      * @param User $loggedInUser
      * @param User $user
      * @param URL $urlHandler
+     * @return null
      */
     private function reportUser(User $loggedInUser, User $user, URL $urlHandler)
     {
@@ -300,15 +293,15 @@ class ProfileController
                 echo json_encode([
                     'code' => 'ok'
                 ]);
-                return;
             } catch (ErrorHandler $e) {
                 echo json_encode([
                     'code' => 'error',
                     'errors' => $e->getErrors()
                 ]);
-                return;
             }
         }
+
+        return null;
     }
 
     /**
@@ -319,10 +312,52 @@ class ProfileController
     {
         return (bool)$loggedInUser->isCommunityAdmin();
     }
-}
 
-class ProfileController_Data
-{
-    public $userURL,
-        $format = 'html';
+    /**
+     * @return bool
+     */
+    public function askForPermanentLogin()
+    {
+        return (isset($_GET['src']) AND $_GET['src'] == 'login');
+    }
+
+    /**
+     * @param string $userURL
+     */
+    public function setUserURL(string $userURL)
+    {
+        $this->userURL = $userURL;
+    }
+
+    /**
+     * @param string $format
+     */
+    public function setFormat(string $format)
+    {
+        $this->format = $format;
+    }
+
+    /**
+     * @param $user
+     * @return null
+     */
+    public function permanentLogin($user)
+    {
+        try {
+            $exec = new RememberPermanentLogin();
+            $exec->setUser($user);
+            $exec->exec();
+
+            echo json_encode([
+                'code' => 'ok'
+            ]);
+        } catch (ErrorHandler $e) {
+            echo json_encode([
+                'code' => 'error',
+                'errors' => $e->getErrors()
+            ]);
+        }
+
+        return null;
+    }
 }
