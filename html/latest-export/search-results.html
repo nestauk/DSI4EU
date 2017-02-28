@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<!--  Last Published: Tue Nov 22 2016 10:39:24 GMT+0000 (UTC)  -->
+<!--  Last Published: Tue Feb 28 2017 11:42:57 GMT+0000 (UTC)  -->
 <html data-wf-page="5805e0af762f5ec6678e0954" data-wf-site="5805e0af762f5ec6678e0842">
 <head>
   <meta charset="utf-8">
   <title>search results</title>
   <meta content="search results" property="og:title">
   <meta content="width=device-width, initial-scale=1" name="viewport">
-  <link href="latest-export/css/normalize.css" rel="stylesheet" type="text/css">
-  <link href="latest-export/css/components.css" rel="stylesheet" type="text/css">
-  <link href="latest-export/css/dsi-languages.css" rel="stylesheet" type="text/css">
+  <link href="css/normalize.css" rel="stylesheet" type="text/css">
+  <link href="css/components.css" rel="stylesheet" type="text/css">
+  <link href="css/dsi-languages.css" rel="stylesheet" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
   <script type="text/javascript">
     WebFont.load({
@@ -17,9 +17,9 @@
       }
     });
   </script>
-  <script src="latest-export/js/modernizr.js" type="text/javascript"></script>
-  <link href="latest-export/images/32x32.png" rel="shortcut icon" type="image/x-icon">
-  <link href="latest-export/images/256x256.png" rel="apple-touch-icon">
+  <script src="js/modernizr.js" type="text/javascript"></script>
+  <link href="images/32x32.png" rel="shortcut icon" type="image/x-icon">
+  <link href="images/256x256.png" rel="apple-touch-icon">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   <style>
     .w-nav-button.w--open {
@@ -81,37 +81,34 @@
 </head>
 <body>
   <div class="navbarnu w-nav" data-animation="over-left" data-collapse="all" data-duration="400">
-    <a class="w-nav-brand" href="index.html"><img class="brand-logo" src="latest-export/images/dark.svg">
-    </a>
-    <a class="m-brand w-nav-brand" href="index.html"><img class="brand-logo m-brand" src="latest-export/images/shadowlight.png">
-    </a>
-    <div class="menu-button w-nav-button" data-ix="navbarinteraction">
-      <div class="top-line"></div>
-      <div class="middle-line"></div>
-      <div class="bottom-line"></div>
-      <div class="menu-li">Menu</div>
-    </div>
-    <a class="ll log-in-link w-clearfix w-inline-block" data-ix="log-in-arrow" href="#">
-      <div class="login-li menu-li">login</div><img class="login-arrow" src="latest-export/images/ios7-arrow-thin-right.png">
-    </a>
-    <div class="create ll log-in-link w-clearfix" data-ix="create-dropdown">
-      <div class="login-li menu-li">Create</div><img class="login-arrow" src="latest-export/images/ios7-plus-empty.png">
-      <div class="create-drop-down-block"><a class="drop-down-link-li" href="#">Create Project</a><a class="drop-down-link-li" href="#">Create organisation</a>
+    <div class="menu-div w-clearfix">
+      <a class="w-nav-brand" href="index.html"><img class="brand-logo" src="images/dark.svg">
+      </a>
+      <a class="m-brand w-nav-brand" href="index.html"><img class="brand-logo m-brand" src="images/shadowlight.png">
+      </a>
+      <div class="menu-button w-nav-button" data-ix="navbarinteraction">
+        <div class="top-line"></div>
+        <div class="middle-line"></div>
+        <div class="bottom-line"></div>
+        <div class="menu-li">Menu</div>
       </div>
-    </div>
-    <a class="log-in-link menu-search w-clearfix w-inline-block" data-ix="search-roll" href="#">
-      <div class="menu-li menu-search">Search</div><img class="search-icon" src="latest-export/images/ios7-search.png">
-    </a>
-    <div class="languages w-clearfix">
-      <a class="language log-in-link w-inline-block" href="http://dsi-fr.webflow.io/">
-        <div class="language menu-li menu-search">Fr</div>
+      <a class="ll log-in-link w-clearfix w-inline-block" data-ix="log-in-arrow" href="#">
+        <div class="login-li menu-li">login</div><img class="login-arrow" src="images/ios7-arrow-thin-right.png">
       </a>
-      <a class="language log-in-link w-inline-block" href="http://dsi-de.webflow.io/">
-        <div class="language menu-li menu-search">De</div>
+      <div class="create ll log-in-link w-clearfix" data-ix="create-dropdown">
+        <div class="login-li menu-li">Create</div><img class="login-arrow" src="images/ios7-plus-empty.png">
+        <div class="create-drop-down-block"><a class="drop-down-link-li" href="#">Create Project</a><a class="drop-down-link-li" href="#">Create organisation</a>
+        </div>
+      </div>
+      <a class="log-in-link menu-search w-clearfix w-inline-block" data-ix="search-roll" href="#">
+        <div class="menu-li menu-search">Search</div><img class="search-icon" src="images/ios7-search.png">
       </a>
-      <a class="active language log-in-link w-inline-block" href="http://dsi-languages.webflow.io/">
-        <div class="language menu-li menu-search">en</div>
-      </a>
+      <div class="languages w-clearfix">
+        <div class="active language log-in-link" data-ix="create-dropdown"><img class="language-icon" src="images/ios7-world-outline.png">
+          <div class="create-drop-down-block language-selctor"><a class="drop-down-link-li" href="#">English</a><a class="drop-down-link-li" href="#">French</a><a class="drop-down-link-li" href="#">German</a><a class="drop-down-link-li" href="#">Italian</a><a class="drop-down-link-li" href="#">Spanish</a><a class="drop-down-link-li" href="#">Catalan</a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <div class="menu-full-screen" data-ix="displaynone">
@@ -224,7 +221,7 @@
     </div>
     <div class="signn">
       <a class="large log-in-link search-results sign-up w-clearfix w-inline-block" data-ix="log-in-arrow" href="#">
-        <div class="login-li menu-li">See all results</div><img class="login-arrow" src="latest-export/images/ios7-arrow-thin-right.png">
+        <div class="login-li menu-li">See all results</div><img class="login-arrow" src="images/ios7-arrow-thin-right.png">
       </a>
     </div>
   </div>
@@ -256,78 +253,80 @@
     </div>
   </div>
   <div class="footer-black">
-    <div class="footer-row w-row">
-      <div class="w-col w-col-4">
-        <a class="w-inline-block" href="index.html"><img class="footer-logo" src="latest-export/images/light.svg">
-        </a>
+    <div class="footer-div">
+      <div class="footer-row w-row">
+        <div class="w-col w-col-4">
+          <a class="w-inline-block" href="index.html"><img class="footer-logo" src="images/light.svg">
+          </a>
+        </div>
+        <div class="w-col w-col-2">
+          <h3 class="footer-h3">People</h3>
+          <ul class="w-list-unstyled">
+            <li class="footer-link"><a class="footer-link" href="#">Join DSI4EU</a>
+            </li>
+            <li class="footer-link"><a class="footer-link" href="#">Terms of use</a>
+            </li>
+            <li class="footer-link"><a class="footer-link" href="#">Privacy policy</a>
+            </li>
+          </ul>
+        </div>
+        <div class="w-col w-col-2">
+          <h3 class="footer-h3">Projects</h3>
+          <ul class="w-list-unstyled">
+            <li class="footer-link"><a class="footer-link" href="#">View projects</a>
+            </li>
+          </ul>
+        </div>
+        <div class="w-col w-col-2">
+          <h3 class="footer-h3">Organisations</h3>
+          <ul class="w-list-unstyled">
+            <li class="footer-link"><a class="footer-link" href="#">View organisations</a>
+            </li>
+          </ul>
+        </div>
+        <div class="w-col w-col-2">
+          <h3 class="footer-h3">Development</h3>
+          <ul class="w-list-unstyled">
+            <li class="footer-link"><a class="footer-link" href="#">Updates</a>
+            </li>
+            <li class="footer-link"><a class="footer-link" href="#">Feedback</a>
+            </li>
+          </ul>
+        </div>
       </div>
-      <div class="w-col w-col-2">
-        <h3 class="footer-h3">People</h3>
-        <ul class="w-list-unstyled">
-          <li class="footer-link"><a class="footer-link" href="#">Join DSI4EU</a>
-          </li>
-          <li class="footer-link"><a class="footer-link" href="#">Terms of use</a>
-          </li>
-          <li class="footer-link"><a class="footer-link" href="#">Privacy policy</a>
-          </li>
-        </ul>
-      </div>
-      <div class="w-col w-col-2">
-        <h3 class="footer-h3">Projects</h3>
-        <ul class="w-list-unstyled">
-          <li class="footer-link"><a class="footer-link" href="#">View projects</a>
-          </li>
-        </ul>
-      </div>
-      <div class="w-col w-col-2">
-        <h3 class="footer-h3">Organisations</h3>
-        <ul class="w-list-unstyled">
-          <li class="footer-link"><a class="footer-link" href="#">View organisations</a>
-          </li>
-        </ul>
-      </div>
-      <div class="w-col w-col-2">
-        <h3 class="footer-h3">Development</h3>
-        <ul class="w-list-unstyled">
-          <li class="footer-link"><a class="footer-link" href="#">Updates</a>
-          </li>
-          <li class="footer-link"><a class="footer-link" href="#">Feedback</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-row-bottom w-row">
-      <div class="w-col w-col-8">
-        <div>
-          <div class="w-row">
-            <div class="w-clearfix w-col w-col-1 w-col-medium-6 w-col-small-6 w-col-tiny-6"><img class="footer-eu" src="latest-export/images/5000100-mono.png">
+      <div class="footer-row-bottom w-row">
+        <div class="w-col w-col-8">
+          <div>
+            <div class="w-row">
+              <div class="w-clearfix w-col w-col-1 w-col-medium-6 w-col-small-6 w-col-tiny-6"><img class="footer-eu" src="images/5000100-mono.png">
+              </div>
+              <div class="w-col w-col-11 w-col-medium-6 w-col-small-6 w-col-tiny-6">
+                <div class="footer-small-print">DSI4EU is funded by the European Union</div>
+              </div>
             </div>
-            <div class="w-col w-col-11 w-col-medium-6 w-col-small-6 w-col-tiny-6">
-              <div class="footer-small-print">DSI4EU is funded by the European Union</div>
-            </div>
-          </div>
-          <div class="w-row">
-            <div class="w-clearfix w-col w-col-1 w-col-medium-6 w-col-small-6 w-col-tiny-6"><img class="cc footer-eu" src="latest-export/images/88x31.png">
-            </div>
-            <div class="w-col w-col-11 w-col-medium-6 w-col-small-6 w-col-tiny-6">
-              <div class="footer-small-print">All our work is licensed under a&nbsp;<span class="footer-link-small"></span><span class="footer-link-small"><span xmlns="http://www.w3.org/1999/xhtml">&nbsp;<a class="footer-link-small" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a></span>&nbsp;</span><span>, unless</span> it says otherwise.</div>
+            <div class="w-row">
+              <div class="w-clearfix w-col w-col-1 w-col-medium-6 w-col-small-6 w-col-tiny-6"><img class="cc footer-eu" src="images/88x31.png">
+              </div>
+              <div class="w-col w-col-11 w-col-medium-6 w-col-small-6 w-col-tiny-6">
+                <div class="footer-small-print">All our work is licensed under a&nbsp;<span class="footer-link-small"></span><span class="footer-link-small"><span xmlns="http://www.w3.org/1999/xhtml">&nbsp;<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" class="footer-link-small">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a></span>&nbsp;</span><span>, unless</span> it says otherwise.</div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="w-col w-col-4">
-        <div class="w-row">
-          <div class="footer-logo-col w-clearfix w-col w-col-4">
-            <a class="footer-partner-link w-inline-block" href="http://nesta.org.uk" target="_blank"><img class="footer-partner-logo nesta" src="latest-export/images/nesta-6a9b5fe999e8323b379ccc0d8e70290f.png">
-            </a>
-          </div>
-          <div class="footer-logo-col w-clearfix w-col w-col-4">
-            <a class="footer-partner-link w-inline-block" href="http://waag.org" target="_blank"><img class="footer-partner-logo" src="latest-export/images/waag-f1d052f43133268eaf2e13090a0b4bf1.png">
-            </a>
-          </div>
-          <div class="footer-logo-col w-clearfix w-col w-col-4">
-            <a class="footer-partner-link w-inline-block" href="#" target="_blank"><img class="footer-partner-logo" src="latest-export/images/logo_SUPSI.png">
-            </a>
+        <div class="w-col w-col-4">
+          <div class="w-row">
+            <div class="footer-logo-col w-clearfix w-col w-col-4">
+              <a class="footer-partner-link w-inline-block" href="http://nesta.org.uk" target="_blank"><img class="footer-partner-logo nesta" src="images/nesta-6a9b5fe999e8323b379ccc0d8e70290f.png">
+              </a>
+            </div>
+            <div class="footer-logo-col w-clearfix w-col w-col-4">
+              <a class="footer-partner-link w-inline-block" href="http://waag.org" target="_blank"><img class="footer-partner-logo" src="images/waag-f1d052f43133268eaf2e13090a0b4bf1.png">
+              </a>
+            </div>
+            <div class="footer-logo-col w-clearfix w-col w-col-4">
+              <a class="footer-partner-link w-inline-block" href="#" target="_blank"><img class="footer-partner-logo" src="images/logo_SUPSI.png">
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -335,7 +334,7 @@
     <div class="centre footer-small-print">Nesta is a registered charity in England and Wales 1144091 and Scotland SC042833. Our main address is 1 Plough Place, London, EC4A 1DE</div>
   </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js" type="text/javascript"></script>
-  <script src="latest-export/js/dsi-languages.js" type="text/javascript"></script>
+  <script src="js/dsi-languages.js" type="text/javascript"></script>
   <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
 </body>
 </html>
