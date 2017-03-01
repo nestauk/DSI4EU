@@ -12,12 +12,12 @@ class FundingTypeRepository
 
     public function __construct()
     {
-        $this->createFundingType(1, "Grant Funding");
-        $this->createFundingType(2, "Investment / Social Investment");
-        $this->createFundingType(3, "Incubators and Accelerators (with funding)");
-        $this->createFundingType(4, "Non-financial support");
-        $this->createFundingType(5, "Working spaces");
-        $this->createFundingType(6, "Networking opportunities");
+        $this->createFundingType(1, "Grant Funding", 'rgba(115, 23, 214, 0.96)');
+        $this->createFundingType(2, "Investment / Social Investment", '#ffb800');
+        $this->createFundingType(3, "Incubators and Accelerators (with funding)", '#18233f');
+        $this->createFundingType(4, "Non-financial support", '#dd3ea4');
+        $this->createFundingType(5, "Working spaces", '#33d6ff');
+        $this->createFundingType(6, "Networking opportunities", '#1dc9a0');
     }
 
     public function getById(int $id)
@@ -36,14 +36,16 @@ class FundingTypeRepository
     }
 
     /**
-     * @param $id
-     * @param $title
+     * @param int $id
+     * @param string $title
+     * @param string $color
      */
-    private function createFundingType($id, $title)
+    private function createFundingType(int $id, string $title, string $color)
     {
         $fundingType = new FundingType();
         $fundingType->setId($id);
         $fundingType->setTitle($title);
+        $fundingType->setColor($color);
         $this->objects[] = $fundingType;
     }
 }

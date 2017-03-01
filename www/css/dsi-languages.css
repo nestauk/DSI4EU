@@ -488,7 +488,7 @@ strong {
   min-height: auto;
   margin-bottom: 20px;
   padding-top: 10px;
-  padding-right: 0px;
+  padding-right: 10px;
   padding-bottom: 20px;
   border: 0px none #e2e2e2;
   border-radius: 0px;
@@ -1722,7 +1722,7 @@ strong {
   max-width: 1290px;
   margin-right: auto;
   margin-left: auto;
-  padding-bottom: 70px;
+  padding-bottom: 0px;
 }
 
 .container-wide.nav-container {
@@ -5806,7 +5806,7 @@ strong {
 }
 
 .funding-card-h2 {
-  margin-top: 0px;
+  margin-top: 20px;
   margin-bottom: 0px;
   padding: 20px 20px 10px;
   border-bottom: 1px none #f3f3f3;
@@ -5853,12 +5853,39 @@ strong {
 }
 
 .funding-country.funding-new {
+  position: relative;
   top: 0px;
   right: 0px;
-  background-color: #ffb800;
+  margin-left: 4px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  float: right;
+  border: 1px solid #1dc9a0;
+  border-radius: 3px;
+  background-color: #fff;
   font-family: Montserrat, sans-serif;
   color: #000;
   font-weight: 700;
+}
+
+.funding-country.funding-new.inv {
+  border-color: #33d6ff;
+}
+
+.funding-country.funding-new.inc {
+  border-color: #dd3ea4;
+}
+
+.funding-country.funding-new.non {
+  border-color: #18233f;
+}
+
+.funding-country.funding-new.wor {
+  border-color: #ffb800;
+}
+
+.funding-country.funding-new.net {
+  border-color: rgba(115, 23, 214, .96);
 }
 
 .funding-country.funding-source {
@@ -7966,7 +7993,7 @@ strong {
 
 .log-in-link {
   position: relative;
-  width: auto;
+  width: 140px;
   margin-top: 20px;
   margin-right: 38px;
   padding: 12px 20px 9px;
@@ -8173,7 +8200,7 @@ strong {
   margin-bottom: 0px;
   padding-bottom: 90px;
   padding-left: 35px;
-  color: #fff;
+  color: #08122a;
 }
 
 .home-hero-h3.sub-text {
@@ -8191,6 +8218,13 @@ strong {
   padding-bottom: 0px;
   padding-left: 10px;
   color: #000;
+}
+
+.home-hero-h3.data-vis-h3 {
+  max-width: 447px;
+  min-width: 100%;
+  padding-bottom: 0px;
+  padding-left: 0px;
 }
 
 .home-hero-img {
@@ -9093,8 +9127,8 @@ strong {
   position: relative;
   overflow: hidden;
   height: auto;
-  min-height: 500px;
-  background-color: #000;
+  min-height: 100%;
+  background-color: transparent;
 }
 
 .header-content.org {
@@ -9122,6 +9156,17 @@ strong {
   color: #000;
 }
 
+.case-study-h1.data-vis-h1 {
+  width: auto;
+  max-width: 447px;
+  min-width: 100%;
+  padding-top: 175px;
+  padding-left: 0px;
+  color: #08122a;
+  font-size: 38px;
+  font-weight: 700;
+}
+
 .page-content {
   display: block;
   max-width: 1290px;
@@ -9131,6 +9176,11 @@ strong {
   padding-left: 35px;
 }
 
+.page-content.data-vis-page {
+  margin-top: 0px;
+  background-color: #f3f3f3;
+}
+
 .case-study-img-bg-blur {
   position: absolute;
   left: -10%;
@@ -9138,10 +9188,9 @@ strong {
   bottom: 0px;
   width: 120%;
   height: 120%;
-  background-image: -webkit-linear-gradient(270deg, rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), url('../images/artist_impression_rai_hotel_by_night_vanaf_a10_afrit_s109_o0nluh.jpg');
-  background-image: linear-gradient(180deg, rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), url('../images/artist_impression_rai_hotel_by_night_vanaf_a10_afrit_s109_o0nluh.jpg');
-  background-position: 0px 0px, 50% 50%;
-  background-size: auto, cover;
+  background-image: none;
+  background-position: 0px 0px;
+  background-size: auto;
   -webkit-filter: blur(30px);
   filter: blur(30px);
 }
@@ -9447,8 +9496,8 @@ strong {
 
 .edit {
   position: absolute;
+  top: 20px;
   right: 20px;
-  bottom: 20px;
   font-family: Montserrat, sans-serif;
   font-size: 16px;
 }
@@ -9460,11 +9509,10 @@ strong {
   bottom: -137px;
   display: none;
   width: 280px;
-  height: auto;
+  height: 120px;
   padding: 10px 0px 0px;
   background-color: #fff;
   box-shadow: 0 13px 50px -11px #000;
-  z-index: 9999;
 }
 
 .create-drop-down-block.language-selctor {
@@ -10042,6 +10090,30 @@ strong {
   color: #db4343;
   font-size: 14px;
   text-align: left;
+}
+
+.data-vis-col {
+  min-height: 510px;
+}
+
+.data-vis {
+  position: absolute;
+  right: 0px;
+  bottom: 70px;
+  width: 400px;
+  min-height: 250px;
+}
+
+.data-vis-holding-image {
+  width: auto;
+  height: 300px;
+  float: right;
+}
+
+.label-block {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
 }
 
 html.w-mod-js *[data-ix="pin-drop"] {

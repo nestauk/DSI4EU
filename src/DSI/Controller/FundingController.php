@@ -72,6 +72,7 @@ class FundingController
     private function jsonFundings($fundings)
     {
         return array_map(function (Funding $funding) {
+            $fundingType = $funding->getType();
             return [
                 'id' => $funding->getId(),
                 'title' => $funding->getTitle(),
@@ -82,6 +83,10 @@ class FundingController
                 'country' => $funding->getCountryName(),
                 'countryID' => $funding->getCountryID(),
                 'fundingTypeID' => $funding->getTypeID(),
+                'type' => [
+                    'title' => $fundingType ? $fundingType->getTitle() : '',
+                    'color' => $fundingType ? $fundingType->getColor() : '',
+                ],
                 'fundingTargets' => $funding->getTargetIDs(),
                 'fundingSourceID' => $funding->getSourceID(),
                 'fundingSource' => $funding->getSource()->getTitle(),

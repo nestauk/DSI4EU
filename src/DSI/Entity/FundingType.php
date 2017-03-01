@@ -8,7 +8,8 @@ class FundingType
     private $id;
 
     /** @var string */
-    private $title;
+    private $title,
+        $color;
 
     /**
      * @return int
@@ -43,5 +44,21 @@ class FundingType
     public function setTitle(string $title)
     {
         $this->title = $title;
+    }
+
+    /**
+     * @return string
+     */
+    public function getColor(): string
+    {
+        return $this->color;
+    }
+
+    /**
+     * @param string $color
+     */
+    public function setColor(string $color)
+    {
+        $this->color = $color;
     }
 }

@@ -71,9 +71,10 @@ require __DIR__ . '/header.php'
                                         <?php } ?>
                                     </select>
 
-                                    <label class="dropdown-label" for="field-4"><?php _ehtml('Target organisations & projects')?></label>
+                                    <label class="dropdown-label"
+                                           for="field-4"><?php _ehtml('Target organisations & projects') ?></label>
                                     <select class="w-select" ng-model="fundingTarget">
-                                        <option value="0">- <?php _ehtml('All')?> -</option>
+                                        <option value="0">- <?php _ehtml('All') ?> -</option>
                                         <?php foreach ($fundingTargets AS $target) { ?>
                                             <option value="<?php echo $target->getId() ?>">
                                                 <?php echo show_input($target->getTitle()) ?>
@@ -81,13 +82,13 @@ require __DIR__ . '/header.php'
                                         <?php } ?>
                                     </select>
 
-                                    <label class="dropdown-label" for="field-6"><?php _ehtml('Country')?></label>
+                                    <label class="dropdown-label" for="field-6"><?php _ehtml('Country') ?></label>
                                     <select class="w-select"
                                             ng-options="item as item.title for item in data.countries track by item.id"
                                             ng-model="inCountry">
                                     </select>
 
-                                    <label class="dropdown-label" for="field-5"><?php _ehtml('Closing date')?></label>
+                                    <label class="dropdown-label" for="field-5"><?php _ehtml('Closing date') ?></label>
                                     <select class="w-select"
                                             ng-options="item as item.title for item in data.years track by item.id"
                                             ng-model="beforeYear">
@@ -109,28 +110,35 @@ require __DIR__ . '/header.php'
                         </div>
                     </div>
                     <div class="w-col w-col-8" ng-cloak>
-                        <div ng-repeat="funding in data.fundings
+                        <div class="info-card" data-ix="underline"
+                             ng-repeat="funding in data.fundings
                                  | filter: searchName
                                  | filter: fundingHasType(fundingType)
                                  | filter: fundingHasTarget(fundingTarget)
                                  | filter: {countryID: inCountry.id || ''}
                                  | filter: earlierThan('' + beforeYear.id + beforeMonth.id)
-                                   track by funding.id" style="position:relative">
-                            <a class="info-card" data-ix="underline" href="{{funding.url}}"
-                               style="display: block" target="_blank">
-                                <h2 class="funding-card-h2" ng-bind="funding.title"></h2>
-                                <div class="infocard top3-underline" data-ix="new-interaction-2"></div>
-                                <p class="funding-descr" ng-bind="funding.description"></p>
-                                <div class="funding-closing-date" ng-show="funding.closingDate">
-                                    <strong><?php _ehtml('Closing date')?>:</strong> {{funding.closingDate}}
-                                </div>
-                                <div class="funding-country funding-new" ng-show="funding.isNew">
-                                    <?php _ehtml('New opportunity')?>
-                                </div>
+                                   track by funding.id">
+                            <h2 class="funding-card-h2" ng-bind="funding.title"></h2>
+                            <div class="infocard top3-underline" data-ix="new-interaction-2"></div>
+                            <p class="funding-descr" ng-bind="funding.description"></p>
+                            <div class="funding-closing-date" ng-show="funding.closingDate">
+                                <strong><?php _ehtml('Closing date') ?>:</strong> {{funding.closingDate}}
+                            </div>
+                            <a class="infocard log-in-link read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
+                               href="{{funding.url}}">
+                                <div class="login-li menu-li readmore-li"><?php _ehtml('Read more') ?></div>
+                                <img class="login-arrow"
+                                     src="<?= SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
                             </a>
-                            <?php if ($userCanAddFunding) { ?>
-                                <a class="edit" href="{{funding.editUrl}}"><?php _ehtml('Edit')?></a>
+                            <?php if (1 or $userCanAddFunding) { ?>
+                                <a class="edit" href="{{funding.editUrl}}"><?php _ehtml('Edit') ?></a>
                             <?php } ?>
+                            <div class="label-block w-clearfix">
+                                <div class="funding-country funding-new" style="border-color: {{funding.type.color}}" ng-bind="funding.type.title"></div>
+                                <div class="funding-country funding-new" ng-show="funding.isNew">
+                                    <?php _ehtml('New opportunity') ?>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
