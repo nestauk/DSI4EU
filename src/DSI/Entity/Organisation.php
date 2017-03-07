@@ -474,14 +474,14 @@ class Organisation
      */
     public function isPublished(): bool
     {
-        return $this->isPublished;
+        return (bool)$this->isPublished;
     }
 
     /**
      * @param bool $isPublished
      */
-    public function setIsPublished(bool $isPublished)
+    public function setIsPublished($isPublished)
     {
-        $this->isPublished = $isPublished;
+        $this->isPublished = (bool)$isPublished;
     }
 }
