@@ -66,7 +66,7 @@ class ProfileEditController
 
                         $updateUserEmail = new UpdateUserEmailAddress();
                         $updateUserEmail->data()->userID = $user->getId();
-                        $updateUserEmail->data()->email = $_POST['email'];
+                        $updateUserEmail->data()->email = $_POST['email'] ?? '';
                         $updateUserEmail->exec();
 
                         if ($_POST['profilePic'] != Image::PROFILE_PIC_URL . $user->getProfilePicOrDefault()) {
