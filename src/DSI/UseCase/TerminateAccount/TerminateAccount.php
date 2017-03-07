@@ -17,6 +17,7 @@ use DSI\Repository\ProjectPostCommentReplyRepository;
 use DSI\Repository\ProjectPostCommentRepository;
 use DSI\Repository\ProjectPostRepository;
 use DSI\Repository\ProjectRepository;
+use DSI\Repository\ProjectRepositoryInAPC;
 use DSI\Repository\TerminateAccountTokenRepository;
 use DSI\Repository\UserLinkRepository;
 use DSI\Repository\UserRepository;
@@ -99,7 +100,7 @@ class TerminateAccount
     {
         $sysAdmin = $this->getSysAdmin();
 
-        $projectRepo = new ProjectRepository();
+        $projectRepo = new ProjectRepositoryInAPC();
         $projects = $projectRepo->getByUser($this->user);
         foreach ($projects AS $project) {
             $project->setIsPublished(false);

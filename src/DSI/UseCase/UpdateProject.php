@@ -16,6 +16,7 @@ use DSI\Repository\ProjectImpactTechTagRepository;
 use DSI\Repository\ProjectLinkRepository;
 use DSI\Repository\ProjectMemberRepository;
 use DSI\Repository\ProjectRepository;
+use DSI\Repository\ProjectRepositoryInAPC;
 use DSI\Repository\ProjectTagRepository;
 use DSI\Service\ErrorHandler;
 
@@ -33,7 +34,7 @@ class UpdateProject
     public function __construct()
     {
         $this->data = new UpdateProject_Data();
-        $this->projectRepo = new ProjectRepository();
+        $this->projectRepo = new ProjectRepositoryInAPC();
     }
 
     public function exec()

@@ -7,6 +7,7 @@ use DSI\Entity\Project;
 use DSI\Repository\OrganisationProjectRepository;
 use DSI\Repository\OrganisationRepository;
 use DSI\Repository\ProjectRepository;
+use DSI\Repository\ProjectRepositoryInAPC;
 use DSI\Service\ErrorHandler;
 
 class RemoveProjectFromOrganisation
@@ -36,7 +37,7 @@ class RemoveProjectFromOrganisation
         $this->errorHandler = new ErrorHandler();
         $this->organisationProjectRepo = new OrganisationProjectRepository();
         $this->organisationRepository = new OrganisationRepository();
-        $this->projectRepository = new ProjectRepository();
+        $this->projectRepository = new ProjectRepositoryInAPC();
 
         $this->checkIfTheOrganisationHasTheProject();
 

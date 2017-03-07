@@ -17,6 +17,7 @@ use DSI\Repository\ProjectImpactTechTagRepository;
 use DSI\Repository\ProjectLinkRepository;
 use DSI\Repository\ProjectMemberRepository;
 use DSI\Repository\ProjectRepository;
+use DSI\Repository\ProjectRepositoryInAPC;
 use DSI\Repository\ProjectTagRepository;
 use DSI\Repository\TagForProjectsRepository;
 use DSI\Service\Auth;
@@ -41,7 +42,7 @@ class ProjectEditController
         $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
         $loggedInUser = $authUser->getUser();
 
-        $projectRepo = new ProjectRepository();
+        $projectRepo = new ProjectRepositoryInAPC();
         $project = $projectRepo->getById($this->projectID);
 
         if (!$this->userCanModifyProject($project, $loggedInUser))

@@ -8,6 +8,7 @@ use DSI\Entity\User;
 use DSI\NotEnoughData;
 use DSI\Repository\ProjectMemberRepository;
 use DSI\Repository\ProjectRepository;
+use DSI\Repository\ProjectRepositoryInAPC;
 use DSI\Service\ErrorHandler;
 
 class CreateProject
@@ -32,7 +33,7 @@ class CreateProject
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->projectRepo = new ProjectRepository();
+        $this->projectRepo = new ProjectRepositoryInAPC();
 
         if (!isset($this->data()->name))
             throw new NotEnoughData('project name');

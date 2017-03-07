@@ -6,6 +6,7 @@ use DSI\Entity\Project;
 use DSI\Entity\User;
 use DSI\Repository\ProjectMemberRepository;
 use DSI\Repository\ProjectRepository;
+use DSI\Repository\ProjectRepositoryInAPC;
 use DSI\Repository\UserRepository;
 use DSI\Service\ErrorHandler;
 use DSI\UseCase\AddMemberToProject;
@@ -33,7 +34,7 @@ class ChangeOwner
 
         $this->errorHandler = new ErrorHandler();
         $this->projectMemberRepository = new ProjectMemberRepository();
-        $this->projectRepository = new ProjectRepository();
+        $this->projectRepository = new ProjectRepositoryInAPC();
         $this->userRepository = new UserRepository();
     }
 

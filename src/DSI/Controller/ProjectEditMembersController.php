@@ -11,6 +11,7 @@ use DSI\Repository\ProjectEmailInvitationRepository;
 use DSI\Repository\ProjectMemberInvitationRepository;
 use DSI\Repository\ProjectMemberRepository;
 use DSI\Repository\ProjectRepository;
+use DSI\Repository\ProjectRepositoryInAPC;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\JsModules;
@@ -41,7 +42,7 @@ class ProjectEditMembersController
         $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
         $this->loggedInUser = $loggedInUser = $authUser->getUser();
 
-        $projectRepository = new ProjectRepository();
+        $projectRepository = new ProjectRepositoryInAPC();
         $project = $projectRepository->getById($this->projectID);
 
         $members = (new ProjectMemberRepository())->getByProject($project);

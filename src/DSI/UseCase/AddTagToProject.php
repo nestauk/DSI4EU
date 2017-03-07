@@ -4,6 +4,7 @@ namespace DSI\UseCase;
 
 use DSI\Entity\ProjectTag;
 use DSI\Repository\ProjectRepository;
+use DSI\Repository\ProjectRepositoryInAPC;
 use DSI\Repository\ProjectTagRepository;
 use DSI\Repository\TagForProjectsRepository;
 use DSI\Service\ErrorHandler;
@@ -31,7 +32,7 @@ class AddTagToProject
     {
         $this->errorHandler = new ErrorHandler();
         $this->projectTagRepository = new ProjectTagRepository();
-        $this->projectRepository = new ProjectRepository();
+        $this->projectRepository = new ProjectRepositoryInAPC();
 
         $tagRepo = new TagForProjectsRepository();
 

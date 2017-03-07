@@ -6,6 +6,7 @@ use DSI\Entity\ProjectImpactTechTag;
 use DSI\Repository\ImpactTagRepository;
 use DSI\Repository\ProjectImpactTechTagRepository;
 use DSI\Repository\ProjectRepository;
+use DSI\Repository\ProjectRepositoryInAPC;
 use DSI\Service\ErrorHandler;
 
 class AddImpactTechTagToProject
@@ -31,7 +32,7 @@ class AddImpactTechTagToProject
     {
         $this->errorHandler = new ErrorHandler();
         $this->projectImpactTagRepository = new ProjectImpactTechTagRepository();
-        $this->projectRepository = new ProjectRepository();
+        $this->projectRepository = new ProjectRepositoryInAPC();
 
         $tagRepo = new ImpactTagRepository();
 

@@ -6,6 +6,7 @@ use DSI\Entity\ProjectMemberRequest;
 use DSI\Repository\ProjectMemberRepository;
 use DSI\Repository\ProjectMemberRequestRepository;
 use DSI\Repository\ProjectRepository;
+use DSI\Repository\ProjectRepositoryInAPC;
 use DSI\Repository\UserRepository;
 use DSI\Service\ErrorHandler;
 
@@ -35,7 +36,7 @@ class AddMemberRequestToProject
     {
         $this->errorHandler = new ErrorHandler();
         $this->projectMemberRequestRepo = new ProjectMemberRequestRepository();
-        $this->projectRepository = new ProjectRepository();
+        $this->projectRepository = new ProjectRepositoryInAPC();
         $this->userRepository = new UserRepository();
 
         $this->checkIfProjectAlreadyHasTheMember();

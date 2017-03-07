@@ -5,6 +5,7 @@ namespace DSI\UseCase;
 use DSI\Entity\ProjectLink;
 use DSI\Repository\ProjectLinkRepository;
 use DSI\Repository\ProjectRepository;
+use DSI\Repository\ProjectRepositoryInAPC;
 use DSI\Service\ErrorHandler;
 
 class AddLinkToProject
@@ -28,7 +29,7 @@ class AddLinkToProject
         $this->errorHandler = new ErrorHandler();
         $this->projectLinkRepository = new ProjectLinkRepository();
 
-        $projectRepository = new ProjectRepository();
+        $projectRepository = new ProjectRepositoryInAPC();
 
         if($this->projectLinkRepository->projectHasLink($this->data()->projectID, $this->data()->link)) {
             $this->errorHandler->addTaggedError('skill', __('The project already has this link'));

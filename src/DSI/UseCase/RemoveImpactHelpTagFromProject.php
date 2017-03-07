@@ -6,6 +6,7 @@ use DSI\Entity\ProjectImpactHelpTag;
 use DSI\Repository\ImpactTagRepository;
 use DSI\Repository\ProjectImpactHelpTagRepository;
 use DSI\Repository\ProjectRepository;
+use DSI\Repository\ProjectRepositoryInAPC;
 use DSI\Service\ErrorHandler;
 
 class RemoveImpactHelpTagFromProject
@@ -30,7 +31,7 @@ class RemoveImpactHelpTagFromProject
         $this->projectImpactTagRepo = new ProjectImpactHelpTagRepository();
 
         $tagRepo = new ImpactTagRepository();
-        $projectRepo = new ProjectRepository();
+        $projectRepo = new ProjectRepositoryInAPC();
 
         if ($tagRepo->nameExists($this->data()->tag)) {
             $tag = $tagRepo->getByName($this->data()->tag);

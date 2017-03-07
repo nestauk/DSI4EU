@@ -7,6 +7,7 @@ use DSI\Entity\ProjectMember;
 use DSI\Entity\User;
 use DSI\Repository\ProjectMemberRepository;
 use DSI\Repository\ProjectRepository;
+use DSI\Repository\ProjectRepositoryInAPC;
 use DSI\Repository\UserRepository;
 use DSI\Service\ErrorHandler;
 
@@ -58,7 +59,7 @@ class RemoveMemberFromProject
      */
     public function setProjectId($projectID)
     {
-        $this->project = (new ProjectRepository())->getById($projectID);
+        $this->project = (new ProjectRepositoryInAPC())->getById($projectID);
     }
 
     /**

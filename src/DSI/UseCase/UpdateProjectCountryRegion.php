@@ -4,6 +4,7 @@ namespace DSI\UseCase;
 
 use DSI\Repository\CountryRegionRepository;
 use DSI\Repository\ProjectRepository;
+use DSI\Repository\ProjectRepositoryInAPC;
 use DSI\Service\ErrorHandler;
 
 class UpdateProjectCountryRegion
@@ -28,7 +29,7 @@ class UpdateProjectCountryRegion
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->projectRepo = new ProjectRepository();
+        $this->projectRepo = new ProjectRepositoryInAPC();
         $this->countryRegionRepo = new CountryRegionRepository();
 
         $this->assertProjectHasBeenSent();

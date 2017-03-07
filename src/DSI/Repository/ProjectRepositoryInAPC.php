@@ -63,7 +63,6 @@ class ProjectRepositoryInAPC extends ProjectRepository
             return parent::getAll();
 
         if (!\apcu_exists(self::$apcKey)) {
-            error_log(self::$apcKey . ' was not set');
             $results = parent::getAll();
             \apcu_store(self::$apcKey, $results);
             return $results;

@@ -19,8 +19,8 @@ class OrganisationProjectRepository
 
     public function __construct()
     {
-        $this->organisationRepo = new OrganisationRepository();
-        $this->projectsRepo = new ProjectRepository();
+        $this->organisationRepo = new OrganisationRepositoryInAPC();
+        $this->projectsRepo = new ProjectRepositoryInAPC();
     }
 
     public function add(OrganisationProject $organisationProject)

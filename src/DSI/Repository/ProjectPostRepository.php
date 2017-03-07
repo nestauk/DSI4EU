@@ -70,7 +70,7 @@ class ProjectPostRepository
         $post->setId($dbPost['id']);
 
         $post->setProject(
-            (new ProjectRepository())->getById($dbPost['projectID'])
+            (new ProjectRepositoryInAPC())->getById($dbPost['projectID'])
         );
         $post->setUser(
             (new UserRepository())->getById($dbPost['userID'])

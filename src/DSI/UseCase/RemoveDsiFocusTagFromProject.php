@@ -6,6 +6,7 @@ use DSI\Entity\ProjectDsiFocusTag;
 use DSI\Repository\DsiFocusTagRepository;
 use DSI\Repository\ProjectDsiFocusTagRepository;
 use DSI\Repository\ProjectRepository;
+use DSI\Repository\ProjectRepositoryInAPC;
 use DSI\Service\ErrorHandler;
 
 class RemoveDsiFocusTagFromProject
@@ -30,7 +31,7 @@ class RemoveDsiFocusTagFromProject
         $this->projectDsiFocusTagRepo = new ProjectDsiFocusTagRepository();
 
         $tagRepo = new DsiFocusTagRepository();
-        $projectRepo = new ProjectRepository();
+        $projectRepo = new ProjectRepositoryInAPC();
 
         if ($tagRepo->nameExists($this->data()->tag)) {
             $tag = $tagRepo->getByName($this->data()->tag);

@@ -7,6 +7,7 @@ use DSI\Entity\ProjectEmailInvitation;
 use DSI\Entity\User;
 use DSI\Repository\ProjectEmailInvitationRepository;
 use DSI\Repository\ProjectRepository;
+use DSI\Repository\ProjectRepositoryInAPC;
 use DSI\Repository\UserRepository;
 use DSI\Service\ErrorHandler;
 use DSI\Service\Mailer;
@@ -44,7 +45,7 @@ class CreateProjectEmailInvitation
 
         $this->errorHandler = new ErrorHandler();
         $this->projectEmailInvitationRepo = new ProjectEmailInvitationRepository();
-        $this->projectRepository = new ProjectRepository();
+        $this->projectRepository = new ProjectRepositoryInAPC();
         $this->userRepository = new UserRepository();
 
         if ($this->projectEmailInvitationRepo->projectInvitedEmail($this->projectID, $this->email)) {

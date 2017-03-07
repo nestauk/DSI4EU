@@ -3,10 +3,9 @@
 namespace DSI\UseCase;
 
 use DSI\Entity\ProjectTag;
-use DSI\Repository\ProjectRepository;
+use DSI\Repository\ProjectRepositoryInAPC;
 use DSI\Repository\ProjectTagRepository;
 use DSI\Repository\TagForProjectsRepository;
-use DSI\Repository\UserRepository;
 use DSI\Service\ErrorHandler;
 
 class RemoveTagFromProject
@@ -31,8 +30,7 @@ class RemoveTagFromProject
         $this->projectTagRepo = new ProjectTagRepository();
 
         $tagRepo = new TagForProjectsRepository();
-        $projectRepo = new ProjectRepository();
-        $userRepo = new UserRepository();
+        $projectRepo = new ProjectRepositoryInAPC();
 
         if ($tagRepo->nameExists($this->data()->tag)) {
             $tag = $tagRepo->getByName($this->data()->tag);

@@ -20,7 +20,7 @@ class ProjectTagRepository
 
     public function __construct()
     {
-        $this->projectRepo = new ProjectRepository();
+        $this->projectRepo = new ProjectRepositoryInAPC();
         $this->tagsRepo = new TagForProjectsRepository();
     }
 

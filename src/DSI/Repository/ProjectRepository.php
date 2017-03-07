@@ -8,6 +8,10 @@ use DSI\Service\SQL;
 
 class ProjectRepository
 {
+    public function __construct()
+    {
+    }
+
     public function insert(Project $project)
     {
         $insert = array();

@@ -19,7 +19,7 @@ class ProjectMemberRepository
 
     public function __construct()
     {
-        $this->projectRepo = new ProjectRepository();
+        $this->projectRepo = new ProjectRepositoryInAPC();
         $this->userRepo = new UserRepository();
     }
 

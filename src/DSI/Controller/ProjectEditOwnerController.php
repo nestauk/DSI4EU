@@ -3,6 +3,7 @@
 namespace DSI\Controller;
 
 use DSI\Repository\ProjectRepository;
+use DSI\Repository\ProjectRepositoryInAPC;
 use DSI\Repository\UserRepository;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
@@ -21,7 +22,7 @@ class ProjectEditOwnerController
         $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
         $loggedInUser = $authUser->getUser();
 
-        $projectRepository = new ProjectRepository();
+        $projectRepository = new ProjectRepositoryInAPC();
         $project = $projectRepository->getById($this->projectID);
         $owner = $project->getOwner();
 

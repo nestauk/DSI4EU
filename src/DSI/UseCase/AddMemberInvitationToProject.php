@@ -8,6 +8,7 @@ use DSI\Entity\User;
 use DSI\Repository\ProjectMemberRepository;
 use DSI\Repository\ProjectMemberInvitationRepository;
 use DSI\Repository\ProjectRepository;
+use DSI\Repository\ProjectRepositoryInAPC;
 use DSI\Repository\UserRepository;
 use DSI\Service\ErrorHandler;
 
@@ -39,7 +40,7 @@ class AddMemberInvitationToProject
     {
         $this->errorHandler = new ErrorHandler();
         $this->projectMemberInvitationRepo = new ProjectMemberInvitationRepository();
-        $this->projectRepository = new ProjectRepository();
+        $this->projectRepository = new ProjectRepositoryInAPC();
         $this->userRepository = new UserRepository();
 
         $this->user = $this->userRepository->getById($this->userID);

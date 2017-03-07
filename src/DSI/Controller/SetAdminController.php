@@ -4,6 +4,7 @@ namespace DSI\Controller;
 
 use DSI\Repository\OrganisationRepository;
 use DSI\Repository\ProjectRepository;
+use DSI\Repository\ProjectRepositoryInAPC;
 use DSI\Repository\UserRepository;
 use DSI\Service\Auth;
 use DSI\Service\URL;
@@ -25,7 +26,7 @@ class SetAdminController
 
         if (isset($_GET['userID'])) {
             if (isset($_GET['projectID'])) {
-                $projectRepo = new ProjectRepository();
+                $projectRepo = new ProjectRepositoryInAPC();
                 $project = $projectRepo->getById((int)$_GET['projectID']);
                 $user = (new UserRepository())->getById((int)$_GET['userID']);
 

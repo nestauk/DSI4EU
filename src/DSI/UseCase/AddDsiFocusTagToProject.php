@@ -6,6 +6,7 @@ use DSI\Entity\ProjectDsiFocusTag;
 use DSI\Repository\DsiFocusTagRepository;
 use DSI\Repository\ProjectDsiFocusTagRepository;
 use DSI\Repository\ProjectRepository;
+use DSI\Repository\ProjectRepositoryInAPC;
 use DSI\Service\ErrorHandler;
 
 class AddDsiFocusTagToProject
@@ -31,7 +32,7 @@ class AddDsiFocusTagToProject
     {
         $this->errorHandler = new ErrorHandler();
         $this->projectDsiFocusTagRepository = new ProjectDsiFocusTagRepository();
-        $this->projectRepository = new ProjectRepository();
+        $this->projectRepository = new ProjectRepositoryInAPC();
 
         $tagRepo = new DsiFocusTagRepository();
 

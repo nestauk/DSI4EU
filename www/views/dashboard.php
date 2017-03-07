@@ -295,7 +295,6 @@ require __DIR__ . '/header.php';
         var translate = new Translate();
         <?php foreach([
             'Are you sure you want to terminate your account?',
-            'Success!',
             'An email will be sent to you to confirm your request.',
             'Yes',
         ] AS $translate) { ?>

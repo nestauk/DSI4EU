@@ -14,7 +14,7 @@ class ProjectLinkRepository
 
     public function __construct()
     {
-        $this->projectRepository = new ProjectRepository();
+        $this->projectRepository = new ProjectRepositoryInAPC();
     }
 
     public function add(ProjectLink $projectLink)

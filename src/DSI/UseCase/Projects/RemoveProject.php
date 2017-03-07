@@ -15,6 +15,7 @@ use DSI\Repository\ProjectMemberRepository;
 use DSI\Repository\ProjectMemberRequestRepository;
 use DSI\Repository\ProjectPostRepository;
 use DSI\Repository\ProjectRepository;
+use DSI\Repository\ProjectRepositoryInAPC;
 use DSI\Repository\ProjectTagRepository;
 use DSI\Service\ErrorHandler;
 
@@ -34,7 +35,7 @@ class RemoveProject
         $this->data = new Remove_Data();
 
         $this->errorHandler = new ErrorHandler();
-        $this->projectRepository = new ProjectRepository();
+        $this->projectRepository = new ProjectRepositoryInAPC();
     }
 
     public function exec()
