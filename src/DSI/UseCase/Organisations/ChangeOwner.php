@@ -6,6 +6,7 @@ use DSI\Entity\Organisation;
 use DSI\Entity\User;
 use DSI\Repository\OrganisationMemberRepository;
 use DSI\Repository\OrganisationRepository;
+use DSI\Repository\OrganisationRepositoryInAPC;
 use DSI\Repository\UserRepository;
 use DSI\Service\ErrorHandler;
 use DSI\UseCase\AddMemberToOrganisation;
@@ -33,7 +34,7 @@ class ChangeOwner
 
         $this->errorHandler = new ErrorHandler();
         $this->organisationMemberRepo = new OrganisationMemberRepository();
-        $this->organisationRepository = new OrganisationRepository();
+        $this->organisationRepository = new OrganisationRepositoryInAPC();
         $this->userRepository = new UserRepository();
     }
 

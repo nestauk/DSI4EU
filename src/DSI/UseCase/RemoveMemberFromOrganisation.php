@@ -7,6 +7,7 @@ use DSI\Entity\OrganisationMember;
 use DSI\Entity\User;
 use DSI\Repository\OrganisationMemberRepository;
 use DSI\Repository\OrganisationRepository;
+use DSI\Repository\OrganisationRepositoryInAPC;
 use DSI\Repository\UserRepository;
 use DSI\Service\ErrorHandler;
 
@@ -53,7 +54,7 @@ class RemoveMemberFromOrganisation
      */
     public function setOrganisationID(int $organisationID)
     {
-        $this->organisation = (new OrganisationRepository())->getById($organisationID);
+        $this->organisation = (new OrganisationRepositoryInAPC())->getById($organisationID);
     }
 
     /**

@@ -8,6 +8,7 @@ use DSI\Entity\User;
 use DSI\NotEnoughData;
 use DSI\Repository\OrganisationMemberRepository;
 use DSI\Repository\OrganisationRepository;
+use DSI\Repository\OrganisationRepositoryInAPC;
 use DSI\Service\ErrorHandler;
 
 class CreateOrganisation
@@ -32,7 +33,7 @@ class CreateOrganisation
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->organisationRepo = new OrganisationRepository();
+        $this->organisationRepo = new OrganisationRepositoryInAPC();
 
         if (!isset($this->data()->name))
             throw new NotEnoughData('organisation name');

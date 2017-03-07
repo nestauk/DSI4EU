@@ -30,7 +30,7 @@ class RejectMemberInvitationToOrganisationTest extends PHPUnit_Framework_TestCas
     {
         $this->organisationMemberInvitationRepo = new \DSI\Repository\OrganisationMemberInvitationRepository();
         $this->organisationMemberRepo = new \DSI\Repository\OrganisationMemberRepository();
-        $this->organisationRepo = new \DSI\Repository\OrganisationRepository();
+        $this->organisationRepo = new \DSI\Repository\OrganisationRepositoryInAPC();
         $this->userRepo = new \DSI\Repository\UserRepository();
 
         $this->organisationOwner = new \DSI\Entity\User();

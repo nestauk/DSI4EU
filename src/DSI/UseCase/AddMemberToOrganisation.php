@@ -5,6 +5,7 @@ namespace DSI\UseCase;
 use DSI\Entity\OrganisationMember;
 use DSI\Repository\OrganisationMemberRepository;
 use DSI\Repository\OrganisationRepository;
+use DSI\Repository\OrganisationRepositoryInAPC;
 use DSI\Repository\UserRepository;
 use DSI\Service\ErrorHandler;
 
@@ -34,7 +35,7 @@ class AddMemberToOrganisation
     {
         $this->errorHandler = new ErrorHandler();
         $this->organisationMemberRepo = new OrganisationMemberRepository();
-        $this->organisationRepository = new OrganisationRepository();
+        $this->organisationRepository = new OrganisationRepositoryInAPC();
         $this->userRepository = new UserRepository();
 
         if ($this->organisationMemberRepo->organisationIDHasMemberID($this->data()->organisationID, $this->data()->userID)) {

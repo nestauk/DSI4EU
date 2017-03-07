@@ -20,7 +20,7 @@ class OrganisationMemberRequestRepository
 
     public function __construct()
     {
-        $this->organisationRepo = new OrganisationRepository();
+        $this->organisationRepo = new OrganisationRepositoryInAPC();
         $this->userRepo = new UserRepository();
     }
 

@@ -7,6 +7,7 @@ use DSI\Entity\User;
 use DSI\Repository\OrganisationMemberRepository;
 use DSI\Repository\OrganisationMemberInvitationRepository;
 use DSI\Repository\OrganisationRepository;
+use DSI\Repository\OrganisationRepositoryInAPC;
 use DSI\Repository\UserRepository;
 use DSI\Service\ErrorHandler;
 
@@ -40,7 +41,7 @@ class RejectMemberInvitationToOrganisation
         $this->errorHandler = new ErrorHandler();
         $this->organisationMemberInvitationRepo = new OrganisationMemberInvitationRepository();
         $this->organisationMemberRepo = new OrganisationMemberRepository();
-        $this->organisationRepository = new OrganisationRepository();
+        $this->organisationRepository = new OrganisationRepositoryInAPC();
         $this->userRepository = new UserRepository();
 
         $this->assertExecutorIsSet();

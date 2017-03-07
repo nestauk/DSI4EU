@@ -4,6 +4,7 @@ namespace DSI\UseCase;
 
 use DSI\Entity\OrganisationTag;
 use DSI\Repository\OrganisationRepository;
+use DSI\Repository\OrganisationRepositoryInAPC;
 use DSI\Repository\OrganisationTagRepository;
 use DSI\Repository\TagForOrganisationsRepository;
 use DSI\Repository\UserRepository;
@@ -31,7 +32,7 @@ class RemoveTagFromOrganisation
         $this->organisationTagRepo = new OrganisationTagRepository();
 
         $tagRepo = new TagForOrganisationsRepository();
-        $organisationRepo = new OrganisationRepository();
+        $organisationRepo = new OrganisationRepositoryInAPC();
         $userRepo = new UserRepository();
 
         if ($tagRepo->nameExists($this->data()->tag)) {

@@ -3,6 +3,7 @@
 namespace DSI\Controller;
 
 use DSI\Repository\OrganisationRepository;
+use DSI\Repository\OrganisationRepositoryInAPC;
 use DSI\Repository\ProjectRepository;
 use DSI\Repository\ProjectRepositoryInAPC;
 use DSI\Repository\UserRepository;
@@ -47,7 +48,7 @@ class SetAdminController
             }
             if (isset($_GET['organisationID'])) {
                 $user = (new UserRepository())->getById((int)$_GET['userID']);
-                $organisationRepository = new OrganisationRepository();
+                $organisationRepository = new OrganisationRepositoryInAPC();
                 $organisation = $organisationRepository->getById((int)$_GET['organisationID']);
 
                 $exec = new SetAdminStatusToOrganisationMember();

@@ -13,6 +13,7 @@ use DSI\Repository\OrganisationLinkRepository;
 use DSI\Repository\OrganisationNetworkTagRepository;
 use DSI\Repository\OrganisationProjectRepository;
 use DSI\Repository\OrganisationRepository;
+use DSI\Repository\OrganisationRepositoryInAPC;
 use DSI\Repository\OrganisationSizeRepository;
 use DSI\Repository\OrganisationTagRepository;
 use DSI\Repository\OrganisationTypeRepository;
@@ -32,7 +33,7 @@ class UpdateOrganisation
     public function __construct()
     {
         $this->data = new UpdateOrganisation_Data();
-        $this->organisationRepo = new OrganisationRepository();
+        $this->organisationRepo = new OrganisationRepositoryInAPC();
     }
 
     public function exec()

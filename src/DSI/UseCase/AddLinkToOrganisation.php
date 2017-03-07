@@ -5,6 +5,7 @@ namespace DSI\UseCase;
 use DSI\Entity\OrganisationLink;
 use DSI\Repository\OrganisationLinkRepository;
 use DSI\Repository\OrganisationRepository;
+use DSI\Repository\OrganisationRepositoryInAPC;
 use DSI\Service\ErrorHandler;
 
 class AddLinkToOrganisation
@@ -28,7 +29,7 @@ class AddLinkToOrganisation
         $this->errorHandler = new ErrorHandler();
         $this->organisationLinkRepository = new OrganisationLinkRepository();
 
-        $organisationRepository = new OrganisationRepository();
+        $organisationRepository = new OrganisationRepositoryInAPC();
 
         if($this->organisationLinkRepository->organisationHasLink($this->data()->organisationID, $this->data()->link)) {
             $this->errorHandler->addTaggedError('skill', __('The organisation already has this link'));

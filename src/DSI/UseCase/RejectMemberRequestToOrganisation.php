@@ -8,6 +8,7 @@ use DSI\Entity\User;
 use DSI\Repository\OrganisationMemberRepository;
 use DSI\Repository\OrganisationMemberRequestRepository;
 use DSI\Repository\OrganisationRepository;
+use DSI\Repository\OrganisationRepositoryInAPC;
 use DSI\Repository\UserRepository;
 use DSI\Service\ErrorHandler;
 
@@ -41,7 +42,7 @@ class RejectMemberRequestToOrganisation
         $this->errorHandler = new ErrorHandler();
         $this->organisationMemberRequestRepo = new OrganisationMemberRequestRepository();
         $this->organisationMemberRepo = new OrganisationMemberRepository();
-        $this->organisationRepository = new OrganisationRepository();
+        $this->organisationRepository = new OrganisationRepositoryInAPC();
         $this->userRepository = new UserRepository();
 
         if (!$this->organisationMemberRequestRepo->organisationHasRequestFromMember($this->data()->organisationID, $this->data()->userID)) {

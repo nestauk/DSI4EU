@@ -8,6 +8,10 @@ use DSI\Service\SQL;
 
 class OrganisationRepository
 {
+    public function __construct()
+    {
+    }
+
     public function insert(Organisation $organisation)
     {
         $insert = array();

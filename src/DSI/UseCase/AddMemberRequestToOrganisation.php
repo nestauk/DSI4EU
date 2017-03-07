@@ -6,6 +6,7 @@ use DSI\Entity\OrganisationMemberRequest;
 use DSI\Repository\OrganisationMemberRepository;
 use DSI\Repository\OrganisationMemberRequestRepository;
 use DSI\Repository\OrganisationRepository;
+use DSI\Repository\OrganisationRepositoryInAPC;
 use DSI\Repository\UserRepository;
 use DSI\Service\ErrorHandler;
 
@@ -35,7 +36,7 @@ class AddMemberRequestToOrganisation
     {
         $this->errorHandler = new ErrorHandler();
         $this->organisationMemberRequestRepo = new OrganisationMemberRequestRepository();
-        $this->organisationRepository = new OrganisationRepository();
+        $this->organisationRepository = new OrganisationRepositoryInAPC();
         $this->userRepository = new UserRepository();
 
         $this->checkIfOrganisationAlreadyHasTheMember();

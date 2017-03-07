@@ -8,6 +8,7 @@ use DSI\Entity\User;
 use DSI\Repository\OrganisationMemberRepository;
 use DSI\Repository\OrganisationMemberInvitationRepository;
 use DSI\Repository\OrganisationRepository;
+use DSI\Repository\OrganisationRepositoryInAPC;
 use DSI\Repository\UserRepository;
 use DSI\Service\ErrorHandler;
 
@@ -36,7 +37,7 @@ class AddMemberInvitationToOrganisation
     {
         $this->errorHandler = new ErrorHandler();
         $this->organisationMemberInvitationRepository = new OrganisationMemberInvitationRepository();
-        $this->organisationRepository = new OrganisationRepository();
+        $this->organisationRepository = new OrganisationRepositoryInAPC();
 
         $this->checkIfOrganisationAlreadyHasTheMember();
         $this->checkIfUserHasAlreadyBeenInvited();

@@ -8,6 +8,7 @@ use DSI\Entity\User;
 use DSI\Repository\OrganisationMemberInvitationRepository;
 use DSI\Repository\OrganisationMemberRepository;
 use DSI\Repository\OrganisationRepository;
+use DSI\Repository\OrganisationRepositoryInAPC;
 use DSI\Repository\UserRepository;
 use DSI\Service\ErrorHandler;
 
@@ -36,7 +37,7 @@ class RemoveMemberInvitationToOrganisation
         $this->errorHandler = new ErrorHandler();
         $this->organisationMemberInvitationRepo = new OrganisationMemberInvitationRepository();
         $this->organisationMemberRepo = new OrganisationMemberRepository();
-        $this->organisationRepo = new OrganisationRepository();
+        $this->organisationRepo = new OrganisationRepositoryInAPC();
         $this->userRepository = new UserRepository();
 
         $user = $this->userRepository->getById($this->userID);

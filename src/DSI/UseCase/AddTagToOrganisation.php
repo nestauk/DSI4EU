@@ -4,6 +4,7 @@ namespace DSI\UseCase;
 
 use DSI\Entity\OrganisationTag;
 use DSI\Repository\OrganisationRepository;
+use DSI\Repository\OrganisationRepositoryInAPC;
 use DSI\Repository\OrganisationTagRepository;
 use DSI\Repository\TagForOrganisationsRepository;
 use DSI\Service\ErrorHandler;
@@ -31,7 +32,7 @@ class AddTagToOrganisation
     {
         $this->errorHandler = new ErrorHandler();
         $this->organisationTagRepository = new OrganisationTagRepository();
-        $this->organisationRepository = new OrganisationRepository();
+        $this->organisationRepository = new OrganisationRepositoryInAPC();
 
         $tagRepo = new TagForOrganisationsRepository();
 

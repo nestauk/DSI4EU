@@ -3,6 +3,7 @@
 namespace DSI\Controller;
 
 use DSI\Repository\OrganisationRepository;
+use DSI\Repository\OrganisationRepositoryInAPC;
 use DSI\Repository\UserRepository;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
@@ -21,7 +22,7 @@ class OrganisationEditOwnerController
         $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
         $loggedInUser = $authUser->getUser();
 
-        $organisationRepo = new OrganisationRepository();
+        $organisationRepo = new OrganisationRepositoryInAPC();
         $organisation = $organisationRepo->getById($this->organisationID);
         $owner = $organisation->getOwner();
 

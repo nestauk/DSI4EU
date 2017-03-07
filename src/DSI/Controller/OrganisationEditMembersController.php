@@ -9,6 +9,7 @@ use DSI\Entity\User;
 use DSI\Repository\OrganisationMemberInvitationRepository;
 use DSI\Repository\OrganisationMemberRepository;
 use DSI\Repository\OrganisationRepository;
+use DSI\Repository\OrganisationRepositoryInAPC;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\JsModules;
@@ -37,7 +38,7 @@ class OrganisationEditMembersController
         $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
         $this->loggedInUser = $loggedInUser = $authUser->getUser();
 
-        $organisationRepo = new OrganisationRepository();
+        $organisationRepo = new OrganisationRepositoryInAPC();
         $organisation = $organisationRepo->getById($this->organisationID);
 
         $members = (new OrganisationMemberRepository())->getByOrganisation($organisation);

@@ -14,6 +14,7 @@ use DSI\Repository\OrganisationMemberRequestRepository;
 use DSI\Repository\OrganisationNetworkTagRepository;
 use DSI\Repository\OrganisationProjectRepository;
 use DSI\Repository\OrganisationRepository;
+use DSI\Repository\OrganisationRepositoryInAPC;
 use DSI\Repository\OrganisationSizeRepository;
 use DSI\Repository\OrganisationTagRepository;
 use DSI\Repository\OrganisationTypeRepository;
@@ -50,7 +51,7 @@ class OrganisationEditController
         $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
         $loggedInUser = $authUser->getUser();
 
-        $organisationRepo = new OrganisationRepository();
+        $organisationRepo = new OrganisationRepositoryInAPC();
         $organisation = $organisationRepo->getById($this->organisationID);
 
         $organisationTypes = (new OrganisationTypeRepository())->getAll();
