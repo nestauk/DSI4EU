@@ -27,10 +27,7 @@ class UpdateUserEmailAddress
         $this->errorHandler = new ErrorHandler();
         $this->userRepo = new UserRepository();
 
-        if (!isset($this->data()->email))
-            throw new NotEnoughData('email');
-
-        if ($this->data()->email == '') {
+        if (trim($this->data()->email) == '') {
             $this->errorHandler->addTaggedError('email', __('Please type an email address'));
             throw $this->errorHandler;
         }
