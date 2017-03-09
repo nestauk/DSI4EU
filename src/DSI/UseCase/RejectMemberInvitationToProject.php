@@ -45,10 +45,11 @@ class RejectMemberInvitationToProject
         $this->projectRepository = new ProjectRepositoryInAPC();
         $this->userRepository = new UserRepository();
 
+        $this->assertExecutorIsSet();
+
         $user = $this->userRepository->getById($this->data()->userID);
         $project = $this->projectRepository->getById($this->data()->projectID);
 
-        $this->assertExecutorIsSet();
         $this->assertExecutorCanExecute();
         $this->assertUserHasBeenInvitedToProject($user, $project);
 

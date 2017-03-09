@@ -52,6 +52,9 @@ class AcceptMemberInvitationToProject
         $this->projectRepository = new ProjectRepositoryInAPC();
         $this->userRepository = new UserRepository();
 
+        $this->assertUserIsSet();
+        $this->assertProjectIsSet();
+
         $this->user = $this->userRepository->getById($this->data()->userID);
         $this->project = $this->projectRepository->getById($this->data()->projectID);
 
@@ -92,6 +95,18 @@ class AcceptMemberInvitationToProject
     {
         if (!$this->data()->executor OR $this->data()->executor->getId() < 1)
             throw new \InvalidArgumentException('executor');
+    }
+
+    private function assertUserIsSet()
+    {
+        if ($this->data()->userID < 1)
+            throw new \InvalidArgumentException('user');
+    }
+
+    private function assertProjectIsSet()
+    {
+        if ($this->data()->projectID < 1)
+            throw new \InvalidArgumentException('project');
     }
 
     private function assertExecutorCanExecute()

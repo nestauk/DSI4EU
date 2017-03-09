@@ -53,9 +53,28 @@ class ApproveMemberInvitationToProjectTest extends PHPUnit_Framework_TestCase
     }
 
     /** @test */
+    public function cannotExecuteWithoutAnUser()
+    {
+        $approveCmd = new \DSI\UseCase\AcceptMemberInvitationToProject();
+        $this->setExpectedException(InvalidArgumentException::class);
+        $approveCmd->exec();
+    }
+
+    /** @test */
+    public function cannotExecuteWithoutAnProject()
+    {
+        $approveCmd = new \DSI\UseCase\AcceptMemberInvitationToProject();
+        $approveCmd->data()->userID = $this->invitedUser->getId();
+        $this->setExpectedException(InvalidArgumentException::class);
+        $approveCmd->exec();
+    }
+
+    /** @test */
     public function cannotExecuteWithoutAnExecutor()
     {
         $approveCmd = new \DSI\UseCase\AcceptMemberInvitationToProject();
+        $approveCmd->data()->userID = $this->invitedUser->getId();
+        $approveCmd->data()->projectID = $this->project->getId();
         $this->setExpectedException(InvalidArgumentException::class);
         $approveCmd->exec();
     }

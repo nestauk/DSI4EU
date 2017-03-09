@@ -67,8 +67,8 @@ class SetAdminStatusToOrganisationMember
     {
         if (!$this->organisationMemberRepo->organisationHasMember($this->organisation, $this->member)) {
             $addMemberToOrganisation = new AddMemberToOrganisation();
-            $addMemberToOrganisation->organisationID = $this->organisation->getId();
-            $addMemberToOrganisation->userID = $this->member->getId();
+            $addMemberToOrganisation->data()->organisationID = $this->organisation->getId();
+            $addMemberToOrganisation->data()->userID = $this->member->getId();
             $addMemberToOrganisation->exec();
         }
     }

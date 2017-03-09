@@ -23,22 +23,21 @@ class AddMemberInvitationToOrganisation
     /** @var OrganisationRepository */
     private $organisationRepository;
 
-    /** @var UserRepository */
-    private $userRepository;
-
     /** @var Organisation */
     private $organisation;
 
     /** @var User */
     private $user;
 
-
-    public function exec()
+    public function __construct()
     {
         $this->errorHandler = new ErrorHandler();
         $this->organisationMemberInvitationRepository = new OrganisationMemberInvitationRepository();
         $this->organisationRepository = new OrganisationRepositoryInAPC();
+    }
 
+    public function exec()
+    {
         $this->checkIfOrganisationAlreadyHasTheMember();
         $this->checkIfUserHasAlreadyBeenInvited();
         $this->addMemberInvitation();

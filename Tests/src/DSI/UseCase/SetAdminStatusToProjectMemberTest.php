@@ -68,7 +68,7 @@ class SetAdminStatusToProjectMemberTest extends PHPUnit_Framework_TestCase
         $setStatusCmd->setMember($this->member);
         $setStatusCmd->setProject($this->project);
         $setStatusCmd->setIsAdmin(true);
-        
+
         $this->setExpectedException(InvalidArgumentException::class);
         $setStatusCmd->exec();
     }
@@ -92,21 +92,28 @@ class SetAdminStatusToProjectMemberTest extends PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function adminCanSetMemberAsAdmin()
+    public function adminCannotSetMemberAsAdmin()
     {
         $this->addMemberToProject($this->project, $this->member);
 
+        $e = null;
         $setStatusCmd = new SetAdminStatusToProjectMember();
         $setStatusCmd->setMember($this->member);
         $setStatusCmd->setProject($this->project);
         $setStatusCmd->setIsAdmin(true);
         $setStatusCmd->setExecutor($this->admin);
-        $setStatusCmd->exec();
+        try {
+            $setStatusCmd->exec();
+        } catch (\DSI\Service\ErrorHandler $e) {
+        }
+
+        $this->assertNotNull($e);
+        $this->assertNotEmpty($e->getTaggedError('member'));
 
         $projectMember = $this->projectMemberRepo->getByProjectAndMember(
             $this->project, $this->member
         );
-        $this->assertTrue($projectMember->isAdmin());
+        $this->assertFalse($projectMember->isAdmin());
     }
 
     /** @test */
