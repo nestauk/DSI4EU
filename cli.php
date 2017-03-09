@@ -12,6 +12,7 @@ class CliRouter
             echo 'cities-to-geolocation' . PHP_EOL;
             echo 'update-organisations-partners-count' . PHP_EOL;
             echo 'update-project-tags' . PHP_EOL;
+            echo 'update-project-tech-tags' . PHP_EOL;
             return;
         }
 
@@ -27,6 +28,8 @@ class CliRouter
             $this->updateOrganisationsPartnersCount();
         } elseif ($args[1] == 'update-project-tags') {
             $this->updateProjectTags($args);
+        } elseif ($args[1] == 'update-project-tech-tags') {
+            $this->updateProjectTechTags($args);
         } else {
             echo 'Invalid argument';
         }
@@ -34,37 +37,44 @@ class CliRouter
 
     private function sendCachedEmails()
     {
-        $command = new \DSI\Controller\SendCachedEmailsController();
+        $command = new \DSI\Controller\CLI\SendCachedEmailsController();
         $command->exec();
     }
 
     private function importUserProjectOrganisationLink()
     {
-        $command = new \DSI\Controller\ImportUserProjectOrganisationLinkController();
+        $command = new \DSI\Controller\CLI\ImportUserProjectOrganisationLinkController();
         $command->exec();
     }
 
     private function importOrganisationURLs()
     {
-        $command = new \DSI\Controller\ImportOrgLinksController();
+        $command = new \DSI\Controller\CLI\ImportOrgLinksController();
         $command->exec();
     }
 
     private function citiesToGeolocation()
     {
-        $command = new \DSI\Controller\CitiesToGeolocationController();
+        $command = new \DSI\Controller\CLI\CitiesToGeolocationController();
         $command->exec();
     }
 
     private function updateOrganisationsPartnersCount()
     {
-        $command = new \DSI\Controller\UpdateOrganisationsPartnersCountController();
+        $command = new \DSI\Controller\CLI\UpdateOrganisationsPartnersCountController();
         $command->exec();
     }
 
     private function updateProjectTags(array $args)
     {
-        $command = new \DSI\Controller\UpdateProjectTagsController();
+        $command = new \DSI\Controller\CLI\UpdateProjectTagsController();
+        $command->setArgs($args);
+        $command->exec();
+    }
+
+    private function updateProjectTechTags(array $args)
+    {
+        $command = new \DSI\Controller\CLI\UpdateProjectTechTagsController();
         $command->setArgs($args);
         $command->exec();
     }

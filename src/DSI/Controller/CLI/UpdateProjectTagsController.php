@@ -1,6 +1,6 @@
 <?php
 
-namespace DSI\Controller;
+namespace DSI\Controller\CLI;
 
 use DSI\NotFound;
 use DSI\Repository\OrganisationRepository;
@@ -23,7 +23,7 @@ class UpdateProjectTagsController
 
         $filename = basename($this->args[2]);
 
-        $filePath = __DIR__ . '/../../../' . $filename;
+        $filePath = __DIR__ . '/../../../../' . $filename;
         if (!file_exists($filePath))
             throw new NotFound($filePath);
 

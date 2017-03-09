@@ -1,6 +1,6 @@
 <?php
 
-namespace DSI\Controller;
+namespace DSI\Controller\CLI;
 
 set_time_limit(0);
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace DSI\Controller;
+namespace DSI\Controller\CLI;
 
 use DSI\UseCase\SendCachedEmails;
 

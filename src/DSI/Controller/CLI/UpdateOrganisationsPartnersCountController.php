@@ -1,6 +1,6 @@
 <?php
 
-namespace DSI\Controller;
+namespace DSI\Controller\CLI;
 
 use DSI\Repository\OrganisationRepository;
 use DSI\UseCase\CalculateOrganisationPartnersCount;
