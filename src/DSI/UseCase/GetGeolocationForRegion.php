@@ -7,6 +7,7 @@ use DSI\NotFound;
 use DSI\Repository\UserLinkRepository;
 use DSI\Repository\UserRepository;
 use DSI\Service\ErrorHandler;
+use DSI\Service\Geolocation;
 
 class GetGeolocationForRegion
 {
@@ -26,30 +27,18 @@ class GetGeolocationForRegion
         $this->geoLocation = new GetGeolocationForRegion_Return();
 
         $countryName = explode(',', $this->countryName)[0];
-        $url = 'http://nominatim.openstreetmap.org/search?q=' . urlencode($this->regionName) . ',' . urlencode($countryName) . '&format=json';
 
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_HEADER, 0);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_REFERER, 'https://digitalsocial.eu/');
-        $json = curl_exec($ch);
-        curl_close($ch);
+        $getGeo = new Geolocation();
+        $getGeo->setRegionName($this->regionName);
+        $getGeo->setCountryName($countryName);
 
-        $location = null;
-        if ($json) {
-            $locations = json_decode($json, true);
-            if ($locations)
-                $location = $locations[0];
-        }
-
-        if (!$location) {
+        if ($getGeo->exec()) {
+            $this->geoLocation->lat = $getGeo->getLat();
+            $this->geoLocation->lon = $getGeo->getLon();
+        } else {
             $this->errorHandler->addTaggedError('region', __('This location could not be found.'));
             throw $this->errorHandler;
         }
-
-        $this->geoLocation->lat = $location['lat'];
-        $this->geoLocation->lon = $location['lon'];
     }
 
     /**
