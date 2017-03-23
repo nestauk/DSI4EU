@@ -32,6 +32,9 @@ class Router
         } elseif (preg_match('<^/' . $langHandler . 'dashboard\.json$>', $this->pageURL, $matches)) {
             $this->dashboardJson($matches);
 
+        } elseif (preg_match('<^/' . $langHandler . 'notifications\.json$>', $this->pageURL, $matches)) {
+            $this->notificationsJson($matches);
+
         } elseif ($this->pageURL === '/forgotPassword.json') {
             $this->forgotPasswordJson();
 
@@ -439,6 +442,14 @@ class Router
 
         $command = new \DSI\Controller\DashboardController();
         $command->format = 'json';
+        $command->exec();
+    }
+
+    private function notificationsJson($matches)
+    {
+        $this->setLanguageFromUrl($matches);
+
+        $command = new \DSI\Controller\NotificationsController();
         $command->exec();
     }
 

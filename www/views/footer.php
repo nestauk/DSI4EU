@@ -147,7 +147,7 @@ if (!isset($urlHandler))
     </div>
 
     <div class="centre footer-small-print">
-        <?php _ehtml('Nesta is a registered charity')?>
+        <?php _ehtml('Nesta is a registered charity') ?>
     </div>
 </div>
 
@@ -386,11 +386,11 @@ if (!isset($urlHandler))
 </div>
  */ ?>
 
-<script
-        src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/SearchController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"
-        type="text/javascript"></script>
+<script type="text/javascript"
+        src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/SearchController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 
-<div class="search-block" ng-controller="SearchController" data-langpath="<?php echo \DSI\Service\Translate::getCurrentLangPath()?>">
+<div class="search-block" ng-controller="SearchController"
+     data-langpath="<?php echo \DSI\Service\Translate::getCurrentLangPath() ?>">
     <div class="close-search" data-ix="close-search-block">+</div>
     <h1 class="search-h1"><?php _ehtml('Search') ?></h1>
     <div class="w-form">
@@ -421,7 +421,7 @@ if (!isset($urlHandler))
                 </a>
                 <a class="full-menu-link view-all" ng-show="search.projects.length > 0"
                    href="<?php echo $urlHandler->projects() ?>?q={{search.entry}}">
-                    <?php _ehtml('View all project results')?>
+                    <?php _ehtml('View all project results') ?>
                 </a>
                 <div ng-show="search.projects.length == 0"><?php _ehtml('No projects found') ?></div>
             </div>
@@ -433,7 +433,7 @@ if (!isset($urlHandler))
                 </a>
                 <a class="full-menu-link view-all" ng-show="search.organisations.length > 0"
                    href="<?php echo $urlHandler->organisations() ?>?q={{search.entry}}">
-                    <?php _ehtml('View all organisation results')?>
+                    <?php _ehtml('View all organisation results') ?>
                 </a>
                 <div ng-show="search.organisations.length == 0"><?php _ehtml('No organisations found') ?></div>
             </div>
@@ -455,17 +455,43 @@ if (!isset($urlHandler))
     </div>
 </div>
 
+<?php if ($loggedInUser AND HIDE_NOTIFICATIONS !== true) { ?>
+    <div ng-controller="NotificationController" data-url="<?= $urlHandler->notifications() ?>">
+        <div class="toast-notification" data-ix="toast-in" ng-show="notifications > 0">
+            <a class="link-block w-clearfix w-inline-block" href="<?= $urlHandler->dashboard() ?>">
+                <img class="image" height="75" width="75"
+                     src="<?php echo \DSI\Entity\Image::PROFILE_PIC_URL . $loggedInUser->getProfilePicOrDefault() ?>">
+                <div class="text-block-2"><span class="text-span">Digitalsocial.eu</span> dashboard</div>
+                <div class="text-block-3">
+                    <span ng-show="notifications == 1"><?php _ehtml('You have 1 new notification') ?></span>
+                    <span ng-show="notifications > 1"><?php echo show_input(sprintf(__('You have %s new notifications'), '{{notifications}}')) ?></span>
+                </div>
+            </a>
+            <?php /*
+            <div class="div-block">
+                <a class="link-block-2 w-inline-block" data-ix="remove-toast" href="#">
+                    <div class="text-block">+</div>
+                </a>
+            </div>
+            */ ?>
+        </div>
+    </div>
+    <script type="text/javascript"
+            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/NotificationController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
+<?php } ?>
+
 <div class="cookies" id="cookies">
     <div class="container-wide">
         <div class="w-row">
             <div class="w-col w-col-6">
                 <h3 class="cookie-h3">
-                    <?php _ehtml('We use cookies')?>
+                    <?php _ehtml('We use cookies') ?>
                 </h3>
             </div>
             <div class="w-clearfix w-col w-col-6">
-                <a class="cookie-button w-button" href="#"><?php _ehtml('Find out more')?></a>
-                <a class="cookie-button w-button" href="#" onclick="$('#cookies').hide()"><?php _ehtml('Continue')?></a>
+                <a class="cookie-button w-button" href="#"><?php _ehtml('Find out more') ?></a>
+                <a class="cookie-button w-button" href="#"
+                   onclick="$('#cookies').hide()"><?php _ehtml('Continue') ?></a>
             </div>
         </div>
     </div>

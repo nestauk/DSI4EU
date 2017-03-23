@@ -8211,6 +8211,7 @@ strong {
   max-width: 70%;
   padding-bottom: 0px;
   padding-left: 10px;
+  color: #020202;
   text-shadow: none;
 }
 
@@ -10116,6 +10117,112 @@ strong {
   bottom: 10px;
 }
 
+.toast-notification {
+  position: fixed;
+  top: 100px;
+  right: 10px;
+  z-index: 9999999;
+  width: 400px;
+  height: 75px;
+  background-color: #08122a;
+}
+
+.toast-notification:hover {
+  background-color: #1a243d;
+}
+
+.link-block {
+  width: 100%;
+  box-shadow: 0 14px 50px -10px #000;
+  text-decoration: none;
+}
+
+.div-block {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  width: 75px;
+  height: 75px;
+}
+
+.link-block-2 {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  z-index: 20;
+  width: 75px;
+  height: 75px;
+  text-decoration: none;
+}
+
+.text-block {
+  position: relative;
+  top: 13px;
+  right: 0px;
+  display: block;
+  width: 50px;
+  height: 50px;
+  margin-right: auto;
+  margin-left: auto;
+  border-radius: 50px;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  color: #e2e2e2;
+  font-size: 50px;
+  line-height: 50px;
+  font-weight: 100;
+  text-align: center;
+  text-decoration: none;
+}
+
+.text-block:hover {
+  background-color: rgba(224, 227, 233, .14);
+}
+
+.image {
+  position: relative;
+  padding: 10px;
+  float: left;
+  border-radius: 40px;
+}
+
+.text-block-2 {
+  margin-top: 15px;
+  color: #e2e2e2;
+  font-weight: 500;
+}
+
+.text-block-3 {
+  color: #e2e2e2;
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 400;
+}
+
+.div-block-2 {
+  position: absolute;
+  left: -5px;
+  top: -5px;
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  background-color: red;
+}
+
+.text-block-4 {
+  margin-top: 4px;
+  color: #e2e2e2;
+  font-size: 10px;
+  line-height: 10px;
+}
+
+.text-span {
+  background-color: transparent;
+  color: rgba(29, 201, 160, .94);
+}
+
 html.w-mod-js *[data-ix="pin-drop"] {
   opacity: 0;
   -webkit-transform: translate(0px, -100px);
@@ -10474,6 +10581,14 @@ html.w-mod-js *[data-ix="growinanim"] {
 
 html.w-mod-js *[data-ix="closed"] {
   height: 0px;
+}
+
+html.w-mod-js *[data-ix="toast-in"] {
+  display: none;
+  opacity: 0;
+  -webkit-transform: translate(0px, 20px);
+  -ms-transform: translate(0px, 20px);
+  transform: translate(0px, 20px);
 }
 
 @media (max-width: 991px) {
@@ -11921,6 +12036,11 @@ html.w-mod-js *[data-ix="closed"] {
   .twitter-text {
     margin-top: 11px;
     font-size: 13px;
+  }
+  .toast-notification {
+    top: 84px;
+    right: 0px;
+    width: 100%;
   }
 }
 

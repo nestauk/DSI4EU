@@ -145,6 +145,7 @@ class DashboardController
             $projectsMember = (new ProjectMemberRepository())->getByMemberID($loggedInUser->getId());
             $organisationsMember = (new OrganisationMemberRepository())->getByMemberID($loggedInUser->getId());
             JsModules::setTranslations(true);
+            define('HIDE_NOTIFICATIONS', true);
             require __DIR__ . '/../../../www/views/dashboard.php';
         }
 
@@ -473,7 +474,7 @@ class DashboardController
      * @param DashboardController_Update $b
      * @return int
      */
-    private function sortDashboardUpdates(DashboardController_Update $a, DashboardController_Update $b):int
+    private function sortDashboardUpdates(DashboardController_Update $a, DashboardController_Update $b): int
     {
         if ($a->timestamp == $b->timestamp) {
             return 0;

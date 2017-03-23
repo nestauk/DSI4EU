@@ -29,6 +29,11 @@ class URL
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'dashboard' . $extension;
     }
 
+    public function notifications()
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'notifications.json';
+    }
+
     public function register()
     {
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'register';
