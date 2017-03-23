@@ -1,4 +1,5 @@
 <?php
+use \DSI\Service\App;
 
 define('SITE_DOMAIN', '{domainName}');
 define('SITE_RELATIVE_PATH', '{relativePath}');
@@ -19,6 +20,8 @@ if (!defined('NO_SESSION') OR NO_SESSION != true) {
 require __DIR__ . '/functions.php';
 require __DIR__ . '/exceptions.php';
 require __DIR__ . '/../vendor/autoload.php';
+
+App::setEnv(App::LIVE);
 
 \DSI\Repository\OrganisationRepositoryInAPC::setApcKey(
     'digitalSocial:organisations'
