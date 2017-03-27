@@ -3,6 +3,8 @@
 namespace DSI\Controller;
 
 use DSI\Entity\Project;
+use DSI\Entity\ProjectImpactHelpTag;
+use DSI\Entity\ProjectImpactTechTag;
 use DSI\Repository\OrganisationProjectRepository;
 use DSI\Repository\ProjectDsiFocusTagRepository;
 use DSI\Repository\ProjectImpactHelpTagRepository;
@@ -21,6 +23,7 @@ class ExportProjectsController
 
     public function exec()
     {
+        set_time_limit(0);
         $this->urlHandler = $urlHandler = new URL();
         $authUser = new Auth();
         $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
@@ -120,9 +123,9 @@ class ExportProjectsController
                 'longitude' => $project->getRegionLongitude(),
                 'linked_organisation_ids' => implode(', ', $this->getProjectOrganisationIDs($project)),
                 'who_we_help_tags' => implode(', ', $this->getTags($project)),
-                'support_tags' => implode(', ', $this->getSupportsTags($project)),
-                'focus' => implode(', ', $this->getFocusTags($project)),
-                'technology' => implode(', ', $this->getTechnologyTags($project)),
+                'support_tags' => implode(', ', $this->getSupportsTagsNames($project)),
+                'focus' => implode(', ', $this->getFocusTagsNames($project)),
+                'technology' => implode(', ', $this->getTechnologyTagsNames($project)),
                 'creation_date' => $project->getCreationTime('Y-m-d'),
             ]);
         }
@@ -157,20 +160,29 @@ class ExportProjectsController
                 $xmlOrganisations->addChild('organisation', htmlspecialchars($organisationID));
 
             $xmlTags = $xmlProject->addChild('who_we_help_tags');
-            foreach ($this->getTags($project) AS $tagID)
-                $xmlTags->addChild('tag', htmlspecialchars($tagID));
+            foreach ($this->getTags($project) AS $tag)
+                $xmlTags->addChild('tag', htmlspecialchars($tag));
 
             $xmlTags = $xmlProject->addChild('support_tags');
-            foreach ($this->getSupportsTags($project) AS $tagID)
-                $xmlTags->addChild('tag', htmlspecialchars($tagID));
+            foreach ($this->getSupportsTags($project) AS $tag) {
+                $xmlTag = $xmlTags->addChild('tag');
+                $xmlTag->addChild('id', $tag['id']);
+                $xmlTag->addChild('name', htmlspecialchars($tag['name']));
+            }
 
             $xmlTags = $xmlProject->addChild('focus');
-            foreach ($this->getFocusTags($project) AS $tagID)
-                $xmlTags->addChild('tag', htmlspecialchars($tagID));
+            foreach ($this->getFocusTags($project) AS $tag) {
+                $xmlTag = $xmlTags->addChild('tag');
+                $xmlTag->addChild('id', $tag['id']);
+                $xmlTag->addChild('name', htmlspecialchars($tag['name']));
+            }
 
             $xmlTags = $xmlProject->addChild('technology');
-            foreach ($this->getTechnologyTags($project) AS $tagID)
-                $xmlTags->addChild('tag', htmlspecialchars($tagID));
+            foreach ($this->getTechnologyTags($project) AS $tag) {
+                $xmlTag = $xmlTags->addChild('tag');
+                $xmlTag->addChild('id', $tag['id']);
+                $xmlTag->addChild('name', htmlspecialchars($tag['name']));
+            }
 
             $xmlProject->addChild('creation_date', htmlspecialchars($project->getCreationTime('Y-m-d')));
         }
@@ -189,18 +201,33 @@ class ExportProjectsController
         return (new ProjectTagRepository())->getTagNamesByProject($project);
     }
 
-    private function getSupportsTags(Project $project)
+    private function getSupportsTagsNames(Project $project)
     {
         return (new ProjectImpactHelpTagRepository())->getTagNamesByProject($project);
     }
 
-    private function getFocusTags(Project $project)
+    private function getSupportsTags(Project $project)
+    {
+        return (new ProjectImpactHelpTagRepository())->getTagDataByProject($project);
+    }
+
+    private function getFocusTagsNames(Project $project)
     {
         return (new ProjectDsiFocusTagRepository())->getTagNamesByProject($project);
     }
 
-    private function getTechnologyTags(Project $project)
+    private function getFocusTags(Project $project)
+    {
+        return (new ProjectDsiFocusTagRepository())->getTagDataByProject($project);
+    }
+
+    private function getTechnologyTagsNames(Project $project)
     {
         return (new ProjectImpactTechTagRepository())->getTagNamesByProject($project);
+    }
+
+    private function getTechnologyTags(Project $project)
+    {
+        return (new ProjectImpactTechTagRepository())->getTagDataByProject($project);
     }
 }

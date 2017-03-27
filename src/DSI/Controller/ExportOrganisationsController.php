@@ -3,6 +3,7 @@
 namespace DSI\Controller;
 
 use DSI\Entity\Organisation;
+use DSI\Entity\OrganisationNetworkTag;
 use DSI\Repository\OrganisationNetworkTagRepository;
 use DSI\Repository\OrganisationProjectRepository;
 use DSI\Repository\OrganisationRepository;
@@ -63,7 +64,7 @@ class ExportOrganisationsController
                 'latitude' => $organisation->getRegionLatitude(),
                 'longitude' => $organisation->getRegionLongitude(),
                 'address' => $organisation->getAddress(),
-                'organisation_type' => $organisation->getTypeName(),
+                'organisation_type' => $this->getType($organisation),
                 'organisation_size' => $organisation->getSizeName(),
                 'startDate' => $organisation->getStartDate(),
                 'linked_project_ids' => $this->getOrganisationProjectIDs($organisation),
@@ -118,7 +119,7 @@ class ExportOrganisationsController
                 'start_date' => $organisation->getStartDate(),
                 'linked_project_ids' => implode(', ', $this->getOrganisationProjectIDs($organisation)),
                 'tags' => implode(', ', $this->getTags($organisation)),
-                'networkTags' => implode(', ', $this->getNetworkTags($organisation)),
+                'networkTags' => implode(', ', $this->getNetworkTagNames($organisation)),
                 'created' => $organisation->getCreationTime('Y-m-d'),
             ]);
         }
@@ -145,21 +146,27 @@ class ExportOrganisationsController
             $xmlOrganisation->addChild('latitude', htmlspecialchars($organisation->getRegionLatitude()));
             $xmlOrganisation->addChild('longitude', htmlspecialchars($organisation->getRegionLongitude()));
             $xmlOrganisation->addChild('address', htmlspecialchars($organisation->getAddress()));
-            $xmlOrganisation->addChild('organisation_type', htmlspecialchars($organisation->getTypeName()));
             $xmlOrganisation->addChild('organisation_size', htmlspecialchars($organisation->getSizeName()));
             $xmlOrganisation->addChild('start_date', htmlspecialchars($organisation->getStartDate()));
+
+            $xmlType = $xmlOrganisation->addChild('organisation_type');
+            $xmlType->addChild('id', $organisation->getTypeId());
+            $xmlType->addChild('name', htmlspecialchars($organisation->getTypeName()));
 
             $xmlProjects = $xmlOrganisation->addChild('linked_project_ids');
             foreach ($this->getOrganisationProjectIDs($organisation) AS $projectID)
                 $xmlProjects->addChild('project', htmlspecialchars($projectID));
 
             $xmlTags = $xmlOrganisation->addChild('tags');
-            foreach ($this->getTags($organisation) AS $tagID)
-                $xmlTags->addChild('tag', htmlspecialchars($tagID));
+            foreach ($this->getTags($organisation) AS $tag)
+                $xmlTags->addChild('tag', htmlspecialchars($tag));
 
             $xmlTags = $xmlOrganisation->addChild('networkTags');
-            foreach ($this->getNetworkTags($organisation) AS $tagID)
-                $xmlTags->addChild('tag', htmlspecialchars($tagID));
+            foreach ($this->getNetworkTags($organisation) AS $tag) {
+                $xmlTag = $xmlTags->addChild('tag');
+                $xmlTag->addChild('id', $tag['id']);
+                $xmlTag->addChild('name', $tag['name']);
+            }
 
             $xmlOrganisation->addChild('created', htmlspecialchars($organisation->getCreationTime('Y-m-d')));
         }
@@ -175,11 +182,24 @@ class ExportOrganisationsController
 
     private function getNetworkTags(Organisation $organisation)
     {
+        return (new OrganisationNetworkTagRepository())->getTagDataByOrganisation($organisation);
+    }
+
+    private function getNetworkTagNames(Organisation $organisation)
+    {
         return (new OrganisationNetworkTagRepository())->getTagNamesByOrganisation($organisation);
     }
 
     private function getTags(Organisation $organisation)
     {
         return (new OrganisationTagRepository())->getTagNamesByOrganisation($organisation);
+    }
+
+    private function getType(Organisation $organisation)
+    {
+        return [
+            'id' => $organisation->getTypeId(),
+            'name' => $organisation->getTypeName(),
+        ];
     }
 }

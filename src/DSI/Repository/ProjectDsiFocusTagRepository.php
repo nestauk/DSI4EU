@@ -160,6 +160,17 @@ class ProjectDsiFocusTagRepository
         return $query->fetch_all('tag');
     }
 
+    public function getTagDataByProject(Project $project)
+    {
+        $query = new SQL("SELECT id, tag AS name 
+            FROM `dsi-focus-tags` 
+            LEFT JOIN `{$this->table}` ON `dsi-focus-tags`.`id` = `{$this->table}`.`tagID`
+            WHERE `{$this->table}`.`projectID` = '{$project->getId()}'
+            ORDER BY `dsi-focus-tags`.`tag`
+        ");
+        return $query->fetch_all();
+    }
+
     public function getTagIDsByProject(Project $project)
     {
         $query = new SQL("SELECT tagID 

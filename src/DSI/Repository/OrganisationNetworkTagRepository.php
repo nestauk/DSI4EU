@@ -75,6 +75,17 @@ class OrganisationNetworkTagRepository
 
     /**
      * @param Organisation $organisation
+     * @return OrganisationNetworkTag[]
+     */
+    public function getByOrganisation(Organisation $organisation)
+    {
+        return $this->getObjectsWhere([
+            "`organisationID` = '{$organisation->getId()}'"
+        ]);
+    }
+
+    /**
+     * @param Organisation $organisation
      * @return \int[]
      */
     public function getTagIDsForOrganisation(Organisation $organisation)
@@ -181,5 +192,16 @@ class OrganisationNetworkTagRepository
             ORDER BY `network-tags`.`tag`
         ");
         return $query->fetch_all('tag');
+    }
+
+    public function getTagDataByOrganisation(Organisation $organisation)
+    {
+        $query = new SQL("SELECT id, tag AS name
+            FROM `network-tags` 
+            LEFT JOIN `{$this->table}` ON `network-tags`.`id` = `{$this->table}`.`tagID`
+            WHERE `{$this->table}`.`organisationID` = '{$organisation->getId()}'
+            ORDER BY `network-tags`.`tag`
+        ");
+        return $query->fetch_all();
     }
 }

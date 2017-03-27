@@ -83,6 +83,17 @@ class ProjectImpactHelpTagRepository
     }
 
     /**
+     * @param Project $project
+     * @return ProjectImpactHelpTag[]
+     */
+    public function getByProject(Project $project)
+    {
+        return $this->getObjectsWhere([
+            "`projectID` = '{$project->getId()}'"
+        ]);
+    }
+
+    /**
      * @param int $tagID
      * @return \DSI\Entity\ProjectImpactHelpTag[]
      */
@@ -166,6 +177,17 @@ class ProjectImpactHelpTagRepository
             ORDER BY `impact-tags`.`tag`
         ");
         return $query->fetch_all('tag');
+    }
+
+    public function getTagDataByProject(Project $project)
+    {
+        $query = new SQL("SELECT id, tag AS name
+            FROM `impact-tags` 
+            LEFT JOIN `{$this->table}` ON `impact-tags`.`id` = `{$this->table}`.`tagID`
+            WHERE `{$this->table}`.`projectID` = '{$project->getId()}'
+            ORDER BY `impact-tags`.`tag`
+        ");
+        return $query->fetch_all();
     }
 
     public function getTagIDsByProject(Project $project)

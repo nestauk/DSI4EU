@@ -160,6 +160,17 @@ class ProjectImpactTechTagRepository
         return $query->fetch_all('tag');
     }
 
+    public function getTagDataByProject(Project $project)
+    {
+        $query = new SQL("SELECT id, tag AS name
+            FROM `impact-tags` 
+            LEFT JOIN `{$this->table}` ON `impact-tags`.`id` = `{$this->table}`.`tagID`
+            WHERE `{$this->table}`.`projectID` = '{$project->getId()}'
+            ORDER BY `impact-tags`.`tag`
+        ");
+        return $query->fetch_all();
+    }
+
     public function getTagIDsByProject(Project $project)
     {
         $query = new SQL("SELECT tagID 
