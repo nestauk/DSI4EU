@@ -1,15 +1,22 @@
 <?php
+use \DSI\Service\Translate;
+use \DSI\Entity\Translation;
+
 require __DIR__ . '/src/config.php';
 
 class CliRouter
 {
     public function exec($args)
     {
+        Translate::setCurrentLang(Translation::DEFAULT_LANGUAGE);
+
         if (!isset($args[1])) {
-            echo 'send-cached-emails' . PHP_EOL;
-            echo 'import-user-project-organisation-links' . PHP_EOL;
-            echo 'import-organisation-urls' . PHP_EOL;
             echo 'cities-to-geolocation' . PHP_EOL;
+            echo 'import-organisations' . PHP_EOL;
+            echo 'import-organisation-urls' . PHP_EOL;
+            echo 'import-projects' . PHP_EOL;
+            echo 'import-user-project-organisation-links' . PHP_EOL;
+            echo 'send-cached-emails' . PHP_EOL;
             echo 'update-organisations-partners-count' . PHP_EOL;
             echo 'update-project-tags' . PHP_EOL;
             echo 'update-project-tech-tags' . PHP_EOL;
@@ -20,8 +27,12 @@ class CliRouter
             $this->sendCachedEmails();
         } elseif ($args[1] == 'import-user-project-organisation-links') {
             $this->importUserProjectOrganisationLink();
+        } elseif ($args[1] == 'import-organisations') {
+            $this->importOrganisations();
         } elseif ($args[1] == 'import-organisation-urls') {
             $this->importOrganisationURLs();
+        } elseif ($args[1] == 'import-projects') {
+            $this->importProjects();
         } elseif ($args[1] == 'cities-to-geolocation') {
             $this->citiesToGeolocation();
         } elseif ($args[1] == 'update-organisations-partners-count') {
@@ -44,6 +55,18 @@ class CliRouter
     private function importUserProjectOrganisationLink()
     {
         $command = new \DSI\Controller\CLI\ImportUserProjectOrganisationLinkController();
+        $command->exec();
+    }
+
+    private function importOrganisations()
+    {
+        $command = new \DSI\Controller\CLI\ImportOrganisationsController();
+        $command->exec();
+    }
+
+    private function importProjects()
+    {
+        $command = new \DSI\Controller\CLI\importProjectsController();
         $command->exec();
     }
 

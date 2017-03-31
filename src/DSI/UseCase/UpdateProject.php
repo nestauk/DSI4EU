@@ -87,7 +87,7 @@ class UpdateProject
             $this->setAreasOfImpact();
         if (isset($this->data()->focusTags))
             $this->setImpactTagsB();
-        if (isset($this->data()->impactTagsC))
+        if (isset($this->data()->technologyTags))
             $this->setImpactTagsC();
         if (isset($this->data()->links))
             $this->setLinks();
@@ -170,7 +170,7 @@ class UpdateProject
     private function setImpactTagsC()
     {
         $projectTags = (new ProjectImpactTechTagRepository())->getTagNamesByProject($this->data()->project);
-        foreach ($this->data()->impactTagsC AS $newTagName) {
+        foreach ($this->data()->technologyTags AS $newTagName) {
             if (!in_array($newTagName, $projectTags)) {
                 $addTag = new AddImpactTechTagToProject();
                 $addTag->data()->projectID = $this->data()->project->getId();
@@ -179,7 +179,7 @@ class UpdateProject
             }
         }
         foreach ($projectTags AS $oldTagName) {
-            if (!in_array($oldTagName, $this->data()->impactTagsC)) {
+            if (!in_array($oldTagName, $this->data()->technologyTags)) {
                 $remTag = new RemoveImpactTechTagFromProject();
                 $remTag->data()->projectID = $this->data()->project->getId();
                 $remTag->data()->tag = $oldTagName;
@@ -397,7 +397,7 @@ class UpdateProject_Data
     public $tags,
         $areasOfImpact,
         $focusTags,
-        $impactTagsC,
+        $technologyTags,
         $links,
         $organisations;
 

@@ -5,6 +5,7 @@ namespace DSI\Service;
 class App
 {
     const DEV = 'dev';
+    const TEST = 'test';
     const LIVE = 'live';
 
     private static $env;

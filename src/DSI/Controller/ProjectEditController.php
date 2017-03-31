@@ -60,7 +60,7 @@ class ProjectEditController
                         $updateProject->data()->tags = $_POST['tags'] ?? [];
                         $updateProject->data()->areasOfImpact = $_POST['areasOfImpact'] ?? [];
                         $updateProject->data()->focusTags = $_POST['focusTags'] ?? [];
-                        $updateProject->data()->impactTagsC = $_POST['impactTagsC'] ?? [];
+                        $updateProject->data()->technologyTags = $_POST['impactTagsC'] ?? [];
                         $updateProject->data()->links = $_POST['links'] ?? [];
                         $updateProject->data()->organisations = $_POST['organisations'] ?? [];
                         $updateProject->exec();

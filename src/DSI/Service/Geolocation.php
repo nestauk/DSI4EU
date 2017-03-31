@@ -32,9 +32,12 @@ class Geolocation
         return $this->lon;
     }
 
+    /**
+     * @return bool
+     */
     public function exec()
     {
-        if (defined("NO_SESSION") AND NO_SESSION == true) {
+        if (App::getEnv() == App::DEV) {
             $this->lat = 1;
             $this->lon = 1;
             return true;
