@@ -128,6 +128,26 @@ if (!isset($urlHandler))
         ?>
     </div>
 </div>
+
+<style>.embed-container {
+        position: relative;
+        padding-bottom: 56.25%;
+        height: 0;
+        overflow: hidden;
+        max-width: 100%;
+    }
+
+    .embed-container iframe, .embed-container object, .embed-container embed {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }</style>
+<div class='embed-container'>
+    <iframe src='http://dsitest.todo.to.it/' style='border:0'></iframe>
+</div>
+
 <div class="home-page-events">
     <div class="content-block cs">
         <h3 class="centered title"><?php _ehtml('Case Studies') ?></h3>
