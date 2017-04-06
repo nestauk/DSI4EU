@@ -145,7 +145,7 @@ if (!isset($urlHandler))
         height: 100%;
     }</style>
 <div class='embed-container'>
-    <iframe src='http://dsitest.todo.to.it/' style='border:0'></iframe>
+    <iframe src='https://dsitest.todo.to.it/viz/' style='border:0'></iframe>
 </div>
 
 <div class="home-page-events">
