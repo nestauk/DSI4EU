@@ -26,7 +26,7 @@ class ExportProjectsController
         set_time_limit(0);
         $this->urlHandler = $urlHandler = new URL();
         $authUser = new Auth();
-        $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
+        $loggedInUser = $authUser->getUserIfLoggedIn();
 
         $projects = (new ProjectRepositoryInAPC())->getAll();
 

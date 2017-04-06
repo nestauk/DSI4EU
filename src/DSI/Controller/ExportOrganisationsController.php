@@ -21,9 +21,10 @@ class ExportOrganisationsController
 
     public function exec()
     {
+        set_time_limit(0);
         $this->urlHandler = $urlHandler = new URL();
         $authUser = new Auth();
-        $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
+        $loggedInUser = $authUser->getUserIfLoggedIn();
 
         $organisations = (new OrganisationRepositoryInAPC())->getAll();
 
