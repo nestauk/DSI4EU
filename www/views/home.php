@@ -160,20 +160,31 @@ if (!isset($urlHandler))
 <div class="datavis stats-bg" data-ix="show-data-vis">
     <div class="content">
         <div class="row w-row">
-            <div class="column-2 w-clearfix w-col w-col-6">
+            <div class="column-2 w-clearfix w-col w-col-6 w-col-stack">
                 <h3 class="data-h3">Data visualisation</h3>
                 <h2 class="data h2-large" data-ix="fadeinuponload-2">EXPLORE the data visualisation text to go here</h2>
-                <p class="data-p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in
-                    eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo
-                    diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem
-                    vitae risus tristique posuere.</p>
+                <p class="data-p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p>
                 <a class="large log-in-link sign-up w-clearfix w-inline-block" data-ix="log-in-arrow" href="#">
-                    <div class="data-button login-li menu-li">Check out the Data vis</div>
-                    <img class="login-arrow" src="images/ios7-arrow-thin-right.png">
+                    <div class="data-button login-li menu-li">Check out the Data vis</div><img class="login-arrow" src="images/ios7-arrow-thin-right.png">
                 </a>
             </div>
-            <div class="column w-col w-col-6">
-                <div class="div-block-3"></div>
+            <div class="column w-col w-col-6 w-col-stack">
+                <div class="div-block-3">
+                    <div class="map-point mp3" data-ix="map-point-expand"></div>
+                    <div class="map-point mp5" data-ix="map-point-expand"></div>
+                    <div class="map-point mp13" data-ix="map-point-expand"></div>
+                    <div class="map-point mp12" data-ix="map-point-expand"></div>
+                    <div class="map-point" data-ix="map-point-expand"></div>
+                    <div class="map-point mp9" data-ix="map-point-expand-3"></div>
+                    <div class="map-point mp8" data-ix="map-point-expand-3"></div>
+                    <div class="map-point mp7" data-ix="map-point-expand-3"></div>
+                    <div class="map-point mp4" data-ix="map-point-expand-2"></div>
+                    <div class="map-point mp11" data-ix="map-point-expand-2"></div>
+                    <div class="map-point mp14" data-ix="map-point-expand-2"></div>
+                    <div class="map-point mp10" data-ix="map-point-expand-2"></div>
+                    <div class="map-point mp6" data-ix="map-point-expand-2"></div>
+                    <div class="map-point mp2" data-ix="map-point-expand-2"></div>
+                </div>
             </div>
         </div>
     </div>
