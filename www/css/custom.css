@@ -694,3 +694,10 @@ body#tinymce.mce-content-body {
 .log-in-link {
     width: auto;
 }
+
+.signn .large.log-in-link.sign-up.w-clearfix.w-inline-block{
+    width: 290px;
+    margin-top: auto;
+    margin-left: auto;
+    float: none;
+}

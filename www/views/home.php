@@ -42,7 +42,7 @@ if (!isset($urlHandler))
             }
         </style>
         <div class="embed-container">
-            <iframe src="http://dsitest.todo.to.it/viz/" style="border:0"></iframe>
+            <iframe src="<?= \DSI\Service\DataVis::getUrl() ?>" style="border:0"></iframe>
         </div>
     </div>
 </div>
@@ -163,9 +163,13 @@ if (!isset($urlHandler))
             <div class="column-2 w-clearfix w-col w-col-6 w-col-stack">
                 <h3 class="data-h3">Data visualisation</h3>
                 <h2 class="data h2-large" data-ix="fadeinuponload-2">EXPLORE the data visualisation text to go here</h2>
-                <p class="data-p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p>
+                <p class="data-p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in
+                    eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo
+                    diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem
+                    vitae risus tristique posuere.</p>
                 <a class="large log-in-link sign-up w-clearfix w-inline-block" data-ix="log-in-arrow" href="#">
-                    <div class="data-button login-li menu-li">Check out the Data vis</div><img class="login-arrow" src="images/ios7-arrow-thin-right.png">
+                    <div class="data-button login-li menu-li">Check out the Data vis</div>
+                    <img class="login-arrow" src="images/ios7-arrow-thin-right.png">
                 </a>
             </div>
             <div class="column w-col w-col-6 w-col-stack">
