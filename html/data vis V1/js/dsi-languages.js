@@ -1235,6 +1235,7 @@
     function addListeners() {
       listening = true;
 
+      /*
       // Handle form submission for Webflow forms
       $doc.on('submit', namespace + ' form', function(evt) {
         var data = $.data(this, namespace);
@@ -1243,6 +1244,7 @@
           data.handler(data);
         }
       });
+      */
     }
 
     // Reset data common to all submit handlers
@@ -3501,5 +3503,10 @@ Webflow.require('ix').init([
   {"slug":"toast-in","name":"toast in","value":{"style":{"display":"none","opacity":0,"x":"0px","y":"20px","z":"0px"},"triggers":[{"type":"load","stepsA":[{"wait":"500ms"},{"display":"block"},{"opacity":1,"transition":"opacity 300ms ease 0, transform 300ms ease 0","x":"0px","y":"0px","z":"0px"}],"stepsB":[]}]}},
   {"slug":"hide-data-vis","name":"hide data vis","value":{"style":{},"triggers":[{"type":"click","selector":".data-vis-overlay","preserve3d":true,"stepsA":[{"opacity":0,"transition":"opacity 300ms ease 0, transform 300ms ease 0","scaleX":0.9,"scaleY":0.9,"scaleZ":1},{"display":"none"}],"stepsB":[]}]}},
   {"slug":"data-vis-resting","name":"data vis resting","value":{"style":{"display":"none","opacity":0,"scaleX":0.9,"scaleY":0.9,"scaleZ":1},"triggers":[]}},
+  {"slug":"show-join-project","name":"Show join project","value":{"style":{},"triggers":[{"type":"click","selector":".join-project-modal","stepsA":[{"display":"block"}],"stepsB":[]}]}},
+  {"slug":"close-join-project","name":"Close join project","value":{"style":{},"triggers":[{"type":"click","selector":".join-project-modal","stepsA":[{"display":"none"}],"stepsB":[]}]}},
+  {"slug":"show-join-organisation","name":"Show join organisation","value":{"style":{},"triggers":[{"type":"click","selector":".join-organisation-modal","stepsA":[{"display":"block"}],"stepsB":[]}]}},
+  {"slug":"close-join-organisation","name":"Close join organisation","value":{"style":{},"triggers":[{"type":"click","selector":".join-organisation-modal","stepsA":[{"display":"none"}],"stepsB":[]}]}},
+  {"slug":"toast-in","name":"toast in","value":{"style":{"display":"none","opacity":0,"x":"0px","y":"20px","z":"0px"},"triggers":[{"type":"load","stepsA":[{"wait":"500ms"},{"display":"block"},{"opacity":1,"transition":"opacity 300ms ease 0, transform 300ms ease 0","x":"0px","y":"0px","z":"0px"}],"stepsB":[]}]}},
   {"slug":"show-data-vis","name":"show data vis","value":{"style":{},"triggers":[{"type":"click","selector":".data-vis-overlay","preserve3d":true,"stepsA":[{"display":"block"},{"opacity":1,"transition":"opacity 200 ease 0, transform 200 ease 0","scaleX":1,"scaleY":1,"scaleZ":1}],"stepsB":[]}]}}
 ]);

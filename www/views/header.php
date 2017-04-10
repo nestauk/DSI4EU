@@ -3,7 +3,7 @@ use \DSI\Service\URL;
 use \DSI\Service\Sysctl;
 
 /** @var $loggedInUser \DSI\Entity\User */
-/** @var $isHomePage bool */
+/** @var $isIndexPage bool */
 /** @var $angularModules string[] */
 /** @var $pageTitle string[] */
 
@@ -22,13 +22,16 @@ if (!isset($urlHandler))
 </head>
 <body ng-app="DSIApp">
 
-<?php require(__DIR__ . '/partialViews/header.php') ?>
+<?php
 
-<?php if ($loggedInUser) { ?>
-    <?php require __DIR__ . '/partialViews/createProjectAndOrganisation.php' ?>
-<?php } else { ?>
-    <?php require __DIR__ . '/partialViews/loginModal.php' ?>
-<?php } ?>
+require(__DIR__ . '/partialViews/header.php');
+
+if ($loggedInUser)
+    require __DIR__ . '/partialViews/createProjectAndOrganisation.php';
+else
+    require __DIR__ . '/partialViews/loginModal.php';
+
+?>
 
 <?php /*
 <?php if (!isset($hideSearch) OR $hideSearch !== true) { ?>

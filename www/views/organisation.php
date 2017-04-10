@@ -22,14 +22,42 @@ if (!isset($urlHandler))
     $urlHandler = new \DSI\Service\URL();
 
 ?>
-    <div
-            ng-controller="OrganisationController"
-            data-organisationid="<?php echo $organisation->getId() ?>">
+    <div ng-controller="OrganisationController"
+         data-organisationid="<?php echo $organisation->getId() ?>">
 
         <div class="case-study-intro org">
             <div class="header-content org">
-                <h1 class="case-study-h1 org"><?php echo show_input($organisation->getName()) ?></h1>
-                <h3 class="home-hero-h3 org"></h3>
+                <div class="w-row">
+                    <div class="w-col w-col-6 w-col-stack">
+                        <h1 class="case-study-h1 org"><?php echo show_input($organisation->getName()) ?></h1>
+                        <h3 class="home-hero-h3 org"><?php echo show_input($organisation->getShortDescription()) ?></h3>
+                    </div>
+                    <div class="column-3 w-col w-col-6 w-col-stack">
+                        <div class="w-embed w-iframe">
+                            <style>
+                                .embed-container {
+                                    position: relative;
+                                    padding-bottom: 56.25%;
+                                    height: 0;
+                                    overflow: hidden;
+                                    max-width: 100%;
+                                }
+
+                                .embed-container iframe, .embed-container object, .embed-container embed {
+                                    position: absolute;
+                                    top: 0;
+                                    left: 0;
+                                    width: 100%;
+                                    height: 100%;
+                                }
+                            </style>
+                            <div class="embed-container">
+                                <iframe src="http://dsitest.todo.to.it/viz/#/network?l=1&e=1&org=<?= $organisation->getId() ?>"
+                                        style="border:0"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -229,7 +257,6 @@ if (!isset($urlHandler))
                             <?php } ?>
                             */ ?>
 
-    <script
-            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/OrganisationController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
+    <script src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/OrganisationController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 
 <?php require __DIR__ . '/footer.php' ?>

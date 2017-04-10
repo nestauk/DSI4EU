@@ -583,11 +583,6 @@ div.error {
         position: relative;
         height: 500px;
     }
-
-    iframe {
-        width: 100% !important;
-        height: auto !important;
-    }
 }
 
 .sweet-alert button.cancel {

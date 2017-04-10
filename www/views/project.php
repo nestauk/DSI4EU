@@ -22,8 +22,37 @@ require __DIR__ . '/header.php';
                 <div class="case-study-img-bg-blur"
                      style="background-image: linear-gradient(180deg, rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), url('<?php echo \DSI\Entity\Image::PROJECT_HEADER_URL . $project->getHeaderImageOrDefault() ?>');"></div>
                 <div class="container-wide">
-                    <h1 class="case-study-h1"><?php echo show_input($project->getName()) ?></h1>
-                    <h3 class="home-hero-h3"></h3>
+                    <div class="w-row">
+                        <div class="w-col w-col-6 w-col-stack">
+                            <h1 class="case-study-h1 data-vis-h1"><?php echo show_input($project->getName()) ?></h1>
+                            <h3 class="home-hero-h3"><?php echo show_input($project->getShortDescription()) ?></h3>
+                        </div>
+                        <div class="w-col w-col-6 w-col-stack">
+                            <div class="html-embed-2 w-embed w-iframe">
+                                <style>
+                                    .embed-container {
+                                        position: relative;
+                                        padding-bottom: 56.25%;
+                                        height: 0;
+                                        overflow: hidden;
+                                        max-width: 100%;
+                                    }
+
+                                    .embed-container iframe, .embed-container object, .embed-container embed {
+                                        position: absolute;
+                                        top: 0;
+                                        left: 0;
+                                        width: 100%;
+                                        height: 100%;
+                                    }
+                                </style>
+                                <div class="embed-container">
+                                    <iframe src="http://dsitest.todo.to.it/viz/#/network?l=1&e=1&org=<?= $project->getId() ?>"
+                                            style="border:0"></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

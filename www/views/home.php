@@ -19,6 +19,34 @@ if (!isset($urlHandler))
 </head>
 <body id="top" ng-app="DSIApp">
 
+<div class="data-vis-overlay" data-ix="data-vis-resting">
+    <div class="close-data-vis" data-ix="hide-data-vis">
+        <div class="text-block-5">+</div>
+    </div>
+    <div class="html-embed w-embed w-iframe">
+        <style>
+            .embed-container {
+                position: relative;
+                padding-bottom: 56.25%;
+                height: 0;
+                overflow: hidden;
+                max-width: 100%;
+            }
+
+            .embed-container iframe, .embed-container object, .embed-container embed {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+        </style>
+        <div class="embed-container">
+            <iframe src="http://dsitest.todo.to.it/viz/" style="border:0"></iframe>
+        </div>
+    </div>
+</div>
+
 <?php if ($loggedInUser) { ?>
     <?php require __DIR__ . '/partialViews/createProjectAndOrganisation.php' ?>
 <?php } ?>
@@ -129,23 +157,26 @@ if (!isset($urlHandler))
     </div>
 </div>
 
-<style>.embed-container {
-        position: relative;
-        padding-bottom: 56.25%;
-        height: 0;
-        overflow: hidden;
-        max-width: 100%;
-    }
-
-    .embed-container iframe, .embed-container object, .embed-container embed {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-    }</style>
-<div class='embed-container'>
-    <iframe src='http://dsitest.todo.to.it/viz/' style='border:0'></iframe>
+<div class="datavis stats-bg" data-ix="show-data-vis">
+    <div class="content">
+        <div class="row w-row">
+            <div class="column-2 w-clearfix w-col w-col-6">
+                <h3 class="data-h3">Data visualisation</h3>
+                <h2 class="data h2-large" data-ix="fadeinuponload-2">EXPLORE the data visualisation text to go here</h2>
+                <p class="data-p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in
+                    eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo
+                    diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem
+                    vitae risus tristique posuere.</p>
+                <a class="large log-in-link sign-up w-clearfix w-inline-block" data-ix="log-in-arrow" href="#">
+                    <div class="data-button login-li menu-li">Check out the Data vis</div>
+                    <img class="login-arrow" src="images/ios7-arrow-thin-right.png">
+                </a>
+            </div>
+            <div class="column w-col w-col-6">
+                <div class="div-block-3"></div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="home-page-events">
