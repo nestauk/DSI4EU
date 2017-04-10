@@ -162,13 +162,20 @@ if (!isset($urlHandler))
         <div class="row w-row">
             <div class="column-2 w-clearfix w-col w-col-6 w-col-stack">
                 <h3 class="data-h3">Data visualisation</h3>
-                <h2 class="data h2-large" data-ix="fadeinuponload-2">EXPLORE the data visualisation text to go here</h2>
-                <p class="data-p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in
-                    eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo
-                    diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem
-                    vitae risus tristique posuere.</p>
+                <h2 class="data h2-large" data-ix="fadeinuponload-2">
+                    Explore Europe’s network of digital social innovation
+                </h2>
+                <p class="data-p">
+                    There are <?= $organisationsCount ?> organisations and <?= $projectsCount ?> projects working on DSI
+                    across Europe.
+                </p>
+                <p class="data-p">
+                    With our interactive data visualisation, you can explore the organisations and projects working on
+                    DSI across Europe. Check it out now to understand what’s going on across the continent and how you
+                    fit into it!
+                </p>
                 <a class="large log-in-link sign-up w-clearfix w-inline-block" data-ix="log-in-arrow" href="#">
-                    <div class="data-button login-li menu-li">Check out the Data vis</div>
+                    <div class="data-button login-li menu-li">Explore Europe’s DSI network</div>
                     <img class="login-arrow" src="images/ios7-arrow-thin-right.png">
                 </a>
             </div>
