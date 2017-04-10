@@ -157,7 +157,7 @@ if (!isset($urlHandler))
     </div>
 </div>
 
-<div class="datavis stats-bg" data-ix="show-data-vis">
+<div class="datavis stats-bg" data-ix="show-data-vis" id="datavis">
     <div class="content">
         <div class="row w-row">
             <div class="column-2 w-clearfix w-col w-col-6 w-col-stack">
