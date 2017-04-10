@@ -52,7 +52,7 @@ if (!isset($urlHandler))
                                 }
                             </style>
                             <div class="embed-container">
-                                <iframe src="http://dsitest.todo.to.it/viz/#/network?l=1&e=1&org=<?= $organisation->getId() ?>"
+                                <iframe src="http://dsitest.todo.to.it/viz/#/network?l=0&e=1&org=<?= $organisation->getId() ?>"
                                         style="border:0"></iframe>
                             </div>
                         </div>
