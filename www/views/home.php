@@ -19,34 +19,6 @@ if (!isset($urlHandler))
 </head>
 <body id="top" ng-app="DSIApp">
 
-<div class="data-vis-overlay" data-ix="data-vis-resting">
-    <div class="close-data-vis" data-ix="hide-data-vis">
-        <div class="text-block-5">+</div>
-    </div>
-    <div class="html-embed w-embed w-iframe">
-        <style>
-            .embed-container {
-                position: relative;
-                padding-bottom: 56.25%;
-                height: 0;
-                overflow: hidden;
-                max-width: 100%;
-            }
-
-            .embed-container iframe, .embed-container object, .embed-container embed {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-            }
-        </style>
-        <div class="embed-container">
-            <iframe src="<?= \DSI\Service\DataVis::getUrl() ?>" style="border:0"></iframe>
-        </div>
-    </div>
-</div>
-
 <?php if ($loggedInUser) { ?>
     <?php require __DIR__ . '/partialViews/createProjectAndOrganisation.php' ?>
 <?php } ?>
@@ -151,13 +123,12 @@ if (!isset($urlHandler))
             <?php _e("EXPLORE EUROPE’S GROWING NETWORK OF DIGITAL SOCIAL INNOVATION") ?>
         </h2>
 
-        <?php
-        require __DIR__ . '/partialViews/index-' . \DSI\Service\Translate::getCurrentLang() . '.php';
-        ?>
+        <?php require __DIR__ . '/partialViews/index-' . \DSI\Service\Translate::getCurrentLang() . '.php'; ?>
     </div>
 </div>
 
-<div class="datavis stats-bg" data-ix="show-data-vis" id="datavis">
+<div class="datavis stats-bg" data-ix="show-data-vis" id="datavis"
+     onclick="window.open('<?= \DSI\Service\DataVis::getUrl() ?>', '_blank');">
     <div class="content">
         <div class="row w-row">
             <div class="column-2 w-clearfix w-col w-col-6 w-col-stack">
@@ -176,7 +147,7 @@ if (!isset($urlHandler))
                 </p>
                 <a class="large log-in-link sign-up w-clearfix w-inline-block" data-ix="log-in-arrow" href="#">
                     <div class="data-button login-li menu-li">Explore Europe’s DSI network</div>
-                    <img class="login-arrow" src="images/ios7-arrow-thin-right.png">
+                    <img class="login-arrow" src="<?= SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
                 </a>
             </div>
             <div class="column w-col w-col-6 w-col-stack">
