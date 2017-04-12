@@ -23,7 +23,7 @@ if (!isset($urlHandler))
 
 ?>
     <div ng-controller="OrganisationController"
-         data-organisationid="<?php echo $organisation->getId() ?>">
+         data-organisationid="<?php echo $organisation->getId() ?>" class="page-organisation">
 
         <div class="case-study-intro org">
             <div class="header-content org">
