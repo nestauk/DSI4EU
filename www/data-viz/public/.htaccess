@@ -1,0 +1,3 @@
+RewriteEngine off
+Redirect 301 /viz/public     /viz/
+Redirect 301 /viz/public/    /viz/

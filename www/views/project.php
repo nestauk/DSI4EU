@@ -15,7 +15,7 @@ require __DIR__ . '/header.php';
 /** @var $urlHandler \DSI\Service\URL */
 ?>
     <div ng-controller="ProjectController"
-         data-jsonurl="<?php echo $urlHandler->projectJson($project) ?>">
+         data-jsonurl="<?php echo $urlHandler->projectJson($project) ?>" class="page-project">
 
         <div class="case-study-intro data-vis-intro">
             <div class="header-content">

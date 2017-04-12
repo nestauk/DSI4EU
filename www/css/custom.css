@@ -701,3 +701,11 @@ body#tinymce.mce-content-body {
     margin-left: auto;
     float: none;
 }
+
+.page-project .header-content h1, .page-project .header-content h3{
+    padding-left:0;
+}
+
+.page-organisation .header-content h1, .page-organisation .header-content h3{
+    padding-left:0;
+}
