@@ -17,10 +17,9 @@ require __DIR__ . '/header.php';
     <div ng-controller="ProjectController"
          data-jsonurl="<?php echo $urlHandler->projectJson($project) ?>">
 
-        <div class="case-study-intro">
+        <div class="case-study-intro data-vis-intro">
             <div class="header-content">
-                <div class="case-study-img-bg-blur"
-                     style="background-image: linear-gradient(180deg, rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), url('<?php echo \DSI\Entity\Image::PROJECT_HEADER_URL . $project->getHeaderImageOrDefault() ?>');"></div>
+                <div class="case-study-img-bg-blur"></div>
                 <div class="container-wide">
                     <div class="w-row">
                         <div class="w-col w-col-6 w-col-stack">
