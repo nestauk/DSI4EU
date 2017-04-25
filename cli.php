@@ -23,8 +23,9 @@ class CliRouter
             return;
         }
 
-        if ($args[1] == 'send-cached-emails') {
-            $this->sendCachedEmails();
+
+        if ($args[1] == 'cities-to-geolocation') {
+            $this->citiesToGeolocation();
         } elseif ($args[1] == 'import-user-project-organisation-links') {
             $this->importUserProjectOrganisationLink();
         } elseif ($args[1] == 'import-organisations') {
@@ -33,8 +34,8 @@ class CliRouter
             $this->importOrganisationURLs();
         } elseif ($args[1] == 'import-projects') {
             $this->importProjects();
-        } elseif ($args[1] == 'cities-to-geolocation') {
-            $this->citiesToGeolocation();
+        } elseif ($args[1] == 'send-cached-emails') {
+            $this->sendCachedEmails();
         } elseif ($args[1] == 'update-organisations-partners-count') {
             $this->updateOrganisationsPartnersCount();
         } elseif ($args[1] == 'update-project-tags') {

@@ -50,15 +50,6 @@ class Router
         } elseif ($this->pageURL === '/twitter-login') {
             $this->twitterLogin();
 
-        } elseif ($this->pageURL === '/app-login') {
-            $this->appLogin();
-
-        } elseif ($this->pageURL === '/app-register-user') {
-            $this->appRegisterUser();
-
-        } elseif ($this->pageURL === '/app-leader-board') {
-            $this->appLeaderBoard();
-
         } elseif ($this->pageURL === '/set-admin') {
             $this->setAdmin();
 
@@ -450,24 +441,6 @@ class Router
         $this->setLanguageFromUrl($matches);
 
         $command = new \DSI\Controller\NotificationsController();
-        $command->exec();
-    }
-
-    private function appLogin()
-    {
-        $command = new \DSI\Controller\AppLoginController();
-        $command->exec();
-    }
-
-    private function appRegisterUser()
-    {
-        $command = new \DSI\Controller\AppRegisterUserController();
-        $command->exec();
-    }
-
-    private function appLeaderBoard()
-    {
-        $command = new \DSI\Controller\AppLeaderBoard();
         $command->exec();
     }
 
