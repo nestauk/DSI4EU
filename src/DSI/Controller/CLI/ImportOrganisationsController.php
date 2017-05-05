@@ -31,7 +31,12 @@ class ImportOrganisationsController
 
         $this->organisationRepo = new OrganisationRepository();
 
-        $this->importFrom(__DIR__ . '/../../../../import-organisations.csv');
+        $file = __DIR__ . '/../../../../import-organisations.csv';
+        if (!file_exists($file)) {
+            echo 'File does not exist: ' . $file . PHP_EOL;
+            return;
+        }
+        $this->importFrom($file);
     }
 
     /**
@@ -89,7 +94,6 @@ class ImportOrganisationsController
         $this->organisationRepo->insert($organisation);
 
         if (trim($country)) {
-
             if ($country == 'Russia')
                 $country = 'Russian Federation';
             if (strtolower($country) == 'uk')
@@ -106,13 +110,23 @@ class ImportOrganisationsController
 
                 $this->organisationRepo->save($organisation);
                 // print_r($organisation);
-            } catch (NotFound $e) {
-                pr('Not Found');
-                pr($e->getMessage());
-                pr($e->getTrace());
-            } catch (ErrorHandler $e) {
-                pr('Error');
-                pr($e->getErrors());
+            } catch (\Exception $e) {
+                $region = $country;
+                try {
+                    $organisation = $this->setRegion($organisation, $country, $region);
+                    $organisation = $this->setType($organisation, $type);
+                    $organisation = $this->setSize($organisation, $size);
+                    $organisation = $this->setTags($organisation, $tags, $networkTags);
+
+                    $this->organisationRepo->save($organisation);
+                } catch (NotFound $e) {
+                    pr('Not Found');
+                    pr($e->getMessage());
+                    pr($e->getTrace());
+                } catch (ErrorHandler $e) {
+                    pr('Error');
+                    pr($e->getErrors());
+                }
             }
         }
     }
@@ -163,6 +177,8 @@ class ImportOrganisationsController
                 $size = '11-25 people';
             if ($size == '26-50')
                 $size = '26-50 people';
+            if ($size == 'Over 1000')
+                $size = 'over-1000 people';
 
             $sizeRepo = new OrganisationSizeRepository();
             $size = $sizeRepo->getByName($size);
@@ -178,7 +194,7 @@ class ImportOrganisationsController
             $tagList = explode(',', $tags);
             $tagList = array_map('trim', $tagList);
             $tagList = array_filter($tagList);
-        } else{
+        } else {
             $tagList = [];
         }
 
