@@ -67,7 +67,7 @@ class CliRouter
 
     private function importProjects()
     {
-        $command = new \DSI\Controller\CLI\importProjectsController();
+        $command = new \DSI\Controller\CLI\ImportProjectsController();
         $command->exec();
     }
 
