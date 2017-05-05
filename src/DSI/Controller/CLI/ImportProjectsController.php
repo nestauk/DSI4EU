@@ -109,7 +109,6 @@ class ImportProjectsController
                 $project = $this->setTags($project, $supportTags, $focus, $technology);
 
                 $this->projectRepo->save($project);
-                // print_r($organisation);
             } catch (NotFound $e) {
                 pr('Not Found');
                 pr($e->getMessage());
@@ -126,11 +125,29 @@ class ImportProjectsController
         $countryRepo = new CountryRepository();
         $countryObj = $countryRepo->getByName($country);
 
-        $exec = new UpdateProjectCountryRegion();
-        $exec->data()->countryID = $countryObj->getId();
-        $exec->data()->projectID = $project->getId();
-        $exec->data()->region = $region;
-        $exec->exec();
+        try {
+            $exec = new UpdateProjectCountryRegion();
+            $exec->data()->countryID = $countryObj->getId();
+            $exec->data()->projectID = $project->getId();
+            $exec->data()->region = $region;
+            $exec->exec();
+        } catch (\Exception $e) {
+            $region = $country;
+            try {
+                $exec = new UpdateProjectCountryRegion();
+                $exec->data()->countryID = $countryObj->getId();
+                $exec->data()->projectID = $project->getId();
+                $exec->data()->region = $region;
+                $exec->exec();
+            } catch (NotFound $e) {
+                pr('Not Found');
+                pr($e->getMessage());
+                pr($e->getTrace());
+            } catch (ErrorHandler $e) {
+                pr('Error');
+                pr($e->getErrors());
+            }
+        }
 
         return $project;
     }
@@ -207,7 +224,6 @@ class ImportProjectsController
         } else {
             $technologyTagsList = [];
         }
-        print_r($technologyTagsList);
 
         $exec = new UpdateProject();
         $exec->data()->executor = $this->sysAdminUser;
