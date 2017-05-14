@@ -26,6 +26,21 @@ require __DIR__ . '/header.php';
                     <a class="resource-card w-inline-block"
                        href="http://www.nesta.org.uk/media_colorbox/5740/media_small/und" target="_blank">
                         <div class="info-card resource">
+                            <img class="research-paper-img" src="<?php echo SITE_RELATIVE_PATH ?>/images/tools.png">
+                            <h3>DSI Toolkit</h3>
+                            <p>A collaboratively-developed toolkit to support projects to scale sustainably</p>
+                            <div class="log-in-link long next-page read-more w-clearfix" data-ix="log-in-arrow">
+                                <div class="login-li long menu-li readmore-li">Read the toolkit</div>
+                                <img class="login-arrow"
+                                     src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="w-col w-col-4">
+                    <a class="resource-card w-inline-block"
+                       href="http://www.nesta.org.uk/media_colorbox/5740/media_small/und" target="_blank">
+                        <div class="info-card resource">
                             <img class="research-paper-img" src="<?php echo SITE_RELATIVE_PATH ?>/images/reportpdf.png">
                             <h3>Introduction to dsi</h3>
                             <p>Understand what we mean by digital social innovation and what the future looks like</p>
