@@ -24,7 +24,7 @@ require __DIR__ . '/header.php';
             <div class="w-row">
                 <div class="w-col w-col-4">
                     <a class="resource-card w-inline-block"
-                       href="http://www.nesta.org.uk/media_colorbox/5740/media_small/und" target="_blank">
+                       href="https://www.dropbox.com/s/vztkaaoaqcalfge/170514_DSI4EU.pdf?dl=0" target="_blank">
                         <div class="info-card resource">
                             <img class="research-paper-img" src="<?php echo SITE_RELATIVE_PATH ?>/images/tools.png">
                             <h3>DSI Toolkit</h3>
