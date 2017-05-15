@@ -24,7 +24,7 @@ require __DIR__ . '/header.php';
             <div class="w-row">
                 <div class="w-col w-col-4">
                     <a class="resource-card w-inline-block"
-                       href="https://www.dropbox.com/s/vztkaaoaqcalfge/170514_DSI4EU.pdf?dl=0" target="_blank">
+                       href="<?= SITE_RELATIVE_PATH ?>/uploads/digital-social-toolkit.pdf" target="_blank">
                         <div class="info-card resource">
                             <img class="research-paper-img" src="<?php echo SITE_RELATIVE_PATH ?>/images/tools.png">
                             <h3>DSI Toolkit</h3>
@@ -81,26 +81,26 @@ require __DIR__ . '/header.php';
         </p>
         <ul>
             <li><p>
-                    <?php _ehtml('Access all the anonymised data we have captured on DSI in Europe via the DSI4EU open data set.')?>
+                    <?php _ehtml('Access all the anonymised data we have captured on DSI in Europe via the DSI4EU open data set.') ?>
                 </p>
-                <p><strong><?php _ehtml('Projects data:')?></strong>
+                <p><strong><?php _ehtml('Projects data:') ?></strong>
                     <a href="https://digitalsocial.eu/export/projects.json">json</a>,
                     <a href="https://digitalsocial.eu/export/projects.csv">csv</a>,
                     <a href="https://digitalsocial.eu/export/projects.xml">xml</a>
                 </p>
-                <p><strong><?php _ehtml('Organisations data:')?></strong>
+                <p><strong><?php _ehtml('Organisations data:') ?></strong>
                     <a href="https://digitalsocial.eu/export/organisations.json">json</a>,
                     <a href="https://digitalsocial.eu/export/organisations.csv">csv</a>,
                     <a href="https://digitalsocial.eu/export/organisations.xml">xml</a>
                 </p>
             </li>
             <li>
-                <?php _ehtml('Download the source code. All of the code used to develop this site will be shared')?>
+                <?php _ehtml('Download the source code. All of the code used to develop this site will be shared') ?>
             </li>
         </ul>
         <a class="log-in-link long next-page read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
            href="<?php echo $urlHandler->contactDSI() ?>">
-            <div class="login-li long menu-li readmore-li"><?php _ehtml('Contact DSI4EU')?></div>
+            <div class="login-li long menu-li readmore-li"><?php _ehtml('Contact DSI4EU') ?></div>
             <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
         </a>
     </div>

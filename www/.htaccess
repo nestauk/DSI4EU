@@ -8,6 +8,6 @@ Header add Access-Control-Allow-Methods: "GET"
 
 #RewriteCond %{REQUEST_FILENAME} !-d
 #RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule (.*)\.(gif|jpe?g|png|svg|js|css|map|ttf|ico)$ $0 [L,QSA]
+RewriteRule (.*)\.(gif|jpe?g|png|svg|js|css|map|ttf|ico|pdf)$ $0 [L,QSA]
 RewriteRule google38e1f0ae1b736b46\.html $0 [L,QSA]
 RewriteRule . index.php [QSA,L]
