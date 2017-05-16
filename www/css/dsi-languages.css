@@ -545,6 +545,7 @@ strong {
 .info-card.resource {
   padding: 20px;
   text-decoration: none;
+  min-height:465px;
 }
 
 .info-h {
