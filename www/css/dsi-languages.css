@@ -8206,6 +8206,10 @@ strong {
   color: #08122a;
 }
 
+.case-study-intro > .home-hero-h3 {
+    color: #fff;
+}
+
 .home-hero-h3.sub-text {
   font-size: 19px;
 }
