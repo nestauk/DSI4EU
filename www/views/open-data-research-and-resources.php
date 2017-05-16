@@ -22,6 +22,24 @@ require __DIR__ . '/header.php';
     <div class="content-directory">
         <div class="content">
             <div class="w-row">
+                
+                <div class="w-col w-col-4">
+                    <a class="resource-card w-inline-block"
+                       href="<?= SITE_RELATIVE_PATH ?>/uploads/What next for digital social innovation Realising the potential of people and technology to tackle social challenges.pdf" target="_blank">
+                        <div class="info-card resource">
+                            <img class="research-paper-img" src="<?php echo SITE_RELATIVE_PATH ?>/images/what-next.png">
+                            <h3>What Next for Digital Social Innnovation</h3>
+                            <p>Realising the potential of people and technology to tackle social challenges</p>
+                            <div class="log-in-link long next-page read-more w-clearfix" data-ix="log-in-arrow">
+                                <div class="login-li long menu-li readmore-li">View pdf</div>
+                                <img class="login-arrow"
+                                     src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                
+                
                 <div class="w-col w-col-4">
                     <a class="resource-card w-inline-block"
                        href="<?= SITE_RELATIVE_PATH ?>/uploads/digital-social-toolkit.pdf" target="_blank">
@@ -45,13 +63,20 @@ require __DIR__ . '/header.php';
                             <h3>Introduction to dsi</h3>
                             <p>Understand what we mean by digital social innovation and what the future looks like</p>
                             <div class="log-in-link long next-page read-more w-clearfix" data-ix="log-in-arrow">
-                                <div class="login-li long menu-li readmore-li">Watch video</div>
+                                <div class="login-li long menu-li readmore-li">Watch the video</div>
                                 <img class="login-arrow"
                                      src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
                             </div>
                         </div>
                     </a>
                 </div>
+
+
+            </div>
+            
+            <!-- added second row to resources -->
+            
+        <div class="w-row">
                 <div class="w-col w-col-4">
                     <a class="resource-card w-inline-block"
                        href="http://www.nesta.org.uk/sites/default/files/dsireport.pdf" target="_blank">
@@ -67,10 +92,13 @@ require __DIR__ . '/header.php';
                         </div>
                     </a>
                 </div>
-                <div class="w-col w-col-4">
-                    <a class="resource-card w-inline-block" href="#"></a>
-                </div>
-            </div>
+
+    </div>        
+            
+            
+            
+            
+            <!-- end of second row -->
         </div>
     </div>
     <div class="content-block">

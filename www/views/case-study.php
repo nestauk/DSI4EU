@@ -13,7 +13,7 @@ require __DIR__ . '/header.php';
                  style="background-image: linear-gradient(180deg, rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), url('<?php echo \DSI\Entity\Image::CASE_STUDY_CARD_BG_URL . $caseStudy->getCardImage() ?>');"></div>
             <div class="container-wide">
                 <h1 class="case-study-h1"><?php echo show_input($caseStudy->getTitle()) ?></h1>
-                <h3 class="home-hero-h3"><?php echo show_input($caseStudy->getIntroCardText()) ?></h3>
+                <h3 class="home-hero-h3 case-study-h3"><?php echo show_input($caseStudy->getIntroCardText()) ?></h3>
             </div>
         </div>
     </div>

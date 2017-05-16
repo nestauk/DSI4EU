@@ -545,6 +545,7 @@ strong {
 .info-card.resource {
   padding: 20px;
   text-decoration: none;
+  min-height:465px;
 }
 
 .info-h {
@@ -8203,6 +8204,10 @@ strong {
   padding-bottom: 90px;
   padding-left: 35px;
   color: #08122a;
+}
+
+.case-study-h3 {
+    color: #fff;
 }
 
 .home-hero-h3.sub-text {
