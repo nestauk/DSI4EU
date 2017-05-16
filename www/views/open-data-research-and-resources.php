@@ -96,6 +96,9 @@ require __DIR__ . '/header.php';
             </li>
             <li>
                 <?php _ehtml('Download the source code. All of the code used to develop this site will be shared') ?>
+                <a href="https://github.com/nestauk/DSI4EU" target="_blank"><?php _ehtml('Website') ?></a>
+                |
+                <a href="https://github.com/nestauk/DSI4EU_Dataviz" target="_blank"><?php _ehtml('Data visualisation') ?></a>
             </li>
         </ul>
         <a class="log-in-link long next-page read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
