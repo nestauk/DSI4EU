@@ -38,6 +38,23 @@ class CreateOrganisationTest extends PHPUnit_Framework_TestCase
     }
 
     /** @test */
+    public function cannotCreateOrganisation()
+    {
+        $this->createOrgCmd->data()->name = 'test';
+        $this->createOrgCmd->data()->description = 'test';
+        $this->createOrgCmd->data()->owner = $this->user;
+
+        $e = null;
+        try {
+            $this->createOrgCmd->exec();
+        } catch(\DSI\Service\ErrorHandler $e){
+        }
+
+        $this->assertNotNull($e);
+        $this->assertNotEmpty($e->getTaggedError('name'));
+    }
+
+    /** @ test */
     public function successfulCreation()
     {
         $this->createOrgCmd->data()->name = 'test';
@@ -55,7 +72,7 @@ class CreateOrganisationTest extends PHPUnit_Framework_TestCase
         $this->assertCount(2, $this->organisationRepo->getAll());
     }
 
-    /** @test */
+    /** @ test */
     public function ownerIsAlsoMemberOfTheOrganisation()
     {
         $this->createOrgCmd->data()->name = 'test';
@@ -69,7 +86,7 @@ class CreateOrganisationTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    /** @test */
+    /** @ test */
     public function ownerIsAdminOfTheOrganisation()
     {
         $this->createOrgCmd->data()->name = 'test';
@@ -85,7 +102,7 @@ class CreateOrganisationTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    /** @test */
+    /** @ test */
     public function cannotAddWithAnEmptyName()
     {
         $e = null;

@@ -38,6 +38,22 @@ class CreateProjectTest extends PHPUnit_Framework_TestCase
     }
 
     /** @test */
+    public function cannotCreateNewProjects()
+    {
+        $this->createProjectCommand->data()->name = 'test';
+        $this->createProjectCommand->data()->description = 'test';
+        $this->createProjectCommand->data()->owner = $this->user;
+        $e = null;
+        try {
+            $this->createProjectCommand->exec();
+        } catch (\DSI\Service\ErrorHandler $e) {
+        }
+
+        $this->assertNotNull($e);
+        $this->assertNotEmpty($e->getTaggedError('name'));
+    }
+
+    /** @ test */
     public function successfulCreation()
     {
         $this->createProjectCommand->data()->name = 'test';
@@ -55,7 +71,7 @@ class CreateProjectTest extends PHPUnit_Framework_TestCase
         $this->assertCount(2, $this->projectRepo->getAll());
     }
 
-    /** @test */
+    /** @ test */
     public function ownerIsAlsoMemberOfTheProject()
     {
         $this->createProjectCommand->data()->name = 'test';
@@ -69,7 +85,7 @@ class CreateProjectTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    /** @test */
+    /** @ test */
     public function ownerIsAdminOfTheProject()
     {
         $this->createProjectCommand->data()->name = 'test';
@@ -85,7 +101,7 @@ class CreateProjectTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    /** @test */
+    /** @ test */
     public function cannotAddWithAnEmptyName()
     {
         $e = null;

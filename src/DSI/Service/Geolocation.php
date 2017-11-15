@@ -37,7 +37,7 @@ class Geolocation
      */
     public function exec()
     {
-        if (App::getEnv() == App::DEV) {
+        if (App::getEnv() == App::DEV OR App::getEnv() == App::TEST) {
             $this->lat = 1;
             $this->lon = 1;
             return true;

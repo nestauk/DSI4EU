@@ -35,6 +35,7 @@ class UpdateOrganisationTest extends PHPUnit_Framework_TestCase
         $createOrganisation = new \DSI\UseCase\CreateOrganisation();
         $createOrganisation->data()->name = 'Organisation Name';
         $createOrganisation->data()->owner = $this->user1;
+        $createOrganisation->forceCreation = true;
         $createOrganisation->exec();
 
         $this->organisation = $createOrganisation->getOrganisation();
@@ -52,17 +53,18 @@ class UpdateOrganisationTest extends PHPUnit_Framework_TestCase
         $name = 'Name';
         $description = 'Description';
 
-        try {
-            $this->updateOrganisation->data()->name = $name;
-            $this->updateOrganisation->data()->description = $description;
-            $this->updateOrganisation->data()->organisation = $this->organisation;
-            $this->updateOrganisation->data()->executor = $this->user1;
+        $this->updateOrganisation->data()->name = $name;
+        $this->updateOrganisation->data()->description = $description;
+        $this->updateOrganisation->data()->organisation = $this->organisation;
+        $this->updateOrganisation->data()->executor = $this->user1;
 
+        $e = null;
+        try {
             $this->updateOrganisation->exec();
         } catch (ErrorHandler $e) {
-            $this->assertNull($e);
         }
 
+        $this->assertNull($e);
         $organisation = $this->organisationRepo->getById($this->organisation->getId());
         $this->assertEquals($name, $organisation->getName());
         $this->assertEquals($description, $organisation->getDescription());

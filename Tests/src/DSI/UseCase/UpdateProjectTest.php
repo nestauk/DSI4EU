@@ -35,6 +35,7 @@ class UpdateProjectTest extends PHPUnit_Framework_TestCase
         $createProject = new \DSI\UseCase\CreateProject();
         $createProject->data()->name = 'Project Name';
         $createProject->data()->owner = $this->user1;
+        $createProject->forceCreation = true;
         $createProject->exec();
 
         $this->project = $createProject->getProject();

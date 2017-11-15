@@ -2,10 +2,12 @@
 
 namespace DSI\UseCase;
 
+use DSI\Entity\ContentUpdate;
 use DSI\Entity\Organisation;
 use DSI\Entity\OrganisationMember;
 use DSI\Entity\User;
 use DSI\NotEnoughData;
+use DSI\Repository\ContentUpdateRepository;
 use DSI\Repository\OrganisationMemberRepository;
 use DSI\Repository\OrganisationRepository;
 use DSI\Repository\OrganisationRepositoryInAPC;
@@ -25,6 +27,9 @@ class CreateOrganisation
     /** @var CreateOrganisation_Data */
     private $data;
 
+    /** @var bool */
+    public $forceCreation;
+
     public function __construct()
     {
         $this->data = new CreateOrganisation_Data();
@@ -33,6 +38,11 @@ class CreateOrganisation
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
+        if (!$this->forceCreation) {
+            $this->errorHandler->addTaggedError('name', __("At the moment you cannot add an organisation. Please try again later."));
+            throw $this->errorHandler;
+        }
+
         $this->organisationRepo = new OrganisationRepositoryInAPC();
 
         if (!isset($this->data()->name))
@@ -45,7 +55,7 @@ class CreateOrganisation
             throw $this->errorHandler;
         }
 
-        if($this->data()->name == ''){
+        if ($this->data()->name == '') {
             $this->errorHandler->addTaggedError('name', __('Please type a organisation name'));
             throw $this->errorHandler;
         }
@@ -55,6 +65,11 @@ class CreateOrganisation
         $organisation->setDescription((string)$this->data()->description);
         $organisation->setOwner($this->data()->owner);
         $this->organisationRepo->insert($organisation);
+
+        $contentUpdate = new ContentUpdate();
+        $contentUpdate->setOrganisation($organisation);
+        $contentUpdate->setUpdated(ContentUpdate::Updated_New);
+        (new ContentUpdateRepository())->insert($contentUpdate);
 
         $organisationMemberRepository = new OrganisationMemberRepository();
         $organisationMember = new OrganisationMember();

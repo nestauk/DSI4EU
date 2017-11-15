@@ -44,7 +44,12 @@ class CreateCountryRegionTest extends PHPUnit_Framework_TestCase
 
         $this->createCountryRegionCmd->data()->name = 'test2';
         $this->createCountryRegionCmd->data()->countryID = $this->country->getId();
-        $this->createCountryRegionCmd->exec();
+        try {
+            $this->createCountryRegionCmd->exec();
+        } catch(\DSI\Service\ErrorHandler $e){
+            pr($e->getErrors());
+            pr($e->getTraceAsString());
+        }
 
         $this->assertCount(2, $this->countryRegionRepo->getAll());
     }

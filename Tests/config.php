@@ -15,3 +15,5 @@ require_once(__DIR__ . "/../src/config.php");
     'password' => '',
     'db' => 'dsi-test',
 ));
+
+\DSI\Service\App::setEnv(\DSI\Service\App::TEST);

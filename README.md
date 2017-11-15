@@ -11,7 +11,7 @@
 ## Installation
 - `git clone https://github.com/nestauk/DSI4EU.git`
 - create MySQL user and database
-- import into MySQL database all the files from _src/mysql-update_
+- import into MySQL database all the files from _database/migrations_ and _database/seeds_
 - copy _src/config.sample.php_ to _src/config.php_ and update with correct information
 - `composer install`
 
