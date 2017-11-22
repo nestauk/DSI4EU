@@ -1,11 +1,25 @@
 <?php
 /** @var $loggedInUser \DSI\Entity\User */
+
 use DSI\Service\URL;
 
 if (!isset($urlHandler))
     $urlHandler = new URL();
 ?>
 
+    <div data-ix="close-notification-modal" class="create-paused">
+        <div class="add-post-modal">
+            <h1 class="modal-h1 padding">Thank you for your interest in joining Europe&#x27;s network of digital social
+                innovation</h1>
+            <p class="paragraph">We regret to inform you that, due to a technical issue, we can&#x27;t currently accept
+                new projects and organisations. We&#x27;re working as quickly as we can to get this fixed and look
+                forward to seeing your work on the platform soon!</p>
+            <p class="paragraph">In the meantime, please do sign up to our newsletter through the homepage, and if you
+                have any questions drop us a line at <a
+                        href="mailto:contact@digitalsocial.eu">contact@digitalsocial.eu</a>.</p>
+            <div data-ix="close-notification-modal" class="close-modal">+</div>
+        </div>
+    </div>
     <div class="menu-full-screen" data-ix="displaynone">
         <div class="main-menu">
             <div class="main-menu-profile-block w-clearfix">
@@ -145,18 +159,20 @@ if (!isset($urlHandler))
                 <div class="top-line"></div>
                 <div class="middle-line"></div>
                 <div class="bottom-line"></div>
-                <div class="menu-li"><?php _ehtml('Menu')?></div>
+                <div class="menu-li"><?php _ehtml('Menu') ?></div>
             </div>
             <?php if (isset($loggedInUser) AND $loggedInUser) { ?>
                 <div class="create ll log-in-link w-clearfix" data-ix="create-dropdown">
-                    <div class="login-li menu-li"><?php _e('Create') ?></div>
+                    <div data-ix="create-paused" class="login-li menu-li"><?php _e('Create') ?></div>
                     <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-plus-empty.png">
+                    <?php /*
                     <div class="create-drop-down-block">
                         <a class="drop-down-link-li" data-ix="create-project-modal"
                            href="#"><?php _e('Create project') ?></a>
                         <a class="drop-down-link-li" data-ix="create-organisation-modal"
                            href="#"><?php _e('Create organisation') ?></a>
                     </div>
+                    */ ?>
                 </div>
             <?php } else { ?>
                 <a class="ll log-in-link w-clearfix w-inline-block" data-ix="log-in-arrow" style="width:auto"

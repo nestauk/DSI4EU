@@ -39,7 +39,7 @@ class CreateOrganisation
     {
         $this->errorHandler = new ErrorHandler();
         if (!$this->forceCreation) {
-            $this->errorHandler->addTaggedError('name', __("At the moment you cannot add an organisation. Please try again later."));
+            $this->errorHandler->addTaggedError('name', __("We are sorry, but at the moment you cannot add a new organisation. We are working on getting this fixed as soon as possible."));
             throw $this->errorHandler;
         }
 

@@ -112,7 +112,7 @@ form.add-skill-section, form.add-language-section {
 }
 
 .add-post-modal {
-    width: 585px;
+    /* width: 585px; */
 }
 
 .alphabet-link.selected {

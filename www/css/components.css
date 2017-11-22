@@ -69,9 +69,6 @@ html.w-mod-touch * {
 .w-clearfix:after {
   clear: both;
 }
-.w-preserve-3d {
-  transform-style: preserve-3d;
-}
 .w-hidden {
   display: none;
 }
@@ -228,9 +225,6 @@ h6 {
 p {
   margin-top: 0;
   margin-bottom: 10px;
-}
-a:focus {
-  outline: 0;
 }
 blockquote {
   margin: 0 0 10px 0;
@@ -964,9 +958,6 @@ textarea.w-select {
   cursor: pointer;
   padding-right: 40px;
 }
-.w-dropdown-toggle:focus {
-  outline: 0;
-}
 .w-icon-dropdown-toggle {
   position: absolute;
   top: 0;
@@ -1385,8 +1376,7 @@ textarea.w-select {
   position: relative;
   max-width: 60%;
 }
-.w-richtext figure > div:before,
-.w-richtext figure img {
+.w-richtext figure > div:before {
   cursor: default!important;
 }
 .w-richtext figure img {

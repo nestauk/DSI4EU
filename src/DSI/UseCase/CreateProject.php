@@ -39,7 +39,7 @@ class CreateProject
     {
         $this->errorHandler = new ErrorHandler();
         if(!$this->forceCreation){
-            $this->errorHandler->addTaggedError('name', __("At the moment you cannot add a new project. Please try again later."));
+            $this->errorHandler->addTaggedError('name', __("We are sorry, but at the moment you cannot add a new project. We are working on getting this fixed as soon as possible."));
             throw $this->errorHandler;
         }
 
