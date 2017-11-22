@@ -162,8 +162,9 @@ if (!isset($urlHandler))
                 <div class="menu-li"><?php _ehtml('Menu') ?></div>
             </div>
             <?php if (isset($loggedInUser) AND $loggedInUser) { ?>
-                <div class="create ll log-in-link w-clearfix" data-ix="create-dropdown">
-                    <div data-ix="create-paused" class="login-li menu-li"><?php _e('Create') ?></div>
+                <div class="create ll log-in-link w-clearfix" <?php /*data-ix="create-dropdown"*/ ?>
+                     data-ix="create-paused">
+                    <div class="login-li menu-li"><?php _e('Create') ?></div>
                     <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-plus-empty.png">
                     <?php /*
                     <div class="create-drop-down-block">
