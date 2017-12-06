@@ -18,7 +18,6 @@ class Router
     public function exec(string $pageURL)
     {
         Translate::setCurrentLang(Translation::DEFAULT_LANGUAGE);
-        $urlHandler = new \DSI\Service\URL();
         $this->pageURL = $pageURL;
 
         $langHandler = '(([a-z]{2})/?)?';
