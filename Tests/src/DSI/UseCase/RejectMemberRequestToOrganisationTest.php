@@ -7,19 +7,19 @@ class RejectMemberRequestToOrganisationTest extends PHPUnit_Framework_TestCase
     /** @var \DSI\UseCase\AddMemberRequestToOrganisation */
     private $addMemberRequestToOrganisation;
 
-    /** @var \DSI\Repository\OrganisationMemberRequestRepository */
+    /** @var \DSI\Repository\OrganisationMemberRequestRepo */
     private $organisationMemberRequestRepo;
 
-    /** @var \DSI\Repository\OrganisationMemberRepository */
+    /** @var \DSI\Repository\OrganisationMemberRepo */
     private $organisationMemberRepo;
 
-    /** @var \DSI\Repository\OrganisationRepository */
+    /** @var \DSI\Repository\OrganisationRepo */
     private $organisationRepo;
 
     /** @var \DSI\Entity\Organisation */
     private $organisation;
 
-    /** @var \DSI\Repository\UserRepository */
+    /** @var \DSI\Repository\UserRepo */
     private $userRepo;
 
     /** @var \DSI\Entity\User */
@@ -27,10 +27,10 @@ class RejectMemberRequestToOrganisationTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->organisationMemberRequestRepo = new \DSI\Repository\OrganisationMemberRequestRepository();
-        $this->organisationMemberRepo = new \DSI\Repository\OrganisationMemberRepository();
-        $this->organisationRepo = new \DSI\Repository\OrganisationRepository();
-        $this->userRepo = new \DSI\Repository\UserRepository();
+        $this->organisationMemberRequestRepo = new \DSI\Repository\OrganisationMemberRequestRepo();
+        $this->organisationMemberRepo = new \DSI\Repository\OrganisationMemberRepo();
+        $this->organisationRepo = new \DSI\Repository\OrganisationRepo();
+        $this->userRepo = new \DSI\Repository\UserRepo();
 
         $this->user_1 = new \DSI\Entity\User();
         $this->userRepo->insert($this->user_1);

@@ -4,8 +4,8 @@ namespace DSI\UseCase;
 
 use DSI\Entity\Project;
 use DSI\Entity\ProjectNetworkTag;
-use DSI\Repository\NetworkTagRepository;
-use DSI\Repository\ProjectNetworkTagRepository;
+use DSI\Repository\NetworkTagRepo;
+use DSI\Repository\ProjectNetworkTagRepo;
 use DSI\Service\ErrorHandler;
 
 class AddNetworkTagToProject
@@ -13,7 +13,7 @@ class AddNetworkTagToProject
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var ProjectNetworkTagRepository */
+    /** @var ProjectNetworkTagRepo */
     private $projectNetworkTagRepo;
 
     /** @var String */
@@ -25,9 +25,9 @@ class AddNetworkTagToProject
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->projectNetworkTagRepo = new ProjectNetworkTagRepository();
+        $this->projectNetworkTagRepo = new ProjectNetworkTagRepo();
 
-        $networkTagRepo = new NetworkTagRepository();
+        $networkTagRepo = new NetworkTagRepo();
 
         if ($networkTagRepo->nameExists($this->tag)) {
             $tag = $networkTagRepo->getByName($this->tag);

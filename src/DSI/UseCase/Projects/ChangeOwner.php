@@ -4,10 +4,10 @@ namespace DSI\UseCase\Projects;
 
 use DSI\Entity\Project;
 use DSI\Entity\User;
-use DSI\Repository\ProjectMemberRepository;
-use DSI\Repository\ProjectRepository;
-use DSI\Repository\ProjectRepositoryInAPC;
-use DSI\Repository\UserRepository;
+use DSI\Repository\ProjectMemberRepo;
+use DSI\Repository\ProjectRepo;
+use DSI\Repository\ProjectRepoInAPC;
+use DSI\Repository\UserRepo;
 use DSI\Service\ErrorHandler;
 use DSI\UseCase\AddMemberToProject;
 
@@ -16,13 +16,13 @@ class ChangeOwner
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var ProjectMemberRepository */
+    /** @var ProjectMemberRepo */
     private $projectMemberRepository;
 
-    /** @var ProjectRepository */
+    /** @var ProjectRepo */
     private $projectRepository;
 
-    /** @var UserRepository */
+    /** @var UserRepo */
     private $userRepository;
 
     /** @var ChangeOwner_Data */
@@ -33,9 +33,9 @@ class ChangeOwner
         $this->data = new ChangeOwner_Data();
 
         $this->errorHandler = new ErrorHandler();
-        $this->projectMemberRepository = new ProjectMemberRepository();
-        $this->projectRepository = new ProjectRepositoryInAPC();
-        $this->userRepository = new UserRepository();
+        $this->projectMemberRepository = new ProjectMemberRepo();
+        $this->projectRepository = new ProjectRepoInAPC();
+        $this->userRepository = new UserRepo();
     }
 
     public function exec()

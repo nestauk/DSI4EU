@@ -1,7 +1,7 @@
 <?php
 namespace DSI\Controller;
 
-use DSI\Repository\UserRepository;
+use DSI\Repository\UserRepo;
 use DSI\Service\Auth;
 use DSI\Service\URL;
 use DSI\UseCase\FacebookLogin;
@@ -29,7 +29,7 @@ class LoginFacebookController
             try {
                 /** @var \League\OAuth2\Client\Provider\FacebookUser $user */
                 $user = $facebookLoginService->getProvider()->getResourceOwner($token);
-                $userRepo = new UserRepository();
+                $userRepo = new UserRepo();
                 if ($userRepo->facebookUIDExists($user->getId())) {
                     $facebookLogin = new FacebookLogin();
                     $facebookLogin->data()->facebookUID = $user->getId();

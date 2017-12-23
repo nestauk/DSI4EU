@@ -10,16 +10,16 @@ class RemoveTagFromOrganisationTest extends PHPUnit_Framework_TestCase
     /** @var \DSI\UseCase\RemoveTagFromOrganisation */
     private $removeTagFromOrganisationCommand;
 
-    /** @var \DSI\Repository\TagForOrganisationsRepository*/
+    /** @var \DSI\Repository\TagForOrganisationsRepo*/
     private $tagRepo;
 
-    /** @var \DSI\Repository\UserRepository */
+    /** @var \DSI\Repository\UserRepo */
     private $userRepo;
 
-    /** @var \DSI\Repository\OrganisationTagRepository */
+    /** @var \DSI\Repository\OrganisationTagRepo */
     private $organisationTagRepo;
 
-    /** @var \DSI\Repository\OrganisationRepository */
+    /** @var \DSI\Repository\OrganisationRepo */
     private $organisationRepo;
 
     /** @var \DSI\Entity\Organisation */
@@ -29,10 +29,10 @@ class RemoveTagFromOrganisationTest extends PHPUnit_Framework_TestCase
     {
         $this->addTagToOrganisationCommand = new \DSI\UseCase\AddTagToOrganisation();
         $this->removeTagFromOrganisationCommand = new \DSI\UseCase\RemoveTagFromOrganisation();
-        $this->organisationTagRepo = new \DSI\Repository\OrganisationTagRepository();
-        $this->tagRepo = new \DSI\Repository\TagForOrganisationsRepository();
-        $this->organisationRepo = new \DSI\Repository\OrganisationRepository();
-        $this->userRepo = new \DSI\Repository\UserRepository();
+        $this->organisationTagRepo = new \DSI\Repository\OrganisationTagRepo();
+        $this->tagRepo = new \DSI\Repository\TagForOrganisationsRepo();
+        $this->organisationRepo = new \DSI\Repository\OrganisationRepo();
+        $this->userRepo = new \DSI\Repository\UserRepo();
 
         $user = new \DSI\Entity\User();
         $this->userRepo->insert($user);

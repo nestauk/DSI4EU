@@ -3,10 +3,10 @@
 require_once __DIR__ . '/../../../config.php';
 
 use \DSI\Repository;
-use \DSI\Repository\UserRepository;
-use \DSI\Repository\ProjectRepository;
-use \DSI\Repository\ProjectPostRepository;
-use \DSI\Repository\ProjectPostCommentRepository;
+use \DSI\Repository\UserRepo;
+use \DSI\Repository\ProjectRepo;
+use \DSI\Repository\ProjectPostRepo;
+use \DSI\Repository\ProjectPostCommentRepo;
 use \DSI\Entity\ProjectPostComment;
 use \DSI\Entity\ProjectPost;
 use \DSI\Entity\Project;
@@ -15,19 +15,19 @@ use \DSI\Entity;
 
 class ProjectPostCommentReplyRepositoryTest extends PHPUnit_Framework_TestCase
 {
-    /** @var Repository\ProjectPostCommentReplyRepository */
+    /** @var Repository\ProjectPostCommentReplyRepo */
     private $projectPostCommentReplyRepo;
 
-    /** @var ProjectPostCommentRepository */
+    /** @var ProjectPostCommentRepo */
     private $projectPostCommentRepo;
 
-    /** @var ProjectPostRepository */
+    /** @var ProjectPostRepo */
     private $projectPostRepo;
 
-    /** @var ProjectRepository */
+    /** @var ProjectRepo */
     private $projectRepo;
 
-    /** @var UserRepository */
+    /** @var UserRepo */
     private $userRepo;
 
     /** @var Project */
@@ -44,11 +44,11 @@ class ProjectPostCommentReplyRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->projectPostCommentReplyRepo = new Repository\ProjectPostCommentReplyRepository();
-        $this->projectPostCommentRepo = new ProjectPostCommentRepository();
-        $this->projectPostRepo = new ProjectPostRepository();
-        $this->projectRepo = new ProjectRepository();
-        $this->userRepo = new UserRepository();
+        $this->projectPostCommentReplyRepo = new Repository\ProjectPostCommentReplyRepo();
+        $this->projectPostCommentRepo = new ProjectPostCommentRepo();
+        $this->projectPostRepo = new ProjectPostRepo();
+        $this->projectRepo = new ProjectRepo();
+        $this->userRepo = new UserRepo();
 
         $this->user = new User();
         $this->userRepo->insert($this->user);

@@ -4,13 +4,13 @@ namespace DSI\UseCase\Organisations;
 
 use DSI\Entity\Organisation;
 use DSI\Entity\User;
-use DSI\Repository\OrganisationLinkRepository;
-use DSI\Repository\OrganisationMemberInvitationRepository;
-use DSI\Repository\OrganisationMemberRepository;
-use DSI\Repository\OrganisationMemberRequestRepository;
-use DSI\Repository\OrganisationProjectRepository;
-use DSI\Repository\OrganisationRepository;
-use DSI\Repository\OrganisationTagRepository;
+use DSI\Repository\OrganisationLinkRepo;
+use DSI\Repository\OrganisationMemberInvitationRepo;
+use DSI\Repository\OrganisationMemberRepo;
+use DSI\Repository\OrganisationMemberRequestRepo;
+use DSI\Repository\OrganisationProjectRepo;
+use DSI\Repository\OrganisationRepo;
+use DSI\Repository\OrganisationTagRepo;
 use DSI\Service\ErrorHandler;
 
 class RemoveOrganisation
@@ -18,7 +18,7 @@ class RemoveOrganisation
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var OrganisationRepository */
+    /** @var OrganisationRepo */
     private $organisationRepo;
 
     /** @var RemoveOrganisation_Data */
@@ -29,7 +29,7 @@ class RemoveOrganisation
         $this->data = new RemoveOrganisation_Data();
 
         $this->errorHandler = new ErrorHandler();
-        $this->organisationRepo = new OrganisationRepository();
+        $this->organisationRepo = new OrganisationRepo();
     }
 
     public function exec()
@@ -95,7 +95,7 @@ class RemoveOrganisation
 
     private function removeOrgInvitations()
     {
-        $orgMemberInvitationRepo = new OrganisationMemberInvitationRepository();
+        $orgMemberInvitationRepo = new OrganisationMemberInvitationRepo();
         $orgInvitations = $orgMemberInvitationRepo->getByOrganisation($this->data()->organisation);
         foreach ($orgInvitations AS $invitation) {
             $orgMemberInvitationRepo->remove($invitation);
@@ -104,7 +104,7 @@ class RemoveOrganisation
 
     private function removeOrgRequests()
     {
-        $orgMemberRequestRepo = new OrganisationMemberRequestRepository();
+        $orgMemberRequestRepo = new OrganisationMemberRequestRepo();
         $orgRequests = $orgMemberRequestRepo->getByOrganisationID($this->data()->organisation->getId());
         foreach ($orgRequests AS $request) {
             $orgMemberRequestRepo->remove($request);
@@ -113,7 +113,7 @@ class RemoveOrganisation
 
     private function removeOrgMembers()
     {
-        $orgMemberRepo = new OrganisationMemberRepository();
+        $orgMemberRepo = new OrganisationMemberRepo();
         $orgMembers = $orgMemberRepo->getByOrganisation($this->data()->organisation);
         foreach ($orgMembers AS $member) {
             $orgMemberRepo->remove($member);
@@ -122,7 +122,7 @@ class RemoveOrganisation
 
     private function removeOrgProjects()
     {
-        $orgProjectsRepo = new OrganisationProjectRepository();
+        $orgProjectsRepo = new OrganisationProjectRepo();
         $orgProjects = $orgProjectsRepo->getByOrganisationID($this->data()->organisation->getId());
         foreach ($orgProjects AS $orgProject) {
             $orgProjectsRepo->remove($orgProject);
@@ -131,7 +131,7 @@ class RemoveOrganisation
 
     private function removeOrgTags()
     {
-        $orgTagRepo = new OrganisationTagRepository();
+        $orgTagRepo = new OrganisationTagRepo();
         $orgTags = $orgTagRepo->getByOrganisationID($this->data()->organisation->getId());
         foreach ($orgTags AS $orgTag) {
             $orgTagRepo->remove($orgTag);
@@ -140,7 +140,7 @@ class RemoveOrganisation
 
     private function removeOrgLinks()
     {
-        $orgLinkRepo = new OrganisationLinkRepository();
+        $orgLinkRepo = new OrganisationLinkRepo();
         $orgLinks = $orgLinkRepo->getByOrganisationID($this->data()->organisation->getId());
         foreach ($orgLinks AS $orgLink) {
             $orgLinkRepo->remove($orgLink);

@@ -4,13 +4,13 @@ require_once __DIR__ . '/../../../config.php';
 
 class ProjectMemberRequestRepositoryTest extends PHPUnit_Framework_TestCase
 {
-    /** @var \DSI\Repository\ProjectMemberRequestRepository */
+    /** @var \DSI\Repository\ProjectMemberRequestRepo */
     protected $projectMemberRequestRepository;
 
-    /** @var \DSI\Repository\ProjectRepository */
+    /** @var \DSI\Repository\ProjectRepo */
     protected $projectsRepo;
 
-    /** @var \DSI\Repository\UserRepository */
+    /** @var \DSI\Repository\UserRepo */
     protected $usersRepo;
 
     /** @var \DSI\Entity\Project */
@@ -21,9 +21,9 @@ class ProjectMemberRequestRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->projectMemberRequestRepository = new \DSI\Repository\ProjectMemberRequestRepository();
-        $this->projectsRepo = new \DSI\Repository\ProjectRepository();
-        $this->usersRepo = new \DSI\Repository\UserRepository();
+        $this->projectMemberRequestRepository = new \DSI\Repository\ProjectMemberRequestRepo();
+        $this->projectsRepo = new \DSI\Repository\ProjectRepo();
+        $this->usersRepo = new \DSI\Repository\UserRepo();
 
         $this->user_1 = $this->createUser();
         $this->user_2 = $this->createUser();

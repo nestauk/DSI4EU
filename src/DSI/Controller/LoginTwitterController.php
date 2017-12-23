@@ -8,7 +8,7 @@
 
 namespace DSI\Controller;
 
-use DSI\Repository\UserRepository;
+use DSI\Repository\UserRepo;
 use DSI\Service\Auth;
 use DSI\Service\URL;
 use DSI\UseCase\TwitterLogin;
@@ -46,7 +46,7 @@ class LoginTwitterController
             ]);
             */
 
-            $userRepo = new UserRepository();
+            $userRepo = new UserRepo();
             if ($userRepo->twitterUIDExists($user->uid)) {
                 $twitterLogin = new TwitterLogin();
                 $twitterLogin->data()->twitterUID = $user->uid;

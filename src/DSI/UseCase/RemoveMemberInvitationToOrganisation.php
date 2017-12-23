@@ -5,11 +5,11 @@ namespace DSI\UseCase;
 use DSI\Entity\Organisation;
 use DSI\Entity\OrganisationMemberInvitation;
 use DSI\Entity\User;
-use DSI\Repository\OrganisationMemberInvitationRepository;
-use DSI\Repository\OrganisationMemberRepository;
-use DSI\Repository\OrganisationRepository;
-use DSI\Repository\OrganisationRepositoryInAPC;
-use DSI\Repository\UserRepository;
+use DSI\Repository\OrganisationMemberInvitationRepo;
+use DSI\Repository\OrganisationMemberRepo;
+use DSI\Repository\OrganisationRepo;
+use DSI\Repository\OrganisationRepoInAPC;
+use DSI\Repository\UserRepo;
 use DSI\Service\ErrorHandler;
 
 class RemoveMemberInvitationToOrganisation
@@ -17,16 +17,16 @@ class RemoveMemberInvitationToOrganisation
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var OrganisationMemberInvitationRepository */
+    /** @var OrganisationMemberInvitationRepo */
     private $organisationMemberInvitationRepo;
 
-    /** @var OrganisationMemberRepository */
+    /** @var OrganisationMemberRepo */
     private $organisationMemberRepo;
 
-    /** @var OrganisationRepository */
+    /** @var OrganisationRepo */
     private $organisationRepo;
 
-    /** @var UserRepository */
+    /** @var UserRepo */
     private $userRepository;
 
     private $userID,
@@ -35,10 +35,10 @@ class RemoveMemberInvitationToOrganisation
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->organisationMemberInvitationRepo = new OrganisationMemberInvitationRepository();
-        $this->organisationMemberRepo = new OrganisationMemberRepository();
-        $this->organisationRepo = new OrganisationRepositoryInAPC();
-        $this->userRepository = new UserRepository();
+        $this->organisationMemberInvitationRepo = new OrganisationMemberInvitationRepo();
+        $this->organisationMemberRepo = new OrganisationMemberRepo();
+        $this->organisationRepo = new OrganisationRepoInAPC();
+        $this->userRepository = new UserRepo();
 
         $user = $this->userRepository->getById($this->userID);
         $organisation = $this->organisationRepo->getById($this->organisationID);

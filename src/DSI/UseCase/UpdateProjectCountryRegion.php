@@ -2,9 +2,9 @@
 
 namespace DSI\UseCase;
 
-use DSI\Repository\CountryRegionRepository;
-use DSI\Repository\ProjectRepository;
-use DSI\Repository\ProjectRepositoryInAPC;
+use DSI\Repository\CountryRegionRepo;
+use DSI\Repository\ProjectRepo;
+use DSI\Repository\ProjectRepoInAPC;
 use DSI\Service\ErrorHandler;
 
 class UpdateProjectCountryRegion
@@ -15,10 +15,10 @@ class UpdateProjectCountryRegion
     /** @var UpdateProjectCountryRegion_Data */
     private $data;
 
-    /** @var ProjectRepository */
+    /** @var ProjectRepo */
     private $projectRepo;
 
-    /** @var CountryRegionRepository */
+    /** @var CountryRegionRepo */
     private $countryRegionRepo;
 
     public function __construct()
@@ -29,8 +29,8 @@ class UpdateProjectCountryRegion
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->projectRepo = new ProjectRepositoryInAPC();
-        $this->countryRegionRepo = new CountryRegionRepository();
+        $this->projectRepo = new ProjectRepoInAPC();
+        $this->countryRegionRepo = new CountryRegionRepo();
 
         $this->assertProjectHasBeenSent();
         $this->assertNameHasBeenSent();

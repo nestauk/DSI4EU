@@ -5,8 +5,8 @@ namespace DSI\UseCase;
 use DSI\Entity\CountryRegion;
 use DSI\Entity\ReportProfile;
 use DSI\Entity\User;
-use DSI\Repository\ReportProfileRepository;
-use DSI\Repository\UserRepository;
+use DSI\Repository\ReportProfileRepo;
+use DSI\Repository\UserRepo;
 use DSI\Service\ErrorHandler;
 
 class CreateReportProfile
@@ -17,7 +17,7 @@ class CreateReportProfile
     /** @var ReportProfile */
     private $report;
 
-    /** @var ReportProfileRepository */
+    /** @var ReportProfileRepo */
     private $reportProfileRepo;
 
     /** @var CreateReportProfile_Data */
@@ -31,7 +31,7 @@ class CreateReportProfile
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->reportProfileRepo = new ReportProfileRepository();
+        $this->reportProfileRepo = new ReportProfileRepo();
 
         if(!$this->data()->executor)
             throw new \InvalidArgumentException('Invalid executor');
@@ -41,8 +41,8 @@ class CreateReportProfile
             throw new \InvalidArgumentException('Invalid reported user');
 
         $this->report = new ReportProfile();
-        $this->report->setByUser((new UserRepository())->getById($this->data()->byUserId));
-        $this->report->setReportedUser((new UserRepository())->getById($this->data()->reportedUserId));
+        $this->report->setByUser((new UserRepo())->getById($this->data()->byUserId));
+        $this->report->setReportedUser((new UserRepo())->getById($this->data()->reportedUserId));
         $this->report->setComment($this->data()->comment);
 
         $this->reportProfileRepo->insert($this->report);

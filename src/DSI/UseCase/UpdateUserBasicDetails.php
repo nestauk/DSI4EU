@@ -2,15 +2,15 @@
 
 namespace DSI\UseCase;
 
-use DSI\Repository\LanguageRepository;
-use DSI\Repository\OrganisationMemberRepository;
-use DSI\Repository\OrganisationMemberRequestRepository;
-use DSI\Repository\ProjectMemberRepository;
-use DSI\Repository\ProjectMemberRequestRepository;
-use DSI\Repository\UserLanguageRepository;
-use DSI\Repository\UserLinkRepository;
-use DSI\Repository\UserRepository;
-use DSI\Repository\UserSkillRepository;
+use DSI\Repository\LanguageRepo;
+use DSI\Repository\OrganisationMemberRepo;
+use DSI\Repository\OrganisationMemberRequestRepo;
+use DSI\Repository\ProjectMemberRepo;
+use DSI\Repository\ProjectMemberRequestRepo;
+use DSI\Repository\UserLanguageRepo;
+use DSI\Repository\UserLinkRepo;
+use DSI\Repository\UserRepo;
+use DSI\Repository\UserSkillRepo;
 use DSI\Service\ErrorHandler;
 
 class UpdateUserBasicDetails
@@ -21,7 +21,7 @@ class UpdateUserBasicDetails
     /** @var UpdateUserBasicDetails_Data */
     private $data;
 
-    /** @var UserRepository */
+    /** @var UserRepo */
     private $userRepo;
 
     public function __construct()
@@ -32,7 +32,7 @@ class UpdateUserBasicDetails
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->userRepo = new UserRepository();
+        $this->userRepo = new UserRepo();
 
         if (isset($this->data()->firstName)) {
             if ($this->data()->firstName == '') {
@@ -98,12 +98,12 @@ class UpdateUserBasicDetails
 
     private function setUserLanguages()
     {
-        $userLanguages = (new UserLanguageRepository())->getLanguageIDsForUser($this->data()->userID);
+        $userLanguages = (new UserLanguageRepo())->getLanguageIDsForUser($this->data()->userID);
         foreach ($this->data()->languages AS $newLang) {
             if (!in_array($newLang, $userLanguages)) {
                 $addLang = new AddLanguageToUser();
                 $addLang->data()->userID = $this->data()->userID;
-                $addLang->data()->language = (new LanguageRepository())->getById($newLang)->getName();
+                $addLang->data()->language = (new LanguageRepo())->getById($newLang)->getName();
                 $addLang->exec();
             }
         }
@@ -111,7 +111,7 @@ class UpdateUserBasicDetails
             if (!in_array($oldLang, $this->data()->languages)) {
                 $remLang = new RemoveLanguageFromUser();
                 $remLang->data()->userID = $this->data()->userID;
-                $remLang->data()->language = (new LanguageRepository())->getById($oldLang)->getName();
+                $remLang->data()->language = (new LanguageRepo())->getById($oldLang)->getName();
                 $remLang->exec();
             }
         }
@@ -119,7 +119,7 @@ class UpdateUserBasicDetails
 
     private function setUserSkills()
     {
-        $userSkills = (new UserSkillRepository())->getSkillsNameByUserID($this->data()->userID);
+        $userSkills = (new UserSkillRepo())->getSkillsNameByUserID($this->data()->userID);
         foreach ($this->data()->skills AS $newSkillName) {
             if (!in_array($newSkillName, $userSkills)) {
                 $addSkill = new AddSkillToUser();
@@ -140,7 +140,7 @@ class UpdateUserBasicDetails
 
     private function setUserLinks()
     {
-        $userLinks = (new UserLinkRepository())->getLinksByUserID($this->data()->userID);
+        $userLinks = (new UserLinkRepo())->getLinksByUserID($this->data()->userID);
         $this->data()->links = array_filter((array)$this->data()->links);
         foreach ((array)$this->data()->links AS $newLink) {
             if (!in_array($newLink, $userLinks)) {
@@ -162,8 +162,8 @@ class UpdateUserBasicDetails
 
     private function setUserProjects()
     {
-        $userProjects = (new ProjectMemberRepository())->getProjectIDsForMember($this->data()->userID);
-        $userProjectRequests = (new ProjectMemberRequestRepository())->getProjectIDsForMember($this->data()->userID);
+        $userProjects = (new ProjectMemberRepo())->getProjectIDsForMember($this->data()->userID);
+        $userProjectRequests = (new ProjectMemberRequestRepo())->getProjectIDsForMember($this->data()->userID);
         foreach ($this->data()->projects AS $newProjectID) {
             if (!in_array($newProjectID, $userProjects) AND !in_array($newProjectID, $userProjectRequests)) {
                 $addMemberRequest = new AddMemberRequestToProject();
@@ -184,8 +184,8 @@ class UpdateUserBasicDetails
 
     private function setUserOrganisations()
     {
-        $userOrganisations = (new OrganisationMemberRepository())->getOrganisationIDsForMember($this->data()->userID);
-        $userOrganisationRequests = (new OrganisationMemberRequestRepository())->getOrganisationIDsForMember($this->data()->userID);
+        $userOrganisations = (new OrganisationMemberRepo())->getOrganisationIDsForMember($this->data()->userID);
+        $userOrganisationRequests = (new OrganisationMemberRequestRepo())->getOrganisationIDsForMember($this->data()->userID);
         foreach ($this->data()->organisations AS $newOrgID) {
             if (!in_array($newOrgID, $userOrganisations) AND !in_array($newOrgID, $userOrganisationRequests)) {
                 $addMemberRequest = new AddMemberRequestToOrganisation();

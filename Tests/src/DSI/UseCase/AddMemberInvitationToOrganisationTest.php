@@ -7,13 +7,13 @@ class AddMemberInvitationToOrganisationTest extends PHPUnit_Framework_TestCase
     /** @var \DSI\UseCase\AddMemberInvitationToOrganisation */
     private $addMemberInvitationToOrganisation;
 
-    /** @var \DSI\Repository\OrganisationRepository */
+    /** @var \DSI\Repository\OrganisationRepo */
     private $organisationRepo;
 
     /** @var \DSI\Entity\Organisation */
     private $organisation;
 
-    /** @var \DSI\Repository\UserRepository */
+    /** @var \DSI\Repository\UserRepo */
     private $userRepo;
 
     /** @var \DSI\Entity\User */
@@ -22,8 +22,8 @@ class AddMemberInvitationToOrganisationTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->addMemberInvitationToOrganisation = new \DSI\UseCase\AddMemberInvitationToOrganisation();
-        $this->organisationRepo = new \DSI\Repository\OrganisationRepository();
-        $this->userRepo = new \DSI\Repository\UserRepository();
+        $this->organisationRepo = new \DSI\Repository\OrganisationRepo();
+        $this->userRepo = new \DSI\Repository\UserRepo();
 
         $this->user_1 = new \DSI\Entity\User();
         $this->userRepo->insert($this->user_1);
@@ -39,7 +39,7 @@ class AddMemberInvitationToOrganisationTest extends PHPUnit_Framework_TestCase
     {
         $this->organisationRepo->clearAll();
         $this->userRepo->clearAll();
-        (new \DSI\Repository\OrganisationMemberInvitationRepository())->clearAll();
+        (new \DSI\Repository\OrganisationMemberInvitationRepo())->clearAll();
     }
 
     /** @test */
@@ -50,7 +50,7 @@ class AddMemberInvitationToOrganisationTest extends PHPUnit_Framework_TestCase
         $this->addMemberInvitationToOrganisation->exec();
 
         $this->assertTrue(
-            (new \DSI\Repository\OrganisationMemberInvitationRepository())->userIdHasInvitationToOrganisationId(
+            (new \DSI\Repository\OrganisationMemberInvitationRepo())->userIdHasInvitationToOrganisationId(
                 $this->user_2->getId(),
                 $this->organisation->getId()
             )

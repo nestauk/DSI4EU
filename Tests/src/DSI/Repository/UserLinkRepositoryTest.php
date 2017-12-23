@@ -4,10 +4,10 @@ require_once __DIR__ . '/../../../config.php';
 
 class UserLinkRepositoryTest extends PHPUnit_Framework_TestCase
 {
-    /** @var \DSI\Repository\UserLinkRepository */
+    /** @var \DSI\Repository\UserLinkRepo */
     protected $userLinkRepo;
 
-    /** @var \DSI\Repository\UserRepository */
+    /** @var \DSI\Repository\UserRepo */
     protected $userRepo;
 
     /** @var \DSI\Entity\User */
@@ -18,8 +18,8 @@ class UserLinkRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->userLinkRepo = new \DSI\Repository\UserLinkRepository();
-        $this->userRepo = new \DSI\Repository\UserRepository();
+        $this->userLinkRepo = new \DSI\Repository\UserLinkRepo();
+        $this->userRepo = new \DSI\Repository\UserRepo();
 
         $this->user_1 = $this->createUser(1);
         $this->user_2 = $this->createUser(2);

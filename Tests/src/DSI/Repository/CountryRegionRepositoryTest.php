@@ -2,16 +2,16 @@
 
 require_once __DIR__ . '/../../../config.php';
 
-use \DSI\Repository\CountryRegionRepository;
-use \DSI\Repository\CountryRepository;
+use \DSI\Repository\CountryRegionRepo;
+use \DSI\Repository\CountryRepo;
 use \DSI\Entity\Country;
 
 class CountryRegionRepositoryTest extends PHPUnit_Framework_TestCase
 {
-    /** @var CountryRegionRepository */
+    /** @var CountryRegionRepo */
     protected $countryRegionRepo;
 
-    /** @var CountryRepository */
+    /** @var CountryRepo */
     protected $countryRepo;
 
     /** @var Country */
@@ -19,8 +19,8 @@ class CountryRegionRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->countryRegionRepo = new CountryRegionRepository();
-        $this->countryRepo = new CountryRepository();
+        $this->countryRegionRepo = new CountryRegionRepo();
+        $this->countryRepo = new CountryRepo();
 
         $this->country_1 = new Country();
         $this->country_1->setName('Romania');

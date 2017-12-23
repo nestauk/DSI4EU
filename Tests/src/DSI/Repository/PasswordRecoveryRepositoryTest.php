@@ -2,16 +2,16 @@
 
 require_once __DIR__ . '/../../../config.php';
 
-use \DSI\Repository\UserRepository;
-use \DSI\Repository\PasswordRecoveryRepository;
+use \DSI\Repository\UserRepo;
+use \DSI\Repository\PasswordRecoveryRepo;
 use \DSI\Entity\User;
 
 class PasswordRecoveryRepositoryTest extends PHPUnit_Framework_TestCase
 {
-    /** @var PasswordRecoveryRepository */
+    /** @var PasswordRecoveryRepo */
     private $passwordRecoveryRepository;
 
-    /** @var UserRepository */
+    /** @var UserRepo */
     private $userRepo;
 
     /** @var User */
@@ -19,8 +19,8 @@ class PasswordRecoveryRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->passwordRecoveryRepository = new PasswordRecoveryRepository();
-        $this->userRepo = new UserRepository();
+        $this->passwordRecoveryRepository = new PasswordRecoveryRepo();
+        $this->userRepo = new UserRepo();
 
         $this->user1 = new User();
         $this->user2 = new User();

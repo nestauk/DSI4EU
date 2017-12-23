@@ -5,8 +5,8 @@ namespace DSI\UseCase;
 use DSI\Entity\Project;
 use DSI\Entity\ProjectEmailInvitation;
 use DSI\Entity\User;
-use DSI\Repository\ProjectEmailInvitationRepository;
-use DSI\Repository\UserRepository;
+use DSI\Repository\ProjectEmailInvitationRepo;
+use DSI\Repository\UserRepo;
 use DSI\Service\ErrorHandler;
 
 class CancelInvitationEmailToProject
@@ -14,7 +14,7 @@ class CancelInvitationEmailToProject
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var UserRepository */
+    /** @var UserRepo */
     private $userRepository;
 
     /** @var User */
@@ -29,7 +29,7 @@ class CancelInvitationEmailToProject
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->userRepository = new UserRepository();
+        $this->userRepository = new UserRepo();
 
         $this->assertValidEmailAddress();
         $this->removeProjectEmailInvitation();
@@ -72,6 +72,6 @@ class CancelInvitationEmailToProject
         $projectEmailInvitation = new ProjectEmailInvitation();
         $projectEmailInvitation->setProject($this->project);
         $projectEmailInvitation->setEmail($this->email);
-        (new ProjectEmailInvitationRepository())->remove($projectEmailInvitation);
+        (new ProjectEmailInvitationRepo())->remove($projectEmailInvitation);
     }
 }

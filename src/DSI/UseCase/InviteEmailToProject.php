@@ -4,7 +4,7 @@ namespace DSI\UseCase;
 
 use DSI\Entity\Project;
 use DSI\Entity\User;
-use DSI\Repository\UserRepository;
+use DSI\Repository\UserRepo;
 use DSI\Service\ErrorHandler;
 
 class InviteEmailToProject
@@ -12,7 +12,7 @@ class InviteEmailToProject
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var UserRepository */
+    /** @var UserRepo */
     private $userRepository;
 
     /** @var User */
@@ -30,7 +30,7 @@ class InviteEmailToProject
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->userRepository = new UserRepository();
+        $this->userRepository = new UserRepo();
 
         $this->assertValidEmailAddress();
 

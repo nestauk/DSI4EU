@@ -5,12 +5,12 @@ namespace DSI\UseCase\Projects;
 use DSI\Entity\Project;
 use DSI\Entity\ProjectFollow;
 use DSI\Entity\User;
-use DSI\Repository\ProjectFollowRepository;
+use DSI\Repository\ProjectFollowRepo;
 use DSI\Service\ErrorHandler;
 
 class UnfollowProject
 {
-    /** @var ProjectFollowRepository */
+    /** @var ProjectFollowRepo */
     private $projectFollowRepository;
 
     /** @var ErrorHandler */
@@ -27,7 +27,7 @@ class UnfollowProject
     {
         $this->errorHandler = new ErrorHandler();
 
-        $this->projectFollowRepository = new ProjectFollowRepository();
+        $this->projectFollowRepository = new ProjectFollowRepo();
     }
 
     public function exec()

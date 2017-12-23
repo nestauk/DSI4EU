@@ -4,11 +4,11 @@ namespace DSI\UseCase;
 
 use DSI\Entity\OrganisationProject;
 use DSI\Entity\Project;
-use DSI\Repository\OrganisationProjectRepository;
-use DSI\Repository\OrganisationRepository;
-use DSI\Repository\OrganisationRepositoryInAPC;
-use DSI\Repository\ProjectRepository;
-use DSI\Repository\ProjectRepositoryInAPC;
+use DSI\Repository\OrganisationProjectRepo;
+use DSI\Repository\OrganisationRepo;
+use DSI\Repository\OrganisationRepoInAPC;
+use DSI\Repository\ProjectRepo;
+use DSI\Repository\ProjectRepoInAPC;
 use DSI\Service\ErrorHandler;
 
 class AddProjectToOrganisation
@@ -16,13 +16,13 @@ class AddProjectToOrganisation
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var OrganisationProjectRepository */
+    /** @var OrganisationProjectRepo */
     private $organisationProjectRepo;
 
-    /** @var OrganisationRepository */
+    /** @var OrganisationRepo */
     private $organisationRepository;
 
-    /** @var ProjectRepository */
+    /** @var ProjectRepo */
     private $projectRepository;
 
     /** @var AddProjectToOrganisation_Data */
@@ -36,9 +36,9 @@ class AddProjectToOrganisation
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->organisationProjectRepo = new OrganisationProjectRepository();
-        $this->organisationRepository = new OrganisationRepositoryInAPC();
-        $this->projectRepository = new ProjectRepositoryInAPC();
+        $this->organisationProjectRepo = new OrganisationProjectRepo();
+        $this->organisationRepository = new OrganisationRepoInAPC();
+        $this->projectRepository = new ProjectRepoInAPC();
 
         $this->checkIfTheOrganisationAlreadyHasTheProject();
 

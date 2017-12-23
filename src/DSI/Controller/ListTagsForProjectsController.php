@@ -2,7 +2,7 @@
 
 namespace DSI\Controller;
 
-use DSI\Repository\TagForProjectsRepository;
+use DSI\Repository\TagForProjectsRepo;
 use DSI\Service\Auth;
 use DSI\Service\URL;
 
@@ -14,7 +14,7 @@ class ListTagsForProjectsController
         $authUser = new Auth();
         $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
 
-        $tagRepo = new TagForProjectsRepository();
+        $tagRepo = new TagForProjectsRepo();
         $tags = [];
         foreach($tagRepo->getAll() AS $tag){
             $tags[] = [

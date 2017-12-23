@@ -2,7 +2,7 @@
 
 namespace DSI\UseCase;
 
-use DSI\Repository\UserRepository;
+use DSI\Repository\UserRepo;
 use DSI\Service\ErrorHandler;
 
 class UpdateUserBio
@@ -21,7 +21,7 @@ class UpdateUserBio
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $userRepo = new UserRepository();
+        $userRepo = new UserRepo();
 
         $user = $userRepo->getById($this->data()->userID);
         $user->setBio($this->data()->bio);

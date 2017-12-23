@@ -3,12 +3,12 @@
 namespace DSI\Controller;
 
 use DSI\Entity\User;
-use DSI\Repository\OrganisationMemberInvitationRepository;
-use DSI\Repository\OrganisationMemberRepository;
-use DSI\Repository\OrganisationMemberRequestRepository;
-use DSI\Repository\ProjectMemberInvitationRepository;
-use DSI\Repository\ProjectMemberRepository;
-use DSI\Repository\ProjectMemberRequestRepository;
+use DSI\Repository\OrganisationMemberInvitationRepo;
+use DSI\Repository\OrganisationMemberRepo;
+use DSI\Repository\OrganisationMemberRequestRepo;
+use DSI\Repository\ProjectMemberInvitationRepo;
+use DSI\Repository\ProjectMemberRepo;
+use DSI\Repository\ProjectMemberRequestRepo;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\URL;
@@ -28,9 +28,9 @@ class NotificationsController
         $loggedInUser = $authUser->getUser();
 
         try {
-            $projectInvitations = (new ProjectMemberInvitationRepository())->getByMemberID($loggedInUser->getId());
+            $projectInvitations = (new ProjectMemberInvitationRepo())->getByMemberID($loggedInUser->getId());
             $projectRequests = $this->getProjectRequests($loggedInUser);
-            $organisationInvitations = (new OrganisationMemberInvitationRepository())->getByMemberID($loggedInUser->getId());
+            $organisationInvitations = (new OrganisationMemberInvitationRepo())->getByMemberID($loggedInUser->getId());
             $organisationRequests = $this->getOrganisationRequests($loggedInUser);
 
             echo json_encode([
@@ -58,13 +58,13 @@ class NotificationsController
      */
     private function getOrganisationRequests(User $loggedInUser)
     {
-        $organisationsWhereUserIsAdmin = (new OrganisationMemberRepository())->getByAdmin($loggedInUser);
+        $organisationsWhereUserIsAdmin = (new OrganisationMemberRepo())->getByAdmin($loggedInUser);
         if ($organisationsWhereUserIsAdmin) {
             $_orgIDs = [];
             foreach ($organisationsWhereUserIsAdmin AS $_org)
                 $_orgIDs[] = $_org->getOrganisationID();
 
-            $organisationRequests = (new OrganisationMemberRequestRepository())->getByOrganisationIDs($_orgIDs);
+            $organisationRequests = (new OrganisationMemberRequestRepo())->getByOrganisationIDs($_orgIDs);
         } else {
             $organisationRequests = [];
         }
@@ -77,13 +77,13 @@ class NotificationsController
      */
     private function getProjectRequests(User $loggedInUser)
     {
-        $projectsWhereUserIsAdmin = (new ProjectMemberRepository())->getByAdmin($loggedInUser);
+        $projectsWhereUserIsAdmin = (new ProjectMemberRepo())->getByAdmin($loggedInUser);
         if ($projectsWhereUserIsAdmin) {
             $_projectIDs = [];
             foreach ($projectsWhereUserIsAdmin AS $_project)
                 $_projectIDs[] = $_project->getProjectID();
 
-            $projectRequests = (new ProjectMemberRequestRepository())->getByProjectIDs($_projectIDs);
+            $projectRequests = (new ProjectMemberRequestRepo())->getByProjectIDs($_projectIDs);
         } else {
             $projectRequests = [];
         }

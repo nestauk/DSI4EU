@@ -2,17 +2,17 @@
 
 require_once __DIR__ . '/../../../config.php';
 
-use \DSI\Repository\TagForOrganisationsRepository;
+use \DSI\Repository\TagForOrganisationsRepo;
 use \DSI\Entity\TagForOrganisations;
 
 class TagForOrganisationsRepositoryTest extends PHPUnit_Framework_TestCase
 {
-    /** @var TagForOrganisationsRepository */
+    /** @var TagForOrganisationsRepo */
     protected $tagsRepo;
 
     public function setUp()
     {
-        $this->tagsRepo = new TagForOrganisationsRepository();
+        $this->tagsRepo = new TagForOrganisationsRepo();
     }
 
     public function tearDown()

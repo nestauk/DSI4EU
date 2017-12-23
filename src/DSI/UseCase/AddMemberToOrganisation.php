@@ -3,10 +3,10 @@
 namespace DSI\UseCase;
 
 use DSI\Entity\OrganisationMember;
-use DSI\Repository\OrganisationMemberRepository;
-use DSI\Repository\OrganisationRepository;
-use DSI\Repository\OrganisationRepositoryInAPC;
-use DSI\Repository\UserRepository;
+use DSI\Repository\OrganisationMemberRepo;
+use DSI\Repository\OrganisationRepo;
+use DSI\Repository\OrganisationRepoInAPC;
+use DSI\Repository\UserRepo;
 use DSI\Service\ErrorHandler;
 
 class AddMemberToOrganisation
@@ -14,13 +14,13 @@ class AddMemberToOrganisation
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var OrganisationMemberRepository */
+    /** @var OrganisationMemberRepo */
     private $organisationMemberRepo;
 
-    /** @var OrganisationRepository */
+    /** @var OrganisationRepo */
     private $organisationRepository;
 
-    /** @var UserRepository */
+    /** @var UserRepo */
     private $userRepository;
 
     /** @var AddMemberToOrganisation_Data */
@@ -34,9 +34,9 @@ class AddMemberToOrganisation
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->organisationMemberRepo = new OrganisationMemberRepository();
-        $this->organisationRepository = new OrganisationRepositoryInAPC();
-        $this->userRepository = new UserRepository();
+        $this->organisationMemberRepo = new OrganisationMemberRepo();
+        $this->organisationRepository = new OrganisationRepoInAPC();
+        $this->userRepository = new UserRepo();
 
         if ($this->organisationMemberRepo->organisationIDHasMemberID($this->data()->organisationID, $this->data()->userID)) {
             $this->errorHandler->addTaggedError('member', __('This user is already a member of the organisation'));

@@ -8,16 +8,16 @@ use \DSI\UseCase\Funding\FundingCreate;
 
 class FundingAddTest extends PHPUnit_Framework_TestCase
 {
-    /** @var Repository\FundingRepository */
+    /** @var Repository\FundingRepo */
     private $fundingRepository;
 
-    /** @var Repository\CountryRepository */
+    /** @var Repository\CountryRepo */
     private $countryRepo;
 
     /** @var Entity\Country */
     private $country;
 
-    /** @var Repository\FundingSourceRepository */
+    /** @var Repository\FundingSourceRepo */
     private $fundingSourceRepo;
 
     /** @var Entity\FundingSource */
@@ -25,14 +25,14 @@ class FundingAddTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->fundingRepository = new Repository\FundingRepository();
+        $this->fundingRepository = new Repository\FundingRepo();
 
-        $this->countryRepo = new Repository\CountryRepository();
+        $this->countryRepo = new Repository\CountryRepo();
         $this->country = new Entity\Country();
         $this->country->setName('Country Name');
         $this->countryRepo->insert($this->country);
 
-        $this->fundingSourceRepo = new Repository\FundingSourceRepository();
+        $this->fundingSourceRepo = new Repository\FundingSourceRepo();
         $this->fundingSource = new Entity\FundingSource();
         $this->fundingSource->setTitle('Funding Source');
         $this->fundingSource->setUrl('http://funding-source.rss');

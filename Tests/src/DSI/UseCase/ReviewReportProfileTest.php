@@ -7,13 +7,13 @@ class ReviewReportProfileTest extends PHPUnit_Framework_TestCase
     /** @var \DSI\UseCase\ReviewReportProfile */
     private $reviewReportProfileCmd;
 
-    /** @var \DSI\Repository\ReportProfileRepository */
+    /** @var \DSI\Repository\ReportProfileRepo */
     private $reportProfileRepo;
 
     /** @var \DSI\Entity\ReportProfile */
     private $report;
 
-    /** @var \DSI\Repository\UserRepository */
+    /** @var \DSI\Repository\UserRepo */
     private $userRepo;
 
     /** @var \DSI\Entity\User */
@@ -24,8 +24,8 @@ class ReviewReportProfileTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->reviewReportProfileCmd = new \DSI\UseCase\ReviewReportProfile();
-        $this->reportProfileRepo = new \DSI\Repository\ReportProfileRepository();
-        $this->userRepo = new \DSI\Repository\UserRepository();
+        $this->reportProfileRepo = new \DSI\Repository\ReportProfileRepo();
+        $this->userRepo = new \DSI\Repository\UserRepo();
 
         $this->executor = new \DSI\Entity\User();
         $this->userRepo->insert($this->executor);

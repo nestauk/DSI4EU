@@ -3,7 +3,7 @@
 namespace DSI\Controller;
 
 use DSI\Entity\User;
-use DSI\Repository\StoryCategoryRepository;
+use DSI\Repository\StoryCategoryRepo;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\JsModules;
@@ -58,7 +58,7 @@ class StoryAddController
             die();
         }
 
-        $categories = (new StoryCategoryRepository())->getAll();
+        $categories = (new StoryCategoryRepo())->getAll();
 
         $angularModules['fileUpload'] = true;
         JsModules::setTinyMCE(true);

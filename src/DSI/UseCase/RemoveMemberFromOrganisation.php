@@ -5,10 +5,10 @@ namespace DSI\UseCase;
 use DSI\Entity\Organisation;
 use DSI\Entity\OrganisationMember;
 use DSI\Entity\User;
-use DSI\Repository\OrganisationMemberRepository;
-use DSI\Repository\OrganisationRepository;
-use DSI\Repository\OrganisationRepositoryInAPC;
-use DSI\Repository\UserRepository;
+use DSI\Repository\OrganisationMemberRepo;
+use DSI\Repository\OrganisationRepo;
+use DSI\Repository\OrganisationRepoInAPC;
+use DSI\Repository\UserRepo;
 use DSI\Service\ErrorHandler;
 
 class RemoveMemberFromOrganisation
@@ -16,7 +16,7 @@ class RemoveMemberFromOrganisation
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var OrganisationMemberRepository */
+    /** @var OrganisationMemberRepo */
     private $organisationMemberRepo;
 
     /** @var Organisation */
@@ -28,7 +28,7 @@ class RemoveMemberFromOrganisation
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->organisationMemberRepo = new OrganisationMemberRepository();
+        $this->organisationMemberRepo = new OrganisationMemberRepo();
 
         if (!$this->organisationMemberRepo->organisationHasMember($this->organisation, $this->user)) {
             $this->errorHandler->addTaggedError('member', 'The user is not a member of the organisation');
@@ -54,7 +54,7 @@ class RemoveMemberFromOrganisation
      */
     public function setOrganisationID(int $organisationID)
     {
-        $this->organisation = (new OrganisationRepositoryInAPC())->getById($organisationID);
+        $this->organisation = (new OrganisationRepoInAPC())->getById($organisationID);
     }
 
     /**
@@ -70,6 +70,6 @@ class RemoveMemberFromOrganisation
      */
     public function setUserID(int $userID)
     {
-        $this->user = (new UserRepository())->getById($userID);
+        $this->user = (new UserRepo())->getById($userID);
     }
 }

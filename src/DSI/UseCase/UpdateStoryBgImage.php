@@ -5,7 +5,7 @@ namespace DSI\UseCase;
 use abeautifulsite\SimpleImage;
 use DSI\NotEnoughData;
 use DSI\NotFound;
-use DSI\Repository\StoryRepository;
+use DSI\Repository\StoryRepo;
 use DSI\Service\ErrorHandler;
 
 class UpdateStoryBgImage
@@ -16,7 +16,7 @@ class UpdateStoryBgImage
     /** @var UpdateStoryBgImage_Data */
     private $data;
 
-    /** @var StoryRepository */
+    /** @var StoryRepo */
     private $storyRepo;
 
     /** @var string */
@@ -30,7 +30,7 @@ class UpdateStoryBgImage
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->storyRepo = new StoryRepository();
+        $this->storyRepo = new StoryRepo();
 
         $this->checkIfAllTheInfoHaveBeenSent();
         $this->checkIfFileExistsOnServer();

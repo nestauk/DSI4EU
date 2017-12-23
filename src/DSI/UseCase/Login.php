@@ -3,7 +3,7 @@ namespace DSI\UseCase;
 
 use DSI\Entity\User;
 use DSI\NotFound;
-use DSI\Repository\UserRepository;
+use DSI\Repository\UserRepo;
 use DSI\Service\ErrorHandler;
 
 class Login
@@ -11,7 +11,7 @@ class Login
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var UserRepository */
+    /** @var UserRepo */
     private $userRepo;
 
     /** @var Login_Data */
@@ -24,7 +24,7 @@ class Login
     {
         $this->data = new Login_Data();
         $this->errorHandler = new ErrorHandler();
-        $this->userRepo = new UserRepository();
+        $this->userRepo = new UserRepo();
     }
 
     public function exec()

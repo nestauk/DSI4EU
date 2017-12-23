@@ -8,15 +8,15 @@ use DSI\Entity\Organisation;
 use DSI\Entity\User;
 use DSI\NotEnoughData;
 use DSI\NotFound;
-use DSI\Repository\CountryRegionRepository;
-use DSI\Repository\OrganisationLinkRepository;
-use DSI\Repository\OrganisationNetworkTagRepository;
-use DSI\Repository\OrganisationProjectRepository;
-use DSI\Repository\OrganisationRepository;
-use DSI\Repository\OrganisationRepositoryInAPC;
-use DSI\Repository\OrganisationSizeRepository;
-use DSI\Repository\OrganisationTagRepository;
-use DSI\Repository\OrganisationTypeRepository;
+use DSI\Repository\CountryRegionRepo;
+use DSI\Repository\OrganisationLinkRepo;
+use DSI\Repository\OrganisationNetworkTagRepo;
+use DSI\Repository\OrganisationProjectRepo;
+use DSI\Repository\OrganisationRepo;
+use DSI\Repository\OrganisationRepoInAPC;
+use DSI\Repository\OrganisationSizeRepo;
+use DSI\Repository\OrganisationTagRepo;
+use DSI\Repository\OrganisationTypeRepo;
 use DSI\Service\ErrorHandler;
 
 class UpdateOrganisation
@@ -27,13 +27,13 @@ class UpdateOrganisation
     /** @var UpdateOrganisation_Data */
     private $data;
 
-    /** @var OrganisationRepository */
+    /** @var OrganisationRepo */
     private $organisationRepo;
 
     public function __construct()
     {
         $this->data = new UpdateOrganisation_Data();
-        $this->organisationRepo = new OrganisationRepositoryInAPC();
+        $this->organisationRepo = new OrganisationRepoInAPC();
     }
 
     public function exec()
@@ -71,14 +71,14 @@ class UpdateOrganisation
         if (isset($this->data()->organisationTypeId))
             if ($this->data()->organisationTypeId)
                 $this->data()->organisation->setType(
-                    (new OrganisationTypeRepository())->getById(
+                    (new OrganisationTypeRepo())->getById(
                         $this->data()->organisationTypeId
                     )
                 );
         if (isset($this->data()->organisationSizeId))
             if ($this->data()->organisationSizeId)
                 $this->data()->organisation->setSize(
-                    (new OrganisationSizeRepository())->getById(
+                    (new OrganisationSizeRepo())->getById(
                         $this->data()->organisationSizeId
                     )
                 );
@@ -127,7 +127,7 @@ class UpdateOrganisation
 
     private function setTags()
     {
-        $orgTags = (new OrganisationTagRepository())->getTagNamesByOrganisation($this->data()->organisation);
+        $orgTags = (new OrganisationTagRepo())->getTagNamesByOrganisation($this->data()->organisation);
         foreach ($this->data()->tags AS $newTagName) {
             if (!in_array($newTagName, $orgTags)) {
                 $addTag = new AddTagToOrganisation();
@@ -148,7 +148,7 @@ class UpdateOrganisation
 
     private function setNetworkTags()
     {
-        $orgNetworkTags = (new OrganisationNetworkTagRepository())->getTagNamesByOrganisation($this->data()->organisation);
+        $orgNetworkTags = (new OrganisationNetworkTagRepo())->getTagNamesByOrganisation($this->data()->organisation);
         foreach ($this->data()->networkTags AS $newNetworkTagName) {
             if (!in_array($newNetworkTagName, $orgNetworkTags)) {
                 $addTag = new AddNetworkTagToOrganisation();
@@ -169,7 +169,7 @@ class UpdateOrganisation
 
     private function setProjects()
     {
-        $orgProjects = (new OrganisationProjectRepository())->getProjectIDsForOrganisation($this->data()->organisation);
+        $orgProjects = (new OrganisationProjectRepo())->getProjectIDsForOrganisation($this->data()->organisation);
         foreach ($this->data()->projects AS $newProject) {
             if (!in_array($newProject, $orgProjects)) {
                 $addProject = new AddProjectToOrganisation();
@@ -190,7 +190,7 @@ class UpdateOrganisation
 
     private function setRegion()
     {
-        $countryRegionRepo = new CountryRegionRepository();
+        $countryRegionRepo = new CountryRegionRepo();
         if ($this->data()->countryID != 0) {
             if ($countryRegionRepo->nameExists($this->data()->countryID, $this->data()->region)) {
                 $countryRegion = $countryRegionRepo->getByName($this->data()->countryID, $this->data()->region);
@@ -277,7 +277,7 @@ class UpdateOrganisation
     private function setLinks()
     {
         $this->data()->links = (array)$this->data()->links;
-        $organisationLinks = (new OrganisationLinkRepository())->getLinksByOrganisationID($this->data()->organisation->getId());
+        $organisationLinks = (new OrganisationLinkRepo())->getLinksByOrganisationID($this->data()->organisation->getId());
         foreach ($this->data()->links AS $newLink) {
             if (!in_array($newLink, $organisationLinks)) {
                 $addLink = new AddLinkToOrganisation();

@@ -3,11 +3,11 @@
 namespace DSI\UseCase;
 
 use DSI\Entity\OrganisationTag;
-use DSI\Repository\OrganisationRepository;
-use DSI\Repository\OrganisationRepositoryInAPC;
-use DSI\Repository\OrganisationTagRepository;
-use DSI\Repository\TagForOrganisationsRepository;
-use DSI\Repository\UserRepository;
+use DSI\Repository\OrganisationRepo;
+use DSI\Repository\OrganisationRepoInAPC;
+use DSI\Repository\OrganisationTagRepo;
+use DSI\Repository\TagForOrganisationsRepo;
+use DSI\Repository\UserRepo;
 use DSI\Service\ErrorHandler;
 
 class RemoveTagFromOrganisation
@@ -15,7 +15,7 @@ class RemoveTagFromOrganisation
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var OrganisationTagRepository */
+    /** @var OrganisationTagRepo */
     private $organisationTagRepo;
 
     /** @var RemoveTagFromOrganisation_Data */
@@ -29,11 +29,11 @@ class RemoveTagFromOrganisation
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->organisationTagRepo = new OrganisationTagRepository();
+        $this->organisationTagRepo = new OrganisationTagRepo();
 
-        $tagRepo = new TagForOrganisationsRepository();
-        $organisationRepo = new OrganisationRepositoryInAPC();
-        $userRepo = new UserRepository();
+        $tagRepo = new TagForOrganisationsRepo();
+        $organisationRepo = new OrganisationRepoInAPC();
+        $userRepo = new UserRepo();
 
         if ($tagRepo->nameExists($this->data()->tag)) {
             $tag = $tagRepo->getByName($this->data()->tag);

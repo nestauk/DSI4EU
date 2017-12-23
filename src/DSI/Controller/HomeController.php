@@ -2,9 +2,9 @@
 
 namespace DSI\Controller;
 
-use DSI\Repository\CaseStudyRepository;
-use DSI\Repository\OrganisationRepository;
-use DSI\Repository\ProjectRepository;
+use DSI\Repository\CaseStudyRepo;
+use DSI\Repository\OrganisationRepo;
+use DSI\Repository\ProjectRepo;
 use DSI\Service\Auth;
 
 class HomeController
@@ -17,11 +17,11 @@ class HomeController
         $loggedInUser = $authUser->getUserIfLoggedIn();
         
         $hideSearch = true;
-        $sliderCaseStudies = (new CaseStudyRepository())->getAllPublishedForSlider();
-        $homePageCaseStudies = (new CaseStudyRepository())->getHomePageStudiesLast(3);
+        $sliderCaseStudies = (new CaseStudyRepo())->getAllPublishedForSlider();
+        $homePageCaseStudies = (new CaseStudyRepo())->getHomePageStudiesLast(3);
 
-        $organisationsCount = (new \DSI\Repository\OrganisationRepositoryInAPC())->countAll();
-        $projectsCount = (new \DSI\Repository\ProjectRepositoryInAPC())->countAll();
+        $organisationsCount = (new \DSI\Repository\OrganisationRepoInAPC())->countAll();
+        $projectsCount = (new \DSI\Repository\ProjectRepoInAPC())->countAll();
 
         $isIndexPage = true;
 

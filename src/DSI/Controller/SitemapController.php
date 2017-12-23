@@ -2,13 +2,13 @@
 
 namespace DSI\Controller;
 
-use DSI\Repository\CaseStudyRepository;
-use DSI\Repository\OrganisationRepository;
-use DSI\Repository\OrganisationRepositoryInAPC;
-use DSI\Repository\ProjectRepository;
-use DSI\Repository\ProjectRepositoryInAPC;
-use DSI\Repository\StoryRepository;
-use DSI\Repository\UserRepository;
+use DSI\Repository\CaseStudyRepo;
+use DSI\Repository\OrganisationRepo;
+use DSI\Repository\OrganisationRepoInAPC;
+use DSI\Repository\ProjectRepo;
+use DSI\Repository\ProjectRepoInAPC;
+use DSI\Repository\StoryRepo;
+use DSI\Repository\UserRepo;
 use DSI\Service\Auth;
 use DSI\Service\URL;
 
@@ -43,7 +43,7 @@ class SitemapController
      */
     private function addOrganisationsTo($links)
     {
-        $organisations = (new OrganisationRepositoryInAPC())->getAll();
+        $organisations = (new OrganisationRepoInAPC())->getAll();
         // $organisations = (new OrganisationRepository())->getAllPublished();
         foreach ($organisations AS $organisation) {
             $organisationLink = new SitemapLink();
@@ -62,7 +62,7 @@ class SitemapController
      */
     private function addStoriesTo($links)
     {
-        $stories = (new StoryRepository())->getAllPublished();
+        $stories = (new StoryRepo())->getAllPublished();
         foreach ($stories AS $story) {
             $storyLink = new SitemapLink();
             $storyLink->loc = 'https://' . SITE_DOMAIN . $this->urlHandler->blogPost($story);
@@ -80,7 +80,7 @@ class SitemapController
      */
     private function addCaseStudiesTo($links)
     {
-        $caseStudies = (new CaseStudyRepository())->getAllPublished();
+        $caseStudies = (new CaseStudyRepo())->getAllPublished();
         foreach ($caseStudies AS $caseStudy) {
             $link = new SitemapLink();
             $link->loc = 'https://' . SITE_DOMAIN . $this->urlHandler->caseStudy($caseStudy);
@@ -98,7 +98,7 @@ class SitemapController
      */
     private function addProjectsTo($links)
     {
-        $projects = (new ProjectRepositoryInAPC())->getAll();
+        $projects = (new ProjectRepoInAPC())->getAll();
         // $projects = (new ProjectRepository())->getAllPublished();
         foreach ($projects AS $project) {
             $projectLink = new SitemapLink();

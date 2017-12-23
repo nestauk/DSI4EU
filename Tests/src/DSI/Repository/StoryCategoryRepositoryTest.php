@@ -2,17 +2,17 @@
 
 require_once __DIR__ . '/../../../config.php';
 
-use \DSI\Repository\StoryCategoryRepository;
+use \DSI\Repository\StoryCategoryRepo;
 use \DSI\Entity\StoryCategory;
 
 class StoryCategoryRepositoryTest extends PHPUnit_Framework_TestCase
 {
-    /** @var StoryCategoryRepository */
+    /** @var StoryCategoryRepo */
     private $storyCategoryRepository;
 
     public function setUp()
     {
-        $this->storyCategoryRepository = new StoryCategoryRepository();
+        $this->storyCategoryRepository = new StoryCategoryRepo();
     }
 
     public function tearDown()

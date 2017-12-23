@@ -2,7 +2,7 @@
 
 namespace DSI\Controller;
 
-use DSI\Repository\CountryRegionRepository;
+use DSI\Repository\CountryRegionRepo;
 use DSI\Service\Auth;
 use DSI\Service\URL;
 
@@ -22,7 +22,7 @@ class ListCountryRegionsController
         $authUser = new Auth();
         $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
 
-        $countryRegionsRepo = new CountryRegionRepository();
+        $countryRegionsRepo = new CountryRegionRepo();
         $countryRegions = [];
         foreach ($countryRegionsRepo->getAllByCountryId($this->data()->countryID) AS $countryRegion) {
             $countryRegions[] = [

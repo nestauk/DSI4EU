@@ -3,14 +3,14 @@
 require_once __DIR__ . '/../../../config.php';
 
 use DSI\Service\ErrorHandler;
-use DSI\Repository\ProjectRepository;
+use DSI\Repository\ProjectRepo;
 
 class UpdateProjectTest extends PHPUnit_Framework_TestCase
 {
     /** @var \DSI\UseCase\UpdateProject */
     private $updateProject;
 
-    /** @var ProjectRepository */
+    /** @var ProjectRepo */
     private $projectRepo;
 
     /** @var \DSI\Entity\Project */
@@ -22,14 +22,14 @@ class UpdateProjectTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->updateProject = new \DSI\UseCase\UpdateProject();
-        $this->projectRepo = new ProjectRepository();
+        $this->projectRepo = new ProjectRepo();
 
         $this->user1 = new \DSI\Entity\User();
-        $userRepo = new \DSI\Repository\UserRepository();
+        $userRepo = new \DSI\Repository\UserRepo();
         $userRepo->insert($this->user1);
 
         $this->user2 = new \DSI\Entity\User();
-        $userRepo = new \DSI\Repository\UserRepository();
+        $userRepo = new \DSI\Repository\UserRepo();
         $userRepo->insert($this->user2);
 
         $createProject = new \DSI\UseCase\CreateProject();
@@ -44,7 +44,7 @@ class UpdateProjectTest extends PHPUnit_Framework_TestCase
     public function tearDown()
     {
         $this->projectRepo->clearAll();
-        (new \DSI\Repository\ProjectMemberRepository())->clearAll();
+        (new \DSI\Repository\ProjectMemberRepo())->clearAll();
     }
 
     /** @test */

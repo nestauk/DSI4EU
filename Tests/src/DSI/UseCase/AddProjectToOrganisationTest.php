@@ -7,19 +7,19 @@ class AddProjectToOrganisationTest extends PHPUnit_Framework_TestCase
     /** @var \DSI\UseCase\AddProjectToOrganisation */
     private $addProjectToOrganisation;
 
-    /** @var \DSI\Repository\OrganisationProjectRepository */
+    /** @var \DSI\Repository\OrganisationProjectRepo */
     private $organisationProjectRepo;
 
-    /** @var \DSI\Repository\OrganisationRepository */
+    /** @var \DSI\Repository\OrganisationRepo */
     private $organisationRepo;
 
     /** @var \DSI\Entity\Organisation */
     private $organisation;
 
-    /** @var \DSI\Repository\UserRepository */
+    /** @var \DSI\Repository\UserRepo */
     private $userRepo;
 
-    /** @var \DSI\Repository\ProjectRepository */
+    /** @var \DSI\Repository\ProjectRepo */
     private $projectRepo;
 
     /** @var \DSI\Entity\Project */
@@ -27,10 +27,10 @@ class AddProjectToOrganisationTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->organisationProjectRepo = new \DSI\Repository\OrganisationProjectRepository();
-        $this->organisationRepo = new \DSI\Repository\OrganisationRepository();
-        $this->projectRepo = new \DSI\Repository\ProjectRepository();
-        $this->userRepo = new \DSI\Repository\UserRepository();
+        $this->organisationProjectRepo = new \DSI\Repository\OrganisationProjectRepo();
+        $this->organisationRepo = new \DSI\Repository\OrganisationRepo();
+        $this->projectRepo = new \DSI\Repository\ProjectRepo();
+        $this->userRepo = new \DSI\Repository\UserRepo();
 
         $this->addProjectToOrganisation = new \DSI\UseCase\AddProjectToOrganisation();
 

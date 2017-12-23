@@ -2,8 +2,8 @@
 namespace DSI\Service;
 
 use DSI\Entity\User;
-use DSI\Repository\AuthTokenRepository;
-use DSI\Repository\UserRepository;
+use DSI\Repository\AuthTokenRepo;
+use DSI\Repository\UserRepo;
 
 class Auth
 {
@@ -42,7 +42,7 @@ class Auth
 
     public function getUser()
     {
-        return (new UserRepository())->getById($this->getUserId());
+        return (new UserRepo())->getById($this->getUserId());
     }
 
     public function getUserIfLoggedIn()
@@ -91,7 +91,7 @@ class Auth
      */
     private function deleteUserAuthTokens(User $user)
     {
-        $authTokenRepository = new AuthTokenRepository();
+        $authTokenRepository = new AuthTokenRepo();
         $userTokens = $authTokenRepository->getAllByUser($user);
         foreach ($userTokens AS $userToken) {
             $authTokenRepository->remove($userToken);
@@ -114,7 +114,7 @@ class Auth
     private function getAuthToken($cookieValue): \DSI\Entity\AuthToken
     {
         list($selector, $token) = explode(':', $cookieValue, 2);
-        $authTokenRepo = new AuthTokenRepository();
+        $authTokenRepo = new AuthTokenRepo();
         $authToken = $authTokenRepo->getBySelector($selector);
 
         if (!password_verify($token, $authToken->getToken()))

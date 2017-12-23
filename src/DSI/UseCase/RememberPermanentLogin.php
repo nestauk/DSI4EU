@@ -5,7 +5,7 @@ namespace DSI\UseCase;
 use DSI\DuplicateEntry;
 use DSI\Entity\AuthToken;
 use DSI\Entity\User;
-use DSI\Repository\AuthTokenRepository;
+use DSI\Repository\AuthTokenRepo;
 use DSI\Service\ErrorHandler;
 use DSI\Service\PermanentLogin;
 
@@ -34,7 +34,7 @@ class RememberPermanentLogin
                 $auth_token->setSelector($selector);
                 $auth_token->setToken(password_hash($token, PASSWORD_DEFAULT));
                 $auth_token->setUser($this->user);
-                (new AuthTokenRepository())->insert($auth_token);
+                (new AuthTokenRepo())->insert($auth_token);
             } catch (DuplicateEntry $e) {
                 $auth_token = null;
             }

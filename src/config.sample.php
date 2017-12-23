@@ -23,10 +23,10 @@ require __DIR__ . '/../vendor/autoload.php';
 
 App::setEnv(App::LIVE);
 
-\DSI\Repository\OrganisationRepositoryInAPC::setApcKey(
+\DSI\Repository\OrganisationRepoInAPC::setApcKey(
     'digitalSocial:organisations'
 );
-\DSI\Repository\ProjectRepositoryInAPC::setApcKey(
+\DSI\Repository\ProjectRepoInAPC::setApcKey(
     'digitalSocial:projects'
 );
 

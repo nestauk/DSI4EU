@@ -2,7 +2,7 @@
 
 namespace DSI\Controller;
 
-use DSI\Repository\FundingRepository;
+use DSI\Repository\FundingRepo;
 use DSI\Service\Auth;
 use DSI\Service\URL;
 
@@ -15,7 +15,7 @@ class RssFundingOpportunitiesController
         $authUser = new Auth();
         $loggedInUser = $authUser->getUserIfLoggedIn();
 
-        $fundings = (new FundingRepository())->getAll();
+        $fundings = (new FundingRepo())->getAll();
 
         header("Content-Type: application/rss+xml");
         require __DIR__ . '/../../../www/views/rss-funding-opportunities.php';

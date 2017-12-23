@@ -8,7 +8,7 @@
 
 namespace DSI\Controller;
 
-use DSI\Repository\UserRepository;
+use DSI\Repository\UserRepo;
 use DSI\Service\Auth;
 use DSI\Service\GitHubLogin;
 use DSI\Service\URL;
@@ -41,7 +41,7 @@ class LoginGitHubController
             try {
                 /** @var \League\OAuth2\Client\Provider\GithubResourceOwner $user */
                 $user = $gitHubLoginService->getProvider()->getResourceOwner($token);
-                $userRepo = new UserRepository();
+                $userRepo = new UserRepo();
 
                 pr($user);
 

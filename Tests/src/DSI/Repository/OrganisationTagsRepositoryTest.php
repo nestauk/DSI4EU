@@ -4,19 +4,19 @@ require_once __DIR__ . '/../../../config.php';
 
 class OrganisationTagsRepositoryTest extends PHPUnit_Framework_TestCase
 {
-    /** @var \DSI\Repository\OrganisationTagRepository */
+    /** @var \DSI\Repository\OrganisationTagRepo */
     protected $organisationTagsRepo;
 
-    /** @var \DSI\Repository\OrganisationRepository */
+    /** @var \DSI\Repository\OrganisationRepo */
     protected $organisationsRepo;
 
-    /** @var \DSI\Repository\UserRepository */
+    /** @var \DSI\Repository\UserRepo */
     protected $usersRepo;
 
     /** @var \DSI\Entity\Organisation */
     protected $organisation_1, $organisation_2, $organisation_3;
 
-    /** @var \DSI\Repository\TagForOrganisationsRepository */
+    /** @var \DSI\Repository\TagForOrganisationsRepo */
     protected $tagsRepo;
 
     /** @var \DSI\Entity\TagForOrganisations */
@@ -24,10 +24,10 @@ class OrganisationTagsRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->organisationTagsRepo = new \DSI\Repository\OrganisationTagRepository();
-        $this->organisationsRepo = new \DSI\Repository\OrganisationRepository();
-        $this->tagsRepo = new \DSI\Repository\TagForOrganisationsRepository();
-        $this->usersRepo = new \DSI\Repository\UserRepository();
+        $this->organisationTagsRepo = new \DSI\Repository\OrganisationTagRepo();
+        $this->organisationsRepo = new \DSI\Repository\OrganisationRepo();
+        $this->tagsRepo = new \DSI\Repository\TagForOrganisationsRepo();
+        $this->usersRepo = new \DSI\Repository\UserRepo();
 
         $this->organisation_1 = $this->createOrganisation(1);
         $this->organisation_2 = $this->createOrganisation(2);

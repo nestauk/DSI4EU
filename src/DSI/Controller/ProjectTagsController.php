@@ -4,8 +4,8 @@ namespace DSI\Controller;
 
 use DSI\Entity\ImpactTag;
 use DSI\Entity\TagForProjects;
-use DSI\Repository\ImpactTagRepository;
-use DSI\Repository\TagForProjectsRepository;
+use DSI\Repository\ImpactTagRepo;
+use DSI\Repository\TagForProjectsRepo;
 
 class ProjectTagsController
 {
@@ -19,13 +19,13 @@ class ProjectTagsController
                     'id' => $tag->getId(),
                     'name' => $tag->getName(),
                 ];
-            }, (new TagForProjectsRepository())->getAll()),
+            }, (new TagForProjectsRepo())->getAll()),
             'impactTags' => array_map(function (ImpactTag $tag) {
                 return [
                     'id' => $tag->getId(),
                     'name' => $tag->getName(),
                 ];
-            }, (new ImpactTagRepository())->getAll()),
+            }, (new ImpactTagRepo())->getAll()),
         ]);
     }
 }

@@ -7,13 +7,13 @@ class AddMemberToProjectTest extends PHPUnit_Framework_TestCase
     /** @var \DSI\UseCase\AddMemberToProject */
     private $addMemberToProject;
 
-    /** @var \DSI\Repository\ProjectRepository */
+    /** @var \DSI\Repository\ProjectRepo */
     private $projectRepo;
 
     /** @var \DSI\Entity\Project */
     private $project;
 
-    /** @var \DSI\Repository\UserRepository */
+    /** @var \DSI\Repository\UserRepo */
     private $userRepo;
 
     /** @var \DSI\Entity\User */
@@ -22,8 +22,8 @@ class AddMemberToProjectTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->addMemberToProject = new \DSI\UseCase\AddMemberToProject();
-        $this->projectRepo = new \DSI\Repository\ProjectRepository();
-        $this->userRepo = new \DSI\Repository\UserRepository();
+        $this->projectRepo = new \DSI\Repository\ProjectRepo();
+        $this->userRepo = new \DSI\Repository\UserRepo();
 
         $this->user_1 = new \DSI\Entity\User();
         $this->userRepo->insert($this->user_1);
@@ -39,7 +39,7 @@ class AddMemberToProjectTest extends PHPUnit_Framework_TestCase
     {
         $this->projectRepo->clearAll();
         $this->userRepo->clearAll();
-        (new \DSI\Repository\ProjectMemberRepository())->clearAll();
+        (new \DSI\Repository\ProjectMemberRepo())->clearAll();
     }
 
     /** @test */
@@ -50,7 +50,7 @@ class AddMemberToProjectTest extends PHPUnit_Framework_TestCase
         $this->addMemberToProject->exec();
 
         $this->assertTrue(
-            (new \DSI\Repository\ProjectMemberRepository())->projectHasMember(
+            (new \DSI\Repository\ProjectMemberRepo())->projectHasMember(
                 $this->project,
                 $this->user_2
             )

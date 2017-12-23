@@ -2,17 +2,17 @@
 
 require_once __DIR__ . '/../../../config.php';
 
-use \DSI\Repository\DsiFocusTagRepository;
+use \DSI\Repository\DsiFocusTagRepo;
 use \DSI\Entity\DsiFocusTag;
 
 class DsiFocusTagRepositoryTest extends PHPUnit_Framework_TestCase
 {
-    /** @var DsiFocusTagRepository */
+    /** @var DsiFocusTagRepo */
     protected $tagsRepo;
 
     public function setUp()
     {
-        $this->tagsRepo = new DsiFocusTagRepository();
+        $this->tagsRepo = new DsiFocusTagRepo();
     }
 
     public function tearDown()

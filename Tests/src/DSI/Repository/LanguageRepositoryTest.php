@@ -2,17 +2,17 @@
 
 require_once __DIR__ . '/../../../config.php';
 
-use \DSI\Repository\LanguageRepository;
+use \DSI\Repository\LanguageRepo;
 use \DSI\Entity\Language;
 
 class LanguageRepositoryTest extends PHPUnit_Framework_TestCase
 {
-    /** @var LanguageRepository */
+    /** @var LanguageRepo */
     protected $languageRepo;
 
     public function setUp()
     {
-        $this->languageRepo = new LanguageRepository;
+        $this->languageRepo = new LanguageRepo;
     }
 
     public function tearDown()

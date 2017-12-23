@@ -2,8 +2,8 @@
 
 namespace DSI\UseCase;
 
-use DSI\Repository\CountryRegionRepository;
-use DSI\Repository\OrganisationRepository;
+use DSI\Repository\CountryRegionRepo;
+use DSI\Repository\OrganisationRepo;
 use DSI\Service\ErrorHandler;
 
 class UpdateOrganisationCountryRegion
@@ -14,10 +14,10 @@ class UpdateOrganisationCountryRegion
     /** @var UpdateOrganisationCountryRegion_Data */
     private $data;
 
-    /** @var OrganisationRepository */
+    /** @var OrganisationRepo */
     private $organisationRepo;
 
-    /** @var CountryRegionRepository */
+    /** @var CountryRegionRepo */
     private $countryRegionRepo;
 
     public function __construct()
@@ -28,8 +28,8 @@ class UpdateOrganisationCountryRegion
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->organisationRepo = new OrganisationRepository();
-        $this->countryRegionRepo = new CountryRegionRepository();
+        $this->organisationRepo = new OrganisationRepo();
+        $this->countryRegionRepo = new CountryRegionRepo();
 
         if ($this->data()->countryID == 0)
             $this->errorHandler->addTaggedError('country', __('Please select a country'));

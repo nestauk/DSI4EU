@@ -5,12 +5,12 @@ namespace DSI\UseCase\Organisations;
 use DSI\Entity\Organisation;
 use DSI\Entity\OrganisationFollow;
 use DSI\Entity\User;
-use DSI\Repository\OrganisationFollowRepository;
+use DSI\Repository\OrganisationFollowRepo;
 use DSI\Service\ErrorHandler;
 
 class UnfollowOrganisation
 {
-    /** @var OrganisationFollowRepository */
+    /** @var OrganisationFollowRepo */
     private $organisationFollowRepo;
 
     /** @var ErrorHandler */
@@ -27,7 +27,7 @@ class UnfollowOrganisation
     {
         $this->errorHandler = new ErrorHandler();
 
-        $this->organisationFollowRepo = new OrganisationFollowRepository();
+        $this->organisationFollowRepo = new OrganisationFollowRepo();
     }
 
     public function exec()

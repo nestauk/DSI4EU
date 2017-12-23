@@ -4,13 +4,13 @@ require_once __DIR__ . '/../../../../config.php';
 
 class RemoveProjectTest extends PHPUnit_Framework_TestCase
 {
-    /** @var \DSI\Repository\ProjectRepository */
+    /** @var \DSI\Repository\ProjectRepo */
     private $projectRepo;
 
     /** @var \DSI\Entity\Project */
     private $project;
 
-    /** @var \DSI\Repository\UserRepository */
+    /** @var \DSI\Repository\UserRepo */
     private $userRepo;
 
     /** @var \DSI\Entity\User */
@@ -20,8 +20,8 @@ class RemoveProjectTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->projectRepo = new \DSI\Repository\ProjectRepository();
-        $this->userRepo = new \DSI\Repository\UserRepository();
+        $this->projectRepo = new \DSI\Repository\ProjectRepo();
+        $this->userRepo = new \DSI\Repository\UserRepo();
 
         $this->owner = new \DSI\Entity\User();
         $this->userRepo->insert($this->owner);
@@ -56,7 +56,7 @@ class RemoveProjectTest extends PHPUnit_Framework_TestCase
 
         $this->assertCount(0, $this->projectRepo->getAll());
         $this->assertCount(0,
-            (new \DSI\Repository\ProjectMemberRepository())->getByProject($this->project)
+            (new \DSI\Repository\ProjectMemberRepo())->getByProject($this->project)
         );
     }
 

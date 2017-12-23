@@ -8,19 +8,19 @@ use \DSI\UseCase\Funding\FundingEdit;
 
 class FundingEditTest extends PHPUnit_Framework_TestCase
 {
-    /** @var Repository\FundingRepository */
+    /** @var Repository\FundingRepo */
     private $fundingRepository;
 
     /** @var Entity\Funding */
     private $funding;
 
-    /** @var Repository\CountryRepository */
+    /** @var Repository\CountryRepo */
     private $countryRepo;
 
     /** @var Entity\Country */
     private $country;
 
-    /** @var Repository\FundingSourceRepository */
+    /** @var Repository\FundingSourceRepo */
     private $fundingSourceRepo;
 
     /** @var Entity\FundingSource */
@@ -28,7 +28,7 @@ class FundingEditTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->fundingRepository = new Repository\FundingRepository();
+        $this->fundingRepository = new Repository\FundingRepo();
 
         $this->createCountry();
         $this->createSource();
@@ -146,7 +146,7 @@ class FundingEditTest extends PHPUnit_Framework_TestCase
 
     private function createCountry()
     {
-        $this->countryRepo = new Repository\CountryRepository();
+        $this->countryRepo = new Repository\CountryRepo();
         $this->country = new Entity\Country();
         $this->country->setName('Country Name');
         $this->countryRepo->insert($this->country);
@@ -154,7 +154,7 @@ class FundingEditTest extends PHPUnit_Framework_TestCase
 
     private function createSource()
     {
-        $this->fundingSourceRepo = new Repository\FundingSourceRepository();
+        $this->fundingSourceRepo = new Repository\FundingSourceRepo();
         $this->fundingSource = new Entity\FundingSource();
         $this->fundingSource->setTitle('Funding Source');
         $this->fundingSource->setUrl('http://funding-source.rss');

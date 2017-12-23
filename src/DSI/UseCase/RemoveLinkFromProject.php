@@ -3,9 +3,9 @@
 namespace DSI\UseCase;
 
 use DSI\Entity\ProjectLink;
-use DSI\Repository\ProjectLinkRepository;
-use DSI\Repository\ProjectRepository;
-use DSI\Repository\ProjectRepositoryInAPC;
+use DSI\Repository\ProjectLinkRepo;
+use DSI\Repository\ProjectRepo;
+use DSI\Repository\ProjectRepoInAPC;
 use DSI\Service\ErrorHandler;
 
 class RemoveLinkFromProject
@@ -13,7 +13,7 @@ class RemoveLinkFromProject
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var ProjectLinkRepository */
+    /** @var ProjectLinkRepo */
     private $projectLinkRepository;
 
     /** @var RemoveLinkFromProject_Data */
@@ -27,9 +27,9 @@ class RemoveLinkFromProject
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->projectLinkRepository = new ProjectLinkRepository();
+        $this->projectLinkRepository = new ProjectLinkRepo();
 
-        $projectRepository = new ProjectRepositoryInAPC();
+        $projectRepository = new ProjectRepoInAPC();
 
         if (!$this->projectLinkRepository->projectHasLink($this->data()->projectID, $this->data()->link)) {
             $this->errorHandler->addTaggedError('link', __('The project does not have this link'));

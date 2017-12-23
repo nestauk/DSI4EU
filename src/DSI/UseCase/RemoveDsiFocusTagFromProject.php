@@ -3,10 +3,10 @@
 namespace DSI\UseCase;
 
 use DSI\Entity\ProjectDsiFocusTag;
-use DSI\Repository\DsiFocusTagRepository;
-use DSI\Repository\ProjectDsiFocusTagRepository;
-use DSI\Repository\ProjectRepository;
-use DSI\Repository\ProjectRepositoryInAPC;
+use DSI\Repository\DsiFocusTagRepo;
+use DSI\Repository\ProjectDsiFocusTagRepo;
+use DSI\Repository\ProjectRepo;
+use DSI\Repository\ProjectRepoInAPC;
 use DSI\Service\ErrorHandler;
 
 class RemoveDsiFocusTagFromProject
@@ -14,7 +14,7 @@ class RemoveDsiFocusTagFromProject
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var ProjectDsiFocusTagRepository */
+    /** @var ProjectDsiFocusTagRepo */
     private $projectDsiFocusTagRepo;
 
     /** @var RemoveDsiFocusTagBFromProject_Data */
@@ -28,10 +28,10 @@ class RemoveDsiFocusTagFromProject
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->projectDsiFocusTagRepo = new ProjectDsiFocusTagRepository();
+        $this->projectDsiFocusTagRepo = new ProjectDsiFocusTagRepo();
 
-        $tagRepo = new DsiFocusTagRepository();
-        $projectRepo = new ProjectRepositoryInAPC();
+        $tagRepo = new DsiFocusTagRepo();
+        $projectRepo = new ProjectRepoInAPC();
 
         if ($tagRepo->nameExists($this->data()->tag)) {
             $tag = $tagRepo->getByName($this->data()->tag);

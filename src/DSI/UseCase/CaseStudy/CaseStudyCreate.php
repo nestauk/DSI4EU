@@ -7,10 +7,10 @@ use DSI\Entity\CaseStudy;
 use DSI\Entity\CountryRegion;
 use DSI\Entity\Image;
 use DSI\NotFound;
-use DSI\Repository\CaseStudyRepository;
-use DSI\Repository\CountryRegionRepository;
-use DSI\Repository\OrganisationRepositoryInAPC;
-use DSI\Repository\ProjectRepositoryInAPC;
+use DSI\Repository\CaseStudyRepo;
+use DSI\Repository\CountryRegionRepo;
+use DSI\Repository\OrganisationRepoInAPC;
+use DSI\Repository\ProjectRepoInAPC;
 use DSI\Service\ErrorHandler;
 use DSI\UseCase\CreateCountryRegion;
 
@@ -19,7 +19,7 @@ class CaseStudyCreate
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var CaseStudyRepository */
+    /** @var CaseStudyRepo */
     private $caseStudyRepo;
 
     /** @var CaseStudy */
@@ -28,7 +28,7 @@ class CaseStudyCreate
     /** @var CaseStudyCreate_Data */
     private $data;
 
-    /** @var CountryRegionRepository */
+    /** @var CountryRegionRepo */
     private $countryRegionRepo;
 
     /** @var CountryRegion */
@@ -38,8 +38,8 @@ class CaseStudyCreate
     {
         $this->data = new CaseStudyCreate_Data();
         $this->errorHandler = new ErrorHandler();
-        $this->caseStudyRepo = new CaseStudyRepository();
-        $this->countryRegionRepo = new CountryRegionRepository();
+        $this->caseStudyRepo = new CaseStudyRepo();
+        $this->countryRegionRepo = new CountryRegionRepo();
     }
 
     public function exec()
@@ -103,9 +103,9 @@ class CaseStudyCreate
         $caseStudy->setIsFeaturedOnSlider((bool)$this->data()->isFeaturedOnSlider);
         $caseStudy->setPositionOnFirstPage((int)$this->data()->positionOnHomePage);
         if($this->data()->projectID)
-            $caseStudy->setProject( (new ProjectRepositoryInAPC())->getById($this->data()->projectID) );
+            $caseStudy->setProject( (new ProjectRepoInAPC())->getById($this->data()->projectID) );
         if($this->data()->organisationID)
-            $caseStudy->setOrganisation( (new OrganisationRepositoryInAPC())->getById($this->data()->organisationID) );
+            $caseStudy->setOrganisation( (new OrganisationRepoInAPC())->getById($this->data()->organisationID) );
 
         $this->caseStudyRepo->insert($caseStudy);
         $this->caseStudy = $caseStudy;

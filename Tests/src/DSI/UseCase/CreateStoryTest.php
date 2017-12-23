@@ -7,13 +7,13 @@ class CreateStoryTest extends PHPUnit_Framework_TestCase
     /** @var \DSI\UseCase\StoryAdd */
     private $createStoryCmd;
 
-    /** @var \DSI\Repository\StoryCategoryRepository */
+    /** @var \DSI\Repository\StoryCategoryRepo */
     private $storyCategoryRepo;
 
-    /** @var \DSI\Repository\StoryRepository */
+    /** @var \DSI\Repository\StoryRepo */
     private $storyRepo;
 
-    /** @var \DSI\Repository\UserRepository */
+    /** @var \DSI\Repository\UserRepo */
     private $userRepo;
 
     /** @var \DSI\Entity\User */
@@ -23,9 +23,9 @@ class CreateStoryTest extends PHPUnit_Framework_TestCase
     {
         $this->createStoryCmd = new \DSI\UseCase\StoryAdd();
 
-        $this->storyCategoryRepo = new \DSI\Repository\StoryCategoryRepository();
-        $this->storyRepo = new \DSI\Repository\StoryRepository();
-        $this->userRepo = new \DSI\Repository\UserRepository();
+        $this->storyCategoryRepo = new \DSI\Repository\StoryCategoryRepo();
+        $this->storyRepo = new \DSI\Repository\StoryRepo();
+        $this->userRepo = new \DSI\Repository\UserRepo();
 
         $this->user = new \DSI\Entity\User();
         $this->userRepo->insert($this->user);

@@ -5,14 +5,14 @@ namespace DSI\Controller;
 use DSI\Entity\OrganisationMember;
 use DSI\Entity\ProjectMember;
 use DSI\Entity\User;
-use DSI\Repository\OrganisationMemberRepository;
-use DSI\Repository\OrganisationRepositoryInAPC;
-use DSI\Repository\ProjectMemberRepository;
-use DSI\Repository\ProjectRepositoryInAPC;
-use DSI\Repository\UserLanguageRepository;
-use DSI\Repository\UserLinkRepository;
-use DSI\Repository\UserRepository;
-use DSI\Repository\UserSkillRepository;
+use DSI\Repository\OrganisationMemberRepo;
+use DSI\Repository\OrganisationRepoInAPC;
+use DSI\Repository\ProjectMemberRepo;
+use DSI\Repository\ProjectRepoInAPC;
+use DSI\Repository\UserLanguageRepo;
+use DSI\Repository\UserLinkRepo;
+use DSI\Repository\UserRepo;
+use DSI\Repository\UserSkillRepo;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\Mailer;
@@ -68,11 +68,11 @@ class ProfileController
         $isOwner = ($user->getId() == $loggedInUser->getId());
 
         if ($this->format == 'json') {
-            $userSkillRepo = new UserSkillRepository();
-            $userLangRepo = new UserLanguageRepository();
-            $userLinkRepo = new UserLinkRepository();
-            $projectMemberRepo = new ProjectMemberRepository();
-            $organisationMemberRepo = new OrganisationMemberRepository();
+            $userSkillRepo = new UserSkillRepo();
+            $userLangRepo = new UserLanguageRepo();
+            $userLinkRepo = new UserLinkRepo();
+            $projectMemberRepo = new ProjectMemberRepo();
+            $organisationMemberRepo = new OrganisationMemberRepo();
 
             if ($isOwner) {
                 try {
@@ -185,9 +185,9 @@ class ProfileController
                 ],
             ]);
         } else {
-            $projects = (new ProjectRepositoryInAPC())->getAll();
-            $organisations = (new OrganisationRepositoryInAPC())->getAll();
-            $userLinks = (new UserLinkRepository())->getLinksByUserID($userID);
+            $projects = (new ProjectRepoInAPC())->getAll();
+            $organisations = (new OrganisationRepoInAPC())->getAll();
+            $userLinks = (new UserLinkRepo())->getLinksByUserID($userID);
             $angularModules['fileUpload'] = true;
             require __DIR__ . '/../../../www/views/profile.php';
         }
@@ -200,7 +200,7 @@ class ProfileController
      */
     protected function getUserFromURL($url)
     {
-        $userRepo = new UserRepository();
+        $userRepo = new UserRepo();
         if (ctype_digit($url)) {
             $user = $userRepo->getById((int)$url);
             return $user;

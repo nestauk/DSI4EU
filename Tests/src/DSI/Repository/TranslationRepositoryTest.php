@@ -2,17 +2,17 @@
 
 require_once __DIR__ . '/../../../config.php';
 
-use \DSI\Repository\TranslationRepository;
+use \DSI\Repository\TranslationRepo;
 use \DSI\Entity\Translation;
 
 class TranslationRepositoryTest extends PHPUnit_Framework_TestCase
 {
-    /** @var TranslationRepository */
+    /** @var TranslationRepo */
     private $translationRepository;
 
     public function setUp()
     {
-        $this->translationRepository = new TranslationRepository();
+        $this->translationRepository = new TranslationRepo();
     }
 
     public function tearDown()

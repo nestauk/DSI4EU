@@ -6,8 +6,8 @@ use DSI\Entity\ProjectPost;
 use DSI\Entity\ProjectPostComment;
 use DSI\Entity\User;
 use DSI\NotEnoughData;
-use DSI\Repository\ProjectPostCommentRepository;
-use DSI\Repository\ProjectPostRepository;
+use DSI\Repository\ProjectPostCommentRepo;
+use DSI\Repository\ProjectPostRepo;
 use DSI\Service\ErrorHandler;
 
 class AddCommentToProjectPost
@@ -15,7 +15,7 @@ class AddCommentToProjectPost
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var ProjectPostCommentRepository */
+    /** @var ProjectPostCommentRepo */
     private $projectPostCommentRepo;
 
     /** @var ProjectPostComment */
@@ -32,7 +32,7 @@ class AddCommentToProjectPost
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->projectPostCommentRepo = new ProjectPostCommentRepository();
+        $this->projectPostCommentRepo = new ProjectPostCommentRepo();
 
         $this->checkForUnsentData();
         $this->checkForInvalidData();
@@ -94,7 +94,7 @@ class AddCommentToProjectPost
     {
         $comments = $this->projectPostCommentRepo->getByPostID($post->getId());
         $post->setCommentsCount(count($comments));
-        (new ProjectPostRepository())->save($post);
+        (new ProjectPostRepo())->save($post);
     }
 }
 

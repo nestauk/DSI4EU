@@ -6,8 +6,8 @@ use DSI\Entity\PasswordRecovery;
 use DSI\Entity\User;
 use DSI\NotEnoughData;
 use DSI\NotFound;
-use DSI\Repository\PasswordRecoveryRepository;
-use DSI\Repository\UserRepository;
+use DSI\Repository\PasswordRecoveryRepo;
+use DSI\Repository\UserRepo;
 use DSI\Service\ErrorHandler;
 
 class CompletePasswordRecovery
@@ -15,7 +15,7 @@ class CompletePasswordRecovery
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var PasswordRecoveryRepository */
+    /** @var PasswordRecoveryRepo */
     private $passwordRecoveryRepo;
 
     /** @var PasswordRecovery */
@@ -35,7 +35,7 @@ class CompletePasswordRecovery
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->passwordRecoveryRepo = new PasswordRecoveryRepository();
+        $this->passwordRecoveryRepo = new PasswordRecoveryRepo();
 
         $this->checkDataHasBeenSubmitted();
         $this->checkValidData();
@@ -92,7 +92,7 @@ class CompletePasswordRecovery
 
     private function checkIfEmailIsRegistered()
     {
-        if (!(new UserRepository())->emailAddressExists($this->data()->email)) {
+        if (!(new UserRepo())->emailAddressExists($this->data()->email)) {
             $this->errorHandler->addTaggedError('email', __('The email address is not registered'));
             $this->errorHandler->throwIfNotEmpty();
         }

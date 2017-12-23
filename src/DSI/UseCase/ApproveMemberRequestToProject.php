@@ -5,11 +5,11 @@ namespace DSI\UseCase;
 use DSI\Entity\ProjectMember;
 use DSI\Entity\ProjectMemberRequest;
 use DSI\Entity\User;
-use DSI\Repository\ProjectMemberRepository;
-use DSI\Repository\ProjectMemberRequestRepository;
-use DSI\Repository\ProjectRepository;
-use DSI\Repository\ProjectRepositoryInAPC;
-use DSI\Repository\UserRepository;
+use DSI\Repository\ProjectMemberRepo;
+use DSI\Repository\ProjectMemberRequestRepo;
+use DSI\Repository\ProjectRepo;
+use DSI\Repository\ProjectRepoInAPC;
+use DSI\Repository\UserRepo;
 use DSI\Service\ErrorHandler;
 
 class ApproveMemberRequestToProject
@@ -17,16 +17,16 @@ class ApproveMemberRequestToProject
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var ProjectMemberRequestRepository */
+    /** @var ProjectMemberRequestRepo */
     private $projectMemberRequestRepo;
 
-    /** @var ProjectMemberRepository */
+    /** @var ProjectMemberRepo */
     private $projectMemberRepo;
 
-    /** @var ProjectRepository */
+    /** @var ProjectRepo */
     private $projectRepository;
 
-    /** @var UserRepository */
+    /** @var UserRepo */
     private $userRepository;
 
     /** @var ApproveMemberRequestToProject_Data */
@@ -40,10 +40,10 @@ class ApproveMemberRequestToProject
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->projectMemberRequestRepo = new ProjectMemberRequestRepository();
-        $this->projectMemberRepo = new ProjectMemberRepository();
-        $this->projectRepository = new ProjectRepositoryInAPC();
-        $this->userRepository = new UserRepository();
+        $this->projectMemberRequestRepo = new ProjectMemberRequestRepo();
+        $this->projectMemberRepo = new ProjectMemberRepo();
+        $this->projectRepository = new ProjectRepoInAPC();
+        $this->userRepository = new UserRepo();
 
         if (!$this->projectMemberRequestRepo->projectHasRequestFromMember($this->data()->projectID, $this->data()->userID)) {
             $this->errorHandler->addTaggedError('member', 'This user has not made a request to join the project');

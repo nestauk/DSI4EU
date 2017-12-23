@@ -5,7 +5,7 @@ namespace DSI\UseCase\Organisations;
 use DSI\Entity\Organisation;
 use DSI\Entity\OrganisationFollow;
 use DSI\Entity\User;
-use DSI\Repository\OrganisationFollowRepository;
+use DSI\Repository\OrganisationFollowRepo;
 use DSI\Service\ErrorHandler;
 
 class FollowOrganisation
@@ -55,7 +55,7 @@ class FollowOrganisation
         $follow = new OrganisationFollow();
         $follow->setUser($this->user);
         $follow->setOrganisation($this->organisation);
-        (new OrganisationFollowRepository())->add($follow);
+        (new OrganisationFollowRepo())->add($follow);
     }
 
     /**

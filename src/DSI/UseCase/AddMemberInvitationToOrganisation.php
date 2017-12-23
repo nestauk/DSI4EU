@@ -5,11 +5,11 @@ namespace DSI\UseCase;
 use DSI\Entity\Organisation;
 use DSI\Entity\OrganisationMemberInvitation;
 use DSI\Entity\User;
-use DSI\Repository\OrganisationMemberRepository;
-use DSI\Repository\OrganisationMemberInvitationRepository;
-use DSI\Repository\OrganisationRepository;
-use DSI\Repository\OrganisationRepositoryInAPC;
-use DSI\Repository\UserRepository;
+use DSI\Repository\OrganisationMemberRepo;
+use DSI\Repository\OrganisationMemberInvitationRepo;
+use DSI\Repository\OrganisationRepo;
+use DSI\Repository\OrganisationRepoInAPC;
+use DSI\Repository\UserRepo;
 use DSI\Service\ErrorHandler;
 
 class AddMemberInvitationToOrganisation
@@ -17,10 +17,10 @@ class AddMemberInvitationToOrganisation
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var OrganisationMemberInvitationRepository */
+    /** @var OrganisationMemberInvitationRepo */
     private $organisationMemberInvitationRepository;
 
-    /** @var OrganisationRepository */
+    /** @var OrganisationRepo */
     private $organisationRepository;
 
     /** @var Organisation */
@@ -32,8 +32,8 @@ class AddMemberInvitationToOrganisation
     public function __construct()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->organisationMemberInvitationRepository = new OrganisationMemberInvitationRepository();
-        $this->organisationRepository = new OrganisationRepositoryInAPC();
+        $this->organisationMemberInvitationRepository = new OrganisationMemberInvitationRepo();
+        $this->organisationRepository = new OrganisationRepoInAPC();
     }
 
     public function exec()
@@ -45,7 +45,7 @@ class AddMemberInvitationToOrganisation
 
     private function checkIfOrganisationAlreadyHasTheMember()
     {
-        if ((new OrganisationMemberRepository())->organisationHasMember($this->organisation, $this->user)) {
+        if ((new OrganisationMemberRepo())->organisationHasMember($this->organisation, $this->user)) {
             $this->errorHandler->addTaggedError('member', __('This user is already a member of the organisation'));
             $this->errorHandler->throwIfNotEmpty();
         }
@@ -96,6 +96,6 @@ class AddMemberInvitationToOrganisation
      */
     public function setUserID(int $userID)
     {
-        $this->user = (new UserRepository())->getById($userID);
+        $this->user = (new UserRepo())->getById($userID);
     }
 }

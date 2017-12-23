@@ -10,16 +10,16 @@ class RemoveImpactTagCFromProjectTest extends PHPUnit_Framework_TestCase
     /** @var \DSI\UseCase\RemoveImpactTechTagFromProject */
     private $removeTagFromProjectCommand;
 
-    /** @var \DSI\Repository\ImpactTagRepository */
+    /** @var \DSI\Repository\ImpactTagRepo */
     private $tagRepo;
 
-    /** @var \DSI\Repository\UserRepository */
+    /** @var \DSI\Repository\UserRepo */
     private $userRepo;
 
-    /** @var \DSI\Repository\ProjectImpactTechTagRepository */
+    /** @var \DSI\Repository\ProjectImpactTechTagRepo */
     private $projectTagRepo;
 
-    /** @var \DSI\Repository\ProjectRepository */
+    /** @var \DSI\Repository\ProjectRepo */
     private $projectRepo;
 
     /** @var \DSI\Entity\Project */
@@ -29,10 +29,10 @@ class RemoveImpactTagCFromProjectTest extends PHPUnit_Framework_TestCase
     {
         $this->addTagToProjectCommand = new \DSI\UseCase\AddImpactTechTagToProject();
         $this->removeTagFromProjectCommand = new \DSI\UseCase\RemoveImpactTechTagFromProject();
-        $this->projectTagRepo = new \DSI\Repository\ProjectImpactTechTagRepository();
-        $this->tagRepo = new \DSI\Repository\ImpactTagRepository();
-        $this->projectRepo = new \DSI\Repository\ProjectRepository();
-        $this->userRepo = new \DSI\Repository\UserRepository();
+        $this->projectTagRepo = new \DSI\Repository\ProjectImpactTechTagRepo();
+        $this->tagRepo = new \DSI\Repository\ImpactTagRepo();
+        $this->projectRepo = new \DSI\Repository\ProjectRepo();
+        $this->userRepo = new \DSI\Repository\UserRepo();
 
         $user = new \DSI\Entity\User();
         $this->userRepo->insert($user);

@@ -5,7 +5,7 @@ namespace DSI\UseCase;
 use DSI\Entity\Project;
 use DSI\Entity\ProjectMember;
 use DSI\Entity\User;
-use DSI\Repository\ProjectMemberRepository;
+use DSI\Repository\ProjectMemberRepo;
 use DSI\Service\ErrorHandler;
 
 class AddMemberToProject
@@ -13,7 +13,7 @@ class AddMemberToProject
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var ProjectMemberRepository */
+    /** @var ProjectMemberRepo */
     private $projectMemberRepo;
 
     /** @var Project */
@@ -25,7 +25,7 @@ class AddMemberToProject
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->projectMemberRepo = new ProjectMemberRepository();
+        $this->projectMemberRepo = new ProjectMemberRepo();
 
         if ($this->projectMemberRepo->projectHasMember($this->project, $this->user)) {
             $this->errorHandler->addTaggedError('member', __('This user is already a member of the project'));

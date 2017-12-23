@@ -7,13 +7,13 @@ class AddMemberRequestToOrganisationTest extends PHPUnit_Framework_TestCase
     /** @var \DSI\UseCase\AddMemberRequestToOrganisation */
     private $addMemberRequestToOrganisation;
 
-    /** @var \DSI\Repository\OrganisationRepository */
+    /** @var \DSI\Repository\OrganisationRepo */
     private $organisationRepo;
 
     /** @var \DSI\Entity\Organisation */
     private $organisation;
 
-    /** @var \DSI\Repository\UserRepository */
+    /** @var \DSI\Repository\UserRepo */
     private $userRepo;
 
     /** @var \DSI\Entity\User */
@@ -22,8 +22,8 @@ class AddMemberRequestToOrganisationTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->addMemberRequestToOrganisation = new \DSI\UseCase\AddMemberRequestToOrganisation();
-        $this->organisationRepo = new \DSI\Repository\OrganisationRepository();
-        $this->userRepo = new \DSI\Repository\UserRepository();
+        $this->organisationRepo = new \DSI\Repository\OrganisationRepo();
+        $this->userRepo = new \DSI\Repository\UserRepo();
 
         $this->user_1 = new \DSI\Entity\User();
         $this->userRepo->insert($this->user_1);
@@ -39,7 +39,7 @@ class AddMemberRequestToOrganisationTest extends PHPUnit_Framework_TestCase
     {
         $this->organisationRepo->clearAll();
         $this->userRepo->clearAll();
-        (new \DSI\Repository\OrganisationMemberRequestRepository())->clearAll();
+        (new \DSI\Repository\OrganisationMemberRequestRepo())->clearAll();
     }
 
     /** @test */
@@ -50,7 +50,7 @@ class AddMemberRequestToOrganisationTest extends PHPUnit_Framework_TestCase
         $this->addMemberRequestToOrganisation->exec();
 
         $this->assertTrue(
-            (new \DSI\Repository\OrganisationMemberRequestRepository())->organisationHasRequestFromMember(
+            (new \DSI\Repository\OrganisationMemberRequestRepo())->organisationHasRequestFromMember(
                 $this->addMemberRequestToOrganisation->data()->organisationID,
                 $this->addMemberRequestToOrganisation->data()->userID
             )

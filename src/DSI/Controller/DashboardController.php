@@ -10,17 +10,17 @@ use DSI\Entity\ProjectMemberRequest;
 use DSI\Entity\ProjectPost;
 use DSI\Entity\Story;
 use DSI\Entity\User;
-use DSI\Repository\OrganisationFollowRepository;
-use DSI\Repository\OrganisationMemberInvitationRepository;
-use DSI\Repository\OrganisationMemberRepository;
-use DSI\Repository\OrganisationMemberRequestRepository;
-use DSI\Repository\OrganisationProjectRepository;
-use DSI\Repository\ProjectFollowRepository;
-use DSI\Repository\ProjectMemberInvitationRepository;
-use DSI\Repository\ProjectMemberRepository;
-use DSI\Repository\ProjectMemberRequestRepository;
-use DSI\Repository\ProjectPostRepository;
-use DSI\Repository\StoryRepository;
+use DSI\Repository\OrganisationFollowRepo;
+use DSI\Repository\OrganisationMemberInvitationRepo;
+use DSI\Repository\OrganisationMemberRepo;
+use DSI\Repository\OrganisationMemberRequestRepo;
+use DSI\Repository\OrganisationProjectRepo;
+use DSI\Repository\ProjectFollowRepo;
+use DSI\Repository\ProjectMemberInvitationRepo;
+use DSI\Repository\ProjectMemberRepo;
+use DSI\Repository\ProjectMemberRequestRepo;
+use DSI\Repository\ProjectPostRepo;
+use DSI\Repository\StoryRepo;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\JsModules;
@@ -78,9 +78,9 @@ class DashboardController
                 if (isset($_POST['terminateAccount']))
                     return $this->terminateAccount($loggedInUser);
 
-                $projectInvitations = (new ProjectMemberInvitationRepository())->getByMemberID($loggedInUser->getId());
+                $projectInvitations = (new ProjectMemberInvitationRepo())->getByMemberID($loggedInUser->getId());
                 $projectRequests = $this->getProjectRequests($loggedInUser);
-                $organisationInvitations = (new OrganisationMemberInvitationRepository())->getByMemberID($loggedInUser->getId());
+                $organisationInvitations = (new OrganisationMemberInvitationRepo())->getByMemberID($loggedInUser->getId());
                 $organisationRequests = $this->getOrganisationRequests($loggedInUser);
 
                 echo json_encode([
@@ -142,8 +142,8 @@ class DashboardController
         } else {
             /** @var DashboardController_Update[] $updates */
             $updates = $this->getUpdates($loggedInUser);
-            $projectsMember = (new ProjectMemberRepository())->getByMemberID($loggedInUser->getId());
-            $organisationsMember = (new OrganisationMemberRepository())->getByMemberID($loggedInUser->getId());
+            $projectsMember = (new ProjectMemberRepo())->getByMemberID($loggedInUser->getId());
+            $organisationsMember = (new OrganisationMemberRepo())->getByMemberID($loggedInUser->getId());
             JsModules::setTranslations(true);
             define('HIDE_NOTIFICATIONS', true);
             require __DIR__ . '/../../../www/views/dashboard.php';
@@ -158,13 +158,13 @@ class DashboardController
      */
     private function getOrganisationRequests(User $loggedInUser)
     {
-        $organisationsWhereUserIsAdmin = (new OrganisationMemberRepository())->getByAdmin($loggedInUser);
+        $organisationsWhereUserIsAdmin = (new OrganisationMemberRepo())->getByAdmin($loggedInUser);
         if ($organisationsWhereUserIsAdmin) {
             $_orgIDs = [];
             foreach ($organisationsWhereUserIsAdmin AS $_org)
                 $_orgIDs[] = $_org->getOrganisationID();
 
-            $organisationRequests = (new OrganisationMemberRequestRepository())->getByOrganisationIDs($_orgIDs);
+            $organisationRequests = (new OrganisationMemberRequestRepo())->getByOrganisationIDs($_orgIDs);
         } else {
             $organisationRequests = [];
         }
@@ -177,13 +177,13 @@ class DashboardController
      */
     private function getProjectRequests(User $loggedInUser)
     {
-        $projectsWhereUserIsAdmin = (new ProjectMemberRepository())->getByAdmin($loggedInUser);
+        $projectsWhereUserIsAdmin = (new ProjectMemberRepo())->getByAdmin($loggedInUser);
         if ($projectsWhereUserIsAdmin) {
             $_projectIDs = [];
             foreach ($projectsWhereUserIsAdmin AS $_project)
                 $_projectIDs[] = $_project->getProjectID();
 
-            $projectRequests = (new ProjectMemberRequestRepository())->getByProjectIDs($_projectIDs);
+            $projectRequests = (new ProjectMemberRequestRepo())->getByProjectIDs($_projectIDs);
         } else {
             $projectRequests = [];
         }
@@ -415,7 +415,7 @@ class DashboardController
             $update->published = strtotime($story->getDatePublished());
             $update->timestamp = strtotime($story->getDatePublished());
             return $update;
-        }, (new StoryRepository())->getLast($limit));
+        }, (new StoryRepo())->getLast($limit));
     }
 
     /**
@@ -431,8 +431,8 @@ class DashboardController
             $update->timestamp = strtotime($projectPost->getTime());
             $update->link = $this->urlHandler->project($projectPost->getProject());
             return $update;
-        }, (new ProjectPostRepository())->getByProjectIDs(
-            (new ProjectFollowRepository())->getProjectIDsForUser($loggedInUser))
+        }, (new ProjectPostRepo())->getByProjectIDs(
+            (new ProjectFollowRepo())->getProjectIDsForUser($loggedInUser))
         );
 
         usort($updates, function (DashboardController_Update $a, DashboardController_Update $b) {
@@ -458,8 +458,8 @@ class DashboardController
             $update->timestamp = strtotime($organisationProject->getProject()->getCreationTime());
             $update->link = $this->urlHandler->organisation($organisationProject->getOrganisation());
             return $update;
-        }, (new OrganisationProjectRepository())->getByOrganisationIDs(
-            (new OrganisationFollowRepository())->getOrganisationIDsForUser($loggedInUser))
+        }, (new OrganisationProjectRepo())->getByOrganisationIDs(
+            (new OrganisationFollowRepo())->getOrganisationIDsForUser($loggedInUser))
         );
 
         usort($updates, function (DashboardController_Update $a, DashboardController_Update $b) {

@@ -8,16 +8,16 @@ use DSI\Entity\Project;
 use DSI\Entity\User;
 use DSI\NotEnoughData;
 use DSI\NotFound;
-use DSI\Repository\CountryRegionRepository;
-use DSI\Repository\OrganisationProjectRepository;
-use DSI\Repository\ProjectDsiFocusTagRepository;
-use DSI\Repository\ProjectImpactHelpTagRepository;
-use DSI\Repository\ProjectImpactTechTagRepository;
-use DSI\Repository\ProjectLinkRepository;
-use DSI\Repository\ProjectMemberRepository;
-use DSI\Repository\ProjectRepository;
-use DSI\Repository\ProjectRepositoryInAPC;
-use DSI\Repository\ProjectTagRepository;
+use DSI\Repository\CountryRegionRepo;
+use DSI\Repository\OrganisationProjectRepo;
+use DSI\Repository\ProjectDsiFocusTagRepo;
+use DSI\Repository\ProjectImpactHelpTagRepo;
+use DSI\Repository\ProjectImpactTechTagRepo;
+use DSI\Repository\ProjectLinkRepo;
+use DSI\Repository\ProjectMemberRepo;
+use DSI\Repository\ProjectRepo;
+use DSI\Repository\ProjectRepoInAPC;
+use DSI\Repository\ProjectTagRepo;
 use DSI\Service\ErrorHandler;
 
 class UpdateProject
@@ -28,13 +28,13 @@ class UpdateProject
     /** @var UpdateProject_Data */
     private $data;
 
-    /** @var ProjectRepository */
+    /** @var ProjectRepo */
     private $projectRepo;
 
     public function __construct()
     {
         $this->data = new UpdateProject_Data();
-        $this->projectRepo = new ProjectRepositoryInAPC();
+        $this->projectRepo = new ProjectRepoInAPC();
     }
 
     public function exec()
@@ -99,14 +99,14 @@ class UpdateProject
 
     private function updateInvolvedOrganisationCount()
     {
-        $organisationsCount = count((new OrganisationProjectRepository())->getByProjectID($this->data()->project->getId()));
+        $organisationsCount = count((new OrganisationProjectRepo())->getByProjectID($this->data()->project->getId()));
         $this->data()->project->setOrganisationsCount($organisationsCount);
         $this->projectRepo->save($this->data()->project);
     }
 
     private function setTags()
     {
-        $projectTags = (new ProjectTagRepository())->getTagNamesByProject($this->data()->project);
+        $projectTags = (new ProjectTagRepo())->getTagNamesByProject($this->data()->project);
         foreach ($this->data()->tags AS $newTagName) {
             if (!in_array($newTagName, $projectTags)) {
                 $addTag = new AddTagToProject();
@@ -127,7 +127,7 @@ class UpdateProject
 
     private function setAreasOfImpact()
     {
-        $projectTags = (new ProjectImpactHelpTagRepository())->getTagNamesByProject($this->data()->project);
+        $projectTags = (new ProjectImpactHelpTagRepo())->getTagNamesByProject($this->data()->project);
         foreach ($this->data()->areasOfImpact AS $newTagName) {
             if (!in_array($newTagName, $projectTags)) {
                 $addTag = new AddImpactHelpTagToProject();
@@ -148,7 +148,7 @@ class UpdateProject
 
     private function setImpactTagsB()
     {
-        $projectTags = (new ProjectDsiFocusTagRepository())->getTagNamesByProject($this->data()->project);
+        $projectTags = (new ProjectDsiFocusTagRepo())->getTagNamesByProject($this->data()->project);
         foreach ($this->data()->focusTags AS $newTagName) {
             if (!in_array($newTagName, $projectTags)) {
                 $addTag = new AddDsiFocusTagToProject();
@@ -169,7 +169,7 @@ class UpdateProject
 
     private function setImpactTagsC()
     {
-        $projectTags = (new ProjectImpactTechTagRepository())->getTagNamesByProject($this->data()->project);
+        $projectTags = (new ProjectImpactTechTagRepo())->getTagNamesByProject($this->data()->project);
         foreach ($this->data()->technologyTags AS $newTagName) {
             if (!in_array($newTagName, $projectTags)) {
                 $addTag = new AddImpactTechTagToProject();
@@ -191,7 +191,7 @@ class UpdateProject
     private function setLinks()
     {
         $this->data()->links = (array)$this->data()->links;
-        $projectLinks = (new ProjectLinkRepository())->getLinksByProjectID($this->data()->project->getId());
+        $projectLinks = (new ProjectLinkRepo())->getLinksByProjectID($this->data()->project->getId());
         foreach ($this->data()->links AS $newLink) {
             if (!in_array($newLink, $projectLinks)) {
                 $addLink = new AddLinkToProject();
@@ -213,7 +213,7 @@ class UpdateProject
     private function setOrganisations()
     {
         $this->data()->organisations = (array)$this->data()->organisations;
-        $organisationIDsForProject = (new OrganisationProjectRepository())->getOrganisationIDsForProject(
+        $organisationIDsForProject = (new OrganisationProjectRepo())->getOrganisationIDsForProject(
             $this->data()->project
         );
         foreach ($this->data()->organisations AS $newOrganisationID) {
@@ -248,7 +248,7 @@ class UpdateProject
             return true;
         if ($this->data()->executor->isCommunityAdmin())
             return true;
-        $member = (new ProjectMemberRepository())->getByProjectAndMember(
+        $member = (new ProjectMemberRepo())->getByProjectAndMember(
             $this->data()->project,
             $this->data()->executor
         );
@@ -290,7 +290,7 @@ class UpdateProject
 
     private function setRegion()
     {
-        $countryRegionRepo = new CountryRegionRepository();
+        $countryRegionRepo = new CountryRegionRepo();
         if ($this->data()->countryID != 0) {
             if ($countryRegionRepo->nameExists($this->data()->countryID, $this->data()->region)) {
                 $countryRegion = $countryRegionRepo->getByName($this->data()->countryID, $this->data()->region);

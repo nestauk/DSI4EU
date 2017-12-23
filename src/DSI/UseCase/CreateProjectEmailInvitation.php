@@ -5,10 +5,10 @@ namespace DSI\UseCase;
 use DSI\Entity\Project;
 use DSI\Entity\ProjectEmailInvitation;
 use DSI\Entity\User;
-use DSI\Repository\ProjectEmailInvitationRepository;
-use DSI\Repository\ProjectRepository;
-use DSI\Repository\ProjectRepositoryInAPC;
-use DSI\Repository\UserRepository;
+use DSI\Repository\ProjectEmailInvitationRepo;
+use DSI\Repository\ProjectRepo;
+use DSI\Repository\ProjectRepoInAPC;
+use DSI\Repository\UserRepo;
 use DSI\Service\ErrorHandler;
 use DSI\Service\Mailer;
 use DSI\Service\URL;
@@ -18,13 +18,13 @@ class CreateProjectEmailInvitation
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var ProjectEmailInvitationRepository */
+    /** @var ProjectEmailInvitationRepo */
     private $projectEmailInvitationRepo;
 
-    /** @var ProjectRepository */
+    /** @var ProjectRepo */
     private $projectRepository;
 
-    /** @var UserRepository */
+    /** @var UserRepo */
     private $userRepository;
 
     /** @var User */
@@ -44,9 +44,9 @@ class CreateProjectEmailInvitation
         $urlHandler = new URL();
 
         $this->errorHandler = new ErrorHandler();
-        $this->projectEmailInvitationRepo = new ProjectEmailInvitationRepository();
-        $this->projectRepository = new ProjectRepositoryInAPC();
-        $this->userRepository = new UserRepository();
+        $this->projectEmailInvitationRepo = new ProjectEmailInvitationRepo();
+        $this->projectRepository = new ProjectRepoInAPC();
+        $this->userRepository = new UserRepo();
 
         if ($this->projectEmailInvitationRepo->projectInvitedEmail($this->projectID, $this->email)) {
             $this->errorHandler->addTaggedError('email', __('This user has already been invited to join the project'));

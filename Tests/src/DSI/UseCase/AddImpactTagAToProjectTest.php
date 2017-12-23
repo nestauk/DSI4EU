@@ -7,16 +7,16 @@ class AddImpactTagAToProjectTest extends PHPUnit_Framework_TestCase
     /** @var \DSI\UseCase\AddImpactHelpTagToProject */
     private $addImpactTagToProject;
 
-    /** @var \DSI\Repository\ImpactTagRepository */
+    /** @var \DSI\Repository\ImpactTagRepo */
     private $impactTagRepo;
 
-    /** @var \DSI\Repository\ProjectRepository */
+    /** @var \DSI\Repository\ProjectRepo */
     private $projectRepo;
 
     /** @var \DSI\Entity\Project */
     private $project;
 
-    /** @var \DSI\Repository\UserRepository */
+    /** @var \DSI\Repository\UserRepo */
     private $userRepo;
 
     /** @var \DSI\Entity\User */
@@ -25,9 +25,9 @@ class AddImpactTagAToProjectTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->addImpactTagToProject = new \DSI\UseCase\AddImpactHelpTagToProject();
-        $this->impactTagRepo = new \DSI\Repository\ImpactTagRepository();
-        $this->projectRepo = new \DSI\Repository\ProjectRepository();
-        $this->userRepo = new \DSI\Repository\UserRepository();
+        $this->impactTagRepo = new \DSI\Repository\ImpactTagRepo();
+        $this->projectRepo = new \DSI\Repository\ProjectRepo();
+        $this->userRepo = new \DSI\Repository\UserRepo();
 
         $this->user = new \DSI\Entity\User();
         $this->userRepo->insert($this->user);
@@ -42,7 +42,7 @@ class AddImpactTagAToProjectTest extends PHPUnit_Framework_TestCase
         $this->impactTagRepo->clearAll();
         $this->projectRepo->clearAll();
         $this->userRepo->clearAll();
-        (new \DSI\Repository\ProjectImpactHelpTagRepository())->clearAll();
+        (new \DSI\Repository\ProjectImpactHelpTagRepo())->clearAll();
     }
 
     /** @test */
@@ -53,7 +53,7 @@ class AddImpactTagAToProjectTest extends PHPUnit_Framework_TestCase
         $this->addImpactTagToProject->exec();
 
         $this->assertTrue(
-            (new \DSI\Repository\ProjectImpactHelpTagRepository())->projectHasTagName(
+            (new \DSI\Repository\ProjectImpactHelpTagRepo())->projectHasTagName(
                 $this->addImpactTagToProject->data()->projectID,
                 $this->addImpactTagToProject->data()->tag
             )

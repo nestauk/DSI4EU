@@ -4,16 +4,16 @@ require_once __DIR__ . '/../../../../config.php';
 
 class FollowOrganisationTest extends PHPUnit_Framework_TestCase
 {
-    /** @var \DSI\Repository\OrganisationFollowRepository */
+    /** @var \DSI\Repository\OrganisationFollowRepo */
     private $organisationFollowRepo;
 
-    /** @var \DSI\Repository\OrganisationRepository */
+    /** @var \DSI\Repository\OrganisationRepo */
     private $organisationRepo;
 
     /** @var \DSI\Entity\Organisation */
     private $organisation;
 
-    /** @var \DSI\Repository\UserRepository */
+    /** @var \DSI\Repository\UserRepo */
     private $userRepo;
 
     /** @var \DSI\Entity\User */
@@ -22,9 +22,9 @@ class FollowOrganisationTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->organisationRepo = new \DSI\Repository\OrganisationRepository();
-        $this->organisationFollowRepo = new \DSI\Repository\OrganisationFollowRepository();
-        $this->userRepo = new \DSI\Repository\UserRepository();
+        $this->organisationRepo = new \DSI\Repository\OrganisationRepo();
+        $this->organisationFollowRepo = new \DSI\Repository\OrganisationFollowRepo();
+        $this->userRepo = new \DSI\Repository\UserRepo();
 
         $this->user = new \DSI\Entity\User();
         $this->userRepo->insert($this->user);

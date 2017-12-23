@@ -7,10 +7,10 @@ use DSI\Entity\Organisation;
 use DSI\Entity\OrganisationMember;
 use DSI\Entity\User;
 use DSI\NotEnoughData;
-use DSI\Repository\ContentUpdateRepository;
-use DSI\Repository\OrganisationMemberRepository;
-use DSI\Repository\OrganisationRepository;
-use DSI\Repository\OrganisationRepositoryInAPC;
+use DSI\Repository\ContentUpdateRepo;
+use DSI\Repository\OrganisationMemberRepo;
+use DSI\Repository\OrganisationRepo;
+use DSI\Repository\OrganisationRepoInAPC;
 use DSI\Service\ErrorHandler;
 
 class CreateOrganisation
@@ -18,7 +18,7 @@ class CreateOrganisation
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var OrganisationRepository */
+    /** @var OrganisationRepo */
     private $organisationRepo;
 
     /** @var Organisation */
@@ -43,7 +43,7 @@ class CreateOrganisation
             throw $this->errorHandler;
         }
 
-        $this->organisationRepo = new OrganisationRepositoryInAPC();
+        $this->organisationRepo = new OrganisationRepoInAPC();
 
         if (!isset($this->data()->name))
             throw new NotEnoughData('organisation name');
@@ -70,9 +70,9 @@ class CreateOrganisation
         $contentUpdate = new ContentUpdate();
         $contentUpdate->setOrganisation($organisation);
         $contentUpdate->setUpdated(ContentUpdate::Updated_New);
-        (new ContentUpdateRepository())->insert($contentUpdate);
+        (new ContentUpdateRepo())->insert($contentUpdate);
 
-        $organisationMemberRepository = new OrganisationMemberRepository();
+        $organisationMemberRepository = new OrganisationMemberRepo();
         $organisationMember = new OrganisationMember();
         $organisationMember->setMember($this->data()->owner);
         $organisationMember->setOrganisation($organisation);

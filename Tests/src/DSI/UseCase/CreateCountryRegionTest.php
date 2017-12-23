@@ -7,10 +7,10 @@ class CreateCountryRegionTest extends PHPUnit_Framework_TestCase
     /** @var \DSI\UseCase\CreateCountryRegion */
     private $createCountryRegionCmd;
 
-    /** @var \DSI\Repository\CountryRegionRepository */
+    /** @var \DSI\Repository\CountryRegionRepo */
     private $countryRegionRepo;
 
-    /** @var \DSI\Repository\CountryRepository */
+    /** @var \DSI\Repository\CountryRepo */
     private $countryRepo;
 
     /** @var  \DSI\Entity\Country */
@@ -19,8 +19,8 @@ class CreateCountryRegionTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->createCountryRegionCmd = new \DSI\UseCase\CreateCountryRegion();
-        $this->countryRegionRepo = new \DSI\Repository\CountryRegionRepository();
-        $this->countryRepo = new \DSI\Repository\CountryRepository();
+        $this->countryRegionRepo = new \DSI\Repository\CountryRegionRepo();
+        $this->countryRepo = new \DSI\Repository\CountryRepo();
 
         $this->country = new \DSI\Entity\Country();
         $this->country->setName('test');

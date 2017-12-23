@@ -4,23 +4,23 @@ namespace DSI\UseCase\TerminateAccount;
 
 use DSI\Entity\TerminateAccountToken;
 use DSI\Entity\User;
-use DSI\Repository\OrganisationFollowRepository;
-use DSI\Repository\OrganisationMemberInvitationRepository;
-use DSI\Repository\OrganisationMemberRepository;
-use DSI\Repository\OrganisationMemberRequestRepository;
-use DSI\Repository\OrganisationRepository;
-use DSI\Repository\ProjectFollowRepository;
-use DSI\Repository\ProjectMemberInvitationRepository;
-use DSI\Repository\ProjectMemberRepository;
-use DSI\Repository\ProjectMemberRequestRepository;
-use DSI\Repository\ProjectPostCommentReplyRepository;
-use DSI\Repository\ProjectPostCommentRepository;
-use DSI\Repository\ProjectPostRepository;
-use DSI\Repository\ProjectRepository;
-use DSI\Repository\ProjectRepositoryInAPC;
-use DSI\Repository\TerminateAccountTokenRepository;
-use DSI\Repository\UserLinkRepository;
-use DSI\Repository\UserRepository;
+use DSI\Repository\OrganisationFollowRepo;
+use DSI\Repository\OrganisationMemberInvitationRepo;
+use DSI\Repository\OrganisationMemberRepo;
+use DSI\Repository\OrganisationMemberRequestRepo;
+use DSI\Repository\OrganisationRepo;
+use DSI\Repository\ProjectFollowRepo;
+use DSI\Repository\ProjectMemberInvitationRepo;
+use DSI\Repository\ProjectMemberRepo;
+use DSI\Repository\ProjectMemberRequestRepo;
+use DSI\Repository\ProjectPostCommentReplyRepo;
+use DSI\Repository\ProjectPostCommentRepo;
+use DSI\Repository\ProjectPostRepo;
+use DSI\Repository\ProjectRepo;
+use DSI\Repository\ProjectRepoInAPC;
+use DSI\Repository\TerminateAccountTokenRepo;
+use DSI\Repository\UserLinkRepo;
+use DSI\Repository\UserRepo;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 
@@ -67,7 +67,7 @@ class TerminateAccount
     {
         $sysAdmin = $this->getSysAdmin();
 
-        $organisationRepo = new OrganisationRepository();
+        $organisationRepo = new OrganisationRepo();
         $organisations = $organisationRepo->getByUser($this->user);
         foreach ($organisations AS $organisation) {
             $organisation->setIsPublished(false);
@@ -75,22 +75,22 @@ class TerminateAccount
             $organisationRepo->save($organisation);
         }
 
-        $organisationFollowRepo = new OrganisationFollowRepository();
+        $organisationFollowRepo = new OrganisationFollowRepo();
         $organisationFollows = $organisationFollowRepo->getByUser($this->user);
         foreach ($organisationFollows AS $organisationFollow)
             $organisationFollowRepo->remove($organisationFollow);
 
-        $organisationMemberInvitationRepo = new OrganisationMemberInvitationRepository();
+        $organisationMemberInvitationRepo = new OrganisationMemberInvitationRepo();
         $organisationMemberInvitations = $organisationMemberInvitationRepo->getByMemberID($this->user->getId());
         foreach ($organisationMemberInvitations AS $organisationMemberInvitation)
             $organisationMemberInvitationRepo->remove($organisationMemberInvitation);
 
-        $organisationMemberRequestRepo = new OrganisationMemberRequestRepository();
+        $organisationMemberRequestRepo = new OrganisationMemberRequestRepo();
         $organisationMemberRequests = $organisationMemberRequestRepo->getByMemberID($this->user->getId());
         foreach ($organisationMemberRequests AS $organisationMemberRequest)
             $organisationMemberRequestRepo->remove($organisationMemberRequest);
 
-        $organisationMemberRepo = new OrganisationMemberRepository();
+        $organisationMemberRepo = new OrganisationMemberRepo();
         $organisationMembers = $organisationMemberRepo->getByMemberID($this->user->getId());
         foreach ($organisationMembers AS $organisationMember)
             $organisationMemberRepo->remove($organisationMember);
@@ -100,7 +100,7 @@ class TerminateAccount
     {
         $sysAdmin = $this->getSysAdmin();
 
-        $projectRepo = new ProjectRepositoryInAPC();
+        $projectRepo = new ProjectRepoInAPC();
         $projects = $projectRepo->getByUser($this->user);
         foreach ($projects AS $project) {
             $project->setIsPublished(false);
@@ -108,37 +108,37 @@ class TerminateAccount
             $projectRepo->save($project);
         }
 
-        $projectFollowRepo = new ProjectFollowRepository();
+        $projectFollowRepo = new ProjectFollowRepo();
         $projectFollows = $projectFollowRepo->getByUser($this->user);
         foreach ($projectFollows as $projectFollow)
             $projectFollowRepo->remove($projectFollow);
 
-        $projectMemberInvitationRepo = new ProjectMemberInvitationRepository();
+        $projectMemberInvitationRepo = new ProjectMemberInvitationRepo();
         $projectMemberInvitations = $projectMemberInvitationRepo->getByMemberID($this->user->getId());
         foreach ($projectMemberInvitations as $projectMemberInvitation)
             $projectMemberInvitationRepo->remove($projectMemberInvitation);
 
-        $projectMemberRequestRepo = new ProjectMemberRequestRepository();
+        $projectMemberRequestRepo = new ProjectMemberRequestRepo();
         $projectMemberRequests = $projectMemberRequestRepo->getByMemberID($this->user->getId());
         foreach ($projectMemberRequests as $projectMemberRequest)
             $projectMemberRequestRepo->remove($projectMemberRequest);
 
-        $projectMemberRepo = new ProjectMemberRepository();
+        $projectMemberRepo = new ProjectMemberRepo();
         $projectMembers = $projectMemberRepo->getByMemberID($this->user->getId());
         foreach ($projectMembers as $projectMember)
             $projectMemberRepo->remove($projectMember);
 
-        $projectPostCommentReplyRepo = new ProjectPostCommentReplyRepository();
+        $projectPostCommentReplyRepo = new ProjectPostCommentReplyRepo();
         $replies = $projectPostCommentReplyRepo->getByUser($this->user);
         foreach ($replies as $reply)
             $projectPostCommentReplyRepo->remove($reply);
 
-        $projectPostCommentRepo = new ProjectPostCommentRepository();
+        $projectPostCommentRepo = new ProjectPostCommentRepo();
         $projectPostComments = $projectPostCommentRepo->getByUser($this->user);
         foreach ($projectPostComments AS $projectPostComment)
             $projectPostCommentRepo->save($projectPostComment);
 
-        $projectPostRepo = new ProjectPostRepository();
+        $projectPostRepo = new ProjectPostRepo();
         $projectPosts = $projectPostRepo->getByUser($this->user);
         foreach ($projectPosts AS $projectPost)
             $projectPostRepo->remove($projectPost);
@@ -149,12 +149,12 @@ class TerminateAccount
      */
     private function getSysAdmin(): User
     {
-        return (new UserRepository())->getById(1);
+        return (new UserRepo())->getById(1);
     }
 
     private function removeUserLinks()
     {
-        $userLinkRepo = new UserLinkRepository();
+        $userLinkRepo = new UserLinkRepo();
         $userLinks = $userLinkRepo->getByUser($this->user);
         foreach ($userLinks AS $userLink)
             $userLinkRepo->remove($userLink);
@@ -162,12 +162,12 @@ class TerminateAccount
 
     private function removeToken()
     {
-        (new TerminateAccountTokenRepository())->remove($this->token);
+        (new TerminateAccountTokenRepo())->remove($this->token);
     }
 
     private function removeUser()
     {
-        (new UserRepository())->remove($this->user);
+        (new UserRepo())->remove($this->user);
     }
 
     private function logoutUser()

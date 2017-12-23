@@ -6,7 +6,7 @@ use abeautifulsite\SimpleImage;
 use DSI\Entity\Image;
 use DSI\NotEnoughData;
 use DSI\NotFound;
-use DSI\Repository\UserRepository;
+use DSI\Repository\UserRepo;
 use DSI\Service\ErrorHandler;
 
 class UploadTempImage
@@ -17,7 +17,7 @@ class UploadTempImage
     /** @var UploadTempImage_Data */
     private $data;
 
-    /** @var UserRepository */
+    /** @var UserRepo */
     private $userRepo;
 
     /** @var string */
@@ -31,7 +31,7 @@ class UploadTempImage
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->userRepo = new UserRepository();
+        $this->userRepo = new UserRepo();
 
         $this->checkIfAllTheInfoHaveBeenSent();
         $this->checkIfFileExistsOnServer();

@@ -4,13 +4,13 @@ require_once __DIR__ . '/../../../../config.php';
 
 class RemoveOrganisationTest extends PHPUnit_Framework_TestCase
 {
-    /** @var \DSI\Repository\OrganisationRepository */
+    /** @var \DSI\Repository\OrganisationRepo */
     private $organisationRepo;
 
     /** @var \DSI\Entity\Organisation */
     private $organisation;
 
-    /** @var \DSI\Repository\UserRepository */
+    /** @var \DSI\Repository\UserRepo */
     private $userRepo;
 
     /** @var \DSI\Entity\User */
@@ -20,8 +20,8 @@ class RemoveOrganisationTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->organisationRepo = new \DSI\Repository\OrganisationRepository();
-        $this->userRepo = new \DSI\Repository\UserRepository();
+        $this->organisationRepo = new \DSI\Repository\OrganisationRepo();
+        $this->userRepo = new \DSI\Repository\UserRepo();
 
         $this->owner = new \DSI\Entity\User();
         $this->userRepo->insert($this->owner);
@@ -56,7 +56,7 @@ class RemoveOrganisationTest extends PHPUnit_Framework_TestCase
 
         $this->assertCount(0, $this->organisationRepo->getAll());
         $this->assertCount(0,
-            (new \DSI\Repository\OrganisationMemberRepository())->getByOrganisation($this->organisation)
+            (new \DSI\Repository\OrganisationMemberRepo())->getByOrganisation($this->organisation)
         );
     }
 

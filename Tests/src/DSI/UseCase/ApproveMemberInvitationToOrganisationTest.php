@@ -7,19 +7,19 @@ class ApproveMemberInvitationToOrganisationTest extends PHPUnit_Framework_TestCa
     /** @var \DSI\UseCase\AddMemberInvitationToOrganisation */
     private $addMemberInvitationToOrganisation;
 
-    /** @var \DSI\Repository\OrganisationMemberInvitationRepository */
+    /** @var \DSI\Repository\OrganisationMemberInvitationRepo */
     private $organisationMemberInvitationRepo;
 
-    /** @var \DSI\Repository\OrganisationMemberRepository */
+    /** @var \DSI\Repository\OrganisationMemberRepo */
     private $organisationMemberRepo;
 
-    /** @var \DSI\Repository\OrganisationRepository */
+    /** @var \DSI\Repository\OrganisationRepo */
     private $organisationRepo;
 
     /** @var \DSI\Entity\Organisation */
     private $organisation;
 
-    /** @var \DSI\Repository\UserRepository */
+    /** @var \DSI\Repository\UserRepo */
     private $userRepo;
 
     /** @var \DSI\Entity\User */
@@ -28,10 +28,10 @@ class ApproveMemberInvitationToOrganisationTest extends PHPUnit_Framework_TestCa
 
     public function setUp()
     {
-        $this->organisationMemberInvitationRepo = new \DSI\Repository\OrganisationMemberInvitationRepository();
-        $this->organisationMemberRepo = new \DSI\Repository\OrganisationMemberRepository();
-        $this->organisationRepo = new \DSI\Repository\OrganisationRepository();
-        $this->userRepo = new \DSI\Repository\UserRepository();
+        $this->organisationMemberInvitationRepo = new \DSI\Repository\OrganisationMemberInvitationRepo();
+        $this->organisationMemberRepo = new \DSI\Repository\OrganisationMemberRepo();
+        $this->organisationRepo = new \DSI\Repository\OrganisationRepo();
+        $this->userRepo = new \DSI\Repository\UserRepo();
 
         $this->organisationOwner = new \DSI\Entity\User();
         $this->userRepo->insert($this->organisationOwner);

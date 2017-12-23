@@ -2,9 +2,9 @@
 
 namespace DSI\Controller;
 
-use DSI\Repository\OrganisationRepository;
-use DSI\Repository\OrganisationRepositoryInAPC;
-use DSI\Repository\UserRepository;
+use DSI\Repository\OrganisationRepo;
+use DSI\Repository\OrganisationRepoInAPC;
+use DSI\Repository\UserRepo;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\URL;
@@ -22,7 +22,7 @@ class OrganisationEditOwnerController
         $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
         $loggedInUser = $authUser->getUser();
 
-        $organisationRepo = new OrganisationRepositoryInAPC();
+        $organisationRepo = new OrganisationRepoInAPC();
         $organisation = $organisationRepo->getById($this->organisationID);
         $owner = $organisation->getOwner();
 
@@ -38,7 +38,7 @@ class OrganisationEditOwnerController
             try {
                 $exec = new ChangeOwner();
                 $exec->data()->executor = $loggedInUser;
-                $exec->data()->member = (new UserRepository())->getById($_POST['newOwnerID']);
+                $exec->data()->member = (new UserRepo())->getById($_POST['newOwnerID']);
                 $exec->data()->organisation = $organisation;
                 $exec->exec();
 
@@ -56,7 +56,7 @@ class OrganisationEditOwnerController
         }
 
         $pageTitle = $organisation->getName();
-        $users = (new UserRepository())->getAll();
+        $users = (new UserRepo())->getAll();
         require __DIR__ . '/../../../www/views/organisation-edit-owner.php';
     }
 }

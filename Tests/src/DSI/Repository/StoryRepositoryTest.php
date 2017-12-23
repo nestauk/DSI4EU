@@ -2,21 +2,21 @@
 
 require_once __DIR__ . '/../../../config.php';
 
-use \DSI\Repository\UserRepository;
-use \DSI\Repository\StoryRepository;
-use \DSI\Repository\StoryCategoryRepository;
+use \DSI\Repository\UserRepo;
+use \DSI\Repository\StoryRepo;
+use \DSI\Repository\StoryCategoryRepo;
 use \DSI\Entity\Story;
 use \DSI\Entity\User;
 
 class StoryRepositoryTest extends PHPUnit_Framework_TestCase
 {
-    /** @var StoryCategoryRepository */
+    /** @var StoryCategoryRepo */
     private $storyCategoryRepository;
 
-    /** @var StoryRepository */
+    /** @var StoryRepo */
     private $storyRepository;
 
-    /** @var UserRepository */
+    /** @var UserRepo */
     private $userRepo;
 
     /** @var User */
@@ -24,9 +24,9 @@ class StoryRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->storyCategoryRepository = new StoryCategoryRepository();
-        $this->storyRepository = new StoryRepository();
-        $this->userRepo = new UserRepository();
+        $this->storyCategoryRepository = new StoryCategoryRepo();
+        $this->storyRepository = new StoryRepo();
+        $this->userRepo = new UserRepo();
 
         $this->user1 = new User();
         $this->user2 = new User();

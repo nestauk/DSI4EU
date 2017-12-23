@@ -4,8 +4,8 @@ namespace DSI\UseCase;
 
 use DSI\Entity\PasswordRecovery;
 use DSI\NotEnoughData;
-use DSI\Repository\PasswordRecoveryRepository;
-use DSI\Repository\UserRepository;
+use DSI\Repository\PasswordRecoveryRepo;
+use DSI\Repository\UserRepo;
 use DSI\Service\ErrorHandler;
 use DSI\Service\Mailer;
 
@@ -14,7 +14,7 @@ class CreatePasswordRecovery
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var PasswordRecoveryRepository */
+    /** @var PasswordRecoveryRepo */
     private $passwordRecoveryRepo;
 
     /** @var PasswordRecovery */
@@ -31,12 +31,12 @@ class CreatePasswordRecovery
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->passwordRecoveryRepo = new PasswordRecoveryRepository();
+        $this->passwordRecoveryRepo = new PasswordRecoveryRepo();
 
         if (!isset($this->data()->email))
             throw new NotEnoughData('email');
 
-        $userRepository = new UserRepository();
+        $userRepository = new UserRepo();
 
         if (!$userRepository->emailAddressExists($this->data()->email)) {
             $this->errorHandler->addTaggedError('email', __('The email address is not registered'));

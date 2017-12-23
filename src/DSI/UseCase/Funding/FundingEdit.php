@@ -5,11 +5,11 @@ namespace DSI\UseCase\Funding;
 use DSI\Entity\Funding;
 use DSI\Entity\FundingSource;
 use DSI\NotFound;
-use DSI\Repository\CountryRepository;
-use DSI\Repository\FundingRepository;
-use DSI\Repository\FundingSourceRepository;
-use DSI\Repository\FundingTargetRepository;
-use DSI\Repository\FundingTypeRepository;
+use DSI\Repository\CountryRepo;
+use DSI\Repository\FundingRepo;
+use DSI\Repository\FundingSourceRepo;
+use DSI\Repository\FundingTargetRepo;
+use DSI\Repository\FundingTypeRepo;
 use DSI\Service\ErrorHandler;
 
 class FundingEdit
@@ -20,7 +20,7 @@ class FundingEdit
     /** @var FundingEdit_Data */
     private $data;
 
-    /** @var FundingRepository */
+    /** @var FundingRepo */
     private $fundingRepository;
 
     /** @var FundingSource */
@@ -34,7 +34,7 @@ class FundingEdit
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->fundingRepository = new FundingRepository();
+        $this->fundingRepository = new FundingRepo();
 
         $this->assertDataHasBeenSubmitted();
         $this->assertDataIsNotEmpty();
@@ -54,16 +54,16 @@ class FundingEdit
 
     private function saveFunding()
     {
-        $fundingTargetRepository = new FundingTargetRepository();
+        $fundingTargetRepository = new FundingTargetRepo();
 
         $this->data()->funding->setTitle($this->data()->title);
         $this->data()->funding->setUrl($this->data()->url);
-        $this->data()->funding->setCountry((new CountryRepository())->getById($this->data()->countryID));
+        $this->data()->funding->setCountry((new CountryRepo())->getById($this->data()->countryID));
         $this->data()->funding->setSource($this->fundingSource);
         $this->data()->funding->setClosingDate($this->data()->closingDate);
         $this->data()->funding->setDescription($this->data()->description);
         if($this->data()->typeID)
-            $this->data()->funding->setType((new FundingTypeRepository())->getById($this->data()->typeID));
+            $this->data()->funding->setType((new FundingTypeRepo())->getById($this->data()->typeID));
 
         $this->data()->funding->removeAllTargets();
         foreach ((array)$this->data()->targets AS $targetID)
@@ -108,7 +108,7 @@ class FundingEdit
     private function getFundingSource()
     {
         if ($this->data()->sourceTitle) {
-            $fundingSourceRepository = new FundingSourceRepository();
+            $fundingSourceRepository = new FundingSourceRepo();
             try {
                 $this->fundingSource = $fundingSourceRepository->getByTitle($this->data()->sourceTitle);
             } catch (NotFound $e) {

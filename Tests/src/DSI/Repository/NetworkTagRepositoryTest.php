@@ -2,17 +2,17 @@
 
 require_once __DIR__ . '/../../../config.php';
 
-use \DSI\Repository\NetworkTagRepository;
+use \DSI\Repository\NetworkTagRepo;
 use \DSI\Entity\NetworkTag;
 
 class NetworkTagRepositoryTest extends PHPUnit_Framework_TestCase
 {
-    /** @var NetworkTagRepository */
+    /** @var NetworkTagRepo */
     protected $tagsRepo;
 
     public function setUp()
     {
-        $this->tagsRepo = new NetworkTagRepository();
+        $this->tagsRepo = new NetworkTagRepo();
     }
 
     public function tearDown()

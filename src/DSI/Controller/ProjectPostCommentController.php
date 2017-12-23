@@ -2,8 +2,8 @@
 
 namespace DSI\Controller;
 
-use DSI\Repository\ProjectPostCommentRepository;
-use DSI\Repository\UserRepository;
+use DSI\Repository\ProjectPostCommentRepo;
+use DSI\Repository\UserRepo;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\UseCase\AddReplyToProjectPostComment;
@@ -25,7 +25,7 @@ class ProjectPostCommentController
         $authUser = new Auth();
         $loggedInUser = $authUser->getUserIfLoggedIn();
 
-        $projectPostCommentRepo = new ProjectPostCommentRepository();
+        $projectPostCommentRepo = new ProjectPostCommentRepo();
         $comment = $projectPostCommentRepo->getById($this->data()->commentID);
 
         try {

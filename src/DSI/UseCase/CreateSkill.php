@@ -3,7 +3,7 @@
 namespace DSI\UseCase;
 
 use DSI\Entity\Skill;
-use DSI\Repository\SkillRepository;
+use DSI\Repository\SkillRepo;
 use DSI\Service\ErrorHandler;
 
 class CreateSkill
@@ -11,7 +11,7 @@ class CreateSkill
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var SkillRepository */
+    /** @var SkillRepo */
     private $skillRepo;
 
     /** @var Skill */
@@ -28,7 +28,7 @@ class CreateSkill
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->skillRepo = new SkillRepository();
+        $this->skillRepo = new SkillRepo();
 
         if($this->skillRepo->nameExists($this->data()->name)){
             $this->errorHandler->addTaggedError('skill', __('Skill name already exists'));

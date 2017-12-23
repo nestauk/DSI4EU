@@ -5,11 +5,11 @@ namespace DSI\UseCase;
 use DSI\Entity\OrganisationMember;
 use DSI\Entity\OrganisationMemberInvitation;
 use DSI\Entity\User;
-use DSI\Repository\OrganisationMemberRepository;
-use DSI\Repository\OrganisationMemberInvitationRepository;
-use DSI\Repository\OrganisationRepository;
-use DSI\Repository\OrganisationRepositoryInAPC;
-use DSI\Repository\UserRepository;
+use DSI\Repository\OrganisationMemberRepo;
+use DSI\Repository\OrganisationMemberInvitationRepo;
+use DSI\Repository\OrganisationRepo;
+use DSI\Repository\OrganisationRepoInAPC;
+use DSI\Repository\UserRepo;
 use DSI\Service\ErrorHandler;
 
 class AcceptMemberInvitationToOrganisation
@@ -17,16 +17,16 @@ class AcceptMemberInvitationToOrganisation
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var OrganisationMemberInvitationRepository */
+    /** @var OrganisationMemberInvitationRepo */
     private $organisationMemberInvitationRepository;
 
-    /** @var OrganisationMemberRepository */
+    /** @var OrganisationMemberRepo */
     private $organisationMemberRepository;
 
-    /** @var OrganisationRepository */
+    /** @var OrganisationRepo */
     private $organisationRepository;
 
-    /** @var UserRepository */
+    /** @var UserRepo */
     private $userRepository;
 
     /** @var ApproveMemberInvitationToOrganisation_Data */
@@ -40,10 +40,10 @@ class AcceptMemberInvitationToOrganisation
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->organisationMemberInvitationRepository = new OrganisationMemberInvitationRepository();
-        $this->organisationMemberRepository = new OrganisationMemberRepository();
-        $this->organisationRepository = new OrganisationRepositoryInAPC();
-        $this->userRepository = new UserRepository();
+        $this->organisationMemberInvitationRepository = new OrganisationMemberInvitationRepo();
+        $this->organisationMemberRepository = new OrganisationMemberRepo();
+        $this->organisationRepository = new OrganisationRepoInAPC();
+        $this->userRepository = new UserRepo();
 
         $this->assertExecutorIsSet();
         $this->assertExecutorCanExecute();

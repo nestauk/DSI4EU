@@ -2,10 +2,10 @@
 
 require_once __DIR__ . '/../../../config.php';
 
-use \DSI\Repository\UserRepository;
-use \DSI\Repository\ProjectRepositoryInAPC;
-use \DSI\Repository\CountryRegionRepository;
-use \DSI\Repository\CountryRepository;
+use \DSI\Repository\UserRepo;
+use \DSI\Repository\ProjectRepoInAPC;
+use \DSI\Repository\CountryRegionRepo;
+use \DSI\Repository\CountryRepo;
 use \DSI\Entity\Project;
 use \DSI\Entity\User;
 use \DSI\Entity\CountryRegion;
@@ -13,16 +13,16 @@ use \DSI\Entity\Country;
 
 class ProjectRepositoryInAPCTest extends PHPUnit_Framework_TestCase
 {
-    /** @var ProjectRepositoryInAPC */
+    /** @var ProjectRepoInAPC */
     private $projectRepositoryInAPC;
 
-    /** @var UserRepository */
+    /** @var UserRepo */
     private $userRepo;
 
-    /** @var CountryRegionRepository */
+    /** @var CountryRegionRepo */
     private $countryRegionRepo;
 
-    /** @var CountryRepository */
+    /** @var CountryRepo */
     private $countryRepo;
 
     /** @var Country */
@@ -36,10 +36,10 @@ class ProjectRepositoryInAPCTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->projectRepositoryInAPC = new ProjectRepositoryInAPC();
-        $this->userRepo = new UserRepository();
-        $this->countryRegionRepo = new CountryRegionRepository();
-        $this->countryRepo = new CountryRepository();
+        $this->projectRepositoryInAPC = new ProjectRepoInAPC();
+        $this->userRepo = new UserRepo();
+        $this->countryRegionRepo = new CountryRegionRepo();
+        $this->countryRepo = new CountryRepo();
 
         $this->user1 = new User();
         $this->user2 = new User();

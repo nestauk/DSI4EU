@@ -3,8 +3,8 @@
 namespace DSI\UseCase;
 
 use DSI\Entity\UserLink;
-use DSI\Repository\UserLinkRepository;
-use DSI\Repository\UserRepository;
+use DSI\Repository\UserLinkRepo;
+use DSI\Repository\UserRepo;
 use DSI\Service\ErrorHandler;
 
 class AddLinkToUser
@@ -12,7 +12,7 @@ class AddLinkToUser
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var UserLinkRepository */
+    /** @var UserLinkRepo */
     private $userLinkRepo;
 
     /** @var AddLinkToUser_Data */
@@ -26,9 +26,9 @@ class AddLinkToUser
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->userLinkRepo = new UserLinkRepository();
+        $this->userLinkRepo = new UserLinkRepo();
 
-        $userRepo = new UserRepository();
+        $userRepo = new UserRepo();
 
         if($this->userLinkRepo->userHasLink($this->data()->userID, $this->data()->link)) {
             $this->errorHandler->addTaggedError('skill', __('The user already has this link'));

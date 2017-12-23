@@ -3,7 +3,7 @@
 namespace DSI\UseCase;
 
 use DSI\Entity\User;
-use DSI\Repository\UserRepository;
+use DSI\Repository\UserRepo;
 use DSI\Service\ErrorHandler;
 
 class GoogleRegister
@@ -11,7 +11,7 @@ class GoogleRegister
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var UserRepository */
+    /** @var UserRepo */
     private $userRepo;
 
     /** @var GoogleRegister_Data */
@@ -29,7 +29,7 @@ class GoogleRegister
     {
         $this->errorHandler = new ErrorHandler();
         if (!$this->userRepo)
-            $this->userRepo = new UserRepository();
+            $this->userRepo = new UserRepo();
 
         $this->verifyGoogleUID();
         $this->errorHandler->throwIfNotEmpty();
@@ -55,7 +55,7 @@ class GoogleRegister
         return $this->data;
     }
 
-    public function setUserRepo(UserRepository $userRepo)
+    public function setUserRepo(UserRepo $userRepo)
     {
         $this->userRepo = $userRepo;
     }

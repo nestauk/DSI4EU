@@ -2,11 +2,11 @@
 
 namespace DSI\Controller;
 
-use DSI\Repository\OrganisationRepository;
-use DSI\Repository\OrganisationRepositoryInAPC;
-use DSI\Repository\ProjectRepository;
-use DSI\Repository\ProjectRepositoryInAPC;
-use DSI\Repository\UserRepository;
+use DSI\Repository\OrganisationRepo;
+use DSI\Repository\OrganisationRepoInAPC;
+use DSI\Repository\ProjectRepo;
+use DSI\Repository\ProjectRepoInAPC;
+use DSI\Repository\UserRepo;
 use DSI\Service\Auth;
 use DSI\Service\URL;
 use DSI\UseCase\SetAdminStatusToOrganisationMember;
@@ -27,9 +27,9 @@ class SetAdminController
 
         if (isset($_GET['userID'])) {
             if (isset($_GET['projectID'])) {
-                $projectRepo = new ProjectRepositoryInAPC();
+                $projectRepo = new ProjectRepoInAPC();
                 $project = $projectRepo->getById((int)$_GET['projectID']);
-                $user = (new UserRepository())->getById((int)$_GET['userID']);
+                $user = (new UserRepo())->getById((int)$_GET['userID']);
 
                 $exec = new SetAdminStatusToProjectMember();
                 $exec->setMember($user);
@@ -47,8 +47,8 @@ class SetAdminController
                 }
             }
             if (isset($_GET['organisationID'])) {
-                $user = (new UserRepository())->getById((int)$_GET['userID']);
-                $organisationRepository = new OrganisationRepositoryInAPC();
+                $user = (new UserRepo())->getById((int)$_GET['userID']);
+                $organisationRepository = new OrganisationRepoInAPC();
                 $organisation = $organisationRepository->getById((int)$_GET['organisationID']);
 
                 $exec = new SetAdminStatusToOrganisationMember();

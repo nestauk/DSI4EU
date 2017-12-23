@@ -3,9 +3,9 @@
 namespace DSI\UseCase;
 
 use DSI\Entity\OrganisationLink;
-use DSI\Repository\OrganisationLinkRepository;
-use DSI\Repository\OrganisationRepository;
-use DSI\Repository\OrganisationRepositoryInAPC;
+use DSI\Repository\OrganisationLinkRepo;
+use DSI\Repository\OrganisationRepo;
+use DSI\Repository\OrganisationRepoInAPC;
 use DSI\Service\ErrorHandler;
 
 class RemoveLinkFromOrganisation
@@ -13,7 +13,7 @@ class RemoveLinkFromOrganisation
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var OrganisationLinkRepository */
+    /** @var OrganisationLinkRepo */
     private $organisationLinkRepository;
 
     /** @var RemoveLinkFromOrganisation_Data */
@@ -27,9 +27,9 @@ class RemoveLinkFromOrganisation
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->organisationLinkRepository = new OrganisationLinkRepository();
+        $this->organisationLinkRepository = new OrganisationLinkRepo();
 
-        $organisationRepository = new OrganisationRepositoryInAPC();
+        $organisationRepository = new OrganisationRepoInAPC();
 
         if (!$this->organisationLinkRepository->organisationHasLink($this->data()->organisationID, $this->data()->link)) {
             $this->errorHandler->addTaggedError('link', __('The organisation does not have this link'));

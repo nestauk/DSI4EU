@@ -3,8 +3,8 @@
 namespace DSI\Controller;
 
 use DSI\Entity\User;
-use DSI\Repository\CountryRepository;
-use DSI\Repository\EventRepository;
+use DSI\Repository\CountryRepo;
+use DSI\Repository\EventRepo;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\JsModules;
@@ -29,7 +29,7 @@ class EventEditController
         if (!($this->userCanManageEvent($loggedInUser)))
             go_to($urlHandler->home());
 
-        $event = (new EventRepository())->getById($this->eventID);
+        $event = (new EventRepo())->getById($this->eventID);
 
         if ($this->format == 'json') {
             if (isset($_POST['save'])) {
@@ -80,7 +80,7 @@ class EventEditController
             return;
         }
 
-        $countries = (new CountryRepository())->getAll();
+        $countries = (new CountryRepo())->getAll();
         JsModules::setTinyMCE(true);
         require(__DIR__ . '/../../../www/views/events-edit.php');
     }

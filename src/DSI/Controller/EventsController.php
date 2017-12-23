@@ -3,8 +3,8 @@
 namespace DSI\Controller;
 
 use DSI\Entity\Event;
-use DSI\Repository\CountryRepository;
-use DSI\Repository\EventRepository;
+use DSI\Repository\CountryRepo;
+use DSI\Repository\EventRepo;
 use DSI\Service\Auth;
 use DSI\Service\URL;
 
@@ -22,7 +22,7 @@ class EventsController
         $loggedInUser = $authUser->getUserIfLoggedIn();
 
         if ($this->format == 'json') {
-            $events = (new EventRepository())->getFutureOnes();
+            $events = (new EventRepo())->getFutureOnes();
 
             echo json_encode([
                 'months' => $this->jsonMonths(),

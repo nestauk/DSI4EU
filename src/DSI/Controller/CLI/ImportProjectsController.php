@@ -5,8 +5,8 @@ namespace DSI\Controller\CLI;
 use DSI\Entity\Project;
 use DSI\Entity\User;
 use DSI\NotFound;
-use DSI\Repository\CountryRepository;
-use DSI\Repository\ProjectRepository;
+use DSI\Repository\CountryRepo;
+use DSI\Repository\ProjectRepo;
 use DSI\Service\ErrorHandler;
 use DSI\UseCase\UpdateProject;
 use DSI\UseCase\UpdateProjectCountryRegion;
@@ -18,7 +18,7 @@ class ImportProjectsController
     /** @var User */
     private $sysAdminUser;
 
-    /** @var ProjectRepository */
+    /** @var ProjectRepo */
     private $projectRepo;
 
     public function exec()
@@ -27,7 +27,7 @@ class ImportProjectsController
         $this->sysAdminUser->setId(1);
         $this->sysAdminUser->setRole('sys-admin');
 
-        $this->projectRepo = new ProjectRepository();
+        $this->projectRepo = new ProjectRepo();
 
         $this->importFrom(__DIR__ . '/../../../../import-projects.csv');
     }
@@ -122,7 +122,7 @@ class ImportProjectsController
 
     private function setRegion(Project $project, $country, $region)
     {
-        $countryRepo = new CountryRepository();
+        $countryRepo = new CountryRepo();
         $countryObj = $countryRepo->getByName($country);
 
         try {

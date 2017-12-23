@@ -7,18 +7,18 @@ class CreateImpactTagTest extends PHPUnit_Framework_TestCase
     /** @var \DSI\UseCase\CreateImpactTag */
     private $createTagCommand;
 
-    /** @var \DSI\Repository\ImpactTagRepository */
+    /** @var \DSI\Repository\ImpactTagRepo */
     private $tagRepo;
 
     public function setUp()
     {
         $this->createTagCommand = new \DSI\UseCase\CreateImpactTag();
-        $this->tagRepo = new \DSI\Repository\ImpactTagRepository();
+        $this->tagRepo = new \DSI\Repository\ImpactTagRepo();
     }
 
     public function tearDown()
     {
-        (new \DSI\Repository\ImpactTagRepository())->clearAll();
+        (new \DSI\Repository\ImpactTagRepo())->clearAll();
     }
 
     /** @test */

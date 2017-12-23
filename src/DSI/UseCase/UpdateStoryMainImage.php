@@ -7,7 +7,7 @@ use DSI\Entity\Image;
 use DSI\Entity\Story;
 use DSI\NotEnoughData;
 use DSI\NotFound;
-use DSI\Repository\StoryRepository;
+use DSI\Repository\StoryRepo;
 use DSI\Service\ErrorHandler;
 
 class UpdateStoryMainImage
@@ -18,7 +18,7 @@ class UpdateStoryMainImage
     /** @var UpdateStoryMainImage_Data */
     private $data;
 
-    /** @var StoryRepository */
+    /** @var StoryRepo */
     private $storyRepository;
 
     /** @var string */
@@ -32,7 +32,7 @@ class UpdateStoryMainImage
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->storyRepository = new StoryRepository();
+        $this->storyRepository = new StoryRepo();
 
         $this->assertAllInfoHaveBeenSent();
 

@@ -8,9 +8,9 @@ use DSI\Entity\CaseStudy;
 use DSI\Entity\Organisation;
 use DSI\Entity\Project;
 use DSI\Entity\User;
-use DSI\Repository\CaseStudyRepository;
-use DSI\Repository\OrganisationRepositoryInAPC;
-use DSI\Repository\ProjectRepositoryInAPC;
+use DSI\Repository\CaseStudyRepo;
+use DSI\Repository\OrganisationRepoInAPC;
+use DSI\Repository\ProjectRepoInAPC;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\JsModules;
@@ -33,7 +33,7 @@ class CaseStudyEditController
         if (!$userCanAddCaseStudy)
             go_to($urlHandler->home());
 
-        $caseStudyRepo = new CaseStudyRepository();
+        $caseStudyRepo = new CaseStudyRepo();
         $caseStudy = $caseStudyRepo->getById($this->caseStudyID);
 
         if (!$this->userCanModifyCaseStudy($caseStudy, $loggedInUser))
@@ -105,13 +105,13 @@ class CaseStudyEditController
                         'id' => $project->getId(),
                         'name' => $project->getName(),
                     ];
-                }, (new ProjectRepositoryInAPC())->getAll()),
+                }, (new ProjectRepoInAPC())->getAll()),
                 'organisations' => array_map(function (Organisation $organisation) {
                     return [
                         'id' => $organisation->getId(),
                         'name' => $organisation->getName(),
                     ];
-                }, (new OrganisationRepositoryInAPC())->getAll()),
+                }, (new OrganisationRepoInAPC())->getAll()),
             ]);
             return;
 

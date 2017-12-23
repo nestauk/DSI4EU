@@ -6,16 +6,16 @@ use DSI\AccessDenied;
 use DSI\Entity\Image;
 use DSI\Entity\User;
 use DSI\Entity\UserLink_Service;
-use DSI\Repository\LanguageRepository;
-use DSI\Repository\OrganisationMemberRepository;
-use DSI\Repository\OrganisationRepositoryInAPC;
-use DSI\Repository\ProjectMemberRepository;
-use DSI\Repository\ProjectRepositoryInAPC;
-use DSI\Repository\SkillRepository;
-use DSI\Repository\UserLanguageRepository;
-use DSI\Repository\UserLinkRepository;
-use DSI\Repository\UserRepository;
-use DSI\Repository\UserSkillRepository;
+use DSI\Repository\LanguageRepo;
+use DSI\Repository\OrganisationMemberRepo;
+use DSI\Repository\OrganisationRepoInAPC;
+use DSI\Repository\ProjectMemberRepo;
+use DSI\Repository\ProjectRepoInAPC;
+use DSI\Repository\SkillRepo;
+use DSI\Repository\UserLanguageRepo;
+use DSI\Repository\UserLinkRepo;
+use DSI\Repository\UserRepo;
+use DSI\Repository\UserSkillRepo;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\URL;
@@ -46,7 +46,7 @@ class ProfileEditController
         if (!$this->userID)
             $this->userID = $loggedInUser->getId();
 
-        $userRepo = new UserRepository();
+        $userRepo = new UserRepo();
         $user = $userRepo->getById($this->userID);
 
         if (!$this->loggedInUserCanManageUser($loggedInUser, $user))
@@ -119,7 +119,7 @@ class ProfileEditController
             }
 
             $links = [];
-            $userLinks = (new UserLinkRepository())->getByUser($user);
+            $userLinks = (new UserLinkRepo())->getByUser($user);
             foreach ($userLinks AS $userLink) {
                 if ($userLink->getLinkService() == UserLink_Service::Facebook)
                     $links['facebook'] = $userLink->getLink();
@@ -154,14 +154,14 @@ class ProfileEditController
             return;
         }
 
-        $languages = (new LanguageRepository())->getAll();
-        $userLanguages = (new UserLanguageRepository())->getLanguageIDsForUser($user->getId());
-        $skills = (new SkillRepository())->getAll();
-        $userSkills = (new UserSkillRepository())->getSkillsNameByUserID($user->getId());
-        $projects = (new ProjectRepositoryInAPC())->getAll();
-        $userProjects = (new ProjectMemberRepository())->getProjectIDsForMember($user->getId());
-        $organisations = (new OrganisationRepositoryInAPC())->getAll();
-        $userOrganisations = (new OrganisationMemberRepository())->getOrganisationIDsForMember($user->getId());
+        $languages = (new LanguageRepo())->getAll();
+        $userLanguages = (new UserLanguageRepo())->getLanguageIDsForUser($user->getId());
+        $skills = (new SkillRepo())->getAll();
+        $userSkills = (new UserSkillRepo())->getSkillsNameByUserID($user->getId());
+        $projects = (new ProjectRepoInAPC())->getAll();
+        $userProjects = (new ProjectMemberRepo())->getProjectIDsForMember($user->getId());
+        $organisations = (new OrganisationRepoInAPC())->getAll();
+        $userOrganisations = (new OrganisationMemberRepo())->getOrganisationIDsForMember($user->getId());
 
         $angularModules['fileUpload'] = true;
         require __DIR__ . '/../../../www/views/profile-edit.php';

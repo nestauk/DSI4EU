@@ -12,18 +12,18 @@ use DSI\Entity\ProjectMember;
 use DSI\Entity\ProjectPost;
 use DSI\Entity\ProjectTag;
 use DSI\Entity\User;
-use DSI\Repository\OrganisationProjectRepository;
-use DSI\Repository\ProjectDsiFocusTagRepository;
-use DSI\Repository\ProjectFollowRepository;
-use DSI\Repository\ProjectImpactHelpTagRepository;
-use DSI\Repository\ProjectImpactTechTagRepository;
-use DSI\Repository\ProjectLinkRepository;
-use DSI\Repository\ProjectMemberRepository;
-use DSI\Repository\ProjectMemberRequestRepository;
-use DSI\Repository\ProjectPostRepository;
-use DSI\Repository\ProjectRepository;
-use DSI\Repository\ProjectTagRepository;
-use DSI\Repository\UserRepository;
+use DSI\Repository\OrganisationProjectRepo;
+use DSI\Repository\ProjectDsiFocusTagRepo;
+use DSI\Repository\ProjectFollowRepo;
+use DSI\Repository\ProjectImpactHelpTagRepo;
+use DSI\Repository\ProjectImpactTechTagRepo;
+use DSI\Repository\ProjectLinkRepo;
+use DSI\Repository\ProjectMemberRepo;
+use DSI\Repository\ProjectMemberRequestRepo;
+use DSI\Repository\ProjectPostRepo;
+use DSI\Repository\ProjectRepo;
+use DSI\Repository\ProjectTagRepo;
+use DSI\Repository\UserRepo;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\JsModules;
@@ -65,7 +65,7 @@ class ProjectController
         $authUser = new Auth();
         $loggedInUser = $authUser->getUserIfLoggedIn();
 
-        $projectRepo = new ProjectRepository();
+        $projectRepo = new ProjectRepo();
         $project = $projectRepo->getById($this->data()->projectID);
 
         $memberRequests = [];
@@ -73,8 +73,8 @@ class ProjectController
         $canUserRequestMembership = false;
         $isOwner = false;
 
-        $projectMembers = (new ProjectMemberRepository())->getByProject($project);
-        $organisationProjectsObj = (new OrganisationProjectRepository())->getByProjectID($project->getId());
+        $projectMembers = (new ProjectMemberRepo())->getByProject($project);
+        $organisationProjectsObj = (new OrganisationProjectRepo())->getByProjectID($project->getId());
         usort($organisationProjectsObj, function (OrganisationProject $a, OrganisationProject $b) {
             return ($a->getOrganisation()->getName() <= $b->getOrganisation()->getName()) ? -1 : 1;
         });
@@ -84,7 +84,7 @@ class ProjectController
                 'id' => $organisation->getId(),
                 'name' => $organisation->getName(),
                 'url' => $urlHandler->organisation($organisation),
-                'projectsCount' => count((new OrganisationProjectRepository())->getByOrganisationID($organisation->getId())),
+                'projectsCount' => count((new OrganisationProjectRepo())->getByOrganisationID($organisation->getId())),
             ];
         }, $organisationProjectsObj);
 
@@ -117,9 +117,9 @@ class ProjectController
             if (isset($_POST['unfollowProject']))
                 return $this->unfollowProject($loggedInUser, $project);
 
-            $userIsMember = (new ProjectMemberRepository())->projectHasMember($project, $loggedInUser);
+            $userIsMember = (new ProjectMemberRepo())->projectHasMember($project, $loggedInUser);
             if (!$userIsMember) {
-                $userSentJoinRequest = (new ProjectMemberRequestRepository())->projectHasRequestFromMember(
+                $userSentJoinRequest = (new ProjectMemberRequestRepo())->projectHasRequestFromMember(
                     $project->getId(),
                     $loggedInUser->getId()
                 );
@@ -132,20 +132,20 @@ class ProjectController
                 $isAdmin = true;
             }
 
-            $member = (new ProjectMemberRepository())->getByProjectAndMember($project, $loggedInUser);
+            $member = (new ProjectMemberRepo())->getByProjectAndMember($project, $loggedInUser);
             if ($member !== null AND $member->isAdmin())
                 $isAdmin = true;
 
             if (isset($isAdmin) AND $isAdmin === true)
-                $memberRequests = (new ProjectMemberRequestRepository())->getMembersForProject($project->getId());
+                $memberRequests = (new ProjectMemberRequestRepo())->getMembersForProject($project->getId());
         }
 
         $userCanEditProject = ($isAdmin OR ($loggedInUser AND $loggedInUser->isCommunityAdmin()));
         $userCanAddPost = $isAdmin;
-        $userIsFollowing = ($loggedInUser AND (new ProjectFollowRepository())->userFollowsProject($loggedInUser, $project));
+        $userIsFollowing = ($loggedInUser AND (new ProjectFollowRepo())->userFollowsProject($loggedInUser, $project));
 
         $links = [];
-        $projectLinks = (new ProjectLinkRepository())->getByProjectID($project->getId());
+        $projectLinks = (new ProjectLinkRepo())->getByProjectID($project->getId());
         foreach ($projectLinks AS $projectLink) {
             if ($projectLink->getLinkService() == ProjectLink_Service::Facebook)
                 $links['facebook'] = $projectLink->getLink();
@@ -202,25 +202,25 @@ class ProjectController
                         'id' => $projectTag->getTagID(),
                         'name' => $projectTag->getTag()->getName(),
                     ];
-                }, (new ProjectTagRepository())->getByProjectID($project->getId())),
+                }, (new ProjectTagRepo())->getByProjectID($project->getId())),
                 'impactTagsA' => array_map(function (ProjectImpactHelpTag $projectTag) {
                     return [
                         'id' => $projectTag->getTagID(),
                         'name' => $projectTag->getTag()->getName(),
                     ];
-                }, (new ProjectImpactHelpTagRepository())->getByProjectID($project->getId())),
+                }, (new ProjectImpactHelpTagRepo())->getByProjectID($project->getId())),
                 'impactTagsB' => array_map(function (ProjectDsiFocusTag $projectTag) {
                     return [
                         'id' => $projectTag->getTagID(),
                         'name' => $projectTag->getTag()->getName(),
                     ];
-                }, (new ProjectDsiFocusTagRepository())->getByProjectID($project->getId())),
+                }, (new ProjectDsiFocusTagRepo())->getByProjectID($project->getId())),
                 'impactTagsC' => array_map(function (ProjectImpactTechTag $projectTag) {
                     return [
                         'id' => $projectTag->getTagID(),
                         'name' => $projectTag->getTag()->getName(),
                     ];
-                }, (new ProjectImpactTechTagRepository())->getByProjectID($project->getId())),
+                }, (new ProjectImpactTechTagRepo())->getByProjectID($project->getId())),
 
                 'members' => $this->getMembers($project->getOwner(), $projectMembers),
                 'memberRequests' => array_map(function (User $user) {
@@ -303,7 +303,7 @@ class ProjectController
                 ],
                 'commentsCount' => $post->getCommentsCount(),
             ];
-        }, (new ProjectPostRepository())->getByProjectID($project->getId()));
+        }, (new ProjectPostRepo())->getByProjectID($project->getId()));
     }
 
     private function setSecureCode()

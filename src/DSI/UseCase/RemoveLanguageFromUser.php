@@ -3,9 +3,9 @@
 namespace DSI\UseCase;
 
 use DSI\Entity\UserLanguage;
-use DSI\Repository\LanguageRepository;
-use DSI\Repository\UserRepository;
-use DSI\Repository\UserLanguageRepository;
+use DSI\Repository\LanguageRepo;
+use DSI\Repository\UserRepo;
+use DSI\Repository\UserLanguageRepo;
 use DSI\Service\ErrorHandler;
 
 class RemoveLanguageFromUser
@@ -13,7 +13,7 @@ class RemoveLanguageFromUser
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var UserLanguageRepository */
+    /** @var UserLanguageRepo */
     private $userLanguageRepo;
 
     /** @var RemoveLanguageFromUser_Data */
@@ -27,10 +27,10 @@ class RemoveLanguageFromUser
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->userLanguageRepo = new UserLanguageRepository();
+        $this->userLanguageRepo = new UserLanguageRepo();
 
-        $languageRepo = new LanguageRepository();
-        $userRepo = new UserRepository();
+        $languageRepo = new LanguageRepo();
+        $userRepo = new UserRepo();
 
         $language = null;
         if ($languageRepo->nameExists($this->data()->language)) {

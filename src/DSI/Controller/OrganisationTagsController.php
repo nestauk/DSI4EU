@@ -4,8 +4,8 @@ namespace DSI\Controller;
 
 use DSI\Entity\NetworkTag;
 use DSI\Entity\TagForOrganisations;
-use DSI\Repository\NetworkTagRepository;
-use DSI\Repository\TagForOrganisationsRepository;
+use DSI\Repository\NetworkTagRepo;
+use DSI\Repository\TagForOrganisationsRepo;
 
 class OrganisationTagsController
 {
@@ -19,13 +19,13 @@ class OrganisationTagsController
                     'id' => $tag->getId(),
                     'name' => $tag->getName(),
                 ];
-            }, (new TagForOrganisationsRepository())->getAll()),
+            }, (new TagForOrganisationsRepo())->getAll()),
             'netwTags' => array_map(function (NetworkTag $tag) {
                 return [
                     'id' => $tag->getId(),
                     'name' => $tag->getName(),
                 ];
-            }, (new NetworkTagRepository())->getAll()),
+            }, (new NetworkTagRepo())->getAll()),
         ]);
     }
 }

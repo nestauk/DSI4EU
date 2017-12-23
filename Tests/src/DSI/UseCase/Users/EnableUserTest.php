@@ -3,14 +3,14 @@
 require_once __DIR__ . '/../../../../config.php';
 
 use DSI\Service\ErrorHandler;
-use DSI\Repository\UserRepository;
+use DSI\Repository\UserRepo;
 
 class EnableUserTest extends PHPUnit_Framework_TestCase
 {
     /** @var \DSI\UseCase\Users\EnableUser */
     private $enableUserCmd;
 
-    /** @var UserRepository */
+    /** @var UserRepo */
     private $userRepo;
 
     /** @var \DSI\Entity\User */
@@ -22,7 +22,7 @@ class EnableUserTest extends PHPUnit_Framework_TestCase
     {
         $this->enableUserCmd = new \DSI\UseCase\Users\EnableUser();
 
-        $this->userRepo = new UserRepository();
+        $this->userRepo = new UserRepo();
 
         $this->superAdmin = new \DSI\Entity\User();
         $this->superAdmin->setRole('sys-admin');

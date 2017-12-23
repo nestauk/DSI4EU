@@ -4,7 +4,7 @@ namespace DSI\Controller;
 
 use DSI\Entity\CaseStudy;
 use DSI\Entity\User;
-use DSI\Repository\CaseStudyRepository;
+use DSI\Repository\CaseStudyRepo;
 use DSI\Service\Auth;
 use DSI\Service\URL;
 
@@ -20,7 +20,7 @@ class CaseStudiesController
         $loggedInUser = $authUser->getUserIfLoggedIn();
         $userCanManageCaseStudies = $this->userCanManageCaseStudies($loggedInUser);
 
-        $caseStudyRepository = new CaseStudyRepository();
+        $caseStudyRepository = new CaseStudyRepo();
         if ($userCanManageCaseStudies)
             $caseStudies = $caseStudyRepository->getAll();
         else

@@ -7,11 +7,11 @@ use DSI\Entity\ProjectEmailInvitation;
 use DSI\Entity\ProjectMember;
 use DSI\Entity\ProjectMemberInvitation;
 use DSI\Entity\User;
-use DSI\Repository\ProjectEmailInvitationRepository;
-use DSI\Repository\ProjectMemberInvitationRepository;
-use DSI\Repository\ProjectMemberRepository;
-use DSI\Repository\ProjectRepository;
-use DSI\Repository\ProjectRepositoryInAPC;
+use DSI\Repository\ProjectEmailInvitationRepo;
+use DSI\Repository\ProjectMemberInvitationRepo;
+use DSI\Repository\ProjectMemberRepo;
+use DSI\Repository\ProjectRepo;
+use DSI\Repository\ProjectRepoInAPC;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\JsModules;
@@ -42,10 +42,10 @@ class ProjectEditMembersController
         $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
         $this->loggedInUser = $loggedInUser = $authUser->getUser();
 
-        $projectRepository = new ProjectRepositoryInAPC();
+        $projectRepository = new ProjectRepoInAPC();
         $project = $projectRepository->getById($this->projectID);
 
-        $members = (new ProjectMemberRepository())->getByProject($project);
+        $members = (new ProjectMemberRepo())->getByProject($project);
         $isOwner = $this->isProjectOwner($project, $loggedInUser);
         $isAdmin = $this->isProjectAdmin($members, $loggedInUser);
 
@@ -318,7 +318,7 @@ class ProjectEditMembersController
      */
     private function projectInvitedMembersJson(Project $project)
     {
-        $invitedMembers = (new ProjectMemberInvitationRepository())->getByProject($project);
+        $invitedMembers = (new ProjectMemberInvitationRepo())->getByProject($project);
         return array_map(function (ProjectMemberInvitation $invitedMember) {
             $user = $invitedMember->getMember();
             return [
@@ -336,7 +336,7 @@ class ProjectEditMembersController
      */
     private function projectInvitedEmailsJson(Project $project)
     {
-        $invitedEmails = (new ProjectEmailInvitationRepository())->getByProject($project);
+        $invitedEmails = (new ProjectEmailInvitationRepo())->getByProject($project);
         return array_map(function (ProjectEmailInvitation $invitedEmail) {
             return [
                 'email' => $invitedEmail->getEmail(),

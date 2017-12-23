@@ -5,11 +5,11 @@ namespace DSI\UseCase;
 use DSI\Entity\OrganisationMember;
 use DSI\Entity\OrganisationMemberRequest;
 use DSI\Entity\User;
-use DSI\Repository\OrganisationMemberRepository;
-use DSI\Repository\OrganisationMemberRequestRepository;
-use DSI\Repository\OrganisationRepository;
-use DSI\Repository\OrganisationRepositoryInAPC;
-use DSI\Repository\UserRepository;
+use DSI\Repository\OrganisationMemberRepo;
+use DSI\Repository\OrganisationMemberRequestRepo;
+use DSI\Repository\OrganisationRepo;
+use DSI\Repository\OrganisationRepoInAPC;
+use DSI\Repository\UserRepo;
 use DSI\Service\ErrorHandler;
 
 class RejectMemberRequestToOrganisation
@@ -17,16 +17,16 @@ class RejectMemberRequestToOrganisation
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var OrganisationMemberRequestRepository */
+    /** @var OrganisationMemberRequestRepo */
     private $organisationMemberRequestRepo;
 
-    /** @var OrganisationMemberRepository */
+    /** @var OrganisationMemberRepo */
     private $organisationMemberRepo;
 
-    /** @var OrganisationRepository */
+    /** @var OrganisationRepo */
     private $organisationRepository;
 
-    /** @var UserRepository */
+    /** @var UserRepo */
     private $userRepository;
 
     /** @var RejectMemberRequestToOrganisation_Data */
@@ -40,10 +40,10 @@ class RejectMemberRequestToOrganisation
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->organisationMemberRequestRepo = new OrganisationMemberRequestRepository();
-        $this->organisationMemberRepo = new OrganisationMemberRepository();
-        $this->organisationRepository = new OrganisationRepositoryInAPC();
-        $this->userRepository = new UserRepository();
+        $this->organisationMemberRequestRepo = new OrganisationMemberRequestRepo();
+        $this->organisationMemberRepo = new OrganisationMemberRepo();
+        $this->organisationRepository = new OrganisationRepoInAPC();
+        $this->userRepository = new UserRepo();
 
         if (!$this->organisationMemberRequestRepo->organisationHasRequestFromMember($this->data()->organisationID, $this->data()->userID)) {
             $this->errorHandler->addTaggedError('member', 'This user has not made a request to join the organisation');

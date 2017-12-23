@@ -7,10 +7,10 @@ use DSI\Entity\Project;
 use DSI\Entity\ProjectMember;
 use DSI\Entity\User;
 use DSI\NotEnoughData;
-use DSI\Repository\ContentUpdateRepository;
-use DSI\Repository\ProjectMemberRepository;
-use DSI\Repository\ProjectRepository;
-use DSI\Repository\ProjectRepositoryInAPC;
+use DSI\Repository\ContentUpdateRepo;
+use DSI\Repository\ProjectMemberRepo;
+use DSI\Repository\ProjectRepo;
+use DSI\Repository\ProjectRepoInAPC;
 use DSI\Service\ErrorHandler;
 
 class CreateProject
@@ -18,7 +18,7 @@ class CreateProject
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var ProjectRepository */
+    /** @var ProjectRepo */
     private $projectRepo;
 
     /** @var Project */
@@ -43,7 +43,7 @@ class CreateProject
             throw $this->errorHandler;
         }
 
-        $this->projectRepo = new ProjectRepositoryInAPC();
+        $this->projectRepo = new ProjectRepoInAPC();
 
         if (!isset($this->data()->name))
             throw new NotEnoughData('project name');
@@ -70,9 +70,9 @@ class CreateProject
         $contentUpdate = new ContentUpdate();
         $contentUpdate->setProject($project);
         $contentUpdate->setUpdated(ContentUpdate::Updated_New);
-        (new ContentUpdateRepository())->insert($contentUpdate);
+        (new ContentUpdateRepo())->insert($contentUpdate);
 
-        $projectMemberRepository = new ProjectMemberRepository();
+        $projectMemberRepository = new ProjectMemberRepo();
         $projectMember = new ProjectMember();
         $projectMember->setMember($this->data()->owner);
         $projectMember->setProject($project);

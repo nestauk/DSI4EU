@@ -10,13 +10,13 @@ class RemoveMemberFromProjectTest extends PHPUnit_Framework_TestCase
     /** @var \DSI\UseCase\RemoveMemberFromProject */
     private $removeMemberFromProjectCommand;
 
-    /** @var \DSI\Repository\ProjectMemberRepository */
+    /** @var \DSI\Repository\ProjectMemberRepo */
     private $projectMemberRepo;
 
-    /** @var \DSI\Repository\UserRepository */
+    /** @var \DSI\Repository\UserRepo */
     private $userRepo;
 
-    /** @var \DSI\Repository\ProjectRepository */
+    /** @var \DSI\Repository\ProjectRepo */
     private $projectRepo;
 
     /** @var \DSI\Entity\User */
@@ -30,9 +30,9 @@ class RemoveMemberFromProjectTest extends PHPUnit_Framework_TestCase
     {
         $this->addMemberToProjectCommand = new \DSI\UseCase\AddMemberToProject();
         $this->removeMemberFromProjectCommand = new \DSI\UseCase\RemoveMemberFromProject();
-        $this->projectMemberRepo = new \DSI\Repository\ProjectMemberRepository();
-        $this->projectRepo = new \DSI\Repository\ProjectRepository();
-        $this->userRepo = new \DSI\Repository\UserRepository();
+        $this->projectMemberRepo = new \DSI\Repository\ProjectMemberRepo();
+        $this->projectRepo = new \DSI\Repository\ProjectRepo();
+        $this->userRepo = new \DSI\Repository\UserRepo();
 
         $this->owner = new \DSI\Entity\User();
         $this->userRepo->insert($this->owner);

@@ -10,20 +10,20 @@ class UpdateProjectCountryRegionTest extends PHPUnit_Framework_TestCase
     private $countryRegion;
     /** @var \DSI\Entity\Country */
     private $country;
-    /** @var \DSI\Repository\CountryRegionRepository */
+    /** @var \DSI\Repository\CountryRegionRepo */
     private $countryRegionRepository;
-    /** @var \DSI\Repository\CountryRepository */
+    /** @var \DSI\Repository\CountryRepo */
     private $countryRepository;
     /** @var \DSI\UseCase\UpdateProjectCountryRegion */
     private $updateProjectCountryRegionCmd;
 
-    /** @var \DSI\Repository\ProjectRepository */
+    /** @var \DSI\Repository\ProjectRepo */
     private $projectRepo;
 
     /** @var \DSI\Entity\Project */
     private $project;
 
-    /** @var \DSI\Repository\UserRepository */
+    /** @var \DSI\Repository\UserRepo */
     private $userRepo;
 
     /** @var \DSI\Entity\User */
@@ -33,9 +33,9 @@ class UpdateProjectCountryRegionTest extends PHPUnit_Framework_TestCase
     {
         try {
             $this->updateProjectCountryRegionCmd = new \DSI\UseCase\UpdateProjectCountryRegion();
-            $this->userRepo = new \DSI\Repository\UserRepository();
-            $this->countryRepository = new \DSI\Repository\CountryRepository();
-            $this->countryRegionRepository = new \DSI\Repository\CountryRegionRepository();
+            $this->userRepo = new \DSI\Repository\UserRepo();
+            $this->countryRepository = new \DSI\Repository\CountryRepo();
+            $this->countryRegionRepository = new \DSI\Repository\CountryRegionRepo();
 
             $this->country = new \DSI\Entity\Country();
             $this->country->setName('test');
@@ -49,7 +49,7 @@ class UpdateProjectCountryRegionTest extends PHPUnit_Framework_TestCase
             $this->user = new \DSI\Entity\User();
             $this->userRepo->insert($this->user);
 
-            $this->projectRepo = new \DSI\Repository\ProjectRepository();
+            $this->projectRepo = new \DSI\Repository\ProjectRepo();
             $this->project = new \DSI\Entity\Project();
             $this->project->setOwner($this->user);
             $this->projectRepo->insert($this->project);

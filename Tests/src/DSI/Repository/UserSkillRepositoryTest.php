@@ -4,16 +4,16 @@ require_once __DIR__ . '/../../../config.php';
 
 class UserSkillRepositoryTest extends PHPUnit_Framework_TestCase
 {
-    /** @var \DSI\Repository\UserSkillRepository */
+    /** @var \DSI\Repository\UserSkillRepo */
     protected $userSkillRepo;
 
-    /** @var \DSI\Repository\UserRepository */
+    /** @var \DSI\Repository\UserRepo */
     protected $userRepo;
 
     /** @var \DSI\Entity\User */
     protected $user_1, $user_2, $user_3;
 
-    /** @var \DSI\Repository\SkillRepository */
+    /** @var \DSI\Repository\SkillRepo */
     protected $skillRepo;
 
     /** @var \DSI\Entity\Skill */
@@ -21,9 +21,9 @@ class UserSkillRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->userSkillRepo = new \DSI\Repository\UserSkillRepository();
-        $this->userRepo = new \DSI\Repository\UserRepository();
-        $this->skillRepo = new \DSI\Repository\SkillRepository();
+        $this->userSkillRepo = new \DSI\Repository\UserSkillRepo();
+        $this->userRepo = new \DSI\Repository\UserRepo();
+        $this->skillRepo = new \DSI\Repository\SkillRepo();
 
         $this->user_1 = $this->createUser(1);
         $this->user_2 = $this->createUser(2);

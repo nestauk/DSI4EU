@@ -7,10 +7,10 @@ class AddLanguageToUserTest extends PHPUnit_Framework_TestCase
     /** @var \DSI\UseCase\AddLanguageToUser */
     private $addLanguageToUserCommand;
 
-    /** @var \DSI\Repository\LanguageRepository */
+    /** @var \DSI\Repository\LanguageRepo */
     private $languageRepo;
 
-    /** @var \DSI\Repository\UserRepository */
+    /** @var \DSI\Repository\UserRepo */
     private $userRepo;
 
     /** @var \DSI\Entity\User */
@@ -19,8 +19,8 @@ class AddLanguageToUserTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->addLanguageToUserCommand = new \DSI\UseCase\AddLanguageToUser();
-        $this->languageRepo = new \DSI\Repository\LanguageRepository();
-        $this->userRepo = new \DSI\Repository\UserRepository();
+        $this->languageRepo = new \DSI\Repository\LanguageRepo();
+        $this->userRepo = new \DSI\Repository\UserRepo();
 
         $this->user = new \DSI\Entity\User();
         $this->userRepo->insert($this->user);
@@ -34,7 +34,7 @@ class AddLanguageToUserTest extends PHPUnit_Framework_TestCase
     {
         $this->languageRepo->clearAll();
         $this->userRepo->clearAll();
-        (new \DSI\Repository\UserLanguageRepository())->clearAll();
+        (new \DSI\Repository\UserLanguageRepo())->clearAll();
     }
 
     /** @test */
@@ -45,7 +45,7 @@ class AddLanguageToUserTest extends PHPUnit_Framework_TestCase
         $this->addLanguageToUserCommand->exec();
 
         $this->assertTrue(
-            (new \DSI\Repository\UserLanguageRepository())->userHasLanguageName(
+            (new \DSI\Repository\UserLanguageRepo())->userHasLanguageName(
                 $this->addLanguageToUserCommand->data()->userID,
                 $this->addLanguageToUserCommand->data()->language
             )

@@ -3,8 +3,8 @@
 namespace DSI\UseCase;
 
 use DSI\Entity\CountryRegion;
-use DSI\Repository\CountryRegionRepository;
-use DSI\Repository\CountryRepository;
+use DSI\Repository\CountryRegionRepo;
+use DSI\Repository\CountryRepo;
 use DSI\Service\ErrorHandler;
 
 class CreateCountryRegion
@@ -12,10 +12,10 @@ class CreateCountryRegion
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var CountryRepository */
+    /** @var CountryRepo */
     private $countryRepo;
 
-    /** @var CountryRegionRepository */
+    /** @var CountryRegionRepo */
     private $countryRegionRepo;
 
     /** @var CountryRegion */
@@ -32,8 +32,8 @@ class CreateCountryRegion
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->countryRegionRepo = new CountryRegionRepository();
-        $this->countryRepo = new CountryRepository();
+        $this->countryRegionRepo = new CountryRegionRepo();
+        $this->countryRepo = new CountryRepo();
 
         if ($this->countryRegionRepo->nameExists($this->data()->countryID, $this->data()->name)) {
             $this->errorHandler->addTaggedError('region', __('The region name already exists'));

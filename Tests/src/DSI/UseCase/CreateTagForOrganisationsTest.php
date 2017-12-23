@@ -7,18 +7,18 @@ class CreateTagForOrganisationsTest extends PHPUnit_Framework_TestCase
     /** @var \DSI\UseCase\CreateTagForOrganisations */
     private $createTagCommand;
 
-    /** @var \DSI\Repository\TagForOrganisationsRepository */
+    /** @var \DSI\Repository\TagForOrganisationsRepo */
     private $tagRepo;
 
     public function setUp()
     {
         $this->createTagCommand = new \DSI\UseCase\CreateTagForOrganisations();
-        $this->tagRepo = new \DSI\Repository\TagForOrganisationsRepository();
+        $this->tagRepo = new \DSI\Repository\TagForOrganisationsRepo();
     }
 
     public function tearDown()
     {
-        (new \DSI\Repository\TagForOrganisationsRepository())->clearAll();
+        (new \DSI\Repository\TagForOrganisationsRepo())->clearAll();
     }
 
     /** @test */

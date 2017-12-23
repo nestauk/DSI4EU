@@ -7,13 +7,13 @@ class AddMemberToOrganisationTest extends PHPUnit_Framework_TestCase
     /** @var \DSI\UseCase\AddMemberToOrganisation */
     private $addMemberToOrganisation;
 
-    /** @var \DSI\Repository\OrganisationRepository */
+    /** @var \DSI\Repository\OrganisationRepo */
     private $organisationRepo;
 
     /** @var \DSI\Entity\Organisation */
     private $organisation;
 
-    /** @var \DSI\Repository\UserRepository */
+    /** @var \DSI\Repository\UserRepo */
     private $userRepo;
 
     /** @var \DSI\Entity\User */
@@ -22,8 +22,8 @@ class AddMemberToOrganisationTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->addMemberToOrganisation = new \DSI\UseCase\AddMemberToOrganisation();
-        $this->organisationRepo = new \DSI\Repository\OrganisationRepository();
-        $this->userRepo = new \DSI\Repository\UserRepository();
+        $this->organisationRepo = new \DSI\Repository\OrganisationRepo();
+        $this->userRepo = new \DSI\Repository\UserRepo();
 
         $this->user_1 = new \DSI\Entity\User();
         $this->userRepo->insert($this->user_1);
@@ -39,7 +39,7 @@ class AddMemberToOrganisationTest extends PHPUnit_Framework_TestCase
     {
         $this->organisationRepo->clearAll();
         $this->userRepo->clearAll();
-        (new \DSI\Repository\OrganisationMemberRepository())->clearAll();
+        (new \DSI\Repository\OrganisationMemberRepo())->clearAll();
     }
 
     /** @test */
@@ -50,7 +50,7 @@ class AddMemberToOrganisationTest extends PHPUnit_Framework_TestCase
         $this->addMemberToOrganisation->exec();
 
         $this->assertTrue(
-            (new \DSI\Repository\OrganisationMemberRepository())->organisationIDHasMemberID(
+            (new \DSI\Repository\OrganisationMemberRepo())->organisationIDHasMemberID(
                 $this->addMemberToOrganisation->data()->organisationID,
                 $this->addMemberToOrganisation->data()->userID
             )

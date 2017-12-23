@@ -5,8 +5,8 @@ namespace DSI\UseCase;
 use DSI\Entity\CountryRegion;
 use DSI\Entity\ReportProfile;
 use DSI\Entity\User;
-use DSI\Repository\ReportProfileRepository;
-use DSI\Repository\UserRepository;
+use DSI\Repository\ReportProfileRepo;
+use DSI\Repository\UserRepo;
 use DSI\Service\ErrorHandler;
 
 class ReviewReportProfile
@@ -17,7 +17,7 @@ class ReviewReportProfile
     /** @var ReportProfile */
     private $report;
 
-    /** @var ReportProfileRepository */
+    /** @var ReportProfileRepo */
     private $reportProfileRepo;
 
     /** @var ReviewReportProfile_Data */
@@ -31,7 +31,7 @@ class ReviewReportProfile
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->reportProfileRepo = new ReportProfileRepository();
+        $this->reportProfileRepo = new ReportProfileRepo();
 
         if(!$this->data()->executor)
             throw new \InvalidArgumentException('Invalid executor');
@@ -40,7 +40,7 @@ class ReviewReportProfile
         if(!$this->data()->report)
             throw new \InvalidArgumentException('Invalid report');
 
-        $this->data()->report->setReviewedByUser((new UserRepository())->getById($this->data()->reviewedByUserId));
+        $this->data()->report->setReviewedByUser((new UserRepo())->getById($this->data()->reviewedByUserId));
         $this->data()->report->setReviewedTime(date('Y-m-d H:i:s'));
         $this->data()->report->setReview($this->data()->review);
 

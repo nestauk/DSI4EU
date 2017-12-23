@@ -4,10 +4,10 @@ namespace DSI\UseCase\Organisations;
 
 use DSI\Entity\Organisation;
 use DSI\Entity\User;
-use DSI\Repository\OrganisationMemberRepository;
-use DSI\Repository\OrganisationRepository;
-use DSI\Repository\OrganisationRepositoryInAPC;
-use DSI\Repository\UserRepository;
+use DSI\Repository\OrganisationMemberRepo;
+use DSI\Repository\OrganisationRepo;
+use DSI\Repository\OrganisationRepoInAPC;
+use DSI\Repository\UserRepo;
 use DSI\Service\ErrorHandler;
 use DSI\UseCase\AddMemberToOrganisation;
 
@@ -16,13 +16,13 @@ class ChangeOwner
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var OrganisationMemberRepository */
+    /** @var OrganisationMemberRepo */
     private $organisationMemberRepo;
 
-    /** @var OrganisationRepository */
+    /** @var OrganisationRepo */
     private $organisationRepository;
 
-    /** @var UserRepository */
+    /** @var UserRepo */
     private $userRepository;
 
     /** @var ChangeOwner_Data */
@@ -33,9 +33,9 @@ class ChangeOwner
         $this->data = new ChangeOwner_Data();
 
         $this->errorHandler = new ErrorHandler();
-        $this->organisationMemberRepo = new OrganisationMemberRepository();
-        $this->organisationRepository = new OrganisationRepositoryInAPC();
-        $this->userRepository = new UserRepository();
+        $this->organisationMemberRepo = new OrganisationMemberRepo();
+        $this->organisationRepository = new OrganisationRepoInAPC();
+        $this->userRepository = new UserRepo();
     }
 
     public function exec()

@@ -3,14 +3,14 @@
 require_once __DIR__ . '/../../../config.php';
 
 use DSI\Service\ErrorHandler;
-use DSI\Repository\UserRepository;
+use DSI\Repository\UserRepo;
 
 class UpdateUserBioTest extends PHPUnit_Framework_TestCase
 {
     /** @var \DSI\UseCase\UpdateUserBio */
     private $updateUserBioCommand;
 
-    /** @var UserRepository */
+    /** @var UserRepo */
     private $userRepo;
 
     /** @var \DSI\Entity\User */
@@ -20,7 +20,7 @@ class UpdateUserBioTest extends PHPUnit_Framework_TestCase
     {
         $this->updateUserBioCommand = new \DSI\UseCase\UpdateUserBio();
 
-        $this->userRepo = new UserRepository();
+        $this->userRepo = new UserRepo();
 
         $this->user = new \DSI\Entity\User();
         $this->userRepo->insert($this->user);

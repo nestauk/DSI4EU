@@ -5,10 +5,10 @@ namespace DSI\UseCase;
 use DSI\Entity\Project;
 use DSI\Entity\ProjectMember;
 use DSI\Entity\User;
-use DSI\Repository\ProjectMemberRepository;
-use DSI\Repository\ProjectRepository;
-use DSI\Repository\ProjectRepositoryInAPC;
-use DSI\Repository\UserRepository;
+use DSI\Repository\ProjectMemberRepo;
+use DSI\Repository\ProjectRepo;
+use DSI\Repository\ProjectRepoInAPC;
+use DSI\Repository\UserRepo;
 use DSI\Service\ErrorHandler;
 
 class RemoveMemberFromProject
@@ -16,7 +16,7 @@ class RemoveMemberFromProject
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var ProjectMemberRepository */
+    /** @var ProjectMemberRepo */
     private $projectMemberRepo;
 
     /** @var Project */
@@ -28,7 +28,7 @@ class RemoveMemberFromProject
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->projectMemberRepo = new ProjectMemberRepository();
+        $this->projectMemberRepo = new ProjectMemberRepo();
 
         if (!$this->projectMemberRepo->projectHasMember($this->project, $this->user)) {
             $this->errorHandler->addTaggedError('member', 'The user is not a member of the project');
@@ -59,7 +59,7 @@ class RemoveMemberFromProject
      */
     public function setProjectId($projectID)
     {
-        $this->project = (new ProjectRepositoryInAPC())->getById($projectID);
+        $this->project = (new ProjectRepoInAPC())->getById($projectID);
     }
 
     /**
@@ -75,6 +75,6 @@ class RemoveMemberFromProject
      */
     public function setUserId($userID)
     {
-        $this->user = (new UserRepository())->getById((int)$userID);
+        $this->user = (new UserRepo())->getById((int)$userID);
     }
 }

@@ -2,21 +2,21 @@
 
 require_once __DIR__ . '/../../../config.php';
 
-use \DSI\Repository\UserRepository;
-use \DSI\Repository\ProjectRepository;
-use \DSI\Repository\ProjectPostRepository;
+use \DSI\Repository\UserRepo;
+use \DSI\Repository\ProjectRepo;
+use \DSI\Repository\ProjectPostRepo;
 use \DSI\Entity\Project;
 use \DSI\Entity\User;
 
 class ProjectPostRepositoryTest extends PHPUnit_Framework_TestCase
 {
-    /** @var ProjectPostRepository */
+    /** @var ProjectPostRepo */
     private $projectPostRepo;
 
-    /** @var ProjectRepository */
+    /** @var ProjectRepo */
     private $projectRepo;
 
-    /** @var UserRepository */
+    /** @var UserRepo */
     private $userRepo;
 
     /** @var Project */
@@ -27,9 +27,9 @@ class ProjectPostRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->projectPostRepo = new ProjectPostRepository();
-        $this->projectRepo = new ProjectRepository();
-        $this->userRepo = new UserRepository();
+        $this->projectPostRepo = new ProjectPostRepo();
+        $this->projectRepo = new ProjectRepo();
+        $this->userRepo = new UserRepo();
 
         $this->user1 = new User();
         $this->user2 = new User();

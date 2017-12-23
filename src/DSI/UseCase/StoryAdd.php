@@ -5,9 +5,9 @@ namespace DSI\UseCase;
 use DSI\Entity\Image;
 use DSI\Entity\Story;
 use DSI\NotEnoughData;
-use DSI\Repository\StoryCategoryRepository;
-use DSI\Repository\StoryRepository;
-use DSI\Repository\UserRepository;
+use DSI\Repository\StoryCategoryRepo;
+use DSI\Repository\StoryRepo;
+use DSI\Repository\UserRepo;
 use DSI\Service\ErrorHandler;
 
 class StoryAdd
@@ -15,7 +15,7 @@ class StoryAdd
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var StoryRepository */
+    /** @var StoryRepo */
     private $storyRepo;
 
     /** @var Story */
@@ -32,7 +32,7 @@ class StoryAdd
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->storyRepo = new StoryRepository();
+        $this->storyRepo = new StoryRepo();
 
         $this->assertDataHasBeenSent();
         $this->assertSentDataIsValid();
@@ -130,7 +130,7 @@ class StoryAdd
      */
     private function setAuthor(Story $story)
     {
-        $author = (new UserRepository())->getById($this->data()->authorID);
+        $author = (new UserRepo())->getById($this->data()->authorID);
         $story->setAuthor($author);
     }
 }

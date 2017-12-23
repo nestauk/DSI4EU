@@ -2,7 +2,7 @@
 
 namespace DSI\Controller;
 
-use DSI\Repository\StoryRepository;
+use DSI\Repository\StoryRepo;
 use DSI\Service\Auth;
 use DSI\Service\URL;
 
@@ -15,7 +15,7 @@ class RssNewsBlogsController
         $authUser = new Auth();
         $loggedInUser = $authUser->getUserIfLoggedIn();
 
-        $stories = (new StoryRepository())->getAllPublished();
+        $stories = (new StoryRepo())->getAllPublished();
 
         header("Content-Type: application/rss+xml");
         require __DIR__ . '/../../../www/views/rss-news-and-blogs.php';

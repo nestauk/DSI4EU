@@ -4,8 +4,8 @@ namespace DSI\UseCase\TerminateAccount;
 
 use DSI\Entity\TerminateAccountToken;
 use DSI\Entity\User;
-use DSI\Repository\TerminateAccountTokenRepository;
-use DSI\Repository\UserRepository;
+use DSI\Repository\TerminateAccountTokenRepo;
+use DSI\Repository\UserRepo;
 use DSI\Service\ErrorHandler;
 
 class CreateToken
@@ -29,7 +29,7 @@ class CreateToken
         $this->token->setToken($this->getRandomString(255));
         $this->token->setUser($this->user);
         $this->token->setExpire(date('Y-m-d H:i:s', time() + 1 * $day));
-        (new TerminateAccountTokenRepository())->insert($this->token);
+        (new TerminateAccountTokenRepo())->insert($this->token);
     }
 
     /**

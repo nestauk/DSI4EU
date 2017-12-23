@@ -4,19 +4,19 @@ namespace DSI\UseCase\Projects;
 
 use DSI\Entity\Project;
 use DSI\Entity\User;
-use DSI\Repository\OrganisationProjectRepository;
-use DSI\Repository\ProjectDsiFocusTagRepository;
-use DSI\Repository\ProjectEmailInvitationRepository;
-use DSI\Repository\ProjectImpactHelpTagRepository;
-use DSI\Repository\ProjectImpactTechTagRepository;
-use DSI\Repository\ProjectLinkRepository;
-use DSI\Repository\ProjectMemberInvitationRepository;
-use DSI\Repository\ProjectMemberRepository;
-use DSI\Repository\ProjectMemberRequestRepository;
-use DSI\Repository\ProjectPostRepository;
-use DSI\Repository\ProjectRepository;
-use DSI\Repository\ProjectRepositoryInAPC;
-use DSI\Repository\ProjectTagRepository;
+use DSI\Repository\OrganisationProjectRepo;
+use DSI\Repository\ProjectDsiFocusTagRepo;
+use DSI\Repository\ProjectEmailInvitationRepo;
+use DSI\Repository\ProjectImpactHelpTagRepo;
+use DSI\Repository\ProjectImpactTechTagRepo;
+use DSI\Repository\ProjectLinkRepo;
+use DSI\Repository\ProjectMemberInvitationRepo;
+use DSI\Repository\ProjectMemberRepo;
+use DSI\Repository\ProjectMemberRequestRepo;
+use DSI\Repository\ProjectPostRepo;
+use DSI\Repository\ProjectRepo;
+use DSI\Repository\ProjectRepoInAPC;
+use DSI\Repository\ProjectTagRepo;
 use DSI\Service\ErrorHandler;
 
 class RemoveProject
@@ -24,7 +24,7 @@ class RemoveProject
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var ProjectRepository */
+    /** @var ProjectRepo */
     private $projectRepository;
 
     /** @var Remove_Data */
@@ -35,7 +35,7 @@ class RemoveProject
         $this->data = new Remove_Data();
 
         $this->errorHandler = new ErrorHandler();
-        $this->projectRepository = new ProjectRepositoryInAPC();
+        $this->projectRepository = new ProjectRepoInAPC();
     }
 
     public function exec()
@@ -107,7 +107,7 @@ class RemoveProject
 
     private function removeProjectEmailInvitations()
     {
-        $projectEmailInvitationRepo = new ProjectEmailInvitationRepository();
+        $projectEmailInvitationRepo = new ProjectEmailInvitationRepo();
         $projectInvitations = $projectEmailInvitationRepo->getByProject($this->data()->project);
         foreach ($projectInvitations AS $invitation) {
             $projectEmailInvitationRepo->remove($invitation);
@@ -116,7 +116,7 @@ class RemoveProject
 
     private function removeProjectInvitations()
     {
-        $projectMemberInvitationRepo = new ProjectMemberInvitationRepository();
+        $projectMemberInvitationRepo = new ProjectMemberInvitationRepo();
         $projectInvitations = $projectMemberInvitationRepo->getByProject($this->data()->project);
         foreach ($projectInvitations AS $invitation) {
             $projectMemberInvitationRepo->remove($invitation);
@@ -125,7 +125,7 @@ class RemoveProject
 
     private function removeProjectRequests()
     {
-        $projectMemberRequestRepo = new ProjectMemberRequestRepository();
+        $projectMemberRequestRepo = new ProjectMemberRequestRepo();
         $projectRequests = $projectMemberRequestRepo->getByProjectID($this->data()->project->getId());
         foreach ($projectRequests AS $request) {
             $projectMemberRequestRepo->remove($request);
@@ -134,7 +134,7 @@ class RemoveProject
 
     private function removeProjectMembers()
     {
-        $projectMemberRepo = new ProjectMemberRepository();
+        $projectMemberRepo = new ProjectMemberRepo();
         $projectMembers = $projectMemberRepo->getByProject($this->data()->project);
         foreach ($projectMembers AS $projectMember) {
             $projectMemberRepo->remove($projectMember);
@@ -143,7 +143,7 @@ class RemoveProject
 
     private function removeProjectPosts()
     {
-        $projectPostRepo = new ProjectPostRepository();
+        $projectPostRepo = new ProjectPostRepo();
         $projectPosts = $projectPostRepo->getByProjectID($this->data()->project->getId());
         foreach ($projectPosts AS $projectPost) {
             $projectPostRepo->remove($projectPost);
@@ -152,7 +152,7 @@ class RemoveProject
 
     private function removeProjectsOrganisations()
     {
-        $orgProjectsRepo = new OrganisationProjectRepository();
+        $orgProjectsRepo = new OrganisationProjectRepo();
         $orgProjects = $orgProjectsRepo->getByProjectID($this->data()->project->getId());
         foreach ($orgProjects AS $orgProject) {
             $orgProjectsRepo->remove($orgProject);
@@ -161,7 +161,7 @@ class RemoveProject
 
     private function removeProjectTags()
     {
-        $projectTagRepo = new ProjectTagRepository();
+        $projectTagRepo = new ProjectTagRepo();
         $projectTags = $projectTagRepo->getByProjectID($this->data()->project->getId());
         foreach ($projectTags AS $projectTag) {
             $projectTagRepo->remove($projectTag);
@@ -170,7 +170,7 @@ class RemoveProject
 
     private function removeProjectTagsA()
     {
-        $projectTagARepo = new ProjectImpactHelpTagRepository();
+        $projectTagARepo = new ProjectImpactHelpTagRepo();
         $projectTags = $projectTagARepo->getByProjectID($this->data()->project->getId());
         foreach ($projectTags AS $projectTag) {
             $projectTagARepo->remove($projectTag);
@@ -179,7 +179,7 @@ class RemoveProject
 
     private function removeProjectImpactTags()
     {
-        $projectDsiTagRepo = new ProjectDsiFocusTagRepository();
+        $projectDsiTagRepo = new ProjectDsiFocusTagRepo();
         $projectTags = $projectDsiTagRepo->getByProjectID($this->data()->project->getId());
         foreach ($projectTags AS $projectTag) {
             $projectDsiTagRepo->remove($projectTag);
@@ -188,7 +188,7 @@ class RemoveProject
 
     private function removeProjectTagsC()
     {
-        $projectTagCRepo = new ProjectImpactTechTagRepository();
+        $projectTagCRepo = new ProjectImpactTechTagRepo();
         $projectTags = $projectTagCRepo->getByProjectID($this->data()->project->getId());
         foreach ($projectTags AS $projectTag) {
             $projectTagCRepo->remove($projectTag);
@@ -197,7 +197,7 @@ class RemoveProject
 
     private function removeProjectLinks()
     {
-        $projectLinkRepo = new ProjectLinkRepository();
+        $projectLinkRepo = new ProjectLinkRepo();
         $projectLinks = $projectLinkRepo->getByProjectID($this->data()->project->getId());
         foreach ($projectLinks AS $projectLink) {
             $projectLinkRepo->remove($projectLink);

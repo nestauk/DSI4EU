@@ -10,16 +10,16 @@ class RemoveTagFromProjectTest extends PHPUnit_Framework_TestCase
     /** @var \DSI\UseCase\RemoveTagFromProject */
     private $removeTagFromProjectCommand;
 
-    /** @var \DSI\Repository\TagForProjectsRepository*/
+    /** @var \DSI\Repository\TagForProjectsRepo*/
     private $tagRepo;
 
-    /** @var \DSI\Repository\UserRepository */
+    /** @var \DSI\Repository\UserRepo */
     private $userRepo;
 
-    /** @var \DSI\Repository\ProjectTagRepository */
+    /** @var \DSI\Repository\ProjectTagRepo */
     private $projectTagRepo;
 
-    /** @var \DSI\Repository\ProjectRepository */
+    /** @var \DSI\Repository\ProjectRepo */
     private $projectRepo;
 
     /** @var \DSI\Entity\Project */
@@ -29,10 +29,10 @@ class RemoveTagFromProjectTest extends PHPUnit_Framework_TestCase
     {
         $this->addTagToProjectCommand = new \DSI\UseCase\AddTagToProject();
         $this->removeTagFromProjectCommand = new \DSI\UseCase\RemoveTagFromProject();
-        $this->projectTagRepo = new \DSI\Repository\ProjectTagRepository();
-        $this->tagRepo = new \DSI\Repository\TagForProjectsRepository();
-        $this->projectRepo = new \DSI\Repository\ProjectRepository();
-        $this->userRepo = new \DSI\Repository\UserRepository();
+        $this->projectTagRepo = new \DSI\Repository\ProjectTagRepo();
+        $this->tagRepo = new \DSI\Repository\TagForProjectsRepo();
+        $this->projectRepo = new \DSI\Repository\ProjectRepo();
+        $this->userRepo = new \DSI\Repository\UserRepo();
 
         $user = new \DSI\Entity\User();
         $this->userRepo->insert($user);

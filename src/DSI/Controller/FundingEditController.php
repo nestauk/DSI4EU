@@ -3,12 +3,12 @@
 namespace DSI\Controller;
 
 use DSI\Entity\User;
-use DSI\Repository\CountryRepository;
-use DSI\Repository\FundingRepository;
-use DSI\Repository\FundingSourceRepository;
-use DSI\Repository\FundingTargetRepository;
-use DSI\Repository\FundingTypeRepository;
-use DSI\Repository\UserRepository;
+use DSI\Repository\CountryRepo;
+use DSI\Repository\FundingRepo;
+use DSI\Repository\FundingSourceRepo;
+use DSI\Repository\FundingTargetRepo;
+use DSI\Repository\FundingTypeRepo;
+use DSI\Repository\UserRepo;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\JsModules;
@@ -33,7 +33,7 @@ class FundingEditController
         if (!($this->userCanManageFunding($loggedInUser)))
             go_to($urlHandler->home());
 
-        $funding = (new FundingRepository())->getById($this->fundingID);
+        $funding = (new FundingRepo())->getById($this->fundingID);
 
         if ($this->format == 'json') {
             if (isset($_POST['save'])) {
@@ -77,10 +77,10 @@ class FundingEditController
             return;
         }
 
-        $fundingTypes = (new FundingTypeRepository())->getAll();
-        $fundingTargets = (new FundingTargetRepository())->getAll();
-        $fundingSources = (new FundingSourceRepository())->getAll();
-        $countries = (new CountryRepository())->getAll();
+        $fundingTypes = (new FundingTypeRepo())->getAll();
+        $fundingTargets = (new FundingTargetRepo())->getAll();
+        $fundingSources = (new FundingSourceRepo())->getAll();
+        $countries = (new CountryRepo())->getAll();
         JsModules::setTinyMCE(true);
         require(__DIR__ . '/../../../www/views/funding-edit.php');
     }

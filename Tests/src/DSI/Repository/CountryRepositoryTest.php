@@ -2,17 +2,17 @@
 
 require_once __DIR__ . '/../../../config.php';
 
-use \DSI\Repository\CountryRepository;
+use \DSI\Repository\CountryRepo;
 use \DSI\Entity\Country;
 
 class CountryRepositoryTest extends PHPUnit_Framework_TestCase
 {
-    /** @var CountryRepository */
+    /** @var CountryRepo */
     protected $countryRepo;
 
     public function setUp()
     {
-        $this->countryRepo = new CountryRepository();
+        $this->countryRepo = new CountryRepo();
     }
 
     public function tearDown()

@@ -10,16 +10,16 @@ class RemoveDsiFocusTagFromProjectTest extends PHPUnit_Framework_TestCase
     /** @var \DSI\UseCase\RemoveDsiFocusTagFromProject */
     private $removeTagFromProjectCommand;
 
-    /** @var \DSI\Repository\DsiFocusTagRepository */
+    /** @var \DSI\Repository\DsiFocusTagRepo */
     private $tagRepo;
 
-    /** @var \DSI\Repository\UserRepository */
+    /** @var \DSI\Repository\UserRepo */
     private $userRepo;
 
-    /** @var \DSI\Repository\ProjectDsiFocusTagRepository */
+    /** @var \DSI\Repository\ProjectDsiFocusTagRepo */
     private $projectTagRepo;
 
-    /** @var \DSI\Repository\ProjectRepository */
+    /** @var \DSI\Repository\ProjectRepo */
     private $projectRepo;
 
     /** @var \DSI\Entity\Project */
@@ -29,10 +29,10 @@ class RemoveDsiFocusTagFromProjectTest extends PHPUnit_Framework_TestCase
     {
         $this->addTagToProjectCommand = new \DSI\UseCase\AddDsiFocusTagToProject();
         $this->removeTagFromProjectCommand = new \DSI\UseCase\RemoveDsiFocusTagFromProject();
-        $this->projectTagRepo = new \DSI\Repository\ProjectDsiFocusTagRepository();
-        $this->tagRepo = new \DSI\Repository\DsiFocusTagRepository();
-        $this->projectRepo = new \DSI\Repository\ProjectRepository();
-        $this->userRepo = new \DSI\Repository\UserRepository();
+        $this->projectTagRepo = new \DSI\Repository\ProjectDsiFocusTagRepo();
+        $this->tagRepo = new \DSI\Repository\DsiFocusTagRepo();
+        $this->projectRepo = new \DSI\Repository\ProjectRepo();
+        $this->userRepo = new \DSI\Repository\UserRepo();
 
         $user = new \DSI\Entity\User();
         $this->userRepo->insert($user);

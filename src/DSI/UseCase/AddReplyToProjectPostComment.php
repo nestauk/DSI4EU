@@ -6,8 +6,8 @@ use DSI\Entity\ProjectPostComment;
 use DSI\Entity\ProjectPostCommentReply;
 use DSI\Entity\User;
 use DSI\NotEnoughData;
-use DSI\Repository\ProjectPostCommentReplyRepository;
-use DSI\Repository\ProjectPostCommentRepository;
+use DSI\Repository\ProjectPostCommentReplyRepo;
+use DSI\Repository\ProjectPostCommentRepo;
 use DSI\Service\ErrorHandler;
 
 class AddReplyToProjectPostComment
@@ -15,7 +15,7 @@ class AddReplyToProjectPostComment
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var ProjectPostCommentReplyRepository */
+    /** @var ProjectPostCommentReplyRepo */
     private $projectPostCommentReplyRepo;
 
     /** @var ProjectPostCommentReply */
@@ -32,7 +32,7 @@ class AddReplyToProjectPostComment
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->projectPostCommentReplyRepo = new ProjectPostCommentReplyRepository();
+        $this->projectPostCommentReplyRepo = new ProjectPostCommentReplyRepo();
 
         $this->checkForUnsentData();
         $this->checkForInvalidData();
@@ -93,7 +93,7 @@ class AddReplyToProjectPostComment
             $comment->getId()
         );
         $comment->setRepliesCount(count($replies));
-        (new ProjectPostCommentRepository())->save($comment);
+        (new ProjectPostCommentRepo())->save($comment);
     }
 }
 

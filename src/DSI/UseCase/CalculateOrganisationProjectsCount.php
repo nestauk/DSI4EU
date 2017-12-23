@@ -2,8 +2,8 @@
 
 namespace DSI\UseCase;
 
-use DSI\Repository\OrganisationProjectRepository;
-use DSI\Repository\OrganisationRepository;
+use DSI\Repository\OrganisationProjectRepo;
+use DSI\Repository\OrganisationRepo;
 use DSI\Service\ErrorHandler;
 
 class CalculateOrganisationProjectsCount
@@ -11,10 +11,10 @@ class CalculateOrganisationProjectsCount
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var OrganisationRepository */
+    /** @var OrganisationRepo */
     private $organisationRepo;
 
-    /** @var OrganisationProjectRepository */
+    /** @var OrganisationProjectRepo */
     private $organisationProjectRepo;
 
     /** @var CalculateOrganisationProjectsCount_Data */
@@ -28,8 +28,8 @@ class CalculateOrganisationProjectsCount
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->organisationRepo = new OrganisationRepository();
-        $this->organisationProjectRepo = new OrganisationProjectRepository();
+        $this->organisationRepo = new OrganisationRepo();
+        $this->organisationProjectRepo = new OrganisationProjectRepo();
 
         if ($this->data()->organisationID <= 0) {
             $this->errorHandler->addTaggedError('organisation', 'Invalid organisation ID');

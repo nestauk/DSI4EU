@@ -3,7 +3,7 @@
 namespace DSI\UseCase;
 
 use DSI\NotEnoughData;
-use DSI\Repository\UserRepository;
+use DSI\Repository\UserRepo;
 use DSI\Service\ErrorHandler;
 
 class UpdateUserPassword
@@ -22,7 +22,7 @@ class UpdateUserPassword
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $userRepo = new UserRepository();
+        $userRepo = new UserRepo();
 
         $this->checkIfAllInfoHaveBeenSubmitted();
 
@@ -58,7 +58,7 @@ class UpdateUserPassword
     /**
      * @param $userRepo
      */
-    private function updateUserPassword(UserRepository $userRepo)
+    private function updateUserPassword(UserRepo $userRepo)
     {
         $user = $userRepo->getById($this->data()->userID);
         $user->setPassword($this->data()->password);

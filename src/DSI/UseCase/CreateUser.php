@@ -3,7 +3,7 @@
 namespace DSI\UseCase;
 
 use DSI\Entity\User;
-use DSI\Repository\UserRepository;
+use DSI\Repository\UserRepo;
 use DSI\Service\ErrorHandler;
 
 class CreateUser
@@ -11,7 +11,7 @@ class CreateUser
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var UserRepository */
+    /** @var UserRepo */
     private $userRepo;
 
     /** @var Register_Data */
@@ -28,7 +28,7 @@ class CreateUser
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->userRepo = new UserRepository();
+        $this->userRepo = new UserRepo();
 
         $this->verifyEmail();
         $this->errorHandler->throwIfNotEmpty();

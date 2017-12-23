@@ -4,14 +4,14 @@ namespace DSI\Service;
 use DSI\Entity\Translation;
 use DSI\NotEnoughData;
 use DSI\NotFound;
-use DSI\Repository\TranslationRepository;
+use DSI\Repository\TranslationRepo;
 
 class Translate
 {
     /** @var Translation[] */
     private static $translations;
 
-    /** @var TranslationRepository */
+    /** @var TranslationRepo */
     private static $translationRepository;
 
     private static $currentLang;
@@ -54,7 +54,7 @@ class Translate
     private static function fetchTranslations()
     {
         if (!isset(self::$translationRepository))
-            self::$translationRepository = new TranslationRepository();
+            self::$translationRepository = new TranslationRepo();
 
         if (!isset(self::$translations)) {
             $translations = self::$translationRepository->getAll();

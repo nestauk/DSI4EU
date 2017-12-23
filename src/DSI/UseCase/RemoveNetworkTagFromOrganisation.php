@@ -4,8 +4,8 @@ namespace DSI\UseCase;
 
 use DSI\Entity\Organisation;
 use DSI\Entity\OrganisationNetworkTag;
-use DSI\Repository\NetworkTagRepository;
-use DSI\Repository\OrganisationNetworkTagRepository;
+use DSI\Repository\NetworkTagRepo;
+use DSI\Repository\OrganisationNetworkTagRepo;
 use DSI\Service\ErrorHandler;
 
 class RemoveNetworkTagFromOrganisation
@@ -13,7 +13,7 @@ class RemoveNetworkTagFromOrganisation
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var OrganisationNetworkTagRepository */
+    /** @var OrganisationNetworkTagRepo */
     private $organisationNetworkTagRepo;
 
     /** @var String */
@@ -25,9 +25,9 @@ class RemoveNetworkTagFromOrganisation
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->organisationNetworkTagRepo = new OrganisationNetworkTagRepository();
+        $this->organisationNetworkTagRepo = new OrganisationNetworkTagRepo();
 
-        $networkTagRepo = new NetworkTagRepository();
+        $networkTagRepo = new NetworkTagRepo();
 
         if ($networkTagRepo->nameExists($this->tag)) {
             $tag = $networkTagRepo->getByName($this->tag);

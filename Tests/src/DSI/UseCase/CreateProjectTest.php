@@ -7,13 +7,13 @@ class CreateProjectTest extends PHPUnit_Framework_TestCase
     /** @var \DSI\UseCase\CreateProject */
     private $createProjectCommand;
 
-    /** @var \DSI\Repository\ProjectMemberRepository */
+    /** @var \DSI\Repository\ProjectMemberRepo */
     private $projectMemberRepo;
 
-    /** @var \DSI\Repository\ProjectRepository */
+    /** @var \DSI\Repository\ProjectRepo */
     private $projectRepo;
 
-    /** @var \DSI\Repository\UserRepository */
+    /** @var \DSI\Repository\UserRepo */
     private $userRepo;
 
     /** @var \DSI\Entity\User */
@@ -22,9 +22,9 @@ class CreateProjectTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->createProjectCommand = new \DSI\UseCase\CreateProject();
-        $this->projectMemberRepo = new \DSI\Repository\ProjectMemberRepository();
-        $this->projectRepo = new \DSI\Repository\ProjectRepository();
-        $this->userRepo = new \DSI\Repository\UserRepository();
+        $this->projectMemberRepo = new \DSI\Repository\ProjectMemberRepo();
+        $this->projectRepo = new \DSI\Repository\ProjectRepo();
+        $this->userRepo = new \DSI\Repository\UserRepo();
 
         $this->user = new \DSI\Entity\User();
         $this->userRepo->insert($this->user);
@@ -110,7 +110,7 @@ class CreateProjectTest extends PHPUnit_Framework_TestCase
         $this->createProjectCommand->exec();
         $project = $this->createProjectCommand->getProject();
 
-        $project = (new \DSI\Repository\ProjectRepository())
+        $project = (new \DSI\Repository\ProjectRepo())
             ->getById($project->getId());
 
         $this->assertTrue($project->isWaitingApproval());

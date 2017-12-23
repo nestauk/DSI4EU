@@ -3,7 +3,7 @@
 namespace DSI\Controller;
 
 use DSI\NotFound;
-use DSI\Repository\TerminateAccountTokenRepository;
+use DSI\Repository\TerminateAccountTokenRepo;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\JsModules;
@@ -20,7 +20,7 @@ class TerminateAccountController
         $loggedInUser = $auth->getUser();
 
         try {
-            $token = (new TerminateAccountTokenRepository())->getByToken($_GET['token']);
+            $token = (new TerminateAccountTokenRepo())->getByToken($_GET['token']);
         } catch (NotFound $e) {
             return $this->showErrorPage();
         }

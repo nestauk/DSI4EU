@@ -4,9 +4,9 @@ namespace DSI\UseCase;
 
 use DSI\Entity\Skill;
 use DSI\Entity\UserSkill;
-use DSI\Repository\SkillRepository;
-use DSI\Repository\UserRepository;
-use DSI\Repository\UserSkillRepository;
+use DSI\Repository\SkillRepo;
+use DSI\Repository\UserRepo;
+use DSI\Repository\UserSkillRepo;
 use DSI\Service\ErrorHandler;
 
 class RemoveSkillFromUser
@@ -14,7 +14,7 @@ class RemoveSkillFromUser
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var UserSkillRepository */
+    /** @var UserSkillRepo */
     private $userSkillRepo;
 
     /** @var RemoveSkillFromUser_Data */
@@ -28,10 +28,10 @@ class RemoveSkillFromUser
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->userSkillRepo = new UserSkillRepository();
+        $this->userSkillRepo = new UserSkillRepo();
 
-        $skillRepo = new SkillRepository();
-        $userRepo = new UserRepository();
+        $skillRepo = new SkillRepo();
+        $userRepo = new UserRepo();
 
         if ($skillRepo->nameExists($this->data()->skill)) {
             $skill = $skillRepo->getByName($this->data()->skill);

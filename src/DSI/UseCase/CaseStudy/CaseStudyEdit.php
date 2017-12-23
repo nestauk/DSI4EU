@@ -7,10 +7,10 @@ use DSI\Entity\CaseStudy;
 use DSI\Entity\CountryRegion;
 use DSI\Entity\Image;
 use DSI\NotFound;
-use DSI\Repository\CaseStudyRepository;
-use DSI\Repository\CountryRegionRepository;
-use DSI\Repository\OrganisationRepositoryInAPC;
-use DSI\Repository\ProjectRepositoryInAPC;
+use DSI\Repository\CaseStudyRepo;
+use DSI\Repository\CountryRegionRepo;
+use DSI\Repository\OrganisationRepoInAPC;
+use DSI\Repository\ProjectRepoInAPC;
 use DSI\Service\ErrorHandler;
 
 class CaseStudyEdit
@@ -18,7 +18,7 @@ class CaseStudyEdit
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var CaseStudyRepository */
+    /** @var CaseStudyRepo */
     private $caseStudyRepo;
 
     /** @var CaseStudy */
@@ -27,7 +27,7 @@ class CaseStudyEdit
     /** @var CaseStudyEdit_Data */
     private $data;
 
-    /** @var CountryRegionRepository */
+    /** @var CountryRegionRepo */
     private $countryRegionRepo;
 
     /** @var CountryRegion */
@@ -37,8 +37,8 @@ class CaseStudyEdit
     {
         $this->data = new CaseStudyEdit_Data();
         $this->errorHandler = new ErrorHandler();
-        $this->caseStudyRepo = new CaseStudyRepository();
-        $this->countryRegionRepo = new CountryRegionRepository();
+        $this->caseStudyRepo = new CaseStudyRepo();
+        $this->countryRegionRepo = new CountryRegionRepo();
     }
 
     public function exec()
@@ -102,11 +102,11 @@ class CaseStudyEdit
         $this->caseStudy->setIsFeaturedOnSlider((bool)$this->data()->isFeaturedOnSlider);
         $this->caseStudy->setPositionOnFirstPage((int)$this->data()->positionOnHomePage);
         if($this->data()->projectID)
-            $this->caseStudy->setProject( (new ProjectRepositoryInAPC())->getById($this->data()->projectID) );
+            $this->caseStudy->setProject( (new ProjectRepoInAPC())->getById($this->data()->projectID) );
         else
             $this->caseStudy->unsetProject();
         if($this->data()->organisationID)
-            $this->caseStudy->setOrganisation( (new OrganisationRepositoryInAPC())->getById($this->data()->organisationID) );
+            $this->caseStudy->setOrganisation( (new OrganisationRepoInAPC())->getById($this->data()->organisationID) );
         else
             $this->caseStudy->unsetOrganisation();
 

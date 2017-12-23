@@ -4,16 +4,16 @@ require_once __DIR__ . '/../../../config.php';
 
 class UserLanguageRepositoryTest extends PHPUnit_Framework_TestCase
 {
-    /** @var \DSI\Repository\UserLanguageRepository */
+    /** @var \DSI\Repository\UserLanguageRepo */
     protected $userLanguageRepo;
 
-    /** @var \DSI\Repository\UserRepository */
+    /** @var \DSI\Repository\UserRepo */
     protected $userRepo;
 
     /** @var \DSI\Entity\User */
     protected $user_1, $user_2, $user_3;
 
-    /** @var \DSI\Repository\LanguageRepository */
+    /** @var \DSI\Repository\LanguageRepo */
     protected $languageRepo;
 
     /** @var \DSI\Entity\Language */
@@ -21,9 +21,9 @@ class UserLanguageRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->userLanguageRepo = new \DSI\Repository\UserLanguageRepository();
-        $this->userRepo = new \DSI\Repository\UserRepository();
-        $this->languageRepo = new \DSI\Repository\LanguageRepository();
+        $this->userLanguageRepo = new \DSI\Repository\UserLanguageRepo();
+        $this->userRepo = new \DSI\Repository\UserRepo();
+        $this->languageRepo = new \DSI\Repository\LanguageRepo();
 
         $this->user_1 = $this->createUser(1);
         $this->user_2 = $this->createUser(2);

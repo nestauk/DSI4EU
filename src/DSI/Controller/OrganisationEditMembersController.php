@@ -6,10 +6,10 @@ use DSI\Entity\Organisation;
 use DSI\Entity\OrganisationMember;
 use DSI\Entity\OrganisationMemberInvitation;
 use DSI\Entity\User;
-use DSI\Repository\OrganisationMemberInvitationRepository;
-use DSI\Repository\OrganisationMemberRepository;
-use DSI\Repository\OrganisationRepository;
-use DSI\Repository\OrganisationRepositoryInAPC;
+use DSI\Repository\OrganisationMemberInvitationRepo;
+use DSI\Repository\OrganisationMemberRepo;
+use DSI\Repository\OrganisationRepo;
+use DSI\Repository\OrganisationRepoInAPC;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\JsModules;
@@ -38,10 +38,10 @@ class OrganisationEditMembersController
         $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
         $this->loggedInUser = $loggedInUser = $authUser->getUser();
 
-        $organisationRepo = new OrganisationRepositoryInAPC();
+        $organisationRepo = new OrganisationRepoInAPC();
         $organisation = $organisationRepo->getById($this->organisationID);
 
-        $members = (new OrganisationMemberRepository())->getByOrganisation($organisation);
+        $members = (new OrganisationMemberRepo())->getByOrganisation($organisation);
         $isOwner = $this->isOrganisationOwner($organisation, $loggedInUser);
         $isAdmin = $this->isOrganisationAdmin($members, $loggedInUser);
 
@@ -144,7 +144,7 @@ class OrganisationEditMembersController
      */
     private function organisationInvitedMembersJson(Organisation $organisation)
     {
-        $invitedMembers = (new OrganisationMemberInvitationRepository())->getByOrganisation($organisation);
+        $invitedMembers = (new OrganisationMemberInvitationRepo())->getByOrganisation($organisation);
         return array_map(function (OrganisationMemberInvitation $invitedMember) {
             $user = $invitedMember->getMember();
             return [

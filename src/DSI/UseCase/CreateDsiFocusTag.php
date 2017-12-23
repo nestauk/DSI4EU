@@ -3,7 +3,7 @@
 namespace DSI\UseCase;
 
 use DSI\Entity\DsiFocusTag;
-use DSI\Repository\DsiFocusTagRepository;
+use DSI\Repository\DsiFocusTagRepo;
 use DSI\Service\ErrorHandler;
 
 class CreateDsiFocusTag
@@ -11,7 +11,7 @@ class CreateDsiFocusTag
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var DsiFocusTagRepository */
+    /** @var DsiFocusTagRepo */
     private $tagRepo;
 
     /** @var DsiFocusTag */
@@ -28,7 +28,7 @@ class CreateDsiFocusTag
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->tagRepo = new DsiFocusTagRepository();
+        $this->tagRepo = new DsiFocusTagRepo();
 
         if($this->tagRepo->nameExists($this->data()->name)){
             $this->errorHandler->addTaggedError('tag', __('Tag name already exists'));

@@ -7,19 +7,19 @@ class CreateSkillTest extends PHPUnit_Framework_TestCase
     /** @var \DSI\UseCase\CreateSkill */
     private $createSkillCommand;
 
-    /** @var \DSI\Repository\SkillRepository */
+    /** @var \DSI\Repository\SkillRepo */
     private $skillRepo;
 
     public function setUp()
     {
         $this->createSkillCommand = new \DSI\UseCase\CreateSkill();
-        $this->skillRepo = new \DSI\Repository\SkillRepository();
+        $this->skillRepo = new \DSI\Repository\SkillRepo();
     }
 
     public function tearDown()
     {
-        (new \DSI\Repository\SkillRepository())->clearAll();
-        (new \DSI\Repository\UserSkillRepository())->clearAll();
+        (new \DSI\Repository\SkillRepo())->clearAll();
+        (new \DSI\Repository\UserSkillRepo())->clearAll();
     }
 
     /** @test */

@@ -5,7 +5,7 @@ namespace DSI\UseCase\Projects;
 use DSI\Entity\Project;
 use DSI\Entity\ProjectFollow;
 use DSI\Entity\User;
-use DSI\Repository\ProjectFollowRepository;
+use DSI\Repository\ProjectFollowRepo;
 use DSI\Service\ErrorHandler;
 
 class FollowProject
@@ -69,7 +69,7 @@ class FollowProject
         $follow = new ProjectFollow();
         $follow->setUser($this->user);
         $follow->setProject($this->project);
-        (new ProjectFollowRepository())->add($follow);
+        (new ProjectFollowRepo())->add($follow);
     }
 
     /**

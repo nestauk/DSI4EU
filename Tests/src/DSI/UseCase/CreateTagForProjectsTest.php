@@ -7,18 +7,18 @@ class CreateTagForProjectsTest extends PHPUnit_Framework_TestCase
     /** @var \DSI\UseCase\CreateTagForProjects */
     private $createTagCommand;
 
-    /** @var \DSI\Repository\TagForProjectsRepository */
+    /** @var \DSI\Repository\TagForProjectsRepo */
     private $tagRepo;
 
     public function setUp()
     {
         $this->createTagCommand = new \DSI\UseCase\CreateTagForProjects();
-        $this->tagRepo = new \DSI\Repository\TagForProjectsRepository();
+        $this->tagRepo = new \DSI\Repository\TagForProjectsRepo();
     }
 
     public function tearDown()
     {
-        (new \DSI\Repository\TagForProjectsRepository())->clearAll();
+        (new \DSI\Repository\TagForProjectsRepo())->clearAll();
     }
 
     /** @test */

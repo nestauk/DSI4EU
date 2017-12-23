@@ -3,7 +3,7 @@
 namespace DSI\UseCase;
 
 use DSI\NotEnoughData;
-use DSI\Repository\UserRepository;
+use DSI\Repository\UserRepo;
 use DSI\Service\ErrorHandler;
 
 class UpdateUserEmailAddress
@@ -14,7 +14,7 @@ class UpdateUserEmailAddress
     /** @var UpdateUserEmailAddress_Data */
     private $data;
 
-    /** @var UserRepository */
+    /** @var UserRepo */
     private $userRepo;
 
     public function __construct()
@@ -25,7 +25,7 @@ class UpdateUserEmailAddress
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->userRepo = new UserRepository();
+        $this->userRepo = new UserRepo();
 
         if (trim($this->data()->email) == '') {
             $this->errorHandler->addTaggedError('email', __('Please type an email address'));

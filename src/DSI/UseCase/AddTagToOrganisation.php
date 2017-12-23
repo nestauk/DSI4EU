@@ -3,10 +3,10 @@
 namespace DSI\UseCase;
 
 use DSI\Entity\OrganisationTag;
-use DSI\Repository\OrganisationRepository;
-use DSI\Repository\OrganisationRepositoryInAPC;
-use DSI\Repository\OrganisationTagRepository;
-use DSI\Repository\TagForOrganisationsRepository;
+use DSI\Repository\OrganisationRepo;
+use DSI\Repository\OrganisationRepoInAPC;
+use DSI\Repository\OrganisationTagRepo;
+use DSI\Repository\TagForOrganisationsRepo;
 use DSI\Service\ErrorHandler;
 
 class AddTagToOrganisation
@@ -14,10 +14,10 @@ class AddTagToOrganisation
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var OrganisationTagRepository */
+    /** @var OrganisationTagRepo */
     private $organisationTagRepository;
 
-    /** @var OrganisationRepository */
+    /** @var OrganisationRepo */
     private $organisationRepository;
 
     /** @var AddTagToOrganisation_Data */
@@ -31,10 +31,10 @@ class AddTagToOrganisation
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->organisationTagRepository = new OrganisationTagRepository();
-        $this->organisationRepository = new OrganisationRepositoryInAPC();
+        $this->organisationTagRepository = new OrganisationTagRepo();
+        $this->organisationRepository = new OrganisationRepoInAPC();
 
-        $tagRepo = new TagForOrganisationsRepository();
+        $tagRepo = new TagForOrganisationsRepo();
 
         if ($tagRepo->nameExists($this->data()->tag)) {
             $tag = $tagRepo->getByName($this->data()->tag);

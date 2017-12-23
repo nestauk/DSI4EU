@@ -3,11 +3,11 @@
 namespace DSI\UseCase;
 
 use DSI\Entity\OrganisationMemberRequest;
-use DSI\Repository\OrganisationMemberRepository;
-use DSI\Repository\OrganisationMemberRequestRepository;
-use DSI\Repository\OrganisationRepository;
-use DSI\Repository\OrganisationRepositoryInAPC;
-use DSI\Repository\UserRepository;
+use DSI\Repository\OrganisationMemberRepo;
+use DSI\Repository\OrganisationMemberRequestRepo;
+use DSI\Repository\OrganisationRepo;
+use DSI\Repository\OrganisationRepoInAPC;
+use DSI\Repository\UserRepo;
 use DSI\Service\ErrorHandler;
 
 class AddMemberRequestToOrganisation
@@ -15,13 +15,13 @@ class AddMemberRequestToOrganisation
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var OrganisationMemberRequestRepository */
+    /** @var OrganisationMemberRequestRepo */
     private $organisationMemberRequestRepo;
 
-    /** @var OrganisationRepository */
+    /** @var OrganisationRepo */
     private $organisationRepository;
 
-    /** @var UserRepository */
+    /** @var UserRepo */
     private $userRepository;
 
     /** @var AddMemberRequestToOrganisation_Data */
@@ -35,9 +35,9 @@ class AddMemberRequestToOrganisation
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->organisationMemberRequestRepo = new OrganisationMemberRequestRepository();
-        $this->organisationRepository = new OrganisationRepositoryInAPC();
-        $this->userRepository = new UserRepository();
+        $this->organisationMemberRequestRepo = new OrganisationMemberRequestRepo();
+        $this->organisationRepository = new OrganisationRepoInAPC();
+        $this->userRepository = new UserRepo();
 
         $this->checkIfOrganisationAlreadyHasTheMember();
         $this->checkIfThereIsAlreadyARequestFromTheUser();
@@ -54,7 +54,7 @@ class AddMemberRequestToOrganisation
 
     private function checkIfOrganisationAlreadyHasTheMember()
     {
-        if ((new OrganisationMemberRepository())->organisationIDHasMemberID($this->data()->organisationID, $this->data()->userID)) {
+        if ((new OrganisationMemberRepo())->organisationIDHasMemberID($this->data()->organisationID, $this->data()->userID)) {
             $this->errorHandler->addTaggedError('member', __('This user is already a member of the organisation'));
             $this->errorHandler->throwIfNotEmpty();
         }

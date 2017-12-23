@@ -5,9 +5,9 @@ namespace DSI\UseCase;
 use DSI\Entity\Organisation;
 use DSI\Entity\OrganisationMember;
 use DSI\Entity\User;
-use DSI\Repository\OrganisationMemberRepository;
-use DSI\Repository\OrganisationRepository;
-use DSI\Repository\UserRepository;
+use DSI\Repository\OrganisationMemberRepo;
+use DSI\Repository\OrganisationRepo;
+use DSI\Repository\UserRepo;
 use DSI\Service\ErrorHandler;
 
 class SetAdminStatusToOrganisationMember
@@ -15,7 +15,7 @@ class SetAdminStatusToOrganisationMember
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var OrganisationMemberRepository */
+    /** @var OrganisationMemberRepo */
     private $organisationMemberRepo;
 
     /** @var User */
@@ -31,7 +31,7 @@ class SetAdminStatusToOrganisationMember
     public function __construct()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->organisationMemberRepo = new OrganisationMemberRepository();
+        $this->organisationMemberRepo = new OrganisationMemberRepo();
     }
 
     public function exec()
@@ -53,7 +53,7 @@ class SetAdminStatusToOrganisationMember
         if ($this->organisation->getOwnerID() == $this->executor->getId())
             return true;
 
-        $member = (new OrganisationMemberRepository())->getByMemberIdAndOrganisationId(
+        $member = (new OrganisationMemberRepo())->getByMemberIdAndOrganisationId(
             $this->executor->getId(),
             $this->organisation->getId()
         );
@@ -117,7 +117,7 @@ class SetAdminStatusToOrganisationMember
      */
     public function setMemberID(int $memberID)
     {
-        $this->member = (new UserRepository())->getById($memberID);
+        $this->member = (new UserRepo())->getById($memberID);
     }
 
     /**

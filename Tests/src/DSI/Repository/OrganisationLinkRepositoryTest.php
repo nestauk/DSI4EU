@@ -4,10 +4,10 @@ require_once __DIR__ . '/../../../config.php';
 
 class OrganisationLinkRepositoryTest extends PHPUnit_Framework_TestCase
 {
-    /** @var \DSI\Repository\OrganisationLinkRepository */
+    /** @var \DSI\Repository\OrganisationLinkRepo */
     private $organisationLinkRep;
 
-    /** @var \DSI\Repository\OrganisationRepository */
+    /** @var \DSI\Repository\OrganisationRepo */
     private $organisationRepo;
 
     /** @var \DSI\Entity\Organisation */
@@ -16,7 +16,7 @@ class OrganisationLinkRepositoryTest extends PHPUnit_Framework_TestCase
     /** @var string */
     private $link_1, $link_2, $link_3;
 
-    /** @var  \DSI\Repository\UserRepository */
+    /** @var  \DSI\Repository\UserRepo */
     private $userRepo;
 
     /** @var \DSI\Entity\User */
@@ -24,9 +24,9 @@ class OrganisationLinkRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->organisationLinkRep = new \DSI\Repository\OrganisationLinkRepository();
-        $this->organisationRepo = new \DSI\Repository\OrganisationRepository();
-        $this->userRepo = new \DSI\Repository\UserRepository();
+        $this->organisationLinkRep = new \DSI\Repository\OrganisationLinkRepo();
+        $this->organisationRepo = new \DSI\Repository\OrganisationRepo();
+        $this->userRepo = new \DSI\Repository\UserRepo();
 
         $this->user = new \DSI\Entity\User();
         $this->userRepo->insert($this->user);

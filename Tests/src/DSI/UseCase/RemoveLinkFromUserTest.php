@@ -10,7 +10,7 @@ class RemoveLinkFromUserTest extends PHPUnit_Framework_TestCase
     /** @var \DSI\UseCase\RemoveLinkFromUser */
     private $removeLinkFromUserCommand;
 
-    /** @var \DSI\Repository\UserRepository */
+    /** @var \DSI\Repository\UserRepo */
     private $userRepo;
 
     /** @var \DSI\Entity\User */
@@ -20,7 +20,7 @@ class RemoveLinkFromUserTest extends PHPUnit_Framework_TestCase
     {
         $this->addLinkToUserCommand = new \DSI\UseCase\AddLinkToUser();
         $this->removeLinkFromUserCommand = new \DSI\UseCase\RemoveLinkFromUser();
-        $this->userRepo = new \DSI\Repository\UserRepository();
+        $this->userRepo = new \DSI\Repository\UserRepo();
 
         $this->user = new \DSI\Entity\User();
         $this->userRepo->insert($this->user);
@@ -29,7 +29,7 @@ class RemoveLinkFromUserTest extends PHPUnit_Framework_TestCase
     public function tearDown()
     {
         $this->userRepo->clearAll();
-        (new \DSI\Repository\UserLinkRepository())->clearAll();
+        (new \DSI\Repository\UserLinkRepo())->clearAll();
     }
 
     /** @test */
@@ -44,7 +44,7 @@ class RemoveLinkFromUserTest extends PHPUnit_Framework_TestCase
         $this->removeLinkFromUserCommand->exec();
 
         $this->assertFalse(
-            (new \DSI\Repository\UserLinkRepository())->userHasLink(
+            (new \DSI\Repository\UserLinkRepo())->userHasLink(
                 $this->removeLinkFromUserCommand->data()->userID,
                 $this->removeLinkFromUserCommand->data()->link
             )

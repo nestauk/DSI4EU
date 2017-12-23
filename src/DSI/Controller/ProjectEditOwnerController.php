@@ -2,9 +2,9 @@
 
 namespace DSI\Controller;
 
-use DSI\Repository\ProjectRepository;
-use DSI\Repository\ProjectRepositoryInAPC;
-use DSI\Repository\UserRepository;
+use DSI\Repository\ProjectRepo;
+use DSI\Repository\ProjectRepoInAPC;
+use DSI\Repository\UserRepo;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\URL;
@@ -22,7 +22,7 @@ class ProjectEditOwnerController
         $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
         $loggedInUser = $authUser->getUser();
 
-        $projectRepository = new ProjectRepositoryInAPC();
+        $projectRepository = new ProjectRepoInAPC();
         $project = $projectRepository->getById($this->projectID);
         $owner = $project->getOwner();
 
@@ -38,7 +38,7 @@ class ProjectEditOwnerController
             try {
                 $exec = new ChangeOwner();
                 $exec->data()->executor = $loggedInUser;
-                $exec->data()->member = (new UserRepository())->getById($_POST['newOwnerID']);
+                $exec->data()->member = (new UserRepo())->getById($_POST['newOwnerID']);
                 $exec->data()->project = $project;
                 $exec->exec();
 
@@ -56,7 +56,7 @@ class ProjectEditOwnerController
         }
 
         $pageTitle = $project->getName();
-        $users = (new UserRepository())->getAll();
+        $users = (new UserRepo())->getAll();
         require __DIR__ . '/../../../www/views/project-editOwner.php';
     }
 }

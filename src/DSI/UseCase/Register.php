@@ -4,9 +4,9 @@ namespace DSI\UseCase;
 
 use DSI\Entity\ProjectMember;
 use DSI\Entity\User;
-use DSI\Repository\ProjectEmailInvitationRepository;
-use DSI\Repository\ProjectMemberRepository;
-use DSI\Repository\UserRepository;
+use DSI\Repository\ProjectEmailInvitationRepo;
+use DSI\Repository\ProjectMemberRepo;
+use DSI\Repository\UserRepo;
 use DSI\Service\ErrorHandler;
 
 class Register
@@ -14,7 +14,7 @@ class Register
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var UserRepository */
+    /** @var UserRepo */
     private $userRepo;
 
     /** @var Register_Data */
@@ -32,7 +32,7 @@ class Register
     {
         $this->errorHandler = new ErrorHandler();
         if (!$this->userRepo)
-            $this->userRepo = new UserRepository();
+            $this->userRepo = new UserRepo();
 
         $this->verifyCaptcha();
         $this->verifyEmail();
@@ -60,7 +60,7 @@ class Register
         return $this->data;
     }
 
-    public function setUserRepo(UserRepository $userRepo)
+    public function setUserRepo(UserRepo $userRepo)
     {
         $this->userRepo = $userRepo;
     }
@@ -117,7 +117,7 @@ class Register
 
     private function checkProjectInvitations()
     {
-        $projectEmailInvitationRepo = new ProjectEmailInvitationRepository();
+        $projectEmailInvitationRepo = new ProjectEmailInvitationRepo();
         $projectInvitations = $projectEmailInvitationRepo->getByEmail(
             $this->data()->email
         );
@@ -126,7 +126,7 @@ class Register
             $projectMember = new ProjectMember();
             $projectMember->setMember($this->user);
             $projectMember->setProject($projectInvitation->getProject());
-            (new ProjectMemberRepository())->insert($projectMember);
+            (new ProjectMemberRepo())->insert($projectMember);
 
             $projectEmailInvitationRepo->remove($projectInvitation);
         }

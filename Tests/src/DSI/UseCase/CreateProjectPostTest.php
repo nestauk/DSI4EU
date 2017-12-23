@@ -7,13 +7,13 @@ class CreateProjectPostTest extends PHPUnit_Framework_TestCase
     /** @var \DSI\UseCase\CreateProjectPost */
     private $createPostCmd;
 
-    /** @var \DSI\Repository\ProjectPostRepository */
+    /** @var \DSI\Repository\ProjectPostRepo */
     private $projectPostRepo;
 
-    /** @var \DSI\Repository\ProjectRepository */
+    /** @var \DSI\Repository\ProjectRepo */
     private $projectRepo;
 
-    /** @var \DSI\Repository\UserRepository */
+    /** @var \DSI\Repository\UserRepo */
     private $userRepo;
 
     /** @var \DSI\Entity\Project */
@@ -25,9 +25,9 @@ class CreateProjectPostTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->createPostCmd = new \DSI\UseCase\CreateProjectPost();
-        $this->projectPostRepo = new \DSI\Repository\ProjectPostRepository();
-        $this->projectRepo = new \DSI\Repository\ProjectRepository();
-        $this->userRepo = new \DSI\Repository\UserRepository();
+        $this->projectPostRepo = new \DSI\Repository\ProjectPostRepo();
+        $this->projectRepo = new \DSI\Repository\ProjectRepo();
+        $this->userRepo = new \DSI\Repository\UserRepo();
 
         $this->owner = new \DSI\Entity\User();
         $this->userRepo->insert($this->owner);
@@ -48,7 +48,7 @@ class CreateProjectPostTest extends PHPUnit_Framework_TestCase
         $this->projectPostRepo->clearAll();
         $this->projectRepo->clearAll();
         $this->userRepo->clearAll();
-        (new \DSI\Repository\ProjectMemberRepository())->clearAll();
+        (new \DSI\Repository\ProjectMemberRepo())->clearAll();
     }
 
     /** @test */

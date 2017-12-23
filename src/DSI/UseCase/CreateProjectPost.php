@@ -6,8 +6,8 @@ use DSI\Entity\Project;
 use DSI\Entity\ProjectPost;
 use DSI\Entity\User;
 use DSI\NotEnoughData;
-use DSI\Repository\ProjectMemberRepository;
-use DSI\Repository\ProjectPostRepository;
+use DSI\Repository\ProjectMemberRepo;
+use DSI\Repository\ProjectPostRepo;
 use DSI\Service\ErrorHandler;
 
 class CreateProjectPost
@@ -15,7 +15,7 @@ class CreateProjectPost
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var ProjectPostRepository */
+    /** @var ProjectPostRepo */
     private $projectPostRepo;
 
     /** @var ProjectPost */
@@ -32,7 +32,7 @@ class CreateProjectPost
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->projectPostRepo = new ProjectPostRepository();
+        $this->projectPostRepo = new ProjectPostRepo();
 
         $this->checkForUnsentData();
         $this->checkForInvalidData();
@@ -95,7 +95,7 @@ class CreateProjectPost
         if ($this->data()->project->getOwnerID() == $this->data()->executor->getId())
             return true;
 
-        $member = (new ProjectMemberRepository())->getByProjectAndMember(
+        $member = (new ProjectMemberRepo())->getByProjectAndMember(
             $this->data()->project,
             $this->data()->executor
         );

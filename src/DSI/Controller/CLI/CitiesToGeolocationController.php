@@ -4,7 +4,7 @@ namespace DSI\Controller\CLI;
 
 set_time_limit(0);
 
-use DSI\Repository\CountryRegionRepository;
+use DSI\Repository\CountryRegionRepo;
 use DSI\Service\ErrorHandler;
 use DSI\UseCase\GetGeolocationForRegion;
 
@@ -12,7 +12,7 @@ class CitiesToGeolocationController
 {
     public function exec()
     {
-        $countryRegionRepository = new CountryRegionRepository();
+        $countryRegionRepository = new CountryRegionRepo();
         $regions = $countryRegionRepository->getAll();
         foreach ($regions AS $region) {
             if (!$region->getLatitude() OR !$region->getLongitude()) {

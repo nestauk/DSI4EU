@@ -16,16 +16,16 @@ use DSI\Entity\ProjectDsiFocusTag;
 use DSI\Entity\ProjectImpactTechTag;
 use DSI\Entity\User;
 use DSI\NotFound;
-use DSI\Repository\CountryRegionRepository;
-use DSI\Repository\CountryRepository;
-use DSI\Repository\ImpactTagRepository;
-use DSI\Repository\OrganisationRepository;
-use DSI\Repository\OrganisationSizeRepository;
-use DSI\Repository\OrganisationTypeRepository;
-use DSI\Repository\ProjectImpactHelpTagRepository;
-use DSI\Repository\ProjectDsiFocusTagRepository;
-use DSI\Repository\ProjectImpactTechTagRepository;
-use DSI\Repository\ProjectRepository;
+use DSI\Repository\CountryRegionRepo;
+use DSI\Repository\CountryRepo;
+use DSI\Repository\ImpactTagRepo;
+use DSI\Repository\OrganisationRepo;
+use DSI\Repository\OrganisationSizeRepo;
+use DSI\Repository\OrganisationTypeRepo;
+use DSI\Repository\ProjectImpactHelpTagRepo;
+use DSI\Repository\ProjectDsiFocusTagRepo;
+use DSI\Repository\ProjectImpactTechTagRepo;
+use DSI\Repository\ProjectRepo;
 use DSI\Service\ErrorHandler;
 use DSI\UseCase\AddProjectToOrganisation;
 
@@ -76,7 +76,7 @@ class ImportController
         // ignore region $data[13]
         $this->setCountryRegion($organisation, $data[14], $data[15]);
 
-        (new OrganisationRepository())->insert($organisation);
+        (new OrganisationRepo())->insert($organisation);
     }
 
     /**
@@ -95,7 +95,7 @@ class ImportController
         if ($organisationTypeName == '')
             return;
 
-        $organisationTypeRepo = new OrganisationTypeRepository();
+        $organisationTypeRepo = new OrganisationTypeRepo();
         try {
             $organisationType = $organisationTypeRepo->getByName($organisationTypeName);
         } catch (NotFound $e) {
@@ -113,7 +113,7 @@ class ImportController
         if ($organisationSizeName == '')
             return;
 
-        $organisationSizeRepo = new OrganisationSizeRepository();
+        $organisationSizeRepo = new OrganisationSizeRepo();
         try {
             $organisationSize = $organisationSizeRepo->getByName($organisationSizeName);
         } catch (NotFound $e) {
@@ -131,7 +131,7 @@ class ImportController
         if ($countryName == '')
             return;
 
-        $countryRepository = new CountryRepository();
+        $countryRepository = new CountryRepo();
         try {
             $country = $countryRepository->getByName($countryName);
         } catch (NotFound $e) {
@@ -140,7 +140,7 @@ class ImportController
             $countryRepository->insert($country);
         }
 
-        $countryRegionRepo = new CountryRegionRepository();
+        $countryRegionRepo = new CountryRegionRepo();
 
         try {
             $countryRegion = $countryRegionRepo->getByName($country->getId(), $regionName);
@@ -191,7 +191,7 @@ class ImportController
         $project->setDescription($data[6]);
         // TODO project type $data[2] - use as tag
         // TODO project links $data[3] - link
-        (new ProjectRepository())->insert($project);
+        (new ProjectRepo())->insert($project);
         $this->setAreasOfSociety($data[4], $project);
         // TODO DSI Areas?
         $this->setTechnologyFocus($data[7], $project);
@@ -208,7 +208,7 @@ class ImportController
     {
         $areasOfSociety = explode(',', $areasOfSociety);
         $areasOfSociety = array_map('trim', $areasOfSociety);
-        $impactTagRepository = (new ImpactTagRepository());
+        $impactTagRepository = (new ImpactTagRepo());
 
         foreach ($areasOfSociety AS $areaOfSociety) {
             if ($areaOfSociety == '')
@@ -225,7 +225,7 @@ class ImportController
             $projectTag = new ProjectImpactHelpTag();
             $projectTag->setProject($project);
             $projectTag->setTag($tag);
-            (new ProjectImpactHelpTagRepository())->add($projectTag);
+            (new ProjectImpactHelpTagRepo())->add($projectTag);
         }
     }
 
@@ -233,7 +233,7 @@ class ImportController
     {
         $areasOfTechnologyFocus = explode(',', $areasOfTechnologyFocus);
         $areasOfTechnologyFocus = array_map('trim', $areasOfTechnologyFocus);
-        $impactTagRepository = (new ImpactTagRepository());
+        $impactTagRepository = (new ImpactTagRepo());
 
         foreach ($areasOfTechnologyFocus AS $areaOfTechnologyFocus) {
             if ($areaOfTechnologyFocus == '')
@@ -250,7 +250,7 @@ class ImportController
             $projectTag = new ProjectDsiFocusTag();
             $projectTag->setProject($project);
             $projectTag->setTag($tag);
-            (new ProjectDsiFocusTagRepository())->add($projectTag);
+            (new ProjectDsiFocusTagRepo())->add($projectTag);
         }
     }
 
@@ -258,7 +258,7 @@ class ImportController
     {
         $areasOfTechnologyMethod = explode(',', $areasOfTechnologyMethod);
         $areasOfTechnologyMethod = array_map('trim', $areasOfTechnologyMethod);
-        $impactTagRepository = (new ImpactTagRepository());
+        $impactTagRepository = (new ImpactTagRepo());
 
         foreach ($areasOfTechnologyMethod AS $areaOfTechnologyMethod) {
             if ($areaOfTechnologyMethod == '')
@@ -275,7 +275,7 @@ class ImportController
             $projectTag = new ProjectImpactTechTag();
             $projectTag->setProject($project);
             $projectTag->setTag($tag);
-            (new ProjectImpactTechTagRepository())->add($projectTag);
+            (new ProjectImpactTechTagRepo())->add($projectTag);
         }
     }
 
@@ -307,12 +307,12 @@ class ImportController
     private function importOrgProjectRow($data)
     {
         try {
-            $organisation = (new OrganisationRepository())->getByImportID($data[1]);
+            $organisation = (new OrganisationRepo())->getByImportID($data[1]);
         } catch (NotFound $e) {
             var_dump(['invalid org' => $data[1]]);
         }
         try {
-            $project = (new ProjectRepository())->getByImportID($data[2]);
+            $project = (new ProjectRepo())->getByImportID($data[2]);
         } catch (NotFound $e) {
             var_dump(['invalid proj' => $data[2]]);
         }

@@ -2,17 +2,17 @@
 
 require_once __DIR__ . '/../../../config.php';
 
-use \DSI\Repository\OrganisationTypeRepository;
+use \DSI\Repository\OrganisationTypeRepo;
 use \DSI\Entity\OrganisationType;
 
 class OrganisationTypeRepositoryTest extends PHPUnit_Framework_TestCase
 {
-    /** @var OrganisationTypeRepository */
+    /** @var OrganisationTypeRepo */
     private $organisationTypeRepo;
 
     public function setUp()
     {
-        $this->organisationTypeRepo = new OrganisationTypeRepository();
+        $this->organisationTypeRepo = new OrganisationTypeRepo();
     }
 
     public function tearDown()

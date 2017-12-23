@@ -2,17 +2,17 @@
 
 require_once __DIR__ . '/../../../config.php';
 
-use \DSI\Repository\FundingSourceRepository;
+use \DSI\Repository\FundingSourceRepo;
 use \DSI\Entity\FundingSource;
 
 class FundingSourceRepositoryTest extends PHPUnit_Framework_TestCase
 {
-    /** @var FundingSourceRepository */
+    /** @var FundingSourceRepo */
     private $fundingSourceRepository;
 
     public function setUp()
     {
-        $this->fundingSourceRepository = new FundingSourceRepository();
+        $this->fundingSourceRepository = new FundingSourceRepo();
     }
 
     public function tearDown()

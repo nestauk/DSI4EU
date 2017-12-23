@@ -3,10 +3,10 @@
 namespace DSI\Controller;
 
 use DSI\Entity\Organisation;
-use DSI\Repository\CountryRegionRepository;
-use DSI\Repository\OrganisationNetworkTagRepository;
-use DSI\Repository\OrganisationRepositoryInAPC;
-use DSI\Repository\OrganisationTagRepository;
+use DSI\Repository\CountryRegionRepo;
+use DSI\Repository\OrganisationNetworkTagRepo;
+use DSI\Repository\OrganisationRepoInAPC;
+use DSI\Repository\OrganisationTagRepo;
 use DSI\Service\Auth;
 use DSI\Service\URL;
 
@@ -14,10 +14,10 @@ class OrganisationsController
 {
     public $responseFormat = 'html';
 
-    /** @var OrganisationTagRepository */
+    /** @var OrganisationTagRepo */
     private $organisationTagRepo;
 
-    /** @var OrganisationNetworkTagRepository */
+    /** @var OrganisationNetworkTagRepo */
     private $organisationNetworkTagRepo;
 
     public function exec()
@@ -26,16 +26,16 @@ class OrganisationsController
         $authUser = new Auth();
         $loggedInUser = $authUser->getUserIfLoggedIn();
 
-        $this->organisationTagRepo = new OrganisationTagRepository();
-        $this->organisationNetworkTagRepo = new OrganisationNetworkTagRepository();
+        $this->organisationTagRepo = new OrganisationTagRepo();
+        $this->organisationNetworkTagRepo = new OrganisationNetworkTagRepo();
 
         if ($this->responseFormat == 'json') {
             // (new CountryRepository())->getAll();
-            (new CountryRegionRepository())->getAll();
+            (new CountryRegionRepo())->getAll();
             // (new OrganisationTypeRepository())->getAll();
             // (new OrganisationSizeRepository())->getAll();
 
-            $organisationRepositoryInAPC = new OrganisationRepositoryInAPC();
+            $organisationRepositoryInAPC = new OrganisationRepoInAPC();
             echo json_encode(array_map(function (Organisation $organisation) use ($urlHandler) {
                 return [
                     'id' => $organisation->getId(),

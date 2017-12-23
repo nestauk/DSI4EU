@@ -7,17 +7,17 @@ use DSI\Entity\NetworkTag;
 use DSI\Entity\TagForOrganisations;
 use DSI\Entity\TagForProjects;
 use DSI\Entity\User;
-use DSI\Repository\ImpactTagRepository;
-use DSI\Repository\NetworkTagRepository;
-use DSI\Repository\OrganisationNetworkTagRepository;
-use DSI\Repository\OrganisationTagRepository;
-use DSI\Repository\ProjectDsiFocusTagRepository;
-use DSI\Repository\ProjectImpactHelpTagRepository;
-use DSI\Repository\ProjectImpactTechTagRepository;
-use DSI\Repository\ProjectNetworkTagRepository;
-use DSI\Repository\ProjectTagRepository;
-use DSI\Repository\TagForOrganisationsRepository;
-use DSI\Repository\TagForProjectsRepository;
+use DSI\Repository\ImpactTagRepo;
+use DSI\Repository\NetworkTagRepo;
+use DSI\Repository\OrganisationNetworkTagRepo;
+use DSI\Repository\OrganisationTagRepo;
+use DSI\Repository\ProjectDsiFocusTagRepo;
+use DSI\Repository\ProjectImpactHelpTagRepo;
+use DSI\Repository\ProjectImpactTechTagRepo;
+use DSI\Repository\ProjectNetworkTagRepo;
+use DSI\Repository\ProjectTagRepo;
+use DSI\Repository\TagForOrganisationsRepo;
+use DSI\Repository\TagForProjectsRepo;
 use DSI\Service\Auth;
 use DSI\Service\URL;
 
@@ -73,7 +73,7 @@ class ManageTagsController
                 'id' => $tag->getId(),
                 'name' => $tag->getName(),
             ];
-        }, (new NetworkTagRepository())->getAll());
+        }, (new NetworkTagRepo())->getAll());
     }
 
     /**
@@ -86,7 +86,7 @@ class ManageTagsController
                 'id' => $tag->getId(),
                 'name' => $tag->getName(),
             ];
-        }, (new TagForOrganisationsRepository())->getAll());
+        }, (new TagForOrganisationsRepo())->getAll());
     }
 
     /**
@@ -99,7 +99,7 @@ class ManageTagsController
                 'id' => $tag->getId(),
                 'name' => $tag->getName(),
             ];
-        }, (new TagForProjectsRepository())->getAll());
+        }, (new TagForProjectsRepo())->getAll());
     }
 
     /**
@@ -112,7 +112,7 @@ class ManageTagsController
                 'id' => $tag->getId(),
                 'name' => $tag->getName(),
             ];
-        }, (new ImpactTagRepository())->getAll());
+        }, (new ImpactTagRepo())->getAll());
     }
 
     /**
@@ -130,7 +130,7 @@ class ManageTagsController
     private function removeOrganisationNetworkTags($tagID)
     {
         try {
-            $organisationNetworkTagRepository = new OrganisationNetworkTagRepository();
+            $organisationNetworkTagRepository = new OrganisationNetworkTagRepo();
             $organisationTags = $organisationNetworkTagRepository->getByTagID($tagID);
             foreach ($organisationTags AS $organisationTag) {
 
@@ -146,7 +146,7 @@ class ManageTagsController
     private function removeProjectNetworkTags($tagID)
     {
         try {
-            $projectNetworkTagRepository = new ProjectNetworkTagRepository();
+            $projectNetworkTagRepository = new ProjectNetworkTagRepo();
             $projectTags = $projectNetworkTagRepository->getByTagID($tagID);
             foreach ($projectTags AS $projectTag) {
                 $projectNetworkTagRepository->remove($projectTag);
@@ -160,7 +160,7 @@ class ManageTagsController
      */
     private function removeNetworkTag($tagID)
     {
-        $networkTagRepository = new NetworkTagRepository();
+        $networkTagRepository = new NetworkTagRepo();
         $tag = $networkTagRepository->getById($tagID);
         $networkTagRepository->remove($tag);
     }
@@ -236,7 +236,7 @@ class ManageTagsController
      */
     private function removeOrganisationTags($tagID)
     {
-        $organisationTagRepository = new OrganisationTagRepository();
+        $organisationTagRepository = new OrganisationTagRepo();
         $organisationTags = $organisationTagRepository->getByTagID($tagID);
         foreach ($organisationTags AS $organisationTag) {
             $organisationTagRepository->remove($organisationTag);
@@ -248,7 +248,7 @@ class ManageTagsController
      */
     private function removeTagForOrganisation($tagID)
     {
-        $tagForOrganisationsRepository = new TagForOrganisationsRepository;
+        $tagForOrganisationsRepository = new TagForOrganisationsRepo;
         $tag = $tagForOrganisationsRepository->getById($tagID);
         $tagForOrganisationsRepository->remove($tag);
     }
@@ -258,7 +258,7 @@ class ManageTagsController
      */
     private function removeProjectTags($tagID)
     {
-        $projectTagRepository = new ProjectTagRepository();
+        $projectTagRepository = new ProjectTagRepo();
         $projectTags = $projectTagRepository->getByTagID($tagID);
         foreach ($projectTags AS $projectTag) {
             $projectTagRepository->remove($projectTag);
@@ -270,7 +270,7 @@ class ManageTagsController
      */
     private function removeTagForProject($tagID)
     {
-        $tagForProjectsRepository = new TagForProjectsRepository();
+        $tagForProjectsRepository = new TagForProjectsRepo();
         $tag = $tagForProjectsRepository->getById($tagID);
         $tagForProjectsRepository->remove($tag);
     }
@@ -280,7 +280,7 @@ class ManageTagsController
      */
     private function removeProjectImpactTechTags($tagID)
     {
-        $projectImpactTechTagRepository = new ProjectImpactTechTagRepository();
+        $projectImpactTechTagRepository = new ProjectImpactTechTagRepo();
         $projectImpactTechTags = $projectImpactTechTagRepository->getByTagID($tagID);
         foreach ($projectImpactTechTags AS $projectImpactTechTag) {
             $projectImpactTechTagRepository->remove($projectImpactTechTag);
@@ -292,7 +292,7 @@ class ManageTagsController
      */
     private function removeProjectImpactHelpTags($tagID)
     {
-        $projectImpactHelpTagRepository = new ProjectImpactHelpTagRepository();
+        $projectImpactHelpTagRepository = new ProjectImpactHelpTagRepo();
         $projectImpactHelpTags = $projectImpactHelpTagRepository->getByTagID($tagID);
         foreach ($projectImpactHelpTags AS $projectImpactHelpTag) {
             $projectImpactHelpTagRepository->remove($projectImpactHelpTag);
@@ -304,7 +304,7 @@ class ManageTagsController
      */
     private function removeImpactTag($tagID)
     {
-        $impactTagRepository = new ImpactTagRepository();
+        $impactTagRepository = new ImpactTagRepo();
         $impactTag = $impactTagRepository->getById($tagID);
         $impactTagRepository->remove($impactTag);
     }

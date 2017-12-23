@@ -3,10 +3,10 @@
 namespace DSI\Controller\CLI;
 
 use DSI\NotFound;
-use DSI\Repository\OrganisationRepository;
-use DSI\Repository\ProjectImpactHelpTagRepository;
-use DSI\Repository\ProjectRepository;
-use DSI\Repository\ProjectRepositoryInAPC;
+use DSI\Repository\OrganisationRepo;
+use DSI\Repository\ProjectImpactHelpTagRepo;
+use DSI\Repository\ProjectRepo;
+use DSI\Repository\ProjectRepoInAPC;
 use DSI\UseCase\AddImpactHelpTagToProject;
 use DSI\UseCase\CalculateOrganisationPartnersCount;
 use DSI\UseCase\RemoveImpactHelpTagFromProject;
@@ -53,13 +53,13 @@ class UpdateProjectTagsController
                 $areasOfImpactLowerCase = array_map('strtolower', $areasOfImpact);
 
                 try {
-                    $project = (new ProjectRepositoryInAPC())->getById($projectID);
+                    $project = (new ProjectRepoInAPC())->getById($projectID);
                 } catch (NotFound $e) {
                     echo "project id {$projectID} not found" . PHP_EOL;
                     continue;
                 }
 
-                $projectTags = (new ProjectImpactHelpTagRepository())->getTagNamesByProject($project);
+                $projectTags = (new ProjectImpactHelpTagRepo())->getTagNamesByProject($project);
                 $projectTagsLowerCase = array_map('strtolower', $projectTags);
 
                 foreach ($projectTags AS $oldTagName) {

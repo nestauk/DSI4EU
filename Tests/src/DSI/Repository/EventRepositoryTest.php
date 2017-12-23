@@ -2,38 +2,38 @@
 
 require_once __DIR__ . '/../../../config.php';
 
-use \DSI\Repository\EventRepository;
-use \DSI\Repository\CountryRepository;
+use \DSI\Repository\EventRepo;
+use \DSI\Repository\CountryRepo;
 use \DSI\Entity\Event;
 use \DSI\Entity\Country;
 
 class EventRepositoryTest extends PHPUnit_Framework_TestCase
 {
-    /** @var \DSI\Repository\CountryRegionRepository */
+    /** @var \DSI\Repository\CountryRegionRepo */
     private $countryRegionRepository;
 
     /** @var \DSI\Entity\CountryRegion */
     private $region;
 
-    /** @var CountryRepository */
+    /** @var CountryRepo */
     private $countryRepository;
 
     /** @var Country */
     private $country;
 
-    /** @var EventRepository */
+    /** @var EventRepo */
     private $eventRepository;
 
     public function setUp()
     {
-        $this->eventRepository = new EventRepository();
+        $this->eventRepository = new EventRepo();
 
-        $this->countryRepository = new CountryRepository();
+        $this->countryRepository = new CountryRepo();
         $this->country = new Country();
         $this->country->setName('Country Name');
         $this->countryRepository->insert($this->country);
 
-        $this->countryRegionRepository = new \DSI\Repository\CountryRegionRepository();
+        $this->countryRegionRepository = new \DSI\Repository\CountryRegionRepo();
         $this->region = new \DSI\Entity\CountryRegion();
         $this->region->setName('Region Name');
         $this->region->setCountry($this->country);

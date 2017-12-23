@@ -7,10 +7,10 @@ set_time_limit(0);
 use DSI\Entity\Organisation;
 use DSI\Entity\User;
 use DSI\NotFound;
-use DSI\Repository\CountryRepository;
-use DSI\Repository\OrganisationRepository;
-use DSI\Repository\OrganisationSizeRepository;
-use DSI\Repository\OrganisationTypeRepository;
+use DSI\Repository\CountryRepo;
+use DSI\Repository\OrganisationRepo;
+use DSI\Repository\OrganisationSizeRepo;
+use DSI\Repository\OrganisationTypeRepo;
 use DSI\Service\ErrorHandler;
 use DSI\UseCase\UpdateOrganisation;
 use DSI\UseCase\UpdateOrganisationCountryRegion;
@@ -20,7 +20,7 @@ class ImportOrganisationsController
     /** @var User */
     private $sysAdminUser;
 
-    /** @var  OrganisationRepository */
+    /** @var  OrganisationRepo */
     private $organisationRepo;
 
     public function exec()
@@ -29,7 +29,7 @@ class ImportOrganisationsController
         $this->sysAdminUser->setId(1);
         $this->sysAdminUser->setRole('sys-admin');
 
-        $this->organisationRepo = new OrganisationRepository();
+        $this->organisationRepo = new OrganisationRepo();
 
         $file = __DIR__ . '/../../../../import-organisations.csv';
         if (!file_exists($file)) {
@@ -133,7 +133,7 @@ class ImportOrganisationsController
 
     private function setRegion(Organisation $organisation, $country, $region)
     {
-        $countryRepo = new CountryRepository();
+        $countryRepo = new CountryRepo();
         $countryObj = $countryRepo->getByName($country);
 
         $exec = new UpdateOrganisationCountryRegion();
@@ -160,7 +160,7 @@ class ImportOrganisationsController
     private function setType(Organisation $organisation, $type)
     {
         if ($type != '') {
-            $typeRepo = new OrganisationTypeRepository();
+            $typeRepo = new OrganisationTypeRepo();
             $type = $typeRepo->getByName($this->getTypeName($type));
             $organisation->setType($type);
         }
@@ -180,7 +180,7 @@ class ImportOrganisationsController
             if ($size == 'Over 1000')
                 $size = 'over-1000 people';
 
-            $sizeRepo = new OrganisationSizeRepository();
+            $sizeRepo = new OrganisationSizeRepo();
             $size = $sizeRepo->getByName($size);
             $organisation->setSize($size);
         }

@@ -8,10 +8,10 @@ use DSI\Entity\Organisation;
 use DSI\Entity\Project;
 use DSI\Entity\User;
 use DSI\NotFound;
-use DSI\Repository\OrganisationProjectRepository;
-use DSI\Repository\OrganisationRepository;
-use DSI\Repository\ProjectRepository;
-use DSI\Repository\UserRepository;
+use DSI\Repository\OrganisationProjectRepo;
+use DSI\Repository\OrganisationRepo;
+use DSI\Repository\ProjectRepo;
+use DSI\Repository\UserRepo;
 use DSI\UseCase\AddProjectToOrganisation;
 use DSI\UseCase\SetAdminStatusToOrganisationMember;
 use DSI\UseCase\SetAdminStatusToProjectMember;
@@ -72,21 +72,21 @@ class ImportUserProjectOrganisationLinkController
         */
 
         try {
-            $user = (new UserRepository())->getByEmail($email);
+            $user = (new UserRepo())->getByEmail($email);
         } catch(NotFound $e){
             $user = new User();
             $user->setEmail($email);
-            (new UserRepository())->insert($user);
+            (new UserRepo())->insert($user);
         }
 
         try{
-            $organisation = (new OrganisationRepository())->getByImportID($organisationUID);
+            $organisation = (new OrganisationRepo())->getByImportID($organisationUID);
         } catch (NotFound $e){
             return;
         }
 
         try{
-            $project = (new ProjectRepository())->getByImportID($projectUID);
+            $project = (new ProjectRepo())->getByImportID($projectUID);
         } catch (NotFound $e){
             return;
         }
@@ -129,7 +129,7 @@ class ImportUserProjectOrganisationLinkController
 
     private function organisationMustHaveProject(Organisation $organisation, Project $project)
     {
-        if (!(new OrganisationProjectRepository())->organisationHasProject(
+        if (!(new OrganisationProjectRepo())->organisationHasProject(
             $organisation->getId(),
             $project->getId()
         )

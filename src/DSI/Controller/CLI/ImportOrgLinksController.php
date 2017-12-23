@@ -7,18 +7,18 @@ set_time_limit(0);
 use DSI\Entity\Organisation;
 use DSI\Entity\User;
 use DSI\NotFound;
-use DSI\Repository\OrganisationLinkRepository;
-use DSI\Repository\OrganisationRepository;
+use DSI\Repository\OrganisationLinkRepo;
+use DSI\Repository\OrganisationRepo;
 use DSI\UseCase\UpdateOrganisation;
 
 class ImportOrgLinksController
 {
-    /** @var  OrganisationRepository */
+    /** @var  OrganisationRepo */
     private $orgRepo;
 
     public function exec()
     {
-        $this->orgRepo = new OrganisationRepository();
+        $this->orgRepo = new OrganisationRepo();
         $this->importOrganisationsFrom(__DIR__ . '/../../../import/orgs.csv');
     }
 
@@ -50,7 +50,7 @@ class ImportOrgLinksController
     {
         try{
             $organisation = $this->orgRepo->getByImportID($data[0]);
-            $organisationLinks = (new OrganisationLinkRepository())->getLinksByOrganisationID(
+            $organisationLinks = (new OrganisationLinkRepo())->getLinksByOrganisationID(
                 $organisation->getId()
             );
 

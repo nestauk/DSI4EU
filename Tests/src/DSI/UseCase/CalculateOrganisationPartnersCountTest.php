@@ -10,25 +10,25 @@ class CalculateOrganisationPartnersCountTest extends PHPUnit_Framework_TestCase
     /** @var \DSI\Entity\User */
     private $user;
 
-    /** @var \DSI\Repository\UserRepository */
+    /** @var \DSI\Repository\UserRepo */
     private $userRepo;
 
-    /** @var \DSI\Repository\OrganisationProjectRepository */
+    /** @var \DSI\Repository\OrganisationProjectRepo */
     private $organisationProjectRepo;
 
-    /** @var \DSI\Repository\OrganisationRepository */
+    /** @var \DSI\Repository\OrganisationRepo */
     private $organisationRepo;
 
-    /** @var \DSI\Repository\ProjectRepository */
+    /** @var \DSI\Repository\ProjectRepo */
     private $projectRepo;
 
     public function setUp()
     {
         $this->calculateOrgPartnersCntCmd = new \DSI\UseCase\CalculateOrganisationPartnersCount();
-        $this->organisationProjectRepo = new \DSI\Repository\OrganisationProjectRepository();
-        $this->organisationRepo = new \DSI\Repository\OrganisationRepository();
-        $this->projectRepo = new \DSI\Repository\ProjectRepository();
-        $this->userRepo = new \DSI\Repository\UserRepository();
+        $this->organisationProjectRepo = new \DSI\Repository\OrganisationProjectRepo();
+        $this->organisationRepo = new \DSI\Repository\OrganisationRepo();
+        $this->projectRepo = new \DSI\Repository\ProjectRepo();
+        $this->userRepo = new \DSI\Repository\UserRepo();
 
         $this->user = new \DSI\Entity\User();
         $this->userRepo->insert($this->user);

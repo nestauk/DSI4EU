@@ -2,10 +2,10 @@
 
 require_once __DIR__ . '/../../../config.php';
 
-use \DSI\Repository\UserRepository;
-use \DSI\Repository\OrganisationRepositoryInAPC;
-use \DSI\Repository\CountryRegionRepository;
-use \DSI\Repository\CountryRepository;
+use \DSI\Repository\UserRepo;
+use \DSI\Repository\OrganisationRepoInAPC;
+use \DSI\Repository\CountryRegionRepo;
+use \DSI\Repository\CountryRepo;
 use \DSI\Entity\Organisation;
 use \DSI\Entity\User;
 use \DSI\Entity\CountryRegion;
@@ -13,22 +13,22 @@ use \DSI\Entity\Country;
 
 class OrganisationRepositoryInAPCTest extends PHPUnit_Framework_TestCase
 {
-    /** @var OrganisationRepositoryInAPC */
+    /** @var OrganisationRepoInAPC */
     private $organisationRepositoryInAPC;
 
-    /** @var \DSI\Repository\OrganisationTypeRepository */
+    /** @var \DSI\Repository\OrganisationTypeRepo */
     private $organisationTypeRepo;
 
-    /** @var \DSI\Repository\OrganisationSizeRepository */
+    /** @var \DSI\Repository\OrganisationSizeRepo */
     private $organisationSizeRepo;
 
-    /** @var UserRepository */
+    /** @var UserRepo */
     private $userRepo;
 
-    /** @var CountryRegionRepository */
+    /** @var CountryRegionRepo */
     private $countryRegionRepo;
 
-    /** @var CountryRepository */
+    /** @var CountryRepo */
     private $countryRepo;
 
     /** @var Country */
@@ -48,12 +48,12 @@ class OrganisationRepositoryInAPCTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->organisationRepositoryInAPC = new OrganisationRepositoryInAPC();
-        $this->organisationTypeRepo = new \DSI\Repository\OrganisationTypeRepository();
-        $this->organisationSizeRepo = new \DSI\Repository\OrganisationSizeRepository();
-        $this->userRepo = new UserRepository();
-        $this->countryRegionRepo = new CountryRegionRepository();
-        $this->countryRepo = new CountryRepository();
+        $this->organisationRepositoryInAPC = new OrganisationRepoInAPC();
+        $this->organisationTypeRepo = new \DSI\Repository\OrganisationTypeRepo();
+        $this->organisationSizeRepo = new \DSI\Repository\OrganisationSizeRepo();
+        $this->userRepo = new UserRepo();
+        $this->countryRegionRepo = new CountryRegionRepo();
+        $this->countryRepo = new CountryRepo();
 
         $this->user1 = new User();
         $this->user2 = new User();
@@ -187,8 +187,8 @@ class OrganisationRepositoryInAPCTest extends PHPUnit_Framework_TestCase
     /** @test */
     public function settingKey_canGetKey()
     {
-        OrganisationRepositoryInAPC::setApcKey($key = 'new-key');
-        $this->assertEquals($key, OrganisationRepositoryInAPC::getApcKey());
+        OrganisationRepoInAPC::setApcKey($key = 'new-key');
+        $this->assertEquals($key, OrganisationRepoInAPC::getApcKey());
     }
 
     /** @test getAll */

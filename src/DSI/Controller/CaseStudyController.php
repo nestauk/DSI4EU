@@ -2,7 +2,7 @@
 
 namespace DSI\Controller;
 
-use DSI\Repository\CaseStudyRepository;
+use DSI\Repository\CaseStudyRepo;
 use DSI\Service\Auth;
 use DSI\Service\URL;
 
@@ -19,7 +19,7 @@ class CaseStudyController
 
         $userCanAddCaseStudy = (bool)($loggedInUser AND ($loggedInUser->isCommunityAdmin() OR $loggedInUser->isEditorialAdmin()));
 
-        $caseStudyRepo = new CaseStudyRepository();
+        $caseStudyRepo = new CaseStudyRepo();
         $caseStudy = $caseStudyRepo->getById($this->caseStudyID);
 
         $caseStudies = $caseStudyRepo->getAll();

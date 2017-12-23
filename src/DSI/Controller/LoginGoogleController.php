@@ -8,7 +8,7 @@
 
 namespace DSI\Controller;
 
-use DSI\Repository\UserRepository;
+use DSI\Repository\UserRepo;
 use DSI\Service\Auth;
 use DSI\Service\GoogleLogin;
 use DSI\Service\URL;
@@ -46,7 +46,7 @@ class LoginGoogleController
             try {
                 /** @var \League\OAuth2\Client\Provider\GoogleUser $user */
                 $user = $googleLoginService->getProvider()->getResourceOwner($token);
-                $userRepo = new UserRepository();
+                $userRepo = new UserRepo();
                 if ($userRepo->googleUIDExists($user->getId())) {
                     $googleLogin = new \DSI\UseCase\GoogleLogin();
                     $googleLogin->data()->googleUID = $user->getId();

@@ -4,19 +4,19 @@ require_once __DIR__ . '/../../../config.php';
 
 class OrganisationNetworkTagRepositoryTest extends PHPUnit_Framework_TestCase
 {
-    /** @var \DSI\Repository\OrganisationNetworkTagRepository */
+    /** @var \DSI\Repository\OrganisationNetworkTagRepo */
     protected $organisationNetworkTagRepo;
 
-    /** @var \DSI\Repository\OrganisationRepository */
+    /** @var \DSI\Repository\OrganisationRepo */
     protected $organisationsRepo;
 
-    /** @var \DSI\Repository\UserRepository */
+    /** @var \DSI\Repository\UserRepo */
     protected $usersRepo;
 
     /** @var \DSI\Entity\Organisation */
     protected $organisation_1, $organisation_2, $organisation_3;
 
-    /** @var \DSI\Repository\NetworkTagRepository */
+    /** @var \DSI\Repository\NetworkTagRepo */
     protected $networkTagRepo;
 
     /** @var \DSI\Entity\NetworkTag */
@@ -24,10 +24,10 @@ class OrganisationNetworkTagRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->organisationNetworkTagRepo = new \DSI\Repository\OrganisationNetworkTagRepository();
-        $this->organisationsRepo = new \DSI\Repository\OrganisationRepository();
-        $this->networkTagRepo = new \DSI\Repository\NetworkTagRepository();
-        $this->usersRepo = new \DSI\Repository\UserRepository();
+        $this->organisationNetworkTagRepo = new \DSI\Repository\OrganisationNetworkTagRepo();
+        $this->organisationsRepo = new \DSI\Repository\OrganisationRepo();
+        $this->networkTagRepo = new \DSI\Repository\NetworkTagRepo();
+        $this->usersRepo = new \DSI\Repository\UserRepo();
 
         $this->organisation_1 = $this->createOrganisation(1);
         $this->organisation_2 = $this->createOrganisation(2);

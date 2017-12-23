@@ -5,11 +5,11 @@ namespace DSI\Controller;
 use DSI\Entity\Country;
 use DSI\Entity\Funding;
 use DSI\Entity\FundingSource;
-use DSI\Repository\CountryRepository;
-use DSI\Repository\FundingRepository;
-use DSI\Repository\FundingSourceRepository;
-use DSI\Repository\FundingTargetRepository;
-use DSI\Repository\FundingTypeRepository;
+use DSI\Repository\CountryRepo;
+use DSI\Repository\FundingRepo;
+use DSI\Repository\FundingSourceRepo;
+use DSI\Repository\FundingTargetRepo;
+use DSI\Repository\FundingTypeRepo;
 use DSI\Service\Auth;
 use DSI\Service\URL;
 
@@ -27,7 +27,7 @@ class FundingController
         $loggedInUser = $authUser->getUserIfLoggedIn();
 
         if ($this->format == 'json') {
-            $fundings = (new FundingRepository())->getFutureOnes();
+            $fundings = (new FundingRepo())->getFutureOnes();
 
             echo json_encode([
                 'sources' => $this->jsonSources(),
@@ -38,8 +38,8 @@ class FundingController
             ]);
         } else {
             $pageTitle = 'Funding Opportunities';
-            $fundingTypes = (new FundingTypeRepository())->getAll();
-            $fundingTargets = (new FundingTargetRepository())->getAll();
+            $fundingTypes = (new FundingTypeRepo())->getAll();
+            $fundingTargets = (new FundingTargetRepo())->getAll();
             $userCanAddFunding = (bool)($loggedInUser AND ($loggedInUser->isCommunityAdmin() OR $loggedInUser->isEditorialAdmin()));
             require __DIR__ . '/../../../www/views/funding.php';
         }
@@ -50,7 +50,7 @@ class FundingController
      */
     private function jsonSources()
     {
-        $sources = (new FundingSourceRepository())->getAll();
+        $sources = (new FundingSourceRepo())->getAll();
 
         $fundingSources = array_map(function (FundingSource $fundingSource) {
             return [
@@ -157,7 +157,7 @@ class FundingController
             $countryIDs[] = $funding->getCountryID();
         }
 
-        $countries = (new CountryRepository())->getByIds($countryIDs);
+        $countries = (new CountryRepo())->getByIds($countryIDs);
         $countries = array_map(function (Country $country) {
             return [
                 'id' => $country->getId(),

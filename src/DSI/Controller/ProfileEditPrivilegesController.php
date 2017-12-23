@@ -3,7 +3,7 @@
 namespace DSI\Controller;
 
 use DSI\AccessDenied;
-use DSI\Repository\UserRepository;
+use DSI\Repository\UserRepo;
 use DSI\Service\Auth;
 use DSI\Service\URL;
 
@@ -27,7 +27,7 @@ class ProfileEditPrivilegesController
         $loggedInUser = $authUser->getUser();
         $sessionKey = 'secureCode-profileEditPrivilege';
 
-        $userRepo = new UserRepository();
+        $userRepo = new UserRepo();
         $user = $userRepo->getById($this->userID);
 
         if (!$loggedInUser->isSysAdmin())

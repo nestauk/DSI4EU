@@ -2,13 +2,13 @@
 
 namespace DSI\UseCase;
 
-use DSI\Repository\CacheMailRepository;
+use DSI\Repository\CacheMailRepo;
 
 class SendCachedEmails
 {
     public function exec()
     {
-        $cacheMailRepository = new CacheMailRepository();
+        $cacheMailRepository = new CacheMailRepo();
         $cachedEmails = $cacheMailRepository->getAll();
         foreach ($cachedEmails AS $email) {
             $email->getContent()->send();

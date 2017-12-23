@@ -11,7 +11,7 @@ namespace DSI\UseCase;
 
 use DSI\Entity\User;
 use DSI\NotFound;
-use DSI\Repository\UserRepository;
+use DSI\Repository\UserRepo;
 use DSI\Service\ErrorHandler;
 
 class GoogleLogin
@@ -19,7 +19,7 @@ class GoogleLogin
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var UserRepository */
+    /** @var UserRepo */
     private $userRepo;
 
     /** @var GoogleLogin_Data */
@@ -37,7 +37,7 @@ class GoogleLogin
     {
         $this->errorHandler = new ErrorHandler();
         if (!$this->userRepo)
-            $this->userRepo = new UserRepository();
+            $this->userRepo = new UserRepo();
 
         $this->verifyGoogleUID();
         $this->errorHandler->throwIfNotEmpty();

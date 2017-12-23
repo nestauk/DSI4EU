@@ -2,8 +2,8 @@
 
 namespace DSI\Controller;
 
-use DSI\Repository\OrganisationRepository;
-use DSI\Repository\OrganisationRepositoryInAPC;
+use DSI\Repository\OrganisationRepo;
+use DSI\Repository\OrganisationRepoInAPC;
 use DSI\Service\Auth;
 use DSI\Service\URL;
 
@@ -15,7 +15,7 @@ class ListOrganisationsController
         $authUser = new Auth();
         $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
 
-        $organisationRepositoryInAPC = new OrganisationRepositoryInAPC();
+        $organisationRepositoryInAPC = new OrganisationRepoInAPC();
         $organisations = [];
         foreach ($organisationRepositoryInAPC->getAll() AS $organisation) {
             $organisations[] = [

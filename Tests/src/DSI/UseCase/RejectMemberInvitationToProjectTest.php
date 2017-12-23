@@ -7,19 +7,19 @@ class RejectMemberInvitationToProjectTest extends PHPUnit_Framework_TestCase
     /** @var \DSI\UseCase\AddMemberInvitationToProject */
     private $addMemberInvitationToProject;
 
-    /** @var \DSI\Repository\ProjectMemberInvitationRepository */
+    /** @var \DSI\Repository\ProjectMemberInvitationRepo */
     private $projectMemberInvitationRepo;
 
-    /** @var \DSI\Repository\ProjectMemberRepository */
+    /** @var \DSI\Repository\ProjectMemberRepo */
     private $projectMemberRepo;
 
-    /** @var \DSI\Repository\ProjectRepository */
+    /** @var \DSI\Repository\ProjectRepo */
     private $projectRepo;
 
     /** @var \DSI\Entity\Project */
     private $project;
 
-    /** @var \DSI\Repository\UserRepository */
+    /** @var \DSI\Repository\UserRepo */
     private $userRepo;
 
     /** @var \DSI\Entity\User */
@@ -28,10 +28,10 @@ class RejectMemberInvitationToProjectTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->projectMemberInvitationRepo = new \DSI\Repository\ProjectMemberInvitationRepository();
-        $this->projectMemberRepo = new \DSI\Repository\ProjectMemberRepository();
-        $this->projectRepo = new \DSI\Repository\ProjectRepository();
-        $this->userRepo = new \DSI\Repository\UserRepository();
+        $this->projectMemberInvitationRepo = new \DSI\Repository\ProjectMemberInvitationRepo();
+        $this->projectMemberRepo = new \DSI\Repository\ProjectMemberRepo();
+        $this->projectRepo = new \DSI\Repository\ProjectRepo();
+        $this->userRepo = new \DSI\Repository\UserRepo();
 
         $this->projectOwner = new \DSI\Entity\User();
         $this->userRepo->insert($this->projectOwner);

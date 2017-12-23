@@ -2,17 +2,17 @@
 
 require_once __DIR__ . '/../../../config.php';
 
-use \DSI\Repository\SkillRepository;
+use \DSI\Repository\SkillRepo;
 use \DSI\Entity\Skill;
 
 class SkillRepositoryTest extends PHPUnit_Framework_TestCase
 {
-    /** @var SkillRepository */
+    /** @var SkillRepo */
     protected $skillRepo;
 
     public function setUp()
     {
-        $this->skillRepo = new SkillRepository;
+        $this->skillRepo = new SkillRepo;
     }
 
     public function tearDown()

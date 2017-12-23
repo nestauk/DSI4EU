@@ -2,7 +2,7 @@
 
 namespace DSI\Controller;
 
-use DSI\Repository\LanguageRepository;
+use DSI\Repository\LanguageRepo;
 use DSI\Service\Auth;
 use DSI\Service\URL;
 
@@ -14,7 +14,7 @@ class ListLanguagesController
         $authUser = new Auth();
         $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
 
-        $langRepo = new LanguageRepository();
+        $langRepo = new LanguageRepo();
         $languages = [];
         foreach($langRepo->getAll() AS $lang){
             $languages[] = [

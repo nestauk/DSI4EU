@@ -7,15 +7,15 @@ use DSI\Entity\OrganisationLink_Service;
 use DSI\Entity\OrganisationNetworkTag;
 use DSI\Entity\OrganisationTag;
 use DSI\Entity\User;
-use DSI\Repository\OrganisationFollowRepository;
-use DSI\Repository\OrganisationLinkRepository;
-use DSI\Repository\OrganisationMemberRepository;
-use DSI\Repository\OrganisationMemberRequestRepository;
-use DSI\Repository\OrganisationNetworkTagRepository;
-use DSI\Repository\OrganisationProjectRepository;
-use DSI\Repository\OrganisationRepository;
-use DSI\Repository\OrganisationRepositoryInAPC;
-use DSI\Repository\OrganisationTagRepository;
+use DSI\Repository\OrganisationFollowRepo;
+use DSI\Repository\OrganisationLinkRepo;
+use DSI\Repository\OrganisationMemberRepo;
+use DSI\Repository\OrganisationMemberRequestRepo;
+use DSI\Repository\OrganisationNetworkTagRepo;
+use DSI\Repository\OrganisationProjectRepo;
+use DSI\Repository\OrganisationRepo;
+use DSI\Repository\OrganisationRepoInAPC;
+use DSI\Repository\OrganisationTagRepo;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\Mailer;
@@ -46,7 +46,7 @@ class OrganisationController
         $loggedInUser = null;
         $authUser = new Auth();
         $loggedInUser = $authUser->getUserIfLoggedIn();
-        $organisationRepo = new OrganisationRepositoryInAPC();
+        $organisationRepo = new OrganisationRepoInAPC();
         $organisation = $organisationRepo->getById($this->data()->organisationID);
 
         $userIsMember = false;
@@ -181,9 +181,9 @@ class OrganisationController
         $canUserRequestMembership = false;
         $userCanEditOrganisation = false;
 
-        $organisationMembers = (new OrganisationMemberRepository())->getMembersForOrganisation($organisation);
-        $organisationProjects = (new OrganisationProjectRepository())->getByOrganisationID($organisation->getId());
-        $partnerOrganisations = (new OrganisationProjectRepository())->getPartnerOrganisationsFor($organisation);
+        $organisationMembers = (new OrganisationMemberRepo())->getMembersForOrganisation($organisation);
+        $organisationProjects = (new OrganisationProjectRepo())->getByOrganisationID($organisation->getId());
+        $partnerOrganisations = (new OrganisationProjectRepo())->getPartnerOrganisationsFor($organisation);
 
         if ($loggedInUser) {
             $canUserRequestMembership = $this->canUserRequestMembership($organisation, $loggedInUser);
@@ -191,13 +191,13 @@ class OrganisationController
                 $isOwner = true;
 
             if (isset($isOwner) AND $isOwner === true)
-                $memberRequests = (new OrganisationMemberRequestRepository())->getMembersForOrganisation($organisation);
+                $memberRequests = (new OrganisationMemberRequestRepo())->getMembersForOrganisation($organisation);
 
             // $userCanEditOrganisation = ($isAdmin OR ($loggedInUser AND $loggedInUser->isCommunityAdmin()));
             $userCanEditOrganisation = ($isOwner OR ($loggedInUser AND $loggedInUser->isCommunityAdmin()));
             $userIsFollowing = (
                 $loggedInUser AND
-                (new OrganisationFollowRepository())->userFollowsOrganisation($loggedInUser, $organisation)
+                (new OrganisationFollowRepo())->userFollowsOrganisation($loggedInUser, $organisation)
             );
 
             if (isset($_POST['getSecureCode']))
@@ -224,9 +224,9 @@ class OrganisationController
             if (isset($_POST['unfollowOrganisation']))
                 return $this->unfollowOrganisation($loggedInUser, $organisation);
 
-            $userIsMember = (new OrganisationMemberRepository())->organisationHasMember($organisation, $loggedInUser);
+            $userIsMember = (new OrganisationMemberRepo())->organisationHasMember($organisation, $loggedInUser);
             if (!$userIsMember) {
-                $userSentJoinRequest = (new OrganisationMemberRequestRepository())->organisationHasRequestFromMember(
+                $userSentJoinRequest = (new OrganisationMemberRequestRepo())->organisationHasRequestFromMember(
                     $organisation->getId(),
                     $loggedInUser->getId()
                 );
@@ -236,7 +236,7 @@ class OrganisationController
         }
 
         $links = [];
-        $organisationLinks = (new OrganisationLinkRepository())->getByOrganisationID($organisation->getId());
+        $organisationLinks = (new OrganisationLinkRepo())->getByOrganisationID($organisation->getId());
         foreach ($organisationLinks AS $organisationLink) {
             if ($organisationLink->getLinkService() == OrganisationLink_Service::Facebook)
                 $links['facebook'] = $organisationLink->getLink();
@@ -306,11 +306,11 @@ class OrganisationController
         */
         $tags = array_map(function (OrganisationTag $organisationTag) {
             return $organisationTag->getTag();
-        }, (new OrganisationTagRepository())->getByOrganisationID($organisation->getId()));
+        }, (new OrganisationTagRepo())->getByOrganisationID($organisation->getId()));
 
         $networkTags = array_map(function (OrganisationNetworkTag $organisationNetworkTag) {
             return $organisationNetworkTag->getTag();
-        }, (new OrganisationNetworkTagRepository())->getByOrganisationID($organisation->getId()));
+        }, (new OrganisationNetworkTagRepo())->getByOrganisationID($organisation->getId()));
 
         $pageTitle = $organisation->getName();
         require __DIR__ . '/../../../www/views/organisation.php';
@@ -330,9 +330,9 @@ class OrganisationController
     {
         if ($organisation->getOwnerID() == $loggedInUser->getId())
             return false;
-        if ((new OrganisationMemberRepository())->organisationHasMember($organisation, $loggedInUser))
+        if ((new OrganisationMemberRepo())->organisationHasMember($organisation, $loggedInUser))
             return false;
-        if ((new OrganisationMemberRequestRepository())->organisationHasRequestFromMember($organisation->getId(), $loggedInUser->getId()))
+        if ((new OrganisationMemberRequestRepo())->organisationHasRequestFromMember($organisation->getId(), $loggedInUser->getId()))
             return false;
 
         return true;

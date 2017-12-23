@@ -3,7 +3,7 @@
 namespace DSI\UseCase;
 
 use DSI\Entity\ImpactTag;
-use DSI\Repository\ImpactTagRepository;
+use DSI\Repository\ImpactTagRepo;
 use DSI\Service\ErrorHandler;
 
 class CreateImpactTag
@@ -11,7 +11,7 @@ class CreateImpactTag
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var ImpactTagRepository */
+    /** @var ImpactTagRepo */
     private $tagRepo;
 
     /** @var ImpactTag */
@@ -28,7 +28,7 @@ class CreateImpactTag
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->tagRepo = new ImpactTagRepository();
+        $this->tagRepo = new ImpactTagRepo();
 
         if($this->tagRepo->nameExists($this->data()->name)){
             $this->errorHandler->addTaggedError('tag', __('Tag name already exists'));

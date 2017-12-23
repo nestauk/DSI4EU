@@ -4,19 +4,19 @@ require_once __DIR__ . '/../../../config.php';
 
 class OrganisationProjectsRepositoryTest extends PHPUnit_Framework_TestCase
 {
-    /** @var \DSI\Repository\OrganisationProjectRepository */
+    /** @var \DSI\Repository\OrganisationProjectRepo */
     protected $organisationProjectsRepo;
 
-    /** @var \DSI\Repository\OrganisationRepository */
+    /** @var \DSI\Repository\OrganisationRepo */
     protected $organisationsRepo;
 
-    /** @var \DSI\Repository\UserRepository */
+    /** @var \DSI\Repository\UserRepo */
     protected $usersRepo;
 
     /** @var \DSI\Entity\Organisation */
     protected $organisation_1, $organisation_2, $organisation_3;
 
-    /** @var \DSI\Repository\ProjectRepository */
+    /** @var \DSI\Repository\ProjectRepo */
     protected $projectsRepo;
 
     /** @var \DSI\Entity\Project */
@@ -24,10 +24,10 @@ class OrganisationProjectsRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->organisationProjectsRepo = new \DSI\Repository\OrganisationProjectRepository();
-        $this->organisationsRepo = new \DSI\Repository\OrganisationRepository();
-        $this->projectsRepo = new \DSI\Repository\ProjectRepository();
-        $this->usersRepo = new \DSI\Repository\UserRepository();
+        $this->organisationProjectsRepo = new \DSI\Repository\OrganisationProjectRepo();
+        $this->organisationsRepo = new \DSI\Repository\OrganisationRepo();
+        $this->projectsRepo = new \DSI\Repository\ProjectRepo();
+        $this->usersRepo = new \DSI\Repository\UserRepo();
 
         $this->organisation_1 = $this->createOrganisation(1);
         $this->organisation_2 = $this->createOrganisation(2);

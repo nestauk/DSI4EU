@@ -4,11 +4,11 @@ namespace DSI\Controller;
 
 use DSI\Entity\Organisation;
 use DSI\Entity\OrganisationNetworkTag;
-use DSI\Repository\OrganisationNetworkTagRepository;
-use DSI\Repository\OrganisationProjectRepository;
-use DSI\Repository\OrganisationRepository;
-use DSI\Repository\OrganisationRepositoryInAPC;
-use DSI\Repository\OrganisationTagRepository;
+use DSI\Repository\OrganisationNetworkTagRepo;
+use DSI\Repository\OrganisationProjectRepo;
+use DSI\Repository\OrganisationRepo;
+use DSI\Repository\OrganisationRepoInAPC;
+use DSI\Repository\OrganisationTagRepo;
 use DSI\Service\Auth;
 use DSI\Service\URL;
 
@@ -26,7 +26,7 @@ class ExportOrganisationsController
         $authUser = new Auth();
         $loggedInUser = $authUser->getUserIfLoggedIn();
 
-        $organisations = (new OrganisationRepositoryInAPC())->getAll();
+        $organisations = (new OrganisationRepoInAPC())->getAll();
 
         if (isset($_GET['download'])) {
             header('Content-Description: File Transfer');
@@ -178,22 +178,22 @@ class ExportOrganisationsController
 
     private function getOrganisationProjectIDs(Organisation $organisation)
     {
-        return (new OrganisationProjectRepository())->getProjectIDsForOrganisation($organisation);
+        return (new OrganisationProjectRepo())->getProjectIDsForOrganisation($organisation);
     }
 
     private function getNetworkTags(Organisation $organisation)
     {
-        return (new OrganisationNetworkTagRepository())->getTagDataByOrganisation($organisation);
+        return (new OrganisationNetworkTagRepo())->getTagDataByOrganisation($organisation);
     }
 
     private function getNetworkTagNames(Organisation $organisation)
     {
-        return (new OrganisationNetworkTagRepository())->getTagNamesByOrganisation($organisation);
+        return (new OrganisationNetworkTagRepo())->getTagNamesByOrganisation($organisation);
     }
 
     private function getTags(Organisation $organisation)
     {
-        return (new OrganisationTagRepository())->getTagNamesByOrganisation($organisation);
+        return (new OrganisationTagRepo())->getTagNamesByOrganisation($organisation);
     }
 
     private function getType(Organisation $organisation)

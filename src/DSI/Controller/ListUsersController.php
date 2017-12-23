@@ -2,7 +2,7 @@
 
 namespace DSI\Controller;
 
-use DSI\Repository\UserRepository;
+use DSI\Repository\UserRepo;
 use DSI\Service\Auth;
 
 class ListUsersController
@@ -12,7 +12,7 @@ class ListUsersController
         $authUser = new Auth();
         $users = [];
         if ($authUser->isLoggedIn()) {
-            $userRepo = new UserRepository();
+            $userRepo = new UserRepo();
             foreach ($userRepo->getAll() AS $user) {
                 $users[] = [
                     'id' => $user->getId(),

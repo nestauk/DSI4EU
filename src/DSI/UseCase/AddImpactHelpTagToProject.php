@@ -3,10 +3,10 @@
 namespace DSI\UseCase;
 
 use DSI\Entity\ProjectImpactHelpTag;
-use DSI\Repository\ImpactTagRepository;
-use DSI\Repository\ProjectImpactHelpTagRepository;
-use DSI\Repository\ProjectRepository;
-use DSI\Repository\ProjectRepositoryInAPC;
+use DSI\Repository\ImpactTagRepo;
+use DSI\Repository\ProjectImpactHelpTagRepo;
+use DSI\Repository\ProjectRepo;
+use DSI\Repository\ProjectRepoInAPC;
 use DSI\Service\ErrorHandler;
 
 class AddImpactHelpTagToProject
@@ -14,10 +14,10 @@ class AddImpactHelpTagToProject
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var ProjectImpactHelpTagRepository */
+    /** @var ProjectImpactHelpTagRepo */
     private $projectImpactTagRepository;
 
-    /** @var ProjectRepository */
+    /** @var ProjectRepo */
     private $projectRepository;
 
     /** @var AddImpactHelpTagToProject_Data */
@@ -31,10 +31,10 @@ class AddImpactHelpTagToProject
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->projectImpactTagRepository = new ProjectImpactHelpTagRepository();
-        $this->projectRepository = new ProjectRepositoryInAPC();
+        $this->projectImpactTagRepository = new ProjectImpactHelpTagRepo();
+        $this->projectRepository = new ProjectRepoInAPC();
 
-        $tagRepo = new ImpactTagRepository();
+        $tagRepo = new ImpactTagRepo();
 
         if ($tagRepo->nameExists($this->data()->tag)) {
             $tag = $tagRepo->getByName($this->data()->tag);

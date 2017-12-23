@@ -4,8 +4,8 @@ namespace DSI\UseCase;
 
 use DSI\Entity\UserLink;
 use DSI\NotFound;
-use DSI\Repository\UserLinkRepository;
-use DSI\Repository\UserRepository;
+use DSI\Repository\UserLinkRepo;
+use DSI\Repository\UserRepo;
 use DSI\Service\ErrorHandler;
 use DSI\Service\Geolocation;
 

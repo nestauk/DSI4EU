@@ -3,8 +3,8 @@
 namespace DSI\Controller;
 
 use DSI\Entity\Story;
-use DSI\Repository\StoryRepository;
-use DSI\Repository\UserRepository;
+use DSI\Repository\StoryRepo;
+use DSI\Repository\UserRepo;
 use DSI\Service\Auth;
 use DSI\Service\URL;
 
@@ -21,9 +21,9 @@ class StoriesController
 
         if ($this->format == 'json') {
             if ($userCanAddStory)
-                $stories = (new StoryRepository())->getAll();
+                $stories = (new StoryRepo())->getAll();
             else
-                $stories = (new StoryRepository())->getAllPublished();
+                $stories = (new StoryRepo())->getAllPublished();
 
             echo json_encode(array_map(function (Story $story) use ($urlHandler) {
                 $data = [

@@ -2,7 +2,7 @@
 
 namespace DSI\Controller;
 
-use DSI\Repository\EventRepository;
+use DSI\Repository\EventRepo;
 use DSI\Service\Auth;
 use DSI\Service\URL;
 
@@ -15,7 +15,7 @@ class RssEventsController
         $authUser = new Auth();
         $loggedInUser = $authUser->getUserIfLoggedIn();
 
-        $events = (new EventRepository())->getAll();
+        $events = (new EventRepo())->getAll();
 
         header("Content-Type: application/rss+xml");
         require __DIR__ . '/../../../www/views/rss-events.php';

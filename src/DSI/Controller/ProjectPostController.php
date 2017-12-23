@@ -4,10 +4,10 @@ namespace DSI\Controller;
 
 use DSI\Entity\ProjectPostComment;
 use DSI\Entity\ProjectPostCommentReply;
-use DSI\Repository\ProjectPostCommentReplyRepository;
-use DSI\Repository\ProjectPostCommentRepository;
-use DSI\Repository\ProjectPostRepository;
-use DSI\Repository\UserRepository;
+use DSI\Repository\ProjectPostCommentReplyRepo;
+use DSI\Repository\ProjectPostCommentRepo;
+use DSI\Repository\ProjectPostRepo;
+use DSI\Repository\UserRepo;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\UseCase\AddCommentToProjectPost;
@@ -29,7 +29,7 @@ class ProjectPostController
         $authUser = new Auth();
         $loggedInUser = $authUser->getUserIfLoggedIn();
 
-        $projectPostRepo = new ProjectPostRepository();
+        $projectPostRepo = new ProjectPostRepo();
         $post = $projectPostRepo->getById($this->data()->postID);
         $project = $post->getProject();
 
@@ -71,11 +71,11 @@ class ProjectPostController
             die();
         }
 
-        $comments = (new ProjectPostCommentRepository())->getByPostID($post->getId());
+        $comments = (new ProjectPostCommentRepo())->getByPostID($post->getId());
         echo json_encode([
             'comments' => array_map(function (ProjectPostComment $comment) {
                 $user = $comment->getUser();
-                $replies = (new ProjectPostCommentReplyRepository())->getByCommentID($comment->getId());
+                $replies = (new ProjectPostCommentReplyRepo())->getByCommentID($comment->getId());
                 return [
                     'id' => $comment->getId(),
                     'comment' => $comment->getComment(),

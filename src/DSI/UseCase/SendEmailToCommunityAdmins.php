@@ -4,8 +4,8 @@ namespace DSI\UseCase;
 
 use DSI\Entity\User;
 use DSI\Entity\UserLink;
-use DSI\Repository\UserLinkRepository;
-use DSI\Repository\UserRepository;
+use DSI\Repository\UserLinkRepo;
+use DSI\Repository\UserRepo;
 use DSI\Service\ErrorHandler;
 use DSI\Service\Mailer;
 
@@ -26,7 +26,7 @@ class SendEmailToCommunityAdmins
     {
         $this->errorHandler = new ErrorHandler();
 
-        $userRepo = new UserRepository();
+        $userRepo = new UserRepo();
         $admins = $userRepo->getAllCommunityAdmins();
         foreach($admins AS $admin){
             $mail = clone $this->data()->mail;

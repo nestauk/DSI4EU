@@ -2,7 +2,7 @@
 
 namespace DSI\Controller;
 
-use DSI\Repository\TagForOrganisationsRepository;
+use DSI\Repository\TagForOrganisationsRepo;
 use DSI\Service\Auth;
 use DSI\Service\URL;
 
@@ -14,7 +14,7 @@ class ListTagsForOrganisationsController
         $authUser = new Auth();
         $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
 
-        $tagRepo = new TagForOrganisationsRepository();
+        $tagRepo = new TagForOrganisationsRepo();
         $tags = [];
         foreach($tagRepo->getAll() AS $tag){
             $tags[] = [

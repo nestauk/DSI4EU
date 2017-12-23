@@ -2,7 +2,7 @@
 
 namespace DSI\Controller;
 
-use DSI\Repository\SkillRepository;
+use DSI\Repository\SkillRepo;
 use DSI\Service\Auth;
 use DSI\Service\URL;
 
@@ -14,7 +14,7 @@ class ListSkillsController
         $authUser = new Auth();
         $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
 
-        $skillRepo = new SkillRepository();
+        $skillRepo = new SkillRepo();
         $skills = [];
         foreach($skillRepo->getAll() AS $skill){
             $skills[] = [

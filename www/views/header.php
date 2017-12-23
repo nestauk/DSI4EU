@@ -7,8 +7,8 @@ use \DSI\Service\Sysctl;
 /** @var $angularModules string[] */
 /** @var $pageTitle string[] */
 
-$projectsCount = (new \DSI\Repository\ProjectRepositoryInAPC())->countAll();
-$organisationsCount = (new \DSI\Repository\OrganisationRepositoryInAPC())->countAll();
+$projectsCount = (new \DSI\Repository\ProjectRepoInAPC())->countAll();
+$organisationsCount = (new \DSI\Repository\OrganisationRepoInAPC())->countAll();
 
 if (!isset($loggedInUser))
     $loggedInUser = null;

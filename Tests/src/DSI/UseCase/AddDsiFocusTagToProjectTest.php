@@ -7,16 +7,16 @@ class AddDsiFocusTagToProjectTest extends PHPUnit_Framework_TestCase
     /** @var \DSI\UseCase\AddDsiFocusTagToProject */
     private $addDsiFocusTagToProject;
 
-    /** @var \DSI\Repository\DsiFocusTagRepository */
+    /** @var \DSI\Repository\DsiFocusTagRepo */
     private $dsiFocusTagRepository;
 
-    /** @var \DSI\Repository\ProjectRepository */
+    /** @var \DSI\Repository\ProjectRepo */
     private $projectRepo;
 
     /** @var \DSI\Entity\Project */
     private $project;
 
-    /** @var \DSI\Repository\UserRepository */
+    /** @var \DSI\Repository\UserRepo */
     private $userRepo;
 
     /** @var \DSI\Entity\User */
@@ -25,9 +25,9 @@ class AddDsiFocusTagToProjectTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->addDsiFocusTagToProject = new \DSI\UseCase\AddDsiFocusTagToProject();
-        $this->dsiFocusTagRepository = new \DSI\Repository\DsiFocusTagRepository();
-        $this->projectRepo = new \DSI\Repository\ProjectRepository();
-        $this->userRepo = new \DSI\Repository\UserRepository();
+        $this->dsiFocusTagRepository = new \DSI\Repository\DsiFocusTagRepo();
+        $this->projectRepo = new \DSI\Repository\ProjectRepo();
+        $this->userRepo = new \DSI\Repository\UserRepo();
 
         $this->user = new \DSI\Entity\User();
         $this->userRepo->insert($this->user);
@@ -42,7 +42,7 @@ class AddDsiFocusTagToProjectTest extends PHPUnit_Framework_TestCase
         $this->dsiFocusTagRepository->clearAll();
         $this->projectRepo->clearAll();
         $this->userRepo->clearAll();
-        (new \DSI\Repository\ProjectDsiFocusTagRepository())->clearAll();
+        (new \DSI\Repository\ProjectDsiFocusTagRepo())->clearAll();
     }
 
     /** @test */
@@ -53,7 +53,7 @@ class AddDsiFocusTagToProjectTest extends PHPUnit_Framework_TestCase
         $this->addDsiFocusTagToProject->exec();
 
         $this->assertTrue(
-            (new \DSI\Repository\ProjectDsiFocusTagRepository())->projectHasTagName(
+            (new \DSI\Repository\ProjectDsiFocusTagRepo())->projectHasTagName(
                 $this->addDsiFocusTagToProject->data()->projectID,
                 $this->addDsiFocusTagToProject->data()->tag
             )

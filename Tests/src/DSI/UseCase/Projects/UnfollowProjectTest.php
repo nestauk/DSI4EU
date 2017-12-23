@@ -4,16 +4,16 @@ require_once __DIR__ . '/../../../../config.php';
 
 class UnfollowProjectTest extends PHPUnit_Framework_TestCase
 {
-    /** @var \DSI\Repository\ProjectFollowRepository */
+    /** @var \DSI\Repository\ProjectFollowRepo */
     private $projectFollowRepository;
 
-    /** @var \DSI\Repository\ProjectRepository */
+    /** @var \DSI\Repository\ProjectRepo */
     private $projectRepository;
 
     /** @var \DSI\Entity\Project */
     private $project;
 
-    /** @var \DSI\Repository\UserRepository */
+    /** @var \DSI\Repository\UserRepo */
     private $userRepo;
 
     /** @var \DSI\Entity\User */
@@ -22,9 +22,9 @@ class UnfollowProjectTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->projectRepository = new \DSI\Repository\ProjectRepository();
-        $this->projectFollowRepository = new \DSI\Repository\ProjectFollowRepository();
-        $this->userRepo = new \DSI\Repository\UserRepository();
+        $this->projectRepository = new \DSI\Repository\ProjectRepo();
+        $this->projectFollowRepository = new \DSI\Repository\ProjectFollowRepo();
+        $this->userRepo = new \DSI\Repository\UserRepo();
 
         $this->user = new \DSI\Entity\User();
         $this->userRepo->insert($this->user);

@@ -3,10 +3,10 @@
 namespace DSI\UseCase;
 
 use DSI\Entity\ProjectTag;
-use DSI\Repository\ProjectRepository;
-use DSI\Repository\ProjectRepositoryInAPC;
-use DSI\Repository\ProjectTagRepository;
-use DSI\Repository\TagForProjectsRepository;
+use DSI\Repository\ProjectRepo;
+use DSI\Repository\ProjectRepoInAPC;
+use DSI\Repository\ProjectTagRepo;
+use DSI\Repository\TagForProjectsRepo;
 use DSI\Service\ErrorHandler;
 
 class AddTagToProject
@@ -14,10 +14,10 @@ class AddTagToProject
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var ProjectTagRepository */
+    /** @var ProjectTagRepo */
     private $projectTagRepository;
 
-    /** @var ProjectRepository */
+    /** @var ProjectRepo */
     private $projectRepository;
 
     /** @var AddTagToProject_Data */
@@ -31,10 +31,10 @@ class AddTagToProject
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->projectTagRepository = new ProjectTagRepository();
-        $this->projectRepository = new ProjectRepositoryInAPC();
+        $this->projectTagRepository = new ProjectTagRepo();
+        $this->projectRepository = new ProjectRepoInAPC();
 
-        $tagRepo = new TagForProjectsRepository();
+        $tagRepo = new TagForProjectsRepo();
 
         if ($tagRepo->nameExists($this->data()->tag)) {
             $tag = $tagRepo->getByName($this->data()->tag);

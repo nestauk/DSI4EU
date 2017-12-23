@@ -7,10 +7,10 @@ class CreateReportProfileTest extends PHPUnit_Framework_TestCase
     /** @var \DSI\UseCase\CreateReportProfile */
     private $createReportProfileCmd;
 
-    /** @var \DSI\Repository\ReportProfileRepository */
+    /** @var \DSI\Repository\ReportProfileRepo */
     private $reportProfileRepo;
 
-    /** @var \DSI\Repository\UserRepository */
+    /** @var \DSI\Repository\UserRepo */
     private $userRepo;
 
     /** @var \DSI\Entity\User */
@@ -21,8 +21,8 @@ class CreateReportProfileTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->createReportProfileCmd = new \DSI\UseCase\CreateReportProfile();
-        $this->reportProfileRepo = new \DSI\Repository\ReportProfileRepository();
-        $this->userRepo = new \DSI\Repository\UserRepository();
+        $this->reportProfileRepo = new \DSI\Repository\ReportProfileRepo();
+        $this->userRepo = new \DSI\Repository\UserRepo();
 
         $this->executor = new \DSI\Entity\User();
         $this->userRepo->insert($this->executor);

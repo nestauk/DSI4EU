@@ -6,8 +6,8 @@ use abeautifulsite\SimpleImage;
 use DSI\Entity\Image;
 use DSI\NotEnoughData;
 use DSI\NotFound;
-use DSI\Repository\ProjectRepository;
-use DSI\Repository\ProjectRepositoryInAPC;
+use DSI\Repository\ProjectRepo;
+use DSI\Repository\ProjectRepoInAPC;
 use DSI\Service\ErrorHandler;
 
 class UpdateProjectLogo
@@ -18,7 +18,7 @@ class UpdateProjectLogo
     /** @var UpdateProjectLogo_Data */
     private $data;
 
-    /** @var ProjectRepository */
+    /** @var ProjectRepo */
     private $projectRepository;
 
     /** @var string */
@@ -32,7 +32,7 @@ class UpdateProjectLogo
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->projectRepository = new ProjectRepositoryInAPC();
+        $this->projectRepository = new ProjectRepoInAPC();
 
         $this->assertAllInfoHaveBeenSent();
 

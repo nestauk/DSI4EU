@@ -2,7 +2,7 @@
 
 require_once __DIR__ . '/../../../config.php';
 
-use \DSI\Repository\UserRepository;
+use \DSI\Repository\UserRepo;
 use \DSI\Entity\User;
 
 class UserRepositoryTest extends PHPUnit_Framework_TestCase
@@ -28,12 +28,12 @@ class UserRepositoryTest extends PHPUnit_Framework_TestCase
     const IS_DISABLED = true;
     const ROLE = 'sys-admin';
 
-    /** @var UserRepository */
+    /** @var UserRepo */
     protected $userRepo;
 
     public function setUp()
     {
-        $this->userRepo = new UserRepository();
+        $this->userRepo = new UserRepo();
     }
 
     public function tearDown()

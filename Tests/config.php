@@ -3,10 +3,10 @@
 define('NO_SESSION', true);
 require_once(__DIR__ . "/../src/config.php");
 
-\DSI\Repository\OrganisationRepositoryInAPC::setApcKey(
+\DSI\Repository\OrganisationRepoInAPC::setApcKey(
     'digitalSocialTest:organisations'
 );
-\DSI\Repository\ProjectRepositoryInAPC::setApcKey(
+\DSI\Repository\ProjectRepoInAPC::setApcKey(
     'digitalSocialTest:projects'
 );
 

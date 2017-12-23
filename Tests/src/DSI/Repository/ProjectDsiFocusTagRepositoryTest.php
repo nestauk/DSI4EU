@@ -4,19 +4,19 @@ require_once __DIR__ . '/../../../config.php';
 
 class ProjectDsiFocusTagRepositoryTest extends PHPUnit_Framework_TestCase
 {
-    /** @var \DSI\Repository\ProjectDsiFocusTagRepository */
+    /** @var \DSI\Repository\ProjectDsiFocusTagRepo */
     protected $projectTagsRepo;
 
-    /** @var \DSI\Repository\ProjectRepository */
+    /** @var \DSI\Repository\ProjectRepo */
     protected $projectsRepo;
 
-    /** @var \DSI\Repository\UserRepository */
+    /** @var \DSI\Repository\UserRepo */
     protected $usersRepo;
 
     /** @var \DSI\Entity\Project */
     protected $project_1, $project_2, $project_3;
 
-    /** @var \DSI\Repository\DsiFocusTagRepository */
+    /** @var \DSI\Repository\DsiFocusTagRepo */
     protected $tagsRepo;
 
     /** @var \DSI\Entity\DsiFocusTag */
@@ -24,10 +24,10 @@ class ProjectDsiFocusTagRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->projectTagsRepo = new \DSI\Repository\ProjectDsiFocusTagRepository();
-        $this->projectsRepo = new \DSI\Repository\ProjectRepository();
-        $this->tagsRepo = new \DSI\Repository\DsiFocusTagRepository();
-        $this->usersRepo = new \DSI\Repository\UserRepository();
+        $this->projectTagsRepo = new \DSI\Repository\ProjectDsiFocusTagRepo();
+        $this->projectsRepo = new \DSI\Repository\ProjectRepo();
+        $this->tagsRepo = new \DSI\Repository\DsiFocusTagRepo();
+        $this->usersRepo = new \DSI\Repository\UserRepo();
 
         $this->project_1 = $this->createProject(1);
         $this->project_2 = $this->createProject(2);

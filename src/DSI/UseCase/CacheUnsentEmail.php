@@ -3,7 +3,7 @@
 namespace DSI\UseCase;
 
 use DSI\Entity\CacheMail;
-use DSI\Repository\CacheMailRepository;
+use DSI\Repository\CacheMailRepo;
 use DSI\Service\ErrorHandler;
 use DSI\Service\Mailer;
 
@@ -47,7 +47,7 @@ class CacheUnsentEmail
     {
         $mail = new CacheMail();
         $mail->setContent($this->data()->content);
-        (new CacheMailRepository())->insert($mail);
+        (new CacheMailRepo())->insert($mail);
     }
 }
 

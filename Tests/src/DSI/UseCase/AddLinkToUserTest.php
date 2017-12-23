@@ -7,7 +7,7 @@ class AddLinkToUserTest extends PHPUnit_Framework_TestCase
     /** @var \DSI\UseCase\AddLinkToUser */
     private $addLinkToUserCommand;
 
-    /** @var \DSI\Repository\UserRepository */
+    /** @var \DSI\Repository\UserRepo */
     private $userRepo;
 
     /** @var \DSI\Entity\User */
@@ -16,7 +16,7 @@ class AddLinkToUserTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->addLinkToUserCommand = new \DSI\UseCase\AddLinkToUser();
-        $this->userRepo = new \DSI\Repository\UserRepository();
+        $this->userRepo = new \DSI\Repository\UserRepo();
 
         $this->user = new \DSI\Entity\User();
         $this->userRepo->insert($this->user);
@@ -25,7 +25,7 @@ class AddLinkToUserTest extends PHPUnit_Framework_TestCase
     public function tearDown()
     {
         $this->userRepo->clearAll();
-        (new \DSI\Repository\UserLinkRepository())->clearAll();
+        (new \DSI\Repository\UserLinkRepo())->clearAll();
     }
 
     /** @test */
@@ -36,7 +36,7 @@ class AddLinkToUserTest extends PHPUnit_Framework_TestCase
         $this->addLinkToUserCommand->exec();
 
         $this->assertTrue(
-            (new \DSI\Repository\UserLinkRepository())->userHasLink(
+            (new \DSI\Repository\UserLinkRepo())->userHasLink(
                 $this->addLinkToUserCommand->data()->userID,
                 $this->addLinkToUserCommand->data()->link
             )

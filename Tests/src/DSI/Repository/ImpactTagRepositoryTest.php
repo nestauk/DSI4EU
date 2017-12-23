@@ -2,17 +2,17 @@
 
 require_once __DIR__ . '/../../../config.php';
 
-use \DSI\Repository\ImpactTagRepository;
+use \DSI\Repository\ImpactTagRepo;
 use \DSI\Entity\ImpactTag;
 
 class ImpactTagRepositoryTest extends PHPUnit_Framework_TestCase
 {
-    /** @var ImpactTagRepository */
+    /** @var ImpactTagRepo */
     protected $tagsRepo;
 
     public function setUp()
     {
-        $this->tagsRepo = new ImpactTagRepository();
+        $this->tagsRepo = new ImpactTagRepo();
     }
 
     public function tearDown()

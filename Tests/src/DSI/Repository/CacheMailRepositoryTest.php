@@ -2,17 +2,17 @@
 
 require_once __DIR__ . '/../../../config.php';
 
-use \DSI\Repository\CacheMailRepository;
+use \DSI\Repository\CacheMailRepo;
 use \DSI\Entity\CacheMail;
 
 class CacheMailRepositoryTest extends PHPUnit_Framework_TestCase
 {
-    /** @var CacheMailRepository */
+    /** @var CacheMailRepo */
     private $mailRepository;
 
     public function setUp()
     {
-        $this->mailRepository = new CacheMailRepository();
+        $this->mailRepository = new CacheMailRepo();
     }
 
     public function tearDown()

@@ -10,10 +10,10 @@ class CompletePasswordRecoveryTest extends PHPUnit_Framework_TestCase
     /** @var \DSI\UseCase\CompletePasswordRecovery */
     private $completePasswordRecoveryCmd;
 
-    /** @var \DSI\Repository\PasswordRecoveryRepository */
+    /** @var \DSI\Repository\PasswordRecoveryRepo */
     private $passwordRecoveryRepo;
 
-    /** @var \DSI\Repository\UserRepository */
+    /** @var \DSI\Repository\UserRepo */
     private $userRepo;
 
     /** @var \DSI\Entity\User */
@@ -23,8 +23,8 @@ class CompletePasswordRecoveryTest extends PHPUnit_Framework_TestCase
     {
         $this->createPasswordRecoveryCmd = new \DSI\UseCase\CreatePasswordRecovery();
         $this->completePasswordRecoveryCmd = new \DSI\UseCase\CompletePasswordRecovery();
-        $this->passwordRecoveryRepo = new \DSI\Repository\PasswordRecoveryRepository();
-        $this->userRepo = new \DSI\Repository\UserRepository();
+        $this->passwordRecoveryRepo = new \DSI\Repository\PasswordRecoveryRepo();
+        $this->userRepo = new \DSI\Repository\UserRepo();
 
         $this->user = new \DSI\Entity\User();
         $this->user->setEmail('test@example.org');

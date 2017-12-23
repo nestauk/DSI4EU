@@ -3,9 +3,9 @@
 namespace DSI\Controller;
 
 use DSI\Entity\Image;
-use DSI\Repository\StoryCategoryRepository;
-use DSI\Repository\StoryRepository;
-use DSI\Repository\UserRepository;
+use DSI\Repository\StoryCategoryRepo;
+use DSI\Repository\StoryRepo;
+use DSI\Repository\UserRepo;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\JsModules;
@@ -34,7 +34,7 @@ class StoryEditController
         if (!$userCanEditStory)
             go_to($urlHandler->home());
 
-        $storyRepo = new StoryRepository();
+        $storyRepo = new StoryRepo();
         $story = $storyRepo->getById($this->storyID);
 
         if ($this->format == 'json') {
@@ -77,7 +77,7 @@ class StoryEditController
             die();
         }
 
-        $categories = (new StoryCategoryRepository())->getAll();
+        $categories = (new StoryCategoryRepo())->getAll();
 
         $angularModules['fileUpload'] = true;
         JsModules::setTinyMCE(true);

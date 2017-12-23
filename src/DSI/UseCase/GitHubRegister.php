@@ -3,7 +3,7 @@
 namespace DSI\UseCase;
 
 use DSI\Entity\User;
-use DSI\Repository\UserRepository;
+use DSI\Repository\UserRepo;
 use DSI\Service\ErrorHandler;
 
 class GitHubRegister
@@ -11,7 +11,7 @@ class GitHubRegister
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var UserRepository */
+    /** @var UserRepo */
     private $userRepo;
 
     /** @var GitHubRegister_Data */
@@ -29,7 +29,7 @@ class GitHubRegister
     {
         $this->errorHandler = new ErrorHandler();
         if (!$this->userRepo)
-            $this->userRepo = new UserRepository();
+            $this->userRepo = new UserRepo();
 
         $this->verifyGitHubUID();
         $this->errorHandler->throwIfNotEmpty();
@@ -55,7 +55,7 @@ class GitHubRegister
         return $this->data;
     }
 
-    public function setUserRepo(UserRepository $userRepo)
+    public function setUserRepo(UserRepo $userRepo)
     {
         $this->userRepo = $userRepo;
     }

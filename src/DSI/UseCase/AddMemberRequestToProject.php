@@ -3,11 +3,11 @@
 namespace DSI\UseCase;
 
 use DSI\Entity\ProjectMemberRequest;
-use DSI\Repository\ProjectMemberRepository;
-use DSI\Repository\ProjectMemberRequestRepository;
-use DSI\Repository\ProjectRepository;
-use DSI\Repository\ProjectRepositoryInAPC;
-use DSI\Repository\UserRepository;
+use DSI\Repository\ProjectMemberRepo;
+use DSI\Repository\ProjectMemberRequestRepo;
+use DSI\Repository\ProjectRepo;
+use DSI\Repository\ProjectRepoInAPC;
+use DSI\Repository\UserRepo;
 use DSI\Service\ErrorHandler;
 
 class AddMemberRequestToProject
@@ -15,13 +15,13 @@ class AddMemberRequestToProject
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var ProjectMemberRequestRepository */
+    /** @var ProjectMemberRequestRepo */
     private $projectMemberRequestRepo;
 
-    /** @var ProjectRepository */
+    /** @var ProjectRepo */
     private $projectRepository;
 
-    /** @var UserRepository */
+    /** @var UserRepo */
     private $userRepository;
 
     /** @var AddMemberRequestToProject_Data */
@@ -35,9 +35,9 @@ class AddMemberRequestToProject
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->projectMemberRequestRepo = new ProjectMemberRequestRepository();
-        $this->projectRepository = new ProjectRepositoryInAPC();
-        $this->userRepository = new UserRepository();
+        $this->projectMemberRequestRepo = new ProjectMemberRequestRepo();
+        $this->projectRepository = new ProjectRepoInAPC();
+        $this->userRepository = new UserRepo();
 
         $this->checkIfProjectAlreadyHasTheMember();
         $this->checkIfThereIsAlreadyARequestFromTheUser();
@@ -54,7 +54,7 @@ class AddMemberRequestToProject
 
     private function checkIfProjectAlreadyHasTheMember()
     {
-        if ((new ProjectMemberRepository())->projectIDHasMemberID($this->data()->projectID, $this->data()->userID)) {
+        if ((new ProjectMemberRepo())->projectIDHasMemberID($this->data()->projectID, $this->data()->userID)) {
             $this->errorHandler->addTaggedError('member', __('This user is already a member of the project'));
             $this->errorHandler->throwIfNotEmpty();
         }

@@ -3,7 +3,7 @@
 namespace DSI\UseCase;
 
 use DSI\Entity\NetworkTag;
-use DSI\Repository\NetworkTagRepository;
+use DSI\Repository\NetworkTagRepo;
 use DSI\Service\ErrorHandler;
 
 class CreateNetworkTag
@@ -11,7 +11,7 @@ class CreateNetworkTag
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var NetworkTagRepository */
+    /** @var NetworkTagRepo */
     private $networkTagRepo;
 
     /** @var NetworkTag */
@@ -28,7 +28,7 @@ class CreateNetworkTag
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->networkTagRepo = new NetworkTagRepository();
+        $this->networkTagRepo = new NetworkTagRepo();
 
         if($this->networkTagRepo->nameExists($this->data()->name)){
             $this->errorHandler->addTaggedError('tag', __('Tag name already exists'));

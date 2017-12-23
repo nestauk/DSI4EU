@@ -2,7 +2,7 @@
 
 namespace DSI\Controller;
 
-use DSI\Repository\ImpactTagRepository;
+use DSI\Repository\ImpactTagRepo;
 use DSI\Service\Auth;
 use DSI\Service\URL;
 
@@ -14,7 +14,7 @@ class ListImpactTagsController
         $authUser = new Auth();
         $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
 
-        $tagRepo = new ImpactTagRepository();
+        $tagRepo = new ImpactTagRepo();
         $tags = [];
         foreach($tagRepo->getAll() AS $tag){
             $tags[] = [

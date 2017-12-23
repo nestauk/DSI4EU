@@ -2,7 +2,7 @@
 
 namespace DSI\Controller;
 
-use DSI\Repository\CountryRepository;
+use DSI\Repository\CountryRepo;
 use DSI\Service\Auth;
 use DSI\Service\URL;
 
@@ -14,7 +14,7 @@ class ListCountriesController
         $authUser = new Auth();
         $loggedInUser = $authUser->getUserIfLoggedIn();
 
-        $countryRepo = new CountryRepository();
+        $countryRepo = new CountryRepo();
         $countries = [];
         foreach ($countryRepo->getAll() AS $country) {
             $countries[] = [

@@ -4,10 +4,10 @@ require_once __DIR__ . '/../../../config.php';
 
 class ProjectLinkRepositoryTest extends PHPUnit_Framework_TestCase
 {
-    /** @var \DSI\Repository\ProjectLinkRepository */
+    /** @var \DSI\Repository\ProjectLinkRepo */
     private $projectLinkRepository;
 
-    /** @var \DSI\Repository\ProjectRepository */
+    /** @var \DSI\Repository\ProjectRepo */
     private $projectRepository;
 
     /** @var \DSI\Entity\Project */
@@ -16,7 +16,7 @@ class ProjectLinkRepositoryTest extends PHPUnit_Framework_TestCase
     /** @var string */
     private $link_1, $link_2, $link_3;
 
-    /** @var  \DSI\Repository\UserRepository */
+    /** @var  \DSI\Repository\UserRepo */
     private $userRepo;
 
     /** @var \DSI\Entity\User */
@@ -24,9 +24,9 @@ class ProjectLinkRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->projectLinkRepository = new \DSI\Repository\ProjectLinkRepository();
-        $this->projectRepository = new \DSI\Repository\ProjectRepository();
-        $this->userRepo = new \DSI\Repository\UserRepository();
+        $this->projectLinkRepository = new \DSI\Repository\ProjectLinkRepo();
+        $this->projectRepository = new \DSI\Repository\ProjectRepo();
+        $this->userRepo = new \DSI\Repository\UserRepo();
 
         $this->user = new \DSI\Entity\User();
         $this->userRepo->insert($this->user);

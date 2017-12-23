@@ -2,39 +2,39 @@
 
 require_once __DIR__ . '/../../../config.php';
 
-use \DSI\Repository\FundingSourceRepository;
-use \DSI\Repository\FundingRepository;
-use \DSI\Repository\CountryRepository;
+use \DSI\Repository\FundingSourceRepo;
+use \DSI\Repository\FundingRepo;
+use \DSI\Repository\CountryRepo;
 use \DSI\Entity\FundingSource;
 use \DSI\Entity\Funding;
 use \DSI\Entity\Country;
 
 class FundingRepositoryTest extends PHPUnit_Framework_TestCase
 {
-    /** @var FundingSourceRepository */
+    /** @var FundingSourceRepo */
     private $fundingSourceRepository;
 
     /** @var FundingSource */
     private $fundingSource;
 
-    /** @var CountryRepository */
+    /** @var CountryRepo */
     private $countryRepository;
 
     /** @var Country */
     private $country;
 
-    /** @var FundingRepository */
+    /** @var FundingRepo */
     private $fundingRepository;
 
     public function setUp()
     {
-        $this->fundingRepository = new FundingRepository();
+        $this->fundingRepository = new FundingRepo();
 
-        $this->fundingSourceRepository = new FundingSourceRepository();
+        $this->fundingSourceRepository = new FundingSourceRepo();
         $this->fundingSource = new FundingSource();
         $this->fundingSourceRepository->insert($this->fundingSource);
 
-        $this->countryRepository = new CountryRepository();
+        $this->countryRepository = new CountryRepo();
         $this->country = new Country();
         $this->country->setName('Country Name');
         $this->countryRepository->insert($this->country);

@@ -4,19 +4,19 @@ require_once __DIR__ . '/../../../config.php';
 
 class ProjectNetworkTagRepositoryTest extends PHPUnit_Framework_TestCase
 {
-    /** @var \DSI\Repository\ProjectNetworkTagRepository */
+    /** @var \DSI\Repository\ProjectNetworkTagRepo */
     protected $projectNetworkTagRepo;
 
-    /** @var \DSI\Repository\ProjectRepository */
+    /** @var \DSI\Repository\ProjectRepo */
     protected $projectsRepo;
 
-    /** @var \DSI\Repository\UserRepository */
+    /** @var \DSI\Repository\UserRepo */
     protected $usersRepo;
 
     /** @var \DSI\Entity\Project */
     protected $project_1, $project_2, $project_3;
 
-    /** @var \DSI\Repository\NetworkTagRepository */
+    /** @var \DSI\Repository\NetworkTagRepo */
     protected $networkTagRepo;
 
     /** @var \DSI\Entity\NetworkTag */
@@ -24,10 +24,10 @@ class ProjectNetworkTagRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->projectNetworkTagRepo = new \DSI\Repository\ProjectNetworkTagRepository();
-        $this->projectsRepo = new \DSI\Repository\ProjectRepository();
-        $this->networkTagRepo = new \DSI\Repository\NetworkTagRepository();
-        $this->usersRepo = new \DSI\Repository\UserRepository();
+        $this->projectNetworkTagRepo = new \DSI\Repository\ProjectNetworkTagRepo();
+        $this->projectsRepo = new \DSI\Repository\ProjectRepo();
+        $this->networkTagRepo = new \DSI\Repository\NetworkTagRepo();
+        $this->usersRepo = new \DSI\Repository\UserRepo();
 
         $this->project_1 = $this->createProject(1);
         $this->project_2 = $this->createProject(2);

@@ -4,8 +4,8 @@ namespace DSI\Controller;
 
 use DSI\Entity\Story;
 use DSI\Entity\User;
-use DSI\Repository\StoryRepository;
-use DSI\Repository\UserRepository;
+use DSI\Repository\StoryRepo;
+use DSI\Repository\UserRepo;
 use DSI\Service\Auth;
 use DSI\Service\URL;
 
@@ -25,7 +25,7 @@ class StoryController
         $authUser = new Auth();
         $loggedInUser = $authUser->getUserIfLoggedIn();
 
-        $storyRepo = new StoryRepository();
+        $storyRepo = new StoryRepo();
         $story = $storyRepo->getById($this->data()->storyID);
         $author = $story->getAuthor();
         $stories = $storyRepo->getPublishedLast(5);

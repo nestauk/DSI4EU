@@ -4,13 +4,13 @@ require_once __DIR__ . '/../../../config.php';
 
 class OrganisationMemberInvitationRepositoryTest extends PHPUnit_Framework_TestCase
 {
-    /** @var \DSI\Repository\OrganisationMemberInvitationRepository */
+    /** @var \DSI\Repository\OrganisationMemberInvitationRepo */
     protected $organisationMemberInvitationRepository;
 
-    /** @var \DSI\Repository\OrganisationRepository */
+    /** @var \DSI\Repository\OrganisationRepo */
     protected $organisationsRepo;
 
-    /** @var \DSI\Repository\UserRepository */
+    /** @var \DSI\Repository\UserRepo */
     protected $usersRepo;
 
     /** @var \DSI\Entity\Organisation */
@@ -21,9 +21,9 @@ class OrganisationMemberInvitationRepositoryTest extends PHPUnit_Framework_TestC
 
     public function setUp()
     {
-        $this->organisationMemberInvitationRepository = new \DSI\Repository\OrganisationMemberInvitationRepository();
-        $this->organisationsRepo = new \DSI\Repository\OrganisationRepository();
-        $this->usersRepo = new \DSI\Repository\UserRepository();
+        $this->organisationMemberInvitationRepository = new \DSI\Repository\OrganisationMemberInvitationRepo();
+        $this->organisationsRepo = new \DSI\Repository\OrganisationRepo();
+        $this->usersRepo = new \DSI\Repository\UserRepo();
 
         $this->user_1 = $this->createUser();
         $this->user_2 = $this->createUser();

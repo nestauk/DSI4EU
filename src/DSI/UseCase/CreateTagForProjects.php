@@ -3,7 +3,7 @@
 namespace DSI\UseCase;
 
 use DSI\Entity\TagForProjects;
-use DSI\Repository\TagForProjectsRepository;
+use DSI\Repository\TagForProjectsRepo;
 use DSI\Service\ErrorHandler;
 
 class CreateTagForProjects
@@ -11,7 +11,7 @@ class CreateTagForProjects
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var TagForProjectsRepository */
+    /** @var TagForProjectsRepo */
     private $tagRepo;
 
     /** @var TagForProjects */
@@ -28,7 +28,7 @@ class CreateTagForProjects
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->tagRepo = new TagForProjectsRepository();
+        $this->tagRepo = new TagForProjectsRepo();
 
         if($this->tagRepo->nameExists($this->data()->name)){
             $this->errorHandler->addTaggedError('tag', __('Tag name already exists'));

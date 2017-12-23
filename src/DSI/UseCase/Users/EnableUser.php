@@ -3,7 +3,7 @@
 namespace DSI\UseCase\Users;
 
 use DSI\Entity\User;
-use DSI\Repository\UserRepository;
+use DSI\Repository\UserRepo;
 use DSI\Service\ErrorHandler;
 
 class EnableUser
@@ -22,7 +22,7 @@ class EnableUser
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $userRepo = new UserRepository();
+        $userRepo = new UserRepo();
 
         $this->assertExecutorCanMakeChange();
         

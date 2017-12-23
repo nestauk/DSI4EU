@@ -6,16 +6,16 @@ require_once __DIR__ . '/../../../config.php';
 
 class SetAdminStatusToOrganisationMemberTest extends PHPUnit_Framework_TestCase
 {
-    /** @var \DSI\Repository\OrganisationMemberRepository */
+    /** @var \DSI\Repository\OrganisationMemberRepo */
     private $organisationMemberRepository;
 
-    /** @var \DSI\Repository\OrganisationRepository */
+    /** @var \DSI\Repository\OrganisationRepo */
     private $organisationRepository;
 
     /** @var \DSI\Entity\Organisation */
     private $organisation;
 
-    /** @var \DSI\Repository\UserRepository */
+    /** @var \DSI\Repository\UserRepo */
     private $userRepo;
 
     /** @var \DSI\Entity\User */
@@ -23,9 +23,9 @@ class SetAdminStatusToOrganisationMemberTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->organisationMemberRepository = new \DSI\Repository\OrganisationMemberRepository();
-        $this->organisationRepository = new \DSI\Repository\OrganisationRepository();
-        $this->userRepo = new \DSI\Repository\UserRepository();
+        $this->organisationMemberRepository = new \DSI\Repository\OrganisationMemberRepo();
+        $this->organisationRepository = new \DSI\Repository\OrganisationRepo();
+        $this->userRepo = new \DSI\Repository\UserRepo();
 
         $this->owner = new \DSI\Entity\User();
         $this->userRepo->insert($this->owner);

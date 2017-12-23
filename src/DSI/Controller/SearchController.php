@@ -6,11 +6,11 @@ use DSI\Entity\CaseStudy;
 use DSI\Entity\Organisation;
 use DSI\Entity\Project;
 use DSI\Entity\Story;
-use DSI\Repository\CaseStudyRepository;
-use DSI\Repository\OrganisationRepository;
-use DSI\Repository\ProjectRepository;
-use DSI\Repository\StoryRepository;
-use DSI\Repository\UserRepository;
+use DSI\Repository\CaseStudyRepo;
+use DSI\Repository\OrganisationRepo;
+use DSI\Repository\ProjectRepo;
+use DSI\Repository\StoryRepo;
+use DSI\Repository\UserRepo;
 use DSI\Service\Auth;
 use DSI\Service\URL;
 
@@ -28,10 +28,10 @@ class SearchController
 
         if ($this->format == 'json') {
             if (isset($_POST['term'])) {
-                $organisations = (new OrganisationRepository())->searchByTitle($_POST['term'], 5);
-                $projects = (new ProjectRepository())->searchByTitle($_POST['term'], 5);
-                $blogPosts = (new StoryRepository())->searchByTitle($_POST['term'], 5);
-                $caseStudies = (new CaseStudyRepository())->searchByTitle($_POST['term'], 5);
+                $organisations = (new OrganisationRepo())->searchByTitle($_POST['term'], 5);
+                $projects = (new ProjectRepo())->searchByTitle($_POST['term'], 5);
+                $blogPosts = (new StoryRepo())->searchByTitle($_POST['term'], 5);
+                $caseStudies = (new CaseStudyRepo())->searchByTitle($_POST['term'], 5);
                 echo json_encode([
                     'organisations' => array_map(function (Organisation $organisation) use ($urlHandler) {
                         return [
@@ -61,10 +61,10 @@ class SearchController
             }
         } else {
             $term = $this->term;
-            $caseStudies = (new CaseStudyRepository())->searchByTitle($this->term);
-            $organisations = (new OrganisationRepository())->searchByTitle($this->term);
-            $projects = (new ProjectRepository())->searchByTitle($this->term);
-            $blogPosts = (new StoryRepository())->searchByTitle($this->term);
+            $caseStudies = (new CaseStudyRepo())->searchByTitle($this->term);
+            $organisations = (new OrganisationRepo())->searchByTitle($this->term);
+            $projects = (new ProjectRepo())->searchByTitle($this->term);
+            $blogPosts = (new StoryRepo())->searchByTitle($this->term);
             require __DIR__ . '/../../../www/views/search.php';
         }
     }

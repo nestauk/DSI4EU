@@ -3,8 +3,8 @@
 namespace DSI\Controller;
 
 use DSI\Entity\User;
-use DSI\Repository\OrganisationRepositoryInAPC;
-use DSI\Repository\ProjectRepositoryInAPC;
+use DSI\Repository\OrganisationRepoInAPC;
+use DSI\Repository\ProjectRepoInAPC;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\JsModules;
@@ -58,8 +58,8 @@ class CaseStudyAddController
         }
 
         $angularModules['fileUpload'] = true;
-        $projects = (new ProjectRepositoryInAPC())->getAll();
-        $organisations = (new OrganisationRepositoryInAPC())->getAll();
+        $projects = (new ProjectRepoInAPC())->getAll();
+        $organisations = (new OrganisationRepoInAPC())->getAll();
         JsModules::setTinyMCE(true);
         require(__DIR__ . '/../../../www/views/case-study-add.php');
     }

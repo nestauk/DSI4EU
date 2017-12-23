@@ -2,17 +2,17 @@
 
 require_once __DIR__ . '/../../../config.php';
 
-use \DSI\Repository\OrganisationSizeRepository;
+use \DSI\Repository\OrganisationSizeRepo;
 use \DSI\Entity\OrganisationSize;
 
 class OrganisationSizeRepositoryTest extends PHPUnit_Framework_TestCase
 {
-    /** @var OrganisationSizeRepository */
+    /** @var OrganisationSizeRepo */
     private $organisationSizeRepo;
 
     public function setUp()
     {
-        $this->organisationSizeRepo = new OrganisationSizeRepository();
+        $this->organisationSizeRepo = new OrganisationSizeRepo();
     }
 
     public function tearDown()

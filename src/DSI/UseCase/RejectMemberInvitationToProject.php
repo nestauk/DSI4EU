@@ -5,11 +5,11 @@ namespace DSI\UseCase;
 use DSI\Entity\Project;
 use DSI\Entity\ProjectMemberInvitation;
 use DSI\Entity\User;
-use DSI\Repository\ProjectMemberRepository;
-use DSI\Repository\ProjectMemberInvitationRepository;
-use DSI\Repository\ProjectRepository;
-use DSI\Repository\ProjectRepositoryInAPC;
-use DSI\Repository\UserRepository;
+use DSI\Repository\ProjectMemberRepo;
+use DSI\Repository\ProjectMemberInvitationRepo;
+use DSI\Repository\ProjectRepo;
+use DSI\Repository\ProjectRepoInAPC;
+use DSI\Repository\UserRepo;
 use DSI\Service\ErrorHandler;
 
 class RejectMemberInvitationToProject
@@ -17,16 +17,16 @@ class RejectMemberInvitationToProject
     /** @var ErrorHandler */
     private $errorHandler;
 
-    /** @var ProjectMemberInvitationRepository */
+    /** @var ProjectMemberInvitationRepo */
     private $projectMemberInvitationRepo;
 
-    /** @var ProjectMemberRepository */
+    /** @var ProjectMemberRepo */
     private $projectMemberRepo;
 
-    /** @var ProjectRepository */
+    /** @var ProjectRepo */
     private $projectRepository;
 
-    /** @var UserRepository */
+    /** @var UserRepo */
     private $userRepository;
 
     /** @var RejectMemberInvitationToProject_Data */
@@ -40,10 +40,10 @@ class RejectMemberInvitationToProject
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->projectMemberInvitationRepo = new ProjectMemberInvitationRepository();
-        $this->projectMemberRepo = new ProjectMemberRepository();
-        $this->projectRepository = new ProjectRepositoryInAPC();
-        $this->userRepository = new UserRepository();
+        $this->projectMemberInvitationRepo = new ProjectMemberInvitationRepo();
+        $this->projectMemberRepo = new ProjectMemberRepo();
+        $this->projectRepository = new ProjectRepoInAPC();
+        $this->userRepository = new UserRepo();
 
         $this->assertExecutorIsSet();
 

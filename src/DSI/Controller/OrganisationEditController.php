@@ -7,19 +7,19 @@ use DSI\Entity\Organisation;
 use DSI\Entity\OrganisationLink_Service;
 use DSI\Entity\OrganisationProject;
 use DSI\Entity\User;
-use DSI\Repository\NetworkTagRepository;
-use DSI\Repository\OrganisationLinkRepository;
-use DSI\Repository\OrganisationMemberRepository;
-use DSI\Repository\OrganisationMemberRequestRepository;
-use DSI\Repository\OrganisationNetworkTagRepository;
-use DSI\Repository\OrganisationProjectRepository;
-use DSI\Repository\OrganisationRepository;
-use DSI\Repository\OrganisationRepositoryInAPC;
-use DSI\Repository\OrganisationSizeRepository;
-use DSI\Repository\OrganisationTagRepository;
-use DSI\Repository\OrganisationTypeRepository;
-use DSI\Repository\ProjectRepositoryInAPC;
-use DSI\Repository\TagForOrganisationsRepository;
+use DSI\Repository\NetworkTagRepo;
+use DSI\Repository\OrganisationLinkRepo;
+use DSI\Repository\OrganisationMemberRepo;
+use DSI\Repository\OrganisationMemberRequestRepo;
+use DSI\Repository\OrganisationNetworkTagRepo;
+use DSI\Repository\OrganisationProjectRepo;
+use DSI\Repository\OrganisationRepo;
+use DSI\Repository\OrganisationRepoInAPC;
+use DSI\Repository\OrganisationSizeRepo;
+use DSI\Repository\OrganisationTagRepo;
+use DSI\Repository\OrganisationTypeRepo;
+use DSI\Repository\ProjectRepoInAPC;
+use DSI\Repository\TagForOrganisationsRepo;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\JsModules;
@@ -51,11 +51,11 @@ class OrganisationEditController
         $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
         $loggedInUser = $authUser->getUser();
 
-        $organisationRepo = new OrganisationRepositoryInAPC();
+        $organisationRepo = new OrganisationRepoInAPC();
         $organisation = $organisationRepo->getById($this->organisationID);
 
-        $organisationTypes = (new OrganisationTypeRepository())->getAll();
-        $organisationSizes = (new OrganisationSizeRepository())->getAll();
+        $organisationTypes = (new OrganisationTypeRepo())->getAll();
+        $organisationSizes = (new OrganisationSizeRepo())->getAll();
 
         $isOwner = false;
         if ($organisation->getOwnerID() == $loggedInUser->getId())
@@ -226,18 +226,18 @@ class OrganisationEditController
         }
 
         if (isset($isOwner) AND $isOwner === true)
-            $memberRequests = (new OrganisationMemberRequestRepository())->getMembersForOrganisation($organisation);
+            $memberRequests = (new OrganisationMemberRequestRepo())->getMembersForOrganisation($organisation);
         else
             $memberRequests = [];
 
-        $organisationMembers = (new OrganisationMemberRepository())->getMembersForOrganisation($organisation);
-        $organisationProjects = (new OrganisationProjectRepository())->getByOrganisationID($organisation->getId());
-        $partnerOrganisations = (new OrganisationProjectRepository())->getPartnerOrganisationsFor($organisation);
+        $organisationMembers = (new OrganisationMemberRepo())->getMembersForOrganisation($organisation);
+        $organisationProjects = (new OrganisationProjectRepo())->getByOrganisationID($organisation->getId());
+        $partnerOrganisations = (new OrganisationProjectRepo())->getPartnerOrganisationsFor($organisation);
 
         if ($this->format == 'json') {
             $owner = $organisation->getOwner();
             $links = [];
-            $organisationLinks = (new OrganisationLinkRepository())->getByOrganisationID($organisation->getId());
+            $organisationLinks = (new OrganisationLinkRepo())->getByOrganisationID($organisation->getId());
             foreach ($organisationLinks AS $organisationLink) {
                 if ($organisationLink->getLinkService() == OrganisationLink_Service::Facebook)
                     $links['facebook'] = $organisationLink->getLink();
@@ -311,12 +311,12 @@ class OrganisationEditController
                 $canUserRequestMembership = $this->canUserRequestMembership($organisation, $loggedInUser);
             $pageTitle = $organisation->getName();
             $angularModules['fileUpload'] = true;
-            $tags = (new TagForOrganisationsRepository())->getAll();
-            $networkTags = (new NetworkTagRepository())->getAll();
-            $orgTags = (new OrganisationTagRepository())->getTagNamesByOrganisation($organisation);
-            $orgNetworkTags = (new OrganisationNetworkTagRepository())->getTagNamesByOrganisation($organisation);
-            $projects = (new ProjectRepositoryInAPC())->getAll();
-            $orgProjects = (new OrganisationProjectRepository())->getProjectIDsForOrganisation($organisation);
+            $tags = (new TagForOrganisationsRepo())->getAll();
+            $networkTags = (new NetworkTagRepo())->getAll();
+            $orgTags = (new OrganisationTagRepo())->getTagNamesByOrganisation($organisation);
+            $orgNetworkTags = (new OrganisationNetworkTagRepo())->getTagNamesByOrganisation($organisation);
+            $projects = (new ProjectRepoInAPC())->getAll();
+            $orgProjects = (new OrganisationProjectRepo())->getProjectIDsForOrganisation($organisation);
             JsModules::setTinyMCE(true);
             require __DIR__ . '/../../../www/views/organisation-edit.php';
         }
@@ -326,9 +326,9 @@ class OrganisationEditController
     {
         if ($organisation->getOwnerID() == $loggedInUser->getId())
             return false;
-        if ((new OrganisationMemberRepository())->organisationHasMember($organisation, $loggedInUser))
+        if ((new OrganisationMemberRepo())->organisationHasMember($organisation, $loggedInUser))
             return false;
-        if ((new OrganisationMemberRequestRepository())->organisationHasRequestFromMember($organisation->getId(), $loggedInUser->getId()))
+        if ((new OrganisationMemberRequestRepo())->organisationHasRequestFromMember($organisation->getId(), $loggedInUser->getId()))
             return false;
 
         return true;

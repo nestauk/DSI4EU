@@ -5,12 +5,12 @@ namespace DSI\Controller;
 use DSI\Entity\Project;
 use DSI\Entity\ProjectImpactHelpTag;
 use DSI\Entity\ProjectImpactTechTag;
-use DSI\Repository\OrganisationProjectRepository;
-use DSI\Repository\ProjectDsiFocusTagRepository;
-use DSI\Repository\ProjectImpactHelpTagRepository;
-use DSI\Repository\ProjectImpactTechTagRepository;
-use DSI\Repository\ProjectRepositoryInAPC;
-use DSI\Repository\ProjectTagRepository;
+use DSI\Repository\OrganisationProjectRepo;
+use DSI\Repository\ProjectDsiFocusTagRepo;
+use DSI\Repository\ProjectImpactHelpTagRepo;
+use DSI\Repository\ProjectImpactTechTagRepo;
+use DSI\Repository\ProjectRepoInAPC;
+use DSI\Repository\ProjectTagRepo;
 use DSI\Service\Auth;
 use DSI\Service\URL;
 
@@ -28,7 +28,7 @@ class ExportProjectsController
         $authUser = new Auth();
         $loggedInUser = $authUser->getUserIfLoggedIn();
 
-        $projects = (new ProjectRepositoryInAPC())->getAll();
+        $projects = (new ProjectRepoInAPC())->getAll();
 
         if (isset($_GET['download'])) {
             header('Content-Description: File Transfer');
@@ -193,41 +193,41 @@ class ExportProjectsController
 
     private function getProjectOrganisationIDs(Project $project)
     {
-        return (new OrganisationProjectRepository())->getOrganisationIDsForProject($project);
+        return (new OrganisationProjectRepo())->getOrganisationIDsForProject($project);
     }
 
     private function getTags(Project $project)
     {
-        return (new ProjectTagRepository())->getTagNamesByProject($project);
+        return (new ProjectTagRepo())->getTagNamesByProject($project);
     }
 
     private function getSupportsTagsNames(Project $project)
     {
-        return (new ProjectImpactHelpTagRepository())->getTagNamesByProject($project);
+        return (new ProjectImpactHelpTagRepo())->getTagNamesByProject($project);
     }
 
     private function getSupportsTags(Project $project)
     {
-        return (new ProjectImpactHelpTagRepository())->getTagDataByProject($project);
+        return (new ProjectImpactHelpTagRepo())->getTagDataByProject($project);
     }
 
     private function getFocusTagsNames(Project $project)
     {
-        return (new ProjectDsiFocusTagRepository())->getTagNamesByProject($project);
+        return (new ProjectDsiFocusTagRepo())->getTagNamesByProject($project);
     }
 
     private function getFocusTags(Project $project)
     {
-        return (new ProjectDsiFocusTagRepository())->getTagDataByProject($project);
+        return (new ProjectDsiFocusTagRepo())->getTagDataByProject($project);
     }
 
     private function getTechnologyTagsNames(Project $project)
     {
-        return (new ProjectImpactTechTagRepository())->getTagNamesByProject($project);
+        return (new ProjectImpactTechTagRepo())->getTagNamesByProject($project);
     }
 
     private function getTechnologyTags(Project $project)
     {
-        return (new ProjectImpactTechTagRepository())->getTagDataByProject($project);
+        return (new ProjectImpactTechTagRepo())->getTagDataByProject($project);
     }
 }

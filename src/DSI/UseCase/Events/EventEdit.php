@@ -4,8 +4,8 @@ namespace DSI\UseCase\Events;
 
 use DSI\Entity\CountryRegion;
 use DSI\Entity\Event;
-use DSI\Repository\CountryRegionRepository;
-use DSI\Repository\EventRepository;
+use DSI\Repository\CountryRegionRepo;
+use DSI\Repository\EventRepo;
 use DSI\Service\ErrorHandler;
 use DSI\UseCase\CreateCountryRegion;
 
@@ -17,10 +17,10 @@ class EventEdit
     /** @var EventEdit_Data */
     private $data;
 
-    /** @var EventRepository */
+    /** @var EventRepo */
     private $eventRepository;
 
-    /** @var CountryRegionRepository */
+    /** @var CountryRegionRepo */
     private $countryRegionRepo;
 
     /** @var CountryRegion */
@@ -29,13 +29,13 @@ class EventEdit
     public function __construct()
     {
         $this->data = new EventEdit_Data();
-        $this->countryRegionRepo = new CountryRegionRepository();
+        $this->countryRegionRepo = new CountryRegionRepo();
     }
 
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->eventRepository = new EventRepository();
+        $this->eventRepository = new EventRepo();
 
         $this->assertDataHasBeenSubmitted();
         $this->assertDataIsNotEmpty();

@@ -4,21 +4,21 @@ require_once __DIR__ . '/../../../config.php';
 
 use DSI\UseCase\Register;
 use DSI\Service\ErrorHandler;
-use DSI\Repository\UserRepository;
+use DSI\Repository\UserRepo;
 
 class RegisterTest extends PHPUnit_Framework_TestCase
 {
     /** @var Register */
     private $registerCommand;
 
-    /** @var UserRepository */
+    /** @var UserRepo */
     private $userRepo;
 
     public function setUp()
     {
         $this->registerCommand = new Register();
 
-        $this->userRepo = new UserRepository();
+        $this->userRepo = new UserRepo();
         $this->registerCommand->setUserRepo($this->userRepo);
     }
 

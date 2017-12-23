@@ -7,19 +7,19 @@ use DSI\Entity\Image;
 use DSI\Entity\Project;
 use DSI\Entity\ProjectLink_Service;
 use DSI\Entity\User;
-use DSI\Repository\DsiFocusTagRepository;
-use DSI\Repository\ImpactTagRepository;
-use DSI\Repository\OrganisationProjectRepository;
-use DSI\Repository\OrganisationRepositoryInAPC;
-use DSI\Repository\ProjectImpactHelpTagRepository;
-use DSI\Repository\ProjectDsiFocusTagRepository;
-use DSI\Repository\ProjectImpactTechTagRepository;
-use DSI\Repository\ProjectLinkRepository;
-use DSI\Repository\ProjectMemberRepository;
-use DSI\Repository\ProjectRepository;
-use DSI\Repository\ProjectRepositoryInAPC;
-use DSI\Repository\ProjectTagRepository;
-use DSI\Repository\TagForProjectsRepository;
+use DSI\Repository\DsiFocusTagRepo;
+use DSI\Repository\ImpactTagRepo;
+use DSI\Repository\OrganisationProjectRepo;
+use DSI\Repository\OrganisationRepoInAPC;
+use DSI\Repository\ProjectImpactHelpTagRepo;
+use DSI\Repository\ProjectDsiFocusTagRepo;
+use DSI\Repository\ProjectImpactTechTagRepo;
+use DSI\Repository\ProjectLinkRepo;
+use DSI\Repository\ProjectMemberRepo;
+use DSI\Repository\ProjectRepo;
+use DSI\Repository\ProjectRepoInAPC;
+use DSI\Repository\ProjectTagRepo;
+use DSI\Repository\TagForProjectsRepo;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\JsModules;
@@ -42,7 +42,7 @@ class ProjectEditController
         $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
         $loggedInUser = $authUser->getUser();
 
-        $projectRepo = new ProjectRepositoryInAPC();
+        $projectRepo = new ProjectRepoInAPC();
         $project = $projectRepo->getById($this->projectID);
 
         if (!$this->userCanModifyProject($project, $loggedInUser))
@@ -103,7 +103,7 @@ class ProjectEditController
 
             $owner = $project->getOwner();
             $links = [];
-            $projectLinks = (new ProjectLinkRepository())->getByProjectID($project->getId());
+            $projectLinks = (new ProjectLinkRepo())->getByProjectID($project->getId());
             foreach ($projectLinks AS $projectLink) {
                 if ($projectLink->getLinkService() == ProjectLink_Service::Facebook)
                     $links['facebook'] = $projectLink->getLink();
@@ -137,17 +137,17 @@ class ProjectEditController
 
         } else {
             $data = ['project' => $project];
-            $tags = (new TagForProjectsRepository())->getAll();
-            $impactTags = (new ImpactTagRepository())->getAll();
+            $tags = (new TagForProjectsRepo())->getAll();
+            $impactTags = (new ImpactTagRepo())->getAll();
             $impactMainTags = array_slice($impactTags, 0, 9);
             $impactSecondaryTags = array_slice($impactTags, 9);
-            $dsiFocusTags = (new DsiFocusTagRepository())->getAll();
-            $projectImpactTagsA = (new ProjectImpactHelpTagRepository())->getTagNamesByProject($project);
-            $projectImpactTagsB = (new ProjectDsiFocusTagRepository())->getTagNamesByProject($project);
-            $projectImpactTagsC = (new ProjectImpactTechTagRepository())->getTagNamesByProject($project);
-            $projectTags = (new ProjectTagRepository())->getTagNamesByProject($project);
-            $organisations = (new OrganisationRepositoryInAPC())->getAll();
-            $projectOrganisations = (new OrganisationProjectRepository())->getOrganisationIDsForProject($project);
+            $dsiFocusTags = (new DsiFocusTagRepo())->getAll();
+            $projectImpactTagsA = (new ProjectImpactHelpTagRepo())->getTagNamesByProject($project);
+            $projectImpactTagsB = (new ProjectDsiFocusTagRepo())->getTagNamesByProject($project);
+            $projectImpactTagsC = (new ProjectImpactTechTagRepo())->getTagNamesByProject($project);
+            $projectTags = (new ProjectTagRepo())->getTagNamesByProject($project);
+            $organisations = (new OrganisationRepoInAPC())->getAll();
+            $projectOrganisations = (new OrganisationProjectRepo())->getOrganisationIDsForProject($project);
             $angularModules['fileUpload'] = true;
             JsModules::setTinyMCE(true);
             require __DIR__ . '/../../../www/views/project-edit.php';
@@ -159,7 +159,7 @@ class ProjectEditController
         if ($project->getOwnerID() == $user->getId())
             return true;
 
-        if ((new ProjectMemberRepository())->projectHasMember($project, $user))
+        if ((new ProjectMemberRepo())->projectHasMember($project, $user))
             return true;
 
         if ($user->isCommunityAdmin())

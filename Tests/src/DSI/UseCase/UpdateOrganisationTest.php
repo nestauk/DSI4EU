@@ -3,14 +3,14 @@
 require_once __DIR__ . '/../../../config.php';
 
 use DSI\Service\ErrorHandler;
-use DSI\Repository\OrganisationRepository;
+use DSI\Repository\OrganisationRepo;
 
 class UpdateOrganisationTest extends PHPUnit_Framework_TestCase
 {
     /** @var \DSI\UseCase\UpdateOrganisation */
     private $updateOrganisation;
 
-    /** @var OrganisationRepository */
+    /** @var OrganisationRepo */
     private $organisationRepo;
 
     /** @var \DSI\Entity\Organisation */
@@ -22,14 +22,14 @@ class UpdateOrganisationTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->updateOrganisation = new \DSI\UseCase\UpdateOrganisation();
-        $this->organisationRepo = new OrganisationRepository();
+        $this->organisationRepo = new OrganisationRepo();
 
         $this->user1 = new \DSI\Entity\User();
-        $userRepo = new \DSI\Repository\UserRepository();
+        $userRepo = new \DSI\Repository\UserRepo();
         $userRepo->insert($this->user1);
 
         $this->user2 = new \DSI\Entity\User();
-        $userRepo = new \DSI\Repository\UserRepository();
+        $userRepo = new \DSI\Repository\UserRepo();
         $userRepo->insert($this->user2);
 
         $createOrganisation = new \DSI\UseCase\CreateOrganisation();
@@ -44,7 +44,7 @@ class UpdateOrganisationTest extends PHPUnit_Framework_TestCase
     public function tearDown()
     {
         $this->organisationRepo->clearAll();
-        (new \DSI\Repository\OrganisationMemberRepository())->clearAll();
+        (new \DSI\Repository\OrganisationMemberRepo())->clearAll();
     }
 
     /** @test */

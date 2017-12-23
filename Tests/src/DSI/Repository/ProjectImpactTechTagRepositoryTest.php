@@ -4,19 +4,19 @@ require_once __DIR__ . '/../../../config.php';
 
 class ProjectImpactTechTagRepositoryTest extends PHPUnit_Framework_TestCase
 {
-    /** @var \DSI\Repository\ProjectImpactTechTagRepository */
+    /** @var \DSI\Repository\ProjectImpactTechTagRepo */
     protected $projectTagsRepo;
 
-    /** @var \DSI\Repository\ProjectRepository */
+    /** @var \DSI\Repository\ProjectRepo */
     protected $projectsRepo;
 
-    /** @var \DSI\Repository\UserRepository */
+    /** @var \DSI\Repository\UserRepo */
     protected $usersRepo;
 
     /** @var \DSI\Entity\Project */
     protected $project_1, $project_2, $project_3;
 
-    /** @var \DSI\Repository\ImpactTagRepository */
+    /** @var \DSI\Repository\ImpactTagRepo */
     protected $tagsRepo;
 
     /** @var \DSI\Entity\ImpactTag */
@@ -24,10 +24,10 @@ class ProjectImpactTechTagRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->projectTagsRepo = new \DSI\Repository\ProjectImpactTechTagRepository();
-        $this->projectsRepo = new \DSI\Repository\ProjectRepository();
-        $this->tagsRepo = new \DSI\Repository\ImpactTagRepository();
-        $this->usersRepo = new \DSI\Repository\UserRepository();
+        $this->projectTagsRepo = new \DSI\Repository\ProjectImpactTechTagRepo();
+        $this->projectsRepo = new \DSI\Repository\ProjectRepo();
+        $this->tagsRepo = new \DSI\Repository\ImpactTagRepo();
+        $this->usersRepo = new \DSI\Repository\UserRepo();
 
         $this->project_1 = $this->createProject(1);
         $this->project_2 = $this->createProject(2);

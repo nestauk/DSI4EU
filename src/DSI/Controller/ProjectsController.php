@@ -3,11 +3,11 @@
 namespace DSI\Controller;
 
 use DSI\Entity\Project;
-use DSI\Repository\ProjectDsiFocusTagRepository;
-use DSI\Repository\ProjectImpactHelpTagRepository;
-use DSI\Repository\ProjectImpactTechTagRepository;
-use DSI\Repository\ProjectRepositoryInAPC;
-use DSI\Repository\ProjectTagRepository;
+use DSI\Repository\ProjectDsiFocusTagRepo;
+use DSI\Repository\ProjectImpactHelpTagRepo;
+use DSI\Repository\ProjectImpactTechTagRepo;
+use DSI\Repository\ProjectRepoInAPC;
+use DSI\Repository\ProjectTagRepo;
 use DSI\Service\Auth;
 use DSI\Service\URL;
 
@@ -15,16 +15,16 @@ class ProjectsController
 {
     public $responseFormat = 'html';
 
-    /** @var ProjectDsiFocusTagRepository */
+    /** @var ProjectDsiFocusTagRepo */
     private $projectDsiFocusTagRepo;
 
-    /** @var ProjectTagRepository */
+    /** @var ProjectTagRepo */
     private $projectTagRepo;
 
-    /** @var ProjectImpactHelpTagRepository */
+    /** @var ProjectImpactHelpTagRepo */
     private $projectImpactHelpTagRepo;
 
-    /** @var ProjectImpactTechTagRepository */
+    /** @var ProjectImpactTechTagRepo */
     private $projectImpactTechTagRepo;
 
     public function exec()
@@ -33,11 +33,11 @@ class ProjectsController
         $authUser = new Auth();
         $loggedInUser = $authUser->getUserIfLoggedIn();
         if ($this->responseFormat == 'json') {
-            $projectRepositoryInAPC = new ProjectRepositoryInAPC();
-            $this->projectDsiFocusTagRepo = new ProjectDsiFocusTagRepository();
-            $this->projectTagRepo = new ProjectTagRepository();
-            $this->projectImpactHelpTagRepo = new ProjectImpactHelpTagRepository();
-            $this->projectImpactTechTagRepo = new ProjectImpactTechTagRepository();
+            $projectRepositoryInAPC = new ProjectRepoInAPC();
+            $this->projectDsiFocusTagRepo = new ProjectDsiFocusTagRepo();
+            $this->projectTagRepo = new ProjectTagRepo();
+            $this->projectImpactHelpTagRepo = new ProjectImpactHelpTagRepo();
+            $this->projectImpactTechTagRepo = new ProjectImpactTechTagRepo();
             echo json_encode(array_map(function (Project $project) use ($urlHandler) {
                 return [
                     'id' => $project->getId(),

@@ -2,16 +2,16 @@
 
 require_once __DIR__ . '/../../../config.php';
 
-use \DSI\Repository\AppRegistrationRepository;
+use \DSI\Repository\AppRegistrationRepo;
 use \DSI\Entity\AppRegistration;
-use \DSI\Repository\UserRepository;
+use \DSI\Repository\UserRepo;
 
 class AppRegistrationRepositoryTest extends PHPUnit_Framework_TestCase
 {
-    /** @var UserRepository */
+    /** @var UserRepo */
     private $userRepository;
 
-    /** @var AppRegistrationRepository */
+    /** @var AppRegistrationRepo */
     private $appRegistrationRepository;
 
     /** @var AppRegistration */
@@ -19,8 +19,8 @@ class AppRegistrationRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->appRegistrationRepository = new AppRegistrationRepository();
-        $this->userRepository = new UserRepository();
+        $this->appRegistrationRepository = new AppRegistrationRepo();
+        $this->userRepository = new UserRepo();
         $this->appRegistration = new AppRegistration();
     }
 

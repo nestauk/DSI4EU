@@ -7,16 +7,16 @@ class AddTagToProjectTest extends PHPUnit_Framework_TestCase
     /** @var \DSI\UseCase\AddTagToProject */
     private $addTagToProject;
 
-    /** @var \DSI\Repository\TagForProjectsRepository */
+    /** @var \DSI\Repository\TagForProjectsRepo */
     private $tagRepo;
 
-    /** @var \DSI\Repository\ProjectRepository */
+    /** @var \DSI\Repository\ProjectRepo */
     private $projectRepo;
 
     /** @var \DSI\Entity\Project */
     private $project;
 
-    /** @var \DSI\Repository\UserRepository */
+    /** @var \DSI\Repository\UserRepo */
     private $userRepo;
 
     /** @var \DSI\Entity\User */
@@ -25,9 +25,9 @@ class AddTagToProjectTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->addTagToProject = new \DSI\UseCase\AddTagToProject();
-        $this->tagRepo = new \DSI\Repository\TagForProjectsRepository();
-        $this->projectRepo = new \DSI\Repository\ProjectRepository();
-        $this->userRepo = new \DSI\Repository\UserRepository();
+        $this->tagRepo = new \DSI\Repository\TagForProjectsRepo();
+        $this->projectRepo = new \DSI\Repository\ProjectRepo();
+        $this->userRepo = new \DSI\Repository\UserRepo();
 
         $this->user = new \DSI\Entity\User();
         $this->userRepo->insert($this->user);
@@ -42,7 +42,7 @@ class AddTagToProjectTest extends PHPUnit_Framework_TestCase
         $this->tagRepo->clearAll();
         $this->projectRepo->clearAll();
         $this->userRepo->clearAll();
-        (new \DSI\Repository\ProjectTagRepository())->clearAll();
+        (new \DSI\Repository\ProjectTagRepo())->clearAll();
     }
 
     /** @test */
@@ -53,7 +53,7 @@ class AddTagToProjectTest extends PHPUnit_Framework_TestCase
         $this->addTagToProject->exec();
 
         $this->assertTrue(
-            (new \DSI\Repository\ProjectTagRepository())->projectHasTagName(
+            (new \DSI\Repository\ProjectTagRepo())->projectHasTagName(
                 $this->addTagToProject->data()->projectID,
                 $this->addTagToProject->data()->tag
             )

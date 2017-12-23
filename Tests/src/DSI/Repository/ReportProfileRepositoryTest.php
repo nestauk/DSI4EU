@@ -2,8 +2,8 @@
 
 require_once __DIR__ . '/../../../config.php';
 
-use \DSI\Repository\ReportProfileRepository;
-use \DSI\Repository\UserRepository;
+use \DSI\Repository\ReportProfileRepo;
+use \DSI\Repository\UserRepo;
 use \DSI\Entity\User;
 use \DSI\Entity\ReportProfile;
 
@@ -13,10 +13,10 @@ class ReportProfileRepositoryTest extends PHPUnit_Framework_TestCase
     const REVIEWED_TIME = '2016-10-10 10:12:12';
     const REVIEW = 'Report Accepted';
 
-    /** @var ReportProfileRepository */
+    /** @var ReportProfileRepo */
     private $reportRepo;
 
-    /** @var UserRepository */
+    /** @var UserRepo */
     private $userRepo;
 
     /** @var User */
@@ -26,8 +26,8 @@ class ReportProfileRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->reportRepo = new ReportProfileRepository;
-        $this->userRepo = new UserRepository();
+        $this->reportRepo = new ReportProfileRepo;
+        $this->userRepo = new UserRepo();
 
         $this->byUser = new User();
         $this->userRepo->insert($this->byUser);
@@ -60,7 +60,7 @@ class ReportProfileRepositoryTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(1, $report->getId());
 
-        $report = (new ReportProfileRepository())->getById($report->getId());
+        $report = (new ReportProfileRepo())->getById($report->getId());
         $this->assertEquals($this->byUser->getId(), $report->getByUserId());
         $this->assertEquals($this->reportedUser->getId(), $report->getReportedUserId());
         $this->assertEquals(self::COMMENT, $report->getComment());
@@ -76,7 +76,7 @@ class ReportProfileRepositoryTest extends PHPUnit_Framework_TestCase
         $report = new ReportProfile();
         $this->reportRepo->insert($report);
 
-        $report = (new ReportProfileRepository())->getById($report->getId());
+        $report = (new ReportProfileRepo())->getById($report->getId());
         $report->setByUser($this->byUser);
         $report->setReportedUser($this->reportedUser);
         $report->setComment(self::COMMENT);
@@ -86,7 +86,7 @@ class ReportProfileRepositoryTest extends PHPUnit_Framework_TestCase
 
         $this->reportRepo->save($report);
 
-        $report = (new ReportProfileRepository())->getById($report->getId());
+        $report = (new ReportProfileRepo())->getById($report->getId());
         $this->assertEquals($this->byUser->getId(), $report->getByUserId());
         $this->assertEquals($this->reportedUser->getId(), $report->getReportedUserId());
         $this->assertEquals(self::COMMENT, $report->getComment());

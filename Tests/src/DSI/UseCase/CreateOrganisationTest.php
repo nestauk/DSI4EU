@@ -7,13 +7,13 @@ class CreateOrganisationTest extends PHPUnit_Framework_TestCase
     /** @var \DSI\UseCase\CreateOrganisation */
     private $createOrgCmd;
 
-    /** @var \DSI\Repository\OrganisationMemberRepository */
+    /** @var \DSI\Repository\OrganisationMemberRepo */
     private $organisationMemberRepo;
 
-    /** @var \DSI\Repository\OrganisationRepository */
+    /** @var \DSI\Repository\OrganisationRepo */
     private $organisationRepo;
 
-    /** @var \DSI\Repository\UserRepository */
+    /** @var \DSI\Repository\UserRepo */
     private $userRepo;
 
     /** @var \DSI\Entity\User */
@@ -22,9 +22,9 @@ class CreateOrganisationTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->createOrgCmd = new \DSI\UseCase\CreateOrganisation();
-        $this->organisationMemberRepo = new \DSI\Repository\OrganisationMemberRepository();
-        $this->organisationRepo = new \DSI\Repository\OrganisationRepository();
-        $this->userRepo = new \DSI\Repository\UserRepository();
+        $this->organisationMemberRepo = new \DSI\Repository\OrganisationMemberRepo();
+        $this->organisationRepo = new \DSI\Repository\OrganisationRepo();
+        $this->userRepo = new \DSI\Repository\UserRepo();
 
         $this->user = new \DSI\Entity\User();
         $this->userRepo->insert($this->user);
@@ -111,7 +111,7 @@ class CreateOrganisationTest extends PHPUnit_Framework_TestCase
         $this->createOrgCmd->exec();
         $organisation = $this->createOrgCmd->getOrganisation();
 
-        $organisation = (new \DSI\Repository\OrganisationRepository())
+        $organisation = (new \DSI\Repository\OrganisationRepo())
             ->getById($organisation->getId());
 
         $this->assertTrue($organisation->isWaitingApproval());

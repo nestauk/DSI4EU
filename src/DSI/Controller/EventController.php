@@ -4,7 +4,7 @@ namespace DSI\Controller;
 
 use DSI\Entity\Event;
 use DSI\Entity\User;
-use DSI\Repository\EventRepository;
+use DSI\Repository\EventRepo;
 use DSI\Service\Auth;
 use DSI\Service\URL;
 
@@ -24,7 +24,7 @@ class EventController
         $authUser = new Auth();
         $loggedInUser = $authUser->getUserIfLoggedIn();
 
-        $event = (new EventRepository())->getById($this->eventID);
+        $event = (new EventRepo())->getById($this->eventID);
         $userCanManageEvent = $this->userCanManageEvents($loggedInUser);
 
         if ($this->format == 'json') {

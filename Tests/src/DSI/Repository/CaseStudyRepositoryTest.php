@@ -2,22 +2,22 @@
 
 require_once __DIR__ . '/../../../config.php';
 
-use \DSI\Repository\CaseStudyRepository;
-use \DSI\Repository\CountryRegionRepository;
-use \DSI\Repository\CountryRepository;
+use \DSI\Repository\CaseStudyRepo;
+use \DSI\Repository\CountryRegionRepo;
+use \DSI\Repository\CountryRepo;
 use \DSI\Entity\CaseStudy;
 use \DSI\Entity\CountryRegion;
 use \DSI\Entity\Country;
 
 class CaseStudyRepositoryTest extends PHPUnit_Framework_TestCase
 {
-    /** @var CaseStudyRepository */
+    /** @var CaseStudyRepo */
     private $caseStudyRepository;
 
-    /** @var CountryRegionRepository */
+    /** @var CountryRegionRepo */
     private $countryRegionRepo;
 
-    /** @var CountryRepository */
+    /** @var CountryRepo */
     private $countryRepo;
 
     /** @var Country */
@@ -28,9 +28,9 @@ class CaseStudyRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->caseStudyRepository = new CaseStudyRepository();
-        $this->countryRegionRepo = new CountryRegionRepository();
-        $this->countryRepo = new CountryRepository();
+        $this->caseStudyRepository = new CaseStudyRepo();
+        $this->countryRegionRepo = new CountryRegionRepo();
+        $this->countryRepo = new CountryRepo();
 
         $this->country = new Country();
         $this->country->setName('testCountry');

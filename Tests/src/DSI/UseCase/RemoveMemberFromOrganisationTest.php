@@ -10,13 +10,13 @@ class RemoveMemberFromOrganisationTest extends PHPUnit_Framework_TestCase
     /** @var \DSI\UseCase\RemoveMemberFromOrganisation */
     private $removeMemberFromOrganisationCommand;
 
-    /** @var \DSI\Repository\OrganisationMemberRepository */
+    /** @var \DSI\Repository\OrganisationMemberRepo */
     private $organisationMemberRepo;
 
-    /** @var \DSI\Repository\UserRepository */
+    /** @var \DSI\Repository\UserRepo */
     private $userRepo;
 
-    /** @var \DSI\Repository\OrganisationRepository */
+    /** @var \DSI\Repository\OrganisationRepo */
     private $organisationRepo;
 
     /** @var \DSI\Entity\User */
@@ -29,9 +29,9 @@ class RemoveMemberFromOrganisationTest extends PHPUnit_Framework_TestCase
     {
         $this->addMemberToOrganisationCommand = new \DSI\UseCase\AddMemberToOrganisation();
         $this->removeMemberFromOrganisationCommand = new \DSI\UseCase\RemoveMemberFromOrganisation();
-        $this->organisationMemberRepo = new \DSI\Repository\OrganisationMemberRepository();
-        $this->organisationRepo = new \DSI\Repository\OrganisationRepository();
-        $this->userRepo = new \DSI\Repository\UserRepository();
+        $this->organisationMemberRepo = new \DSI\Repository\OrganisationMemberRepo();
+        $this->organisationRepo = new \DSI\Repository\OrganisationRepo();
+        $this->userRepo = new \DSI\Repository\UserRepo();
 
         $this->user = new \DSI\Entity\User();
         $this->userRepo->insert($this->user);

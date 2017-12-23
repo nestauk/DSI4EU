@@ -5,11 +5,11 @@ namespace DSI\UseCase\Funding;
 use DSI\Entity\Funding;
 use DSI\Entity\FundingSource;
 use DSI\NotFound;
-use DSI\Repository\CountryRepository;
-use DSI\Repository\FundingRepository;
-use DSI\Repository\FundingSourceRepository;
-use DSI\Repository\FundingTargetRepository;
-use DSI\Repository\FundingTypeRepository;
+use DSI\Repository\CountryRepo;
+use DSI\Repository\FundingRepo;
+use DSI\Repository\FundingSourceRepo;
+use DSI\Repository\FundingTargetRepo;
+use DSI\Repository\FundingTypeRepo;
 use DSI\Service\ErrorHandler;
 
 class FundingCreate
@@ -20,7 +20,7 @@ class FundingCreate
     /** @var FundingCreate_Data */
     private $data;
 
-    /** @var FundingRepository */
+    /** @var FundingRepo */
     private $fundingRepository;
 
     /** @var FundingSource */
@@ -34,7 +34,7 @@ class FundingCreate
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        $this->fundingRepository = new FundingRepository();
+        $this->fundingRepository = new FundingRepo();
 
         $this->assertDataHasBeenSubmitted();
         $this->assertDataIsNotEmpty();
@@ -54,14 +54,14 @@ class FundingCreate
 
     private function saveFunding()
     {
-        $fundingTargetRepository = new FundingTargetRepository();
+        $fundingTargetRepository = new FundingTargetRepo();
 
         $funding = new Funding();
         $funding->setTitle($this->data()->title);
         $funding->setUrl($this->data()->url);
         if ($this->data()->typeID)
-            $funding->setType((new FundingTypeRepository())->getById($this->data()->typeID));
-        $funding->setCountry((new CountryRepository())->getById($this->data()->countryID));
+            $funding->setType((new FundingTypeRepo())->getById($this->data()->typeID));
+        $funding->setCountry((new CountryRepo())->getById($this->data()->countryID));
         if ($this->fundingSource)
             $funding->setSource($this->fundingSource);
         foreach ((array)$this->data()->targets AS $targetID)
@@ -106,7 +106,7 @@ class FundingCreate
     private function getFundingSource()
     {
         if ($this->data()->sourceTitle) {
-            $fundingSourceRepository = new FundingSourceRepository();
+            $fundingSourceRepository = new FundingSourceRepo();
             try {
                 $this->fundingSource = $fundingSourceRepository->getByTitle($this->data()->sourceTitle);
             } catch (NotFound $e) {
