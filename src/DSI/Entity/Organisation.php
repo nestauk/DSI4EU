@@ -45,7 +45,8 @@ class Organisation
         $headerImage;
 
     /** @var boolean */
-    private $isPublished;
+    private $isWaitingApproval,
+        $isPublished;
 
     /**
      * @return int
@@ -467,6 +468,24 @@ class Organisation
     public function setHeaderImage($headerImage)
     {
         $this->headerImage = (string)$headerImage;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isWaitingApproval(): bool
+    {
+        return (bool)$this->isWaitingApproval;
+    }
+
+    /**
+     * @param bool $isWaitingApproval
+     * @return Organisation
+     */
+    public function setIsWaitingApproval(bool $isWaitingApproval)
+    {
+        $this->isWaitingApproval = $isWaitingApproval;
+        return $this;
     }
 
     /**

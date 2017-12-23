@@ -64,6 +64,7 @@ class CreateOrganisation
         $organisation->setName((string)$this->data()->name);
         $organisation->setDescription((string)$this->data()->description);
         $organisation->setOwner($this->data()->owner);
+        $organisation->setIsWaitingApproval(true);
         $this->organisationRepo->insert($organisation);
 
         $contentUpdate = new ContentUpdate();

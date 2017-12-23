@@ -35,7 +35,8 @@ class Project
         $socialImpact;
 
     /** @var bool */
-    private $isPublished;
+    private $isWaitingApproval,
+        $isPublished;
 
     /**
      * @return int
@@ -457,6 +458,24 @@ class Project
     public function setSocialImpact($socialImpact)
     {
         $this->socialImpact = (string)$socialImpact;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isWaitingApproval(): bool
+    {
+        return (bool)$this->isWaitingApproval;
+    }
+
+    /**
+     * @param bool $isWaitingApproval
+     * @return Project
+     */
+    public function setIsWaitingApproval(bool $isWaitingApproval)
+    {
+        $this->isWaitingApproval = $isWaitingApproval;
+        return $this;
     }
 
     /**

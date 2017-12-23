@@ -102,6 +102,21 @@ class CreateProjectTest extends PHPUnit_Framework_TestCase
     }
 
     /** @ test */
+    public function projectIsWaitingApprovalOnCreation()
+    {
+        $this->createProjectCommand->data()->name = 'test';
+        $this->createProjectCommand->data()->description = 'test';
+        $this->createProjectCommand->data()->owner = $this->user;
+        $this->createProjectCommand->exec();
+        $project = $this->createProjectCommand->getProject();
+
+        $project = (new \DSI\Repository\ProjectRepository())
+            ->getById($project->getId());
+
+        $this->assertTrue($project->isWaitingApproval());
+    }
+
+    /** @ test */
     public function cannotAddWithAnEmptyName()
     {
         $e = null;

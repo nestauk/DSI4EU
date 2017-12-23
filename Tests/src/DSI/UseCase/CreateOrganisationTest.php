@@ -47,7 +47,7 @@ class CreateOrganisationTest extends PHPUnit_Framework_TestCase
         $e = null;
         try {
             $this->createOrgCmd->exec();
-        } catch(\DSI\Service\ErrorHandler $e){
+        } catch (\DSI\Service\ErrorHandler $e) {
         }
 
         $this->assertNotNull($e);
@@ -100,6 +100,21 @@ class CreateOrganisationTest extends PHPUnit_Framework_TestCase
                 $this->user->getId(), $organisation->getId()
             )->isAdmin()
         );
+    }
+
+    /** @ test */
+    public function organisationIsWaitingApprovalOnCreation()
+    {
+        $this->createOrgCmd->data()->name = 'test';
+        $this->createOrgCmd->data()->description = 'test';
+        $this->createOrgCmd->data()->owner = $this->user;
+        $this->createOrgCmd->exec();
+        $organisation = $this->createOrgCmd->getOrganisation();
+
+        $organisation = (new \DSI\Repository\OrganisationRepository())
+            ->getById($organisation->getId());
+
+        $this->assertTrue($organisation->isWaitingApproval());
     }
 
     /** @ test */

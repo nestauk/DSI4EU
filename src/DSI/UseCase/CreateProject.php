@@ -38,7 +38,7 @@ class CreateProject
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        if(!$this->forceCreation){
+        if (!$this->forceCreation) {
             $this->errorHandler->addTaggedError('name', __("We are sorry, but at the moment you cannot add a new project. We are working on getting this fixed as soon as possible."));
             throw $this->errorHandler;
         }
@@ -64,6 +64,7 @@ class CreateProject
         $project->setName((string)$this->data()->name);
         $project->setDescription((string)$this->data()->description);
         $project->setOwner($this->data()->owner);
+        $project->setIsWaitingApproval(true);
         $this->projectRepo->insert($project);
 
         $contentUpdate = new ContentUpdate();
