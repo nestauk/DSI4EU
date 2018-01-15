@@ -7,6 +7,7 @@ use DSI\Entity\OrganisationLink_Service;
 use DSI\Entity\OrganisationNetworkTag;
 use DSI\Entity\OrganisationTag;
 use DSI\Entity\User;
+use DSI\NotFound;
 use DSI\Repository\OrganisationFollowRepo;
 use DSI\Repository\OrganisationLinkRepo;
 use DSI\Repository\OrganisationMemberRepo;
@@ -35,6 +36,9 @@ class OrganisationController
     /** @var  OrganisationController_Data */
     private $data;
 
+    /** @var Organisation */
+    private $organisation;
+
     public function __construct()
     {
         $this->data = new OrganisationController_Data();
@@ -47,7 +51,19 @@ class OrganisationController
         $authUser = new Auth();
         $loggedInUser = $authUser->getUserIfLoggedIn();
         $organisationRepo = new OrganisationRepoInAPC();
-        $organisation = $organisationRepo->getById($this->data()->organisationID);
+        try {
+            $this->organisation = $organisationRepo->getById($this->data()->organisationID);
+        } catch (NotFound $e) {
+            $pageTitle = 'Organisation does not exist';
+            require __DIR__ . '/../../../www/views/organisation-404.php';
+            return;
+        }
+
+        if ($this->organisation->isWaitingApproval() AND !$this->canViewWaitingApproval($loggedInUser)) {
+            $pageTitle = 'Project is waiting approval';
+            require __DIR__ . '/../../../www/views/organisation-404.php';
+            return;
+        }
 
         $userIsMember = false;
         $userSentJoinRequest = false;
@@ -62,7 +78,7 @@ class OrganisationController
                 $authUser->ifNotLoggedInRedirectTo(URL::login());
 
                 $updateOrganisation = new UpdateOrganisation();
-                $updateOrganisation->data()->organisation = $organisation;
+                $updateOrganisation->data()->organisation = $this->organisation;
                 $updateOrganisation->data()->executor = $loggedInUser;
                 if (isset($_POST['name']))
                     $updateOrganisation->data()->name = $_POST['name'];
@@ -81,7 +97,7 @@ class OrganisationController
 
             if (isset($_POST['addTag'])) {
                 $addTagCmd = new AddTagToOrganisation();
-                $addTagCmd->data()->organisationID = $organisation->getId();
+                $addTagCmd->data()->organisationID = $this->organisation->getId();
                 $addTagCmd->data()->tag = $_POST['addTag'];
                 $addTagCmd->exec();
                 echo json_encode(['result' => 'ok']);
@@ -89,7 +105,7 @@ class OrganisationController
             }
             if (isset($_POST['removeTag'])) {
                 $removeTagCmd = new RemoveTagFromOrganisation();
-                $removeTagCmd->data()->organisationID = $organisation->getId();
+                $removeTagCmd->data()->organisationID = $this->organisation->getId();
                 $removeTagCmd->data()->tag = $_POST['removeTag'];
                 $removeTagCmd->exec();
                 echo json_encode(['result' => 'ok']);
@@ -98,7 +114,7 @@ class OrganisationController
 
             if (isset($_POST['addMember'])) {
                 $addMemberToOrgCmd = new AddMemberInvitationToOrganisation();
-                $addMemberToOrgCmd->data()->organisationID = $organisation->getId();
+                $addMemberToOrgCmd->data()->organisationID = $this->organisation->getId();
                 $addMemberToOrgCmd->data()->userID = $_POST['addMember'];
                 $addMemberToOrgCmd->exec();
                 echo json_encode(['result' => 'ok']);
@@ -106,7 +122,7 @@ class OrganisationController
             }
             if (isset($_POST['removeMember'])) {
                 $removeMemberFromOrgCmd = new RemoveMemberFromOrganisation();
-                $removeMemberFromOrgCmd->data()->organisationID = $organisation->getId();
+                $removeMemberFromOrgCmd->data()->organisationID = $this->organisation->getId();
                 $removeMemberFromOrgCmd->data()->userID = $_POST['removeMember'];
                 $removeMemberFromOrgCmd->exec();
                 echo json_encode(['result' => 'ok']);
@@ -115,7 +131,7 @@ class OrganisationController
 
             if (isset($_POST['requestToJoin'])) {
                 $addMemberRequestToJoinOrganisation = new AddMemberRequestToOrganisation();
-                $addMemberRequestToJoinOrganisation->data()->organisationID = $organisation->getId();
+                $addMemberRequestToJoinOrganisation->data()->organisationID = $this->organisation->getId();
                 $addMemberRequestToJoinOrganisation->data()->userID = $loggedInUser->getId();
                 $addMemberRequestToJoinOrganisation->exec();
                 echo json_encode(['result' => 'ok']);
@@ -123,7 +139,7 @@ class OrganisationController
             }
             if (isset($_POST['approveRequestToJoin'])) {
                 $approveMemberRequestToJoinOrganisation = new ApproveMemberRequestToOrganisation();
-                $approveMemberRequestToJoinOrganisation->data()->organisationID = $organisation->getId();
+                $approveMemberRequestToJoinOrganisation->data()->organisationID = $this->organisation->getId();
                 $approveMemberRequestToJoinOrganisation->data()->userID = $_POST['approveRequestToJoin'];
                 $approveMemberRequestToJoinOrganisation->exec();
                 echo json_encode(['result' => 'ok']);
@@ -131,7 +147,7 @@ class OrganisationController
             }
             if (isset($_POST['rejectRequestToJoin'])) {
                 $rejectMemberRequestToJoinOrganisation = new RejectMemberRequestToOrganisation();
-                $rejectMemberRequestToJoinOrganisation->data()->organisationID = $organisation->getId();
+                $rejectMemberRequestToJoinOrganisation->data()->organisationID = $this->organisation->getId();
                 $rejectMemberRequestToJoinOrganisation->data()->userID = $_POST['rejectRequestToJoin'];
                 $rejectMemberRequestToJoinOrganisation->exec();
                 echo json_encode(['result' => 'ok']);
@@ -140,7 +156,7 @@ class OrganisationController
 
             if (isset($_POST['updateCountryRegion'])) {
                 $createProjectCmd = new UpdateOrganisationCountryRegion();
-                $createProjectCmd->data()->organisationID = $organisation->getId();
+                $createProjectCmd->data()->organisationID = $this->organisation->getId();
                 $createProjectCmd->data()->countryID = $_POST['countryID'];
                 $createProjectCmd->data()->region = $_POST['region'];
                 $createProjectCmd->exec();
@@ -157,7 +173,7 @@ class OrganisationController
 
                 $addOrganisationProjectCmd = new AddProjectToOrganisation();
                 $addOrganisationProjectCmd->data()->projectID = $project->getId();
-                $addOrganisationProjectCmd->data()->organisationID = $organisation->getId();
+                $addOrganisationProjectCmd->data()->organisationID = $this->organisation->getId();
                 $addOrganisationProjectCmd->exec();
 
                 echo json_encode([
@@ -181,53 +197,53 @@ class OrganisationController
         $canUserRequestMembership = false;
         $userCanEditOrganisation = false;
 
-        $organisationMembers = (new OrganisationMemberRepo())->getMembersForOrganisation($organisation);
-        $organisationProjects = (new OrganisationProjectRepo())->getByOrganisationID($organisation->getId());
-        $partnerOrganisations = (new OrganisationProjectRepo())->getPartnerOrganisationsFor($organisation);
+        $organisationMembers = (new OrganisationMemberRepo())->getMembersForOrganisation($this->organisation);
+        $organisationProjects = (new OrganisationProjectRepo())->getByOrganisationID($this->organisation->getId());
+        $partnerOrganisations = (new OrganisationProjectRepo())->getPartnerOrganisationsFor($this->organisation);
 
         if ($loggedInUser) {
-            $canUserRequestMembership = $this->canUserRequestMembership($organisation, $loggedInUser);
-            if ($organisation->getOwnerID() == $loggedInUser->getId())
+            $canUserRequestMembership = $this->canUserRequestMembership($this->organisation, $loggedInUser);
+            if ($this->organisation->getOwnerID() == $loggedInUser->getId())
                 $isOwner = true;
 
             if (isset($isOwner) AND $isOwner === true)
-                $memberRequests = (new OrganisationMemberRequestRepo())->getMembersForOrganisation($organisation);
+                $memberRequests = (new OrganisationMemberRequestRepo())->getMembersForOrganisation($this->organisation);
 
             // $userCanEditOrganisation = ($isAdmin OR ($loggedInUser AND $loggedInUser->isCommunityAdmin()));
             $userCanEditOrganisation = ($isOwner OR ($loggedInUser AND $loggedInUser->isCommunityAdmin()));
             $userIsFollowing = (
                 $loggedInUser AND
-                (new OrganisationFollowRepo())->userFollowsOrganisation($loggedInUser, $organisation)
+                (new OrganisationFollowRepo())->userFollowsOrganisation($loggedInUser, $this->organisation)
             );
 
             if (isset($_POST['getSecureCode']))
                 return $this->setSecureCode();
 
             if (isset($_POST['reportOrganisation']))
-                return $this->report($loggedInUser, $organisation, $urlHandler);
+                return $this->report($loggedInUser, $this->organisation, $urlHandler);
 
             if (isset($_POST['deleteOrganisation']))
-                return $this->deleteOrganisation($loggedInUser, $organisation, $urlHandler);
+                return $this->deleteOrganisation($loggedInUser, $this->organisation, $urlHandler);
 
             if (isset($_POST['joinOrganisation']))
-                return $this->joinOrganisation($loggedInUser, $organisation);
+                return $this->joinOrganisation($loggedInUser, $this->organisation);
 
             if (isset($_POST['cancelJoinRequest']))
-                return $this->cancelJoinRequest($loggedInUser, $organisation);
+                return $this->cancelJoinRequest($loggedInUser, $this->organisation);
 
             if (isset($_POST['leaveOrganisation']))
-                return $this->leaveOrganisation($loggedInUser, $organisation);
+                return $this->leaveOrganisation($loggedInUser, $this->organisation);
 
             if (isset($_POST['followOrganisation']))
-                return $this->followOrganisation($loggedInUser, $organisation);
+                return $this->followOrganisation($loggedInUser, $this->organisation);
 
             if (isset($_POST['unfollowOrganisation']))
-                return $this->unfollowOrganisation($loggedInUser, $organisation);
+                return $this->unfollowOrganisation($loggedInUser, $this->organisation);
 
-            $userIsMember = (new OrganisationMemberRepo())->organisationHasMember($organisation, $loggedInUser);
+            $userIsMember = (new OrganisationMemberRepo())->organisationHasMember($this->organisation, $loggedInUser);
             if (!$userIsMember) {
                 $userSentJoinRequest = (new OrganisationMemberRequestRepo())->organisationHasRequestFromMember(
-                    $organisation->getId(),
+                    $this->organisation->getId(),
                     $loggedInUser->getId()
                 );
                 if (!$userSentJoinRequest)
@@ -236,7 +252,7 @@ class OrganisationController
         }
 
         $links = [];
-        $organisationLinks = (new OrganisationLinkRepo())->getByOrganisationID($organisation->getId());
+        $organisationLinks = (new OrganisationLinkRepo())->getByOrganisationID($this->organisation->getId());
         foreach ($organisationLinks AS $organisationLink) {
             if ($organisationLink->getLinkService() == OrganisationLink_Service::Facebook)
                 $links['facebook'] = $organisationLink->getLink();
@@ -250,15 +266,15 @@ class OrganisationController
 
         /*
         if ($this->data()->format == 'json') {
-            $owner = $organisation->getOwner();
+            $owner = $this->organisation->getOwner();
             echo json_encode([
-                'name' => $organisation->getName(),
-                'description' => $organisation->getDescription(),
-                'address' => $organisation->getAddress(),
-                'organisationTypeId' => (string)$organisation->getOrganisationTypeId(),
-                'organisationSizeId' => (string)$organisation->getOrganisationSizeId(),
+                'name' => $this->organisation->getName(),
+                'description' => $this->organisation->getDescription(),
+                'address' => $this->organisation->getAddress(),
+                'organisationTypeId' => (string)$this->organisation->getOrganisationTypeId(),
+                'organisationSizeId' => (string)$this->organisation->getOrganisationSizeId(),
 
-                'tags' => (new OrganisationTagRepository())->getTagsNameByOrganisationID($organisation->getId()),
+                'tags' => (new OrganisationTagRepository())->getTagsNameByOrganisationID($this->organisation->getId()),
                 'members' => array_values(array_filter(array_map(function (User $user) use ($owner) {
                     if ($owner->getId() == $user->getId())
                         return null;
@@ -306,13 +322,14 @@ class OrganisationController
         */
         $tags = array_map(function (OrganisationTag $organisationTag) {
             return $organisationTag->getTag();
-        }, (new OrganisationTagRepo())->getByOrganisationID($organisation->getId()));
+        }, (new OrganisationTagRepo())->getByOrganisationID($this->organisation->getId()));
 
         $networkTags = array_map(function (OrganisationNetworkTag $organisationNetworkTag) {
             return $organisationNetworkTag->getTag();
-        }, (new OrganisationNetworkTagRepo())->getByOrganisationID($organisation->getId()));
+        }, (new OrganisationNetworkTagRepo())->getByOrganisationID($this->organisation->getId()));
 
-        $pageTitle = $organisation->getName();
+        $pageTitle = $this->organisation->getName();
+        $organisation = $this->organisation;
         require __DIR__ . '/../../../www/views/organisation.php';
 
         return true;
@@ -551,6 +568,24 @@ class OrganisationController
             }
         }
         return true;
+    }
+
+    /**
+     * @param User|null $loggedInUser
+     * @return bool
+     */
+    private function canViewWaitingApproval($loggedInUser)
+    {
+        if (!$loggedInUser)
+            return false;
+
+        else if ($loggedInUser->isEditorialAdmin() OR $loggedInUser->isCommunityAdmin())
+            return true;
+
+        else if ($this->organisation->getOwnerID() != $loggedInUser->getId())
+            return true;
+
+        return false;
     }
 }
 

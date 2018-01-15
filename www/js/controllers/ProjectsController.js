@@ -4,7 +4,7 @@ angular
         var projectsJsonUrl = $attrs.projectsjsonurl;
         var projectTagsJsonUrl = $attrs.projecttagsjsonurl;
 
-        $scope.showAdvancedSearch = $attrs.showadvancedsearch ? true : false;
+        $scope.showAdvancedSearch = !!$attrs.showadvancedsearch;
 
         $scope.letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
         $scope.filter = {

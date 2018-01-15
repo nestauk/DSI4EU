@@ -1,4 +1,5 @@
 <?php
+
 namespace DSI\Service;
 
 
@@ -398,6 +399,16 @@ class URL
     public function terminateAccount($token)
     {
         return SITE_RELATIVE_PATH . '/terminateAccount?token=' . $token;
+    }
+
+    public function waitingApproval($format = null)
+    {
+        if ($format == 'json')
+            $extension = '.json';
+        else
+            $extension = '';
+
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'waiting-approval' . $extension;
     }
 
 

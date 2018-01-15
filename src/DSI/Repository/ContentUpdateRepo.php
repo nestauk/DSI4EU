@@ -3,6 +3,8 @@
 namespace DSI\Repository;
 
 use DSI\Entity\ContentUpdate;
+use DSI\Entity\Organisation;
+use DSI\Entity\Project;
 use DSI\NotFound;
 use DSI\Service\SQL;
 
@@ -32,17 +34,57 @@ class ContentUpdateRepo
 
         $insert = array();
         $insert[] = "`projectID` = '" . (int)($contentUpdate->getProjectID()) . "'";
-        $insert[] = "`organisationID` = '" . (int)($contentUpdate->getOrganisation()) . "'";
+        $insert[] = "`organisationID` = '" . (int)($contentUpdate->getOrganisationID()) . "'";
         $insert[] = "`updated` = '" . addslashes($contentUpdate->getUpdated()) . "'";
 
         $query = new SQL("UPDATE `{$this->dbTable}` SET " . implode(', ', $insert) . " WHERE `id` = '{$contentUpdate->getId()}'");
         $query->query();
     }
 
+    public function delete(ContentUpdate $contentUpdate)
+    {
+        $query = new SQL("DELETE FROM `{$this->dbTable}` WHERE id = '{$contentUpdate->getId()}' LIMIT 1");
+        $query->query();
+    }
+
+    /**
+     * @param int $id
+     * @return ContentUpdate
+     * @throws NotFound
+     */
     public function getById(int $id)
     {
         return $this->getObjectWhere([
             "`id` = {$id}"
+        ]);
+    }
+
+    /**
+     * @param Project $project
+     * @return ContentUpdate[]
+     */
+    public function getByProject(Project $project)
+    {
+        return $this->getObjectsWhere([
+            "`projectID` = {$project->getId()}"
+        ]);
+    }
+
+    /**
+     * @param Organisation $organisation
+     * @return ContentUpdate[]
+     */
+    public function getByOrganisation(Organisation $organisation)
+    {
+        return $this->getObjectsWhere([
+            "`organisationID` = {$organisation->getId()}"
+        ]);
+    }
+
+    public function getByDate(string $date)
+    {
+        return $this->getObjectsWhere([
+            "`timestamp` BETWEEN '{$date} 00:00:00' AND '{$date} 23:59:59'"
         ]);
     }
 

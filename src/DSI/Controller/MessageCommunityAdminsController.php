@@ -66,5 +66,7 @@ class MessageCommunityAdminsController
         $_SESSION[$sessionKey] = $securityCode;
 
         require __DIR__ . '/../../../www/views/message-community-admins.php';
+
+        return true;
     }
 }

@@ -45,6 +45,7 @@ class UpdateProjectTest extends PHPUnit_Framework_TestCase
     {
         $this->projectRepo->clearAll();
         (new \DSI\Repository\ProjectMemberRepo())->clearAll();
+        (new \DSI\Repository\ContentUpdateRepo())->clearAll();
     }
 
     /** @test */
@@ -72,5 +73,89 @@ class UpdateProjectTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($description, $project->getDescription());
         $this->assertEquals($url, $project->getUrl());
         $this->assertEquals($this->user1->getId(), $project->getOwnerID());
+    }
+
+    /** @test */
+    public function changingNameCreatesContentUpdate()
+    {
+        $this->deleteFirstContentUpdate();
+
+        try {
+            $this->updateProject->data()->name = 'New Name';
+            $this->updateProject->data()->project = $this->project;
+            $this->updateProject->data()->executor = $this->user1;
+            $this->updateProject->exec();
+        } catch (ErrorHandler $e) {
+            $this->assertNull($e);
+        }
+
+        $contentUpdates = (new \DSI\Repository\ContentUpdateRepo())
+            ->getAll();
+
+        $this->assertCount(1, $contentUpdates);
+
+        $contentUpdate = $contentUpdates[0];
+
+        $this->assertEquals($this->project->getId(), $contentUpdate->getProjectID());
+        $this->assertEquals(\DSI\Entity\ContentUpdate::Updated_Content, $contentUpdate->getUpdated());
+    }
+
+    /** @test */
+    public function changingDescCreatesContentUpdate()
+    {
+        $this->deleteFirstContentUpdate();
+
+        try {
+            $this->updateProject->data()->description = 'New Description';
+            $this->updateProject->data()->project = $this->project;
+            $this->updateProject->data()->executor = $this->user1;
+            $this->updateProject->exec();
+        } catch (ErrorHandler $e) {
+            $this->assertNull($e);
+        }
+
+        $contentUpdates = (new \DSI\Repository\ContentUpdateRepo())
+            ->getAll();
+
+        $this->assertCount(1, $contentUpdates);
+
+        $contentUpdate = $contentUpdates[0];
+
+        $this->assertEquals($this->project->getId(), $contentUpdate->getProjectID());
+        $this->assertEquals(\DSI\Entity\ContentUpdate::Updated_Content, $contentUpdate->getUpdated());
+    }
+
+    /** @test */
+    public function givenAContentUpdateExists_whenProjectIsUpdated_thenTheExistingContentUpdateIsUpdated()
+    {
+        try {
+            $this->updateProject->data()->name = 'New Name';
+            $this->updateProject->data()->project = $this->project;
+            $this->updateProject->data()->executor = $this->user1;
+            $this->updateProject->exec();
+        } catch (ErrorHandler $e) {
+            $this->assertNull($e);
+        }
+
+        $contentUpdates = (new \DSI\Repository\ContentUpdateRepo())
+            ->getAll();
+
+        $this->assertCount(1, $contentUpdates);
+
+        $contentUpdate = $contentUpdates[0];
+
+        $this->assertEquals($this->project->getId(), $contentUpdate->getProjectID());
+        $this->assertEquals(\DSI\Entity\ContentUpdate::New_Content, $contentUpdate->getUpdated());
+    }
+
+
+    private function deleteFirstContentUpdate()
+    {
+        $contentUpdate = (new \DSI\Repository\ContentUpdateRepo())
+            ->getAll();
+
+        (new \DSI\UseCase\ContentUpdates\RemoveContentUpdate())
+            ->setContentUpdate($contentUpdate[0])
+            ->exec();
     }
 }

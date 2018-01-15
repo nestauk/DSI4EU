@@ -11,6 +11,7 @@ use DSI\Repository\ContentUpdateRepo;
 use DSI\Repository\ProjectMemberRepo;
 use DSI\Repository\ProjectRepo;
 use DSI\Repository\ProjectRepoInAPC;
+use DSI\Service\App;
 use DSI\Service\ErrorHandler;
 
 class CreateProject
@@ -38,7 +39,7 @@ class CreateProject
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        if (!$this->forceCreation) {
+        if (!App::canCreateProjects() AND !$this->forceCreation) {
             $this->errorHandler->addTaggedError('name', __("We are sorry, but at the moment you cannot add a new project. We are working on getting this fixed as soon as possible."));
             throw $this->errorHandler;
         }
@@ -69,7 +70,7 @@ class CreateProject
 
         $contentUpdate = new ContentUpdate();
         $contentUpdate->setProject($project);
-        $contentUpdate->setUpdated(ContentUpdate::Updated_New);
+        $contentUpdate->setUpdated(ContentUpdate::New_Content);
         (new ContentUpdateRepo())->insert($contentUpdate);
 
         $projectMemberRepository = new ProjectMemberRepo();
@@ -80,6 +81,8 @@ class CreateProject
         $projectMemberRepository->insert($projectMember);
 
         $this->project = $project;
+
+        return $this;
     }
 
     /**
@@ -96,6 +99,24 @@ class CreateProject
     public function getProject()
     {
         return $this->project;
+    }
+
+    public function setName($name)
+    {
+        $this->data()->name = $name;
+        return $this;
+    }
+
+    public function setDescription($description)
+    {
+        $this->data()->description = $description;
+        return $this;
+    }
+
+    public function setOwner(User $user)
+    {
+        $this->data()->owner = $user;
+        return $this;
     }
 }
 

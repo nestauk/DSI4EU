@@ -12,6 +12,7 @@ use DSI\Entity\ProjectMember;
 use DSI\Entity\ProjectPost;
 use DSI\Entity\ProjectTag;
 use DSI\Entity\User;
+use DSI\NotFound;
 use DSI\Repository\OrganisationProjectRepo;
 use DSI\Repository\ProjectDsiFocusTagRepo;
 use DSI\Repository\ProjectFollowRepo;
@@ -54,6 +55,9 @@ class ProjectController
     /** @var URL */
     private $urlHandler;
 
+    /** @var Project */
+    private $project;
+
     public function __construct()
     {
         $this->data = new ProjectController_Data();
@@ -66,15 +70,27 @@ class ProjectController
         $loggedInUser = $authUser->getUserIfLoggedIn();
 
         $projectRepo = new ProjectRepo();
-        $project = $projectRepo->getById($this->data()->projectID);
+        try {
+            $this->project = $projectRepo->getById($this->data()->projectID);
+        } catch (NotFound $e) {
+            $pageTitle = 'Project does not exist';
+            require __DIR__ . '/../../../www/views/project-404.php';
+            return;
+        }
+
+        if ($this->project->isWaitingApproval() AND !$this->canViewWaitingApproval($loggedInUser)) {
+            $pageTitle = 'Project is waiting approval';
+            require __DIR__ . '/../../../www/views/project-404.php';
+            return;
+        }
 
         $memberRequests = [];
         $isAdmin = false;
         $canUserRequestMembership = false;
         $isOwner = false;
 
-        $projectMembers = (new ProjectMemberRepo())->getByProject($project);
-        $organisationProjectsObj = (new OrganisationProjectRepo())->getByProjectID($project->getId());
+        $projectMembers = (new ProjectMemberRepo())->getByProject($this->project);
+        $organisationProjectsObj = (new OrganisationProjectRepo())->getByProjectID($this->project->getId());
         usort($organisationProjectsObj, function (OrganisationProject $a, OrganisationProject $b) {
             return ($a->getOrganisation()->getName() <= $b->getOrganisation()->getName()) ? -1 : 1;
         });
@@ -97,55 +113,55 @@ class ProjectController
                 return $this->setSecureCode();
 
             if (isset($_POST['report']))
-                return $this->report($loggedInUser, $project, $urlHandler);
+                return $this->report($loggedInUser, $this->project, $urlHandler);
 
             if (isset($_POST['deleteProject']))
-                return $this->deleteProject($loggedInUser, $project, $urlHandler);
+                return $this->deleteProject($loggedInUser, $this->project, $urlHandler);
 
             if (isset($_POST['joinProject']))
-                return $this->joinProject($loggedInUser, $project);
+                return $this->joinProject($loggedInUser, $this->project);
 
             if (isset($_POST['cancelJoinRequest']))
-                return $this->cancelJoinRequest($loggedInUser, $project);
+                return $this->cancelJoinRequest($loggedInUser, $this->project);
 
             if (isset($_POST['leaveProject']))
-                return $this->leaveProject($loggedInUser, $project);
+                return $this->leaveProject($loggedInUser, $this->project);
 
             if (isset($_POST['followProject']))
-                return $this->followProject($loggedInUser, $project);
+                return $this->followProject($loggedInUser, $this->project);
 
             if (isset($_POST['unfollowProject']))
-                return $this->unfollowProject($loggedInUser, $project);
+                return $this->unfollowProject($loggedInUser, $this->project);
 
-            $userIsMember = (new ProjectMemberRepo())->projectHasMember($project, $loggedInUser);
+            $userIsMember = (new ProjectMemberRepo())->projectHasMember($this->project, $loggedInUser);
             if (!$userIsMember) {
                 $userSentJoinRequest = (new ProjectMemberRequestRepo())->projectHasRequestFromMember(
-                    $project->getId(),
+                    $this->project->getId(),
                     $loggedInUser->getId()
                 );
                 if (!$userSentJoinRequest)
                     $userCanSendJoinRequest = true;
             }
 
-            if ($project->getOwnerID() == $loggedInUser->getId()) {
+            if ($this->project->getOwnerID() == $loggedInUser->getId()) {
                 $isOwner = true;
                 $isAdmin = true;
             }
 
-            $member = (new ProjectMemberRepo())->getByProjectAndMember($project, $loggedInUser);
+            $member = (new ProjectMemberRepo())->getByProjectAndMember($this->project, $loggedInUser);
             if ($member !== null AND $member->isAdmin())
                 $isAdmin = true;
 
             if (isset($isAdmin) AND $isAdmin === true)
-                $memberRequests = (new ProjectMemberRequestRepo())->getMembersForProject($project->getId());
+                $memberRequests = (new ProjectMemberRequestRepo())->getMembersForProject($this->project->getId());
         }
 
         $userCanEditProject = ($isAdmin OR ($loggedInUser AND $loggedInUser->isCommunityAdmin()));
         $userCanAddPost = $isAdmin;
-        $userIsFollowing = ($loggedInUser AND (new ProjectFollowRepo())->userFollowsProject($loggedInUser, $project));
+        $userIsFollowing = ($loggedInUser AND (new ProjectFollowRepo())->userFollowsProject($loggedInUser, $this->project));
 
         $links = [];
-        $projectLinks = (new ProjectLinkRepo())->getByProjectID($project->getId());
+        $projectLinks = (new ProjectLinkRepo())->getByProjectID($this->project->getId());
         foreach ($projectLinks AS $projectLink) {
             if ($projectLink->getLinkService() == ProjectLink_Service::Facebook)
                 $links['facebook'] = $projectLink->getLink();
@@ -160,25 +176,25 @@ class ProjectController
         try {
             if ($userCanEditProject) {
                 if (isset($_POST['updateBasic']))
-                    return $this->updateBasicInfo($project, $loggedInUser);
+                    return $this->updateBasicInfo($this->project, $loggedInUser);
 
                 if (isset($_POST['approveRequestToJoin']))
-                    return $this->approveRequestToJoin($project);
+                    return $this->approveRequestToJoin($this->project);
 
                 if (isset($_POST['rejectRequestToJoin']))
-                    return $this->rejectRequestToJoin($project);
+                    return $this->rejectRequestToJoin($this->project);
 
                 if (isset($_POST['updateCountryRegion']))
-                    return $this->updateCountryRegion($project);
+                    return $this->updateCountryRegion($this->project);
 
                 if (isset($_POST['newOrganisationID']))
-                    return $this->addOrganisationToProject($project);
+                    return $this->addOrganisationToProject($this->project);
 
                 if (isset($_POST['addPost']))
-                    return $this->addNewPostToProject($project, $loggedInUser);
+                    return $this->addNewPostToProject($this->project, $loggedInUser);
             } else {
                 if (isset($_POST['requestToJoin']))
-                    return $this->requestToJoin($project, $loggedInUser);
+                    return $this->requestToJoin($this->project, $loggedInUser);
             }
         } catch (ErrorHandler $e) {
             echo json_encode([
@@ -190,39 +206,39 @@ class ProjectController
 
         if ($this->data()->format == 'json') {
             echo json_encode([
-                'name' => $project->getName(),
-                'url' => $project->getUrl(),
-                'status' => $project->getStatus(),
-                'shortDescription' => $project->getShortDescription(),
-                'description' => $project->getDescription(),
-                'startDate' => $project->getStartDate(),
-                'endDate' => $project->getEndDate(),
+                'name' => $this->project->getName(),
+                'url' => $this->project->getUrl(),
+                'status' => $this->project->getStatus(),
+                'shortDescription' => $this->project->getShortDescription(),
+                'description' => $this->project->getDescription(),
+                'startDate' => $this->project->getStartDate(),
+                'endDate' => $this->project->getEndDate(),
                 'tags' => array_map(function (ProjectTag $projectTag) {
                     return [
                         'id' => $projectTag->getTagID(),
                         'name' => $projectTag->getTag()->getName(),
                     ];
-                }, (new ProjectTagRepo())->getByProjectID($project->getId())),
+                }, (new ProjectTagRepo())->getByProjectID($this->project->getId())),
                 'impactTagsA' => array_map(function (ProjectImpactHelpTag $projectTag) {
                     return [
                         'id' => $projectTag->getTagID(),
                         'name' => $projectTag->getTag()->getName(),
                     ];
-                }, (new ProjectImpactHelpTagRepo())->getByProjectID($project->getId())),
+                }, (new ProjectImpactHelpTagRepo())->getByProjectID($this->project->getId())),
                 'impactTagsB' => array_map(function (ProjectDsiFocusTag $projectTag) {
                     return [
                         'id' => $projectTag->getTagID(),
                         'name' => $projectTag->getTag()->getName(),
                     ];
-                }, (new ProjectDsiFocusTagRepo())->getByProjectID($project->getId())),
+                }, (new ProjectDsiFocusTagRepo())->getByProjectID($this->project->getId())),
                 'impactTagsC' => array_map(function (ProjectImpactTechTag $projectTag) {
                     return [
                         'id' => $projectTag->getTagID(),
                         'name' => $projectTag->getTag()->getName(),
                     ];
-                }, (new ProjectImpactTechTagRepo())->getByProjectID($project->getId())),
+                }, (new ProjectImpactTechTagRepo())->getByProjectID($this->project->getId())),
 
-                'members' => $this->getMembers($project->getOwner(), $projectMembers),
+                'members' => $this->getMembers($this->project->getOwner(), $projectMembers),
                 'memberRequests' => array_map(function (User $user) {
                     return [
                         'id' => $user->getId(),
@@ -233,13 +249,14 @@ class ProjectController
                     ];
                 }, $memberRequests),
                 'organisationProjects' => $organisationProjects,
-                'countryID' => $project->getCountryID(),
-                'countryRegionID' => $project->getRegionID(),
-                'countryRegion' => $project->getRegion() ? $project->getRegion()->getName() : '',
-                'posts' => $this->getPostsForProject($project),
+                'countryID' => $this->project->getCountryID(),
+                'countryRegionID' => $this->project->getRegionID(),
+                'countryRegion' => $this->project->getRegion() ? $this->project->getRegion()->getName() : '',
+                'posts' => $this->getPostsForProject($this->project),
             ]);
         } else {
-            $pageTitle = $project->getName();
+            $pageTitle = $this->project->getName();
+            $project = $this->project;
             JsModules::setTinyMCE(true);
             JsModules::setTranslations(true);
             require __DIR__ . '/../../../www/views/project.php';
@@ -648,6 +665,24 @@ class ProjectController
         $addMemberRequestToJoinProject->exec();
         echo json_encode(['result' => 'ok']);
         return;
+    }
+
+    /**
+     * @param User|null $loggedInUser
+     * @return bool
+     */
+    private function canViewWaitingApproval($loggedInUser)
+    {
+        if (!$loggedInUser)
+            return false;
+
+        else if ($loggedInUser->isEditorialAdmin() OR $loggedInUser->isCommunityAdmin())
+            return true;
+
+        else if ($this->project->getOwnerID() != $loggedInUser->getId())
+            return true;
+
+        return false;
     }
 }
 

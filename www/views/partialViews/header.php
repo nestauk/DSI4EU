@@ -162,18 +162,21 @@ if (!isset($urlHandler))
                 <div class="menu-li"><?php _ehtml('Menu') ?></div>
             </div>
             <?php if (isset($loggedInUser) AND $loggedInUser) { ?>
-                <div class="create ll log-in-link w-clearfix" <?php /*data-ix="create-dropdown"*/ ?>
-                     data-ix="create-paused">
+                <div
+                    <?php if (\DSI\Service\App::canCreateProjects()) { ?>
+                        data-ix="create-dropdown"
+                    <?php } else { ?>
+                        data-ix="create-paused"
+                    <?php } ?>
+                        class="create ll log-in-link w-clearfix">
                     <div class="login-li menu-li"><?php _e('Create') ?></div>
                     <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-plus-empty.png">
-                    <?php /*
                     <div class="create-drop-down-block">
                         <a class="drop-down-link-li" data-ix="create-project-modal"
                            href="#"><?php _e('Create project') ?></a>
                         <a class="drop-down-link-li" data-ix="create-organisation-modal"
                            href="#"><?php _e('Create organisation') ?></a>
                     </div>
-                    */ ?>
                 </div>
             <?php } else { ?>
                 <a class="ll log-in-link w-clearfix w-inline-block" data-ix="log-in-arrow" style="width:auto"

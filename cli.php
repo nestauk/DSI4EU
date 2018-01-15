@@ -85,7 +85,11 @@ class CliRouter
             $command->setArgs($args);
             $command->exec();
         });
-
+        $this->addRoute('send-waiting-approval', function ($args) {
+            $command = new \DSI\Controller\CLI\SendWaitingApprovalController();
+            $command->setArgs($args);
+            $command->exec();
+        });
     }
 
     public function exec($args)

@@ -35,14 +35,19 @@ class CreateProjectTest extends PHPUnit_Framework_TestCase
         $this->projectRepo->clearAll();
         $this->userRepo->clearAll();
         $this->projectMemberRepo->clearAll();
+        (new \DSI\Repository\ContentUpdateRepo())->clearAll();
     }
 
     /** @test */
     public function cannotCreateNewProjects()
     {
+        $canCreateProjects = \DSI\Service\App::canCreateProjects();
+        \DSI\Service\App::setCanCreateProjects(false);
+
         $this->createProjectCommand->data()->name = 'test';
         $this->createProjectCommand->data()->description = 'test';
         $this->createProjectCommand->data()->owner = $this->user;
+
         $e = null;
         try {
             $this->createProjectCommand->exec();
@@ -51,6 +56,8 @@ class CreateProjectTest extends PHPUnit_Framework_TestCase
 
         $this->assertNotNull($e);
         $this->assertNotEmpty($e->getTaggedError('name'));
+
+        \DSI\Service\App::setCanCreateProjects($canCreateProjects);
     }
 
     /** @ test */

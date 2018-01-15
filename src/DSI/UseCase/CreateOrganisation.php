@@ -11,6 +11,7 @@ use DSI\Repository\ContentUpdateRepo;
 use DSI\Repository\OrganisationMemberRepo;
 use DSI\Repository\OrganisationRepo;
 use DSI\Repository\OrganisationRepoInAPC;
+use DSI\Service\App;
 use DSI\Service\ErrorHandler;
 
 class CreateOrganisation
@@ -38,7 +39,7 @@ class CreateOrganisation
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
-        if (!$this->forceCreation) {
+        if (!App::canCreateProjects() AND !$this->forceCreation) {
             $this->errorHandler->addTaggedError('name', __("We are sorry, but at the moment you cannot add a new organisation. We are working on getting this fixed as soon as possible."));
             throw $this->errorHandler;
         }
@@ -69,7 +70,7 @@ class CreateOrganisation
 
         $contentUpdate = new ContentUpdate();
         $contentUpdate->setOrganisation($organisation);
-        $contentUpdate->setUpdated(ContentUpdate::Updated_New);
+        $contentUpdate->setUpdated(ContentUpdate::New_Content);
         (new ContentUpdateRepo())->insert($contentUpdate);
 
         $organisationMemberRepository = new OrganisationMemberRepo();
@@ -96,6 +97,24 @@ class CreateOrganisation
     public function getOrganisation()
     {
         return $this->organisation;
+    }
+
+    public function setOwner(User $owner)
+    {
+        $this->data()->owner = $owner;
+        return $this;
+    }
+
+    public function setName(string $name)
+    {
+        $this->data()->name = $name;
+        return $this;
+    }
+
+    public function setDescription(string $description)
+    {
+        $this->data()->description = $description;
+        return $this;
     }
 }
 

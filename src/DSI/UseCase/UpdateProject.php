@@ -3,11 +3,13 @@
 namespace DSI\UseCase;
 
 use abeautifulsite\SimpleImage;
+use DSI\Entity\ContentUpdate;
 use DSI\Entity\Image;
 use DSI\Entity\Project;
 use DSI\Entity\User;
 use DSI\NotEnoughData;
 use DSI\NotFound;
+use DSI\Repository\ContentUpdateRepo;
 use DSI\Repository\CountryRegionRepo;
 use DSI\Repository\OrganisationProjectRepo;
 use DSI\Repository\ProjectDsiFocusTagRepo;
@@ -45,6 +47,7 @@ class UpdateProject
         $this->checkIfUserCanEditTheProject();
         $this->checkIfMandatoryDetailsHaveBeenSent();
         $this->fixUrl();
+        $this->saveUpdatedContent();
         $this->saveProjectDetails();
         $this->updateInvolvedOrganisationCount();
     }
@@ -372,6 +375,39 @@ class UpdateProject
             $this->errorHandler->addTaggedError('file', 'Only image files accepted (received .' . $fileInfo->getExtension() . ')');
             $this->errorHandler->throwIfNotEmpty();
         }
+    }
+
+    /**
+     * @return bool
+     */
+    private function contentIsUpdated(): bool
+    {
+        return (isset($this->data()->name) AND $this->data()->project->getName() != $this->data()->name)
+            OR
+            (isset($this->data()->description) AND $this->data()->project->getDescription() != $this->data()->description);
+    }
+
+    private function updateContent()
+    {
+        $contentUpdateRepo = new ContentUpdateRepo();
+        $existingUpdates = $contentUpdateRepo->getByProject($this->data()->project);
+        if ($existingUpdates) {
+            $contentUpdate = $existingUpdates[0];
+            $contentUpdate->setProject($this->data()->project);
+            $contentUpdate->setTimestamp(date('Y-m-d H:i:s'));
+            $contentUpdateRepo->save($contentUpdate);
+        } else {
+            $contentUpdate = new ContentUpdate();
+            $contentUpdate->setProject($this->data()->project);
+            $contentUpdate->setUpdated(ContentUpdate::Updated_Content);
+            $contentUpdateRepo->insert($contentUpdate);
+        }
+    }
+
+    private function saveUpdatedContent()
+    {
+        if ($this->contentIsUpdated())
+            $this->updateContent();
     }
 }
 

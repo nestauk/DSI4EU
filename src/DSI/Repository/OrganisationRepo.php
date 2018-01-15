@@ -35,6 +35,7 @@ class OrganisationRepo
         $insert[] = "`projectsCount` = '" . (int)($organisation->getProjectsCount()) . "'";
         $insert[] = "`partnersCount` = '" . (int)($organisation->getPartnersCount()) . "'";
         $insert[] = "`importID` = '" . addslashes($organisation->getImportID()) . "'";
+        $insert[] = "`isWaitingApproval` = '" . (bool)($organisation->isWaitingApproval()) . "'";
         $insert[] = "`isPublished` = '" . (bool)($organisation->isPublished()) . "'";
 
         $query = new SQL("INSERT INTO `organisations` SET " . implode(', ', $insert) . "");
@@ -73,6 +74,7 @@ class OrganisationRepo
         $insert[] = "`projectsCount` = '" . (int)($organisation->getProjectsCount()) . "'";
         $insert[] = "`partnersCount` = '" . (int)($organisation->getPartnersCount()) . "'";
         $insert[] = "`importID` = '" . addslashes($organisation->getImportID()) . "'";
+        $insert[] = "`isWaitingApproval` = '" . (bool)($organisation->isWaitingApproval()) . "'";
         $insert[] = "`isPublished` = '" . (bool)($organisation->isPublished()) . "'";
 
         $query = new SQL("UPDATE `organisations` SET " . implode(', ', $insert) . " WHERE `id` = '{$organisation->getId()}'");
@@ -145,6 +147,7 @@ class OrganisationRepo
         $organisationObj->setProjectsCount($organisation['projectsCount']);
         $organisationObj->setPartnersCount($organisation['partnersCount']);
         $organisationObj->setImportID($organisation['importID']);
+        $organisationObj->setIsWaitingApproval($organisation['isWaitingApproval']);
         $organisationObj->setIsPublished($organisation['isPublished']);
 
         return $organisationObj;
@@ -207,6 +210,7 @@ class OrganisationRepo
           , startDate, created, logo, headerImage
           , projectsCount, partnersCount
           , importID
+          , isWaitingApproval
           , isPublished
           FROM `organisations` 
           WHERE " . implode(' AND ', $where) . "

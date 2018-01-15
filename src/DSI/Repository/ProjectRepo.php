@@ -33,6 +33,7 @@ class ProjectRepo
         $insert[] = "`logo` = '" . addslashes($project->getLogo()) . "'";
         $insert[] = "`headerImage` = '" . addslashes($project->getHeaderImage()) . "'";
         $insert[] = "`socialImpact` = '" . addslashes($project->getSocialImpact()) . "'";
+        $insert[] = "`isWaitingApproval` = '" . (bool)($project->isWaitingApproval()) . "'";
         $insert[] = "`isPublished` = '" . (bool)($project->isPublished()) . "'";
 
         $query = new SQL("INSERT INTO `projects` SET " . implode(', ', $insert) . "");
@@ -69,6 +70,7 @@ class ProjectRepo
         $insert[] = "`logo` = '" . addslashes($project->getLogo()) . "'";
         $insert[] = "`headerImage` = '" . addslashes($project->getHeaderImage()) . "'";
         $insert[] = "`socialImpact` = '" . addslashes($project->getSocialImpact()) . "'";
+        $insert[] = "`isWaitingApproval` = '" . (bool)($project->isWaitingApproval()) . "'";
         $insert[] = "`isPublished` = '" . (bool)($project->isPublished()) . "'";
 
         $query = new SQL("UPDATE `projects` SET " . implode(', ', $insert) . " WHERE `id` = '{$project->getId()}'");
@@ -133,6 +135,7 @@ class ProjectRepo
         $projectObj->setLogo($project['logo']);
         $projectObj->setHeaderImage($project['headerImage']);
         $projectObj->setSocialImpact($project['socialImpact']);
+        $projectObj->setIsWaitingApproval($project['isWaitingApproval']);
         $projectObj->setIsPublished($project['isPublished']);
 
         return $projectObj;
@@ -188,6 +191,7 @@ class ProjectRepo
           , countryRegionID, organisationsCount
           , importID, logo, headerImage
           , socialImpact
+          , isWaitingApproval
           , isPublished
           FROM `projects`
           WHERE " . implode(' AND ', $where) . "

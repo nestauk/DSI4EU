@@ -4,9 +4,8 @@ namespace DSI\Entity;
 
 class ContentUpdate
 {
-    const Updated_New = 'new';
-    const Updated_Title = 'title';
-    const Updated_Description = 'description';
+    const New_Content = 'new';
+    const Updated_Content = 'update';
 
     /** @var integer */
     private $id;
@@ -49,17 +48,22 @@ class ContentUpdate
         return $this->project;
     }
 
+    public function hasProject(): bool
+    {
+        return $this->project ? true : false;
+    }
+
+    public function hasOrganisation(): bool
+    {
+        return $this->organisation ? true : false;
+    }
+
     /**
      * @return int
      */
     public function getProjectID(): int
     {
         return $this->project ? $this->project->getId() : 0;
-    }
-
-    public function hasProject(): bool
-    {
-        return $this->project->getId() > 0;
     }
 
     /**
@@ -86,11 +90,6 @@ class ContentUpdate
     public function getOrganisationID(): int
     {
         return $this->organisation ? $this->organisation->getId() : 0;
-    }
-
-    public function hasOrganisation(): bool
-    {
-        return $this->organisation->getId() > 0;
     }
 
     /**

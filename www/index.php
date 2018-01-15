@@ -361,6 +361,12 @@ class Router
         } elseif (preg_match('<^/' . $langHandler . 'message/community-admins$>', $this->pageURL, $matches)) {
             $this->messageCommunityAdmins($matches);
 
+        } elseif (preg_match('<^/' . $langHandler . 'waiting-approval$>', $this->pageURL, $matches)) {
+            $this->waitingApproval($matches);
+
+        } elseif (preg_match('<^/' . $langHandler . 'waiting-approval.json$>', $this->pageURL, $matches)) {
+            $this->waitingApprovalJson($matches);
+
         } elseif (preg_match('<^/' . $langHandler . 'export/projects\.json$>', $this->pageURL, $matches)) {
             $this->exportProjects($matches, 'json');
 
@@ -761,9 +767,21 @@ class Router
     private function messageCommunityAdmins($matches)
     {
         $this->setLanguageFromUrl($matches);
+        return (new \DSI\Controller\MessageCommunityAdminsController())->exec();
+    }
 
-        $command = new \DSI\Controller\MessageCommunityAdminsController();
-        $command->exec();
+    private function waitingApproval($matches)
+    {
+        $this->setLanguageFromUrl($matches);
+        return (new \DSI\Controller\WaitingApprovalController())
+                ->html();
+    }
+
+    private function waitingApprovalJson($matches)
+    {
+        $this->setLanguageFromUrl($matches);
+        return (new \DSI\Controller\WaitingApprovalController())
+                ->json();
     }
 
     private function exportProjects($matches, $format = 'json')

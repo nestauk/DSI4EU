@@ -22,6 +22,7 @@ require __DIR__ . '/exceptions.php';
 require __DIR__ . '/../vendor/autoload.php';
 
 App::setEnv(App::LIVE);
+App::setCanCreateProjects(true);
 
 \DSI\Repository\OrganisationRepoInAPC::setApcKey(
     'digitalSocial:organisations'

@@ -30,8 +30,8 @@ class Mailer extends \PHPMailer
             return false;
         }
 
-        // file_put_contents(__DIR__ . '/../../../logs/mail-logs/' . microtime(1) . '.json', json_encode($this));
-        // file_put_contents(__DIR__ . '/../../../logs/mail-logs/' . microtime(1) . '.html', $this->Body);
+        file_put_contents(__DIR__ . '/../../../logs/mail-logs/' . microtime(1) . '.json', json_encode($this));
+        file_put_contents(__DIR__ . '/../../../logs/mail-logs/' . microtime(1) . '.html', $this->Body);
 
         $returnCode = parent::send();
         if (!$returnCode) {

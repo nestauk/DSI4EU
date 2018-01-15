@@ -9,6 +9,7 @@ class App
     const LIVE = 'live';
 
     private static $env;
+    private static $canCreateProjects = false;
 
     public static function setEnv($env)
     {
@@ -18,5 +19,15 @@ class App
     public static function getEnv()
     {
         return self::$env;
+    }
+
+    public static function canCreateProjects(): bool
+    {
+        return self::$canCreateProjects;
+    }
+
+    public static function setCanCreateProjects(bool $canCreateProjects)
+    {
+        self::$canCreateProjects = $canCreateProjects;
     }
 }

@@ -3,11 +3,13 @@
 namespace DSI\UseCase;
 
 use abeautifulsite\SimpleImage;
+use DSI\Entity\ContentUpdate;
 use DSI\Entity\Image;
 use DSI\Entity\Organisation;
 use DSI\Entity\User;
 use DSI\NotEnoughData;
 use DSI\NotFound;
+use DSI\Repository\ContentUpdateRepo;
 use DSI\Repository\CountryRegionRepo;
 use DSI\Repository\OrganisationLinkRepo;
 use DSI\Repository\OrganisationNetworkTagRepo;
@@ -43,6 +45,7 @@ class UpdateOrganisation
         $this->checkIfAllInfoHaveBeenSent();
         $this->checkIfUserCanEditTheOrganisation();
         $this->checkIfNameIsNotEmpty();
+        $this->saveUpdatedContent();
         $this->saveOrganisationDetails();
     }
 
@@ -308,6 +311,40 @@ class UpdateOrganisation
             return true;
 
         return false;
+    }
+
+    private function saveUpdatedContent()
+    {
+        if ($this->contentIsUpdated())
+            $this->updateContent();
+    }
+
+    /**
+     * @return bool
+     */
+    private function contentIsUpdated(): bool
+    {
+        return (isset($this->data()->name) AND $this->data()->organisation->getName() != $this->data()->name)
+            OR
+            (isset($this->data()->description) AND $this->data()->organisation->getDescription() != $this->data()->description);
+    }
+
+    private function updateContent()
+    {
+        $contentUpdateRepo = new ContentUpdateRepo();
+        $existingUpdates = $contentUpdateRepo->getByOrganisation($this->data()->organisation);
+        if ($existingUpdates) {
+            $contentUpdate = $existingUpdates[0];
+            $contentUpdate->setOrganisation($this->data()->organisation);
+            $contentUpdate->setTimestamp(date('Y-m-d H:i:s'));
+            $contentUpdateRepo->save($contentUpdate);
+        } else {
+            $contentUpdate = new ContentUpdate();
+            $contentUpdate->setOrganisation($this->data()->organisation);
+            $contentUpdate->setUpdated(ContentUpdate::Updated_Content);
+            (new ContentUpdateRepo())->insert($contentUpdate);
+        }
+
     }
 }
 
