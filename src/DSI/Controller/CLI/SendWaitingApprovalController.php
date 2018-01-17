@@ -3,6 +3,7 @@
 namespace DSI\Controller\CLI;
 
 use DSI\Repository\ContentUpdateRepo;
+use DSI\Service\App;
 use DSI\Service\Mailer;
 
 class SendWaitingApprovalController
@@ -27,8 +28,7 @@ class SendWaitingApprovalController
         $email = new Mailer();
         $email->From = 'noreply@digitalsocial.eu';
         $email->FromName = 'Digital Social';
-        $email->addAddress('alecs@inoveb.co.uk');
-        // $email->addAddress('matt.stokes@nesta.org.uk');
+        $email->addAddress(App::getWaitingApprovalEmailAddress());
         $email->Subject = 'Digital Social Innovation :: Waiting Approval Projects & Organisations';
         $email->wrapMessageInTemplate([
             'header' => 'Waiting Approval Projects & Organisations',

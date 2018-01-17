@@ -10,6 +10,7 @@ class App
 
     private static $env;
     private static $canCreateProjects = false;
+    private static $waitingApprovalEmailAddress = '';
 
     public static function setEnv($env)
     {
@@ -29,5 +30,21 @@ class App
     public static function setCanCreateProjects(bool $canCreateProjects)
     {
         self::$canCreateProjects = $canCreateProjects;
+    }
+
+    /**
+     * @return string
+     */
+    public static function getWaitingApprovalEmailAddress(): string
+    {
+        return self::$waitingApprovalEmailAddress;
+    }
+
+    /**
+     * @param string $emailAddress
+     */
+    public static function setWaitingApprovalEmailAddress(string $emailAddress)
+    {
+        self::$waitingApprovalEmailAddress = $emailAddress;
     }
 }
