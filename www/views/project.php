@@ -24,6 +24,11 @@ require __DIR__ . '/header.php';
                     <div class="w-row">
                         <div class="w-col w-col-6 w-col-stack">
                             <h1 class="case-study-h1 data-vis-h1"><?php echo show_input($project->getName()) ?></h1>
+                            <?php if ($project->isWaitingApproval()) { ?>
+                                <div style="color:red;font-weight:bold">
+                                    This project is waiting approval. Only the project owner can see this page.
+                                </div>
+                            <?php } ?>
                             <h3 class="home-hero-h3"><?php echo show_input($project->getShortDescription()) ?></h3>
                         </div>
                         <div class="w-col w-col-6 w-col-stack">
@@ -414,18 +419,18 @@ require __DIR__ . '/header.php';
 
     <div class="new-post-bg bg-blur">
         <script>
-            tinymce.init({
-                selector: '#newPost',
-                statusbar: false,
-                height: 500,
-                plugins: "autoresize autolink lists link preview paste textcolor colorpicker image imagetools media",
-                autoresize_bottom_margin: 0,
-                autoresize_max_height: 500,
-                menubar: false,
-                toolbar1: 'styleselect | forecolor backcolor | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media | preview',
-                image_advtab: true,
-                paste_data_images: false
-            });
+          tinymce.init({
+            selector: '#newPost',
+            statusbar: false,
+            height: 500,
+            plugins: "autoresize autolink lists link preview paste textcolor colorpicker image imagetools media",
+            autoresize_bottom_margin: 0,
+            autoresize_max_height: 500,
+            menubar: false,
+            toolbar1: 'styleselect | forecolor backcolor | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media | preview',
+            image_advtab: true,
+            paste_data_images: false
+          });
         </script>
 
         <div class="add-post-modal">
@@ -443,38 +448,38 @@ require __DIR__ . '/header.php';
     </div>
 
     <script>
-        var translate = new Translate();
-        <?php foreach([
-            'Delete project',
-            'Are you sure you want to delete this project?',
-            'Deleted',
-            'The project has been deleted.',
-            'Report this project',
-            'Please tell us why you are reporting this project',
-            'Reason for reporting',
-            'Please write your reason for reporting.',
-            'Reported',
-            'Thank you for your report',
-            'Cancel Join Request',
-            'Are you sure you want to cancel the join request?',
-            'Request Cancelled',
-            'Your request has been cancelled.',
-            'Join Project',
-            'Are you sure you want to join this project?',
-            'Your join request has been sent.',
-            'Leave Project',
-            'Are you sure you want to leave this project?',
-            'Success',
-            'You have left this project',
-            'Follow Project',
-            'Are you sure you want to follow this project?',
-            'You are now following this project.',
-            'Unfollow Project',
-            'Are you sure you want to unfollow this project?',
-            "You won't receive any more news from this project.",
-        ] AS $translate) { ?>
-        translate.set('<?php echo show_input($translate)?>', '<?php _ehtml($translate)?>');
-        <?php } ?>
+      var translate = new Translate();
+      <?php foreach([
+          'Delete project',
+          'Are you sure you want to delete this project?',
+          'Deleted',
+          'The project has been deleted.',
+          'Report this project',
+          'Please tell us why you are reporting this project',
+          'Reason for reporting',
+          'Please write your reason for reporting.',
+          'Reported',
+          'Thank you for your report',
+          'Cancel Join Request',
+          'Are you sure you want to cancel the join request?',
+          'Request Cancelled',
+          'Your request has been cancelled.',
+          'Join Project',
+          'Are you sure you want to join this project?',
+          'Your join request has been sent.',
+          'Leave Project',
+          'Are you sure you want to leave this project?',
+          'Success',
+          'You have left this project',
+          'Follow Project',
+          'Are you sure you want to follow this project?',
+          'You are now following this project.',
+          'Unfollow Project',
+          'Are you sure you want to unfollow this project?',
+          "You won't receive any more news from this project.",
+      ] AS $translate) { ?>
+      translate.set('<?php echo show_input($translate)?>', '<?php _ehtml($translate)?>');
+      <?php } ?>
     </script>
     <script src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/ProjectController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 

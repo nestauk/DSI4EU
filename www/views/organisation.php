@@ -30,6 +30,11 @@ if (!isset($urlHandler))
                 <div class="w-row">
                     <div class="w-col w-col-6 w-col-stack">
                         <h1 class="case-study-h1 org"><?php echo show_input($organisation->getName()) ?></h1>
+                        <?php if ($organisation->isWaitingApproval()) { ?>
+                            <div style="color:red;font-weight:bold">
+                                This organisation is waiting approval. Only the organisation owner can see this page.
+                            </div>
+                        <?php } ?>
                         <h3 class="home-hero-h3 org"><?php echo show_input($organisation->getShortDescription()) ?></h3>
                     </div>
                     <div class="column-3 w-col w-col-6 w-col-stack">

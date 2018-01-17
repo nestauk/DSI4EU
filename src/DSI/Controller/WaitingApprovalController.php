@@ -23,8 +23,9 @@ class WaitingApprovalController
     {
         $this->urlHandler = new URL();
         $auth = new Auth();
-        $this->authUser = $auth->getUser();
         $auth->ifNotLoggedInRedirectTo($this->urlHandler->login());
+
+        $this->authUser = $auth->getUser();
         if (!$this->authUser->isCommunityAdmin())
             go_to($this->urlHandler->dashboard());
     }
@@ -104,10 +105,6 @@ class WaitingApprovalController
 
     private function handleMultipleApproves($ids)
     {
-        $genSecureCode = new SecureCode();
-        if (!$genSecureCode->checkCode($_POST['secureCode']))
-            return false;
-
         foreach ($ids AS $id)
             $this->approveItem((int)$id);
 
@@ -116,10 +113,6 @@ class WaitingApprovalController
 
     private function handleMultipleRejects($ids)
     {
-        $genSecureCode = new SecureCode();
-        if (!$genSecureCode->checkCode($_POST['secureCode']))
-            return false;
-
         foreach ($ids AS $id)
             $this->rejectItem((int)$id);
 
