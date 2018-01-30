@@ -7,6 +7,8 @@ use DSI\Entity\Organisation;
 use DSI\Entity\Project;
 use DSI\NotFound;
 use DSI\Service\SQL;
+use DSI\UseCase\Projects\RemoveProject;
+use DSI\UseCase\WaitingApproval\RejectWaitingApproval;
 
 class ContentUpdateRepo
 {
@@ -132,13 +134,23 @@ class ContentUpdateRepo
             $contentUpdate->setTimestamp($dbObject['timestamp']);
 
             if ($dbObject['projectID']) {
-                $project = (new ProjectRepo())->getById($dbObject['projectID']);
-                $contentUpdate->setProject($project);
+                try {
+                    $project = (new ProjectRepo())->getById($dbObject['projectID']);
+                    $contentUpdate->setProject($project);
+                } catch (NotFound $e){
+                    $this->delete($contentUpdate);
+                    continue;
+                }
             }
 
             if ($dbObject['organisationID']) {
-                $organisation = (new OrganisationRepo())->getById($dbObject['organisationID']);
-                $contentUpdate->setOrganisation($organisation);
+                try {
+                    $organisation = (new OrganisationRepo())->getById($dbObject['organisationID']);
+                    $contentUpdate->setOrganisation($organisation);
+                } catch (NotFound $e){
+                    $this->delete($contentUpdate);
+                    continue;
+                }
             }
 
             $objects[] = $contentUpdate;
