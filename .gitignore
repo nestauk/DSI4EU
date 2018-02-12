@@ -1,6 +1,5 @@
 /src/config.php
 /vendor/
-/composer.lock
 /composer.phar
 /.idea/
 /www/views/partialViews/googleAnalytics.html
