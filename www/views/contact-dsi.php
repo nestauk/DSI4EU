@@ -18,10 +18,7 @@ require __DIR__ . '/header.php';
                     ) ?>
                 </p>
                 <p>
-                    <?php echo sprintf(
-                        _html('To keep in touch with the project and DSI in Europe'),
-                        '<a target="_blank" href="https://twitter.com/dsi4eu">' . _html('follow DSI4EU on Twitter') . '</a>'
-                    ) ?>
+                    <?php _e('To keep in touch with the project and DSI in Europe, follow us on Twitter @DSI4EU and sign up to our newsletter.') ?>
                 </p>
             </div>
             <?php require __DIR__ . '/partialViews/about-dsi.php' ?>

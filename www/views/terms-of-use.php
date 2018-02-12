@@ -18,7 +18,9 @@ $totalOrganisations = (new \DSI\Repository\OrganisationRepoInAPC())->countAll();
                 <div class="w-col w-col-12 intro-col">
                     <p>
                         This website is managed by Nesta (“Nesta”) on behalf of the European Commission and our
-                        partners, Waag Society and SUPSI. Use of the site is subject to these Terms. Our Privacy Policy
+                        partners: Stichting Waag Society, gut.org, WeMake S.R.L., Institut d’arquitectura avançada de
+                        Catalunya, Barcelona Activa SA SPM and Fundacja ePaństwo. Use of the site is subject to these
+                        Terms. Our Privacy Policy
                         explains how we use any personal information which we collect via the site. If you don’t agree
                         with these Terms or our Privacy Policy, please don’t use this site.
                     </p>
@@ -77,7 +79,7 @@ $totalOrganisations = (new \DSI\Repository\OrganisationRepoInAPC())->countAll();
                         7706036 and charity number 1144091. Registered as a charity in Scotland number SC042833.
                     </p>
                     <p>
-                        Registered office: 1 Plough Place, London EC4A 1DE
+                        Registered office: 58 Victoria Embankment, London EC4Y 0DS.
                     </p>
                 </div>
             </div>

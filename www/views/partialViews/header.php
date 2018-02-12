@@ -150,7 +150,7 @@ if (!isset($urlHandler))
     <div class="navbarnu w-nav" data-animation="over-left" data-collapse="all" data-duration="400">
         <div class="menu-div" style="max-width:1290px; margin: 0 auto;">
             <a class="w-nav-brand" href="<?php echo $urlHandler->home() ?>">
-                <img class="brand-logo" src="<?php echo SITE_RELATIVE_PATH ?>/images/dark_1.svg">
+                <img class="brand-logo" src="<?php echo SITE_RELATIVE_PATH ?>/images/partners/dsi-logo.png">
             </a>
             <a class="m-brand w-nav-brand" href="<?php echo $urlHandler->home() ?>">
                 <img class="brand-logo m-brand" src="<?php echo SITE_RELATIVE_PATH ?>/images/shadowlight.png">

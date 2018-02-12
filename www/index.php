@@ -283,10 +283,16 @@ class Router
             $this->staticPage($matches, 'updates.php');
 
         } elseif (preg_match('<^/' . $langHandler . 'about-the-project$>', $this->pageURL, $matches)) {
-            $this->staticPage($matches, 'about-the-project.php');
+            if (Translate::getCurrentLang() === 'en')
+                $this->staticPage($matches, 'about-the-project_en.php');
+            else
+                $this->staticPage($matches, 'about-the-project.php');
 
         } elseif (preg_match('<^/' . $langHandler . 'partners$>', $this->pageURL, $matches)) {
-            $this->staticPage($matches, 'partners.php');
+            if (Translate::getCurrentLang() === 'en')
+                $this->staticPage($matches, 'partners_en.php');
+            else
+                $this->staticPage($matches, 'partners.php');
 
         } elseif (preg_match('<^/' . $langHandler . 'open-data-research-and-resources$>', $this->pageURL, $matches)) {
             $this->staticPage($matches, 'open-data-research-and-resources.php');
@@ -774,14 +780,14 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
         return (new \DSI\Controller\WaitingApprovalController())
-                ->html();
+            ->html();
     }
 
     private function waitingApprovalJson($matches)
     {
         $this->setLanguageFromUrl($matches);
         return (new \DSI\Controller\WaitingApprovalController())
-                ->json();
+            ->json();
     }
 
     private function exportProjects($matches, $format = 'json')
@@ -1153,4 +1159,5 @@ if (substr($pageURL, 0, strlen(SITE_RELATIVE_PATH)) == SITE_RELATIVE_PATH) {
 $router = new Router();
 if (MUST_USE_HTTPS)
     $router->forceHTTPS();
+
 $router->exec($pageURL);

@@ -70,6 +70,16 @@ function _html($text)
     return show_input(\DSI\Service\Translate::getTranslation($text));
 }
 
+if (!function_exists('dd')) {
+    function dd()
+    {
+        array_map(function ($x) {
+            dump($x);
+        }, func_get_args());
+        die;
+    }
+}
+
 spl_autoload_register(function ($class) {
     $file = __DIR__ . '/../src/' . str_replace('\\', '/', $class) . '.php';
     if (file_exists($file)) {

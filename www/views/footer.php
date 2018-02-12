@@ -1,4 +1,5 @@
 <?php
+
 use DSI\Service\URL;
 
 /** @var $loggedInUser \DSI\Entity\User */
@@ -19,12 +20,7 @@ if (!isset($urlHandler))
             </div>
             <div class="w-col w-col-11 w-col-small-11 w-col-tiny-tiny-stack">
                 <p class="twitter-text">
-                    <?php echo str_replace(
-                        '@DSI4EU',
-                        '<a href="https://twitter.com/dsi4eu" target="_blank" class="twitter-footer-link">@DSI4EU</a>',
-                        _html('To keep in touch with the project and DSI in Europe, you can follow @DSI4EU on Twitter')
-                    );
-                    ?>
+                    <?php _e('To keep in touch with the project and DSI in Europe, follow us on Twitter @DSI4EU and sign up to our newsletter.'); ?>
                 </p>
             </div>
         </div>
@@ -36,7 +32,7 @@ if (!isset($urlHandler))
         <div class="footer-row w-row">
             <div class="w-col w-col-4">
                 <a class="w-inline-block" href="<?php echo $urlHandler->home() ?>">
-                    <img class="footer-logo" src="<?php echo SITE_RELATIVE_PATH ?>/images/light.svg">
+                    <img class="footer-logo" src="/images/partners/dsi-transparent.png">
                 </a>
             </div>
             <div class="w-col w-col-2">
@@ -98,7 +94,9 @@ if (!isset($urlHandler))
                             <img class="footer-eu" src="<?php echo SITE_RELATIVE_PATH ?>/images/5000100-mono.png">
                         </div>
                         <div class="w-col w-col-11 w-col-medium-6 w-col-small-6 w-col-tiny-6">
-                            <div class="footer-small-print"><?php _ehtml('DSI4EU is funded by the European Union') ?></div>
+                            <div class="footer-small-print">
+                                <?php _ehtml('DSI4EU, formally known as DSISCALE, is supported by the European Union and funded under the Horizon 2020 Programme, grant agreement no 780473.') ?>
+                            </div>
                         </div>
                     </div>
                     <div class="w-row">

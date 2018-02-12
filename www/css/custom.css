@@ -688,24 +688,28 @@ body#tinymce.mce-content-body {
 
 .home-hero-cta {
     padding-top: 5px;
-    font-size:16px;
+    font-size: 16px;
 }
 
 .log-in-link {
     width: auto;
 }
 
-.signn .large.log-in-link.sign-up.w-clearfix.w-inline-block{
+.signn .large.log-in-link.sign-up.w-clearfix.w-inline-block {
     width: 290px;
     margin-top: auto;
     margin-left: auto;
     float: none;
 }
 
-.page-project .header-content h1, .page-project .header-content h3{
-    padding-left:0;
+.page-project .header-content h1, .page-project .header-content h3 {
+    padding-left: 0;
 }
 
-.page-organisation .header-content h1, .page-organisation .header-content h3{
-    padding-left:0;
+.page-organisation .header-content h1, .page-organisation .header-content h3 {
+    padding-left: 0;
+}
+
+.twitter-block a {
+    color: white;
 }

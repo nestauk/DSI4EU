@@ -18,9 +18,10 @@ $totalOrganisations = (new \DSI\Repository\OrganisationRepoInAPC())->countAll();
                 <div class="w-col w-col-12 intro-col">
                     <p>
                         This website is managed by Nesta (“Nesta”) on behalf of the European Commission and our
-                        partners, Waag Society and SUPSI. This privacy policy explains how the European Commission,
-                        Nesta and our partners use personal information which we collect via this site and what cookies
-                        we use.
+                        partners: Stichting Waag Society, gut.org, WeMake S.R.L., Institut d’arquitectura avançada de
+                        Catalunya, Barcelona Activa SA SPM and Fundacja ePaństwo. This privacy policy explains how the
+                        European Commission, Nesta and our partners use personal information which we collect via this
+                        site and what cookies we use.
                     </p>
 
                     <h2 class="home-h2">1. What kind of information do we collect?</h2>
@@ -114,20 +115,19 @@ $totalOrganisations = (new \DSI\Repository\OrganisationRepoInAPC())->countAll();
                     <p>
                         You are legally entitled to know what personal information we hold about you and how that
                         information is processed. If you would like to know what information we hold about you, please
-                        write
-                        to the General Counsel & Company Secretary at Nesta, 1 Plough Place, London EC4A 1DE, UK. We
-                        will
-                        ask you for proof of identity and may charge a £10 fee.
+                        write to the General Counsel & Company Secretary at Nesta, 58 Victoria Embankment, London EC4Y
+                        0DS, UK. We will ask you for proof of identity and may charge a £10 fee.
                     </p>
 
                     <p>
-                        Nesta, a company limited by guarantee registered in England and Wales with company number 7706036
+                        Nesta, a company limited by guarantee registered in England and Wales with company number
+                        7706036
                         and charity number 1144091.
                     </p>
 
                     <p>
                         Registered as a charity in Scotland number SC042833.
-                        Registered office: 1 Plough Place, London EC4A 1DE
+                        Registered office: 58 Victoria Embankment, London EC4Y 0DS.
                     </p>
                 </div>
             </div>
