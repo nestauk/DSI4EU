@@ -87,23 +87,23 @@ if (!isset($urlHandler))
             </div>
         </div>
         <div class="footer-row-bottom w-row">
-            <div class="w-col w-col-8">
+            <div class="w-col w-col-6">
                 <div>
                     <div class="w-row">
-                        <div class="w-clearfix w-col w-col-1 w-col-medium-6 w-col-small-6 w-col-tiny-6">
+                        <div class="w-clearfix w-col w-col-2 w-col-medium-6 w-col-small-6 w-col-tiny-6">
                             <img class="footer-eu" src="<?php echo SITE_RELATIVE_PATH ?>/images/5000100-mono.png">
                         </div>
-                        <div class="w-col w-col-11 w-col-medium-6 w-col-small-6 w-col-tiny-6">
+                        <div class="w-col w-col-10 w-col-medium-6 w-col-small-6 w-col-tiny-6">
                             <div class="footer-small-print">
                                 <?php _ehtml('DSI4EU, formally known as DSISCALE, is supported by the European Union and funded under the Horizon 2020 Programme, grant agreement no 780473.') ?>
                             </div>
                         </div>
                     </div>
                     <div class="w-row">
-                        <div class="w-clearfix w-col w-col-1 w-col-medium-6 w-col-small-6 w-col-tiny-6">
+                        <div class="w-clearfix w-col w-col-2 w-col-medium-6 w-col-small-6 w-col-tiny-6">
                             <img class="cc footer-eu" src="<?php echo SITE_RELATIVE_PATH ?>/images/88x31.png">
                         </div>
-                        <div class="w-col w-col-11 w-col-medium-6 w-col-small-6 w-col-tiny-6">
+                        <div class="w-col w-col-10 w-col-medium-6 w-col-small-6 w-col-tiny-6">
                             <div class="footer-small-print">
                                 <?php echo sprintf(
                                     __('All our work is licensed under a %s, unless it says otherwise.'),
@@ -118,24 +118,50 @@ if (!isset($urlHandler))
                     </div>
                 </div>
             </div>
-            <div class="w-col w-col-4">
+            <div class="w-col w-col-6">
                 <div class="w-row">
-                    <div class="footer-logo-col w-clearfix w-col w-col-4">
+                    <div class="footer-logo-col w-clearfix w-col w-col-3">
                         <a class="footer-partner-link w-inline-block" href="http://nesta.org.uk" target="_blank">
-                            <img class="footer-partner-logo nesta"
-                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/nesta-white-220px.png">
+                            <img class="footer-partner-logo" style="height:50px;width:auto"
+                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/home-logos/nesta.gif">
                         </a>
                     </div>
-                    <div class="footer-logo-col w-clearfix w-col w-col-4">
+                    <div class="footer-logo-col w-clearfix w-col w-col-3">
+                        <a class="footer-partner-link w-inline-block" href="http://www.betterplace-lab.org/en/"
+                           target="_blank">
+                            <img class="footer-partner-logo" style="height:50px;width:auto"
+                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/home-logos/betterplace.png">
+                        </a>
+                    </div>
+                    <div class="footer-logo-col w-clearfix w-col w-col-3">
                         <a class="footer-partner-link w-inline-block" href="http://waag.org" target="_blank">
-                            <img class="footer-partner-logo"
-                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/waag-f1d052f43133268eaf2e13090a0b4bf1.png">
+                            <img class="footer-partner-logo" style="height:50px;width:auto"
+                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/home-logos/waag.gif">
+                        </a>
+                    </div>
+                    <div class="footer-logo-col w-clearfix w-col w-col-3">
+                        <a class="footer-partner-link w-inline-block" href="http://wemake.cc" target="_blank">
+                            <img class="footer-partner-logo" style="height:50px;width:auto"
+                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/home-logos/wemake.gif">
                         </a>
                     </div>
                     <div class="footer-logo-col w-clearfix w-col w-col-4">
-                        <a class="footer-partner-link w-inline-block" href="#" target="_blank">
-                            <img class="footer-partner-logo"
-                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/logo_SUPSI.png">
+                        <a class="footer-partner-link w-inline-block" href="http://fablabbcn.org" target="_blank">
+                            <img class="footer-partner-logo" style="height:50px;width:auto"
+                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/home-logos/fablab.gif">
+                        </a>
+                    </div>
+                    <div class="footer-logo-col w-clearfix w-col w-col-4">
+                        <a class="footer-partner-link w-inline-block" href="http://www.barcelonactiva.cat/"
+                           target="_blank">
+                            <img class="footer-partner-logo" style="height:50px;width:auto"
+                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/home-logos/barcelona-activa.gif">
+                        </a>
+                    </div>
+                    <div class="footer-logo-col w-clearfix w-col w-col-4">
+                        <a class="footer-partner-link w-inline-block" href="http://epf.org.pl/" target="_blank">
+                            <img class="footer-partner-logo" style="height:50px;width:auto"
+                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/home-logos/epantswo.png">
                         </a>
                     </div>
                 </div>
