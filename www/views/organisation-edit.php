@@ -341,7 +341,7 @@ if (!isset($urlHandler))
                                     </div>
                                     <div class="w-row">
                                         <div class="creator-col w-col w-col-4">
-                                            <h2>4 - <?php _ehtml('Add images & publish')?></h2>
+                                            <h2>4 - <?php _ehtml('Add images & publish') ?></h2>
                                             <?php echo $leftSideText ?>
                                         </div>
                                         <div class="creator-col creator-col-right w-col w-col-8">
@@ -350,10 +350,10 @@ if (!isset($urlHandler))
                                                     <div class="w-col w-col-6 w-col-stack">
                                                         <div class="padding-left-50">
                                                             <label class="story-label" for="Title">
-                                                                <?php _ehtml('Header background image')?>
+                                                                <?php _ehtml('Header background image') ?>
                                                             </label>
                                                             <p>
-                                                                <?php _ehtml("This will appear as the header background for your organisation's page")?>
+                                                                <?php _ehtml("This will appear as the header background for your organisation's page") ?>
                                                             </p>
                                                             <img class="story-image-upload story-image-upload-large"
                                                                  style="max-height:140px;max-width:140px"
@@ -361,8 +361,8 @@ if (!isset($urlHandler))
                                                                  ng-src="{{headerImage.image}}">
                                                             <a class="dsi-button story-image-upload w-button" href="#"
                                                                ngf-select="headerImage.upload($file, $invalidFiles)"
-                                                               ng-bind="headerImage.loading ? '<?php _ehtml('Loading') ?>...' : '<?php _ehtml('Upload image')?>'">
-                                                                <?php _ehtml('Upload image')?>
+                                                               ng-bind="headerImage.loading ? '<?php _ehtml('Loading') ?>...' : '<?php _ehtml('Upload image') ?>'">
+                                                                <?php _ehtml('Upload image') ?>
                                                             </a>
                                                             <div style="color:red" ng-show="headerImage.errorMsg.file"
                                                                  ng-cloak>
@@ -373,14 +373,19 @@ if (!isset($urlHandler))
                                                     <div class="w-col w-col-6 w-col-stack">
                                                         <div class="padding-left-50">
                                                             <div class="small-print">
-                                                                <?php _ehtml('Any information, organisation data or results that you submit to Nesta in relation to your project shall be released under the terms of a licence')?>
+                                                                <?php _ehtml('Any information, organisation data or results that you submit to Nesta in relation to your project shall be released under the terms of a licence') ?>
+                                                            </div>
+                                                            <div class="small-print">
+                                                                Please note your organisation will not be visible until
+                                                                it has been approved by an admin. We endeavour to review
+                                                                new organisations every working day.
                                                             </div>
                                                             <div class="w-checkbox">
                                                                 <label class="w-form-label">
                                                                     <input class="w-checkbox-input" data-name="Checkbox"
                                                                            id="checkbox" name="checkbox" type="checkbox"
                                                                            ng-model="organisation.confirm">
-                                                                    <?php _ehtml('I agree')?>
+                                                                    <?php _ehtml('I agree') ?>
                                                                 </label>
                                                             </div>
                                                             <div class="error" ng-bind="errors.confirm"></div>

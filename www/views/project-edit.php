@@ -446,6 +446,11 @@ if (!isset($urlHandler))
                                                             <div class="small-print">
                                                                 <?php _ehtml('Any information, project data or results that you submit to Nesta in relation to your project shall be released under the terms of a licence [...]') ?>
                                                             </div>
+                                                            <div class="small-print">
+                                                                Please note your project will not be visible until it
+                                                                has been approved by an admin. We endeavour to review
+                                                                new projects every working day.
+                                                            </div>
                                                             <div class="w-checkbox">
                                                                 <label class="w-form-label">
                                                                     <input class="w-checkbox-input" data-name="Checkbox"
