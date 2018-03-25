@@ -41,7 +41,7 @@ class RememberPermanentLogin
         } while ($auth_token === null);
 
         $cookieValue = "{$selector}:{$token}";
-        setcookie(PermanentLogin::CookieName, $cookieValue, time() + PermanentLogin::ExpireTime);
+        setcookie(PermanentLogin::CookieName, $cookieValue, time() + PermanentLogin::ExpireTime, '/', null, true, true);
     }
 
     /**

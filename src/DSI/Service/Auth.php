@@ -1,4 +1,5 @@
 <?php
+
 namespace DSI\Service;
 
 use DSI\Entity\User;
@@ -99,11 +100,11 @@ class Auth
     }
 
     /**
-     * @param $oneYear
+     * @param $years
      */
-    private function updateCookieToExpireIn($oneYear)
+    private function updateCookieToExpireIn($years)
     {
-        setcookie(PermanentLogin::CookieName, $_COOKIE[PermanentLogin::CookieName], time() + $oneYear);
+        setcookie(PermanentLogin::CookieName, $_COOKIE[PermanentLogin::CookieName], time() + $years, '/', null, true, true);
     }
 
     /**
