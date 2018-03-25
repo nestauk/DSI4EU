@@ -209,6 +209,7 @@ if (!isset($urlHandler))
     </div>
 </div>
 
+<!--
 <div class="newsletter-signup">
     <div class="mailchimp-container">
         <div class="w-row">
@@ -237,7 +238,7 @@ if (!isset($urlHandler))
                                            id="mce-EMAIL"
                                            placeholder="<?php _ehtml('Email address') ?>">
                                 </div>
-                                <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                                <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-- >
                                 <div style="position: absolute; left: -5000px;" aria-hidden="true">
                                     <input type="text"
                                            name="b_668c39c8408fd7322d7b61d39_c2085cdb78"
@@ -262,6 +263,7 @@ if (!isset($urlHandler))
         </div>
     </div>
 </div>
+-->
 
 <!-- Begin MailChimp Signup Form -->
 <link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
