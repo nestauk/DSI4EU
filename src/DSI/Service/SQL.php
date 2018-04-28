@@ -19,7 +19,13 @@ class SQL
                 self::$credentials['host'] = 'localhost';
 
             ### Connect to mysql server
-            self::$link = mysqli_connect(self::$credentials['host'], self::$credentials['username'], self::$credentials['password'], self::$credentials['db']) or die("Error " . mysqli_error(self::$link));
+            self::$link = mysqli_connect(self::$credentials['host'], self::$credentials['username'], self::$credentials['password'], self::$credentials['db']);
+            if(!self::$link){
+                http_response_code(503);
+                echo 'Service Unavailable. Please try again later';
+                die();
+            }
+
             if (self::$useUTF8 == TRUE) {
                 self::$link->query('SET CHARACTER SET utf8');
                 self::$link->query('SET SESSION collation_connection ="utf8_general_ci"');
