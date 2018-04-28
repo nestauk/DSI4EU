@@ -20,17 +20,24 @@ class SQL
 
             ### Connect to mysql server
             self::$link = mysqli_connect(self::$credentials['host'], self::$credentials['username'], self::$credentials['password'], self::$credentials['db']);
-            if(!self::$link){
+            if (!self::$link) {
                 http_response_code(503);
                 echo 'Service Unavailable. Please try again later';
                 die();
             }
+
+            $filename = date('Y-m-d') . '.sql.log';
+            $handle = fopen(__DIR__ . '/../../../logs/sql/' . $filename, 'a');
+            fwrite($handle, date('Y:m:d H:i:s') . "\n" . $query . "\n\n");
+            fclose($handle);
 
             if (self::$useUTF8 == TRUE) {
                 self::$link->query('SET CHARACTER SET utf8');
                 self::$link->query('SET SESSION collation_connection ="utf8_general_ci"');
             }
         }
+
+
         $this->query = $query;
         return $this;
     }
@@ -131,9 +138,9 @@ class SQL
     public function debug()
     {
         throw new SQL_couldNotExecuteQuery('<pre>' . var_export(array(
-			'sql' => $this->query,
-            'error' => self::$link->error
-		), 1) . '</pre>');
+                'sql' => $this->query,
+                'error' => self::$link->error
+            ), 1) . '</pre>');
     }
 
     public static function transaction()
