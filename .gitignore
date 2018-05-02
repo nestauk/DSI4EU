@@ -1,4 +1,3 @@
-/src/config.php
 /vendor/
 /composer.phar
 /.idea/
@@ -19,4 +18,4 @@
 /www/images/upload/
 .DS_Store
 /import/
-/phinx.yml
+/config/app.php
