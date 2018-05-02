@@ -26,11 +26,6 @@ class SQL
                 die();
             }
 
-            $filename = date('Y-m-d') . '.sql.log';
-            $handle = fopen(__DIR__ . '/../../../logs/sql/' . $filename, 'a');
-            fwrite($handle, date('Y:m:d H:i:s') . "\n" . $query . "\n\n");
-            fclose($handle);
-
             if (self::$useUTF8 == TRUE) {
                 self::$link->query('SET CHARACTER SET utf8');
                 self::$link->query('SET SESSION collation_connection ="utf8_general_ci"');
