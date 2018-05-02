@@ -2,10 +2,8 @@
 /composer.phar
 /.idea/
 /www/views/partialViews/googleAnalytics.html
-/www/google38e1f0ae1b736b46.html
 /www/images/users/background/
 /www/images/users/profile/
-/www/images/tmp/
 /www/images/stories/feat/
 /www/images/stories/main/
 /www/images/case-studies/cardBg/
@@ -15,7 +13,6 @@
 /www/images/org/header/
 /www/images/projects/logo/
 /www/images/projects/header/
-/www/images/upload/
 .DS_Store
 /import/
 /config/app.php
