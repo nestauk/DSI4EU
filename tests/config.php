@@ -16,4 +16,4 @@ require_once __DIR__ . '/../src/include.php';
     'db' => 'dsi-test',
 ));
 
-\DSI\Service\App::setEnv(\DSI\Service\App::TEST);
+\Services\App::setEnv(\Services\App::TEST);

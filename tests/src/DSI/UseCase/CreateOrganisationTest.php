@@ -40,8 +40,8 @@ class CreateOrganisationTest extends PHPUnit_Framework_TestCase
     /** @test */
     public function cannotCreateOrganisation()
     {
-        $canCreateProjects = \DSI\Service\App::canCreateProjects();
-        \DSI\Service\App::setCanCreateProjects(false);
+        $canCreateProjects = \Services\App::canCreateProjects();
+        \Services\App::setCanCreateProjects(false);
 
         $this->createOrgCmd->data()->name = 'test';
         $this->createOrgCmd->data()->description = 'test';
@@ -56,7 +56,7 @@ class CreateOrganisationTest extends PHPUnit_Framework_TestCase
         $this->assertNotNull($e);
         $this->assertNotEmpty($e->getTaggedError('name'));
 
-        \DSI\Service\App::setCanCreateProjects($canCreateProjects);
+        \Services\App::setCanCreateProjects($canCreateProjects);
     }
 
     /** @ test */

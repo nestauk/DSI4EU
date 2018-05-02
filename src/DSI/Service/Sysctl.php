@@ -2,6 +2,8 @@
 
 namespace DSI\Service;
 
+use Services\App;
+
 class Sysctl
 {
     public static $version = '1.4c.18';

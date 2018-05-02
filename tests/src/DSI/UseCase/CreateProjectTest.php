@@ -41,8 +41,8 @@ class CreateProjectTest extends PHPUnit_Framework_TestCase
     /** @test */
     public function cannotCreateNewProjects()
     {
-        $canCreateProjects = \DSI\Service\App::canCreateProjects();
-        \DSI\Service\App::setCanCreateProjects(false);
+        $canCreateProjects = \Services\App::canCreateProjects();
+        \Services\App::setCanCreateProjects(false);
 
         $this->createProjectCommand->data()->name = 'test';
         $this->createProjectCommand->data()->description = 'test';
@@ -57,7 +57,7 @@ class CreateProjectTest extends PHPUnit_Framework_TestCase
         $this->assertNotNull($e);
         $this->assertNotEmpty($e->getTaggedError('name'));
 
-        \DSI\Service\App::setCanCreateProjects($canCreateProjects);
+        \Services\App::setCanCreateProjects($canCreateProjects);
     }
 
     /** @ test */

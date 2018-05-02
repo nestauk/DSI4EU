@@ -3,7 +3,7 @@
 namespace DSI\Controller\CLI;
 
 use DSI\Repository\ContentUpdateRepo;
-use DSI\Service\App;
+use Services\App;
 use DSI\Service\Mailer;
 
 class SendWaitingApprovalController

@@ -1,6 +1,6 @@
 <?php
 
-namespace DSI\Service;
+namespace Services;
 
 class App
 {

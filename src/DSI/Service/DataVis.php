@@ -1,6 +1,7 @@
 <?php
 
 namespace DSI\Service;
+use Services\App;
 
 class DataVis
 {

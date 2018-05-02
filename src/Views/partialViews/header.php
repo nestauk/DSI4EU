@@ -163,7 +163,7 @@ if (!isset($urlHandler))
             </div>
             <?php if (isset($loggedInUser) AND $loggedInUser) { ?>
                 <div
-                    <?php if (\DSI\Service\App::canCreateProjects()) { ?>
+                    <?php if (\Services\App::canCreateProjects()) { ?>
                         data-ix="create-dropdown"
                     <?php } else { ?>
                         data-ix="create-paused"

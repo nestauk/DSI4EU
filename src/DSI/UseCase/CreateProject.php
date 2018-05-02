@@ -11,7 +11,7 @@ use DSI\Repository\ContentUpdateRepo;
 use DSI\Repository\ProjectMemberRepo;
 use DSI\Repository\ProjectRepo;
 use DSI\Repository\ProjectRepoInAPC;
-use DSI\Service\App;
+use Services\App;
 use DSI\Service\ErrorHandler;
 
 class CreateProject

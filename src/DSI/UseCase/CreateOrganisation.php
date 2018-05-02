@@ -11,7 +11,7 @@ use DSI\Repository\ContentUpdateRepo;
 use DSI\Repository\OrganisationMemberRepo;
 use DSI\Repository\OrganisationRepo;
 use DSI\Repository\OrganisationRepoInAPC;
-use DSI\Service\App;
+use Services\App;
 use DSI\Service\ErrorHandler;
 
 class CreateOrganisation

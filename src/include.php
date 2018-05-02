@@ -2,7 +2,7 @@
 
 error_reporting(E_ALL ^ E_NOTICE);
 
-use \DSI\Service\App;
+use \Services\App;
 
 if (!file_exists(__DIR__ . '/../config/app.php')) {
     http_response_code(405);
