@@ -15,4 +15,9 @@ class Cluster extends Model
     {
         return $this->{self::Id};
     }
+
+    public function clusterLangs()
+    {
+        return $this->hasMany(ClusterLang::class, ClusterLang::ClusterID, self::Id);
+    }
 }
