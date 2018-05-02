@@ -31,7 +31,7 @@ class ClustersController
             ->where(ClusterLang::Lang, Translate::getCurrentLang())
             ->get();
 
-        View::render(__DIR__ . '/../Views/clusters.php', [
+        View::render(__DIR__ . '/../Views/clusters/clusters.php', [
             'urlHandler' => $this->urlHandler,
             'loggedInUser' => $this->loggedInUser,
             'clusters' => $clusters,

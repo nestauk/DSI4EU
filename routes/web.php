@@ -390,6 +390,9 @@ class Router
         } elseif (preg_match('<^/' . $langHandler . 'cluster/([0-9]+)$>', $this->pageURL, $matches)) {
             $this->cluster($matches);
 
+        } elseif (preg_match('<^/' . $langHandler . 'cluster/([0-9]+)/edit$>', $this->pageURL, $matches)) {
+            $this->clusterEdit($matches);
+
         } elseif (preg_match('<^/' . $langHandler . 'api/cluster/([0-9]+)$>', $this->pageURL, $matches)) {
             $this->clusterApi($matches);
 
@@ -1132,9 +1135,16 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \Controllers\ClusterController();
-        $command->clusterID = $matches[3];
-        $command->exec();
+        $command = new \Controllers\ClusterController($matches[3]);
+        $command->get();
+    }
+
+    private function clusterEdit($matches)
+    {
+        $this->setLanguageFromUrl($matches);
+
+        $command = new \Controllers\ClusterController($matches[3]);
+        $command->edit();
     }
 
     private function clusterApi($matches)

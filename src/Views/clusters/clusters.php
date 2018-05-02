@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/../../www/views/header.php'
+require __DIR__ . '/../header.php'
 /** @var $loggedInUser \DSI\Entity\User */
 /** @var $urlHandler Services\URL */
 /** @var $clusters \Models\ClusterLang[] */
@@ -42,4 +42,4 @@ require __DIR__ . '/../../www/views/header.php'
         </div>
     </div>
 
-<?php require __DIR__ . '/footer.php' ?>
+<?php require __DIR__ . '/../footer.php' ?>

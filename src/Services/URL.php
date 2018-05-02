@@ -416,6 +416,15 @@ class URL
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'cluster/' . (int)$clusterId;
     }
 
+    public function clusterEdit($clusterId)
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'cluster/' . (int)$clusterId . '/edit';
+    }
+
+    public function clusterApi($clusterId)
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'api/cluster/' . (int)$clusterId;
+    }
 
     /**
      * @param $title

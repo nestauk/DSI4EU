@@ -63,6 +63,12 @@ class ClusterApiController
         if (!$this->loggedInUser->isEditorialAdmin())
             return (new Response('Not admin', Response::HTTP_UNAUTHORIZED))->send();
 
+        $errors = [];
+        if (trim($_POST['title']) === '')
+            $errors['title'] = 'Please provide a cluster title';
+        if ($errors)
+            return (new JsonResponse($errors, Response::HTTP_FORBIDDEN))->send();
+
         $fields = [
             ClusterLang::Title,
             ClusterLang::Description,

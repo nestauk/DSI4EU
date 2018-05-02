@@ -3,7 +3,9 @@
 namespace Controllers;
 
 use DSI\Entity\User;
+use DSI\NotFound;
 use DSI\Service\Auth;
+use DSI\Service\JsModules;
 use DSI\Service\Translate;
 use Services\URL;
 use Models\ClusterLang;
@@ -29,8 +31,9 @@ class ClusterController
     /** @var Auth */
     private $authUser;
 
-    public function exec()
+    public function __construct($clusterID)
     {
+        $this->clusterID = (int)$clusterID;
         $this->urlHandler = new URL();
         $this->authUser = new Auth();
         $this->loggedInUser = $this->authUser->getUserIfLoggedIn();
@@ -42,20 +45,41 @@ class ClusterController
         ])->first();
 
         if (!$this->clusterLang)
-            return View::render(__DIR__ . '/../Views/404-not-found.php');
-
-        if (Request::isMethod(Request::METHOD_GET))
-            return $this->get();
-        else
-            return (new Response('Invalid header', Response::HTTP_FORBIDDEN))->send();
+            throw new NotFound();
     }
 
-    private function get()
+    public function get()
     {
-        return View::render(__DIR__ . '/../Views/cluster.php', [
+        if (!Request::isMethod(Request::METHOD_GET))
+            return (new Response('Invalid header', Response::HTTP_FORBIDDEN))->send();
+
+        return View::render(__DIR__ . '/../Views/clusters/cluster.php', [
             'authUser' => $this->authUser,
             'loggedInUser' => $this->loggedInUser,
             'cluster' => $this->clusterLang,
+            'canEdit' => $this->canEdit(),
         ]);
+    }
+
+    public function edit()
+    {
+        JsModules::setTinyMCE(true);
+        return View::render(__DIR__ . '/../Views/clusters/cluster-edit.php', [
+            'authUser' => $this->authUser,
+            'loggedInUser' => $this->loggedInUser,
+            'cluster' => $this->clusterLang,
+            'canEdit' => $this->canEdit(),
+        ]);
+    }
+
+    /**
+     * @return bool
+     */
+    private function canEdit()
+    {
+        if ($this->loggedInUser AND $this->loggedInUser->isCommunityAdmin())
+            return true;
+
+        return false;
     }
 }
