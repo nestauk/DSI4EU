@@ -6,7 +6,7 @@ use DSI\Entity\Event;
 use DSI\Repository\CountryRepo;
 use DSI\Repository\EventRepo;
 use DSI\Service\Auth;
-use DSI\Service\URL;
+use Services\URL;
 
 class EventsController
 {

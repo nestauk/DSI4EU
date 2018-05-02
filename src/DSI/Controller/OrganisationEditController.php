@@ -23,7 +23,7 @@ use DSI\Repository\TagForOrganisationsRepo;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\JsModules;
-use DSI\Service\URL;
+use Services\URL;
 use DSI\UseCase\AddMemberInvitationToOrganisation;
 use DSI\UseCase\AddMemberRequestToOrganisation;
 use DSI\UseCase\AddProjectToOrganisation;

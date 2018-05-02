@@ -6,7 +6,7 @@ use DSI\Entity\CaseStudy;
 use DSI\Entity\User;
 use DSI\Repository\CaseStudyRepo;
 use DSI\Service\Auth;
-use DSI\Service\URL;
+use Services\URL;
 
 class CaseStudiesController
 {

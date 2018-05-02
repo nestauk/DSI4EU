@@ -11,7 +11,7 @@ namespace DSI\Controller;
 use DSI\Repository\UserRepo;
 use DSI\Service\Auth;
 use DSI\Service\GoogleLogin;
-use DSI\Service\URL;
+use Services\URL;
 
 use DSI\UseCase\GoogleRegister;
 use League\OAuth2\Client\Token\AccessToken;

@@ -12,7 +12,7 @@ use DSI\Repository\ProjectImpactTechTagRepo;
 use DSI\Repository\ProjectRepoInAPC;
 use DSI\Repository\ProjectTagRepo;
 use DSI\Service\Auth;
-use DSI\Service\URL;
+use Services\URL;
 
 class ExportProjectsController
 {

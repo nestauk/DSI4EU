@@ -1,5 +1,5 @@
 <?php
-/** @var $urlHandler \DSI\Service\URL */
+/** @var $urlHandler Services\URL */
 ?>
 <div class="stat-text w-row">
     <div class="w-col w-col-5">

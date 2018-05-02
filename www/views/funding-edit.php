@@ -3,7 +3,7 @@ require __DIR__ . '/header.php';
 /** @var $fundingTypes \DSI\Entity\FundingType[] */
 /** @var $fundingTargets \DSI\Entity\FundingTarget[] */
 /** @var $fundingSources \DSI\Entity\FundingSource[] */
-/** @var $urlHandler \DSI\Service\URL */
+/** @var $urlHandler Services\URL */
 /** @var $countries \DSI\Entity\Country[] */
 /** @var $loggedInUser \DSI\Entity\User */
 /** @var $funding \DSI\Entity\Funding */

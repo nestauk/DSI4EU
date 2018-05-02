@@ -19,7 +19,7 @@ use DSI\Repository\ProjectTagRepo;
 use DSI\Repository\TagForOrganisationsRepo;
 use DSI\Repository\TagForProjectsRepo;
 use DSI\Service\Auth;
-use DSI\Service\URL;
+use Services\URL;
 
 class ManageTagsController
 {

@@ -7,7 +7,7 @@ use DSI\Repository\ProjectRepoInAPC;
 use DSI\Repository\UserRepo;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
-use DSI\Service\URL;
+use Services\URL;
 use DSI\UseCase\Projects\ChangeOwner;
 
 class ProjectEditOwnerController

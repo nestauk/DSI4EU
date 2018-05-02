@@ -12,7 +12,7 @@ use DSI\Repository\ProjectRepo;
 use DSI\Repository\StoryRepo;
 use DSI\Repository\UserRepo;
 use DSI\Service\Auth;
-use DSI\Service\URL;
+use Services\URL;
 
 class SearchController
 {

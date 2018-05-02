@@ -2,11 +2,11 @@
 /** @var $angularModules string[] */
 /** @var $pageTitle string[] */
 /** @var $loggedInUser \DSI\Entity\User */
-/** @var $urlHandler \DSI\Service\URL */
+/** @var $urlHandler Services\URL */
 use DSI\Service\Sysctl;
 
 if (!$urlHandler)
-    $urlHandler = new \DSI\Service\URL();
+    $urlHandler = new Services\URL();
 
 ?>
 <meta charset="utf-8">

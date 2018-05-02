@@ -10,7 +10,7 @@ namespace DSI\Controller;
 
 use DSI\Repository\UserRepo;
 use DSI\Service\Auth;
-use DSI\Service\URL;
+use Services\URL;
 use DSI\UseCase\TwitterLogin;
 use DSI\UseCase\TwitterRegister;
 

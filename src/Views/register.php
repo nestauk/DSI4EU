@@ -1,5 +1,5 @@
 <?php
-use \DSI\Service\URL;
+use Services\URL;
 
 ?>
 <!DOCTYPE html>

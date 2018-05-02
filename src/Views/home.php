@@ -7,7 +7,8 @@
 /** @var $homePageCaseStudies \DSI\Entity\CaseStudy[] */
 /** @var $organisationsCount int */
 /** @var $projectsCount int */
-use DSI\Entity\Image;use DSI\Service\URL;
+use DSI\Entity\Image;
+use Services\URL;
 
 if (!isset($urlHandler))
     $urlHandler = new URL();

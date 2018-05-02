@@ -4,7 +4,7 @@ namespace DSI\Controller;
 
 use DSI\Repository\EventRepo;
 use DSI\Service\Auth;
-use DSI\Service\URL;
+use Services\URL;
 
 class RssEventsController
 {

@@ -1,5 +1,5 @@
 <?php
-/** @var $urlHandler \DSI\Service\URL */
+/** @var $urlHandler Services\URL */
 ?>
 <div class="additional" data-ix="fadeinuponload-3">Bisher haben</div>
 <div class="stat-text w-row">

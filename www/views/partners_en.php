@@ -1,5 +1,5 @@
 <?php
-/** @var $urlHandler \DSI\Service\URL */
+/** @var $urlHandler Services\URL */
 require __DIR__ . '/header.php' ?>
 
     <style xmlns="http://www.w3.org/1999/html">

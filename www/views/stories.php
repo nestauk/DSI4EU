@@ -1,7 +1,7 @@
 <?php
 require __DIR__ . '/header.php';
 /** @var $userCanAddStory bool */
-/** @var $urlHandler \DSI\Service\URL */
+/** @var $urlHandler Services\URL */
 ?>
 
     <style>

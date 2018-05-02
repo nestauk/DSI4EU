@@ -15,7 +15,7 @@ use DSI\Repository\ProjectRepoInAPC;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\JsModules;
-use DSI\Service\URL;
+use Services\URL;
 use DSI\UseCase\CancelInvitationEmailToProject;
 use DSI\UseCase\InviteEmailToProject;
 use DSI\UseCase\AddMemberInvitationToProject;

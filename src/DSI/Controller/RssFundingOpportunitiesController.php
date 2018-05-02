@@ -4,7 +4,7 @@ namespace DSI\Controller;
 
 use DSI\Repository\FundingRepo;
 use DSI\Service\Auth;
-use DSI\Service\URL;
+use Services\URL;
 
 class RssFundingOpportunitiesController
 {

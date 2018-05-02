@@ -3,7 +3,7 @@ namespace DSI\Controller;
 
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
-use DSI\Service\URL;
+use Services\URL;
 use DSI\UseCase\Register;
 
 class RegisterController
@@ -49,7 +49,7 @@ class RegisterController
             }
         }
 
-        require __DIR__ . '/../../../www/views/register.php';
+        require __DIR__ . '/../../Views/register.php';
     }
 
     private function checkRecaptcha():bool

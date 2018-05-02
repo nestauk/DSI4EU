@@ -1,5 +1,5 @@
 <?php
-/** @var $urlHandler \DSI\Service\URL */
+/** @var $urlHandler Services\URL */
 /** @var $events \DSI\Entity\Event[] */
 ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">

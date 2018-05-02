@@ -1,6 +1,6 @@
 <?php
 
-use \DSI\Service\URL;
+use Services\URL;;
 
 require_once __DIR__ . '/../../../config.php';
 

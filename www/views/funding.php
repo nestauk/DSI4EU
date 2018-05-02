@@ -1,7 +1,7 @@
 <?php
 require __DIR__ . '/header.php'
 /** @var $loggedInUser \DSI\Entity\User */
-/** @var $urlHandler \DSI\Service\URL */
+/** @var $urlHandler Services\URL */
 /** @var $userCanAddFunding bool */
 /** @var $fundingTypes \DSI\Entity\FundingType[] */
 /** @var $fundingTargets \DSI\Entity\FundingTarget[] */

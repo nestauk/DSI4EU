@@ -8,7 +8,7 @@ require __DIR__ . '/header.php';
 /** @var $userProjects int[] */
 /** @var $organisations \DSI\Entity\Organisation[] */
 /** @var $userOrganisations int[] */
-/** @var $urlHandler \DSI\Service\URL */
+/** @var $urlHandler Services\URL */
 /** @var $loggedInUser \DSI\Entity\User */
 /** @var $user \DSI\Entity\User */
 

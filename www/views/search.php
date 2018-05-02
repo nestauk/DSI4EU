@@ -7,7 +7,7 @@ require __DIR__ . '/header.php';
 /** @var $organisations \DSI\Entity\Organisation[] */
 
 if (!isset($urlHandler))
-    $urlHandler = new \DSI\Service\URL();
+    $urlHandler = new Services\URL();
 
 ?>
     <style>

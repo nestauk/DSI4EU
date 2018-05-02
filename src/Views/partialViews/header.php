@@ -1,7 +1,7 @@
 <?php
 /** @var $loggedInUser \DSI\Entity\User */
 
-use DSI\Service\URL;
+use Services\URL;
 
 if (!isset($urlHandler))
     $urlHandler = new URL();

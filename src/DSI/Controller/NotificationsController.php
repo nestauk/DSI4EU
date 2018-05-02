@@ -11,7 +11,7 @@ use DSI\Repository\ProjectMemberRepo;
 use DSI\Repository\ProjectMemberRequestRepo;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
-use DSI\Service\URL;
+use Services\URL;
 
 class NotificationsController
 {

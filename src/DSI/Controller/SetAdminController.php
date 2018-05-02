@@ -8,7 +8,7 @@ use DSI\Repository\ProjectRepo;
 use DSI\Repository\ProjectRepoInAPC;
 use DSI\Repository\UserRepo;
 use DSI\Service\Auth;
-use DSI\Service\URL;
+use Services\URL;
 use DSI\UseCase\SetAdminStatusToOrganisationMember;
 use DSI\UseCase\SetAdminStatusToProjectMember;
 

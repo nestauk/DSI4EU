@@ -2,7 +2,7 @@
 namespace DSI\Controller;
 
 use DSI\Service\Auth;
-use DSI\Service\URL;
+use Services\URL;
 
 class UploadImageController
 {

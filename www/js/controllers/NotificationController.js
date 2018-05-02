@@ -7,7 +7,7 @@ angular
         $http
             .get(url)
             .then(function (response) {
-                if (response.data.code == 'ok') {
+                if (response.data.code === 'ok') {
                     $scope.notifications = response.data.notifications;
                 } else {
                     alert('unexpected error');

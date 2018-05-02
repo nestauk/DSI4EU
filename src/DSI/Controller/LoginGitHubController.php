@@ -11,7 +11,7 @@ namespace DSI\Controller;
 use DSI\Repository\UserRepo;
 use DSI\Service\Auth;
 use DSI\Service\GitHubLogin;
-use DSI\Service\URL;
+use Services\URL;
 use DSI\UseCase\GitHubRegister;
 
 class LoginGitHubController

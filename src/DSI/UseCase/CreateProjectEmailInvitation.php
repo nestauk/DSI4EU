@@ -11,7 +11,7 @@ use DSI\Repository\ProjectRepoInAPC;
 use DSI\Repository\UserRepo;
 use DSI\Service\ErrorHandler;
 use DSI\Service\Mailer;
-use DSI\Service\URL;
+use Services\URL;
 
 class CreateProjectEmailInvitation
 {

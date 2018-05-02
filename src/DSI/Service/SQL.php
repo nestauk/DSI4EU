@@ -158,7 +158,12 @@ class SQL
         return (new SQL('ROLLBACK'))->query();
     }
 
-    public static function credentials($arr)
+    public static function getCredentials()
+    {
+        return self::$credentials;
+    }
+
+    public static function setCredentials($arr)
     {
         self::$credentials = $arr;
     }

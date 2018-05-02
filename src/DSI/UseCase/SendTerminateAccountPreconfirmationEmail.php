@@ -5,7 +5,7 @@ namespace DSI\UseCase;
 use DSI\Entity\User;
 use DSI\Service\ErrorHandler;
 use DSI\Service\Mailer;
-use DSI\Service\URL;
+use Services\URL;
 
 class SendTerminateAccountPreconfirmationEmail
 {

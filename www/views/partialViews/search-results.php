@@ -1,6 +1,6 @@
 <?php
 if (!isset($urlHandler))
-    $urlHandler = new \DSI\Service\URL();
+    $urlHandler = new Services\URL();
 ?>
 <div class="search-results-popover" ng-cloak
      ng-show="search.entry.length >= 3">

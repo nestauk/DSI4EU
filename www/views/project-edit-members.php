@@ -3,12 +3,12 @@ require __DIR__ . '/header.php';
 /** @var $users \DSI\Entity\User[] */
 /** @var $loggedInUser \DSI\Entity\User */
 /** @var $project \DSI\Entity\Project */
-/** @var $urlHandler \DSI\Service\URL */
+/** @var $urlHandler Services\URL */
 /** @var $isAdmin bool */
 /** @var $isOwner bool */
 
 if (!isset($urlHandler))
-    $urlHandler = new \DSI\Service\URL();
+    $urlHandler = new Services\URL();
 ?>
     <div ng-controller="ProjectEditMembersController">
         <div class="creator page-header">

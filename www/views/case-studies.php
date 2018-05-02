@@ -3,7 +3,7 @@ require __DIR__ . '/header.php';
 /** @var $loggedInUser \DSI\Entity\User */
 /** @var $caseStudies \DSI\Entity\CaseStudy[] */
 /** @var $userCanManageCaseStudies bool */
-/** @var $urlHandler \DSI\Service\URL */
+/** @var $urlHandler Services\URL */
 ?>
 
     <div ng-controller="CaseStudiesController"

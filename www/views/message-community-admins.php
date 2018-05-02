@@ -2,7 +2,7 @@
 require __DIR__ . '/header.php';
 /** @var $userID int */
 /** @var $loggedInUser \DSI\Entity\User */
-/** @var $urlHandler \DSI\Service\URL */
+/** @var $urlHandler Services\URL */
 /** @var $securityCode string */
 ?>
     <div class="content-block">

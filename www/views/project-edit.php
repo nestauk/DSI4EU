@@ -16,7 +16,7 @@ $leftSideText = "<p>" . _html('To add your project, we need to understand more a
 $leftSideText .= "<p>" . _html('Some information is optional (mandatory fields are indicated with an asterisk). You can edit answers later.') . "</p>";
 
 if (!isset($urlHandler))
-    $urlHandler = new \DSI\Service\URL();
+    $urlHandler = new Services\URL();
 
 ?>
     <div ng-controller="ProjectEditController"

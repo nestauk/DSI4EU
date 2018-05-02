@@ -6,7 +6,7 @@ require __DIR__ . '/header.php';
 /** @var $organisation \DSI\Entity\Organisation */
 
 if (!isset($urlHandler))
-    $urlHandler = new \DSI\Service\URL();
+    $urlHandler = new Services\URL();
 ?>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
     <script src="//code.jquery.com/ui/1.12.0/jquery-ui.js"></script>

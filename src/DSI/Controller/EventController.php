@@ -2,11 +2,10 @@
 
 namespace DSI\Controller;
 
-use DSI\Entity\Event;
 use DSI\Entity\User;
 use DSI\Repository\EventRepo;
 use DSI\Service\Auth;
-use DSI\Service\URL;
+use Services\URL;
 
 class EventController
 {

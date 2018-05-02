@@ -3,7 +3,7 @@ namespace DSI\Controller;
 
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
-use DSI\Service\URL;
+use Services\URL;
 use DSI\UseCase\Login;
 use DSI\UseCase\RememberPermanentLogin;
 
@@ -54,6 +54,6 @@ class LoginController
             }
         }
 
-        require __DIR__ . '/../../../www/views/login.php';
+        require __DIR__ . '/../../Views/login.php';
     }
 }

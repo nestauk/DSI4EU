@@ -7,7 +7,7 @@ require __DIR__ . '/header.php';
 /** @var $projects \DSI\Entity\Project[] */
 /** @var $organisations \DSI\Entity\Organisation[] */
 /** @var $userLinks string[] */
-/** @var $urlHandler \DSI\Service\URL */
+/** @var $urlHandler Services\URL */
 /** @var $canManageUsers bool */
 /** @var $askForPermanentLogin bool */
 ?>

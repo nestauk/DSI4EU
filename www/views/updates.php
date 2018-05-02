@@ -1,5 +1,5 @@
 <?php
-/** @var $urlHandler \DSI\Service\URL */
+/** @var $urlHandler Services\URL */
 
 $pageTitle = 'Updates';
 require __DIR__ . '/header.php';

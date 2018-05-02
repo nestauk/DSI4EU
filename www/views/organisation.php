@@ -19,7 +19,7 @@ require __DIR__ . '/header.php';
 /** @var $networkTags \DSI\Entity\NetworkTag[] */
 
 if (!isset($urlHandler))
-    $urlHandler = new \DSI\Service\URL();
+    $urlHandler = new Services\URL();
 
 ?>
     <div ng-controller="OrganisationController"

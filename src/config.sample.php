@@ -31,7 +31,7 @@ App::setCanCreateProjects(true);
     'digitalSocial:projects'
 );
 
-\DSI\Service\SQL::credentials(array(
+\DSI\Service\SQL::setCredentials(array(
     'username' => '',
     'password' => '',
     'db' => '',

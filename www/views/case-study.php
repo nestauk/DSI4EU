@@ -4,7 +4,7 @@ require __DIR__ . '/header.php';
 /** @var $caseStudy \DSI\Entity\CaseStudy */
 /** @var $caseStudies \DSI\Entity\CaseStudy[] */
 /** @var $userCanAddCaseStudy bool */
-/** @var $urlHandler \DSI\Service\URL */
+/** @var $urlHandler Services\URL */
 ?>
 
     <div class="case-study-intro">

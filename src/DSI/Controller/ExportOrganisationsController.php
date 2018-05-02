@@ -10,7 +10,7 @@ use DSI\Repository\OrganisationRepo;
 use DSI\Repository\OrganisationRepoInAPC;
 use DSI\Repository\OrganisationTagRepo;
 use DSI\Service\Auth;
-use DSI\Service\URL;
+use Services\URL;
 
 class ExportOrganisationsController
 {

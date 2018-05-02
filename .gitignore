@@ -19,3 +19,4 @@
 /www/images/upload/
 .DS_Store
 /import/
+/phinx.yml

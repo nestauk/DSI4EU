@@ -25,6 +25,6 @@ class HomeController
 
         $isIndexPage = true;
 
-        require __DIR__ . '/../../../www/views/home.php';
+        require __DIR__ . '/../../Views/home.php';
     }
 }

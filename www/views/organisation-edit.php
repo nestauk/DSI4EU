@@ -14,7 +14,7 @@ $leftSideText = "<p>" . _html('To add your organisation, we need to understand m
 $leftSideText .= "<p>" . _html('Some information is optional (mandatory fields are indicated with an asterisk).') . "</p>";
 
 if (!isset($urlHandler))
-    $urlHandler = new \DSI\Service\URL();
+    $urlHandler = new Services\URL();
 
 ?>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">

@@ -24,7 +24,7 @@ use DSI\Repository\StoryRepo;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\JsModules;
-use DSI\Service\URL;
+use Services\URL;
 use DSI\UseCase\AcceptMemberInvitationToOrganisation;
 use DSI\UseCase\AcceptMemberInvitationToProject;
 use DSI\UseCase\ApproveMemberRequestToOrganisation;

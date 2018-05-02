@@ -10,7 +10,7 @@ require_once(__DIR__ . "/../src/config.php");
     'digitalSocialTest:projects'
 );
 
-\DSI\Service\SQL::credentials(array(
+\DSI\Service\SQL::setCredentials(array(
     'username' => 'root',
     'password' => '',
     'db' => 'dsi-test',

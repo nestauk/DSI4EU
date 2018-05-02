@@ -5,7 +5,7 @@ namespace DSI\Controller;
 use DSI\AccessDenied;
 use DSI\Repository\UserRepo;
 use DSI\Service\Auth;
-use DSI\Service\URL;
+use Services\URL;
 
 class ProfileEditPrivilegesController
 {

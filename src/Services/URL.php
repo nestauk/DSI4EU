@@ -1,7 +1,6 @@
 <?php
 
-namespace DSI\Service;
-
+namespace Services;
 
 use DSI\Entity\CaseStudy;
 use DSI\Entity\Event;
@@ -10,6 +9,7 @@ use DSI\Entity\Project;
 use DSI\Entity\Story;
 use DSI\Entity\Translation;
 use DSI\Entity\User;
+use DSI\Service\Translate;
 
 class URL
 {
@@ -409,6 +409,11 @@ class URL
             $extension = '';
 
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'waiting-approval' . $extension;
+    }
+
+    public function cluster($clusterId)
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'cluster/' . (int)$clusterId;
     }
 
 

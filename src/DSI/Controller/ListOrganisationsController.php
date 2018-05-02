@@ -5,7 +5,7 @@ namespace DSI\Controller;
 use DSI\Repository\OrganisationRepo;
 use DSI\Repository\OrganisationRepoInAPC;
 use DSI\Service\Auth;
-use DSI\Service\URL;
+use Services\URL;
 
 class ListOrganisationsController
 {

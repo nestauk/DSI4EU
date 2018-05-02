@@ -16,7 +16,7 @@ use DSI\Repository\UserSkillRepo;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\Mailer;
-use DSI\Service\URL;
+use Services\URL;
 use DSI\UseCase\AddLanguageToUser;
 use DSI\UseCase\AddLinkToUser;
 use DSI\UseCase\AddMemberRequestToOrganisation;

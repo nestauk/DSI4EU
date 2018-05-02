@@ -6,7 +6,7 @@ use DSI\Entity\ContentUpdate;
 use DSI\Entity\User;
 use DSI\Repository\ContentUpdateRepo;
 use DSI\Service\Auth;
-use DSI\Service\URL;
+use Services\URL;
 use DSI\UseCase\SecureCode;
 use DSI\UseCase\WaitingApproval\ApproveWaitingApproval;
 use DSI\UseCase\WaitingApproval\RejectWaitingApproval;

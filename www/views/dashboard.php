@@ -4,7 +4,7 @@
 /** @var $projectsMember \DSI\Entity\ProjectMember[] */
 /** @var $organisationsMember \DSI\Entity\OrganisationMember[] */
 
-use DSI\Service\URL;
+use Services\URL;
 
 if (!isset($urlHandler))
     $urlHandler = new URL();

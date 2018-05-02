@@ -1,5 +1,5 @@
 <?php
-/** @var $urlHandler \DSI\Service\URL */
+/** @var $urlHandler Services\URL */
 /** @var $user \DSI\Entity\User */
 use \DSI\Service\Sysctl;
 

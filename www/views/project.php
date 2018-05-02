@@ -12,7 +12,7 @@ require __DIR__ . '/header.php';
 /** @var $loggedInUser \DSI\Entity\User */
 /** @var $projectMembers \DSI\Entity\ProjectMember[] */
 /** @var $organisationProjectsObj \DSI\Entity\OrganisationProject[] */
-/** @var $urlHandler \DSI\Service\URL */
+/** @var $urlHandler Services\URL */
 ?>
     <div ng-controller="ProjectController"
          data-jsonurl="<?php echo $urlHandler->projectJson($project) ?>" class="page-project">

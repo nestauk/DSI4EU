@@ -11,7 +11,7 @@ use DSI\Repository\FundingSourceRepo;
 use DSI\Repository\FundingTargetRepo;
 use DSI\Repository\FundingTypeRepo;
 use DSI\Service\Auth;
-use DSI\Service\URL;
+use Services\URL;
 
 class FundingController
 {

@@ -1,18 +1,18 @@
 <?php
-/** @var $urlHandler \DSI\Service\URL */
+/** @var $urlHandler Services\URL */
 ?>
 <div class="stat-text w-row">
     <div class="w-col w-col-5">
         <div class="number-of-orgs"
              data-ix="fadeinuponload-3"><?php echo number_format($organisationsCount, 0, ',', '.') ?></div>
-        <a class="organisations-2" data-ix="fadeinuponload-4" href="<?php echo $urlHandler->organisations() ?>">Organizaciones</a>
+        <a class="organisations-2" data-ix="fadeinuponload-4" href="<?php echo $urlHandler->organisations() ?>">Organizzazioni</a>
     </div>
     <div class="w-col w-col-2">
-        <div class="have-collab" data-ix="fadeinuponload-5">han colaborado en</div>
+        <div class="have-collab" data-ix="fadeinuponload-5">hanno collaborato a</div>
     </div>
     <div class="w-col w-col-5">
         <div class="number-of-orgs pro"
              data-ix="fadeinuponload-6"><?php echo number_format($projectsCount, 0, ',', '.') ?></div>
-        <a class="organisations-2" data-ix="fadeinuponload-7" href="<?php echo $urlHandler->projects() ?>">Proyectos</a>
+        <a class="organisations-2" data-ix="fadeinuponload-7" href="<?php echo $urlHandler->projects() ?>">Progetti</a>
     </div>
 </div>

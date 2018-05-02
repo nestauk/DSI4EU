@@ -1,8 +1,8 @@
 <?php
 /** @var \DSI\Entity\ContentUpdate[] $contentUpdates */
-/** @var \DSI\Service\URL $urlHandler */
+/** @var Services\URL $urlHandler */
 if (!isset($urlHandler))
-    $urlHandler = new \DSI\Service\URL();
+    $urlHandler = new Services\URL();
 ?>
 <?php if ($contentUpdates) { ?>
     <table cellpadding="2" cellspacing="2">

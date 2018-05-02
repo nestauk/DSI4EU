@@ -8,7 +8,7 @@ use DSI\Repository\OrganisationNetworkTagRepo;
 use DSI\Repository\OrganisationRepoInAPC;
 use DSI\Repository\OrganisationTagRepo;
 use DSI\Service\Auth;
-use DSI\Service\URL;
+use Services\URL;
 
 class OrganisationsController
 {

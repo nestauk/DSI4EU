@@ -1,7 +1,7 @@
 <?php
 require __DIR__ . '/header.php'
 /** @var $loggedInUser \DSI\Entity\User */
-/** @var $urlHandler \DSI\Service\URL */
+/** @var $urlHandler Services\URL */
 /** @var $event \DSI\Entity\Event */
 /** @var $userCanManageEvent bool */
 ?>
