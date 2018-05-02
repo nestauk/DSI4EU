@@ -52,7 +52,7 @@ class UploadImageController
                     }
 
                     if (!file_exists($serverFolder)) {
-                        mkdir($serverFolder, 0700, true);
+                        mkdir($serverFolder, 0750, true);
                     }
 
                     // Accept upload if there was no origin, or if it is an accepted origin
