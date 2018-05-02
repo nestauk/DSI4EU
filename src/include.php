@@ -4,6 +4,11 @@ error_reporting(E_ALL ^ E_NOTICE);
 
 use \DSI\Service\App;
 
+if (!file_exists(__DIR__ . '/../config/app.php')) {
+    http_response_code(405);
+    echo '<h1>Please make sure the config file exists and is readable</h1>';
+    die();
+}
 $config = require __DIR__ . '/../config/app.php';
 
 define('SITE_DOMAIN', $config['site-domain']);
