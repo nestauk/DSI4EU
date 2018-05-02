@@ -1,7 +1,7 @@
 <?php
 
 define('NO_SESSION', true);
-require_once(__DIR__ . "/../src/config.php");
+require_once __DIR__ . '/../src/include.php';
 
 \DSI\Repository\OrganisationRepoInAPC::setApcKey(
     'digitalSocialTest:organisations'

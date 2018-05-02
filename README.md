@@ -12,9 +12,9 @@
 - `git clone https://github.com/nestauk/DSI4EU.git`
 - create MySQL user and database
 - import into MySQL database all the files from _database/migrations_ and _database/seeds_
-- copy _src/config.sample.php_ to _src/config.php_ and update with correct information
+- copy _config/config.sample.php_ to _config/config.php_ and update with correct information
 - `composer install`
-- `vendor/bin/phinx migrate`
+- `vendor/bin/phinx migrate -c config/phinx.php  -e production`
 
 ## Integration with data visualisation
 - `cd www/data-viz`
