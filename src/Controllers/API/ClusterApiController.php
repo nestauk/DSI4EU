@@ -59,11 +59,8 @@ class ClusterApiController
 
     private function save()
     {
-        if (!$this->authUser->isLoggedIn())
-            return (new Response('Not logged in', Response::HTTP_UNAUTHORIZED))->send();
-
-        if (!$this->loggedInUser->isEditorialAdmin())
-            return (new Response('Not admin', Response::HTTP_UNAUTHORIZED))->send();
+        if (!$this->canEdit())
+            return (new Response('Not allowed', Response::HTTP_UNAUTHORIZED))->send();
 
         $errors = [];
         if (trim($_POST['title']) === '')
@@ -90,5 +87,16 @@ class ClusterApiController
             $clusterImg->path = Image::UPLOAD_FOLDER_URL . $clusterImg->filename;
         });
         return (new JsonResponse($this->clusterLang))->send();
+    }
+
+    /**
+     * @return bool
+     */
+    private function canEdit()
+    {
+        if ($this->loggedInUser AND $this->loggedInUser->isEditorialAdmin())
+            return true;
+
+        return false;
     }
 }

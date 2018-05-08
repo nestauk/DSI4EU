@@ -63,6 +63,9 @@ class ClusterController
 
     public function edit()
     {
+        if (!$this->canEdit())
+            go_to($this->urlHandler->clusters());
+
         JsModules::setTinyMCE(true);
         $angularModules['fileUpload'] = true;
         return View::render(__DIR__ . '/../Views/clusters/cluster-edit.php', [
@@ -79,7 +82,7 @@ class ClusterController
      */
     private function canEdit()
     {
-        if ($this->loggedInUser AND $this->loggedInUser->isCommunityAdmin())
+        if ($this->loggedInUser AND $this->loggedInUser->isEditorialAdmin())
             return true;
 
         return false;
