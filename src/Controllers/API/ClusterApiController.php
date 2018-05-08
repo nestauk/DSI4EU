@@ -2,9 +2,11 @@
 
 namespace Controllers\API;
 
+use DSI\Entity\Image;
 use DSI\Entity\User;
 use DSI\Service\Auth;
 use DSI\Service\Translate;
+use Models\ClusterImg;
 use Services\URL;
 use Models\ClusterLang;
 use Services\Request;
@@ -84,6 +86,9 @@ class ClusterApiController
 
     private function get()
     {
+        $this->clusterLang->images = $this->clusterLang->images->map(function (ClusterImg $clusterImg) {
+            $clusterImg->path = Image::UPLOAD_FOLDER_URL . $clusterImg->filename;
+        });
         return (new JsonResponse($this->clusterLang))->send();
     }
 }

@@ -28,10 +28,10 @@ require __DIR__ . '/../header.php'
                                     </h2>
                                     <div class="infocard top3-underline" data-ix="new-interaction-2"></div>
                                     <p class="funding-descr">
-                                        <?php _ehtml($cluster->getDescription()) ?>
+                                        <?php _e($cluster->getDescription()) ?>
                                     </p>
                                     <p class="funding-descr">
-                                        <?php _ehtml($cluster->getGetInTouch()) ?>
+                                        <?php _e($cluster->getGetInTouch()) ?>
                                     </p>
                                 </a>
                             </div>

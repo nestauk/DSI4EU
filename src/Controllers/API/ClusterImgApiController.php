@@ -2,6 +2,8 @@
 
 namespace Controllers\API;
 
+use Actions\Uploads\MoveUploadedFromTemp;
+use DSI\Entity\Image;
 use DSI\Entity\User;
 use DSI\NotFound;
 use DSI\Service\Auth;
@@ -35,14 +37,6 @@ class ClusterImgApiController
         $this->authUser = new Auth();
         $this->loggedInUser = $this->authUser->getUserIfLoggedIn();
 
-        if ($this->clusterImgID) {
-            $this->clusterImg = ClusterImg::find($this->clusterImgID);
-            if (!$this->clusterImg) {
-                (new Response('Cluster Image not found', Response::HTTP_NOT_FOUND))->send();
-                throw new NotFound();
-            }
-        }
-
         if (Request::isMethod(Request::METHOD_GET))
             return $this->get();
         elseif (Request::isMethod(Request::METHOD_POST))
@@ -55,7 +49,7 @@ class ClusterImgApiController
 
     private function save()
     {
-        if (!$this->clusterImg)
+        if (!$this->clusterImgID)
             return $this->insert();
         else
             return $this->update();
@@ -69,9 +63,14 @@ class ClusterImgApiController
         if (!$clusterLang)
             return (new Response('Cluster Lang not found', Response::HTTP_NOT_FOUND))->send();
 
+        $exec = new MoveUploadedFromTemp();
+        $exec->fileName = $_POST[ClusterImg::Filename];
+        $exec->user = $this->loggedInUser;
+        $exec->exec();
+
         $this->clusterImg = new ClusterImg();
         $this->clusterImg->{ClusterImg::ClusterLangID} = $clusterLang->{ClusterLang::Id};
-        $this->clusterImg->{ClusterImg::Filename} = $_POST[ClusterImg::Filename];
+        $this->clusterImg->{ClusterImg::Filename} = $exec->getNewFileName();
         $this->clusterImg->{ClusterImg::Link} = $_POST[ClusterImg::Link];
         $this->clusterImg->save();
         return $this->get();
@@ -81,11 +80,12 @@ class ClusterImgApiController
     {
         if (!$this->userCanMakeChanges()) return false;
 
-        if (!$this->clusterImg)
+        if (!$this->fetchClusterImage())
             return (new Response('Cluster Image not found', Response::HTTP_NOT_FOUND))->send();
 
         $fields = [
             ClusterImg::Link,
+            // ClusterImg::Filename,
         ];
         foreach ($fields AS $field)
             if (isset($_POST[$field])) $this->clusterImg->{$field} = $_POST[$field];
@@ -97,9 +97,10 @@ class ClusterImgApiController
 
     private function get()
     {
-        if (!$this->clusterImg)
+        if (!$this->fetchClusterImage())
             return (new Response('Cluster Image not found', Response::HTTP_NOT_FOUND))->send();
 
+        $this->clusterImg->path = Image::UPLOAD_FOLDER_URL . $this->clusterImg->filename;
         return (new JsonResponse($this->clusterImg))->send();
     }
 
@@ -107,7 +108,7 @@ class ClusterImgApiController
     {
         if (!$this->userCanMakeChanges()) return false;
 
-        if (!$this->clusterImg)
+        if (!$this->fetchClusterImage())
             return (new Response('Cluster Image not found', Response::HTTP_NOT_FOUND))->send();
 
         return $this->clusterImg->delete();
@@ -126,5 +127,13 @@ class ClusterImgApiController
         }
 
         return true;
+    }
+
+    private function fetchClusterImage()
+    {
+        if (!$this->clusterImg)
+            $this->clusterImg = ClusterImg::find($this->clusterImgID);
+
+        return $this->clusterImg;
     }
 }

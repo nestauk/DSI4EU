@@ -396,10 +396,10 @@ class Router
         } elseif (preg_match('<^/' . $langHandler . 'api/cluster/([0-9]+)$>', $this->pageURL, $matches)) {
             $this->clusterApi($matches);
 
-        } elseif (preg_match('<^/' . $langHandler . 'api/cluster-image$>', $this->pageURL, $matches)) {
+        } elseif (preg_match('<^/' . $langHandler . 'api/cluster-image/([0-9]+)$>', $this->pageURL, $matches)) {
             $this->clusterImageApi($matches);
 
-        } elseif (preg_match('<^/' . $langHandler . 'api/cluster-image/([0-9]+)$>', $this->pageURL, $matches)) {
+        } elseif (preg_match('<^/' . $langHandler . 'api/cluster-image/?$>', $this->pageURL, $matches)) {
             $this->clusterImageApi($matches);
 
         } elseif (preg_match('<^/.*\.(gif|jpe?g|png|svg|js|css|map|ico)$>', $this->pageURL)) {
@@ -1096,7 +1096,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\TerminateAccountController();
+        $command = new \Controllers\TerminateAccountController();
         $command->exec();
     }
 
@@ -1111,7 +1111,7 @@ class Router
 
     private function tempGalleryJson()
     {
-        $command = new \DSI\Controller\TempGalleryController();
+        $command = new \Controllers\TempGalleryController();
         $command->format = 'json';
         $command->exec();
     }

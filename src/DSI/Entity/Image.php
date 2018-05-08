@@ -7,6 +7,9 @@ class Image
     const TEMP_FOLDER = __DIR__ . '/../../../www/images/tmp/';
     const TEMP_FOLDER_URL = SITE_RELATIVE_PATH . '/images/tmp/';
 
+    const UPLOAD_FOLDER = __DIR__ . '/../../../www/images/upload/';
+    const UPLOAD_FOLDER_URL = SITE_RELATIVE_PATH . '/images/upload/';
+
     const PROFILE_PIC = __DIR__ . '/../../../www/images/users/profile/';
     const PROFILE_PIC_URL = SITE_RELATIVE_PATH . '/images/users/profile/';
 

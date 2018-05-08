@@ -64,11 +64,13 @@ class ClusterController
     public function edit()
     {
         JsModules::setTinyMCE(true);
+        $angularModules['fileUpload'] = true;
         return View::render(__DIR__ . '/../Views/clusters/cluster-edit.php', [
             'authUser' => $this->authUser,
             'loggedInUser' => $this->loggedInUser,
             'cluster' => $this->clusterLang,
             'canEdit' => $this->canEdit(),
+            'angularModules' => ['fileUpload' => true],
         ]);
     }
 

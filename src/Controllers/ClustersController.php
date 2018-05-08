@@ -2,6 +2,7 @@
 
 namespace Controllers;
 
+use Actions\Clusters\ClusterLangCreate;
 use DSI\Entity\Translation;
 use DSI\Entity\User;
 use DSI\Service\Auth;
@@ -33,12 +34,12 @@ class ClustersController
         $refetch = false;
         foreach ($clusters AS $cluster) {
             if ($cluster->clusterLangs->count() === 0) {
-                $clusterLang = new ClusterLang();
-                $clusterLang->{ClusterLang::ClusterID} = $cluster->getId();
-                $clusterLang->{ClusterLang::Lang} = Translate::getCurrentLang();
-                $clusterLang->{ClusterLang::Title} = 'Cluster Title';
-                $clusterLang->{ClusterLang::Description} = 'Cluster Description';
-                $clusterLang->save();
+                $exec = new ClusterLangCreate();
+                $exec->clusterID = $cluster->getId();
+                $exec->lang = Translate::getCurrentLang();
+                $exec->title = "Cluster title";
+                $exec->description = "Cluster description";
+                $exec->exec();
 
                 $refetch = true;
             }

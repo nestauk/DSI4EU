@@ -426,6 +426,11 @@ class URL
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'api/cluster/' . (int)$clusterId;
     }
 
+    public function clusterImgApi($clusterId = null)
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'api/cluster-image/' . $clusterId;
+    }
+
     /**
      * @param $title
      * @return string

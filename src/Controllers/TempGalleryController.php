@@ -1,15 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: apandele
- * Date: 25/04/2016
- * Time: 15:45
- */
-
-namespace DSI\Controller;
+namespace Controllers;
 
 use DSI\Entity\Image;
-use DSI\Repository\UserRepo;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use Services\URL;
