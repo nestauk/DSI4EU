@@ -411,6 +411,11 @@ class URL
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'waiting-approval' . $extension;
     }
 
+    public function clusters()
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'clusters';
+    }
+
     public function cluster($clusterId)
     {
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'cluster/' . (int)$clusterId;
