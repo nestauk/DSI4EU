@@ -1,6 +1,6 @@
 <?php
 
-namespace DSI\Controller;
+namespace Controllers;
 
 use DSI\NotFound;
 use DSI\Repository\TerminateAccountTokenRepo;
@@ -50,7 +50,7 @@ class TerminateAccountController
         }
 
         JsModules::setTranslations(true);
-        require __DIR__ . '/../../../www/views/terminate-account.php';
+        require __DIR__ . '/../Views/terminate-account.php';
 
         return null;
     }
@@ -60,7 +60,7 @@ class TerminateAccountController
      */
     private function showErrorPage()
     {
-        require __DIR__ . '/../../../www/views/terminate-account-error.php';
+        require __DIR__ . '/../Views/terminate-account-error.php';
         return null;
     }
 }
