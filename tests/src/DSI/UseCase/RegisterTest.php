@@ -34,6 +34,7 @@ class RegisterTest extends PHPUnit_Framework_TestCase
             $this->registerCommand->data()->email = 'test@example.org';
             $this->registerCommand->data()->password = 'testPassword';
             $this->registerCommand->data()->recaptchaResponse = true;
+            $this->registerCommand->data()->acceptTerms = true;
             $this->registerCommand->exec();
         } catch (ErrorHandler $e) {
             $this->assertNull($e);
@@ -52,6 +53,7 @@ class RegisterTest extends PHPUnit_Framework_TestCase
         $this->registerCommand->data()->email = 'test@example.org';
         $this->registerCommand->data()->password = 'testPassword';
         $this->registerCommand->data()->recaptchaResponse = true;
+        $this->registerCommand->data()->acceptTerms = true;
         $this->registerCommand->exec();
 
         $e = null;
@@ -59,6 +61,7 @@ class RegisterTest extends PHPUnit_Framework_TestCase
             $this->registerCommand->data()->email = 'test@example.org';
             $this->registerCommand->data()->password = 'testPassword';
             $this->registerCommand->data()->recaptchaResponse = true;
+            $this->registerCommand->data()->acceptTerms = true;
             $this->registerCommand->exec();
         } catch (ErrorHandler $e) {
         }
@@ -73,6 +76,7 @@ class RegisterTest extends PHPUnit_Framework_TestCase
         $e = null;
         try {
             $this->registerCommand->data()->recaptchaResponse = true;
+            $this->registerCommand->data()->acceptTerms = true;
             $this->registerCommand->exec();
         } catch (ErrorHandler $e) {
         }
@@ -80,5 +84,22 @@ class RegisterTest extends PHPUnit_Framework_TestCase
         $this->assertNotNull($e);
         $this->assertNotEmpty($e->getTaggedError('email'));
         $this->assertNotEmpty($e->getTaggedError('password'));
+    }
+
+    /** @test */
+    public function cannotRegisterWithoutAcceptingTheTerms()
+    {
+        $e = null;
+        try {
+            $this->registerCommand->data()->email = 'test@example.org';
+            $this->registerCommand->data()->password = 'testPassword';
+            $this->registerCommand->data()->recaptchaResponse = true;
+            $this->registerCommand->data()->acceptTerms = false;
+            $this->registerCommand->exec();
+        } catch (ErrorHandler $e) {
+        }
+
+        $this->assertNotNull($e);
+        $this->assertNotEmpty($e->getTaggedError('accept-terms'));
     }
 }

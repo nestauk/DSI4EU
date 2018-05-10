@@ -1,8 +1,10 @@
 <?php
+
 namespace Controllers;
 
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
+use Services\App;
 use Services\URL;
 use DSI\UseCase\Register;
 
@@ -21,6 +23,8 @@ class RegisterController
                 $register = new Register();
                 $register->data()->email = $_POST['email'];
                 $register->data()->password = $_POST['password'];
+                $register->data()->emailSubscription = $_POST['email-subscription'];
+                $register->data()->acceptTerms = $_POST['accept-terms'];
                 $register->data()->sendEmail = true;
                 $register->data()->recaptchaResponse = $this->checkRecaptcha();
                 $register->exec();
@@ -52,8 +56,11 @@ class RegisterController
         require __DIR__ . '/../Views/register.php';
     }
 
-    private function checkRecaptcha():bool
+    private function checkRecaptcha(): bool
     {
+        if (App::getEnv() === APP::DEV OR App::getEnv() === APP::TEST)
+            return true;
+
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, 'https://www.google.com/recaptcha/api/siteverify');
         curl_setopt($ch, CURLOPT_POST, TRUE);

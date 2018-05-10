@@ -4,6 +4,9 @@ namespace DSI\Entity;
 
 class User
 {
+    const TABLE = 'users';
+    const EmailSubscription = 'email-subscription';
+
     const DEFAULT_PROFILE_PIC = '0.svg';
     /** @var integer */
     private $id;
@@ -26,7 +29,8 @@ class User
         $profilePic;
 
     /** @var bool */
-    private $showEmail;
+    private $showEmail,
+        $email_subscription;
 
     /** @var bool */
     private $disabled;
@@ -336,6 +340,22 @@ class User
     public function setShowEmail($showEmail)
     {
         $this->showEmail = (bool)$showEmail;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasEmailSubscription(): bool
+    {
+        return (bool)$this->email_subscription;
+    }
+
+    /**
+     * @param bool $email_subscription
+     */
+    public function setEmailSubscription($email_subscription)
+    {
+        $this->email_subscription = (bool)$email_subscription;
     }
 
     /**

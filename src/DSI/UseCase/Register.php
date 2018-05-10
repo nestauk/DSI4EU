@@ -8,6 +8,7 @@ use DSI\Repository\ProjectEmailInvitationRepo;
 use DSI\Repository\ProjectMemberRepo;
 use DSI\Repository\UserRepo;
 use DSI\Service\ErrorHandler;
+use Models\EmailSubscription;
 
 class Register
 {
@@ -35,6 +36,7 @@ class Register
             $this->userRepo = new UserRepo();
 
         $this->verifyCaptcha();
+        $this->verifyTerms();
         $this->verifyEmail();
         $this->verifyPassword();
         $this->errorHandler->throwIfNotEmpty();
@@ -44,10 +46,11 @@ class Register
         $user = new User();
         $user->setEmail($this->data()->email);
         $user->setPassword($this->data()->password);
+        $user->setEmailSubscription($this->data()->emailSubscription);
         $this->userRepo->insert($user);
-
         $this->user = $user;
 
+        $this->saveEmailSubscription();
         $this->sendWelcomeEmail();
         $this->checkProjectInvitations();
     }
@@ -77,6 +80,14 @@ class Register
     {
         if (!$this->data()->recaptchaResponse) {
             $this->errorHandler->addTaggedError('captcha', __('Please resolve the captcha'));
+            $this->errorHandler->throwIfNotEmpty();
+        }
+    }
+
+    public function verifyTerms()
+    {
+        if (!$this->data()->acceptTerms) {
+            $this->errorHandler->addTaggedError('accept-terms', __('You must accept the terms before creating your account'));
             $this->errorHandler->throwIfNotEmpty();
         }
     }
@@ -131,6 +142,16 @@ class Register
             $projectEmailInvitationRepo->remove($projectInvitation);
         }
     }
+
+    private function saveEmailSubscription()
+    {
+        if ($this->data()->emailSubscription) {
+            $emailSubscription = new EmailSubscription();
+            $emailSubscription->{EmailSubscription::UserID} = $this->user->getId();
+            $emailSubscription->{EmailSubscription::Subscribed} = true;
+            $emailSubscription->save();
+        }
+    }
 }
 
 class Register_Data
@@ -140,7 +161,9 @@ class Register_Data
         $password;
 
     /** @var bool */
-    public $sendEmail;
+    public $sendEmail,
+        $emailSubscription,
+        $acceptTerms;
 
     /** @var bool */
     public $recaptchaResponse;

@@ -35,6 +35,8 @@ class UserRepo
         $insert[] = "`isDisabled` = '" . (bool)($user->isDisabled()) . "'";
         $insert[] = "`role` = '" . addslashes($user->getRole()) . "'";
 
+        $insert[] = "`" . User::EmailSubscription . "` = '" . $user->hasEmailSubscription() . "'";
+
         $query = new SQL("INSERT INTO `users` SET " . implode(', ', $insert));
         $query->query();
 
@@ -74,6 +76,8 @@ class UserRepo
 
         $insert[] = "`isDisabled` = '" . (bool)($user->isDisabled()) . "'";
         $insert[] = "`role` = '" . addslashes($user->getRole()) . "'";
+
+        $insert[] = "`" . User::EmailSubscription . "` = '" . $user->hasEmailSubscription() . "'";
 
         $query = new SQL("UPDATE `users` SET " . implode(', ', $insert) . " WHERE `id` = '{$user->getId()}'");
         $query->query();
@@ -249,6 +253,8 @@ class UserRepo
             $userObj->setProfileURL($user['profileURL']);
         if ($user['profilePic'])
             $userObj->setProfilePic($user['profilePic']);
+        if ($user[User::EmailSubscription])
+            $userObj->setEmailSubscription(User::EmailSubscription);
 
         $userObj->setDisabled($user['isDisabled']);
         $userObj->setRole($user['role']);
@@ -269,6 +275,14 @@ class UserRepo
     {
         return $this->getObjectsWhere([
             "(`role` = 'community-admin' OR `role` = 'sys-admin')"
+        ]);
+    }
+
+    /** @return User[] */
+    public function getAllSubscribedForEmail()
+    {
+        return $this->getObjectsWhere([
+            "(`".User::EmailSubscription."` = '1')"
         ]);
     }
 
@@ -321,7 +335,7 @@ class UserRepo
           , jobTitle, company
           , facebookUID, googleUID, gitHubUID, twitterUID
           , profileURL, profilePic
-          , isDisabled, role
+          , isDisabled, role, `" . User::EmailSubscription . "`
           FROM `users` WHERE " . implode(' AND ', $where) . "");
         foreach ($query->fetch_all() AS $dbUser) {
             $users[] = $this->buildUserFromData($dbUser);

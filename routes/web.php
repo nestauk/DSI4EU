@@ -402,6 +402,9 @@ class Router
         } elseif (preg_match('<^/' . $langHandler . 'api/cluster-image/?$>', $this->pageURL, $matches)) {
             $this->clusterImageApi($matches);
 
+        } elseif (preg_match('<^/' . $langHandler . 'api/email-subscribers/?$>', $this->pageURL, $matches)) {
+            $this->emailSubscribersApi($matches);
+
         } elseif (preg_match('<^/.*\.(gif|jpe?g|png|svg|js|css|map|ico)$>', $this->pageURL)) {
             return $this->staticContent();
 
@@ -1162,6 +1165,14 @@ class Router
 
         $command = new \Controllers\API\ClusterImgApiController();
         $command->clusterImgID = isset($matches[3]) ? $matches[3] : 0;
+        $command->exec();
+    }
+
+    private function emailSubscribersApi($matches)
+    {
+        $this->setLanguageFromUrl($matches);
+
+        $command = new \Controllers\API\EmailSubscribersApiController();
         $command->exec();
     }
 

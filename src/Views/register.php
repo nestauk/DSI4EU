@@ -1,4 +1,5 @@
 <?php
+
 use Services\URL;
 
 ?>
@@ -9,7 +10,7 @@ use Services\URL;
 </head>
 <body ng-app="DSIApp" class="login-body">
 
-<div class="ab-fab log-in-section" ng-controller="RegisterController">
+<div class="register-controller ab-fab log-in-section" ng-controller="RegisterController">
     <div class="w-row">
         <div class="content-left w-col w-col-12">
             <a href="<?php echo $urlHandler->home() ?>">
@@ -19,7 +20,7 @@ use Services\URL;
 
             <div class="form-wrapper w-form">
                 <form id="email-form" method="post"
-                      action="" <?php /*name="email-form" ng-submit="onSubmit()" */ ?>>
+                      action="">
                     <input id="email-5" type="email" placeholder="<?php _ehtml('Enter your email address') ?>"
                            name="email"
                            data-name="Email 5" autofocus="autofocus"
@@ -34,8 +35,7 @@ use Services\URL;
                     <?php } ?>
 
                     <input id="Password-5" type="password" placeholder="<?php _ehtml('Password') ?>"
-                           name="password"
-                           data-name="Password 5" class="log-in-form-field w-input"
+                           name="password" data-name="Password 5" class="log-in-form-field w-input"
                            ng-class="{error: errors.password}">
                     <div class="log-in-error" ng-show="errors.password"
                          ng-bind="errors.password"></div>
@@ -55,12 +55,44 @@ use Services\URL;
                         </div>
                     <?php } ?>
 
+                    <div class="check-box">
+                        <label>
+                            <input type="checkbox" name="accept-terms" <?= $_POST['accept-terms'] ? 'checked' : '' ?>>
+                            I accept that all data provided, with the exception of my email address, will be available
+                            publicly on digitalsocial.eu
+                        </label>
+                        <?php if (isset($errors['accept-terms'])) { ?>
+                            <div class="log-in-error">
+                                <?php echo show_input($errors['accept-terms']) ?>
+                            </div>
+                        <?php } ?>
+                    </div>
+
+                    <div class="check-box">
+                        We would like to email you updates about the DSI programme including regular newsletters,
+                        project updates updates, new research and publications, invitations to events and the
+                        occasional request to take part in research of surveys.
+                        <br><br>
+
+                        <label>
+                            <input type="checkbox"
+                                   name="email-subscription" <?= $_POST['email-subscription'] ? 'checked' : '' ?>>
+                            I would like to subscribe to the DSI mailing list
+                        </label>
+
+                        <br>
+                        You can unsubscribe by clicking the link in our emails, or emailing info@nesta.org.uk. We
+                        promise to keep your details safe and secure. We won’t share your details outside of Nesta
+                        without your permission. Find out more about how we use personal information in our Privacy
+                        Policy.
+                    </div>
+
                     <div class="modal-footer">
                         <div ng-hide="registered">
                             <button type="submit" class="auto ll log-in-link w-clearfix w-inline-block"
                                     data-ix="log-in-arrow" name="register"
                                     style="width:250px;display:block">
-                                <span class="login-li menu-li"><?php _ehtml('Register')?></span>
+                                <span class="login-li menu-li"><?php _ehtml('Register') ?></span>
                                 <img class="login-arrow"
                                      src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
                             </button>
@@ -70,7 +102,7 @@ use Services\URL;
             </div>
 
             <br/><br/>
-            <div class="or-login-with">- <?php _ehtml('or log in with')?> -</div>
+            <div class="or-login-with">- <?php _ehtml('or log in with') ?> -</div>
             <div class="w-row">
                 <div class="w-col w-col-3 w-col-small-3 w-col-tiny-6">
                     <a class="log-in-with-link w-inline-block" href="<?php echo URL::loginWithFacebook() ?>">
