@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "dependencies": {},
   "devDependencies": {
     "axios": "^0.17.1",
     "babel-core": "^6.26.3",
@@ -13,6 +12,7 @@
     "css-loader": "^0.28.11",
     "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^1.1.6",
+    "hoek": "github:hapijs/hoek",
     "node-sass": "^4.9.0",
     "optimize-css-assets-webpack-plugin": "^3.2.0",
     "rimraf": "^2.6.2",

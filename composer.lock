@@ -359,7 +359,7 @@
         },
         {
             "name": "illuminate/container",
-            "version": "v5.6.19",
+            "version": "v5.6.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/container.git",
@@ -403,16 +403,16 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v5.6.19",
+            "version": "v5.6.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
-                "reference": "322ec80498b3bf85bc4025d028e130a9b50242b9"
+                "reference": "6a11fbccbc7da16a85fcd1d4b08e51b5658de0d4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/contracts/zipball/322ec80498b3bf85bc4025d028e130a9b50242b9",
-                "reference": "322ec80498b3bf85bc4025d028e130a9b50242b9",
+                "url": "https://api.github.com/repos/illuminate/contracts/zipball/6a11fbccbc7da16a85fcd1d4b08e51b5658de0d4",
+                "reference": "6a11fbccbc7da16a85fcd1d4b08e51b5658de0d4",
                 "shasum": ""
             },
             "require": {
@@ -443,20 +443,20 @@
             ],
             "description": "The Illuminate Contracts package.",
             "homepage": "https://laravel.com",
-            "time": "2018-04-07T17:05:26+00:00"
+            "time": "2018-05-08T13:22:33+00:00"
         },
         {
             "name": "illuminate/database",
-            "version": "v5.6.19",
+            "version": "v5.6.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/database.git",
-                "reference": "1d0eebfe6cf18a8e2f7e392dec829559f7c0cc17"
+                "reference": "7ab07d133ece8098b6f5f872ec95d080087236c0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/database/zipball/1d0eebfe6cf18a8e2f7e392dec829559f7c0cc17",
-                "reference": "1d0eebfe6cf18a8e2f7e392dec829559f7c0cc17",
+                "url": "https://api.github.com/repos/illuminate/database/zipball/7ab07d133ece8098b6f5f872ec95d080087236c0",
+                "reference": "7ab07d133ece8098b6f5f872ec95d080087236c0",
                 "shasum": ""
             },
             "require": {
@@ -502,20 +502,20 @@
                 "orm",
                 "sql"
             ],
-            "time": "2018-04-29T12:57:53+00:00"
+            "time": "2018-05-07T14:20:13+00:00"
         },
         {
             "name": "illuminate/support",
-            "version": "v5.6.19",
+            "version": "v5.6.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "4ecadcab0816eae4a2aeca5ec402c681ee62b191"
+                "reference": "6e84d4140310246ace38fdb0909da5b2fb22eadf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/4ecadcab0816eae4a2aeca5ec402c681ee62b191",
-                "reference": "4ecadcab0816eae4a2aeca5ec402c681ee62b191",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/6e84d4140310246ace38fdb0909da5b2fb22eadf",
+                "reference": "6e84d4140310246ace38fdb0909da5b2fb22eadf",
                 "shasum": ""
             },
             "require": {
@@ -559,7 +559,7 @@
             ],
             "description": "The Illuminate Support package.",
             "homepage": "https://laravel.com",
-            "time": "2018-04-29T13:02:42+00:00"
+            "time": "2018-05-07T14:12:37+00:00"
         },
         {
             "name": "ircmaxell/random-lib",
