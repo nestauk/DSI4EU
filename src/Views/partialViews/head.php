@@ -110,7 +110,7 @@ if (!$urlHandler)
         src="<?php echo SITE_RELATIVE_PATH ?>/js/DSIApp.js?<?php Sysctl::echoVersion() ?>"></script>
 
 <link rel="stylesheet" type="text/css"
-      href="<?php echo SITE_RELATIVE_PATH ?>/css/custom.css?<?php Sysctl::echoVersion() ?>">
+      href="<?php echo SITE_RELATIVE_PATH ?>/assets/scss/style.css?<?php Sysctl::echoVersion() ?>">
 
 <link rel="stylesheet" type="text/css"
       href="<?php echo SITE_RELATIVE_PATH ?>/css/style.<?php echo \DSI\Service\Translate::getCurrentLang() ?>.css?<?php Sysctl::echoVersion() ?>">

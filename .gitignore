@@ -1,4 +1,5 @@
 /vendor/
+/node_modules/
 /composer.phar
 /.idea/
 /www/views/partialViews/googleAnalytics.html
