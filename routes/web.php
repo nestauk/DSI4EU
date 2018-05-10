@@ -416,7 +416,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\RegisterController();
+        $command = new \Controllers\RegisterController();
         $command->responseFormat = $format;
         $command->exec();
     }
@@ -498,7 +498,7 @@ class Router
 
     private function registerJson()
     {
-        $command = new \DSI\Controller\RegisterController();
+        $command = new \Controllers\RegisterController();
         $command->responseFormat = 'json';
         $command->exec();
     }

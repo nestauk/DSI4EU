@@ -1,5 +1,5 @@
 <?php
-namespace DSI\Controller;
+namespace Controllers;
 
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
@@ -49,7 +49,7 @@ class RegisterController
             }
         }
 
-        require __DIR__ . '/../../Views/register.php';
+        require __DIR__ . '/../Views/register.php';
     }
 
     private function checkRecaptcha():bool
