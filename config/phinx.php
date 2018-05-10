@@ -3,8 +3,8 @@ $config = require __DIR__ . '/app.php';
 
 return [
     'paths' => [
-        'migrations' => '%%PHINX_CONFIG_DIR %%/../db/migrations',
-        'seeds' => '%%PHINX_CONFIG_DIR%%/../db/seeds',
+        'migrations' => __DIR__ . '/../db/migrations',
+        'seeds' => __DIR__ . '/../db/seeds',
     ],
     'environments' => [
         "default_migration_table" => "phinxlog",
