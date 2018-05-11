@@ -1,6 +1,12 @@
 .register-controller.ab-fab.log-in-section {
   width: 100%;
-  max-width: 500px; }
+  max-width: 400px;
+  transform: none;
+  position: static;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  left: auto;
+  top: auto; }
 
 .register-controller .check-box {
   margin: 20px 0;
@@ -9,6 +15,9 @@
   padding-top: 20px; }
   .register-controller .check-box label {
     font-weight: normal; }
+
+.register-controller .content-left {
+  padding-right: 0; }
 
 body {
   /* personal profile project and organisation card styles */
