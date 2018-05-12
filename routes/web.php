@@ -11,7 +11,10 @@ class Router
     public function exec(string $pageURL)
     {
         Translate::setCurrentLang(Translation::DEFAULT_LANGUAGE);
-        $this->pageURL = $pageURL;
+        // $this->pageURL = $pageURL;
+        $this->pageURL = rtrim($pageURL, '/');
+        if ($this->pageURL === '')
+            $this->pageURL = '/';
 
         $langHandler = '(([a-z]{2})/?)?';
 
@@ -399,11 +402,17 @@ class Router
         } elseif (preg_match('<^/' . $langHandler . 'api/cluster-image/([0-9]+)$>', $this->pageURL, $matches)) {
             $this->clusterImageApi($matches);
 
-        } elseif (preg_match('<^/' . $langHandler . 'api/cluster-image/?$>', $this->pageURL, $matches)) {
+        } elseif (preg_match('<^/' . $langHandler . 'api/cluster-image$>', $this->pageURL, $matches)) {
             $this->clusterImageApi($matches);
 
-        } elseif (preg_match('<^/' . $langHandler . 'api/email-subscribers/?$>', $this->pageURL, $matches)) {
+        } elseif (preg_match('<^/' . $langHandler . 'api/email-subscribers$>', $this->pageURL, $matches)) {
             $this->emailSubscribersApi($matches);
+
+        } elseif (preg_match('<^/' . $langHandler . 'cookies-policy$>', $this->pageURL, $matches)) {
+            $this->cookiesPolicy($matches);
+
+        } elseif (preg_match('<^/' . $langHandler . 'what-is-dsi$>', $this->pageURL, $matches)) {
+            $this->whatIsDsi($matches);
 
         } elseif (preg_match('<^/.*\.(gif|jpe?g|png|svg|js|css|map|ico)$>', $this->pageURL)) {
             return $this->staticContent();
@@ -1174,6 +1183,22 @@ class Router
 
         $command = new \Controllers\API\EmailSubscribersApiController();
         $command->exec();
+    }
+
+    private function cookiesPolicy($matches)
+    {
+        $this->setLanguageFromUrl($matches);
+
+        $command = new \Controllers\CookiesPolicyController();
+        $command->get();
+    }
+
+    private function whatIsDsi($matches)
+    {
+        $this->setLanguageFromUrl($matches);
+
+        $command = new \Controllers\WhatIsDsiController();
+        $command->get();
     }
 
     public function forceHTTPS()

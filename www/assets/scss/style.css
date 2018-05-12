@@ -19,6 +19,9 @@
 .register-controller .content-left {
   padding-right: 0; }
 
+.cookies-policy-controller p.separator {
+  margin-top: 40px; }
+
 body {
   /* personal profile project and organisation card styles */
   /* backend tagging styles */
