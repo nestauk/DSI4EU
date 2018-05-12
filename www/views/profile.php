@@ -25,13 +25,11 @@ require __DIR__ . '/header.php';
                         <?php if ($user->getJobTitle() AND $user->getCompany()) echo ' at ' ?>
                         <?php echo show_input($user->getCompany()) ?>
                     </div>
-                    <p class="intro"><?php echo nl2br(show_input($user->getBio())) ?></p>
-                    <h3><?php _ehtml('Location') ?></h3>
-                    <p>
-                        <?php echo show_input($user->getCityName()) ?>
-                        <?php if ($user->getCityName() != '' AND $user->getCountryName() != '') echo ', '; ?>
-                        <?php echo show_input($user->getCountryName()) ?>
-                    </p>
+                    <p style="clear:both" class="intro"><?php echo nl2br(show_input($user->getBio())) ?></p>
+                    <?php if ($user->getFullLocation()) { ?>
+                        <h3><?php _ehtml('Location') ?></h3>
+                        <p><?php echo show_input($user->getFullLocation()) ?></p>
+                    <?php } ?>
                 </div>
                 <div class="sidebar w-col w-col-4">
                     <?php if ($isOwner) { ?>

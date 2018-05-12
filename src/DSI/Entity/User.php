@@ -273,6 +273,19 @@ class User
     /**
      * @return string
      */
+    public function getFullLocation()
+    {
+        $location = [];
+        if ($this->getCityName())
+            $location[] = $this->getCityName();
+        if ($this->getCountryName())
+            $location[] = $this->getCountryName();
+        return implode(', ', $location);
+    }
+
+    /**
+     * @return string
+     */
     public function getProfilePic()
     {
         return (string)$this->profilePic;
