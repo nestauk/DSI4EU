@@ -41,6 +41,10 @@ require __DIR__ . '/header.php';
                                 <span class="green">-&nbsp;</span><?php _ehtml('Edit Profile') ?></a>
                             <a class="sidebar-link" href="<?php echo $urlHandler->editUserPrivileges($user) ?>">
                                 <span class="green">-&nbsp;</span><?php _ehtml('Edit privileges') ?></a>
+                            <?php if ($loggedInUser->isCommunityAdmin()) { ?>
+                                <a class="sidebar-link" href="mailto:<?= $user->getEmail() ?>">
+                                    <span class="green">-&nbsp;</span><?php _ehtml('Email user') ?></a>
+                            <?php } ?>
                             <?php if ($user->isDisabled()) { ?>
                                 <a class="sidebar-link remove" href="#" ng-click="setDisabled(false)">
                                     <span class="green">- </span>Enable user</a>
