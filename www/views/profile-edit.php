@@ -87,7 +87,7 @@ $leftSideText .= "<p>" . _html('Boost your profile by registering as a team memb
             <div class="container-wide header">
                 <h1 class="page-h1 light">
                     <?php _ehtml('Edit') ?> -
-                    <a href="<?php echo $urlHandler->profile($loggedInUser) ?>">
+                    <a href="<?php echo $urlHandler->profile($user) ?>">
                         <?php _ehtml('Your Personal Profile') ?>
                     </a>
                 </h1>
