@@ -53,7 +53,7 @@ class SendWelcomeEmailAfterRegistration
     private function sendEmail()
     {
         ob_start();
-        include __DIR__ . '/../../email-template/welcome.php';
+        include __DIR__ . '/../../../resources/views/emails/welcome.php';
         $message = ob_get_clean();
         $email = new Mailer();
         $email->From = 'noreply@digitalsocial.eu';

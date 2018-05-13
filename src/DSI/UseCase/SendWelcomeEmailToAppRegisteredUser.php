@@ -54,7 +54,7 @@ class SendWelcomeEmailToAppRegisteredUser
     {
         $code = $this->data()->code;
         ob_start();
-        require(__DIR__ . '/../../email-template/welcomeFromApp.php');
+        require(__DIR__ . '/../../../resources/views/emails/welcomeFromApp.php');
 
         $message = "<div>";
         $message .= ob_get_clean();

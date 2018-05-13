@@ -3,6 +3,7 @@
 namespace DSI\Service;
 
 use DSI\UseCase\CacheUnsentEmail;
+use Services\App;
 
 class Mailer extends \PHPMailer
 {
@@ -12,7 +13,7 @@ class Mailer extends \PHPMailer
         $mailBody = $data['body'];
 
         ob_start();
-        require(__DIR__ . '/../../email-template/default.php');
+        require(__DIR__ . '/../../../resources/views/emails/layout/default.php');
         $newMailBody = ob_get_clean();
 
         $return = parent::msgHTML($newMailBody);
@@ -25,7 +26,7 @@ class Mailer extends \PHPMailer
 
     public function send()
     {
-        if(count($this->getToAddresses()) == 0){
+        if (count($this->getToAddresses()) == 0) {
             error_log('Empty Recipients');
             return false;
         }
@@ -33,7 +34,11 @@ class Mailer extends \PHPMailer
         file_put_contents(__DIR__ . '/../../../logs/mail-logs/' . microtime(1) . '.json', json_encode($this));
         file_put_contents(__DIR__ . '/../../../logs/mail-logs/' . microtime(1) . '.html', $this->Body);
 
-        $returnCode = parent::send();
+        if (App::getEnv() === App::LIVE)
+            $returnCode = parent::send();
+        else
+            $returnCode = true;
+
         if (!$returnCode) {
             error_log('Could not send email to: ');
             error_log(var_export($this->getToAddresses(), true));

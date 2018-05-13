@@ -54,7 +54,7 @@ class CreatePasswordRecovery
 
         if ($this->data()->sendEmail) {
             ob_start();
-            require(__DIR__ . '/../../email-template/resetPassword.php');
+            require(__DIR__ . '/../../../resources/views/emails/resetPassword.php');
             $message = "<div>";
             $message .= ob_get_clean();
             $message .= "</div>";

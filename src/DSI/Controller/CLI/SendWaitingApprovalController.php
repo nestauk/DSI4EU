@@ -20,7 +20,7 @@ class SendWaitingApprovalController
             ->getByDate($yesterday->format('Y-m-d'));
 
         ob_start();
-        require(__DIR__ . '/../../../email-template/send-waiting-approval.php');
+        require(__DIR__ . '/../../../../resources/views/emails/send-waiting-approval.php');
         $message = "<div>";
         $message .= ob_get_clean();
         $message .= "</div>";

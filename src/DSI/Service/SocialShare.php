@@ -15,6 +15,6 @@ class SocialShare
     public function renderHtml()
     {
         $url = $this->url;
-        require __DIR__ . '/../../../www/views/partialViews/socialShare.php';
+        require __DIR__ . '/../../Views/partialViews/socialShare.php';
     }
 }
