@@ -59,7 +59,7 @@ class EventRepositoryTest extends PHPUnit_Framework_TestCase
         $event->setEndDate($endDate = '2016-10-14');
         $event->setAddress($address = 'Elms Crescent, London');
         $event->setPhoneNumber($phoneNumber = '01234 567 890');
-        $event->setEmailAddress($emailAddress = 'alecs@example.org');
+        $event->setEmailAddress($emailAddress = 'user@example.org');
         $event->setPrice($price = 'Free');
         $event->setRegion($this->region);
         $this->eventRepository->insert($event);
@@ -146,7 +146,7 @@ class EventRepositoryTest extends PHPUnit_Framework_TestCase
         $event->setEndDate($endDate = '2016-10-12');
         $event->setAddress($address = 'Elms Crescent, London');
         $event->setPhoneNumber($phoneNumber = '01234 567 890');
-        $event->setEmailAddress($emailAddress = 'alecs@example.org');
+        $event->setEmailAddress($emailAddress = 'user@example.org');
         $event->setPrice($price = 'Free');
         $event->setRegion($this->region);
         $this->eventRepository->save($event);

@@ -193,7 +193,7 @@ class EventTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals('', $this->event->getEmailAddress());
 
-        $emailAddress = 'alecs@example.org';
+        $emailAddress = 'user@example.org';
         $this->event->setEmailAddress($emailAddress);
         $this->assertEquals($emailAddress, $this->event->getEmailAddress());
     }

@@ -24,7 +24,7 @@ class CacheMailRepositoryTest extends PHPUnit_Framework_TestCase
     public function mailCanBeCreated()
     {
         $content = new \DSI\Service\Mailer();
-        $content->addAddress('alecs@example.org');
+        $content->addAddress('user@example.org');
 
         $mail = new CacheMail();
         $mail->setContent($content);

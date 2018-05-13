@@ -41,7 +41,7 @@ class CacheMailTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty($this->mail->getContent());
 
         $content = new \DSI\Service\Mailer();
-        $content->addAddress($address = 'alecs@example.org');
+        $content->addAddress($address = 'user@example.org');
 
         $this->mail->setContent($content);
         $this->assertEquals($content, $this->mail->getContent());
