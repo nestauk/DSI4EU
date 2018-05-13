@@ -17,24 +17,15 @@ class RemoveContentUpdate
     /** @var ContentUpdate */
     private $contentUpdate;
 
-    public function __construct()
+    public function __construct(ContentUpdate $contentUpdate)
     {
         $this->errorHandler = new ErrorHandler();
         $this->contentUpdateRepo = new ContentUpdateRepo();
+        $this->contentUpdate = $contentUpdate;
     }
 
     public function exec()
     {
         $this->contentUpdateRepo->delete($this->contentUpdate);
-    }
-
-    /**
-     * @param ContentUpdate $contentUpdate
-     * @return RemoveContentUpdate
-     */
-    public function setContentUpdate(ContentUpdate $contentUpdate)
-    {
-        $this->contentUpdate = $contentUpdate;
-        return $this;
     }
 }

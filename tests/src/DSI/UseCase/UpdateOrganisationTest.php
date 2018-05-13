@@ -4,6 +4,7 @@ require_once __DIR__ . '/../../../config.php';
 
 use DSI\Service\ErrorHandler;
 use DSI\Repository\OrganisationRepo;
+use DSI\UseCase\ContentUpdates\RemoveContentUpdate;
 
 class UpdateOrganisationTest extends PHPUnit_Framework_TestCase
 {
@@ -154,8 +155,6 @@ class UpdateOrganisationTest extends PHPUnit_Framework_TestCase
         $contentUpdate = (new \DSI\Repository\ContentUpdateRepo())
             ->getAll();
 
-        (new \DSI\UseCase\ContentUpdates\RemoveContentUpdate())
-            ->setContentUpdate($contentUpdate[0])
-            ->exec();
+        (new RemoveContentUpdate($contentUpdate[0]))->exec();
     }
 }

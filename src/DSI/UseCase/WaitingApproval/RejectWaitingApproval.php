@@ -41,9 +41,7 @@ class RejectWaitingApproval
             $exec->exec();
         }
 
-        (new RemoveContentUpdate())
-            ->setContentUpdate($this->contentUpdate)
-            ->exec();
+        (new RemoveContentUpdate($this->contentUpdate))->exec();
     }
 
     private function assertExecutorCanExecute()
