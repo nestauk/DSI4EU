@@ -26,8 +26,8 @@ class EmailSubscribersApiController
         $this->authUser = new Auth();
         $this->loggedInUser = $this->authUser->getUserIfLoggedIn();
 
-        if (!$this->loggedInUser->isSysAdmin())
-            return (new Response('Not allowed', Response::HTTP_UNAUTHORIZED))->send();
+        if (!$this->loggedInUser OR !$this->loggedInUser->isSysAdmin())
+            return (new Response('UNAUTHORIZED', Response::HTTP_UNAUTHORIZED))->send();
 
         $users = (new UserRepo())->getAllSubscribedForEmail();
         return (new JsonResponse(array_map(function (User $user) {
