@@ -14,7 +14,7 @@
 - import into MySQL database all the files from _db/queries_
 - copy _config/app.sample.php_ to _config/app.php_ and update with correct information
 - `composer install`
-- `vendor/bin/phinx migrate -c config/phinx.php  -e production`
+- `vendor/bin/phinx migrate -e production`
 
 ## Integration with data visualisation
 - `cd www/data-viz`
