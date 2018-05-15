@@ -13,6 +13,7 @@ class ClusterLang extends Model
     const ClusterID = 'clusterID';
     const Lang = 'lang';
     const Title = 'title';
+    const Subtitle = 'subtitle';
     const Description = 'description';
     const GetInTouch = 'get_in_touch';
 
@@ -36,6 +37,7 @@ class ClusterLang extends Model
         return $this->cluster;
     }
 
+    /** @return ClusterImg[] */
     public function getImages()
     {
         return $this->images;
@@ -44,6 +46,11 @@ class ClusterLang extends Model
     public function getTitle()
     {
         return $this->{self::Title};
+    }
+
+    public function getSubtitle()
+    {
+        return $this->{self::Subtitle};
     }
 
     public function getDescription()

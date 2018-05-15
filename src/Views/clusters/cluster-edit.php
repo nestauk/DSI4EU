@@ -66,9 +66,17 @@ use \DSI\Entity\Image;
 
                                 <label>Cluster title:</label>
                                 <input class="creator-data-entry w-input" maxlength="256" name="name-2"
-                                       placeholder="Event title" type="text"
+                                       placeholder="Cluster title" type="text"
                                        ng-model="cluster.title">
                                 <div class="error" ng-bind="errors.title"></div>
+
+                                <div style="margin-top:50px">
+                                    <label>Cluster subtitle:</label>
+                                    <input class="creator-data-entry w-input" maxlength="256" name="name-2"
+                                           placeholder="Cluster subtitle" type="text"
+                                           ng-model="cluster.subtitle">
+                                    <div class="error" ng-bind="errors.subtitle"></div>
+                                </div>
 
                                 <div style="margin-top:50px">
                                     <label>Cluster description</label>

@@ -70,6 +70,7 @@ class ClusterApiController
 
         $fields = [
             ClusterLang::Title,
+            ClusterLang::Subtitle,
             ClusterLang::Description,
             ClusterLang::GetInTouch,
         ];
