@@ -273,7 +273,7 @@ class Router
             $this->staticPage($matches, 'terms-of-use.php');
 
         } elseif (preg_match('<^/' . $langHandler . 'privacy-policy$>', $this->pageURL, $matches)) {
-            $this->staticPage($matches, 'privacy-policy.php');
+            $this->privacyPolicy($matches);
 
         } elseif (preg_match('<^/' . $langHandler . 'updates$>', $this->pageURL, $matches)) {
             $this->staticPage($matches, 'updates.php');
@@ -408,7 +408,7 @@ class Router
         } elseif (preg_match('<^/' . $langHandler . 'api/email-subscribers$>', $this->pageURL, $matches)) {
             $this->emailSubscribersApi($matches);
 
-        } elseif (preg_match('<^/' . $langHandler . 'cookies-policy$>', $this->pageURL, $matches)) {
+        } elseif (preg_match('<^/' . $langHandler . 'cookies?-policy$>', $this->pageURL, $matches)) {
             $this->cookiesPolicy($matches);
 
         } elseif (preg_match('<^/' . $langHandler . 'what-is-dsi$>', $this->pageURL, $matches)) {
@@ -1096,6 +1096,12 @@ class Router
         $command->exec();
     }
 
+    private function privacyPolicy($matches)
+    {
+        $this->setLanguageFromUrl($matches);
+        return (new \Controllers\StaticHtmlController())->privacyPolicy();
+    }
+
     private function keepUserLoggedIn($matches)
     {
         $this->setLanguageFromUrl($matches);
@@ -1188,9 +1194,7 @@ class Router
     private function cookiesPolicy($matches)
     {
         $this->setLanguageFromUrl($matches);
-
-        $command = new \Controllers\CookiesPolicyController();
-        $command->get();
+        return (new \Controllers\StaticHtmlController())->cookiesPolicy();
     }
 
     private function whatIsDsi($matches)

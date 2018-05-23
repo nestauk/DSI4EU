@@ -2,7 +2,9 @@
 /** @var $angularModules string[] */
 /** @var $pageTitle string[] */
 /** @var $loggedInUser \DSI\Entity\User */
+
 /** @var $urlHandler Services\URL */
+
 use DSI\Service\Sysctl;
 
 if (!$urlHandler)
