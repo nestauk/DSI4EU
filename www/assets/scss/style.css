@@ -19,8 +19,11 @@
 .register-controller .content-left {
   padding-right: 0; }
 
-.cookies-policy-controller p.separator {
-  margin-top: 40px; }
+.cookies-policy-controller h1, .privacy-policy-controller h1 {
+  margin-bottom: 40px; }
+
+.cookies-policy-controller td {
+  padding: 10px; }
 
 body {
   /* personal profile project and organisation card styles */
