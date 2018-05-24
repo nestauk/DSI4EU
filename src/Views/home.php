@@ -374,7 +374,7 @@ if (!isset($urlHandler))
     /* end */
 
 </style>
-
+<!--
 <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>
 <script type='text/javascript'>(function ($) {
         window.fnames = new Array();
@@ -387,6 +387,7 @@ if (!isset($urlHandler))
         ftypes[2] = 'text';
     }(jQuery));
     var $mcj = jQuery.noConflict(true);</script>
+    -->
 <!--End mc_embed_signup-->
 
 <?php require __DIR__ . '/footer.php' ?>

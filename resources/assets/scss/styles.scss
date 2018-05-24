@@ -26,9 +26,15 @@
   }
 }
 
+.cookies-policy-controller, .privacy-policy-controller {
+  h1 {
+    margin-bottom: 40px;
+  }
+}
+
 .cookies-policy-controller {
-  p.separator {
-    margin-top: 40px;
+  td {
+    padding: 10px;
   }
 }
 

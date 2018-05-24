@@ -14,6 +14,7 @@ class ClusterLang extends Model
     const Lang = 'lang';
     const Title = 'title';
     const Subtitle = 'subtitle';
+    const Paragraph = 'paragraph';
     const Description = 'description';
     const GetInTouch = 'get_in_touch';
 
@@ -56,6 +57,11 @@ class ClusterLang extends Model
     public function getDescription()
     {
         return $this->{self::Description};
+    }
+
+    public function getParagraph()
+    {
+        return $this->{self::Paragraph};
     }
 
     public function getGetInTouch()
