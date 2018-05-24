@@ -71,7 +71,7 @@ use Services\URL;
                     <div class="check-box">
                         We would like to email you updates about the DSI programme including regular newsletters,
                         project updates updates, new research and publications, invitations to events and the
-                        occasional request to take part in research of surveys.
+                        occasional request to take part in research and surveys.
                         <br><br>
 
                         <label>
