@@ -7,6 +7,7 @@ use DSI\Service\ErrorHandler;
 use Services\App;
 use Services\URL;
 use DSI\UseCase\Register;
+use Services\View;
 
 class RegisterController
 {
@@ -16,7 +17,8 @@ class RegisterController
     {
         $urlHandler = new URL();
         $authUser = new Auth();
-        //$authUser->ifLoggedInRedirectTo(URL::myProfile());
+        $errors = [];
+        // $authUser->ifLoggedInRedirectTo(URL::myProfile());
 
         if (isset($_POST['register'])) {
             try {
@@ -53,7 +55,11 @@ class RegisterController
             }
         }
 
-        require __DIR__ . '/../Views/register.php';
+        return View::render(__DIR__ . '/../Views/register.php', [
+            'authUser' => $authUser,
+            'urlHandler' => $urlHandler,
+            'errors' => $errors,
+        ]);
     }
 
     private function checkRecaptcha(): bool
