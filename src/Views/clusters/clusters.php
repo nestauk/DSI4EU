@@ -28,10 +28,7 @@ require __DIR__ . '/../header.php'
                                     </h2>
                                     <div class="infocard top3-underline" data-ix="new-interaction-2"></div>
                                     <p class="funding-descr">
-                                        <?php _e($cluster->getDescription()) ?>
-                                    </p>
-                                    <p class="funding-descr">
-                                        <?php _e($cluster->getGetInTouch()) ?>
+                                        <?php _e($cluster->getParagraph()) ?>
                                     </p>
                                 </a>
                             </div>
