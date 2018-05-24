@@ -150,7 +150,7 @@ class ProjectEditController
             $projectOrganisations = (new OrganisationProjectRepo())->getOrganisationIDsForProject($project);
             $angularModules['fileUpload'] = true;
             JsModules::setTinyMCE(true);
-            require __DIR__ . '/../../../www/views/project-edit.php';
+            require __DIR__ . '/../../Views/project/project-edit.php';
         }
     }
 

@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/header.php';
+require __DIR__ . '/../header.php';
 /** @var $project \DSI\Entity\Project */
 /** @var $tags \DSI\Entity\TagForProjects[] */
 /** @var $impactMainTags \DSI\Entity\ImpactTag[] */
@@ -533,4 +533,4 @@ if (!isset($urlHandler))
         });
     </script>
 
-<?php require __DIR__ . '/footer.php' ?>
+<?php require __DIR__ . '/../footer.php' ?>
