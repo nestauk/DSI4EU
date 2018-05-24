@@ -101,6 +101,7 @@ angular
 
         $scope.save = function () {
             $scope.loading = true;
+            $scope.cluster.paragraph = tinyMCE.get('paragraph').getContent();
             $scope.cluster.description = tinyMCE.get('description').getContent();
             $scope.cluster.get_in_touch = tinyMCE.get('get_in_touch').getContent();
 
