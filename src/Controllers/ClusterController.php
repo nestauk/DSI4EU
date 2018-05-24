@@ -11,7 +11,6 @@ use Services\URL;
 use Models\ClusterLang;
 use Services\Request;
 use Services\Response;
-use Services\JsonResponse;
 use Services\View;
 
 class ClusterController

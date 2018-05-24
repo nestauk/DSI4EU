@@ -79,6 +79,14 @@ use \DSI\Entity\Image;
                                 </div>
 
                                 <div style="margin-top:50px">
+                                    <label>Cluster paragraph</label>
+                                    <textarea class="creator-data-entry end long-description w-input editor"
+                                              id="paragraph"
+                                              data-placeholder="Cluster paragraph"><?php _ehtml($cluster->getParagraph()) ?></textarea>
+                                    <div class="error" ng-bind="errors.paragraph"></div>
+                                </div>
+
+                                <div style="margin-top:50px">
                                     <label>Cluster description</label>
                                     <textarea class="creator-data-entry end long-description w-input editor"
                                               id="description"
