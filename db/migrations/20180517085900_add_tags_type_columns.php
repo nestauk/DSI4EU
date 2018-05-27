@@ -11,16 +11,16 @@ class AddTagsTypeColumns extends AbstractMigration
     public function up()
     {
         Capsule::schema()->table(Tag::TABLE, function (Blueprint $table) {
-            $table->boolean(Tag::IsImpact);
-            $table->boolean(Tag::IsTechnology);
+            $table->boolean(Tag::IsTechnologyMain);
+            $table->integer(Tag::TechnologyOrder);
         });
     }
 
     public function down()
     {
         Capsule::schema()->table(Tag::TABLE, function (Blueprint $table) {
-            $table->dropColumn(Tag::IsImpact);
-            $table->dropColumn(Tag::IsTechnology);
+            $table->dropColumn(Tag::IsTechnologyMain);
+            $table->dropColumn(Tag::TechnologyOrder);
         });
     }
 }

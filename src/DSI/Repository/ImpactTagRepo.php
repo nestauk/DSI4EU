@@ -10,6 +10,7 @@ use Models\Tag;
 class ImpactTagRepo
 {
     private $table = Tag::TABLE;
+    private $orderBy = Tag::Order;
 
     public function insert(ImpactTag $tag)
     {
@@ -21,9 +22,9 @@ class ImpactTagRepo
         $data = array();
         $data[] = "`" . Tag::Name . "` = '" . addslashes($tag->getName()) . "'";
         $data[] = "`" . Tag::IsMain . "` = '" . (bool)($tag->isMain()) . "'";
-        $data[] = "`" . Tag::IsImpact . "` = '" . (bool)($tag->isImpact()) . "'";
-        $data[] = "`" . Tag::IsTechnology . "` = '" . (bool)($tag->isTechnology()) . "'";
         $data[] = "`" . Tag::Order . "` = '" . (int)($tag->getOrder()) . "'";
+        $data[] = "`" . Tag::IsTechnologyMain . "` = '" . (bool)($tag->isTechnologyMain()) . "'";
+        $data[] = "`" . Tag::TechnologyOrder . "` = '" . (bool)($tag->getTechnologyOrder()) . "'";
 
         $query = new SQL("INSERT INTO `{$this->table}` SET " . implode(', ', $data) . "");
         $query->query();
@@ -47,9 +48,9 @@ class ImpactTagRepo
         $data = array();
         $data[] = "`" . Tag::Name . "` = '" . addslashes($tag->getName()) . "'";
         $data[] = "`" . Tag::IsMain . "` = '" . (bool)($tag->isMain()) . "'";
-        $data[] = "`" . Tag::IsImpact . "` = '" . (bool)($tag->isImpact()) . "'";
-        $data[] = "`" . Tag::IsTechnology . "` = '" . (bool)($tag->isTechnology()) . "'";
         $data[] = "`" . Tag::Order . "` = '" . (int)($tag->getOrder()) . "'";
+        $data[] = "`" . Tag::IsTechnologyMain . "` = '" . (bool)($tag->isTechnologyMain()) . "'";
+        $data[] = "`" . Tag::TechnologyOrder . "` = '" . (bool)($tag->getTechnologyOrder()) . "'";
 
         $query = new SQL("UPDATE `{$this->table}` SET " . implode(', ', $data) . " WHERE `id` = '{$tag->getId()}'");
         $query->query();
@@ -101,6 +102,12 @@ class ImpactTagRepo
         ]);
     }
 
+    public function orderByTechnology()
+    {
+        $this->orderBy = Tag::TechnologyOrder;
+        return $this;
+    }
+
     /**
      * @param $where
      * @return ImpactTag[]
@@ -108,9 +115,11 @@ class ImpactTagRepo
     private function getTagsWhere($where)
     {
         $query = new SQL("SELECT 
-            `id`, `tag`, `order`, `" . Tag::IsMain . "`, `" . Tag::IsImpact . "`, `" . Tag::IsTechnology . "`
+            `id`, `tag`, 
+            `" . Tag::IsMain . "`, `" . Tag::Order . "`,
+            `" . Tag::IsTechnologyMain . "`, `" . Tag::TechnologyOrder . "`
           FROM `{$this->table}` WHERE " . implode(' AND ', $where) . "
-          ORDER BY `" . Tag::Order . "` DESC, tag");
+          ORDER BY `{$this->orderBy}` DESC, tag");
 
         return array_map(function ($dbTag) {
             return $this->buildTagFromData($dbTag);
@@ -134,9 +143,9 @@ class ImpactTagRepo
         $tagObj->setId($tag[Tag::Id]);
         $tagObj->setName($tag[Tag::Name]);
         $tagObj->setIsMain($tag[Tag::IsMain]);
-        $tagObj->setIsImpact($tag[Tag::IsImpact]);
-        $tagObj->setIsTechnology($tag[Tag::IsTechnology]);
         $tagObj->setOrder($tag[Tag::Order]);
+        $tagObj->setIsTechnologyMain($tag[Tag::IsTechnologyMain]);
+        $tagObj->setTechnologyOrder($tag[Tag::TechnologyOrder]);
         return $tagObj;
     }
 

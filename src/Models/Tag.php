@@ -9,14 +9,15 @@ class Tag extends Model
     const TABLE = 'impact-tags';
     public $timestamps = false;
     protected $table = self::TABLE;
+    protected $fillable = [self::Name];
 
     const Id = 'id';
-    const Order = 'order';
     const Name = 'tag';
     const IsMain = 'isMain';
+    const Order = 'order';
 
-    const IsImpact = 'isImpact';
-    const IsTechnology = 'isTechnology';
+    const IsTechnologyMain = 'isTechnologyMain';
+    const TechnologyOrder = 'technologyOrder';
 
     public function getId()
     {
@@ -80,37 +81,5 @@ class Tag extends Model
     public function setIsMain($isMain)
     {
         $this->{self::IsMain} = (bool)$isMain;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isImpact(): bool
-    {
-        return (bool)$this->{self::IsImpact};
-    }
-
-    /**
-     * @param bool $isImpact
-     */
-    public function setIsImpact($isImpact)
-    {
-        $this->{self::IsImpact} = (bool)$isImpact;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isTechnology(): bool
-    {
-        return (bool)$this->{self::IsTechnology};
-    }
-
-    /**
-     * @param bool $isTechnology
-     */
-    public function setIsTechnology($isTechnology)
-    {
-        $this->{self::IsTechnology} = (bool)$isTechnology;
     }
 }

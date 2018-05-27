@@ -21,10 +21,6 @@ class CreateImpactTag
     /** @var string */
     private $name;
 
-    /** @var boolean */
-    private $isImpact,
-        $isTechnology;
-
     public function __construct()
     {
         $this->errorHandler = new ErrorHandler();
@@ -38,18 +34,8 @@ class CreateImpactTag
             $this->errorHandler->throwIfNotEmpty();
         }
 
-        /*
-        $this->tag = new Tag();
-        $this->tag->setName($this->name);
-        $this->tag->setIsImpact($this->isImpact);
-        $this->tag->setIsTechnology($this->isTechnology);
-        $this->tag->save();
-        */
-
         $this->tag = new ImpactTag();
         $this->tag->setName($this->name);
-        $this->tag->setIsImpact($this->isImpact);
-        $this->tag->setIsTechnology($this->isTechnology);
         $this->tagRepo->insert($this->tag);
 
         return $this;
@@ -70,26 +56,6 @@ class CreateImpactTag
     public function setName(string $name)
     {
         $this->name = $name;
-        return $this;
-    }
-
-    /**
-     * @param bool $isImpact
-     * @return CreateImpactTag
-     */
-    public function setIsImpact(bool $isImpact)
-    {
-        $this->isImpact = $isImpact;
-        return $this;
-    }
-
-    /**
-     * @param bool $isTechnology
-     * @return CreateImpactTag
-     */
-    public function setIsTechnology(bool $isTechnology)
-    {
-        $this->isTechnology = $isTechnology;
         return $this;
     }
 }

@@ -4,6 +4,8 @@ require __DIR__ . '/../header.php';
 /** @var $tags \DSI\Entity\TagForProjects[] */
 /** @var $impactMainTags \DSI\Entity\ImpactTag[] */
 /** @var $impactSecondaryTags \DSI\Entity\ImpactTag[] */
+/** @var $technologyMainTags \DSI\Entity\ImpactTag[] */
+/** @var $technologySecondaryTags \DSI\Entity\ImpactTag[] */
 /** @var $dsiFocusTags \DSI\Entity\DsiFocusTag[] */
 /** @var $projectTags string[] */
 /** @var $projectImpactTagsA string[] */
@@ -155,17 +157,29 @@ if (!isset($urlHandler))
                                                                 <?php _ehtml('Please add tags which describe the technology your project uses.') ?>
                                                             </p>
                                                             <div class="customSelect2">
+                                                                <?php foreach ($technologyMainTags AS $tag) { ?>
+                                                                    <label>
+                                                                        <input type="checkbox" name="technologyTags[]"
+                                                                               value="<?php echo show_input($tag->getName()) ?>"
+                                                                            <?php if (in_array($tag->getName(), $projectImpactTagsC)) echo 'checked' ?>/>
+                                                                        <?php echo show_input($tag->getName()) ?>
+                                                                    </label>
+                                                                <?php } ?>
+                                                                <b><?php _ehtml('Other (please specify):') ?></b>
                                                                 <select class="select2 creator-data-entry end w-input"
                                                                         id="impact-tags-c" style="width:100%;border:0"
                                                                         multiple data-tags="true"
                                                                         data-placeholder="<?php _ehtml('Write tags') ?>">
-                                                                    <?php foreach ($impactTags AS $tag) { ?>
+                                                                    <?php foreach ($technologySecondaryTags AS $tag) { ?>
                                                                         <option value="<?php echo $tag->getName() ?>"
                                                                             <?php if (in_array($tag->getName(), $projectImpactTagsC)) echo 'selected' ?>><?php
                                                                             echo show_input($tag->getName())
                                                                             ?></option>
                                                                     <?php } ?>
                                                                 </select>
+
+                                                                <div class="log-in-error" ng-show="errors.areasOfImpact"
+                                                                     ng-bind="errors.areasOfImpact"></div>
                                                             </div>
                                                             <br/><br/>
 
