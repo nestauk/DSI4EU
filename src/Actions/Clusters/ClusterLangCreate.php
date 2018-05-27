@@ -45,19 +45,19 @@ class ClusterLangCreate
         if (trim($this->title) == '')
             $this->errorHandler->addTaggedError('title', 'Please type cluster name');
 
-        if (trim($this->lang) == '')
-            $this->errorHandler->addTaggedError('lang', 'Please select a cluster language');
-
         $this->errorHandler->throwIfNotEmpty();
     }
 
     private function createClusterLang()
     {
-        $clusterLang = new ClusterLang();
-        $clusterLang->{ClusterLang::ClusterID} = (int)$this->clusterID;
-        $clusterLang->{ClusterLang::Lang} = $this->lang;
-        $clusterLang->{ClusterLang::Title} = $this->title;
-        $clusterLang->{ClusterLang::Description} = $this->description;
-        $clusterLang->save();
+        if (!$this->lang)
+            $this->lang = 'en';
+
+        $this->clusterLang = new ClusterLang();
+        $this->clusterLang->{ClusterLang::ClusterID} = (int)$this->clusterID;
+        $this->clusterLang->{ClusterLang::Lang} = $this->lang;
+        $this->clusterLang->{ClusterLang::Title} = $this->title;
+        $this->clusterLang->{ClusterLang::Description} = $this->description;
+        $this->clusterLang->save();
     }
 }

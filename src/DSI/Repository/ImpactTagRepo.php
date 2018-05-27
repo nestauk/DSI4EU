@@ -5,10 +5,12 @@ namespace DSI\Repository;
 use DSI;
 use DSI\Entity\ImpactTag;
 use DSI\Service\SQL;
+use Models\Tag;
 
 class ImpactTagRepo
 {
-    private $table = 'impact-tags';
+    private $table = Tag::TABLE;
+    private $orderBy = Tag::Order;
 
     public function insert(ImpactTag $tag)
     {
@@ -17,12 +19,14 @@ class ImpactTagRepo
         if ($this->nameExists($tag->getName()))
             throw new DSI\DuplicateEntry('name');
 
-        $insert = array();
-        $insert[] = "`tag` = '" . addslashes($tag->getName()) . "'";
-        $insert[] = "`isMain` = '" . (bool)($tag->isMain()) . "'";
-        $insert[] = "`order` = '" . (int)($tag->getOrder()) . "'";
+        $data = array();
+        $data[] = "`" . Tag::Name . "` = '" . addslashes($tag->getName()) . "'";
+        $data[] = "`" . Tag::IsMain . "` = '" . (bool)($tag->isMain()) . "'";
+        $data[] = "`" . Tag::Order . "` = '" . (int)($tag->getOrder()) . "'";
+        $data[] = "`" . Tag::IsTechnologyMain . "` = '" . (bool)($tag->isTechnologyMain()) . "'";
+        $data[] = "`" . Tag::TechnologyOrder . "` = '" . (bool)($tag->getTechnologyOrder()) . "'";
 
-        $query = new SQL("INSERT INTO `{$this->table}` SET " . implode(', ', $insert) . "");
+        $query = new SQL("INSERT INTO `{$this->table}` SET " . implode(', ', $data) . "");
         $query->query();
 
         $tag->setId($query->insert_id());
@@ -41,23 +45,25 @@ class ImpactTagRepo
         if (!$existingTag)
             throw new DSI\NotFound('tagID: ' . $tag->getId());
 
-        $insert = array();
-        $insert[] = "`tag` = '" . addslashes($tag->getName()) . "'";
-        $insert[] = "`isMain` = '" . (bool)($tag->isMain()) . "'";
-        $insert[] = "`order` = '" . (int)($tag->getOrder()) . "'";
+        $data = array();
+        $data[] = "`" . Tag::Name . "` = '" . addslashes($tag->getName()) . "'";
+        $data[] = "`" . Tag::IsMain . "` = '" . (bool)($tag->isMain()) . "'";
+        $data[] = "`" . Tag::Order . "` = '" . (int)($tag->getOrder()) . "'";
+        $data[] = "`" . Tag::IsTechnologyMain . "` = '" . (bool)($tag->isTechnologyMain()) . "'";
+        $data[] = "`" . Tag::TechnologyOrder . "` = '" . (bool)($tag->getTechnologyOrder()) . "'";
 
-        $query = new SQL("UPDATE `{$this->table}` SET " . implode(', ', $insert) . " WHERE `id` = '{$tag->getId()}'");
+        $query = new SQL("UPDATE `{$this->table}` SET " . implode(', ', $data) . " WHERE `id` = '{$tag->getId()}'");
         $query->query();
     }
 
     public function remove(ImpactTag $tag)
     {
-        $query = new SQL("SELECT id FROM `{$this->table}` WHERE id = '{$tag->getId()}' LIMIT 1");
+        $query = new SQL("SELECT " . Tag::Id . " FROM `{$this->table}` WHERE `" . Tag::Id . "` = '{$tag->getId()}' LIMIT 1");
         $existingTag = $query->fetch();
         if (!$existingTag)
             throw new DSI\NotFound('tagID: ' . $tag->getId());
 
-        $query = new SQL("DELETE FROM `{$this->table}` WHERE `id` = '{$tag->getId()}'");
+        $query = new SQL("DELETE FROM `{$this->table}` WHERE `" . Tag::Id . "` = '{$tag->getId()}'");
         $query->query();
     }
 
@@ -96,6 +102,12 @@ class ImpactTagRepo
         ]);
     }
 
+    public function orderByTechnology()
+    {
+        $this->orderBy = Tag::TechnologyOrder;
+        return $this;
+    }
+
     /**
      * @param $where
      * @return ImpactTag[]
@@ -103,9 +115,11 @@ class ImpactTagRepo
     private function getTagsWhere($where)
     {
         $query = new SQL("SELECT 
-            `id`, `tag`, `isMain`, `order`
+            `id`, `tag`, 
+            `" . Tag::IsMain . "`, `" . Tag::Order . "`,
+            `" . Tag::IsTechnologyMain . "`, `" . Tag::TechnologyOrder . "`
           FROM `{$this->table}` WHERE " . implode(' AND ', $where) . "
-          ORDER BY `order` DESC, tag");
+          ORDER BY `{$this->orderBy}` DESC, tag");
 
         return array_map(function ($dbTag) {
             return $this->buildTagFromData($dbTag);
@@ -126,10 +140,12 @@ class ImpactTagRepo
     private function buildTagFromData($tag)
     {
         $tagObj = new ImpactTag();
-        $tagObj->setId($tag['id']);
-        $tagObj->setName($tag['tag']);
-        $tagObj->setIsMain($tag['isMain']);
-        $tagObj->setOrder($tag['order']);
+        $tagObj->setId($tag[Tag::Id]);
+        $tagObj->setName($tag[Tag::Name]);
+        $tagObj->setIsMain($tag[Tag::IsMain]);
+        $tagObj->setOrder($tag[Tag::Order]);
+        $tagObj->setIsTechnologyMain($tag[Tag::IsTechnologyMain]);
+        $tagObj->setTechnologyOrder($tag[Tag::TechnologyOrder]);
         return $tagObj;
     }
 

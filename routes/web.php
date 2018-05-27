@@ -778,7 +778,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\ProjectController();
+        $command = new \Controllers\Projects\ProjectController();
         $command->data()->projectID = $matches[3];
         $command->exec();
     }
@@ -862,7 +862,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\ProjectController();
+        $command = new \Controllers\Projects\ProjectController();
         $command->data()->projectID = $matches[3];
         $command->data()->format = 'json';
         $command->exec();
@@ -872,7 +872,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\ProjectEditController();
+        $command = new \Controllers\Projects\ProjectEditController();
         $command->projectID = $matches[3];
         $command->format = $format;
         $command->exec();

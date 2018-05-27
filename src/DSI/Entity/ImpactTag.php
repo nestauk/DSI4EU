@@ -6,13 +6,15 @@ class ImpactTag
 {
     /** @var integer */
     private $id,
-        $order;
+        $order,
+        $technologyOrder;
 
     /** @var string */
     private $name;
 
     /** @var bool */
-    private $isMain;
+    private $isMain,
+        $isTechnologyMain;
 
     /**
      * @return int
@@ -44,9 +46,9 @@ class ImpactTag
     /**
      * @param string $name
      */
-    public function setName(string $name)
+    public function setName($name)
     {
-        $this->name = $name;
+        $this->name = (string)$name;
     }
 
     /**
@@ -79,5 +81,41 @@ class ImpactTag
     public function setIsMain($isMain)
     {
         $this->isMain = (bool)$isMain;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTechnologyOrder(): int
+    {
+        return (int)$this->technologyOrder;
+    }
+
+    /**
+     * @param int $technologyOrder
+     * @return ImpactTag
+     */
+    public function setTechnologyOrder($technologyOrder)
+    {
+        $this->technologyOrder = (int)$technologyOrder;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isTechnologyMain(): bool
+    {
+        return (bool)$this->isTechnologyMain;
+    }
+
+    /**
+     * @param bool $isTechnologyMain
+     * @return ImpactTag
+     */
+    public function setIsTechnologyMain($isTechnologyMain)
+    {
+        $this->isTechnologyMain = (bool)$isTechnologyMain;
+        return $this;
     }
 }

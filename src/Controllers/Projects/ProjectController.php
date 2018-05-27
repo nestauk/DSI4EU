@@ -1,6 +1,6 @@
 <?php
 
-namespace DSI\Controller;
+namespace Controllers\Projects;
 
 use DSI\Entity\OrganisationProject;
 use DSI\Entity\Project;
@@ -24,14 +24,11 @@ use DSI\Repository\ProjectMemberRequestRepo;
 use DSI\Repository\ProjectPostRepo;
 use DSI\Repository\ProjectRepo;
 use DSI\Repository\ProjectTagRepo;
-use DSI\Repository\UserRepo;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\JsModules;
 use DSI\Service\Mailer;
 use Services\URL;
-use DSI\UseCase\InviteEmailToProject;
-use DSI\UseCase\AddMemberInvitationToProject;
 use DSI\UseCase\AddMemberRequestToProject;
 use DSI\UseCase\AddProjectToOrganisation;
 use DSI\UseCase\ApproveMemberRequestToProject;
@@ -43,7 +40,6 @@ use DSI\UseCase\RejectMemberRequestToProject;
 use DSI\UseCase\RemoveMemberFromProject;
 use DSI\UseCase\SecureCode;
 use DSI\UseCase\SendEmailToCommunityAdmins;
-use DSI\UseCase\SetAdminStatusToProjectMember;
 use DSI\UseCase\UpdateProject;
 use DSI\UseCase\UpdateProjectCountryRegion;
 
@@ -74,13 +70,13 @@ class ProjectController
             $this->project = $projectRepo->getById($this->data()->projectID);
         } catch (NotFound $e) {
             $pageTitle = 'Project does not exist';
-            require __DIR__ . '/../../../www/views/project-404.php';
+            require __DIR__ . '/../../Views/project/project-404.php';
             return;
         }
 
         if ($this->project->isWaitingApproval() AND !$this->canViewWaitingApproval($loggedInUser)) {
             $pageTitle = 'Project is waiting approval';
-            require __DIR__ . '/../../../www/views/project-404.php';
+            require __DIR__ . '/../../Views/project/project-404.php';
             return;
         }
 
@@ -259,7 +255,7 @@ class ProjectController
             $project = $this->project;
             JsModules::setTinyMCE(true);
             JsModules::setTranslations(true);
-            require __DIR__ . '/../../../www/views/project.php';
+            require __DIR__ . '/../../Views/project/project.php';
         }
 
         return null;
