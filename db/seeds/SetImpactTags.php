@@ -8,14 +8,41 @@ class SetImpactTags extends AbstractSeed
 {
     public function run()
     {
+        Capsule::table(\Models\Tag::TABLE)
+            ->update([
+                \Models\Tag::IsMain => 0,
+                \Models\Tag::Order => 0,
+            ]);
+
+        $replaces = [
+            ['Education and skills', 'Skills and learning'],
+            ['Participation and democracy', 'Digital democracy'],
+            ['Culture and arts', 'Culture and arts'],
+            ['Health and wellbeing', 'Health and care'],
+            ['Work and employment', 'Work and employment'],
+            ['Neighbourhood regeneration', 'Cities and urban development'],
+            ['Energy and environment', 'Food, environment and climate change'],
+            ['Science', 'Science'],
+            ['Finance and economy', 'Finance and economy'],
+        ];
+        foreach ($replaces AS $replace) {
+            /** @var \Models\Tag $tag */
+            $tag = \Models\Tag::where(\Models\Tag::Name, $replace[0])->first();
+            if ($tag) {
+                $tag->setName($replace[1]);
+                $tag->save();
+            }
+        }
+
         $impactTags = [
-            'Education and skills',
-            'Participation and democracy',
-            'Culture and arts',
-            'Health and wellbeing',
+            'Health and care',
+            'Skills and learning',
+            'Food, environment and climate change',
+            'Migration and integration',
+            'Digital democracy',
+            'Cities and urban development',
             'Work and employment',
-            'Neighbourhood regeneration',
-            'Energy and environment',
+            'Culture and arts',
             'Science',
             'Finance and economy',
         ];
