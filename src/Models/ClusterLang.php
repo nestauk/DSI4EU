@@ -28,6 +28,11 @@ class ClusterLang extends Model
         return $this->hasMany(ClusterImg::class, ClusterImg::ClusterLangID, self::Id);
     }
 
+    public function getId()
+    {
+        return $this->{self::Id};
+    }
+
     public function getClusterId()
     {
         return $this->{self::ClusterID};
@@ -67,5 +72,10 @@ class ClusterLang extends Model
     public function getGetInTouch()
     {
         return $this->{self::GetInTouch};
+    }
+
+    public function getLang()
+    {
+        return $this->{self::Lang};
     }
 }

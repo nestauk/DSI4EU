@@ -8,11 +8,11 @@ class Tag extends Model
 {
     const TABLE = 'impact-tags';
     public $timestamps = false;
-    public $table = self::TABLE;
+    protected $table = self::TABLE;
 
     const Id = 'id';
     const Order = 'order';
-    const Name = 'name';
+    const Name = 'tag';
     const IsMain = 'isMain';
 
     const IsImpact = 'isImpact';

@@ -38,18 +38,19 @@ class CreateImpactTag
             $this->errorHandler->throwIfNotEmpty();
         }
 
+        /*
         $this->tag = new Tag();
         $this->tag->setName($this->name);
         $this->tag->setIsImpact($this->isImpact);
         $this->tag->setIsTechnology($this->isTechnology);
         $this->tag->save();
-
-        /*
-        $tag = new ImpactTag();
-        $tag->setName((string)$this->name);
-        $this->tagRepo->insert($tag);
-        $this->tag = $tag;
         */
+
+        $this->tag = new ImpactTag();
+        $this->tag->setName($this->name);
+        $this->tag->setIsImpact($this->isImpact);
+        $this->tag->setIsTechnology($this->isTechnology);
+        $this->tagRepo->insert($this->tag);
 
         return $this;
     }

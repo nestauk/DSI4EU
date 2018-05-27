@@ -12,7 +12,9 @@ class ImpactTag
     private $name;
 
     /** @var bool */
-    private $isMain;
+    private $isMain,
+        $isImpact,
+        $isTechnology;
 
     /**
      * @return int
@@ -44,9 +46,9 @@ class ImpactTag
     /**
      * @param string $name
      */
-    public function setName(string $name)
+    public function setName($name)
     {
-        $this->name = $name;
+        $this->name = (string)$name;
     }
 
     /**
@@ -79,5 +81,41 @@ class ImpactTag
     public function setIsMain($isMain)
     {
         $this->isMain = (bool)$isMain;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isImpact(): bool
+    {
+        return (bool)$this->isImpact;
+    }
+
+    /**
+     * @param bool $isImpact
+     * @return ImpactTag
+     */
+    public function setIsImpact($isImpact)
+    {
+        $this->isImpact = (bool)$isImpact;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isTechnology(): bool
+    {
+        return (bool)$this->isTechnology;
+    }
+
+    /**
+     * @param bool $isTechnology
+     * @return ImpactTag
+     */
+    public function setIsTechnology($isTechnology)
+    {
+        $this->isTechnology = (bool)$isTechnology;
+        return $this;
     }
 }
