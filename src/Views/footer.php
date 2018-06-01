@@ -531,7 +531,8 @@ if (!isset($urlHandler))
 </script>
 
 <script type="text/javascript"
-        src="<?php echo SITE_RELATIVE_PATH ?>/js/script.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
+        src="/main.js?<?= \Services\Assets::version() ?>"></script>
+
 
 <?php include(__DIR__ . '/partialViews/googleAnalytics.html'); ?>
 
