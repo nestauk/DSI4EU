@@ -51,6 +51,9 @@ class Router
         } elseif ($this->pageURL === '/register.json') {
             $this->registerJson();
 
+        } elseif (preg_match('<^/' . $langHandler . 'accept-policy>', $this->pageURL, $matches)) {
+            $this->acceptPolicy($matches);
+
         } elseif (preg_match('<^/' . $langHandler . 'register>', $this->pageURL, $matches)) {
             $this->register($matches);
 
@@ -429,6 +432,15 @@ class Router
         $this->setLanguageFromUrl($matches);
 
         $command = new \Controllers\RegisterController();
+        $command->responseFormat = $format;
+        $command->exec();
+    }
+
+    private function acceptPolicy($matches = [], $format = 'html')
+    {
+        $this->setLanguageFromUrl($matches);
+
+        $command = new \Controllers\AcceptPolicyController();
         $command->responseFormat = $format;
         $command->exec();
     }
