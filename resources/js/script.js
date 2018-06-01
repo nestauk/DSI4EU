@@ -21,11 +21,11 @@
     });
 }());
 
-var DSI_Helpers = {
+const DSI_Helpers = {
     UploadImageHandler: function (Upload) {
         this.uploader = {};
         this.upload = function (file, errFiles) {
-            var $this = this;
+            const $this = this;
             $this.errorMsg = {};
             $this.uploader.f = file;
             $this.uploader.errFile = errFiles && errFiles[0];
@@ -38,9 +38,9 @@ var DSI_Helpers = {
                 file.upload.then(function (response) {
                     console.log(response.data);
                     file.result = response.data;
-                    if (response.data.code == 'ok')
+                    if (response.data.code === 'ok')
                         $this.image = response.data.imgPath;
-                    else if (response.data.code == 'error')
+                    else if (response.data.code === 'error')
                         $this.errorMsg = response.data.errors;
 
                     $this.uploader = {};
@@ -83,3 +83,25 @@ var DSI_Helpers = {
             .click();
     }
 };
+
+(function cookiePolicy() {
+    function setCookie(name, value) {
+    }
+
+    function getCookie(name) {
+        // return true;
+        return false;
+    }
+    
+    if (!getCookie('accept_cookie_policy')) {
+        const container = $('#cookies');
+        container.show();
+
+        $('.js-cookie-accept', container).click(function (ev) {
+            ev.preventDefault();
+            setCookie('accept_cookie_policy');
+            container.hide('slow');
+            return false;
+        })
+    }
+}());

@@ -376,6 +376,11 @@ class URL
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'manage/tags.json';
     }
 
+    public function cookiesPolicy()
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'cookies-policy';
+    }
+
     public function uploadImage()
     {
         return SITE_RELATIVE_PATH . '/uploadImage.json';
@@ -462,7 +467,7 @@ class URL
     /**
      * @param string $currentLanguage
      */
-    public function setCurrentLanguage($currentLanguage)
+    private function setCurrentLanguage($currentLanguage)
     {
         $this->currentLanguage = (string)$currentLanguage;
     }
