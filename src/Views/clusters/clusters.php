@@ -34,7 +34,7 @@ require __DIR__ . '/../header.php'
                         <?php foreach ($clusters AS $cluster) { ?>
                             <div>
                                 <a class="info-card" data-ix="underline"
-                                   href="<?= $urlHandler->cluster($cluster->getClusterId()) ?>">
+                                   href="<?= $urlHandler->cluster($cluster) ?>">
                                     <h2 class="funding-card-h2">
                                         <?php _ehtml($cluster->getTitle()) ?>
                                     </h2>
