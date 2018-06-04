@@ -16,7 +16,7 @@ if (!isset($urlHandler))
     <div class="twitter">
         <div class="w-row">
             <div class="w-col w-col-1 w-col-small-1 w-col-tiny-tiny-stack">
-                <img class="homepage-twitter-logo" src="https://digitalsocial.eu/images/twitter-logo-silhouette.png">
+                <img class="homepage-twitter-logo" src="/images/twitter-logo-silhouette.png">
             </div>
             <div class="w-col w-col-11 w-col-small-11 w-col-tiny-tiny-stack">
                 <p class="twitter-text">
@@ -91,7 +91,7 @@ if (!isset($urlHandler))
                 <div>
                     <div class="w-row">
                         <div class="w-clearfix w-col w-col-2 w-col-medium-6 w-col-small-6 w-col-tiny-6">
-                            <img class="footer-eu" src="<?php echo SITE_RELATIVE_PATH ?>/images/5000100-mono.png">
+                            <img class="footer-eu" src="/images/5000100-mono.png">
                         </div>
                         <div class="w-col w-col-10 w-col-medium-6 w-col-small-6 w-col-tiny-6">
                             <div class="footer-small-print">
@@ -101,7 +101,7 @@ if (!isset($urlHandler))
                     </div>
                     <div class="w-row">
                         <div class="w-clearfix w-col w-col-2 w-col-medium-6 w-col-small-6 w-col-tiny-6">
-                            <img class="cc footer-eu" src="<?php echo SITE_RELATIVE_PATH ?>/images/88x31.png">
+                            <img class="cc footer-eu" src="/images/88x31.png">
                         </div>
                         <div class="w-col w-col-10 w-col-medium-6 w-col-small-6 w-col-tiny-6">
                             <div class="footer-small-print">
@@ -123,45 +123,45 @@ if (!isset($urlHandler))
                     <div class="footer-logo-col w-clearfix w-col w-col-3">
                         <a class="footer-partner-link w-inline-block" href="http://nesta.org.uk" target="_blank">
                             <img class="footer-partner-logo" style="height:50px;width:auto"
-                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/home-logos/nesta.gif">
+                                 src="/images/home-logos/nesta.gif">
                         </a>
                     </div>
                     <div class="footer-logo-col w-clearfix w-col w-col-3">
                         <a class="footer-partner-link w-inline-block" href="http://www.betterplace-lab.org/en/"
                            target="_blank">
                             <img class="footer-partner-logo" style="height:50px;width:auto"
-                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/home-logos/betterplace.png">
+                                 src="/images/home-logos/betterplace.png">
                         </a>
                     </div>
                     <div class="footer-logo-col w-clearfix w-col w-col-3">
                         <a class="footer-partner-link w-inline-block" href="http://waag.org" target="_blank">
                             <img class="footer-partner-logo" style="height:50px;width:auto"
-                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/home-logos/waag.gif">
+                                 src="/images/home-logos/waag.gif">
                         </a>
                     </div>
                     <div class="footer-logo-col w-clearfix w-col w-col-3">
                         <a class="footer-partner-link w-inline-block" href="http://wemake.cc" target="_blank">
                             <img class="footer-partner-logo" style="height:50px;width:auto"
-                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/home-logos/wemake.gif">
+                                 src="/images/home-logos/wemake.gif">
                         </a>
                     </div>
                     <div class="footer-logo-col w-clearfix w-col w-col-4">
                         <a class="footer-partner-link w-inline-block" href="http://fablabbcn.org" target="_blank">
                             <img class="footer-partner-logo" style="height:50px;width:auto"
-                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/home-logos/fablab.gif">
+                                 src="/images/home-logos/fablab.gif">
                         </a>
                     </div>
                     <div class="footer-logo-col w-clearfix w-col w-col-4">
                         <a class="footer-partner-link w-inline-block" href="http://www.barcelonactiva.cat/"
                            target="_blank">
                             <img class="footer-partner-logo" style="height:50px;width:auto"
-                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/home-logos/barcelona-activa.gif">
+                                 src="/images/home-logos/barcelona-activa.gif">
                         </a>
                     </div>
                     <div class="footer-logo-col w-clearfix w-col w-col-4">
                         <a class="footer-partner-link w-inline-block" href="http://epf.org.pl/" target="_blank">
                             <img class="footer-partner-logo" style="height:50px;width:auto"
-                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/home-logos/epantswo.png">
+                                 src="/images/home-logos/epantswo.png">
                         </a>
                     </div>
                 </div>
@@ -185,7 +185,7 @@ if (!isset($urlHandler))
                 </div>
                 <div class="w-col w-col-6">
                     <div class="w-form">
-                        <form class="w-clearfix" id="email-form" name="email-form">
+                        <form class="w-clearfix">
                             <input class="newsletter-signup-input w-input" data-name="Email" id="email" maxlength="256"
                                    name="email" placeholder="Enter your email address" required="required" type="email">
                             <input class="newsletter-signup-submit w-button" data-wait="Please wait..." type="submit"
@@ -198,7 +198,7 @@ if (!isset($urlHandler))
         <div class="footer-columns w-row">
             <div class="w-col w-col-4">
                 <div class="footer-logo">
-                    <img class="footer-brand" src="<?php echo SITE_RELATIVE_PATH ?>/images/all white.svg">
+                    <img class="footer-brand" src="/images/all white.svg">
                     <div class="beta-badge">Beta</div>
                 </div>
             </div>
@@ -297,7 +297,7 @@ if (!isset($urlHandler))
                 <div class="footer-small-print">
                     <?php _ehtml('Nesta is a registered charity') ?>
                 </div>
-                <img class="footer-cc-img" src="<?php echo SITE_RELATIVE_PATH ?>/images/88x31.png">
+                <img class="footer-cc-img" src="/images/88x31.png">
                 <div class="footer-small-print">All our work is licensed under a&nbsp;
                     <a target="_blank" class="footer-link-small"
                        href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
@@ -307,16 +307,16 @@ if (!isset($urlHandler))
             </div>
             <div class="w-clearfix w-col w-col-6">
                 <a class="footer-partner-link w-inline-block" href="http://www.supsi.ch/" target="_blank">
-                    <img class="footer-logo" src="<?php echo SITE_RELATIVE_PATH ?>/images/logo_SUPSI.png" width="125">
+                    <img class="footer-logo" src="/images/logo_SUPSI.png" width="125">
                 </a>
                 <a class="footer-partner-link w-inline-block" href="http://waag.org/en" target="_blank">
                     <img class="footer-logo"
-                         src="<?php echo SITE_RELATIVE_PATH ?>/images/waag-f1d052f43133268eaf2e13090a0b4bf1.png"
+                         src="/images/waag-f1d052f43133268eaf2e13090a0b4bf1.png"
                          width="125">
                 </a>
                 <a class="footer-partner-link w-inline-block" href="http://www.nesta.org.uk/" target="_blank">
                     <img class="footer-logo"
-                         src="<?php echo SITE_RELATIVE_PATH ?>/images/nesta-6a9b5fe999e8323b379ccc0d8e70290f.png"
+                         src="/images/nesta-6a9b5fe999e8323b379ccc0d8e70290f.png"
                          width="125">
                 </a>
             </div>
@@ -329,7 +329,7 @@ if (!isset($urlHandler))
     <div class="container-wide">
         <div class="footer-columns w-row">
             <div class="w-col w-col-4">
-                <img class="footer-brand" src="<?php echo SITE_RELATIVE_PATH ?>/images/all white.svg">
+                <img class="footer-brand" src="/images/all white.svg">
             </div>
             <div class="w-col w-col-2">
                 <h3 class="footer-h3">People</h3>
@@ -394,14 +394,14 @@ if (!isset($urlHandler))
             <div class="w-col w-col-6"></div>
             <div class="w-clearfix w-col w-col-6">
                 <a class="footer-partner-link w-inline-block" href="#">
-                    <img src="<?php echo SITE_RELATIVE_PATH ?>/images/logo_SUPSI.png" width="125">
+                    <img src="/images/logo_SUPSI.png" width="125">
                 </a>
                 <a class="footer-partner-link w-inline-block" href="#">
-                    <img src="<?php echo SITE_RELATIVE_PATH ?>/images/waag-f1d052f43133268eaf2e13090a0b4bf1.png"
+                    <img src="/images/waag-f1d052f43133268eaf2e13090a0b4bf1.png"
                          width="125">
                 </a>
                 <a class="footer-partner-link w-inline-block" href="#">
-                    <img src="<?php echo SITE_RELATIVE_PATH ?>/images/nesta-6a9b5fe999e8323b379ccc0d8e70290f.png"
+                    <img src="/images/nesta-6a9b5fe999e8323b379ccc0d8e70290f.png"
                          width="125">
                 </a>
             </div>
@@ -411,14 +411,14 @@ if (!isset($urlHandler))
  */ ?>
 
 <script type="text/javascript"
-        src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/SearchController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
+        src="/js/controllers/SearchController.js?<?= \Services\Assets::version() ?>"></script>
 
 <div class="search-block" ng-controller="SearchController"
      data-langpath="<?php echo \DSI\Service\Translate::getCurrentLangPath() ?>">
     <div class="close-search" data-ix="close-search-block">+</div>
     <h1 class="search-h1"><?php _ehtml('Search') ?></h1>
     <div class="w-form">
-        <form id="email-form" name="email-form" autocomplete="off">
+        <form autocomplete="off">
             <input class="main-search w-input" data-name="search" id="search" maxlength="256" name="search"
                    autocomplete="off"
                    ng-model="search.entry"
@@ -473,7 +473,7 @@ if (!isset($urlHandler))
             <a class="large log-in-link search-results sign-up w-clearfix w-inline-block" data-ix="log-in-arrow"
                href="<?php echo $urlHandler->search() ?>{{search.entry}}">
                 <div class="login-li menu-li"><?php _ehtml('See all results') ?></div>
-                <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
+                <img class="login-arrow" src="/images/ios7-arrow-thin-right.png">
             </a>
         </div>
     </div>
@@ -494,7 +494,7 @@ if (!isset($urlHandler))
         </div>
     </div>
     <script type="text/javascript"
-            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/NotificationController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
+            src="/js/controllers/NotificationController.js?<?= \Services\Assets::version() ?>"></script>
 <?php } ?>
 
 <div class="cookies" id="cookies">
@@ -502,22 +502,25 @@ if (!isset($urlHandler))
         <div class="w-row">
             <div class="w-col w-col-6">
                 <h3 class="cookie-h3">
-                    <?php _ehtml('We use cookies') ?>
+                    <?php // _ehtml('We use cookies') ?>
+                    We use cookies to help us improve this site and your experience. Continue to use this site if you're
+                    happy with this or find out more
                 </h3>
             </div>
             <div class="w-clearfix w-col w-col-6">
-                <a class="cookie-button w-button" href="#"><?php _ehtml('Find out more') ?></a>
-                <a class="cookie-button w-button" href="#"
-                   onclick="$('#cookies').hide()"><?php _ehtml('Continue') ?></a>
+                <a class="cookie-button w-button"
+                   href="<?= $urlHandler->cookiesPolicy() ?>"><?php _ehtml('Find out more') ?></a>
+                <!-- <a class="cookie-button w-button js-cookie-accept" href="#"><?php _ehtml('Continue') ?></a> -->
+                <a class="cookie-button w-button js-cookie-accept" href="#"><?php _ehtml('Accept') ?></a>
             </div>
         </div>
     </div>
 </div>
 
 <script type="text/javascript"
-        src="<?php echo SITE_RELATIVE_PATH ?>/js/dsi-languages.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
+        src="/js/dsi-languages.js?<?= \Services\Assets::version() ?>"></script>
 <!--[if lte IE 9]>
-<script src="<?php echo SITE_RELATIVE_PATH ?>/js/lib/placeholders/placeholders.min.js"></script>
+<script src="/js/lib/placeholders/placeholders.min.js"></script>
 <![endif]-->
 
 <script>
@@ -531,7 +534,7 @@ if (!isset($urlHandler))
 </script>
 
 <script type="text/javascript"
-        src="<?php echo SITE_RELATIVE_PATH ?>/js/script.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
+        src="/main.js?<?= \Services\Assets::version() ?>"></script>
 
 <?php include(__DIR__ . '/partialViews/googleAnalytics.html'); ?>
 

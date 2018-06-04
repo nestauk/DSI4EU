@@ -2,6 +2,7 @@
 
 use Services\URL;
 
+/** @var $urlHandler Services\URL */
 ?>
 <!DOCTYPE html>
 <html data-wf-site="56e2e31a1b1f8f784728a08c" data-wf-page="56fbef6ecf591b312d56f8be">
@@ -83,8 +84,8 @@ use Services\URL;
                         <br>
                         You can unsubscribe by clicking the link in our emails, or emailing info@nesta.org.uk. We
                         promise to keep your details safe and secure. We won’t share your details outside of Nesta
-                        without your permission. Find out more about how we use personal information in our Privacy
-                        Policy.
+                        without your permission. Find out more about how we use personal information in our
+                        <a target="_blank" href="<?= $urlHandler->privacyPolicy() ?>">Privacy Policy</a>.
                     </div>
 
                     <div class="modal-footer">
