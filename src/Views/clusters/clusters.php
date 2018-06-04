@@ -4,7 +4,7 @@ require __DIR__ . '/../header.php'
 /** @var $urlHandler Services\URL */
 /** @var $clusters \Models\ClusterLang[] */
 ?>
-    <div>
+    <div class="clusters-controller">
         <div class="content-block">
             <div class="w-row">
                 <div class="w-col w-col-8 w-col-stack">
@@ -27,7 +27,6 @@ require __DIR__ . '/../header.php'
                 </div>
             </div>
         </div>
-
         <div class="content-directory">
             <div class="list-block">
                 <div class="w-row">
