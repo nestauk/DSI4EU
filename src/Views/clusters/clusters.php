@@ -40,9 +40,9 @@ require __DIR__ . '/../header.php'
                                         <?php _ehtml($cluster->getTitle()) ?>
                                     </h2>
                                     <div class="infocard top3-underline" data-ix="new-interaction-2"></div>
-                                    <p class="funding-descr">
+                                    <div class="funding-descr">
                                         <?php _e($cluster->getParagraph()) ?>
-                                    </p>
+                                    </div>
                                 </a>
                             </div>
                         <?php } ?>
