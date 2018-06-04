@@ -2,6 +2,7 @@
 
 namespace Controllers;
 
+use DSI\Entity\Translation;
 use DSI\Entity\User;
 use DSI\NotFound;
 use DSI\Service\Auth;
@@ -40,7 +41,8 @@ class ClusterController
         /** @var ClusterLang $clusterLang */
         $this->clusterLang = ClusterLang::with('images')->where([
             [ClusterLang::ClusterID, $this->clusterID],
-            [ClusterLang::Lang, Translate::getCurrentLang()]
+            // [ClusterLang::Lang, Translate::getCurrentLang()]
+            [ClusterLang::Lang, Translation::DEFAULT_LANGUAGE]
         ])->first();
 
         if (!$this->clusterLang)

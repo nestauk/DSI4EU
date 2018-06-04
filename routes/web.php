@@ -389,12 +389,12 @@ class Router
 
         } elseif (preg_match('<^/' . $langHandler . 'clusters$>', $this->pageURL, $matches)) {
             $this->clusters($matches);
-
-        } elseif (preg_match('<^/' . $langHandler . 'cluster/([0-9]+)$>', $this->pageURL, $matches)) {
-            $this->cluster($matches);
-
+            
         } elseif (preg_match('<^/' . $langHandler . 'cluster/([0-9]+)/edit$>', $this->pageURL, $matches)) {
             $this->clusterEdit($matches);
+
+        } elseif (preg_match('<^/' . $langHandler . 'cluster/([0-9]+)/?>', $this->pageURL, $matches)) {
+            $this->cluster($matches);
 
         } elseif (preg_match('<^/' . $langHandler . 'api/cluster/([0-9]+)$>', $this->pageURL, $matches)) {
             $this->clusterApi($matches);

@@ -106,7 +106,7 @@ use \DSI\Entity\Image;
                                     <div class="tabbed-nav-buttons w-clearfix">
                                         <input type="submit" class="tab-button-2 tab-button-next w-button"
                                                value="Save"/>
-                                        <a href="<?php echo $urlHandler->cluster($cluster->getClusterId()) ?>"
+                                        <a href="<?php echo $urlHandler->cluster($cluster) ?>"
                                            class="tab-button-2 tab-button-next w-button">
                                             Back to cluster</a>
                                     </div>
