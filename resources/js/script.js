@@ -21,11 +21,11 @@
     });
 }());
 
-var DSI_Helpers = {
+const DSI_Helpers = {
     UploadImageHandler: function (Upload) {
         this.uploader = {};
         this.upload = function (file, errFiles) {
-            var $this = this;
+            const $this = this;
             $this.errorMsg = {};
             $this.uploader.f = file;
             $this.uploader.errFile = errFiles && errFiles[0];
@@ -38,9 +38,9 @@ var DSI_Helpers = {
                 file.upload.then(function (response) {
                     console.log(response.data);
                     file.result = response.data;
-                    if (response.data.code == 'ok')
+                    if (response.data.code === 'ok')
                         $this.image = response.data.imgPath;
-                    else if (response.data.code == 'error')
+                    else if (response.data.code === 'error')
                         $this.errorMsg = response.data.errors;
 
                     $this.uploader = {};
@@ -83,3 +83,40 @@ var DSI_Helpers = {
             .click();
     }
 };
+
+(function cookiePolicy() {
+    function setCookie(cname, cvalue, exdays) {
+        const d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        const expires = "expires=" + d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+
+    function getCookie(cname) {
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for(let i = 0; i <ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) === ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) === 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
+    if (!getCookie('cookies-agree')) {
+        const container = $('#cookies');
+        container.show();
+
+        $('.js-cookie-accept', container).click(function (ev) {
+            ev.preventDefault();
+            setCookie('cookies-agree', true, 720);
+            container.hide('slow');
+            return false;
+        })
+    }
+}());
