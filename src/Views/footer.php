@@ -502,9 +502,9 @@ if (!isset($urlHandler))
         <div class="w-row">
             <div class="w-col w-col-6">
                 <h3 class="cookie-h3">
-                    <?php // _ehtml('We use cookies') ?>
-                    We use cookies to help us improve this site and your experience. Continue to use this site if you're
-                    happy with this or find out more
+                    <?php _ehtml('We use cookies') ?>
+                    <!-- We use cookies to help us improve this site and your experience. Continue to use this site if you're
+                    happy with this or find out more -->
                 </h3>
             </div>
             <div class="w-clearfix w-col w-col-6">
