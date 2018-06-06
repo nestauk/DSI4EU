@@ -33,3 +33,7 @@ The controllers are responsible to execute any required **actions**
 ( in _src/DSI/UseCase/_, _src/Actions/_ ) before loading the **views** ( in _www/views/_, _src/Views/_ ).
  
 Command line calls are made to _cli.php_. Run `php cli.php` to list all the possible options.
+
+## How to
+- run sql migrations: `vendor/bin/phinx migrate -e production`
+- create sql migration: `vendor/bin/phinx create` *ClassName*
