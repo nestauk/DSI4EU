@@ -6,6 +6,7 @@ use DSI\Entity\User;
 use DSI\Repository\UserRepo;
 use DSI\Service\ErrorHandler;
 use Models\EmailSubscription;
+use Models\UserAccept;
 
 class AcceptPolicy
 {
@@ -39,6 +40,7 @@ class AcceptPolicy
         $this->userRepo->save($this->user);
 
         $this->saveEmailSubscription();
+        $this->saveUserAccept();
     }
 
     public function setUserRepo(UserRepo $userRepo)
@@ -70,5 +72,12 @@ class AcceptPolicy
             $emailSubscription->{EmailSubscription::Subscribed} = true;
             $emailSubscription->save();
         }
+    }
+
+    private function saveUserAccept()
+    {
+        $userAccept = new UserAccept();
+        $userAccept->{UserAccept::UserID} = $this->user->getId();
+        $userAccept->save();
     }
 }
