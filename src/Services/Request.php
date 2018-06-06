@@ -30,4 +30,19 @@ class Request
     {
         return self::getInstance()->isMethod($method);
     }
+
+    public static function isPost()
+    {
+        return self::isMethod(self::METHOD_POST);
+    }
+
+    public static function isGet()
+    {
+        return self::isMethod(self::METHOD_GET);
+    }
+
+    public static function isDelete()
+    {
+        return self::isMethod(self::METHOD_DELETE);
+    }
 }

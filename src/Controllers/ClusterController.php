@@ -50,7 +50,7 @@ class ClusterController
 
     public function get()
     {
-        if (!Request::isMethod(Request::METHOD_GET))
+        if (!Request::isGet())
             return (new Response('Invalid header', Response::HTTP_FORBIDDEN))->send();
 
         return View::render(__DIR__ . '/../Views/clusters/cluster.php', [

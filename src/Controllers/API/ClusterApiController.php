@@ -49,9 +49,9 @@ class ClusterApiController
             $this->clusterLang->save();
         }
 
-        if (Request::isMethod(Request::METHOD_GET))
+        if (Request::isGet())
             return $this->get();
-        elseif (Request::isMethod(Request::METHOD_POST))
+        elseif (Request::isPost())
             return $this->save();
         else
             return (new Response('Invalid header', Response::HTTP_FORBIDDEN))->send();

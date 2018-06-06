@@ -21,7 +21,7 @@ class AcceptPolicyController
         $loggedInUser = $authUser->getUser();
 
         $errors = [];
-        if (Request::isMethod(Request::METHOD_POST)) {
+        if (Request::isPost()) {
             try {
                 $exec = new AcceptPolicy();
                 $exec->user = $loggedInUser;
