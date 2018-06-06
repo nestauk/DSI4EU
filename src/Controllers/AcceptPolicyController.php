@@ -5,6 +5,7 @@ namespace Controllers;
 use Actions\Register\AcceptPolicy;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
+use Models\UserAccept;
 use Services\Request;
 use Services\URL;
 use Services\View;
@@ -19,6 +20,10 @@ class AcceptPolicyController
         $authUser = new Auth();
         $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
         $loggedInUser = $authUser->getUser();
+
+        $userAccept = UserAccept::where(UserAccept::UserID, $loggedInUser->getId())->count();
+        // if ($userAccept)
+            // return go_to($urlHandler->dashboard());
 
         $errors = [];
         if (Request::isPost()) {
