@@ -38,6 +38,12 @@
   }
 }
 
+.clusters-controller {
+  .info-card {
+    background: none;
+  }
+}
+
 body {
   .twitter-block {
     height: 100px;
@@ -751,5 +757,26 @@ body {
 
   .twitter-block a {
     color: white;
+  }
+
+  .cookie-h3 {
+    color: #fff;
+    font-size: 14px;
+    line-height: 20px;
+    margin-top: 7px;
+  }
+
+  @media (max-width: 767px) {
+    .cookies {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 9999;
+      display: none;
+      height: auto;
+      padding-bottom: 20px;
+      background-color: rgba(19, 125, 100, 0.94);
+    }
   }
 }

@@ -10,6 +10,7 @@ use DSI\Entity\Story;
 use DSI\Entity\Translation;
 use DSI\Entity\User;
 use DSI\Service\Translate;
+use Models\ClusterLang;
 
 class URL
 {
@@ -421,9 +422,9 @@ class URL
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'clusters';
     }
 
-    public function cluster($clusterId)
+    public function cluster(ClusterLang $cluster)
     {
-        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'cluster/' . (int)$clusterId;
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'cluster/' . $cluster->getClusterId() . '/' . self::linkify($cluster->getTitle());
     }
 
     public function clusterEdit($clusterId)
