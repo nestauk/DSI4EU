@@ -467,7 +467,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\DashboardController();
+        $command = new \Controllers\DashboardController();
         $command->format = 'html';
         $command->exec();
     }
@@ -476,7 +476,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\DashboardController();
+        $command = new \Controllers\DashboardController();
         $command->format = 'json';
         $command->exec();
     }

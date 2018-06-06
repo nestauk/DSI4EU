@@ -1,6 +1,6 @@
 <?php
 
-namespace DSI\Controller;
+namespace Controllers;
 
 use DSI\Entity\OrganisationMemberInvitation;
 use DSI\Entity\OrganisationMemberRequest;
@@ -146,7 +146,7 @@ class DashboardController
             $organisationsMember = (new OrganisationMemberRepo())->getByMemberID($loggedInUser->getId());
             JsModules::setTranslations(true);
             define('HIDE_NOTIFICATIONS', true);
-            require __DIR__ . '/../../../www/views/dashboard.php';
+            require __DIR__ . '/../Views/dashboard.php';
         }
 
         return null;

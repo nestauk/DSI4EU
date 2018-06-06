@@ -1,6 +1,7 @@
 <?php
 /** @var $urlHandler Services\URL */
 /** @var $user \DSI\Entity\User */
+/** @var $loggedInUser \DSI\Entity\User */
 use \DSI\Service\Sysctl;
 
 ?>
