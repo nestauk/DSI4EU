@@ -1,6 +1,6 @@
 <?php
 
-namespace DSI\UseCase;
+namespace Actions\Register;
 
 use DSI\Entity\ProjectMember;
 use DSI\Entity\User;
@@ -8,7 +8,9 @@ use DSI\Repository\ProjectEmailInvitationRepo;
 use DSI\Repository\ProjectMemberRepo;
 use DSI\Repository\UserRepo;
 use DSI\Service\ErrorHandler;
+use DSI\UseCase\SendWelcomeEmailAfterRegistration;
 use Models\EmailSubscription;
+use Models\UserAccept;
 
 class Register
 {
@@ -51,6 +53,7 @@ class Register
         $this->user = $user;
 
         $this->saveEmailSubscription();
+        $this->saveUserAccept();
         $this->sendWelcomeEmail();
         $this->checkProjectInvitations();
     }
@@ -151,6 +154,13 @@ class Register
             $emailSubscription->{EmailSubscription::Subscribed} = true;
             $emailSubscription->save();
         }
+    }
+
+    private function saveUserAccept()
+    {
+        $userAccept = new UserAccept();
+        $userAccept->{UserAccept::UserID} = $this->user->getId();
+        $userAccept->save();
     }
 }
 
