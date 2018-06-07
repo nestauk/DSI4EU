@@ -37,14 +37,14 @@ class ClusterImgApiController
         $this->authUser = new Auth();
         $this->loggedInUser = $this->authUser->getUserIfLoggedIn();
 
-        if (Request::isMethod(Request::METHOD_GET))
+        if (Request::isGet())
             return $this->get();
-        elseif (Request::isMethod(Request::METHOD_POST))
+        elseif (Request::isPost())
             return $this->save();
-        elseif (Request::isMethod(Request::METHOD_DELETE))
+        elseif (Request::isDelete())
             return $this->delete();
         else
-            return (new Response('Invalid header', Response::HTTP_FORBIDDEN))->send();
+            return (new Response('Invalid method', Response::HTTP_FORBIDDEN))->send();
     }
 
     private function save()

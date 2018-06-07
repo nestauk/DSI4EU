@@ -49,7 +49,6 @@ class ClustersController
             $clusters = $this->getClusters();
 
         View::render(__DIR__ . '/../Views/clusters/clusters.php', [
-            'urlHandler' => $this->urlHandler,
             'loggedInUser' => $this->loggedInUser,
             'clusters' => $clusters->map(function (Cluster $cluster) {
                 return $cluster->clusterLangs[0];

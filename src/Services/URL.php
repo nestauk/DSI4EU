@@ -31,6 +31,11 @@ class URL
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'dashboard' . $extension;
     }
 
+    public function acceptPolicy()
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'accept-policy';
+    }
+
     public function notifications()
     {
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'notifications.json';

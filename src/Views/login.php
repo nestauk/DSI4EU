@@ -321,7 +321,7 @@ use Services\URL;
 <![endif]-->
 
 <script type="text/javascript"
-        src="<?php echo SITE_RELATIVE_PATH ?>/js/script.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
+        src="<?php echo SITE_RELATIVE_PATH ?>/main.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 
 <?php include(__DIR__ . '/partialViews/googleAnalytics.html'); ?>
 

@@ -303,7 +303,7 @@ require __DIR__ . '/header.php';
     </script>
 
     <script type="text/javascript"
-            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/DashboardController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
+            src="/js/controllers/DashboardController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 
     <script type="text/javascript">
         jQuery(function ($) {

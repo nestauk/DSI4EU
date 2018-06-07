@@ -51,6 +51,9 @@ class Router
         } elseif ($this->pageURL === '/register.json') {
             $this->registerJson();
 
+        } elseif (preg_match('<^/' . $langHandler . 'accept-policy>', $this->pageURL, $matches)) {
+            $this->acceptPolicy($matches);
+
         } elseif (preg_match('<^/' . $langHandler . 'register>', $this->pageURL, $matches)) {
             $this->register($matches);
 
@@ -433,6 +436,15 @@ class Router
         $command->exec();
     }
 
+    private function acceptPolicy($matches = [], $format = 'html')
+    {
+        $this->setLanguageFromUrl($matches);
+
+        $command = new \Controllers\AcceptPolicyController();
+        $command->responseFormat = $format;
+        $command->exec();
+    }
+
     private function login($matches = [], $format = 'html')
     {
         $this->setLanguageFromUrl($matches);
@@ -455,7 +467,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\DashboardController();
+        $command = new \Controllers\DashboardController();
         $command->format = 'html';
         $command->exec();
     }
@@ -464,7 +476,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\DashboardController();
+        $command = new \Controllers\DashboardController();
         $command->format = 'json';
         $command->exec();
     }

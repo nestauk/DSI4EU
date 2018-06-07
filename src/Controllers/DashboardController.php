@@ -1,6 +1,6 @@
 <?php
 
-namespace DSI\Controller;
+namespace Controllers;
 
 use DSI\Entity\OrganisationMemberInvitation;
 use DSI\Entity\OrganisationMemberRequest;
@@ -24,6 +24,7 @@ use DSI\Repository\StoryRepo;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\JsModules;
+use Models\UserAccept;
 use Services\URL;
 use DSI\UseCase\AcceptMemberInvitationToOrganisation;
 use DSI\UseCase\AcceptMemberInvitationToProject;
@@ -34,6 +35,7 @@ use DSI\UseCase\RejectMemberInvitationToProject;
 use DSI\UseCase\RejectMemberRequestToOrganisation;
 use DSI\UseCase\RejectMemberRequestToProject;
 use DSI\UseCase\SendTerminateAccountPreconfirmationEmail;
+use Services\View;
 
 class DashboardController
 {
@@ -140,13 +142,23 @@ class DashboardController
                 ]);
             }
         } else {
+            $userAccept = UserAccept::where(UserAccept::UserID, $loggedInUser->getId())->count();
+            if (!$userAccept)
+                return go_to($this->urlHandler->acceptPolicy());
+
             /** @var DashboardController_Update[] $updates */
             $updates = $this->getUpdates($loggedInUser);
             $projectsMember = (new ProjectMemberRepo())->getByMemberID($loggedInUser->getId());
             $organisationsMember = (new OrganisationMemberRepo())->getByMemberID($loggedInUser->getId());
             JsModules::setTranslations(true);
             define('HIDE_NOTIFICATIONS', true);
-            require __DIR__ . '/../../../www/views/dashboard.php';
+
+            return View::render(__DIR__ . '/../Views/dashboard.php', [
+                'updates' => $updates,
+                'projectsMember' => $projectsMember,
+                'organisationsMember' => $organisationsMember,
+                'loggedInUser' => $loggedInUser,
+            ]);
         }
 
         return null;
