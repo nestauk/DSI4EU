@@ -6,7 +6,7 @@ use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use Services\App;
 use Services\URL;
-use DSI\UseCase\Register;
+use Actions\Register\Register;
 use Services\View;
 
 class RegisterController
