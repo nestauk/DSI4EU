@@ -23,7 +23,7 @@ class AcceptPolicyController
 
         $userAccept = UserAccept::where(UserAccept::UserID, $loggedInUser->getId())->count();
         // if ($userAccept)
-            // return go_to($urlHandler->dashboard());
+        // return go_to($urlHandler->dashboard());
 
         $errors = [];
         if (Request::isPost()) {
@@ -33,7 +33,8 @@ class AcceptPolicyController
                 $exec->acceptTerms = $_POST['accept-terms'];
                 $exec->emailSubscription = $_POST['email-subscription'];
                 $exec->exec();
-                go_to($urlHandler->dashboard());
+                return go_to($urlHandler->dashboard());
+
             } catch (ErrorHandler $e) {
                 $errors = $e->getErrors();
             }

@@ -2,7 +2,7 @@
 
 require_once __DIR__ . '/../../../config.php';
 
-use DSI\UseCase\Register;
+use Actions\Register\Register;
 use DSI\Service\ErrorHandler;
 use DSI\Repository\UserRepo;
 
