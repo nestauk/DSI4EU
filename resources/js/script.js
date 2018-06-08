@@ -1,27 +1,4 @@
-(function () {
-    function textAreaAdjust(o) {
-        o.style.height = "1px";
-        o.style.height = (25 + o.scrollHeight) + "px";
-    }
-
-    $('.readjustTextarea').each(function () {
-        textAreaAdjust($(this).get(0));
-        $(this).on('keydown', function () {
-            textAreaAdjust($(this).get(0));
-        });
-    });
-
-    // close user menu popup when clicking outside
-    $("body").click(function () {
-        $(".profile-popover.bg-blur").hide();
-    });
-    // Prevent events from getting pass .popup
-    $("#userMenu").click(function (e) {
-        e.stopPropagation();
-    });
-}());
-
-const DSI_Helpers = {
+window.DSI_Helpers = {
     UploadImageHandler: function (Upload) {
         this.uploader = {};
         this.upload = function (file, errFiles) {
@@ -83,6 +60,29 @@ const DSI_Helpers = {
             .click();
     }
 };
+
+(function () {
+    function textAreaAdjust(o) {
+        o.style.height = "1px";
+        o.style.height = (25 + o.scrollHeight) + "px";
+    }
+
+    $('.readjustTextarea').each(function () {
+        textAreaAdjust($(this).get(0));
+        $(this).on('keydown', function () {
+            textAreaAdjust($(this).get(0));
+        });
+    });
+
+    // close user menu popup when clicking outside
+    $("body").click(function () {
+        $(".profile-popover.bg-blur").hide();
+    });
+    // Prevent events from getting pass .popup
+    $("#userMenu").click(function (e) {
+        e.stopPropagation();
+    });
+}());
 
 (function cookiePolicy() {
     function setCookie(cname, cvalue, exdays) {
