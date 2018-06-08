@@ -72,75 +72,134 @@ if (!isset($urlHandler))
                     <div class="full-menu-links-block no-border">
                         <h2 class="full-menu-h2"><?php _e('About DSI4EU') ?></h2>
                         <a class="full-menu-link" href="<?php echo $urlHandler->aboutTheProject() ?>">
-                            <?php _e('About the project') ?>
+                            <?= __('About the project') ?>
                         </a>
                         <a class="full-menu-link" href="<?php echo $urlHandler->partners() ?>">
-                            <?php _e('Partners') ?>
+                            <?= __('Partners') ?>
                         </a>
                         <a class="full-menu-link" href="<?php echo $urlHandler->openDataResearchAndResources() ?>">
-                            <?php _e('Open data, research & resources') ?>
+                            <?php // _e('Open data, research & resources') ?>
+                            <?= __('Research and resources') ?>
                         </a>
+                        <?php /*
                         <a class="full-menu-link" href="<?php echo $urlHandler->contactDSI() ?>">
-                            <?php _e('Contact DSI4EU') ?>
+                            <?php // _e('Contact DSI4EU') ?>
                         </a>
+                        */ ?>
                     </div>
                 </div>
                 <div class="full-menu-col w-col w-col-4">
                     <h2 class="full-menu-h2">
-                        <?php echo sprintf(
-                            __('%s projects'),
-                            '<strong>' . number_format($projectsCount) . '</strong>'
-                        ) ?>
+                        <?= __('DSI in Europe') ?>
                     </h2>
-                    <a class="full-menu-link"
-                       href="<?php echo $urlHandler->projects() ?>"><?php _e('View all projects') ?></a>
-                    <a class="full-menu-link"
-                       href="<?php echo $urlHandler->caseStudies() ?>"><?php _e('Case Studies') ?></a>
+                    <a class="full-menu-link" href="<?= $urlHandler->what_is_dsi() ?>">
+                        <?= __('What is DSI?') ?>
+                    </a>
+                    <a class="full-menu-link" href="<?= $urlHandler->projects() ?>">
+                        <?= __('Search projects') ?>
+                    </a>
+                    <a class="full-menu-link" href="<?= $urlHandler->organisations() ?>">
+                        <?= __('Search organisations') ?>
+                    </a>
+                    <a class="full-menu-link" href="/viz/" target="_blank">
+                        <?= __('Data visualisation') ?>
+                    </a>
+                    <?php if ($loggedInUser) { ?>
+                        <a class="full-menu-link" href="<?= $urlHandler->editUserProfile($loggedInUser) ?>">
+                            <?= __('Create your profile') ?>
+                        </a>
+                    <?php } ?>
+
+                    <?php /*
+                    <a class="full-menu-link" href="<?php echo $urlHandler->caseStudies() ?>">
+                        <?php _e('Case Studies') ?>
+                    </a>
+
                     <?php if ($loggedInUser) { ?>
                         <a class="full-menu-link" data-ix="create-project-modal" href="#">
                             <?php _e('Add new project') ?>
                         </a>
                     <?php } ?>
+                    */ ?>
                 </div>
+
                 <div class="full-menu-col w-col w-col-4">
                     <h2 class="full-menu-h2">
-                        <?php echo sprintf(
-                            __('%s organisations'),
-                            '<strong>' . number_format($organisationsCount) . '</strong>'
-                        ) ?>
+                        <?= __('DSI Clusters') ?>
                     </h2>
-                    <a class="full-menu-link" href="<?php echo $urlHandler->organisations() ?>">
-                        <?php _e('View all organisations') ?>
+                    <a class="full-menu-link" href="<?php echo $urlHandler->clusterById(1, 'health-and-care') ?>">
+                        <?= __('Health and care') ?>
                     </a>
-                    <?php if ($loggedInUser) { ?>
+                    <a class="full-menu-link" href="<?php echo $urlHandler->clusterById(2, 'skills-and-learning') ?>">
+                        <?= __('Skills and learning') ?>
+                    </a>
+                    <a class="full-menu-link"
+                       href="<?php echo $urlHandler->clusterById(4, 'food-environment-and-climate-change') ?>">
+                        <?= __('Food, environment and climate change') ?>
+                    </a>
+                    <a class="full-menu-link"
+                       href="<?php echo $urlHandler->clusterById(5, 'migration-and-integration') ?>">
+                        <?= __('Migration and integration') ?>
+                    </a>
+                    <a class="full-menu-link" href="<?php echo $urlHandler->clusterById(3, 'digital-democracy') ?>">
+                        <?= __('Digital democracy') ?>
+                    </a>
+                    <a class="full-menu-link"
+                       href="<?php echo $urlHandler->clusterById(6, 'cities-and-urban-development') ?>">
+                        <?= __('Cities and urban development') ?>
+                    </a>
+                    <?php /* if ($loggedInUser) { ?>
                         <a class="full-menu-link" data-ix="create-organisation-modal" href="#">
                             <?php _e('Add new organisation') ?>
                         </a>
-                    <?php } ?>
+                    <?php } */ ?>
                 </div>
             </div>
             <div class="full-menu-items w-row">
                 <div class="full-menu-col w-clearfix w-col w-col-4">
-                    <h2 class="full-menu-h2"><?php _e('Funding & support') ?></h2>
+                    <h2 class="full-menu-h2"><?= __('Funding, support and events') ?></h2>
                     <div class="full-menu-links-block no-border">
                         <a class="full-menu-link" href="<?php echo $urlHandler->funding() ?>">
-                            <?php _e('See all funding opportunities') ?>
+                            <?= __('Search funding and support') ?>
                         </a>
-                    </div>
-                </div>
-                <div class="full-menu-col w-clearfix w-col w-col-4">
-                    <h2 class="full-menu-h2"><?php _e('Events') ?></h2>
-                    <div class="full-menu-links-block no-border">
                         <a class="full-menu-link" href="<?php echo $urlHandler->events() ?>">
-                            <?php _e('See upcoming DSI events') ?>
+                            <?= __('Search events') ?>
+                        </a>
+                        <a class="full-menu-link" target="_blank"
+                           href="https://docs.google.com/forms/d/e/1FAIpQLSd8V-vyQADRo_ofvc5n49CBB-qeEgMlymLgQ6EUTJJWLD7DkQ/viewform">
+                            <?= __('Add your opportunity') ?>
+                        </a>
+                        <a class="full-menu-link" href="http://bit.ly/DSIEvent" target="_blank">
+                            <?= __('Add your event') ?>
                         </a>
                     </div>
                 </div>
                 <div class="full-menu-col w-clearfix w-col w-col-4">
-                    <h2 class="full-menu-h2"><?php _e('News & blogs') ?></h2>
+                    <h2 class="full-menu-h2"><?= __('DSI Stories') ?></h2>
                     <div class="full-menu-links-block no-border">
                         <a class="full-menu-link" href="<?php echo $urlHandler->blogPosts() ?>">
-                            <?php _e('See all news & blogs') ?>
+                            <?= __('Blogs') ?>
+                        </a>
+                        <a class="full-menu-link" href="<?php echo $urlHandler->caseStudies() ?>">
+                            <?= __('Case studies') ?>
+                        </a>
+                    </div>
+                </div>
+                <div class="full-menu-col w-clearfix w-col w-col-4">
+                    <h2 class="full-menu-h2"><?= __('Contact us') ?></h2>
+                    <div class="full-menu-links-block no-border">
+                        <a class="full-menu-link" href="<?php echo $urlHandler->contactDSI() ?>">
+                            <?= __('Contact DSI4EU') ?>
+                        </a>
+                        <a class="full-menu-link" href="<?php echo $urlHandler->feedback() ?>">
+                            <?= __('Feedback') ?>
+                        </a>
+                        <a class="full-menu-link" href="http://twitter.com/DSI4EU" target="_blank">
+                            <?= __('Follow us on Twitter') ?>
+                        </a>
+                        <a class="full-menu-link" target="_blank"
+                           href="http://digitalsocial.us14.list-manage.com/subscribe?u=668c39c8408fd7322d7b61d39&id=fb76c451e0">
+                            <?= __('Sign up to our newsletter') ?>
                         </a>
                     </div>
                 </div>
