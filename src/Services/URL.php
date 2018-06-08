@@ -422,6 +422,11 @@ class URL
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'waiting-approval' . $extension;
     }
 
+    public function what_is_dsi()
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'what-is-dsi';
+    }
+
     public function clusters()
     {
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'clusters';
@@ -430,6 +435,11 @@ class URL
     public function cluster(ClusterLang $cluster)
     {
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'cluster/' . $cluster->getClusterId() . '/' . self::linkify($cluster->getTitle());
+    }
+
+    public function clusterById(int $clusterId, string $name = null)
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'cluster/' . $clusterId . '/' . $name;
     }
 
     public function clusterEdit($clusterId)
