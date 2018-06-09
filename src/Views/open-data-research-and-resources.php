@@ -2,6 +2,7 @@
 /** @var $urlHandler Services\URL */
 /** @var $mainText \Models\Text */
 /** @var $subText \Models\Text */
+/** @var $canEdit bool */
 
 
 require __DIR__ . '/header.php';
@@ -21,9 +22,11 @@ require __DIR__ . '/header.php';
             <div class="sidebar w-col w-col-4 w-col-stack">
                 <?php require __DIR__ . '/partialViews/about-dsi.php' ?>
 
-                <a class="sidebar-link" href="<?php echo $urlHandler->OpenDataResearchAndResourcesEdit() ?>">
-                    <span class="green">- <?php _ehtml('Edit page') ?></span>
-                </a>
+                <?php if ($canEdit) { ?>
+                    <a class="sidebar-link" href="<?php echo $urlHandler->OpenDataResearchAndResourcesEdit() ?>">
+                        <span class="green">- <?php _ehtml('Edit page') ?></span>
+                    </a>
+                <?php } ?>
             </div>
         </div>
     </div>
