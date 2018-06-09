@@ -294,7 +294,10 @@ class Router
                 $this->staticPage($matches, 'partners.php');
 
         } elseif (preg_match('<^/' . $langHandler . 'open-data-research-and-resources$>', $this->pageURL, $matches)) {
-            $this->staticPage($matches, 'open-data-research-and-resources.php');
+            $this->openData($matches);
+
+        } elseif (preg_match('<^/' . $langHandler . 'edit/open-data-research-and-resources$>', $this->pageURL, $matches)) {
+            $this->editOpenData($matches);
 
         } elseif (preg_match('<^/' . $langHandler . 'contact-dsi$>', $this->pageURL, $matches)) {
             $this->staticPage($matches, 'contact-dsi.php');
@@ -392,7 +395,7 @@ class Router
 
         } elseif (preg_match('<^/' . $langHandler . 'clusters$>', $this->pageURL, $matches)) {
             $this->clusters($matches);
-            
+
         } elseif (preg_match('<^/' . $langHandler . 'cluster/([0-9]+)/edit$>', $this->pageURL, $matches)) {
             $this->clusterEdit($matches);
 
@@ -1112,6 +1115,18 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
         return (new \Controllers\StaticHtmlController())->privacyPolicy();
+    }
+
+    private function openData($matches)
+    {
+        $this->setLanguageFromUrl($matches);
+        return (new \Controllers\OpenData())->exec();
+    }
+
+    private function editOpenData($matches)
+    {
+        $this->setLanguageFromUrl($matches);
+        return (new \Controllers\EditOpenData())->exec();
     }
 
     private function keepUserLoggedIn($matches)
