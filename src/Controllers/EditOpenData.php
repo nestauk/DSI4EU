@@ -64,5 +64,7 @@ class EditOpenData
         $subText = Text::getByIdentifier('open-data-sub-text');
         $subText->{Text::Copy} = $_POST['sub'];
         $subText->save();
+
+        return true;
     }
 }

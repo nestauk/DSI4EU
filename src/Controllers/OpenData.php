@@ -38,6 +38,15 @@ class OpenData
             'loggedInUser' => $this->loggedInUser,
             'mainText' => $mainText,
             'subText' => $subText,
+            'canEdit' => $this->canEdit(),
         ]);
+    }
+
+    /**
+     * @return bool
+     */
+    private function canEdit(): bool
+    {
+        return $this->loggedInUser AND $this->loggedInUser->isEditorialAdmin();
     }
 }
