@@ -187,7 +187,9 @@ require __DIR__ . '/header.php'
                     <a href="https://ec.europa.eu/digital-single-market/en/collective-awareness">CAPS programme</a>.
                 </p>
             </div>
-            <?php require __DIR__ . '/partialViews/about-dsi.php' ?>
+            <div class="sidebar w-col w-col-4 w-col-stack">
+                <?php require __DIR__ . '/partialViews/about-dsi.php' ?>
+            </div>
         </div>
     </div>
 

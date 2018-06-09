@@ -256,6 +256,11 @@ class URL
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'open-data-research-and-resources';
     }
 
+    public function OpenDataResearchAndResourcesEdit()
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'edit/open-data-research-and-resources';
+    }
+
     public function contactDSI()
     {
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'contact-dsi';

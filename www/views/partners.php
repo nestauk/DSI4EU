@@ -102,11 +102,13 @@ require __DIR__ . '/header.php' ?>
                 </p>
                 <a class="log-in-link long next-page read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
                    href="<?php echo $urlHandler->openDataResearchAndResources() ?>">
-                    <div class="login-li long menu-li readmore-li"><?php _ehtml('Explore our open data, research & resources')?></div>
+                    <div class="login-li long menu-li readmore-li"><?php _ehtml('Explore our open data, research & resources') ?></div>
                     <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
                 </a>
             </div>
-            <?php require __DIR__ . '/partialViews/about-dsi.php' ?>
+            <div class="sidebar w-col w-col-4 w-col-stack">
+                <?php require __DIR__ . '/partialViews/about-dsi.php' ?>
+            </div>
         </div>
     </div>
 

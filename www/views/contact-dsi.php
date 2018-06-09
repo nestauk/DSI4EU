@@ -21,7 +21,9 @@ require __DIR__ . '/header.php';
                     <?php _e('To keep in touch with the project and DSI in Europe, follow us on Twitter @DSI4EU and sign up to our newsletter.') ?>
                 </p>
             </div>
-            <?php require __DIR__ . '/partialViews/about-dsi.php' ?>
+            <div class="sidebar w-col w-col-4 w-col-stack">
+                <?php require __DIR__ . '/partialViews/about-dsi.php' ?>
+            </div>
         </div>
     </div>
 
