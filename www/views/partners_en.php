@@ -54,7 +54,8 @@ require __DIR__ . '/header.php' ?>
 
                 <div class="partner-block w-row">
                     <div class="w-col w-col-3">
-                        <img class="partner-logo-colour" src="<?php echo SITE_RELATIVE_PATH ?>/images/partners/waag.jpg">
+                        <img class="partner-logo-colour"
+                             src="<?php echo SITE_RELATIVE_PATH ?>/images/partners/waag.jpg">
                     </div>
                     <div class="w-col w-col-9">
                         <p><a href="http://waag.org"><strong>Waag</strong></a>&nbsp;&mdash; the institute for art,
@@ -80,7 +81,8 @@ require __DIR__ . '/header.php' ?>
 
                 <div class="partner-block w-row">
                     <div class="w-col w-col-3">
-                        <img class="partner-logo-colour" src="<?php echo SITE_RELATIVE_PATH ?>/images/partners/betterplace.png">
+                        <img class="partner-logo-colour"
+                             src="<?php echo SITE_RELATIVE_PATH ?>/images/partners/betterplace.png">
                     </div>
                     <div class="w-col w-col-9">
                         <p><a href="http://www.betterplace-lab.org/en/"><strong>betterplace lab</strong></a>&nbsp;is a
@@ -149,7 +151,8 @@ require __DIR__ . '/header.php' ?>
 
                 <div class="partner-block w-row">
                     <div class="w-col w-col-3">
-                        <img class="partner-logo-colour" src="<?php echo SITE_RELATIVE_PATH ?>/images/partners/we-make.png">
+                        <img class="partner-logo-colour"
+                             src="<?php echo SITE_RELATIVE_PATH ?>/images/partners/we-make.png">
                     </div>
                     <div class="w-col w-col-9">
                         <p><a href="http://wemake.cc"><strong>WeMake</strong></a>&nbsp;is an innovative enterprise based
@@ -252,7 +255,9 @@ require __DIR__ . '/header.php' ?>
                         by the European Union and funded under the Horizon 2020 Programme, grant agreement no
                         780473. </em></p>
             </div>
-            <?php require __DIR__ . '/partialViews/about-dsi.php' ?>
+            <div class="sidebar w-col w-col-4 w-col-stack">
+                <?php require __DIR__ . '/partialViews/about-dsi.php' ?>
+            </div>
         </div>
     </div>
 

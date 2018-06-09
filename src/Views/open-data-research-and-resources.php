@@ -1,5 +1,8 @@
 <?php
 /** @var $urlHandler Services\URL */
+/** @var $mainText \Models\Text */
+/** @var $subText \Models\Text */
+
 
 require __DIR__ . '/header.php';
 ?>
@@ -8,24 +11,30 @@ require __DIR__ . '/header.php';
         <div class="w-row">
             <div class="w-col w-col-8">
                 <h1 class="content-h1"><?php _ehtml('Open data, research & resources') ?></h1>
-                <p class="intro">
-                    <?php _ehtml('DSI4EU is committed to being open and transparent') ?>
-                </p>
-                <p class="p-head">
-                    <?php _ehtml('You can read all of our previous and current research publications here.') ?>
-                </p>
-                <a class="log-in-link long read-more w-inline-block" data-ix="log-in-arrow" href="#"></a>
+                <div class="intro">
+                    <?= $mainText->getCopy() ?>
+                </div>
+                <div class="p-head">
+                    <?= $subText->getCopy() ?>
+                </div>
             </div>
-            <?php require __DIR__ . '/partialViews/about-dsi.php' ?>
+            <div class="sidebar w-col w-col-4 w-col-stack">
+                <?php require __DIR__ . '/partialViews/about-dsi.php' ?>
+
+                <a class="sidebar-link" href="<?php echo $urlHandler->OpenDataResearchAndResourcesEdit() ?>">
+                    <span class="green">- <?php _ehtml('Edit page') ?></span>
+                </a>
+            </div>
         </div>
     </div>
     <div class="content-directory">
         <div class="content">
             <div class="w-row">
-                
+
                 <div class="w-col w-col-4">
                     <a class="resource-card w-inline-block"
-                       href="<?= SITE_RELATIVE_PATH ?>/uploads/What next for digital social innovation Realising the potential of people and technology to tackle social challenges.pdf" target="_blank">
+                       href="<?= SITE_RELATIVE_PATH ?>/uploads/What next for digital social innovation Realising the potential of people and technology to tackle social challenges.pdf"
+                       target="_blank">
                         <div class="info-card resource">
                             <img class="research-paper-img" src="<?php echo SITE_RELATIVE_PATH ?>/images/what-next.png">
                             <h3>What Next for Digital Social Innnovation</h3>
@@ -38,8 +47,8 @@ require __DIR__ . '/header.php';
                         </div>
                     </a>
                 </div>
-                
-                
+
+
                 <div class="w-col w-col-4">
                     <a class="resource-card w-inline-block"
                        href="<?= SITE_RELATIVE_PATH ?>/uploads/digital-social-toolkit.pdf" target="_blank">
@@ -73,10 +82,10 @@ require __DIR__ . '/header.php';
 
 
             </div>
-            
+
             <!-- added second row to resources -->
-            
-        <div class="w-row">
+
+            <div class="w-row">
                 <div class="w-col w-col-4">
                     <a class="resource-card w-inline-block"
                        href="http://www.nesta.org.uk/sites/default/files/dsireport.pdf" target="_blank">
@@ -93,11 +102,9 @@ require __DIR__ . '/header.php';
                     </a>
                 </div>
 
-    </div>        
-            
-            
-            
-            
+            </div>
+
+
             <!-- end of second row -->
         </div>
     </div>
@@ -126,7 +133,8 @@ require __DIR__ . '/header.php';
                 <?php _ehtml('Download the source code. All of the code used to develop this site will be shared') ?>
                 <a href="https://github.com/nestauk/DSI4EU" target="_blank"><?php _ehtml('Website') ?></a>
                 |
-                <a href="https://github.com/nestauk/DSI4EU_Dataviz" target="_blank"><?php _ehtml('Data visualisation') ?></a>
+                <a href="https://github.com/nestauk/DSI4EU_Dataviz"
+                   target="_blank"><?php _ehtml('Data visualisation') ?></a>
             </li>
         </ul>
         <a class="log-in-link long next-page read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
