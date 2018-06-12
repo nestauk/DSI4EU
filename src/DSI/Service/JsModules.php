@@ -5,7 +5,8 @@ namespace DSI\Service;
 class JsModules
 {
     /** @var bool */
-    private static $tinyMCE;
+    private static $tinyMCE,
+        $jqueryUI;
 
     /** @var bool */
     private static $translations;
@@ -24,6 +25,22 @@ class JsModules
     public static function setTinyMCE(bool $tinyMCE)
     {
         self::$tinyMCE = (bool)$tinyMCE;
+    }
+
+    /**
+     * @return boolean
+     */
+    public static function hasJqueryUI(): bool
+    {
+        return (bool)self::$jqueryUI;
+    }
+
+    /**
+     * @param boolean $jqueryUI
+     */
+    public static function setJqueryUI(bool $jqueryUI)
+    {
+        self::$jqueryUI= (bool)$jqueryUI;
     }
 
     /**

@@ -23,7 +23,7 @@ require __DIR__ . '/header.php';
                 <?php require __DIR__ . '/partialViews/about-dsi.php' ?>
 
                 <?php if ($canEdit) { ?>
-                    <a class="sidebar-link" href="<?php echo $urlHandler->OpenDataResearchAndResourcesEdit() ?>">
+                    <a class="sidebar-link" href="<?php echo $urlHandler->openDataResearchAndResourcesEdit() ?>">
                         <span class="green">- <?php _ehtml('Edit page') ?></span>
                     </a>
                 <?php } ?>

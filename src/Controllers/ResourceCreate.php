@@ -10,7 +10,7 @@ use Services\Request;
 use Services\Response;
 use Services\View;
 
-class EditOpenData
+class ResourceCreate
 {
     /** @var URL */
     private $urlHandler;
@@ -36,35 +36,14 @@ class EditOpenData
     {
         if (Request::isGet())
             return $this->get();
-        else if (Request::isPost())
-            return $this->post();
         else
             return (new Response('Invalid header', Response::HTTP_FORBIDDEN))->send();
     }
 
     private function get()
     {
-        $mainText = Text::getByIdentifier('open-data-main-text');
-        $subText = Text::getByIdentifier('open-data-sub-text');
-
-        return View::render(__DIR__ . '/../Views/edit/open-data.php', [
-            'authUser' => $this->authUser,
+        return View::render(__DIR__ . '/../Views/resource-create.php', [
             'loggedInUser' => $this->loggedInUser,
-            'mainText' => $mainText,
-            'subText' => $subText,
         ]);
-    }
-
-    private function post()
-    {
-        $mainText = Text::getByIdentifier('open-data-main-text');
-        $mainText->{Text::Copy} = $_POST['main'];
-        $mainText->save();
-
-        $subText = Text::getByIdentifier('open-data-sub-text');
-        $subText->{Text::Copy} = $_POST['sub'];
-        $subText->save();
-
-        return true;
     }
 }
