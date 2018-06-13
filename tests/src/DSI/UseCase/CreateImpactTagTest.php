@@ -24,13 +24,15 @@ class CreateImpactTagTest extends PHPUnit_Framework_TestCase
     /** @test */
     public function successfulCreation()
     {
-        $this->createTagCommand->data()->name = 'test';
-        $this->createTagCommand->exec();
+        $this->createTagCommand
+            ->setName('test')
+            ->exec();
 
         $this->assertCount(1, $this->tagRepo->getAll());
 
-        $this->createTagCommand->data()->name = 'test2';
-        $this->createTagCommand->exec();
+        $this->createTagCommand
+            ->setName('test2')
+            ->exec();
 
         $this->assertCount(2, $this->tagRepo->getAll());
     }
@@ -40,12 +42,13 @@ class CreateImpactTagTest extends PHPUnit_Framework_TestCase
     {
         $e = null;
 
-        $this->createTagCommand->data()->name = 'test';
-        $this->createTagCommand->exec();
+        $this->createTagCommand
+            ->setName('test')
+            ->exec();
 
         $this->assertCount(1, $this->tagRepo->getAll());
 
-        $this->createTagCommand->data()->name = 'test';
+        $this->createTagCommand->setName('test');
         try {
             $this->createTagCommand->exec();
         } catch (\DSI\Service\ErrorHandler $e) {

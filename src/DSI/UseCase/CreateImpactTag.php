@@ -5,6 +5,7 @@ namespace DSI\UseCase;
 use DSI\Entity\ImpactTag;
 use DSI\Repository\ImpactTagRepo;
 use DSI\Service\ErrorHandler;
+use Models\Tag;
 
 class CreateImpactTag
 {
@@ -17,37 +18,27 @@ class CreateImpactTag
     /** @var ImpactTag */
     private $tag;
 
-    /** @var CreateImpactTag_Data */
-    private $data;
+    /** @var string */
+    private $name;
 
     public function __construct()
     {
-        $this->data = new CreateImpactTag_Data();
+        $this->errorHandler = new ErrorHandler();
+        $this->tagRepo = new ImpactTagRepo();
     }
 
     public function exec()
     {
-        $this->errorHandler = new ErrorHandler();
-        $this->tagRepo = new ImpactTagRepo();
-
-        if($this->tagRepo->nameExists($this->data()->name)){
+        if ($this->tagRepo->nameExists($this->name)) {
             $this->errorHandler->addTaggedError('tag', __('Tag name already exists'));
             $this->errorHandler->throwIfNotEmpty();
         }
 
-        $tag = new ImpactTag();
-        $tag->setName((string)$this->data()->name);
-        $this->tagRepo->insert($tag);
+        $this->tag = new ImpactTag();
+        $this->tag->setName($this->name);
+        $this->tagRepo->insert($this->tag);
 
-        $this->tag = $tag;
-    }
-
-    /**
-     * @return CreateImpactTag_Data
-     */
-    public function data()
-    {
-        return $this->data;
+        return $this;
     }
 
     /**
@@ -57,10 +48,14 @@ class CreateImpactTag
     {
         return $this->tag;
     }
-}
 
-class CreateImpactTag_Data
-{
-    /** @var string */
-    public $name;
+    /**
+     * @param string $name
+     * @return CreateImpactTag
+     */
+    public function setName(string $name)
+    {
+        $this->name = $name;
+        return $this;
+    }
 }

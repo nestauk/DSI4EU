@@ -12,5 +12,8 @@
                 <directory suffix=".php">C:\xampp\htdocs\DSI4EU\src\DSI\Controller</directory>
             </exclude>
 		</whitelist>
+		<whitelist>
+			<directory suffix=".php">C:\xampp\htdocs\DSI4EU\src\Actions</directory>
+		</whitelist>
 	</filter>
 </phpunit>

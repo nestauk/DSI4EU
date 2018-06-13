@@ -5,10 +5,28 @@ namespace DSI\Service;
 class JsModules
 {
     /** @var bool */
-    private static $tinyMCE;
+    private static $tinyMCE,
+        $jqueryUI,
+        $masonry;
 
     /** @var bool */
     private static $translations;
+
+    /**
+     * @return bool
+     */
+    public static function hasTranslations(): bool
+    {
+        return (bool)self::$translations;
+    }
+
+    /**
+     * @param bool $translations
+     */
+    public static function setTranslations(bool $translations)
+    {
+        self::$translations = $translations;
+    }
 
     /**
      * @return boolean
@@ -27,18 +45,34 @@ class JsModules
     }
 
     /**
-     * @return bool
+     * @return boolean
      */
-    public static function hasTranslations(): bool
+    public static function hasJqueryUI(): bool
     {
-        return (bool)self::$translations;
+        return (bool)self::$jqueryUI;
     }
 
     /**
-     * @param bool $translations
+     * @param boolean $jqueryUI
      */
-    public static function setTranslations(bool $translations)
+    public static function setJqueryUI(bool $jqueryUI)
     {
-        self::$translations = $translations;
+        self::$jqueryUI = (bool)$jqueryUI;
+    }
+
+    /**
+     * @return boolean
+     */
+    public static function hasMasonry(): bool
+    {
+        return (bool)self::$masonry;
+    }
+
+    /**
+     * @param boolean $masonry
+     */
+    public static function setMasonry(bool $masonry)
+    {
+        self::$masonry = (bool)$masonry;
     }
 }

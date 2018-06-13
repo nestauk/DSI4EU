@@ -26,7 +26,7 @@
                 $scope.project.networkTags = $('#networkTagsSelect').val();
                 $scope.project.areasOfImpact = getAreaOfImpactTags();
                 $scope.project.focusTags = getSelectedFocusTags();
-                $scope.project.impactTagsC = $('#impact-tags-c').val();
+                $scope.project.impactTagsC = getAreaOfTechnologyTags();
                 $scope.project.organisations = $('#organisationsSelect').val();
                 $scope.saveDetails({
                     postField: 'step1',
@@ -50,6 +50,14 @@
                 function getAreaOfImpactTags() {
                     var selectedTags = $('#impact-tags-a').val() || [];
                     $('input[name="impactTags[]"]:checked').each(function (i) {
+                        selectedTags.push($(this).val());
+                    });
+                    return selectedTags;
+                }
+
+                function getAreaOfTechnologyTags() {
+                    var selectedTags = $('#impact-tags-c').val() || [];
+                    $('input[name="technologyTags[]"]:checked').each(function (i) {
                         selectedTags.push($(this).val());
                     });
                     return selectedTags;

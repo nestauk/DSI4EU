@@ -39,9 +39,9 @@ class AddImpactTechTagToProject
         if ($tagRepo->nameExists($this->data()->tag)) {
             $tag = $tagRepo->getByName($this->data()->tag);
         } else {
-            $createTag = new CreateImpactTag();
-            $createTag->data()->name = $this->data()->tag;
-            $createTag->exec();
+            $createTag = (new CreateImpactTag())
+                ->setName($this->data()->tag)
+                ->exec();
             $tag = $createTag->getTag();
         }
 

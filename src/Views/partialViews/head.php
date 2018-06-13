@@ -52,10 +52,21 @@ if (!$urlHandler)
 <link href="<?php echo SITE_RELATIVE_PATH ?>/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
 <link href="<?php echo SITE_RELATIVE_PATH ?>/images/favicon.ico" rel="apple-touch-icon">
 
+<?php /*
 <script src="<?php echo SITE_RELATIVE_PATH ?>/js/lib/isotope/isotope.pkgd.min.js"></script>
+ */ ?>
 
 <?php /** jQuery */ ?>
 <script type="text/javascript" src="<?php echo SITE_RELATIVE_PATH ?>/js/lib/jquery/jquery.min.js"></script>
+
+<?php if (\DSI\Service\JsModules::hasJqueryUI()) { ?>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.min.css">
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<?php } ?>
+
+<?php if (\DSI\Service\JsModules::hasMasonry()) { ?>
+    <script src="/lib/masonry/masonry.pkgd.min.js"></script>
+<?php } ?>
 
 <?php /** SweetAlert */ ?>
 <script

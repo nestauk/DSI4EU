@@ -11,6 +11,7 @@ use DSI\Entity\Translation;
 use DSI\Entity\User;
 use DSI\Service\Translate;
 use Models\ClusterLang;
+use Models\Resource;
 
 class URL
 {
@@ -256,9 +257,24 @@ class URL
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'open-data-research-and-resources';
     }
 
-    public function OpenDataResearchAndResourcesEdit()
+    public function openDataResearchAndResourcesEdit()
     {
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'edit/open-data-research-and-resources';
+    }
+
+    public function openResourceCreate()
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'open-resource/edit/new';
+    }
+
+    public function openResourceEdit(Resource $resource)
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'open-resource/edit/' . $resource->getId();
+    }
+
+    public function openResourceEditApi(Resource $resource)
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'api/open-resource/' . $resource->getId();
     }
 
     public function contactDSI()

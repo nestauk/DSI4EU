@@ -1,8 +1,7 @@
 <?php
 
-namespace DSI\Controller;
+namespace Controllers\Projects;
 
-use DSI\AccessDenied;
 use DSI\Entity\Image;
 use DSI\Entity\Project;
 use DSI\Entity\ProjectLink_Service;
@@ -16,7 +15,6 @@ use DSI\Repository\ProjectDsiFocusTagRepo;
 use DSI\Repository\ProjectImpactTechTagRepo;
 use DSI\Repository\ProjectLinkRepo;
 use DSI\Repository\ProjectMemberRepo;
-use DSI\Repository\ProjectRepo;
 use DSI\Repository\ProjectRepoInAPC;
 use DSI\Repository\ProjectTagRepo;
 use DSI\Repository\TagForProjectsRepo;
@@ -25,6 +23,7 @@ use DSI\Service\ErrorHandler;
 use DSI\Service\JsModules;
 use Services\URL;
 use DSI\UseCase\UpdateProject;
+use Services\View;
 
 class ProjectEditController
 {
@@ -136,21 +135,34 @@ class ProjectEditController
             return;
 
         } else {
-            $data = ['project' => $project];
-            $tags = (new TagForProjectsRepo())->getAll();
             $impactTags = (new ImpactTagRepo())->getAll();
-            $impactMainTags = array_slice($impactTags, 0, 9);
-            $impactSecondaryTags = array_slice($impactTags, 9);
-            $dsiFocusTags = (new DsiFocusTagRepo())->getAll();
-            $projectImpactTagsA = (new ProjectImpactHelpTagRepo())->getTagNamesByProject($project);
-            $projectImpactTagsB = (new ProjectDsiFocusTagRepo())->getTagNamesByProject($project);
-            $projectImpactTagsC = (new ProjectImpactTechTagRepo())->getTagNamesByProject($project);
-            $projectTags = (new ProjectTagRepo())->getTagNamesByProject($project);
-            $organisations = (new OrganisationRepoInAPC())->getAll();
-            $projectOrganisations = (new OrganisationProjectRepo())->getOrganisationIDsForProject($project);
+            $technologyTags = (new ImpactTagRepo())->orderByTechnology()->getAll();
+
             $angularModules['fileUpload'] = true;
             JsModules::setTinyMCE(true);
-            require __DIR__ . '/../../../www/views/project-edit.php';
+            View::render(__DIR__ . '/../../Views/project/project-edit.php', [
+                'project' => $project,
+                'tags' => (new TagForProjectsRepo())->getAll(),
+
+                'impactTags' => $impactTags,
+                'impactMainTags' => array_slice($impactTags, 0, 9),
+                'impactSecondaryTags' => array_slice($impactTags, 9),
+
+                'technologyTags' => $technologyTags,
+                'technologyMainTags' => array_slice($technologyTags, 0, 18),
+                'technologySecondaryTags' => array_slice($technologyTags, 18),
+
+                'dsiFocusTags' => (new DsiFocusTagRepo())->getAll(),
+                'projectImpactTagsA' => (new ProjectImpactHelpTagRepo())->getTagNamesByProject($project),
+                'projectImpactTagsB' => (new ProjectDsiFocusTagRepo())->getTagNamesByProject($project),
+                'projectImpactTagsC' => (new ProjectImpactTechTagRepo())->getTagNamesByProject($project),
+                'projectTags' => (new ProjectTagRepo())->getTagNamesByProject($project),
+                'organisations' => (new OrganisationRepoInAPC())->getAll(),
+                'projectOrganisations' => (new OrganisationProjectRepo())->getOrganisationIDsForProject($project),
+                'angularModules' => [
+                    'fileUpload' => true
+                ]
+            ]);
         }
     }
 

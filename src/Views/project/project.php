@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/header.php';
+require __DIR__ . '/../header.php';
 /** @var $project \DSI\Entity\Project */
 /** @var $userHasInvitation bool */
 /** @var $userIsMember bool */
@@ -483,4 +483,4 @@ require __DIR__ . '/header.php';
     </script>
     <script src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/ProjectController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 
-<?php require __DIR__ . '/footer.php' ?>
+<?php require __DIR__ . '/../footer.php' ?>

@@ -1,10 +1,14 @@
 <?php
+
+use Models\Resource;
+
 /** @var $urlHandler Services\URL */
 /** @var $mainText \Models\Text */
 /** @var $subText \Models\Text */
 /** @var $canEdit bool */
+/** @var $resources \Models\Resource[] */
 
-
+\DSI\Service\JsModules::setMasonry(true);
 require __DIR__ . '/header.php';
 ?>
 
@@ -23,7 +27,7 @@ require __DIR__ . '/header.php';
                 <?php require __DIR__ . '/partialViews/about-dsi.php' ?>
 
                 <?php if ($canEdit) { ?>
-                    <a class="sidebar-link" href="<?php echo $urlHandler->OpenDataResearchAndResourcesEdit() ?>">
+                    <a class="sidebar-link" href="<?php echo $urlHandler->openDataResearchAndResourcesEdit() ?>">
                         <span class="green">- <?php _ehtml('Edit page') ?></span>
                     </a>
                 <?php } ?>
@@ -32,83 +36,28 @@ require __DIR__ . '/header.php';
     </div>
     <div class="content-directory">
         <div class="content">
-            <div class="w-row">
+            <div class="w-row grid w-clearfix">
 
-                <div class="w-col w-col-4">
-                    <a class="resource-card w-inline-block"
-                       href="<?= SITE_RELATIVE_PATH ?>/uploads/What next for digital social innovation Realising the potential of people and technology to tackle social challenges.pdf"
-                       target="_blank">
-                        <div class="info-card resource">
-                            <img class="research-paper-img" src="<?php echo SITE_RELATIVE_PATH ?>/images/what-next.png">
-                            <h3>What Next for Digital Social Innnovation</h3>
-                            <p>Realising the potential of people and technology to tackle social challenges</p>
-                            <div class="log-in-link long next-page read-more w-clearfix" data-ix="log-in-arrow">
-                                <div class="login-li long menu-li readmore-li">View pdf</div>
-                                <img class="login-arrow"
-                                     src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
+                <?php foreach ($resources AS $resource) { ?>
+                    <div class="w-col w-col-4 grid-item">
+                        <a class="resource-card w-inline-block" href="<?= $resource->{Resource::LinkUrl} ?>"
+                           target="_blank">
+                            <div class="info-card resource">
+                                <img class="research-paper-img"
+                                     src="<?= \DSI\Entity\Image::UPLOAD_FOLDER_URL . $resource->{Resource::Image} ?>">
+                                <h3><?= show_input($resource->{Resource::Title}) ?></h3>
+                                <p><?= show_input($resource->{Resource::Description}) ?></p>
+                                <div class="log-in-link long next-page read-more w-clearfix" data-ix="log-in-arrow">
+                                    <div class="login-li long menu-li readmore-li">
+                                        <?= show_input($resource->{Resource::LinkText}) ?>
+                                    </div>
+                                    <img src="/images/ios7-arrow-thin-right.png" class="login-arrow">
+                                </div>
                             </div>
-                        </div>
-                    </a>
-                </div>
-
-
-                <div class="w-col w-col-4">
-                    <a class="resource-card w-inline-block"
-                       href="<?= SITE_RELATIVE_PATH ?>/uploads/digital-social-toolkit.pdf" target="_blank">
-                        <div class="info-card resource">
-                            <img class="research-paper-img" src="<?php echo SITE_RELATIVE_PATH ?>/images/tools.png">
-                            <h3>DSI Toolkit</h3>
-                            <p>A collaboratively-developed toolkit to support projects to scale sustainably</p>
-                            <div class="log-in-link long next-page read-more w-clearfix" data-ix="log-in-arrow">
-                                <div class="login-li long menu-li readmore-li">Read the toolkit</div>
-                                <img class="login-arrow"
-                                     src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="w-col w-col-4">
-                    <a class="resource-card w-inline-block"
-                       href="http://www.nesta.org.uk/media_colorbox/5740/media_small/und" target="_blank">
-                        <div class="info-card resource">
-                            <img class="research-paper-img" src="<?php echo SITE_RELATIVE_PATH ?>/images/reportpdf.png">
-                            <h3>Introduction to dsi</h3>
-                            <p>Understand what we mean by digital social innovation and what the future looks like</p>
-                            <div class="log-in-link long next-page read-more w-clearfix" data-ix="log-in-arrow">
-                                <div class="login-li long menu-li readmore-li">Watch the video</div>
-                                <img class="login-arrow"
-                                     src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-
+                        </a>
+                    </div>
+                <?php } ?>
             </div>
-
-            <!-- added second row to resources -->
-
-            <div class="w-row">
-                <div class="w-col w-col-4">
-                    <a class="resource-card w-inline-block"
-                       href="http://www.nesta.org.uk/sites/default/files/dsireport.pdf" target="_blank">
-                        <div class="info-card resource">
-                            <img class="research-paper-img" src="<?php echo SITE_RELATIVE_PATH ?>/images/report.png">
-                            <h3>DSI Report</h3>
-                            <p>Growing a digital social innovation ecosystem for Europe</p>
-                            <div class="log-in-link long next-page read-more w-clearfix" data-ix="log-in-arrow">
-                                <div class="login-li long menu-li readmore-li">View pdf</div>
-                                <img class="login-arrow"
-                                     src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-            </div>
-
-
-            <!-- end of second row -->
         </div>
     </div>
     <div class="content-block">
@@ -146,5 +95,28 @@ require __DIR__ . '/header.php';
             <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
         </a>
     </div>
+
+    <style>
+        .grid-item {
+            width: 33.3333333%;
+        }
+
+        @media screen and (max-width: 767px) {
+            .grid-item {
+                width: 100%;
+            }
+        }
+    </style>
+
+    <script>
+        $(function () {
+            if ($(window).width() > 767) {
+                $('.grid').masonry({
+                    itemSelector: '.grid-item',
+                    horizontalOrder: true
+                });
+            }
+        })
+    </script>
 
 <?php require __DIR__ . '/footer.php' ?>

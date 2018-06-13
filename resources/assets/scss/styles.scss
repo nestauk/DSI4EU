@@ -44,6 +44,29 @@
   }
 }
 
+.edit-open-data-controller {
+  .edit-resource, .delete-resource {
+    width: 50%;
+    display: inline-block;
+    text-align: center;
+    color: green;
+    font-weight: bold;
+    text-decoration: none;
+    float: left;
+    line-height: 50px;
+
+    &:hover {
+      text-decoration: underline;
+      background: #f0f0f0;
+    }
+  }
+
+  .delete-resource {
+    float: right;
+    color: red;
+  }
+}
+
 body {
   .twitter-block {
     height: 100px;
@@ -778,5 +801,9 @@ body {
       padding-bottom: 20px;
       background-color: rgba(19, 125, 100, 0.94);
     }
+  }
+
+  .footer-black {
+    z-index: -1;
   }
 }
