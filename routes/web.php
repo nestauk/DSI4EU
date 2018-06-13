@@ -297,7 +297,19 @@ class Router
             $this->openData($matches);
 
         } elseif (preg_match('<^/' . $langHandler . 'edit/open-data-research-and-resources$>', $this->pageURL, $matches)) {
-            $this->editOpenData($matches);
+            $this->openDataEdit($matches);
+
+        } elseif (preg_match('<^/' . $langHandler . 'open-resource/edit/new$>', $this->pageURL, $matches)) {
+            $this->newResource($matches);
+
+        } elseif (preg_match('<^/' . $langHandler . 'open-resource/edit/([0-9]+)?$>', $this->pageURL, $matches)) {
+            $this->editResource($matches);
+
+        } elseif (preg_match('<^/' . $langHandler . 'api/open-resource/([0-9]+)$>', $this->pageURL, $matches)) {
+            $this->openResourceEditApi($matches);
+
+        } elseif (preg_match('<^/' . $langHandler . 'api/open-resource$>', $this->pageURL, $matches)) {
+            $this->openResourceCreateApi($matches);
 
         } elseif (preg_match('<^/' . $langHandler . 'contact-dsi$>', $this->pageURL, $matches)) {
             $this->staticPage($matches, 'contact-dsi.php');
@@ -1123,10 +1135,34 @@ class Router
         return (new \Controllers\OpenData())->exec();
     }
 
-    private function editOpenData($matches)
+    private function openDataEdit($matches)
     {
         $this->setLanguageFromUrl($matches);
-        return (new \Controllers\EditOpenData())->exec();
+        return (new \Controllers\OpenDataEdit())->exec();
+    }
+
+    private function newResource($matches)
+    {
+        $this->setLanguageFromUrl($matches);
+        return (new \Controllers\ResourceCreate())->exec();
+    }
+
+    private function editResource($matches)
+    {
+        $this->setLanguageFromUrl($matches);
+        return (new \Controllers\ResourceEdit($matches[3]))->exec();
+    }
+
+    private function openResourceCreateApi($matches)
+    {
+        $this->setLanguageFromUrl($matches);
+        return (new \Controllers\API\OpenResourceApiController())->createObject();
+    }
+
+    private function openResourceEditApi($matches)
+    {
+        $this->setLanguageFromUrl($matches);
+        return (new \Controllers\API\OpenResourceApiController())->edit($matches[3]);
     }
 
     private function keepUserLoggedIn($matches)
