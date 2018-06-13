@@ -109,12 +109,14 @@ require __DIR__ . '/header.php';
     </style>
 
     <script>
-        if ($(window).width() > 767) {
-            $('.grid').masonry({
-                itemSelector: '.grid-item',
-                horizontalOrder: true
-            });
-        }
+        $(function () {
+            if ($(window).width() > 767) {
+                $('.grid').masonry({
+                    itemSelector: '.grid-item',
+                    horizontalOrder: true
+                });
+            }
+        })
     </script>
 
 <?php require __DIR__ . '/footer.php' ?>
