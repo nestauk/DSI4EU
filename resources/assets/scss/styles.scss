@@ -806,4 +806,11 @@ body {
   .footer-black {
     z-index: -1;
   }
+
+  .info-card.resource {
+    .research-paper-img {
+      width: 110px;
+      height: 110px;
+    }
+  }
 }
