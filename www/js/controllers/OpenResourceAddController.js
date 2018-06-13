@@ -35,12 +35,13 @@ angular
         // addResource
         (function () {
             $scope.addResource = function () {
+                $scope.errors = {};
                 $scope.loading = true;
                 var data = {
                     title: $scope.title,
                     description: $scope.description,
-                    link_text: $scope.linkText,
-                    link_url: $scope.linkUrl,
+                    link_text: $scope.link_text,
+                    link_url: $scope.link_url,
                     image: $scope.featuredImage,
                 };
                 $http.post('/api/open-resource/', data)
@@ -53,10 +54,10 @@ angular
                         }, function () {
                             window.location.href = response.data.object.url;
                         });
-                    }, function () {
+                    }, function (response) {
                         $scope.loading = false;
-                        $scope.errors = response.data.errors;
-                        console.log(response.data.errors);
+                        $scope.errors = response.data.object
+                        console.log(response.data.object);
                     });
             }
         }())

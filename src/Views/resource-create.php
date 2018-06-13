@@ -49,16 +49,17 @@ require __DIR__ . '/header.php'
                                           style="border:1px solid #999;" maxlength="140"></textarea>
 
                                 <label class="story-label" for="Title">Link text</label>
-                                <div style="color:red" ng-cloak ng-show="errors.linkText"
-                                     ng-bind="errors.linkText"></div>
-                                <input class="w-input story-form" maxlength="256" ng-model="linkText"
+                                <div style="color:red" ng-cloak ng-show="errors.link_text"
+                                     ng-bind="errors.link_text"></div>
+                                <input class="w-input story-form" maxlength="256" ng-model="link_text"
                                        style="border:1px solid #999;" placeholder="" type="text"/>
 
                                 <label class="story-label" for="Title">Link url</label>
-                                <div style="color:red" ng-cloak ng-show="errors.linkUrl" ng-bind="errors.linkUrl"></div>
-                                <input class="w-input story-form" maxlength="256" ng-model="linkUrl"
+                                <div style="color:red" ng-cloak ng-show="errors.link_url" ng-bind="errors.link_url"></div>
+                                <input class="w-input story-form" maxlength="256" ng-model="link_url"
                                        style="border:1px solid #999;" placeholder="" type="text"/>
 
+                                <div style="color:red" ng-cloak ng-show="errors.image" ng-bind="errors.image"></div>
                                 <label class="story-label" for="Title">Resource image</label>
                                 <img ng-show="featuredImage" class="story-image-upload"
                                      ng-src="{{featuredImage}}">
@@ -85,7 +86,7 @@ require __DIR__ . '/header.php'
                                        ng-disabled="loading">
 
                                 <a href="<?php echo $urlHandler->openDataResearchAndResourcesEdit() ?>"
-                                   class="w-button dsi-button post-story cancel">Cancel</a>
+                                   class="w-button dsi-button post-story cancel">Back</a>
                             </div>
                         </div>
                     </form>

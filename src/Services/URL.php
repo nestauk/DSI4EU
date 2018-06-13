@@ -262,6 +262,11 @@ class URL
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'edit/open-data-research-and-resources';
     }
 
+    public function openResourceCreate()
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'open-resource/edit/new';
+    }
+
     public function openResourceEdit(Resource $resource)
     {
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'open-resource/edit/' . $resource->getId();

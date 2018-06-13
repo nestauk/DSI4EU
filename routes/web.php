@@ -1156,7 +1156,7 @@ class Router
     private function openResourceCreateApi($matches)
     {
         $this->setLanguageFromUrl($matches);
-        return (new \Controllers\API\OpenResourceApiController())->create();
+        return (new \Controllers\API\OpenResourceApiController())->createObject();
     }
 
     private function openResourceEditApi($matches)

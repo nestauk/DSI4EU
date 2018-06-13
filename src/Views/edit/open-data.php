@@ -8,6 +8,7 @@ use \Models\Resource;
 /** @var $resources Resource[] */
 
 \DSI\Service\JsModules::setTinyMCE(true);
+\DSI\Service\JsModules::setMasonry(true);
 $angularModules['fileUpload'] = true;
 
 require __DIR__ . '/../header.php';
@@ -83,13 +84,32 @@ require __DIR__ . '/../header.php';
                                     </a>
 
                                     <div class="w-clearfix">
-                                        <a href="<?=$urlHandler->openResourceEdit($resource)?>" class="edit-resource">Edit</a>
-                                        <a href="" class="delete-resource">Delete</a>
+                                        <a href="<?= $urlHandler->openResourceEdit($resource) ?>"
+                                           class="edit-resource">Edit</a>
+                                        <a href="#"
+                                           ng-click="deleteResource('<?= $urlHandler->openResourceEditApi($resource) ?>')"
+                                           class="delete-resource">Delete</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     <?php } ?>
+
+                    <div class="w-col w-col-4 grid-item">
+                        <a class="resource-card w-inline-block" href="<?= $urlHandler->openResourceCreate() ?>">
+                            <div class="info-card resource">
+                                <h3>Add new resource</h3>
+                                <p>Click to add new resource</p>
+                                <div class="log-in-link long next-page read-more w-clearfix" data-ix="log-in-arrow"
+                                     href="<?= $resource->{Resource::LinkUrl} ?>" target="_blank">
+                                    <div class="login-li long menu-li readmore-li">
+                                        Link to add new resource
+                                    </div>
+                                    <img src="/images/ios7-arrow-thin-right.png" class="login-arrow">
+                                </div>
+                            </div>
+                        </a>
+                    </div>
                 </div>
                 <!-- end of second row -->
             </div>
@@ -115,8 +135,6 @@ require __DIR__ . '/../header.php';
             });
         });
     </script>
-
-    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
 
     <style>
         .grid-item {

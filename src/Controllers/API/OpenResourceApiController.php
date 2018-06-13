@@ -39,7 +39,7 @@ class OpenResourceApiController
         $this->loggedInUser = $this->authUser->getUserIfLoggedIn();
     }
 
-    public function create()
+    public function createObject()
     {
         if (!Request::isPost())
             return (new Response('Invalid header', Response::HTTP_FORBIDDEN))->send();
@@ -71,14 +71,16 @@ class OpenResourceApiController
             return (new Response('Not found', Response::HTTP_NOT_FOUND))->send();
 
         if (Request::isGet())
-            return $this->editGet();
+            return $this->getObject();
         elseif (Request::isPost())
-            return $this->editPost();
+            return $this->updateObject();
+        elseif (Request::isDelete())
+            return $this->deleteObject();
         else
             return (new Response('Invalid header', Response::HTTP_FORBIDDEN))->send();
     }
 
-    private function editPost()
+    private function updateObject()
     {
         if (!$this->canEdit())
             return (new Response('Not allowed', Response::HTTP_UNAUTHORIZED))->send();
@@ -102,7 +104,21 @@ class OpenResourceApiController
         }
     }
 
-    private function editGet()
+    private function deleteObject()
+    {
+        if (!$this->canEdit())
+            return (new Response('Not allowed', Response::HTTP_UNAUTHORIZED))->send();
+
+        try {
+            $this->resource->delete();
+
+            return (new JsonResponse([], Response::HTTP_OK))->send();
+        } catch (ErrorHandler $e) {
+            return (new JsonResponse($e->getErrors(), Response::HTTP_FORBIDDEN))->send();
+        }
+    }
+
+    private function getObject()
     {
         $this->resource->{Resource::Image} = Image::UPLOAD_FOLDER_URL . $this->resource->{Resource::Image};
         return (new JsonResponse($this->resource))->send();

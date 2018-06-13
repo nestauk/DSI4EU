@@ -4,6 +4,7 @@ namespace Controllers;
 
 use DSI\Entity\User;
 use DSI\Service\Auth;
+use Models\Resource;
 use Models\Text;
 use Services\URL;
 use Services\Request;
@@ -39,6 +40,7 @@ class OpenData
             'mainText' => $mainText,
             'subText' => $subText,
             'canEdit' => $this->canEdit(),
+            'resources' => Resource::all(),
         ]);
     }
 

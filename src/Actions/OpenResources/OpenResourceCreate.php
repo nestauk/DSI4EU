@@ -49,11 +49,11 @@ class OpenResourceCreate
         if (trim($this->title) == '')
             $this->errorHandler->addTaggedError('title', 'Please type resource name');
         if (trim($this->linkText) == '')
-            $this->errorHandler->addTaggedError('title', 'Please type link text');
+            $this->errorHandler->addTaggedError('link_text', 'Please type link text');
         if (trim($this->linkUrl) == '')
-            $this->errorHandler->addTaggedError('title', 'Please type link url');
+            $this->errorHandler->addTaggedError('link_url', 'Please type link url');
         if (trim($this->image) == '')
-            $this->errorHandler->addTaggedError('title', 'Please upload an resource image');
+            $this->errorHandler->addTaggedError('image', 'Please upload an resource image');
 
         $this->errorHandler->throwIfNotEmpty();
     }
