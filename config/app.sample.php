@@ -18,6 +18,12 @@ return [
         'password' => '',
         'db' => '',
     ],
+    'mysql-test' => [
+        'host' => 'localhost',
+        'username' => '',
+        'password' => '',
+        'db' => '',
+    ],
     'api ' => [
         'facebook' => [
             'clientId' => '{facebook-app-id}',

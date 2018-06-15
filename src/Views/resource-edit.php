@@ -5,6 +5,7 @@ use \Models\Resource;
 /** @var $urlHandler \Services\URL */
 /** @var $resource \Models\Resource */
 /** @var $clusters \Models\Cluster[] */
+/** @var $types \Models\TypeOfResource[] */
 /** @var $authors \Models\AuthorOfResource[] */
 
 $angularModules['fileUpload'] = true;
@@ -98,6 +99,17 @@ require __DIR__ . '/header.php'
                                         <input type="checkbox" ng-model="resource.clusters[<?= $cluster->getId() ?>]"
                                                value="1" ng-true-value="1" ng-false-value="0"/>
                                         <?= show_input($cluster->clusterLangs()->first()->{\Models\Relationship\ClusterLang::Title}) ?>
+                                    </label>
+                                <?php } ?>
+
+                                <br>
+                                <label class="story-label">Type of Resource</label>
+                                <?php foreach ($types AS $type) { ?>
+                                    <label>
+                                        <input type="checkbox"
+                                               ng-model="resource.<?= Resource::Types ?>[<?= $type->getId() ?>]"
+                                               value="1" ng-true-value="1" ng-false-value="0"/>
+                                        <?= show_input($type->{\Models\TypeOfResource::Name}) ?>
                                     </label>
                                 <?php } ?>
 

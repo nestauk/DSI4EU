@@ -8,6 +8,7 @@ use Models\AuthorOfResource;
 use Models\Cluster;
 use Models\Relationship\ClusterLang;
 use Models\Resource;
+use Models\TypeOfResource;
 use Services\URL;
 use Services\Request;
 use Services\Response;
@@ -61,6 +62,7 @@ class ResourceEdit
                 }])
                 ->get(),
             'authors' => AuthorOfResource::all(),
+            'types' => TypeOfResource::all(),
         ]);
     }
 }

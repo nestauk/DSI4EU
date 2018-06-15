@@ -45,6 +45,7 @@ angular
                     link_text: $scope.resource.link_text,
                     link_url: $scope.resource.link_url,
                     clusters: $scope.resource.clusters,
+                    types: $scope.resource.types,
                     author_id: $scope.resource.author_id,
                     image: $scope.featuredImage,
                 };
