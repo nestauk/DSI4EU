@@ -54,6 +54,7 @@ angular
                     description: $scope.resource.description,
                     link_text: $scope.resource.link_text,
                     link_url: $scope.resource.link_url,
+                    clusters: $scope.resource.clusters,
                 };
                 if ($scope.featuredImageUpdated)
                     data.image = $scope.featuredImage;

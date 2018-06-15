@@ -1,5 +1,7 @@
 <?php
 /** @var $urlHandler \Services\URL */
+/** @var $clusters \Models\Cluster[] */
+
 $angularModules['fileUpload'] = true;
 \DSI\Service\JsModules::setTinyMCE(true);
 \DSI\Service\JsModules::setJqueryUI(true);
@@ -40,23 +42,24 @@ require __DIR__ . '/header.php'
                             <div class="w-col w-col-6">
                                 <label class="story-label" for="Title">Title</label>
                                 <div style="color:red" ng-cloak ng-show="errors.title" ng-bind="errors.title"></div>
-                                <input class="w-input story-form" maxlength="256" ng-model="title"
+                                <input class="w-input story-form" maxlength="256" ng-model="resource.title"
                                        style="border:1px solid #999;" placeholder="Add the title of your story"
                                        type="text"/>
 
                                 <label class="story-label">Description</label>
-                                <textarea ng-model="description" class="w-input story-form"
+                                <textarea ng-model="resource.description" class="w-input story-form"
                                           style="border:1px solid #999;" maxlength="140"></textarea>
 
                                 <label class="story-label" for="Title">Link text</label>
                                 <div style="color:red" ng-cloak ng-show="errors.link_text"
                                      ng-bind="errors.link_text"></div>
-                                <input class="w-input story-form" maxlength="256" ng-model="link_text"
+                                <input class="w-input story-form" maxlength="256" ng-model="resource.link_text"
                                        style="border:1px solid #999;" placeholder="" type="text"/>
 
                                 <label class="story-label" for="Title">Link url</label>
-                                <div style="color:red" ng-cloak ng-show="errors.link_url" ng-bind="errors.link_url"></div>
-                                <input class="w-input story-form" maxlength="256" ng-model="link_url"
+                                <div style="color:red" ng-cloak ng-show="errors.link_url"
+                                     ng-bind="errors.link_url"></div>
+                                <input class="w-input story-form" maxlength="256" ng-model="resource.link_url"
                                        style="border:1px solid #999;" placeholder="" type="text"/>
 
                                 <div style="color:red" ng-cloak ng-show="errors.image" ng-bind="errors.image"></div>
@@ -79,16 +82,28 @@ require __DIR__ . '/header.php'
                                     </div>
                                     <div style="color:red" ng-bind="{{featuredImageUpload.errorMsg.file}}"></div>
                                 </div>
+                            </div>
 
-                                <input class="dsi-button post-story w-button"
-                                       type="submit" value="Save"
-                                       ng-value="loading ? 'Loading...' : 'Save'"
-                                       ng-disabled="loading">
+                            <div class="w-col w-col-6">
+                                <label class="story-label" for="Title">Clusters</label>
 
-                                <a href="<?php echo $urlHandler->openDataResearchAndResourcesEdit() ?>"
-                                   class="w-button dsi-button post-story cancel">Back</a>
+                                <?php foreach ($clusters AS $cluster) { ?>
+                                    <label>
+                                        <input type="checkbox" ng-model="resource.clusters[<?= $cluster->getId() ?>]"
+                                               value="1" ng-true-value="1" ng-false-value="0"/>
+                                        <?= show_input($cluster->clusterLangs()->first()->{\Models\Relationship\ClusterLang::Title}) ?>
+                                    </label>
+                                <?php } ?>
                             </div>
                         </div>
+
+                        <input class="dsi-button post-story w-button"
+                               type="submit" value="Save"
+                               ng-value="loading ? 'Loading...' : 'Save'"
+                               ng-disabled="loading">
+
+                        <a href="<?php echo $urlHandler->openDataResearchAndResourcesEdit() ?>"
+                           class="w-button dsi-button post-story cancel">Back</a>
                     </form>
                 </div>
             </div>

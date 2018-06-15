@@ -10,7 +10,7 @@ use DSI\Entity\Story;
 use DSI\Entity\Translation;
 use DSI\Entity\User;
 use DSI\Service\Translate;
-use Models\ClusterLang;
+use Models\Relationship\ClusterLang;
 use Models\Resource;
 
 class URL

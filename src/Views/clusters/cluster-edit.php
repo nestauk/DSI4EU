@@ -3,7 +3,7 @@ require __DIR__ . '/../header.php';
 /** @var $loggedInUser \DSI\Entity\User */
 /** @var $urlHandler \Services\URL */
 
-/** @var $cluster \Models\ClusterLang */
+/** @var $cluster \Models\Relationship\ClusterLang */
 
 use \DSI\Entity\Image;
 
