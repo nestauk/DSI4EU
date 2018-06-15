@@ -1,7 +1,11 @@
 <?php
+
+use \Models\Resource;
+
 /** @var $urlHandler \Services\URL */
 /** @var $resource \Models\Resource */
 /** @var $clusters \Models\Cluster[] */
+/** @var $authors \Models\AuthorOfResource[] */
 
 $angularModules['fileUpload'] = true;
 \DSI\Service\JsModules::setTinyMCE(true);
@@ -89,7 +93,6 @@ require __DIR__ . '/header.php'
                             </div>
                             <div class="w-col w-col-6">
                                 <label class="story-label" for="Title">Clusters</label>
-
                                 <?php foreach ($clusters AS $cluster) { ?>
                                     <label>
                                         <input type="checkbox" ng-model="resource.clusters[<?= $cluster->getId() ?>]"
@@ -97,6 +100,21 @@ require __DIR__ . '/header.php'
                                         <?= show_input($cluster->clusterLangs()->first()->{\Models\Relationship\ClusterLang::Title}) ?>
                                     </label>
                                 <?php } ?>
+
+                                <br>
+                                <div style="color:red"
+                                     ng-show="errors.<?= Resource::AuthorID ?>"
+                                     ng-bind="errors.<?= Resource::AuthorID ?>"></div>
+                                <label class="story-label">Author</label>
+                                <select name="author_id" title="author" ng-model="resource.<?= Resource::AuthorID ?>">
+                                    <option value=""> - Select an author -</option>
+
+                                    <?php foreach ($authors AS $author) { ?>
+                                        <option value="<?= $author->getId() ?>">
+                                            <?= _html($author->{\Models\AuthorOfResource::Name}) ?>
+                                        </option>
+                                    <?php } ?>
+                                </select>
                             </div>
                         </div>
 

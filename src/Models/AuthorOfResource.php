@@ -3,23 +3,18 @@
 namespace Models;
 
 use Illuminate\Database\Eloquent\Model;
-use \Models\Relationship\ClusterLang;
 
-class Cluster extends Model
+class AuthorOfResource extends Model
 {
-    const TABLE = 'clusters';
+    const TABLE = 'author_of_resources';
     public $timestamps = false;
     protected $table = self::TABLE;
 
     const Id = 'id';
+    const Name = 'name';
 
     public function getId()
     {
         return $this->{self::Id};
-    }
-
-    public function clusterLangs()
-    {
-        return $this->hasMany(ClusterLang::class, ClusterLang::ClusterID, self::Id);
     }
 }

@@ -16,16 +16,20 @@ class OpenResourceCreateTest extends PHPUnit_Framework_TestCase
         Resource::truncate();
         ResourceCluster::truncate();
         \Models\Cluster::truncate();
+        \Models\AuthorOfResource::truncate();
     }
 
     /** @test */
     public function CanCreateResource()
     {
+        $authors = $this->createAuthors();
+
         $exec = new \Actions\OpenResources\OpenResourceCreate();
         $exec->title = $title = 'Title';
         $exec->description = $description = 'Description';
         $exec->linkUrl = $linkUrl = 'http://';
         $exec->linkText = $linkText = 'Click here';
+        $exec->authorID = $author = $authors[0]->getId();
         $exec->exec();
 
         /** @var Resource $resource */
@@ -40,6 +44,7 @@ class OpenResourceCreateTest extends PHPUnit_Framework_TestCase
     /** @test */
     public function CanSaveResourceClusters()
     {
+        $authors = $this->createAuthors();
         $this->createClusters(7);
 
         $exec = new \Actions\OpenResources\OpenResourceCreate();
@@ -47,12 +52,15 @@ class OpenResourceCreateTest extends PHPUnit_Framework_TestCase
         $exec->description = $description = 'Description';
         $exec->linkUrl = $linkUrl = 'http://';
         $exec->linkText = $linkText = 'Click here';
+        $exec->authorID = $author = $authors[0]->getId();
         $exec->clusters = $clusters = [
             1 => 1,
             3 => 1
         ];
         $exec->exec();
-        $resource = $exec->getResource();
+
+        /** @var Resource $resource */
+        $resource = Resource::first();
 
         foreach ($clusters AS $clusterId => $value) {
             $resourceCluster = ResourceCluster::where([
@@ -63,11 +71,48 @@ class OpenResourceCreateTest extends PHPUnit_Framework_TestCase
         }
     }
 
+    /** @test */
+    public function CanSaveResourceAuthor()
+    {
+        $authors = $this->createAuthors();
+        $this->createClusters(7);
+
+        $exec = new \Actions\OpenResources\OpenResourceCreate();
+        $exec->title = $title = 'Title';
+        $exec->description = $description = 'Description';
+        $exec->linkUrl = $linkUrl = 'http://';
+        $exec->linkText = $linkText = 'Click here';
+        $exec->authorID = $authorID = $authors[0]->getId();
+        $exec->exec();
+
+        /** @var Resource $resource */
+        $resource = Resource::first();
+        $this->assertEquals($authors[0]->getId(), $resource->{Resource::AuthorID});
+    }
+
     private function createClusters($count = 1)
     {
         for ($i = 0; $i < $count; $i++) {
             $cluster = new \Models\Cluster();
             $cluster->save();
         }
+    }
+
+    /**
+     * @return \Models\AuthorOfResource[]
+     */
+    private function createAuthors()
+    {
+        $authors = [];
+
+        $authors[0] = new \Models\AuthorOfResource();
+        $authors[0]->{\Models\AuthorOfResource::Name} = 'DSI4EU';
+        $authors[0]->save();
+
+        $authors[1] = new \Models\AuthorOfResource();
+        $authors[1]->{\Models\AuthorOfResource::Name} = 'Other';
+        $authors[1]->save();
+
+        return $authors;
     }
 }

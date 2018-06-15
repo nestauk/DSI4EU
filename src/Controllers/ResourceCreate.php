@@ -4,6 +4,7 @@ namespace Controllers;
 
 use DSI\Entity\User;
 use DSI\Service\Auth;
+use Models\AuthorOfResource;
 use Models\Cluster;
 use Models\Relationship\ClusterLang;
 use Models\Text;
@@ -51,6 +52,7 @@ class ResourceCreate
                     $query->where(ClusterLang::Lang, 'en');
                 }])
                 ->get(),
+            'authors' => AuthorOfResource::all(),
         ]);
     }
 }

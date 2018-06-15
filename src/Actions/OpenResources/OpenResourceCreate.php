@@ -26,6 +26,9 @@ class OpenResourceCreate
         $linkUrl,
         $image;
 
+    /** @var int */
+    public $authorID;
+
     /** @var int[] */
     public $clusters;
 
@@ -51,13 +54,15 @@ class OpenResourceCreate
     private function assertDataHasBeenSent()
     {
         if (trim($this->title) == '')
-            $this->errorHandler->addTaggedError('title', 'Please type resource name');
+            $this->errorHandler->addTaggedError(Resource::Title, 'Please type resource name');
         if (trim($this->linkText) == '')
-            $this->errorHandler->addTaggedError('link_text', 'Please type link text');
+            $this->errorHandler->addTaggedError(Resource::LinkText, 'Please type link text');
         if (trim($this->linkUrl) == '')
-            $this->errorHandler->addTaggedError('link_url', 'Please type link url');
+            $this->errorHandler->addTaggedError(Resource::LinkUrl, 'Please type link url');
+        if (!$this->authorID)
+            $this->errorHandler->addTaggedError(Resource::AuthorID, 'Please select an author');
         if ($this->image AND trim($this->image) == '')
-            $this->errorHandler->addTaggedError('image', 'Please upload an resource image');
+            $this->errorHandler->addTaggedError(Resource::Image, 'Please upload an resource image');
 
         $this->errorHandler->throwIfNotEmpty();
     }
@@ -69,6 +74,7 @@ class OpenResourceCreate
         $this->resource->{Resource::Description} = $this->description;
         $this->resource->{Resource::LinkText} = $this->linkText;
         $this->resource->{Resource::LinkUrl} = $this->linkUrl;
+        $this->resource->{Resource::AuthorID} = $this->authorID;
 
         if ($this->image) {
             $exec = new MoveUploadedFromTemp();

@@ -14,13 +14,16 @@ class OpenResourceEditTest extends PHPUnit_Framework_TestCase
     public function tearDown()
     {
         Resource::truncate();
-    //    ResourceCluster::truncate();
+        ResourceCluster::truncate();
         \Models\Cluster::truncate();
+        \Models\AuthorOfResource::truncate();
     }
 
     /** @test */
     public function CanEditResource()
     {
+        $authors = $this->createAuthors();
+
         $resource = $this->createResource();
         $exec = new \Actions\OpenResources\OpenResourceEdit();
         $exec->resource = $resource;
@@ -28,6 +31,7 @@ class OpenResourceEditTest extends PHPUnit_Framework_TestCase
         $exec->description = $description = 'Description';
         $exec->linkUrl = $linkUrl = 'http://';
         $exec->linkText = $linkText = 'Click here';
+        $exec->authorID = $author = $authors[0]->getId();
         $exec->exec();
 
         /** @var Resource $resource */
@@ -42,6 +46,7 @@ class OpenResourceEditTest extends PHPUnit_Framework_TestCase
     /** @test */
     public function CanSaveResourceClusters()
     {
+        $authors = $this->createAuthors();
         $this->createClusters(7);
 
         $resource = $this->createResource();
@@ -51,6 +56,7 @@ class OpenResourceEditTest extends PHPUnit_Framework_TestCase
         $exec->description = $description = 'Description';
         $exec->linkUrl = $linkUrl = 'http://';
         $exec->linkText = $linkText = 'Click here';
+        $exec->authorID = $author = $authors[0]->getId();
         $exec->clusters = $clusters = [
             1 => 1,
             3 => 1
@@ -64,6 +70,25 @@ class OpenResourceEditTest extends PHPUnit_Framework_TestCase
             ])->get();
             $this->assertCount(1, $resourceCluster);
         }
+    }
+
+    /** @test */
+    public function CanSaveResourceAuthor()
+    {
+        $authors = $this->createAuthors();
+        $this->createClusters(7);
+
+        $resource = $this->createResource();
+        $exec = new \Actions\OpenResources\OpenResourceEdit();
+        $exec->resource = $resource;
+        $exec->title = $title = 'Title';
+        $exec->description = $description = 'Description';
+        $exec->linkUrl = $linkUrl = 'http://';
+        $exec->linkText = $linkText = 'Click here';
+        $exec->authorID = $author = $authors[0]->getId();
+        $exec->exec();
+
+        $this->assertEquals($authors[0]->getId(), $resource->{Resource::AuthorID});
     }
 
     /** @return Resource */
@@ -80,5 +105,20 @@ class OpenResourceEditTest extends PHPUnit_Framework_TestCase
             $cluster = new \Models\Cluster();
             $cluster->save();
         }
+    }
+
+    private function createAuthors()
+    {
+        $authors = [];
+
+        $authors[0] = new \Models\AuthorOfResource();
+        $authors[0]->{\Models\AuthorOfResource::Name} = 'DSI4EU';
+        $authors[0]->save();
+
+        $authors[1] = new \Models\AuthorOfResource();
+        $authors[1]->{\Models\AuthorOfResource::Name} = 'Other';
+        $authors[1]->save();
+
+        return $authors;
     }
 }

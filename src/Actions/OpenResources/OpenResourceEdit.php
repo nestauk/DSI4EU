@@ -27,6 +27,9 @@ class OpenResourceEdit
         $linkUrl,
         $image;
 
+    /** @var int */
+    public $authorID;
+
     /** @var int[] */
     public $clusters;
 
@@ -47,11 +50,13 @@ class OpenResourceEdit
             throw new NotEnoughData('resource');
 
         if (trim($this->title) == '')
-            $this->errorHandler->addTaggedError('title', 'Please type resource name');
+            $this->errorHandler->addTaggedError(Resource::Title, 'Please type resource name');
         if (trim($this->linkText) == '')
-            $this->errorHandler->addTaggedError('title', 'Please type link text');
+            $this->errorHandler->addTaggedError(Resource::LinkText, 'Please type link text');
         if (trim($this->linkUrl) == '')
-            $this->errorHandler->addTaggedError('title', 'Please type link url');
+            $this->errorHandler->addTaggedError(Resource::LinkUrl, 'Please type link url');
+        if (!$this->authorID)
+            $this->errorHandler->addTaggedError(Resource::AuthorID, 'Please select an author');
 
         $this->errorHandler->throwIfNotEmpty();
     }
@@ -64,6 +69,7 @@ class OpenResourceEdit
         $this->resource->{Resource::Description} = $this->description;
         $this->resource->{Resource::LinkText} = $this->linkText;
         $this->resource->{Resource::LinkUrl} = $this->linkUrl;
+        $this->resource->{Resource::AuthorID} = $this->authorID;
         $this->resource->save();
 
         $this->saveClusters($this->resource);
