@@ -1,5 +1,13 @@
 <?php
-$config = require __DIR__ . '/app.php';
+
+require __DIR__ . '/../src/kernel.php';
+
+$config = Kernel::loadConfigFile(__DIR__ . '/app.php');
+$command = implode(' ', $_SERVER['argv']);
+if (preg_match('/-e test/', $command) OR preg_match('/-environment test/', $command)) {
+    $config['env'] = \Services\App::TEST;
+}
+Kernel::setConfig($config);
 
 return [
     'paths' => [
@@ -17,7 +25,16 @@ return [
             'pass' => $config['mysql']['password'],
             'port' => '3306',
             'charset' => 'utf8',
-        ]
+        ],
+        "test" => [
+            'adapter' => 'mysql',
+            'host' => $config['mysql-test']['host'],
+            'name' => $config['mysql-test']['db'],
+            'user' => $config['mysql-test']['username'],
+            'pass' => $config['mysql-test']['password'],
+            'port' => '3306',
+            'charset' => 'utf8',
+        ],
     ],
     'version_order' => 'creation'
 ];

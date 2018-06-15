@@ -4,6 +4,7 @@ require_once __DIR__ . '/../../../config.php';
 
 use \Models\Resource;
 use \Models\Relationship\ResourceCluster;
+use \Models\Relationship\ResourceType;
 
 class OpenResourceCreateTest extends PHPUnit_Framework_TestCase
 {
@@ -17,6 +18,8 @@ class OpenResourceCreateTest extends PHPUnit_Framework_TestCase
         ResourceCluster::truncate();
         \Models\Cluster::truncate();
         \Models\AuthorOfResource::truncate();
+        \Models\TypeOfResource::truncate();
+        ResourceType::truncate();
     }
 
     /** @test */
@@ -72,6 +75,36 @@ class OpenResourceCreateTest extends PHPUnit_Framework_TestCase
     }
 
     /** @test */
+    public function CanSaveResourceTypes()
+    {
+        $authors = $this->createAuthors();
+        $this->createTypes(4);
+
+        $exec = new \Actions\OpenResources\OpenResourceCreate();
+        $exec->title = $title = 'Title';
+        $exec->description = $description = 'Description';
+        $exec->linkUrl = $linkUrl = 'http://';
+        $exec->linkText = $linkText = 'Click here';
+        $exec->authorID = $author = $authors[0]->getId();
+        $exec->types = $types = [
+            1 => 1,
+            3 => 1
+        ];
+        $exec->exec();
+
+        /** @var Resource $resource */
+        $resource = Resource::first();
+
+        foreach ($types AS $typeID => $value) {
+            $resourceType = ResourceType::where([
+                ResourceType::ResourceID => $resource->getId(),
+                ResourceType::TypeID => $typeID,
+            ])->get();
+            $this->assertCount(1, $resourceType);
+        }
+    }
+
+    /** @test */
     public function CanSaveResourceAuthor()
     {
         $authors = $this->createAuthors();
@@ -95,6 +128,14 @@ class OpenResourceCreateTest extends PHPUnit_Framework_TestCase
         for ($i = 0; $i < $count; $i++) {
             $cluster = new \Models\Cluster();
             $cluster->save();
+        }
+    }
+
+    private function createTypes($count = 1)
+    {
+        for ($i = 0; $i < $count; $i++) {
+            $type = new \Models\TypeOfResource();
+            $type->save();
         }
     }
 
