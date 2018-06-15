@@ -9,7 +9,7 @@ use DSI\Service\Auth;
 use DSI\Service\Translate;
 use Models\Cluster;
 use Services\URL;
-use Models\ClusterLang;
+use Models\Relationship\ClusterLang;
 use Services\View;
 
 class ClustersController

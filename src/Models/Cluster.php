@@ -3,6 +3,7 @@
 namespace Models;
 
 use Illuminate\Database\Eloquent\Model;
+use \Models\Relationship\ClusterLang;
 
 class Cluster extends Model
 {

@@ -5,20 +5,22 @@ use Phinx\Migration\AbstractMigration;
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Illuminate\Database\Schema\Blueprint;
 
+use Models\Relationship\ClusterImg;
+
 class CreateClusterImgsTable extends AbstractMigration
 {
     public function up()
     {
-        Capsule::schema()->create(\Models\ClusterImg::TABLE, function (Blueprint $table) {
-            $table->increments(\Models\ClusterImg::Id);
-            $table->integer(\Models\ClusterImg::ClusterLangID);
-            $table->string(\Models\ClusterImg::Filename);
-            $table->text(\Models\ClusterImg::Link);
+        Capsule::schema()->create(ClusterImg::TABLE, function (Blueprint $table) {
+            $table->increments(ClusterImg::Id);
+            $table->integer(ClusterImg::ClusterLangID);
+            $table->string(ClusterImg::Filename);
+            $table->text(ClusterImg::Link);
         });
     }
 
     public function down()
     {
-        Capsule::schema()->dropIfExists(\Models\ClusterImg::TABLE);
+        Capsule::schema()->dropIfExists(ClusterImg::TABLE);
     }
 }

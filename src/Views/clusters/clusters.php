@@ -2,7 +2,7 @@
 require __DIR__ . '/../header.php'
 /** @var $loggedInUser \DSI\Entity\User */
 /** @var $urlHandler Services\URL */
-/** @var $clusters \Models\ClusterLang[] */
+/** @var $clusters \Models\Relationship\ClusterLang[] */
 ?>
     <div class="clusters-controller">
         <div class="content-block">

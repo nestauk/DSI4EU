@@ -6,6 +6,7 @@ use Actions\Uploads\MoveUploadedFromTemp;
 use DSI\Entity\User;
 use DSI\NotEnoughData;
 use DSI\Service\ErrorHandler;
+use Models\Relationship\ResourceCluster;
 use Models\Resource;
 
 class OpenResourceEdit
@@ -26,6 +27,9 @@ class OpenResourceEdit
         $linkUrl,
         $image;
 
+    /** @var int[] */
+    public $clusters;
+
     public function __construct()
     {
         $this->errorHandler = new ErrorHandler();
@@ -34,15 +38,7 @@ class OpenResourceEdit
     public function exec()
     {
         $this->assertDataHasBeenSent();
-        $this->createResource();
-    }
-
-    /**
-     * @return Resource
-     */
-    public function getResource()
-    {
-        return $this->resource;
+        $this->saveResource();
     }
 
     private function assertDataHasBeenSent()
@@ -60,7 +56,20 @@ class OpenResourceEdit
         $this->errorHandler->throwIfNotEmpty();
     }
 
-    private function createResource()
+    private function saveResource()
+    {
+        $this->saveImage($this->resource);
+
+        $this->resource->{Resource::Title} = $this->title;
+        $this->resource->{Resource::Description} = $this->description;
+        $this->resource->{Resource::LinkText} = $this->linkText;
+        $this->resource->{Resource::LinkUrl} = $this->linkUrl;
+        $this->resource->save();
+
+        $this->saveClusters($this->resource);
+    }
+
+    private function saveImage(Resource $resource)
     {
         if ($this->image) {
             $exec = new MoveUploadedFromTemp();
@@ -68,13 +77,23 @@ class OpenResourceEdit
             $exec->user = $this->executor;
             $exec->exec();
 
-            $this->resource->{Resource::Image} = $exec->getNewFileName();
+            $resource->{Resource::Image} = $exec->getNewFileName();
         }
+    }
 
-        $this->resource->{Resource::Title} = $this->title;
-        $this->resource->{Resource::Description} = $this->description;
-        $this->resource->{Resource::LinkText} = $this->linkText;
-        $this->resource->{Resource::LinkUrl} = $this->linkUrl;
-        $this->resource->save();
+    private function saveClusters(Resource $resource)
+    {
+        ResourceCluster
+            ::where(ResourceCluster::ResourceID, $resource->getId())
+            ->delete();
+
+        foreach ((array)$this->clusters AS $clusterID => $value) {
+            if ($value == "1") {
+                $resourceCluster = new ResourceCluster();
+                $resourceCluster->{ResourceCluster::ResourceID} = $resource->getId();
+                $resourceCluster->{ResourceCluster::ClusterID} = $clusterID;
+                $resourceCluster->save();
+            }
+        }
     }
 }

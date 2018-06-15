@@ -4,16 +4,13 @@ namespace Controllers\API;
 
 use Actions\OpenResources\OpenResourceCreate;
 use Actions\OpenResources\OpenResourceEdit;
-use Controllers\ResourceCreate;
 use DSI\Entity\Image;
 use DSI\Entity\User;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
-use DSI\Service\Translate;
-use Models\ClusterImg;
+use Models\Relationship\ResourceCluster;
 use Models\Resource;
 use Services\URL;
-use Models\ClusterLang;
 use Services\Request;
 use Services\Response;
 use Services\JsonResponse;
@@ -55,6 +52,8 @@ class OpenResourceApiController
             $exec->linkText = $_POST[Resource::LinkText];
             $exec->linkUrl = $_POST[Resource::LinkUrl];
             $exec->image = $_POST[Resource::Image];
+            $exec->clusters = $_POST[Resource::Clusters];
+
             $exec->exec();
             return (new JsonResponse([
                 'url' => $this->urlHandler->openDataResearchAndResourcesEdit()
@@ -94,6 +93,8 @@ class OpenResourceApiController
             $exec->description = $_POST[Resource::Description];
             $exec->linkText = $_POST[Resource::LinkText];
             $exec->linkUrl = $_POST[Resource::LinkUrl];
+            $exec->clusters = $_POST[Resource::Clusters];
+
             if ($_POST[Resource::Image])
                 $exec->image = $_POST[Resource::Image];
             $exec->exec();
@@ -112,6 +113,10 @@ class OpenResourceApiController
         try {
             $this->resource->delete();
 
+            ResourceCluster
+                ::where(ResourceCluster::ResourceID, $this->resource->getId())
+                ->delete();
+
             return (new JsonResponse([], Response::HTTP_OK))->send();
         } catch (ErrorHandler $e) {
             return (new JsonResponse($e->getErrors(), Response::HTTP_FORBIDDEN))->send();
@@ -121,6 +126,16 @@ class OpenResourceApiController
     private function getObject()
     {
         $this->resource->{Resource::Image} = Image::UPLOAD_FOLDER_URL . $this->resource->{Resource::Image};
+        $clusters = new \stdClass();
+        ResourceCluster
+            ::where(ResourceCluster::ResourceID, $this->resource->getId())
+            ->get()
+            ->map(function (ResourceCluster $resourceCluster) use ($clusters) {
+                $clusters->{$resourceCluster->{ResourceCluster::ClusterID}} = 1;
+            });
+
+        $this->resource->{Resource::Clusters} = (array)$clusters;
+
         return (new JsonResponse($this->resource))->send();
     }
 
