@@ -39,6 +39,7 @@ angular
             $http.get($attrs.loadurl)
                 .then(function (response) {
                     $scope.resource = response.data.object;
+                    $scope.resource.author_id = $scope.resource.author_id.toString();
                     $scope.featuredImage = $scope.resource.image;
                 }, function (error) {
                     console.log({error});
@@ -48,6 +49,7 @@ angular
         // addResource
         (function () {
             $scope.saveResource = function () {
+                $scope.errors = {};
                 $scope.loading = true;
                 var data = {
                     title: $scope.resource.title,
@@ -55,6 +57,7 @@ angular
                     link_text: $scope.resource.link_text,
                     link_url: $scope.resource.link_url,
                     clusters: $scope.resource.clusters,
+                    author_id: $scope.resource.author_id,
                 };
                 if ($scope.featuredImageUpdated)
                     data.image = $scope.featuredImage;
@@ -69,9 +72,9 @@ angular
                         }, function () {
                             // window.location.href = response.data.object.url;
                         });
-                    }, function () {
+                    }, function (response) {
                         $scope.loading = false;
-                        $scope.errors = response.data.errors;
+                        $scope.errors = response.data.object;
                     });
             }
         }())
