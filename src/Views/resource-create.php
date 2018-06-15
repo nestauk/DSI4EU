@@ -1,6 +1,10 @@
 <?php
+
+use \Models\Resource;
+
 /** @var $urlHandler \Services\URL */
 /** @var $clusters \Models\Cluster[] */
+/** @var $authors \Models\AuthorOfResource[] */
 
 $angularModules['fileUpload'] = true;
 \DSI\Service\JsModules::setTinyMCE(true);
@@ -10,7 +14,7 @@ require __DIR__ . '/header.php'
 ?>
 
     <script type="text/javascript"
-            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/OpenResourceAddController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
+            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/OpenResourceCreateController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 
     <style>
         .progress {
@@ -26,7 +30,7 @@ require __DIR__ . '/header.php'
         }
     </style>
 
-    <div ng-controller="OpenResourceAddController">
+    <div ng-controller="OpenResourceCreateController">
 
         <div class="w-section page-header">
             <div class="container-wide header">
@@ -37,32 +41,41 @@ require __DIR__ . '/header.php'
         <div class="container-wide">
             <div class="body-content add-story">
                 <div class="w-form">
-                    <form class="w-clearfix" ng-submit="addResource()">
+                    <form class="w-clearfix" ng-submit="addResource()" ng-cloak>
                         <div class="w-row">
                             <div class="w-col w-col-6">
                                 <label class="story-label" for="Title">Title</label>
-                                <div style="color:red" ng-cloak ng-show="errors.title" ng-bind="errors.title"></div>
-                                <input class="w-input story-form" maxlength="256" ng-model="resource.title"
+                                <div style="color:red"
+                                     ng-show="errors.<?= Resource::Title ?>"
+                                     ng-bind="errors.<?= Resource::Title ?>"></div>
+                                <input class="w-input story-form" maxlength="256"
+                                       ng-model="resource.<?= Resource::Title ?>"
                                        style="border:1px solid #999;" placeholder="Add the title of your story"
                                        type="text"/>
 
                                 <label class="story-label">Description</label>
-                                <textarea ng-model="resource.description" class="w-input story-form"
+                                <textarea ng-model="resource.<?= Resource::Description ?>" class="w-input story-form"
                                           style="border:1px solid #999;" maxlength="140"></textarea>
 
                                 <label class="story-label" for="Title">Link text</label>
-                                <div style="color:red" ng-cloak ng-show="errors.link_text"
-                                     ng-bind="errors.link_text"></div>
-                                <input class="w-input story-form" maxlength="256" ng-model="resource.link_text"
+                                <div style="color:red"
+                                     ng-show="errors.<?= Resource::LinkText ?>"
+                                     ng-bind="errors.<?= Resource::LinkText ?>"></div>
+                                <input class="w-input story-form" maxlength="256"
+                                       ng-model="resource.<?= Resource::LinkText ?>"
                                        style="border:1px solid #999;" placeholder="" type="text"/>
 
                                 <label class="story-label" for="Title">Link url</label>
-                                <div style="color:red" ng-cloak ng-show="errors.link_url"
-                                     ng-bind="errors.link_url"></div>
-                                <input class="w-input story-form" maxlength="256" ng-model="resource.link_url"
+                                <div style="color:red"
+                                     ng-show="errors.<?= Resource::LinkUrl ?>"
+                                     ng-bind="errors.<?= Resource::LinkUrl ?>"></div>
+                                <input class="w-input story-form" maxlength="256"
+                                       ng-model="resource.<?= Resource::LinkUrl ?>"
                                        style="border:1px solid #999;" placeholder="" type="text"/>
 
-                                <div style="color:red" ng-cloak ng-show="errors.image" ng-bind="errors.image"></div>
+                                <div style="color:red"
+                                     ng-show="errors.<?= Resource::Image ?>"
+                                     ng-bind="errors.<?= Resource::Image ?>"></div>
                                 <label class="story-label" for="Title">Resource image</label>
                                 <img ng-show="featuredImage" class="story-image-upload"
                                      ng-src="{{featuredImage}}">
@@ -86,14 +99,29 @@ require __DIR__ . '/header.php'
 
                             <div class="w-col w-col-6">
                                 <label class="story-label" for="Title">Clusters</label>
-
                                 <?php foreach ($clusters AS $cluster) { ?>
                                     <label>
-                                        <input type="checkbox" ng-model="resource.clusters[<?= $cluster->getId() ?>]"
+                                        <input type="checkbox"
+                                               ng-model="resource.<?= Resource::Clusters ?>[<?= $cluster->getId() ?>]"
                                                value="1" ng-true-value="1" ng-false-value="0"/>
                                         <?= show_input($cluster->clusterLangs()->first()->{\Models\Relationship\ClusterLang::Title}) ?>
                                     </label>
                                 <?php } ?>
+
+                                <br>
+                                <div style="color:red"
+                                     ng-show="errors.<?= Resource::AuthorID ?>"
+                                     ng-bind="errors.<?= Resource::AuthorID ?>"></div>
+                                <label class="story-label">Author</label>
+                                <select name="author_id" title="author" ng-model="resource.<?= Resource::AuthorID ?>">
+                                    <option value=""> - Select an author -</option>
+
+                                    <?php foreach ($authors AS $author) { ?>
+                                        <option value="<?= $author->getId() ?>">
+                                            <?= _html($author->{\Models\AuthorOfResource::Name}) ?>
+                                        </option>
+                                    <?php } ?>
+                                </select>
                             </div>
                         </div>
 

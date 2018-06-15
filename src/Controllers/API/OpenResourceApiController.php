@@ -53,6 +53,7 @@ class OpenResourceApiController
             $exec->linkUrl = $_POST[Resource::LinkUrl];
             $exec->image = $_POST[Resource::Image];
             $exec->clusters = $_POST[Resource::Clusters];
+            $exec->authorID = $_POST[Resource::AuthorID];
 
             $exec->exec();
             return (new JsonResponse([
@@ -94,6 +95,7 @@ class OpenResourceApiController
             $exec->linkText = $_POST[Resource::LinkText];
             $exec->linkUrl = $_POST[Resource::LinkUrl];
             $exec->clusters = $_POST[Resource::Clusters];
+            $exec->authorID = $_POST[Resource::AuthorID];
 
             if ($_POST[Resource::Image])
                 $exec->image = $_POST[Resource::Image];
@@ -125,7 +127,11 @@ class OpenResourceApiController
 
     private function getObject()
     {
-        $this->resource->{Resource::Image} = Image::UPLOAD_FOLDER_URL . $this->resource->{Resource::Image};
+        $this->resource->{Resource::Image} =
+            $this->resource->{Resource::Image} ?
+                Image::UPLOAD_FOLDER_URL . $this->resource->{Resource::Image} :
+                '';
+        
         $clusters = new \stdClass();
         ResourceCluster
             ::where(ResourceCluster::ResourceID, $this->resource->getId())

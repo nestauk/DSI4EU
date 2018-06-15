@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Resource extends Model
 {
     const TABLE = 'resources';
-    protected $table = self::TABLE;
     public $timestamps = false;
+    protected $table = self::TABLE;
 
     const Id = 'id';
     const Image = 'image';
@@ -17,6 +17,7 @@ class Resource extends Model
     const LinkUrl = 'link_url';
     const LinkText = 'link_text';
     const Clusters = 'clusters';
+    const AuthorID = 'author_id';
 
     public function getId()
     {

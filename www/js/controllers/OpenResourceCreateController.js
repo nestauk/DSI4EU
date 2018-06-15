@@ -1,6 +1,6 @@
 angular
     .module(angularAppName)
-    .controller('OpenResourceAddController', function ($scope, $http, Upload) {
+    .controller('OpenResourceCreateController', function ($scope, $http, Upload) {
         // image
         (function () {
             $scope.featuredImageUpload = {};
@@ -32,6 +32,8 @@ angular
             };
         }());
 
+        $scope.resource = {};
+
         // addResource
         (function () {
             $scope.addResource = function () {
@@ -43,6 +45,7 @@ angular
                     link_text: $scope.resource.link_text,
                     link_url: $scope.resource.link_url,
                     clusters: $scope.resource.clusters,
+                    author_id: $scope.resource.author_id,
                     image: $scope.featuredImage,
                 };
                 $http.post('/api/open-resource/', data)
@@ -57,8 +60,7 @@ angular
                         });
                     }, function (response) {
                         $scope.loading = false;
-                        $scope.errors = response.data.object
-                        console.log(response.data.object);
+                        $scope.errors = response.data.object;
                     });
             }
         }())
