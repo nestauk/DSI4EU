@@ -46,7 +46,7 @@ angular
                 })
         }());
 
-        // addResource
+        // saveResource
         (function () {
             $scope.saveResource = function () {
                 $scope.errors = {};
@@ -57,6 +57,7 @@ angular
                     link_text: $scope.resource.link_text,
                     link_url: $scope.resource.link_url,
                     clusters: $scope.resource.clusters,
+                    types: $scope.resource.types,
                     author_id: $scope.resource.author_id,
                 };
                 if ($scope.featuredImageUpdated)

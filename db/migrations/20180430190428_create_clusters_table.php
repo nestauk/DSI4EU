@@ -1,5 +1,4 @@
 <?php
-require_once __DIR__ . '/../../src/include.php';
 
 use Phinx\Migration\AbstractMigration;
 use Illuminate\Database\Capsule\Manager as Capsule;

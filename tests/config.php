@@ -1,7 +1,9 @@
 <?php
 
-define('NO_SESSION', true);
-require_once __DIR__ . '/../src/include.php';
+require __DIR__ . '/../src/kernel.php';
+$config = Kernel::loadConfigFile(__DIR__ . '/../config/app.php');
+$config['env'] = 'test';
+Kernel::setConfig($config);
 
 \DSI\Repository\OrganisationRepoInAPC::setApcKey(
     'digitalSocialTest:organisations'
@@ -9,11 +11,3 @@ require_once __DIR__ . '/../src/include.php';
 \DSI\Repository\ProjectRepoInAPC::setApcKey(
     'digitalSocialTest:projects'
 );
-
-\DSI\Service\SQL::setCredentials(array(
-    'username' => 'root',
-    'password' => '',
-    'db' => 'dsi-test',
-));
-
-\Services\App::setEnv(\Services\App::TEST);

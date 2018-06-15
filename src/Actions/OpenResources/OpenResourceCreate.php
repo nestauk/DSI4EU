@@ -6,6 +6,7 @@ use Actions\Uploads\MoveUploadedFromTemp;
 use DSI\Entity\User;
 use DSI\Service\ErrorHandler;
 use Models\Relationship\ResourceCluster;
+use Models\Relationship\ResourceType;
 use Models\Resource;
 
 class OpenResourceCreate
@@ -30,7 +31,8 @@ class OpenResourceCreate
     public $authorID;
 
     /** @var int[] */
-    public $clusters;
+    public $clusters,
+        $types;
 
     public function __construct()
     {
@@ -86,6 +88,7 @@ class OpenResourceCreate
 
         $this->resource->save();
         $this->saveClusters($this->resource);
+        $this->saveTypes($this->resource);
     }
 
     private function saveClusters(Resource $resource)
@@ -100,6 +103,22 @@ class OpenResourceCreate
                 $resourceCluster->{ResourceCluster::ResourceID} = $resource->getId();
                 $resourceCluster->{ResourceCluster::ClusterID} = $clusterID;
                 $resourceCluster->save();
+            }
+        }
+    }
+
+    private function saveTypes(Resource $resource)
+    {
+        ResourceType
+            ::where(ResourceType::ResourceID, $resource->getId())
+            ->delete();
+
+        foreach ((array)$this->types AS $typeID => $value) {
+            if ($value == "1") {
+                $resourceType = new ResourceType();
+                $resourceType->{ResourceType::ResourceID} = $resource->getId();
+                $resourceType->{ResourceType::TypeID} = $typeID;
+                $resourceType->save();
             }
         }
     }

@@ -7,6 +7,7 @@ use DSI\Entity\User;
 use DSI\NotEnoughData;
 use DSI\Service\ErrorHandler;
 use Models\Relationship\ResourceCluster;
+use Models\Relationship\ResourceType;
 use Models\Resource;
 
 class OpenResourceEdit
@@ -31,7 +32,8 @@ class OpenResourceEdit
     public $authorID;
 
     /** @var int[] */
-    public $clusters;
+    public $clusters,
+        $types;
 
     public function __construct()
     {
@@ -73,6 +75,7 @@ class OpenResourceEdit
         $this->resource->save();
 
         $this->saveClusters($this->resource);
+        $this->saveTypes($this->resource);
     }
 
     private function saveImage(Resource $resource)
@@ -99,6 +102,22 @@ class OpenResourceEdit
                 $resourceCluster->{ResourceCluster::ResourceID} = $resource->getId();
                 $resourceCluster->{ResourceCluster::ClusterID} = $clusterID;
                 $resourceCluster->save();
+            }
+        }
+    }
+
+    private function saveTypes(Resource $resource)
+    {
+        ResourceType
+            ::where(ResourceType::ResourceID, $resource->getId())
+            ->delete();
+
+        foreach ((array)$this->types AS $typeID => $value) {
+            if ($value == "1") {
+                $resourceType = new ResourceType();
+                $resourceType->{ResourceType::ResourceID} = $resource->getId();
+                $resourceType->{ResourceType::TypeID} = $typeID;
+                $resourceType->save();
             }
         }
     }

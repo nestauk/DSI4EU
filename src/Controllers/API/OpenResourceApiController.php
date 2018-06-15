@@ -9,6 +9,7 @@ use DSI\Entity\User;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use Models\Relationship\ResourceCluster;
+use Models\Relationship\ResourceType;
 use Models\Resource;
 use Services\URL;
 use Services\Request;
@@ -53,6 +54,7 @@ class OpenResourceApiController
             $exec->linkUrl = $_POST[Resource::LinkUrl];
             $exec->image = $_POST[Resource::Image];
             $exec->clusters = $_POST[Resource::Clusters];
+            $exec->types = $_POST[Resource::Types];
             $exec->authorID = $_POST[Resource::AuthorID];
 
             $exec->exec();
@@ -95,6 +97,7 @@ class OpenResourceApiController
             $exec->linkText = $_POST[Resource::LinkText];
             $exec->linkUrl = $_POST[Resource::LinkUrl];
             $exec->clusters = $_POST[Resource::Clusters];
+            $exec->types = $_POST[Resource::Types];
             $exec->authorID = $_POST[Resource::AuthorID];
 
             if ($_POST[Resource::Image])
@@ -119,6 +122,10 @@ class OpenResourceApiController
                 ::where(ResourceCluster::ResourceID, $this->resource->getId())
                 ->delete();
 
+            ResourceType
+                ::where(ResourceCluster::ResourceID, $this->resource->getId())
+                ->delete();
+
             return (new JsonResponse([], Response::HTTP_OK))->send();
         } catch (ErrorHandler $e) {
             return (new JsonResponse($e->getErrors(), Response::HTTP_FORBIDDEN))->send();
@@ -131,7 +138,7 @@ class OpenResourceApiController
             $this->resource->{Resource::Image} ?
                 Image::UPLOAD_FOLDER_URL . $this->resource->{Resource::Image} :
                 '';
-        
+
         $clusters = new \stdClass();
         ResourceCluster
             ::where(ResourceCluster::ResourceID, $this->resource->getId())
@@ -139,8 +146,16 @@ class OpenResourceApiController
             ->map(function (ResourceCluster $resourceCluster) use ($clusters) {
                 $clusters->{$resourceCluster->{ResourceCluster::ClusterID}} = 1;
             });
-
         $this->resource->{Resource::Clusters} = (array)$clusters;
+
+        $types = new \stdClass();
+        ResourceType
+            ::where(ResourceType::ResourceID, $this->resource->getId())
+            ->get()
+            ->map(function (ResourceType $resourceType) use ($types) {
+                $types->{$resourceType->{ResourceType::TypeID}} = 1;
+            });
+        $this->resource->{Resource::Types} = (array)$types;
 
         return (new JsonResponse($this->resource))->send();
     }
