@@ -1,8 +1,10 @@
 <?php
 
-namespace Models;
+namespace Models\Relationship;
 
 use Illuminate\Database\Eloquent\Model;
+use Models\Cluster;
+use \Models\Relationship\ClusterImg;
 
 class ClusterLang extends Model
 {

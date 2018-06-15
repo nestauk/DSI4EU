@@ -2,9 +2,9 @@
 
 require_once __DIR__ . '/../../../config.php';
 
-use \DSI\Repository\AppRegistrationRepo;
-use \DSI\Entity\AppRegistration;
 use \DSI\Repository\UserRepo;
+
+use \Models\Relationship\ClusterLang;
 
 class ClusterLangCreateTest extends PHPUnit_Framework_TestCase
 {
@@ -20,7 +20,7 @@ class ClusterLangCreateTest extends PHPUnit_Framework_TestCase
     {
         $this->userRepository->clearAll();
         \Models\Cluster::truncate();
-        \Models\ClusterLang::truncate();
+        ClusterLang::truncate();
     }
 
     /** @test */

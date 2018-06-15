@@ -1,6 +1,6 @@
 <?php
 
-namespace Models;
+namespace Models\Relationship;
 
 use Illuminate\Database\Eloquent\Model;
 

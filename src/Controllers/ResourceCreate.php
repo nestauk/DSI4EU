@@ -4,6 +4,8 @@ namespace Controllers;
 
 use DSI\Entity\User;
 use DSI\Service\Auth;
+use Models\Cluster;
+use Models\Relationship\ClusterLang;
 use Models\Text;
 use Services\URL;
 use Services\Request;
@@ -44,6 +46,11 @@ class ResourceCreate
     {
         return View::render(__DIR__ . '/../Views/resource-create.php', [
             'loggedInUser' => $this->loggedInUser,
+            'clusters' => Cluster
+                ::with(['clusterLangs' => function ($query) {
+                    $query->where(ClusterLang::Lang, 'en');
+                }])
+                ->get(),
         ]);
     }
 }

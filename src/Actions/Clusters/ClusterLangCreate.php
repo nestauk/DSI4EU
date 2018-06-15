@@ -3,7 +3,7 @@
 namespace Actions\Clusters;
 
 use DSI\Service\ErrorHandler;
-use Models\ClusterLang;
+use Models\Relationship\ClusterLang;
 
 class ClusterLangCreate
 {

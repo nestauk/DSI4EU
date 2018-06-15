@@ -16,6 +16,7 @@ class Resource extends Model
     const Description = 'description';
     const LinkUrl = 'link_url';
     const LinkText = 'link_text';
+    const Clusters = 'clusters';
 
     public function getId()
     {

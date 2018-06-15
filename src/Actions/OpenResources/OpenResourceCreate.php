@@ -5,6 +5,7 @@ namespace Actions\OpenResources;
 use Actions\Uploads\MoveUploadedFromTemp;
 use DSI\Entity\User;
 use DSI\Service\ErrorHandler;
+use Models\Relationship\ResourceCluster;
 use Models\Resource;
 
 class OpenResourceCreate
@@ -24,6 +25,9 @@ class OpenResourceCreate
         $linkText,
         $linkUrl,
         $image;
+
+    /** @var int[] */
+    public $clusters;
 
     public function __construct()
     {
@@ -52,7 +56,7 @@ class OpenResourceCreate
             $this->errorHandler->addTaggedError('link_text', 'Please type link text');
         if (trim($this->linkUrl) == '')
             $this->errorHandler->addTaggedError('link_url', 'Please type link url');
-        if (trim($this->image) == '')
+        if ($this->image AND trim($this->image) == '')
             $this->errorHandler->addTaggedError('image', 'Please upload an resource image');
 
         $this->errorHandler->throwIfNotEmpty();
@@ -60,17 +64,37 @@ class OpenResourceCreate
 
     private function createResource()
     {
-        $exec = new MoveUploadedFromTemp();
-        $exec->fileName = $this->image;
-        $exec->user = $this->executor;
-        $exec->exec();
-
         $this->resource = new Resource();
         $this->resource->{Resource::Title} = $this->title;
         $this->resource->{Resource::Description} = $this->description;
         $this->resource->{Resource::LinkText} = $this->linkText;
         $this->resource->{Resource::LinkUrl} = $this->linkUrl;
-        $this->resource->{Resource::Image} = $exec->getNewFileName();
+
+        if ($this->image) {
+            $exec = new MoveUploadedFromTemp();
+            $exec->fileName = $this->image;
+            $exec->user = $this->executor;
+            $exec->exec();
+            $this->resource->{Resource::Image} = $exec->getNewFileName();
+        }
+
         $this->resource->save();
+        $this->saveClusters($this->resource);
+    }
+
+    private function saveClusters(Resource $resource)
+    {
+        ResourceCluster
+            ::where(ResourceCluster::ResourceID, $resource->getId())
+            ->delete();
+
+        foreach ((array)$this->clusters AS $clusterID => $value) {
+            if ($value == "1") {
+                $resourceCluster = new ResourceCluster();
+                $resourceCluster->{ResourceCluster::ResourceID} = $resource->getId();
+                $resourceCluster->{ResourceCluster::ClusterID} = $clusterID;
+                $resourceCluster->save();
+            }
+        }
     }
 }
