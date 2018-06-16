@@ -17,6 +17,6 @@ class View
 
         require($view);
 
-        return false;
+        return true;
     }
 }

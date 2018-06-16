@@ -1,12 +1,14 @@
 <?php
-require __DIR__ . '/header.php';
+$angularModules['fileUpload'] = true;
+\DSI\Service\JsModules::setTinyMCE(true);
+\DSI\Service\JsModules::setJqueryUI(true);
+
+require __DIR__ . '/../header.php';
 /** @var $loggedInUser \DSI\Entity\User */
 /** @var $caseStudy \DSI\Entity\CaseStudy */
+/** @var $urlHandler \Services\URL */
+/** @var $tags \Models\Tag[] */
 ?>
-
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-
     <div ng-controller="CaseStudyEditController" data-casestudyid="<?php echo $caseStudy->getId() ?>">
         <div class="content-block">
             <div class="w-row">
@@ -17,7 +19,7 @@ require __DIR__ . '/header.php';
                 <div class="sidebar w-col w-col-4">
                     <h1 class="content-h1">Actions</h1>
                     <a class="sidebar-link" href="<?php echo $urlHandler->addCaseStudy() ?>"><span
-                            class="green">-&nbsp;</span>Add new case study</a>
+                                class="green">-&nbsp;</span>Add new case study</a>
                     <a class="sidebar-link" href="<?php echo $urlHandler->caseStudy($caseStudy) ?>"><span class="green">-&nbsp;</span>Cancel</a>
                 </div>
             </div>
@@ -52,18 +54,22 @@ require __DIR__ . '/header.php';
                                 <br/>
                                 <h2 class="edit-h2">Project</h2>
                                 <select class="creator-data-entry w-input" ng-model="caseStudy.projectID">
-                                    <option value="0"> - None selected - </option>
-                                    <option ng-repeat="option in caseStudy.projects" value="{{option.id}}">{{option.name}}</option>
+                                    <option value="0"> - None selected -</option>
+                                    <option ng-repeat="option in caseStudy.projects" value="{{option.id}}">
+                                        {{option.name}}
+                                    </option>
                                 </select>
 
                                 <br/>
                                 <h2 class="edit-h2">Organisation</h2>
                                 <select class="creator-data-entry w-input" ng-model="caseStudy.organisationID">
-                                    <option value="0"> - None selected - </option>
-                                    <option ng-repeat="option in caseStudy.organisations" value="{{option.id}}">{{option.name}}</option>
+                                    <option value="0"> - None selected -</option>
+                                    <option ng-repeat="option in caseStudy.organisations" value="{{option.id}}">
+                                        {{option.name}}
+                                    </option>
                                 </select>
-                            </div>
-                            <div class="form-col-right w-col w-col-6">
+
+                                <br>
                                 <h2 class="edit-h2">Info Box</h2>
 
                                 <label for="name-3">Info Text:</label>
@@ -80,6 +86,21 @@ require __DIR__ . '/header.php';
                                        ng-model="caseStudy.buttonLabel"
                                        placeholder="This text will appear on the button for the above link"
                                        type="text">
+                            </div>
+                            <div class="form-col-right w-col w-col-6">
+                                <h2 class="edit-h2">Tags</h2>
+                                <?php foreach ($tags AS $tag) { ?>
+                                    <div class="w-radio">
+                                        <label class="w-form-label">
+                                            <input class="w-radio-input" type="checkbox"
+                                                   ng-model="caseStudy.tags[<?= $tag->getId() ?>]"
+                                                   value="1" ng-true-value="1" ng-false-value="0">
+                                            <?= $tag->getName() ?>
+                                        </label>
+                                    </div>
+                                <?php } ?>
+
+                                <br>
                                 <h2 class="edit-h2">Case study visuals</h2>
                                 <div class="w-row">
                                     <?php /* <div class="w-col w-col-4">
@@ -246,4 +267,4 @@ require __DIR__ . '/header.php';
         });
     </script>
 
-<?php require __DIR__ . '/footer.php' ?>
+<?php require __DIR__ . '/../footer.php' ?>

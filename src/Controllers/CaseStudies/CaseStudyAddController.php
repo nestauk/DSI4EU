@@ -1,6 +1,6 @@
 <?php
 
-namespace DSI\Controller;
+namespace Controllers\CaseStudies;
 
 use DSI\Entity\User;
 use DSI\Repository\OrganisationRepoInAPC;
@@ -8,8 +8,10 @@ use DSI\Repository\ProjectRepoInAPC;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\JsModules;
+use Models\Tag;
 use Services\URL;
 use DSI\UseCase\CaseStudy\CaseStudyCreate;
+use Services\View;
 
 class CaseStudyAddController
 {
@@ -22,6 +24,10 @@ class CaseStudyAddController
 
         if (!$this->userCanAddCaseStudy($loggedInUser))
             go_to($urlHandler->home());
+
+        $tags = Tag::where(Tag::IsMain, 1)
+            ->orderBy(Tag::Order, 'desc')
+            ->get();
 
         if (isset($_POST['add'])) {
             try {
@@ -41,6 +47,7 @@ class CaseStudyAddController
                 $createCaseStudy->data()->cardBgImage = $_POST['cardImage'] ?? '';
                 $createCaseStudy->data()->projectID = (int)($_POST['projectID'] ?? 0);
                 $createCaseStudy->data()->organisationID = (int)($_POST['organisationID'] ?? 0);
+                $createCaseStudy->tagIDs = (array)$_POST['tags'];
                 $createCaseStudy->exec();
                 $caseStudy = $createCaseStudy->getCaseStudy();
 
@@ -57,18 +64,18 @@ class CaseStudyAddController
             return;
         }
 
-        $angularModules['fileUpload'] = true;
-        $projects = (new ProjectRepoInAPC())->getAll();
-        $organisations = (new OrganisationRepoInAPC())->getAll();
-        JsModules::setTinyMCE(true);
-        require(__DIR__ . '/../../../www/views/case-study-add.php');
+        return View::render(__DIR__ . '/../../Views/case-studies/case-study-add.php', [
+            'projects' => (new ProjectRepoInAPC())->getAll(),
+            'organisations' => (new OrganisationRepoInAPC())->getAll(),
+            'tags' => $tags,
+        ]);
     }
 
     /**
      * @param User $loggedInUser
      * @return bool
      */
-    private function userCanAddCaseStudy(User $loggedInUser):bool
+    private function userCanAddCaseStudy(User $loggedInUser): bool
     {
         $userCanAddCaseStudy = (bool)($loggedInUser AND ($loggedInUser->isCommunityAdmin() OR $loggedInUser->isEditorialAdmin()));
         return $userCanAddCaseStudy;
