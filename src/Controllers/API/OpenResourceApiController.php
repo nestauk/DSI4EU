@@ -160,6 +160,40 @@ class OpenResourceApiController
         return (new JsonResponse($this->resource))->send();
     }
 
+    public function getObjects()
+    {
+        $resources = Resource::all()
+            ->map(function (Resource $resource) {
+
+                $resource->{Resource::Image} =
+                    $resource->{Resource::Image} ?
+                        Image::UPLOAD_FOLDER_URL . $resource->{Resource::Image} :
+                        '';
+
+                $clusters = new \stdClass();
+                ResourceCluster
+                    ::where(ResourceCluster::ResourceID, $resource->getId())
+                    ->get()
+                    ->map(function (ResourceCluster $resourceCluster) use ($clusters) {
+                        $clusters->{$resourceCluster->{ResourceCluster::ClusterID}} = 1;
+                    });
+                $resource->{Resource::Clusters} = (array)$clusters;
+
+                $types = new \stdClass();
+                ResourceType
+                    ::where(ResourceType::ResourceID, $resource->getId())
+                    ->get()
+                    ->map(function (ResourceType $resourceType) use ($types) {
+                        $types->{$resourceType->{ResourceType::TypeID}} = 1;
+                    });
+                $resource->{Resource::Types} = (array)$types;
+
+                return $resource;
+            });
+
+        return (new JsonResponse($resources))->send();
+    }
+
     /**
      * @return bool
      */
