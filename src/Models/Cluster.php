@@ -22,4 +22,10 @@ class Cluster extends Model
     {
         return $this->hasMany(ClusterLang::class, ClusterLang::ClusterID, self::Id);
     }
+
+    /** @return ClusterLang */
+    public function getClusterLang()
+    {
+        return $this->clusterLangs()->first();
+    }
 }

@@ -299,6 +299,9 @@ class Router
         } elseif (preg_match('<^/' . $langHandler . 'edit/open-data-research-and-resources$>', $this->pageURL, $matches)) {
             $this->openDataEdit($matches);
 
+        } elseif (preg_match('<^/' . $langHandler . 'api/open-resources$>', $this->pageURL, $matches)) {
+            $this->openResourcesApi($matches);
+
         } elseif (preg_match('<^/' . $langHandler . 'open-resource/edit/new$>', $this->pageURL, $matches)) {
             $this->newResource($matches);
 
@@ -1157,6 +1160,12 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
         return (new \Controllers\API\OpenResourceApiController())->createObject();
+    }
+
+    private function openResourcesApi($matches)
+    {
+        $this->setLanguageFromUrl($matches);
+        return (new \Controllers\API\OpenResourceApiController())->getObjects();
     }
 
     private function openResourceEditApi($matches)
