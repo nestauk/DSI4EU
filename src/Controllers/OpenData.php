@@ -4,8 +4,13 @@ namespace Controllers;
 
 use DSI\Entity\User;
 use DSI\Service\Auth;
+use DSI\Service\Translate;
+use Models\AuthorOfResource;
+use Models\Cluster;
+use Models\Relationship\ClusterLang;
 use Models\Resource;
 use Models\Text;
+use Models\TypeOfResource;
 use Services\URL;
 use Services\Request;
 use Services\Response;
@@ -41,6 +46,13 @@ class OpenData
             'subText' => $subText,
             'canEdit' => $this->canEdit(),
             'resources' => Resource::all(),
+            'authors' => AuthorOfResource::all(),
+            'clusters' => Cluster
+                ::with(['clusterLangs' => function ($query) {
+                    $query->where(ClusterLang::Lang, Translate::getCurrentLang());
+                }])
+                ->get(),
+            'types' => TypeOfResource::all(),
         ]);
     }
 

@@ -67,6 +67,23 @@
   }
 }
 
+.resources-controller{
+  .grid-item {
+    width: 50%;
+    // width: 33.3333333%
+  }
+
+  @media screen and (max-width: 767px) {
+    .grid-item {
+      width: 100%;
+    }
+  }
+
+  .info-card.resource{
+    margin:10px;
+  }
+}
+
 body {
   .twitter-block {
     height: 100px;
