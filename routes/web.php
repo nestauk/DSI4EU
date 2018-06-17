@@ -817,7 +817,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\CaseStudyController();
+        $command = new \Controllers\CaseStudies\CaseStudyController();
         $command->caseStudyID = $matches[3];
         $command->exec();
     }
@@ -980,7 +980,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\CaseStudiesController();
+        $command = new \Controllers\CaseStudies\CaseStudiesController();
         $command->exec();
     }
 
@@ -988,7 +988,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\CaseStudiesController();
+        $command = new \Controllers\CaseStudies\CaseStudiesController();
         $command->format = 'json';
         $command->exec();
     }

@@ -65,6 +65,7 @@ class CaseStudyAddController
         }
 
         return View::render(__DIR__ . '/../../Views/case-studies/case-study-add.php', [
+            'loggedInUser' => $loggedInUser,
             'projects' => (new ProjectRepoInAPC())->getAll(),
             'organisations' => (new OrganisationRepoInAPC())->getAll(),
             'tags' => $tags,

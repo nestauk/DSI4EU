@@ -3,6 +3,7 @@
 namespace Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Models\Relationship\CaseStudyTag;
 use \Models\Relationship\ClusterLang;
 
 class CaseStudy extends Model
@@ -35,5 +36,17 @@ class CaseStudy extends Model
     public function getId()
     {
         return $this->{self::Id};
+    }
+
+    public function caseStudyTags()
+    {
+        return $this->hasMany(CaseStudyTag::class, CaseStudyTag::CaseStudyID, self::Id);
+    }
+
+    public function caseStudyTagIDs()
+    {
+        return $this->caseStudyTags->map(function (CaseStudyTag $caseStudyTag) {
+            return $caseStudyTag->{CaseStudyTag::TagID};
+        });
     }
 }

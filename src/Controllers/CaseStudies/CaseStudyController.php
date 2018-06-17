@@ -1,10 +1,11 @@
 <?php
 
-namespace DSI\Controller;
+namespace Controllers\CaseStudies;
 
 use DSI\Repository\CaseStudyRepo;
 use DSI\Service\Auth;
 use Services\URL;
+use Services\View;
 
 class CaseStudyController
 {
@@ -13,7 +14,6 @@ class CaseStudyController
 
     public function exec()
     {
-        $urlHandler = new URL();
         $authUser = new Auth();
         $loggedInUser = $authUser->getUserIfLoggedIn();
 
@@ -25,7 +25,11 @@ class CaseStudyController
         $caseStudies = $caseStudyRepo->getAll();
         $caseStudies = array_splice($caseStudies, 0, 3);
 
-        $pageTitle = $caseStudy->getTitle();
-        require __DIR__ . '/../../../www/views/case-study.php';
+        View::render(__DIR__ . '/../../Views/case-studies/case-study.php', [
+            'loggedInUser' => $loggedInUser,
+            'userCanAddCaseStudy' => $userCanAddCaseStudy,
+            'caseStudy' => $caseStudy,
+            'caseStudies' => $caseStudies,
+        ]);
     }
 }
