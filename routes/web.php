@@ -563,7 +563,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\StoriesController();
+        $command = new \Controllers\Stories\StoriesController();
         $command->exec();
     }
 
@@ -571,7 +571,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\StoriesController();
+        $command = new \Controllers\Stories\StoriesController();
         $command->format = 'json';
         $command->exec();
     }
@@ -580,7 +580,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\StoryAddController();
+        $command = new \Controllers\Stories\StoryAddController();
         $command->exec();
     }
 
@@ -864,7 +864,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\StoryController();
+        $command = new \Controllers\Stories\StoryController();
         $command->data()->storyID = $matches[3];
         $command->exec();
     }
@@ -873,7 +873,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\StoryEditController();
+        $command = new \Controllers\Stories\StoryEditController();
         $command->storyID = $matches[3];
         $command->format = $format;
         $command->exec();
