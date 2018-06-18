@@ -1,7 +1,12 @@
 <?php
-require __DIR__ . '/header.php';
 /** @var $userCanAddStory bool */
 /** @var $urlHandler Services\URL */
+
+$angularModules['animate'] = true;
+$angularModules['pagination'] = true;
+$pageTitle = 'Stories';
+
+require __DIR__ . '/../header.php';
 ?>
 
     <style>
@@ -40,14 +45,14 @@ require __DIR__ . '/header.php';
         <div class="content-block">
             <div class="w-row">
                 <div class="w-col w-col-8 w-col-stack">
-                    <h1 class="content-h1"><?php _ehtml('News & blogs')?></h1>
-                    <p class="intro"><?php _ehtml('Stay up to date with news, events, and blogs')?></p>
+                    <h1 class="content-h1"><?php _ehtml('News & blogs') ?></h1>
+                    <p class="intro"><?php _ehtml('Stay up to date with news, events, and blogs') ?></p>
                 </div>
                 <?php if ($userCanAddStory) { ?>
                     <div class="sidebar w-col w-col-4 w-col-stack">
                         <h1 class="content-h1 side-bar-space-h1">Actions</h1>
                         <a class="sidebar-link" href="<?php echo $urlHandler->blogPostAdd() ?>"><span
-                                class="green">- </span>Add new post</a>
+                                    class="green">- </span>Add new post</a>
                     </div>
                 <?php } ?>
 
@@ -101,7 +106,7 @@ require __DIR__ . '/header.php';
     </div>
 
     <script type="text/javascript"
-            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/StoriesController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
+            src="/js/controllers/StoriesController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 
     <script type="text/javascript">
         $('#lisStories').on('mouseenter', '.admin-edit', function () {
@@ -111,4 +116,4 @@ require __DIR__ . '/header.php';
         });
     </script>
 
-<?php require __DIR__ . '/footer.php' ?>
+<?php require __DIR__ . '/../footer.php' ?>

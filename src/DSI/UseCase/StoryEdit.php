@@ -37,11 +37,12 @@ class StoryEdit
         $this->assertDataHasBeenSent();
         $this->assertSentDataIsValid();
 
+        $author = (new UserRepo())->getById($this->data->writerID);
         $story = $this->storyRepo->getById($this->data()->id);
         $story->setTitle((string)$this->data()->title);
         $story->setCardShortDescription((string)$this->data()->cardShortDescription);
         $story->setContent((string)$this->data()->content);
-        // $this->setAuthor($story);
+        $story->setAuthor($author);
         $this->setFeaturedImage($story);
         $this->setMainImage($story);
         $this->setDatePublished($story);
@@ -91,8 +92,12 @@ class StoryEdit
         }
         */
 
-        if ($this->data()->title == '') {
+        if (!$this->data()->title) {
             $this->errorHandler->addTaggedError('title', 'Please type a story title');
+            throw $this->errorHandler;
+        }
+        if (!$this->data()->writerID) {
+            $this->errorHandler->addTaggedError('writer', 'Please select an author');
             throw $this->errorHandler;
         }
     }
@@ -139,15 +144,6 @@ class StoryEdit
             $updateFeatImage->exec();
         }
     }
-
-    /**
-     * @param $story
-     */
-    private function setAuthor(Story $story)
-    {
-        $author = (new UserRepo())->getById($this->data()->authorID);
-        $story->setAuthor($author);
-    }
 }
 
 class StoryEdit_Data
@@ -157,7 +153,7 @@ class StoryEdit_Data
         $title,
         $cardShortDescription,
         $content,
-        $authorID,
+        $writerID,
         $featuredImage,
         $mainImage,
         $isPublished,
