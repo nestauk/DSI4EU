@@ -82,7 +82,8 @@ use Services\URL;
                         </label>
 
                         <br>
-                        You can unsubscribe by clicking the link in our emails, or emailing info@nesta.org.uk. We
+                        You can unsubscribe by clicking the link in our emails, or emailing
+                        <a href="mailto:info@nesta.org.uk">info@nesta.org.uk</a>. We
                         promise to keep your details safe and secure. We won’t share your details outside of Nesta
                         without your permission. Find out more about how we use personal information in our
                         <a target="_blank" href="<?= $urlHandler->privacyPolicy() ?>">Privacy Policy</a>.

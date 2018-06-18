@@ -17,7 +17,6 @@ use Services\URL;
             <a href="<?php echo $urlHandler->home() ?>">
                 <img class="log-in-logo" src="/images/dark_1.svg">
             </a>
-            <h2><?php _ehtml('Accept Policy') ?></h2>
 
             <div class="form-wrapper w-form">
                 <form id="email-form" method="post"
@@ -27,7 +26,7 @@ use Services\URL;
                         <label>
                             <input type="checkbox" name="accept-terms" <?= $_POST['accept-terms'] ? 'checked' : '' ?>>
                             I accept that all data provided, with the exception of my email address, will be available
-                            publicly on digitalsocial.eu
+                            publicly on digitalsocial.eu.
                         </label>
                         <?php if (isset($errors['accept-terms'])) { ?>
                             <div class="log-in-error">
@@ -49,10 +48,11 @@ use Services\URL;
                         </label>
 
                         <br>
-                        You can unsubscribe by clicking the link in our emails, or emailing info@nesta.org.uk. We
+                        You can unsubscribe by clicking the link in our emails, or emailing
+                        <a href="mailto:info@nesta.org.uk">info@nesta.org.uk</a>. We
                         promise to keep your details safe and secure. We won’t share your details outside of Nesta
-                        without your permission. Find out more about how we use personal information in our Privacy
-                        Policy.
+                        without your permission. Find out more about how we use personal information in our
+                        <a target="_blank" href="<?= $urlHandler->privacyPolicy() ?>">Privacy Policy</a>.
                     </div>
 
                     <div class="modal-footer">
