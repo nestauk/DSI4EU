@@ -51,6 +51,24 @@
   }
 }
 
+.cluster-controller {
+  .cluster-image {
+    float: left;
+    width: 33.333333%;
+    text-align: center;
+
+    @media screen and (max-width: 767px) {
+      float: none;
+      width: 100%;
+    }
+
+    img {
+      min-width: 30%;
+      max-width: 90%;
+    }
+  }
+}
+
 .edit-open-data-controller {
   .edit-resource, .delete-resource {
     width: 50%;

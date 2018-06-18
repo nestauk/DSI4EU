@@ -5,7 +5,7 @@ require __DIR__ . '/../header.php'
 /** @var $cluster \Models\Relationship\ClusterLang */
 /** @var $canEdit bool */
 ?>
-    <div>
+    <div class="cluster-controller">
         <div class="content-block">
             <div class="w-row">
                 <div class="w-col w-col-8 w-col-stack">
@@ -14,13 +14,13 @@ require __DIR__ . '/../header.php'
                     <div><?php echo $cluster->getDescription() ?></div>
                     <div><?php echo $cluster->getGetInTouch() ?></div>
                     <?php foreach ($cluster->getImages() AS $image) { ?>
-                        <div style="margin:10px">
+                        <div class="cluster-image">
                             <a href="<?= $image->getLink() ?>" target="_blank">
-                                <img src="<?= \DSI\Entity\Image::UPLOAD_FOLDER_URL . $image->getFilename() ?>"
-                                     style="height: 100px"/>
+                                <img src="<?= \DSI\Entity\Image::UPLOAD_FOLDER_URL . $image->getFilename() ?>"/>
                             </a>
                         </div>
                     <?php } ?>
+                    <div style="clear: both;"></div>
                 </div>
                 <?php if ($canEdit) { ?>
                     <div class="sidebar w-col w-col-4 w-col-stack">
