@@ -369,7 +369,7 @@ $totalOrganisations = (new \DSI\Repository\OrganisationRepoInAPC())->countAll();
                         Wales with company number 7706036 and charity number 1144091.</em></p>
                 <p><em>Registered as a charity in Scotland number SC042833.</em></p>
                 <p><em>Registered office: 58 Victoria Embankment, London, EC4Y 0DS</em></p>
-                <p>Email: <a href="mailto:information@nesta.org.uk">info@nesta.org.uk</a></p>
+                <p>Email: <a href="mailto:info@nesta.org.uk">info@nesta.org.uk</a></p>
             </div>
         </div>
     </div>
