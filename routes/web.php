@@ -580,7 +580,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\StoryAddController();
+        $command = new \Controllers\Stories\StoryAddController();
         $command->exec();
     }
 
@@ -864,7 +864,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\StoryController();
+        $command = new \Controllers\Stories\StoryController();
         $command->data()->storyID = $matches[3];
         $command->exec();
     }

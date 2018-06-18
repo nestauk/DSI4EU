@@ -71,14 +71,14 @@ class StoryAdd
     {
         if (!isset($this->data()->title))
             throw new NotEnoughData('title');
-        if (!isset($this->data()->authorID))
+        if (!isset($this->data()->writerID))
             throw new NotEnoughData('author');
     }
 
     private function assertSentDataIsValid()
     {
-        if ($this->data()->authorID <= 0) {
-            $this->errorHandler->addTaggedError('author', 'Invalid user ID');
+        if ($this->data()->writerID <= 0) {
+            $this->errorHandler->addTaggedError('writer', 'Please select an author');
             throw $this->errorHandler;
         }
 
@@ -130,7 +130,7 @@ class StoryAdd
      */
     private function setAuthor(Story $story)
     {
-        $author = (new UserRepo())->getById($this->data()->authorID);
+        $author = (new UserRepo())->getById($this->data()->writerID);
         $story->setAuthor($author);
     }
 }
@@ -141,7 +141,7 @@ class StoryAdd_Data
     public $title,
         $cardShortDescription,
         $content,
-        $authorID,
+        $writerID,
         $featuredImage,
         $mainImage,
         $isPublished,

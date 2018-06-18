@@ -1,14 +1,15 @@
 <?php
 
-namespace DSI\Controller;
+namespace Controllers\Stories;
 
 use DSI\Entity\User;
 use DSI\Repository\StoryCategoryRepo;
+use DSI\Repository\UserRepo;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
-use DSI\Service\JsModules;
 use Services\URL;
 use DSI\UseCase\StoryAdd;
+use Services\View;
 
 class StoryAddController
 {
@@ -29,7 +30,6 @@ class StoryAddController
         if (isset($_POST['add'])) {
             try {
                 $createStory = new StoryAdd();
-                $createStory->data()->authorID = $loggedInUser->getId();
                 $createStory->data()->title = $_POST['title'] ?? '';
                 $createStory->data()->cardShortDescription = $_POST['cardShortDescription'] ?? '';
                 $createStory->data()->content = $_POST['content'] ?? '';
@@ -41,8 +41,9 @@ class StoryAddController
                     $createStory->data()->datePublished = $_POST['datePublished'];
                 if (isset($_POST['isPublished']))
                     $createStory->data()->isPublished = (bool)$_POST['isPublished'];
-
+                $createStory->data()->writerID = (int)$_POST['writerID'];
                 $createStory->exec();
+
                 $story = $createStory->getStory();
 
                 echo json_encode([
@@ -58,18 +59,18 @@ class StoryAddController
             die();
         }
 
-        $categories = (new StoryCategoryRepo())->getAll();
-
-        $angularModules['fileUpload'] = true;
-        JsModules::setTinyMCE(true);
-        require(__DIR__ . '/../../../www/views/story-add.php');
+        return View::render(__DIR__ . '/../../Views/stories/story-add.php', [
+            'categories' => (new StoryCategoryRepo())->getAll(),
+            'writers' => (new UserRepo())->getAllCommunityAdmins(),
+            'loggedInUser' => $loggedInUser,
+        ]);
     }
 
     /**
      * @param $loggedInUser
      * @return bool
      */
-    private function userCanAddStory(User $loggedInUser):bool
+    private function userCanAddStory(User $loggedInUser): bool
     {
         $userCanAddStory = (bool)($loggedInUser AND ($loggedInUser->isCommunityAdmin() OR $loggedInUser->isEditorialAdmin()));
         return $userCanAddStory;

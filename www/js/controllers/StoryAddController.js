@@ -75,7 +75,8 @@ angular
                     featuredImage: $scope.featuredImage,
                     mainImage: $scope.mainImage,
                     content: tinyMCE.get('newStory').getContent(),
-                    isPublished: $scope.isPublished
+                    isPublished: $scope.isPublished,
+                    writerID: $scope.story.writerID
                 };
                 $http.post(SITE_RELATIVE_PATH + '/story/add', data)
                     .then(function (response) {
