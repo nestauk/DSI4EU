@@ -1,6 +1,6 @@
 <?php
 
-namespace DSI\Controller;
+namespace Controllers\Stories;
 
 use DSI\Entity\Image;
 use DSI\Repository\StoryCategoryRepo;
@@ -11,6 +11,7 @@ use DSI\Service\ErrorHandler;
 use DSI\Service\JsModules;
 use Services\URL;
 use DSI\UseCase\StoryEdit;
+use Services\View;
 
 class StoryEditController
 {
@@ -51,6 +52,7 @@ class StoryEditController
                         $editStory->data()->mainImage = $_POST['mainImage'];
                     $editStory->data()->datePublished = $_POST['datePublished'] ?? '';
                     $editStory->data()->isPublished = (bool)$_POST['isPublished'] ?? false;
+                    $editStory->data()->writerID = (int)$_POST['writerID'];
 
                     $editStory->exec();
 
@@ -73,14 +75,16 @@ class StoryEditController
                 'featuredImage' => Image::STORY_FEATURED_IMAGE_URL . $story->getFeaturedImage(),
                 'mainImage' => Image::STORY_MAIN_IMAGE_URL . $story->getMainImage(),
                 'isPublished' => $story->isPublished(),
+                'writerID' => (string)$story->getAuthor()->getId(),
             ]);
             die();
         }
 
-        $categories = (new StoryCategoryRepo())->getAll();
-
-        $angularModules['fileUpload'] = true;
-        JsModules::setTinyMCE(true);
-        require __DIR__ . '/../../../www/views/story-edit.php';
+        View::render(__DIR__ . '/../../Views/stories/story-edit.php', [
+            'categories' => (new StoryCategoryRepo())->getAll(),
+            'writers' => (new UserRepo())->getAllCommunityAdmins(),
+            'story' => $story,
+            'loggedInUser' => $loggedInUser,
+        ]);
     }
 }

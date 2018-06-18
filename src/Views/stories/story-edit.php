@@ -1,14 +1,18 @@
 <?php
-require __DIR__ . '/header.php';
 /** @var $story \DSI\Entity\Story */
 /** @var $categories \DSI\Entity\StoryCategory[] */
+/** @var $urlHandler \Services\URL */
+/** @var $writers \DSI\Entity\User[] */
+
+$angularModules['fileUpload'] = true;
+\DSI\Service\JsModules::setTinyMCE(true);
+\DSI\Service\JsModules::setJqueryUI(true);
+
+require __DIR__ . '/../header.php';
 ?>
 
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-
     <script type="text/javascript"
-            src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/StoryEditController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
+            src="/js/controllers/StoryEditController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 
     <style>
         .progress {
@@ -118,7 +122,7 @@ require __DIR__ . '/header.php';
                                 </div>
                                 <input type="text" style="display:none" id="datePublished" maxlength="256"
                                        ng-model="story.datePublished">
-                                <br/><br/>
+                                <br/>
 
 
                                 <label class="story-label" for="Story-wysiwyg">Published</label>
@@ -135,6 +139,20 @@ require __DIR__ . '/header.php';
                                                name="published" ng-model="story.isPublished" type="radio">
                                         Unpublished
                                     </label>
+                                </div>
+                                <br/>
+                                
+                                <div style="color:red" ng-cloak ng-show="errors.writer" ng-bind="errors.writer"></div>
+                                <label class="story-label" for="Story-wysiwyg">Author</label>
+                                <div class="w-checkbox">
+                                    <select name="writerID" class="w-checkbox-input" ng-model="story.writerID">
+                                        <option value="0"> - Select an author -</option>
+                                        <?php foreach ($writers AS $writer) { ?>
+                                            <option value="<?= $writer->getId() ?>">
+                                                <?= show_input($writer->getFullName()) ?>
+                                            </option>
+                                        <?php } ?>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -185,4 +203,4 @@ require __DIR__ . '/header.php';
         });
     </script>
 
-<?php require __DIR__ . '/footer.php' ?>
+<?php require __DIR__ . '/../footer.php' ?>
