@@ -66,6 +66,10 @@ require __DIR__ . '/header.php'
                                        ng-model="resource.<?= Resource::LinkText ?>"
                                        style="border:1px solid #999;" placeholder="" type="text"/>
 
+                                <label class="story-label" for="Title">Link file</label>
+                                <a ngf-select="uploadLinkFile($file, $invalidFiles)" accept="*/*"
+                                   class="w-button dsi-button story-image-upload" href="#">Upload file</a>
+
                                 <label class="story-label" for="Title">Link url</label>
                                 <div style="color:red"
                                      ng-show="errors.<?= Resource::LinkUrl ?>"
