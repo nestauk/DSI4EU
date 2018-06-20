@@ -30,6 +30,35 @@ angular
                     });
                 }
             };
+            $scope.uploadLinkFile = function (file, errFiles) {
+                if (file) {
+                    file.upload = Upload.upload({
+                        url: '/upload-file',
+                        data: {file: file}
+                    });
+
+                    file.upload.then(function (response) {
+                        file.result = response.data;
+                        console.log(response.data.object);
+                        $scope.resource.link_url = response.data.object.path;
+                        swal({
+                            title: 'Success',
+                            text: 'The file has been uploaded. The link has been automatically updated.',
+                            type: "success"
+                        });
+                    }, function (response) {
+                        swal({
+                            title: 'Could not upload',
+                            text: 'There was a problem uploading your file. Please try a different file.',
+                            type: "error"
+                        });
+                        console.log({response: response});
+                    }, function (evt) {
+                        file.progress = Math.min(100, parseInt(100.0 *
+                            evt.loaded / evt.total));
+                    });
+                }
+            };
         }());
 
         $scope.resource = {};

@@ -178,6 +178,9 @@ class Router
         } elseif ($this->pageURL === '/uploadImage.json') {
             $this->uploadImageJson();
 
+        } elseif ($this->pageURL === '/upload-file') {
+            $this->uploadFile();
+
 // Blog
         } elseif (preg_match('<^/' . $langHandler . 'stories$>', $this->pageURL, $matches)) {
             $this->stories($matches);
@@ -1211,6 +1214,11 @@ class Router
         $command = new \DSI\Controller\UploadImageController();
         $command->format = 'json';
         $command->exec();
+    }
+
+    private function uploadFile()
+    {
+        return (new \Controllers\UploadController())->exec();
     }
 
     private function clusters($matches)
