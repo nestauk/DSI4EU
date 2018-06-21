@@ -11,21 +11,7 @@ if (!isset($urlHandler))
 
 ?>
 </div>
-<!-- twitter block -->
-<div class="twitter-block">
-    <div class="twitter">
-        <div class="w-row">
-            <div class="w-col w-col-1 w-col-small-1 w-col-tiny-tiny-stack">
-                <img class="homepage-twitter-logo" src="/images/twitter-logo-silhouette.png">
-            </div>
-            <div class="w-col w-col-11 w-col-small-11 w-col-tiny-tiny-stack">
-                <p class="twitter-text">
-                    <?php _e('To keep in touch with the project and DSI in Europe, follow us on Twitter @DSI4EU and sign up to our newsletter.'); ?>
-                </p>
-            </div>
-        </div>
-    </div>
-</div>
+
 <!-- end -->
 <div class="footer-black">
     <div style="max-width:1290px;margin:0 auto;">
@@ -497,21 +483,38 @@ if (!isset($urlHandler))
             src="/js/controllers/NotificationController.js?<?= \Services\Assets::version() ?>"></script>
 <?php } ?>
 
-<div class="cookies" id="cookies">
-    <div class="container-wide">
-        <div class="w-row">
-            <div class="w-col w-col-6">
-                <h3 class="cookie-h3">
-                    <?php _ehtml('We use cookies') ?>
-                    <!-- We use cookies to help us improve this site and your experience. Continue to use this site if you're
-                    happy with this or find out more -->
-                </h3>
+<div id="bottom-bar">
+    <!-- twitter block -->
+    <div class="twitter-block">
+        <div class="twitter">
+            <div class="w-row">
+                <div class="w-col w-col-1 w-col-small-1 w-col-tiny-tiny-stack">
+                    <img class="homepage-twitter-logo" src="/images/twitter-logo-silhouette.png">
+                </div>
+                <div class="w-col w-col-11 w-col-small-11 w-col-tiny-tiny-stack">
+                    <p class="twitter-text">
+                        <?php _e('To keep in touch with the project and DSI in Europe, follow us on Twitter @DSI4EU and sign up to our newsletter.'); ?>
+                    </p>
+                </div>
             </div>
-            <div class="w-clearfix w-col w-col-6">
-                <a class="cookie-button w-button"
-                   href="<?= $urlHandler->cookiesPolicy() ?>"><?php _ehtml('Find out more') ?></a>
-                <!-- <a class="cookie-button w-button js-cookie-accept" href="#"><?php _ehtml('Continue') ?></a> -->
-                <a class="cookie-button w-button js-cookie-accept" href="#"><?php _ehtml('Accept') ?></a>
+        </div>
+    </div>
+    <div class="cookies" id="cookies">
+        <div class="container-wide">
+            <div class="w-row">
+                <div class="w-col w-col-6">
+                    <h3 class="cookie-h3">
+                        <?php _ehtml('We use cookies') ?>
+                        <!-- We use cookies to help us improve this site and your experience. Continue to use this site if you're
+                        happy with this or find out more -->
+                    </h3>
+                </div>
+                <div class="w-clearfix w-col w-col-6">
+                    <a class="cookie-button w-button"
+                       href="<?= $urlHandler->cookiesPolicy() ?>"><?php _ehtml('Find out more') ?></a>
+                    <!-- <a class="cookie-button w-button js-cookie-accept" href="#"><?php _ehtml('Continue') ?></a> -->
+                    <a class="cookie-button w-button js-cookie-accept" href="#"><?php _ehtml('Accept') ?></a>
+                </div>
             </div>
         </div>
     </div>
