@@ -21,243 +21,240 @@ require __DIR__ . '/header.php' ?>
 
                 <div class="partner-block w-row">
                     <div class="w-col w-col-3">
-                        <img class="partner-logo-colour"
-                             src="<?php echo SITE_RELATIVE_PATH ?>/images/partners/nesta.png">
+                        <img class="partner-logo-colour" src="/images/advisory-board/Elena-Calistru.jpg">
                     </div>
                     <div class="w-col w-col-9">
-                        <p><a href="http://nesta.org.uk"><strong>Nesta</strong></a> is a global innovation foundation.
-                            We back new ideas to tackle the big challenges of our time. We seek out, spark and shape
-                            powerful new ideas, joining with others to take on the big challenges of our time and shift
-                            how the world works for everyone. We work with partners across the world and work in five
-                            key thematic areas: <a
-                                    href="http://www.nesta.org.uk/sites/default/files/priority_fields_introducing_nestas_work_in_health_0.pdf">health</a>;
-                            <a href="http://www.nesta.org.uk/sites/default/files/introducing_nestas_work_in_education.pdf">education</a>;
-                            <a href="http://www.nesta.org.uk/sites/default/files/introducing-_nesta-work-in-government-innovation.pdf">government
-                                innovation</a>; <a
-                                    href="https://www.nesta.org.uk/sites/default/files/nestas_work_in_the_creative_economy_arts_and_culture-2017.pdf">the
-                                creative economy, arts and culture</a>; and<a
-                                    href="http://www.nesta.org.uk/sites/default/files/introducing_nestas_work_in_innovation_policy.pdf">
-                                innovation policy</a>.</p>
-                        <p>As project coordinator, Nesta has overall responsibility for DSI4EU, and leads facilitation
-                            of <a href="http://digitalsocial.eu/">digitalsocial.eu</a> and the prototype DSI Index.</p>
-                        <p>Nesta is involved in a number of programmes related to DSI4EU, including <a
-                                    href="http://siceurope.eu/">Social Innovation Community</a>, <a
-                                    href="https://www.nesta.org.uk/project/next-generation-internet-engineroom">Next
-                                Generation Internet - Engineroom</a>, <a href="http://decodeproject.eu/">DECODE</a> and
-                            <a href="https://www.nesta.org.uk/project/sharelab">ShareLab</a>.</p>
+                        <h2>
+                            Elena Calistru, Director,
+                            <a class="w-clearfix w-inline-block" target="_blank" href="http://funky.ong/">
+                                Funky Citizens
+                            </a>
+                        </h2>
 
-                        <a class="log-in-link long read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
-                           href="http://www.nesta.org.uk/" target="_blank">
-                            <div class="login-li long menu-li readmore-li">Nesta.org.uk</div>
-                            <img class="login-arrow"
-                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
-                        </a>
-                    </div>
-                </div>
-
-                <div class="partner-block w-row">
-                    <div class="w-col w-col-3">
-                        <img class="partner-logo-colour"
-                             src="<?php echo SITE_RELATIVE_PATH ?>/images/partners/waag.jpg">
-                    </div>
-                    <div class="w-col w-col-9">
-                        <p><a href="http://waag.org"><strong>Waag</strong></a>&nbsp;&mdash; the institute for art,
-                            science and technology &mdash; is a pioneer in the field of digital media. Over the past 22
-                            years, the foundation has developed into an institution of international stature, a platform
-                            for artistic research and experimentation, and has become both a catalyst for events and a
-                            breeding ground for cultural and social innovation. Waag explores emerging technologies, and
-                            provides art and culture with a central role in the designing of new applications for novel
-                            advances in science and technology. The organisation concerns itself not only with
-                            technologies related to the Internet, but also with those related to biotechnology and the
-                            cognitive sciences.</p>
-                        <p>Waag is leading the coordination of clusters within DSI4EU, as well as leading the Food,
-                            Environment and Climate Change cluster.</p>
-
-                        <a class="log-in-link long read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
-                           href="http://waag.org" target="_blank">
-                            <div class="login-li long menu-li readmore-li">waag.org</div>
-                            <img class="login-arrow"
-                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
-                        </a>
-                    </div>
-                </div>
-
-                <div class="partner-block w-row">
-                    <div class="w-col w-col-3">
-                        <img class="partner-logo-colour"
-                             src="<?php echo SITE_RELATIVE_PATH ?>/images/partners/betterplace.png">
-                    </div>
-                    <div class="w-col w-col-9">
-                        <p><a href="http://www.betterplace-lab.org/en/"><strong>betterplace lab</strong></a>&nbsp;is a
-                            think-and-do-tank working on digital-social innovation, researching and experimenting where
-                            digital innovation intersects with social good. We aim to help others to do good better by
-                            analysing, inspiring and building networks. Our focus topics include: <a
-                                    href="https://demokratie.io/">digital democracy</a>, <a
-                                    href="http://www.betterplace-lab.org/en/digital-routes-to-integration/">digital
-                                refugee integration</a> and <a
-                                    href="http://www.betterplace-lab.org/en/bridging-the-digital-gender-gap-2/">ICT4Women</a>.
+                        <p>
+                            Elena Calistru is the chair and founder of Funky Citizens, a Romanian-based NGO. Funky
+                            Citizens builds research-based, data-driven advocacy tools. Funky Citizens’ tools aim to be
+                            educational and actionable, encouraging citizens to engage in accountability and government
+                            responsibility initiatives in which they can see an impact. Elena has more than 10 years of
+                            experience in civil society projects, both at national and international level. Her
+                            expertise is mainly in the area of good governance, transparency, public finance and
+                            advocacy. She strongly believes that data and online tools can empower citizens to influence
+                            public sector reform.
                         </p>
-                        <p>We work for, and in cooperation with, leading civil society organisations, German federal
-                            ministries, and the CSR departments of major tech companies. betterplace lab is a department
-                            of gut.org gemeinn&uuml;tzige Aktiengesellschaft, which also runs <a
-                                    href="https://www.betterplace.org/en">betterplace.org</a>, Germany&rsquo;s leading
-                            charitable online donation platform.</p>
-                        <p>betterplace lab is responsible for the thematic DSI cluster on migration and integration, and
-                            is leading Work Package 3, mapping and analysing future trends in DSI.</p>
-
-                        <a class="log-in-link long read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
-                           href="http://www.betterplace-lab.org/en/" target="_blank">
-                            <div class="login-li long menu-li readmore-li">betterplace lab</div>
-                            <img class="login-arrow"
-                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
-                        </a>
                     </div>
                 </div>
 
                 <div class="partner-block w-row">
                     <div class="w-col w-col-3">
-                        <img class="partner-logo-colour"
-                             src="<?php echo SITE_RELATIVE_PATH ?>/images/partners/fab-lab-barcelona.png">
+                        <img class="partner-logo-colour" src="/images/advisory-board/Julia-Kloiber.jpg">
                     </div>
                     <div class="w-col w-col-9">
-                        <p><a href="http://fablabbcn.org"><strong>Fab Lab Barcelona</strong></a>&nbsp;is part of the <a
-                                    href="https://iaac.net/">Institute for Advanced Architecture of Catalonia</a>, where
-                            it support different educational and research programs related with the multiple scales of
-                            the human habitat. It is also the headquarters of the global coordination of the <a
-                                    href="http://fabacademy.org/">Fab Academy</a> program in collaboration with the <a
-                                    href="http://fabfoundation.org/">Fab Foundation</a> and the MIT&rsquo;s Center for
-                            Bits and Atoms. The Fab Lab Barcelona has produced projects including <a
-                                    href="https://www.youtube.com/watch?t=15&amp;v=SK0vvBRN8R0">Hyper habitat IAAC</a>
-                            (official selection for the Venice Biennale XXI) and the <a
-                                    href="https://www.youtube.com/watch?v=bO-Dvm5OTuU">Fab Lab House</a> (Audience Award
-                            in the first Solar Decathlon Europe in Madrid).<br/><br/>It is currently developing projects
-                            at different scales, including smart devices for data collection by individuals, the
-                            development of a new generation of Fab Labs in the <a href="http://www.valldaura.net/">Green
-                                Fab Lab</a> project, and the new production models for cities with the <a
-                                    href="http://fab.city/">Fab City</a> project being implemented in
-                            Barcelona.<br/><br/>Our mission as a Fab Lab is to provide access to the tools, the
-                            knowledge and the financial means to educate, innovate and invent using technology and
-                            digital fabrication to allow anyone to make (almost) anything, and thereby creating
-                            opportunities to improve lives and livelihoods around the world. Community organisations,
-                            educational institutions and non-profit concerns are our primary beneficiaries.</p>
-                        <p>Fab Lab Barcelona is leading the Skills and Learning cluster, and is supporting the
-                            development of the DSI Index.</p>
+                        <h2>
+                            Julia Kloiber, Senior Fellow,
+                            <a class="w-clearfix w-inline-block" target="_blank" href="http://foundation.mozilla.org/">
+                                Mozilla Foundation
+                            </a>
+                        </h2>
 
-                        <a class="log-in-link long read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
-                           href="http://fablabbcn.org" target="_blank">
-                            <div class="login-li long menu-li readmore-li">Fab Lab Barcelona</div>
-                            <img class="login-arrow"
-                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
-                        </a>
+                        <p>
+                            Julia Kloiber is the co-founder of the
+                            <a href="https://prototypefund.de/en/"><strong>Prototype Fund</strong></a> and
+                            <a href="https://codefor.de/"><strong>Code for Germany</strong></a>.
+                            She develops strategies and concepts to innovate programs for
+                            the digital world. She has been running multiple projects that foster the reuse of open data
+                            and promote transparency and open source. She has put her expertise in technology, design
+                            and media studies to use for the
+                            <a href="https://okfn.de/"><strong>Open Knowledge Foundation Germany</strong></a>
+                            and as Consultant for
+                            <a href="https://www.theengineroom.org/"><strong>The Engine Room</strong></a>.
+                            Since April 2018 she has been a Senior Fellow at
+                            <a href="https://www.mozilla.org/en-US/foundation/"><strong>Mozilla</strong></a>
+                            where she will be investigating emerging technologies and their influence on society.
+                        </p>
                     </div>
                 </div>
 
                 <div class="partner-block w-row">
                     <div class="w-col w-col-3">
-                        <img class="partner-logo-colour"
-                             src="<?php echo SITE_RELATIVE_PATH ?>/images/partners/we-make.png">
+                        <img class="partner-logo-colour" src="/images/advisory-board/Sandor-Lederer.jpg">
                     </div>
                     <div class="w-col w-col-9">
-                        <p><a href="http://wemake.cc"><strong>WeMake</strong></a>&nbsp;is an innovative enterprise based
-                            in Milan providing a series of services and training to the creative community in the field
-                            of digital and traditional manufacturing and access to a fully equipped Fab Lab.</p>
-                        <p>WeMake has been developing and designing courses, workshops, initiatives and co-design
-                            sessions, which boost knowledge exchange and explore new fields of innovation involving the
-                            local and global community on different skills and learning processes. We bring together the
-                            best practices of informal groups/companies and the most unique techniques in an environment
-                            of open exchange by excellent professionals and researchers in diverse fields.</p>
-                        <p>WeMake is leading the Health and Care cluster, including mapping and fostering the DSI
-                            community at a local level (Milan and Italy) through a series of online and offline
-                            events.</p>
+                        <h2>
+                            Sandor Lederer, Director,
+                            <a class="w-clearfix w-inline-block" target="_blank" href="http://k-monitor.hu/">
+                                K-Monitor
+                            </a>
+                        </h2>
 
-                        <a class="log-in-link long read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
-                           href="http://wemake.cc" target="_blank">
-                            <div class="login-li long menu-li readmore-li">WeMake</div>
-                            <img class="login-arrow"
-                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
-                        </a>
+                        <p>
+                            Sandor Lederer is the Co-Founder and CEO of K-Monitor, a non-profit public funds watchdog
+                            based in Budapest. The NGO was founded to improve the levels of transparency and the rule of
+                            law in Hungary. Civic participation and technology driven solutions are among the
+                            organizations key instruments. Beside K-Monitor&rsquo;s tech focus, the organization is also
+                            active in anti-corruption advocacy and research. One of the recent projects K-Monitor has
+                            been working on is <a href="http://redflags.eu/"><strong>redflags.eu</strong></a>, a program
+                            that uses algorithmic indicators to analyse risky public procurements.
+                        </p>
                     </div>
                 </div>
 
                 <div class="partner-block w-row">
                     <div class="w-col w-col-3">
-                        <img class="partner-logo-colour"
-                             src="<?php echo SITE_RELATIVE_PATH ?>/images/partners/barcelona-activa.png">
+
                     </div>
                     <div class="w-col w-col-9">
-                        <p><a href="http://www.barcelonactiva.cat/"><strong>Barcelona Activa</strong></a>&nbsp;is the
-                            The Local Economic Development Agency of the Barcelona City Council.</p>
-                        <p>Its mission is to boost economic policy and local development in order to promote a better
-                            quality of life for citizens in Barcelona by promoting employment, encouraging
-                            entrepreneurship and offering support to companies. The objective is to meet citizens&rsquo;
-                            different needs in their own neighbourhoods and also from the perspective of the plural
-                            economy, including the social and solidarity economy. This is done by promoting citizen
-                            empowerment as well as reshaping the balance between neighbourhoods to achieve a fairer
-                            model in terms of economic development and the creation, maintenance and distribution of
-                            employment.</p>
-                        <p>Barcelona Activa is leading the Cities and Urban Development cluster.</p>
+                        <h2>
+                            Clémence Pène, Head of Digital and Citizen Engagement,
+                            <a class="w-clearfix w-inline-block" target="_blank" href="http://c40.org/">
+                                C40
+                            </a>
+                        </h2>
 
-                        <a class="log-in-link long read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
-                           href="http://www.barcelonactiva.cat/" target="_blank">
-                            <div class="login-li long menu-li readmore-li">Barcelona Activa</div>
-                            <img class="login-arrow"
-                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
-                        </a>
+                        <p>
+                            Clémence serves as Head of Digital and Citizen Engagement for C40. She leads on C40’s
+                            digital communications strategy based on innovative campaigns, governance tools and citizen
+                            engagement to grow and strengthen C40’s online community. In this capacity, Clemence builds
+                            and maintains strong relationships with C40 Mayors, digital advocates, civic and tech
+                            startups, and other key influencers. Prior to joining C40, Clémence was the Digital Director
+                            during Anne Hidalgo's Campaign in Paris and served as the Digital Strategy and Open
+                            Governance Advisor to Mayor Hidalgo where she oversaw the participatory budget innovation
+                            from its inception to its current status as the most ambitious and efficient in the world.
+                        </p>
                     </div>
                 </div>
 
                 <div class="partner-block w-row">
                     <div class="w-col w-col-3">
-                        <img class="partner-logo-colour"
-                             src="<?php echo SITE_RELATIVE_PATH ?>/images/partners/epantswo.png">
+                        <img class="partner-logo-colour" src="/images/advisory-board/Rebecca-Rumbul.jpg">
                     </div>
                     <div class="w-col w-col-9">
-                        <p><a href="http://epf.org.pl"><strong>ePaństwo Foundation</strong></a>&nbsp;is a non
-                            governmental organisation based in Warsaw.</p>
-                        <p>Our aim is to is to develop democracy, open and transparent authorities and civic engagement.
-                            We take various types of public data and, using the power of Internet and new technologies,
-                            present it to citizens free of charge. We give the citizens the knowledge and the tools to
-                            make their country better. Our key areas of activity and expertise are Open data, Freedom of
-                            Information, Good Governance, Civic Participation.</p>
-                        <p>ePaństwo Foundation is leading the Digital Democracy cluster.</p>
+                        <h2>
+                            Rebecca Rumbul, Research Director,
+                            <a class="w-clearfix w-inline-block" target="_blank" href="http://mysociety.orgr/">
+                                mySociety
+                            </a>
+                        </h2>
 
-                        <a class="log-in-link long read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
-                           href="http://epf.org.pl" target="_blank">
-                            <div class="login-li long menu-li readmore-li">ePaństwo Foundation</div>
-                            <img class="login-arrow"
-                                 src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
-                        </a>
+                        <p>
+                            Rebecca is Head of Research for international digital development NGO mySociety. Rebecca
+                            holds a PhD in politics and governance, and has worked actively as a researcher for many
+                            years. Previously managing the work of the Wales Governance Centre and lecturing in Politics
+                            at Cardiff University, Rebecca was responsible for the development and establishment of
+                            mySociety&rsquo;s research agenda, and has spoken widely on the impacts of civic technology
+                            both at practitioner and academic conferences. Rebecca has written several respected
+                            research reports on civic technology, and has articles on politics, governance and civic
+                            tech published in a number of peer-reviewed journals. In 2016, Rebecca won the &lsquo;Best
+                            Paper Award&rsquo; at the Conference for eDemocracy and Open Government, and currently
+                            serves as Co-Chair of the <a href="http://ogrx.org/"><strong>OGRX</strong></a> Editorial
+                            Board.
+                        </p>
                     </div>
                 </div>
 
-                <!--
+                <div class="partner-block w-row">
+                    <div class="w-col w-col-3">
+                        <img class="partner-logo-colour" src="/images/advisory-board/Anna-Seravalli.jpg">
+                    </div>
+                    <div class="w-col w-col-9">
+                        <h2>
+                            Anna Serravalli, Senior Lecturer,
+                            <a class="w-clearfix w-inline-block" target="_blank" href="http://forskning.mah.se/">
+                                University of Malmö
+                            </a>
+                        </h2>
 
-                <h2>The CAPS community</h2>
-                <p>DSI4EU is a coordination and support action funded under the European Commission&rsquo;s Collective
-                    Awareness Platforms for Sustainability (CAPS) programme. The CAPS programme supports DSI in Europe
-                    through funding for projects, coordination, support, events and networking. </p>
-                <p>CAPS projects are designing and piloting online platforms creating awareness of sustainability
-                    problems and offering collaborative solutions based on innovative networks of people, ideas,
-                    services and technologies enabling new forms of social innovation. The CAPS programme supports
-                    environment-aware efforts, grassroots processes and practices to share knowledge, achieve changes in
-                    lifestyle, production and consumption patterns, and set up more participatory democratic processes
-                    on a pan-European scale.</p>
-                <p>As part of the CAPS community, we are particularly proud to be supporting the projects developing DSI
-                    solutions with funding from the European Commission. We also work closely with the <a
-                            href="http://capssi.eu">ChiC project</a>, which aims to empower the community of CAPS
-                    projects and promote their outcomes and results. </p>
-                <h2>Social Innovation Community </h2>
-                <p>DSI4EU works closely with <a href="http://siceurope.eu">Social Innovation Community</a> (SIC), a
-                    Horizon 2020-funded project which seeks to strengthen, connect and grow existing social innovation
-                    communities across Europe. Social Innovation Community is based around specific networks, one of
-                    which is DSI. By fostering close links between the two projects, we are able to introduce DSI actors
-                    to other social innovation actors, and vice versa. Please <a href="mailto:contact@digitalsocial.eu">get
-                        in touch</a> if you would like to learn more. </p>
-                <p>&nbsp;</p>
-                <p><em>*DSI4EU is the operating name for the project formally known as DSISCALE. DSISCALE is supported
-                        by the European Union and funded under the Horizon 2020 Programme, grant agreement no
-                        780473. </em></p>
-                 -->
+                        <p>
+                            Anna Seravalli is a senior lecturer and design researcher at The School of Arts and
+                            Communication Malm&ouml; University. She has a background as product and service designer
+                            and holds a PhD in Design and Social Innovation. In her research, she closely collaborates
+                            with citizens, NGOs, civil servants and small entrepreneurs in the city of Malm&ouml; to
+                            explore questions of participation, collaboration, decision-making in initiatives aiming at
+                            improving environmental and social sustainability in the urban context. She is particularly
+                            interested in initiatives related to making, upcycling and alternative production practices.
+                            She is the coordinator of
+                            <a href="http://mah.se/desislab"><strong>Malm&ouml; University DESIS Lab</strong></a>.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="partner-block w-row">
+                    <div class="w-col w-col-3">
+                        <img class="partner-logo-colour" src="/images/advisory-board/Anna-Sienicka.jpg">
+                    </div>
+                    <div class="w-col w-col-9">
+                        <h2>
+                            Anna Sienicka, Vice President,
+                            <a class="w-clearfix w-inline-block" target="_blank" href="http://www.techsoupeurope.org/">
+                                Techsoup Europe
+                            </a>
+                        </h2>
+
+                        <p>
+                            Anna is responsible for the strategic direction of the TechSoup Europe Network that consists
+                            of 24 capacity-building organizations, and serves over 400,000 registered NGOs, with over a
+                            billion-euro delivered in technology tools and philanthropic services. Her background
+                            includes employability, social enterprises, social and digital inclusion, civic technology,
+                            as well as development of friendly policies and legal environment for civil society. Anna
+                            holds master degrees in both Law and Economy and Society from Warsaw and Lancaster
+                            Universities respectively. She was a member on the Minister of Labour’s Public Benefit Work
+                            Council and the Polish Prime Minister’s Social Economy Task Force in Poland (under D. Tusk’s
+                            administration).
+                        </p>
+                    </div>
+                </div>
+
+                <div class="partner-block w-row">
+                    <div class="w-col w-col-3">
+                        <img class="partner-logo-colour" src="/images/advisory-board/Mieke-van-Heesewijk.jpg">
+                    </div>
+                    <div class="w-col w-col-9">
+                        <h2>
+                            Mieke van Heesewijk, Programme Manager,
+                            <a class="w-clearfix w-inline-block" target="_blank"
+                               href="https://www.sidn.nl/a/about-sidn/sidn-fund?language_id=2">
+                                SIDN Fund
+                            </a>
+                        </h2>
+
+                        <p>
+                            Mieke van Heesewijk is program manager at SIDN Fund, an independent foundation that provides
+                            financial support for projects aimed at innovation for the Internet. Since her time at
+                            XS4ALL, Mieke has been active as policy adviser for Internet Participation at the Ministry
+                            of the Interior, program developer at Waag Society, and co-director of the Network Democracy
+                            Foundation. Mieke is a committee member at the Internet Society Netherlands and founder and
+                            board member of the whistleblowing platform <a href="http://publeaks.nl/"><strong>Publeaks.nl</strong></a>
+                            and a member of the supervisory board of WPG publishers.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="partner-block w-row">
+                    <div class="w-col w-col-3">
+                        <img class="partner-logo-colour" src="/images/advisory-board/Christian-Villum.jpg">
+                    </div>
+                    <div class="w-col w-col-9">
+                        <h2>
+                            Christian Villum, Programme Director,
+                            <a class="w-clearfix w-inline-block" target="_blank" href="https://danskdesigncenter.dk/">
+                                Danish Design Center
+                            </a>
+                        </h2>
+
+                        <p>
+                            Christian Villum’s work as Programme Director at the Danish Design Centre examining new
+                            ideas related to technology and design thinking. With a background in maker technology, new
+                            business models, sharing cultures, open data and open design, internet culture and
+                            hacktivism, he enjoys developing communities and bringing people together to share new ideas
+                            and generate change. His work explores future currents in technology from a design
+                            perspective, and includes, among other things, programs for new open source business models
+                            for manufacturing, establishment of global Fab Cities and human-centric approaches to
+                            technology. Christian’s previous work includes co-founding and heading the experimental
+                            Platform4 Art & Technology hub, being a frontrunner in the use of Creative Commons content
+                            licenses, building global communities for the UK-based non-profit organisation Open
+                            Knowledge Foundation and initiating a wide range of companies and projects.
+                        </p>
+                    </div>
+                </div>
             </div>
             <div class="sidebar w-col w-col-4 w-col-stack">
 
