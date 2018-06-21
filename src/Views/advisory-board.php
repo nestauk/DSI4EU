@@ -100,7 +100,7 @@ require __DIR__ . '/header.php' ?>
 
                 <div class="partner-block w-row">
                     <div class="w-col w-col-3">
-
+                        <img class="partner-logo-colour" src="/images/advisory-board/Clemence-Pene.jpg">
                     </div>
                     <div class="w-col w-col-9">
                         <h2>
