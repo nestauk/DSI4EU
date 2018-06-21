@@ -178,6 +178,9 @@ class Router
         } elseif ($this->pageURL === '/uploadImage.json') {
             $this->uploadImageJson();
 
+        } elseif ($this->pageURL === '/upload-file') {
+            $this->uploadFile();
+
 // Blog
         } elseif (preg_match('<^/' . $langHandler . 'stories$>', $this->pageURL, $matches)) {
             $this->stories($matches);
@@ -566,7 +569,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\StoriesController();
+        $command = new \Controllers\Stories\StoriesController();
         $command->exec();
     }
 
@@ -574,7 +577,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\StoriesController();
+        $command = new \Controllers\Stories\StoriesController();
         $command->format = 'json';
         $command->exec();
     }
@@ -583,7 +586,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\StoryAddController();
+        $command = new \Controllers\Stories\StoryAddController();
         $command->exec();
     }
 
@@ -867,7 +870,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\StoryController();
+        $command = new \Controllers\Stories\StoryController();
         $command->data()->storyID = $matches[3];
         $command->exec();
     }
@@ -876,7 +879,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\StoryEditController();
+        $command = new \Controllers\Stories\StoryEditController();
         $command->storyID = $matches[3];
         $command->format = $format;
         $command->exec();
@@ -1220,6 +1223,11 @@ class Router
         $command = new \DSI\Controller\UploadImageController();
         $command->format = 'json';
         $command->exec();
+    }
+
+    private function uploadFile()
+    {
+        return (new \Controllers\UploadController())->exec();
     }
 
     private function clusters($matches)

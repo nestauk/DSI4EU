@@ -47,14 +47,14 @@ class CreateStoryTest extends PHPUnit_Framework_TestCase
         $this->createStoryCmd->data()->title = 'test';
         $this->createStoryCmd->data()->cardShortDescription = 'card short desc';
         $this->createStoryCmd->data()->content = 'content';
-        $this->createStoryCmd->data()->authorID = $this->user->getId();
+        $this->createStoryCmd->data()->writerID = $this->user->getId();
         $this->createStoryCmd->exec();
         $this->assertCount(1, $this->storyRepo->getAll());
 
         $this->createStoryCmd->data()->title = 'test';
         $this->createStoryCmd->data()->cardShortDescription = 'card short desc';
         $this->createStoryCmd->data()->content = 'content';
-        $this->createStoryCmd->data()->authorID = $this->user->getId();
+        $this->createStoryCmd->data()->writerID = $this->user->getId();
         $this->createStoryCmd->exec();
         $this->assertCount(2, $this->storyRepo->getAll());
     }
@@ -66,7 +66,7 @@ class CreateStoryTest extends PHPUnit_Framework_TestCase
         $this->createStoryCmd->data()->title = '';
         $this->createStoryCmd->data()->content = 'content';
         $this->createStoryCmd->data()->cardShortDescription = 'card short description';
-        $this->createStoryCmd->data()->authorID = $this->user->getId();
+        $this->createStoryCmd->data()->writerID = $this->user->getId();
         try {
             $this->createStoryCmd->exec();
         } catch (\DSI\Service\ErrorHandler $e) {
