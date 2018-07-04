@@ -61,7 +61,7 @@ window.DSI_Helpers = {
     }
 };
 
-(function () {
+(function readjustTextarea() {
     function textAreaAdjust(o) {
         o.style.height = "1px";
         o.style.height = (25 + o.scrollHeight) + "px";
@@ -96,7 +96,7 @@ window.DSI_Helpers = {
         let name = cname + "=";
         let decodedCookie = decodeURIComponent(document.cookie);
         let ca = decodedCookie.split(';');
-        for(let i = 0; i <ca.length; i++) {
+        for (let i = 0; i < ca.length; i++) {
             let c = ca[i];
             while (c.charAt(0) === ' ') {
                 c = c.substring(1);
@@ -119,4 +119,26 @@ window.DSI_Helpers = {
             return false;
         })
     }
+}());
+
+(function createProjectOrOrganisation() {
+    $('.ix-create-project-modal').click(function () {
+        swal({
+            title: 'Create new project',
+            text: 'Please note that Please note that Please note that Please note that Please note that Please note that Please note that Please note that ',
+            type: "info"
+        }, function () {
+            $('#ix-create-project-modal').click();
+        });
+    });
+
+    $('.ix-create-organisation-modal').click(function () {
+        swal({
+            title: 'Create new organisation',
+            text: 'Please note that Please note that Please note that Please note that Please note that Please note that Please note that Please note that ',
+            type: "info"
+        }, function () {
+            $('#ix-create-organisation-modal').click();
+        });
+    })
 }());
