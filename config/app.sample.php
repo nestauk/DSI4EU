@@ -24,7 +24,7 @@ return [
         'password' => '',
         'db' => '',
     ],
-    'api ' => [
+    'api' => [
         'facebook' => [
             'clientId' => '{facebook-app-id}',
             'clientSecret' => '{facebook-app-secret}',
