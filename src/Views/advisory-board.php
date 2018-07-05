@@ -2,22 +2,16 @@
 /** @var $urlHandler Services\URL */
 require __DIR__ . '/header.php' ?>
 
-    <style xmlns="http://www.w3.org/1999/html">
-        .current-page a {
-            font-weight: normal;
-        }
-    </style>
-
-    <div class="content-block">
+    <div class="content-block advisory-board-controller">
         <div class="w-row">
-            <div class="current-page w-col w-col-8">
+            <div class="w-col w-col-8">
                 <h1 class="content-h1">Advisory Board</h1>
-                <!--
-                <p class="intro">
-                    DSI4EU* is a project delivered by a consortium of seven partners, and is part of the CAPS community.
+                <p>
+                    DSI4EU is being supported by an Advisory Board of experts from across Europe, who are providing us
+                    with feedback, support, expertise and access to networks all over the continent. Read on to find out
+                    more about the members of the Advisory Board, listed here in alphabetical order.
                 </p>
-                -->
-                <br><br>
+                <br>
 
                 <div class="partner-block w-row">
                     <div class="w-col w-col-3">
