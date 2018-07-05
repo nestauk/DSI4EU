@@ -69,13 +69,13 @@ class ProjectController
         try {
             $this->project = $projectRepo->getById($this->data()->projectID);
         } catch (NotFound $e) {
-            $pageTitle = 'Project does not exist';
+            \Services\View::setPageTitle('Project does not exist');
             require __DIR__ . '/../../Views/project/project-404.php';
             return;
         }
 
         if ($this->project->isWaitingApproval() AND !$this->canViewWaitingApproval($loggedInUser)) {
-            $pageTitle = 'Project is waiting approval';
+            \Services\View::setPageTitle('Project is waiting approval');
             require __DIR__ . '/../../Views/project/project-404.php';
             return;
         }
@@ -251,10 +251,10 @@ class ProjectController
                 'posts' => $this->getPostsForProject($this->project),
             ]);
         } else {
-            $pageTitle = $this->project->getName();
             $project = $this->project;
             JsModules::setTinyMCE(true);
             JsModules::setTranslations(true);
+            \Services\View::setPageTitle($this->project->getName());
             require __DIR__ . '/../../Views/project/project.php';
         }
 

@@ -54,13 +54,13 @@ class OrganisationController
         try {
             $this->organisation = $organisationRepo->getById($this->data()->organisationID);
         } catch (NotFound $e) {
-            $pageTitle = 'Organisation does not exist';
+            \Services\View::setPageTitle('Organisation does not exists');
             require __DIR__ . '/../../../www/views/organisation-404.php';
             return;
         }
 
         if ($this->organisation->isWaitingApproval() AND !$this->canViewWaitingApproval($loggedInUser)) {
-            $pageTitle = 'Project is waiting approval';
+            \Services\View::setPageTitle('Organisation is waiting approval');
             require __DIR__ . '/../../../www/views/organisation-404.php';
             return;
         }
@@ -328,7 +328,7 @@ class OrganisationController
             return $organisationNetworkTag->getTag();
         }, (new OrganisationNetworkTagRepo())->getByOrganisationID($this->organisation->getId()));
 
-        $pageTitle = $this->organisation->getName();
+        \Services\View::setPageTitle($this->organisation->getName());
         $organisation = $this->organisation;
         require __DIR__ . '/../../../www/views/organisation.php';
 

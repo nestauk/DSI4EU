@@ -31,8 +31,8 @@ class EventsController
                 'countries' => $this->jsonCountriesFromEvents($events),
             ]);
         } else {
-            $pageTitle = 'Events';
             $userCanAddEvent = (bool)($loggedInUser AND ($loggedInUser->isCommunityAdmin() OR $loggedInUser->isEditorialAdmin()));
+            \Services\View::setPageTitle('Events - DSI4EU');
             require __DIR__ . '/../../../www/views/events.php';
         }
     }

@@ -29,7 +29,7 @@ class EventController
         if ($this->format == 'json') {
 
         } else {
-            $pageTitle = $event->getTitle() . ' - Digital Social Events';
+            \Services\View::setPageTitle($event->getTitle() . ' - Digital Social Events');
             require __DIR__ . '/../../../www/views/event.php';
         }
     }

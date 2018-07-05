@@ -55,7 +55,7 @@ class ProjectsController
                 ];
             }, $projectRepositoryInAPC->getAll()));
         } else {
-            $pageTitle = 'Projects';
+            \Services\View::setPageTitle('Projects - DSI4EU');
             require __DIR__ . '/../../../www/views/projects.php';
         }
     }

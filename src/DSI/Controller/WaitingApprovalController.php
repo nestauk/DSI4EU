@@ -53,7 +53,7 @@ class WaitingApprovalController
             go_to('?');
         }
 
-        $pageTitle = 'Waiting Approval';
+        \Services\View::setPageTitle('Waiting Approval');
         require __DIR__ . '/../../../www/views/waiting-approval.php';
         return true;
     }

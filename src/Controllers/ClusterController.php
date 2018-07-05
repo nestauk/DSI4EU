@@ -53,6 +53,7 @@ class ClusterController
         if (!Request::isGet())
             return (new Response('Invalid header', Response::HTTP_FORBIDDEN))->send();
 
+        View::setPageTitle($this->clusterLang->getTitle() . ' - DSI4EU');
         return View::render(__DIR__ . '/../Views/clusters/cluster.php', [
             'authUser' => $this->authUser,
             'loggedInUser' => $this->loggedInUser,

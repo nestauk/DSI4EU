@@ -2,7 +2,6 @@
 /** @var $loggedInUser \DSI\Entity\User */
 /** @var $isHomePage bool */
 /** @var $angularModules string[] */
-/** @var $pageTitle string[] */
 /** @var $sliderCaseStudies \DSI\Entity\CaseStudy[] */
 /** @var $homePageCaseStudies \DSI\Entity\CaseStudy[] */
 /** @var $organisationsCount int */

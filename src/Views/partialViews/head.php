@@ -1,20 +1,20 @@
 <?php
 /** @var $angularModules string[] */
-/** @var $pageTitle string[] */
 /** @var $loggedInUser \DSI\Entity\User */
 
 /** @var $urlHandler Services\URL */
 
 use DSI\Service\Sysctl;
+use Services\View;
 
 if (!$urlHandler)
     $urlHandler = new Services\URL();
 
 ?>
 <meta charset="utf-8">
-<title><?php echo isset($pageTitle) ? show_input($pageTitle) : 'Digitalsocial.eu' ?></title>
+<title><?= show_input(View::getPageTitleOr('Digitalsocial.eu')) ?></title>
 <meta name="google-site-verification" content="al4Vt4vNA7eWC2OyIEa0C8vjDBFl5UZWZODih8wy3r4"/>
-<meta property="og:title" content="<?php echo isset($pageTitle) ? show_input($pageTitle) : 'Digitalsocial.eu' ?>">
+<meta property="og:title" content="<?= show_input(View::getPageTitleOr('Digitalsocial.eu')) ?>">
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
 
 <link href="<?php echo $urlHandler->rssNewsBlogs() ?>" rel="feed" type="application/rss+xml"

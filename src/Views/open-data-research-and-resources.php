@@ -1,7 +1,4 @@
 <?php
-
-use Models\Resource;
-
 /** @var $urlHandler Services\URL */
 /** @var $mainText \Models\Text */
 /** @var $subText \Models\Text */
@@ -11,7 +8,6 @@ use Models\Resource;
 /** @var $clusters \Models\Cluster[] */
 /** @var $types \Models\TypeOfResource[] */
 
-\DSI\Service\JsModules::setMasonry(true);
 require __DIR__ . '/header.php';
 ?>
 

@@ -13232,15 +13232,15 @@ body {
     }
   }
 
-  .footer-black {
-    z-index: -1;
-    padding-bottom: 110px;
-  }
-
   .info-card.resource {
     .research-paper-img {
       width: 110px;
       height: 110px;
     }
+  }
+
+  .feedback-form-wrapper{
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 }

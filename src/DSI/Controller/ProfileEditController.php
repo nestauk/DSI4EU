@@ -23,6 +23,7 @@ use DSI\UseCase\UpdateUserBasicDetails;
 use DSI\UseCase\UpdateUserEmailAddress;
 use DSI\UseCase\UpdateUserPassword;
 use DSI\UseCase\UpdateUserProfilePicture;
+use Services\View;
 
 class ProfileEditController
 {
@@ -164,6 +165,7 @@ class ProfileEditController
         $userOrganisations = (new OrganisationMemberRepo())->getOrganisationIDsForMember($user->getId());
 
         $angularModules['fileUpload'] = true;
+        View::setPageTitle('Create your profile - DSI4EU');
         require __DIR__ . '/../../../www/views/profile-edit.php';
     }
 
