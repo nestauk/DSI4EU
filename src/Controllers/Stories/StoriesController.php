@@ -1,12 +1,12 @@
 <?php
 
-namespace DSI\Controller;
+namespace Controllers\Stories;
 
 use DSI\Entity\Story;
 use DSI\Repository\StoryRepo;
-use DSI\Repository\UserRepo;
 use DSI\Service\Auth;
 use Services\URL;
+use Services\View;
 
 class StoriesController
 {
@@ -43,10 +43,11 @@ class StoriesController
                 return $data;
             }, $stories));
         } else {
-            $angularModules['animate'] = true;
-            $angularModules['pagination'] = true;
-            $pageTitle = 'Stories';
-            require __DIR__ . '/../../../www/views/stories.php';
+            View::setPageTitle('Blogs - DSI4EU');
+            return View::render(__DIR__ . '/../../Views/stories/stories.php', [
+                'loggedInUser' => $loggedInUser,
+                'userCanAddStory' => $userCanAddStory,
+            ]);
         }
     }
 }

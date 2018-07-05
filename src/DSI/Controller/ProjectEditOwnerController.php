@@ -55,7 +55,7 @@ class ProjectEditOwnerController
             return;
         }
 
-        $pageTitle = $project->getName();
+        \Services\View::setPageTitle($project->getName());
         $users = (new UserRepo())->getAll();
         require __DIR__ . '/../../../www/views/project-editOwner.php';
     }

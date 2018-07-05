@@ -51,7 +51,8 @@ class CaseStudiesController
                 ];
             }, $caseStudies));
         } else {
-            View::render(__DIR__ . '/../../Views/case-studies/case-studies.php', [
+            View::setPageTitle('Case studies - DSI4EU');
+            return View::render(__DIR__ . '/../../Views/case-studies/case-studies.php', [
                 'loggedInUser' => $loggedInUser,
                 'userCanManageCaseStudies' => $userCanManageCaseStudies,
                 'caseStudies' => $caseStudies,

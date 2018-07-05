@@ -27,6 +27,7 @@ class WhatIsDsiController
 
     public function get()
     {
+        View::setPageTitle('What is DSI? - DSI4EU');
         return View::render(__DIR__ . '/../Views/what-is-dsi/en.php', [
             'authUser' => $this->authUser,
             'loggedInUser' => $this->loggedInUser,

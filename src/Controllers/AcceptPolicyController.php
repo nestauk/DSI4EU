@@ -21,9 +21,11 @@ class AcceptPolicyController
         $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
         $loggedInUser = $authUser->getUser();
 
-        $userAccept = UserAccept::where(UserAccept::UserID, $loggedInUser->getId())->count();
-        // if ($userAccept)
-        // return go_to($urlHandler->dashboard());
+        $userAccept = UserAccept
+            ::where(UserAccept::UserID, $loggedInUser->getId())
+            ->count();
+        if ($userAccept)
+            return go_to($urlHandler->dashboard());
 
         $errors = [];
         if (Request::isPost()) {

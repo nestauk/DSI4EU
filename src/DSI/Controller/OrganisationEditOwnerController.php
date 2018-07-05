@@ -55,7 +55,7 @@ class OrganisationEditOwnerController
             return;
         }
 
-        $pageTitle = $organisation->getName();
+        \Services\View::setPageTitle($organisation->getName());
         $users = (new UserRepo())->getAll();
         require __DIR__ . '/../../../www/views/organisation-edit-owner.php';
     }

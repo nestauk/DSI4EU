@@ -52,7 +52,7 @@ class OrganisationsController
                 ];
             }, $organisationRepositoryInAPC->getAll()));
         } else {
-            $pageTitle = 'Organisations';
+            \Services\View::setPageTitle('Organisations - DSI4EU');
             require __DIR__ . '/../../../www/views/organisations.php';
         }
     }

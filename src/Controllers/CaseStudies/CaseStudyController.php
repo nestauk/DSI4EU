@@ -14,6 +14,7 @@ class CaseStudyController
 
     public function exec()
     {
+        $urlHandler = new URL();
         $authUser = new Auth();
         $loggedInUser = $authUser->getUserIfLoggedIn();
 
@@ -25,6 +26,7 @@ class CaseStudyController
         $caseStudies = $caseStudyRepo->getAll();
         $caseStudies = array_splice($caseStudies, 0, 3);
 
+        \Services\View::setPageTitle($caseStudy->getTitle());
         View::render(__DIR__ . '/../../Views/case-studies/case-study.php', [
             'loggedInUser' => $loggedInUser,
             'userCanAddCaseStudy' => $userCanAddCaseStudy,

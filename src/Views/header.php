@@ -5,7 +5,6 @@ use \DSI\Service\Sysctl;
 /** @var $loggedInUser \DSI\Entity\User */
 /** @var $isIndexPage bool */
 /** @var $angularModules string[] */
-/** @var $pageTitle string[] */
 
 $projectsCount = (new \DSI\Repository\ProjectRepoInAPC())->countAll();
 $organisationsCount = (new \DSI\Repository\OrganisationRepoInAPC())->countAll();
