@@ -126,7 +126,10 @@ window.DSI_Helpers = {
         swal({
             title: 'Create new project',
             text: 'Please note that Please note that Please note that Please note that Please note that Please note that Please note that Please note that ',
-            type: "info"
+            type: "info",
+            confirmButtonText: 'Continue',
+            showCancelButton: true,
+            cancelButtonText: 'Cancel',
         }, function () {
             $('#ix-create-project-modal').click();
         });
@@ -136,7 +139,10 @@ window.DSI_Helpers = {
         swal({
             title: 'Create new organisation',
             text: 'Please note that Please note that Please note that Please note that Please note that Please note that Please note that Please note that ',
-            type: "info"
+            type: "info",
+            confirmButtonText: 'Continue',
+            showCancelButton: true,
+            cancelButtonText: 'Cancel',
         }, function () {
             $('#ix-create-organisation-modal').click();
         });
