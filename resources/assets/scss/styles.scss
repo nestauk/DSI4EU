@@ -109,6 +109,20 @@
   }
 }
 
+.advisory-board-controller {
+  a {
+    font-weight: normal;
+  }
+
+  h2 {
+    margin-top: 0;
+  }
+
+  .partner-logo-colour {
+    margin-top: 5px;
+  }
+}
+
 body {
   .twitter-block {
     height: 100px;
@@ -852,7 +866,7 @@ body {
     }
   }
 
-  .feedback-form-wrapper{
+  .feedback-form-wrapper {
     margin-left: auto !important;
     margin-right: auto !important;
   }

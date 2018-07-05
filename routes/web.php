@@ -272,6 +272,9 @@ class Router
         } elseif ($this->pageURL === '/robots.txt') {
             $this->robotsTxt();
 
+        } elseif (preg_match('<^/' . $langHandler . 'advisory-board$>', $this->pageURL, $matches)) {
+            $this->advisoryBoard($matches);
+
         } elseif (preg_match('<^/' . $langHandler . 'explore-dsi$>', $this->pageURL, $matches)) {
             $this->staticPage($matches, 'explore-dsi.php');
 
@@ -1124,6 +1127,12 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
         (new \DSI\Controller\StaticHtmlController())->contact();
+    }
+
+    private function advisoryBoard($matches)
+    {
+        $this->setLanguageFromUrl($matches);
+        return (new \Controllers\AdvisoryBoardController())->exec();
     }
 
     private function staticPage($matches, $view)
