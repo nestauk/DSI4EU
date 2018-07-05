@@ -37,10 +37,10 @@ class FundingController
                 'years' => $this->jsonYearsFromFundings($fundings),
             ]);
         } else {
-            $pageTitle = 'Funding Opportunities';
             $fundingTypes = (new FundingTypeRepo())->getAll();
             $fundingTargets = (new FundingTargetRepo())->getAll();
             $userCanAddFunding = (bool)($loggedInUser AND ($loggedInUser->isCommunityAdmin() OR $loggedInUser->isEditorialAdmin()));
+            \Services\View::setPageTitle('Funding and support - DSI4EU');
             require __DIR__ . '/../../../www/views/funding.php';
         }
     }

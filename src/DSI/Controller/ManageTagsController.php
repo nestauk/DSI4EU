@@ -56,7 +56,7 @@ class ManageTagsController
                 'projectImpactTags' => $this->getProjectImpactTags(),
             ]);
         } else {
-            $pageTitle = 'Manage Tags';
+            \Services\View::setPageTitle('Manage Tags');
             require __DIR__ . '/../../../www/views/manage-tags.php';
         }
 

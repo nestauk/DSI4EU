@@ -25,7 +25,7 @@ class CaseStudyController
         $caseStudies = $caseStudyRepo->getAll();
         $caseStudies = array_splice($caseStudies, 0, 3);
 
-        $pageTitle = $caseStudy->getTitle();
+        \Services\View::setPageTitle($caseStudy->getTitle());
         require __DIR__ . '/../../../www/views/case-study.php';
     }
 }

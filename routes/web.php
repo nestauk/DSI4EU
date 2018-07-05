@@ -318,7 +318,7 @@ class Router
             $this->openResourceCreateApi($matches);
 
         } elseif (preg_match('<^/' . $langHandler . 'contact-dsi$>', $this->pageURL, $matches)) {
-            $this->staticPage($matches, 'contact-dsi.php');
+            $this->contact($matches);
 
 // Permanent Login
         } elseif (preg_match('<^/' . $langHandler . 'keepUserLoggedIn>', $this->pageURL, $matches)) {
@@ -1118,6 +1118,12 @@ class Router
         $command->format = 'txt';
         $command->view = 'robots.txt.php';
         $command->exec();
+    }
+
+    private function contact($matches)
+    {
+        $this->setLanguageFromUrl($matches);
+        (new \DSI\Controller\StaticHtmlController())->contact();
     }
 
     private function staticPage($matches, $view)

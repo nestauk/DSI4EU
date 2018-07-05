@@ -4,7 +4,6 @@
 
 $angularModules['animate'] = true;
 $angularModules['pagination'] = true;
-$pageTitle = 'Stories';
 
 require __DIR__ . '/../header.php';
 ?>

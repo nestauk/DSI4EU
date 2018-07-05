@@ -4,6 +4,8 @@ namespace Services;
 
 class View
 {
+    static $pageTitle;
+
     static function render(string $view, array $data = [])
     {
         /** @var $urlHandler URL */
@@ -18,5 +20,15 @@ class View
         require($view);
 
         return false;
+    }
+
+    static function setPageTitle($title)
+    {
+        self::$pageTitle = $title;
+    }
+
+    static function getPageTitleOr($default)
+    {
+        return self::$pageTitle ? self::$pageTitle : $default;
     }
 }
