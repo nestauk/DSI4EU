@@ -66,6 +66,7 @@ class ClustersController
             ::with(['clusterLangs' => function ($query) {
                 $query->where(ClusterLang::Lang, Translate::getCurrentLang());
             }])
+            ->where(Cluster::IsOther, false)
             ->get();
     }
 }
