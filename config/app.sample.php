@@ -24,12 +24,12 @@ return [
         'password' => '',
         'db' => '',
     ],
-    'api ' => [
+    'api' => [
         'facebook' => [
             'clientId' => '{facebook-app-id}',
             'clientSecret' => '{facebook-app-secret}',
             'redirectUri' => '{https://example.com}/facebook-login',
-            'graphApiVersion' => 'v2.6',
+            'graphApiVersion' => 'v3.0',
         ],
         'github' => [
             'clientId' => '{github-client-id}',

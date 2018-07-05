@@ -1,7 +1,7 @@
 <?php
 /** @var $urlHandler Services\URL */
 
-$pageTitle = 'Updates';
+\Services\View::setPageTitle('Updates');
 require __DIR__ . '/header.php';
 ?>
 

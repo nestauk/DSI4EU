@@ -1,6 +1,7 @@
 <?php
 /** @var $urlHandler Services\URL */
 
+\Services\View::setPageTitle('About the project - DSI4EU');
 require __DIR__ . '/header.php'
 ?>
 

@@ -92,7 +92,7 @@ class ProjectEditMembersController
                 'invitedEmails' => $this->projectInvitedEmailsJson($project),
             ]);
         } else {
-            $pageTitle = $project->getName();
+            \Services\View::setPageTitle($project->getName());
             JsModules::setTranslations(true);
             require __DIR__ . '/../../../www/views/project-edit-members.php';
         }
