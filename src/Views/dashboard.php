@@ -162,7 +162,7 @@ require __DIR__ . '/header.php';
                                 </div>
                                 <div class="w-row create-or-join">
                                     <div class="w-col w-col-6">
-                                        <a class="w-button dsi-button create" href="#" data-ix="create-project-modal">
+                                        <a class="w-button dsi-button create ix-create-project-modal" href="#">
                                             <?php _ehtml('Create +') ?></a>
                                     </div>
                                     <div class="w-col w-col-6">
@@ -211,8 +211,7 @@ require __DIR__ . '/header.php';
                                 </div>
                                 <div class="w-row create-or-join">
                                     <div class="w-col w-col-6">
-                                        <a class="w-button dsi-button create" href="#"
-                                           data-ix="create-organisation-modal"
+                                        <a class="w-button dsi-button create ix-create-organisation-modal" href="#"
                                            data-w-tab="Tab 2"><?php _ehtml('Create +') ?></a>
                                     </div>
                                     <div class="w-col w-col-6">

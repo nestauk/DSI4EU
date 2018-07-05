@@ -229,7 +229,7 @@ if (!isset($urlHandler))
                 <ul class="w-list-unstyled">
                     <?php if ($loggedInUser) { ?>
                         <li class="footer-link">
-                            <a class="footer-link" href="#" data-ix="create-project-modal">
+                            <a class="footer-link ix-create-project-modal" href="#">
                                 <?php _ehtml('Add a project') ?></a>
                         </li>
                     <?php } ?>
@@ -249,7 +249,7 @@ if (!isset($urlHandler))
                 <ul class="w-list-unstyled">
                     <?php if ($loggedInUser) { ?>
                         <li class="footer-link">
-                            <a class="footer-link" href="#" data-ix="create-organisation-modal">
+                            <a class="footer-link ix-create-organisation-modal" href="#">
                                 <?php _ehtml('Add an organisation') ?></a>
                         </li>
                     <?php } ?>

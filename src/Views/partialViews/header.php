@@ -116,7 +116,7 @@ if (!isset($urlHandler))
                     </a>
 
                     <?php if ($loggedInUser) { ?>
-                        <a class="full-menu-link" data-ix="create-project-modal" href="#">
+                        <a class="full-menu-link ix-create-project-modal" href="#">
                             <?php _e('Add new project') ?>
                         </a>
                     <?php } ?>
@@ -149,7 +149,7 @@ if (!isset($urlHandler))
                         <?= __('Cities and urban development') ?>
                     </a>
                     <?php /* if ($loggedInUser) { ?>
-                        <a class="full-menu-link" data-ix="create-organisation-modal" href="#">
+                        <a class="full-menu-link ix-create-organisation-modal" href="#">
                             <?php _e('Add new organisation') ?>
                         </a>
                     <?php } */ ?>
@@ -231,9 +231,11 @@ if (!isset($urlHandler))
                     <div class="login-li menu-li"><?php _e('Create') ?></div>
                     <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-plus-empty.png">
                     <div class="create-drop-down-block">
-                        <a class="drop-down-link-li" data-ix="create-project-modal"
+                        <a href="#" data-ix="create-project-modal" id="ix-create-project-modal"></a>
+                        <a href="#" data-ix="create-organisation-modal" id="ix-create-organisation-modal"></a>
+                        <a class="drop-down-link-li ix-create-project-modal"
                            href="#"><?php _e('Create project') ?></a>
-                        <a class="drop-down-link-li" data-ix="create-organisation-modal"
+                        <a class="drop-down-link-li ix-create-organisation-modal"
                            href="#"><?php _e('Create organisation') ?></a>
                     </div>
                 </div>
@@ -318,9 +320,9 @@ if (!isset($urlHandler))
                     <div><?php _ehtml('Create') ?></div>
                 </div>
                 <nav class="create-drop-down w-dropdown-list">
-                    <a class="drop-down-link w-dropdown-link" data-ix="create-project-modal" href="#">
+                    <a class="drop-down-link w-dropdown-link ix-create-project-modal" href="#">
                         <?php _ehtml('Create a new project') ?></a>
-                    <a class="drop-down-link w-dropdown-link" data-ix="create-organisation-modal" href="#">
+                    <a class="drop-down-link w-dropdown-link ix-create-organisation-modal" href="#">
                         <?php _ehtml('Create an organisation') ?></a>
                     <div class="arror-up"></div>
                 </nav>

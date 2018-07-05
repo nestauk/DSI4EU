@@ -106,7 +106,7 @@ require __DIR__ . '/header.php';
                     <div class="w-col w-col-8">
                         <div class="w-row grid w-clearfix">
                             <div class="w-col w-col-6 grid-item" ng-repeat="resource in filteredResources">
-                                <a class="resource-card w-inline-block" ng-href="resource.link_url"
+                                <a class="resource-card w-inline-block" ng-href="{{resource.link_url}}"
                                    target="_blank">
                                     <div class="info-card resource">
                                         <img class="research-paper-img" ng-src="{{resource.image}}">
