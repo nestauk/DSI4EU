@@ -81,7 +81,7 @@ class OrganisationEditMembersController
                 'invitedMembers' => $this->organisationInvitedMembersJson($organisation),
             ]);
         } else {
-            $pageTitle = $organisation->getName();
+            \Services\View::setPageTitle($organisation->getName());
             JsModules::setTranslations(true);
             require __DIR__ . '/../../../www/views/organisation-edit-members.php';
         }

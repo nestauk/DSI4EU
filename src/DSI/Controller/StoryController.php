@@ -33,7 +33,7 @@ class StoryController
         $userCanManageStory = $this->userCanManageStory($loggedInUser, $story);
         $userCanDeleteStory = $this->userCanDeleteStory($loggedInUser, $story);
 
-        $pageTitle = $story->getTitle();
+        \Services\View::setPageTitle($story->getTitle());
         require __DIR__ . '/../../../www/views/story.php';
     }
 

@@ -12494,6 +12494,20 @@ html.w-mod-js *[data-ix="map-point-expand-3"] {
   }
 }
 
+.advisory-board-controller {
+  a {
+    font-weight: normal;
+  }
+
+  h2 {
+    margin-top: 0;
+  }
+
+  .partner-logo-colour {
+    margin-top: 5px;
+  }
+}
+
 body {
   .twitter-block {
     height: 100px;
@@ -13232,15 +13246,19 @@ body {
     }
   }
 
-  .footer-black {
-    z-index: -1;
-    padding-bottom: 110px;
-  }
-
   .info-card.resource {
     .research-paper-img {
       width: 110px;
       height: 110px;
     }
+  }
+
+  .footer-black {
+    padding-bottom: 110px;
+  }
+
+  .feedback-form-wrapper {
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 }

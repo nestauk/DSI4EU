@@ -309,7 +309,6 @@ class OrganisationEditController
         } else {
             if ($loggedInUser)
                 $canUserRequestMembership = $this->canUserRequestMembership($organisation, $loggedInUser);
-            $pageTitle = $organisation->getName();
             $angularModules['fileUpload'] = true;
             $tags = (new TagForOrganisationsRepo())->getAll();
             $networkTags = (new NetworkTagRepo())->getAll();
@@ -317,6 +316,8 @@ class OrganisationEditController
             $orgNetworkTags = (new OrganisationNetworkTagRepo())->getTagNamesByOrganisation($organisation);
             $projects = (new ProjectRepoInAPC())->getAll();
             $orgProjects = (new OrganisationProjectRepo())->getProjectIDsForOrganisation($organisation);
+
+            \Services\View::setPageTitle($organisation->getName());
             JsModules::setTinyMCE(true);
             require __DIR__ . '/../../../www/views/organisation-edit.php';
         }

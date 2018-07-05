@@ -7,6 +7,7 @@ use DSI\Entity\User;
 use DSI\Repository\CaseStudyRepo;
 use DSI\Service\Auth;
 use Services\URL;
+use Services\View;
 
 class CaseStudiesController
 {
@@ -40,6 +41,7 @@ class CaseStudiesController
                 ];
             }, $caseStudies));
         } else {
+            View::setPageTitle('Case studies - DSI4EU');
             require __DIR__ . '/../../../www/views/case-studies.php';
         }
     }

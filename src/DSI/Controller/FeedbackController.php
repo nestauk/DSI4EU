@@ -7,6 +7,7 @@ use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use Services\URL;
 use DSI\UseCase\SendFeedback;
+use Services\View;
 
 class FeedbackController
 {
@@ -33,10 +34,12 @@ class FeedbackController
                     'errors' => $e->getErrors(),
                 ]);
             }
-            return;
+            return true;
         }
 
-        $pageTitle = 'Feedback';
-        require __DIR__ . '/../../../www/views/feedback.php';
+        View::setPageTitle('Feedback - DSI4EU');
+        return View::render(__DIR__ . '/../../../www/views/feedback.php', [
+            'loggedInUser' => $loggedInUser
+        ]);
     }
 }

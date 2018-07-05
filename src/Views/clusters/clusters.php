@@ -1,9 +1,9 @@
 <?php
-require __DIR__ . '/../header.php'
 /** @var $loggedInUser \DSI\Entity\User */
 /** @var $urlHandler Services\URL */
 /** @var $clusters \Models\Relationship\ClusterLang[] */
-?>
+require __DIR__ . '/../header.php' ?>
+
     <div class="clusters-controller">
         <div class="content-block">
             <div class="w-row">

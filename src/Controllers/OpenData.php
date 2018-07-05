@@ -12,9 +12,8 @@ use Models\Resource;
 use Models\Text;
 use Models\TypeOfResource;
 use Services\URL;
-use Services\Request;
-use Services\Response;
 use Services\View;
+use DSI\Service\JsModules;
 
 class OpenData
 {
@@ -39,6 +38,8 @@ class OpenData
         $mainText = Text::getByIdentifier('open-data-main-text');
         $subText = Text::getByIdentifier('open-data-sub-text');
 
+        JsModules::setMasonry(true);
+        View::setPageTitle('Research and resources - DSI4EU');
         return View::render(__DIR__ . '/../Views/open-data-research-and-resources.php', [
             'authUser' => $this->authUser,
             'loggedInUser' => $this->loggedInUser,
