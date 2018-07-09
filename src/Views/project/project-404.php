@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/header.php';
+require __DIR__ . '/../header.php';
 ?>
     <div class="page-project">
         <div class="case-study-intro data-vis-intro">
@@ -16,4 +16,4 @@ require __DIR__ . '/header.php';
         </div>
     </div>
 
-<?php require __DIR__ . '/footer.php' ?>
+<?php require __DIR__ . '/../footer.php' ?>
