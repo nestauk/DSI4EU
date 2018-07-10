@@ -46,7 +46,6 @@ class OpenData
             'mainText' => $mainText,
             'subText' => $subText,
             'canEdit' => $this->canEdit(),
-            'resources' => Resource::all(),
             'authors' => AuthorOfResource::all(),
             'clusters' => Cluster
                 ::with(['clusterLangs' => function ($query) {
