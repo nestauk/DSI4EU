@@ -61,7 +61,7 @@ class StoryAddController
 
         return View::render(__DIR__ . '/../../Views/stories/story-add.php', [
             'categories' => (new StoryCategoryRepo())->getAll(),
-            'writers' => (new UserRepo())->getAllCommunityAdmins(),
+            'writers' => (new UserRepo())->getAll(),
             'loggedInUser' => $loggedInUser,
         ]);
     }

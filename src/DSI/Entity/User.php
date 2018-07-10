@@ -396,6 +396,17 @@ class User
     }
 
     /**
+     * @return string
+     */
+    public function getRoleName(): string
+    {
+        if (!$this->role)
+            return 'user';
+
+        return (string)$this->role;
+    }
+
+    /**
      * @param string $role
      */
     public function setRole(string $role)

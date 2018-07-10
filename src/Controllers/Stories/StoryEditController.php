@@ -81,7 +81,7 @@ class StoryEditController
 
         View::render(__DIR__ . '/../../Views/stories/story-edit.php', [
             'categories' => (new StoryCategoryRepo())->getAll(),
-            'writers' => (new UserRepo())->getAllCommunityAdmins(),
+            'writers' => (new UserRepo())->getAll(),
             'story' => $story,
             'loggedInUser' => $loggedInUser,
         ]);
