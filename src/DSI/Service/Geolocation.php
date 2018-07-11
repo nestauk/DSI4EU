@@ -44,7 +44,7 @@ class Geolocation
             return true;
         }
 
-        $url = 'http://nominatim.openstreetmap.org/search?q=' . urlencode($this->regionName) . ',' . urlencode($this->countryName) . '&format=json';
+        $url = 'https://nominatim.openstreetmap.org/search?q=' . urlencode($this->regionName) . ',' . urlencode($this->countryName) . '&format=json';
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
