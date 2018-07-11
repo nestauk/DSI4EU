@@ -66,6 +66,21 @@ require __DIR__ . '/../header.php';
         <div class="content-directory">
             <div class="content">
                 <div class="w-row grid w-clearfix">
+                    <div class="w-col w-col-4 grid-item">
+                        <a class="resource-card w-inline-block" href="<?= $urlHandler->openResourceCreate() ?>">
+                            <div class="info-card resource">
+                                <h3>Add new resource</h3>
+                                <p>Click to add new resource</p>
+                                <div class="log-in-link long next-page read-more w-clearfix" data-ix="log-in-arrow"
+                                     href="<?= $resource->{Resource::LinkUrl} ?>" target="_blank">
+                                    <div class="login-li long menu-li readmore-li">
+                                        Link to add new resource
+                                    </div>
+                                    <img src="/images/ios7-arrow-thin-right.png" class="login-arrow">
+                                </div>
+                            </div>
+                        </a>
+                    </div>
 
                     <?php foreach ($resources AS $resource) { ?>
                         <div class="w-col w-col-4 grid-item">
@@ -94,22 +109,6 @@ require __DIR__ . '/../header.php';
                             </div>
                         </div>
                     <?php } ?>
-
-                    <div class="w-col w-col-4 grid-item">
-                        <a class="resource-card w-inline-block" href="<?= $urlHandler->openResourceCreate() ?>">
-                            <div class="info-card resource">
-                                <h3>Add new resource</h3>
-                                <p>Click to add new resource</p>
-                                <div class="log-in-link long next-page read-more w-clearfix" data-ix="log-in-arrow"
-                                     href="<?= $resource->{Resource::LinkUrl} ?>" target="_blank">
-                                    <div class="login-li long menu-li readmore-li">
-                                        Link to add new resource
-                                    </div>
-                                    <img src="/images/ios7-arrow-thin-right.png" class="login-arrow">
-                                </div>
-                            </div>
-                        </a>
-                    </div>
                 </div>
                 <!-- end of second row -->
             </div>
