@@ -8,6 +8,16 @@ require __DIR__ . '/../header.php'
         <div class="w-row">
             <div class="w-col w-col-8 w-col-stack">
                 <h1 class="content-h1">What is DSI?</h1>
+
+                <p class="intro">
+                    Coming soon...
+                </p>
+                <p class="separator">
+                    In the meantime, check out some of our <a href="<?= $urlHandler->caseStudies() ?>">case studies</a>
+                    to find inspiring stories of digital social innovation in practice.
+                </p>
+                
+                <?php /*
                 <p class="separator">
                     You may have heard of internet cookies... you may know all about them. To confirm, a cookie is a
                     small file of letters and numbers stored (with your consent) on your browser or the hard drive of
@@ -99,7 +109,7 @@ require __DIR__ . '/../header.php'
                         Internet Explorer
                     </a>
                 </p>
-
+                */ ?>
             </div>
         </div>
     </div>
