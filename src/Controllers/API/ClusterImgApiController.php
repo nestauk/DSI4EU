@@ -71,6 +71,7 @@ class ClusterImgApiController
         $this->clusterImg = new ClusterImg();
         $this->clusterImg->{ClusterImg::ClusterLangID} = $clusterLang->{ClusterLang::Id};
         $this->clusterImg->{ClusterImg::Filename} = $exec->getNewFileName();
+        $this->clusterImg->{ClusterImg::Caption} = $_POST[ClusterImg::Caption];
         $this->clusterImg->{ClusterImg::Link} = $_POST[ClusterImg::Link];
         $this->clusterImg->save();
         return $this->get();
@@ -84,8 +85,8 @@ class ClusterImgApiController
             return (new Response('Cluster Image not found', Response::HTTP_NOT_FOUND))->send();
 
         $fields = [
+            ClusterImg::Caption,
             ClusterImg::Link,
-            // ClusterImg::Filename,
         ];
         foreach ($fields AS $field)
             if (isset($_POST[$field])) $this->clusterImg->{$field} = $_POST[$field];

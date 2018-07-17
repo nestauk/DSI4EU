@@ -1,18 +1,13 @@
 <?php
-require __DIR__ . '/../header.php';
 /** @var $loggedInUser \DSI\Entity\User */
 /** @var $urlHandler \Services\URL */
-
 /** @var $cluster \Models\Relationship\ClusterLang */
 
-use \DSI\Entity\Image;
-
+\DSI\Service\JsModules::setJqueryUI(true);
+require __DIR__ . '/../header.php';
 ?>
-
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-
     <div ng-controller="ClusterEditController"
+         class="cluster-edit-controller"
          data-editurl="<?= $urlHandler->clusterApi($cluster->getClusterId()) ?>"
          data-editimageurl="<?= $urlHandler->clusterImgApi() ?>">
 
@@ -21,7 +16,8 @@ use \DSI\Entity\Image;
                 <div class="modal-helper">
                     <div class="modal-content" style="height:auto">
                         <h2 class="centered modal-h2">
-                            Add new cluster image
+                            <span ng-if="!editingImage.id">Add new cluster image</span>
+                            <span ng-if="editingImage.id">Edit cluster image</span>
                         </h2>
                         <div class="w-form">
                             <form id="email-form-3" name="email-form-3" ng-submit="saveClusterImage()">
@@ -35,16 +31,28 @@ use \DSI\Entity\Image;
                                     <img class="story-image-upload"
                                          ng-src="{{editingImage.path}}">
 
-                                    Link:
-                                    <input type="text" ng-model="editingImage.link"/>
+                                    <label>Caption:</label>
+                                    <input class="w-input creator-data-entry" type="text"
+                                           ng-model="editingImage.caption"/>
 
-                                    <button type="submit" class="dsi-button story-image-upload w-button"
-                                            ng-bind="editingImage.loading ? '<?php _ehtml('Loading...') ?>' : '<?php _ehtml('Save cluster image') ?>'">
-                                    </button>
+                                    <label>Link:</label>
+                                    <input class="w-input creator-data-entry" type="text" ng-model="editingImage.link"/>
                                 </div>
+
+                                <br><br>
+
+                                <button type="submit" class="action-save" ng-if="editingImage.path"
+                                        ng-bind="editingImage.loading ? '<?php _ehtml('Loading...') ?>' : '<?php _ehtml('Save cluster image') ?>'">
+                                </button>
+                                <button type="button" class="action-cancel" ng-click="closeImageModal()">
+                                    <?= _html('Cancel') ?>
+                                </button>
+                                <button type="button" class="action-delete" ng-click="deleteClusterImage(editingImage)"
+                                        ng-if="editingImage.id">
+                                    <?= _html('Delete') ?>
+                                </button>
                             </form>
                         </div>
-                        <div class="cancel" ng-click="closeImageModal()"><?php _ehtml('Cancel') ?></div>
                     </div>
                 </div>
             </div>
@@ -112,17 +120,18 @@ use \DSI\Entity\Image;
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-col-right w-col w-col-6">
+                            <div class="form-col-right w-col w-col-6 cluster-images">
                                 <h2 class="edit-h2">Cluster Images</h2>
-                                <div ng-repeat="image in cluster.images" ng-cloak style="margin-bottom:10px;">
-                                    <img ng-src="{{image.path}}"
-                                         ng-click="openEditClusterImage(image)"
-                                         style="width:100px;cursor: pointer">
-                                    {{image.link}}
-                                    <button type="button" style="color:red"
-                                            ng-click="deleteClusterImage(image)">X
-                                    </button>
-                                </div>
+                                <a href="#" ng-repeat="image in cluster.images" class="cluster-image w-clearfix"
+                                   ng-click="openEditClusterImage(image)" ng-cloak>
+                                    <img ng-src="{{image.path}}">
+                                    <div class="image-caption">
+                                        {{image.caption}}
+                                    </div>
+                                    <div class="image-link">
+                                        {{image.link}}
+                                    </div>
+                                </a>
 
                                 <h2 ng-if="cluster.images.length < 3">
                                     <a href="#" ng-click="openNewClusterImage($event)">

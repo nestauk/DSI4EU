@@ -2219,8 +2219,8 @@ strong {
 }
 
 .centered.modal-h2 {
-  margin-top: 80px;
-  margin-bottom: 75px;
+  margin-top: 35px;
+  margin-bottom: 30px;
   font-size: 32px;
   font-weight: 300;
 }
@@ -12513,6 +12513,68 @@ html.w-mod-js *[data-ix="map-point-expand-3"] {
 
   .partner-logo-colour {
     margin-top: 5px;
+  }
+}
+
+.cluster-edit-controller {
+  .modal {
+    button {
+      border-radius: 25px;
+      background-color: rgba(29, 201, 160, 0.94);
+      font-family: Montserrat, sans-serif;
+      color: #000;
+      font-weight: bold;
+      font-size: 14px;
+      display: inline-block;
+      line-height: 40px;
+      padding: 0 20px;
+
+      &.action-cancel {
+        background: white;
+        color: black;
+      }
+      &.action-delete {
+        background: red;
+        color: white;
+        float: right;
+      }
+    }
+
+    input[type="text"] {
+      border: 1px solid #ddd;
+    }
+  }
+
+  .cluster-images {
+    .cluster-image {
+      display: block;
+      margin-bottom: 10px;
+      padding: 10px;
+      font-weight: normal !important;
+
+      &:hover {
+        background: #ddd;
+      }
+
+      button {
+        float: right;
+        margin: 20px;
+        color: blue;
+        background: none;
+      }
+
+      img {
+        width: 100px;
+        cursor: pointer;
+        float: left;
+        margin-right: 10px;
+      }
+
+      .image-caption {
+        font-weight: bold;
+        margin: 15px 0;
+      }
+    }
   }
 }
 

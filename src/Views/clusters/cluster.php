@@ -20,6 +20,9 @@ require __DIR__ . '/../header.php'
                             <a href="<?= $image->getLink() ?>" target="_blank">
                                 <img src="<?= \DSI\Entity\Image::UPLOAD_FOLDER_URL . $image->getFilename() ?>"/>
                             </a>
+                            <br><br>
+                            <?= $image->getCaption() ?>
+                            <br><br>
                         </div>
                     <?php } ?>
                     <div style="clear: both;"></div>
