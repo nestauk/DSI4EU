@@ -432,7 +432,7 @@ class Router
         } elseif (preg_match('<^/' . $langHandler . 'api/email-subscribers$>', $this->pageURL, $matches)) {
             $this->emailSubscribersApi($matches);
 
-        } elseif (preg_match('<^/' . $langHandler . 'cookies?-policy$>', $this->pageURL, $matches)) {
+        } elseif (preg_match('<^/' . $langHandler . 'cookies-policy$>', $this->pageURL, $matches)) {
             $this->cookiesPolicy($matches);
 
         } elseif (preg_match('<^/' . $langHandler . 'what-is-dsi$>', $this->pageURL, $matches)) {

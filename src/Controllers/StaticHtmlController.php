@@ -44,6 +44,7 @@ class StaticHtmlController
 
     public function cookiesPolicy()
     {
+        View::setPageTitle('Cookies Policy - DSI4EU');
         return View::render(__DIR__ . '/../Views/cookies-policy.php', [
             'loggedInUser' => $this->loggedInUser,
         ]);
