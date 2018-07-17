@@ -9154,7 +9154,6 @@ strong {
   margin-right: auto;
   margin-left: auto;
   padding-top: 100px;
-  padding-bottom: 100px;
 }
 
 .header-content {
@@ -13332,12 +13331,22 @@ body {
     }
   }
 
-  .footer-black {
-    padding-bottom: 110px;
-  }
-
   .feedback-form-wrapper {
     margin-left: auto !important;
     margin-right: auto !important;
+  }
+
+  .footer-black {
+    padding-bottom: 10px;
+  }
+
+  &.padded-footer {
+    .footer-black {
+      padding-bottom: 50px;
+    }
+
+    .main-menu {
+      padding-bottom: 50px;
+    }
   }
 }

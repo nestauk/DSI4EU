@@ -123,6 +123,7 @@ window.DSI_Helpers = {
     if (!getCookie('twitter-dismiss')) {
         const container = $('.twitter-block');
         container.show();
+        $('body').addClass('padded-footer');
 
         $('.js-twitter-dismiss', container).click(function (ev) {
             ev.preventDefault();
