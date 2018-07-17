@@ -38,6 +38,10 @@ if (!isset($urlHandler))
                         <a class="footer-link"
                            href="<?php echo $urlHandler->privacyPolicy() ?>"><?php _ehtml('Privacy policy') ?></a>
                     </li>
+                    <li class="footer-link">
+                        <a class="footer-link"
+                           href="<?php echo $urlHandler->cookiesPolicy() ?>"><?php _ehtml('Cookies policy') ?></a>
+                    </li>
                 </ul>
             </div>
             <div class="w-col w-col-2">
