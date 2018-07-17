@@ -96,7 +96,7 @@ window.DSI_Helpers = {
         let name = cname + "=";
         let decodedCookie = decodeURIComponent(document.cookie);
         let ca = decodedCookie.split(';');
-        for(let i = 0; i <ca.length; i++) {
+        for (let i = 0; i < ca.length; i++) {
             let c = ca[i];
             while (c.charAt(0) === ' ') {
                 c = c.substring(1);
@@ -115,6 +115,18 @@ window.DSI_Helpers = {
         $('.js-cookie-accept', container).click(function (ev) {
             ev.preventDefault();
             setCookie('cookies-agree', true, 720);
+            container.hide('slow');
+            return false;
+        })
+    }
+
+    if (!getCookie('twitter-dismiss')) {
+        const container = $('.twitter-block');
+        container.show();
+
+        $('.js-twitter-dismiss', container).click(function (ev) {
+            ev.preventDefault();
+            setCookie('twitter-dismiss', true, 720);
             container.hide('slow');
             return false;
         })
