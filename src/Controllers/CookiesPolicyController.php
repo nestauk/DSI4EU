@@ -27,6 +27,7 @@ class CookiesPolicyController
 
     public function get()
     {
+        View::setPageTitle('Cookies Policy - DSI4EU');
         return View::render(__DIR__ . '/../Views/cookies-policy/en.php', [
             'authUser' => $this->authUser,
             'loggedInUser' => $this->loggedInUser,
