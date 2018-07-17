@@ -16,7 +16,7 @@ require __DIR__ . '/../header.php'
                     In the meantime, check out some of our <a href="<?= $urlHandler->caseStudies() ?>">case studies</a>
                     to find inspiring stories of digital social innovation in practice.
                 </p>
-                
+
                 <?php /*
                 <p class="separator">
                     You may have heard of internet cookies... you may know all about them. To confirm, a cookie is a
