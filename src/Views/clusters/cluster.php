@@ -10,7 +10,9 @@ require __DIR__ . '/../header.php'
             <div class="w-row">
                 <div class="w-col w-col-8 w-col-stack">
                     <h1 class="content-h1"><?php echo show_input($cluster->getTitle()) ?></h1>
-                    <div><?php echo $cluster->getSubtitle() ?></div>
+                    <p class="intro">
+                        <?php echo $cluster->getSubtitle() ?>
+                    </p>
                     <div><?php echo $cluster->getDescription() ?></div>
                     <div><?php echo $cluster->getGetInTouch() ?></div>
                     <?php foreach ($cluster->getImages() AS $image) { ?>

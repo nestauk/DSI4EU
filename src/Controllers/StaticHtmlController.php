@@ -3,6 +3,7 @@
 namespace Controllers;
 
 use DSI\Service\Auth;
+use DSI\Service\Translate;
 use Services\View;
 
 class StaticHtmlController
@@ -27,6 +28,18 @@ class StaticHtmlController
         return View::render(__DIR__ . '/../Views/privacy-policy.php', [
             'loggedInUser' => $this->loggedInUser,
         ]);
+    }
+
+    public function partners()
+    {
+        $data = [
+            'loggedInUser' => $this->loggedInUser,
+        ];
+
+        if (Translate::getCurrentLang() === 'en')
+            return View::render(__DIR__ . '/../Views/partners/partners_en.php', $data);
+        else
+            return View::render(__DIR__ . '/../Views/partners/partners.php', $data);
     }
 
     public function cookiesPolicy()

@@ -294,10 +294,7 @@ class Router
                 $this->staticPage($matches, 'about-the-project.php');
 
         } elseif (preg_match('<^/' . $langHandler . 'partners$>', $this->pageURL, $matches)) {
-            if (Translate::getCurrentLang() === 'en')
-                $this->staticPage($matches, 'partners_en.php');
-            else
-                $this->staticPage($matches, 'partners.php');
+            $this->partners($matches);
 
         } elseif (preg_match('<^/' . $langHandler . 'open-data-research-and-resources$>', $this->pageURL, $matches)) {
             $this->openData($matches);
@@ -1148,6 +1145,12 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
         return (new \Controllers\StaticHtmlController())->privacyPolicy();
+    }
+
+    private function partners($matches)
+    {
+        $this->setLanguageFromUrl($matches);
+        return (new \Controllers\StaticHtmlController())->partners();
     }
 
     private function openData($matches)
