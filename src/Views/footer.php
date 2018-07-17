@@ -495,7 +495,9 @@ if (!isset($urlHandler))
                 <img class="homepage-twitter-logo" src="/images/twitter-logo-silhouette.png">
                 <a href="#" class="dismiss js-twitter-dismiss">Close</a>
                 <p class="twitter-text">
-                    <?php _e('To keep in touch with the project and DSI in Europe, follow us on Twitter @DSI4EU and sign up to our newsletter.'); ?>
+                    To keep in touch with the project and DSI in Europe, follow us on Twitter
+                    <a target="_blank" href="https://twitter.com/dsi4eu">@DSI4EU</a> and
+                    <a target="_blank" href="https://bit.ly/DSINews">sign up to our newsletter</a>.
                 </p>
             </div>
         </div>
