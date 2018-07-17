@@ -159,7 +159,7 @@ class ProjectEditController
                 'technologySecondaryTags' => array_filter($technologyTags, function (ImpactTag $impactTag) {
                     return !$impactTag->isTechnologyMain();
                 }),
-                
+
                 'dsiFocusTags' => (new DsiFocusTagRepo())->getAll(),
                 'projectImpactTagsA' => (new ProjectImpactHelpTagRepo())->getTagNamesByProject($project),
                 'projectImpactTagsB' => (new ProjectDsiFocusTagRepo())->getTagNamesByProject($project),
