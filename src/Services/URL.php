@@ -242,6 +242,11 @@ class URL
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'feedback';
     }
 
+    public function advisoryBoard()
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'advisory-board';
+    }
+
     public function aboutTheProject()
     {
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'about-the-project';
