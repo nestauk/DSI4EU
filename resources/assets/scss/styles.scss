@@ -8297,6 +8297,14 @@ strong {
   margin-left: auto;
   padding-bottom: 10px;
   border-bottom: 2px solid rgba(29, 201, 160, .94);
+
+  a {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 
 .full-menu-h2.stat {
@@ -9146,6 +9154,7 @@ strong {
   margin-right: auto;
   margin-left: auto;
   padding-top: 100px;
+  padding-bottom: 100px;
 }
 
 .header-content {
@@ -12381,7 +12390,6 @@ html.w-mod-js *[data-ix="map-point-expand-3"] {
     line-height: 24px;
   }
 }
-
 
 .register-controller {
   &.ab-fab.log-in-section {

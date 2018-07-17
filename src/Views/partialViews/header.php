@@ -125,7 +125,7 @@ if (!isset($urlHandler))
 
                 <div class="full-menu-col w-col w-col-4">
                     <h2 class="full-menu-h2">
-                        <?= __('DSI Clusters') ?>
+                        <a href="<?= $urlHandler->clusters() ?>"><?= __('DSI Clusters') ?></a>
                     </h2>
                     <a class="full-menu-link" href="<?php echo $urlHandler->clusterById(1, 'health-and-care') ?>">
                         <?= __('Health and care') ?>
