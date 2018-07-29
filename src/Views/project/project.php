@@ -80,8 +80,7 @@ require __DIR__ . '/../header.php';
                         <h3 class="descr-h3 space"><?php _ehtml("Who's involved") ?></h3>
                         <h4 class="involved-h4"><?php _ehtml('People') ?></h4>
                         <?php foreach ($projectMembers AS $projectMember) {
-                            $member = $projectMember->getMember();
-                            if (trim($member->getFullName()) == '') continue; ?>
+                            $member = $projectMember->getMember(); ?>
                             <a class="involved-card w-inline-block"
                                href="<?php echo $urlHandler->profile($member) ?>">
                                 <div class="involved-card">
@@ -92,7 +91,7 @@ require __DIR__ . '/../header.php';
                                         </div>
                                         <div class="w-clearfix w-col w-col-9 w-col-small-9 w-col-tiny-9">
                                             <div class="card-name">
-                                                <?php echo show_input($member->getFullName()) ?>
+                                                <?php echo show_input($member->getFullNameOrDefault()) ?>
                                             </div>
                                             <div class="card-position">
                                                 <?php echo show_input($member->getJobTitle()) ?>
@@ -419,18 +418,18 @@ require __DIR__ . '/../header.php';
 
     <div class="new-post-bg bg-blur">
         <script>
-          tinymce.init({
-            selector: '#newPost',
-            statusbar: false,
-            height: 500,
-            plugins: "autoresize autolink lists link preview paste textcolor colorpicker image imagetools media",
-              autoresize_bottom_margin: 3,
-            autoresize_max_height: 500,
-            menubar: false,
-            toolbar1: 'styleselect | forecolor backcolor | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media | preview',
-            image_advtab: true,
-            paste_data_images: false
-          });
+            tinymce.init({
+                selector: '#newPost',
+                statusbar: false,
+                height: 500,
+                plugins: "autoresize autolink lists link preview paste textcolor colorpicker image imagetools media",
+                autoresize_bottom_margin: 3,
+                autoresize_max_height: 500,
+                menubar: false,
+                toolbar1: 'styleselect | forecolor backcolor | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media | preview',
+                image_advtab: true,
+                paste_data_images: false
+            });
         </script>
 
         <div class="add-post-modal">
@@ -448,38 +447,38 @@ require __DIR__ . '/../header.php';
     </div>
 
     <script>
-      var translate = new Translate();
-      <?php foreach([
-          'Delete project',
-          'Are you sure you want to delete this project?',
-          'Deleted',
-          'The project has been deleted.',
-          'Report this project',
-          'Please tell us why you are reporting this project',
-          'Reason for reporting',
-          'Please write your reason for reporting.',
-          'Reported',
-          'Thank you for your report',
-          'Cancel Join Request',
-          'Are you sure you want to cancel the join request?',
-          'Request Cancelled',
-          'Your request has been cancelled.',
-          'Join Project',
-          'Are you sure you want to join this project?',
-          'Your join request has been sent.',
-          'Leave Project',
-          'Are you sure you want to leave this project?',
-          'Success',
-          'You have left this project',
-          'Follow Project',
-          'Are you sure you want to follow this project?',
-          'You are now following this project.',
-          'Unfollow Project',
-          'Are you sure you want to unfollow this project?',
-          "You won't receive any more news from this project.",
-      ] AS $translate) { ?>
-      translate.set('<?php echo show_input($translate)?>', '<?php _ehtml($translate)?>');
-      <?php } ?>
+        var translate = new Translate();
+        <?php foreach([
+            'Delete project',
+            'Are you sure you want to delete this project?',
+            'Deleted',
+            'The project has been deleted.',
+            'Report this project',
+            'Please tell us why you are reporting this project',
+            'Reason for reporting',
+            'Please write your reason for reporting.',
+            'Reported',
+            'Thank you for your report',
+            'Cancel Join Request',
+            'Are you sure you want to cancel the join request?',
+            'Request Cancelled',
+            'Your request has been cancelled.',
+            'Join Project',
+            'Are you sure you want to join this project?',
+            'Your join request has been sent.',
+            'Leave Project',
+            'Are you sure you want to leave this project?',
+            'Success',
+            'You have left this project',
+            'Follow Project',
+            'Are you sure you want to follow this project?',
+            'You are now following this project.',
+            'Unfollow Project',
+            'Are you sure you want to unfollow this project?',
+            "You won't receive any more news from this project.",
+        ] AS $translate) { ?>
+        translate.set('<?php echo show_input($translate)?>', '<?php _ehtml($translate)?>');
+        <?php } ?>
     </script>
     <script src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/ProjectController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 
