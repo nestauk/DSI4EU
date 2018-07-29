@@ -97,11 +97,24 @@ class OrganisationRepo
     /**
      * @param int $id
      * @return Organisation
+     * @throws DSI\NotFound
      */
     public function getById(int $id): Organisation
     {
         return $this->getObjectWhere([
             "`id` = {$id}"
+        ]);
+    }
+
+    /**
+     * @param string $name
+     * @return Organisation
+     * @throws DSI\NotFound
+     */
+    public function getByName(string $name): Organisation
+    {
+        return $this->getObjectWhere([
+            "`name` = '" . addslashes($name) . "'"
         ]);
     }
 
