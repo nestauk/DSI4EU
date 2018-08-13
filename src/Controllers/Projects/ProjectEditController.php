@@ -142,6 +142,8 @@ class ProjectEditController
             $angularModules['fileUpload'] = true;
             JsModules::setTinyMCE(true);
             View::render(__DIR__ . '/../../Views/project/project-edit.php', [
+                'loggedInUser' => $loggedInUser,
+
                 'project' => $project,
                 'tags' => (new TagForProjectsRepo())->getAll(),
 
