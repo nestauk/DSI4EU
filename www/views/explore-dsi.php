@@ -1,5 +1,5 @@
 <?php
-$pageTitle = 'Explore DSI';
+\Services\View::setPageTitle('Explore DSI');
 require __DIR__ . '/header.php';
 
 $totalProjects = (new \DSI\Repository\ProjectRepoInAPC())->countAll();

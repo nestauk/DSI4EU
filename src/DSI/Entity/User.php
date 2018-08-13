@@ -148,6 +148,15 @@ class User
         return $this->getFirstName() . ' ' . $this->getLastName();
     }
 
+    public function getFullNameOrDefault()
+    {
+        $name = $this->getFirstName() . ' ' . $this->getLastName();
+        if (trim($name) === '')
+            return 'Unnamed user';
+        
+        return $this->getFirstName() . ' ' . $this->getLastName();
+    }
+
     /**
      * @return string
      */
@@ -392,6 +401,17 @@ class User
      */
     public function getRole(): string
     {
+        return (string)$this->role;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRoleName(): string
+    {
+        if (!$this->role)
+            return 'user';
+
         return (string)$this->role;
     }
 

@@ -119,32 +119,17 @@ window.DSI_Helpers = {
             return false;
         })
     }
-}());
 
-(function createProjectOrOrganisation() {
-    $('.ix-create-project-modal').click(function () {
-        swal({
-            title: 'Create new project',
-            text: 'Please note that Please note that Please note that Please note that Please note that Please note that Please note that Please note that ',
-            type: "info",
-            confirmButtonText: 'Continue',
-            showCancelButton: true,
-            cancelButtonText: 'Cancel',
-        }, function () {
-            $('#ix-create-project-modal').click();
-        });
-    });
+    if (!getCookie('twitter-dismiss')) {
+        const container = $('.twitter-block');
+        container.show();
+        $('body').addClass('padded-footer');
 
-    $('.ix-create-organisation-modal').click(function () {
-        swal({
-            title: 'Create new organisation',
-            text: 'Please note that Please note that Please note that Please note that Please note that Please note that Please note that Please note that ',
-            type: "info",
-            confirmButtonText: 'Continue',
-            showCancelButton: true,
-            cancelButtonText: 'Cancel',
-        }, function () {
-            $('#ix-create-organisation-modal').click();
-        });
-    })
+        $('.js-twitter-dismiss', container).click(function (ev) {
+            ev.preventDefault();
+            setCookie('twitter-dismiss', true, 720);
+            container.hide('slow');
+            return false;
+        })
+    }
 }());

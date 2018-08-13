@@ -162,7 +162,9 @@ class OpenResourceApiController
 
     public function getObjects()
     {
-        $resources = Resource::all()
+        $resources = Resource
+            ::orderBy(Resource::Id, 'desc')
+            ->get()
             ->map(function (Resource $resource) {
 
                 $resource->{Resource::Image} =

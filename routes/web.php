@@ -272,6 +272,9 @@ class Router
         } elseif ($this->pageURL === '/robots.txt') {
             $this->robotsTxt();
 
+        } elseif (preg_match('<^/' . $langHandler . 'advisory-board$>', $this->pageURL, $matches)) {
+            $this->advisoryBoard($matches);
+
         } elseif (preg_match('<^/' . $langHandler . 'explore-dsi$>', $this->pageURL, $matches)) {
             $this->staticPage($matches, 'explore-dsi.php');
 
@@ -291,10 +294,7 @@ class Router
                 $this->staticPage($matches, 'about-the-project.php');
 
         } elseif (preg_match('<^/' . $langHandler . 'partners$>', $this->pageURL, $matches)) {
-            if (Translate::getCurrentLang() === 'en')
-                $this->staticPage($matches, 'partners_en.php');
-            else
-                $this->staticPage($matches, 'partners.php');
+            $this->partners($matches);
 
         } elseif (preg_match('<^/' . $langHandler . 'open-data-research-and-resources$>', $this->pageURL, $matches)) {
             $this->openData($matches);
@@ -318,7 +318,7 @@ class Router
             $this->openResourceCreateApi($matches);
 
         } elseif (preg_match('<^/' . $langHandler . 'contact-dsi$>', $this->pageURL, $matches)) {
-            $this->staticPage($matches, 'contact-dsi.php');
+            $this->contact($matches);
 
 // Permanent Login
         } elseif (preg_match('<^/' . $langHandler . 'keepUserLoggedIn>', $this->pageURL, $matches)) {
@@ -432,7 +432,7 @@ class Router
         } elseif (preg_match('<^/' . $langHandler . 'api/email-subscribers$>', $this->pageURL, $matches)) {
             $this->emailSubscribersApi($matches);
 
-        } elseif (preg_match('<^/' . $langHandler . 'cookies?-policy$>', $this->pageURL, $matches)) {
+        } elseif (preg_match('<^/' . $langHandler . 'cookies-policy$>', $this->pageURL, $matches)) {
             $this->cookiesPolicy($matches);
 
         } elseif (preg_match('<^/' . $langHandler . 'what-is-dsi$>', $this->pageURL, $matches)) {
@@ -478,10 +478,7 @@ class Router
     private function homePage($matches = [])
     {
         $this->setLanguageFromUrl($matches);
-
-        $command = new \DSI\Controller\HomeController();
-        $command->format = 'html';
-        $command->exec();
+        return (new \Controllers\HomeController())->exec();
     }
 
     private function dashboard($matches = [])
@@ -1120,6 +1117,18 @@ class Router
         $command->exec();
     }
 
+    private function contact($matches)
+    {
+        $this->setLanguageFromUrl($matches);
+        (new \DSI\Controller\StaticHtmlController())->contact();
+    }
+
+    private function advisoryBoard($matches)
+    {
+        $this->setLanguageFromUrl($matches);
+        return (new \Controllers\AdvisoryBoardController())->exec();
+    }
+
     private function staticPage($matches, $view)
     {
         $this->setLanguageFromUrl($matches);
@@ -1133,6 +1142,12 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
         return (new \Controllers\StaticHtmlController())->privacyPolicy();
+    }
+
+    private function partners($matches)
+    {
+        $this->setLanguageFromUrl($matches);
+        return (new \Controllers\StaticHtmlController())->partners();
     }
 
     private function openData($matches)

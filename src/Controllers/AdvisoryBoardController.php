@@ -4,13 +4,12 @@ namespace Controllers;
 
 use DSI\Entity\User;
 use DSI\Service\Auth;
-use Services\URL;
 use Services\View;
 
-class CookiesPolicyController
+class AdvisoryBoardController
 {
-    /** @var URL */
-    private $urlHandler;
+    /** @var int */
+    public $clusterID;
 
     /** @var User */
     private $loggedInUser;
@@ -18,17 +17,13 @@ class CookiesPolicyController
     /** @var Auth */
     private $authUser;
 
-    public function __construct()
+    public function exec()
     {
-        $this->urlHandler = new URL();
         $this->authUser = new Auth();
         $this->loggedInUser = $this->authUser->getUserIfLoggedIn();
-    }
 
-    public function get()
-    {
-        return View::render(__DIR__ . '/../Views/cookies-policy/en.php', [
-            'authUser' => $this->authUser,
+        View::setPageTitle('Advisory Board - DSI4EU');
+        return View::render(__DIR__ . '/../Views/advisory-board.php', [
             'loggedInUser' => $this->loggedInUser,
         ]);
     }

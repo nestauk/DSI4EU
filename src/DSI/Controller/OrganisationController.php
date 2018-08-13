@@ -30,6 +30,7 @@ use DSI\UseCase\RejectMemberRequestToOrganisation;
 use DSI\UseCase\RemoveMemberFromOrganisation;
 use DSI\UseCase\SecureCode;
 use DSI\UseCase\SendEmailToCommunityAdmins;
+use Services\View;
 
 class OrganisationController
 {
@@ -54,13 +55,13 @@ class OrganisationController
         try {
             $this->organisation = $organisationRepo->getById($this->data()->organisationID);
         } catch (NotFound $e) {
-            $pageTitle = 'Organisation does not exist';
+            \Services\View::setPageTitle('Organisation does not exists');
             require __DIR__ . '/../../../www/views/organisation-404.php';
             return;
         }
 
         if ($this->organisation->isWaitingApproval() AND !$this->canViewWaitingApproval($loggedInUser)) {
-            $pageTitle = 'Project is waiting approval';
+            \Services\View::setPageTitle('Organisation is waiting approval');
             require __DIR__ . '/../../../www/views/organisation-404.php';
             return;
         }
@@ -328,7 +329,8 @@ class OrganisationController
             return $organisationNetworkTag->getTag();
         }, (new OrganisationNetworkTagRepo())->getByOrganisationID($this->organisation->getId()));
 
-        $pageTitle = $this->organisation->getName();
+        View::setPageTitle($this->organisation->getName());
+        View::setPageDescription($this->organisation->getDescription());
         $organisation = $this->organisation;
         require __DIR__ . '/../../../www/views/organisation.php';
 

@@ -43,7 +43,8 @@ class StoriesController
                 return $data;
             }, $stories));
         } else {
-            View::render(__DIR__ . '/../../Views/stories/stories.php', [
+            View::setPageTitle('Blogs - DSI4EU');
+            return View::render(__DIR__ . '/../../Views/stories/stories.php', [
                 'loggedInUser' => $loggedInUser,
                 'userCanAddStory' => $userCanAddStory,
             ]);

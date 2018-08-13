@@ -3,6 +3,7 @@
 namespace Controllers;
 
 use DSI\Entity\User;
+use DSI\Repository\CaseStudyRepo;
 use DSI\Service\Auth;
 use Services\URL;
 use Services\View;
@@ -27,9 +28,11 @@ class WhatIsDsiController
 
     public function get()
     {
+        View::setPageTitle('What is DSI? - DSI4EU');
         return View::render(__DIR__ . '/../Views/what-is-dsi/en.php', [
             'authUser' => $this->authUser,
             'loggedInUser' => $this->loggedInUser,
+            'homePageCaseStudies' => (new CaseStudyRepo())->getHomePageStudiesLast(3),
         ]);
     }
 }

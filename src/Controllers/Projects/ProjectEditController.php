@@ -3,6 +3,7 @@
 namespace Controllers\Projects;
 
 use DSI\Entity\Image;
+use DSI\Entity\ImpactTag;
 use DSI\Entity\Project;
 use DSI\Entity\ProjectLink_Service;
 use DSI\Entity\User;
@@ -141,16 +142,25 @@ class ProjectEditController
             $angularModules['fileUpload'] = true;
             JsModules::setTinyMCE(true);
             View::render(__DIR__ . '/../../Views/project/project-edit.php', [
+                'loggedInUser' => $loggedInUser,
+
                 'project' => $project,
                 'tags' => (new TagForProjectsRepo())->getAll(),
 
                 'impactTags' => $impactTags,
-                'impactMainTags' => array_slice($impactTags, 0, 9),
-                'impactSecondaryTags' => array_slice($impactTags, 9),
-
+                'impactMainTags' => array_filter($impactTags, function (ImpactTag $impactTag) {
+                    return $impactTag->isMain();
+                }),
+                'impactSecondaryTags' => array_filter($impactTags, function (ImpactTag $impactTag) {
+                    return !$impactTag->isMain();
+                }),
                 'technologyTags' => $technologyTags,
-                'technologyMainTags' => array_slice($technologyTags, 0, 18),
-                'technologySecondaryTags' => array_slice($technologyTags, 18),
+                'technologyMainTags' => array_filter($technologyTags, function (ImpactTag $impactTag) {
+                    return $impactTag->isTechnologyMain();
+                }),
+                'technologySecondaryTags' => array_filter($technologyTags, function (ImpactTag $impactTag) {
+                    return !$impactTag->isTechnologyMain();
+                }),
 
                 'dsiFocusTags' => (new DsiFocusTagRepo())->getAll(),
                 'projectImpactTagsA' => (new ProjectImpactHelpTagRepo())->getTagNamesByProject($project),

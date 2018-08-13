@@ -48,7 +48,8 @@ class ClustersController
         if ($refetch)
             $clusters = $this->getClusters();
 
-        View::render(__DIR__ . '/../Views/clusters/clusters.php', [
+        View::setPageTitle('Clusters - DSI4EU');
+        return View::render(__DIR__ . '/../Views/clusters/clusters.php', [
             'loggedInUser' => $this->loggedInUser,
             'clusters' => $clusters->map(function (Cluster $cluster) {
                 return $cluster->clusterLangs[0];
@@ -65,6 +66,7 @@ class ClustersController
             ::with(['clusterLangs' => function ($query) {
                 $query->where(ClusterLang::Lang, Translate::getCurrentLang());
             }])
+            ->where(Cluster::IsOther, false)
             ->get();
     }
 }
