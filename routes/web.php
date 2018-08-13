@@ -478,10 +478,7 @@ class Router
     private function homePage($matches = [])
     {
         $this->setLanguageFromUrl($matches);
-
-        $command = new \DSI\Controller\HomeController();
-        $command->format = 'html';
-        $command->exec();
+        return (new \Controllers\HomeController())->exec();
     }
 
     private function dashboard($matches = [])
