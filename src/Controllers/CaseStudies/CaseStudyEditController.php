@@ -1,6 +1,6 @@
 <?php
 
-namespace DSI\Controller;
+namespace Controllers\CaseStudies;
 
 use DSI\AccessDenied;
 use DSI\Entity\Image;
@@ -14,8 +14,11 @@ use DSI\Repository\ProjectRepoInAPC;
 use DSI\Service\Auth;
 use DSI\Service\ErrorHandler;
 use DSI\Service\JsModules;
+use Models\Relationship\CaseStudyTag;
+use Models\Tag;
 use Services\URL;
 use DSI\UseCase\CaseStudy\CaseStudyEdit;
+use Services\View;
 
 class CaseStudyEditController
 {
@@ -35,6 +38,10 @@ class CaseStudyEditController
 
         $caseStudyRepo = new CaseStudyRepo();
         $caseStudy = $caseStudyRepo->getById($this->caseStudyID);
+
+        $tags = Tag::where(Tag::IsMain, 1)
+            ->orderBy(Tag::Order, 'desc')
+            ->get();
 
         if (!$this->userCanModifyCaseStudy($caseStudy, $loggedInUser))
             throw new AccessDenied('You cannot access this page');
@@ -59,6 +66,7 @@ class CaseStudyEditController
                     $editCaseStudy->data()->cardBgImage = (string)$_POST['cardImage'] ?? '';
                     $editCaseStudy->data()->projectID = (int)$_POST['projectID'] ?? 0;
                     $editCaseStudy->data()->organisationID = (int)$_POST['organisationID'] ?? 0;
+                    $editCaseStudy->tagIDs = (array)$_POST['tags'];
                     $editCaseStudy->exec();
 
                     echo json_encode([
@@ -77,6 +85,13 @@ class CaseStudyEditController
                 ]);
                 return;
             }
+
+            $tags = new \stdClass();
+            CaseStudyTag::where(CaseStudyTag::CaseStudyID, $this->caseStudyID)
+                ->get()
+                ->map(function (CaseStudyTag $caseStudyTag) use ($tags) {
+                    $tags->{$caseStudyTag->{CaseStudyTag::TagID}} = 1;
+                });
 
             echo json_encode([
                 'title' => $caseStudy->getTitle(),
@@ -112,13 +127,16 @@ class CaseStudyEditController
                         'name' => $organisation->getName(),
                     ];
                 }, (new OrganisationRepoInAPC())->getAll()),
+                'tags' => $tags,
             ]);
             return;
 
         } else {
-            $angularModules['fileUpload'] = true;
-            JsModules::setTinyMCE(true);
-            require __DIR__ . '/../../../www/views/case-study-edit.php';
+            return View::render(__DIR__ . '/../../Views/case-studies/case-study-edit.php', [
+                'caseStudy' => $caseStudy,
+                'loggedInUser' => $loggedInUser,
+                'tags' => $tags,
+            ]);
         }
     }
 

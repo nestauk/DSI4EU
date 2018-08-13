@@ -20,7 +20,7 @@ class View
 
         require($view);
 
-        return false;
+        return true;
     }
 
     static function setPageTitle($title)

@@ -345,6 +345,11 @@ class URL
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'case-study/' . $caseStudy->getId() . '/' . self::linkify($caseStudy->getTitle());
     }
 
+    public function caseStudyModel(\Models\CaseStudy $caseStudy)
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'case-study/' . $caseStudy->getId() . '/' . self::linkify($caseStudy->{\Models\CaseStudy::Title});
+    }
+
     public function addCaseStudy()
     {
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'case-study/add';

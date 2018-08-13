@@ -12,6 +12,7 @@ use DSI\Repository\CountryRegionRepo;
 use DSI\Repository\OrganisationRepoInAPC;
 use DSI\Repository\ProjectRepoInAPC;
 use DSI\Service\ErrorHandler;
+use Models\Relationship\CaseStudyTag;
 
 class CaseStudyEdit
 {
@@ -30,8 +31,8 @@ class CaseStudyEdit
     /** @var CountryRegionRepo */
     private $countryRegionRepo;
 
-    /** @var CountryRegion */
-    private $countryRegion;
+    /** @var int[] */
+    public $tagIDs;
 
     public function __construct()
     {
@@ -48,6 +49,7 @@ class CaseStudyEdit
         $this->unsetSamePositionOnFirstPage();
         $this->editCaseStudy();
         $this->saveImages();
+        $this->saveTags();
     }
 
     /**
@@ -101,12 +103,12 @@ class CaseStudyEdit
         $this->caseStudy->setIsPublished((bool)$this->data()->isPublished);
         $this->caseStudy->setIsFeaturedOnSlider((bool)$this->data()->isFeaturedOnSlider);
         $this->caseStudy->setPositionOnFirstPage((int)$this->data()->positionOnHomePage);
-        if($this->data()->projectID)
-            $this->caseStudy->setProject( (new ProjectRepoInAPC())->getById($this->data()->projectID) );
+        if ($this->data()->projectID)
+            $this->caseStudy->setProject((new ProjectRepoInAPC())->getById($this->data()->projectID));
         else
             $this->caseStudy->unsetProject();
-        if($this->data()->organisationID)
-            $this->caseStudy->setOrganisation( (new OrganisationRepoInAPC())->getById($this->data()->organisationID) );
+        if ($this->data()->organisationID)
+            $this->caseStudy->setOrganisation((new OrganisationRepoInAPC())->getById($this->data()->organisationID));
         else
             $this->caseStudy->unsetOrganisation();
 
@@ -134,6 +136,7 @@ class CaseStudyEdit
      * @param $imageName
      * @param $imagePath
      * @return null|string
+     * @throws NotFound
      */
     private function saveImage($imageName, $imagePath)
     {
@@ -170,6 +173,21 @@ class CaseStudyEdit
         }
 
         $this->caseStudyRepo->save($this->caseStudy);
+    }
+
+    private function saveTags()
+    {
+        CaseStudyTag::where(CaseStudyTag::CaseStudyID, $this->caseStudy->getId())
+            ->delete();
+
+        foreach ((array)$this->tagIDs AS $tagID => $value) {
+            if ($value) {
+                $caseStudyTag = new CaseStudyTag();
+                $caseStudyTag->{CaseStudyTag::CaseStudyID} = $this->caseStudy->getId();
+                $caseStudyTag->{CaseStudyTag::TagID} = $tagID;
+                $caseStudyTag->save();
+            }
+        }
     }
 }
 

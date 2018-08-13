@@ -13,6 +13,7 @@ use DSI\Repository\OrganisationRepoInAPC;
 use DSI\Repository\ProjectRepoInAPC;
 use DSI\Service\ErrorHandler;
 use DSI\UseCase\CreateCountryRegion;
+use Models\Relationship\CaseStudyTag;
 
 class CaseStudyCreate
 {
@@ -31,8 +32,8 @@ class CaseStudyCreate
     /** @var CountryRegionRepo */
     private $countryRegionRepo;
 
-    /** @var CountryRegion */
-    private $countryRegion;
+    /** @var int[] */
+    public $tagIDs;
 
     public function __construct()
     {
@@ -48,6 +49,7 @@ class CaseStudyCreate
         $this->unsetSamePositionOnFirstPage();
         $this->createCaseStudy();
         $this->saveImages();
+        $this->saveTags();
     }
 
     /**
@@ -165,6 +167,21 @@ class CaseStudyCreate
             $this->saveImage($this->data()->cardBgImage, Image::CASE_STUDY_CARD_BG)
         );
         $this->caseStudyRepo->save($this->caseStudy);
+    }
+
+    private function saveTags()
+    {
+        CaseStudyTag::where(CaseStudyTag::CaseStudyID, $this->caseStudy->getId())
+            ->delete();
+
+        foreach ((array)$this->tagIDs AS $tagID => $value) {
+            if ($value) {
+                $caseStudyTag = new CaseStudyTag();
+                $caseStudyTag->{CaseStudyTag::CaseStudyID} = $this->caseStudy->getId();
+                $caseStudyTag->{CaseStudyTag::TagID} = $tagID;
+                $caseStudyTag->save();
+            }
+        }
     }
 }
 
