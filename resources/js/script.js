@@ -133,3 +133,31 @@ window.DSI_Helpers = {
         })
     }
 }());
+
+(function createProjectOrOrganisation() {
+    $('.ix-create-project-modal').click(function () {
+        swal({
+            title: 'Create new project',
+            text: 'Please note that Please note that Please note that Please note that Please note that Please note that Please note that Please note that ',
+            type: "info",
+            confirmButtonText: 'Continue',
+            showCancelButton: true,
+            cancelButtonText: 'Cancel',
+        }, function () {
+            $('#ix-create-project-modal').click();
+        });
+    });
+
+    $('.ix-create-organisation-modal').click(function () {
+        swal({
+            title: 'Create new organisation',
+            text: 'Please note that Please note that Please note that Please note that Please note that Please note that Please note that Please note that ',
+            type: "info",
+            confirmButtonText: 'Continue',
+            showCancelButton: true,
+            cancelButtonText: 'Cancel',
+        }, function () {
+            $('#ix-create-organisation-modal').click();
+        });
+    })
+}());
