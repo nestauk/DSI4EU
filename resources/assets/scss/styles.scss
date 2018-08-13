@@ -12503,6 +12503,10 @@ html.w-mod-js *[data-ix="map-point-expand-3"] {
       line-height: 40px;
       padding: 0 20px;
 
+      &.action-save {
+        color: white;
+      }
+
       &.action-cancel {
         background: white;
         color: black;
