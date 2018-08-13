@@ -71,15 +71,17 @@ if (!isset($urlHandler))
                 <div class="full-menu-col w-clearfix w-col w-col-4">
                     <div class="full-menu-links-block no-border">
                         <h2 class="full-menu-h2"><?php _e('About DSI4EU') ?></h2>
-                        <a class="full-menu-link" href="<?php echo $urlHandler->aboutTheProject() ?>">
+                        <a class="full-menu-link" href="<?= $urlHandler->aboutTheProject() ?>">
                             <?= __('About the project') ?>
                         </a>
-                        <a class="full-menu-link" href="<?php echo $urlHandler->partners() ?>">
+                        <a class="full-menu-link" href="<?= $urlHandler->partners() ?>">
                             <?= __('Partners') ?>
                         </a>
-                        <a class="full-menu-link" href="<?php echo $urlHandler->openDataResearchAndResources() ?>">
-                            <?php // _e('Open data, research & resources') ?>
+                        <a class="full-menu-link" href="<?= $urlHandler->openDataResearchAndResources() ?>">
                             <?= __('Research and resources') ?>
+                        </a>
+                        <a class="full-menu-link" href="<?= $urlHandler->advisoryBoard() ?>">
+                            <?= __('Advisory board') ?>
                         </a>
                         <?php /*
                         <a class="full-menu-link" href="<?php echo $urlHandler->contactDSI() ?>">
@@ -127,6 +129,9 @@ if (!isset($urlHandler))
                     <h2 class="full-menu-h2">
                         <?= __('DSI Clusters') ?>
                     </h2>
+                    <a class="full-menu-link" href="<?= $urlHandler->clusters() ?>">
+                        <?= __('Introduction') ?>
+                    </a>
                     <a class="full-menu-link" href="<?php echo $urlHandler->clusterById(1, 'health-and-care') ?>">
                         <?= __('Health and care') ?>
                     </a>

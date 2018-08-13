@@ -22,6 +22,7 @@ class AdvisoryBoardController
         $this->authUser = new Auth();
         $this->loggedInUser = $this->authUser->getUserIfLoggedIn();
 
+        View::setPageTitle('Advisory Board - DSI4EU');
         return View::render(__DIR__ . '/../Views/advisory-board.php', [
             'loggedInUser' => $this->loggedInUser,
         ]);

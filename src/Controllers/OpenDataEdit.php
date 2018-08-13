@@ -50,7 +50,7 @@ class OpenDataEdit
             'loggedInUser' => $this->loggedInUser,
             'mainText' => Text::getByIdentifier('open-data-main-text'),
             'subText' => Text::getByIdentifier('open-data-sub-text'),
-            'resources' => Resource::all(),
+            'resources' => Resource::orderBy(Resource::Id, 'desc')->get(),
         ]);
     }
 

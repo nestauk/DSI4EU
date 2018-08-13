@@ -42,6 +42,7 @@ use DSI\UseCase\SecureCode;
 use DSI\UseCase\SendEmailToCommunityAdmins;
 use DSI\UseCase\UpdateProject;
 use DSI\UseCase\UpdateProjectCountryRegion;
+use Services\View;
 
 class ProjectController
 {
@@ -254,7 +255,8 @@ class ProjectController
             $project = $this->project;
             JsModules::setTinyMCE(true);
             JsModules::setTranslations(true);
-            \Services\View::setPageTitle($this->project->getName());
+            View::setPageTitle($this->project->getName());
+            View::setPageDescription($project->getDescription());
             require __DIR__ . '/../../Views/project/project.php';
         }
 

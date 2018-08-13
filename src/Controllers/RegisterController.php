@@ -55,6 +55,7 @@ class RegisterController
             }
         }
 
+        View::setPageTitle('Register - DSI4EU');
         return View::render(__DIR__ . '/../Views/register.php', [
             'authUser' => $authUser,
             'urlHandler' => $urlHandler,

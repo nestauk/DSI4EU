@@ -88,6 +88,13 @@ class CliRouter
             $command->setArgs($args);
             $command->exec();
         });
+
+        $this->addRoute('import-projects-2018-07', function ($args) {
+            (new \Controllers\Console\ImportProjects_2018_07_Controller($args))->exec();
+        });
+        $this->addRoute('import-organisations-2018-07', function ($args) {
+            (new \Controllers\Console\ImportOrganisations_2018_07_Controller($args))->exec();
+        });
     }
 
     public function exec($args)
@@ -96,9 +103,10 @@ class CliRouter
 
         if (!isset($args[1])) {
             echo 'Valid routes: ' . PHP_EOL;
-            foreach ($this->routes AS $route) {
-                echo $route[0] . PHP_EOL;
-            }
+            $routes = $this->getRoutes();
+            foreach ($routes AS $route)
+                echo 'php artisan ' . $route . PHP_EOL;
+
             return;
         }
 
@@ -110,9 +118,10 @@ class CliRouter
         }
 
         echo 'Invalid argument: ' . $args[1] . PHP_EOL;
-        foreach ($this->routes AS $route) {
-            echo $route[0] . PHP_EOL;
-        }
+        $routes = $this->getRoutes();
+        foreach ($routes AS $route)
+            echo 'php artisan ' . $route . PHP_EOL;
+
         return;
     }
 
@@ -122,5 +131,17 @@ class CliRouter
             $arg0,
             $handle
         ];
+    }
+
+    /**
+     * @return array
+     */
+    private function getRoutes(): array
+    {
+        $routes = array_map(function ($route) {
+            return $route[0];
+        }, $this->routes);
+        $routes = array_sort($routes);
+        return $routes;
     }
 }

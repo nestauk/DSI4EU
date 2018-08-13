@@ -30,6 +30,7 @@ use DSI\UseCase\RejectMemberRequestToOrganisation;
 use DSI\UseCase\RemoveMemberFromOrganisation;
 use DSI\UseCase\SecureCode;
 use DSI\UseCase\SendEmailToCommunityAdmins;
+use Services\View;
 
 class OrganisationController
 {
@@ -328,7 +329,8 @@ class OrganisationController
             return $organisationNetworkTag->getTag();
         }, (new OrganisationNetworkTagRepo())->getByOrganisationID($this->organisation->getId()));
 
-        \Services\View::setPageTitle($this->organisation->getName());
+        View::setPageTitle($this->organisation->getName());
+        View::setPageDescription($this->organisation->getDescription());
         $organisation = $this->organisation;
         require __DIR__ . '/../../../www/views/organisation.php';
 

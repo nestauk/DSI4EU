@@ -141,16 +141,19 @@ require __DIR__ . '/../header.php';
                                     </label>
                                 </div>
                                 <br/>
-                                
+
                                 <div style="color:red" ng-cloak ng-show="errors.writer" ng-bind="errors.writer"></div>
                                 <label class="story-label" for="Story-wysiwyg">Author</label>
                                 <div class="w-checkbox">
                                     <select name="writerID" class="w-checkbox-input" ng-model="story.writerID">
                                         <option value="0"> - Select an author -</option>
                                         <?php foreach ($writers AS $writer) { ?>
-                                            <option value="<?= $writer->getId() ?>">
-                                                <?= show_input($writer->getFullName()) ?>
-                                            </option>
+                                            <?php if (trim($writer->getFullName()) !== '') { ?>
+                                                <option value="<?= $writer->getId() ?>">
+                                                    <?= show_input($writer->getFullName()) ?>
+                                                    (<?= show_input($writer->getRoleName()) ?>)
+                                                </option>
+                                            <?php } ?>
                                         <?php } ?>
                                     </select>
                                 </div>

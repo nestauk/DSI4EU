@@ -11,6 +11,8 @@ class UserRepo
     /** @var self */
     private static $objects = [];
 
+    private $orderBy = 'id';
+
     public function insert(User $user)
     {
         $insert = array();
@@ -217,6 +219,12 @@ class UserRepo
         return $this->checkExistingUserWhere($where);
     }
 
+    public function orderByName()
+    {
+        $this->orderBy = 'fname';
+        return $this;
+    }
+
     /**
      * @param $user
      * @return User
@@ -336,7 +344,8 @@ class UserRepo
           , facebookUID, googleUID, gitHubUID, twitterUID
           , profileURL, profilePic
           , isDisabled, role, `" . User::EmailSubscription . "`
-          FROM `users` WHERE " . implode(' AND ', $where) . "");
+          FROM `users` WHERE " . implode(' AND ', $where) . "
+          ORDER BY `{$this->orderBy}` ASC");
         foreach ($query->fetch_all() AS $dbUser) {
             $users[] = $this->buildUserFromData($dbUser);
         }

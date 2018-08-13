@@ -12,6 +12,7 @@ class Cluster extends Model
     protected $table = self::TABLE;
 
     const Id = 'id';
+    const IsOther = 'isOther';
 
     public function getId()
     {

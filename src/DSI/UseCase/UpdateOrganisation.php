@@ -131,8 +131,9 @@ class UpdateOrganisation
     private function setTags()
     {
         $orgTags = (new OrganisationTagRepo())->getTagNamesByOrganisation($this->data()->organisation);
+        $orgTagsLowerCase = array_map('strtolower', $orgTags);
         foreach ($this->data()->tags AS $newTagName) {
-            if (!in_array($newTagName, $orgTags)) {
+            if (!in_array(strtolower($newTagName), $orgTagsLowerCase)) {
                 $addTag = new AddTagToOrganisation();
                 $addTag->data()->organisationID = $this->data()->organisation->getId();
                 $addTag->data()->tag = $newTagName;
@@ -152,8 +153,9 @@ class UpdateOrganisation
     private function setNetworkTags()
     {
         $orgNetworkTags = (new OrganisationNetworkTagRepo())->getTagNamesByOrganisation($this->data()->organisation);
+        $orgNetworkTagsLowerCase = array_map('strtolower', $orgNetworkTags);
         foreach ($this->data()->networkTags AS $newNetworkTagName) {
-            if (!in_array($newNetworkTagName, $orgNetworkTags)) {
+            if (!in_array(strtolower($newNetworkTagName), $orgNetworkTagsLowerCase)) {
                 $addTag = new AddNetworkTagToOrganisation();
                 $addTag->setOrganisation($this->data()->organisation);
                 $addTag->setTag($newNetworkTagName);

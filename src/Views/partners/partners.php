@@ -1,7 +1,7 @@
 <?php
 /** @var $urlHandler Services\URL */
 \Services\View::setPageTitle('Partners - DSI4EU');
-require __DIR__ . '/header.php' ?>
+require __DIR__ . '/../header.php' ?>
 
     <div class="content-block">
         <div class="w-row">
@@ -108,9 +108,9 @@ require __DIR__ . '/header.php' ?>
                 </a>
             </div>
             <div class="sidebar w-col w-col-4 w-col-stack">
-                <?php require __DIR__ . '/partialViews/about-dsi.php' ?>
+                <?php require __DIR__ . '/../partialViews/about-dsi.php' ?>
             </div>
         </div>
     </div>
 
-<?php require __DIR__ . '/footer.php' ?>
+<?php require __DIR__ . '/../footer.php' ?>
