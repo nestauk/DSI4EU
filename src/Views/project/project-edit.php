@@ -152,35 +152,23 @@ if (!isset($urlHandler))
                                                                  ng-bind="errors.focusTags"></div>
                                                             <br/><br/>
 
-                                                            <label><?php _ehtml('Your technology') ?></label>
-                                                            <p>
-                                                                <?php _ehtml('Please add tags which describe the technology your project uses.') ?>
-                                                            </p>
+                                                            <label><?php _ehtml('Tags') ?></label>
+                                                            <p><?php _ehtml('Please add tags which describe your project') ?></p>
                                                             <div class="customSelect2">
-                                                                <?php foreach ($technologyMainTags AS $tag) { ?>
-                                                                    <label>
-                                                                        <input type="checkbox" name="technologyTags[]"
-                                                                               value="<?php echo show_input($tag->getName()) ?>"
-                                                                            <?php if (in_array($tag->getName(), $projectImpactTagsC)) echo 'checked' ?>/>
-                                                                        <?php echo show_input($tag->getName()) ?>
-                                                                    </label>
-                                                                <?php } ?>
-                                                                <b><?php _ehtml('Other (please specify):') ?></b>
                                                                 <select class="select2 creator-data-entry end w-input"
-                                                                        id="impact-tags-c" style="width:100%;border:0"
+                                                                        id="tagsSelect" style="width:100%;border:0"
                                                                         multiple data-tags="true"
                                                                         data-placeholder="<?php _ehtml('Write tags') ?>">
-                                                                    <?php foreach ($technologySecondaryTags AS $tag) { ?>
+                                                                    <?php foreach ($tags AS $tag) { ?>
                                                                         <option value="<?php echo $tag->getName() ?>"
-                                                                            <?php if (in_array($tag->getName(), $projectImpactTagsC)) echo 'selected' ?>><?php
+                                                                            <?php if (in_array($tag->getName(), $projectTags)) echo 'selected' ?>><?php
                                                                             echo show_input($tag->getName())
                                                                             ?></option>
                                                                     <?php } ?>
                                                                 </select>
-
-                                                                <div class="log-in-error" ng-show="errors.areasOfImpact"
-                                                                     ng-bind="errors.areasOfImpact"></div>
                                                             </div>
+                                                            <div class="log-in-error" ng-show="errors.tags"
+                                                                 ng-bind="errors.tags"></div>
                                                             <br/><br/>
 
                                                             <?php /*
@@ -212,23 +200,35 @@ if (!isset($urlHandler))
                                                     </div>
                                                     <div class="w-col w-col-6 w-col-stack">
                                                         <div class="padding-left-50">
-                                                            <label><?php _ehtml('Tags') ?></label>
-                                                            <p><?php _ehtml('Please add tags which describe your project') ?></p>
+                                                            <label><?php _ehtml('Your technology') ?></label>
+                                                            <p>
+                                                                <?php _ehtml('Please add tags which describe the technology your project uses.') ?>
+                                                            </p>
                                                             <div class="customSelect2">
+                                                                <?php foreach ($technologyMainTags AS $tag) { ?>
+                                                                    <label>
+                                                                        <input type="checkbox" name="technologyTags[]"
+                                                                               value="<?php echo show_input($tag->getName()) ?>"
+                                                                            <?php if (in_array($tag->getName(), $projectImpactTagsC)) echo 'checked' ?>/>
+                                                                        <?php echo show_input($tag->getName()) ?>
+                                                                    </label>
+                                                                <?php } ?>
+                                                                <b><?php _ehtml('Other (please specify):') ?></b>
                                                                 <select class="select2 creator-data-entry end w-input"
-                                                                        id="tagsSelect" style="width:100%;border:0"
+                                                                        id="impact-tags-c" style="width:100%;border:0"
                                                                         multiple data-tags="true"
                                                                         data-placeholder="<?php _ehtml('Write tags') ?>">
-                                                                    <?php foreach ($tags AS $tag) { ?>
+                                                                    <?php foreach ($technologySecondaryTags AS $tag) { ?>
                                                                         <option value="<?php echo $tag->getName() ?>"
-                                                                            <?php if (in_array($tag->getName(), $projectTags)) echo 'selected' ?>><?php
+                                                                            <?php if (in_array($tag->getName(), $projectImpactTagsC)) echo 'selected' ?>><?php
                                                                             echo show_input($tag->getName())
                                                                             ?></option>
                                                                     <?php } ?>
                                                                 </select>
+
+                                                                <div class="log-in-error" ng-show="errors.areasOfImpact"
+                                                                     ng-bind="errors.areasOfImpact"></div>
                                                             </div>
-                                                            <div class="log-in-error" ng-show="errors.tags"
-                                                                 ng-bind="errors.tags"></div>
                                                             <br/><br/>
 
                                                             <label for="email">

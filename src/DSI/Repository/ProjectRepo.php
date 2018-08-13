@@ -97,6 +97,13 @@ class ProjectRepo
         ]);
     }
 
+    public function getByName(string $name): Project
+    {
+        return $this->getObjectWhere([
+            "`name` = '" . addslashes($name) . "'"
+        ]);
+    }
+
     public function getByImportID(string $importID): Project
     {
         return $this->getObjectWhere([

@@ -134,6 +134,7 @@ class CaseStudyEditController
         } else {
             return View::render(__DIR__ . '/../../Views/case-studies/case-study-edit.php', [
                 'caseStudy' => $caseStudy,
+                'loggedInUser' => $loggedInUser,
                 'tags' => $tags,
             ]);
         }

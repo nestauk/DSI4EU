@@ -38,6 +38,10 @@ if (!isset($urlHandler))
                         <a class="footer-link"
                            href="<?php echo $urlHandler->privacyPolicy() ?>"><?php _ehtml('Privacy policy') ?></a>
                     </li>
+                    <li class="footer-link">
+                        <a class="footer-link"
+                           href="<?php echo $urlHandler->cookiesPolicy() ?>"><?php _ehtml('Cookies policy') ?></a>
+                    </li>
                 </ul>
             </div>
             <div class="w-col w-col-2">
@@ -488,14 +492,13 @@ if (!isset($urlHandler))
     <div class="twitter-block">
         <div class="twitter">
             <div class="w-row">
-                <div class="w-col w-col-1 w-col-small-1 w-col-tiny-tiny-stack">
-                    <img class="homepage-twitter-logo" src="/images/twitter-logo-silhouette.png">
-                </div>
-                <div class="w-col w-col-11 w-col-small-11 w-col-tiny-tiny-stack">
-                    <p class="twitter-text">
-                        <?php _e('To keep in touch with the project and DSI in Europe, follow us on Twitter @DSI4EU and sign up to our newsletter.'); ?>
-                    </p>
-                </div>
+                <img class="homepage-twitter-logo" src="/images/twitter-logo-silhouette.png">
+                <a href="#" class="dismiss js-twitter-dismiss">Close</a>
+                <p class="twitter-text">
+                    To keep in touch with the project and DSI in Europe, follow us on Twitter
+                    <a target="_blank" href="https://twitter.com/dsi4eu">@DSI4EU</a> and
+                    <a target="_blank" href="https://bit.ly/DSINews">sign up to our newsletter</a>.
+                </p>
             </div>
         </div>
     </div>

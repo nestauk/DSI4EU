@@ -119,6 +119,19 @@ window.DSI_Helpers = {
             return false;
         })
     }
+
+    if (!getCookie('twitter-dismiss')) {
+        const container = $('.twitter-block');
+        container.show();
+        $('body').addClass('padded-footer');
+
+        $('.js-twitter-dismiss', container).click(function (ev) {
+            ev.preventDefault();
+            setCookie('twitter-dismiss', true, 720);
+            container.hide('slow');
+            return false;
+        })
+    }
 }());
 
 (function createProjectOrOrganisation() {

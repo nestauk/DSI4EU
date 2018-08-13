@@ -242,6 +242,11 @@ class URL
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'feedback';
     }
 
+    public function advisoryBoard()
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'advisory-board';
+    }
+
     public function aboutTheProject()
     {
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'about-the-project';
@@ -338,6 +343,11 @@ class URL
     public function caseStudy(CaseStudy $caseStudy)
     {
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'case-study/' . $caseStudy->getId() . '/' . self::linkify($caseStudy->getTitle());
+    }
+
+    public function caseStudyModel(\Models\CaseStudy $caseStudy)
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'case-study/' . $caseStudy->getId() . '/' . self::linkify($caseStudy->{\Models\CaseStudy::Title});
     }
 
     public function addCaseStudy()

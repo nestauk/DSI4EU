@@ -8,6 +8,8 @@
             var editCountry = $('#edit-country');
             var editCountryRegion = $('#edit-countryRegion');
 
+            var confirmationText = "The project details have been successfully saved. Please note new and updated projects must be reviewed by an administrator before being made public.";
+
             $scope.logo = new DSI_Helpers.UploadImageHandler(Upload);
             $scope.headerImage = new DSI_Helpers.UploadImageHandler(Upload);
 
@@ -32,7 +34,11 @@
                     postField: 'step1',
                     onSuccess: function () {
                         if (params && params.proceed == false) {
-                            swal('Success!', 'The changes have been successfully saved.', 'success');
+                            swal({
+                                title: "Success!",
+                                text: confirmationText,
+                                type: "success"
+                            });
                         } else {
                             $scope.currentTab = 'step2';
                         }
@@ -71,7 +77,11 @@
                     postField: 'step2',
                     onSuccess: function () {
                         if (params && params.proceed == false) {
-                            swal('Success!', 'The changes have been successfully saved.', 'success');
+                            swal({
+                                title: "Success!",
+                                text: confirmationText,
+                                type: "success"
+                            });
                         } else {
                             $scope.currentTab = 'step3';
                         }
@@ -85,7 +95,11 @@
                     postField: 'step3',
                     onSuccess: function () {
                         if (params && params.proceed == false) {
-                            swal('Success!', 'The changes have been successfully saved.', 'success');
+                            swal({
+                                title: "Success!",
+                                text: confirmationText,
+                                type: "success"
+                            });
                         } else {
                             $scope.currentTab = 'step4';
                         }
@@ -106,7 +120,7 @@
                         onSuccess: function () {
                             swal({
                                 title: "Success!",
-                                text: "The project details have been successfully saved.",
+                                text: confirmationText,
                                 type: "success"
                             }, function (isConfirm) {
                                 window.location.href = projectURL;

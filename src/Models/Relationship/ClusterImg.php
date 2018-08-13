@@ -12,6 +12,7 @@ class ClusterImg extends Model
     const Id = 'id';
     const ClusterLangID = 'clusterLangID';
     const Filename = 'filename';
+    const Caption = 'caption';
     const Link = 'link';
 
     public function getFilename()
@@ -22,5 +23,10 @@ class ClusterImg extends Model
     public function getLink()
     {
         return $this->{self::Link};
+    }
+
+    public function getCaption()
+    {
+        return $this->{self::Caption};
     }
 }

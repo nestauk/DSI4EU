@@ -12,9 +12,11 @@ if (!$urlHandler)
 
 ?>
 <meta charset="utf-8">
-<title><?= show_input(View::getPageTitleOr('Digitalsocial.eu')) ?></title>
+<title><?= show_input(View::getPageTitleOr('DSI4EU')) ?></title>
 <meta name="google-site-verification" content="al4Vt4vNA7eWC2OyIEa0C8vjDBFl5UZWZODih8wy3r4"/>
-<meta property="og:title" content="<?= show_input(View::getPageTitleOr('Digitalsocial.eu')) ?>">
+<meta property="og:title" content="<?= show_input(View::getPageTitleOr('DSI4EU')) ?>">
+<meta property="og:type" content="website" />
+<meta property="og:description" content="<?= show_input(View::getPageDescription()) ?>">
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
 
 <link href="<?php echo $urlHandler->rssNewsBlogs() ?>" rel="feed" type="application/rss+xml"

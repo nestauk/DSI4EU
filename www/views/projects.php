@@ -142,7 +142,8 @@ $showAdvancedSearch = (
                                         </div>
                                     </div>
                                     <br/>
-                                    <div class="filter-title"><strong><?php _ehtml('Filter by category') ?></strong>
+                                    <div class="filter-title">
+                                        <strong><?php _ehtml('Filter by category') ?></strong>
                                     </div>
                                     <div class="filter-checkbox w-checkbox">
                                         <input class="w-checkbox-input" data-name="Checkbox 2" id="checkbox-2"

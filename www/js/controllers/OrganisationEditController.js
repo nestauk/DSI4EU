@@ -7,6 +7,8 @@ angular
         var editCountry = $('#edit-country');
         var editCountryRegion = $('#edit-countryRegion');
 
+        var confirmationText = "The organisation details have been successfully saved. Please note new and updated organisation must be reviewed by an administrator before being made public.";
+
         $scope.logo = new DSI_Helpers.UploadImageHandler(Upload);
         $scope.headerImage = new DSI_Helpers.UploadImageHandler(Upload);
 
@@ -29,7 +31,11 @@ angular
                 postField: 'step1',
                 onSuccess: function () {
                     if (params && params.proceed == false) {
-                        swal('Success!', 'The changes have been successfully saved.', 'success');
+                        swal({
+                            title: "Success!",
+                            text: confirmationText,
+                            type: "success"
+                        });
                     } else {
                         $scope.currentTab = 'step2';
                     }
@@ -43,7 +49,11 @@ angular
                 postField: 'step2',
                 onSuccess: function () {
                     if (params && params.proceed == false) {
-                        swal('Success!', 'The changes have been successfully saved.', 'success');
+                        swal({
+                            title: "Success!",
+                            text: confirmationText,
+                            type: "success"
+                        });
                     } else {
                         $scope.currentTab = 'step3';
                     }
@@ -56,7 +66,11 @@ angular
                 postField: 'step3',
                 onSuccess: function () {
                     if (params && params.proceed == false) {
-                        swal('Success!', 'The changes have been successfully saved.', 'success');
+                        swal({
+                            title: "Success!",
+                            text: confirmationText,
+                            type: "success"
+                        });
                     } else {
                         $scope.currentTab = 'step4';
                     }
@@ -77,7 +91,7 @@ angular
                     onSuccess: function () {
                         swal({
                             title: "Success!",
-                            text: "The organisation details have been successfully saved.",
+                            text: confirmationText,
                             type: "success"
                         }, function (isConfirm) {
                             window.location.href = organisationURL;

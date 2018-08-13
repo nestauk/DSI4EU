@@ -294,10 +294,7 @@ class Router
                 $this->staticPage($matches, 'about-the-project.php');
 
         } elseif (preg_match('<^/' . $langHandler . 'partners$>', $this->pageURL, $matches)) {
-            if (Translate::getCurrentLang() === 'en')
-                $this->staticPage($matches, 'partners_en.php');
-            else
-                $this->staticPage($matches, 'partners.php');
+            $this->partners($matches);
 
         } elseif (preg_match('<^/' . $langHandler . 'open-data-research-and-resources$>', $this->pageURL, $matches)) {
             $this->openData($matches);
@@ -435,7 +432,7 @@ class Router
         } elseif (preg_match('<^/' . $langHandler . 'api/email-subscribers$>', $this->pageURL, $matches)) {
             $this->emailSubscribersApi($matches);
 
-        } elseif (preg_match('<^/' . $langHandler . 'cookies?-policy$>', $this->pageURL, $matches)) {
+        } elseif (preg_match('<^/' . $langHandler . 'cookies-policy$>', $this->pageURL, $matches)) {
             $this->cookiesPolicy($matches);
 
         } elseif (preg_match('<^/' . $langHandler . 'what-is-dsi$>', $this->pageURL, $matches)) {
@@ -481,10 +478,7 @@ class Router
     private function homePage($matches = [])
     {
         $this->setLanguageFromUrl($matches);
-
-        $command = new \DSI\Controller\HomeController();
-        $command->format = 'html';
-        $command->exec();
+        return (new \Controllers\HomeController())->exec();
     }
 
     private function dashboard($matches = [])
@@ -823,7 +817,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\CaseStudyController();
+        $command = new \Controllers\CaseStudies\CaseStudyController();
         $command->caseStudyID = $matches[3];
         $command->exec();
     }
@@ -986,7 +980,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\CaseStudiesController();
+        $command = new \Controllers\CaseStudies\CaseStudiesController();
         $command->exec();
     }
 
@@ -994,7 +988,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\CaseStudiesController();
+        $command = new \Controllers\CaseStudies\CaseStudiesController();
         $command->format = 'json';
         $command->exec();
     }
@@ -1148,6 +1142,12 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
         return (new \Controllers\StaticHtmlController())->privacyPolicy();
+    }
+
+    private function partners($matches)
+    {
+        $this->setLanguageFromUrl($matches);
+        return (new \Controllers\StaticHtmlController())->partners();
     }
 
     private function openData($matches)
