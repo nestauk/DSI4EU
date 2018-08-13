@@ -6,6 +6,8 @@ use DSI\Entity\Organisation;
 use DSI\Entity\Project;
 use DSI\NotFound;
 use DSI\Repository\CountryRepo;
+use DSI\Repository\DsiFocusTagRepo;
+use DSI\Repository\ImpactTagRepo;
 use DSI\Repository\OrganisationRepo;
 use DSI\Repository\ProjectRepo;
 use DSI\Repository\UserRepo;
@@ -202,6 +204,10 @@ class ImportProjects_2018_07_Controller
                     die('Could not find supporting tag: ' . $id . ' for ' . $data['Project name']);
                 return $this->supportTags[$id];
             }, $supportTags);
+            $impactTagRepo = new ImpactTagRepo();
+            $supportTags = array_map(function ($id) use ($data, $impactTagRepo) {
+                return $impactTagRepo->getById($id)->getName();
+            }, $supportTags);
             $exec->data()->areasOfImpact = $supportTags;
         }
 
@@ -212,6 +218,10 @@ class ImportProjects_2018_07_Controller
                 if (!$this->focusTags[$id])
                     die('Could not find focus tag: ' . $id . ' for ' . $data['Project name']);
                 return $this->focusTags[$id];
+            }, $focusTags);
+            $projectDsiFocusTagRepo = new DsiFocusTagRepo();
+            $focusTags = array_map(function ($id) use ($data, $projectDsiFocusTagRepo) {
+                return $projectDsiFocusTagRepo->getById($id)->getName();
             }, $focusTags);
             $exec->data()->focusTags = $focusTags;
         }
@@ -224,6 +234,10 @@ class ImportProjects_2018_07_Controller
                 if (!$this->technologyTags[$id])
                     die('Could not find technology tag: ' . $id . ' for ' . $data['Project name']);
                 return $this->technologyTags[$id];
+            }, $technologyTags);
+            $impactTagRepo = new ImpactTagRepo();
+            $technologyTags = array_map(function ($id) use ($data, $impactTagRepo) {
+                return $impactTagRepo->getById($id)->getName();
             }, $technologyTags);
             $exec->data()->technologyTags = $technologyTags;
         }
