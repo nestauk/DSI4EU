@@ -2,6 +2,7 @@
 
 use \DSI\Service\Translate;
 use \DSI\Entity\Translation;
+use \Controllers\Upload\UploadResourcesController;
 
 class Router
 {
@@ -265,11 +266,18 @@ class Router
         } elseif ($this->pageURL === '/rss/events.xml') {
             $this->rssEvents();
 
-        } elseif ($this->pageURL === '/rss/funding-opportunities.xml') {
+        } elseif ($this->pageURL === '/rss/funding-opportunities.xml')
             $this->rssFundingOpportunities();
 
+// Admin
+        elseif ($this->pageURL === '/upload/resources')
+            return (new UploadResourcesController())->handle();
+
+        elseif ($this->pageURL === '/upload/resources/save')
+            return (new UploadResourcesController())->setSave(true)->handle();
+
 // Static pages
-        } elseif ($this->pageURL === '/robots.txt') {
+        elseif ($this->pageURL === '/robots.txt') {
             $this->robotsTxt();
 
         } elseif (preg_match('<^/' . $langHandler . 'advisory-board$>', $this->pageURL, $matches)) {
@@ -1105,8 +1113,7 @@ class Router
 
     private function rssFundingOpportunities()
     {
-        $command = new \DSI\Controller\RssFundingOpportunitiesController();
-        $command->exec();
+        (new \DSI\Controller\RssFundingOpportunitiesController())->exec();
     }
 
     private function robotsTxt()
