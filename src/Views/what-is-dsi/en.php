@@ -54,7 +54,7 @@ require __DIR__ . '/../header.php'
                             models</strong> &mdash; alternatives which are open and collaborative rather than closed and
                         competitive;
                     </li>
-                    <li>use technology to create a <strong>more environmentally sustainable</strong></li>
+                    <li>use technology to create a <strong>more environmentally sustainable</strong> society</li>
                 </ul>
                 <p>To see examples of DSI in practice, take a look at our library of
                     <a href="<?= $urlHandler->caseStudies() ?>">case studies</a> of innovation from across and
