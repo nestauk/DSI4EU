@@ -446,7 +446,7 @@ class Router
         } elseif (preg_match('<^/' . $langHandler . 'what-is-dsi$>', $this->pageURL, $matches)) {
             $this->whatIsDsi($matches);
 
-        } elseif (preg_match('<^/.*\.(gif|jpe?g|png|svg|js|css|map|ico)$>', $this->pageURL)) {
+        } elseif (preg_match('<^/.*\.(gif|jpe?g|png|svg|js|css|map|ico|csv)$>', $this->pageURL)) {
             return $this->staticContent();
 
         } else {

@@ -20,12 +20,18 @@ require __DIR__ . '/../header.php';
             <div class="container-wide step-window">
                 <div class="w-form">
                     <div class="w-row">
-                        <div class="form-col-left w-col w-col-12">
+                        <div class="form-col-left w-col w-col-12" ng-cloak>
+                            <a target="_blank" href="/assets/files/resources-upload.csv">
+                                Download resources upload template</a>.<br>
+                            <i>* Please note that cluster names and resource types must be separated by semicolon. <br>
+                                * Do not change the CSV headers
+                            </i>
+                            <br><br>
+
                             <a class="w-button dsi-button story-image-upload" href="#"
                                style="width:300px"
                                ngf-select="upload($file, $invalidFiles)"
-                               ng-bind="loading ? 'Loading...' : 'Browse resources CSV'">
-                                Browse resources CSV
+                               ng-bind="loading ? 'Loading...' : 'Upload resources CSV'">
                             </a>
 
                             <div class="errors" ng-show="hasErrors()" style="font-weight: bold;margin:10px;">
