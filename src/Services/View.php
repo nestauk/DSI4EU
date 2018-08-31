@@ -23,6 +23,13 @@ class View
         return true;
     }
 
+    static function prepare(string $view, array $data = [])
+    {
+        ob_start();
+        self::render($view, $data);
+        return ob_get_clean();
+    }
+
     static function setPageTitle($title)
     {
         self::$pageTitle = $title;
