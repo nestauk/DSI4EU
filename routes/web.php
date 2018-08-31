@@ -3,6 +3,7 @@
 use \DSI\Service\Translate;
 use \DSI\Entity\Translation;
 use \Controllers\Upload\UploadResourcesController;
+use \DSI\Controller\WaitingApprovalController;
 
 class Router
 {
@@ -396,7 +397,8 @@ class Router
             $this->messageCommunityAdmins($matches);
 
         } elseif (preg_match('<^/' . $langHandler . 'waiting-approval$>', $this->pageURL, $matches)) {
-            $this->waitingApproval($matches);
+            $this->setLanguageFromUrl($matches);
+            return (new WaitingApprovalController())->html();
 
         } elseif (preg_match('<^/' . $langHandler . 'waiting-approval.json$>', $this->pageURL, $matches)) {
             $this->waitingApprovalJson($matches);
@@ -834,13 +836,6 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
         return (new \DSI\Controller\MessageCommunityAdminsController())->exec();
-    }
-
-    private function waitingApproval($matches)
-    {
-        $this->setLanguageFromUrl($matches);
-        return (new \DSI\Controller\WaitingApprovalController())
-            ->html();
     }
 
     private function waitingApprovalJson($matches)

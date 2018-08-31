@@ -137,4 +137,14 @@ class ContentUpdate
         $this->timestamp = $timestamp;
         return $this;
     }
+
+    /** @return User | null */
+    public function getOwner()
+    {
+        if ($this->hasProject())
+            return $this->getProject()->getOwner();
+        elseif ($this->hasOrganisation())
+            return $this->getOrganisation()->getOwner();
+        else return null;
+    }
 }
