@@ -110,7 +110,7 @@ require __DIR__ . '/header.php'
                 </p>
                 <p>
                     <a href="http://twitter.com/DSI4EU">Follow us on Twitter @DSI4EU</a> and
-                    <a href="http://digitalsocial.us14.list-manage.com/subscribe?u=668c39c8408fd7322d7b61d39&id=fb76c451e0">
+                    <a href="https://nesta.us1.list-manage.com/subscribe?u=db62b5694f0d8093140a6b62e&id=f8a8a22c21">
                         sign up to our newsletter</a>
                     to keep up to date with our events and other opportunities.
                 </p>
@@ -149,7 +149,7 @@ require __DIR__ . '/header.php'
                         people working on DSI, to explore potential collaborations, to help share your work, to speak at
                         and attend events, or just to exchange experiences and lessons.
                     <li><b>Follow us on <a href="http://twitter.com/DSI4EU">Twitter</a> and
-                            <a href="http://digitalsocial.us14.list-manage.com/subscribe?u=668c39c8408fd7322d7b61d39&id=fb76c451e0">
+                            <a href="https://nesta.us1.list-manage.com/subscribe?u=db62b5694f0d8093140a6b62e&id=f8a8a22c21">
                                 sign up to our newsletter</a>.
                         </b>
                 </ul>

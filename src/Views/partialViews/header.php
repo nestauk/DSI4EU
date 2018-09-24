@@ -203,7 +203,7 @@ if (!isset($urlHandler))
                             <?= __('Follow us on Twitter') ?>
                         </a>
                         <a class="full-menu-link" target="_blank"
-                           href="http://digitalsocial.us14.list-manage.com/subscribe?u=668c39c8408fd7322d7b61d39&id=fb76c451e0">
+                           href="https://nesta.us1.list-manage.com/subscribe?u=db62b5694f0d8093140a6b62e&id=f8a8a22c21">
                             <?= __('Sign up to our newsletter') ?>
                         </a>
                     </div>
