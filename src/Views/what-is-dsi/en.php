@@ -5,6 +5,14 @@
 require __DIR__ . '/../header.php'
 ?>
 
+    <style>
+        p.title {
+            text-transform: uppercase;
+            font-size: 22px;
+            margin-top: 40px;
+        }
+    </style>
+
     <div class="cookies-policy-controller content-block">
         <div class="w-row">
             <div class="w-col w-col-8 w-col-stack">
@@ -33,13 +41,13 @@ require __DIR__ . '/../header.php'
                 <p>We call this field <strong>digital social innovation</strong> (DSI), a term which overlaps
                     significantly with other terms including tech for good, social tech and civic tech. </p>
 
-                <p>DSI projects are characterised by:</p>
+                <p class="title">DSI projects are characterised by:</p>
                 <ul>
                     <li>the <strong>primacy of social or environmental impact</strong> over financial return;</li>
                     <li>a dedication to <strong>openness, collaboration and citizen empowerment</strong>.</li>
                 </ul>
 
-                <p>The broad aims of DSI are to:</p>
+                <p class="title">The broad aims of DSI are to:</p>
                 <ul>
                     <li>harness digital technologies to <strong>improve lives</strong> and <strong>reorient
                             technology</strong> towards more social ends;
@@ -56,6 +64,7 @@ require __DIR__ . '/../header.php'
                     </li>
                     <li>use technology to create a <strong>more environmentally sustainable</strong> society</li>
                 </ul>
+                <br>
                 <p>To see examples of DSI in practice, take a look at our library of
                     <a href="<?= $urlHandler->caseStudies() ?>">case studies</a> of innovation from across and
                     beyond Europe and explore our <a href="https://digitalsocial.eu/viz/">data visualisation</a> of DSI
