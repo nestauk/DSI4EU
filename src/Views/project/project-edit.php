@@ -382,7 +382,8 @@ if (!isset($urlHandler))
                                                     Please provide a short description for your project (up to 140
                                                     characters).
                                                 </p>
-                                                <textarea class="creator-data-entry w-input wide" style="width:100%"
+                                                <textarea class="creator-data-entry w-input wide"
+                                                          style="width:100%; max-width:none"
                                                           data-name="Project Bio 3" id="shortDescription"
                                                           name="project-bio-3" ng-model="project.shortDescription"
                                                           placeholder="<?php _ehtml('Briefly describe your project (no more than 140 characters)') ?>"

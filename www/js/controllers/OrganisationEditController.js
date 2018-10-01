@@ -161,7 +161,7 @@ angular
         statusbar: false,
         height: 500,
         plugins: "autoresize autolink lists link preview paste textcolor colorpicker image imagetools media",
-        autoresize_bottom_margin: 0,
+        autoresize_bottom_margin: 5,
         autoresize_max_height: 500,
         menubar: false,
         toolbar1: 'styleselect | forecolor backcolor | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist | link image media | preview',
