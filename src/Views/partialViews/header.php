@@ -98,10 +98,12 @@ if (!isset($urlHandler))
                         <?= __('What is DSI?') ?>
                     </a>
                     <a class="full-menu-link" href="<?= $urlHandler->projects() ?>">
-                        <?= __('Search projects') ?>
+                        <?php // __('Search projects') ?>
+                        <?= __('DSI projects') ?>
                     </a>
                     <a class="full-menu-link" href="<?= $urlHandler->organisations() ?>">
-                        <?= __('Search organisations') ?>
+                        <?php // __('Search organisations') ?>
+                        <?= __('DSI organisations') ?>
                     </a>
                     <a class="full-menu-link" href="/viz/" target="_blank">
                         <?= __('Data visualisation') ?>
@@ -165,10 +167,12 @@ if (!isset($urlHandler))
                     <h2 class="full-menu-h2"><?= __('Funding, support and events') ?></h2>
                     <div class="full-menu-links-block no-border">
                         <a class="full-menu-link" href="<?php echo $urlHandler->funding() ?>">
-                            <?= __('Search funding and support') ?>
+                            <?php // __('Search funding and support') ?>
+                            <?= __('Funding and support') ?>
                         </a>
                         <a class="full-menu-link" href="<?php echo $urlHandler->events() ?>">
-                            <?= __('Search events') ?>
+                            <?php // __('Search events') ?>
+                            <?= __('Events') ?>
                         </a>
                         <a class="full-menu-link" target="_blank"
                            href="https://docs.google.com/forms/d/e/1FAIpQLSd8V-vyQADRo_ofvc5n49CBB-qeEgMlymLgQ6EUTJJWLD7DkQ/viewform">

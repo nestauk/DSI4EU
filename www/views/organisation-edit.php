@@ -54,7 +54,7 @@ if (!isset($urlHandler))
                             <a class="step-tab tab-link-4 w-inline-block w-tab-link"
                                ng-class="{'w--current': currentTab == 'step4'}" data-w-tab="Tab 4" id="tab-four"
                                ng-click="currentTab = 'step4'">
-                                <div>4 - <?php _ehtml('Add images & publish') ?></div>
+                                <div>4 - <?php _ehtml('Add images & submit') ?></div>
                             </a>
                         </div>
                         <div class="w-tab-content">
@@ -180,7 +180,7 @@ if (!isset($urlHandler))
                                                                         class="select2-withDesign creator-data-entry end w-input"
                                                                         id="projectsSelect" style="width:100%;border:0"
                                                                         multiple
-                                                                        data-placeholder="<?php _ehtml('Click to select projects') ?>">
+                                                                        data-placeholder="<?php _ehtml('Select projects') ?>">
                                                                     <option></option>
                                                                     <?php foreach ($projects AS $project) { ?>
                                                                         <option value="<?php echo $project->getId() ?>"
@@ -250,7 +250,8 @@ if (!isset($urlHandler))
                                                     </div>
                                                     <div class="w-col w-col-6">
                                                         <div class="padding-left-50" ng-cloak>
-                                                            <h2 class="edit-h2"><?php _ehtml('Where is your Organisation based?') ?></h2>
+                                                            <?php /* <h2 class="edit-h2"><?php _ehtml('Where is your Organisation based?') ?></h2> */ ?>
+                                                            <h2 class="edit-h2"><?php _ehtml('Location') ?></h2>
                                                             <label for="email-7"><?php _ehtml('Which country is your organisation based in?') ?></label>
                                                             <select id="edit-country"
                                                                     data-placeholder="<?php _ehtml('Select country') ?>"
@@ -314,8 +315,14 @@ if (!isset($urlHandler))
                                                           data-name="Project Bio 3" id="project-bio-3" maxlength="5000"
                                                           ng-model="organisation.shortDescription"></textarea>
                                                 <label class="story-label" for="project-bio">Long description</label>
-                                                <p><?php _ehtml('Please provide a longer description for your organisation. How would you describe your organisation? What type of work do you do? Who do you support?') ?></p>
-                                                <p><?php _ehtml('Make your profile stand out by adding images or videos of your work.') ?></p>
+                                                <p><?php // _ehtml('Please provide a longer description for your organisation. How would you describe your organisation? What type of work do you do? Who do you support?') ?></p>
+                                                <p><?php // _ehtml('Make your profile stand out by adding images or videos of your work.') ?></p>
+                                                <p>
+                                                    Please provide a longer description of your organisation. How would
+                                                    you describe its aims and activities? Who do you support? What
+                                                    challenges do you aim to tackle? Please note you can add photos and
+                                                    videos here.
+                                                </p>
                                                 <textarea class="creator-data-entry long-description w-input wide"
                                                           data-name="Project Bio 4" id="description" maxlength="5000"
                                                           placeholder="<?php _ehtml('Add an in depth organisation description') ?>"
@@ -331,9 +338,9 @@ if (!isset($urlHandler))
                                       ng-submit="submitStep4('<?php echo $urlHandler->organisation($organisation) ?>')">
                                     <div class="tabbed-nav-buttons w-clearfix">
                                         <input type="submit" class="tab-button-next tab-button-publish w-button"
-                                               ng-value="loading ? '<?php _ehtml('Loading') ?>...' : '<?php _ehtml('Publish now') ?>'"
+                                               ng-value="loading ? '<?php _ehtml('Loading') ?>...' : '<?php _ehtml('Submit now') ?>'"
                                                ng-disabled="loading"
-                                               value="<?php _ehtml('Publish now') ?>"/>
+                                               value="<?php _ehtml('Submit now') ?>"/>
                                         <a href="<?php echo $urlHandler->organisation($organisation) ?>"
                                            class="tab-button-next update-button w-button"><?php _ehtml('Save for later') ?></a>
                                         <a class="previous tab-button-3 tab-button-next w-button"
@@ -341,7 +348,7 @@ if (!isset($urlHandler))
                                     </div>
                                     <div class="w-row">
                                         <div class="creator-col w-col w-col-4">
-                                            <h2>4 - <?php _ehtml('Add images & publish') ?></h2>
+                                            <h2>4 - <?php _ehtml('Add images & submit') ?></h2>
                                             <?php echo $leftSideText ?>
                                         </div>
                                         <div class="creator-col creator-col-right w-col w-col-8">
@@ -354,6 +361,7 @@ if (!isset($urlHandler))
                                                             </label>
                                                             <p>
                                                                 <?php _ehtml("This will appear as the header background for your organisation's page") ?>
+                                                                .
                                                             </p>
                                                             <img class="story-image-upload story-image-upload-large"
                                                                  style="max-height:140px;max-width:140px"

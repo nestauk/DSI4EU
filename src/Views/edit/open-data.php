@@ -18,7 +18,8 @@ require __DIR__ . '/../header.php';
         <div class="content-block">
             <div class="w-row">
                 <div class="w-col w-col-8">
-                    <h1 class="content-h1"><?php _ehtml('Open data, research & resources') ?></h1>
+                    <?php /* <h1 class="content-h1"><?php _ehtml('Open data, research & resources') ?></h1> */ ?>
+                    <h1 class="content-h1"><?php _ehtml('Research and resources') ?></h1>
 
                     <div>
                         <label>Main paragraph</label>

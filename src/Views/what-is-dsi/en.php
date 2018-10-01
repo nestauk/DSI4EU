@@ -62,7 +62,7 @@ require __DIR__ . '/../header.php'
                             models</strong> &mdash; alternatives which are open and collaborative rather than closed and
                         competitive;
                     </li>
-                    <li>use technology to create a <strong>more environmentally sustainable</strong> society</li>
+                    <li>use technology to create a <strong>more environmentally sustainable</strong> society.</li>
                 </ul>
                 <br>
                 <p>To see examples of DSI in practice, take a look at our library of
