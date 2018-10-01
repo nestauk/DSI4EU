@@ -1,4 +1,5 @@
 <?php
+
 use Services\URL;
 
 /** @var $urlHandler URL */
@@ -17,7 +18,7 @@ use Services\URL;
 
     <div class="form-container" ng-hide="forgotPassword.show">
         <a href="<?php echo $urlHandler->home() ?>">
-            <img class="log-in-logo" src="<?php echo SITE_RELATIVE_PATH ?>/images/dark_1.svg">
+            <img class="log-in-logo" src="/images/partners/dsi-logo.png">
         </a>
         <?php if (isset($_GET['from']) AND $_GET['from'] == 'organisation') { ?>
             <h2><?php _ehtml('You must be logged in to add an organisation') ?></h2>
@@ -43,8 +44,9 @@ use Services\URL;
 
                 <label>
                     <input type="checkbox" name="rememberMe" ng-model="rememberMe" value="1"/>
-                    <?php _ehtml('Remember me')?>
-                    <span style="font-weight: normal;font-size: smaller">(<?php _ehtml('Do not use this option on a shared or public device')?>)</span>
+                    <?php _ehtml('Remember me') ?>
+                    <span style="font-weight: normal;font-size: smaller">(<?php _ehtml('Do not use this option on a shared or public device') ?>
+                        )</span>
                 </label>
 
                 <button type="submit" class="auto ll log-in-link w-clearfix w-inline-block" data-ix="log-in-arrow"
