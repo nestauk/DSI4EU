@@ -29,12 +29,14 @@ class CaseStudiesController
             // $caseStudies = $caseStudyRepository->getAll();
             $caseStudies = CaseStudy
                 ::with('caseStudyTags')
+                ->orderBy(CaseStudy::Id, 'desc')
                 ->get();
         else
             // $caseStudies = $caseStudyRepository->getAllPublished();
             $caseStudies = CaseStudy
                 ::where(CaseStudy::IsPublished, true)
                 ->with('caseStudyTags')
+                ->orderBy(CaseStudy::Id, 'desc')
                 ->get();
 
         if ($this->format == 'json') {
