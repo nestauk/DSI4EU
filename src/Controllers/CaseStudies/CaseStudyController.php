@@ -26,7 +26,11 @@ class CaseStudyController
         $caseStudies = $caseStudyRepo->getAll();
         $caseStudies = array_splice($caseStudies, 0, 3);
 
-        \Services\View::setPageTitle($caseStudy->getTitle());
+        View::setPageTitle($caseStudy->getTitle());
+        View::setPageDescription(
+            $caseStudy->getInfoText() ?:
+            $caseStudy->getTitle()
+        );
         View::render(__DIR__ . '/../../Views/case-studies/case-study.php', [
             'loggedInUser' => $loggedInUser,
             'userCanAddCaseStudy' => $userCanAddCaseStudy,

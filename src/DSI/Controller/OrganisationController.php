@@ -330,7 +330,11 @@ class OrganisationController
         }, (new OrganisationNetworkTagRepo())->getByOrganisationID($this->organisation->getId()));
 
         View::setPageTitle($this->organisation->getName());
-        View::setPageDescription($this->organisation->getDescription());
+        View::setPageDescription(
+            $this->organisation->getDescription() ?:
+                $this->organisation->getShortDescription() ?:
+                    $this->organisation->getName()
+        );
         $organisation = $this->organisation;
         require __DIR__ . '/../../../www/views/organisation.php';
 

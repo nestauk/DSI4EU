@@ -256,7 +256,11 @@ class ProjectController
             JsModules::setTinyMCE(true);
             JsModules::setTranslations(true);
             View::setPageTitle($this->project->getName());
-            View::setPageDescription($project->getDescription());
+            View::setPageDescription(
+                $project->getDescription() ?:
+                    $project->getShortDescription() ?:
+                        $project->getName()
+            );
             require __DIR__ . '/../../Views/project/project.php';
         }
 

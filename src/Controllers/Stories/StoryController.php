@@ -5,9 +5,9 @@ namespace Controllers\Stories;
 use DSI\Entity\Story;
 use DSI\Entity\User;
 use DSI\Repository\StoryRepo;
-use DSI\Repository\UserRepo;
 use DSI\Service\Auth;
 use Services\URL;
+use \Services\View;
 
 class StoryController
 {
@@ -33,7 +33,11 @@ class StoryController
         $userCanManageStory = $this->userCanManageStory($loggedInUser, $story);
         $userCanDeleteStory = $this->userCanDeleteStory($loggedInUser, $story);
 
-        \Services\View::setPageTitle($story->getTitle());
+        View::setPageTitle($story->getTitle());
+        View::setPageDescription(
+            $story->getCardShortDescription() ?:
+                $story->getTitle()
+        );
         require __DIR__ . '/../../../www/views/story.php';
     }
 
