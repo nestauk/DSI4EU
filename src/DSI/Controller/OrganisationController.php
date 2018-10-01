@@ -588,7 +588,7 @@ class OrganisationController
         else if ($loggedInUser->isEditorialAdmin() OR $loggedInUser->isCommunityAdmin())
             return true;
 
-        else if ($this->organisation->getOwnerID() != $loggedInUser->getId())
+        else if ($this->organisation->getOwnerID() === $loggedInUser->getId())
             return true;
 
         return false;

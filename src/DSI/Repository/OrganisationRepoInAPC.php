@@ -37,6 +37,16 @@ class OrganisationRepoInAPC extends OrganisationRepo
         return $this->getAllFromCache();
     }
 
+    /**
+     * @return Organisation[]
+     */
+    public function getAllPublished()
+    {
+        return array_values(array_filter($this->getAllFromCache(), function (Organisation $organisation) {
+            return !$organisation->isWaitingApproval();
+        }));
+    }
+
     public function clearAll()
     {
         parent::clearAll();
