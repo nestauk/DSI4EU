@@ -131,7 +131,10 @@ require __DIR__ . '/../header.php';
                 menubar: false,
                 toolbar1: 'styleselect | forecolor backcolor | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media | preview',
                 image_advtab: true,
-                paste_data_images: false
+                paste_data_images: false,
+                init_instance_callback: function (inst) {
+                    inst.execCommand('mceAutoResize');
+                }
             });
         });
     </script>

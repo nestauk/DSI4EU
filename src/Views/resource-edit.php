@@ -172,6 +172,9 @@ require __DIR__ . '/header.php'
                         callback: callback
                     });
                 }
+            },
+            init_instance_callback: function (inst) {
+                inst.execCommand('mceAutoResize');
             }
         });
     </script>

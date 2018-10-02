@@ -166,6 +166,9 @@ angular
         menubar: false,
         toolbar1: 'styleselect | forecolor backcolor | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist | link image media | preview',
         image_advtab: true,
-        paste_data_images: false
+        paste_data_images: false,
+        init_instance_callback: function (inst) {
+            inst.execCommand('mceAutoResize');
+        }
     });
 }());

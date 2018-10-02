@@ -170,6 +170,9 @@
                         callback: callback
                     });
                 }
+            },
+            init_instance_callback: function (inst) {
+                inst.execCommand('mceAutoResize');
             }
         });
         $(function () {
