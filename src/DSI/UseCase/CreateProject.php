@@ -61,6 +61,11 @@ class CreateProject
             throw $this->errorHandler;
         }
 
+        if (!$this->data()->owner->isComplete()) {
+            $this->errorHandler->addTaggedError('user', __('Please complete your profile before adding a project'));
+            throw $this->errorHandler;
+        }
+
         $project = new Project();
         $project->setName((string)$this->data()->name);
         $project->setDescription((string)$this->data()->description);

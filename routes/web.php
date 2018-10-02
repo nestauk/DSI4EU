@@ -801,9 +801,7 @@ class Router
     private function createProject($matches)
     {
         $this->setLanguageFromUrl($matches);
-
-        $command = new \DSI\Controller\CreateProjectController();
-        $command->exec();
+        (new \DSI\Controller\CreateProjectController())->exec();
     }
 
     private function createOrganisation($matches)

@@ -42,8 +42,8 @@ $showAdvancedSearch = (
                         <?php _ehtml('Showcase your current and past work, identify potential collaborations and link your projects to your organisation.') ?>
                     </p>
                     <?php if ($loggedInUser) { ?>
-                        <a class="log-in-link long read-more w-clearfix w-inline-block"
-                           data-ix="create-project-modal" href="#">
+                        <a class="log-in-link long read-more w-clearfix w-inline-block ix-create-project-modal"
+                           href="#">
                             <div class="login-li long menu-li readmore-li"><?php _ehtml('Add your project') ?></div>
                             <img class="login-arrow"
                                  src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">

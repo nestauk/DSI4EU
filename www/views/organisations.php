@@ -34,7 +34,7 @@ $showAdvancedSearch = (
                     <p><?php _ehtml('Let others know who you are and what you do, meet potential collaborators and link your projects to your organisation.') ?></p>
                     <?php if ($loggedInUser) { ?>
                         <a class="log-in-link long read-more w-clearfix w-inline-block" data-ix="log-in-arrow" href="#">
-                            <div class="login-li long menu-li readmore-li" data-ix="create-organisation-modal">
+                            <div class="login-li long menu-li readmore-li ix-create-organisation-modal">
                                 <?php _ehtml('Add your organisation') ?>
                             </div>
                             <img class="login-arrow"
@@ -43,7 +43,7 @@ $showAdvancedSearch = (
                     <?php } else { ?>
                         <a class="log-in-link long read-more w-clearfix w-inline-block"
                            href="<?php echo $urlHandler->login() ?>?from=organisation">
-                            <div class="login-li long menu-li readmore-li" data-ix="create-organisation-modal">
+                            <div class="login-li long menu-li readmore-li ix-create-organisation-modal">
                                 <?php _ehtml('Add your organisation') ?>
                             </div>
                             <img class="login-arrow"

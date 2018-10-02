@@ -61,7 +61,7 @@ window.DSI_Helpers = {
     }
 };
 
-(function () {
+(function readjustTextarea() {
     function textAreaAdjust(o) {
         o.style.height = "1px";
         o.style.height = (25 + o.scrollHeight) + "px";
@@ -132,4 +132,34 @@ window.DSI_Helpers = {
             return false;
         })
     }
+}());
+
+(function createProjectOrOrganisation() {
+    $('.ix-create-project-modal').click(function () {
+        swal({
+            html: true,
+            title: 'Create new project',
+            text: '<a href="//digitalsocial.eu/what-is-dsi">Digital social innovation</a> brings together people and digital technologies to tackle social and environmental challenges. By adding your project to our map of DSI in Europe, you can gain more visibility for your work, make new connections and support our research. Click continue to get started!',
+            type: "info",
+            confirmButtonText: 'Continue',
+            showCancelButton: true,
+            cancelButtonText: 'Cancel',
+        }, function () {
+            $('#ix-create-project-modal').click();
+        });
+    });
+
+    $('.ix-create-organisation-modal').click(function () {
+        swal({
+            html: true,
+            title: 'Create new organisation',
+            text: '<a href="//digitalsocial.eu/what-is-dsi">Digital social innovation</a> brings together people and digital technologies to tackle social and environmental challenges. By adding your organisation to our map of DSI in Europe, you can gain more visibility for your work, make new connections and support our research. Click continue to get started!',
+            type: "info",
+            confirmButtonText: 'Continue',
+            showCancelButton: true,
+            cancelButtonText: 'Cancel',
+        }, function () {
+            $('#ix-create-organisation-modal').click();
+        });
+    })
 }());

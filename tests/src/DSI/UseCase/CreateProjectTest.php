@@ -27,6 +27,9 @@ class CreateProjectTest extends PHPUnit_Framework_TestCase
         $this->userRepo = new \DSI\Repository\UserRepo();
 
         $this->user = new \DSI\Entity\User();
+        $this->user->setFirstName('FName');
+        $this->user->setLastName('LName');
+        $this->user->setEmail('user@example.org');
         $this->userRepo->insert($this->user);
     }
 
@@ -58,6 +61,47 @@ class CreateProjectTest extends PHPUnit_Framework_TestCase
         $this->assertNotEmpty($e->getTaggedError('name'));
 
         \Services\App::setCanCreateProjects($canCreateProjects);
+    }
+
+    /** @test */
+    public function cannotCreateNewProjectsIfProfileNotComplete()
+    {
+        $this->createProjectCommand->data()->name = 'test';
+        $this->createProjectCommand->data()->description = 'test';
+        $this->createProjectCommand->data()->owner = $this->user;
+
+        // Check First Name
+        $this->user->setFirstName('');
+        $e = null;
+        try {
+            $this->createProjectCommand->exec();
+        } catch (\DSI\Service\ErrorHandler $e) {
+        }
+        $this->assertNotNull($e);
+        $this->assertNotEmpty($e->getTaggedError('user'));
+        $this->user->setFirstName('FName');
+
+        // Check Last Name
+        $this->user->setLastName('');
+        $e = null;
+        try {
+            $this->createProjectCommand->exec();
+        } catch (\DSI\Service\ErrorHandler $e) {
+        }
+        $this->assertNotNull($e);
+        $this->assertNotEmpty($e->getTaggedError('user'));
+        $this->user->setLastName('LName');
+
+        // Check Email
+        $this->user->resetEmail();
+        $e = null;
+        try {
+            $this->createProjectCommand->exec();
+        } catch (\DSI\Service\ErrorHandler $e) {
+        }
+        $this->assertNotNull($e);
+        $this->assertNotEmpty($e->getTaggedError('user'));
+        $this->user->setEmail('user@example.org');
     }
 
     /** @ test */
