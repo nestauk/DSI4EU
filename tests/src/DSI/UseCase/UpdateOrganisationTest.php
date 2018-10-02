@@ -27,10 +27,16 @@ class UpdateOrganisationTest extends PHPUnit_Framework_TestCase
 
         $this->user1 = new \DSI\Entity\User();
         $userRepo = new \DSI\Repository\UserRepo();
+        $this->user1->setFirstName('FName');
+        $this->user1->setLastName('LName');
+        $this->user1->setEmail('user@example.org');
         $userRepo->insert($this->user1);
 
         $this->user2 = new \DSI\Entity\User();
         $userRepo = new \DSI\Repository\UserRepo();
+        $this->user2->setFirstName('FName');
+        $this->user2->setLastName('LName');
+        $this->user2->setEmail('user@example.org');
         $userRepo->insert($this->user2);
 
         $createOrganisation = new \DSI\UseCase\CreateOrganisation();

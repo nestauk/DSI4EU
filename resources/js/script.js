@@ -137,8 +137,9 @@ window.DSI_Helpers = {
 (function createProjectOrOrganisation() {
     $('.ix-create-project-modal').click(function () {
         swal({
+            html: true,
             title: 'Create new project',
-            text: 'Please note that Please note that Please note that Please note that Please note that Please note that Please note that Please note that ',
+            text: '<a href="//digitalsocial.eu/what-is-dsi">Digital social innovation</a> brings together people and digital technologies to tackle social and environmental challenges. By adding your project to our map of DSI in Europe, you can gain more visibility for your work, make new connections and support our research. Click continue to get started!',
             type: "info",
             confirmButtonText: 'Continue',
             showCancelButton: true,
@@ -150,8 +151,9 @@ window.DSI_Helpers = {
 
     $('.ix-create-organisation-modal').click(function () {
         swal({
+            html: true,
             title: 'Create new organisation',
-            text: 'Please note that Please note that Please note that Please note that Please note that Please note that Please note that Please note that ',
+            text: '<a href="//digitalsocial.eu/what-is-dsi">Digital social innovation</a> brings together people and digital technologies to tackle social and environmental challenges. By adding your organisation to our map of DSI in Europe, you can gain more visibility for your work, make new connections and support our research. Click continue to get started!',
             type: "info",
             confirmButtonText: 'Continue',
             showCancelButton: true,
