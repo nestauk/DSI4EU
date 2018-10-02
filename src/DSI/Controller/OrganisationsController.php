@@ -9,6 +9,7 @@ use DSI\Repository\OrganisationRepoInAPC;
 use DSI\Repository\OrganisationTagRepo;
 use DSI\Service\Auth;
 use Services\URL;
+use Services\View;
 
 class OrganisationsController
 {
@@ -52,7 +53,8 @@ class OrganisationsController
                 ];
             }, $organisationRepositoryInAPC->getAllPublished()));
         } else {
-            \Services\View::setPageTitle('Organisations - DSI4EU');
+            View::setPageTitle('Organisations - DSI4EU');
+            View::setPageDescription(__('Browse our database of over 2,000 digital social innovation (DSI) and tech for good organisations across Europe.'));
             require __DIR__ . '/../../../www/views/organisations.php';
         }
     }

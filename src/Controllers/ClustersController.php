@@ -49,6 +49,7 @@ class ClustersController
             $clusters = $this->getClusters();
 
         View::setPageTitle('Clusters - DSI4EU');
+        View::setPageDescription(__('Find out more about our activities supporting digital social innovation (DSI) and tech for good in different social areas.'));
         return View::render(__DIR__ . '/../Views/clusters/clusters.php', [
             'loggedInUser' => $this->loggedInUser,
             'clusters' => $clusters->map(function (Cluster $cluster) {

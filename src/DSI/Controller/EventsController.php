@@ -7,6 +7,7 @@ use DSI\Repository\CountryRepo;
 use DSI\Repository\EventRepo;
 use DSI\Service\Auth;
 use Services\URL;
+use Services\View;
 
 class EventsController
 {
@@ -32,7 +33,8 @@ class EventsController
             ]);
         } else {
             $userCanAddEvent = (bool)($loggedInUser AND ($loggedInUser->isCommunityAdmin() OR $loggedInUser->isEditorialAdmin()));
-            \Services\View::setPageTitle('Events - DSI4EU');
+            View::setPageTitle('Events - DSI4EU');
+            View::setPageDescription(__('Browse our list of digital social innovation (DSI) and tech for good events taking place across Europe.'));
             require __DIR__ . '/../../../www/views/events.php';
         }
     }

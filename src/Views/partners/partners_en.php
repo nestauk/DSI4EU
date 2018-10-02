@@ -1,6 +1,5 @@
 <?php
 /** @var $urlHandler Services\URL */
-\Services\View::setPageTitle('Partners - DSI4EU');
 require __DIR__ . '/../header.php' ?>
 
     <style xmlns="http://www.w3.org/1999/html">

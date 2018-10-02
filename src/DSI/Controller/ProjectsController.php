@@ -10,6 +10,7 @@ use DSI\Repository\ProjectRepoInAPC;
 use DSI\Repository\ProjectTagRepo;
 use DSI\Service\Auth;
 use Services\URL;
+use Services\View;
 
 class ProjectsController
 {
@@ -55,7 +56,8 @@ class ProjectsController
                 ];
             }, $projectRepositoryInAPC->getAllPublished()));
         } else {
-            \Services\View::setPageTitle('Projects - DSI4EU');
+            View::setPageTitle('Projects - DSI4EU');
+            View::setPageDescription(__('Browse our database of over 1,000 digital social innovation (DSI) and tech for good projects across Europe.'));
             require __DIR__ . '/../../../www/views/projects.php';
         }
     }

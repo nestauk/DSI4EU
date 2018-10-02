@@ -44,6 +44,7 @@ class StoriesController
             }, $stories));
         } else {
             View::setPageTitle('Blogs - DSI4EU');
+            View::setPageDescription(__('Keep up to date with the latest digital social innovation (DSI) updates, news, events and blogs.'));
             return View::render(__DIR__ . '/../../Views/stories/stories.php', [
                 'loggedInUser' => $loggedInUser,
                 'userCanAddStory' => $userCanAddStory,

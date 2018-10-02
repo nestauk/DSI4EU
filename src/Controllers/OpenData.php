@@ -40,6 +40,7 @@ class OpenData
 
         JsModules::setMasonry(true);
         View::setPageTitle('Research and resources - DSI4EU');
+        View::setPageDescription(__('Browse our curated library of research, publications, toolkits and resources related to digital social innovation and tech for good.'));
         return View::render(__DIR__ . '/../Views/open-data-research-and-resources.php', [
             'authUser' => $this->authUser,
             'loggedInUser' => $this->loggedInUser,
