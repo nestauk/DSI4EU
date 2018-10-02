@@ -267,17 +267,23 @@ class UpdateProject
         if (isset($this->data()->name) AND $this->data()->name == '')
             $this->errorHandler->addTaggedError('name', __('Please type a project name'));
 
+        // if (isset($this->data()->url) AND $this->data()->url == '')
+        //    $this->errorHandler->addTaggedError('url', __('Please type a project name'));
+
         if (isset($this->data()->shortDescription) AND $this->data()->shortDescription == '')
             $this->errorHandler->addTaggedError('shortDescription', __('Please type the project short description'));
 
         if (isset($this->data()->areasOfImpact) AND count($this->data()->areasOfImpact) == 0)
             $this->errorHandler->addTaggedError('areasOfImpact', __('Please select at least one area of impact'));
 
-        if (isset($this->data()->focusTags) AND count($this->data()->focusTags) == 0)
-            $this->errorHandler->addTaggedError('focusTags', __('Please select at least one focus tag'));
+        if (isset($this->data()->technologyTags) AND count($this->data()->technologyTags) == 0)
+            $this->errorHandler->addTaggedError('technologyTags', __('Please select at least one technology tag'));
 
-        if (isset($this->data()->tags) AND count($this->data()->tags) == 0)
-            $this->errorHandler->addTaggedError('tags', __('Please select at least one tag'));
+        // if (isset($this->data()->focusTags) AND count($this->data()->focusTags) == 0)
+        //    $this->errorHandler->addTaggedError('focusTags', __('Please select at least one focus tag'));
+
+        // if (isset($this->data()->tags) AND count($this->data()->tags) == 0)
+        //     $this->errorHandler->addTaggedError('tags', __('Please select at least one tag'));
 
         $this->errorHandler->throwIfNotEmpty();
     }

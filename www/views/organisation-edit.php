@@ -81,20 +81,24 @@ if (!isset($urlHandler))
                                                 <div class="w-row">
                                                     <div class="w-col w-col-6 w-col-stack">
                                                         <div class="padding-right-50">
-                                                            <label for="name"><?php _ehtml('Organisation name') ?></label>
-                                                            <input class="creator-data-entry end w-input"
-                                                                   data-name="Name"
-                                                                   id="name" maxlength="256" name="name"
-                                                                   ng-model="organisation.name"
+                                                            <label for="name"><?php _ehtml('Organisation name') ?>
+                                                                *</label>
+                                                            <input class="creator-data-entry w-input"
+                                                                   data-name="Name" id="name" maxlength="256"
+                                                                   name="name" ng-model="organisation.name"
                                                                    placeholder="<?php _ehtml('Organisation name') ?>"
                                                                    type="text">
+                                                            <div class="log-in-error" ng-show="errors.name"
+                                                                 ng-bind="errors.name"></div>
+                                                            <br>
+
                                                             <label for="email"><?php _ehtml('Organisation URL') ?></label>
-                                                            <input class="creator-data-entry end w-input"
-                                                                   data-name="Email"
+                                                            <input class="creator-data-entry w-input" data-name="Email"
                                                                    id="email" maxlength="256" name="email"
-                                                                   placeholder="http://"
-                                                                   ng-model="organisation.url"
+                                                                   placeholder="http://" ng-model="organisation.url"
                                                                    type="text">
+                                                            <br>
+
                                                             <label for="email-2"><?php _ehtml('Social media links') ?></label>
                                                             <input class="creator-data-entry w-input"
                                                                    data-name="Email 2"
@@ -120,7 +124,7 @@ if (!isset($urlHandler))
                                                             <i>* <?php _ehtml('please include http://') ?></i>
                                                             <br/><br/>
 
-                                                            <label><?php _ehtml('Type of Organisation') ?></label>
+                                                            <label><?php _ehtml('Type of Organisation') ?> *</label>
                                                             <select class="w-select" id="field" name="field"
                                                                     ng-model="organisation.organisationTypeId">
                                                                 <?php foreach ($organisationTypes AS $orgType) { ?>
@@ -229,12 +233,13 @@ if (!isset($urlHandler))
                                                         <div class="padding-right-50">
                                                             <h2 class="edit-h2"><?php _ehtml('When did your organisation start?') ?></h2>
                                                             <label for="name"><?php _ehtml('Organisation start date') ?></label>
-                                                            <div class="required">*<?php _ehtml('Required') ?></div>
+                                                            <?php /* <div class="required">*<?php _ehtml('Required') ?></div> */ ?>
                                                             <input class="creator-data-entry end w-input"
                                                                    data-name="Name 2"
                                                                    id="startDate" maxlength="256" name="name-2"
                                                                    placeholder="<?php _ehtml('When did your organisation start?') ?>"
                                                                    ng-model="organisation.startDate" type="text">
+
                                                             <h2 class="edit-h2"><?php _ehtml('Size of Organisation') ?></h2>
                                                             <label><?php _ehtml('Choose the size of your organisation') ?></label>
                                                             <select class="w-select" id="field" name="field"
@@ -245,14 +250,15 @@ if (!isset($urlHandler))
                                                                     </option>
                                                                 <?php } ?>
                                                             </select>
-                                                            <div class="required">*<?php _ehtml('Required') ?></div>
+                                                            <?php /* <div class="required">*<?php _ehtml('Required') ?></div> */ ?>
                                                         </div>
                                                     </div>
                                                     <div class="w-col w-col-6">
                                                         <div class="padding-left-50" ng-cloak>
                                                             <?php /* <h2 class="edit-h2"><?php _ehtml('Where is your Organisation based?') ?></h2> */ ?>
                                                             <h2 class="edit-h2"><?php _ehtml('Location') ?></h2>
-                                                            <label for="email-7"><?php _ehtml('Which country is your organisation based in?') ?></label>
+                                                            <label for="email-7"><?php _ehtml('Which country is your organisation based in?') ?>
+                                                                *</label>
                                                             <select id="edit-country"
                                                                     data-placeholder="<?php _ehtml('Select country') ?>"
                                                                     class="creator-data-entry w-input"
@@ -305,15 +311,18 @@ if (!isset($urlHandler))
                                         </div>
                                         <div class="creator-col creator-col-right w-col w-col-8">
                                             <div class="w-form">
-                                                <label for="name"><?php _ehtml('Short description') ?></label>
+                                                <label for="name"><?php _ehtml('Short description') ?> *</label>
                                                 <p>
                                                     <?php _ehtml('Please provide a short description for your organisation (up to 140 characters).') ?>
                                                 </p>
-                                                <textarea class="creator-data-entry end w-input wide"
-                                                          name="project-bio-3"
+                                                <textarea class="creator-data-entry w-input wide" name="project-bio-3"
                                                           placeholder="<?php _ehtml('Briefly describe your organisation (no more than 140 characters)') ?>"
                                                           data-name="Project Bio 3" id="project-bio-3" maxlength="5000"
                                                           ng-model="organisation.shortDescription"></textarea>
+                                                <div class="log-in-error" ng-show="errors.shortDescription"
+                                                     ng-bind="errors.shortDescription"></div>
+                                                <br/>
+
                                                 <label class="story-label" for="project-bio">Long description</label>
                                                 <p><?php // _ehtml('Please provide a longer description for your organisation. How would you describe your organisation? What type of work do you do? Who do you support?') ?></p>
                                                 <p><?php // _ehtml('Make your profile stand out by adding images or videos of your work.') ?></p>

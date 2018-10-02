@@ -98,8 +98,11 @@ if (!isset($urlHandler))
                                                                    id="email" maxlength="256" name="email" type="text"
                                                                    placeholder="http://" ng-model="project.url"/>
                                                             <i><?php _ehtml('please include http://') ?></i>
+                                                            <div class="log-in-error" ng-show="errors.url"
+                                                                 ng-bind="errors.url"></div>
                                                             <br/><br/>
-                                                            <label><?php _ehtml('Areas of impact') ?></label>
+
+                                                            <label><?php _ehtml('Areas of impact') ?> *</label>
                                                             <p>
                                                                 <?php _ehtml('In which area(s) of society is your project seeking to have impact? If "Other", please specify') ?>
                                                             </p>
@@ -202,7 +205,7 @@ if (!isset($urlHandler))
                                                     </div>
                                                     <div class="w-col w-col-6 w-col-stack">
                                                         <div class="padding-left-50">
-                                                            <label><?php _ehtml('Your technology') ?></label>
+                                                            <label><?php _ehtml('Your technology') ?> *</label>
                                                             <p>
                                                                 <?php _ehtml('Please add tags which describe the technology your project uses.') ?>
                                                             </p>
@@ -228,8 +231,8 @@ if (!isset($urlHandler))
                                                                     <?php } ?>
                                                                 </select>
 
-                                                                <div class="log-in-error" ng-show="errors.areasOfImpact"
-                                                                     ng-bind="errors.areasOfImpact"></div>
+                                                                <div class="log-in-error" ng-show="errors.technologyTags"
+                                                                     ng-bind="errors.technologyTags"></div>
                                                             </div>
                                                             <br/><br/>
 
