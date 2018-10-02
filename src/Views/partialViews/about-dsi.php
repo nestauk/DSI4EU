@@ -14,7 +14,8 @@ use \DSI\Service\Sysctl;
     <span class="green">-&nbsp;</span><?php _ehtml('Partners') ?>
 </a>
 <a class="sidebar-link" href="<?php echo $urlHandler->openDataResearchAndResources() ?>">
-    <span class="green">-&nbsp;</span><?php _ehtml('Open data, research & resources') ?>
+    <?php /* <span class="green">-&nbsp;</span><?php _ehtml('Open data, research & resources') ?> */ ?>
+    <span class="green">-&nbsp;</span><?php _ehtml('Research and resources') ?>
 </a>
 <a class="sidebar-link" href="<?php echo $urlHandler->contactDSI() ?>">
     <span class="green">-&nbsp;</span><?php _ehtml('Contact DSI4EU') ?>

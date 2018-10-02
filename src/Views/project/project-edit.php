@@ -55,7 +55,7 @@ if (!isset($urlHandler))
                             <a class="step-tab tab-link-4 w-inline-block w-tab-link"
                                ng-class="{'w--current': currentTab == 'step4'}" data-w-tab="Tab 4" id="tab-four"
                                ng-click="currentTab = 'step4'">
-                                <div>4 - <?php _ehtml('Publish your project') ?></div>
+                                <div>4 - <?php _ehtml('Submit your project') ?></div>
                             </a>
                         </div>
                         <div class="w-tab-content">
@@ -130,9 +130,11 @@ if (!isset($urlHandler))
                                                             </div>
                                                             <br/><br/>
 
-                                                            <label><?php _ehtml('Your focus') ?></label>
+                                                            <label><?php _ehtml('DSI trends') ?></label>
                                                             <p>
-                                                                <?php _ehtml('Please tag the category or categories of DSI to which your project belongs.') ?>
+                                                                <?php // _ehtml('Please tag the category or categories of DSI to which your project belongs.') ?>
+                                                                DSI is based upon values of openness. Select which open
+                                                                trend(s) best describe your project.
                                                             </p>
 
                                                             <?php foreach ($dsiFocusTags AS $tag) { ?>
@@ -235,13 +237,17 @@ if (!isset($urlHandler))
                                                                 <?php _ehtml('Which organisations are working on this project?') ?>
                                                             </label>
                                                             <p>
-                                                                <?php _ehtml('Add the organisations who collaborate on the project below [...]') ?>
+                                                                <?php // _ehtml('Add the organisations who collaborate on the project below [...]') ?>
+                                                                Select the organisation(s) which work on this project.
+                                                                If an organisation isn’t listed, remember you can add it
+                                                                yourself by clicking the “Create” button at the top of
+                                                                the page once you’ve submitted this project.
                                                             </p>
                                                             <div id="organisationsSelectBox" class="designSelectBox">
                                                                 <select multiple id="organisationsSelect"
                                                                         class="select2-withDesign creator-data-entry end w-input"
                                                                         style="width:100%;border:0"
-                                                                        data-placeholder="<?php _ehtml('Click to select organisations') ?>">
+                                                                        data-placeholder="<?php _ehtml('Select organisations') ?>">
                                                                     <option></option>
                                                                     <?php foreach ($organisations AS $organisation) { ?>
                                                                         <option
@@ -310,11 +316,12 @@ if (!isset($urlHandler))
                                                         <div class="padding-left-50">
                                                             <h2 class="edit-h2"><?php _ehtml('Where is your project based?') ?></h2>
                                                             <label for="email-7">
-                                                                <?php _ehtml('Which country is your project based in?') ?>
-                                                                <br/>
+                                                                <?php // _ehtml('Which country is your project based in?') ?>
+                                                                Which country is your project based in?
                                                                 <span style="font-weight:normal">
                                                                     (
-                                                                    <?php _ehtml('leave this blank if your project is in multiple countries') ?>
+                                                                    <?php // _ehtml('leave this blank if your project is in multiple countries') ?>
+                                                                    if applicable
                                                                     )
                                                                 </span>
                                                             </label>
@@ -371,9 +378,12 @@ if (!isset($urlHandler))
                                             <div class="w-form">
                                                 <label for="name"><?php _ehtml('Short description') ?>: *</label>
                                                 <p>
-                                                    <?php _ehtml('Please provide a short description for your project (up to 140 characters) [...]') ?>
+                                                    <?php // _ehtml('Please provide a short description for your project (up to 140 characters) [...]') ?>
+                                                    Please provide a short description for your project (up to 140
+                                                    characters).
                                                 </p>
-                                                <textarea class="creator-data-entry w-input wide" style="width:100%"
+                                                <textarea class="creator-data-entry w-input wide"
+                                                          style="width:100%; max-width:none"
                                                           data-name="Project Bio 3" id="shortDescription"
                                                           name="project-bio-3" ng-model="project.shortDescription"
                                                           placeholder="<?php _ehtml('Briefly describe your project (no more than 140 characters)') ?>"
@@ -384,8 +394,13 @@ if (!isset($urlHandler))
 
                                                 <label class="story-label"
                                                        for="project-bio"><?php _ehtml('Long description') ?></label>
-                                                <p><?php _ehtml('Please provide a longer description for your project. [...]') ?></p>
-                                                <p><?php _ehtml('Make your project stand out by adding images or videos of your work') ?></p>
+                                                <p><?php // _ehtml('Please provide a longer description for your project. [...]') ?></p>
+                                                <p><?php // _ehtml('Make your project stand out by adding images or videos of your work') ?></p>
+                                                <p>
+                                                    Please provide a longer description of your project. How would you
+                                                    describe your work? What are your main activities? Who do you
+                                                    support? Please note you can add photos and videos here.
+                                                </p>
                                                 <textarea
                                                         class="creator-data-entry long-description w-input wide editableTextarea"
                                                         data-name="Project Bio 4" id="description" maxlength="5000"
@@ -397,7 +412,10 @@ if (!isset($urlHandler))
                                                     <?php _ehtml('Your social impact') ?>
                                                 </label>
                                                 <p>
-                                                    <?php _ehtml('Please provide a description of the social impact your project is aiming to have. [...]') ?>
+                                                    <?php // _ehtml('Please provide a description of the social impact your project is aiming to have. [...]') ?>
+                                                    Please tell us about the social impact your project is aiming to
+                                                    have. What challenges are you trying to address? What change do you
+                                                    want to see? Please note you can add photos and videos here.
                                                 </p>
                                                 <textarea
                                                         class="creator-data-entry long-description w-input wide editableTextarea"
@@ -414,9 +432,9 @@ if (!isset($urlHandler))
                                 <form id="email-form-3" name="email-form-3" ng-submit="submitStep4()">
                                     <div class="tabbed-nav-buttons w-clearfix">
                                         <input type="submit" class="tab-button-next tab-button-publish w-button"
-                                               ng-value="loading ? '<?php _ehtml('Loading') ?>...' : '<?php _ehtml('Publish now') ?>'"
+                                               ng-value="loading ? '<?php _ehtml('Loading') ?>...' : '<?php _ehtml('Submit now') ?>'"
                                                ng-disabled="loading"
-                                               value="<?php _ehtml('Publish now') ?>"/>
+                                               value="<?php _ehtml('Submit now') ?>"/>
                                         <a href="<?php echo $urlHandler->project($project) ?>"
                                            class="tab-button-next update-button w-button">
                                             <?php _ehtml('Save for later') ?></a>
@@ -426,7 +444,7 @@ if (!isset($urlHandler))
                                     </div>
                                     <div class="w-row">
                                         <div class="creator-col w-col w-col-4">
-                                            <h2>4 - <?php _ehtml('Add images & publish') ?></h2>
+                                            <h2>4 - <?php _ehtml('Add images & submit') ?></h2>
                                             <?php echo $leftSideText ?>
                                         </div>
                                         <div class="creator-col creator-col-right w-col w-col-8">
@@ -439,6 +457,7 @@ if (!isset($urlHandler))
                                                             </label>
                                                             <p>
                                                                 <?php _ehtml("This will appear as the header background for your project's page") ?>
+                                                                .
                                                             </p>
                                                             <img class="story-image-upload story-image-upload-large"
                                                                  style="max-height:140px;max-width:140px"
@@ -459,6 +478,7 @@ if (!isset($urlHandler))
                                                         <div class="padding-left-50">
                                                             <div class="small-print">
                                                                 <?php _ehtml('Any information, project data or results that you submit to Nesta in relation to your project shall be released under the terms of a licence [...]') ?>
+                                                                .
                                                             </div>
                                                             <div class="small-print">
                                                                 Please note your project will not be visible until it

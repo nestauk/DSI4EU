@@ -50,7 +50,7 @@ class OrganisationsController
                     'tags' => array_map('intval', $this->organisationTagRepo->getTagIDsForOrganisation($organisation)),
                     'netwTags' => array_map('intval', $this->organisationNetworkTagRepo->getTagIDsForOrganisation($organisation)),
                 ];
-            }, $organisationRepositoryInAPC->getAll()));
+            }, $organisationRepositoryInAPC->getAllPublished()));
         } else {
             \Services\View::setPageTitle('Organisations - DSI4EU');
             require __DIR__ . '/../../../www/views/organisations.php';

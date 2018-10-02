@@ -378,7 +378,7 @@ if (!isset($urlHandler))
                 <table>
                     <tr>
                         <td>
-                            <?php echo $mailBody ?>
+                            <div><?= $mailBody ?></div>
                         </td>
                     </tr>
                 </table>

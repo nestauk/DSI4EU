@@ -6,6 +6,7 @@ use DSI\Entity\User;
 use DSI\Repository\EventRepo;
 use DSI\Service\Auth;
 use Services\URL;
+use \Services\View;
 
 class EventController
 {
@@ -29,7 +30,12 @@ class EventController
         if ($this->format == 'json') {
 
         } else {
-            \Services\View::setPageTitle($event->getTitle() . ' - Digital Social Events');
+            View::setPageTitle($event->getTitle() . ' - Digital Social Events');
+            View::setPageDescription(
+                $event->getDescription() ?:
+                    $event->getShortDescription() ?:
+                        $event->getTitle()
+            );
             require __DIR__ . '/../../../www/views/event.php';
         }
     }
@@ -38,7 +44,7 @@ class EventController
      * @param User $loggedInUser
      * @return bool
      */
-    private function userCanManageEvents($loggedInUser):bool
+    private function userCanManageEvents($loggedInUser): bool
     {
         return (bool)(
             $loggedInUser AND

@@ -1,10 +1,13 @@
 <?php
-require __DIR__ . '/header.php';
 /** @var $loggedInUser \DSI\Entity\User */
 /** @var $caseStudy \DSI\Entity\CaseStudy */
 /** @var $caseStudies \DSI\Entity\CaseStudy[] */
 /** @var $userCanAddCaseStudy bool */
 /** @var $urlHandler Services\URL */
+
+$pageTitle = $caseStudy->getTitle();
+require __DIR__ . '/../header.php';
+
 ?>
 
     <div class="case-study-intro">
@@ -60,7 +63,7 @@ require __DIR__ . '/header.php';
                         <p><?php echo show_input($organisation->getShortDescription()) ?></p>
                         <a class="log-in-link long read-more w-clearfix w-inline-block" data-ix="log-in-arrow"
                            href="<?php echo $urlHandler->organisation($organisation) ?>">
-                            <div class="login-li long menu-li readmore-li"><?php _ehtml('Visit Organisation')?></div>
+                            <div class="login-li long menu-li readmore-li"><?php _ehtml('Visit Organisation') ?></div>
                             <img class="login-arrow"
                                  src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
                         </a>
@@ -74,7 +77,7 @@ require __DIR__ . '/header.php';
         $socialShare->renderHtml();
         ?>
 
-        <h3 class="related-h3"><?php _ehtml('More case studies')?></h3>
+        <h3 class="related-h3"><?php _ehtml('More case studies') ?></h3>
         <div class="w-row">
             <?php foreach ($caseStudies AS $i => $_caseStudy) { ?>
                 <div class="w-col w-col-4">
@@ -91,7 +94,7 @@ require __DIR__ . '/header.php';
                             <?php echo show_input($_caseStudy->getIntroCardText()) ?>
                         </p>
                         <div class="log-in-link read-more w-clearfix" data-ix="log-in-arrow">
-                            <div class="login-li menu-li readmore-li"><?php _ehtml('Read more')?></div>
+                            <div class="login-li menu-li readmore-li"><?php _ehtml('Read more') ?></div>
                             <img class="login-arrow"
                                  src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
                         </div>
@@ -102,10 +105,10 @@ require __DIR__ . '/header.php';
         <div class="signn">
             <a class="large log-in-link sign-up w-clearfix w-inline-block" data-ix="log-in-arrow"
                href="<?php echo $urlHandler->caseStudies() ?>">
-                <div class="login-li menu-li"><?php _ehtml('See all case studies')?></div>
+                <div class="login-li menu-li"><?php _ehtml('See all case studies') ?></div>
                 <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
             </a>
         </div>
     </div>
 
-<?php require __DIR__ . '/footer.php' ?>
+<?php require __DIR__ . '/../footer.php' ?>

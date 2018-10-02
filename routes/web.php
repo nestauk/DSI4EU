@@ -2,6 +2,8 @@
 
 use \DSI\Service\Translate;
 use \DSI\Entity\Translation;
+use \Controllers\Upload\UploadResourcesController;
+use \DSI\Controller\WaitingApprovalController;
 
 class Router
 {
@@ -265,11 +267,18 @@ class Router
         } elseif ($this->pageURL === '/rss/events.xml') {
             $this->rssEvents();
 
-        } elseif ($this->pageURL === '/rss/funding-opportunities.xml') {
+        } elseif ($this->pageURL === '/rss/funding-opportunities.xml')
             $this->rssFundingOpportunities();
 
+// Admin
+        elseif ($this->pageURL === '/upload/resources')
+            return (new UploadResourcesController())->handle();
+
+        elseif ($this->pageURL === '/upload/resources/save')
+            return (new UploadResourcesController())->setSave(true)->handle();
+
 // Static pages
-        } elseif ($this->pageURL === '/robots.txt') {
+        elseif ($this->pageURL === '/robots.txt') {
             $this->robotsTxt();
 
         } elseif (preg_match('<^/' . $langHandler . 'advisory-board$>', $this->pageURL, $matches)) {
@@ -388,7 +397,8 @@ class Router
             $this->messageCommunityAdmins($matches);
 
         } elseif (preg_match('<^/' . $langHandler . 'waiting-approval$>', $this->pageURL, $matches)) {
-            $this->waitingApproval($matches);
+            $this->setLanguageFromUrl($matches);
+            return (new WaitingApprovalController())->html();
 
         } elseif (preg_match('<^/' . $langHandler . 'waiting-approval.json$>', $this->pageURL, $matches)) {
             $this->waitingApprovalJson($matches);
@@ -438,7 +448,7 @@ class Router
         } elseif (preg_match('<^/' . $langHandler . 'what-is-dsi$>', $this->pageURL, $matches)) {
             $this->whatIsDsi($matches);
 
-        } elseif (preg_match('<^/.*\.(gif|jpe?g|png|svg|js|css|map|ico)$>', $this->pageURL)) {
+        } elseif (preg_match('<^/.*\.(gif|jpe?g|png|svg|js|css|map|ico|csv)$>', $this->pageURL)) {
             return $this->staticContent();
 
         } else {
@@ -588,7 +598,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\CaseStudyAddController();
+        $command = new \Controllers\CaseStudies\CaseStudyAddController();
         $command->exec();
     }
 
@@ -817,7 +827,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\CaseStudyController();
+        $command = new \Controllers\CaseStudies\CaseStudyController();
         $command->caseStudyID = $matches[3];
         $command->exec();
     }
@@ -826,13 +836,6 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
         return (new \DSI\Controller\MessageCommunityAdminsController())->exec();
-    }
-
-    private function waitingApproval($matches)
-    {
-        $this->setLanguageFromUrl($matches);
-        return (new \DSI\Controller\WaitingApprovalController())
-            ->html();
     }
 
     private function waitingApprovalJson($matches)
@@ -960,7 +963,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\CaseStudyEditController();
+        $command = new \Controllers\CaseStudies\CaseStudyEditController();
         $command->caseStudyID = $matches[3];
         $command->format = $format;
         $command->exec();
@@ -980,7 +983,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\CaseStudiesController();
+        $command = new \Controllers\CaseStudies\CaseStudiesController();
         $command->exec();
     }
 
@@ -988,7 +991,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\CaseStudiesController();
+        $command = new \Controllers\CaseStudies\CaseStudiesController();
         $command->format = 'json';
         $command->exec();
     }
@@ -1105,8 +1108,7 @@ class Router
 
     private function rssFundingOpportunities()
     {
-        $command = new \DSI\Controller\RssFundingOpportunitiesController();
-        $command->exec();
+        (new \DSI\Controller\RssFundingOpportunitiesController())->exec();
     }
 
     private function robotsTxt()

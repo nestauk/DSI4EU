@@ -18,6 +18,7 @@ class Resource extends Model
     const LinkText = 'link_text';
     const AuthorID = 'author_id';
 
+    const Author = 'author';
     const Clusters = 'clusters';
     const Types = 'types';
 

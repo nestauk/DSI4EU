@@ -6,7 +6,8 @@ use DSI\Entity\ContentUpdate;
 use DSI\Entity\User;
 use DSI\Repository\ContentUpdateRepo;
 use DSI\Service\Auth;
-use Services\URL;
+use \Services\URL;
+use \Services\View;
 use DSI\UseCase\SecureCode;
 use DSI\UseCase\WaitingApproval\ApproveWaitingApproval;
 use DSI\UseCase\WaitingApproval\RejectWaitingApproval;
@@ -53,7 +54,7 @@ class WaitingApprovalController
             go_to('?');
         }
 
-        \Services\View::setPageTitle('Waiting Approval');
+        View::setPageTitle('Waiting Approval');
         require __DIR__ . '/../../../www/views/waiting-approval.php';
         return true;
     }

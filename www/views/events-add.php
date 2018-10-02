@@ -137,7 +137,7 @@ require __DIR__ . '/header.php';
                 statusbar: false,
                 height: 500,
                 plugins: "autoresize autolink lists link preview paste textcolor colorpicker image imagetools media",
-                autoresize_bottom_margin: 3,
+                autoresize_bottom_margin: 5,
                 autoresize_max_height: 500,
                 menubar: false,
                 toolbar1: 'styleselect | forecolor backcolor | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media | preview',

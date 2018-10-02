@@ -53,7 +53,7 @@ class ProjectsController
                     'helpTags' => array_map('intval', $this->projectImpactHelpTagRepo->getTagIDsByProject($project)),
                     'techTags' => array_map('intval', $this->projectImpactTechTagRepo->getTagIDsByProject($project)),
                 ];
-            }, $projectRepositoryInAPC->getAll()));
+            }, $projectRepositoryInAPC->getAllPublished()));
         } else {
             \Services\View::setPageTitle('Projects - DSI4EU');
             require __DIR__ . '/../../../www/views/projects.php';

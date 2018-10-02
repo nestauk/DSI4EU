@@ -70,13 +70,13 @@ class ProjectController
         try {
             $this->project = $projectRepo->getById($this->data()->projectID);
         } catch (NotFound $e) {
-            \Services\View::setPageTitle('Project does not exist');
+            View::setPageTitle('Project does not exist');
             require __DIR__ . '/../../Views/project/project-404.php';
             return;
         }
 
         if ($this->project->isWaitingApproval() AND !$this->canViewWaitingApproval($loggedInUser)) {
-            \Services\View::setPageTitle('Project is waiting approval');
+            View::setPageTitle('Project is waiting approval');
             require __DIR__ . '/../../Views/project/project-404.php';
             return;
         }
@@ -256,7 +256,11 @@ class ProjectController
             JsModules::setTinyMCE(true);
             JsModules::setTranslations(true);
             View::setPageTitle($this->project->getName());
-            View::setPageDescription($project->getDescription());
+            View::setPageDescription(
+                $project->getDescription() ?:
+                    $project->getShortDescription() ?:
+                        $project->getName()
+            );
             require __DIR__ . '/../../Views/project/project.php';
         }
 
@@ -677,7 +681,7 @@ class ProjectController
         else if ($loggedInUser->isEditorialAdmin() OR $loggedInUser->isCommunityAdmin())
             return true;
 
-        else if ($this->project->getOwnerID() != $loggedInUser->getId())
+        else if ($this->project->getOwnerID() === $loggedInUser->getId())
             return true;
 
         return false;

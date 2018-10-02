@@ -63,9 +63,9 @@ require __DIR__ . '/header.php';
         <div class="content-directory">
             <div class="container-wide">
                 <div class="profile-info w-row">
-                    <div class="w-col w-col-4 w-col-stack">
-                        <div class="info-card">
-                            <?php if ($userLinks) { ?>
+                    <?php if ($userLinks) { ?>
+                        <div class="w-col w-col-4 w-col-stack">
+                            <div class="info-card">
                                 <h3 class="card-h info-h"><?php _ehtml('Contact me') ?></h3>
                                 <ul class="w-list-unstyled">
                                     <?php foreach ($userLinks AS $link) { ?>
@@ -77,7 +77,7 @@ require __DIR__ . '/header.php';
                                         </li>
                                     <?php } ?>
                                 </ul>
-                            <?php } ?>
+                                <?php /*
                             <div ng-show="skills" ng-cloak>
                                 <h3 class="card-h info-h"><?php _ehtml('My skills') ?>:</h3>
                                 <div class="tags-block">
@@ -86,8 +86,10 @@ require __DIR__ . '/header.php';
                                     </div>
                                 </div>
                             </div>
+                            */ ?>
+                            </div>
                         </div>
-                    </div>
+                    <?php } ?>
                     <div class="w-col w-col-4 w-col-stack">
                         <div class="info-card">
                             <h3 class="card-h info-h"><?php _ehtml("Projects i'm involved with") ?></h3>

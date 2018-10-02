@@ -1,8 +1,14 @@
 <?php
-require __DIR__ . '/header.php';
+$angularModules['fileUpload'] = true;
+\DSI\Service\JsModules::setTinyMCE(true);
+\DSI\Service\JsModules::setJqueryUI(true);
+
+require __DIR__ . '/../header.php';
 /** @var $loggedInUser \DSI\Entity\User */
 /** @var $projects \DSI\Entity\Project[] */
 /** @var $organisations \DSI\Entity\Organisation[] */
+/** @var $urlHandler \Services\URL */
+/** @var $tags \Models\Tag[] */
 ?>
 
     <div ng-controller="CaseStudyAddController">
@@ -49,7 +55,7 @@ require __DIR__ . '/header.php';
                                 <br/>
                                 <h2 class="edit-h2">Project</h2>
                                 <select class="creator-data-entry w-input" ng-model="caseStudy.projectID">
-                                    <option value="0"> - None selected - </option>
+                                    <option value="0"> - None selected -</option>
                                     <?php foreach ($projects AS $project) { ?>
                                         <option value="<?php echo $project->getId() ?>">
                                             <?php echo show_input($project->getName()) ?>
@@ -68,8 +74,7 @@ require __DIR__ . '/header.php';
                                     <?php } ?>
                                 </select>
 
-                            </div>
-                            <div class="form-col-right w-col w-col-6">
+                                <br>
                                 <h2 class="edit-h2">Info box</h2>
 
                                 <label for="name-3">Info Text:</label>
@@ -86,7 +91,21 @@ require __DIR__ . '/header.php';
                                        ng-model="caseStudy.buttonLabel"
                                        placeholder="This text will appear on the button for the above link"
                                        type="text">
+                            </div>
+                            <div class="form-col-right w-col w-col-6">
+                                <h2 class="edit-h2">Tags</h2>
+                                <?php foreach ($tags AS $tag) { ?>
+                                    <div class="w-radio">
+                                        <label class="w-form-label">
+                                            <input class="w-radio-input" type="checkbox"
+                                                   ng-model="caseStudy.tags[<?= $tag->getId() ?>]"
+                                                   value="1" ng-true-value="1" ng-false-value="0">
+                                            <?= $tag->getName() ?>
+                                        </label>
+                                    </div>
+                                <?php } ?>
 
+                                <br>
                                 <h2 class="edit-h2">Case study visuals</h2>
                                 <div class="w-row">
                                     <?php /* <div class="w-col w-col-4">
@@ -207,9 +226,6 @@ require __DIR__ . '/header.php';
         </div>
     </div>
 
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-
     <script type="text/javascript"
             src="<?php echo SITE_RELATIVE_PATH ?>/js/controllers/CaseStudyAddController.js?<?php \DSI\Service\Sysctl::echoVersion() ?>"></script>
 
@@ -220,7 +236,7 @@ require __DIR__ . '/header.php';
                 statusbar: false,
                 height: 500,
                 plugins: "autoresize autolink lists link preview paste textcolor colorpicker image imagetools media",
-                autoresize_bottom_margin: 3,
+                autoresize_bottom_margin: 5,
                 autoresize_max_height: 500,
                 menubar: false,
                 toolbar1: 'styleselect | forecolor backcolor | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media | preview',
@@ -243,4 +259,4 @@ require __DIR__ . '/header.php';
         });
     </script>
 
-<?php require __DIR__ . '/footer.php' ?>
+<?php require __DIR__ . '/../footer.php' ?>

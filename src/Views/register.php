@@ -15,7 +15,7 @@ use Services\URL;
     <div class="w-row">
         <div class="content-left w-col w-col-12">
             <a href="<?php echo $urlHandler->home() ?>">
-                <img class="log-in-logo" src="<?php echo SITE_RELATIVE_PATH ?>/images/dark_1.svg">
+                <img class="log-in-logo" src="/images/partners/dsi-logo.png">
             </a>
             <h2><?php _ehtml('Register') ?></h2>
 
@@ -60,7 +60,7 @@ use Services\URL;
                         <label>
                             <input type="checkbox" name="accept-terms" <?= $_POST['accept-terms'] ? 'checked' : '' ?>>
                             I accept that all data provided, with the exception of my email address, will be available
-                            publicly on digitalsocial.eu
+                            publicly on digitalsocial.eu.
                         </label>
                         <?php if (isset($errors['accept-terms'])) { ?>
                             <div class="log-in-error">
@@ -72,7 +72,7 @@ use Services\URL;
                     <div class="check-box">
                         We would like to email you updates about the DSI programme including regular newsletters,
                         project updates, new research and publications, invitations to events and the
-                        occasional request to take part in research of surveys.
+                        occasional request to take part in research or surveys.
                         <br><br>
 
                         <label>

@@ -11,6 +11,8 @@ use DSI\Repository\ProjectRepoInAPC;
 use DSI\Service\ErrorHandler;
 use DSI\Service\Mailer;
 use DSI\UseCase\ContentUpdates\RemoveContentUpdate;
+use Services\App;
+use Services\View;
 
 class ApproveWaitingApproval
 {
@@ -70,30 +72,32 @@ class ApproveWaitingApproval
 
     private function informUser()
     {
-        ob_start();
+        $owner = $this->contentUpdate->getOwner();
         if ($this->contentUpdate->hasProject()) {
-            $owner = $this->contentUpdate->getProject()->getOwner();
             $subject = 'Your project has been approved';
-            require(__DIR__ . '/../../../../resources/views/emails/approvedProject.php');
+            $message = View::prepare(__DIR__ . '/../../../../resources/views/emails/approvedProject.php', [
+                'subject' => $subject,
+                'project' => $this->contentUpdate->getProject(),
+                'owner' => $owner,
+            ]);
         } else {
-            $owner = $this->contentUpdate->getOrganisation()->getOwner();
             $subject = 'Your organisation has been approved';
-            require(__DIR__ . '/../../../../resources/views/emails/approvedOrganisation.php');
+            $message = View::prepare(__DIR__ . '/../../../../resources/views/emails/approvedOrganisation.php', [
+                'subject' => $subject,
+                'organisation' => $this->contentUpdate->getOrganisation(),
+                'owner' => $owner,
+            ]);
         }
 
         if ($owner) {
-            $message = "<div>";
-            $message .= ob_get_clean();
-            $message .= "</div>";
-
             $email = new Mailer();
             $email->From = 'noreply@digitalsocial.eu';
-            $email->FromName = 'Digital Social';
+            $email->FromName = 'Digital Social Innovation';
             $email->addAddress($owner->getEmail());
             $email->Subject = $subject;
             $email->wrapMessageInTemplate([
                 'header' => $subject,
-                'body' => $message
+                'body' => $message,
             ]);
             $email->isHTML(true);
             $email->send();
