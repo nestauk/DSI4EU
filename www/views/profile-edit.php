@@ -104,18 +104,18 @@ $leftSideText .= "<p>" . _html('Boost your profile by registering as a team memb
                     <div class="w-tabs" data-easing="linear">
                         <div class="creator-tab-menu w-tab-menu edit-personal-profile">
                             <a class="step-tab tab-link-1 w-inline-block w-tab-link"
-                               ng-class="{'w--current': currentTab == 'step1'}" data-w-tab="Tab 1"
-                               ng-click="currentTab = 'step1'">
+                               ng-class="{'w--current': currentTab == 'step1'}"
+                               ng-click="changeCurrentTab('step1')">
                                 <div>1 - <?php _ehtml('Your details') ?></div>
                             </a>
                             <a class="step-tab tab-link-2 w-inline-block w-tab-link"
-                               ng-class="{'w--current': currentTab == 'step2'}" data-w-tab="Tab 2"
-                               ng-click="currentTab = 'step2'">
+                               ng-class="{'w--current': currentTab == 'step2'}"
+                               ng-click="changeCurrentTab('step2')">
                                 <div>2 - <?php _ehtml('Location & work') ?></div>
                             </a>
                             <a class="step-tab tab-link-3 w-inline-block w-tab-link"
-                               ng-class="{'w--current': currentTab == 'step3'}" data-w-tab="Tab 3"
-                               ng-click="currentTab = 'step3'">
+                               ng-class="{'w--current': currentTab == 'step3'}"
+                               ng-click="changeCurrentTab('step3')">
                                 <div>3 - <?php _ehtml('Projects & Organisations') ?></div>
                             </a>
                             <?php /*
@@ -129,7 +129,7 @@ $leftSideText .= "<p>" . _html('Boost your profile by registering as a team memb
                         <div class="w-tab-content">
                             <div class="step-window w-tab-pane" ng-class="{'w--tab-active': currentTab == 'step1'}"
                                  data-w-tab="Tab 1">
-                                <form id="email-form-3" name="email-form-3" ng-submit="submitStep1()">
+                                <form ng-submit="submitStep1()">
                                     <div class="tabbed-nav-buttons w-clearfix">
                                         <input type="submit" class="tab-button-2 tab-button-next w-button"
                                                ng-value="loading ? '<?php _ehtml('Loading...') ?>' : '<?php _ehtml('Next') ?>'"
@@ -150,7 +150,7 @@ $leftSideText .= "<p>" . _html('Boost your profile by registering as a team memb
                                                 <div class="w-row">
                                                     <div class="w-col w-col-6 w-col-stack">
                                                         <div class="padding-right-50">
-                                                            <label for="name"><?php _ehtml('Your name') ?></label>
+                                                            <label for="name"><?php _ehtml('Your name') ?> *</label>
                                                             <input class="creator-data-entry w-input" data-name="Name"
                                                                    id="name" maxlength="256" name="name"
                                                                    placeholder="<?php _ehtml('First name') ?>"
@@ -192,7 +192,8 @@ $leftSideText .= "<p>" . _html('Boost your profile by registering as a team memb
                                                             <br/>
 
                                                             <label
-                                                                    for="email-9"><?php _ehtml('Your email address') ?></label>
+                                                                    for="email-9"><?php _ehtml('Your email address') ?>
+                                                                *</label>
                                                             <input class="creator-data-entry w-input"
                                                                    data-name="Email 9" id="email-9" maxlength="256"
                                                                    placeholder="<?php _ehtml('Your email address') ?>"
@@ -234,7 +235,7 @@ $leftSideText .= "<p>" . _html('Boost your profile by registering as a team memb
                             </div>
                             <div class="step-window w-tab-pane" ng-class="{'w--tab-active': currentTab == 'step2'}"
                                  data-w-tab="Tab 2">
-                                <form id="email-form-3" name="email-form-3" ng-submit="submitStep2()">
+                                <form ng-submit="submitStep2()">
                                     <div class="tabbed-nav-buttons w-clearfix">
                                         <input type="submit" class="tab-button-3 tab-button-next w-button"
                                                ng-value="loading ? '<?php _ehtml('Loading...') ?>' : '<?php _ehtml('Next') ?>'"
@@ -335,7 +336,7 @@ $leftSideText .= "<p>" . _html('Boost your profile by registering as a team memb
                             </div>
                             <div class="step-window w-tab-pane" ng-class="{'w--tab-active': currentTab == 'step3'}"
                                  data-w-tab="Tab 3">
-                                <form id="email-form-3" name="email-form-3" ng-submit="submitStep3()">
+                                <form ng-submit="submitStep3()">
                                     <div class="tabbed-nav-buttons w-clearfix">
                                         <input type="submit" class="tab-button-4 tab-button-next w-button"
                                                ng-value="loading ? '<?php _ehtml('Loading...') ?>' : '<?php _ehtml('Finish') ?>'"
