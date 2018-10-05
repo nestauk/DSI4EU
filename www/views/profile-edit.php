@@ -13,7 +13,7 @@ require __DIR__ . '/header.php';
 /** @var $user \DSI\Entity\User */
 
 $leftSideText = "<p>" . _html('To create your profile, we would like to collect some information about you.') . "</p>";
-$leftSideText .= "<p>" . _html('Boost your profile by registering as a team member of your projects and organisations . You can edit your answers later.') . "</p>";
+$leftSideText .= "<p>" . _html('You can edit any of your answers later.') . "</p>";
 
 ?>
     <script type="text/javascript"

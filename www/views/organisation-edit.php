@@ -11,7 +11,7 @@ require __DIR__ . '/header.php';
 /** @var $orgProjects int[] */
 
 $leftSideText = "<p>" . _html('To add your organisation, we need to understand more about its activities and aims.') . "</p>";
-$leftSideText .= "<p>" . _html('Some information is optional (mandatory fields are indicated with an asterisk).') . "</p>";
+// $leftSideText .= "<p>" . _html('Some information is optional (mandatory fields are indicated with an asterisk).') . "</p>";
 
 if (!isset($urlHandler))
     $urlHandler = new Services\URL();
@@ -97,7 +97,8 @@ if (!isset($urlHandler))
                                                                    id="email" maxlength="256" name="email"
                                                                    placeholder="http://" ng-model="organisation.url"
                                                                    type="text">
-                                                            <br>
+                                                            <i>* <?php _ehtml('please include http://') ?></i>
+                                                            <br><br>
 
                                                             <label for="email-2"><?php _ehtml('Social media links') ?></label>
                                                             <input class="creator-data-entry w-input"
@@ -121,8 +122,7 @@ if (!isset($urlHandler))
                                                                    id="email-5" maxlength="256" name="email-5"
                                                                    ng-model="organisation.links.github"
                                                                    placeholder="Github" type="text">
-                                                            <i>* <?php _ehtml('please include http://') ?></i>
-                                                            <br/><br/>
+                                                            <br/>
 
                                                             <label><?php _ehtml('Type of Organisation') ?> *</label>
                                                             <select class="w-select" id="field" name="field"

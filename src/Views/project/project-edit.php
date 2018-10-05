@@ -15,7 +15,7 @@ require __DIR__ . '/../header.php';
 /** @var $projectOrganisations int[] */
 
 $leftSideText = "<p>" . _html('To add your project, we need to understand more about its activities and aims. The more information you provide, the easier it will be for others to find out about your work.') . "</p>";
-$leftSideText .= "<p>" . _html('Some information is optional (mandatory fields are indicated with an asterisk). You can edit answers later.') . "</p>";
+// $leftSideText .= "<p>" . _html('Some information is optional (mandatory fields are indicated with an asterisk). You can edit answers later.') . "</p>";
 
 if (!isset($urlHandler))
     $urlHandler = new Services\URL();
