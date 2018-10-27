@@ -121,9 +121,11 @@ class UpdateOrganisation
 
     private function checkIfNameIsNotEmpty()
     {
-        if (isset($this->data()->name))
-            if ($this->data()->name == '')
-                $this->errorHandler->addTaggedError('name', __('Please type a organisation name'));
+        if (isset($this->data()->name) AND $this->data()->name == '')
+            $this->errorHandler->addTaggedError('name', __('Please type a organisation name'));
+
+        if (isset($this->data()->shortDescription) AND $this->data()->shortDescription == '')
+            $this->errorHandler->addTaggedError('shortDescription', __('Please type the organisation short description'));
 
         $this->errorHandler->throwIfNotEmpty();
     }

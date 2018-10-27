@@ -32,14 +32,16 @@ class StaticHtmlController
 
     public function partners()
     {
-        $data = [
-            'loggedInUser' => $this->loggedInUser,
-        ];
-
+        View::setPageTitle('Partners - DSI4EU');
+        View::setPageDescription(__('Find out more about the DSI4EU partners: Nesta, betterplace lab, Fab Lab Barcelona, WeMake, Barcelona Activa and ePaństwo Foundation.'));
         if (Translate::getCurrentLang() === 'en')
-            return View::render(__DIR__ . '/../Views/partners/partners_en.php', $data);
+            return View::render(__DIR__ . '/../Views/partners/partners_en.php', [
+                'loggedInUser' => $this->loggedInUser,
+            ]);
         else
-            return View::render(__DIR__ . '/../Views/partners/partners.php', $data);
+            return View::render(__DIR__ . '/../Views/partners/partners.php', [
+                'loggedInUser' => $this->loggedInUser,
+            ]);
     }
 
     public function cookiesPolicy()

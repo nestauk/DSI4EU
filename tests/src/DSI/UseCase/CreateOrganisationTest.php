@@ -59,6 +59,47 @@ class CreateOrganisationTest extends PHPUnit_Framework_TestCase
         \Services\App::setCanCreateProjects($canCreateProjects);
     }
 
+    /** @test */
+    public function cannotCreateOrganisationIfProfileNotComplete()
+    {
+        $this->createOrgCmd->data()->name = 'test';
+        $this->createOrgCmd->data()->description = 'test';
+        $this->createOrgCmd->data()->owner = $this->user;
+
+        // Check First Name
+        $this->user->setFirstName('');
+        $e = null;
+        try {
+            $this->createOrgCmd->exec();
+        } catch (\DSI\Service\ErrorHandler $e) {
+        }
+        $this->assertNotNull($e);
+        $this->assertNotEmpty($e->getTaggedError('user'));
+        $this->user->setFirstName('FName');
+
+        // Check Last Name
+        $this->user->setLastName('');
+        $e = null;
+        try {
+            $this->createOrgCmd->exec();
+        } catch (\DSI\Service\ErrorHandler $e) {
+        }
+        $this->assertNotNull($e);
+        $this->assertNotEmpty($e->getTaggedError('user'));
+        $this->user->setLastName('LName');
+
+        // Check Email
+        $this->user->resetEmail();
+        $e = null;
+        try {
+            $this->createOrgCmd->exec();
+        } catch (\DSI\Service\ErrorHandler $e) {
+        }
+        $this->assertNotNull($e);
+        $this->assertNotEmpty($e->getTaggedError('user'));
+        $this->user->setEmail('user@example.org');
+    }
+
     /** @ test */
     public function successfulCreation()
     {

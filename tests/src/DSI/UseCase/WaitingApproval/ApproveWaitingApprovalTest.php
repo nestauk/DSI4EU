@@ -23,6 +23,8 @@ class ApproveWaitingApprovalTest extends PHPUnit_Framework_TestCase
         $this->userRepo = new \DSI\Repository\UserRepo();
 
         $this->user = new \DSI\Entity\User();
+        $this->user->setFirstName('FName');
+        $this->user->setLastName('LName');
         $this->user->setEmail('user@example.com');
         $this->user->setRole('sys-admin');
         $this->userRepo->insert($this->user);

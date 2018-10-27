@@ -18,7 +18,8 @@ require __DIR__ . '/../header.php';
         <div class="content-block">
             <div class="w-row">
                 <div class="w-col w-col-8">
-                    <h1 class="content-h1"><?php _ehtml('Open data, research & resources') ?></h1>
+                    <?php /* <h1 class="content-h1"><?php _ehtml('Open data, research & resources') ?></h1> */ ?>
+                    <h1 class="content-h1"><?php _ehtml('Research and resources') ?></h1>
 
                     <div>
                         <label>Main paragraph</label>
@@ -125,12 +126,15 @@ require __DIR__ . '/../header.php';
                 statusbar: false,
                 height: 500,
                 plugins: "autoresize autolink lists link preview paste textcolor colorpicker image imagetools media",
-                autoresize_bottom_margin: 3,
+                autoresize_bottom_margin: 5,
                 autoresize_max_height: 500,
                 menubar: false,
                 toolbar1: 'styleselect | forecolor backcolor | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media | preview',
                 image_advtab: true,
-                paste_data_images: false
+                paste_data_images: false,
+                init_instance_callback: function (inst) {
+                    inst.execCommand('mceAutoResize');
+                }
             });
         });
     </script>

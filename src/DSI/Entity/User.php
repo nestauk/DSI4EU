@@ -76,6 +76,11 @@ class User
         $this->email = (string)$email;
     }
 
+    public function resetEmail()
+    {
+        $this->email = '';
+    }
+
     /**
      * @param string $password
      */
@@ -153,7 +158,7 @@ class User
         $name = $this->getFirstName() . ' ' . $this->getLastName();
         if (trim($name) === '')
             return 'Unnamed user';
-        
+
         return $this->getFirstName() . ' ' . $this->getLastName();
     }
 
@@ -436,5 +441,10 @@ class User
     public function isEditorialAdmin()
     {
         return $this->isSysAdmin() OR $this->role == 'editorial-admin';
+    }
+
+    public function isComplete()
+    {
+        return $this->getFirstName() != '' AND $this->getLastName() != '' AND $this->getEmail() != '';
     }
 }

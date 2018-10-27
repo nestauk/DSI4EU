@@ -330,7 +330,11 @@ class OrganisationController
         }, (new OrganisationNetworkTagRepo())->getByOrganisationID($this->organisation->getId()));
 
         View::setPageTitle($this->organisation->getName());
-        View::setPageDescription($this->organisation->getDescription());
+        View::setPageDescription(
+            $this->organisation->getDescription() ?:
+                $this->organisation->getShortDescription() ?:
+                    $this->organisation->getName()
+        );
         $organisation = $this->organisation;
         require __DIR__ . '/../../../www/views/organisation.php';
 
@@ -584,7 +588,7 @@ class OrganisationController
         else if ($loggedInUser->isEditorialAdmin() OR $loggedInUser->isCommunityAdmin())
             return true;
 
-        else if ($this->organisation->getOwnerID() != $loggedInUser->getId())
+        else if ($this->organisation->getOwnerID() === $loggedInUser->getId())
             return true;
 
         return false;

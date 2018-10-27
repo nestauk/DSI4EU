@@ -29,6 +29,7 @@ class WhatIsDsiController
     public function get()
     {
         View::setPageTitle('What is DSI? - DSI4EU');
+        View::setPageDescription(__('Find out more about how digital social innovation (DSI) brings together people and technology to tackle social and environmental challenges.'));
         return View::render(__DIR__ . '/../Views/what-is-dsi/en.php', [
             'authUser' => $this->authUser,
             'loggedInUser' => $this->loggedInUser,

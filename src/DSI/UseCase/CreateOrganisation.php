@@ -61,6 +61,11 @@ class CreateOrganisation
             throw $this->errorHandler;
         }
 
+        if (!$this->data()->owner->isComplete()) {
+            $this->errorHandler->addTaggedError('user', __('Please complete your profile before adding an organisation'));
+            throw $this->errorHandler;
+        }
+
         $organisation = new Organisation();
         $organisation->setName((string)$this->data()->name);
         $organisation->setDescription((string)$this->data()->description);

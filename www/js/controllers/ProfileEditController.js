@@ -9,6 +9,16 @@ angular
                 $scope.user = result.data || {};
             });
 
+        $scope.changeCurrentTab = function (tab) {
+            if($scope.currentTab === 'step1')
+                $scope.submitStep1();
+
+            if (!$scope.user.firstName || !$scope.user.lastName || !$scope.user.email)
+                return;
+
+            $scope.currentTab = tab;
+        };
+
         $scope.currentTab = 'step1';
         if (window.location.hash) {
             var hash = window.location.hash.substring(1);

@@ -12,6 +12,7 @@ use DSI\Repository\FundingTargetRepo;
 use DSI\Repository\FundingTypeRepo;
 use DSI\Service\Auth;
 use Services\URL;
+use Services\View;
 
 class FundingController
 {
@@ -40,7 +41,8 @@ class FundingController
             $fundingTypes = (new FundingTypeRepo())->getAll();
             $fundingTargets = (new FundingTargetRepo())->getAll();
             $userCanAddFunding = (bool)($loggedInUser AND ($loggedInUser->isCommunityAdmin() OR $loggedInUser->isEditorialAdmin()));
-            \Services\View::setPageTitle('Funding and support - DSI4EU');
+            View::setPageTitle('Funding and support - DSI4EU');
+            View::setPageDescription(__('Browse our list of funding and support opportunities for digital social innovation (DSI) and tech for good in Europe.'));
             require __DIR__ . '/../../../www/views/funding.php';
         }
     }

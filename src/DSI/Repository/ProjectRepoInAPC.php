@@ -37,6 +37,16 @@ class ProjectRepoInAPC extends ProjectRepo
         return $this->getAllFromCache();
     }
 
+    /**
+     * @return Project[]
+     */
+    public function getAllPublished()
+    {
+        return array_values(array_filter($this->getAllFromCache(), function (Project $project) {
+            return !$project->isWaitingApproval();
+        }));
+    }
+
     public function clearAll()
     {
         parent::clearAll();

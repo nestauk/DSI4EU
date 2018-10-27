@@ -4,6 +4,7 @@ namespace DSI\Controller;
 
 use DSI\Entity\User;
 use DSI\Service\Auth;
+use DSI\Service\Translate;
 use Services\View;
 
 class StaticHtmlController
@@ -36,5 +37,20 @@ class StaticHtmlController
         return View::render(__DIR__ . '/../../../www/views/contact-dsi.php', [
             'loggedInUser' => $this->loggedInUser
         ]);
+    }
+
+    public function about()
+    {
+        View::setPageTitle('About the project - DSI4EU');
+        View::setPageDescription(__('Find out more about our work supporting digital social innovation, tech for good and civic tech to grow and scale in Europe.'));
+        if (Translate::getCurrentLang() === 'en') {
+            return View::render(__DIR__ . '/../../../www/views/about-the-project_en.php', [
+                'loggedInUser' => $this->loggedInUser
+            ]);
+        } else {
+            return View::render(__DIR__ . '/../../../www/views/about-the-project.php', [
+                'loggedInUser' => $this->loggedInUser
+            ]);
+        }
     }
 }

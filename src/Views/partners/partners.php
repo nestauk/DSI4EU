@@ -1,6 +1,5 @@
 <?php
 /** @var $urlHandler Services\URL */
-\Services\View::setPageTitle('Partners - DSI4EU');
 require __DIR__ . '/../header.php' ?>
 
     <div class="content-block">

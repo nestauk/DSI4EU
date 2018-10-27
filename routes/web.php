@@ -297,10 +297,7 @@ class Router
             $this->staticPage($matches, 'updates.php');
 
         } elseif (preg_match('<^/' . $langHandler . 'about-the-project$>', $this->pageURL, $matches)) {
-            if (Translate::getCurrentLang() === 'en')
-                $this->staticPage($matches, 'about-the-project_en.php');
-            else
-                $this->staticPage($matches, 'about-the-project.php');
+            $this->about($matches);
 
         } elseif (preg_match('<^/' . $langHandler . 'partners$>', $this->pageURL, $matches)) {
             $this->partners($matches);
@@ -572,9 +569,7 @@ class Router
     private function stories($matches)
     {
         $this->setLanguageFromUrl($matches);
-
-        $command = new \Controllers\Stories\StoriesController();
-        $command->exec();
+        (new \Controllers\Stories\StoriesController())->exec();
     }
 
     private function storiesJson($matches)
@@ -672,9 +667,7 @@ class Router
     private function projects($matches = [])
     {
         $this->setLanguageFromUrl($matches);
-
-        $command = new \DSI\Controller\ProjectsController();
-        $command->exec();
+        (new \DSI\Controller\ProjectsController())->exec();
     }
 
     private function projectsJson($matches = [])
@@ -707,9 +700,7 @@ class Router
     private function organisations($matches)
     {
         $this->setLanguageFromUrl($matches);
-
-        $command = new \DSI\Controller\OrganisationsController();
-        $command->exec();
+        (new \DSI\Controller\OrganisationsController())->exec();
     }
 
     private function organisationsJson($matches)
@@ -801,9 +792,7 @@ class Router
     private function createProject($matches)
     {
         $this->setLanguageFromUrl($matches);
-
-        $command = new \DSI\Controller\CreateProjectController();
-        $command->exec();
+        (new \DSI\Controller\CreateProjectController())->exec();
     }
 
     private function createOrganisation($matches)
@@ -982,9 +971,7 @@ class Router
     private function caseStudies($matches)
     {
         $this->setLanguageFromUrl($matches);
-
-        $command = new \Controllers\CaseStudies\CaseStudiesController();
-        $command->exec();
+        (new \Controllers\CaseStudies\CaseStudiesController())->exec();
     }
 
     private function caseStudiesJson($matches)
@@ -1125,6 +1112,12 @@ class Router
         (new \DSI\Controller\StaticHtmlController())->contact();
     }
 
+    private function about($matches)
+    {
+        $this->setLanguageFromUrl($matches);
+        (new \DSI\Controller\StaticHtmlController())->about();
+    }
+
     private function advisoryBoard($matches)
     {
         $this->setLanguageFromUrl($matches);
@@ -1241,17 +1234,13 @@ class Router
     private function clusters($matches)
     {
         $this->setLanguageFromUrl($matches);
-
-        $command = new \Controllers\ClustersController();
-        $command->exec();
+        (new \Controllers\ClustersController())->exec();
     }
 
     private function cluster($matches)
     {
         $this->setLanguageFromUrl($matches);
-
-        $command = new \Controllers\ClusterController($matches[3]);
-        $command->get();
+        (new \Controllers\ClusterController($matches[3]))->get();
     }
 
     private function clusterEdit($matches)
@@ -1297,9 +1286,7 @@ class Router
     private function whatIsDsi($matches)
     {
         $this->setLanguageFromUrl($matches);
-
-        $command = new \Controllers\WhatIsDsiController();
-        $command->get();
+        (new \Controllers\WhatIsDsiController())->get();
     }
 
     public function forceHTTPS()

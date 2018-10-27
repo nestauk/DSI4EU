@@ -29,12 +29,14 @@ class CaseStudiesController
             // $caseStudies = $caseStudyRepository->getAll();
             $caseStudies = CaseStudy
                 ::with('caseStudyTags')
+                ->orderBy(CaseStudy::Id, 'desc')
                 ->get();
         else
             // $caseStudies = $caseStudyRepository->getAllPublished();
             $caseStudies = CaseStudy
                 ::where(CaseStudy::IsPublished, true)
                 ->with('caseStudyTags')
+                ->orderBy(CaseStudy::Id, 'desc')
                 ->get();
 
         if ($this->format == 'json') {
@@ -52,6 +54,7 @@ class CaseStudiesController
             }, $caseStudies));
         } else {
             View::setPageTitle('Case studies - DSI4EU');
+            View::setPageDescription(__('Explore what digital social innovation (DSI) looks like in practice with our library of case studies from across Europe.'));
             return View::render(__DIR__ . '/../../Views/case-studies/case-studies.php', [
                 'loggedInUser' => $loggedInUser,
                 'userCanManageCaseStudies' => $userCanManageCaseStudies,

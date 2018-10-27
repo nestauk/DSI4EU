@@ -13,7 +13,7 @@ require __DIR__ . '/header.php';
 /** @var $user \DSI\Entity\User */
 
 $leftSideText = "<p>" . _html('To create your profile, we would like to collect some information about you.') . "</p>";
-$leftSideText .= "<p>" . _html('Boost your profile by registering as a team member of your projects and organisations . You can edit your answers later.') . "</p>";
+$leftSideText .= "<p>" . _html('You can edit any of your answers later.') . "</p>";
 
 ?>
     <script type="text/javascript"
@@ -51,7 +51,7 @@ $leftSideText .= "<p>" . _html('Boost your profile by registering as a team memb
         <div class="modal-container">
             <div class="modal-helper">
                 <div class="modal-content">
-                    <h2 class="centered modal-h2 log-in"><?php _ehtml('Change password')?></h2>
+                    <h2 class="centered modal-h2 log-in"><?php _ehtml('Change password') ?></h2>
                     <div class="w-form" style="text-align:center">
                         <div data-ix="destroypasswordchange"
                              style="color: silver;font-family: open sans-serif;font-weight: 300"
@@ -59,20 +59,24 @@ $leftSideText .= "<p>" . _html('Boost your profile by registering as a team memb
                         </div>
                         <form id="email-form" name="email-form"
                               ng-submit="savePassword()">
-                            <input id="new-password" type="password" placeholder="<?php _ehtml('Enter your new password')?>"
+                            <input id="new-password" type="password"
+                                   placeholder="<?php _ehtml('Enter your new password') ?>"
                                    name="new-password" data-name="new password"
                                    class="w-input login-field" ng-class="{error: errors.password}"
                                    ng-model="password">
                             <div style="color:red" ng-bind="errors.password"></div>
-                            <input id="confirm-password" type="password" placeholder="<?php _ehtml('Confirm password')?>"
+                            <input id="confirm-password" type="password"
+                                   placeholder="<?php _ehtml('Confirm password') ?>"
                                    name="confirm-password" data-name="confirm password"
                                    class="w-input login-field" ng-class="{error: errors.retypePassword}"
                                    ng-model="retypePassword">
                             <div style="color:red" ng-bind="errors.retypePassword"></div>
                             <input ng-hide="saved" type="submit"
-                                   value="<?php _ehtml('Update password')?>" ng-disabled="loading" class="w-button login-button"
-                                   ng-value="loading ? '<?php _ehtml('Loading...') ?>' : '<?php _ehtml('Update password')?>'">
-                            <div ng-show="saved" class="success-message"><?php _ehtml('Your password has been changed')?></div>
+                                   value="<?php _ehtml('Update password') ?>" ng-disabled="loading"
+                                   class="w-button login-button"
+                                   ng-value="loading ? '<?php _ehtml('Loading...') ?>' : '<?php _ehtml('Update password') ?>'">
+                            <div ng-show="saved"
+                                 class="success-message"><?php _ehtml('Your password has been changed') ?></div>
                         </form>
                     </div>
                 </div>
@@ -100,18 +104,18 @@ $leftSideText .= "<p>" . _html('Boost your profile by registering as a team memb
                     <div class="w-tabs" data-easing="linear">
                         <div class="creator-tab-menu w-tab-menu edit-personal-profile">
                             <a class="step-tab tab-link-1 w-inline-block w-tab-link"
-                               ng-class="{'w--current': currentTab == 'step1'}" data-w-tab="Tab 1"
-                               ng-click="currentTab = 'step1'">
+                               ng-class="{'w--current': currentTab == 'step1'}"
+                               ng-click="changeCurrentTab('step1')">
                                 <div>1 - <?php _ehtml('Your details') ?></div>
                             </a>
                             <a class="step-tab tab-link-2 w-inline-block w-tab-link"
-                               ng-class="{'w--current': currentTab == 'step2'}" data-w-tab="Tab 2"
-                               ng-click="currentTab = 'step2'">
-                                <div>2 - <?php _ehtml('Location & Skills') ?></div>
+                               ng-class="{'w--current': currentTab == 'step2'}"
+                               ng-click="changeCurrentTab('step2')">
+                                <div>2 - <?php _ehtml('Location & work') ?></div>
                             </a>
                             <a class="step-tab tab-link-3 w-inline-block w-tab-link"
-                               ng-class="{'w--current': currentTab == 'step3'}" data-w-tab="Tab 3"
-                               ng-click="currentTab = 'step3'">
+                               ng-class="{'w--current': currentTab == 'step3'}"
+                               ng-click="changeCurrentTab('step3')">
                                 <div>3 - <?php _ehtml('Projects & Organisations') ?></div>
                             </a>
                             <?php /*
@@ -125,7 +129,7 @@ $leftSideText .= "<p>" . _html('Boost your profile by registering as a team memb
                         <div class="w-tab-content">
                             <div class="step-window w-tab-pane" ng-class="{'w--tab-active': currentTab == 'step1'}"
                                  data-w-tab="Tab 1">
-                                <form id="email-form-3" name="email-form-3" ng-submit="submitStep1()">
+                                <form ng-submit="submitStep1()">
                                     <div class="tabbed-nav-buttons w-clearfix">
                                         <input type="submit" class="tab-button-2 tab-button-next w-button"
                                                ng-value="loading ? '<?php _ehtml('Loading...') ?>' : '<?php _ehtml('Next') ?>'"
@@ -146,7 +150,7 @@ $leftSideText .= "<p>" . _html('Boost your profile by registering as a team memb
                                                 <div class="w-row">
                                                     <div class="w-col w-col-6 w-col-stack">
                                                         <div class="padding-right-50">
-                                                            <label for="name"><?php _ehtml('Your name') ?></label>
+                                                            <label for="name"><?php _ehtml('Your name') ?> *</label>
                                                             <input class="creator-data-entry w-input" data-name="Name"
                                                                    id="name" maxlength="256" name="name"
                                                                    placeholder="<?php _ehtml('First name') ?>"
@@ -178,16 +182,18 @@ $leftSideText .= "<p>" . _html('Boost your profile by registering as a team memb
                                                     <div class="w-col w-col-6 w-col-stack">
                                                         <div class="padding-left-50">
                                                             <label for="name-5">
-                                                                <?php _ehtml('Tell us about yourself in 140 characters') ?>
+                                                                <?php // _ehtml('Tell us about yourself in 140 characters') ?>
+                                                                <?php _ehtml('About you') ?>
                                                             </label>
                                                             <textarea class="creator-data-entry w-input" id="field"
                                                                       maxlength="140" name="field" ng-model="user.bio"
-                                                                      placeholder="<?php _ehtml('Quick bio') ?>"></textarea>
+                                                                      placeholder="<?php _ehtml('Tell us about yourself and your work') ?>"></textarea>
                                                             <div class="error" ng-bind="errors.bio"></div>
                                                             <br/>
 
                                                             <label
-                                                                for="email-9"><?php _ehtml('Your email address') ?></label>
+                                                                    for="email-9"><?php _ehtml('Your email address') ?>
+                                                                *</label>
                                                             <input class="creator-data-entry w-input"
                                                                    data-name="Email 9" id="email-9" maxlength="256"
                                                                    placeholder="<?php _ehtml('Your email address') ?>"
@@ -229,7 +235,7 @@ $leftSideText .= "<p>" . _html('Boost your profile by registering as a team memb
                             </div>
                             <div class="step-window w-tab-pane" ng-class="{'w--tab-active': currentTab == 'step2'}"
                                  data-w-tab="Tab 2">
-                                <form id="email-form-3" name="email-form-3" ng-submit="submitStep2()">
+                                <form ng-submit="submitStep2()">
                                     <div class="tabbed-nav-buttons w-clearfix">
                                         <input type="submit" class="tab-button-3 tab-button-next w-button"
                                                ng-value="loading ? '<?php _ehtml('Loading...') ?>' : '<?php _ehtml('Next') ?>'"
@@ -245,7 +251,7 @@ $leftSideText .= "<p>" . _html('Boost your profile by registering as a team memb
                                     </div>
                                     <div class="w-row">
                                         <div class="creator-col w-col w-col-4 w-col-stack">
-                                            <h2>2 - <?php _ehtml('Your location & skills') ?></h2>
+                                            <h2>2 - <?php _ehtml('Your location & work') ?></h2>
                                             <?php echo $leftSideText ?>
                                         </div>
                                         <div class="creator-col creator-col-right w-col w-col-8 w-col-stack">
@@ -255,7 +261,7 @@ $leftSideText .= "<p>" . _html('Boost your profile by registering as a team memb
                                                         <div class="padding-right-50">
                                                             <h2 class="edit-h2"><?php _ehtml('Where are you based?') ?></h2>
                                                             <label
-                                                                for="email-7"><?php _ehtml('Which country are you based in?') ?></label>
+                                                                    for="email-7"><?php _ehtml('Country') ?></label>
                                                             <input class="creator-data-entry w-input"
                                                                    data-name="Email 7" id="email-7" maxlength="256"
                                                                    name="email-7"
@@ -263,7 +269,7 @@ $leftSideText .= "<p>" . _html('Boost your profile by registering as a team memb
                                                                    ng-model="user.countryName"
                                                                    type="text">
                                                             <label for="email-8">
-                                                                <?php _ehtml('And in which city?') ?>
+                                                                <?php _ehtml('City') ?>
                                                             </label>
                                                             <input class="creator-data-entry w-input"
                                                                    data-name="Email 8" id="email-8" maxlength="256"
@@ -276,10 +282,11 @@ $leftSideText .= "<p>" . _html('Boost your profile by registering as a team memb
                                                     </div>
                                                     <div class="w-col w-col-6">
                                                         <div class="padding-left-50">
+                                                            <?php /*
                                                             <h2 class="edit-h2"><?php _ehtml('Your skills') ?></h2>
                                                             <p><?php _ehtml('Would you like to offer your support to other DSI organisations and projects?') ?></p>
                                                             <label
-                                                                for="name-6"><?php _ehtml('What skills do you have?') ?></label>
+                                                                    for="name-6"><?php _ehtml('What skills do you have?') ?></label>
                                                             <div class="customSelect2">
                                                                 <select class="select2 creator-data-entry end w-input"
                                                                         id="skillsSelect" style="width:100%;border:0"
@@ -294,15 +301,25 @@ $leftSideText .= "<p>" . _html('Boost your profile by registering as a team memb
                                                                 </select>
                                                             </div>
                                                             <br/><br/>
+                                                            <br>
                                                             <label for="name-7"><?php _ehtml('Your work') ?></label>
-                                                            <p><?php _ehtml('Where do you work?') ?></p>
-                                                            <input class="creator-data-entry end w-input"
+                                                            */ ?>
+                                                            <h2 class="edit-h2">
+                                                                <?php _ehtml('Your work') ?></h2>
+                                                            <label for="name-8">
+                                                                <?php _ehtml('Where do you work?') ?>
+                                                            </label>
+                                                            <input class="creator-data-entry w-input"
                                                                    data-name="Name 7" id="name-7" maxlength="256"
                                                                    name="name-7"
                                                                    placeholder="<?php _ehtml('Your place of work') ?>"
                                                                    ng-model="user.company"
                                                                    type="text">
-                                                            <p><?php _ehtml("What's your job title?") ?></p>
+
+
+                                                            <label for="name-8">
+                                                                <?php _ehtml("What’s your role?") ?>
+                                                            </label>
                                                             <input class="creator-data-entry end w-input"
                                                                    data-name="Name 8" id="name-8" maxlength="256"
                                                                    ng-model="user.jobTitle"
@@ -319,7 +336,7 @@ $leftSideText .= "<p>" . _html('Boost your profile by registering as a team memb
                             </div>
                             <div class="step-window w-tab-pane" ng-class="{'w--tab-active': currentTab == 'step3'}"
                                  data-w-tab="Tab 3">
-                                <form id="email-form-3" name="email-form-3" ng-submit="submitStep3()">
+                                <form ng-submit="submitStep3()">
                                     <div class="tabbed-nav-buttons w-clearfix">
                                         <input type="submit" class="tab-button-4 tab-button-next w-button"
                                                ng-value="loading ? '<?php _ehtml('Loading...') ?>' : '<?php _ehtml('Finish') ?>'"
@@ -342,10 +359,10 @@ $leftSideText .= "<p>" . _html('Boost your profile by registering as a team memb
                                                             <p><?php _ehtml('Add DSI projects that you are involved with here.') ?></p>
                                                             <div id="projectsSelectBox" class="designSelectBox">
                                                                 <select
-                                                                    class="select2-withDesign creator-data-entry end w-input"
-                                                                    id="projectsSelect" style="width:100%;border:0"
-                                                                    multiple
-                                                                    data-placeholder="<?php _ehtml('Click to select projects') ?>">
+                                                                        class="select2-withDesign creator-data-entry end w-input"
+                                                                        id="projectsSelect" style="width:100%;border:0"
+                                                                        multiple
+                                                                        data-placeholder="<?php _ehtml('Select projects') ?>">
                                                                     <option></option>
                                                                     <?php foreach ($projects AS $project) { ?>
                                                                         <option value="<?php echo $project->getId() ?>"
@@ -366,18 +383,18 @@ $leftSideText .= "<p>" . _html('Boost your profile by registering as a team memb
                                                             <p><?php _ehtml('Add DSI organisations that you are involved with here.') ?></p>
                                                             <div id="organisationsSelectBox" class="designSelectBox">
                                                                 <select
-                                                                    class="select2-withDesign creator-data-entry end w-input"
-                                                                    id="organisationsSelect"
-                                                                    style="width:100%;border:0"
-                                                                    multiple
-                                                                    data-placeholder="<?php _ehtml('Click to select organisations') ?>">
+                                                                        class="select2-withDesign creator-data-entry end w-input"
+                                                                        id="organisationsSelect"
+                                                                        style="width:100%;border:0"
+                                                                        multiple
+                                                                        data-placeholder="<?php _ehtml('Select organisations') ?>">
                                                                     <option></option>
                                                                     <?php foreach ($organisations AS $organisation) { ?>
                                                                         <option
-                                                                            value="<?php echo $organisation->getId() ?>"
-                                                                            data-url="<?php echo $urlHandler->organisation($organisation) ?>"
-                                                                            data-country="<?php echo $organisation->getCountryName() ?>"
-                                                                            data-type="organisation"
+                                                                                value="<?php echo $organisation->getId() ?>"
+                                                                                data-url="<?php echo $urlHandler->organisation($organisation) ?>"
+                                                                                data-country="<?php echo $organisation->getCountryName() ?>"
+                                                                                data-type="organisation"
                                                                             <?php if (in_array($organisation->getId(), $userOrganisations)) echo 'selected' ?>><?php
                                                                             echo show_input($organisation->getName())
                                                                             ?></option>

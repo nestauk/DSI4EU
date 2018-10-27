@@ -15,8 +15,8 @@ require __DIR__ . '/../header.php' ?>
                         For digital social innovation to achieve its goals, we believe it’s essential to always put
                         social challenges first. As with any social innovation, success is dependent on having a deep,
                         nuanced understanding of social challenges. For that reason, DSI4EU’s activities are focused
-                        around six “DSI clusters”, each led by a project partner and focusing on a specific social
-                        social area. Over the course of the project, each cluster will organise series of peer learnig
+                        around six “DSI clusters”, each led by a project partner and focusing on a specific
+                        social area. Over the course of the project, each cluster will organise series of peer learning
                         events, conduct cluster-specific research, engage with policymakers working in their field, and
                         act as a go-to point of reference for people working on DSI in the field.
                     </p>

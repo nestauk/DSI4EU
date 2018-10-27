@@ -162,15 +162,18 @@ class ImportProjects_2018_07_Controller
         $exec = new UpdateProject();
         $exec->data()->executor = $executor;
         $exec->data()->project = $project;
-        $exec->data()->shortDescription = $data['Short description'];
-        $exec->data()->description = $data['Long description'];
-        $exec->data()->url = $data['Website'];
-        if ($data['Start date'])
+        if (isset($data['Short description']))
+            $exec->data()->shortDescription = $data['Short description'];
+        if (isset($data['Long description']))
+            $exec->data()->description = $data['Long description'];
+        if (isset($data['Website']))
+            $exec->data()->url = $data['Website'];
+        if (isset($data['Start date']))
             $exec->data()->startDate = date('Y-m-d', strtotime($data['Start date']));
-        if ($data['End date'])
+        if (isset($data['End date']))
             $exec->data()->endDate = date('Y-m-d', strtotime($data['End date']));
 
-        if ($data['Country']) {
+        if (isset($data['Country'])) {
             if ($data['Country'] === 'UK')
                 $data['Country'] = 'United Kingdom';
             if ($data['Country'] === 'Great Britain')
@@ -196,22 +199,27 @@ class ImportProjects_2018_07_Controller
             }
         }
 
-        if ($data['Support tags']) {
+        if (isset($data['Support tags'])) {
+            $impactTagRepo = new ImpactTagRepo();
+
             $supportTags = explode(',', $data['Support tags']);
             $supportTags = array_map('trim', $supportTags);
-            $supportTags = array_map(function ($id) use ($data) {
-                if (!$this->supportTags[$id])
-                    die('Could not find supporting tag: ' . $id . ' for ' . $data['Project name']);
-                return $this->supportTags[$id];
-            }, $supportTags);
-            $impactTagRepo = new ImpactTagRepo();
-            $supportTags = array_map(function ($id) use ($data, $impactTagRepo) {
-                return $impactTagRepo->getById($id)->getName();
+            $supportTags = array_filter($supportTags);
+            $supportTags = array_map(function ($tag) use ($data, $impactTagRepo) {
+                if (!$this->supportTags[$tag]) {
+                    dump('--- Extra supporting tag: ' . $tag);
+                    return $tag;
+                } else {
+                    return $impactTagRepo->getById(
+                        $this->supportTags[$tag]
+                    )->getName();
+                }
             }, $supportTags);
             $exec->data()->areasOfImpact = $supportTags;
+            // pr($supportTags);
         }
 
-        if ($data['Focus']) {
+        if (isset($data['Focus'])) {
             $focusTags = explode(',', $data['Focus']);
             $focusTags = array_map('trim', $focusTags);
             $focusTags = array_map(function ($id) use ($data) {
@@ -226,23 +234,26 @@ class ImportProjects_2018_07_Controller
             $exec->data()->focusTags = $focusTags;
         }
 
-        if ($data['Technology']) {
+        if (isset($data['Technology'])) {
+            $impactTagRepo = new ImpactTagRepo();
             $technologyTags = explode(',', $data['Technology']);
             $technologyTags = array_map('trim', $technologyTags);
             $technologyTags = array_filter($technologyTags);
-            $technologyTags = array_map(function ($id) use ($data) {
-                if (!$this->technologyTags[$id])
-                    die('Could not find technology tag: ' . $id . ' for ' . $data['Project name']);
-                return $this->technologyTags[$id];
-            }, $technologyTags);
-            $impactTagRepo = new ImpactTagRepo();
-            $technologyTags = array_map(function ($id) use ($data, $impactTagRepo) {
-                return $impactTagRepo->getById($id)->getName();
+            $technologyTags = array_map(function ($tag) use ($data, $impactTagRepo) {
+                if (!$this->technologyTags[$tag]){
+                    dump('--- Extra technology tag: ' . $tag);
+                    return $tag;
+                }{
+                    return $impactTagRepo->getById(
+                        $this->technologyTags[$tag]
+                    )->getName();
+                }
             }, $technologyTags);
             $exec->data()->technologyTags = $technologyTags;
+            // pr($technologyTags);
         }
 
-        if ($data['Linked Organisation IDs']) {
+        if (isset($data['Linked Organisation IDs'])) {
             $organisationIDs = [];
             $organisationNames = preg_split("/(,|\n)/", $data['Linked Organisation IDs']);;
             $organisationNames = array_map('trim', $organisationNames);
@@ -265,6 +276,11 @@ class ImportProjects_2018_07_Controller
             $exec->data()->organisations = $organisationIDs;
         }
 
-        $exec->exec();
+        try {
+            $exec->exec();
+        } catch (\Exception $e){
+            pr($e);
+            die();
+        }
     }
 }
