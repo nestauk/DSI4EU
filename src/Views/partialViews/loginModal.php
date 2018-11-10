@@ -20,7 +20,7 @@ use Services\URL;
                        ng-click="forgotPassword = {}"><?php _ehtml('Back to login') ?></a>
 
                     <div ng-hide="forgotPassword.show">
-                        <form id="email-form-3" name="email-form-3" ng-submit="onSubmit()">
+                        <form name="email-form-3" ng-submit="onSubmit()">
                             <input class="w-input modal-input log-in"
                                    id="Enter-your-email-address" maxlength="256" name="Enter-your-email-address"
                                    placeholder="<?php _ehtml('Enter your email address') ?>" type="email"

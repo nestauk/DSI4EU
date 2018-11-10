@@ -61,7 +61,7 @@ if (!isset($urlHandler))
                         <div class="w-tab-content">
                             <div class="step-window w-tab-pane" ng-class="{'w--tab-active': currentTab == 'step1'}"
                                  data-w-tab="Tab 1">
-                                <form id="email-form-3" name="email-form-3" ng-submit="submitStep1()">
+                                <form name="email-form-3" ng-submit="submitStep1()">
                                     <div class="tabbed-nav-buttons w-clearfix">
                                         <input type="submit" class="tab-button-2 tab-button-next w-button"
                                                ng-value="loading ? '<?php _ehtml('Loading') ?>...' : '<?php _ehtml('Next') ?>'"
@@ -274,7 +274,7 @@ if (!isset($urlHandler))
                             </div>
                             <div class="step-window w-tab-pane" ng-class="{'w--tab-active': currentTab == 'step2'}"
                                  data-w-tab="Tab 2">
-                                <form id="email-form-3" name="email-form-3" ng-submit="submitStep2()">
+                                <form name="email-form-3" ng-submit="submitStep2()">
                                     <div class="tabbed-nav-buttons w-clearfix">
                                         <input type="submit" class="tab-button-3 tab-button-next w-button"
                                                ng-value="loading ? '<?php _ehtml('Loading') ?>...' : '<?php _ehtml('Next') ?>'"
@@ -358,7 +358,7 @@ if (!isset($urlHandler))
                             </div>
                             <div class="step-window w-tab-pane" ng-class="{'w--tab-active': currentTab == 'step3'}"
                                  data-w-tab="Tab 3">
-                                <form id="email-form-3" name="email-form-3" ng-submit="submitStep3()">
+                                <form name="email-form-3" ng-submit="submitStep3()">
                                     <div class="tabbed-nav-buttons w-clearfix">
                                         <input type="submit" class="tab-button-4 tab-button-next w-button"
                                                ng-value="loading ? '<?php _ehtml('Loading') ?>...' : '<?php _ehtml('Next') ?>'"
@@ -432,7 +432,7 @@ if (!isset($urlHandler))
                             </div>
                             <div class="step-window w-tab-pane" ng-class="{'w--tab-active': currentTab == 'step4'}"
                                  data-w-tab="Tab 4">
-                                <form id="email-form-3" name="email-form-3" ng-submit="submitStep4()">
+                                <form name="email-form-3" ng-submit="submitStep4()">
                                     <div class="tabbed-nav-buttons w-clearfix">
                                         <input type="submit" class="tab-button-next tab-button-publish w-button"
                                                ng-value="loading ? '<?php _ehtml('Loading') ?>...' : '<?php _ehtml('Submit now') ?>'"

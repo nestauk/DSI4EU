@@ -155,9 +155,13 @@ class ProjectEditController
                     return !$impactTag->isMain();
                 }),
                 'technologyTags' => $technologyTags,
-                'technologyMainTags' => array_filter($technologyTags, function (ImpactTag $impactTag) {
-                    return $impactTag->isTechnologyMain();
-                }),
+                'technologyMainTags' => collect($technologyTags)
+                    ->filter(function (ImpactTag $impactTag) {
+                        return $impactTag->isTechnologyMain();
+                    })
+                    ->sortBy(function(ImpactTag $impactTag){
+                        return $impactTag->getName();
+                    }),
                 'technologySecondaryTags' => array_filter($technologyTags, function (ImpactTag $impactTag) {
                     return !$impactTag->isTechnologyMain();
                 }),

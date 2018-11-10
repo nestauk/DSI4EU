@@ -40,16 +40,13 @@ if (!isset($urlHandler))
                     <h3 class="profile-name profile-organisation"><?php echo show_input($loggedInUser->getCompany()) ?></h3>
                     <div class="profile-options">
                         <div class="profile-options w-row">
-                            <div class="profile-col w-col w-col-3">
-                                <a href="<?php echo $urlHandler->dashboard() ?>"><?php _e('View dashboard') ?></a>
+                            <div class="profile-col w-col w-col-4">
+                                <a href="<?php echo $urlHandler->dashboard() ?>"><?php _e('Dashboard') ?></a>
                             </div>
-                            <div class="profile-col w-col w-col-3">
-                                <a href="<?php echo $urlHandler->profile($loggedInUser) ?>"><?php _e('View profile') ?></a>
+                            <div class="profile-col w-col w-col-4">
+                                <a href="<?php echo $urlHandler->profile($loggedInUser) ?>"><?php _e('Profile') ?></a>
                             </div>
-                            <div class="profile-col w-col w-col-3">
-                                <a href="<?php echo $urlHandler->editUserProfile($loggedInUser) ?>"><?php _e('Edit Profile') ?></a>
-                            </div>
-                            <div class="profile-col w-col w-col-3">
+                            <div class="profile-col w-col w-col-4">
                                 <a href="<?php echo $urlHandler->logout() ?>"><?php _e('Sign out') ?></a>
                             </div>
                         </div>

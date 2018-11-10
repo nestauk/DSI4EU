@@ -39,7 +39,7 @@ require __DIR__ . '/header.php';
                                 <div class="error" ng-bind="errors.title"></div>
 
                                 <label for="name-3">Funding link:</label>
-                                <input class="creator-data-entry w-input" data-name="Name 3" id="name-3" maxlength="256"
+                                <input class="creator-data-entry w-input" data-name="Name 3" maxlength="256"
                                        ng-model="funding.url"
                                        name="name-3" placeholder="Funding link" type="text">
                                 <div class="error" ng-bind="errors.url"></div>

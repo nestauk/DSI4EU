@@ -47,7 +47,7 @@ if (!isset($urlHandler))
                                     </div>
                                     <div class="creator-col creator-col-right w-col w-col-8">
                                         <div class="w-form">
-                                            <form id="email-form-3" name="email-form-3">
+                                            <form name="email-form-3">
                                                 <div class="w-row">
                                                     <div class="w-clearfix w-col w-col-6 w-col-stack"
                                                          ng-repeat="member in members">
@@ -105,7 +105,7 @@ if (!isset($urlHandler))
                                     </div>
                                     <div class="creator-col creator-col-right w-col w-col-8 w-col-stack">
                                         <div class="w-form">
-                                            <form id="email-form-3" name="email-form-3"
+                                            <form name="email-form-3"
                                                   ng-submit="searchExistingUser.submit()">
                                                 <div class="w-row">
                                                     <label for="email-6">
@@ -197,7 +197,7 @@ if (!isset($urlHandler))
                                     </div>
                                     <div class="creator-col creator-col-right w-col w-col-8">
                                         <div class="w-form">
-                                            <form id="email-form-3" name="email-form-3"
+                                            <form name="email-form-3"
                                                   ng-submit="inviteByEmail.submit()">
                                                 <div class="w-row">
                                                     <label for="email-6">

@@ -22,7 +22,7 @@ if (!isset($urlHandler))
                 <div class="w-tabs" data-easing="linear">
                     <div class="w-tab-content">
                         <div class="step-window w-tab-pane w--tab-active">
-                            <form id="email-form-3" name="email-form-3" ng-submit="save()">
+                            <form name="email-form-3" ng-submit="save()">
                                 <div class="w-row">
                                     <div class="creator-col w-col w-col-4">
                                         <h2><?php _ehtml('Project Owner') ?>: </h2>

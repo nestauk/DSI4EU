@@ -27,7 +27,7 @@ require __DIR__ . '/header.php';
                                 <div class="error" ng-bind="errors.title"></div>
 
                                 <label for="name-3">Event link:</label>
-                                <input class="creator-data-entry w-input" data-name="Name 3" id="name-3" maxlength="256"
+                                <input class="creator-data-entry w-input" data-name="Name 3" maxlength="256"
                                        ng-model="event.url"
                                        name="name-3" placeholder="Event link" type="text">
                                 <div class="error" ng-bind="errors.url"></div>
