@@ -11,7 +11,7 @@ angular
 
         $scope.changeCurrentTab = function (tab) {
             if($scope.currentTab === 'step1')
-                $scope.submitStep1();
+                $scope.submitStep1({proceed: false});
 
             if (!$scope.user.firstName || !$scope.user.lastName || !$scope.user.email)
                 return;
@@ -22,7 +22,7 @@ angular
         $scope.currentTab = 'step1';
         if (window.location.hash) {
             var hash = window.location.hash.substring(1);
-            if (hash == 'step3')
+            if (hash === 'step3')
                 $scope.currentTab = 'step3';
         }
 
@@ -30,11 +30,14 @@ angular
             $scope.saveUserDetails({
                 postField: 'step1',
                 onSuccess: function () {
-                    if (params && params.proceed == false) {
-                        swal('Success!', 'The changes have been successfully saved.', 'success');
+                    if(params){
+                        if(params.alert === true)
+							return swal('Success!', 'The changes have been successfully saved.', 'success');
+                        if(params.proceed === false)
+							return true;
                     } else {
-                        $scope.currentTab = 'step2';
-                    }
+						return $scope.currentTab = 'step2';
+					}
                 }
             })
         };
@@ -44,7 +47,7 @@ angular
             $scope.saveUserDetails({
                 postField: 'step2',
                 onSuccess: function () {
-                    if (params && params.proceed == false) {
+                    if (params && params.proceed === false) {
                         swal('Success!', 'The changes have been successfully saved.', 'success');
                     } else {
                         $scope.currentTab = 'step3';
@@ -58,7 +61,7 @@ angular
             $scope.saveUserDetails({
                 postField: 'step3',
                 onSuccess: function () {
-                    if (params && params.proceed == false) {
+                    if (params && params.proceed === false) {
                         swal('Success!', 'The changes have been successfully saved.', 'success');
                     } else {
                         swal({
@@ -87,12 +90,13 @@ angular
                 .then(function (response) {
                     $scope.loading = false;
 
-                    if (response.data.response == 'ok')
+                    if (response.data.response === 'ok')
                         options.onSuccess();
-                    else if (response.data.response == 'error')
+                    else if (response.data.response === 'error')
                         $scope.errors = response.data.errors;
                 });
         };
+
         /*
         $scope.savePersonalDetails = function () {
             $scope.loading = true;

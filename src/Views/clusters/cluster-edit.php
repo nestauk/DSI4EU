@@ -20,7 +20,7 @@ require __DIR__ . '/../header.php';
                             <span ng-if="editingImage.id">Edit cluster image</span>
                         </h2>
                         <div class="w-form">
-                            <form id="email-form-3" name="email-form-3" ng-submit="saveClusterImage()">
+                            <form name="email-form-3" ng-submit="saveClusterImage()">
                                 <a class="dsi-button story-image-upload w-button" href="#"
                                    ng-if="!editingImage.id"
                                    ngf-select="uploadClusterImage($file, $invalidFiles)"

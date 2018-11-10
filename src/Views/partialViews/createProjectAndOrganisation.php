@@ -14,10 +14,10 @@
                 <div class="modal-content">
                     <h2 class="centered modal-h2"><?php _ehtml('Create project') ?></h2>
                     <div class="w-form">
-                        <form id="email-form-3" name="email-form-3" ng-submit="createProject()">
+                        <form name="email-form-3" ng-submit="createProject()">
                             <div style="color:red;text-align:center" ng-show="project.errors.name"
                                  ng-bind="project.errors.name"></div>
-                            <input class="w-input modal-input" id="name-3" maxlength="256" type="text"
+                            <input class="w-input modal-input" maxlength="256" type="text"
                                    name="name" placeholder="<?php _ehtml('Enter the name of your project') ?>"
                                    ng-model="project.name" ng-class="{error: project.errors.name}">
                             <div style="color:red;text-align:center" ng-show="project.errors.user">
@@ -42,10 +42,10 @@
                 <div class="modal-content">
                     <h2 class="centered modal-h2"><?php _ehtml('Create organisation') ?></h2>
                     <div class="w-form">
-                        <form id="email-form-3" name="email-form-3" ng-submit="createOrganisation()">
+                        <form name="email-form-3" ng-submit="createOrganisation()">
                             <div style="color:red;text-align:center" ng-show="organisation.errors.name"
                                  ng-bind="organisation.errors.name"></div>
-                            <input class="w-input modal-input" id="name-3" maxlength="256" type="text"
+                            <input class="w-input modal-input" maxlength="256" type="text"
                                    name="name" placeholder="<?php _ehtml('Enter the name of your organisation') ?>"
                                    ng-model="organisation.name"
                                    ng-class="{error: organisation.errors.name}">

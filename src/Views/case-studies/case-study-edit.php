@@ -38,7 +38,7 @@ require __DIR__ . '/../header.php';
                                        name="name-2" placeholder="Project Title" type="text">
                                 <div class="error" ng-bind="errors.title"></div>
                                 <label for="name-3">Intro card text:</label>
-                                <input class="creator-data-entry w-input" data-name="Name 3" id="name-3" maxlength="256"
+                                <input class="creator-data-entry w-input" data-name="Name 3" maxlength="256"
                                        ng-model="caseStudy.introCardText"
                                        name="name-3" placeholder="This text appears on the grid card" type="text">
                                 <label>Page introduction:</label>

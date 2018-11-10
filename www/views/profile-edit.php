@@ -136,7 +136,7 @@ $leftSideText .= "<p>" . _html('You can edit any of your answers later.') . "</p
                                                ng-disabled="loading" value="<?php _ehtml('Next') ?>"/>
                                         <button type="button" class="tab-button-2 tab-button-next w-button"
                                                 ng-bind="loading ? '<?php _ehtml('Loading...') ?>' : '<?php _ehtml('Save') ?>'"
-                                                ng-click="submitStep1({proceed: false})"
+                                                ng-click="submitStep1({alert: false})"
                                                 ng-disabled="loading"><?php _ehtml('Save') ?>
                                         </button>
                                     </div>
@@ -157,9 +157,9 @@ $leftSideText .= "<p>" . _html('You can edit any of your answers later.') . "</p
                                                                    ng-model="user.firstName" type="text">
                                                             <div class="error" ng-bind="errors.firstName"></div>
                                                             <input class="creator-data-entry w-input"
-                                                                   data-name="Name 3" id="name-3" maxlength="256"
+                                                                   data-name="Name 3" maxlength="256"
                                                                    placeholder="<?php _ehtml('Last name') ?>"
-                                                                   ng-model="user.lastName" name="name-3" type="text">
+                                                                   ng-model="user.lastName" type="text">
                                                             <div class="error" ng-bind="errors.lastName"></div>
                                                             <br/>
 
@@ -362,7 +362,8 @@ $leftSideText .= "<p>" . _html('You can edit any of your answers later.') . "</p
                                                                         class="select2-withDesign creator-data-entry end w-input"
                                                                         id="projectsSelect" style="width:100%;border:0"
                                                                         multiple
-                                                                        data-placeholder="<?php _ehtml('Select projects') ?>">
+                                                                        data-placeholder="<?php _ehtml('Select projects') ?>"
+                                                                >
                                                                     <option></option>
                                                                     <?php foreach ($projects AS $project) { ?>
                                                                         <option value="<?php echo $project->getId() ?>"
@@ -448,9 +449,18 @@ $leftSideText .= "<p>" . _html('You can edit any of your answers later.') . "</p
             };
 
             $('select.select2').select2();
-            $('select.select2-withDesign').select2({
-                templateResult: formatResult,
-                templateSelection: formatSelection
+
+			$('select.select2-withDesign').each(function(){
+				var self = $(this);
+				self.select2({
+					templateResult: formatResult,
+					templateSelection: formatSelection
+				});
+				self.on('select2:select', function (e) {
+					self.parent()
+                        .find('input')
+                        .attr("placeholder", self.data('placeholder'));
+				});
             });
         });
     </script>
