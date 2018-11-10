@@ -85,7 +85,8 @@ $leftSideText .= "<p>" . _html('You can edit any of your answers later.') . "</p
     </div>
 
     <div ng-controller="ProfileEditController"
-         data-profileurl="<?php echo $urlHandler->profile($user) ?>">
+         data-urlprofile="<?php echo $urlHandler->profile($user) ?>"
+    >
 
         <div class="w-section page-header">
             <div class="container-wide header">
