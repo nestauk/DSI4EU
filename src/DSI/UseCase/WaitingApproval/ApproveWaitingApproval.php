@@ -74,14 +74,14 @@ class ApproveWaitingApproval
     {
         $owner = $this->contentUpdate->getOwner();
         if ($this->contentUpdate->hasProject()) {
-            $subject = 'Your project has been approved';
+            $subject = 'Your project has been approved!';
             $message = View::prepare(__DIR__ . '/../../../../resources/views/emails/approvedProject.php', [
                 'subject' => $subject,
                 'project' => $this->contentUpdate->getProject(),
                 'owner' => $owner,
             ]);
         } else {
-            $subject = 'Your organisation has been approved';
+            $subject = 'Your organisation has been approved!';
             $message = View::prepare(__DIR__ . '/../../../../resources/views/emails/approvedOrganisation.php', [
                 'subject' => $subject,
                 'organisation' => $this->contentUpdate->getOrganisation(),
