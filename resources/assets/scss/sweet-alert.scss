@@ -3,7 +3,18 @@
 	margin-left: -340px;
 
 	.create {
-		border: 1px solid rgba(29, 201, 160, 0.94) !important;
-		background: white !important;
+		box-shadow: none !important;
+		border: 1px solid rgba(29, 201, 160, .94) !important;
+		background: #fff !important;
+		color: #000;
+		font-family: Montserrat, sans-serif;
+		text-transform: uppercase;
+		font-size: 16px;
+		font-weight: 700;
+		border-radius: 25px;
+		padding: 10px 32px;
+		margin: 26px 5px 0;
+		cursor: pointer;
+		display: inline-block;
 	}
 }

@@ -70,8 +70,8 @@ angular
 							customClass: 'swal-wide',
 							html: true,
 							text: 'Your profile has been successfully updated<br />' +
-								'<button class="create" value="project">Create Project</button>' +
-								'<button class="create" value="organisation">Create Organisation</button>' +
+								'<span class="create" data-value="project">Create Project</span>' +
+								'<span class="create" data-value="organisation">Create Organisation</span>' +
 								'<br /><br />',
 							title: 'Success',
 							type: "success",
@@ -159,7 +159,7 @@ angular
 
 $(function() {
 	$('body').on('click', '.swal-wide .create', function() {
-		switch( $(this).val() ) {
+		switch( $(this).data('value') ) {
 			case 'project':
 				setTimeout(function(){
 					openCreateProject()
