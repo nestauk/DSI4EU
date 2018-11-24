@@ -37,3 +37,4 @@ Command line calls are made to _cli.php_. Run `php cli.php` to list all the poss
 ## How to
 - run sql migrations: `vendor/bin/phinx migrate -e production`
 - create sql migration: `vendor/bin/phinx create` *ClassName*
+- run sql seed: `vendor/bin/phinx seed:run -s ` *ClassName*
