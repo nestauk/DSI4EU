@@ -262,6 +262,11 @@ class URL
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'open-data-research-and-resources';
     }
 
+    public function DsiIndexEdit()
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'edit/dsi-index';
+    }
+
     public function openDataResearchAndResourcesEdit()
     {
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'edit/open-data-research-and-resources';

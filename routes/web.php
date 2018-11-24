@@ -296,6 +296,9 @@ class Router
         } elseif (preg_match('<^/' . $langHandler . 'updates$>', $this->pageURL, $matches)) {
             $this->staticPage($matches, 'updates.php');
 
+        } elseif (preg_match('<^/' . $langHandler . 'dsi-index>', $this->pageURL, $matches)) {
+            $this->dsiIndex($matches);
+
         } elseif (preg_match('<^/' . $langHandler . 'about-the-project$>', $this->pageURL, $matches)) {
             $this->about($matches);
 
@@ -1116,6 +1119,12 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
         (new \DSI\Controller\StaticHtmlController())->about();
+    }
+
+    private function dsiIndex($matches)
+    {
+        $this->setLanguageFromUrl($matches);
+        (new \Controllers\DsiIndex\DsiIndexController())->exec();
     }
 
     private function advisoryBoard($matches)
