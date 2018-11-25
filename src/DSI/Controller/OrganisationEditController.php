@@ -67,7 +67,7 @@ class OrganisationEditController
 
         try {
             if (isset($_POST['saveDetails'])) {
-                if ($_POST['step'] == 'step1') {
+                if ($_POST['step'] == '1') {
                     $updateOrganisation = new UpdateOrganisation();
                     $updateOrganisation->data()->organisation = $organisation;
                     $updateOrganisation->data()->executor = $loggedInUser;
@@ -79,7 +79,7 @@ class OrganisationEditController
                     $updateOrganisation->data()->projects = $_POST['projects'] ?? [];
                     $updateOrganisation->data()->links = $_POST['links'] ?? [];
                     $updateOrganisation->exec();
-                } elseif ($_POST['step'] == 'step2') {
+                } elseif ($_POST['step'] == '2') {
                     $updateOrganisation = new UpdateOrganisation();
                     $updateOrganisation->data()->organisation = $organisation;
                     $updateOrganisation->data()->executor = $loggedInUser;
@@ -88,14 +88,14 @@ class OrganisationEditController
                     $updateOrganisation->data()->region = $_POST['region'] ?? '';
                     $updateOrganisation->data()->organisationSizeId = $_POST['organisationSizeId'] ?? '';
                     $updateOrganisation->exec();
-                } elseif ($_POST['step'] == 'step3') {
+                } elseif ($_POST['step'] == '3') {
                     $updateOrganisation = new UpdateOrganisation();
                     $updateOrganisation->data()->organisation = $organisation;
                     $updateOrganisation->data()->executor = $loggedInUser;
                     $updateOrganisation->data()->shortDescription = $_POST['shortDescription'] ?? '';
                     $updateOrganisation->data()->description = $_POST['description'] ?? '';
                     $updateOrganisation->exec();
-                } elseif ($_POST['step'] == 'step4') {
+                } elseif ($_POST['step'] == '4') {
                     $updateOrganisation = new UpdateOrganisation();
                     $updateOrganisation->data()->organisation = $organisation;
                     $updateOrganisation->data()->executor = $loggedInUser;
