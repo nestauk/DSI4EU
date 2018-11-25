@@ -38,30 +38,30 @@ if (!isset($urlHandler))
                     <div class="w-tabs" data-easing="linear">
                         <div class="creator-tab-menu w-tab-menu">
                             <a class="step-tab tab-link-1 w-inline-block w-tab-link"
-                               ng-class="{'w--current': currentTab == 'step1'}" data-w-tab="Tab 1"
-                               ng-click="currentTab = 'step1'">
+                               ng-class="{'w--current': currentTab === 1}"
+                               ng-click="changeCurrentTab(1)">
                                 <div>1 - <?php _ehtml('Project details') ?></div>
                             </a>
                             <a class="step-tab tab-link-2 w-inline-block w-tab-link"
-                               ng-class="{'w--current': currentTab == 'step2'}" data-w-tab="Tab 2"
-                               ng-click="currentTab = 'step2'">
+                               ng-class="{'w--current': currentTab === 2}"
+                               ng-click="changeCurrentTab(2)">
                                 <div>2 - <?php _ehtml('Project duration & location') ?></div>
                             </a>
                             <a class="step-tab tab-link-3 w-inline-block w-tab-link"
-                               ng-class="{'w--current': currentTab == 'step3'}" data-w-tab="Tab 3"
-                               ng-click="currentTab = 'step3'">
+                               ng-class="{'w--current': currentTab === 3}"
+                               ng-click="changeCurrentTab(3)">
                                 <div>3 - <?php _ehtml('Project Description') ?></div>
                             </a>
                             <a class="step-tab tab-link-4 w-inline-block w-tab-link"
-                               ng-class="{'w--current': currentTab == 'step4'}" data-w-tab="Tab 4" id="tab-four"
-                               ng-click="currentTab = 'step4'">
+                               ng-class="{'w--current': currentTab === 4}" id="tab-four"
+                               ng-click="changeCurrentTab(4)">
                                 <div>4 - <?php _ehtml('Submit your project') ?></div>
                             </a>
                         </div>
                         <div class="w-tab-content">
-                            <div class="step-window w-tab-pane" ng-class="{'w--tab-active': currentTab == 'step1'}"
+                            <div class="step-window w-tab-pane" ng-class="{'w--tab-active': currentTab === 1}"
                                  data-w-tab="Tab 1">
-                                <form name="email-form-3" ng-submit="submitStep1()">
+                                <form ng-submit="submitStep1()">
                                     <div class="tabbed-nav-buttons w-clearfix">
                                         <input type="submit" class="tab-button-2 tab-button-next w-button"
                                                ng-value="loading ? '<?php _ehtml('Loading') ?>...' : '<?php _ehtml('Next') ?>'"
@@ -69,7 +69,7 @@ if (!isset($urlHandler))
                                                value="<?php _ehtml('Next') ?>"/>
                                         <button type="button" class="tab-button-2 tab-button-next w-button"
                                                 ng-bind="loading ? '<?php _ehtml('Loading') ?>...' : '<?php _ehtml('Save') ?>'"
-                                                ng-click="submitStep1({proceed: false})"
+                                                ng-click="submitStep1({alert: true})"
                                                 ng-disabled="loading"><?php _ehtml('Save') ?>
                                         </button>
                                     </div>
@@ -272,7 +272,7 @@ if (!isset($urlHandler))
                                     </div>
                                 </form>
                             </div>
-                            <div class="step-window w-tab-pane" ng-class="{'w--tab-active': currentTab == 'step2'}"
+                            <div class="step-window w-tab-pane" ng-class="{'w--tab-active': currentTab === 2}"
                                  data-w-tab="Tab 2">
                                 <form name="email-form-3" ng-submit="submitStep2()">
                                     <div class="tabbed-nav-buttons w-clearfix">
@@ -282,10 +282,10 @@ if (!isset($urlHandler))
                                                value="<?php _ehtml('Next') ?>"/>
                                         <button type="button" class="tab-button-2 tab-button-next w-button"
                                                 ng-bind="loading ? '<?php _ehtml('Loading') ?>...' : '<?php _ehtml('Save') ?>'"
-                                                ng-click="submitStep2({proceed: false})"
+                                                ng-click="submitStep2({alert: true})"
                                                 ng-disabled="loading"><?php _ehtml('Save') ?>
                                         </button>
-                                        <a ng-click="currentTab='step1'"
+                                        <a ng-click="changeCurrentTab(1)"
                                            class="previous tab-button-1 tab-button-next w-button">Previous</a>
                                     </div>
                                     <div class="w-row">
@@ -356,7 +356,7 @@ if (!isset($urlHandler))
                                     </div>
                                 </form>
                             </div>
-                            <div class="step-window w-tab-pane" ng-class="{'w--tab-active': currentTab == 'step3'}"
+                            <div class="step-window w-tab-pane" ng-class="{'w--tab-active': currentTab === 3}"
                                  data-w-tab="Tab 3">
                                 <form name="email-form-3" ng-submit="submitStep3()">
                                     <div class="tabbed-nav-buttons w-clearfix">
@@ -366,10 +366,10 @@ if (!isset($urlHandler))
                                                value="<?php _ehtml('Next') ?>"/>
                                         <button type="button" class="tab-button-2 tab-button-next w-button"
                                                 ng-bind="loading ? '<?php _ehtml('Loading') ?>...' : '<?php _ehtml('Save') ?>'"
-                                                ng-click="submitStep3({proceed: false})"
+                                                ng-click="submitStep3({alert: true})"
                                                 ng-disabled="loading"><?php _ehtml('Save') ?>
                                         </button>
-                                        <a ng-click="currentTab='step2'"
+                                        <a ng-click="changeCurrentTab(2)"
                                            class="previous tab-button-2 tab-button-next w-button">Previous</a>
                                     </div>
                                     <div class="w-row">
@@ -430,7 +430,7 @@ if (!isset($urlHandler))
                                     </div>
                                 </form>
                             </div>
-                            <div class="step-window w-tab-pane" ng-class="{'w--tab-active': currentTab == 'step4'}"
+                            <div class="step-window w-tab-pane" ng-class="{'w--tab-active': currentTab === 4}"
                                  data-w-tab="Tab 4">
                                 <form name="email-form-3" ng-submit="submitStep4()">
                                     <div class="tabbed-nav-buttons w-clearfix">
@@ -441,7 +441,7 @@ if (!isset($urlHandler))
                                         <a href="<?php echo $urlHandler->project($project) ?>"
                                            class="tab-button-next update-button w-button">
                                             <?php _ehtml('Save for later') ?></a>
-                                        <a ng-click="currentTab='step3'"
+                                        <a ng-click="changeCurrentTab(3)"
                                            class="previous tab-button-3 tab-button-next w-button">
                                             <?php _ehtml('Previous') ?></a>
                                     </div>

@@ -79,9 +79,7 @@ class ImportOrgLinksController
 
             $organisationLinks = array_filter($organisationLinks);
 
-            $updateOrganisation = new UpdateOrganisation();
-            $updateOrganisation->data()->organisation = $organisation;
-            $updateOrganisation->data()->executor = $this->getRootUser();
+            $updateOrganisation = new UpdateOrganisation($this->getRootUser(), $organisation);
             $updateOrganisation->data()->links = $organisationLinks;
             $updateOrganisation->exec();
         } catch (NotFound $e){

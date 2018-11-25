@@ -22,9 +22,6 @@ class UpdateOrganisationTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->updateOrganisation = new \DSI\UseCase\UpdateOrganisation();
-        $this->organisationRepo = new OrganisationRepo();
-
         $this->user1 = new \DSI\Entity\User();
         $userRepo = new \DSI\Repository\UserRepo();
         $this->user1->setFirstName('FName');
@@ -46,6 +43,9 @@ class UpdateOrganisationTest extends PHPUnit_Framework_TestCase
         $createOrganisation->exec();
 
         $this->organisation = $createOrganisation->getOrganisation();
+
+        $this->updateOrganisation = new \DSI\UseCase\UpdateOrganisation($this->user1, $this->organisation);
+        $this->organisationRepo = new OrganisationRepo();
     }
 
     public function tearDown()
