@@ -23,7 +23,7 @@
 				});
 
 			$scope.changeCurrentTab = function(tab) {
-				if( $scope.currentTab === 'step1' ) {
+				if( $scope.currentTab === 1 ) {
 					$scope.submitStep1({proceed: false});
 
 					$scope.project.areasOfImpact = getAreaOfImpactTags();
@@ -36,7 +36,7 @@
 						return;
 				}
 
-				if( $scope.currentTab === 'step3' ) {
+				if( $scope.currentTab === 3 ) {
 					$scope.submitStep3({proceed: false});
 
 					if( !$scope.project.shortDescription )
@@ -46,7 +46,7 @@
 				$scope.currentTab = tab;
 			};
 
-			$scope.currentTab = 'step1';
+			$scope.currentTab = 1;
 
 			function getSelectedFocusTags () {
 				var focusTags = [];
@@ -80,7 +80,7 @@
 				$scope.project.impactTagsC = getAreaOfTechnologyTags();
 				$scope.project.organisations = $('#organisationsSelect').val();
 				$scope.saveDetails({
-					postField: 'step1',
+					postField: 1,
 					onSuccess: function() {
 						if( params ) {
 							if( params.alert === true )
@@ -88,7 +88,7 @@
 							if( params.proceed === false )
 								return true;
 						} else {
-							return $scope.currentTab = 'step2';
+							return $scope.currentTab = 2;
 						}
 					}
 				});
@@ -98,16 +98,15 @@
 				$scope.project.countryID = editCountry.val();
 				$scope.project.region = editCountryRegion.val();
 				$scope.saveDetails({
-					postField: 'step2',
+					postField: 2,
 					onSuccess: function() {
-						if( params && params.proceed === false ) {
-							swal({
-								title: "Success!",
-								text: confirmationText,
-								type: "success"
-							});
+						if( params ) {
+							if( params.alert === true )
+								return swal('Success!', confirmationText, 'success');
+							if( params.proceed === false )
+								return true;
 						} else {
-							$scope.currentTab = 'step3';
+							return $scope.currentTab = 3;
 						}
 					}
 				})
@@ -117,7 +116,7 @@
 				$scope.project.description = tinyMCE.get('description').getContent();
 				$scope.project.socialImpact = tinyMCE.get('socialImpact').getContent();
 				$scope.saveDetails({
-					postField: 'step3',
+					postField: 3,
 					onSuccess: function() {
 						if( params ) {
 							if( params.alert === true )
@@ -125,7 +124,7 @@
 							if( params.proceed === false )
 								return true;
 						} else {
-							return $scope.currentTab = 'step4';
+							return $scope.currentTab = 4;
 						}
 					}
 				})
@@ -141,15 +140,16 @@
 					$scope.project.logo = $scope.logo.image;
 					$scope.project.headerImage = $scope.headerImage.image;
 					$scope.saveDetails({
-						postField: 'step4',
+						postField: 4,
 						onSuccess: function() {
-							swal({
-								title: "Success!",
-								text: confirmationText,
-								type: "success"
-							}, function(isConfirm) {
-								window.location.href = projectURL;
-							});
+							if( params ) {
+								if( params.alert === true )
+									return swal('Success!', confirmationText, 'success');
+								if( params.proceed === false )
+									return true;
+							} else {
+								return window.location.href = projectURL;
+							}
 						}
 					})
 				}
