@@ -22,11 +22,13 @@ angular
 			});
 
 		$scope.changeCurrentTab = function(tab) {
+			console.log({organisation: $scope.organisation});
+
 			if( $scope.currentTab === 1 ) {
 				$scope.submitStep1({proceed: false});
 
 				if( !$scope.organisation.name
-					|| !$scope.organisation.organisationTypeId
+					|| (!$scope.organisation.organisationTypeId || $scope.organisation.organisationTypeId === '0')
 				)
 					return;
 			}
@@ -35,8 +37,9 @@ angular
 				$scope.submitStep2({proceed: false});
 
 				$scope.organisation.countryID = editCountry.val();
+				$scope.organisation.region = editCountryRegion.val();
 
-				if( !$scope.organisation.countryID )
+				if( !$scope.organisation.countryID || !$scope.organisation.region )
 					return;
 			}
 

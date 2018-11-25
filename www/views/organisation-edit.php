@@ -133,6 +133,8 @@ if (!isset($urlHandler))
                                                                     </option>
                                                                 <?php } ?>
                                                             </select>
+                                                            <div class="log-in-error" ng-show="errors.type"
+                                                                 ng-bind="errors.type"></div>
                                                             <br/><br/>
                                                         </div>
                                                     </div>
@@ -257,18 +259,23 @@ if (!isset($urlHandler))
                                                         <div class="padding-left-50" ng-cloak>
                                                             <?php /* <h2 class="edit-h2"><?php _ehtml('Where is your Organisation based?') ?></h2> */ ?>
                                                             <h2 class="edit-h2"><?php _ehtml('Location') ?></h2>
-                                                            <label for="email-7"><?php _ehtml('Which country is your organisation based in?') ?>
-                                                                *</label>
+                                                            <label for="email-7">
+                                                                <?php _ehtml('Which country is your organisation based in?') ?> *
+                                                            </label>
                                                             <select id="edit-country"
                                                                     data-placeholder="<?php _ehtml('Select country') ?>"
                                                                     class="creator-data-entry w-input"
                                                                     style="width:100%">
                                                                 <option></option>
                                                             </select>
+                                                            <div class="log-in-error" ng-show="errors.country"
+                                                                 ng-bind="errors.country"></div>
 
                                                             <div ng-show="regionsLoaded">
                                                                 <br/>
-                                                                <label class="story-label"><?php _ehtml('And in which city?') ?></label>
+                                                                <label class="story-label">
+                                                                    <?php _ehtml('And in which city?') ?> *
+                                                                </label>
                                                                 <select class="creator-data-entry w-input"
                                                                         data-tags="true" id="edit-countryRegion"
                                                                         data-placeholder="<?php _ehtml('Type the city') ?>"

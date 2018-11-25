@@ -68,37 +68,29 @@ class OrganisationEditController
         try {
             if (isset($_POST['saveDetails'])) {
                 if ($_POST['step'] == '1') {
-                    $updateOrganisation = new UpdateOrganisation();
-                    $updateOrganisation->data()->organisation = $organisation;
-                    $updateOrganisation->data()->executor = $loggedInUser;
+                    $updateOrganisation = new UpdateOrganisation($loggedInUser, $organisation);
                     $updateOrganisation->data()->name = $_POST['name'] ?? '';
                     $updateOrganisation->data()->url = $_POST['url'] ?? '';
-                    $updateOrganisation->data()->organisationTypeId = $_POST['organisationTypeId'] ?? 0;
+                    $updateOrganisation->data()->organisationTypeId = (int) $_POST['organisationTypeId'] ?? 0;
                     $updateOrganisation->data()->tags = $_POST['tags'] ?? [];
                     $updateOrganisation->data()->networkTags = $_POST['networkTags'] ?? [];
                     $updateOrganisation->data()->projects = $_POST['projects'] ?? [];
                     $updateOrganisation->data()->links = $_POST['links'] ?? [];
                     $updateOrganisation->exec();
                 } elseif ($_POST['step'] == '2') {
-                    $updateOrganisation = new UpdateOrganisation();
-                    $updateOrganisation->data()->organisation = $organisation;
-                    $updateOrganisation->data()->executor = $loggedInUser;
+                    $updateOrganisation = new UpdateOrganisation($loggedInUser, $organisation);
                     $updateOrganisation->data()->startDate = $_POST['startDate'] ?? '';
-                    $updateOrganisation->data()->countryID = $_POST['countryID'] ?? 0;
+                    $updateOrganisation->data()->countryID = (int) $_POST['countryID'] ?? 0;
                     $updateOrganisation->data()->region = $_POST['region'] ?? '';
                     $updateOrganisation->data()->organisationSizeId = $_POST['organisationSizeId'] ?? '';
                     $updateOrganisation->exec();
                 } elseif ($_POST['step'] == '3') {
-                    $updateOrganisation = new UpdateOrganisation();
-                    $updateOrganisation->data()->organisation = $organisation;
-                    $updateOrganisation->data()->executor = $loggedInUser;
+                    $updateOrganisation = new UpdateOrganisation($loggedInUser, $organisation);
                     $updateOrganisation->data()->shortDescription = $_POST['shortDescription'] ?? '';
                     $updateOrganisation->data()->description = $_POST['description'] ?? '';
                     $updateOrganisation->exec();
                 } elseif ($_POST['step'] == '4') {
-                    $updateOrganisation = new UpdateOrganisation();
-                    $updateOrganisation->data()->organisation = $organisation;
-                    $updateOrganisation->data()->executor = $loggedInUser;
+                    $updateOrganisation = new UpdateOrganisation($loggedInUser, $organisation);
                     $updateOrganisation->data()->logo = $_POST['logo'] ?? '';
                     $updateOrganisation->data()->headerImage = $_POST['headerImage'] ?? '';
                     $updateOrganisation->exec();
@@ -111,9 +103,7 @@ class OrganisationEditController
             if (isset($_POST['updateBasic'])) {
                 $authUser->ifNotLoggedInRedirectTo($urlHandler->login());
 
-                $updateOrganisation = new UpdateOrganisation();
-                $updateOrganisation->data()->organisation = $organisation;
-                $updateOrganisation->data()->executor = $loggedInUser;
+                $updateOrganisation = new UpdateOrganisation($loggedInUser, $organisation);
                 if (isset($_POST['name']))
                     $updateOrganisation->data()->name = $_POST['name'];
                 if (isset($_POST['description']))

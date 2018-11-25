@@ -90,9 +90,7 @@ class ImportOrganisations_2018_07_Controller
             dump("Created " . $data['Name']);
         }
 
-        $exec = new UpdateOrganisation();
-        $exec->data()->executor = $executor;
-        $exec->data()->organisation = $organisation;
+        $exec = new UpdateOrganisation($executor, $organisation);
         $exec->data()->shortDescription = $data['Short description'];
         $exec->data()->description = $data['Long description'];
         $exec->data()->url = $data['Website'];
