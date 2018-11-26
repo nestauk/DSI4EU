@@ -497,7 +497,9 @@ if (!isset($urlHandler))
                 <p class="twitter-text">
                     To keep in touch with the project and DSI in Europe, follow us on Twitter
                     <a target="_blank" href="https://twitter.com/dsi4eu">@DSI4EU</a> and
-                    <a target="_blank" href="https://bit.ly/DSINews">sign up to our newsletter</a>.
+                    <a target="_blank" href="https://nesta.us1.list-manage.com/subscribe?u=db62b5694f0d8093140a6b62e&id=f8a8a22c21">
+                        sign up to our newsletter
+                    </a>.
                 </p>
             </div>
         </div>
