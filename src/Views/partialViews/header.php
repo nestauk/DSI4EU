@@ -7,111 +7,117 @@ if (!isset($urlHandler))
     $urlHandler = new URL();
 ?>
 
-    <div data-ix="close-notification-modal" class="create-paused">
-        <div class="add-post-modal">
-            <h1 class="modal-h1 padding">Thank you for your interest in joining Europe&#x27;s network of digital social
-                innovation</h1>
-            <p class="paragraph">We regret to inform you that, due to a technical issue, we can&#x27;t currently accept
-                new projects and organisations. We&#x27;re working as quickly as we can to get this fixed and look
-                forward to seeing your work on the platform soon!</p>
-            <p class="paragraph">In the meantime, please do sign up to our newsletter through the homepage, and if you
-                have any questions drop us a line at <a
-                        href="mailto:contact@digitalsocial.eu">contact@digitalsocial.eu</a>.</p>
-            <div data-ix="close-notification-modal" class="close-modal">+</div>
-        </div>
+<div data-ix="close-notification-modal" class="create-paused">
+    <div class="add-post-modal">
+        <h1 class="modal-h1 padding">Thank you for your interest in joining Europe&#x27;s network of digital social
+            innovation</h1>
+        <p class="paragraph">We regret to inform you that, due to a technical issue, we can&#x27;t currently accept
+            new projects and organisations. We&#x27;re working as quickly as we can to get this fixed and look
+            forward to seeing your work on the platform soon!</p>
+        <p class="paragraph">In the meantime, please do sign up to our newsletter through the homepage, and if you
+            have any questions drop us a line at <a
+                    href="mailto:contact@digitalsocial.eu">contact@digitalsocial.eu</a>.</p>
+        <div data-ix="close-notification-modal" class="close-modal">+</div>
     </div>
-    <div class="menu-full-screen" data-ix="displaynone">
-        <div class="main-menu">
-            <div class="main-menu-profile-block w-clearfix">
-                <div class="languages menu-languages w-clearfix">
-                    <?php foreach (['it', 'fr', 'es', 'en', 'de', 'ca'] AS $lang) { ?>
-                        <a href="<?php echo (new URL($lang))->home() ?>"
-                           class="language log-in-link w-inline-block
+</div>
+<div class="menu-full-screen" data-ix="displaynone">
+    <div class="main-menu">
+        <div class="main-menu-profile-block w-clearfix">
+            <div class="languages menu-languages w-clearfix">
+                <?php foreach (['it', 'fr', 'es', 'en', 'de', 'ca'] AS $lang) { ?>
+                    <a href="<?php echo (new URL($lang))->home() ?>"
+                       class="language log-in-link w-inline-block
                            <?php if (\DSI\Service\Translate::getCurrentLang() == $lang) echo 'active' ?>">
-                            <div class="language menu-li menu-search"><?php echo ucfirst($lang) ?></div>
-                        </a>
-                    <?php } ?>
-                </div>
-
-                <?php if ($loggedInUser) { ?>
-                    <div class="profile-img"
-                         style="background-image: url('<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/<?php echo $loggedInUser->getProfilePicOrDefault() ?>');"></div>
-                    <h3 class="profile-name"><?php echo show_input($loggedInUser->getFullName()) ?></h3>
-                    <h3 class="profile-name profile-organisation"><?php echo show_input($loggedInUser->getCompany()) ?></h3>
-                    <div class="profile-options">
-                        <div class="profile-options w-row">
-                            <div class="profile-col w-col w-col-4">
-                                <a href="<?php echo $urlHandler->dashboard() ?>"><?php _e('Dashboard') ?></a>
-                            </div>
-                            <div class="profile-col w-col w-col-4">
-                                <a href="<?php echo $urlHandler->profile($loggedInUser) ?>"><?php _e('Profile') ?></a>
-                            </div>
-                            <div class="profile-col w-col w-col-4">
-                                <a href="<?php echo $urlHandler->logout() ?>"><?php _e('Sign out') ?></a>
-                            </div>
-                        </div>
-                    </div>
-                <?php } else { ?>
-                    <div class="profile-options">
-                        <div class="profile-options w-row">
-                            <div class="profile-col w-col w-col-6">
-                                <a href="<?php echo $urlHandler->login() ?>"><?php _e('Login') ?></a>
-                            </div>
-                            <div class="profile-col w-col w-col-6">
-                                <a href="<?php echo $urlHandler->register() ?>"><?php _e('Create account') ?></a>
-                            </div>
-                        </div>
-                    </div>
+                        <div class="language menu-li menu-search"><?php echo ucfirst($lang) ?></div>
+                    </a>
                 <?php } ?>
             </div>
-            <div class="full-menu-items w-row">
-                <div class="full-menu-col w-clearfix w-col w-col-4">
-                    <div class="full-menu-links-block no-border">
-                        <h2 class="full-menu-h2"><?php _e('About DSI4EU') ?></h2>
-                        <a class="full-menu-link" href="<?= $urlHandler->aboutTheProject() ?>">
-                            <?= __('About the project') ?>
-                        </a>
-                        <a class="full-menu-link" href="<?= $urlHandler->partners() ?>">
-                            <?= __('Partners') ?>
-                        </a>
-                        <a class="full-menu-link" href="<?= $urlHandler->openDataResearchAndResources() ?>">
-                            <?= __('Research and resources') ?>
-                        </a>
-                        <a class="full-menu-link" href="<?= $urlHandler->advisoryBoard() ?>">
-                            <?= __('Advisory board') ?>
-                        </a>
-                        <?php /*
+
+            <?php if ($loggedInUser) { ?>
+                <div class="profile-img"
+                     style="background-image: url('<?php echo SITE_RELATIVE_PATH ?>/images/users/profile/<?php echo $loggedInUser->getProfilePicOrDefault() ?>');"></div>
+                <h3 class="profile-name"><?php echo show_input($loggedInUser->getFullName()) ?></h3>
+                <h3 class="profile-name profile-organisation"><?php echo show_input($loggedInUser->getCompany()) ?></h3>
+                <div class="profile-options">
+                    <div class="profile-options w-row">
+                        <div class="profile-col w-col w-col-4">
+                            <a href="<?php echo $urlHandler->dashboard() ?>"><?php _e('Dashboard') ?></a>
+                        </div>
+                        <div class="profile-col w-col w-col-4">
+                            <a href="<?php echo $urlHandler->profile($loggedInUser) ?>"><?php _e('Profile') ?></a>
+                        </div>
+                        <div class="profile-col w-col w-col-4">
+                            <a href="<?php echo $urlHandler->logout() ?>"><?php _e('Sign out') ?></a>
+                        </div>
+                    </div>
+                </div>
+            <?php } else { ?>
+                <div class="profile-options">
+                    <div class="profile-options w-row">
+                        <div class="profile-col w-col w-col-6">
+                            <a href="<?php echo $urlHandler->login() ?>"><?php _e('Login') ?></a>
+                        </div>
+                        <div class="profile-col w-col w-col-6">
+                            <a href="<?php echo $urlHandler->register() ?>"><?php _e('Create account') ?></a>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+        </div>
+        <div class="full-menu-items w-row">
+            <div class="full-menu-col w-clearfix w-col w-col-4">
+                <div class="full-menu-links-block no-border">
+                    <h2 class="full-menu-h2"><?php _e('About DSI4EU') ?></h2>
+                    <a class="full-menu-link" href="<?= $urlHandler->aboutTheProject() ?>">
+                        <?= __('About the project') ?>
+                    </a>
+                    <a class="full-menu-link" href="<?= $urlHandler->partners() ?>">
+                        <?= __('Partners') ?>
+                    </a>
+                    <a class="full-menu-link" href="<?= $urlHandler->openDataResearchAndResources() ?>">
+                        <?= __('Research and resources') ?>
+                    </a>
+                    <a class="full-menu-link" href="<?= $urlHandler->advisoryBoard() ?>">
+                        <?= __('Advisory board') ?>
+                    </a>
+                    <a class="full-menu-link" href="<?= $urlHandler->dsiIndex() ?>">
+                        <?= __('DSI Index') ?>
+                    </a>
+                    <a class="full-menu-link" href="<?= $urlHandler->futures() ?>">
+                        <?= __('DSI Futures') ?>
+                    </a>
+                    <?php /*
                         <a class="full-menu-link" href="<?php echo $urlHandler->contactDSI() ?>">
                             <?php // _e('Contact DSI4EU') ?>
                         </a>
                         */ ?>
-                    </div>
                 </div>
-                <div class="full-menu-col w-col w-col-4">
-                    <h2 class="full-menu-h2">
-                        <?= __('DSI in Europe') ?>
-                    </h2>
-                    <a class="full-menu-link" href="<?= $urlHandler->what_is_dsi() ?>">
-                        <?= __('What is DSI?') ?>
+            </div>
+            <div class="full-menu-col w-col w-col-4">
+                <h2 class="full-menu-h2">
+                    <?= __('DSI in Europe') ?>
+                </h2>
+                <a class="full-menu-link" href="<?= $urlHandler->what_is_dsi() ?>">
+                    <?= __('What is DSI?') ?>
+                </a>
+                <a class="full-menu-link" href="<?= $urlHandler->projects() ?>">
+                    <?php // __('Search projects') ?>
+                    <?= __('DSI projects') ?>
+                </a>
+                <a class="full-menu-link" href="<?= $urlHandler->organisations() ?>">
+                    <?php // __('Search organisations') ?>
+                    <?= __('DSI organisations') ?>
+                </a>
+                <a class="full-menu-link" href="/viz/" target="_blank">
+                    <?= __('Data visualisation') ?>
+                </a>
+                <?php if ($loggedInUser) { ?>
+                    <a class="full-menu-link" href="<?= $urlHandler->editUserProfile($loggedInUser) ?>">
+                        <?= __('Create your profile') ?>
                     </a>
-                    <a class="full-menu-link" href="<?= $urlHandler->projects() ?>">
-                        <?php // __('Search projects') ?>
-                        <?= __('DSI projects') ?>
-                    </a>
-                    <a class="full-menu-link" href="<?= $urlHandler->organisations() ?>">
-                        <?php // __('Search organisations') ?>
-                        <?= __('DSI organisations') ?>
-                    </a>
-                    <a class="full-menu-link" href="/viz/" target="_blank">
-                        <?= __('Data visualisation') ?>
-                    </a>
-                    <?php if ($loggedInUser) { ?>
-                        <a class="full-menu-link" href="<?= $urlHandler->editUserProfile($loggedInUser) ?>">
-                            <?= __('Create your profile') ?>
-                        </a>
-                    <?php } ?>
+                <?php } ?>
 
-                    <?php /*
+                <?php /*
                     <a class="full-menu-link" href="<?php echo $urlHandler->caseStudies() ?>">
                         <?php _e('Case Studies') ?>
                     </a>
@@ -122,155 +128,155 @@ if (!isset($urlHandler))
                         </a>
                     <?php } ?>
                     */ ?>
-                </div>
+            </div>
 
-                <div class="full-menu-col w-col w-col-4">
-                    <h2 class="full-menu-h2">
-                        <?= __('DSI Clusters') ?>
-                    </h2>
-                    <a class="full-menu-link" href="<?= $urlHandler->clusters() ?>">
-                        <?= __('Introduction') ?>
-                    </a>
-                    <a class="full-menu-link" href="<?php echo $urlHandler->clusterById(1, 'health-and-care') ?>">
-                        <?= __('Health and care') ?>
-                    </a>
-                    <a class="full-menu-link" href="<?php echo $urlHandler->clusterById(2, 'skills-and-learning') ?>">
-                        <?= __('Skills and learning') ?>
-                    </a>
-                    <a class="full-menu-link"
-                       href="<?php echo $urlHandler->clusterById(4, 'food-environment-and-climate-change') ?>">
-                        <?= __('Food, environment and climate change') ?>
-                    </a>
-                    <a class="full-menu-link"
-                       href="<?php echo $urlHandler->clusterById(5, 'migration-and-integration') ?>">
-                        <?= __('Migration and integration') ?>
-                    </a>
-                    <a class="full-menu-link" href="<?php echo $urlHandler->clusterById(3, 'digital-democracy') ?>">
-                        <?= __('Digital democracy') ?>
-                    </a>
-                    <a class="full-menu-link"
-                       href="<?php echo $urlHandler->clusterById(6, 'cities-and-urban-development') ?>">
-                        <?= __('Cities and urban development') ?>
-                    </a>
-                    <?php /* if ($loggedInUser) { ?>
+            <div class="full-menu-col w-col w-col-4">
+                <h2 class="full-menu-h2">
+                    <?= __('DSI Clusters') ?>
+                </h2>
+                <a class="full-menu-link" href="<?= $urlHandler->clusters() ?>">
+                    <?= __('Introduction') ?>
+                </a>
+                <a class="full-menu-link" href="<?php echo $urlHandler->clusterById(1, 'health-and-care') ?>">
+                    <?= __('Health and care') ?>
+                </a>
+                <a class="full-menu-link" href="<?php echo $urlHandler->clusterById(2, 'skills-and-learning') ?>">
+                    <?= __('Skills and learning') ?>
+                </a>
+                <a class="full-menu-link"
+                   href="<?php echo $urlHandler->clusterById(4, 'food-environment-and-climate-change') ?>">
+                    <?= __('Food, environment and climate change') ?>
+                </a>
+                <a class="full-menu-link"
+                   href="<?php echo $urlHandler->clusterById(5, 'migration-and-integration') ?>">
+                    <?= __('Migration and integration') ?>
+                </a>
+                <a class="full-menu-link" href="<?php echo $urlHandler->clusterById(3, 'digital-democracy') ?>">
+                    <?= __('Digital democracy') ?>
+                </a>
+                <a class="full-menu-link"
+                   href="<?php echo $urlHandler->clusterById(6, 'cities-and-urban-development') ?>">
+                    <?= __('Cities and urban development') ?>
+                </a>
+                <?php /* if ($loggedInUser) { ?>
                         <a class="full-menu-link ix-create-organisation-modal" href="#">
                             <?php _e('Add new organisation') ?>
                         </a>
                     <?php } */ ?>
+            </div>
+        </div>
+        <div class="full-menu-items w-row">
+            <div class="full-menu-col w-clearfix w-col w-col-4">
+                <h2 class="full-menu-h2"><?= __('Funding, support and events') ?></h2>
+                <div class="full-menu-links-block no-border">
+                    <a class="full-menu-link" href="<?php echo $urlHandler->funding() ?>">
+                        <?php // __('Search funding and support') ?>
+                        <?= __('Funding and support') ?>
+                    </a>
+                    <a class="full-menu-link" href="<?php echo $urlHandler->events() ?>">
+                        <?php // __('Search events') ?>
+                        <?= __('Events') ?>
+                    </a>
+                    <a class="full-menu-link" target="_blank"
+                       href="https://docs.google.com/forms/d/e/1FAIpQLSd8V-vyQADRo_ofvc5n49CBB-qeEgMlymLgQ6EUTJJWLD7DkQ/viewform">
+                        <?= __('Add your opportunity') ?>
+                    </a>
+                    <a class="full-menu-link" href="http://bit.ly/DSIEvent" target="_blank">
+                        <?= __('Add your event') ?>
+                    </a>
                 </div>
             </div>
-            <div class="full-menu-items w-row">
-                <div class="full-menu-col w-clearfix w-col w-col-4">
-                    <h2 class="full-menu-h2"><?= __('Funding, support and events') ?></h2>
-                    <div class="full-menu-links-block no-border">
-                        <a class="full-menu-link" href="<?php echo $urlHandler->funding() ?>">
-                            <?php // __('Search funding and support') ?>
-                            <?= __('Funding and support') ?>
-                        </a>
-                        <a class="full-menu-link" href="<?php echo $urlHandler->events() ?>">
-                            <?php // __('Search events') ?>
-                            <?= __('Events') ?>
-                        </a>
-                        <a class="full-menu-link" target="_blank"
-                           href="https://docs.google.com/forms/d/e/1FAIpQLSd8V-vyQADRo_ofvc5n49CBB-qeEgMlymLgQ6EUTJJWLD7DkQ/viewform">
-                            <?= __('Add your opportunity') ?>
-                        </a>
-                        <a class="full-menu-link" href="http://bit.ly/DSIEvent" target="_blank">
-                            <?= __('Add your event') ?>
-                        </a>
-                    </div>
+            <div class="full-menu-col w-clearfix w-col w-col-4">
+                <h2 class="full-menu-h2"><?= __('DSI Stories') ?></h2>
+                <div class="full-menu-links-block no-border">
+                    <a class="full-menu-link" href="<?php echo $urlHandler->blogPosts() ?>">
+                        <?= __('Blogs') ?>
+                    </a>
+                    <a class="full-menu-link" href="<?php echo $urlHandler->caseStudies() ?>">
+                        <?= __('Case studies') ?>
+                    </a>
                 </div>
-                <div class="full-menu-col w-clearfix w-col w-col-4">
-                    <h2 class="full-menu-h2"><?= __('DSI Stories') ?></h2>
-                    <div class="full-menu-links-block no-border">
-                        <a class="full-menu-link" href="<?php echo $urlHandler->blogPosts() ?>">
-                            <?= __('Blogs') ?>
-                        </a>
-                        <a class="full-menu-link" href="<?php echo $urlHandler->caseStudies() ?>">
-                            <?= __('Case studies') ?>
-                        </a>
-                    </div>
-                </div>
-                <div class="full-menu-col w-clearfix w-col w-col-4">
-                    <h2 class="full-menu-h2"><?= __('Contact us') ?></h2>
-                    <div class="full-menu-links-block no-border">
-                        <a class="full-menu-link" href="<?php echo $urlHandler->contactDSI() ?>">
-                            <?= __('Contact DSI4EU') ?>
-                        </a>
-                        <a class="full-menu-link" href="<?php echo $urlHandler->feedback() ?>">
-                            <?= __('Feedback') ?>
-                        </a>
-                        <a class="full-menu-link" href="http://twitter.com/DSI4EU" target="_blank">
-                            <?= __('Follow us on Twitter') ?>
-                        </a>
-                        <a class="full-menu-link" target="_blank"
-                           href="https://nesta.us1.list-manage.com/subscribe?u=db62b5694f0d8093140a6b62e&id=f8a8a22c21">
-                            <?= __('Sign up to our newsletter') ?>
-                        </a>
-                    </div>
+            </div>
+            <div class="full-menu-col w-clearfix w-col w-col-4">
+                <h2 class="full-menu-h2"><?= __('Contact us') ?></h2>
+                <div class="full-menu-links-block no-border">
+                    <a class="full-menu-link" href="<?php echo $urlHandler->contactDSI() ?>">
+                        <?= __('Contact DSI4EU') ?>
+                    </a>
+                    <a class="full-menu-link" href="<?php echo $urlHandler->feedback() ?>">
+                        <?= __('Feedback') ?>
+                    </a>
+                    <a class="full-menu-link" href="http://twitter.com/DSI4EU" target="_blank">
+                        <?= __('Follow us on Twitter') ?>
+                    </a>
+                    <a class="full-menu-link" target="_blank"
+                       href="https://nesta.us1.list-manage.com/subscribe?u=db62b5694f0d8093140a6b62e&id=f8a8a22c21">
+                        <?= __('Sign up to our newsletter') ?>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
-    <div class="navbarnu w-nav" data-animation="over-left" data-collapse="all" data-duration="400">
-        <div class="menu-div" style="max-width:1290px; margin: 0 auto;">
-            <a class="w-nav-brand" href="<?php echo $urlHandler->home() ?>">
-                <img class="brand-logo" src="<?php echo SITE_RELATIVE_PATH ?>/images/partners/dsi-logo.png">
-            </a>
-            <a class="m-brand w-nav-brand" href="<?php echo $urlHandler->home() ?>">
-                <img class="brand-logo m-brand" src="<?php echo SITE_RELATIVE_PATH ?>/images/shadowlight.png">
-            </a>
-            <div class="menu-button w-nav-button" data-ix="navbarinteraction">
-                <div class="top-line"></div>
-                <div class="middle-line"></div>
-                <div class="bottom-line"></div>
-                <div class="menu-li"><?php _ehtml('Menu') ?></div>
-            </div>
-            <?php if (isset($loggedInUser) AND $loggedInUser) { ?>
-                <div
-                    <?php if (\Services\App::canCreateProjects()) { ?>
-                        data-ix="create-dropdown"
-                    <?php } else { ?>
-                        data-ix="create-paused"
-                    <?php } ?>
-                        class="create ll log-in-link w-clearfix">
-                    <div class="login-li menu-li"><?php _e('Create') ?></div>
-                    <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-plus-empty.png">
-                    <div class="create-drop-down-block">
-                        <a href="#" data-ix="create-project-modal" id="ix-create-project-modal"></a>
-                        <a href="#" data-ix="create-organisation-modal" id="ix-create-organisation-modal"></a>
-                        <a class="drop-down-link-li ix-create-project-modal"
-                           href="#"><?php _e('Create project') ?></a>
-                        <a class="drop-down-link-li ix-create-organisation-modal"
-                           href="#"><?php _e('Create organisation') ?></a>
-                    </div>
+</div>
+<div class="navbarnu w-nav" data-animation="over-left" data-collapse="all" data-duration="400">
+    <div class="menu-div" style="max-width:1290px; margin: 0 auto;">
+        <a class="w-nav-brand" href="<?php echo $urlHandler->home() ?>">
+            <img class="brand-logo" src="<?php echo SITE_RELATIVE_PATH ?>/images/partners/dsi-logo.png">
+        </a>
+        <a class="m-brand w-nav-brand" href="<?php echo $urlHandler->home() ?>">
+            <img class="brand-logo m-brand" src="<?php echo SITE_RELATIVE_PATH ?>/images/shadowlight.png">
+        </a>
+        <div class="menu-button w-nav-button" data-ix="navbarinteraction">
+            <div class="top-line"></div>
+            <div class="middle-line"></div>
+            <div class="bottom-line"></div>
+            <div class="menu-li"><?php _ehtml('Menu') ?></div>
+        </div>
+        <?php if (isset($loggedInUser) AND $loggedInUser) { ?>
+            <div
+                <?php if (\Services\App::canCreateProjects()) { ?>
+                    data-ix="create-dropdown"
+                <?php } else { ?>
+                    data-ix="create-paused"
+                <?php } ?>
+                    class="create ll log-in-link w-clearfix">
+                <div class="login-li menu-li"><?php _e('Create') ?></div>
+                <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-plus-empty.png">
+                <div class="create-drop-down-block">
+                    <a href="#" data-ix="create-project-modal" id="ix-create-project-modal"></a>
+                    <a href="#" data-ix="create-organisation-modal" id="ix-create-organisation-modal"></a>
+                    <a class="drop-down-link-li ix-create-project-modal"
+                       href="#"><?php _e('Create project') ?></a>
+                    <a class="drop-down-link-li ix-create-organisation-modal"
+                       href="#"><?php _e('Create organisation') ?></a>
                 </div>
-            <?php } else { ?>
-                <a class="ll log-in-link w-clearfix w-inline-block" data-ix="log-in-arrow" style="width:auto"
-                   href="<?php echo $urlHandler->login() ?>">
-                    <div class="login-li menu-li"><?php _e('Login') ?></div>
-                    <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
-                </a>
-            <?php } ?>
-            <a class="log-in-link menu-search w-clearfix w-inline-block" data-ix="search-roll" href="#">
-                <div class="menu-li menu-search"><?php _e('Search') ?></div>
-                <img class="search-icon" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-search.png">
+            </div>
+        <?php } else { ?>
+            <a class="ll log-in-link w-clearfix w-inline-block" data-ix="log-in-arrow" style="width:auto"
+               href="<?php echo $urlHandler->login() ?>">
+                <div class="login-li menu-li"><?php _e('Login') ?></div>
+                <img class="login-arrow" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-arrow-thin-right.png">
             </a>
-            <div class="languages w-clearfix">
-                <div class="active language log-in-link" data-ix="create-dropdown">
-                    <img class="language-icon" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-world-outline.png">
-                    <div class="create-drop-down-block language-selctor">
-                        <a class="drop-down-link-li" href="<?php echo (new URL('ca'))->home() ?>">Català</a>
-                        <a class="drop-down-link-li" href="<?php echo (new URL('de'))->home() ?>">Deutsch</a>
-                        <a class="drop-down-link-li" href="<?php echo (new URL('en'))->home() ?>">English</a>
-                        <a class="drop-down-link-li" href="<?php echo (new URL('es'))->home() ?>">Español</a>
-                        <a class="drop-down-link-li" href="<?php echo (new URL('fr'))->home() ?>">Français</a>
-                        <a class="drop-down-link-li" href="<?php echo (new URL('it'))->home() ?>">Italiano</a>
-                    </div>
+        <?php } ?>
+        <a class="log-in-link menu-search w-clearfix w-inline-block" data-ix="search-roll" href="#">
+            <div class="menu-li menu-search"><?php _e('Search') ?></div>
+            <img class="search-icon" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-search.png">
+        </a>
+        <div class="languages w-clearfix">
+            <div class="active language log-in-link" data-ix="create-dropdown">
+                <img class="language-icon" src="<?php echo SITE_RELATIVE_PATH ?>/images/ios7-world-outline.png">
+                <div class="create-drop-down-block language-selctor">
+                    <a class="drop-down-link-li" href="<?php echo (new URL('ca'))->home() ?>">Català</a>
+                    <a class="drop-down-link-li" href="<?php echo (new URL('de'))->home() ?>">Deutsch</a>
+                    <a class="drop-down-link-li" href="<?php echo (new URL('en'))->home() ?>">English</a>
+                    <a class="drop-down-link-li" href="<?php echo (new URL('es'))->home() ?>">Español</a>
+                    <a class="drop-down-link-li" href="<?php echo (new URL('fr'))->home() ?>">Français</a>
+                    <a class="drop-down-link-li" href="<?php echo (new URL('it'))->home() ?>">Italiano</a>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
 <?php /*
 <div class="alt nav-main w-nav white-menu" data-animation="default" data-collapse="medium" data-duration="400">

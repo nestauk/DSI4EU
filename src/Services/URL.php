@@ -262,6 +262,29 @@ class URL
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'open-data-research-and-resources';
     }
 
+
+    public function dsiIndex()
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'dsi-index';
+    }
+
+    public function dsiIndexEdit()
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'edit/dsi-index';
+    }
+
+
+    public function futures()
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'futures';
+    }
+
+    public function futuresEdit()
+    {
+        return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'edit/futures';
+    }
+
+
     public function openDataResearchAndResourcesEdit()
     {
         return SITE_RELATIVE_PATH . '/' . $this->addLanguage() . 'edit/open-data-research-and-resources';

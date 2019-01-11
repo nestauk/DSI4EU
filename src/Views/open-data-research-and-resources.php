@@ -30,10 +30,10 @@ require __DIR__ . '/header.php';
                 </div>
                 <div class="sidebar w-col w-col-4 w-col-stack">
                     <?php require __DIR__ . '/partialViews/about-dsi.php' ?>
-
                     <?php if ($canEdit) { ?>
                         <a class="sidebar-link" href="<?php echo $urlHandler->openDataResearchAndResourcesEdit() ?>">
-                            <span class="green">- <?php _ehtml('Edit page') ?></span>
+                            <span class="green">-&nbsp;</span>
+                            <span class="green"><?php _ehtml('Edit page') ?></span>
                         </a>
                     <?php } ?>
                 </div>

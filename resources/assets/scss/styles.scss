@@ -10141,7 +10141,7 @@ strong {
 
 .toast-notification {
 	position: fixed;
-	top: 100px;
+	top: 130px;
 	right: 10px;
 	z-index: 999;
 	width: 400px;
@@ -13141,8 +13141,8 @@ body {
 		bottom: 0;
 		width: 140px;
 		height: 42px;
-		background-color: #ff0000 !important;
-
+		background-color: #fff !important;
+		color: #f00;
 	}
 
 	.sweet-alert button {
