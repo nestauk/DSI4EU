@@ -1,6 +1,6 @@
 <?php
 
-namespace Controllers\DsiIndex;
+namespace Controllers\Futures;
 
 use DSI\Entity\User;
 use DSI\Service\Auth;
@@ -10,7 +10,7 @@ use Services\Response;
 use Services\URL;
 use Services\View;
 
-class DsiIndexController
+class FuturesController
 {
     /** @var URL */
     private $urlHandler;
@@ -30,13 +30,13 @@ class DsiIndexController
 
     public function exec()
     {
-        $title = Text::getByIdentifier('dsi-index-title');
-        $description = Text::getByIdentifier('dsi-index-description');
-        $content = Text::getByIdentifier('dsi-index-content');
+        $title = Text::getByIdentifier('futures-title');
+        $description = Text::getByIdentifier('futures-description');
+        $content = Text::getByIdentifier('futures-content');
 
         View::setPageTitle($title->getCopy() . ' - DSI4EU');
         View::setPageDescription($description->getCopy());
-        return View::render(__DIR__ . '/../../Views/dsi-index.php', [
+        return View::render(__DIR__ . '/../../Views/futures.php', [
             'authUser' => $this->authUser,
             'loggedInUser' => $this->loggedInUser,
             'title' => $title,
@@ -65,26 +65,26 @@ class DsiIndexController
 
     public function editGet()
     {
-        return View::render(__DIR__ . '/../../Views/edit/dsi-index.php', [
+        return View::render(__DIR__ . '/../../Views/edit/futures.php', [
             'authUser' => $this->authUser,
             'loggedInUser' => $this->loggedInUser,
-            'title' => Text::getByIdentifier('dsi-index-title'),
-            'description' => Text::getByIdentifier('dsi-index-description'),
-            'content' => Text::getByIdentifier('dsi-index-content'),
+            'title' => Text::getByIdentifier('futures-title'),
+            'description' => Text::getByIdentifier('futures-description'),
+            'content' => Text::getByIdentifier('futures-content'),
         ]);
     }
 
     public function editPost()
     {
-        $title = Text::getByIdentifier('dsi-index-title');
+        $title = Text::getByIdentifier('futures-title');
         $title->{Text::Copy} = $_POST['title'];
         $title->save();
 
-        $description = Text::getByIdentifier('dsi-index-description');
+        $description = Text::getByIdentifier('futures-description');
         $description->{Text::Copy} = $_POST['description'];
         $description->save();
 
-        $content = Text::getByIdentifier('dsi-index-content');
+        $content = Text::getByIdentifier('futures-content');
         $content->{Text::Copy} = $_POST['content'];
         $content->save();
 

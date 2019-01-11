@@ -296,8 +296,20 @@ class Router
         } elseif (preg_match('<^/' . $langHandler . 'updates$>', $this->pageURL, $matches)) {
             $this->staticPage($matches, 'updates.php');
 
+
         } elseif (preg_match('<^/' . $langHandler . 'dsi-index>', $this->pageURL, $matches)) {
             $this->dsiIndex($matches);
+
+        } elseif (preg_match('<^/' . $langHandler . 'edit/dsi-index$>', $this->pageURL, $matches)) {
+            $this->dsiIndexEdit($matches);
+
+
+        } elseif (preg_match('<^/' . $langHandler . 'futures>', $this->pageURL, $matches)) {
+            $this->futures($matches);
+
+        } elseif (preg_match('<^/' . $langHandler . 'edit/futures$>', $this->pageURL, $matches)) {
+            $this->futuresEdit($matches);
+
 
         } elseif (preg_match('<^/' . $langHandler . 'about-the-project$>', $this->pageURL, $matches)) {
             $this->about($matches);
@@ -1121,11 +1133,32 @@ class Router
         (new \DSI\Controller\StaticHtmlController())->about();
     }
 
+
     private function dsiIndex($matches)
     {
         $this->setLanguageFromUrl($matches);
-        (new \Controllers\DsiIndex\DsiIndexController())->exec();
+        return (new \Controllers\DsiIndex\DsiIndexController())->exec();
     }
+
+    private function dsiIndexEdit($matches)
+    {
+        $this->setLanguageFromUrl($matches);
+        return (new \Controllers\DsiIndex\DsiIndexController())->edit();
+    }
+
+
+    private function futures($matches)
+    {
+        $this->setLanguageFromUrl($matches);
+        return (new \Controllers\Futures\FuturesController())->exec();
+    }
+
+    private function futuresEdit($matches)
+    {
+        $this->setLanguageFromUrl($matches);
+        return (new \Controllers\Futures\FuturesController())->edit();
+    }
+
 
     private function advisoryBoard($matches)
     {
