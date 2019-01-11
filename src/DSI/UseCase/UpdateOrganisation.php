@@ -32,19 +32,27 @@ class UpdateOrganisation
     /** @var OrganisationRepo */
     private $organisationRepo;
 
-    public function __construct()
+    /** @var Organisation */
+    private $organisation;
+
+    /** @var User */
+    private $executor;
+
+    public function __construct($executor, $organisation)
     {
         $this->data = new UpdateOrganisation_Data();
         $this->organisationRepo = new OrganisationRepoInAPC();
+
+        $this->executor = $executor;
+        $this->organisation = $organisation;
     }
 
     public function exec()
     {
         $this->errorHandler = new ErrorHandler();
 
-        $this->checkIfAllInfoHaveBeenSent();
         $this->checkIfUserCanEditTheOrganisation();
-        $this->checkIfNameIsNotEmpty();
+        $this->checkIfMandatoryInfoHaveBeenSent();
         $this->saveUpdatedContent();
         $this->saveOrganisationDetails();
     }
@@ -60,27 +68,27 @@ class UpdateOrganisation
     private function saveOrganisationDetails()
     {
         if (isset($this->data()->name))
-            $this->data()->organisation->setName($this->data()->name);
+            $this->organisation->setName($this->data()->name);
         if (isset($this->data()->url))
-            $this->data()->organisation->setUrl($this->data()->url);
+            $this->organisation->setUrl($this->data()->url);
         if (isset($this->data()->shortDescription))
-            $this->data()->organisation->setShortDescription($this->data()->shortDescription);
+            $this->organisation->setShortDescription($this->data()->shortDescription);
         if (isset($this->data()->description))
-            $this->data()->organisation->setDescription($this->data()->description);
+            $this->organisation->setDescription($this->data()->description);
         if (isset($this->data()->address))
-            $this->data()->organisation->setAddress($this->data()->address);
+            $this->organisation->setAddress($this->data()->address);
         if (isset($this->data()->startDate))
-            $this->data()->organisation->setStartDate($this->data()->startDate);
+            $this->organisation->setStartDate($this->data()->startDate);
         if (isset($this->data()->organisationTypeId))
             if ($this->data()->organisationTypeId)
-                $this->data()->organisation->setType(
+                $this->organisation->setType(
                     (new OrganisationTypeRepo())->getById(
                         $this->data()->organisationTypeId
                     )
                 );
         if (isset($this->data()->organisationSizeId))
             if ($this->data()->organisationSizeId)
-                $this->data()->organisation->setSize(
+                $this->organisation->setSize(
                     (new OrganisationSizeRepo())->getById(
                         $this->data()->organisationSizeId
                     )
@@ -89,7 +97,7 @@ class UpdateOrganisation
         if (isset($this->data()->countryID) AND isset($this->data()->region))
             $this->setRegion();
 
-        $this->organisationRepo->save($this->data()->organisation);
+        $this->organisationRepo->save($this->organisation);
 
         if (isset($this->data()->tags))
             $this->setTags();
@@ -103,14 +111,6 @@ class UpdateOrganisation
         $this->saveImages();
     }
 
-    private function checkIfAllInfoHaveBeenSent()
-    {
-        if (!isset($this->data()->executor))
-            throw new NotEnoughData('executor');
-        if (!isset($this->data()->organisation))
-            throw new NotEnoughData('organisation');
-    }
-
     private function checkIfUserCanEditTheOrganisation()
     {
         if (!($this->userCanEditOrganisation())) {
@@ -119,25 +119,34 @@ class UpdateOrganisation
         }
     }
 
-    private function checkIfNameIsNotEmpty()
+    private function checkIfMandatoryInfoHaveBeenSent()
     {
         if (isset($this->data()->name) AND $this->data()->name == '')
             $this->errorHandler->addTaggedError('name', __('Please type a organisation name'));
 
+        if (isset($this->data()->organisationTypeId) AND !$this->data()->organisationTypeId)
+            $this->errorHandler->addTaggedError('type', __('Please select an organisation type'));
+
         if (isset($this->data()->shortDescription) AND $this->data()->shortDescription == '')
             $this->errorHandler->addTaggedError('shortDescription', __('Please type the organisation short description'));
+
+        if (isset($this->data()->countryID) AND !$this->data()->countryID)
+            $this->errorHandler->addTaggedError('country', __('Please select a country'));
+
+        if (isset($this->data()->countryID) AND !$this->data()->region)
+            $this->errorHandler->addTaggedError('region', __('Please select a city'));
 
         $this->errorHandler->throwIfNotEmpty();
     }
 
     private function setTags()
     {
-        $orgTags = (new OrganisationTagRepo())->getTagNamesByOrganisation($this->data()->organisation);
+        $orgTags = (new OrganisationTagRepo())->getTagNamesByOrganisation($this->organisation);
         $orgTagsLowerCase = array_map('strtolower', $orgTags);
         foreach ($this->data()->tags AS $newTagName) {
             if (!in_array(strtolower($newTagName), $orgTagsLowerCase)) {
                 $addTag = new AddTagToOrganisation();
-                $addTag->data()->organisationID = $this->data()->organisation->getId();
+                $addTag->data()->organisationID = $this->organisation->getId();
                 $addTag->data()->tag = $newTagName;
                 $addTag->exec();
             }
@@ -145,7 +154,7 @@ class UpdateOrganisation
         foreach ($orgTags AS $oldTagName) {
             if (!in_array($oldTagName, $this->data()->tags)) {
                 $remTag = new RemoveTagFromOrganisation();
-                $remTag->data()->organisationID = $this->data()->organisation->getId();
+                $remTag->data()->organisationID = $this->organisation->getId();
                 $remTag->data()->tag = $oldTagName;
                 $remTag->exec();
             }
@@ -154,12 +163,12 @@ class UpdateOrganisation
 
     private function setNetworkTags()
     {
-        $orgNetworkTags = (new OrganisationNetworkTagRepo())->getTagNamesByOrganisation($this->data()->organisation);
+        $orgNetworkTags = (new OrganisationNetworkTagRepo())->getTagNamesByOrganisation($this->organisation);
         $orgNetworkTagsLowerCase = array_map('strtolower', $orgNetworkTags);
         foreach ($this->data()->networkTags AS $newNetworkTagName) {
             if (!in_array(strtolower($newNetworkTagName), $orgNetworkTagsLowerCase)) {
                 $addTag = new AddNetworkTagToOrganisation();
-                $addTag->setOrganisation($this->data()->organisation);
+                $addTag->setOrganisation($this->organisation);
                 $addTag->setTag($newNetworkTagName);
                 $addTag->exec();
             }
@@ -167,7 +176,7 @@ class UpdateOrganisation
         foreach ($orgNetworkTags AS $oldTagName) {
             if (!in_array($oldTagName, $this->data()->networkTags)) {
                 $remTag = new RemoveNetworkTagFromOrganisation();
-                $remTag->setOrganisation($this->data()->organisation);
+                $remTag->setOrganisation($this->organisation);
                 $remTag->setTag($oldTagName);
                 $remTag->exec();
             }
@@ -176,19 +185,19 @@ class UpdateOrganisation
 
     private function setProjects()
     {
-        $orgProjects = (new OrganisationProjectRepo())->getProjectIDsForOrganisation($this->data()->organisation);
+        $orgProjects = (new OrganisationProjectRepo())->getProjectIDsForOrganisation($this->organisation);
         foreach ($this->data()->projects AS $newProject) {
             if (!in_array($newProject, $orgProjects)) {
                 $addProject = new AddProjectToOrganisation();
                 $addProject->data()->projectID = $newProject;
-                $addProject->data()->organisationID = $this->data()->organisation->getId();
+                $addProject->data()->organisationID = $this->organisation->getId();
                 $addProject->exec();
             }
         }
         foreach ($orgProjects AS $oldProject) {
             if (!in_array($oldProject, $this->data()->projects)) {
                 $remProject = new RemoveProjectFromOrganisation();
-                $remProject->data()->organisationID = $this->data()->organisation->getId();
+                $remProject->data()->organisationID = $this->organisation->getId();
                 $remProject->data()->projectID = $oldProject;
                 $remProject->exec();
             }
@@ -198,7 +207,7 @@ class UpdateOrganisation
     private function setRegion()
     {
         $countryRegionRepo = new CountryRegionRepo();
-        if ($this->data()->countryID != 0) {
+        if ($this->data()->countryID != 0 AND $this->data()->region != '') {
             if ($countryRegionRepo->nameExists($this->data()->countryID, $this->data()->region)) {
                 $countryRegion = $countryRegionRepo->getByName($this->data()->countryID, $this->data()->region);
             } else {
@@ -209,28 +218,28 @@ class UpdateOrganisation
                 $countryRegion = $createCountryRegionCmd->getCountryRegion();
             }
 
-            $this->data()->organisation->setCountryRegion($countryRegion);
+            $this->organisation->setCountryRegion($countryRegion);
         }
     }
 
     private function saveImages()
     {
         if (isset($this->data()->logo)) {
-            if ($this->data()->logo != Image::ORGANISATION_LOGO_URL . $this->data()->organisation->getLogo()) {
-                $this->data()->organisation->setLogo(
+            if ($this->data()->logo != Image::ORGANISATION_LOGO_URL . $this->organisation->getLogo()) {
+                $this->organisation->setLogo(
                     $this->saveImage($this->data()->logo, Image::ORGANISATION_LOGO)
                 );
             }
         }
         if (isset($this->data()->headerImage)) {
-            if ($this->data()->headerImage != Image::ORGANISATION_HEADER_URL . $this->data()->organisation->getHeaderImage()) {
-                $this->data()->organisation->setHeaderImage(
+            if ($this->data()->headerImage != Image::ORGANISATION_HEADER_URL . $this->organisation->getHeaderImage()) {
+                $this->organisation->setHeaderImage(
                     $this->saveImage($this->data()->headerImage, Image::ORGANISATION_HEADER)
                 );
             }
         }
 
-        $this->organisationRepo->save($this->data()->organisation);
+        $this->organisationRepo->save($this->organisation);
     }
 
     /**
@@ -243,7 +252,7 @@ class UpdateOrganisation
         if ($imageName) {
             $orgFileName = basename($imageName);
             $orgFilePath = Image::TEMP_FOLDER . $orgFileName;
-            $newFileName = $this->data()->organisation->getId() . '-' . $orgFileName;
+            $newFileName = $this->organisation->getId() . '-' . $orgFileName;
             $newFilePath = $imagePath . $newFileName;
 
             $this->assertFileExistsOnServer($orgFilePath);
@@ -284,11 +293,11 @@ class UpdateOrganisation
     private function setLinks()
     {
         $this->data()->links = (array)$this->data()->links;
-        $organisationLinks = (new OrganisationLinkRepo())->getLinksByOrganisationID($this->data()->organisation->getId());
+        $organisationLinks = (new OrganisationLinkRepo())->getLinksByOrganisationID($this->organisation->getId());
         foreach ($this->data()->links AS $newLink) {
             if (!in_array($newLink, $organisationLinks)) {
                 $addLink = new AddLinkToOrganisation();
-                $addLink->data()->organisationID = $this->data()->organisation->getId();
+                $addLink->data()->organisationID = $this->organisation->getId();
                 $addLink->data()->link = $newLink;
                 $addLink->exec();
             }
@@ -296,7 +305,7 @@ class UpdateOrganisation
         foreach ($organisationLinks AS $oldLink) {
             if (!in_array($oldLink, $this->data()->links)) {
                 $remLink = new RemoveLinkFromOrganisation();
-                $remLink->data()->organisationID = $this->data()->organisation->getId();
+                $remLink->data()->organisationID = $this->organisation->getId();
                 $remLink->data()->link = $oldLink;
                 $remLink->exec();
             }
@@ -308,10 +317,10 @@ class UpdateOrganisation
      */
     private function userCanEditOrganisation()
     {
-        if ($this->data()->executor->isCommunityAdmin())
+        if ($this->executor->isCommunityAdmin())
             return true;
 
-        if ($this->data()->executor->getId() == $this->data()->organisation->getOwnerID())
+        if ($this->executor->getId() == $this->organisation->getOwnerID())
             return true;
 
         return false;
@@ -328,23 +337,23 @@ class UpdateOrganisation
      */
     private function contentIsUpdated(): bool
     {
-        return (isset($this->data()->name) AND $this->data()->organisation->getName() != $this->data()->name)
+        return (isset($this->data()->name) AND $this->organisation->getName() != $this->data()->name)
             OR
-            (isset($this->data()->description) AND $this->data()->organisation->getDescription() != $this->data()->description);
+            (isset($this->data()->description) AND $this->organisation->getDescription() != $this->data()->description);
     }
 
     private function updateContent()
     {
         $contentUpdateRepo = new ContentUpdateRepo();
-        $existingUpdates = $contentUpdateRepo->getByOrganisation($this->data()->organisation);
+        $existingUpdates = $contentUpdateRepo->getByOrganisation($this->organisation);
         if ($existingUpdates) {
             $contentUpdate = $existingUpdates[0];
-            $contentUpdate->setOrganisation($this->data()->organisation);
+            $contentUpdate->setOrganisation($this->organisation);
             $contentUpdate->setTimestamp(date('Y-m-d H:i:s'));
             $contentUpdateRepo->save($contentUpdate);
         } else {
             $contentUpdate = new ContentUpdate();
-            $contentUpdate->setOrganisation($this->data()->organisation);
+            $contentUpdate->setOrganisation($this->organisation);
             $contentUpdate->setUpdated(ContentUpdate::Updated_Content);
             (new ContentUpdateRepo())->insert($contentUpdate);
         }

@@ -206,11 +206,9 @@ class ImportOrganisationsController
             $netTagList = [];
         }
 
-        $exec = new UpdateOrganisation();
-        $exec->data()->executor = $this->sysAdminUser;
+        $exec = new UpdateOrganisation($this->sysAdminUser, $organisation);
         $exec->data()->tags = $tagList;
         $exec->data()->networkTags = $netTagList;
-        $exec->data()->organisation = $organisation;
         $exec->exec();
 
         return $organisation;

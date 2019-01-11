@@ -273,10 +273,14 @@ class UpdateProject
         if (isset($this->data()->shortDescription) AND $this->data()->shortDescription == '')
             $this->errorHandler->addTaggedError('shortDescription', __('Please type the project short description'));
 
-        if (isset($this->data()->areasOfImpact) AND count($this->data()->areasOfImpact) == 0  AND !$this->data()->executor->isEditorialAdmin())
+        if (isset($this->data()->areasOfImpact) AND count($this->data()->areasOfImpact) == 0
+            // AND !$this->data()->executor->isEditorialAdmin()
+        )
             $this->errorHandler->addTaggedError('areasOfImpact', __('Please select at least one area of impact'));
 
-        if (isset($this->data()->technologyTags) AND count($this->data()->technologyTags) == 0 AND !$this->data()->executor->isEditorialAdmin())
+        if (isset($this->data()->technologyTags) AND count($this->data()->technologyTags) == 0
+            // AND !$this->data()->executor->isEditorialAdmin()
+        )
             $this->errorHandler->addTaggedError('technologyTags', __('Please select at least one technology tag'));
 
         // if (isset($this->data()->focusTags) AND count($this->data()->focusTags) == 0)

@@ -4,7 +4,7 @@ namespace Services;
 
 class Assets
 {
-    public static $version = '1.4.30';
+    public static $version = '1.4.32';
 
     public static function version()
     {

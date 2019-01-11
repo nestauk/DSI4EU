@@ -10,11 +10,12 @@ angular
 			});
 
 		$scope.changeCurrentTab = function(tab) {
-			if( $scope.currentTab === 'step1' )
+			if( $scope.currentTab === 'step1' ) {
 				$scope.submitStep1({proceed: false});
 
-			if( !$scope.user.firstName || !$scope.user.lastName || !$scope.user.email )
-				return;
+				if( !$scope.user.firstName || !$scope.user.lastName || !$scope.user.email )
+					return;
+			}
 
 			$scope.currentTab = tab;
 		};

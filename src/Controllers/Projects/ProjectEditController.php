@@ -51,7 +51,7 @@ class ProjectEditController
         if ($this->format == 'json') {
             try {
                 if (isset($_POST['saveDetails'])) {
-                    if ($_POST['step'] == 'step1') {
+                    if ($_POST['step'] == '1') {
                         $updateProject = new UpdateProject();
                         $updateProject->data()->project = $project;
                         $updateProject->data()->executor = $loggedInUser;
@@ -64,7 +64,7 @@ class ProjectEditController
                         $updateProject->data()->links = $_POST['links'] ?? [];
                         $updateProject->data()->organisations = $_POST['organisations'] ?? [];
                         $updateProject->exec();
-                    } elseif ($_POST['step'] == 'step2') {
+                    } elseif ($_POST['step'] == '2') {
                         $updateProject = new UpdateProject();
                         $updateProject->data()->project = $project;
                         $updateProject->data()->executor = $loggedInUser;
@@ -73,7 +73,7 @@ class ProjectEditController
                         $updateProject->data()->countryID = $_POST['countryID'] ?? 0;
                         $updateProject->data()->region = $_POST['region'] ?? '';
                         $updateProject->exec();
-                    } elseif ($_POST['step'] == 'step3') {
+                    } elseif ($_POST['step'] == '3') {
                         $updateProject = new UpdateProject();
                         $updateProject->data()->project = $project;
                         $updateProject->data()->executor = $loggedInUser;
@@ -81,7 +81,7 @@ class ProjectEditController
                         $updateProject->data()->description = $_POST['description'] ?? '';
                         $updateProject->data()->socialImpact = $_POST['socialImpact'] ?? '';
                         $updateProject->exec();
-                    } elseif ($_POST['step'] == 'step4') {
+                    } elseif ($_POST['step'] == '4') {
                         $updateProject = new UpdateProject();
                         $updateProject->data()->project = $project;
                         $updateProject->data()->executor = $loggedInUser;

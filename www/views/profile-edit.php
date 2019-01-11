@@ -137,7 +137,7 @@ $leftSideText .= "<p>" . _html('You can edit any of your answers later.') . "</p
                                                ng-disabled="loading" value="<?php _ehtml('Next') ?>"/>
                                         <button type="button" class="tab-button-2 tab-button-next w-button"
                                                 ng-bind="loading ? '<?php _ehtml('Loading...') ?>' : '<?php _ehtml('Save') ?>'"
-                                                ng-click="submitStep1({alert: false})"
+                                                ng-click="submitStep1({alert: true})"
                                                 ng-disabled="loading"><?php _ehtml('Save') ?>
                                         </button>
                                     </div>
