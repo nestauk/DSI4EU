@@ -115,10 +115,18 @@ class CaseStudyRepo
         $caseStudy->setIsPublished($caseStudyData['isPublished']);
         $caseStudy->setIsFeaturedOnSlider($caseStudyData['isFeaturedOnSlider']);
         $caseStudy->setPositionOnFirstPage($caseStudyData['isFeaturedOnHomePage']);
-        if ($caseStudyData['projectID'])
-            $caseStudy->setProject((new ProjectRepoInAPC())->getById($caseStudyData['projectID']));
-        if ($caseStudyData['organisationID'])
-            $caseStudy->setOrganisation((new OrganisationRepoInAPC())->getById($caseStudyData['organisationID']));
+        if ($caseStudyData['projectID']) {
+            try {
+                $caseStudy->setProject((new ProjectRepoInAPC())->getById($caseStudyData['projectID']));
+            } catch (DSI\NotFound $e) {
+            }
+        }
+        if ($caseStudyData['organisationID']) {
+            try {
+                $caseStudy->setOrganisation((new OrganisationRepoInAPC())->getById($caseStudyData['organisationID']));
+            } catch (DSI\NotFound $e) {
+            }
+        }
 
         return $caseStudy;
     }
