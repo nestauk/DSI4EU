@@ -1,5 +1,94 @@
 <?php
 
+use Controllers\TableauVis;
+use Controllers\AcceptPolicyController;
+use Controllers\AdvisoryBoardController;
+use Controllers\API\ClusterApiController;
+use Controllers\API\ClusterImgApiController;
+use Controllers\API\EmailSubscribersApiController;
+use Controllers\API\OpenResourceApiController;
+use Controllers\CaseStudies\CaseStudiesController;
+use Controllers\CaseStudies\CaseStudyAddController;
+use Controllers\CaseStudies\CaseStudyController;
+use Controllers\CaseStudies\CaseStudyEditController;
+use Controllers\ClusterController;
+use Controllers\ClustersController;
+use Controllers\DashboardController;
+use Controllers\DsiIndex\DsiIndexController;
+use Controllers\Futures\FuturesController;
+use Controllers\HomeController;
+use Controllers\OpenData;
+use Controllers\OpenDataEdit;
+use Controllers\Projects\ProjectController;
+use Controllers\Projects\ProjectEditController;
+use Controllers\RegisterController;
+use Controllers\ResourceCreate;
+use Controllers\ResourceEdit;
+use Controllers\StaticHtmlController;
+use Controllers\Stories\StoriesController;
+use Controllers\Stories\StoryAddController;
+use Controllers\Stories\StoryController;
+use Controllers\Stories\StoryEditController;
+use Controllers\TempGalleryController;
+use Controllers\TerminateAccountController;
+use Controllers\UploadController;
+use Controllers\WhatIsDsiController;
+use DSI\Controller\CreateOrganisationController;
+use DSI\Controller\CreateProjectController;
+use DSI\Controller\EventAddController;
+use DSI\Controller\EventController;
+use DSI\Controller\EventEditController;
+use DSI\Controller\EventsController;
+use DSI\Controller\ExportOrganisationsController;
+use DSI\Controller\ExportProjectsController;
+use DSI\Controller\FeedbackController;
+use DSI\Controller\ForgotPasswordController;
+use DSI\Controller\FundingAddController;
+use DSI\Controller\FundingController;
+use DSI\Controller\FundingEditController;
+use DSI\Controller\KeepUserLoggedInController;
+use DSI\Controller\ListCountriesController;
+use DSI\Controller\ListCountryRegionsController;
+use DSI\Controller\ListImpactTagsController;
+use DSI\Controller\ListLanguagesController;
+use DSI\Controller\ListOrganisationsController;
+use DSI\Controller\ListSkillsController;
+use DSI\Controller\ListTagsForOrganisationsController;
+use DSI\Controller\ListTagsForProjectsController;
+use DSI\Controller\ListUsersController;
+use DSI\Controller\LoginController;
+use DSI\Controller\LoginFacebookController;
+use DSI\Controller\LoginGitHubController;
+use DSI\Controller\LoginGoogleController;
+use DSI\Controller\LoginTwitterController;
+use DSI\Controller\LogoutController;
+use DSI\Controller\ManageTagsController;
+use DSI\Controller\MessageCommunityAdminsController;
+use DSI\Controller\NotFound404Controller;
+use DSI\Controller\NotificationsController;
+use DSI\Controller\OrganisationController;
+use DSI\Controller\OrganisationEditController;
+use DSI\Controller\OrganisationEditMembersController;
+use DSI\Controller\OrganisationEditOwnerController;
+use DSI\Controller\OrganisationsController;
+use DSI\Controller\OrganisationTagsController;
+use DSI\Controller\ProfileController;
+use DSI\Controller\ProfileEditController;
+use DSI\Controller\ProfileEditPrivilegesController;
+use DSI\Controller\ProjectEditMembersController;
+use DSI\Controller\ProjectEditOwnerController;
+use DSI\Controller\ProjectPostCommentController;
+use DSI\Controller\ProjectPostController;
+use DSI\Controller\ProjectsController;
+use DSI\Controller\ProjectTagsController;
+use DSI\Controller\ResetPasswordController;
+use DSI\Controller\RssEventsController;
+use DSI\Controller\RssFundingOpportunitiesController;
+use DSI\Controller\RssNewsBlogsController;
+use DSI\Controller\SearchController;
+use DSI\Controller\SetAdminController;
+use DSI\Controller\SitemapController;
+use DSI\Controller\UploadImageController;
 use \DSI\Service\Translate;
 use \DSI\Entity\Translation;
 use \Controllers\Upload\UploadResourcesController;
@@ -354,6 +443,9 @@ class Router
             $this->sitemapXml($matches);
 
 // Unfiltered
+        } elseif (preg_match('<^/' . $langHandler . 'vis$>', $this->pageURL, $matches)) {
+            $this->tableauVis($matches);
+
         } elseif (preg_match('<^/' . $langHandler . 'manage/tags$>', $this->pageURL, $matches)) {
             $this->manageTags($matches);
 
@@ -474,7 +566,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \Controllers\RegisterController();
+        $command = new RegisterController();
         $command->responseFormat = $format;
         $command->exec();
     }
@@ -483,7 +575,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \Controllers\AcceptPolicyController();
+        $command = new AcceptPolicyController();
         $command->responseFormat = $format;
         $command->exec();
     }
@@ -492,7 +584,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\LoginController();
+        $command = new LoginController();
         $command->responseFormat = $format;
         $command->exec();
     }
@@ -500,14 +592,14 @@ class Router
     private function homePage($matches = [])
     {
         $this->setLanguageFromUrl($matches);
-        return (new \Controllers\HomeController())->exec();
+        return (new HomeController())->exec();
     }
 
     private function dashboard($matches = [])
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \Controllers\DashboardController();
+        $command = new DashboardController();
         $command->format = 'html';
         $command->exec();
     }
@@ -516,7 +608,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \Controllers\DashboardController();
+        $command = new DashboardController();
         $command->format = 'json';
         $command->exec();
     }
@@ -525,51 +617,51 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\NotificationsController();
+        $command = new NotificationsController();
         $command->exec();
     }
 
     private function forgotPasswordJson()
     {
-        $command = new \DSI\Controller\ForgotPasswordController();
+        $command = new ForgotPasswordController();
         $command->responseFormat = 'json';
         $command->exec();
     }
 
     private function facebookLogin()
     {
-        $command = new \DSI\Controller\LoginFacebookController();
+        $command = new LoginFacebookController();
         $command->exec();
     }
 
     private function googleLogin()
     {
-        $command = new \DSI\Controller\LoginGoogleController();
+        $command = new LoginGoogleController();
         $command->exec();
     }
 
     private function gitHubLogin()
     {
-        $command = new \DSI\Controller\LoginGitHubController();
+        $command = new LoginGitHubController();
         $command->exec();
     }
 
     private function twitterLogin()
     {
-        $command = new \DSI\Controller\LoginTwitterController();
+        $command = new LoginTwitterController();
         $command->exec();
     }
 
     private function registerJson()
     {
-        $command = new \Controllers\RegisterController();
+        $command = new RegisterController();
         $command->responseFormat = 'json';
         $command->exec();
     }
 
     private function setAdmin()
     {
-        $command = new \DSI\Controller\SetAdminController();
+        $command = new SetAdminController();
         $command->exec();
     }
 
@@ -577,21 +669,21 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\LogoutController();
+        $command = new LogoutController();
         $command->exec();
     }
 
     private function stories($matches)
     {
         $this->setLanguageFromUrl($matches);
-        (new \Controllers\Stories\StoriesController())->exec();
+        (new StoriesController())->exec();
     }
 
     private function storiesJson($matches)
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \Controllers\Stories\StoriesController();
+        $command = new StoriesController();
         $command->format = 'json';
         $command->exec();
     }
@@ -600,7 +692,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \Controllers\Stories\StoryAddController();
+        $command = new StoryAddController();
         $command->exec();
     }
 
@@ -608,7 +700,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \Controllers\CaseStudies\CaseStudyAddController();
+        $command = new CaseStudyAddController();
         $command->exec();
     }
 
@@ -617,7 +709,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\FundingController();
+        $command = new FundingController();
         $command->format = $format;
         $command->exec();
     }
@@ -626,7 +718,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\FundingAddController();
+        $command = new FundingAddController();
         $command->exec();
     }
 
@@ -634,7 +726,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\FundingEditController();
+        $command = new FundingEditController();
         $command->fundingID = $matches[3];
         $command->format = $format;
         $command->exec();
@@ -645,7 +737,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\EventsController();
+        $command = new EventsController();
         $command->format = $format;
         $command->exec();
     }
@@ -654,7 +746,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\EventAddController();
+        $command = new EventAddController();
         $command->exec();
     }
 
@@ -662,7 +754,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\EventEditController();
+        $command = new EventEditController();
         $command->eventID = $matches[3];
         $command->format = $format;
         $command->exec();
@@ -672,7 +764,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\EventController();
+        $command = new EventController();
         $command->eventID = $matches[3];
         $command->format = $format;
         $command->exec();
@@ -682,14 +774,14 @@ class Router
     private function projects($matches = [])
     {
         $this->setLanguageFromUrl($matches);
-        (new \DSI\Controller\ProjectsController())->exec();
+        (new ProjectsController())->exec();
     }
 
     private function projectsJson($matches = [])
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\ProjectsController();
+        $command = new ProjectsController();
         $command->responseFormat = 'json';
         $command->exec();
     }
@@ -698,7 +790,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\ProjectTagsController();
+        $command = new ProjectTagsController();
         $command->responseFormat = 'json';
         $command->exec();
     }
@@ -707,7 +799,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\OrganisationTagsController();
+        $command = new OrganisationTagsController();
         $command->responseFormat = 'json';
         $command->exec();
     }
@@ -715,14 +807,14 @@ class Router
     private function organisations($matches)
     {
         $this->setLanguageFromUrl($matches);
-        (new \DSI\Controller\OrganisationsController())->exec();
+        (new OrganisationsController())->exec();
     }
 
     private function organisationsJson($matches)
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\OrganisationsController();
+        $command = new OrganisationsController();
         $command->responseFormat = 'json';
         $command->exec();
     }
@@ -735,7 +827,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\ProfileController();
+        $command = new ProfileController();
         $command->setFormat($format);
         $command->setUserURL($matches[3] ?? '');
         $command->exec();
@@ -749,7 +841,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\ResetPasswordController();
+        $command = new ResetPasswordController();
         $command->exec();
     }
 
@@ -763,19 +855,19 @@ class Router
 
     private function notFound404()
     {
-        $command = new \DSI\Controller\NotFound404Controller();
+        $command = new NotFound404Controller();
         $command->exec();
     }
 
     private function skillsListJson()
     {
-        $command = new \DSI\Controller\ListSkillsController();
+        $command = new ListSkillsController();
         $command->exec();
     }
 
     private function languagesListJson()
     {
-        $command = new \DSI\Controller\ListLanguagesController();
+        $command = new ListLanguagesController();
         $command->exec();
     }
 
@@ -783,7 +875,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\ProfileEditController();
+        $command = new ProfileEditController();
         $command->userID = $matches[3];
         $command->format = $format;
         $command->exec();
@@ -793,28 +885,28 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\ProfileEditPrivilegesController();
+        $command = new ProfileEditPrivilegesController();
         $command->userID = $matches[3];
         $command->exec();
     }
 
     private function uploadProfilePicture()
     {
-        $command = new \DSI\Controller\ProfileEditController();
+        $command = new ProfileEditController();
         $command->exec();
     }
 
     private function createProject($matches)
     {
         $this->setLanguageFromUrl($matches);
-        (new \DSI\Controller\CreateProjectController())->exec();
+        (new CreateProjectController())->exec();
     }
 
     private function createOrganisation($matches)
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\CreateOrganisationController();
+        $command = new CreateOrganisationController();
         $command->exec();
     }
 
@@ -822,7 +914,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \Controllers\Projects\ProjectController();
+        $command = new ProjectController();
         $command->data()->projectID = $matches[3];
         $command->exec();
     }
@@ -831,7 +923,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \Controllers\CaseStudies\CaseStudyController();
+        $command = new CaseStudyController();
         $command->caseStudyID = $matches[3];
         $command->exec();
     }
@@ -839,13 +931,13 @@ class Router
     private function messageCommunityAdmins($matches)
     {
         $this->setLanguageFromUrl($matches);
-        return (new \DSI\Controller\MessageCommunityAdminsController())->exec();
+        return (new MessageCommunityAdminsController())->exec();
     }
 
     private function waitingApprovalJson($matches)
     {
         $this->setLanguageFromUrl($matches);
-        return (new \DSI\Controller\WaitingApprovalController())
+        return (new WaitingApprovalController())
             ->json();
     }
 
@@ -853,7 +945,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\ExportProjectsController();
+        $command = new ExportProjectsController();
         $command->format = $format;
         $command->exec();
     }
@@ -862,7 +954,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\ExportOrganisationsController();
+        $command = new ExportOrganisationsController();
         $command->format = $format;
         $command->exec();
     }
@@ -871,7 +963,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \Controllers\Stories\StoryController();
+        $command = new StoryController();
         $command->data()->storyID = $matches[3];
         $command->exec();
     }
@@ -880,7 +972,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \Controllers\Stories\StoryEditController();
+        $command = new StoryEditController();
         $command->storyID = $matches[3];
         $command->format = $format;
         $command->exec();
@@ -890,7 +982,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\OrganisationController();
+        $command = new OrganisationController();
         $command->data()->organisationID = $matches[3];
         $command->exec();
     }
@@ -899,7 +991,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \Controllers\Projects\ProjectController();
+        $command = new ProjectController();
         $command->data()->projectID = $matches[3];
         $command->data()->format = 'json';
         $command->exec();
@@ -909,7 +1001,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \Controllers\Projects\ProjectEditController();
+        $command = new ProjectEditController();
         $command->projectID = $matches[3];
         $command->format = $format;
         $command->exec();
@@ -919,7 +1011,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\ProjectEditOwnerController();
+        $command = new ProjectEditOwnerController();
         $command->projectID = $matches[3];
         $command->exec();
     }
@@ -928,7 +1020,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\ProjectEditMembersController();
+        $command = new ProjectEditMembersController();
         $command->format = $format;
         $command->projectID = $matches[3];
         $command->exec();
@@ -938,7 +1030,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\OrganisationEditController();
+        $command = new OrganisationEditController();
         $command->organisationID = $matches[3];
         $command->format = $format;
         $command->exec();
@@ -948,7 +1040,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\OrganisationEditOwnerController();
+        $command = new OrganisationEditOwnerController();
         $command->organisationID = $matches[3];
         $command->exec();
     }
@@ -957,7 +1049,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\OrganisationEditMembersController();
+        $command = new OrganisationEditMembersController();
         $command->organisationID = $matches[3];
         $command->format = $format;
         $command->exec();
@@ -967,7 +1059,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \Controllers\CaseStudies\CaseStudyEditController();
+        $command = new CaseStudyEditController();
         $command->caseStudyID = $matches[3];
         $command->format = $format;
         $command->exec();
@@ -977,7 +1069,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\SearchController();
+        $command = new SearchController();
         $command->term = $matches[3] ?? '';
         $command->format = $format;
         $command->exec();
@@ -986,21 +1078,21 @@ class Router
     private function caseStudies($matches)
     {
         $this->setLanguageFromUrl($matches);
-        (new \Controllers\CaseStudies\CaseStudiesController())->exec();
+        (new CaseStudiesController())->exec();
     }
 
     private function caseStudiesJson($matches)
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \Controllers\CaseStudies\CaseStudiesController();
+        $command = new CaseStudiesController();
         $command->format = 'json';
         $command->exec();
     }
 
     private function projectPostJson($matches)
     {
-        $command = new \DSI\Controller\ProjectPostController();
+        $command = new ProjectPostController();
         $command->data()->postID = $matches[1];
         $command->data()->format = 'json';
         $command->exec();
@@ -1008,7 +1100,7 @@ class Router
 
     private function projectPostCommentJson($matches)
     {
-        $command = new \DSI\Controller\ProjectPostCommentController();
+        $command = new ProjectPostCommentController();
         $command->data()->commentID = $matches[1];
         $command->data()->format = 'json';
         $command->exec();
@@ -1029,44 +1121,52 @@ class Router
 
     private function tagsForProjectsListJson()
     {
-        $command = new \DSI\Controller\ListTagsForProjectsController();
+        $command = new ListTagsForProjectsController();
         $command->exec();
     }
 
     private function tagsForOrganisationsListJson()
     {
-        $command = new \DSI\Controller\ListTagsForOrganisationsController();
+        $command = new ListTagsForOrganisationsController();
         $command->exec();
     }
 
     private function impactTagsListJson()
     {
-        $command = new \DSI\Controller\ListImpactTagsController();
+        $command = new ListImpactTagsController();
         $command->exec();
     }
 
     private function usersListJson()
     {
-        $command = new \DSI\Controller\ListUsersController();
+        $command = new ListUsersController();
         $command->exec();
     }
 
     private function countriesListJson()
     {
-        $command = new \DSI\Controller\ListCountriesController();
+        $command = new ListCountriesController();
         $command->exec();
     }
 
     private function organisationsListJson()
     {
-        $command = new \DSI\Controller\ListOrganisationsController();
+        $command = new ListOrganisationsController();
         $command->exec();
     }
 
     private function countryRegionsListJson($matches)
     {
-        $command = new \DSI\Controller\ListCountryRegionsController();
+        $command = new ListCountryRegionsController();
         $command->data()->countryID = $matches[1];
+        $command->exec();
+    }
+
+    private function tableauVis($matches)
+    {
+        $this->setLanguageFromUrl($matches);
+
+        $command = new TableauVis();
         $command->exec();
     }
 
@@ -1074,7 +1174,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\ManageTagsController();
+        $command = new ManageTagsController();
         $command->responseFormat = $format;
         $command->exec();
     }
@@ -1083,7 +1183,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\FeedbackController();
+        $command = new FeedbackController();
         $command->exec();
     }
 
@@ -1091,26 +1191,26 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\FeedbackController();
+        $command = new FeedbackController();
         $command->format = 'json';
         $command->exec();
     }
 
     private function rssNewsBlogs()
     {
-        $command = new \DSI\Controller\RssNewsBlogsController();
+        $command = new RssNewsBlogsController();
         $command->exec();
     }
 
     private function rssEvents()
     {
-        $command = new \DSI\Controller\RssEventsController();
+        $command = new RssEventsController();
         $command->exec();
     }
 
     private function rssFundingOpportunities()
     {
-        (new \DSI\Controller\RssFundingOpportunitiesController())->exec();
+        (new RssFundingOpportunitiesController())->exec();
     }
 
     private function robotsTxt()
@@ -1137,33 +1237,33 @@ class Router
     private function dsiIndex($matches)
     {
         $this->setLanguageFromUrl($matches);
-        return (new \Controllers\DsiIndex\DsiIndexController())->exec();
+        return (new DsiIndexController())->exec();
     }
 
     private function dsiIndexEdit($matches)
     {
         $this->setLanguageFromUrl($matches);
-        return (new \Controllers\DsiIndex\DsiIndexController())->edit();
+        return (new DsiIndexController())->edit();
     }
 
 
     private function futures($matches)
     {
         $this->setLanguageFromUrl($matches);
-        return (new \Controllers\Futures\FuturesController())->exec();
+        return (new FuturesController())->exec();
     }
 
     private function futuresEdit($matches)
     {
         $this->setLanguageFromUrl($matches);
-        return (new \Controllers\Futures\FuturesController())->edit();
+        return (new FuturesController())->edit();
     }
 
 
     private function advisoryBoard($matches)
     {
         $this->setLanguageFromUrl($matches);
-        return (new \Controllers\AdvisoryBoardController())->exec();
+        return (new AdvisoryBoardController())->exec();
     }
 
     private function staticPage($matches, $view)
@@ -1178,62 +1278,62 @@ class Router
     private function privacyPolicy($matches)
     {
         $this->setLanguageFromUrl($matches);
-        return (new \Controllers\StaticHtmlController())->privacyPolicy();
+        return (new StaticHtmlController())->privacyPolicy();
     }
 
     private function partners($matches)
     {
         $this->setLanguageFromUrl($matches);
-        return (new \Controllers\StaticHtmlController())->partners();
+        return (new StaticHtmlController())->partners();
     }
 
     private function openData($matches)
     {
         $this->setLanguageFromUrl($matches);
-        return (new \Controllers\OpenData())->exec();
+        return (new OpenData())->exec();
     }
 
     private function openDataEdit($matches)
     {
         $this->setLanguageFromUrl($matches);
-        return (new \Controllers\OpenDataEdit())->exec();
+        return (new OpenDataEdit())->exec();
     }
 
     private function newResource($matches)
     {
         $this->setLanguageFromUrl($matches);
-        return (new \Controllers\ResourceCreate())->exec();
+        return (new ResourceCreate())->exec();
     }
 
     private function editResource($matches)
     {
         $this->setLanguageFromUrl($matches);
-        return (new \Controllers\ResourceEdit($matches[3]))->exec();
+        return (new ResourceEdit($matches[3]))->exec();
     }
 
     private function openResourceCreateApi($matches)
     {
         $this->setLanguageFromUrl($matches);
-        return (new \Controllers\API\OpenResourceApiController())->createObject();
+        return (new OpenResourceApiController())->createObject();
     }
 
     private function openResourcesApi($matches)
     {
         $this->setLanguageFromUrl($matches);
-        return (new \Controllers\API\OpenResourceApiController())->getObjects();
+        return (new OpenResourceApiController())->getObjects();
     }
 
     private function openResourceEditApi($matches)
     {
         $this->setLanguageFromUrl($matches);
-        return (new \Controllers\API\OpenResourceApiController())->edit($matches[3]);
+        return (new OpenResourceApiController())->edit($matches[3]);
     }
 
     private function keepUserLoggedIn($matches)
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\KeepUserLoggedInController();
+        $command = new KeepUserLoggedInController();
         $command->exec();
     }
 
@@ -1241,7 +1341,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \Controllers\TerminateAccountController();
+        $command = new TerminateAccountController();
         $command->exec();
     }
 
@@ -1249,47 +1349,47 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \DSI\Controller\SitemapController();
+        $command = new SitemapController();
         $command->format = 'xml';
         $command->exec();
     }
 
     private function tempGalleryJson()
     {
-        $command = new \Controllers\TempGalleryController();
+        $command = new TempGalleryController();
         $command->format = 'json';
         $command->exec();
     }
 
     private function uploadImageJson()
     {
-        $command = new \DSI\Controller\UploadImageController();
+        $command = new UploadImageController();
         $command->format = 'json';
         $command->exec();
     }
 
     private function uploadFile()
     {
-        return (new \Controllers\UploadController())->exec();
+        return (new UploadController())->exec();
     }
 
     private function clusters($matches)
     {
         $this->setLanguageFromUrl($matches);
-        (new \Controllers\ClustersController())->exec();
+        (new ClustersController())->exec();
     }
 
     private function cluster($matches)
     {
         $this->setLanguageFromUrl($matches);
-        (new \Controllers\ClusterController($matches[3]))->get();
+        (new ClusterController($matches[3]))->get();
     }
 
     private function clusterEdit($matches)
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \Controllers\ClusterController($matches[3]);
+        $command = new ClusterController($matches[3]);
         $command->edit();
     }
 
@@ -1297,7 +1397,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \Controllers\API\ClusterApiController();
+        $command = new ClusterApiController();
         $command->clusterID = $matches[3];
         $command->exec();
     }
@@ -1306,7 +1406,7 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \Controllers\API\ClusterImgApiController();
+        $command = new ClusterImgApiController();
         $command->clusterImgID = isset($matches[3]) ? $matches[3] : 0;
         $command->exec();
     }
@@ -1315,20 +1415,20 @@ class Router
     {
         $this->setLanguageFromUrl($matches);
 
-        $command = new \Controllers\API\EmailSubscribersApiController();
+        $command = new EmailSubscribersApiController();
         $command->exec();
     }
 
     private function cookiesPolicy($matches)
     {
         $this->setLanguageFromUrl($matches);
-        return (new \Controllers\StaticHtmlController())->cookiesPolicy();
+        return (new StaticHtmlController())->cookiesPolicy();
     }
 
     private function whatIsDsi($matches)
     {
         $this->setLanguageFromUrl($matches);
-        (new \Controllers\WhatIsDsiController())->get();
+        (new WhatIsDsiController())->get();
     }
 
     public function forceHTTPS()
