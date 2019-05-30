@@ -386,6 +386,9 @@ class Router
             $this->staticPage($matches, 'updates.php');
 
 
+        } elseif (preg_match('<^/' . $langHandler . 'dsi-index/viz$>', $this->pageURL, $matches)) {
+            $this->tableauVis($matches);
+
         } elseif (preg_match('<^/' . $langHandler . 'dsi-index>', $this->pageURL, $matches)) {
             $this->dsiIndex($matches);
 
@@ -443,9 +446,6 @@ class Router
             $this->sitemapXml($matches);
 
 // Unfiltered
-        } elseif (preg_match('<^/' . $langHandler . 'vis$>', $this->pageURL, $matches)) {
-            $this->tableauVis($matches);
-
         } elseif (preg_match('<^/' . $langHandler . 'manage/tags$>', $this->pageURL, $matches)) {
             $this->manageTags($matches);
 
