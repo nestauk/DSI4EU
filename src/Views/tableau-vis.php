@@ -38,6 +38,12 @@
 	vizElement.parentNode.insertBefore(scriptElement, vizElement);
 </script>
 
+<style>
+    iframe {
+        margin: 0% auto !important;
+    }
+</style>
+
 <script type="text/javascript"
         src="/main.js?<?= \Services\Assets::version() ?>"></script>
 
