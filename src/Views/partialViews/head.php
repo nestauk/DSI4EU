@@ -13,21 +13,23 @@ if (!$urlHandler)
 ?>
 <meta charset="utf-8">
 <title><?= show_input(View::getPageTitleOr('DSI4EU')) ?></title>
-<meta name="google-site-verification" content="al4Vt4vNA7eWC2OyIEa0C8vjDBFl5UZWZODih8wy3r4"/>
+<meta name="google-site-verification" content="al4Vt4vNA7eWC2OyIEa0C8vjDBFl5UZWZODih8wy3r4" />
 <meta property="og:title" content="<?= show_input(View::getPageTitleOr('DSI4EU')) ?>">
 <meta property="og:type" content="website" />
 <meta property="og:description" content="<?= show_input(View::getPageDescription()) ?>">
-<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<?php if (!isset($no_scroll_meta)) { ?>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<?php } ?>
 
 <link href="<?php echo $urlHandler->rssNewsBlogs() ?>" rel="feed" type="application/rss+xml"
-      title="Digital Social Innovation :: News and Blogs"/>
+      title="Digital Social Innovation :: News and Blogs" />
 <link href="<?php echo $urlHandler->rssEvents() ?>" rel="feed" type="application/rss+xml"
-      title="Digital Social Innovation :: Events"/>
+      title="Digital Social Innovation :: Events" />
 <link href="<?php echo $urlHandler->rssFundingOpportunities() ?>" rel="feed" type="application/rss+xml"
-      title="Digital Social Innovation :: Funding Opportunities"/>
+      title="Digital Social Innovation :: Funding Opportunities" />
 
 <?php /** Select2 */ ?>
-<link href="<?php echo SITE_RELATIVE_PATH ?>/lib/select2/select2.min.css" rel="stylesheet"/>
+<link href="<?php echo SITE_RELATIVE_PATH ?>/lib/select2/select2.min.css" rel="stylesheet" />
 
 <link rel="stylesheet" type="text/css"
       href="<?php echo SITE_RELATIVE_PATH ?>/lib/ionicons/css/ionicons.min.css?<?php Sysctl::echoVersion() ?>">
@@ -38,11 +40,11 @@ if (!$urlHandler)
 
 <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
 <script>
-    WebFont.load({
-        google: {
-            families: ["Montserrat:400,700", "Open Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic"]
-        }
-    });
+	WebFont.load({
+		google: {
+			families: ["Montserrat:400,700", "Open Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic"]
+		}
+	});
 </script>
 <script type="text/javascript"
         src="<?php echo SITE_RELATIVE_PATH ?>/js/modernizr.js?<?php Sysctl::echoVersion() ?>"></script>
@@ -80,9 +82,9 @@ if (!$urlHandler)
 <script src="<?php echo SITE_RELATIVE_PATH ?>/lib/select2/select2.full.js"></script>
 
 <script>
-    var SITE_RELATIVE_PATH = '<?php echo SITE_RELATIVE_PATH?>';
-    var angularDependencies = [];
-    var angularAppName = 'DSIApp';
+	var SITE_RELATIVE_PATH = '<?php echo SITE_RELATIVE_PATH?>';
+	var angularDependencies = [];
+	var angularAppName = 'DSIApp';
 </script>
 
 <script type="text/javascript"

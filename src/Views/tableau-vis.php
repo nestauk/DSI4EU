@@ -1,7 +1,10 @@
+<!DOCTYPE HTML>
+<html lang="en">
 <head>
+    <?php $no_scroll_meta = true; ?>
     <?php require __DIR__ . '/partialViews/head.php' ?>
 </head>
-
+<body>
 <div class='tableauPlaceholder' id='viz1558715568709'>
     <noscript>
         <a href='#'>
@@ -42,9 +45,12 @@
     iframe {
         margin: 0% auto !important;
     }
-    .tableauPlaceholder{
+
+    .tableauPlaceholder {
         position: relative;
         overflow: scroll !important;
+        overflow-x: scroll !important;
+        overflow-y: scroll !important;
     }
 </style>
 
@@ -52,3 +58,5 @@
         src="/main.js?<?= \Services\Assets::version() ?>"></script>
 
 <?php include(__DIR__ . '/partialViews/googleAnalytics.html'); ?>
+</body>
+</html>
