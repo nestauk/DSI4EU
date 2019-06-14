@@ -2,7 +2,7 @@
     <?php require __DIR__ . '/partialViews/head.php' ?>
 </head>
 
-<div class='tableauPlaceholder' id='viz1558715568709' style='position: relative'>
+<div class='tableauPlaceholder' id='viz1558715568709'>
     <noscript>
         <a href='#'>
             <img alt=' '
@@ -41,6 +41,10 @@
 <style>
     iframe {
         margin: 0% auto !important;
+    }
+    .tableauPlaceholder{
+        position: relative;
+        overflow: scroll !important;
     }
 </style>
 
