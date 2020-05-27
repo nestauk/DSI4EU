@@ -6,7 +6,7 @@
     "league/oauth1-client": "^1.6",
     "abeautifulsite/simpleimage": "^2.6",
     "paragonie/random_compat": "^2.0",
-    "phpmailer/phpmailer": "~5.2",
+    "phpmailer/phpmailer": "~6.1",
     "phpunit/phpunit": "5.*",
     "symfony/var-dumper": "3.*",
     "robmorgan/phinx": "^0.9.2",
